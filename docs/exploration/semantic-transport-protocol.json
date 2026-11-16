@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "models": [
+    "BAAI/bge-small-en-v1.5"
+  ],
+  "datasets": [
+    "NIPS",
+    "SIGIR"
+  ],
+  "neighbors": 8,
+  "self_mass": 0.5,
+  "graph": "Exact cosine neighbors, mutual top8; uniform neighbor mass. English alphabetic tokens 3-40 chars excluding existing stop set. Other tokens identity.",
+  "scoring": "Transport both per-expert normalized document language distributions and collection background through the same row-stochastic kernel; fixed original JM=.5. Compile query contributions without online encoder.",
+  "hypothesis": "Profile-level semantic smoothing may preserve useful distributional statistics better than reranking two chosen sources. No labels in kernel construction; no own neural training. Fixed exploratory configuration, not a claim of novel translation-model theory. Evaluate before scaling to real corpus."
+}

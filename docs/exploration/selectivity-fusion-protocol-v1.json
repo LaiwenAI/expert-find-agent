@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "rule": "eligible candidate count <= 32: source_top3; otherwise qwen_max",
+  "threshold": 32,
+  "rrf_constant": 60,
+  "development": [
+    "SIGIR",
+    "NIPS"
+  ],
+  "extensions": [
+    "KDD",
+    "SciRepEval"
+  ],
+  "frozen_before_extension_results": true,
+  "extension_jobs": [
+    "39252",
+    "39253"
+  ],
+  "selection": "Exploratory rule proposed after observing SIGIR/NIPS method means and eligibility differences. Threshold 32 fixed before inspecting extension fusion outputs. Other prior baselines on KDD/SciRepEval have already been studied, so this is not a wholly untouched benchmark.",
+  "reporting": "Report all five fixed variants plus this policy on all four datasets. No per-query relevance values or dataset-name switches. Do not retune this protocol using extension results.",
+  "limitations": "A heuristic, not a guarantee or new RRF theory. Candidate-ID availability is a protocol assumption. No improvement/SOTA claim until checked against strongest baselines and all labels."
+}

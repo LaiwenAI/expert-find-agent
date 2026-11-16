@@ -1,0 +1,272 @@
+{
+  "protocol": {
+    "version": 1,
+    "alpha": 0.5,
+    "prior": "1-r/(n-1) for zero-based Model1 rank within fixed pool; singleton=1",
+    "slow": "Frozen cross-encoder source-max score, uncalibrated bounded ranking feature",
+    "models": [
+      "ms-marco-TinyBERT-L-2-v2",
+      "ms-marco-MiniLM-L-12-v2"
+    ],
+    "datasets": [
+      "NIPS",
+      "SIGIR"
+    ],
+    "rule": "Equal bounded feature weights, fixed before analysis; no label tuning. No claimed pruning speedup."
+  },
+  "datasets": {
+    "NIPS": {
+      "ms-marco-TinyBERT-L-2-v2": {
+        "complete": true,
+        "queries": 34,
+        "metrics": {
+          "soft": {
+            "model1-in-pool": {
+              "p@5": 0.6000000000000002,
+              "p@10": 0.4235294117647059,
+              "ndcg@10": 0.8284506352454334
+            },
+            "crossencoder": {
+              "p@5": 0.5,
+              "p@10": 0.4088235294117647,
+              "ndcg@10": 0.7722249922564797
+            },
+            "fixed-fusion": {
+              "p@5": 0.5588235294117649,
+              "p@10": 0.42058823529411765,
+              "ndcg@10": 0.8174775563685022
+            }
+          },
+          "hard": {
+            "model1-in-pool": {
+              "p@5": 0.27058823529411763,
+              "p@10": 0.1823529411764706,
+              "ndcg@10": 0.5346960247844319
+            },
+            "crossencoder": {
+              "p@5": 0.24705882352941172,
+              "p@10": 0.1823529411764706,
+              "ndcg@10": 0.5076861733447239
+            },
+            "fixed-fusion": {
+              "p@5": 0.25882352941176473,
+              "p@10": 0.1823529411764706,
+              "ndcg@10": 0.5002842392712621
+            }
+          }
+        },
+        "fusion_minus_prior_p5": {
+          "soft": {
+            "mean": -0.04117647058823529,
+            "percentile_95": [
+              -0.08235294117647059,
+              -3.2653618371328133e-18
+            ],
+            "queries": 34,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000
+          },
+          "hard": {
+            "mean": -0.011764705882352941,
+            "percentile_95": [
+              -0.041176470588235294,
+              0.023529411764705882
+            ],
+            "queries": 34,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000
+          }
+        }
+      },
+      "ms-marco-MiniLM-L-12-v2": {
+        "complete": true,
+        "queries": 34,
+        "metrics": {
+          "soft": {
+            "model1-in-pool": {
+              "p@5": 0.6000000000000002,
+              "p@10": 0.4235294117647059,
+              "ndcg@10": 0.8284506352454334
+            },
+            "crossencoder": {
+              "p@5": 0.5,
+              "p@10": 0.41470588235294104,
+              "ndcg@10": 0.7198848149082464
+            },
+            "fixed-fusion": {
+              "p@5": 0.5941176470588236,
+              "p@10": 0.4235294117647059,
+              "ndcg@10": 0.822048689430387
+            }
+          },
+          "hard": {
+            "model1-in-pool": {
+              "p@5": 0.27058823529411763,
+              "p@10": 0.1823529411764706,
+              "ndcg@10": 0.5346960247844319
+            },
+            "crossencoder": {
+              "p@5": 0.24117647058823533,
+              "p@10": 0.1735294117647059,
+              "ndcg@10": 0.452004958188329
+            },
+            "fixed-fusion": {
+              "p@5": 0.27058823529411763,
+              "p@10": 0.1823529411764706,
+              "ndcg@10": 0.5378351991389169
+            }
+          }
+        },
+        "fusion_minus_prior_p5": {
+          "soft": {
+            "mean": -0.00588235294117647,
+            "percentile_95": [
+              -0.023529411764705882,
+              0.011764705882352943
+            ],
+            "queries": 34,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000
+          },
+          "hard": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 34,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000
+          }
+        }
+      }
+    },
+    "SIGIR": {
+      "ms-marco-TinyBERT-L-2-v2": {
+        "complete": true,
+        "queries": 73,
+        "metrics": {
+          "soft": {
+            "model1-in-pool": {
+              "p@5": 0.40273972602739716,
+              "p@10": 0.4027397260273971,
+              "ndcg@10": 0.39882031383910704
+            },
+            "crossencoder": {
+              "p@5": 0.39999999999999986,
+              "p@10": 0.3972602739726028,
+              "ndcg@10": 0.3991445021740215
+            },
+            "fixed-fusion": {
+              "p@5": 0.3863013698630136,
+              "p@10": 0.3986301369863014,
+              "ndcg@10": 0.39793993202013067
+            }
+          },
+          "hard": {
+            "model1-in-pool": {
+              "p@5": 0.1863013698630136,
+              "p@10": 0.16849315068493145,
+              "ndcg@10": 0.17553970303333966
+            },
+            "crossencoder": {
+              "p@5": 0.19726027397260268,
+              "p@10": 0.18082191780821916,
+              "ndcg@10": 0.18867534995234442
+            },
+            "fixed-fusion": {
+              "p@5": 0.18630136986301357,
+              "p@10": 0.16849315068493143,
+              "ndcg@10": 0.17873071229366527
+            }
+          }
+        },
+        "fusion_minus_prior_p5": {
+          "soft": {
+            "mean": -0.016438356164383564,
+            "percentile_95": [
+              -0.04657534246575343,
+              0.013698630136986297
+            ],
+            "queries": 73,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000
+          },
+          "hard": {
+            "mean": 0.0,
+            "percentile_95": [
+              -0.019178082191780823,
+              0.019178082191780823
+            ],
+            "queries": 73,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000
+          }
+        }
+      },
+      "ms-marco-MiniLM-L-12-v2": {
+        "complete": true,
+        "queries": 73,
+        "metrics": {
+          "soft": {
+            "model1-in-pool": {
+              "p@5": 0.40273972602739716,
+              "p@10": 0.4027397260273971,
+              "ndcg@10": 0.39882031383910704
+            },
+            "crossencoder": {
+              "p@5": 0.3753424657534246,
+              "p@10": 0.38630136986301356,
+              "ndcg@10": 0.3787324090629559
+            },
+            "fixed-fusion": {
+              "p@5": 0.3890410958904108,
+              "p@10": 0.4082191780821916,
+              "ndcg@10": 0.39659706037695885
+            }
+          },
+          "hard": {
+            "model1-in-pool": {
+              "p@5": 0.1863013698630136,
+              "p@10": 0.16849315068493145,
+              "ndcg@10": 0.17553970303333966
+            },
+            "crossencoder": {
+              "p@5": 0.16986301369863013,
+              "p@10": 0.16438356164383555,
+              "ndcg@10": 0.1643474223608811
+            },
+            "fixed-fusion": {
+              "p@5": 0.18356164383561632,
+              "p@10": 0.16849315068493143,
+              "ndcg@10": 0.17108771958550045
+            }
+          }
+        },
+        "fusion_minus_prior_p5": {
+          "soft": {
+            "mean": -0.0136986301369863,
+            "percentile_95": [
+              -0.0273972602739726,
+              -0.0027397260273972603
+            ],
+            "queries": 73,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000
+          },
+          "hard": {
+            "mean": -0.0027397260273972603,
+            "percentile_95": [
+              -0.008219178082191782,
+              0.0
+            ],
+            "queries": 73,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000
+          }
+        }
+      }
+    }
+  },
+  "warning": "Exploratory fixed fusion, not a new statistical theorem or demonstrated new method. SIGIR uses the original fixed-mix top20 pool; Model1-in-pool is distinct from global Model1. Model1 uses full profile statistics, CE uses packed windows. Query bootstrap assumes independent queries, unadjusted for multiple analyses. Optimize execution only if quality warrants it."
+}

@@ -1,0 +1,1330 @@
+{
+  "protocol": {
+    "version": 2,
+    "corpus_sha256": "76e03ce9e82c7fb25c5f8cbf2b30087dbdb84a7be33fe6705ccdb8b6adb70939",
+    "queries_sha256": "71b0af38a2ee0500d9d8abdd16e62fc23c51a128c02071b5b94ecd1c64f3f404",
+    "code_sha256": {
+      "src/expert_search/certified_topk.py": "ce5f26f2edf713ca6de2a4dc773cde9a4b0597f22c4bb4e34ef9e719f856fbe1",
+      "src/expert_search/compiled_language_model.py": "38001226456eefa93e4a4d53167b3ba9c95282ebfe854fc2949e4c9fec276909",
+      "experiments/certified_topk_benchmark.py": "bc56d2736a14f0c29bb649082aca6250ea024e165d2d78419650ad988c6e169a"
+    },
+    "k": 5,
+    "repetitions": 5,
+    "seed": 20261117,
+    "python": "3.11.14",
+    "machine": "arm64",
+    "scope": "Both methods return exact ordered top5 scores; full compiled-score plus heap selection versus outward score intervals plus exact replay. No retrieval quality gain claimed."
+  },
+  "queries": 20,
+  "trials": [
+    {
+      "query_id": "demand-214",
+      "repetition": 0,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.011023874976672232,
+      "certified_seconds": 0.004884166060946882,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 76363
+    },
+    {
+      "query_id": "demand-214",
+      "repetition": 1,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.011004666914232075,
+      "certified_seconds": 0.004884750000201166,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 76363
+    },
+    {
+      "query_id": "demand-214",
+      "repetition": 2,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.010933457990176976,
+      "certified_seconds": 0.004846457974053919,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 76363
+    },
+    {
+      "query_id": "demand-214",
+      "repetition": 3,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.01100020797457546,
+      "certified_seconds": 0.004838416934944689,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 76363
+    },
+    {
+      "query_id": "demand-214",
+      "repetition": 4,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.010890667093917727,
+      "certified_seconds": 0.004858792060986161,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 76363
+    },
+    {
+      "query_id": "demand-4134",
+      "repetition": 0,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.019738208036869764,
+      "certified_seconds": 0.008764541940763593,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 149869
+    },
+    {
+      "query_id": "demand-4134",
+      "repetition": 1,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.01865950005594641,
+      "certified_seconds": 0.00857549998909235,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 149869
+    },
+    {
+      "query_id": "demand-4134",
+      "repetition": 2,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.01860387495253235,
+      "certified_seconds": 0.008415292017161846,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 149869
+    },
+    {
+      "query_id": "demand-4134",
+      "repetition": 3,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.01873741706367582,
+      "certified_seconds": 0.008610291057266295,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 149869
+    },
+    {
+      "query_id": "demand-4134",
+      "repetition": 4,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.01836729096248746,
+      "certified_seconds": 0.008569458033889532,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 149869
+    },
+    {
+      "query_id": "demand-406",
+      "repetition": 0,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.016885749995708466,
+      "certified_seconds": 0.004723708960227668,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 34314
+    },
+    {
+      "query_id": "demand-406",
+      "repetition": 1,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.006756708025932312,
+      "certified_seconds": 0.004465457983314991,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 34314
+    },
+    {
+      "query_id": "demand-406",
+      "repetition": 2,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.006680208025500178,
+      "certified_seconds": 0.004280915949493647,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 34314
+    },
+    {
+      "query_id": "demand-406",
+      "repetition": 3,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.0066857910715043545,
+      "certified_seconds": 0.0042290829587727785,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 34314
+    },
+    {
+      "query_id": "demand-406",
+      "repetition": 4,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.0066622080048546195,
+      "certified_seconds": 0.004223625059239566,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 34314
+    },
+    {
+      "query_id": "demand-1682",
+      "repetition": 0,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.013433374930173159,
+      "certified_seconds": 0.005868040956556797,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 96972
+    },
+    {
+      "query_id": "demand-1682",
+      "repetition": 1,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.012960250023752451,
+      "certified_seconds": 0.0057467499282211065,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 96972
+    },
+    {
+      "query_id": "demand-1682",
+      "repetition": 2,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.012908707954920828,
+      "certified_seconds": 0.0058590000262483954,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 96972
+    },
+    {
+      "query_id": "demand-1682",
+      "repetition": 3,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.013049916946329176,
+      "certified_seconds": 0.00577454105950892,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 96972
+    },
+    {
+      "query_id": "demand-1682",
+      "repetition": 4,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.012926875031553209,
+      "certified_seconds": 0.005710833007469773,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 96972
+    },
+    {
+      "query_id": "demand-1115",
+      "repetition": 0,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.017630707938224077,
+      "certified_seconds": 0.0035453750751912594,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 47172
+    },
+    {
+      "query_id": "demand-1115",
+      "repetition": 1,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.00796574994456023,
+      "certified_seconds": 0.003470833064056933,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 47172
+    },
+    {
+      "query_id": "demand-1115",
+      "repetition": 2,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.00787575007416308,
+      "certified_seconds": 0.0033949579810723662,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 47172
+    },
+    {
+      "query_id": "demand-1115",
+      "repetition": 3,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.007892875000834465,
+      "certified_seconds": 0.003352458938024938,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 47172
+    },
+    {
+      "query_id": "demand-1115",
+      "repetition": 4,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.007773499935865402,
+      "certified_seconds": 0.0033298329217359424,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 47172
+    },
+    {
+      "query_id": "demand-3613",
+      "repetition": 0,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.014261499978601933,
+      "certified_seconds": 0.0065296669490635395,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 110631
+    },
+    {
+      "query_id": "demand-3613",
+      "repetition": 1,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.014384458074346185,
+      "certified_seconds": 0.00631041603628546,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 110631
+    },
+    {
+      "query_id": "demand-3613",
+      "repetition": 2,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.014431208954192698,
+      "certified_seconds": 0.0062227919697761536,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 110631
+    },
+    {
+      "query_id": "demand-3613",
+      "repetition": 3,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.01429137506056577,
+      "certified_seconds": 0.006232957937754691,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 110631
+    },
+    {
+      "query_id": "demand-3613",
+      "repetition": 4,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.014280124916695058,
+      "certified_seconds": 0.006207666010595858,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 110631
+    },
+    {
+      "query_id": "demand-789",
+      "repetition": 0,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.021608834038488567,
+      "certified_seconds": 0.005543250008486211,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 81183
+    },
+    {
+      "query_id": "demand-789",
+      "repetition": 1,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.011420708964578807,
+      "certified_seconds": 0.005363042000681162,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 81183
+    },
+    {
+      "query_id": "demand-789",
+      "repetition": 2,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.01140937500167638,
+      "certified_seconds": 0.0052411670330911875,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 81183
+    },
+    {
+      "query_id": "demand-789",
+      "repetition": 3,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.011362749966792762,
+      "certified_seconds": 0.005176124977879226,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 81183
+    },
+    {
+      "query_id": "demand-789",
+      "repetition": 4,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.011363125056959689,
+      "certified_seconds": 0.005186750087887049,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 81183
+    },
+    {
+      "query_id": "demand-3424",
+      "repetition": 0,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.02089350007008761,
+      "certified_seconds": 0.010076791979372501,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 165557
+    },
+    {
+      "query_id": "demand-3424",
+      "repetition": 1,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.02022708300501108,
+      "certified_seconds": 0.009665917023085058,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 165557
+    },
+    {
+      "query_id": "demand-3424",
+      "repetition": 2,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.020300542004406452,
+      "certified_seconds": 0.00975570804439485,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 165557
+    },
+    {
+      "query_id": "demand-3424",
+      "repetition": 3,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.020238625002093613,
+      "certified_seconds": 0.009905540966428816,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 165557
+    },
+    {
+      "query_id": "demand-3424",
+      "repetition": 4,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.02019016700796783,
+      "certified_seconds": 0.00968049990478903,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 165557
+    },
+    {
+      "query_id": "demand-2239",
+      "repetition": 0,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.029458833043463528,
+      "certified_seconds": 0.01013012498151511,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 150431
+    },
+    {
+      "query_id": "demand-2239",
+      "repetition": 1,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.019168749917298555,
+      "certified_seconds": 0.00979833398014307,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 150431
+    },
+    {
+      "query_id": "demand-2239",
+      "repetition": 2,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.019062875071540475,
+      "certified_seconds": 0.009510708041489124,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 150431
+    },
+    {
+      "query_id": "demand-2239",
+      "repetition": 3,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.018760999897494912,
+      "certified_seconds": 0.009379124967381358,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 150431
+    },
+    {
+      "query_id": "demand-2239",
+      "repetition": 4,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.018762499908916652,
+      "certified_seconds": 0.009334207978099585,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 150431
+    },
+    {
+      "query_id": "demand-364",
+      "repetition": 0,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.009314166964031756,
+      "certified_seconds": 0.004374791984446347,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 60020
+    },
+    {
+      "query_id": "demand-364",
+      "repetition": 1,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.009043707977980375,
+      "certified_seconds": 0.004264541901648045,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 60020
+    },
+    {
+      "query_id": "demand-364",
+      "repetition": 2,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.00909154093824327,
+      "certified_seconds": 0.004251917009241879,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 60020
+    },
+    {
+      "query_id": "demand-364",
+      "repetition": 3,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.008973542018793523,
+      "certified_seconds": 0.004206707933917642,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 60020
+    },
+    {
+      "query_id": "demand-364",
+      "repetition": 4,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.009080167044885457,
+      "certified_seconds": 0.004214707994833589,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 60020
+    },
+    {
+      "query_id": "demand-3758",
+      "repetition": 0,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.024751292075961828,
+      "certified_seconds": 0.006670041941106319,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 110395
+    },
+    {
+      "query_id": "demand-3758",
+      "repetition": 1,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.014359875000081956,
+      "certified_seconds": 0.006638374994508922,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 110395
+    },
+    {
+      "query_id": "demand-3758",
+      "repetition": 2,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.01439266698434949,
+      "certified_seconds": 0.006490833009593189,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 110395
+    },
+    {
+      "query_id": "demand-3758",
+      "repetition": 3,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.014397667022421956,
+      "certified_seconds": 0.00635899999178946,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 110395
+    },
+    {
+      "query_id": "demand-3758",
+      "repetition": 4,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.014377582934685051,
+      "certified_seconds": 0.006413417053408921,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 110395
+    },
+    {
+      "query_id": "demand-3052",
+      "repetition": 0,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.02277129201684147,
+      "certified_seconds": 0.011548124952241778,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 188043
+    },
+    {
+      "query_id": "demand-3052",
+      "repetition": 1,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.02327529201284051,
+      "certified_seconds": 0.011255708057433367,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 188043
+    },
+    {
+      "query_id": "demand-3052",
+      "repetition": 2,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.0225287500070408,
+      "certified_seconds": 0.011062208912335336,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 188043
+    },
+    {
+      "query_id": "demand-3052",
+      "repetition": 3,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.02248812501784414,
+      "certified_seconds": 0.010794791975058615,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 188043
+    },
+    {
+      "query_id": "demand-3052",
+      "repetition": 4,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.022677375003695488,
+      "certified_seconds": 0.011349292006343603,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 188043
+    },
+    {
+      "query_id": "demand-1488",
+      "repetition": 0,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.024041333002969623,
+      "certified_seconds": 0.00680199998896569,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 100379
+    },
+    {
+      "query_id": "demand-1488",
+      "repetition": 1,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.01355183299165219,
+      "certified_seconds": 0.006623625056818128,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 100379
+    },
+    {
+      "query_id": "demand-1488",
+      "repetition": 2,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.013510333024896681,
+      "certified_seconds": 0.006571167032234371,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 100379
+    },
+    {
+      "query_id": "demand-1488",
+      "repetition": 3,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.013438874972052872,
+      "certified_seconds": 0.006498750066384673,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 100379
+    },
+    {
+      "query_id": "demand-1488",
+      "repetition": 4,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.013439208967611194,
+      "certified_seconds": 0.006561291986145079,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 100379
+    },
+    {
+      "query_id": "demand-3226",
+      "repetition": 0,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.012129665934480727,
+      "certified_seconds": 0.005948832957074046,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 83427
+    },
+    {
+      "query_id": "demand-3226",
+      "repetition": 1,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.011816166923381388,
+      "certified_seconds": 0.005897333030588925,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 83427
+    },
+    {
+      "query_id": "demand-3226",
+      "repetition": 2,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.011736833024770021,
+      "certified_seconds": 0.005765042034909129,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 83427
+    },
+    {
+      "query_id": "demand-3226",
+      "repetition": 3,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.011790333897806704,
+      "certified_seconds": 0.00592558307107538,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 83427
+    },
+    {
+      "query_id": "demand-3226",
+      "repetition": 4,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.01180454099085182,
+      "certified_seconds": 0.005892874905839562,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 83427
+    },
+    {
+      "query_id": "demand-2739",
+      "repetition": 0,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.024897916009649634,
+      "certified_seconds": 0.006294417078606784,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 109909
+    },
+    {
+      "query_id": "demand-2739",
+      "repetition": 1,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.014401790918782353,
+      "certified_seconds": 0.006019874941557646,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 109909
+    },
+    {
+      "query_id": "demand-2739",
+      "repetition": 2,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.014440958970226347,
+      "certified_seconds": 0.0061217499896883965,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 109909
+    },
+    {
+      "query_id": "demand-2739",
+      "repetition": 3,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.014312583953142166,
+      "certified_seconds": 0.00595733302179724,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 109909
+    },
+    {
+      "query_id": "demand-2739",
+      "repetition": 4,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.014552125008776784,
+      "certified_seconds": 0.006000624969601631,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 109909
+    },
+    {
+      "query_id": "demand-1767",
+      "repetition": 0,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.012971041956916451,
+      "certified_seconds": 0.005153125035576522,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 94886
+    },
+    {
+      "query_id": "demand-1767",
+      "repetition": 1,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.012931250035762787,
+      "certified_seconds": 0.0049284580163657665,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 94886
+    },
+    {
+      "query_id": "demand-1767",
+      "repetition": 2,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.013017958030104637,
+      "certified_seconds": 0.004890999989584088,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 94886
+    },
+    {
+      "query_id": "demand-1767",
+      "repetition": 3,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.012982457992620766,
+      "certified_seconds": 0.004901541979052126,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 94886
+    },
+    {
+      "query_id": "demand-1767",
+      "repetition": 4,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.012518167030066252,
+      "certified_seconds": 0.005067665944807231,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 94886
+    },
+    {
+      "query_id": "demand-3111",
+      "repetition": 0,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.029095958918333054,
+      "certified_seconds": 0.006934958975762129,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 117427
+    },
+    {
+      "query_id": "demand-3111",
+      "repetition": 1,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.015900833997875452,
+      "certified_seconds": 0.006957207922823727,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 117427
+    },
+    {
+      "query_id": "demand-3111",
+      "repetition": 2,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.015791499987244606,
+      "certified_seconds": 0.006983374943956733,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 117427
+    },
+    {
+      "query_id": "demand-3111",
+      "repetition": 3,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.015336582902818918,
+      "certified_seconds": 0.006781207979656756,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 117427
+    },
+    {
+      "query_id": "demand-3111",
+      "repetition": 4,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.01594766601920128,
+      "certified_seconds": 0.006881958921439946,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 117427
+    },
+    {
+      "query_id": "demand-2859",
+      "repetition": 0,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.0072228750213980675,
+      "certified_seconds": 0.0034481659531593323,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 40213
+    },
+    {
+      "query_id": "demand-2859",
+      "repetition": 1,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.007326583028770983,
+      "certified_seconds": 0.00331220799125731,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 40213
+    },
+    {
+      "query_id": "demand-2859",
+      "repetition": 2,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.0075703749898821115,
+      "certified_seconds": 0.0034006249625235796,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 40213
+    },
+    {
+      "query_id": "demand-2859",
+      "repetition": 3,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.007256665965542197,
+      "certified_seconds": 0.0031727920286357403,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 40213
+    },
+    {
+      "query_id": "demand-2859",
+      "repetition": 4,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.007349040941335261,
+      "certified_seconds": 0.0032785420771688223,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 40213
+    },
+    {
+      "query_id": "demand-428",
+      "repetition": 0,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.018342874944210052,
+      "certified_seconds": 0.004501124960370362,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 40818
+    },
+    {
+      "query_id": "demand-428",
+      "repetition": 1,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.0071838750736787915,
+      "certified_seconds": 0.004482958000153303,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 40818
+    },
+    {
+      "query_id": "demand-428",
+      "repetition": 2,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.007244125008583069,
+      "certified_seconds": 0.004269875003956258,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 40818
+    },
+    {
+      "query_id": "demand-428",
+      "repetition": 3,
+      "order": [
+        "certified",
+        "full"
+      ],
+      "full_seconds": 0.007206166977994144,
+      "certified_seconds": 0.004235958098433912,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 40818
+    },
+    {
+      "query_id": "demand-428",
+      "repetition": 4,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.0073021670104935765,
+      "certified_seconds": 0.004219541908241808,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 40818
+    },
+    {
+      "query_id": "demand-4030",
+      "repetition": 0,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.0178182499948889,
+      "certified_seconds": 0.009200708009302616,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 136011
+    },
+    {
+      "query_id": "demand-4030",
+      "repetition": 1,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.017326666973531246,
+      "certified_seconds": 0.014464083011262119,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 136011
+    },
+    {
+      "query_id": "demand-4030",
+      "repetition": 2,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.017813750077039003,
+      "certified_seconds": 0.009489875053986907,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 136011
+    },
+    {
+      "query_id": "demand-4030",
+      "repetition": 3,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.017620124970562756,
+      "certified_seconds": 0.00926295795943588,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 136011
+    },
+    {
+      "query_id": "demand-4030",
+      "repetition": 4,
+      "order": [
+        "full",
+        "certified"
+      ],
+      "full_seconds": 0.01755262492224574,
+      "certified_seconds": 0.009220250067301095,
+      "exact_candidates": 5,
+      "total_candidates": 9861,
+      "postings_visited": 136011
+    }
+  ],
+  "exact_ordered_top5": true,
+  "initialization_seconds": 1.520576584036462,
+  "mean_full_seconds": 0.014429419982479885,
+  "mean_certified_seconds": 0.006426889954600484,
+  "median_full_seconds": 0.013906666485127062,
+  "median_certified_seconds": 0.005953082989435643,
+  "mean_exact_candidates": 5,
+  "max_exact_candidates": 5,
+  "warning": "Interval pass still visits all active postings and maintains corpus-sized bounds. Exact replay candidate reduction is not posting or neural-call reduction. Warm local scoring and top5 selection only; no quality labels, online encoder, agent calls or end-to-end SLA. Repetitions are paired timing samples, not independent queries."
+}

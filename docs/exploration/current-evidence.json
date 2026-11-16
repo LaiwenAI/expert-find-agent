@@ -1,0 +1,226 @@
+{
+  "version": 1,
+  "runs": {
+    "decisions_nips": {
+      "source_sha256": "9fa6f72da29b049ef0ad959c7f8954a55d508e281e9738d978b8aa742601c75c",
+      "results": {
+        "dataset": "NIPS",
+        "planned": 34,
+        "valid": 34,
+        "mean_request_seconds": 2.350369632294079,
+        "metrics": {
+          "soft": {
+            "ndcg@10": 0.7533713682152301,
+            "mrr@10": 0.7875,
+            "recall@10": 0.8610410830999067,
+            "p@5": 0.5470588235294118,
+            "p@10": 0.40882352941176475
+          },
+          "hard": {
+            "ndcg@10": 0.518695805014047,
+            "mrr@10": 0.509313725490196,
+            "recall@10": 0.6239495798319328,
+            "p@5": 0.28235294117647064,
+            "p@10": 0.17647058823529416
+          }
+        }
+      }
+    },
+    "demand_facets": {
+      "source_sha256": "19d539ad695eeb0539a5a635109733bb595c1c8cad898e4255e3d576805723e6",
+      "results": {
+        "demands": 20,
+        "structurally_valid": 15,
+        "role_counts": {
+          "research_topic": 38,
+          "future_target": 20,
+          "explicit_prior_qualification": 0
+        }
+      }
+    },
+    "demand_pool": {
+      "source_sha256": "239f39a05b112165d2c6c83fb8cc0ac6db92ae45c5d8814fda574ca90cc4834d",
+      "results": {
+        "demands": 13,
+        "jobs": 76
+      }
+    },
+    "atomic_decisions": {
+      "source_sha256": "f4849747ec12b0d8ae83f0b0db635cedaa758bb5b639bcafa92f7d972fb73593",
+      "results": {
+        "plans": 10,
+        "valid_plans": 10,
+        "judged_research_atoms": 37,
+        "supported_atoms": 4,
+        "partially_supported_plans": 2,
+        "all_research_atoms_supported_plans": 0,
+        "accepted_dataset_labels": 0
+      }
+    },
+    "atomic_quote_audit": {
+      "source_sha256": "496799b393ae71ed830ead287ce263b2d2f8db4d3d38f0f32504881263cbfbbf",
+      "results": {
+        "valid": 4,
+        "tasks": 4,
+        "scope_rejected": 2,
+        "scope_preserved_and_supported": 0,
+        "accepted_dataset_labels": 0
+      }
+    },
+    "array_bm25_NIPS": {
+      "source_sha256": "5440f172d59485961478abb9a7e7bbe54a0ac823dfd8b8f15901680a6c881aaa",
+      "results": {
+        "queries": 34,
+        "mean_seconds": 0.004734223088101263,
+        "array_bytes": 7909212
+      }
+    },
+    "max-term-v1_NIPS": {
+      "source_sha256": "8ad8c202a95e9ef3dba4921e4f1f56f747fa164800d214cc1e69a30b3117e715",
+      "results": {
+        "queries": 34,
+        "metrics": {
+          "soft": {
+            "p@5": 0.49411764705882355,
+            "ndcg@10": 0.7325033246240105
+          },
+          "hard": {
+            "p@5": 0.19999999999999998,
+            "ndcg@10": 0.3900272641880842
+          }
+        }
+      }
+    },
+    "array_bm25_KDD": {
+      "source_sha256": "cc78ecf4aea89080776ed05bbbebb1180c7535357218d8286f2ee57bfc17e1a5",
+      "results": {
+        "queries": 174,
+        "mean_seconds": 0.05539070357470901,
+        "array_bytes": 110353128
+      }
+    },
+    "max-term-v1_KDD": {
+      "source_sha256": "91a05f1c6cabbdec2e065347b7ae6aeb35cd1b9e7be674698bba0955cc206bf0",
+      "results": {
+        "queries": 174,
+        "metrics": {
+          "soft": {
+            "p@5": 0.30919540229885073,
+            "ndcg@10": 0.4430086753099456
+          },
+          "hard": {
+            "p@5": 0.1390804597701148,
+            "ndcg@10": 0.31372220146642604
+          }
+        }
+      }
+    },
+    "rank-fusion-v1_KDD": {
+      "source_sha256": "8db98cdc43f04f83dbe00a5d4a4d718928c9d1103e4a1fe837053f14cd9f9b65",
+      "results": {
+        "queries": 174,
+        "metrics": {
+          "model1": {
+            "soft": {
+              "p@5": 0.2885057471264368,
+              "ndcg@10": 0.44573102532128095
+            },
+            "hard": {
+              "p@5": 0.13793103448275848,
+              "ndcg@10": 0.31540553461770754
+            }
+          },
+          "bm25-top3": {
+            "soft": {
+              "p@5": 0.32988505747126456,
+              "ndcg@10": 0.4836430232905305
+            },
+            "hard": {
+              "p@5": 0.14597701149425274,
+              "ndcg@10": 0.3354224618370733
+            }
+          },
+          "fusion": {
+            "soft": {
+              "p@5": 0.3172413793103448,
+              "ndcg@10": 0.4590347454624446
+            },
+            "hard": {
+              "p@5": 0.14367816091954005,
+              "ndcg@10": 0.33370792339596594
+            }
+          }
+        }
+      }
+    },
+    "array_bm25_SciRepEval": {
+      "source_sha256": "4f64a6a26e3c50164c444146c7ce2af975fb9094aa5d49a0f3184d03ed9633cf",
+      "results": {
+        "queries": 107,
+        "mean_seconds": 0.03371742832708737,
+        "array_bytes": 76551288
+      }
+    },
+    "max-term-v1_SciRepEval": {
+      "source_sha256": "d6103b0bba4112d46a68023560aa4e98aa78886feff00f73da960c0038012819",
+      "results": {
+        "queries": 107,
+        "metrics": {
+          "soft": {
+            "p@5": 0.6018691588785046,
+            "ndcg@10": 0.7091644749437295
+          },
+          "hard": {
+            "p@5": 0.28224299065420533,
+            "ndcg@10": 0.4749090388873775
+          }
+        }
+      }
+    },
+    "rank-fusion-v1_SciRepEval": {
+      "source_sha256": "ca5fd19fb687a6bad786cf56d2cce1d912de9d2007e0576a1c0e441715b09c8f",
+      "results": {
+        "queries": 107,
+        "metrics": {
+          "model1": {
+            "soft": {
+              "p@5": 0.6616822429906541,
+              "ndcg@10": 0.7550810310595085
+            },
+            "hard": {
+              "p@5": 0.3495327102803737,
+              "ndcg@10": 0.5395316690475851
+            }
+          },
+          "bm25-top3": {
+            "soft": {
+              "p@5": 0.6448598130841121,
+              "ndcg@10": 0.7565275623109976
+            },
+            "hard": {
+              "p@5": 0.325233644859813,
+              "ndcg@10": 0.53139481060515
+            }
+          },
+          "fusion": {
+            "soft": {
+              "p@5": 0.6635514018691586,
+              "ndcg@10": 0.765630578710918
+            },
+            "hard": {
+              "p@5": 0.33271028037383166,
+              "ndcg@10": 0.5430758316714666
+            }
+          }
+        }
+      }
+    }
+  },
+  "completion": {
+    "method_quality_advantage": false,
+    "high_quality_industrial_dataset": false,
+    "metric_validity": false,
+    "public_release": false
+  },
+  "scope": "Completed exploratory results only. Timing boundaries differ across runs. Single-model labels are not human gold. No raw demands, expert identities, quotes or model traces included."
+}

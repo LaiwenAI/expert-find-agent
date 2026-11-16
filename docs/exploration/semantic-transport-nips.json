@@ -1,0 +1,29 @@
+{
+  "dataset": "NIPS",
+  "queries": 34,
+  "graph_words": 22404,
+  "compiled_array_bytes": 14284104,
+  "construction_seconds": 0.7395834579365328,
+  "word_vector_sha256": "eab853e7b6ae94dadaa80e35e74623a52eb490f57e69c33461c884c9e9c396a9",
+  "kernel_sha256": "12ba6d1d3d7aabf499b9231700e6c3a2141fa1069fad4d360fb9b0d80613f0a7",
+  "metrics": {
+    "soft": {
+      "ndcg@10": 0.8256386880137913,
+      "mrr@10": 0.8343137254901961,
+      "recall@10": 0.9054738562091503,
+      "p@5": 0.6,
+      "p@10": 0.4176470588235294
+    },
+    "hard": {
+      "ndcg@10": 0.5142277592505716,
+      "mrr@10": 0.5205882352941177,
+      "recall@10": 0.5897058823529412,
+      "p@5": 0.27058823529411763,
+      "p@10": 0.17647058823529413
+    }
+  },
+  "mean_seconds": 0.002224367663182099,
+  "median_seconds": 0.0020459374645724893,
+  "exact_compilation": true,
+  "warning": "Exploratory fixed k8/self-mass .5/JM .5; no label tuning or neural training. Word-neighbor relatedness is not synonymy or evidence entailment. Both profile and background transported by one stochastic kernel. English-token prototype; Chinese tokens and OOV not semantically expanded. Warm scoring ALL profiles plus sorting timed; kernel construction and encoding separate. One pass, not an end-to-end speed claim. Translation models are prior work, not a new-theory claim."
+}

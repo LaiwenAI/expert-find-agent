@@ -1,0 +1,64 @@
+{
+  "jobs": 6,
+  "statuses": {
+    "constructed_pending_independent_audit": 2,
+    "rejected_structure": 4
+  },
+  "audited": false,
+  "warning": "Generator feasibility only, no accepted silver labels or quality claim. Independent auditor currently unavailable; do not export these as labeled data.",
+  "structural_replay": {
+    "rows": [
+      {
+        "id": "demand-214-source-cf-e4ba5472",
+        "status": "constructed_pending_independent_audit",
+        "reason": null
+      },
+      {
+        "id": "demand-3613-source-cf-89716351",
+        "status": "rejected_structure",
+        "reason": "Missing scoped relationship or demand gaps"
+      },
+      {
+        "id": "demand-364-source-cf-8b73ad27",
+        "status": "rejected_structure",
+        "reason": "Independent topic witness removed by alias closure"
+      },
+      {
+        "id": "demand-1767-source-cf-7d88db73",
+        "status": "rejected_structure",
+        "reason": "Missing or ambiguous source quote"
+      },
+      {
+        "id": "demand-3111-source-cf-ccd11d0e",
+        "status": "rejected_structure",
+        "reason": "Independent topic witness removed by alias closure"
+      },
+      {
+        "id": "demand-2859-source-cf-c01e32a4",
+        "status": "constructed_pending_independent_audit",
+        "reason": null
+      }
+    ],
+    "audited": false
+  },
+  "auditor_availability": {
+    "model": "gpt-6-luna",
+    "purpose": "Availability probe before running unchanged dual-model data audit",
+    "status": "error",
+    "error_type": "BadRequestError",
+    "http_status": 400,
+    "seconds": 0.29130645806435496
+  },
+  "encoder_provenance": {
+    "snapshot": "faf4aa4225822f3bc6376869cb1164e8e3feedd0",
+    "effective_truncation": {
+      "max_length": 128,
+      "stride": 0,
+      "strategy": "longest_first",
+      "direction": "right"
+    },
+    "pooling_implementation": "PooledEmbedding",
+    "vectors_sha256": "6e625f886aafd2e8295e127ec9074fa0d217ec5f65724c962ccc0ac23d36ff20"
+  },
+  "note": "One length rejection is 249 characters versus the structural 240-character cap, which the generator prompt did not explicitly state; this is a protocol-format issue, not evidence that the relation is false. No labels accepted."
+}
