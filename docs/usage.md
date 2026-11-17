@@ -573,3 +573,19 @@ PYTHONPATH=src python experiments/source_method_frame_pilot.py
 四臂为原表达、仅完整中文、仅具体迁移、两者同时；固定开发位置60:80，四组Williams顺序平衡，均为前三名解释和gpt-6-luna。见证筛查仍非独立金标。方法记录试验从开发来源按种类固定抽取100条，不读取任何需求或适用性标签；输入/输出缺失保持null，未提取者必须回退原文。源码包含方法记录编译，但尚未构建该表示的全库检索索引或证明其摊销收益。
 
 新增公开专业匹配辅助评测见[MERIT适配卡](merit-suitability-card.md)，固定610个人工自评配对；未完成全队列前，分析器拒绝输出准确率。它不替代企业迁移任务。
+
+导出已冻结方法记录，核验原始字段及引用归属：
+
+```bash
+PYTHONPATH=src python experiments/export_method_frames.py
+```
+
+结果位于`artifacts/method-frame-store-v1`：100条原文视图、26条方法记录及来源绑定文件。`bind_frames`拒绝过期/外来来源与未获记录筛查支持的条目；`as_fact_card`适配旧事实卡接口并保留null和条件。所有100条来源保持原文检索资格。该导出尚不是完整可检索索引或独立语义认证。论文式初稿见`docs/paper/sigir/main.tex`，旧Markdown稿已移除；历史协议和结果保留在工件及公开Git历史，正文与英文附录以LaTeX为准。
+
+当前维护入口按用途分组：
+
+- `experiments/bilingual/`：企业分组原始需求、1000真实父需求与5000合成意图的中英构造。运行`PYTHONPATH=src python -m experiments.bilingual.prepare_cohort`、`PYTHONPATH=src python -m experiments.bilingual.generate_queries --prepare-only`，后者去掉准备参数会调用付费API。
+- `experiments/metadata/`：出版时间区间、引用量与贡献未知状态；`PYTHONPATH=src python -m experiments.metadata.audit_papers`。
+- `experiments/paper/build_sigir.py`：编译英文LaTeX正文/附录，输出`output/pdf/expert-search-sigir-draft.pdf`。需要Tectonic；模板源和许可保留在`docs/paper/sigir/template`。
+
+旧Markdown稿已删除，不再并行维护。历史实验源码的固定路径暂保留用于协议复现，新模块按用途归组；临时预览和字节码可再生，不进入源码发布包。

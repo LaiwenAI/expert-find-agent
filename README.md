@@ -19,7 +19,7 @@ PYTHONPATH=src python3 -m expert_search agent '寻找机器人运动控制与强
 - [GPU 集群运行方式](docs/cluster.md)
 - [问题定义和论文方法](docs/research-methods.md)
 - [Benchmark 结果](docs/benchmark-results.md)
-- [真实需求构造与控制实验](docs/paper/draft-v3.md)
+- [真实需求构造与控制实验](docs/paper/sigir/main.tex)
 - [人工标注协议](docs/annotation-protocol.md)
 - [MERIT公开人工自评任务适配](docs/merit-suitability-card.md)
 - [从原始数据重建的新评测集](docs/fresh-evaluation-data-card.md)
@@ -28,11 +28,13 @@ Benchmark 比较 BM25-max、BM25-vote、TF-IDF 变体与混合证据树 agent。
 
 ## 无训练技术探索与论文
 
-- [研究初稿 v3](docs/paper/draft-v3.md)
+- [SIGIR英文LaTeX正文](docs/paper/sigir/main.tex)
+- [英文LaTeX附录](docs/paper/sigir/appendix.tex)
+- [编译PDF](output/pdf/expert-search-sigir-draft.pdf)
 - [新增顶会全文审查](docs/exploration/topconf-review-20261117.md)
-- [完整研究日志与历史对照](docs/paper/draft-v2.md)
-- [质量与时间的计时边界](docs/paper/quality-time.md)
-- [已完成结果自动表](docs/paper/results-generated.md)
+- [实验协议、元数据和复现附录](docs/paper/sigir/appendix.tex)
+- [质量与时间的计时边界](docs/paper/sigir/appendix.tex)
+- [已完成结果自动表](docs/paper/sigir/appendix.tex)
 - [最接近工作的审查](docs/exploration/closest-work-review.md)
 - [实验复现入口](docs/exploration/reproduction-map.md)
 
@@ -54,4 +56,4 @@ PYTHONPATH=src python3 -m expert_search.compiled_expert_search '机器人运动�
 
 该持久化入口现使用浮点上下界筛选与精确前 K 重放，保留参考模型的返回分数和有序结果。完整教师库20条需求×5次配对运行中，前五名和分数全部一致，暖查询均值14.43→6.43ms；这是同一统计模型的执行优化，不提供相关性提升或端到端代理速度结论。复验：`experiments/certified_topk_benchmark.py`。
 
-统一执行路径原型：`OwnedVectorIndex` → `GroundedPipeline`，贯通需求规划、实际查询编码、归属来源检索与固定片段适用性核验。真实21人队列的执行脚本是 `experiments/grounded_pipeline_smoke.py`；约15–18秒的结果仍未满足低延迟目标，语义正确性未独立验证，详见[初稿6.6节](docs/paper/draft-v3.md)。
+统一执行路径原型：`OwnedVectorIndex` → `GroundedPipeline`，贯通需求规划、实际查询编码、归属来源检索与固定片段适用性核验。真实21人队列的执行脚本是 `experiments/grounded_pipeline_smoke.py`；约15–18秒的结果仍未满足低延迟目标，语义正确性未独立验证，详见[初稿6.6节](docs/paper/sigir/main.tex)。

@@ -27,4 +27,4 @@ PYTHONPATH=src python experiments/merit_suitability_comparison.py
 PYTHONPATH=src python experiments/analyze_merit_suitability.py
 ```
 
-推理命令产生付费API调用；已有结果按冻结输入摘要复用。完整610对结果尚在运行时，不作部分准确率比较或依标签调整提示。原始企业100条需求的20条封存集未参与本公开辅助任务。
+推理命令产生付费API调用；已有结果按冻结输入摘要复用。完整610对及1830次请求已全部有效完成：完整推理/短Chat/原生Decisions准确率分别73.28%/68.69%/71.15%，请求均值3.84/1.64/0.91秒。原生相对完整推理的准确率差为-2.13个百分点，论文分组bootstrap区间[-5.51,1.32]；跨零不能证明等效。它是成本与质量权衡，不能称为精度提升。原始企业100条需求的20条封存集未参与本公开辅助任务。

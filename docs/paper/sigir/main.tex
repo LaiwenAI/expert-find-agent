@@ -1,0 +1,134 @@
+% Canonical editable manuscript. Compile from this directory with Tectonic.
+% Format: https://sigir2027.org/pages/submit-full.html
+\makeatletter
+\def\input@path{{template/}}
+\makeatother
+\documentclass[sigconf,natbib=true,anonymous=true]{acmart}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{xurl}
+\usepackage{array}
+\usepackage{placeins}
+\emergencystretch=2em
+\setcopyright{none}
+\settopmatter{printacmref=false}
+\acmConference[Research draft]{Research draft; not submitted}{November 2026}{}
+\acmYear{2026}
+\renewcommand\footnotetextcopyrightpermission[1]{}
+\title[Evidence-Based Expert Search]{Evidence-Based Expert Search for Industrial Needs:\\Provenance, Conditional Method Transfer, and Inference Budgets}
+\author{Anonymous Authors}
+\begin{document}
+\begin{abstract}
+Industrial expert search must establish how documented research methods might help solve a technical need, rather than merely retrieve topically similar papers. Requiring previous completion of an entire future project misses useful transfers; accepting field similarity overstates capability. We investigate a training-free, coarse-to-fine framework separating associated sources, historical method facts, conditional target connections, and unresolved obligations. We reconstruct 100 complete industrial needs and 700 fixed candidate-evidence views from original data, yielding 183 development silver judgments while retaining disagreements and a sealed set. Explaining only the displayed top three reduces mean request latency from 6.81 to 4.65 seconds on a development cohort, without establishing independent accuracy preservation. On 610 publicly released human-self-rated paper--reviewer pairs, native Decisions reduces latency from 3.84 to 0.91 seconds, with accuracy 71.15\% versus 73.28\% for full reasoning. This is a trade-off, not demonstrated equivalence. A larger cohort contains 2,741 new company-grouped needs for bilingual construction. Publication-time and citation metadata are available, but individual contribution remains unresolved. The results support concrete components and research directions, not yet joint end-to-end superiority for industrial expert search.
+\end{abstract}
+\ccsdesc[500]{Information systems~Information retrieval}
+\ccsdesc[300]{Information systems~Retrieval models and ranking}
+\keywords{expert search, evidence grounding, method transfer, bilingual retrieval, efficiency}
+\maketitle
+
+\section{Introduction}
+An industrial need can combine material design, sensing, simulation, control, and deployment. A temperature-field model may help another manufacturing process without having produced the requested product. Conversely, an optical spectrometer does not automatically provide a method for radio-frequency nuclear-magnetic-resonance acquisition merely because the instrument names overlap. Search must identify the documented operation, the actual target component, the preserved mechanism, and adaptations still requiring validation.
+
+The ranked entity is an expert, supported by multiple associated sources. Evidence must not be borrowed across candidates; separate papers must not be combined into an already demonstrated system. Applicability is also a conditional inference rather than a quotation alone. A valid component transfer need not have achieved the enterprise's future performance targets, but must be more specific than topic adjacency. Coauthorship, publication age, and citations must not silently become verified personal method credit.
+
+Efficiency requires a common boundary. Millisecond vector operations cannot compensate for repeated multi-second model calls, and fewer candidates can be slower if they require another serial gate. This investigation separates retrieval fidelity, semantic support, explanation budgets, and completed results. Its provisional contributions are an explicit source/transfer contract, a traceable data-construction workflow, and an evaluation protocol for incomplete judgments and deadlines. The combined system's industrial-task superiority remains unproven.
+
+\section{Related Work}
+Classical expert models already aggregate documents into candidate expertise~\cite{balog2006formal}. Max-paper similarity, language models, lexical aggregation, and profile averaging remain strong baselines. PageIndex\footnote{\url{https://github.com/VectifyAI/PageIndex}} motivates traceable hierarchical access, but a tree cannot prove capability or safely exclude experts with incomplete summaries.
+
+MERIT~\cite{yang2026merit} separates core expertise from incidental overlap and trains an assessor and retriever. We use its public task without training models; running its prompt on another model is not a checkpoint reproduction. HippoRAG~2~\cite{gutierrez2025hipporag2} and evidence-tree search~\cite{sun2025ets} motivate structured access and dependent evidence selection. ScIRGen~\cite{lin2025scirgen} supplies a close synthesis/filtering precedent, while citation-aware rubric work~\cite{zhang2026carr} distinguishes support, coverage, and evidence connections. These inherited components are not renamed as new algorithms. Their expert-ownership and conditional-transfer combination requires empirical validation.
+
+\section{Task and Method}
+\subsection{Facts, transfer, and attribution}
+Given a complete need $q$, experts $E$, and associated sources $D$, the system returns ranked candidates and, for explained entries, citations, target-operation anchors, historical method facts, a direct or conditional connection, open assumptions, and remaining obligations. Unreturned experts receive no inability label.
+
+A source method frame $f=(x,o,y,c)$ records input, operation, output, and stated conditions. Unreported input/output remains null. A connection from $f$ to a target operation is a hypothesis, not a historical fact. The association ID does not establish a particular person's contribution to a paper's method. Explicit contributor statements or documented responsibilities are stronger evidence than author position alone; neither author order nor citation count establishes honorary authorship.
+
+Fixed-view grades distinguish: 0, no adequate demonstrated method fit; 1, topic adjacency; 2, concrete conditional functional transfer; and 3, a documented operation on the actual target object. Grade~3 does not establish future delivery. A separate null label denotes missing, failed, or disputed review and cannot be imputed as grade~0. None is a complete measure of expert ability.
+
+\subsection{Coarse-to-fine access and output budgets}
+Raw-record positions, source hashes, ownership, and visible ranges are preserved. A frozen source-vector index recalls sources and aggregates experts, with an efficient exact reference and standard HNSW baseline. Query-independent compilation extracts at most two method frames per source. Titles, field lists, background citations, and aspirations do not automatically establish an own method. Profiles may contain concrete project/patent activity. Schema and offset checks precede same-model witness screening; screening is fallible and nonexhaustive. Every source remains eligible for raw retrieval even if it has a frame.
+
+The reference online flow encodes the full need, recalls owned sources, materializes bounded views, and jointly compares candidates. A transfer must state the source and target operations, their input/output or physical compatibility, and a testable adaptation. ``Assume it transfers'' is not a mechanism; missing whole-system integration is not by itself a reason to reject a useful component.
+
+Input and output budgets are separate: the focused variant still sees seven candidates but explains only the displayed top three in one request. Candidate-specific schemas and validation enforce unique IDs and owned references. Offsets prove localization, not semantic correctness. An extra serial model gate was slower and is not the default. Frame compilation, full-source retrieval, and partial-method comparison have implementations, but the new complete combination still requires paired end-to-end validation.
+
+\subsection{Time and bibliometrics}
+Publication dates retain their precision as intervals. A year-only date is not fabricated into a known day; a cutoff-crossing interval stays uncertain. Citation totals lack observation timestamps and cannot safely represent counts known at a past date. Recency of activity, method relevance, and paper impact remain distinct: old foundational methods can still be useful. Individual credit requires role/identity evidence, such as CRediT declarations\footnote{\url{https://credit.niso.org/}}, not a prestige score. These metadata are being incorporated; a validated contribution-aware ranker is not yet demonstrated.
+
+\section{Data Construction}
+The normalized corpus contains 10,673 researchers and 96,749 sources. Re-reading the original enterprise spreadsheet and researcher JSONL reproduces frozen normalization byte-for-byte. An explicit prior-use registry excludes 36 old needs, 1,798 experts, and registered source/title aliases; 100 complete original needs are fixed from 4,254 eligible cases, rather than rewritten from the old 20 or selected by success.
+
+Experts connected by paper-prefix/title aliases are grouped before annotation, and needs are fixed into 80 development and 20 sealed cases. The new paper-backed stratum has 5,192 experts and 66,491 source fields. Each need has five dense and two random candidates, with at most three papers and one detailed profile, capped at 1,200 characters per source. This dense-selected pool is not a method-neutral full relevance pool.
+
+\begin{table}[t]
+\caption{Original-data industrial evaluation collection.}
+\centering\begin{tabular}{lr}\toprule
+Item & Count\\\midrule
+Complete needs / development / sealed & 100 / 80 / 20\\
+Fixed candidate views & 700\\
+Development silver / unjudged & 183 / 377\\
+Silver grades 0 / 1 / 2 / 3 & 10 / 120 / 53 / 0\\
+Human labels / sealed labels & 0 / 0\\\bottomrule
+\end{tabular}\end{table}
+
+Two differently ordered structured reviews and a proposal-hidden native classification must agree; positives receive two additional witness/connection audits. All share a model/provider and are not independent gold. We trace 47,496 distinct raw records and 71,683 entity/field checks. Exact cross-split expert, source, normalized-prefix, and title intersections are zero; semantic duplicates and team-family independence remain unaudited. Limited same-author source replacements control support for narrow historical facts, not actual ability. Lexical discovery additionally yields 742 unjudged views outside the original pool.
+
+A larger reconstruction excludes the previous 136 need IDs and exact company keys, then groups remaining records by company, identical body, and URL before translation. It yields 2,741 needs in 1,395 groups: 2,228 construction, 284 validation, and 229 sealed cases. Group sizes prevent exact percentage splits. English translations are pending: this is not a completed bilingual benchmark. Lossless segments and supported numeric/unit/comparator checks are implemented, preserving decimals, inequality direction, and unit case. Mechanical equality cannot certify negation, object scope, modality, or complete semantic alignment. The synthesis plan fixes 1,000 real parent needs and five intent types: overview, component method, conditional transfer, evidence lookup, and constraint-focused search. This defines 5,000 synthetic query slots, each with parallel Chinese/English views; language views are not counted as independent needs. A fixed 32-parent pilot generated 160 pairs, of which 136 passed same-model screening. The full run is active, not yet a completed high-quality dataset. Bilingual ranking consistency must accompany quality evaluation, since consistently wrong rankings can be stable.
+
+\begin{table*}[t]
+\caption{Distinct development cohorts. Same-model screening is not independent correctness; rows cannot be combined into an end-to-end gain.}
+\centering\small\begin{tabular}{@{}>{\raggedright\arraybackslash}p{.12\textwidth}>{\raggedright\arraybackslash}p{.48\textwidth}>{\raggedright\arraybackslash}p{.33\textwidth}@{}}\toprule
+Development positions & Comparison and result & Interpretation\\\midrule
+0:20 & Single comparison 5.64\,s; gated comparison 7.09\,s & Fewer candidates did not accelerate execution\\
+20:40 & Explain seven 6.81\,s; explain top three 4.65\,s & Output-budget latency benefit; quality equivalence unproven\\
+40:60 & Both-audit-supported claims 28 vs. 40 & Concrete-expression signal under the same model\\
+60:80 & Base/language/bridge/both: supported 30/34/35/42 & Language does not explain the entire screen difference\\
+60:80 & Respective means 4.33/5.81/5.97/6.38\,s & Additional semantic requirements may cost time\\\bottomrule
+\end{tabular}\end{table*}
+
+\section{Evaluation}
+Actionable gain is $g(0)=g(1)=0$, $g(2)=g(3)=1$. With fixed display cutoff $K$ and $w_i=1/\log_2(i+1)$,
+\begin{equation}
+ U_K=\frac{\sum_{i=1}^{K}w_i g(z_i)}{\sum_{i=1}^{K}w_i}.
+\end{equation}
+Unjudged returned positions receive 0/1 for lower/upper bounds; unreturned positions receive zero. These bounds are conditional on labels, not semantic confidence intervals. Report lower gain, coverage, and delivered count together; do not optimize the upper bound alone. Citation localization, factual support, transfer fit, and full-system obligations remain separate.
+
+Deadline evaluation uses the latest completed snapshot, not the best historical output. Condensed nDCG is diagnostic: sparse judgments made random rankings appear strong. The public self-rating task retains its binary definition, completion coverage, valid-only metrics, and full-cohort abstention bounds. Paired confidence intervals cluster by target title, distinct from missing-label identification bounds. This is a task-specific protocol, not new DCG or bootstrap theory.
+
+\section{Results}
+\subsection{Index and inference components}
+On all sources, 9,861 experts with evidence, and 20 reused development queries, exact ranking averages 33.15\,ms. HNSW with an \texttt{efSearch} floor of 64 averages 1.23\,ms, retains 95\% of exact top tens, and matches ordered results on 12/20 queries. A floor of 512 averages 2.83\,ms and matches all 20 ordered lists. Graph construction/copies take 56.30\,s; separate GPU query encoding averages 19.88\,ms. This is mature approximate search, not a new algorithm, relevance improvement, or general exactness guarantee.
+
+
+
+The explanation-budget difference is $-2.162$\,s, query-bootstrap interval $[-3.879,-0.989]$\,s. The 18 jointly valid cases still save 1.486\,s, but only eight ordered top-three lists agree. In the balanced factorial cohort, the bridge screen main effect is $+0.1083$ per display slot, interval $[0.0333,0.1917]$, averaging over language. This is exploratory, with no multiple-comparison correction or independent accuracy interpretation.
+
+\subsection{Public auxiliary tasks}
+\begin{table}[t]
+\caption{All 610 human-self-rated pairs. All arms completed. Metrics are percentages; time is per request, not whole-search latency.}
+\centering\small\begin{tabular}{lrrrrr}\toprule
+Arm & Acc. & Prec. & Rec. & F1 & Mean s\\\midrule
+Full reasoning & 73.28 & 67.43 & 69.29 & 68.35 & 3.84\\
+Short Chat & 68.69 & 58.22 & 87.80 & 70.02 & 1.64\\
+Native choice & 71.15 & 63.83 & 70.87 & 67.16 & 0.91\\\bottomrule
+\end{tabular}\end{table}
+On the original EvidenceBench test~\cite{wang2025evidencebench}, 293 queries from 284 papers, fixed source-role compilation raises aspect recall from 0.4324 to 0.4935; the paper-cluster difference interval is $[0.0377,0.0840]$. Online encoding/sorting average 8.35\,ms, excluding initialization and source-vector construction. Offline request time sums to 1,162.77\,s, not wall time. This supports auxiliary sentence-evidence coverage, not industrial expert fit or amortized full-agent speed.
+
+We pin MERIT's public 610-pair self-rating test: 254 positives (ratings 4/5), 356 negatives (1/2/3), and 509 target-title groups. All arms use \texttt{gpt-6-luna}, no training: the authors' full prompt, strict short-label Chat, and native Decisions. All target/profile text is retained; human scores never enter inference. Six call permutations cycle with three workers and no retries. This does not run MERIT's trained checkpoint or reproduce its local length filtering.
+
+
+
+Native choice reduces mean latency by 2.928\,s (76.3\%), with paper-cluster interval $[-2.997,-2.852]$\,s. Its accuracy difference is $-2.13$ points, interval $[-5.51,1.32]$. Crossing zero establishes neither equivalence nor non-inferiority. Short Chat differs by $-4.59$ points, interval $[-8.35,-0.81]$, despite higher recall/F1. Self-ratings are independent of our silver generator but concern reviewer expertise, not future enterprise capability; pretraining contamination is not ruled out.
+
+\section{Limitations and Next Experiments}
+Industrial labels remain sparse and model-correlated, candidate pools are biased, and personal contributions unresolved. The new Chinese cohort is not yet bilingual or labeled. Source frames, raw retrieval, and budgeted reasoning need unified end-to-end testing. Time, impact, and relevance must not collapse into an unvalidated prestige score. Appendix~\ref{app:protocols} details provenance and incomplete implementation boundaries.
+
+Next experiments should compare frozen multilingual retrieval, translation, distributional alignment, and graph propagation, distinguishing these from generative diffusion training. Geometry-based optimal transport offers an inherited alignment baseline~\cite{alvarez2018gw}; this is distinct from generative diffusion training. The s3 framework~\cite{jiang2025s3} motivates learning a searcher separately from the generator. Such policies should be compared against training-free budget allocation. Training-based alternatives remain alternatives, not implemented results. The company-grouped validation/sealed sets and original 20 sealed needs remain protected from tuning. Code is public under MIT; original enterprise/researcher texts remain local. The current evidence does not establish the full research objective's completion.
+
+\FloatBarrier
+\appendix
+\input{appendix}
+\bibliographystyle{template/ACM-Reference-Format}
+\bibliography{../references}
+\end{document}

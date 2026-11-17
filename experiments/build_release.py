@@ -8,14 +8,16 @@ from pathlib import Path
 
 def build(output):
     root=Path(__file__).resolve().parents[1]
-    names=['README.md','LICENSE','pyproject.toml','requirements.txt','.env.example','.gitignore']
+    names=['experiments/README.md','docs/paper/sigir/README.md','README.md','LICENSE','pyproject.toml','requirements.txt','.env.example','.gitignore']
     for directory in ('src','tests','experiments'):
         names.extend(str(p.relative_to(root)) for p in (root/directory).rglob('*.py'))
     names.extend(str(p.relative_to(root)) for p in (root/'experiments').rglob('*.sbatch'))
-    names.extend(str(p.relative_to(root)) for p in (root/'docs/paper').glob('*.md'))
-    names.extend(['docs/merit-suitability-card.md','docs/fresh-evaluation-data-card.md','docs/transfer-cases-card.md','docs/evidencebench-card.md','docs/exploration/topconf-review-20261117.md','docs/research-methods.md','docs/benchmark-results.md','docs/annotation-protocol.md','docs/exploration/pageindex-expert-design.md','docs/exploration/closest-work-review.md','docs/exploration/reproduction-map.md','docs/cluster.md','docs/paper-controls-data-card.md','docs/paper/references.bib','docs/paper/draft-v3-evidence.json','docs/usage.md','docs/open-source.md','docs/scoped-dataset-card.md'])
+    names.extend(str(p.relative_to(root)) for p in (root/'docs/paper/sigir').rglob('*.tex'))
+    names.extend(str(p.relative_to(root)) for p in (root/'docs/paper/sigir').glob('*.json'))
+    names.extend('docs/paper/sigir/template/'+n for n in ('acmart.cls','acmart.dtx','acmart.ins','ACM-Reference-Format.bst','README'))
+    names.extend(['docs/merit-suitability-card.md','docs/fresh-evaluation-data-card.md','docs/transfer-cases-card.md','docs/evidencebench-card.md','docs/exploration/topconf-review-20261117.md','docs/research-methods.md','docs/benchmark-results.md','docs/annotation-protocol.md','docs/exploration/pageindex-expert-design.md','docs/exploration/closest-work-review.md','docs/exploration/reproduction-map.md','docs/cluster.md','docs/paper-controls-data-card.md','docs/paper/references.bib','docs/usage.md','docs/open-source.md','docs/scoped-dataset-card.md'])
     names.extend('docs/exploration/'+name for name in (
-        'topconf-downloads-20261117.json','merit-release-assets-20261117.json','source-publication-20261117.json',
+        'topconf-downloads-20261117.json','latest-prior-art-20261117.json','merit-release-assets-20261117.json','source-publication-20261117.json',
         'selectivity-fusion-protocol-v1.json','selectivity-fusion-freeze-observation.json',
         'semantic-transport-protocol.json','semantic-transport-sigir.json',
         'semantic-transport-nips.json','crossencoder-results.json',
@@ -28,7 +30,7 @@ def build(output):
         scope='Source snapshot of the public research prototype; not a complete experimental-data release.',
         exclusions=['credentials','raw enterprise/teacher data','model weights','third-party corpora',
                     'model traces and quoted evidence','local virtual environments'],
-        license_status='MIT for repository software; third-party datasets and literature retain their own terms and are excluded.')
+        license_status='MIT for repository software; vendored unmodified ACM acmart retains its upstream LPPL license; third-party datasets and literature retain their own terms and are excluded.')
     files['RELEASE-MANIFEST.json']=json.dumps(manifest,indent=2).encode()
     target=Path(output);target.parent.mkdir(parents=True,exist_ok=True)
     with zipfile.ZipFile(target,'w',compression=zipfile.ZIP_DEFLATED) as archive:
