@@ -178,3 +178,6 @@ For each of 20 fixed seeds, we retain at most seven randomly selected papers per
 
 \paragraph{Diversity-based source cap.}
 A query-independent alternative starts from a source nearest the profile centroid and repeatedly selects the farthest source from the existing set, up to seven per reviewer. On the same reused reviewer queries, soft/hard P@5 is 0.430/0.175, compared with 0.424/0.175 for the seed-averaged random cap and 0.425/0.203 for all sources. Paired query intervals for diverse minus random are $[-0.022,0.034]$ and $[-0.020,0.022]$; these establish neither improvement nor equivalence. The method can favor outliers, source support is unjudged, and selection and evaluation are exploratory. All source scores were precomputed, so no online speedup is established.
+
+\paragraph{Review-sample dependence.}
+The 100-case intent/status-stratified human-review packet contains 96 parent needs and 96 company/body/URL groups; seven cases belong to three repeated groups, each spanning multiple strata. The packet contains no completed human judgments. Future uncertainty estimates must preserve sampling weights and shared groups across strata; independently resampling cases or strata ignores this dependence. The existing groups do not capture all possible topical or author dependence.
