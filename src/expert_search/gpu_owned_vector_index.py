@@ -10,7 +10,8 @@ class GpuOwnedVectorIndex:
     Query vectors and scores cross the host/device boundary on each call.
     All source scores are computed; this is not ANN or an exact equivalence
     certificate relative to the CPU reduction order. Model encoding and GPU
-    contention are outside this component. Eligibility filtering is unsupported.
+    contention are outside this component. Selected-source scoring is scoped
+    to the supplied expert IDs; missing IDs remain explicitly unavailable.
     """
     def __init__(self,reference,device='cuda'):
         import torch
@@ -24,11 +25,33 @@ class GpuOwnedVectorIndex:
         torch.cuda.synchronize(self.device)
 
     def search_vector(self,query,k=5,eligible=None):
-        if eligible is not None:raise ValueError('GPU scorer does not support eligibility filtering')
         if self.torch.backends.cuda.matmul.allow_tf32:raise ValueError('TF32 was enabled after initialization')
         q=np.asarray(query,dtype=np.float32)
         if q.shape!=(self.reference.vectors.shape[1],) or not np.isfinite(q).all() or type(k) is not int or not 1<=k<=500:raise ValueError('Invalid query vector or result budget')
         start=time.perf_counter()
+        if eligible is not None:
+            requested=set(eligible)
+            if any(not isinstance(e,str) or not e for e in requested):raise ValueError('Invalid eligible expert IDs')
+            candidates=sorted(requested & self.reference.owners.keys())
+            unavailable=sorted(requested-self.reference.owners.keys())
+            if not candidates:
+                return {'hits':[],'branch':'no_sources','source_rows':0,'candidate_experts':0,'depths':[],
+                        'unavailable_experts':unavailable,'seconds':time.perf_counter()-start,
+                        'notice':'No eligible source; absence does not establish inability.'}
+            selected=sorted({i for eid in candidates for i in self.reference.owners[eid]})
+            with self.torch.inference_mode():
+                device_q=self.torch.as_tensor(q,device=self.device,dtype=self.torch.float32)
+                indices=self.torch.as_tensor(selected,device=self.device,dtype=self.torch.long)
+                scores=self.torch.mv(self.vectors.index_select(0,indices),device_q).cpu().numpy()
+            if not np.isfinite(scores).all():raise ValueError('Non-finite GPU scores')
+            lookup={i:float(score) for i,score in zip(selected,scores)};hits=[]
+            for eid in candidates:
+                ordered=sorted(self.reference.owners[eid],key=lambda i:(-lookup[i],self.reference.source_ids[i]))
+                hits.append(dict(id=eid,score=lookup[ordered[0]],evidence=[dict(id=self.reference.source_ids[i],score=lookup[i]) for i in ordered[:3]]))
+            hits.sort(key=lambda hit:(-hit['score'],hit['id']))
+            return {'hits':hits[:k],'branch':'gpu_selected','source_rows':len(selected),'candidate_experts':len(candidates),
+                    'depths':[],'unavailable_experts':unavailable,'seconds':time.perf_counter()-start,
+                    'notice':'Selected-source FP32 GPU scoring; CPU reductions can differ. Candidate selection and source relevance are unverified.'}
         with self.torch.inference_mode():
             device_q=self.torch.as_tensor(q,device=self.device,dtype=self.torch.float32)
             scores=self.torch.mv(self.vectors,device_q).cpu().numpy()

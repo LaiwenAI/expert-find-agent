@@ -26,7 +26,13 @@ class GpuOwnedVectorIndexTest(unittest.TestCase):
                 self.assertEqual([x['id'] for x in cpu_hits],[x['id'] for x in gpu_hits])
                 self.assertEqual([[e['id'] for e in x['evidence']] for x in cpu_hits],[[e['id'] for e in x['evidence']] for x in gpu_hits])
                 for a,b in zip(cpu_hits,gpu_hits):self.assertAlmostEqual(a['score'],b['score'],places=6)
-            with self.assertRaises(ValueError):gpu.search_vector([1,0],eligible=['first'])
+            for eligible in (['first'],['first','second','missing'],['third','first','first'],['missing'],[]):
+                a=reference.search_vector([1,0],k=3,eligible=eligible)
+                b=gpu.search_vector([1,0],k=3,eligible=eligible)
+                self.assertEqual([r['id'] for r in a['hits']],[r['id'] for r in b['hits']])
+                self.assertEqual(a['unavailable_experts'],b['unavailable_experts'])
+                self.assertEqual([[e['id'] for e in r['evidence']] for r in a['hits']],[[e['id'] for e in r['evidence']] for r in b['hits']])
+            with self.assertRaises(ValueError):gpu.search_vector([1,0],eligible=[1])
             with self.assertRaises(ValueError):gpu.search_vector([np.nan,0])
             torch.backends.cuda.matmul.allow_tf32=True
             with self.assertRaises(ValueError):gpu.search_vector([1,0])
