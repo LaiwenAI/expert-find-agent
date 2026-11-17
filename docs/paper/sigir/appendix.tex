@@ -196,3 +196,6 @@ A post-hoc split of the same 73 public reviewer queries separates 20 old-task, 2
 
 \paragraph{Sparse contextual feedback sanity check.}
 A post-hoc variant of the same split keeps separate two-arm policies above and below 200 query tokens. After five simulated feedback updates, the short bucket has no feedback and defaults to lexical, while the long bucket selects dense; old/new P@5 is 0.420/0.339 versus 0.480/0.376 for fixed dense. After 20 updates both buckets select dense. The token threshold was chosen after inspecting data and is not a validated difficulty measure. This single reused split, simulated feedback, and artificial cost cannot support causal or generalizable claims; the result motivates explicit cold-start and sparse-feedback evaluations.
+
+\paragraph{Incumbent guard under sparse feedback.}
+An experimental router retains a fixed incumbent until each arm has three outcomes in a context. On the same post-hoc split, selecting dense as incumbent leaves both buckets on dense at all three checkpoints, because lexical has only one observed outcome per bucket. Old/new P@5 remains 0.480/0.376, exactly the fixed dense baseline. The incumbent and threshold were chosen after data inspection; this no-switch result neither establishes a statistical safety guarantee nor demonstrates learning. Feedback is simulated and selection bias remains.
