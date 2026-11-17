@@ -617,3 +617,5 @@ A small enterprise-source integration check is available as `PYTHONPATH=src pyth
 The condition-specific evidence-removal diagnostic can be run with `PYTHONPATH=src python -m experiments.enterprise_selective_condition_pilot` on the same local development views. It does not equate removed documentation with lack of expert ability.
 
 `paired_time_integrated_actionable_gain_interval` in `expert_search.evaluation_gain` compares two streams of completed rankings at a shared horizon. The same fixed query/expert/source-view key shares one unknown label across both streams and all revisions. Use different keys for changed evidence or unverified translations. The interval is a conditional missing-label bound, not a confidence interval; no result contributes before its completion time.
+
+The post-hoc 20-query request-time example for this metric can be reproduced against local frozen artifacts with `PYTHONPATH=src python -m experiments.analyze_paired_anytime_gain`. Its incomplete same-model grades do not establish expert-search accuracy.
