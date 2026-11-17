@@ -627,10 +627,10 @@ To prevent future-dated evidence from entering a retrospective experiment, build
 ```bash
 PYTHONPATH=src python -m experiments.retrieval.build_temporal_snapshot \
   --corpus artifacts/corpus-temporal-source-v1 \
-  --output artifacts/corpus-asof-2020-v1 --as-of 2020-12-31
+  --output artifacts/corpus-asof-2020-v2 --as-of 2020-12-31
 ```
 
-The input corpus must have been rebuilt with publication metadata. The snapshot keeps only papers whose complete supplied date interval is on or before the cutoff; dates that are unknown or overlap the cutoff and all non-paper evidence are excluded. Exclusion is not a negative judgment. The command refuses to overwrite an existing directory. Rebuild all retrieval indexes from the resulting corpus: filtering only evidence displayed after candidate retrieval would still allow future records to influence ranking. Publication dates and identity are not independently verified, publication does not prove public availability, and expert names and affiliations are not historically versioned.
+The input corpus must have been rebuilt with publication metadata. The snapshot keeps only papers whose complete supplied date interval is on or before the cutoff; dates that are unknown or overlap the cutoff and all non-paper evidence are excluded. Exclusion is not a negative judgment. The command refuses to overwrite an existing directory. Rebuild all retrieval indexes from the resulting corpus: filtering only evidence displayed after candidate retrieval would still allow future records to influence ranking. Publication dates and identity are not independently verified, publication does not prove public availability, expert records are reduced to IDs, and source text may contain later edits or embedded metadata. Earlier v1 snapshots retained current expert fields; existing experiments remain tied to their original snapshots.
 
 After preparing the local 2020 snapshot and its lexical database at the paths shown in `experiments.retrieval.temporal_author_proxy`, run `PYTHONPATH=src python -m experiments.retrieval.temporal_author_proxy` to construct a fixed-seed, 200-query local temporal author-recovery proxy. It checks indexed document bodies against the snapshot and refuses to overwrite an existing result directory. The output contains private titles and author IDs and must remain local. The known authors are source associations, not independently verified individual contributions or enterprise-fit labels.
 
