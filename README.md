@@ -62,6 +62,8 @@ The tree includes local directories created during data preparation and experime
 ├── data/                        # Local raw inputs and downloaded datasets
 │   └── teachers/shenzhen/       # Researcher JSONL files and papers.jsonl
 ├── artifacts/                   # Local corpora, indexes, protocols, and results
+├── benchmarks/                  # Redistributable benchmark data
+│   └── openalex-author-recovery-v1/
 ├── docs/                        # Maintained documentation
 │   ├── assets/                  # Editable README banner
 │   ├── exploration/             # Literature reviews and experiment notes
@@ -152,6 +154,8 @@ python -m unittest discover -s tests
 ```
 
 See the [usage guide](docs/usage.md) for additional methods, data adapters, and experiment commands.
+
+The repository includes an [OpenAlex temporal author-recovery proxy](benchmarks/openalex-author-recovery-v1/README.md) with 99 held-out title queries and known-author associations. It is openly licensed metadata for reproducible baseline checks, not a measure of enterprise suitability or individual contribution.
 
 The experimental candidate-first pipeline combines a compiled candidate language model, selective evidence lookup, and an optional single model call. Its [usage guide](docs/usage.md) describes index creation and verification. It is a research prototype; independent expert-fit evaluation is still pending.
 

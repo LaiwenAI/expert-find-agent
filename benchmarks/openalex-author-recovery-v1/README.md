@@ -1,0 +1,25 @@
+# OpenAlex Temporal Author-Recovery Proxy
+
+This is a small, publicly redistributable auxiliary benchmark, not a benchmark of enterprise suitability or actual individual contribution. It uses English-labeled publication-title metadata and author IDs from the [OpenAlex Works API](https://api.openalex.org/), whose [data are released under CC0](https://help.openalex.org/api/). The derived metadata and author-association labels are offered under [CC0 1.0](https://creativecommons.org/publicdomain/zero/1.0/). No paper abstracts, researcher names, affiliations, private enterprise needs, or model responses are included.
+
+Historical works from 2010--2019 form the evidence corpus. A 2020--2023 target title is a query; eligible known positives are its OpenAlex author IDs that also have at least one historical evidence record. Queries with no eligible author are excluded. An author association is not proof of a specific personal contribution, expertise, suitability, or ability to deliver a project. Authors omitted from the known-positive list are **unjudged**, not verified negatives. OpenAlex identities are machine-disambiguated and may contain errors.
+
+Exact normalized target-title duplicates and historical titles with character four-gram Jaccard at least 0.8 against a target title are removed from historical evidence; duplicate target titles are collapsed. The 0.8 threshold was chosen after a preliminary audit of this snapshot. It removes 10 historical records but cannot detect all paraphrases or semantic leakage. Repeated authors across history and target are intentional. The source pool comes from five topical API searches and is neither representative nor exhaustive. Target-title retrieval is an author-recovery proxy, and evaluation is conditional on the authors present in the selected history pool; many target authors lack historical evidence in this snapshot.
+
+## Files
+
+- `experts.jsonl`: OpenAlex author IDs only.
+- `evidence.jsonl`: historical work titles, years, owner IDs and work IDs; one row per work-author association.
+- `queries.jsonl`: held-out work IDs, titles and publication years.
+- `qrels.jsonl`: known eligible author IDs for each query; no negative labels.
+- `source-records.jsonl`: filtered metadata used by the builder, including target works that were not eligible as queries.
+- `manifest.json`: exact counts, API URLs, response hashes, timestamp and file hashes.
+
+The API is dynamic: raw fetched responses are not redistributed here, so the stored response hashes alone do not make a future API request reproduce those bytes. The filtered source records and benchmark files freeze this release. To construct a new version, run `python -m experiments.openalex.fetch_snapshot` followed by `python -m experiments.openalex.build_author_recovery`; results may differ and are not a re-creation of this snapshot. Use the associated verifier and benchmark tools to validate this release and report known-author recall and reciprocal rank without treating unjudged authors as irrelevant.
+
+```bash
+PYTHONPATH=src python -m experiments.openalex.verify_author_recovery
+PYTHONPATH=src python -m experiments.openalex.benchmark_author_recovery
+```
+
+The local exploratory lexical baseline returns a known author in the top ten for 21/99 queries with BM25-max and 27/99 with BM25-vote; known-author recall@10 is 0.202 and 0.256 respectively. Each query was timed once per method, and the experiment excludes initialization and model reasoning. These are baseline observations, not calibrated precision or statistical superiority. The 99 retained queries contain 126 known-positive links; 792 target works have no eligible author and are not benchmark queries. The manifest also records 3,472 target-author links without historical evidence in the selected pool. This selection excludes hard unavailable cases and must be reported with any result.

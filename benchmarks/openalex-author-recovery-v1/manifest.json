@@ -1,0 +1,90 @@
+{
+  "benchmark": "openalex-author-recovery-v1",
+  "queries": 99,
+  "experts": 2593,
+  "evidence": 2817,
+  "history_works": 867,
+  "target_works": 891,
+  "discarded_duplicate_api_rows": 1,
+  "discarded_duplicate_target_titles": 43,
+  "discarded_duplicate_history_records": 6,
+  "discarded_history_high_title_overlap": 10,
+  "target_authors_without_historical_evidence": 3472,
+  "periods": {
+    "history": "2010-2019",
+    "target": "2020-2023"
+  },
+  "input_snapshot_manifest_sha256": "c1e564e388f42a06edb9c0b9bfc1742aa54a5bc16892f2fbafece806ef21ec64",
+  "api_sources": [
+    {
+      "file": "00-history.json",
+      "url": "https://api.openalex.org/works?search=robotic+control&filter=from_publication_date%3A2010-01-01%2Cto_publication_date%3A2019-12-31&per-page=200&select=id%2Ctitle%2Cpublication_year%2Cauthorships%2Clanguage",
+      "sha256": "b338547466120e42903f0d33013b37b1f0bb8fbb22762bcb11394196dc449fbd",
+      "count": 200
+    },
+    {
+      "file": "00-target.json",
+      "url": "https://api.openalex.org/works?search=robotic+control&filter=from_publication_date%3A2020-01-01%2Cto_publication_date%3A2023-12-31&per-page=200&select=id%2Ctitle%2Cpublication_year%2Cauthorships%2Clanguage",
+      "sha256": "58e558a9676577fbc61dfcc65dda8122faa31240323f6e4fdafc0dd166738f2a",
+      "count": 200
+    },
+    {
+      "file": "01-history.json",
+      "url": "https://api.openalex.org/works?search=battery+materials&filter=from_publication_date%3A2010-01-01%2Cto_publication_date%3A2019-12-31&per-page=200&select=id%2Ctitle%2Cpublication_year%2Cauthorships%2Clanguage",
+      "sha256": "67603797e8a93165de4cd8614106b0eaf46fb53276f4abac2a0a3a006b50287d",
+      "count": 200
+    },
+    {
+      "file": "01-target.json",
+      "url": "https://api.openalex.org/works?search=battery+materials&filter=from_publication_date%3A2020-01-01%2Cto_publication_date%3A2023-12-31&per-page=200&select=id%2Ctitle%2Cpublication_year%2Cauthorships%2Clanguage",
+      "sha256": "be9ea795fc87f5fd558f1c7804ec9a3cf53a10f52c22e507a3d209ae78a0c55a",
+      "count": 200
+    },
+    {
+      "file": "02-history.json",
+      "url": "https://api.openalex.org/works?search=wastewater+treatment&filter=from_publication_date%3A2010-01-01%2Cto_publication_date%3A2019-12-31&per-page=200&select=id%2Ctitle%2Cpublication_year%2Cauthorships%2Clanguage",
+      "sha256": "21a4bdb405fa6919f05b76fcdf816b39d7954acdb06469c46a6af41e69b6d370",
+      "count": 200
+    },
+    {
+      "file": "02-target.json",
+      "url": "https://api.openalex.org/works?search=wastewater+treatment&filter=from_publication_date%3A2020-01-01%2Cto_publication_date%3A2023-12-31&per-page=200&select=id%2Ctitle%2Cpublication_year%2Cauthorships%2Clanguage",
+      "sha256": "af7c1f5844bfe3a1654a1855f7a0f30388c68cd66d8cd277e791e5990a5c0296",
+      "count": 200
+    },
+    {
+      "file": "03-history.json",
+      "url": "https://api.openalex.org/works?search=advanced+manufacturing&filter=from_publication_date%3A2010-01-01%2Cto_publication_date%3A2019-12-31&per-page=200&select=id%2Ctitle%2Cpublication_year%2Cauthorships%2Clanguage",
+      "sha256": "aebd614a1b40d134f7522c46e318a029e21758e407a446cf9da49e40b07b785d",
+      "count": 200
+    },
+    {
+      "file": "03-target.json",
+      "url": "https://api.openalex.org/works?search=advanced+manufacturing&filter=from_publication_date%3A2020-01-01%2Cto_publication_date%3A2023-12-31&per-page=200&select=id%2Ctitle%2Cpublication_year%2Cauthorships%2Clanguage",
+      "sha256": "11ac625e352031087736ebca777839a49ef0014fdb32b44539df9a2c4285e3b0",
+      "count": 200
+    },
+    {
+      "file": "04-history.json",
+      "url": "https://api.openalex.org/works?search=solar+energy&filter=from_publication_date%3A2010-01-01%2Cto_publication_date%3A2019-12-31&per-page=200&select=id%2Ctitle%2Cpublication_year%2Cauthorships%2Clanguage",
+      "sha256": "fa5778e5883ffaf7e2c5393be396e17463eb1ad4dd61c69413f987cce0bb624c",
+      "count": 200
+    },
+    {
+      "file": "04-target.json",
+      "url": "https://api.openalex.org/works?search=solar+energy&filter=from_publication_date%3A2020-01-01%2Cto_publication_date%3A2023-12-31&per-page=200&select=id%2Ctitle%2Cpublication_year%2Cauthorships%2Clanguage",
+      "sha256": "8a610bec8fc990c4e76d777fe7db83477ff8953eb21d8aef2cc7c74adc416423",
+      "count": 200
+    }
+  ],
+  "fetched_utc": "2026-11-17T10:45:09.179154+00:00",
+  "outputs_sha256": {
+    "source-records.jsonl": "55b193291ed4f7fb7b22e066bb667b58ae1ba85d2bb885074cbee3365f45e512",
+    "experts.jsonl": "5cd7abf3565613d68dc825eb9a8fa920d54461be57084e13e3cc4a0e14dd98fe",
+    "evidence.jsonl": "c9b6b42093dfdcdce15a52f0e2027d87cc7f3ed577dccc450898844d861184ea",
+    "queries.jsonl": "7ad190c893ed4a12e7e871145dc1660606a4a954d1b7708583377f7823b46764",
+    "qrels.jsonl": "5a68eab07f2058def493fae9c58f9c677856b3bc5635dd1a355792a5ead54055"
+  },
+  "code_sha256": "494e46abff6dda490c0a7e91c33ab2dec73046dcd165c25ed4b897b5829e09ad",
+  "scope": "English-labeled publication-title known-author recovery, using OpenAlex author associations; not enterprise relevance, ability, individual contribution, or exhaustive labels. Other experts are unjudged. Exact title matches and >=0.8 character 4-gram Jaccard matches against target titles are excluded; semantic leakage remains possible. Threshold was chosen after observing the preliminary snapshot. Snapshot API results can change; filtered source-records and hashes are distributed, raw responses are not."
+}

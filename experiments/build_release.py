@@ -14,6 +14,7 @@ def build(output):
         names.extend(str(p.relative_to(root)) for p in (root/directory).rglob('*.py'))
     names.extend(str(p.relative_to(root)) for p in (root/'experiments').rglob('*.sbatch'))
     names.extend(str(p.relative_to(root)) for p in (root/'docs/assets').glob('*.svg'))
+    names.extend(str(p.relative_to(root)) for p in (root/'benchmarks').rglob('*') if p.is_file() and p.suffix in ('.jsonl','.json','.md'))
     names.extend(['docs/grounding-review-protocol.md', 'docs/exploration/channel-fusion-20261117.md', 'docs/exploration/bilingual-audit-order-controls-20261117.md', 'docs/exploration/enterprise-review-readiness-20261117.md', 'docs/exploration/fixed-evidence-routing-pilot.md', 'docs/exploration/oversearch-cost-baseline.md'])
     names.extend(str(p.relative_to(root)) for p in (root/'docs/paper/sigir').rglob('*.tex'))
     names.extend(str(p.relative_to(root)) for p in (root/'docs/paper/sigir').rglob('*.json'))
@@ -34,10 +35,10 @@ def build(output):
         if language_pattern.search(name) or language_pattern.search(body.decode('utf-8')):
             raise ValueError('Non-English text in source release: '+name)
     manifest=dict(repository_language='English; language-specific fixtures use Unicode escapes.',files={name:hashlib.sha256(body).hexdigest() for name,body in files.items()},
-        scope='Source snapshot of the public research prototype; not a complete experimental-data release.',
-        exclusions=['credentials','raw enterprise/teacher data','model weights','third-party corpora',
+        scope='Source snapshot and the CC0 OpenAlex author-recovery proxy; not a complete enterprise experimental-data release.',
+        exclusions=['credentials','raw enterprise/teacher data','model weights','other third-party corpora',
                     'model traces and quoted evidence','local virtual environments'],
-        license_status='MIT for repository software; vendored unmodified ACM acmart retains its upstream LPPL license; third-party datasets and literature retain their own terms and are excluded.')
+        license_status='MIT for repository software; OpenAlex metadata and the author-recovery proxy are CC0; vendored unmodified ACM acmart retains its upstream LPPL license; other third-party datasets and literature retain their own terms and are excluded.')
     files['RELEASE-MANIFEST.json']=json.dumps(manifest,indent=2).encode()
     target=Path(output);target.parent.mkdir(parents=True,exist_ok=True)
     with zipfile.ZipFile(target,'w',compression=zipfile.ZIP_DEFLATED) as archive:
