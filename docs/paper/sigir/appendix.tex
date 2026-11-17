@@ -202,3 +202,6 @@ An experimental router retains a fixed incumbent until each arm has three outcom
 
 \paragraph{Exposure-linked simulated feedback.}
 An experimental in-memory registry associates each outcome with one selected action and its logged propensity, rejects conflicting duplicates, and leaves missing outcomes pending. Applied to the same simulated 20-update replay, it records all 20 exposures and outcomes and reproduces the guarded checkpoints. Deterministic actions lack policy overlap; logging propensity does not itself remove selection bias or establish off-policy validity. No real user feedback is present.
+
+\paragraph{Logging support diagnostic.}
+The simulated update replay records full action distributions. Two deterministic lexical actions assign zero probability to the fixed-dense target, so a conservative off-policy checker withholds its estimate. The checker also rejects missing outcomes and reports effective sample size when applicable. Logging support is necessary, not sufficient, for valid causal evaluation; propensity correctness, feedback missingness and confounding remain unresolved.
