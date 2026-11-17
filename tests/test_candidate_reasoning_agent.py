@@ -9,6 +9,10 @@ class FakePipeline:
                            {'expert':{'id':'b'},'evidence':[{'id':'s2','expert_id':'b','text':'source b'}]}],
                 'timing':{'total_seconds':0}}
 
+    def search_reranked(self,query,k,candidates,evidence_per_expert):
+        self.rerank_args=(query,k,candidates,evidence_per_expert)
+        return self.search(query,k,evidence_per_expert)
+
 
 class CandidateReasoningAgentTest(unittest.TestCase):
     def test_rejects_cross_owner_citations_and_truncates_visible_text(self):
@@ -30,6 +34,11 @@ class CandidateReasoningAgentTest(unittest.TestCase):
         self.assertEqual(result['results'][0]['evidence'][0]['end'],8)
         self.assertEqual(result['rejected_results'],1)
         with self.assertRaises(ValueError):agent.run('need',k=2,candidates=2,evidence_per_expert=0)
+        result=agent.run('need',k=2,candidates=2,retrieval='adaptive_bm25',rerank_pool=4)
+        self.assertEqual(agent.pipeline.rerank_args,('need',2,4,1))
+        self.assertEqual(result['retrieval_strategy'],'adaptive_bm25')
+        with self.assertRaises(ValueError):agent.run('need',k=2,candidates=2,retrieval='adaptive_bm25',rerank_pool=1)
+        with self.assertRaises(ValueError):agent.run('need',k=2,candidates=2,retrieval='invalid')
 
     def test_rejects_invented_and_truncated_quotes(self):
         agent=CandidateReasoningAgent(FakePipeline(),client=object())

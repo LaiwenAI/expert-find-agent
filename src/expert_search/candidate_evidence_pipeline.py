@@ -2,6 +2,7 @@
 import itertools
 import json
 import time
+from collections import defaultdict
 from pathlib import Path
 
 from .compiled_expert_search import CompiledExpertSearch
@@ -30,6 +31,9 @@ class CandidateEvidencePipeline:
         for table,name in [('docs','docs_expert_idx'),('scores','scores_doc_term_idx')]:
             if name not in {row[1] for row in self.evidence.db.execute(f'PRAGMA index_list({table})')}:
                 raise ValueError('Missing candidate-first index: '+name)
+        self.evidence_by_expert=defaultdict(list)
+        for _,(evidence_id,expert_id) in self.evidence.metadata.items():
+            self.evidence_by_expert[expert_id].append(evidence_id)
         self.initialization_seconds=time.perf_counter()-start
 
     def search(self,query,k=5,evidence_per_expert=3):
@@ -43,3 +47,36 @@ class CandidateEvidencePipeline:
                 'total_seconds':time.perf_counter()-start,'initialization_seconds':self.initialization_seconds},
                 'source_snapshot_sha256':ranked['source_snapshot_sha256'],
                 'scope':'Candidate language-model ranking followed by lexical evidence selection; no model reasoning or relevance validation. Missing evidence does not establish inability.'}
+
+    def search_reranked(self,query,k=10,candidates=50,evidence_per_expert=1):
+        """Candidate-LM shortlist, adaptive BM25-max, then owned evidence.
+
+        Scores and evidence reflect the supplied frozen corpus only. A zero
+        score can still yield fallback evidence; neither rank nor association
+        proves semantic support, identity, personal role, or expert ability.
+        """
+        if type(k)!=int or type(candidates)!=int or not 1<=k<=candidates<=50:
+            raise ValueError('Require 1 <= k <= candidates <= 50')
+        if type(evidence_per_expert)!=int or not 1<=evidence_per_expert<=10:
+            raise ValueError('Require 1 to 10 evidence items per expert')
+        start=time.perf_counter()
+        candidates_result=self.ranker.search(query,candidates)
+        pool=[row['expert']['id'] for row in candidates_result['results']]
+        expert_rows={row['expert']['id']:row['expert'] for row in candidates_result['results']}
+        source_ids=[eid for expert in pool for eid in self.evidence_by_expert[expert]]
+        scoring_start=time.perf_counter()
+        routed=self.evidence.adaptive_document_scores(query,source_ids)
+        scores={expert:max((routed['scores'].get(eid,0.) for eid in self.evidence_by_expert[expert]),default=0.) for expert in pool}
+        ranking=sorted(pool,key=lambda expert:(-scores[expert],expert))[:k]
+        scoring_seconds=time.perf_counter()-scoring_start
+        evidence_start=time.perf_counter()
+        evidence=self.evidence.evidence_for_selective(query,ranking,evidence_per_expert)
+        evidence_seconds=time.perf_counter()-evidence_start
+        result=[dict(expert=expert_rows[expert],score=scores[expert],evidence=evidence[expert]) for expert in ranking]
+        return dict(results=result,source_snapshot_sha256=candidates_result['source_snapshot_sha256'],
+                    route=routed['route'],estimated_global_postings=routed['estimated_global_postings'],
+                    estimated_selective_probes=routed['estimated_selective_probes'],
+                    timing=dict(ranking_seconds=candidates_result['seconds'],scoring_seconds=scoring_seconds,
+                                evidence_seconds=evidence_seconds,total_seconds=time.perf_counter()-start,
+                                initialization_seconds=self.initialization_seconds),
+                    scope='Candidate-LM shortlist and adaptive exact BM25-max followed by owned evidence. Zero scores can return fallback evidence; association, source semantics, individual role and ability remain unverified.')

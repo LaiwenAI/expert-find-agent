@@ -34,6 +34,11 @@ class CompiledExpertSearchTest(unittest.TestCase):
             result=pipeline.search('alpha',2)
             self.assertEqual([r['expert']['id'] for r in result['results']],['a','b'])
             self.assertTrue(all(e['expert_id']==r['expert']['id'] for r in result['results'] for e in r['evidence']))
+            reranked=pipeline.search_reranked('alpha',k=2,candidates=2,evidence_per_expert=1)
+            self.assertEqual([r['expert']['id'] for r in reranked['results']],['a','b'])
+            self.assertEqual(reranked['results'][1]['score'],0.)
+            self.assertTrue(all(e['expert_id']==r['expert']['id'] for r in reranked['results'] for e in r['evidence']))
+            with self.assertRaises(ValueError):pipeline.search_reranked('alpha',k=3,candidates=2)
             import sqlite3
             with sqlite3.connect(root/'fast.sqlite') as db:db.execute("UPDATE docs SET expert_id='b' WHERE evidence_id='d1'")
             with self.assertRaises(ValueError):CandidateEvidencePipeline(root,root/'index',root/'fast.sqlite')
