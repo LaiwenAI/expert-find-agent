@@ -5,6 +5,7 @@ from pathlib import Path
 from expert_search.retrieval import Search,index
 from expert_search.fast_retrieval import FastSearch,compile_index
 from expert_search.agent import verify_compiled_documents
+from experiments.retrieval.audit_compiled_index import audit
 
 class FastTest(unittest.TestCase):
     def test_batched_lookup_crosses_sql_parameter_boundary(self):
@@ -16,6 +17,7 @@ class FastTest(unittest.TestCase):
             index(p,p/'old');compile_index(p/'old',p/'fast')
             verify_compiled_documents(p/'old',p/'fast')
             old=Search(p,p/'old');fast=FastSearch(p,p/'fast')
+            self.assertGreater(audit(p/'old',p/'fast')['postings_verified'],0)
             for method in ['bm25-max','bm25-vote','tfidf-max']:
                 a=old.search('robot control',2,method,['0','1']);b=fast.search('robot control',2,method,['0','1'])
                 self.assertEqual([r['id'] for r in a],[r['id'] for r in b])
@@ -52,3 +54,7 @@ class FastTest(unittest.TestCase):
             fallback=fast.evidence_for('unmatched',['a'],2)
             self.assertEqual([e['id'] for e in fallback['a']],['0','1'])
             with self.assertRaises(ValueError):fast.evidence_for('biology',['missing'])
+            import sqlite3
+            with sqlite3.connect(p/'fast') as db:
+                db.execute('UPDATE scores SET bm25=bm25+1 WHERE rowid=(SELECT min(rowid) FROM scores)')
+            with self.assertRaises(ValueError):audit(p/'old',p/'fast')
