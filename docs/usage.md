@@ -611,3 +611,5 @@ else:
 ```
 
 The threshold is a routing setting, not calibrated confidence. The 0.75 value was explored on an auxiliary reviewer-self-rating task; it is not validated for industrial expert search and must not be adopted as a universal default. The initial 40-case pilot used its own implementation. A separate 12-case public reviewer-matching pilot exercised this component, including four actual escalations; industrial end-to-end quality remains unvalidated.
+
+A small enterprise-source integration check is available as `PYTHONPATH=src python -m experiments.enterprise_selective_component_pilot`; it requires the local frozen source-view dataset and makes paid model calls. It compares model outputs, not independent expert-fit labels.
