@@ -235,3 +235,6 @@ An exploratory gate computes the memory candidate's score, forms upward-rounded 
 
 \paragraph{Shared-owner gate checks.}
 The bound-based prototype is now implemented as a reusable component that rejects negative and nonfinite postings and expands shared sources across owners. Exhaustive small synthetic checks cover ties and shared ownership, including 50 randomized posting sets. A new replay reproduces all 26 prior full-gate decisions; 16 reused new-query attempts average 6.57 ms versus 16.06 ms for full lexical scoring and ranking, with one sequential, cache-sensitive observation per attempt. These checks neither authenticate mutable inputs nor establish semantic evidence or end-to-end speed.
+
+\paragraph{Larger shared-owner membership diagnostic.}
+On 30 reused CoF NIPS queries with 364 reviewers and 14,913 unique papers, candidates at precomputed full ranks 10, 50 and 100 yield 270 matching bounded/full top-50 decisions across three alternating repeats. Mean bounded membership is approximately 18.5 ms versus 107--109 ms for full scoring and ranking; resident and bound initialization are 685 and 164 ms. Candidate selection already uses the full ranking and is excluded, the output contracts differ, and sequential repeats are dependent. This is a component diagnostic, not end-to-end speed or relevance evidence.
