@@ -5,7 +5,7 @@ from collections import Counter
 from datetime import date
 from pathlib import Path
 from ..corpus import records
-from .papers import availability
+from .papers import availability, publication_interval
 
 
 def build_temporal_snapshot(corpus, output, as_of):
@@ -35,12 +35,17 @@ def build_temporal_snapshot(corpus, output, as_of):
         if not isinstance(interval, dict):
             counts['unknown_publication_date'] += 1
             continue
-        state = availability(interval, as_of)
+        canonical = publication_interval(interval.get('raw'))
+        interval_fields = ('raw', 'precision', 'start', 'end_exclusive', 'status')
+        if any(interval.get(key) != canonical[key] for key in interval_fields):
+            counts['inconsistent_publication_interval'] += 1
+            continue
+        state = availability(canonical, as_of)
         counts[state] += 1
         if state == 'before_or_on_cutoff':
             allowed = ('id', 'expert_id', 'kind', 'text', 'title', 'url', 'source', 'publication', 'contribution_status', 'authorship_association')
             retained = {key: row[key] for key in allowed if key in row}
-            retained['publication'] = {key: interval[key] for key in ('raw', 'precision', 'start', 'end_exclusive', 'status') if key in interval}
+            retained['publication'] = canonical
             retained['contribution_status'] = 'unverified'
             retained['authorship_association'] = 'source_association_not_independently_verified'
             kept.append(retained)
@@ -54,6 +59,6 @@ def build_temporal_snapshot(corpus, output, as_of):
     report = dict(as_of=as_of, source_experts_sha256=sha(experts_bytes), source_evidence_sha256=sha(source_bytes),
                   output_experts_sha256=sha(output_experts_bytes), output_evidence_sha256=sha(evidence_bytes),
                   source_evidence=len(seen), kept_papers=len(kept), excluded=len(seen)-len(kept), counts=dict(counts),
-                  scope='Conservative paper-only snapshot based on supplied publication-date intervals. Unknown and partial-overlap dates are excluded, not negatives. Source dates and author identity are not independently verified. Expert records retain IDs only; publication date is not proof of actual public availability. Paper fields are allowlisted to exclude citation counts and other extra metadata. Source text may still contain later edits or embedded metadata.')
+                  scope='Conservative paper-only snapshot based on supplied publication-date intervals. Unknown, inconsistent and partial-overlap dates are excluded, not negatives. Source dates and author identity are not independently verified. Expert records retain IDs only; publication date is not proof of actual public availability. Paper fields are allowlisted to exclude citation counts and other extra metadata. Source text may still contain later edits or embedded metadata.')
     (output/'temporal-manifest.json').write_text(json.dumps(report, indent=2)+'\n')
     return report
