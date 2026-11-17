@@ -3,6 +3,7 @@
 Metadata access optimization only; topic routing and applicability need evaluation.
 """
 import hashlib
+import itertools
 import json
 import sqlite3
 from pathlib import Path
@@ -39,7 +40,12 @@ class ExpertCatalog:
         self._database_identity=(database_stat.st_dev,database_stat.st_ino)
         self.db=sqlite3.connect(self.database.resolve().as_uri()+'?mode=ro',uri=True)
         self._data_version=self.db.execute('PRAGMA data_version').fetchone()[0]
-        self._check_snapshot()
+        try:
+            self._check_snapshot()
+            self._verify_inventory()
+        except BaseException:
+            self.db.close()
+            raise
 
     @staticmethod
     def _identity(stat):
@@ -61,6 +67,29 @@ class ExpertCatalog:
                 raise ValueError('Evidence catalog or source snapshot changed')
         except OSError as error:
             raise ValueError('Evidence source snapshot unavailable') from error
+
+    def _verify_inventory(self):
+        """Compare every catalog row with the current manifest-matched source.
+
+        This detects stale, missing, injected or reassigned catalog entries,
+        including edits made before this instance was opened. It does not
+        authenticate the source data or an untrusted manifest itself.
+        """
+        self._check_snapshot()
+        def source_rows(stream):
+            while True:
+                offset=stream.tell();body=stream.readline()
+                if not body:break
+                if not body.strip():continue
+                row=json.loads(body)
+                yield (row['id'],row['expert_id'],offset,len(body))
+        with self.source.open('rb') as stream:
+            if self._file_identity(stream.fileno())!=self._source_identity:raise ValueError('Evidence source snapshot changed')
+            stored=self.db.execute('SELECT id,expert_id,offset,length FROM evidence ORDER BY offset')
+            for original,entry in itertools.zip_longest(source_rows(stream),stored):
+                if original!=entry:raise ValueError('Evidence catalog inventory differs from source')
+            if self._file_identity(stream.fileno())!=self._source_identity:raise ValueError('Evidence source snapshot changed')
+        self._check_snapshot()
 
     def _read_rows(self,rows):
         self._check_snapshot();result=[]

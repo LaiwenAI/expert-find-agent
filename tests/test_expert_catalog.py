@@ -38,3 +38,24 @@ class ExpertCatalogTest(unittest.TestCase):
             with sqlite3.connect(catalog.database) as db:db.execute("UPDATE evidence SET expert_id='b' WHERE id='s'")
             with self.assertRaisesRegex(ValueError,'snapshot'):catalog.for_evidence(['s'])
             catalog.db.close()
+
+    def test_reopen_rejects_catalog_preexisting_mutation(self):
+        import sqlite3
+        for change in ("DELETE FROM evidence WHERE id='s'", "UPDATE evidence SET expert_id='b' WHERE id='s'", "UPDATE evidence SET offset=offset+1 WHERE id='s'"):
+            with self.subTest(change=change),tempfile.TemporaryDirectory() as directory:
+                root=Path(directory);corpus=root/'corpus';corpus.mkdir()
+                (corpus/'evidence.jsonl').write_text(json.dumps(dict(id='s',expert_id='a',text='old'))+'\n')
+                catalog=ExpertCatalog(corpus,root/'index');database=catalog.database;catalog.db.close()
+                with sqlite3.connect(database) as db:db.execute(change)
+                with self.assertRaisesRegex(ValueError,'inventory'):ExpertCatalog(corpus,root/'index')
+
+    def test_open_catalog_rejects_database_file_replacement(self):
+        import os
+        import shutil
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);corpus=root/'corpus';corpus.mkdir()
+            (corpus/'evidence.jsonl').write_text(json.dumps(dict(id='s',expert_id='a',text='text'))+'\n')
+            catalog=ExpertCatalog(corpus,root/'index')
+            replacement=root/'replacement.sqlite';shutil.copyfile(catalog.database,replacement);os.replace(replacement,catalog.database)
+            with self.assertRaisesRegex(ValueError,'snapshot'):catalog.for_evidence(['s'])
+            catalog.db.close()
