@@ -20,3 +20,17 @@ Use graded nDCG@10. Treat `grade>=2` as relevant for MRR@10 and Recall@10. Exper
 Human gold labels are not yet available. Model self-assessment cannot be described as human validation or used to establish real-demand accuracy. Report the paper-author recovery proxy separately.
 
 A future project's requested performance or delivery target does not automatically require the candidate to have achieved it historically. Grade the documented technical foundation and match for undertaking the research. Record unknown prior integration experience as a gap instead of directly assigning zero potential relevance. Distinguish explicit personal qualifications from future technical goals.
+
+## Bilingual intent-pair review
+
+The local high-overlap packet contains two generated requests from the same original need, in both languages. It hides the intended type, previous screening status, internal identifiers, and overlap scores. The request order is fixed by the packet; do not infer a preferred request from its position. The packet is targeted, so its judgments do not estimate the frequency of semantic redundancy among all synthetic pairs.
+
+For each language independently, compare what an expert search must find:
+
+- **same:** both requests seek substantially the same technical capability, operation, and relevant constraints; stylistic paraphrases and minor wording differences do not create a new search intent.
+- **different:** the requests require materially different evidence, operations, constraints, or stages of work. A broad request and a narrower one can be different if the extra scope would affect which experts or evidence qualify.
+- **uncertain:** the requested operation, context, technical constraint, or translation cannot be interpreted reliably. Missing evidence about actual experts is not a reason to label the requests different.
+
+Use the original need as context for terminology and scope, not as proof that either generated request is faithful. This task does not adjudicate grounding or bilingual equivalence; those require their separate fields and protocol. A high lexical overlap can still correspond to different needs, while a low overlap can conceal a paraphrase. Do not infer an expert's capability, authorship, or personal contribution from an intent-pair judgment.
+
+Have two qualified reviewers independently complete separate copies, without seeing each other's decisions or model outputs. Record a short rationale and reviewer identifier for every labeled case; the validator rejects edited source fields and unlabeled attribution. Count missing and uncertain separately, report per-language agreement on jointly determinate cases and its denominator, and adjudicate disagreements independently. Keep all copies and mappings local under the original access terms. There are currently no human judgments.
