@@ -17,7 +17,54 @@
       "path": "/Users/zhoudixin/Desktop/Lai/Benchmark/literatures/method/2018_EMNLP_Gromov-Wasserstein Alignment of Word Embedding Spaces.pdf",
       "sha256": "747c44d686d1bc4914ccc08cf0b4719e1409e5ab7dc0de4b3f2905a95d557237",
       "pages": 10
+    },
+    {
+      "name": "2023_ACL_Understanding and Improving the Robustness of Terminology Constraints in Neural Machine Translation.pdf",
+      "url": "https://aclanthology.org/2023.acl-long.332.pdf",
+      "page": "https://aclanthology.org/2023.acl-long.332/",
+      "path": "/Users/zhoudixin/Desktop/Lai/Benchmark/literatures/method/2023_ACL_Understanding and Improving the Robustness of Terminology Constraints in Neural Machine Translation.pdf",
+      "sha256": "08ffbe5220ffa9818f808bc22fb2362e061070070a8cf915a9f140d88b40d570",
+      "pages": 14,
+      "scope": "Verified ACL2023 long paper; foundational constrained-translation robustness, not latest2026 or our implementation. Its method trains a model; our API placeholder/gap ablations do not reproduce it."
+    },
+    {
+      "name": "2026_ACL_Mitigating Context Interference for Reliable and Efficient Search Agents.pdf",
+      "path": "/Users/zhoudixin/Desktop/Lai/Benchmark/literatures/method/2026_ACL_Mitigating Context Interference for Reliable and Efficient Search Agents.pdf",
+      "url": "https://aclanthology.org/2026.acl-long.160.pdf",
+      "page": "https://aclanthology.org/2026.acl-long.160/",
+      "sha256": "eefd0659d7a75dadb3fad358c7a96674ce3f7847a13b87820c610984ab8e58d2",
+      "pages": 18,
+      "scope": "Official proceedings PDF downloaded on Slurm ws5 network route; first-page proceedings/title verified locally, full extracted text available for review. No prior gains transferred to our method."
+    },
+    {
+      "name": "2026_EMNLP_Long Live the Librarian A Persistent Search Sub-Agent for Energy-Efficient Multi-Agent Software Engineering Systems.pdf",
+      "path": "/Users/zhoudixin/Desktop/Lai/Benchmark/literatures/method/2026_EMNLP_Long Live the Librarian A Persistent Search Sub-Agent for Energy-Efficient Multi-Agent Software Engineering Systems.pdf",
+      "url": "https://aclanthology.org/2026.emnlp-main.867.pdf",
+      "page": "https://aclanthology.org/2026.emnlp-main.867/",
+      "sha256": "53b216e37d31dbac3cd3890718c64eff970780f3117f22b8b3caa597d486d6c7",
+      "pages": 23,
+      "scope": "Official proceedings PDF downloaded on Slurm ws5 network route; first-page proceedings/title verified locally, full extracted text available for review. No prior gains transferred to our method."
     }
   ],
-  "scope": "Verified official EMNLP main-proceedings PDFs.2018is foundational alignment work, not presented as latest. Model training in s3 is prior work, not performed here."
+  "scope": "Official main-proceedings papers with source/PDF identities verified. Older alignment and terminology work is background, not latest. Prior learned methods are not claimed as our trained implementations.",
+  "web_verified_papers": [
+    {
+      "title": "Mitigating Context Interference for Reliable and Efficient Search Agents",
+      "venue": "ACL2026 main long papers",
+      "page": "https://aclanthology.org/2026.acl-long.160/",
+      "pdf": "https://aclanthology.org/2026.acl-long.160.pdf",
+      "pages": 18,
+      "read_scope": "Official PDF proceedings header, method/context-refinement sections and learned-distillation/RL boundary verified through web tool.",
+      "local_download_status": "Downloaded via Slurm compute-node network; hash/title verified."
+    },
+    {
+      "title": "Long Live the Librarian! A Persistent Search Sub-Agent for Energy-Efficient Multi-Agent Software Engineering Systems",
+      "venue": "EMNLP2026 main proceedings",
+      "page": "https://aclanthology.org/2026.emnlp-main.867/",
+      "pdf": "https://aclanthology.org/2026.emnlp-main.867.pdf",
+      "pages": 23,
+      "read_scope": "Official PDF proceedings header and persistent-history/edit-invalidation/compact-reference mechanisms read through web tool; energy results not transferred to our latency claims.",
+      "local_download_status": "Downloaded via Slurm compute-node network; hash/title verified."
+    }
+  ]
 }

@@ -16,3 +16,8 @@ PYTHONPATH=src python -m experiments.bilingual.export_dataset
 ```
 
 The exporter rejects changed source cohorts or parent records, incomplete parent coverage, missing postchecks, duplicate query slots, and protected-split entries. Each output has a SHA-256 manifest. Original enterprise text remains subject to its original access terms and is excluded from the public MIT software archive. This is a construction dataset, not a completed independently labeled expert-search benchmark.
+
+
+A subsequent full-original translation pilot compares direct, copied-placeholder, and fixed-numeric-block gap translation on the same 32 construction parents. Combined native/limited-numeric screening retains 8, 6, and 3 records respectively; unresolved request/structure counts are 1, 9, and 8. The runs were sequential exploratory ablations, and screens are not human gold. No variant is adopted for translating all 1,000 original needs. The 5,000 derived bilingual requests remain a separate construction product.
+
+A frozen retrieval diagnostic selects one derived query per original parent, cycling types to give 200 each: 860 retain the screen, 140 remain unjudged. Exact Chinese/English top-ten overlap is 42.16%; this is ranking stability, not relevance accuracy. HNSW floor512 retains99.805% of exact top-ten entries across2,000views but only1,962 ordered lists match. These results motivate further alignment and verification, not a claim of bilingual quality completion.

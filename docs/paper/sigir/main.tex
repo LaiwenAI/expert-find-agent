@@ -3,7 +3,7 @@
 \makeatletter
 \def\input@path{{template/}}
 \makeatother
-\documentclass[sigconf,natbib=true,anonymous=true]{acmart}
+\documentclass[sigconf,natbib=true,anonymous=true,pbalance=true]{acmart}
 \usepackage{booktabs}
 \usepackage{amsmath}
 \usepackage{xurl}
@@ -20,7 +20,7 @@
 \input{generated/results}
 \begin{document}
 \begin{abstract}
-Industrial expert search must establish how documented research methods might help solve a technical need, rather than merely retrieve topically similar papers. Requiring previous completion of an entire future project misses useful transfers; accepting field similarity overstates capability. We investigate a training-free, coarse-to-fine framework separating associated sources, historical method facts, conditional target connections, and unresolved obligations. We reconstruct 100 complete industrial needs and 700 fixed candidate-evidence views from original data, yielding 183 development silver judgments while retaining disagreements and a sealed set. Explaining only the displayed top three reduces mean request latency from 6.81 to 4.65 seconds on a development cohort, without establishing independent accuracy preservation. On 610 publicly released human-self-rated paper--reviewer pairs, native Decisions reduces latency from 3.84 to 0.91 seconds, with accuracy 71.15\% versus 73.28\% for full reasoning. This is a trade-off, not demonstrated equivalence. A larger cohort contains 2,741 new company-grouped needs for bilingual construction. Publication-time and citation metadata are available, but individual contribution remains unresolved. The results support concrete components and research directions, not yet joint end-to-end superiority for industrial expert search.
+Industrial expert search must establish how documented research methods might help solve a technical need, rather than merely retrieve topically similar papers. Requiring previous completion of an entire future project misses useful transfers; accepting field similarity overstates capability. We investigate a training-free, coarse-to-fine framework separating associated sources, historical method facts, conditional target connections, and unresolved obligations. We reconstruct 100 complete industrial needs and 700 fixed candidate-evidence views from original data, yielding 183 development silver judgments while retaining disagreements and a sealed set. Explaining only the displayed top three reduces mean request latency from 6.81 to 4.65 seconds on a development cohort, without establishing independent accuracy preservation. On 610 publicly released human-self-rated paper--reviewer pairs, native Decisions reduces latency from 3.84 to 0.91 seconds, with accuracy 71.15\% versus 73.28\% for full reasoning. This is a trade-off, not demonstrated equivalence. A larger cohort contains 2,741 new company-grouped needs for bilingual construction. Publication-time and citation metadata are available, but individual contribution remains unresolved. On 1,000 derived bilingual query pairs, exact Chinese and English top-ten overlap is only 42.16\%. Factoring native suitability decisions increases false positives in a further complete-cohort test. The results support specific components and expose remaining alignment and judgment problems, not yet joint end-to-end superiority for industrial expert search.
 \end{abstract}
 \ccsdesc[500]{Information systems~Information retrieval}
 \ccsdesc[300]{Information systems~Retrieval models and ranking}
@@ -38,6 +38,8 @@ Efficiency requires a common boundary. Millisecond vector operations cannot comp
 Classical expert models already aggregate documents into candidate expertise~\cite{balog2006formal}. Max-paper similarity, language models, lexical aggregation, and profile averaging remain strong baselines. PageIndex\footnote{\url{https://github.com/VectifyAI/PageIndex}} motivates traceable hierarchical access, but a tree cannot prove capability or safely exclude experts with incomplete summaries.
 
 MERIT~\cite{yang2026merit} separates core expertise from incidental overlap and trains an assessor and retriever. We use its public task without training models; running its prompt on another model is not a checkpoint reproduction. HippoRAG~2~\cite{gutierrez2025hipporag2} and evidence-tree search~\cite{sun2025ets} motivate structured access and dependent evidence selection. ScIRGen~\cite{lin2025scirgen} supplies a close synthesis/filtering precedent, while citation-aware rubric work~\cite{zhang2026carr} distinguishes support, coverage, and evidence connections. These inherited components are not renamed as new algorithms. Their expert-ownership and conditional-transfer combination requires empirical validation.
+
+Recent work separates other sources of agent overhead. Context-interference analysis~\cite{xue2026context} studies distraction from retrieved material and develops a distilled refiner with RL integration. Its learned gains do not establish that arbitrary summaries are safe substitutes for method evidence. Librarian~\cite{cho2026librarian} preserves search history and returns compact region references in software-engineering agents, with state updates after file edits. This motivates reuse of immutable source facts and references, while target-transfer judgments must remain query scoped. Its hardware-energy results are not latency measurements for our expert-search system. Neither work makes source ownership, personal contribution, or industrial method transfer automatic.
 
 \section{Task and Method}
 \subsection{Facts, transfer, and attribution}
@@ -207,6 +209,46 @@ We pin MERIT's public 610-pair self-rating test: 254 positives (ratings 4/5), 35
 
 
 Native choice reduces mean latency by 2.928\,s (76.3\%), with paper-cluster interval $[-2.997,-2.852]$\,s. Its accuracy difference is $-2.13$ points, interval $[-5.51,1.32]$. Crossing zero establishes neither equivalence nor non-inferiority. Short Chat differs by $-4.59$ points, interval $[-8.35,-0.81]$, despite higher recall/F1. Self-ratings are independent of our silver generator but concern reviewer expertise, not future enterprise capability; pretraining contamination is not ruled out.
+
+\subsection{Factoring a native decision is not enough}
+We test a training-free criterion decomposition on the complete 610-pair auxiliary task. One native request evaluates whether a candidate demonstrates at least one core requirement and whether the record demonstrates at least two distinct relevant requirements. A deterministic three-valued conjunction yields positive only if both predicates pass, negative if either fails, and otherwise abstains. This inherits the benchmark's combination rule; it is not a new logical calculus. Consistent semantic definitions across the predicates are not mechanically guaranteed.
+
+We rerun the single-question native baseline contemporaneously, alternating two arm orders with three workers and no retries. Unlike the earlier complete-output run, 13 binary and 10 factored requests remain unresolved; neither arm explicitly abstains. The factored arm also changes the primitive answer space to include uncertainty, so the comparison does not isolate decomposition alone. Prior aggregate results informed this exploratory design; it is not an untouched final test.
+
+\begin{table}[t]
+\caption{Contemporaneous native comparison on all 610 pairs. Accuracy, precision and recall are valid-only percentages; failures remain in full-cohort bounds. Time includes all attempts.}
+\centering\small
+\begin{tabular}{@{}lrrrrr@{}}\toprule
+Arm & Valid & Acc. & Prec. & Rec. & Mean s\\\midrule
+Binary & \CurrentBinaryValid & \CurrentBinaryAcc & \CurrentBinaryPrec & \CurrentBinaryRecall & \CurrentBinarySeconds\\
+Factored & \FactoredValid & \FactoredAcc & \FactoredPrec & \FactoredRecall & \FactoredSeconds\\\bottomrule
+\end{tabular}
+\end{table}
+
+Among 587 jointly valid pairs, factored-minus-binary accuracy is $-4.43$ points, paper-cluster interval $[-7.52,-1.34]$. Full-cohort accuracy bounds are $[\CurrentBinaryAccLower,\CurrentBinaryAccUpper]$\% for binary and $[\FactoredAccLower,\FactoredAccUpper]$\% for factored; their difference bounds remain negative, $[-6.56,-2.79]$ points, even allowing favorable completion of failed factored requests. The factored arm produces 149 false positives versus 91 for binary. Mean attempt time differs by $+0.096$\,s, interval $[-0.021,0.211]$\,s. It therefore supplies no demonstrated efficiency or accuracy improvement and is not the default. Separate criterion judgments cannot replace checking that a specific body of evidence supports a coherent combined qualification.
+
+\subsection{Bilingual retrieval at a larger scale}
+We freeze one derived intent per real construction parent, cycling the five intent types to obtain 200 of each. The \BilingualPairs{} pairs come from 1,000 distinct connected company groups; \BilingualScreenedPairs{} pairs retain the construction screen and the other 140 remain unjudged. Each language searches the same 96,749-source, 9,861-expert snapshot. The official frozen Qwen encoder uses the same instruction for both languages; no selected query is truncated. This experiment introduces no expert relevance labels.
+
+\begin{table}[t]
+\caption{Larger bilingual retrieval diagnostic: 2,000 language queries. Fidelity refers to the exact frozen-score top ten, not relevance. CPU query time excludes encoding and index construction.}
+\centering\small
+\begin{tabular}{lrrr}\toprule
+Method & Mean ms & Retained \% & Ordered / 2,000\\\midrule
+Exact & \BExactMillis & \BExactFidelity & \BExactOrdered\\
+HNSW floor 64 & \BLowMillis & \BLowFidelity & \BLowOrdered\\
+HNSW floor 512 & \BHighMillis & \BHighFidelity & \BHighOrdered\\\bottomrule
+\end{tabular}
+\end{table}
+
+Even exact retrieval has only \BilingualExactOverlap{}\% mean overlap between the Chinese and English top-ten sets, with company-group bootstrap interval $[41.03,43.30]$\%. Among the 860 screened pairs the overlap is \BilingualScreenedOverlap{}\%; screening is not human verification. Mean paired query cosine is 0.8103, showing that a relatively high embedding cosine does not imply stable candidate rankings. Exact overlap ranges from 38.0\% for overview queries to 45.9\% for conditional-transfer queries. No pair has an identical ordered top ten. This leaves translation differences, encoder language effects, and score margins as competing explanations; the experiment does not isolate them.
+
+The high-effort ANN preserves almost all exact entries but matches only \BHighOrdered{}/2,000 ordered lists. Thus the earlier 20-query perfect agreement does not generalize to a larger cohort. Its overlap across languages is 42.10\%, close to exact retrieval's observed value; approximation alone does not explain most of the language difference. Source graph construction and index copies take \BilingualBuildSeconds{}\,s. Batched GPU encoding of all 2,000 views takes \BilingualEncodingSeconds{}\,s after model load and warmup on an allocated RTX~4090. This is throughput timing, not single-request latency or whole-agent speed.
+
+\subsection{Full-need translation ablations}
+Derived bilingual requests do not replace complete original needs. We therefore test full-need translation on the first \TranslationPilot{} construction parents, preserving every source segment. Direct translation admits \DirectPass{}/32 records under the combined native completeness screen and conservative numeric check. A placeholder-copy variant admits \PlaceholderPass{}/32; deterministic numeric-block assembly admits \BlocksPass{}/32. The respective unresolved counts are \DirectFailures{}, \PlaceholderFailures{}, and \BlocksFailures{}, including API timeouts and structural failures. All failures remain in the denominator.
+
+Terminology-constraint work already documents a distinction between constraint retention and translation quality~\cite{zhang2023terminology}. Our API ablations inherit that concern rather than reproduce its trained method. Fixed blocks eliminate numeric mismatch among structurally completed segments in this pilot, but can constrain word order, introduce awkward scope, or fail when the model adds numeric content to a free gap. Their lower overall screening rate gives no reason to scale them as the default. These sequential development runs are not randomized trials, and a correlated model screen cannot establish human translation quality. The full 1,000-original English dataset remains incomplete.
 
 \section{Limitations and Next Experiments}
 Industrial labels remain sparse and model-correlated, candidate pools are biased, and personal contributions unresolved. The new cohort has partially generated bilingual views but no expert-fit labels. Source frames, raw retrieval, and budgeted reasoning need unified end-to-end testing. Time, impact, and relevance must not collapse into an unvalidated prestige score. The supplementary material details provenance and incomplete implementation boundaries.

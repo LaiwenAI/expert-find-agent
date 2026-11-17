@@ -30,9 +30,10 @@ Benchmark 比较 BM25-max、BM25-vote、TF-IDF 变体与混合证据树 agent。
 
 - [SIGIR英文LaTeX正文](docs/paper/sigir/main.tex)
 - [英文LaTeX附录](docs/paper/sigir/appendix.tex)
-- [正文PDF](output/pdf/expert-search-sigir-draft.pdf)
-- [独立附录PDF](output/pdf/expert-search-sigir-supplement.pdf)
+- [正文与独立附录PDF的编译方法](docs/paper/sigir/README.md)
 - [1,000条真实需求与5,000条双语合成查询数据说明](docs/bilingual-query-data-card.md)
+- [1,000对双语检索诊断](docs/exploration/bilingual-retrieval-20261117.md)
+- [全文翻译三组试验](docs/exploration/translation-pilot-20261117.md)
 - [新增顶会全文审查](docs/exploration/topconf-review-20261117.md)
 - [实验协议、元数据和复现附录](docs/paper/sigir/appendix.tex)
 - [质量与时间的计时边界](docs/paper/sigir/appendix.tex)

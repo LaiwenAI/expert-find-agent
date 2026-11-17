@@ -1,16 +1,19 @@
 """Refresh artifact-backed numbers and compile separate SIGIR draft/supplement."""
+import argparse
+import sys
 import hashlib
 import json
 from pathlib import Path
 import subprocess
 
 
-def build():
+def build(frozen_results=False):
     root = Path(__file__).resolve().parents[2]
     paper = root / 'docs/paper/sigir'
     out = root / 'output/pdf'
     out.mkdir(parents=True, exist_ok=True)
-    subprocess.run([str(root / '.venv-local/bin/python'), str(Path(__file__).with_name('export_results.py'))], cwd=root, check=True, stdout=subprocess.DEVNULL)
+    if not frozen_results:
+        subprocess.run([sys.executable, str(Path(__file__).with_name('export_results.py'))], cwd=root, check=True, stdout=subprocess.DEVNULL)
     reports = []
     logs = []
     for stem, name in [('main', 'expert-search-sigir-draft'), ('supplement', 'expert-search-sigir-supplement')]:
@@ -26,10 +29,12 @@ def build():
         for suffix in ['blg', 'log', 'aux', 'bbl', 'out']:
             (out / (stem + '.' + suffix)).unlink(missing_ok=True)
     sources = list(paper.rglob('*.tex')) + [paper.parent / 'references.bib', paper / 'generated/results.json']
-    report = dict(documents=reports, engine=subprocess.check_output(['tectonic', '--version'], text=True).strip(), sources_sha256={str(p.relative_to(root)): hashlib.sha256(p.read_bytes()).hexdigest() for p in sources}, scope='Separate English main draft and supplementary material; not submitted. Vendored ACM acmart selected with explicit search path. Visual QA required after each build.')
+    report = dict(frozen_results=frozen_results, documents=reports, engine=subprocess.check_output(['tectonic', '--version'], text=True).strip(), sources_sha256={str(p.relative_to(root)): hashlib.sha256(p.read_bytes()).hexdigest() for p in sources}, scope='Separate English main draft and supplementary material; not submitted. Vendored ACM acmart selected with explicit search path. Visual QA required after each build.')
     (out / 'build-manifest.json').write_text(json.dumps(report, indent=2) + '\n')
     print(json.dumps(reports, indent=2))
 
 
 if __name__ == '__main__':
-    build()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--frozen-results', action='store_true', help='Compile the committed result snapshot without private experimental artifacts.')
+    build(parser.parse_args().frozen_results)
