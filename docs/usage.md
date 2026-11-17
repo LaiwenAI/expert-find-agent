@@ -665,3 +665,26 @@ The fully judged CoF SIGIR candidate-shortlist experiment is `PYTHONPATH=src pyt
 `CandidateEvidencePipeline.search_reranked(query, k=10, candidates=50)` exposes the shortlist, adaptive BM25-max scoring, and final evidence lookup as a reusable path. `CandidateReasoningAgent.run(..., retrieval='adaptive_bm25', rerank_pool=50)` passes its result into the existing one-call reasoning stage; the default remains `retrieval='lm'`. The reranking pool must contain at least as many candidates as the reasoning stage. A zero lexical score may still return fallback evidence and does not establish relevance. The temporal integration replay (`experiments.retrieval.validate_temporal_rerank_pipeline`) verifies rankings and source ownership on local frozen data; it does not certify semantic support. The optional `--adaptive` mode of `experiments.retrieval.anchored_candidate_pilot` exercises the full model call on four previously studied proxy queries.
 
 `experiments.retrieval.enterprise_adaptive_agent_pilot` compares the LM and adaptive candidate strategies on four previously studied local development needs using the same exact-quote prompt. `experiments.retrieval.export_enterprise_adaptive_review` creates a local blinded review packet from completed results. It hides method, expert ID and rank, though source text may identify a person. Original demand and researcher text remain local; the packet currently contains no human judgments.
+
+### Bind a vector index to an evidence catalog
+
+`VectorCatalogBinding` is an opt-in validation for an `ExactOwnedVectorIndex` or its `GpuOwnedVectorIndex` wrapper. Supply the frozen source-branch file, NumPy vector file, and their hashes from the preserved encoding run. The binding verifies source order, owner IDs, indexed prefixes, and the loaded CPU matrix against those files and the catalog. It does not prove that a particular model generated the vectors or authenticate an untrusted manifest.
+
+```python
+from expert_search.grounded_pipeline import GroundedPipeline
+from expert_search.vector_catalog_binding import VectorCatalogBinding
+
+# index, catalog, encoder, planner and assessor must already be initialized.
+binding = VectorCatalogBinding(
+    index, catalog, branches_path, vectors_path,
+    branches_sha256=recorded_branch_hash,
+    vectors_sha256=recorded_vector_hash,
+    prefix_chars=1200,
+)
+pipeline = GroundedPipeline(
+    encoder, index, catalog, planner, assessor,
+    binding=binding, require_binding=True,
+)
+```
+
+Keep the index, GPU tensor, source files and catalog immutable during use. Binding checks file and catalog state but does not rehash index memory on each query; unsupported approximate indexes are rejected. Without a binding, retrieval events explicitly report `index_catalog_binding="unverified"`. Initialization and the binding scan have separate cost from query time.

@@ -23,12 +23,22 @@ class DemandSpanPlanner:
 
 
 class GroundedPipeline:
-    def __init__(self,encoder,index,catalog,planner,assessor):
-        self.encoder=encoder;self.index=index;self.catalog=catalog;self.planner=planner;self.assessor=assessor
+    def __init__(self,encoder,index,catalog,planner,assessor,*,binding=None,require_binding=False):
+        if type(require_binding) is not bool:raise ValueError('Require a boolean binding policy')
+        if require_binding and binding is None:raise ValueError('A validated vector/catalog binding is required')
+        if binding is not None:
+            from .vector_catalog_binding import VectorCatalogBinding
+            if not isinstance(binding,VectorCatalogBinding):raise ValueError('Invalid vector/catalog binding')
+            binding.ensure_current(index,catalog)
+        self.encoder=encoder;self.index=index;self.catalog=catalog;self.planner=planner;self.assessor=assessor;self.binding=binding
 
     def events(self,demand,k=3,candidates=3):
         if not isinstance(demand,str) or not demand.strip() or not 1<=k<=candidates<=50:raise ValueError('Invalid demand or candidate budget')
         start=time.perf_counter();stage=time.perf_counter()
+        if self.binding is not None:
+            try:self.binding.ensure_current(self.index,self.catalog)
+            except Exception as error:
+                yield dict(stage='binding',status='unresolved',error_type=type(error).__name__,total_seconds=time.perf_counter()-start);return
         try:plan=self.planner.plan(demand)
         except Exception as error:
             yield dict(stage='planning',status='unresolved',error_type=type(error).__name__,total_seconds=time.perf_counter()-start);return
@@ -37,9 +47,10 @@ class GroundedPipeline:
         stage=time.perf_counter();q=self.encoder.encode([demand],query=True)[0]
         yield dict(stage='encoding',seconds=time.perf_counter()-stage,total_seconds=time.perf_counter()-start)
         stage=time.perf_counter();route=self.index.search_vector(q,k=candidates)
-        yield dict(stage='retrieval',status='unverified',route=route,seconds=time.perf_counter()-stage,total_seconds=time.perf_counter()-start)
+        yield dict(stage='retrieval',status='unverified',route=route,index_catalog_binding='validated_at_initialization' if self.binding is not None else 'unverified',seconds=time.perf_counter()-stage,total_seconds=time.perf_counter()-start)
         hits=route['hits'];stage=time.perf_counter()
         try:
+            if self.binding is not None:self.binding.ensure_current(self.index,self.catalog)
             requested=[w['id'] for hit in hits for w in hit['evidence']]
             reader=getattr(self.catalog,'for_evidence',None)
             source_rows=reader(requested) if callable(reader) else self.catalog.for_experts([h['id'] for h in hits])
