@@ -39,11 +39,13 @@ class CompiledExpertSearchTest(unittest.TestCase):
             self.assertEqual(reranked['results'][1]['score'],0.)
             self.assertTrue(all(e['expert_id']==r['expert']['id'] for r in reranked['results'] for e in r['evidence']))
             resident=CandidateEvidencePipeline(root,root/'index',root/'fast.sqlite',scoring='resident')
+            adaptive=CandidateEvidencePipeline(root,root/'index',root/'fast.sqlite',scoring='resident-adaptive')
             for mode in ('max','vote'):
                 expected=pipeline.search_reranked('alpha',k=2,candidates=2,aggregation=mode)['results']
                 actual=resident.search_reranked('alpha',k=2,candidates=2,aggregation=mode)
                 self.assertEqual(actual['results'],expected)
                 self.assertEqual(actual['route'],'resident')
+                self.assertEqual(adaptive.search_reranked('alpha',k=2,candidates=2,aggregation=mode)['results'],expected)
             import sqlite3
             with self.assertRaises(sqlite3.OperationalError):
                 resident.evidence.db.execute('UPDATE scores SET bm25=0')
@@ -53,7 +55,9 @@ class CompiledExpertSearchTest(unittest.TestCase):
                 resident.search_reranked('alpha',k=2,candidates=2)
             with self.assertRaisesRegex(ValueError, 'changed'):
                 resident.search('alpha',k=2)
-            resident.evidence.db.close()
+            with self.assertRaisesRegex(ValueError, 'changed'):
+                adaptive.search_reranked('alpha',k=2,candidates=2)
+            resident.evidence.db.close();adaptive.evidence.db.close()
             with self.assertRaises(ValueError):pipeline.search_reranked('alpha',k=3,candidates=2)
             vote=pipeline.search_reranked('alpha',k=2,candidates=2,aggregation='vote')
             self.assertEqual([r['expert']['id'] for r in vote['results']],['a'])

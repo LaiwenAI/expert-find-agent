@@ -24,13 +24,13 @@ def verify_evidence_documents(corpus,searcher):
 class CandidateEvidencePipeline:
     def __init__(self,corpus='artifacts/corpus',language_index='artifacts/teacher-compiled-lm',
                  evidence_database='artifacts/fast-search-selective-v1.sqlite',scoring='sqlite'):
-        if scoring not in ('sqlite','resident'):
-            raise ValueError('Require sqlite or resident scoring')
+        if scoring not in ('sqlite','resident','resident-adaptive'):
+            raise ValueError('Require sqlite, resident, or resident-adaptive scoring')
         start=time.perf_counter()
         self.ranker=CompiledExpertSearch(corpus,language_index)
         self.evidence=FastSearch(corpus,evidence_database)
         self._resident_data_version = None
-        if scoring == 'resident':
+        if scoring in ('resident','resident-adaptive'):
             self.evidence.db.execute('PRAGMA query_only=ON')
             self._resident_data_version = self.evidence.db.execute('PRAGMA data_version').fetchone()[0]
         verify_evidence_documents(corpus,self.evidence)
@@ -41,9 +41,9 @@ class CandidateEvidencePipeline:
         for _,(evidence_id,expert_id) in self.evidence.metadata.items():
             self.evidence_by_expert[expert_id].append(evidence_id)
         self.resident = None
-        if scoring == 'resident':
+        if scoring in ('resident','resident-adaptive'):
             from .resident_candidate_bm25 import ResidentCandidateBM25
-            self.resident = ResidentCandidateBM25(evidence_database)
+            self.resident = ResidentCandidateBM25(evidence_database, adaptive_intersection=scoring=='resident-adaptive')
             expected = tuple(self.evidence.metadata[doc][0] for doc in sorted(self.evidence.metadata))
             if self.resident.ids != expected:
                 raise ValueError('Resident evidence snapshot mismatch')

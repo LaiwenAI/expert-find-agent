@@ -16,7 +16,9 @@ class ResidentCandidateBM25:
     Construction reads all postings and must be reported separately. It rejects
     ambiguous source IDs and duplicate term/document postings.
     """
-    def __init__(self, database):
+    def __init__(self, database, adaptive_intersection=False):
+        if type(adaptive_intersection) is not bool: raise ValueError('Require a boolean intersection mode')
+        self.adaptive_intersection = adaptive_intersection
         start = time.perf_counter()
         with sqlite3.connect(Path(database).resolve().as_uri() + '?mode=ro', uri=True) as db:
             docs = list(db.execute('SELECT id,evidence_id FROM docs ORDER BY id'))
@@ -56,9 +58,15 @@ class ResidentCandidateBM25:
             offsets = self.offsets.get(term)
             if offsets is None or not len(positions): continue
             lo, hi = offsets; postings = self.indices[lo:hi]
-            locations = np.searchsorted(postings, positions)
-            slots = np.flatnonzero(locations < len(postings))
-            slots = slots[postings[locations[slots]] == positions[slots]]
-            totals[slots] += self.values[lo + locations[slots]]
+            if self.adaptive_intersection and len(postings) < len(positions):
+                locations = np.searchsorted(positions, postings)
+                slots = np.flatnonzero(locations < len(positions))
+                slots = slots[positions[locations[slots]] == postings[slots]]
+                totals[locations[slots]] += self.values[lo + slots]
+            else:
+                locations = np.searchsorted(postings, positions)
+                slots = np.flatnonzero(locations < len(postings))
+                slots = slots[postings[locations[slots]] == positions[slots]]
+                totals[slots] += self.values[lo + locations[slots]]
         score_by_position = dict(zip(positions.tolist(), totals.tolist()))
         return {eid: score_by_position[self.evidence_positions[eid]] for eid in identifiers}
