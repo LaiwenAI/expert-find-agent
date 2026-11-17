@@ -32,16 +32,32 @@ class CandidateReasoningAgent:
                 visible[e['id']]=item;items.append(item)
             if items:payload.extend(items)
         if not payload:raise ValueError('No candidate evidence')
-        response=self.helper.ask('verify','Rank experts using only supplied evidence. Cite evidence IDs and state missing requirements. Paper ownership is an unverified association, not proof of individual contribution or method credit. Respect publication dates when present and state when date or contribution is unknown. Do not infer capability from names or institutions. Return {"results":[{"expert_id":str,"reason":str,"missing":[str],"citations":[str]}]}.',{'demand':query,'evidence':payload,'top_k':k})
-        results=[];seen=set()
-        for row in response.get('results',[]):
-            eid=row.get('expert_id')
-            citations=list(dict.fromkeys(c for c in row.get('citations',[]) if isinstance(c,str) and c in visible and visible[c]['expert_id']==eid))
-            if eid in experts and eid not in seen and citations:
-                results.append({'expert':experts[eid],'reason':row.get('reason',''),'missing':row.get('missing',[]),
-                                'evidence':[visible[c] for c in citations]});seen.add(eid)
+        response=self.helper.ask('verify','Rank experts using only supplied evidence. For each claim cite an owned evidence ID and an exact nonempty quote copied from its visible text; state missing requirements. Paper ownership is an unverified association, not proof of individual contribution or method credit. Respect publication dates when present and state when date or contribution is unknown. Do not infer capability from names or institutions. Return {"results":[{"expert_id":str,"reason":str,"missing":[str],"citations":[{"evidence_id":str,"quote":str}]}]}.',{'demand':query,'evidence':payload,'top_k':k})
+        results=[];seen=set();rejected=0
+        rows=response.get('results',[])
+        if not isinstance(rows,list):raise ValueError('Invalid result list')
+        for row in rows:
+            if not isinstance(row,dict):
+                rejected+=1;continue
+            eid=row.get('expert_id');reason=row.get('reason');missing=row.get('missing');citations=row.get('citations')
+            if (not isinstance(eid,str) or eid not in experts or eid in seen or not isinstance(reason,str) or not reason.strip() or
+                    not isinstance(missing,list) or any(not isinstance(x,str) for x in missing) or not isinstance(citations,list)):
+                rejected+=1;continue
+            anchored=[];used=set()
+            for citation in citations:
+                if not isinstance(citation,dict):continue
+                cid=citation.get('evidence_id');quote=citation.get('quote')
+                if (not isinstance(cid,str) or cid in used or cid not in visible or visible[cid]['expert_id']!=eid or
+                        not isinstance(quote,str) or not quote.strip()):continue
+                source=visible[cid];start_offset=source['text'].find(quote)
+                if start_offset<0:continue
+                anchored.append(dict(source,quote=quote,start=start_offset,end=start_offset+len(quote)))
+                used.add(cid)
+            if not anchored:
+                rejected+=1;continue
+            results.append({'expert':experts[eid],'reason':reason,'missing':missing,'evidence':anchored});seen.add(eid)
             if len(results)==k:break
         return {'query':query,'results':results,'candidate_ids':[r['expert']['id'] for r in retrieved['results']],
-                'trace':self.helper.trace,'usage':self.helper.usage,
+                'trace':self.helper.trace,'usage':self.helper.usage,'rejected_results':rejected,
                 'timing':{'run_seconds':time.perf_counter()-start,'retrieval':retrieved['timing']},
-                'scope':'One model call after candidate-LM retrieval and lexical evidence selection. Citation ownership is checked against supplied records; source identity, individual contribution, semantic support and expert ability are not independently verified.'}
+                'scope':'One model call after candidate-LM retrieval and lexical evidence selection. Citation ownership and exact quote offsets are checked against visible supplied records; source identity, individual contribution, semantic support and expert ability are not independently verified.'}

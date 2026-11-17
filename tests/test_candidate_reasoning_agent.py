@@ -15,8 +15,9 @@ class CandidateReasoningAgentTest(unittest.TestCase):
         agent=CandidateReasoningAgent(FakePipeline(),client=object());captured={}
         def ask(stage,instruction,payload):
             captured.update(payload)
-            return {'results':[{'expert_id':'a','citations':['s2']},{'expert_id':'b','citations':['s2']},
-                               {'expert_id':'a','citations':['s1']}]}
+            return {'results':[{'expert_id':'a','reason':'x','missing':[],'citations':[{'evidence_id':'s2','quote':'source'}]},
+                               {'expert_id':'b','reason':'y','missing':[],'citations':[{'evidence_id':'s2','quote':'source b'}]},
+                               {'expert_id':'a','reason':'z','missing':[],'citations':[{'evidence_id':'s1','quote':'aaaa'}]}]}
         agent.helper.ask=ask
         result=agent.run('need',k=2,candidates=2)
         self.assertEqual([r['expert']['id'] for r in result['results']],['b','a'])
@@ -25,7 +26,18 @@ class CandidateReasoningAgentTest(unittest.TestCase):
         self.assertEqual(captured['evidence'][0]['authorship_association'], 'source_association_not_independently_verified')
         self.assertIsNone(captured['evidence'][0]['publication'])
         self.assertEqual(len(result['results'][1]['evidence'][0]['text']),6000)
+        self.assertEqual(result['results'][0]['evidence'][0]['start'],0)
+        self.assertEqual(result['results'][0]['evidence'][0]['end'],8)
+        self.assertEqual(result['rejected_results'],1)
         with self.assertRaises(ValueError):agent.run('need',k=2,candidates=2,evidence_per_expert=0)
+
+    def test_rejects_invented_and_truncated_quotes(self):
+        agent=CandidateReasoningAgent(FakePipeline(),client=object())
+        agent.helper.ask=lambda *_: {'results':[{'expert_id':'b','reason':'r','missing':[],'citations':[{'evidence_id':'s2','quote':'invented'}]},
+                                               {'expert_id':'a','reason':'r','missing':[],'citations':[{'evidence_id':'s1','quote':'a'*6001}]}]}
+        result=agent.run('need',k=2,candidates=2)
+        self.assertEqual(result['results'],[])
+        self.assertEqual(result['rejected_results'],2)
 
 
 if __name__=='__main__':unittest.main()
