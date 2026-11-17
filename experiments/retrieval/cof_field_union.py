@@ -9,7 +9,8 @@ from expert_search.certified_topk import certified_topk
 from expert_search.cof_benchmark import load, precision_metrics
 from expert_search.compiled_language_model import CompiledCandidateLM
 from expert_search.expert_language_models import ExpertLanguageModels
-from expert_search.fast_retrieval import FastSearch
+from expert_search.fast_retrieval import FastSearch, compile_index, add_selective_indexes
+from expert_search.retrieval import index
 from expert_search.statistics import paired_interval
 
 
@@ -21,7 +22,16 @@ def main(output):
     model = CompiledCandidateLM(ExpertLanguageModels(documents, profiles)); available = set(model.available)
     if available != set(reviewers) or set(labels['soft']) != set(labels['hard']) or any(set(labels[t][q]) != available for t in labels for q in labels[t]):
         raise ValueError('Incomplete reviewer labels')
-    search = FastSearch(root / 'unique-profile-corpus', Path('artifacts/cof-sigir-selective-rerank-v1/selective.sqlite'))
+    out = Path(output); out.mkdir(parents=True, exist_ok=False)
+    corpus = out / 'corpus'; corpus.mkdir()
+    (corpus / 'experts.jsonl').write_text(''.join(json.dumps({'id': pid}) + '\n' for pid in sources))
+    (corpus / 'evidence.jsonl').write_text(''.join(json.dumps({'id': pid, 'expert_id': pid, 'text': documents[pid]}) + '\n' for pid in sources))
+    build_start = time.perf_counter()
+    index(corpus, out / 'source.sqlite')
+    compile_index(out / 'source.sqlite', out / 'fast.sqlite')
+    add_selective_indexes(out / 'fast.sqlite')
+    index_build_seconds = time.perf_counter() - build_start
+    search = FastSearch(corpus, out / 'fast.sqlite')
     search.prepare_adaptive_scoring()
     methods = ('full20', 'field_union20', 'full50', 'global')
     rows = []
@@ -58,13 +68,12 @@ def main(output):
             arms[method] = {'seconds': seconds, 'pool_size': len(pool), 'metrics': metrics}
         rows.append({'query_id': qid, 'arms': arms})
     search.db.close()
-    report = {'queries': len(rows), 'methods': {m: {'mean_seconds': statistics.mean(r['arms'][m]['seconds'] for r in rows),
+    report = {'queries': len(rows), 'index_build_seconds': index_build_seconds, 'methods': {m: {'mean_seconds': statistics.mean(r['arms'][m]['seconds'] for r in rows),
               'mean_pool_size': statistics.mean(r['arms'][m]['pool_size'] for r in rows),
               'metrics': {t: {metric: statistics.mean(r['arms'][m]['metrics'][t][metric] for r in rows) for metric in ('p5', 'pool_recall', 'pool_oracle_p5')} for t in labels}} for m in methods},
               'input_sha256': {n: hashlib.sha256((root / n).read_bytes()).hexdigest() for n in ('SIGIR_papers_test.json', 'SIGIR_reviewers_test.json', 'SIGIR_queries_test_soft.json', 'SIGIR_queries_test_hard.json')},
               'scope': 'Post-hoc fixed 10-title/10-abstract union, filled from full-query rank to 20; labels unavailable for candidate selection. Reused fully judged SIGIR reviewer data, not enterprise fit. One rotating-order timing per query excludes initialization, index build, evidence display and reasoning. Oracle ceiling is not achievable quality. No held-out or superiority claim.'}
     report['paired_union_minus_full20'] = {task: {metric: paired_interval([r['arms']['field_union20']['metrics'][task][metric] - r['arms']['full20']['metrics'][task][metric] for r in rows]) for metric in ('p5', 'pool_recall')} for task in labels}
-    out = Path(output); out.mkdir(parents=True, exist_ok=False)
     (out / 'results.json').write_text(json.dumps(rows, indent=2) + '\n')
     report['results_sha256'] = hashlib.sha256((out / 'results.json').read_bytes()).hexdigest()
     report['code_sha256'] = {str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in (Path(__file__), Path('src/expert_search/certified_topk.py'), Path('src/expert_search/fast_retrieval.py'))}
