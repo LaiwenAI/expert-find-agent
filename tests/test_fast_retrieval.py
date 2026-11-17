@@ -3,7 +3,7 @@ import tempfile
 import unittest
 from pathlib import Path
 from expert_search.retrieval import Search,index
-from expert_search.fast_retrieval import FastSearch,compile_index
+from expert_search.fast_retrieval import FastSearch,compile_index,add_selective_indexes
 from expert_search.agent import verify_compiled_documents
 from experiments.retrieval.audit_compiled_index import audit
 
@@ -47,6 +47,12 @@ class FastTest(unittest.TestCase):
                         self.assertEqual([e['id'] for e in x['evidence']],[e['id'] for e in y['evidence']])
             selected=fast.evidence_for('biology',['b'],1)
             self.assertEqual([e['id'] for e in selected['b']],['7'])
+            add_selective_indexes(p/'fast')
+            long_query=' '.join('term'+str(i) for i in range(450))+' robot control'
+            for query in ['robot \u673a\u5668\u4eba control','unmatched','biology',long_query]:
+                self.assertEqual(fast.evidence_for(query,['a','b'],3),fast.evidence_for_selective(query,['a','b'],3))
+            self.assertEqual(fast.evidence_for_selective('biology',[],3),{})
+            with self.assertRaises(ValueError):fast.evidence_for_selective('biology',['missing'])
             self.assertTrue(all(e['expert_id']=='b' for e in selected['b']))
             self.assertAlmostEqual(fast.document_scores('biology')['7'],fast.search('biology',1)[0]['evidence'][0]['score'])
             # With no lexical overlap, fallback ordering is deterministic and

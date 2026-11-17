@@ -153,6 +153,8 @@ python -m unittest discover -s tests
 
 See the [usage guide](docs/usage.md) for additional methods, data adapters, and experiment commands.
 
+The experimental candidate-first pipeline combines a compiled candidate language model, selective evidence lookup, and an optional single model call. Its [usage guide](docs/usage.md) describes index creation and verification. It is a research prototype; independent expert-fit evaluation is still pending.
+
 ## Development and Maintenance
 
 ### Common Commands

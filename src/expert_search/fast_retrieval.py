@@ -23,6 +23,13 @@ def compile_index(source, target):
     dst.execute('CREATE INDEX term_idx ON scores(term)');dst.commit();dst.close();src.close()
 
 
+def add_selective_indexes(database):
+    """Build optional candidate-first indexes offline on a compiled database."""
+    with sqlite3.connect(database) as db:
+        db.execute('CREATE INDEX IF NOT EXISTS docs_expert_idx ON docs(expert_id)')
+        db.execute('CREATE INDEX IF NOT EXISTS scores_doc_term_idx ON scores(doc,term)')
+
+
 class FastSearch(Search):
     def __init__(self, corpus, database):
         from pathlib import Path
@@ -56,6 +63,27 @@ class FastSearch(Search):
         for doc in allowed:
             ev,eid=self.metadata[doc];grouped[eid].append((scores[doc],ev,doc))
         selected={eid:heapq.nsmallest(n,hits,key=lambda h:(-h[0],h[1])) for eid,hits in grouped.items()}
+        bodies=self._bodies(doc for hits in selected.values() for _,_,doc in hits)
+        return {eid:[dict(bodies[doc],score=value) for value,_,doc in selected.get(eid,[])] for eid in wanted}
+
+    def evidence_for_selective(self,query,expert_ids,n=3):
+        """Retrieve the same lexical evidence using optional candidate-first indexes."""
+        if n<1:raise ValueError('Invalid evidence count')
+        wanted=set(expert_ids)
+        if wanted-set(self.experts):raise ValueError('Unknown expert IDs')
+        terms=sorted(set(tokens(query)));grouped=defaultdict(list);scores=defaultdict(float)
+        identifiers=sorted(wanted)
+        for start in range(0,len(identifiers),400):
+            batch=identifiers[start:start+400];params=','.join('?' for _ in batch)
+            docs=list(self.db.execute(f'SELECT id,evidence_id,expert_id FROM docs INDEXED BY docs_expert_idx WHERE expert_id IN ({params})',batch))
+            for doc,ev,eid in docs:grouped[eid].append((doc,ev))
+            for offset in range(0,len(terms),400):
+                chunk=terms[offset:offset+400];term_params=','.join('?' for _ in chunk)
+                sql=(f'SELECT s.doc,s.bm25 FROM docs d INDEXED BY docs_expert_idx '
+                     f'CROSS JOIN scores s INDEXED BY scores_doc_term_idx '
+                     f'WHERE d.expert_id IN ({params}) AND s.doc=d.id AND s.term IN ({term_params}) ORDER BY s.term,s.doc')
+                for doc,value in self.db.execute(sql,batch+chunk):scores[doc]+=value
+        selected={eid:heapq.nsmallest(n,[(scores[doc],ev,doc) for doc,ev in hits],key=lambda h:(-h[0],h[1])) for eid,hits in grouped.items()}
         bodies=self._bodies(doc for hits in selected.values() for _,_,doc in hits)
         return {eid:[dict(bodies[doc],score=value) for value,_,doc in selected.get(eid,[])] for eid in wanted}
 

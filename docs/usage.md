@@ -119,6 +119,18 @@ PYTHONPATH=src python3 experiments/judgment_budget.py
 
 `CompiledCandidateLM.save(path, source_sha256)` stores a numeric inverted index without pickle; `CompiledCandidateLM.load(path, expected_source_sha256)` checks the snapshot, array hashes, ranges, and ordering. Precompilation changes only how the classic candidate language model is executed, not the scoring formula; real teacher timing provides no quality conclusion in the absence of labels.
 
+To build the candidate-first evidence path after preparing the corpus and its normal lexical index, choose new output paths (the builder refuses to overwrite existing indexes):
+
+```bash
+PYTHONPATH=src python -m experiments.retrieval.build_candidate_pipeline \
+  --corpus artifacts/corpus --source-database artifacts/search.sqlite \
+  --language-index artifacts/candidate-lm-v1 --evidence-database artifacts/candidate-evidence-v1.sqlite
+PYTHONPATH=src python -m experiments.retrieval.audit_compiled_index \
+  artifacts/search.sqlite artifacts/candidate-evidence-v1.sqlite
+```
+
+The builder checks corpus-to-document identity and ownership; the separate audit checks compiled posting scores. Both run offline and can require substantial time and disk space. Instantiate `CandidateEvidencePipeline` with those same paths, then call `search(query, k=20, evidence_per_expert=1)` for a candidate shortlist with owned evidence. For model reasoning, pass that pipeline to `CandidateReasoningAgent(pipeline=...)` and call `run(query, k=5, candidates=20)`. The latter makes one provider call and requires configured `laiwenai` credentials. Citation ownership is checked, but neither source relevance nor individual contribution is automatically verified. This path uses a different candidate ranking from the basic BM25 CLI.
+
 Local frozen encoding and synthetic-candidate preparation use the optional local environment:
 
 ```bash
