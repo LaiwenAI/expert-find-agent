@@ -33,10 +33,20 @@ class CandidateReasoningAgent:
                       'kind':e.get('kind','unknown'), 'publication':e.get('publication'),
                       'contribution_status':'unverified',
                       'authorship_association':'source_association_not_independently_verified'}
+                if 'citation_context' in e:
+                    context=e['citation_context']
+                    required={'observed_total','observation_date','total_history_status','field_normalized_impact','personal_credit'}
+                    if (e.get('kind')!='paper' or not isinstance(context,dict) or set(context)!=required or
+                        (context['observed_total'] is not None and (type(context['observed_total']) is not int or context['observed_total']<0)) or
+                        context['observation_date'] is not None or context['field_normalized_impact'] is not None or context['personal_credit'] is not None or
+                        context['total_history_status'] not in ('unknown_total','yearly_sum_exceeds_total','yearly_sum_matches_total','partial_or_unresolved_history')):
+                        raise ValueError('Invalid paper citation context')
+                    item['citation_context']=dict(context)
                 visible[e['id']]=item;items.append(item)
             if items:payload.extend(items)
         if not payload:raise ValueError('No candidate evidence')
-        response=self.helper.ask('verify','Rank experts using only supplied evidence. For each claim cite an owned evidence ID and an exact nonempty quote copied from its visible text; state missing requirements. Paper ownership is an unverified association, not proof of individual contribution or method credit. Respect publication dates when present and state when date or contribution is unknown. Do not infer capability from names or institutions. Return {"results":[{"expert_id":str,"reason":str,"missing":[str],"citations":[{"evidence_id":str,"quote":str}]}]}.',{'demand':query,'evidence':payload,'top_k':k})
+        citation_instruction=' Citation totals, when supplied, are unnormalized paper-level observations of unknown date; never infer individual credit from them.' if any('citation_context' in e for e in payload) else ''
+        response=self.helper.ask('verify','Rank experts using only supplied evidence. For each claim cite an owned evidence ID and an exact nonempty quote copied from its visible text; state missing requirements. Paper ownership is an unverified association, not proof of individual contribution or method credit. Respect publication dates when present and state when date or contribution is unknown. Do not infer capability from names or institutions. Return {"results":[{"expert_id":str,"reason":str,"missing":[str],"citations":[{"evidence_id":str,"quote":str}]}]}.'+citation_instruction,{'demand':query,'evidence':payload,'top_k':k})
         results=[];seen=set();rejected=0
         rows=response.get('results',[])
         if not isinstance(rows,list):raise ValueError('Invalid result list')

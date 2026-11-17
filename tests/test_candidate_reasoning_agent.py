@@ -41,6 +41,32 @@ class CandidateReasoningAgentTest(unittest.TestCase):
         with self.assertRaises(ValueError):agent.run('need',k=2,candidates=2,retrieval='adaptive_bm25',rerank_pool=1)
         with self.assertRaises(ValueError):agent.run('need',k=2,candidates=2,retrieval='invalid')
 
+    def test_paper_citation_context_is_scoped_and_unverified(self):
+        class Pipeline(FakePipeline):
+            def search(self,*args,**kwargs):
+                data=super().search(*args,**kwargs);data['results'][0]['evidence'][0].update(kind='paper',citation_context={
+                    'observed_total':12,'observation_date':None,'total_history_status':'partial_or_unresolved_history',
+                    'field_normalized_impact':None,'personal_credit':None})
+                return data
+        agent=CandidateReasoningAgent(Pipeline(),client=object());captured={}
+        def ask(stage,instruction,payload):
+            captured['instruction']=instruction;captured['payload']=payload
+            return {'results':[{'expert_id':'a','reason':'r','missing':[],'citations':[{'evidence_id':'s1','quote':'aaaa'}]}]}
+        agent.helper.ask=ask;result=agent.run('need',k=1,candidates=2)
+        self.assertIn('never infer individual credit',captured['instruction'])
+        self.assertEqual(captured['payload']['evidence'][0]['citation_context']['observed_total'],12)
+        self.assertIsNone(result['results'][0]['evidence'][0]['citation_context']['personal_credit'])
+
+    def test_citation_context_cannot_claim_personal_credit(self):
+        class Pipeline(FakePipeline):
+            def search(self,*args,**kwargs):
+                data=super().search(*args,**kwargs);data['results'][0]['evidence'][0].update(kind='paper',citation_context={
+                    'observed_total':12,'observation_date':None,'total_history_status':'partial_or_unresolved_history',
+                    'field_normalized_impact':None,'personal_credit':12})
+                return data
+        agent=CandidateReasoningAgent(Pipeline(),client=object())
+        with self.assertRaisesRegex(ValueError,'citation context'):agent.run('need',k=1,candidates=2)
+
     def test_reports_partial_results_without_fabricating_missing_experts(self):
         agent=CandidateReasoningAgent(FakePipeline(),client=object())
         agent.helper.ask=lambda *_: {'results':[{'expert_id':'b','reason':'r','missing':[],'citations':[{'evidence_id':'s2','quote':'source b'}]}]}
