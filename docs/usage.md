@@ -595,3 +595,19 @@ Current maintenance entry points are grouped by use:
 - `experiments/paper/build_sigir.py`: compile the English LaTeX main text/appendix and output `output/pdf/expert-search-sigir-draft.pdf`. Requires Tectonic; template source and license are retained in `docs/paper/sigir/template`.
 
 The old Markdown draft has been deleted and is no longer maintained in parallel. Fixed paths for historical experiment source code are temporarily retained for protocol reproduction; new modules are grouped by use. Temporary previews and bytecode are regenerable and are not included in the source release package.
+
+### Selective native decisions
+
+`expert_search.selective_decision.selective_decision` offers an optional routing policy: it makes a validated native choice, then invokes a caller-supplied reasoning function when the maximum choice probability is strictly below a fixed threshold. The reasoning function receives the same records and question and must return an allowed choice value. Native or reasoning failures produce an unresolved result; a failed escalation does not reuse the initial label. The returned time includes routing and requests but excludes client initialization and downstream evidence validation.
+
+```python
+from expert_search.selective_decision import selective_decision
+
+result = selective_decision(client, records, question, slow_decision, threshold=0.75)
+if result['status'] == 'valid':
+    label = result['label']
+else:
+    label = None  # Preserve unresolved cases in evaluation.
+```
+
+The threshold is a routing setting, not calibrated confidence. The 0.75 value was explored on an auxiliary reviewer-self-rating task; it is not validated for industrial expert search and must not be adopted as a universal default. The published pilot used its own implementation; the reusable component has unit coverage but has not been independently evaluated end to end.
