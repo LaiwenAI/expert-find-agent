@@ -70,6 +70,12 @@ class FastTest(unittest.TestCase):
             self.assertEqual(fast.adaptive_document_scores('biology',['0','1','7'])['route'],'global')
             with self.assertRaises(ValueError):fast.adaptive_document_scores('biology',['missing'])
             with self.assertRaises(ValueError):fast.selective_document_scores('biology',['missing'])
+            owners={'a':[str(i) for i in range(6)], 'b':['6','7']}
+            for query in ['robot control','unmatched','biology',long_query]:
+                scores=fast.adaptive_document_scores(query,[str(i) for i in range(8)])['scores']
+                self.assertEqual(fast.evidence_from_scores(['a','b'],owners,scores,3),fast.evidence_for_selective(query,['a','b'],3))
+            with self.assertRaises(ValueError):fast.evidence_from_scores(['a'],owners,{})
+            with self.assertRaises(ValueError):fast.evidence_from_scores(['a'],{'a':['7']},{'7':0})
             self.assertEqual(fast.evidence_for_selective('biology',[],3),{})
             with self.assertRaises(ValueError):fast.evidence_for_selective('biology',['missing'])
             self.assertTrue(all(e['expert_id']=='b' for e in selected['b']))

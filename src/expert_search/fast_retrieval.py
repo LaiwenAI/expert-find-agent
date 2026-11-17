@@ -92,6 +92,37 @@ class FastSearch(Search):
         bodies=self._bodies(doc for hits in selected.values() for _,_,doc in hits)
         return {eid:[dict(bodies[doc],score=value) for value,_,doc in selected.get(eid,[])] for eid in wanted}
 
+    def evidence_from_scores(self, expert_ids, evidence_by_expert, scores, n=3):
+        """Materialize owned evidence using already-computed document scores.
+
+        Every source for a requested expert must be present in the score map;
+        a missing score is not silently treated as zero. IDs must be unique and
+        owned by the expert in this compiled snapshot.
+        """
+        if type(n) is not int or n < 1:
+            raise ValueError('Invalid evidence count')
+        wanted = set(expert_ids)
+        if wanted - set(self.experts):
+            raise ValueError('Unknown expert IDs')
+        selected = {}
+        for expert in wanted:
+            hits = []
+            seen = set()
+            for evidence_id in evidence_by_expert.get(expert, []):
+                if evidence_id in seen or evidence_id in self.ambiguous_evidence or evidence_id not in self.evidence_documents or evidence_id not in scores:
+                    raise ValueError('Missing, duplicate or ambiguous evidence score')
+                seen.add(evidence_id)
+                doc = self.evidence_documents[evidence_id]
+                if self.metadata[doc][1] != expert:
+                    raise ValueError('Evidence owner mismatch')
+                value = scores[evidence_id]
+                if not isinstance(value, (int, float)) or not math.isfinite(value):
+                    raise ValueError('Invalid evidence score')
+                hits.append((value, evidence_id, doc))
+            selected[expert] = heapq.nsmallest(n, hits, key=lambda h: (-h[0], h[1]))
+        bodies = self._bodies(doc for hits in selected.values() for _, _, doc in hits)
+        return {expert: [dict(bodies[doc], score=value) for value, _, doc in selected[expert]] for expert in wanted}
+
     def selective_document_scores(self,query,evidence_ids):
         """Exact BM25 scores for selected evidence IDs, without reading bodies.
 

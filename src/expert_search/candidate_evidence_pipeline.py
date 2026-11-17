@@ -70,7 +70,7 @@ class CandidateEvidencePipeline:
         ranking=sorted(pool,key=lambda expert:(-scores[expert],expert))[:k]
         scoring_seconds=time.perf_counter()-scoring_start
         evidence_start=time.perf_counter()
-        evidence=self.evidence.evidence_for_selective(query,ranking,evidence_per_expert)
+        evidence=self.evidence.evidence_from_scores(ranking,self.evidence_by_expert,routed['scores'],evidence_per_expert)
         evidence_seconds=time.perf_counter()-evidence_start
         result=[dict(expert=expert_rows[expert],score=scores[expert],evidence=evidence[expert]) for expert in ranking]
         return dict(results=result,source_snapshot_sha256=candidates_result['source_snapshot_sha256'],
