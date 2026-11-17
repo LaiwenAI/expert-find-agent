@@ -53,7 +53,7 @@ class ExpertAgent:
         usage=getattr(response,'usage',None)
         for key in self.usage:
             self.usage[key]+=getattr(usage,key,0) or 0
-        self.trace.append({'stage':stage,'seconds':time.perf_counter()-start,'model':getattr(response,'model',None),'reasoning_tokens':getattr(getattr(usage,'completion_tokens_details',None),'reasoning_tokens',None),'output':value})
+        self.trace.append({'stage':stage,'seconds':time.perf_counter()-start,'model':getattr(response,'model',None),'usage_present':usage is not None and getattr(usage,'prompt_tokens',None) is not None and getattr(usage,'completion_tokens',None) is not None,'reasoning_tokens':getattr(getattr(usage,'completion_tokens_details',None),'reasoning_tokens',None),'output':value})
         return value
 
     def run(self, query, k=5, candidates=20, exclude=()):

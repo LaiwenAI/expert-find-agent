@@ -177,6 +177,8 @@ Let $R(t)$ be the latest fully validated snapshot available by time $t$, with th
 
 For bilingual evaluation, aligned Chinese/English views should share a parent split but retain their own judgments until equivalence is established. Rank overlap measures stability, not relevance; two identical erroneous rankings are perfectly stable. The final benchmark should stratify gain, completion, and latency by language and intent, and report their paired differences alongside equivalence audits. Comparisons should also separate factual support from personal-role support and date eligibility. These reporting dimensions are an evaluation design; their annotation reliability and relation to expert utility remain empirical questions.
 
+Cost per correct response~\cite{xie2026oversearch} requires independently judged support and abstention; missing evidence does not establish inability.
+
 \section{Results}
 \subsection{Index and inference components}
 On all sources, 9,861 experts with evidence, and 20 reused development queries, exact ranking averages 33.15\,ms. HNSW with an \texttt{efSearch} floor of 64 averages 1.23\,ms, retains 95\% of exact top tens, and matches ordered results on 12/20 queries. A floor of 512 averages 2.83\,ms and matches all 20 ordered lists. Graph construction/copies take 56.30\,s; separate GPU query encoding averages 19.88\,ms. This is mature approximate search, not a new algorithm, relevance improvement, or general exactness guarantee.

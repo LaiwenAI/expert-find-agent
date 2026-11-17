@@ -34,6 +34,12 @@ def analyze(root):
                           'mean_seconds':statistics.mean(r['seconds'] for r in rows),
                           'mean_mrr10':statistics.mean(s['mrr@10'] for s in scores),
                           'mean_recall10':statistics.mean(s['recall@10'] for s in scores)}
+        usage=[r.get('usage') for r in rows]
+        complete=all(isinstance(u,dict) and all(type(u.get(k)) is int and u[k]>=0 for k in ('prompt_tokens','completion_tokens')) and bool(r.get('trace')) and all(t.get('usage_present') is True for t in r['trace']) for r,u in zip(rows,usage))
+        out['arms'][arm]['token_usage_complete']=complete
+        if complete:
+            out['arms'][arm]['mean_input_tokens']=statistics.mean(u['prompt_tokens'] for u in usage)
+            out['arms'][arm]['mean_output_tokens']=statistics.mean(u['completion_tokens'] for u in usage)
     out['scope']='Author recovery proxy with incomplete labels; failed arms score empty; timing excludes retrieval and initialization.'
     return out
 
