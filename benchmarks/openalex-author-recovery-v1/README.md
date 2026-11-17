@@ -20,6 +20,9 @@ The API is dynamic: raw fetched responses are not redistributed here, so the sto
 ```bash
 PYTHONPATH=src python -m experiments.openalex.verify_author_recovery
 PYTHONPATH=src python -m experiments.openalex.benchmark_author_recovery
+PYTHONPATH=src python -m experiments.openalex.compare_candidate_pipeline --output artifacts/openalex-candidate-comparison
 ```
 
 The local exploratory lexical baseline returns a known author in the top ten for 21/99 queries with BM25-max and 27/99 with BM25-vote; known-author recall@10 is 0.202 and 0.256 respectively. Each query was timed once per method, and the experiment excludes initialization and model reasoning. These are baseline observations, not calibrated precision or statistical superiority. The 99 retained queries contain 126 known-positive links; 792 target works have no eligible author and are not benchmark queries. The manifest also records 3,472 target-author links without historical evidence in the selected pool. This selection excludes hard unavailable cases and must be reported with any result.
+
+A separate exploratory comparison uses the same frozen corpus and rotates method order per query. Candidate language-model ranking followed by selective evidence lookup recovers a known author for 20/99 queries (known-author recall@10 0.190), versus 27/99 (0.256) for BM25-vote. Mean one-shot retrieval times on this local run were 0.81 ms and 5.77 ms respectively; candidate indexing additionally took 0.18 s after the shared 0.04 s lexical build. These observations exclude initialization and model calls, cover only a small corpus, and do not establish scalable latency or quality equivalence.
