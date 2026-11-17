@@ -21,6 +21,9 @@ class CandidateReasoningAgentTest(unittest.TestCase):
         result=agent.run('need',k=2,candidates=2)
         self.assertEqual([r['expert']['id'] for r in result['results']],['b','a'])
         self.assertEqual(len(captured['evidence'][0]['text']),6000)
+        self.assertEqual(captured['evidence'][0]['contribution_status'], 'unverified')
+        self.assertEqual(captured['evidence'][0]['authorship_association'], 'source_association_not_independently_verified')
+        self.assertIsNone(captured['evidence'][0]['publication'])
         self.assertEqual(len(result['results'][1]['evidence'][0]['text']),6000)
         with self.assertRaises(ValueError):agent.run('need',k=2,candidates=2,evidence_per_expert=0)
 
