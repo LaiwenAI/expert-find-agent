@@ -59,3 +59,35 @@ class SharedOwnerGate:
             value=max((exact[sid] for sid in self.sources[eid]),default=0.)
             if value>threshold or (value==threshold and eid<candidate):ahead+=1
         return {'accepted':ahead<k,'possible_competitors':len(possible),'candidate_score':threshold}
+
+    def contains_many(self,query,candidates,k):
+        """Evaluate several candidates while sharing term bounds and scoring.
+
+        This can score more sources than individual calls because the smallest
+        positive candidate threshold controls the shared set. Output ordering
+        follows the supplied candidates. It does not establish semantic fit.
+        """
+        if not isinstance(query,str) or not query.strip() or not isinstance(candidates,(list,tuple)) or not candidates or len(set(candidates))!=len(candidates) or any(e not in self.positions for e in candidates) or type(k)!=int or not 1<=k<=len(self.owners):
+            raise ValueError('Invalid query, candidates or budget')
+        candidate_sources=sorted({sid for e in candidates for sid in self.sources[e]})
+        initial=self.resident.selected_scores(query,candidate_sources)
+        thresholds={e:max((initial[s] for s in self.sources[e]),default=0.) for e in candidates}
+        if any(not math.isfinite(v) for v in thresholds.values()):raise ValueError('Nonfinite score')
+        positive=[value for value in thresholds.values() if value>0]
+        if not positive:
+            return [{'candidate':e,'accepted':False,'candidate_score':thresholds[e]} for e in candidates]
+        upper=np.zeros(len(self.owners),dtype=np.float64)
+        for term in sorted(set(tokens(query))):
+            for owner,value in self.bounds.get(term,{}).items():
+                upper[owner]=np.nextafter(upper[owner]+value,np.inf)
+        if not np.isfinite(upper).all():raise ValueError('Nonfinite upper bound')
+        possible=[e for e in self.owners if upper[self.positions[e]]>=min(positive)]
+        source_ids=sorted({sid for e in possible for sid in self.sources[e]})
+        scores=self.resident.selected_scores(query,source_ids)
+        maxima={e:max((scores[s] for s in self.sources[e]),default=0.) for e in possible}
+        results=[]
+        for candidate in candidates:
+            threshold=thresholds[candidate]
+            ahead=sum(value>threshold or (value==threshold and eid<candidate) for eid,value in maxima.items() if eid!=candidate) if threshold>0 else 0
+            results.append({'candidate':candidate,'accepted':threshold>0 and ahead<k,'candidate_score':threshold})
+        return results

@@ -41,9 +41,22 @@ class SharedOwnerGateTest(unittest.TestCase):
                 scores=index.selected_scores(query,index.ids)
                 order=sorted(owner,key=lambda e:(-max(scores[s] for s in owner[e]),e))
                 for k in (1,2,4):
+                    batched={r['candidate']:r for r in gate.contains_many(query,list(owner),k)}
                     for e in owner:
                         expected=e in order[:k] and max(scores[s] for s in owner[e])>0
                         self.assertEqual(gate.contains(query,e,k)['accepted'],expected)
+                        self.assertEqual(batched[e]['accepted'],expected)
+
+    def test_batched_matches_individual_with_shared_owners(self):
+        gate=SharedOwnerGate(Resident(),{'a':['shared','a'],'b':['shared','b'],'c':['shared']})
+        for query in ('alpha','beta','alpha beta','missing'):
+            for k in (1,2,3):
+                batch=gate.contains_many(query,['c','a','b'],k)
+                for row in batch:
+                    single=gate.contains(query,row['candidate'],k)
+                    self.assertEqual(row['accepted'],single['accepted'])
+                    self.assertEqual(row['candidate_score'],single['candidate_score'])
+        with self.assertRaises(ValueError):gate.contains_many('alpha',['a','a'],1)
 
     def test_invalid_and_negative_postings_rejected(self):
         index=Resident();index.values=index.values.copy();index.values[0]=-1

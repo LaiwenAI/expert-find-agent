@@ -247,3 +247,6 @@ On 30 previously explored CoF SIGIR queries, independently repeated online query
 
 \paragraph{Repeated live gate comparison.}
 On the same 30 previously explored queries, five alternating pairs after warmup yield 150/150 matching candidate IDs, decisions and source-view hashes; 135 pairs accept and read sources. Full/bounded component mean latency is 28.79/14.56 ms, with empirical P50 28.94/14.41 ms and P95 32.99/15.89 ms over sequential observations. The query-mean bootstrap interval for bounded minus full is $[-14.79,-13.65]$ ms. Repeats are dependent, initialization and full-agent stages are excluded, and hashes do not establish semantic support.
+
+\paragraph{Five-candidate batched gate.}
+A batched membership implementation shares term bounds and exact scores among candidates, using the lowest positive threshold to form a common competitor pool. On 30 reused CoF SIGIR queries, three rotating attempts compare full lexical ranking, five individual bounded calls and the batched gate after live encoding and dense top-five retrieval. All 90 triples match candidate IDs, decisions and source hashes; 357 of 450 candidate slots are accepted. Mean component time is 28.94, 40.40 and 14.85 ms, respectively. Repeats are dependent, initialization and full-agent stages are excluded, and source identity does not establish semantic support.
