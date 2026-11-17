@@ -1,5 +1,7 @@
 # 专家搜索 Agent
 
+源码已在[LaiwenAI/expert-find-agent](https://github.com/LaiwenAI/expert-find-agent)公开（MIT），默认分支为`research/prototype-20261117`。当前为研究原型；真实原文数据包仍仅在本地，尚未证明专家精度与端到端效率的联合优势。
+
 面向企业技术需求的 evidence-based expert search 研究原型：从专家论文和简介中定位证据，探索直接能力与方法迁移的判断及排序。沿用 PageIndex 可追溯层次目录的思路，检验全库粗筛、专家能力分支和原文细查的组合。当前 agent 采用 BM25 召回与证据树导航；语义能力目录、适用性协议和全库多分支路由仍在独立实验中验证。
 
 ```bash

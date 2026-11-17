@@ -15,7 +15,7 @@ def build(output):
     names.extend(str(p.relative_to(root)) for p in (root/'docs/paper').glob('*.md'))
     names.extend(['docs/fresh-evaluation-data-card.md','docs/transfer-cases-card.md','docs/evidencebench-card.md','docs/exploration/topconf-review-20261117.md','docs/research-methods.md','docs/benchmark-results.md','docs/annotation-protocol.md','docs/exploration/pageindex-expert-design.md','docs/exploration/closest-work-review.md','docs/exploration/reproduction-map.md','docs/cluster.md','docs/paper-controls-data-card.md','docs/paper/references.bib','docs/paper/draft-v3-evidence.json','docs/usage.md','docs/open-source.md','docs/scoped-dataset-card.md'])
     names.extend('docs/exploration/'+name for name in (
-        'topconf-downloads-20261117.json',
+        'topconf-downloads-20261117.json','source-publication-20261117.json',
         'selectivity-fusion-protocol-v1.json','selectivity-fusion-freeze-observation.json',
         'semantic-transport-protocol.json','semantic-transport-sigir.json',
         'semantic-transport-nips.json','crossencoder-results.json',
@@ -25,7 +25,7 @@ def build(output):
         'current-evidence.json'))
     files={name:(root/name).read_bytes() for name in sorted(set(names))}
     manifest=dict(files={name:hashlib.sha256(body).hexdigest() for name,body in files.items()},
-        scope='Source review bundle; not published and not a complete experimental-data release.',
+        scope='Source snapshot of the public research prototype; not a complete experimental-data release.',
         exclusions=['credentials','raw enterprise/teacher data','model weights','third-party corpora',
                     'model traces and quoted evidence','local virtual environments'],
         license_status='MIT for repository software; third-party datasets and literature retain their own terms and are excluded.')
