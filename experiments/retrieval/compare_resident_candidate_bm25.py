@@ -43,7 +43,7 @@ def main(output):
               'input_sha256': {'queries': manifest['files_sha256']['queries.jsonl'], 'corpus_snapshot': engine.ranker.snapshot},
               'scope': 'Post-hoc 80 full enterprise development needs, candidate50 return20, one owned evidence item; identical complete results required. Resident index reads all BM25 postings and must be rebuilt for changed sources; array bytes exclude Python dictionaries and process memory. Peak RSS includes pipeline initialization and prior allocations and is not exact incremental index size. One alternating measurement per query excludes model reasoning, index construction and initialization. No independent relevance, semantic support or production latency claim. Query texts and per-query IDs remain private.'}
     output.mkdir(parents=True, exist_ok=False); (output / 'private-results.json').write_text(json.dumps(rows, indent=2)+'\n')
-    report['results_sha256'] = sha(output / 'private-results.json'); report['code_sha256'] = {str(p): sha(p) for p in (Path(__file__),Path('src/expert_search/resident_candidate_bm25.py'),Path('src/expert_search/fast_retrieval.py'))}
+    report['results_sha256'] = sha(output / 'private-results.json'); report['code_sha256'] = {str(p): sha(p) for p in (Path(__file__),Path('src/expert_search/resident_candidate_bm25.py'),Path('src/expert_search/fast_retrieval.py'),Path('src/expert_search/candidate_evidence_pipeline.py'))}
     (output / 'summary.json').write_text(json.dumps(report, indent=2)+'\n'); print(json.dumps(report, indent=2))
 
 

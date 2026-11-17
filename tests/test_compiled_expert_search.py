@@ -44,6 +44,15 @@ class CompiledExpertSearchTest(unittest.TestCase):
                 actual=resident.search_reranked('alpha',k=2,candidates=2,aggregation=mode)
                 self.assertEqual(actual['results'],expected)
                 self.assertEqual(actual['route'],'resident')
+            import sqlite3
+            with self.assertRaises(sqlite3.OperationalError):
+                resident.evidence.db.execute('UPDATE scores SET bm25=0')
+            with sqlite3.connect(root/'fast.sqlite') as db:
+                db.execute('UPDATE scores SET bm25=bm25+1 WHERE rowid=(SELECT min(rowid) FROM scores)')
+            with self.assertRaisesRegex(ValueError, 'changed'):
+                resident.search_reranked('alpha',k=2,candidates=2)
+            with self.assertRaisesRegex(ValueError, 'changed'):
+                resident.search('alpha',k=2)
             resident.evidence.db.close()
             with self.assertRaises(ValueError):pipeline.search_reranked('alpha',k=3,candidates=2)
             vote=pipeline.search_reranked('alpha',k=2,candidates=2,aggregation='vote')

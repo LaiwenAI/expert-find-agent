@@ -29,6 +29,10 @@ class CandidateEvidencePipeline:
         start=time.perf_counter()
         self.ranker=CompiledExpertSearch(corpus,language_index)
         self.evidence=FastSearch(corpus,evidence_database)
+        self._resident_data_version = None
+        if scoring == 'resident':
+            self.evidence.db.execute('PRAGMA query_only=ON')
+            self._resident_data_version = self.evidence.db.execute('PRAGMA data_version').fetchone()[0]
         verify_evidence_documents(corpus,self.evidence)
         for table,name in [('docs','docs_expert_idx'),('scores','scores_doc_term_idx')]:
             if name not in {row[1] for row in self.evidence.db.execute(f'PRAGMA index_list({table})')}:
@@ -43,15 +47,25 @@ class CandidateEvidencePipeline:
             expected = tuple(self.evidence.metadata[doc][0] for doc in sorted(self.evidence.metadata))
             if self.resident.ids != expected:
                 raise ValueError('Resident evidence snapshot mismatch')
+            self._check_resident_snapshot()
         self.initialization_seconds=time.perf_counter()-start
 
+    def _check_resident_snapshot(self):
+        # A data_version change indicates another connection committed a write.
+        # The connection is query-only so this pipeline cannot commit its own.
+        if (self._resident_data_version is not None and
+                self.evidence.db.execute('PRAGMA data_version').fetchone()[0] != self._resident_data_version):
+            raise ValueError('Evidence database changed; rebuild resident index')
+
     def search(self,query,k=5,evidence_per_expert=3):
+        self._check_resident_snapshot()
         start=time.perf_counter();ranked=self.ranker.search(query,k)
         ids=[row['expert']['id'] for row in ranked['results']]
         evidence_start=time.perf_counter()
         evidence=self.evidence.evidence_for_selective(query,ids,evidence_per_expert)
         evidence_seconds=time.perf_counter()-evidence_start
         results=[dict(row,evidence=evidence[row['expert']['id']]) for row in ranked['results']]
+        self._check_resident_snapshot()
         return {'results':results,'timing':{'ranking_seconds':ranked['seconds'],'evidence_seconds':evidence_seconds,
                 'total_seconds':time.perf_counter()-start,'initialization_seconds':self.initialization_seconds},
                 'source_snapshot_sha256':ranked['source_snapshot_sha256'],
@@ -72,6 +86,7 @@ class CandidateEvidencePipeline:
             raise ValueError('Require 1 <= k <= candidates <= 50')
         if type(evidence_per_expert)!=int or not 1<=evidence_per_expert<=10:
             raise ValueError('Require 1 to 10 evidence items per expert')
+        self._check_resident_snapshot()
         start=time.perf_counter()
         candidates_result=self.ranker.search(query,candidates)
         pool=[row['expert']['id'] for row in candidates_result['results']]
@@ -94,6 +109,7 @@ class CandidateEvidencePipeline:
         evidence=self.evidence.evidence_from_scores(ranking,self.evidence_by_expert,routed['scores'],evidence_per_expert)
         evidence_seconds=time.perf_counter()-evidence_start
         result=[dict(expert=expert_rows[expert],score=scores[expert],evidence=evidence[expert]) for expert in ranking]
+        self._check_resident_snapshot()
         return dict(results=result,source_snapshot_sha256=candidates_result['source_snapshot_sha256'],
                     aggregation=aggregation,route=routed['route'],estimated_global_postings=routed['estimated_global_postings'],
                     estimated_selective_probes=routed['estimated_selective_probes'],
