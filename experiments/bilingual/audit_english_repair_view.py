@@ -1,4 +1,5 @@
 """Check the local English view without printing text or identifiers."""
+import argparse
 from collections import Counter
 import hashlib
 import json
@@ -8,7 +9,9 @@ from .audit_release_identifiers import PATTERNS
 
 
 def main():
-    root=Path('artifacts/dataset-release/english-repair-construction-v1');manifest=json.loads((root/'manifest.json').read_text());raw=(root/'queries.jsonl').read_bytes()
+    parser=argparse.ArgumentParser()
+    parser.add_argument('--root',type=Path,default=Path('artifacts/dataset-release/english-repair-construction-v1'))
+    root=parser.parse_args().root;manifest=json.loads((root/'manifest.json').read_text());raw=(root/'queries.jsonl').read_bytes()
     if hashlib.sha256(raw).hexdigest()!=manifest['output_sha256']:raise ValueError('Changed English view')
     parent_path=Path('artifacts/large-bilingual-data-v1/queries-zh.jsonl');original=Path('artifacts/dataset-release/bilingual-query-construction-v1/manifest.json')
     original_manifest=json.loads(original.read_text())
