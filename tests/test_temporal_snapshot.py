@@ -1,0 +1,26 @@
+import json
+import tempfile
+import unittest
+from pathlib import Path
+from expert_search.metadata.papers import publication_interval
+from expert_search.metadata.temporal_snapshot import build_temporal_snapshot
+
+
+class TemporalSnapshotTest(unittest.TestCase):
+    def test_inclusive_cutoff_excludes_unknown_and_partial_dates(self):
+        with tempfile.TemporaryDirectory() as tmp:
+            source=Path(tmp)/'source'; source.mkdir(); target=Path(tmp)/'snapshot'
+            (source/'experts.jsonl').write_text(json.dumps({'id':'e'})+'\n')
+            data=[('old','paper','2019'),('same','paper','2020-06-10'),('partial','paper','2020'),
+                  ('future','paper','2021'),('missing','paper',None),('profile','profile',None)]
+            rows=[dict(id=i,expert_id='e',kind=kind,text=i,publication=publication_interval(raw)) for i,kind,raw in data]
+            (source/'evidence.jsonl').write_text(''.join(json.dumps(r)+'\n' for r in rows))
+            summary=build_temporal_snapshot(source,target,'2020-06-10')
+            self.assertEqual([json.loads(x)['id'] for x in (target/'evidence.jsonl').read_text().splitlines()],['old','same'])
+            self.assertEqual((summary['kept_papers'],summary['excluded']),(2,4))
+            self.assertEqual(summary['counts']['overlaps_cutoff_date_precision_uncertain'],1)
+            self.assertEqual(summary['counts']['unknown_publication_date'],1)
+            with self.assertRaises(FileExistsError):build_temporal_snapshot(source,target,'2020-06-10')
+
+
+if __name__=='__main__':unittest.main()

@@ -621,3 +621,13 @@ The condition-specific evidence-removal diagnostic can be run with `PYTHONPATH=s
 The post-hoc 20-query request-time example for this metric can be reproduced against local frozen artifacts with `PYTHONPATH=src python -m experiments.analyze_paired_anytime_gain`. Its incomplete same-model grades do not establish expert-search accuracy.
 
 New corpus builds retain parsed paper publication-date intervals where provided and mark authorship association and personal contribution as unverified. Candidate-first reasoning passes the available publication interval and an explicit unverified-contribution marker to the model; missing dates remain unknown. This is informational metadata: the pipeline does not enforce an as-of cutoff, verify author identity or personal contributions, or validate semantic support. Existing corpus files and compiled indexes retain their original snapshots; rebuild them into new paths to include the added fields. Earlier benchmark results used the earlier code and should not be attributed to this change.
+
+To prevent future-dated evidence from entering a retrospective experiment, build a new paper-only corpus before constructing any retrieval index:
+
+```bash
+PYTHONPATH=src python -m experiments.retrieval.build_temporal_snapshot \
+  --corpus artifacts/corpus-temporal-source-v1 \
+  --output artifacts/corpus-asof-2020-v1 --as-of 2020-12-31
+```
+
+The input corpus must have been rebuilt with publication metadata. The snapshot keeps only papers whose complete supplied date interval is on or before the cutoff; dates that are unknown or overlap the cutoff and all non-paper evidence are excluded. Exclusion is not a negative judgment. The command refuses to overwrite an existing directory. Rebuild all retrieval indexes from the resulting corpus: filtering only evidence displayed after candidate retrieval would still allow future records to influence ranking. Publication dates and identity are not independently verified, publication does not prove public availability, and expert names and affiliations are not historically versioned.
