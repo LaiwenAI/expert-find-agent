@@ -22,6 +22,18 @@ class OwnedVectorIndexTest(unittest.TestCase):
         self.assertEqual(self.index.search_vector([1,0],eligible=['missing'])['branch'],'no_sources')
         with self.assertRaises(ValueError):self.index.vectors[0,0]=0
 
+    def test_exact_reference_shares_snapshot_and_copies_ownership(self):
+        reference=ExactOwnedVectorIndex.from_owned(self.index)
+        self.assertTrue(np.shares_memory(reference.vectors,self.index.vectors))
+        self.assertFalse(reference.vectors.flags.writeable)
+        independent=ExactOwnedVectorIndex(self.index.vectors,self.index.source_ids,self.index.source_owners)
+        for vector in ([1,0],[0,1],[.5,.5]):
+            self.assertEqual(reference.search_vector(vector)['hits'],independent.search_vector(vector)['hits'])
+            self.assertEqual(reference.search_vector(vector,eligible=['a','missing'])['hits'],independent.search_vector(vector,eligible=['a','missing'])['hits'])
+        reference.owners['a'].clear()
+        self.assertNotEqual(reference.owners['a'],self.index.owners['a'])
+        with self.assertRaises(ValueError):ExactOwnedVectorIndex.from_owned(object())
+
     def test_duplicate_source_ids_and_nonfinite_vectors_rejected(self):
         with self.assertRaises(ValueError):OwnedVectorIndex([[1],[2]],['s','s'],[['a'],['a']],index=Index())
         with self.assertRaises(ValueError):self.index.search_vector([float('nan'),0])

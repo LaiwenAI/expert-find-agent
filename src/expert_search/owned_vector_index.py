@@ -67,6 +67,31 @@ class ExactOwnedVectorIndex(OwnedVectorIndex):
         self.owner_starts=np.concatenate(([0],np.cumsum(counts)[:-1]))
         self.owner_rows=np.asarray([i for e in self.owner_ids for i in self.owners[e]],dtype=np.int64)
 
+    @classmethod
+    def from_owned(cls, owned):
+        """Share an existing read-only vector snapshot for an exact reference.
+
+        Ownership containers are copied; vectors are shared without another
+        full matrix allocation. Both instances require the source snapshot to
+        remain unchanged. Eligible queries use full scoring, not the ANN graph.
+        This method does not make externally mutable arrays or ANN indices safe
+        for concurrent mutation.
+        """
+        if not isinstance(owned, OwnedVectorIndex) or owned.vectors.flags.writeable:
+            raise ValueError('Require a read-only owned vector index')
+        result = cls.__new__(cls)
+        result.vectors = owned.vectors
+        result.source_ids = list(owned.source_ids)
+        result.source_owners = [list(owners) for owners in owned.source_owners]
+        result.owners = {eid:list(indices) for eid,indices in owned.owners.items()}
+        result.index = owned.index
+        result.switch_sources = len(result.vectors)
+        result.owner_ids = sorted(result.owners)
+        counts = np.asarray([len(result.owners[e]) for e in result.owner_ids],dtype=np.int64)
+        result.owner_starts = np.concatenate(([0],np.cumsum(counts)[:-1]))
+        result.owner_rows = np.asarray([i for e in result.owner_ids for i in result.owners[e]],dtype=np.int64)
+        return result
+
     def search_vector(self,query,k=5,eligible=None):
         if eligible is not None:return super().search_vector(query,k,eligible)
         start=time.perf_counter();q=np.asarray(query,dtype=np.float32)
