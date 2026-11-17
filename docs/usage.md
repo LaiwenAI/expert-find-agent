@@ -610,4 +610,4 @@ else:
     label = None  # Preserve unresolved cases in evaluation.
 ```
 
-The threshold is a routing setting, not calibrated confidence. The 0.75 value was explored on an auxiliary reviewer-self-rating task; it is not validated for industrial expert search and must not be adopted as a universal default. The published pilot used its own implementation; the reusable component has unit coverage but has not been independently evaluated end to end.
+The threshold is a routing setting, not calibrated confidence. The 0.75 value was explored on an auxiliary reviewer-self-rating task; it is not validated for industrial expert search and must not be adopted as a universal default. The initial 40-case pilot used its own implementation. A separate 12-case public reviewer-matching pilot exercised this component, including four actual escalations; industrial end-to-end quality remains unvalidated.

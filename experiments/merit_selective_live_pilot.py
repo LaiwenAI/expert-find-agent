@@ -8,6 +8,7 @@ from pathlib import Path
 from dotenv import load_dotenv
 from laiwenai import LaiwenAI
 from expert_search.choice_judgments import decide
+from expert_search.selective_decision import selective_decision
 from expert_search.merit_suitability import prompts, build_case, gold, parse_final_label
 from experiments.merit_suitability_comparison import DATA, CHOICES
 
@@ -15,6 +16,14 @@ ROOT = Path('artifacts/merit-selective-live-pilot-v1')
 
 
 def main():
+    import argparse
+    global ROOT
+    parser = argparse.ArgumentParser()
+    parser.add_argument("--component", action="store_true")
+    args = parser.parse_args()
+    prior_pilot = ROOT
+    if args.component:
+        ROOT = Path("artifacts/merit-selective-component-pilot-v1")
     source = DATA / 'MERIT-Assessor/test/test.json'; prompt_path = DATA / 'MERIT-Assessor/test/prompts.py'
     prior = json.loads(Path('artifacts/merit-suitability-comparison-v1/protocol.json').read_text())
     sha = lambda p: hashlib.sha256(p.read_bytes()).hexdigest()
@@ -26,15 +35,18 @@ def main():
     eligible = [(case, label) for case, label in all_cases if int(hashlib.sha256(case['paper_cluster'].encode()).hexdigest()[:8], 16) % 2 == 1]
     eligible.sort(key=lambda item: hashlib.sha256(('pilot-v1:' + item[0]['id']).encode()).hexdigest())
     selected = []; groups = set()
+    if args.component:
+        groups.update(c["paper_cluster"] for c in json.loads((prior_pilot / "protocol.json").read_text())["cases"])
+    target = 12 if args.component else 40
     for case, label in eligible:
         if case['paper_cluster'] not in groups:
             groups.add(case['paper_cluster']); selected.append((case, label))
-            if len(selected) == 40: break
-    if len(selected) != 40: raise ValueError('Insufficient distinct groups')
+            if len(selected) == target: break
+    if len(selected) != target: raise ValueError('Insufficient distinct groups')
     ROOT.mkdir(parents=True, exist_ok=False); (ROOT / 'predictions').mkdir()
     protocol = dict(model='gpt-6-luna', threshold=0.75, cases=[dict(id=c['id'], input_sha256=c['input_sha256'], paper_cluster=c['paper_cluster']) for c, _ in selected],
                     dataset_sha256=sha(source), official_prompts_sha256=sha(prompt_path),
-                    selection='First 40 distinct test-title groups by fixed pair-ID hash; labels unused; prior full cohort was already examined.',
+                    selection=f'First {target} distinct test-title groups by fixed pair-ID hash; labels unused; component run excludes previous pilot groups; prior full cohort was already examined.',
                     order='Alternate cascade/full arm first by selected index; 3 workers; no retries.',
                     scope='Fresh calls on previously studied public self-ratings, not untouched data or industrial suitability. Cascade request time includes both serial calls when escalated; client initialization excluded.')
     (ROOT / 'protocol.json').write_text(json.dumps(protocol, indent=2)+'\n')
@@ -46,6 +58,12 @@ def main():
             return parse_final_label(answer.choices[0].message.content)
         def cascade():
             q = [dict(type='choice',name='suitability',instructions=prior['criterion'],choices=CHOICES)]
+            if args.component:
+                records = dict(target_and_profile=case['input'])
+                result = selective_decision(client, records, q[0], lambda *_: 'qualified' if full() else 'not_qualified', 0.75)
+                if result['status'] != 'valid':
+                    raise RuntimeError('Component unresolved: ' + str(result['failure_stage']))
+                return int(result['label'] == 'qualified'), result['escalated'], result['maximum_choice_probability']
             answer = decide(client, dict(target_and_profile=case['input']), q)
             probs = answer['response']['answers'][0]['probabilities']; confidence = max(p['probability'] for p in probs)
             if not .5 <= confidence <= 1: raise ValueError('Invalid decision score')
@@ -62,7 +80,7 @@ def main():
             record['seconds'] = time.perf_counter() - started; result[arm] = record
         record = dict(id=case['id'], input_sha256=case['input_sha256'], arms=result)
         path = ROOT / 'predictions' / (case['id']+'.json'); path.write_text(json.dumps(record, indent=2)+'\n')
-        print(f"{index+1}/40 {case['id']} " + str({k:v['status'] for k,v in result.items()}), flush=True)
+        print(f"{index+1}/{target} {case['id']} " + str({k:v['status'] for k,v in result.items()}), flush=True)
         return record
     with ThreadPoolExecutor(max_workers=3) as pool: results=list(pool.map(execute, enumerate(selected)))
     labels={c['id']: label for c,label in selected}
