@@ -19,6 +19,7 @@ PYTHONPATH=src python3 -m expert_search agent '寻找机器人运动控制与强
 - [Benchmark 结果](docs/benchmark-results.md)
 - [真实需求构造与控制实验](docs/paper/draft-v3.md)
 - [人工标注协议](docs/annotation-protocol.md)
+- [从原始数据重建的新评测集](docs/fresh-evaluation-data-card.md)
 
 Benchmark 比较 BM25-max、BM25-vote、TF-IDF 变体与混合证据树 agent。论文作者恢复属于代理任务，不能作为企业需求匹配准确率。当前版本为研究原型，主要限制是词法候选召回、叶子展示截断及缺少真实需求人工 gold。
 

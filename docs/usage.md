@@ -504,3 +504,48 @@ PYTHONPATH=src python experiments/verify_global_owned_routing.py --directory art
 ```
 
 对应Slurm脚本为`cluster_global_owned_encode.sbatch`（ws5 GPU）、`cluster_global_owned_routing.sbatch`和`cluster_global_owned_effort.sbatch`（ws6 CPU）。`ExactOwnedVectorIndex`为最大来源点积的高效全量参考；默认ANN与固定efSearch512对照均为成熟近似搜索基线。比较仅衡量原始语义排序保留及局部耗时，不能当作真实专家精度或最终代理时延。
+
+## 新原始需求评测集
+
+范围、来源与未判定标签规则见[数据卡](fresh-evaluation-data-card.md)。已有本地原始数据及冻结生成工件时：
+
+```bash
+PYTHONPATH=src python experiments/export_fresh_evaluation.py
+PYTHONPATH=src python experiments/verify_fresh_evaluation.py
+PYTHONPATH=src python experiments/benchmark_fresh_evaluation.py
+python experiments/package_fresh_evaluation.py
+```
+
+导出依赖先前冻结的选择、候选池和开发标注工件；不是仅从原始数据一步重跑模型的快捷命令。生成入口依次为`prepare_fresh_method_data.py`、`rebuild_fresh_sources.py`、`fresh_method_retrieval.py`（编码）、`fresh_evaluation_pool.py`及`annotate_fresh_evaluation.py`，具体参数以各脚本为准。模型生成会产生调用费用，不应为复核已有工件而重跑。封存集保持未标注。数据压缩包仅本地保存，软件许可不覆盖原始文本。
+
+开发集候选池偏差审查及未标注扩充（不会修改冻结数据）：
+
+```bash
+PYTHONPATH=src python experiments/fresh_lexical_pool_audit.py
+python experiments/export_fresh_lexical_review.py
+python experiments/audit_fresh_annotation.py
+```
+
+新增材料位于`artifacts/fresh-lexical-pool-audit-v1/review-additions`，742个视图均未标注，不得继承其他快照的标签或作为已知负例。
+
+短选项接口配对实验入口为`experiments/choice_interface_comparison.py`，固定前20条开发需求、两接口各一次，含付费API调用。第二轮使用同一模块将`ROOT`设为`artifacts/choice-interface-comparison-repeat-v1`，其余参数及输入不变。`experiments/analyze_choice_interface.py`读取两轮冻结输出，计算接口间及接口内重复一致性和按需求分组的耗时bootstrap；不提供语义正确率。全部使用gpt-6-luna，无重试，失败保留。
+
+门控开发审查与实际两阶段对照：
+
+```bash
+PYTHONPATH=src python experiments/audit_choice_gating.py
+PYTHONPATH=src:experiments python experiments/staged_partial_match_comparison.py
+PYTHONPATH=src python experiments/analyze_staged_partial.py
+```
+
+第二项使用付费gpt-6-luna API；已有冻结输出时只读取缓存，协议不一致会拒绝覆盖。第三项包含实际门控耗时、失败、已知银标遗漏和2/5/10/20秒截止结果，不将未知标签视为负例。开发实验不支持两阶段加速，该流程不是默认搜索路径。
+
+单次请求只解释最终前三名的实验：
+
+```bash
+PYTHONPATH=src python experiments/focused_partial_comparison.py
+PYTHONPATH=src python experiments/analyze_focused_partial.py
+PYTHONPATH=src:experiments python experiments/audit_focused_witnesses.py
+```
+
+第一、三项调用付费gpt-6-luna API。比较固定开发集位置20:40，双臂均读七名候选，只改变解释输出预算，均评价前三名。实现为`FocusedPartialMethodMatcher`，尾部候选保持未评估，不输出能力否定。后置见证审查为同模型诊断，不计入两臂计时，也不是独立金标；当前尚未接入默认搜索。
