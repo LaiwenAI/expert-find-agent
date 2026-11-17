@@ -113,6 +113,31 @@ class FastSearch(Search):
                 for doc,value in self.db.execute(sql,batch+chunk):scores[doc]+=value
         return {eid:scores[self.evidence_documents[eid]] for eid in identifiers}
 
+    def prepare_adaptive_scoring(self):
+        """Cache posting counts for a simple cost-based scoring route."""
+        self.term_posting_counts=dict(self.db.execute('SELECT term,count(*) FROM scores GROUP BY term'))
+
+    def adaptive_document_scores(self,query,evidence_ids):
+        """Return exact selected BM25 scores using a posting-count cost heuristic.
+
+        The heuristic does not guarantee speed. Initialization can be made
+        explicit with ``prepare_adaptive_scoring`` and must be timed separately.
+        """
+        identifiers=list(dict.fromkeys(evidence_ids))
+        if any(eid not in self.evidence_documents or eid in self.ambiguous_evidence for eid in identifiers):
+            raise ValueError('Unknown or ambiguous evidence ID')
+        if not hasattr(self,'term_posting_counts'):self.prepare_adaptive_scoring()
+        terms=set(tokens(query))
+        active=sum(t in self.term_posting_counts for t in terms)
+        global_work=sum(self.term_posting_counts.get(t,0) for t in terms)
+        selective_work=len(identifiers)*active
+        if selective_work < global_work:
+            scores=self.selective_document_scores(query,identifiers);route='selective'
+        else:
+            full=self.document_scores(query);scores={eid:full.get(eid,0.) for eid in identifiers};route='global'
+        return dict(scores=scores,route=route,estimated_global_postings=global_work,
+                    estimated_selective_probes=selective_work)
+
     def document_scores(self,query):
         """BM25 scores by unique evidence ID, without reading document bodies."""
         scores=defaultdict(float)

@@ -61,6 +61,14 @@ class FastTest(unittest.TestCase):
                 chosen=[str(i) for i in range(8)]
                 self.assertEqual(fast.selective_document_scores(query,chosen),{eid:full.get(eid,0.) for eid in chosen})
             self.assertEqual(fast.selective_document_scores('biology',[]),{})
+            fast.prepare_adaptive_scoring()
+            for query in ['biology','robot control','unmatched']:
+                ids=['0','1','7'];adaptive=fast.adaptive_document_scores(query,ids)
+                self.assertEqual(adaptive['scores'],fast.selective_document_scores(query,ids))
+                self.assertIn(adaptive['route'],('global','selective'))
+            self.assertEqual(fast.adaptive_document_scores('robot',['0'])['route'],'selective')
+            self.assertEqual(fast.adaptive_document_scores('biology',['0','1','7'])['route'],'global')
+            with self.assertRaises(ValueError):fast.adaptive_document_scores('biology',['missing'])
             with self.assertRaises(ValueError):fast.selective_document_scores('biology',['missing'])
             self.assertEqual(fast.evidence_for_selective('biology',[],3),{})
             with self.assertRaises(ValueError):fast.evidence_for_selective('biology',['missing'])
