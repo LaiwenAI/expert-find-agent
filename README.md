@@ -30,7 +30,9 @@ Benchmark 比较 BM25-max、BM25-vote、TF-IDF 变体与混合证据树 agent。
 
 - [SIGIR英文LaTeX正文](docs/paper/sigir/main.tex)
 - [英文LaTeX附录](docs/paper/sigir/appendix.tex)
-- [编译PDF](output/pdf/expert-search-sigir-draft.pdf)
+- [正文PDF](output/pdf/expert-search-sigir-draft.pdf)
+- [独立附录PDF](output/pdf/expert-search-sigir-supplement.pdf)
+- [1,000条真实需求与5,000条双语合成查询数据说明](docs/bilingual-query-data-card.md)
 - [新增顶会全文审查](docs/exploration/topconf-review-20261117.md)
 - [实验协议、元数据和复现附录](docs/paper/sigir/appendix.tex)
 - [质量与时间的计时边界](docs/paper/sigir/appendix.tex)
@@ -56,4 +58,4 @@ PYTHONPATH=src python3 -m expert_search.compiled_expert_search '机器人运动�
 
 该持久化入口现使用浮点上下界筛选与精确前 K 重放，保留参考模型的返回分数和有序结果。完整教师库20条需求×5次配对运行中，前五名和分数全部一致，暖查询均值14.43→6.43ms；这是同一统计模型的执行优化，不提供相关性提升或端到端代理速度结论。复验：`experiments/certified_topk_benchmark.py`。
 
-统一执行路径原型：`OwnedVectorIndex` → `GroundedPipeline`，贯通需求规划、实际查询编码、归属来源检索与固定片段适用性核验。真实21人队列的执行脚本是 `experiments/grounded_pipeline_smoke.py`；约15–18秒的结果仍未满足低延迟目标，语义正确性未独立验证，详见[初稿6.6节](docs/paper/sigir/main.tex)。
+统一执行路径原型：`OwnedVectorIndex` → `GroundedPipeline`，贯通需求规划、实际查询编码、归属来源检索与固定片段适用性核验。真实21人队列的执行脚本是 `experiments/grounded_pipeline_smoke.py`；约15–18秒的结果仍未满足低延迟目标，语义正确性未独立验证，详见[当前初稿](docs/paper/sigir/main.tex)。

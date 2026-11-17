@@ -51,3 +51,25 @@ def condensed_ndcg(ranking,judgments,k=5):
     dcg=lambda values:sum((2**g-1)/math.log2(i+2) for i,g in enumerate(values))
     denominator=dcg(ideal)
     return dcg([judgments[e] for e in retained])/denominator if denominator else None
+
+
+def paired_actionable_gain_interval(first,second,judgments,k=3):
+    """Tighter shared-label bounds for two rankings of the SAME fixed views.
+
+    Keys must identify identical query/expert/source snapshots in both rankings.
+    Different views or unverified cross-language equivalence cannot share labels.
+    This is standard linear box-bound arithmetic, not a confidence interval.
+    """
+    a=actionable_gain_interval(first,judgments,k);b=actionable_gain_interval(second,judgments,k)
+    denominator=sum(1/math.log2(i+2) for i in range(k));coefficients={}
+    for sign,ranking in [(1,first),(-1,second)]:
+        for i,key in enumerate(ranking[:k]):coefficients[key]=coefficients.get(key,0.)+sign/(math.log2(i+2)*denominator)
+    low=high=0.;uncertain=cancelled=0
+    for key,c in coefficients.items():
+        grade=judgments.get(key)
+        if grade is None:
+            low+=min(0.,c);high+=max(0.,c)
+            uncertain+=c!=0;cancelled+=c==0
+        elif grade>=2:low+=c;high+=c
+    return dict(lower=low,upper=high,independent_bounds=[a['lower']-b['upper'],a['upper']-b['lower']],uncertain_nonzero_coefficients=uncertain,cancelled_shared_unjudged=cancelled,
+                scope='First-minus-second gain over shared fixed-view labels; tight only for the stated independent unknown-label box. Not semantic confidence, actual ability or a new bound theory. Do not reuse labels across changed snapshots or unverified translations.')

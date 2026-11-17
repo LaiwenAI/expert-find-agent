@@ -1,6 +1,6 @@
 {
-  "main_tex_sha256": "fa717fb4d41e64984fed79b77a4dba4c6eafa5e17b2d8b1e63d06e123db111c7",
-  "appendix_tex_sha256": "db96e10a87d6093ae6e9abaafa5c5859392e3de490595560d9259639a8774e7b",
+  "main_tex_sha256": "2db50f390cf73a66d253eab442304f79f86e545f95fe27c075aee28e2025c70d",
+  "appendix_tex_sha256": "650018afa1c556a366f5c29eed1c35279bea4526bd589cd9b45b8adbec6e582d",
   "bibliography_sha256": "3d3cdca3719fa6c2e0c85857f39ccfa117bfd4f87124ebdc62d66f0f529950ba",
   "artifacts": {
     "artifacts/expert-catalog-check.json": {
@@ -441,6 +441,18 @@
     },
     "artifacts/large-bilingual-data-v1/synthesis-v1/pilot32.json": {
       "sha256": "673fa462a7e67970ad84adf2b9d67d2c48daf73af2d33abc814592b9b4989020"
+    },
+    "artifacts/paired-view-gain-v1/summary.json": {
+      "sha256": "2bc0c5d2775cf3b5dfca6fbd0cd9f880618169fd887d0940bf7900874b607ef2"
+    },
+    "artifacts/large-bilingual-data-v1/synthesis-v1/progress.json": {
+      "sha256": "9038fa00a7a44d37e0f67ead86075923edf96bffe22376c8ba7821838bc15b34"
+    },
+    "artifacts/large-bilingual-data-v1/postvalidation-v2/manifest.json": {
+      "sha256": "f6fd7b8f2e453c112de736d604ee073c38e8bce0ff9241331dda4556b75f3b68"
+    },
+    "artifacts/dataset-release/bilingual-query-construction-v1/manifest.json": {
+      "sha256": "45e6788afdebc45d3fe1204b4d47003a86cf828ab797a4a809e682172e3f64e8"
     }
   },
   "superseded_markdown_sha256": {
@@ -450,5 +462,6 @@
     "docs/paper/results-generated.md": "28d719da285d37d657ffc7726f8b86a2970e24775fb8970e7a716854f48d33d2",
     "docs/paper/draft-v4.md": "0c6d6f77d9b1ca4fdaf93e22f9e8016301a15bcc62aef76b9f4e13bc7cc62939"
   },
-  "scope": "Canonical all-English SIGIR LaTeX main+appendix. Obsolete Markdown manuscripts removed; immutable experimental protocols and public Git history retain historical evidence. Hashes establish identity, not semantic truth. Full synthesis ongoing; no complete goal claim."
+  "scope": "Canonical separate English SIGIR main and supplement. Original 1000 needs and 5000 generated bilingual intent pairs exported locally; 4224 retain same-model/limited numeric screening, not independent gold. Industrial superiority and full bilingual original-query evaluation remain incomplete. Hashes prove identity, not semantic truth.",
+  "supplement_tex_sha256": "f0dfbd87e5ffbad2dd41d6d333a14d81f38284545636b4d31db9c7c0bd7d91c2"
 }

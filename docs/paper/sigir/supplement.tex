@@ -1,0 +1,25 @@
+% Canonical editable manuscript. Compile from this directory with Tectonic.
+% Format: https://sigir2027.org/pages/submit-full.html
+\makeatletter
+\def\input@path{{template/}}
+\makeatother
+\documentclass[sigconf,natbib=true,anonymous=true]{acmart}
+\usepackage{booktabs}
+\usepackage{amsmath}
+\usepackage{xurl}
+\usepackage{array}
+\usepackage{placeins}
+\emergencystretch=2em
+\setcopyright{none}
+\settopmatter{printacmref=false}
+\acmConference[Research draft]{Research draft; not submitted}{November 2026}{}
+\acmYear{2026}
+\renewcommand\footnotetextcopyrightpermission[1]{}
+\title[Supplementary Material]{Supplementary Material: Evidence-Based Expert Search for Industrial Needs}
+\author{Anonymous Authors}
+\input{generated/results}
+\begin{document}
+\maketitle
+\appendix
+\input{appendix}
+\end{document}

@@ -17,6 +17,7 @@
 \renewcommand\footnotetextcopyrightpermission[1]{}
 \title[Evidence-Based Expert Search]{Evidence-Based Expert Search for Industrial Needs:\\Provenance, Conditional Method Transfer, and Inference Budgets}
 \author{Anonymous Authors}
+\input{generated/results}
 \begin{document}
 \begin{abstract}
 Industrial expert search must establish how documented research methods might help solve a technical need, rather than merely retrieve topically similar papers. Requiring previous completion of an entire future project misses useful transfers; accepting field similarity overstates capability. We investigate a training-free, coarse-to-fine framework separating associated sources, historical method facts, conditional target connections, and unresolved obligations. We reconstruct 100 complete industrial needs and 700 fixed candidate-evidence views from original data, yielding 183 development silver judgments while retaining disagreements and a sealed set. Explaining only the displayed top three reduces mean request latency from 6.81 to 4.65 seconds on a development cohort, without establishing independent accuracy preservation. On 610 publicly released human-self-rated paper--reviewer pairs, native Decisions reduces latency from 3.84 to 0.91 seconds, with accuracy 71.15\% versus 73.28\% for full reasoning. This is a trade-off, not demonstrated equivalence. A larger cohort contains 2,741 new company-grouped needs for bilingual construction. Publication-time and citation metadata are available, but individual contribution remains unresolved. The results support concrete components and research directions, not yet joint end-to-end superiority for industrial expert search.
@@ -46,12 +47,59 @@ A source method frame $f=(x,o,y,c)$ records input, operation, output, and stated
 
 Fixed-view grades distinguish: 0, no adequate demonstrated method fit; 1, topic adjacency; 2, concrete conditional functional transfer; and 3, a documented operation on the actual target object. Grade~3 does not establish future delivery. A separate null label denotes missing, failed, or disputed review and cannot be imputed as grade~0. None is a complete measure of expert ability.
 
+
+\subsection{A scoped evidence contract}
+Let $D_e$ be the supplied sources associated with expert $e$. A source view is $v=(q,e,d,h,[a,b))$, where $h$ hashes the complete normalized source and $[a,b)$ fixes the visible characters. A judgment applies to this tuple rather than to the expert in perpetuity. A longer abstract, another project record, or a changed query can justify a different judgment. Reusing the old label after such a change would hide a change in the task itself.
+
+We distinguish four objects in an explanation: a localized historical assertion $F$, a target operation $T$, a proposed bridge $B$, and an unresolved obligation set $O$. A useful bridge says which operation is reusable, why its inputs and outputs are compatible with the target, and what adaptation must be tested. For example, a demonstrated thermal inverse problem may provide a candidate estimation operation for another manufacturing process. The explanation must retain changes in boundary conditions and material properties as obligations; it cannot claim that the new process has already been validated. Conversely, a source stating only ``intelligent manufacturing'' supplies neither an inverse method nor the bridge.
+
+This contract prevents two opposite errors. A requirement for prior completion of every enterprise constraint rejects useful component expertise. A topic-only connection accepts almost any adjacent field. Grade~2 occupies the middle ground: the recorded operation has a concrete conditional use, with assumptions visible to the reader. Grade~3 strengthens target correspondence but still does not warrant a future performance guarantee. Neither grade should certify an individual's contribution when the source only establishes a team association.
+
+\begin{table}[t]
+\caption{Evidence dimensions are recorded separately. A missing dimension remains unknown rather than becoming a negative capability label.}
+\centering\small
+\begin{tabular}{@{}p{.25\columnwidth}p{.68\columnwidth}@{}}\toprule
+Dimension & Required interpretation\\\midrule
+Association & Source belongs to the supplied expert record\\
+Historical fact & Visible passage states the method or activity\\
+Target connection & Direct operation or explicit conditional bridge\\
+Personal role & Independent role/identity evidence, when available\\
+Time and impact & Date precision and observed paper-level citations\\
+Obligations & Adaptations and future validation still required\\\bottomrule
+\end{tabular}
+\end{table}
+
 \subsection{Coarse-to-fine access and output budgets}
 Raw-record positions, source hashes, ownership, and visible ranges are preserved. A frozen source-vector index recalls sources and aggregates experts, with an efficient exact reference and standard HNSW baseline. Query-independent compilation extracts at most two method frames per source. Titles, field lists, background citations, and aspirations do not automatically establish an own method. Profiles may contain concrete project/patent activity. Schema and offset checks precede same-model witness screening; screening is fallible and nonexhaustive. Every source remains eligible for raw retrieval even if it has a frame.
 
 The reference online flow encodes the full need, recalls owned sources, materializes bounded views, and jointly compares candidates. A transfer must state the source and target operations, their input/output or physical compatibility, and a testable adaptation. ``Assume it transfers'' is not a mechanism; missing whole-system integration is not by itself a reason to reject a useful component.
 
 Input and output budgets are separate: the focused variant still sees seven candidates but explains only the displayed top three in one request. Candidate-specific schemas and validation enforce unique IDs and owned references. Offsets prove localization, not semantic correctness. An extra serial model gate was slower and is not the default. Frame compilation, full-source retrieval, and partial-method comparison have implementations, but the new complete combination still requires paired end-to-end validation.
+
+
+\subsection{Executable stages and failure behavior}
+The proposed composition has an offline and an online path. Offline normalization produces immutable owned sources. Source embeddings provide a reusable recall index; optional method frames provide an additional access representation, not a replacement for original evidence. At query time the system retrieves sources, aggregates them by expert, assembles bounded views, and performs one comparative request with a restricted display budget. This design places expensive semantic comparison after inexpensive recall. It does not assume that an expert-summary tree is a reliable exclusion oracle.
+
+\begin{quote}\small
+\textbf{Offline:} normalize raw records; assign expert/source IDs; save hashes and field ranges; build the source index; optionally compile and screen frames; retain raw fallback for every source.\\
+\textbf{Online:} encode the complete need; recall owned sources; aggregate and deduplicate experts; materialize bounded source views; compare candidates jointly; validate the completed top-$K$ result; publish a timestamped snapshot or an explicit unresolved result.
+\end{quote}
+
+The current implementations support these stages individually. Their new composition is a research specification until evaluated together under a frozen protocol. In particular, the 100-source frame store cannot stand in for a corpus-wide frame index, and the exact/HNSW timing comparison does not include an LLM judge. A reproducible integrated test must state which stages were enabled and which caches were warm.
+
+A top-$K$ output still reads all recalled candidate views. It saves response generation and explanation work, rather than obtaining additional recall or proving a better ranking. Each explanation contains owned references, a target anchor, a method fact, a bridge, and obligations. Validation rejects duplicate or foreign candidate IDs, stale references, and malformed outputs. Validation cannot establish semantic truth. A failed request yields no completed ranked snapshot for that arm; it does not silently reuse another arm's answer or turn every candidate into a negative example.
+
+A safe coarse-to-fine hierarchy should support navigation without hiding uncovered evidence. Internal nodes can cache source coverage and expert membership, while leaf access retains original passages. Pruning on a learned or generated summary alone is heuristic: an omitted niche method may be precisely the useful bridge. We therefore keep flat source recall as a required fallback and exact expert aggregation as a fidelity reference. Future tree experiments must report the positive experts lost at each pruning stage, not merely the number of nodes skipped.
+
+\subsection{Where computation is spent}
+For one complete result, the relevant cost is
+\begin{equation}
+ T_{\rm result}=T_{\rm encode}+T_{\rm recall}+T_{\rm views}
+ +\sum_{j\in\mathcal{S}}T_j+T_{\rm validate},
+\end{equation}
+where $\mathcal{S}$ denotes serial inference stages. Parallel workers affect throughput and queueing; summing individual request times does not give elapsed wall time. Offline compilation adds a separate cost $C_{\rm off}$. For a fixed workload of $n$ requests its accounting contribution is $C_{\rm off}/n$, but only if the same index remains applicable and the observed execution environment is specified. We have not established a break-even workload for a complete compiled system.
+
+This decomposition explains why a gate can lose despite reducing candidate count: it inserts a serial model round trip before the remaining comparison. It also explains why reducing explanations can help without reducing input tokens. Native choice is another possible fast path, but its disagreement with long reasoning means that substituting it is an accuracy--latency decision. A selective verifier would need a validation-set policy and a held-out assessment; choosing a threshold using all public test labels would not provide that assessment.
 
 \subsection{Time and bibliometrics}
 Publication dates retain their precision as intervals. A year-only date is not fabricated into a known day; a cutoff-crossing interval stays uncertain. Citation totals lack observation timestamps and cannot safely represent counts known at a past date. Recency of activity, method relevance, and paper impact remain distinct: old foundational methods can still be useful. Individual credit requires role/identity evidence, such as CRediT declarations\footnote{\url{https://credit.niso.org/}}, not a prestige score. These metadata are being incorporated; a validated contribution-aware ranker is not yet demonstrated.
@@ -74,7 +122,22 @@ Human labels / sealed labels & 0 / 0\\\bottomrule
 
 Two differently ordered structured reviews and a proposal-hidden native classification must agree; positives receive two additional witness/connection audits. All share a model/provider and are not independent gold. We trace 47,496 distinct raw records and 71,683 entity/field checks. Exact cross-split expert, source, normalized-prefix, and title intersections are zero; semantic duplicates and team-family independence remain unaudited. Limited same-author source replacements control support for narrow historical facts, not actual ability. Lexical discovery additionally yields 742 unjudged views outside the original pool.
 
-A larger reconstruction excludes the previous 136 need IDs and exact company keys, then groups remaining records by company, identical body, and URL before translation. It yields 2,741 needs in 1,395 groups: 2,228 construction, 284 validation, and 229 sealed cases. Group sizes prevent exact percentage splits. English translations are pending: this is not a completed bilingual benchmark. Lossless segments and supported numeric/unit/comparator checks are implemented, preserving decimals, inequality direction, and unit case. Mechanical equality cannot certify negation, object scope, modality, or complete semantic alignment. The synthesis plan fixes 1,000 real parent needs and five intent types: overview, component method, conditional transfer, evidence lookup, and constraint-focused search. This defines 5,000 synthetic query slots, each with parallel Chinese/English views; language views are not counted as independent needs. A fixed 32-parent pilot generated 160 pairs, of which 136 passed same-model screening. The full run is active, not yet a completed high-quality dataset. Bilingual ranking consistency must accompany quality evaluation, since consistently wrong rankings can be stable.
+A larger reconstruction excludes the previous 136 need IDs and exact company keys, then groups remaining records by company, identical body, and URL before translation. It yields 2,741 needs in 1,395 groups: 2,228 construction, 284 validation, and 229 sealed cases. Group sizes prevent exact percentage splits. Complete-parent English translations remain pending; derived bilingual queries are being generated separately. This is not a completed bilingual benchmark. Lossless segments and supported numeric/unit/comparator checks are implemented, preserving decimals, inequality direction, and unit case. Mechanical equality cannot certify negation, object scope, modality, or complete semantic alignment. The frozen synthesis protocol fixes 1,000 real parent needs and five intent types: overview, component method, conditional transfer, evidence lookup, and constraint-focused search. This defines 5,000 synthetic query slots, each with parallel Chinese/English views; language views are not counted as independent needs. A fixed 32-parent pilot generated 160 pairs, of which 136 passed same-model screening. At \SnapshotUTC{}, \ParentJobsDone{} parent jobs have terminal records, containing \SyntheticGenerated{} generated pairs: \SyntheticScreened{} pass the current same-model screen and \SyntheticUnjudged{} remain unjudged. All 1,000 parent jobs have now reached terminal records and all 5,000 bilingual intent slots contain generated text. These are construction-status counts, not verified relevance labels; the large cohort currently has \ExpertFitLabelsLarge{} expert-fit judgments. Bilingual ranking consistency must accompany quality evaluation, since consistently wrong rankings can be stable.
+
+
+\subsection{Source-grounded query synthesis}
+We separate demand construction from expert-fit annotation. A parent enterprise need determines what the query may ask; a researcher source determines what can support a candidate. Generating a query from a known positive paper and then evaluating retrieval of that same paper risks making lexical recoverability the task. Our larger construction starts from original enterprise needs, preserving provenance before retrieving or labeling experts. Derived queries inherit parent identity and split, never an expert relevance label.
+
+The five intent types expose different retrieval requirements. An overview retains the whole need; a component-method query isolates a supported sub-operation; a conditional-transfer query asks about a possible mechanism with assumptions; an evidence-lookup query asks for documented support; a constraint-focused query foregrounds an original material, operating condition, or quantitative requirement. A type is a generation instruction rather than evidence that a useful answer exists. Some parents may not support a good variant of every type; those slots must remain unresolved rather than be filled by invented constraints.
+
+Generation emits one to four segment references for each query, both language views, and its intent type. Mechanical checks verify allowed IDs, offsets, and supported numeric/unit/comparator consistency. A separate native review screens grounding and Chinese/English equivalence without receiving an expert-fit label. A successful response still has only a model-screened status. Reusing the same model family for generation and review can preserve shared misconceptions, and a number-preserving translation can change the affected object or the polarity of a requirement.
+
+Failures remain in the denominator. Parent-level terminal records distinguish generated-but-unjudged variants from screened variants, and preserve the protocol and response hashes. The current exporter scans only the frozen selected-parent list, so unrelated pilot or temporary files cannot inflate the count. It records a timestamped snapshot rather than treating a directory count as proof that a process remains live. The intended release should retain original and derived IDs, language, taxonomy, segment trace, screening status, split, and failure reason. An independent post-validation module now handles negated comparator aliases such as ``not below and abstains on unsupported nearby negation. At \PostSnapshotUTC{}, it rechecks \PostPairs{} pairs, retains \PostRetained{} previous screen passes, and downgrades \PostDowngraded{} previous passes; \PostUncertain{} pairs have uncertain numeric checks. It never promotes a previous failure or rewrites the original generation/audit records. Human review remains necessary before describing the collection as a high-quality bilingual benchmark.
+
+\subsection{Evaluation pools and annotation independence}
+A fixed-view benchmark answers whether a method selects and justifies candidates from the provided views. It does not measure full-corpus recall: candidates absent from the pool cannot be discovered by the reranker. Our five dense plus two random candidates cover both plausible matches and background, but favor the dense retriever that constructed the pool. The separate lexical expansion tests this boundary and currently supplies unjudged candidates rather than new gold labels.
+
+A stronger final assessment needs pools from lexical, multilingual dense, profile, method-frame, and alternative retrieval runs, followed by blinded adjudication on a shared view contract. Annotation must distinguish ``not supported by this view'' from ``expert cannot solve the need.'' Interventions replacing a historical passage test source dependence, while real negative capability judgments would require much stronger information. We keep the sealed cases unused while developing prompts, data transformations, and budget rules. None of the exploratory cohorts should later be renamed as held-out evidence.
 
 \begin{table*}[t]
 \caption{Distinct development cohorts. Same-model screening is not independent correctness; rows cannot be combined into an end-to-end gain.}
@@ -96,6 +159,22 @@ Unjudged returned positions receive 0/1 for lower/upper bounds; unreturned posit
 
 Deadline evaluation uses the latest completed snapshot, not the best historical output. Condensed nDCG is diagnostic: sparse judgments made random rankings appear strong. The public self-rating task retains its binary definition, completion coverage, valid-only metrics, and full-cohort abstention bounds. Paired confidence intervals cluster by target title, distinct from missing-label identification bounds. This is a task-specific protocol, not new DCG or bootstrap theory.
 
+
+\subsection{Paired identification with shared unknown labels}
+Subtracting two independently computed gain intervals wastes information when the rankings refer to the same fixed candidate views. Let $a_e$ and $b_e$ be an expert's normalized positional discounts in two lists, or zero if absent, and let $c_e=a_e-b_e$. The paired contrast is $\Delta=\sum_e c_e g(z_e)$. If $J$ is the judged set and $M$ the unknown set, its sharp box bounds are
+\begin{align}
+ L_\Delta&=\sum_{e\in J}c_eg(z_e)+\sum_{e\in M}\min(0,c_e),\\
+ H_\Delta&=\sum_{e\in J}c_eg(z_e)+\sum_{e\in M}\max(0,c_e).
+\end{align}
+An unknown expert occupying the same position cancels exactly. This is ordinary linear interval arithmetic, not a new statistical theorem. The bounds are sharp only under the stated independent unknown-gain box. They cannot repair incorrect silver labels, and semantic constraints among unknown labels could change the feasible set. Shared labels require identical query, expert, and source snapshots; a translation or expanded passage cannot silently inherit them.
+
+On the 20-query output-budget cohort, focused-minus-full independent bounds average $[-0.6617,0.7821]$. Shared-label bounds narrow to $[-0.0679,0.1883]$, cancelling 27 unchanged-position unknown entries. The interval still crosses zero and is not a sampling confidence interval. It shows that label dependence matters for comparing nearly overlapping rankings, while leaving quality preservation unresolved. Failed arms contribute no completed ranking under the declared policy.
+
+\subsection{Completed results under deadlines}
+Let $R(t)$ be the latest fully validated snapshot available by time $t$, with the empty result before the first completion. Report $[L(R(t)),H(R(t))]$, completion coverage, and returned count at fixed deadlines. Using the best historical gain would conceal a later harmful revision and grant an oracle access to labels. In a streaming system, partial tokens or an unvalidated JSON fragment are not a completed result. A method that returns quickly but abstains frequently must expose both facts.
+
+For bilingual evaluation, aligned Chinese/English views should share a parent split but retain their own judgments until equivalence is established. Rank overlap measures stability, not relevance; two identical erroneous rankings are perfectly stable. The final benchmark should stratify gain, completion, and latency by language and intent, and report their paired differences alongside equivalence audits. Comparisons should also separate factual support from personal-role support and date eligibility. These reporting dimensions are an evaluation design; their annotation reliability and relation to expert utility remain empirical questions.
+
 \section{Results}
 \subsection{Index and inference components}
 On all sources, 9,861 experts with evidence, and 20 reused development queries, exact ranking averages 33.15\,ms. HNSW with an \texttt{efSearch} floor of 64 averages 1.23\,ms, retains 95\% of exact top tens, and matches ordered results on 12/20 queries. A floor of 512 averages 2.83\,ms and matches all 20 ordered lists. Graph construction/copies take 56.30\,s; separate GPU query encoding averages 19.88\,ms. This is mature approximate search, not a new algorithm, relevance improvement, or general exactness guarantee.
@@ -104,14 +183,22 @@ On all sources, 9,861 experts with evidence, and 20 reused development queries, 
 
 The explanation-budget difference is $-2.162$\,s, query-bootstrap interval $[-3.879,-0.989]$\,s. The 18 jointly valid cases still save 1.486\,s, but only eight ordered top-three lists agree. In the balanced factorial cohort, the bridge screen main effect is $+0.1083$ per display slot, interval $[0.0333,0.1917]$, averaging over language. This is exploratory, with no multiple-comparison correction or independent accuracy interpretation.
 
+
+\subsection{What the negative results rule out}
+The staged-gate experiment rules out an easy efficiency claim for the tested implementation: passing 91 rather than 140 candidates to detailed comparison did not compensate for the added serial request. The old source-card pilot similarly provides no reason to replace raw evidence indiscriminately. Its compressed cards largely expressed expertise topics rather than documented methods, and raw fallback was frequently necessary. These failures motivate operation-level frames and selective output budgets, but do not prove that those replacements solve the original problem.
+
+The focused experiment isolates output scope more directly: identical candidate inputs and token caps, with explanations for seven versus three experts. However, two invalid full outputs and substantial ordering changes prevent treating the latency reduction as a quality-preserving optimization. Likewise, the factorial bridge experiment concerns the rate at which a model accepts concrete claims in a diagnostic audit. It suggests that an explicit compatibility/adaptation requirement affects explanation behavior, with a latency cost; it does not establish a higher rate of independently correct industrial matches.
+
+These distinctions determine the next integration test. Recall should first be frozen and compared against its exact reference. Reasoning arms should then share candidate views and output requirements, with validation failures retained. Only an experiment measuring the complete path on independently reviewed queries can support a joint efficiency and precision claim. Combining the best number from each of several development cohorts would not constitute that experiment.
+
 \subsection{Public auxiliary tasks}
 \begin{table}[t]
 \caption{All 610 human-self-rated pairs. All arms completed. Metrics are percentages; time is per request, not whole-search latency.}
 \centering\small\begin{tabular}{lrrrrr}\toprule
 Arm & Acc. & Prec. & Rec. & F1 & Mean s\\\midrule
-Full reasoning & 73.28 & 67.43 & 69.29 & 68.35 & 3.84\\
-Short Chat & 68.69 & 58.22 & 87.80 & 70.02 & 1.64\\
-Native choice & 71.15 & 63.83 & 70.87 & 67.16 & 0.91\\\bottomrule
+Full reasoning & \LongAcc & \LongPrec & \LongRecall & \LongFone & \LongSeconds\\
+Short Chat & \ShortAcc & \ShortPrec & \ShortRecall & \ShortFone & \ShortSeconds\\
+Native choice & \NativeAcc & \NativePrec & \NativeRecall & \NativeFone & \NativeSeconds\\\bottomrule
 \end{tabular}\end{table}
 On the original EvidenceBench test~\cite{wang2025evidencebench}, 293 queries from 284 papers, fixed source-role compilation raises aspect recall from 0.4324 to 0.4935; the paper-cluster difference interval is $[0.0377,0.0840]$. Online encoding/sorting average 8.35\,ms, excluding initialization and source-vector construction. Offline request time sums to 1,162.77\,s, not wall time. This supports auxiliary sentence-evidence coverage, not industrial expert fit or amortized full-agent speed.
 
@@ -122,13 +209,10 @@ We pin MERIT's public 610-pair self-rating test: 254 positives (ratings 4/5), 35
 Native choice reduces mean latency by 2.928\,s (76.3\%), with paper-cluster interval $[-2.997,-2.852]$\,s. Its accuracy difference is $-2.13$ points, interval $[-5.51,1.32]$. Crossing zero establishes neither equivalence nor non-inferiority. Short Chat differs by $-4.59$ points, interval $[-8.35,-0.81]$, despite higher recall/F1. Self-ratings are independent of our silver generator but concern reviewer expertise, not future enterprise capability; pretraining contamination is not ruled out.
 
 \section{Limitations and Next Experiments}
-Industrial labels remain sparse and model-correlated, candidate pools are biased, and personal contributions unresolved. The new Chinese cohort is not yet bilingual or labeled. Source frames, raw retrieval, and budgeted reasoning need unified end-to-end testing. Time, impact, and relevance must not collapse into an unvalidated prestige score. Appendix~\ref{app:protocols} details provenance and incomplete implementation boundaries.
+Industrial labels remain sparse and model-correlated, candidate pools are biased, and personal contributions unresolved. The new cohort has partially generated bilingual views but no expert-fit labels. Source frames, raw retrieval, and budgeted reasoning need unified end-to-end testing. Time, impact, and relevance must not collapse into an unvalidated prestige score. The supplementary material details provenance and incomplete implementation boundaries.
 
-Next experiments should compare frozen multilingual retrieval, translation, distributional alignment, and graph propagation, distinguishing these from generative diffusion training. Geometry-based optimal transport offers an inherited alignment baseline~\cite{alvarez2018gw}; this is distinct from generative diffusion training. The s3 framework~\cite{jiang2025s3} motivates learning a searcher separately from the generator. Such policies should be compared against training-free budget allocation. Training-based alternatives remain alternatives, not implemented results. The company-grouped validation/sealed sets and original 20 sealed needs remain protected from tuning. Code is public under MIT; original enterprise/researcher texts remain local. The current evidence does not establish the full research objective's completion.
+Next experiments should compare frozen multilingual retrieval, translation, distributional alignment, and graph propagation, distinguishing these from generative diffusion training. Geometry-based optimal transport offers an inherited alignment baseline~\cite{alvarez2018gw}; this is distinct from generative diffusion training. The s3 framework~\cite{jiang2025s3} motivates learning a searcher separately from the generator. Such policies should be compared against training-free budget allocation. Training-based alternatives remain alternatives, not implemented results. The company-grouped validation/sealed sets and original 20 sealed needs remain protected from tuning. Code is public under MIT; original enterprise/researcher texts remain local. The current evidence does not establish the full research objective's completion. A successful final study must demonstrate improved independently judged expert ranking at a stated whole-search latency budget, with the same source visibility, complete failure accounting, and protected company-grouped evaluation cases.
 
-\FloatBarrier
-\appendix
-\input{appendix}
 \bibliographystyle{template/ACM-Reference-Format}
 \bibliography{../references}
 \end{document}
