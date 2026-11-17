@@ -481,3 +481,14 @@ PYTHONPATH=src .venv-local/bin/python experiments/analyze_enterprise_span_stabil
 ```
 
 分歧输入为`artifacts/enterprise-span-assessment-v1/disagreements.json`，保存所有压缩/完整上下文可操作判断翻转；不是挑选正确样本。重复实验严格检查父协议和相同输入哈希。源码包含视图核验模块与归属/偏移测试，原始来源和模型响应保持本地。
+
+条件性方法迁移案例构造（完整保留20条固定需求，所有模型调用均为gpt-6-luna）：
+
+```bash
+PYTHONPATH=src .venv-local/bin/python experiments/generate_transfer_cases.py
+PYTHONPATH=src .venv-local/bin/python experiments/audit_transfer_cases.py
+PYTHONPATH=src .venv-local/bin/python experiments/transfer_source_controls.py
+PYTHONPATH=src .venv-local/bin/python experiments/export_transfer_cases.py
+```
+
+输入为已有需求先行检索任务；来源控制需要完整本地语料catalog。输出本地`transfer-candidates-v1`，标签范围和未完成审核见[迁移案例数据卡](transfer-cases-card.md)。不把未知事实来源视作负能力标签，不把条件性迁移解释视作已实现未来项目。
