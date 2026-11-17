@@ -559,3 +559,17 @@ PYTHONPATH=src python experiments/analyze_concrete_partial.py
 ```
 
 前两项为付费API调用；后者使用固定见证规则，不是独立金标，也不计入在线两臂耗时。重复审查使用同一模块，先将`audit_concrete_witnesses.ROOT`设为`Path('artifacts/concrete-witness-repeat-v1')`再调用`run()`，保持冻结生成结果和盲序不变；随后运行`experiments/analyze_concrete_witness_repeat.py`。首轮失败不由重审回填。`ConcreteFocusedPartialMatcher`只增加具体迁移及完整中文表达指令，保留原归属/schema/一次调用/前三名预算；未接入默认搜索，语言和桥接因素尚未分别消融。
+
+四因素开发消融及来源方法记录试验：
+
+```bash
+PYTHONPATH=src python experiments/factorial_partial_comparison.py
+PYTHONPATH=src:experiments python experiments/audit_factorial_witnesses.py
+PYTHONPATH=src python experiments/analyze_factorial_partial.py
+PYTHONPATH=src python experiments/source_method_frame_pilot.py --prepare-only
+PYTHONPATH=src python experiments/source_method_frame_pilot.py
+```
+
+四臂为原表达、仅完整中文、仅具体迁移、两者同时；固定开发位置60:80，四组Williams顺序平衡，均为前三名解释和gpt-6-luna。见证筛查仍非独立金标。方法记录试验从开发来源按种类固定抽取100条，不读取任何需求或适用性标签；输入/输出缺失保持null，未提取者必须回退原文。源码包含方法记录编译，但尚未构建该表示的全库检索索引或证明其摊销收益。
+
+新增公开专业匹配辅助评测见[MERIT适配卡](merit-suitability-card.md)，固定610个人工自评配对；未完成全队列前，分析器拒绝输出准确率。它不替代企业迁移任务。
