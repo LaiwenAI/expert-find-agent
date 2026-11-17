@@ -39,10 +39,15 @@ class GroundedPipeline:
         stage=time.perf_counter();route=self.index.search_vector(q,k=candidates)
         yield dict(stage='retrieval',status='unverified',route=route,seconds=time.perf_counter()-stage,total_seconds=time.perf_counter()-start)
         hits=route['hits'];stage=time.perf_counter()
-        requested=[w['id'] for hit in hits for w in hit['evidence']]
-        reader=getattr(self.catalog,'for_evidence',None)
-        source_rows=reader(requested) if callable(reader) else self.catalog.for_experts([h['id'] for h in hits])
-        sources={s['id']:s for s in source_rows}
+        try:
+            requested=[w['id'] for hit in hits for w in hit['evidence']]
+            reader=getattr(self.catalog,'for_evidence',None)
+            source_rows=reader(requested) if callable(reader) else self.catalog.for_experts([h['id'] for h in hits])
+            sources={s['id']:s for s in source_rows}
+        except Exception as error:
+            yield dict(stage='source_reading',status='unresolved',error_type=type(error).__name__,seconds=time.perf_counter()-stage,total_seconds=time.perf_counter()-start,
+                       notice='Source snapshot could not be read; no applicability judgment was made.')
+            return
         yield dict(stage='source_reading',sources_read=len(sources),seconds=time.perf_counter()-stage,total_seconds=time.perf_counter()-start)
         outcomes=[];valid=[]
         for hit in hits:

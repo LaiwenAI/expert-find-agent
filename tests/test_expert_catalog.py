@@ -21,3 +21,20 @@ class ExpertCatalogTest(unittest.TestCase):
             rows[0]['text']='changed'
             source.write_text(''.join(json.dumps(r,ensure_ascii=False)+'\n' for r in rows))
             with self.assertRaisesRegex(ValueError,'snapshot'):ExpertCatalog(corpus,root/'index')
+
+    def test_open_catalog_rejects_source_and_database_mutations(self):
+        import sqlite3
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);corpus=root/'corpus';corpus.mkdir();source=corpus/'evidence.jsonl'
+            source.write_text(json.dumps(dict(id='s',expert_id='a',text='old'))+'\n')
+            catalog=ExpertCatalog(corpus,root/'index')
+            source.write_text(json.dumps(dict(id='s',expert_id='a',text='new'))+'\n')
+            with self.assertRaisesRegex(ValueError,'snapshot'):catalog.for_evidence(['s'])
+            catalog.db.close()
+        with tempfile.TemporaryDirectory() as directory:
+            root=Path(directory);corpus=root/'corpus';corpus.mkdir();source=corpus/'evidence.jsonl'
+            source.write_text(json.dumps(dict(id='s',expert_id='a',text='old'))+'\n')
+            catalog=ExpertCatalog(corpus,root/'index')
+            with sqlite3.connect(catalog.database) as db:db.execute("UPDATE evidence SET expert_id='b' WHERE id='s'")
+            with self.assertRaisesRegex(ValueError,'snapshot'):catalog.for_evidence(['s'])
+            catalog.db.close()

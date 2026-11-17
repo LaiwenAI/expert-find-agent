@@ -47,6 +47,15 @@ class GroundedPipelineTest(unittest.TestCase):
         self.assertEqual(events[-1]['unresolved_experts'],['b'])
         self.assertEqual(assessor.calls,['a'])
 
+    def test_catalog_failure_is_explicit_and_stops_assessment(self):
+        class ChangedCatalog(Catalog):
+            def for_evidence(self,ids):raise ValueError('Snapshot changed')
+        assessor=Assessor();events=GroundedPipeline(Encoder(),Index(),ChangedCatalog(),Planner(),assessor).run('Find a method.',k=1,candidates=2)
+        self.assertEqual(events[-1]['stage'],'source_reading')
+        self.assertEqual(events[-1]['status'],'unresolved')
+        self.assertEqual(events[-1]['error_type'],'ValueError')
+        self.assertEqual(assessor.calls,[])
+
     def test_planning_failure_never_silently_becomes_empty_success(self):
         class Broken:
             def plan(self,demand):raise TimeoutError()
