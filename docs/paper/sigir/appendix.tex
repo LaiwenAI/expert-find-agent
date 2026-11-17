@@ -241,3 +241,6 @@ On 30 reused CoF NIPS queries with 364 reviewers and 14,913 unique papers, candi
 
 \paragraph{Dense candidate plus membership gate.}
 On 30 reused CoF NIPS queries, both component arms recompute a cached-vector dense top-one candidate before either full lexical top-50 membership or the bounded gate. All 90 alternating paired attempts agree on candidate and decision; mean times are 108.75 and 19.87 ms. Query encoding, index construction, evidence reading, reasoning and serving are excluded; resident and bound initialization take 676 and 172 ms separately. The bounded path scores 286.3 possible competitors on average, and repeated observations are dependent. This is not an end-to-end accuracy or latency result.
+
+\paragraph{Live query and cached source reads.}
+On 30 previously explored CoF SIGIR queries, independently repeated online query encoding, GPU dense top-one, lexical membership and cached source reads yield matching candidate IDs, decisions and source hashes for all pairs. Full versus bounded mean component time is 28.82 versus 14.62 ms on ws5 job 39694, with one alternating observation per query. Model, resident and bound initialization take 1.183 s, 117.93 ms and 26.59 ms separately. This excludes source/index creation, explanation, feedback, serving and concurrency. Matching hashes do not establish semantic support or end-to-end quality.
