@@ -244,3 +244,6 @@ On 30 reused CoF NIPS queries, both component arms recompute a cached-vector den
 
 \paragraph{Live query and cached source reads.}
 On 30 previously explored CoF SIGIR queries, independently repeated online query encoding, GPU dense top-one, lexical membership and cached source reads yield matching candidate IDs, decisions and source hashes for all pairs. Full versus bounded mean component time is 28.82 versus 14.62 ms on ws5 job 39694, with one alternating observation per query. Model, resident and bound initialization take 1.183 s, 117.93 ms and 26.59 ms separately. This excludes source/index creation, explanation, feedback, serving and concurrency. Matching hashes do not establish semantic support or end-to-end quality.
+
+\paragraph{Repeated live gate comparison.}
+On the same 30 previously explored queries, five alternating pairs after warmup yield 150/150 matching candidate IDs, decisions and source-view hashes; 135 pairs accept and read sources. Full/bounded component mean latency is 28.79/14.56 ms, with empirical P50 28.94/14.41 ms and P95 32.99/15.89 ms over sequential observations. The query-mean bootstrap interval for bounded minus full is $[-14.79,-13.65]$ ms. Repeats are dependent, initialization and full-agent stages are excluded, and hashes do not establish semantic support.
