@@ -13,8 +13,9 @@ def build(output):
         names.extend(str(p.relative_to(root)) for p in (root/directory).rglob('*.py'))
     names.extend(str(p.relative_to(root)) for p in (root/'experiments').rglob('*.sbatch'))
     names.extend(str(p.relative_to(root)) for p in (root/'docs/paper').glob('*.md'))
-    names.extend(['docs/research-methods.md','docs/benchmark-results.md','docs/annotation-protocol.md','docs/exploration/pageindex-expert-design.md','docs/exploration/closest-work-review.md','docs/exploration/reproduction-map.md','docs/cluster.md','docs/paper-controls-data-card.md','docs/paper/references.bib','docs/paper/draft-v3-evidence.json','docs/usage.md','docs/open-source.md','docs/scoped-dataset-card.md'])
+    names.extend(['docs/evidencebench-card.md','docs/exploration/topconf-review-20261117.md','docs/research-methods.md','docs/benchmark-results.md','docs/annotation-protocol.md','docs/exploration/pageindex-expert-design.md','docs/exploration/closest-work-review.md','docs/exploration/reproduction-map.md','docs/cluster.md','docs/paper-controls-data-card.md','docs/paper/references.bib','docs/paper/draft-v3-evidence.json','docs/usage.md','docs/open-source.md','docs/scoped-dataset-card.md'])
     names.extend('docs/exploration/'+name for name in (
+        'topconf-downloads-20261117.json',
         'selectivity-fusion-protocol-v1.json','selectivity-fusion-freeze-observation.json',
         'semantic-transport-protocol.json','semantic-transport-sigir.json',
         'semantic-transport-nips.json','crossencoder-results.json',

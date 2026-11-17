@@ -430,3 +430,14 @@ PYTHONPATH=src OPENBLAS_NUM_THREADS=1 .venv-local/bin/python experiments/prepare
 ```
 
 全部固定变体保留。资格池≤32时来源top3、否则Qwen的规则在扩展融合输出前冻结；不是依据扩展结果选参。所有时间仍须区分编码、BM25及共享缓存，来源贡献不等于已证实能力。NIPS与SIGIR结果方向不同，不据单数据集优势作总体结论。
+
+细粒度证据阶段的辅助开发基准（非企业专家适用性评价）：
+
+```sh
+PYTHONPATH=src OPENBLAS_NUM_THREADS=1 .venv-mlx/bin/python experiments/evidencebench_pilot.py
+# 以下会实际调用已配置的gpt-6-luna API：
+PYTHONPATH=src OPENBLAS_NUM_THREADS=1 .venv-mlx/bin/python experiments/evidencebench_decisions.py
+PYTHONPATH=src .venv-local/bin/python experiments/evidencebench_set_selector.py
+```
+
+原文按固定上游版本下载，不进入源码包。已有结果按协议读取，不把缓存重读当作新在线时延。见[辅助数据卡](evidencebench-card.md)。新增顶会PDF放在用户指定的literatures/method目录，来源与哈希见[全文审查记录](exploration/topconf-review-20261117.md)；PDF不复制进软件仓库。

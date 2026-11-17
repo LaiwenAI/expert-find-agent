@@ -25,6 +25,7 @@ Benchmark 比较 BM25-max、BM25-vote、TF-IDF 变体与混合证据树 agent。
 ## 无训练技术探索与论文
 
 - [研究初稿 v3](docs/paper/draft-v3.md)
+- [新增顶会全文审查](docs/exploration/topconf-review-20261117.md)
 - [完整研究日志与历史对照](docs/paper/draft-v2.md)
 - [质量与时间的计时边界](docs/paper/quality-time.md)
 - [已完成结果自动表](docs/paper/results-generated.md)
