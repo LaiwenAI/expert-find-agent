@@ -245,6 +245,7 @@ Even exact retrieval has only \BilingualExactOverlap{}\% mean overlap between th
 
 The high-effort ANN preserves almost all exact entries but matches only \BHighOrdered{}/2,000 ordered lists. Thus the earlier 20-query perfect agreement does not generalize to a larger cohort. Its overlap across languages is 42.10\%, close to exact retrieval's observed value; approximation alone does not explain most of the language difference. Source graph construction and index copies take \BilingualBuildSeconds{}\,s. Batched GPU encoding of all 2,000 views takes \BilingualEncodingSeconds{}\,s after model load and warmup on an allocated RTX~4090. This is throughput timing, not single-request latency or whole-agent speed.
 
+
 \subsection{Full-need translation ablations}
 Derived bilingual requests do not replace complete original needs. We therefore test full-need translation on the first \TranslationPilot{} construction parents, preserving every source segment. Direct translation admits \DirectPass{}/32 records under the combined native completeness screen and conservative numeric check. A placeholder-copy variant admits \PlaceholderPass{}/32; deterministic numeric-block assembly admits \BlocksPass{}/32. The respective unresolved counts are \DirectFailures{}, \PlaceholderFailures{}, and \BlocksFailures{}, including API timeouts and structural failures. All failures remain in the denominator.
 

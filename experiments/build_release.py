@@ -14,6 +14,7 @@ def build(output):
         names.extend(str(p.relative_to(root)) for p in (root/directory).rglob('*.py'))
     names.extend(str(p.relative_to(root)) for p in (root/'experiments').rglob('*.sbatch'))
     names.extend(str(p.relative_to(root)) for p in (root/'docs/assets').glob('*.svg'))
+    names.extend(['docs/grounding-review-protocol.md', 'docs/exploration/channel-fusion-20261117.md', 'docs/exploration/bilingual-audit-order-controls-20261117.md', 'docs/exploration/enterprise-review-readiness-20261117.md'])
     names.extend(str(p.relative_to(root)) for p in (root/'docs/paper/sigir').rglob('*.tex'))
     names.extend(str(p.relative_to(root)) for p in (root/'docs/paper/sigir').rglob('*.json'))
     names.extend('docs/paper/sigir/template/'+n for n in ('acmart.cls','acmart.dtx','acmart.ins','ACM-Reference-Format.bst','README'))

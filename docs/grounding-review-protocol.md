@@ -1,0 +1,13 @@
+# Independent grounding review
+
+Review each record without consulting model predictions. The local review package contains private source text and is not a public dataset. Each reviewer should work on a separate copy and use a stable, non-identifying reviewer ID. Record an explanation for every judgment, especially uncertainty or disagreement.
+
+For each language view, determine whether the selected request is supported by the original need and cited segments. A derived request may omit unrelated obligations for its stated intent, but must not alter a condition attached to its selected operation or introduce an unsupported object, threshold, capability, actor, or completed achievement. The source can request a solution without demonstrating that a solution exists. Inspect the full original need for scope and attribution; cited segments alone may omit context.
+
+For bilingual equivalence, compare the two derived requests on their selected operation, object, conditions, modality, negation, units and thresholds. Fluency is not sufficient. A pair can be equivalent while both versions add an unsupported condition, so equivalence and grounding are separate judgments.
+
+Use `supported` when the relevant relationship is established, `changed_or_unsupported` when a substantive contradiction or addition is evident, and `uncertain` when available text is insufficient or ambiguous. Do not use missing evidence to infer an expert's inability. Fill `chinese_grounding`, `english_grounding`, and `bilingual_equivalence` independently, and include a rationale and reviewer ID. Leave case identifiers and source text unchanged.
+
+Two independent reviews per case are desirable. Preserve each review separately, report raw agreement and the full confusion matrix including uncertainty, and resolve disagreements only in a separate adjudication record. Record missing reviews and do not convert them to negative labels. These 30 selected diagnostic cases are not a random sample of all enterprise needs; their agreement or accuracy cannot be generalized without a separate sampling design.
+
+The current export has six cases for each of the five intent types. It was selected from the earlier overlap-stratified diagnostic rather than sampled uniformly. Validate each completed copy with `python -m experiments.bilingual.check_grounding_review PATH`, keeping the original blind export and its manifest unchanged. The validator checks the frozen source fields and counts missing judgments but does not assess the correctness of a review.
