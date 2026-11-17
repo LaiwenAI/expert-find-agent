@@ -31,6 +31,17 @@ class FastSearch(Search):
         self.experts={r['id']:r for _,r in records(Path(corpus)/'experts.jsonl')}
         self.metadata={i:(ev,eid) for i,ev,eid in self.db.execute('SELECT id,evidence_id,expert_id FROM docs')}
 
+    def _bodies(self, doc_ids):
+        """Fetch only selected evidence, in batches below SQLite's variable limit."""
+        ids=list(dict.fromkeys(doc_ids)); result={}
+        for start in range(0,len(ids),500):
+            batch=ids[start:start+500]
+            placeholders=','.join('?' for _ in batch)
+            for doc,body in self.db.execute(f'SELECT id,body FROM docs WHERE id IN ({placeholders})',batch):
+                result[doc]=json.loads(body)
+        if len(result)!=len(ids):raise ValueError('Compiled index is missing evidence')
+        return result
+
     def evidence_for(self,query,expert_ids,n=3):
         """Apply one common lexical evidence policy to an external candidate pool."""
         if n<1:raise ValueError('Invalid evidence count')
@@ -44,12 +55,9 @@ class FastSearch(Search):
         grouped=defaultdict(list)
         for doc in allowed:
             ev,eid=self.metadata[doc];grouped[eid].append((scores[doc],ev,doc))
-        output={eid:[] for eid in wanted}
-        for eid,hits in grouped.items():
-            for value,_,doc in heapq.nsmallest(n,hits,key=lambda h:(-h[0],h[1])):
-                row=json.loads(self.db.execute('SELECT body FROM docs WHERE id=?',(doc,)).fetchone()[0])
-                output[eid].append(dict(row,score=value))
-        return output
+        selected={eid:heapq.nsmallest(n,hits,key=lambda h:(-h[0],h[1])) for eid,hits in grouped.items()}
+        bodies=self._bodies(doc for hits in selected.values() for _,_,doc in hits)
+        return {eid:[dict(bodies[doc],score=value) for value,_,doc in selected.get(eid,[])] for eid in wanted}
 
     def document_scores(self,query):
         """BM25 scores by unique evidence ID, without reading document bodies."""
@@ -76,9 +84,11 @@ class FastSearch(Search):
             value=sum(h[0] for h in top) if method=='bm25-vote' else top[0][0]
             ranked.append((value,eid))
         result=[]
-        for score,eid in heapq.nsmallest(k,ranked,key=lambda x:(-x[0],x[1])):
+        top_experts=heapq.nsmallest(k,ranked,key=lambda x:(-x[0],x[1]))
+        bodies=self._bodies(doc for _,eid in top_experts for _,_,doc in hits_by_expert[eid][:3])
+        for score,eid in top_experts:
             evidence=[]
             for value,_,doc in hits_by_expert[eid][:3]:
-                row=json.loads(self.db.execute('SELECT body FROM docs WHERE id=?',(doc,)).fetchone()[0]);evidence.append(dict(row,score=value))
+                evidence.append(dict(bodies[doc],score=value))
             result.append(dict(**self.experts[eid],score=score,evidence=evidence))
         return result
