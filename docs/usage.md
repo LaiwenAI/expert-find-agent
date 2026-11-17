@@ -549,3 +549,13 @@ PYTHONPATH=src:experiments python experiments/audit_focused_witnesses.py
 ```
 
 第一、三项调用付费gpt-6-luna API。比较固定开发集位置20:40，双臂均读七名候选，只改变解释输出预算，均评价前三名。实现为`FocusedPartialMethodMatcher`，尾部候选保持未评估，不输出能力否定。后置见证审查为同模型诊断，不计入两臂计时，也不是独立金标；当前尚未接入默认搜索。
+
+具体迁移表达消融（开发位置40:60）：
+
+```bash
+PYTHONPATH=src python experiments/concrete_partial_comparison.py
+PYTHONPATH=src:experiments python experiments/audit_concrete_witnesses.py
+PYTHONPATH=src python experiments/analyze_concrete_partial.py
+```
+
+前两项为付费API调用；后者使用固定见证规则，不是独立金标，也不计入在线两臂耗时。重复审查使用同一模块，先将`audit_concrete_witnesses.ROOT`设为`Path('artifacts/concrete-witness-repeat-v1')`再调用`run()`，保持冻结生成结果和盲序不变；随后运行`experiments/analyze_concrete_witness_repeat.py`。首轮失败不由重审回填。`ConcreteFocusedPartialMatcher`只增加具体迁移及完整中文表达指令，保留原归属/schema/一次调用/前三名预算；未接入默认搜索，语言和桥接因素尚未分别消融。
