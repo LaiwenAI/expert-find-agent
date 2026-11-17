@@ -441,3 +441,22 @@ PYTHONPATH=src .venv-local/bin/python experiments/evidencebench_set_selector.py
 ```
 
 原文按固定上游版本下载，不进入源码包。已有结果按协议读取，不把缓存重读当作新在线时延。见[辅助数据卡](evidencebench-card.md)。新增顶会PDF放在用户指定的literatures/method目录，来源与哈希见[全文审查记录](exploration/topconf-review-20261117.md)；PDF不复制进软件仓库。
+
+辅助来源角色编译开发实验（需先完成EvidenceBench pilot生成来源向量；会调用gpt-6-luna，原文离线传入模型）：
+
+```bash
+PYTHONPATH=src .venv-mlx/bin/python experiments/evidencebench_role_index.py
+```
+
+输出协议锁定源码和来源哈希；编号分区不完整即使用原始语义回退。该版本没有证明质量收益，不是默认搜索流程。
+
+固定原始测试293条的来源角色实验：
+
+```bash
+PYTHONPATH=src .venv-local/bin/python experiments/evidencebench_role_test.py --stage compile
+# 以下两步需CUDA环境，集群分别见cluster_evidencebench_test.sbatch与cluster_evidencebench_evaluate.sbatch
+PYTHONPATH=src python experiments/evidencebench_role_test.py --stage vectors
+PYTHONPATH=src python experiments/evidencebench_role_test.py --stage evaluate
+```
+
+编译只输入来源句子；评价才使用假设和方面标注。协议锁定来源与实现，已有产物可续用。第三方原文和模型响应不随源码包分发。
