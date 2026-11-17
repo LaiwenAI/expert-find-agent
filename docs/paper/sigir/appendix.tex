@@ -220,3 +220,6 @@ For the fixed source-view conjunction of method fit and constraint support, shar
 
 \paragraph{Simulated correction-memory baseline.}
 A development-only replay creates 16 templated reviewer suggestions from the 20 update queries and retrieves a previous suggestion by TF-IDF similarity for new queries. The template is not parsed; this tests candidate memory, not textual feedback understanding. On 20 old and 33 new reused queries, the baseline inserts a candidate 10 and 16 times. Soft P@5 changes positively on 1/5 queries and negatively on 0/2, respectively. These post-hoc results use self-ratings as simulated corrections, do not verify the proposed source for the new query, and establish neither safe transfer nor enterprise utility.
+
+\paragraph{Correction identity permutation control.}
+Permuting reviewer identities among the 16 fixed memory entries 1,000 times gives a mean new-query soft P@5 change of $-0.003$, compared with $+0.018$ for the original mapping; 85 permutations match or exceed the original. The original identities were selected using update-query labels, whereas permutation breaks that association. This is a post-hoc diagnostic on a reused cohort, not a causal significance test or independent evidence of safe transfer. Neither arm parses the feedback text or verifies source support for new queries.
