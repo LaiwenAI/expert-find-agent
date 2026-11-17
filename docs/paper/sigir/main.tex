@@ -181,7 +181,7 @@ Cost per correct response~\cite{xie2026oversearch} requires independently judged
 
 \section{Results}
 \subsection{Index and inference components}
-On all sources, 9,861 experts with evidence, and 20 reused development queries, exact ranking averages 33.15\,ms. HNSW with an \texttt{efSearch} floor of 64 averages 1.23\,ms, retains 95\% of exact top tens, and matches ordered results on 12/20 queries. A floor of 512 averages 2.83\,ms and matches all 20 ordered lists. Graph construction/copies take 56.30\,s; separate GPU query encoding averages 19.88\,ms. This is mature approximate search, not a new algorithm, relevance improvement, or general exactness guarantee. A five-repeat resident-index replay on 80 reused full needs gives 10.77 versus 13.32\,ms for adaptive and fixed intersections with identical complete retrieval outputs. Repeats share queries; these times exclude initialization and model inference.
+On 20 reused development queries, exact scoring averages 33.15\,ms; HNSW at effort 64 takes 1.23\,ms and retains 95\% of exact top tens, while effort 512 takes 2.83\,ms and matches all 20 ordered lists. Graph construction takes 56.30\,s and separate GPU query encoding 19.88\,ms. These approximations do not prove relevance or general exactness. A five-repeat replay on 80 needs preserves complete results and averages 10.77 versus 13.32\,ms for adaptive versus fixed lexical intersections. Full-source FP32 GPU scoring averages 1.00 versus 8.89\,ms on 2,000 cached views, matching CPU expert and first-source orders. Retrieval times exclude initialization and model inference; GPU scoring also excludes query encoding.
 
 
 
