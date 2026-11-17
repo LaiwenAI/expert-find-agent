@@ -37,6 +37,11 @@ class FastSearch(Search):
         self.db=sqlite3.connect(database)
         self.experts={r['id']:r for _,r in records(Path(corpus)/'experts.jsonl')}
         self.metadata={i:(ev,eid) for i,ev,eid in self.db.execute('SELECT id,evidence_id,expert_id FROM docs')}
+        self.evidence_documents={}
+        self.ambiguous_evidence=set()
+        for doc,(evidence_id,_) in self.metadata.items():
+            if evidence_id in self.evidence_documents:self.ambiguous_evidence.add(evidence_id)
+            self.evidence_documents[evidence_id]=doc
 
     def _bodies(self, doc_ids):
         """Fetch only selected evidence, in batches below SQLite's variable limit."""
@@ -86,6 +91,27 @@ class FastSearch(Search):
         selected={eid:heapq.nsmallest(n,[(scores[doc],ev,doc) for doc,ev in hits],key=lambda h:(-h[0],h[1])) for eid,hits in grouped.items()}
         bodies=self._bodies(doc for hits in selected.values() for _,_,doc in hits)
         return {eid:[dict(bodies[doc],score=value) for value,_,doc in selected.get(eid,[])] for eid in wanted}
+
+    def selective_document_scores(self,query,evidence_ids):
+        """Exact BM25 scores for selected evidence IDs, without reading bodies.
+
+        Requires the optional doc/term index; unscored documents receive zero.
+        Duplicate corpus IDs are rejected when requested because a source ID
+        would otherwise refer to an ambiguous document.
+        """
+        identifiers=list(dict.fromkeys(evidence_ids))
+        if any(eid not in self.evidence_documents or eid in self.ambiguous_evidence for eid in identifiers):
+            raise ValueError('Unknown or ambiguous evidence ID')
+        terms=sorted(set(tokens(query)));scores=defaultdict(float)
+        docs=sorted(self.evidence_documents[eid] for eid in identifiers)
+        for start in range(0,len(docs),400):
+            batch=docs[start:start+400];params=','.join('?' for _ in batch)
+            for offset in range(0,len(terms),400):
+                chunk=terms[offset:offset+400];term_params=','.join('?' for _ in chunk)
+                sql=(f'SELECT doc,bm25 FROM scores INDEXED BY scores_doc_term_idx '
+                     f'WHERE doc IN ({params}) AND term IN ({term_params}) ORDER BY term,doc')
+                for doc,value in self.db.execute(sql,batch+chunk):scores[doc]+=value
+        return {eid:scores[self.evidence_documents[eid]] for eid in identifiers}
 
     def document_scores(self,query):
         """BM25 scores by unique evidence ID, without reading document bodies."""

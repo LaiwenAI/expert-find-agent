@@ -18,6 +18,11 @@ class FastTest(unittest.TestCase):
             verify_compiled_documents(p/'old',p/'fast')
             old=Search(p,p/'old');fast=FastSearch(p,p/'fast')
             self.assertGreater(audit(p/'old',p/'fast')['postings_verified'],0)
+            add_selective_indexes(p/'fast')
+            ids=[str(i) for i in range(1001)]
+            query=' '.join('term'+str(i) for i in range(450))+' robot control'
+            full=fast.document_scores(query)
+            self.assertEqual(fast.selective_document_scores(query,ids),{eid:full.get(eid,0.) for eid in ids})
             for method in ['bm25-max','bm25-vote','tfidf-max']:
                 a=old.search('robot control',2,method,['0','1']);b=fast.search('robot control',2,method,['0','1'])
                 self.assertEqual([r['id'] for r in a],[r['id'] for r in b])
@@ -51,6 +56,12 @@ class FastTest(unittest.TestCase):
             long_query=' '.join('term'+str(i) for i in range(450))+' robot control'
             for query in ['robot \u673a\u5668\u4eba control','unmatched','biology',long_query]:
                 self.assertEqual(fast.evidence_for(query,['a','b'],3),fast.evidence_for_selective(query,['a','b'],3))
+            for query in ['robot \u673a\u5668\u4eba control','unmatched',long_query]:
+                full=fast.document_scores(query)
+                chosen=[str(i) for i in range(8)]
+                self.assertEqual(fast.selective_document_scores(query,chosen),{eid:full.get(eid,0.) for eid in chosen})
+            self.assertEqual(fast.selective_document_scores('biology',[]),{})
+            with self.assertRaises(ValueError):fast.selective_document_scores('biology',['missing'])
             self.assertEqual(fast.evidence_for_selective('biology',[],3),{})
             with self.assertRaises(ValueError):fast.evidence_for_selective('biology',['missing'])
             self.assertTrue(all(e['expert_id']=='b' for e in selected['b']))
