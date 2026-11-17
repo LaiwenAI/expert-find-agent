@@ -217,3 +217,6 @@ A newly constructed private review packet unions five frozen dense, two random a
 
 \paragraph{Paired bounds for the joint review pool.}
 For the fixed source-view conjunction of method fit and constraint support, shared unknown query/expert labels cancel between dense and lexical top-five lists. With all 948 joint-pool views still unjudged, the paired difference over 80 development needs is bounded by $[-0.9725,0.9725]$, with 778 unknown cells carrying nonzero coefficients. The interval is an identification bound, not a confidence interval, and cannot rank the methods. View-level lack of support is not expert inability.
+
+\paragraph{Simulated correction-memory baseline.}
+A development-only replay creates 16 templated reviewer suggestions from the 20 update queries and retrieves a previous suggestion by TF-IDF similarity for new queries. The template is not parsed; this tests candidate memory, not textual feedback understanding. On 20 old and 33 new reused queries, the baseline inserts a candidate 10 and 16 times. Soft P@5 changes positively on 1/5 queries and negatively on 0/2, respectively. These post-hoc results use self-ratings as simulated corrections, do not verify the proposed source for the new query, and establish neither safe transfer nor enterprise utility.
