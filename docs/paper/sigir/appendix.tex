@@ -211,3 +211,6 @@ On 1,000 randomized action logs simulated from the same 73 frozen reviewer queri
 
 \paragraph{Cross-method annotation views.}
 The legacy demand-pool exporter now deduplicates the sources actually returned per candidate by its three lexical baselines, removes source scores, and checks ownership and consistency. A four-query private development smoke test produced 87 candidate views and 256 source records. Experts and unreturned sources remain unjudged, identities can remain visible, and existing packets retain their original policy. No human relevance or source-support labels are implied.
+
+\paragraph{Development-only dense and lexical review pool.}
+A newly constructed private review packet unions five frozen dense, two random and five full-demand lexical candidates per development need. Across 80 reused queries it contains 948 candidate views, including 388 lexical positions outside the old pool, and 3,200 supplied source views. Source ownership and frozen spans are checked and method ordering is hidden, though text can reveal identities. All new judgments remain blank; prior fixed-view labels do not transfer automatically and unpooled experts remain unknown. Heldout queries are excluded.
