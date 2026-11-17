@@ -35,6 +35,18 @@ class GroundedPipelineTest(unittest.TestCase):
         self.assertEqual(events[-1]['ranking'][0]['expert_id'],'a')
         self.assertEqual([e['total_seconds'] for e in events],sorted(e['total_seconds'] for e in events))
 
+    def test_targeted_reads_preserve_unresolved_foreign_and_missing_sources(self):
+        class TargetCatalog(Catalog):
+            def __init__(self):self.requested=None
+            def for_evidence(self,ids):
+                self.requested=ids
+                return self.for_experts([])
+        catalog=TargetCatalog();assessor=Assessor()
+        events=GroundedPipeline(Encoder(),Index(),catalog,Planner(),assessor).run('Find a method.',k=1,candidates=2)
+        self.assertEqual(catalog.requested,['s','foreign'])
+        self.assertEqual(events[-1]['unresolved_experts'],['b'])
+        self.assertEqual(assessor.calls,['a'])
+
     def test_planning_failure_never_silently_becomes_empty_success(self):
         class Broken:
             def plan(self,demand):raise TimeoutError()

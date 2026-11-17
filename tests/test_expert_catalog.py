@@ -14,6 +14,9 @@ class ExpertCatalogTest(unittest.TestCase):
             catalog=ExpertCatalog(corpus,root/'index')
             self.assertEqual(catalog.for_experts(['a','a']),[rows[0],rows[2]])
             self.assertEqual(catalog.for_experts([]),[])
+            self.assertEqual(catalog.for_evidence(['s3','s1','s3','missing']),[rows[0],rows[2]])
+            self.assertEqual(catalog.for_evidence([]),[])
+            with self.assertRaises(ValueError):catalog.for_evidence([''])
             catalog.db.close()
             rows[0]['text']='changed'
             source.write_text(''.join(json.dumps(r,ensure_ascii=False)+'\n' for r in rows))

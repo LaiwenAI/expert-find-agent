@@ -38,7 +38,11 @@ class GroundedPipeline:
         yield dict(stage='encoding',seconds=time.perf_counter()-stage,total_seconds=time.perf_counter()-start)
         stage=time.perf_counter();route=self.index.search_vector(q,k=candidates)
         yield dict(stage='retrieval',status='unverified',route=route,seconds=time.perf_counter()-stage,total_seconds=time.perf_counter()-start)
-        hits=route['hits'];stage=time.perf_counter();sources={s['id']:s for s in self.catalog.for_experts([h['id'] for h in hits])}
+        hits=route['hits'];stage=time.perf_counter()
+        requested=[w['id'] for hit in hits for w in hit['evidence']]
+        reader=getattr(self.catalog,'for_evidence',None)
+        source_rows=reader(requested) if callable(reader) else self.catalog.for_experts([h['id'] for h in hits])
+        sources={s['id']:s for s in source_rows}
         yield dict(stage='source_reading',sources_read=len(sources),seconds=time.perf_counter()-stage,total_seconds=time.perf_counter()-start)
         outcomes=[];valid=[]
         for hit in hits:

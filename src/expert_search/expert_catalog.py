@@ -33,6 +33,27 @@ class ExpertCatalog:
             marker.write_text(json.dumps(dict(version=1,source_sha256=digest,records=count),indent=2))
         self.db=sqlite3.connect(self.database)
 
+    def for_evidence(self,evidence_ids):
+        """Read only requested known sources; missing IDs remain absent.
+
+        Returned records are checked against the frozen catalog offsets and
+        owners. The caller must compare each record's owner with the intended
+        expert; absence does not establish expert inability.
+        """
+        ids=list(dict.fromkeys(evidence_ids))
+        if any(not isinstance(s,str) or not s for s in ids):raise ValueError('Invalid evidence ID')
+        if len(ids)>500:raise ValueError('Catalog read budget exceeds 500 sources')
+        if not ids:return []
+        placeholders=','.join('?' for _ in ids)
+        rows=self.db.execute(f'SELECT id,expert_id,offset,length FROM evidence WHERE id IN ({placeholders}) ORDER BY offset',ids).fetchall()
+        result=[]
+        with self.source.open('rb') as stream:
+            for sid,eid,offset,length in rows:
+                stream.seek(offset);row=json.loads(stream.read(length))
+                if row['id']!=sid or row['expert_id']!=eid:raise ValueError('Changed source offset or ownership')
+                result.append(row)
+        return result
+
     def for_experts(self,expert_ids):
         ids=sorted(set(expert_ids))
         if not ids:return []
