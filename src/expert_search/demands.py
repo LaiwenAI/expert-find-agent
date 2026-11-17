@@ -28,11 +28,24 @@ def pool(queries, output='artifacts/demands', corpus='artifacts/corpus', databas
         for method in ['bm25-max','bm25-vote','tfidf-max']:
             result=engine.search(q['query'],10,method)
             runs.append(dict(query_id=q['id'],method=method,ranking=[x['id'] for x in result]))
-            for r in result: candidates.setdefault(r['id'],r)
+            for r in result:
+                eid=r['id']
+                candidate=candidates.setdefault(eid,{'name':r.get('name'),'sources':{}})
+                if candidate['name']!=r.get('name'):
+                    raise ValueError('Conflicting expert names across methods')
+                for evidence in r['evidence']:
+                    source={key:value for key,value in evidence.items() if key!='score'}
+                    sid=source.get('id')
+                    if not isinstance(sid,str) or not sid or source.get('expert_id')!=eid:
+                        raise ValueError('Invalid evidence identity or owner')
+                    prior=candidate['sources'].get(sid)
+                    if prior is not None and prior!=source:
+                        raise ValueError('Conflicting source snapshots across methods')
+                    candidate['sources'][sid]=source
         for eid in sorted(candidates):
-            r=candidates[eid]
-            annotations.append(dict(query_id=q['id'],expert_id=eid,name=r.get('name'),query=q['query'],
-                evidence=r['evidence'],grade=None,annotator=None,rationale=''))
+            candidate=candidates[eid]
+            annotations.append(dict(query_id=q['id'],expert_id=eid,name=candidate['name'],query=q['query'],
+                evidence=[candidate['sources'][sid] for sid in sorted(candidate['sources'])],grade=None,annotator=None,rationale=''))
     out=Path(output)
     for name,rows in [('baseline-runs',runs),('annotation-pool',annotations)]:
         (out/f'{name}.jsonl').write_text('\n'.join(json.dumps(r,ensure_ascii=False) for r in rows)+'\n')

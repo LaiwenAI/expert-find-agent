@@ -208,3 +208,6 @@ The simulated update replay records full action distributions. Two deterministic
 
 \paragraph{Weak-overlap estimator simulation.}
 On 1,000 randomized action logs simulated from the same 73 frozen reviewer queries, the fixed-dense soft-label oracle is 0.422. When dense-action probability drops from 0.5 to 0.1, IPS root-mean-square error over draws increases from 0.056 to 0.166, while mean effective sample size falls from 36.42 to 7.34. The logs reuse the same data and use known action probabilities with complete simulated outcomes. This is a variance sanity check, not validation on real user feedback or industrial expert matching.
+
+\paragraph{Cross-method annotation views.}
+The legacy demand-pool exporter now deduplicates the sources actually returned per candidate by its three lexical baselines, removes source scores, and checks ownership and consistency. A four-query private development smoke test produced 87 candidate views and 256 source records. Experts and unreturned sources remain unjudged, identities can remain visible, and existing packets retain their original policy. No human relevance or source-support labels are implied.
