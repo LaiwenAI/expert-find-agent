@@ -93,3 +93,51 @@ def paired_actionable_gain_interval(first,second,judgments,k=3):
         elif grade>=2:low+=c;high+=c
     return dict(lower=low,upper=high,independent_bounds=[a['lower']-b['upper'],a['upper']-b['lower']],uncertain_nonzero_coefficients=uncertain,cancelled_shared_unjudged=cancelled,
                 scope='First-minus-second gain over shared fixed-view labels; tight only for the stated independent unknown-label box. Not semantic confidence, actual ability or a new bound theory. Do not reuse labels across changed snapshots or unverified translations.')
+
+
+def paired_time_integrated_actionable_gain_interval(first_events, second_events, judgments, horizon, k=3):
+    """Bound the difference of time-averaged gains using shared fixed-view labels.
+
+    Each event is ``(completion_time, ranking)``. A snapshot replaces the
+    previous one, including regressions, and no result has zero gain. Unknown
+    labels are shared across all appearances of the same fixed view in both
+    streams. Returned bounds assume independent binary unknown gains; they are
+    not confidence intervals or evidence of individual ability.
+    """
+    if type(horizon) not in (int, float) or not math.isfinite(horizon) or horizon <= 0:
+        raise ValueError('Invalid horizon')
+    streams = [list(first_events), list(second_events)]
+    gain_streams = []
+    for stream in streams:
+        previous = -1.; gain_events = []
+        for timestamp, ranking in stream:
+            if type(timestamp) not in (int, float) or not math.isfinite(timestamp) or timestamp < 0 or timestamp < previous:
+                raise ValueError('Invalid result snapshot time')
+            previous = timestamp
+            interval = actionable_gain_interval(ranking, judgments, k)
+            gain_events.append((timestamp, interval['lower'], interval['upper']))
+        gain_streams.append(gain_events)
+    # Validate labels and cutoff even when both streams are empty.
+    actionable_gain_interval([], judgments, k)
+    independent = [time_integrated_gain_interval(events, horizon) for events in gain_streams]
+    denominator = sum(1 / math.log2(i + 2) for i in range(k))
+    coefficients = {}
+    for sign, stream in zip((1, -1), streams):
+        for index, (timestamp, ranking) in enumerate(stream):
+            if timestamp >= horizon:
+                break
+            end = min(horizon, stream[index + 1][0] if index + 1 < len(stream) else horizon)
+            duration = max(0., end - timestamp) / horizon
+            for rank, key in enumerate(ranking[:k]):
+                coefficients[key] = coefficients.get(key, 0.) + sign * duration / (math.log2(rank + 2) * denominator)
+    low = high = 0.
+    for key, coefficient in coefficients.items():
+        grade = judgments.get(key)
+        if grade is None:
+            low += min(0., coefficient); high += max(0., coefficient)
+        elif grade >= 2:
+            low += coefficient; high += coefficient
+    return dict(lower=low, upper=high,
+                independent_bounds=[independent[0]['lower'] - independent[1]['upper'], independent[0]['upper'] - independent[1]['lower']],
+                horizon=horizon, fixed_view_keys=len(coefficients),
+                scope='First-minus-second time-averaged gain with shared labels for identical fixed views. Bounds assume independent unknown gains, not sampling uncertainty or actual ability.')
