@@ -8,6 +8,8 @@ Generation and native grounding/equivalence review use `gpt-6-luna`. All 1,000 p
 
 Version-2 numeric checking handles additional negated comparator aliases and abstains on unsupported nearby negation. Across all pairs it reports 4,400 numeric matches, 370 mismatches and 230 uncertain checks. A numeric match is insufficient for admission: the export intersects it with the previous grounding screen and never promotes a prior failure. Numeric-free pairs have no numeric evidence of equivalence. Source responses, the frozen original generator and its version-1 guard remain unchanged.
 
+The construction screen has uneven coverage by intent: unjudged counts out of 1,000 are 115 component-method, 74 conditional-transfer, 279 constraint-focused, 212 evidence-lookup, and 96 overview. Five parents have no retained pairs, and 550 have all five retained. Among initially screened pairs, the later numeric guard downgraded eight mismatches and 112 uncertain cases. Thus filtering to retained pairs changes the type distribution and can hide hard constraints; report coverage by type and retain unresolved items as unknown. These counts describe the screening process, not measured error rates. Reproduce aggregate checks with `PYTHONPATH=src python -m experiments.bilingual.audit_screen_coverage` against the local frozen artifacts.
+
 Rebuild locally after generation has completed:
 
 ```bash
