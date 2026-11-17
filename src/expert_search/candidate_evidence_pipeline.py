@@ -7,6 +7,7 @@ from pathlib import Path
 
 from .compiled_expert_search import CompiledExpertSearch
 from .corpus import records
+from .retrieval import tokens
 from .fast_retrieval import FastSearch
 
 
@@ -23,9 +24,12 @@ def verify_evidence_documents(corpus,searcher):
 
 class CandidateEvidencePipeline:
     def __init__(self,corpus='artifacts/corpus',language_index='artifacts/teacher-compiled-lm',
-                 evidence_database='artifacts/fast-search-selective-v1.sqlite',scoring='sqlite'):
+                 evidence_database='artifacts/fast-search-selective-v1.sqlite',scoring='sqlite',share_query_tokens=False):
         if scoring not in ('sqlite','resident','resident-adaptive'):
             raise ValueError('Require sqlite, resident, or resident-adaptive scoring')
+        if type(share_query_tokens) is not bool or (share_query_tokens and scoring not in ('resident','resident-adaptive')):
+            raise ValueError('Shared tokenization requires resident scoring')
+        self.share_query_tokens=share_query_tokens
         start=time.perf_counter()
         self.ranker=CompiledExpertSearch(corpus,language_index)
         self.evidence=FastSearch(corpus,evidence_database)
@@ -88,13 +92,16 @@ class CandidateEvidencePipeline:
             raise ValueError('Require 1 to 10 evidence items per expert')
         self._check_resident_snapshot()
         start=time.perf_counter()
-        candidates_result=self.ranker.search(query,candidates)
+        if self.share_query_tokens and (not isinstance(query,str) or not query.strip()):
+            raise ValueError('Require nonempty query and integer k in [1,50]')
+        query_tokens=tokens(query) if self.share_query_tokens else None
+        candidates_result=self.ranker.search(query,candidates,_tokens=query_tokens)
         pool=[row['expert']['id'] for row in candidates_result['results']]
         expert_rows={row['expert']['id']:row['expert'] for row in candidates_result['results']}
         source_ids=[eid for expert in pool for eid in self.evidence_by_expert[expert]]
         scoring_start=time.perf_counter()
         routed=(self.evidence.adaptive_document_scores(query,source_ids) if self.resident is None else
-                dict(scores=self.resident.selected_scores(query,source_ids),route='resident',
+                dict(scores=self.resident.selected_scores(query,source_ids,_tokens=query_tokens),route='resident',
                      estimated_global_postings=None,estimated_selective_probes=None))
         scores={}
         for expert in pool:

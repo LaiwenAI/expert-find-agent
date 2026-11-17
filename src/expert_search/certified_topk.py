@@ -9,7 +9,7 @@ import numpy as np
 from .retrieval import tokens
 
 
-def certified_topk(model, query, k=5, eligible=None):
+def certified_topk(model, query, k=5, eligible=None, *, _tokens=None):
     if type(k) is not int or k < 1:
         raise ValueError('Require positive integer k')
     candidates = sorted(model.available if eligible is None else eligible)
@@ -22,7 +22,7 @@ def certified_topk(model, query, k=5, eligible=None):
     lower = np.zeros(len(model.experts),dtype=np.float64)
     upper = np.zeros_like(lower)
     active = []
-    for term,count in Counter(tokens(query)).items():
+    for term,count in Counter(tokens(query) if _tokens is None else _tokens).items():
         posting = model.postings.get(term)
         if posting is None:
             continue

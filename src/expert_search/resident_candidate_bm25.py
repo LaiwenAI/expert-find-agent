@@ -47,14 +47,14 @@ class ResidentCandidateBM25:
         self.array_bytes = indices.nbytes + values.nbytes
         self.initialization_seconds = time.perf_counter() - start
 
-    def selected_scores(self, query, evidence_ids):
+    def selected_scores(self, query, evidence_ids, *, _tokens=None):
         """Return exact scores for unique selected IDs; absent matches are zero."""
         identifiers = list(dict.fromkeys(evidence_ids))
         if any(eid not in self.evidence_positions for eid in identifiers):
             raise ValueError('Unknown evidence ID')
         positions = np.array(sorted(self.evidence_positions[eid] for eid in identifiers), dtype=np.int32)
         totals = np.zeros(len(positions), dtype=np.float64)
-        for term in sorted(set(tokens(query))):
+        for term in sorted(set(tokens(query) if _tokens is None else _tokens)):
             offsets = self.offsets.get(term)
             if offsets is None or not len(positions): continue
             lo, hi = offsets; postings = self.indices[lo:hi]

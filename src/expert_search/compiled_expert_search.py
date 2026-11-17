@@ -24,11 +24,11 @@ class CompiledExpertSearch:
             raise ValueError('Compiled index has unknown expert IDs')
         self.initialization_seconds = time.perf_counter()-start
 
-    def search(self, query, k=5):
+    def search(self, query, k=5, *, _tokens=None):
         if not isinstance(query,str) or not query.strip() or type(k)!=int or not 1<=k<=50:
             raise ValueError('Require nonempty query and integer k in [1,50]')
         start = time.perf_counter()
-        selected = certified_topk(self.model,query,k)
+        selected = certified_topk(self.model,query,k,_tokens=_tokens)
         results = [dict(expert=self.experts[row['id']],score=row['score']) for row in selected['results']]
         elapsed = time.perf_counter()-start
         return dict(results=results,seconds=elapsed,initialization_seconds=self.initialization_seconds,
