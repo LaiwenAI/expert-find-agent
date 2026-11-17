@@ -1,4 +1,5 @@
 """Encode frozen public CoF bilingual queries only on a Slurm GPU node."""
+import argparse
 import hashlib
 import json
 import os
@@ -12,9 +13,9 @@ def sha(path):
     with Path(path).open('rb') as stream:return hashlib.file_digest(stream,'sha256').hexdigest()
 
 
-def main():
+def main(root):
     if not os.environ.get('SLURM_JOB_ID'):raise RuntimeError('Require a Slurm compute allocation')
-    root=Path('artifacts/cof-sigir-bilingual-translation-v1');selection=json.loads((root/'encode-manifest.json').read_text());source=root/'encode-input.jsonl'
+    root=Path(root);selection=json.loads((root/'encode-manifest.json').read_text());source=root/'encode-input.jsonl'
     if sha(source)!=selection['queries_sha256'] or sha(__file__)!=selection['encoder_script_sha256'] or sha('src/expert_search/qwen_embedding_torch.py')!=selection['encoder_sha256'] or sha('src/expert_search/qwen_embedding.py')!=selection['task_module_sha256']:
         raise ValueError('Changed encoding inputs or implementation')
     rows=[json.loads(line) for line in source.read_text().splitlines()]
@@ -47,4 +48,5 @@ def main():
     (root/'encoding-summary.json').write_text(json.dumps(report,indent=2)+'\n');print(json.dumps(report,indent=2))
 
 
-if __name__=='__main__':main()
+if __name__=='__main__':
+    p=argparse.ArgumentParser(description=__doc__);p.add_argument('--folder',type=Path,default=Path('artifacts/cof-sigir-bilingual-translation-v1'));a=p.parse_args();main(a.folder)
