@@ -469,3 +469,15 @@ PYTHONPATH=src .venv-mlx/bin/python experiments/enterprise_query_budget.py
 ```
 
 前者离线编译单条来源角色，后者从原需求进行来源盲规划。协议在选择与指标前固定；标签只用于选择后引用保留诊断。原文与返回轨迹保留本地，不进入源码包。
+
+相同需求的匿名片段视图评审、全部分歧复核及一次相同输入重复（均调用gpt-6-luna；模型评分不是金标）：
+
+```bash
+PYTHONPATH=src .venv-local/bin/python experiments/enterprise_span_assessment.py
+PYTHONPATH=src .venv-local/bin/python experiments/enterprise_span_disagreements.py
+PYTHONPATH=src .venv-local/bin/python experiments/enterprise_disagreement_audit.py
+PYTHONPATH=src .venv-local/bin/python experiments/enterprise_span_repeat.py
+PYTHONPATH=src .venv-local/bin/python experiments/analyze_enterprise_span_stability.py
+```
+
+分歧输入为`artifacts/enterprise-span-assessment-v1/disagreements.json`，保存所有压缩/完整上下文可操作判断翻转；不是挑选正确样本。重复实验严格检查父协议和相同输入哈希。源码包含视图核验模块与归属/偏移测试，原始来源和模型响应保持本地。
