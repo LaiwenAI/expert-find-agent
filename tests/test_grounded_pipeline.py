@@ -87,6 +87,40 @@ class GroundedPipelineTest(unittest.TestCase):
         self.assertEqual(pipeline.run('Find a method.')[0]['status'],'unresolved')
         with self.assertRaises(ValueError):pipeline.run('Find a method.',k=True,candidates=2)
 
+    def test_parallel_assessment_preserves_results_and_requires_factory(self):
+        import threading
+        class TwoSources:
+            def for_evidence(self,ids):return [dict(id='s',expert_id='a',text='First.'),dict(id='foreign',expert_id='b',text='Second.')]
+        barrier=threading.Barrier(2)
+        class ParallelAssessor:
+            def assess(self,demand,eid,requirements,sources):
+                barrier.wait(timeout=2)
+                return dict(status='structurally_valid',result=dict(expert_id=eid,actionable_coverage=0,direct_coverage=0,topic_coverage=1))
+        pipeline=GroundedPipeline(Encoder(),Index(),TwoSources(),Planner(),Assessor(),assessor_factory=ParallelAssessor)
+        sequential=pipeline.run('Find a method.',k=2,candidates=2)
+        concurrent=pipeline.run('Find a method.',k=2,candidates=2,assessment_workers=2)
+        self.assertEqual(concurrent[-1]['ranking'],sequential[-1]['ranking'])
+        self.assertEqual(concurrent[-1]['status'],'provisional')
+        self.assertEqual({e['expert_id'] for e in concurrent if e['stage']=='assessment'},{'a','b'})
+        self.assertEqual([e['total_seconds'] for e in concurrent],sorted(e['total_seconds'] for e in concurrent))
+        no_factory=GroundedPipeline(Encoder(),Index(),TwoSources(),Planner(),Assessor())
+        with self.assertRaises(ValueError):no_factory.run('Find a method.',assessment_workers=2)
+        with self.assertRaises(ValueError):pipeline.run('Find a method.',assessment_workers=True)
+
+    def test_parallel_failures_remain_unresolved_and_retrieval_ordered(self):
+        class ThreeIndex:
+            def search_vector(self,q,k):return dict(hits=[dict(id=e,evidence=[dict(id=e)]) for e in ('a','b','c')])
+        class ThreeCatalog:
+            def for_evidence(self,ids):return [dict(id=e,expert_id=e,text='Source.') for e in ids]
+        class SometimesFails:
+            def assess(self,demand,eid,requirements,sources):
+                if eid in ('a','c'):raise TimeoutError()
+                return dict(status='structurally_valid',result=dict(expert_id=eid,actionable_coverage=0,direct_coverage=0,topic_coverage=1))
+        pipeline=GroundedPipeline(Encoder(),ThreeIndex(),ThreeCatalog(),Planner(),Assessor(),assessor_factory=SometimesFails)
+        events=pipeline.run('Find a method.',k=1,candidates=3,assessment_workers=3)
+        self.assertEqual(events[-1]['status'],'partial');self.assertEqual(events[-1]['unresolved_experts'],['a','c'])
+        self.assertEqual([x['expert_id'] for x in events[-1]['ranking']],['b'])
+
     def test_planning_failure_never_silently_becomes_empty_success(self):
         class Broken:
             def plan(self,demand):raise TimeoutError()

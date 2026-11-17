@@ -1,5 +1,7 @@
 """Executable retrieval-to-source-assessment pipeline, with explicit partial states."""
+from concurrent.futures import ThreadPoolExecutor, as_completed
 import json
+import math
 import time
 import numpy as np
 from .applicability import rank_candidates
@@ -24,17 +26,20 @@ class DemandSpanPlanner:
 
 
 class GroundedPipeline:
-    def __init__(self,encoder,index,catalog,planner,assessor,*,binding=None,require_binding=False):
+    def __init__(self,encoder,index,catalog,planner,assessor,*,binding=None,require_binding=False,assessor_factory=None):
         if type(require_binding) is not bool:raise ValueError('Require a boolean binding policy')
         if require_binding and binding is None:raise ValueError('A validated vector/catalog binding is required')
         if binding is not None:
             from .vector_catalog_binding import VectorCatalogBinding
             if not isinstance(binding,VectorCatalogBinding):raise ValueError('Invalid vector/catalog binding')
             binding.ensure_current(index,catalog)
-        self.encoder=encoder;self.index=index;self.catalog=catalog;self.planner=planner;self.assessor=assessor;self.binding=binding
+        if assessor_factory is not None and not callable(assessor_factory):raise ValueError('Invalid assessor factory')
+        self.encoder=encoder;self.index=index;self.catalog=catalog;self.planner=planner;self.assessor=assessor;self.binding=binding;self.assessor_factory=assessor_factory
 
-    def events(self,demand,k=3,candidates=3):
+    def events(self,demand,k=3,candidates=3,assessment_workers=1):
         if not isinstance(demand,str) or not demand.strip() or type(k) is not int or type(candidates) is not int or not 1<=k<=candidates<=50:raise ValueError('Invalid demand or candidate budget')
+        if type(assessment_workers) is not int or not 1<=assessment_workers<=8:raise ValueError('Require 1 to 8 assessment workers')
+        if assessment_workers>1 and self.assessor_factory is None:raise ValueError('Concurrent assessment requires a per-call assessor factory')
         start=time.perf_counter();stage=time.perf_counter()
         if self.binding is not None:
             try:self.binding.ensure_current(self.index,self.catalog)
@@ -81,9 +86,8 @@ class GroundedPipeline:
                        notice='Source snapshot could not be read; no applicability judgment was made.')
             return
         yield dict(stage='source_reading',sources_read=len(sources),seconds=time.perf_counter()-stage,total_seconds=time.perf_counter()-start)
-        outcomes=[];valid=[]
-        for hit in hits:
-            eid=hit['id'];stage=time.perf_counter()
+        def assess_one(position,hit):
+            eid=hit['id'];started=time.perf_counter()
             try:
                 selected={}
                 if not hit['evidence']:raise ValueError('No retrieved evidence')
@@ -91,13 +95,32 @@ class GroundedPipeline:
                     sid=witness['id'];source=sources.get(sid)
                     if source is None or source.get('expert_id')!=eid:raise ValueError('Retrieval/source ownership mismatch')
                     selected[sid]=dict(id=sid,expert_id=eid,text=source['text'][:1200])
-                outcome=self.assessor.assess(demand,eid,requirements,selected)
+                assessor=self.assessor if assessment_workers==1 else self.assessor_factory()
+                outcome=assessor.assess(demand,eid,requirements,selected)
+                if not isinstance(outcome,dict) or not isinstance(outcome.get('status'),str):raise ValueError('Invalid assessment outcome')
                 if outcome['status']=='structurally_valid':
-                    if outcome['result']['expert_id']!=eid:raise ValueError('Assessment expert mismatch')
-                    valid.append(outcome['result'])
+                    result=outcome.get('result')
+                    if not isinstance(result,dict) or result.get('expert_id')!=eid:raise ValueError('Assessment expert mismatch')
+                    for field in ('actionable_coverage','direct_coverage','topic_coverage'):
+                        value=result.get(field)
+                        if type(value) not in (int,float) or not math.isfinite(value) or not 0<=value<=1:raise ValueError('Invalid assessment coverage')
             except Exception as error:outcome=dict(status='unresolved',error_type=type(error).__name__)
-            outcomes.append(dict(expert_id=eid,**outcome))
-            yield dict(stage='assessment',expert_id=eid,outcome=outcome,seconds=time.perf_counter()-stage,total_seconds=time.perf_counter()-start)
+            return position,eid,outcome,time.perf_counter()-started
+
+        outcomes=[None]*len(hits);valid=[]
+        def event(completed):
+            position,eid,outcome,seconds=completed
+            outcomes[position]=dict(expert_id=eid,**outcome)
+            if outcome['status']=='structurally_valid':valid.append(outcome['result'])
+            return dict(stage='assessment',expert_id=eid,outcome=outcome,seconds=seconds,total_seconds=time.perf_counter()-start)
+        if assessment_workers==1:
+            for position,hit in enumerate(hits):yield event(assess_one(position,hit))
+        else:
+            # Each task gets its own assessor/client. Events are completion-ordered;
+            # final failure ordering follows the original retrieval list.
+            with ThreadPoolExecutor(max_workers=assessment_workers) as pool:
+                futures=[pool.submit(assess_one,position,hit) for position,hit in enumerate(hits)]
+                for future in as_completed(futures):yield event(future.result())
         unresolved=[r['expert_id'] for r in outcomes if r['status']!='structurally_valid']
         yield dict(stage='result',status='provisional' if len(hits)==candidates and not unresolved else 'partial',
                    ranking=rank_candidates(valid)[:k],unresolved_experts=unresolved,candidate_count=len(hits),

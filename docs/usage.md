@@ -688,3 +688,24 @@ pipeline = GroundedPipeline(
 ```
 
 Keep the index, GPU tensor, source files and catalog immutable during use. Binding checks file and catalog state but does not rehash index memory on each query; unsupported approximate indexes are rejected. Without a binding, retrieval events explicitly report `index_catalog_binding="unverified"`. Initialization and the binding scan have separate cost from query time.
+
+### Bounded concurrent applicability checks
+
+`GroundedPipeline` assesses candidates serially by default. To opt into concurrent assessments, pass an `assessor_factory` that constructs a separate assessor and client for each candidate, then set `assessment_workers` between 2 and 8 on `events` or `run`. Assessment events arrive in completion order; the final unresolved list follows retrieval order and the final ranking uses the same coverage sort as serial execution. Each candidate still triggers its own model request, so concurrency changes wall time and provider load, not the number of requests or the evidence contract. Canceling iteration does not guarantee cancellation of already submitted requests.
+
+```python
+from laiwenai import LaiwenAI
+from expert_search.grounded_pipeline import GroundedPipeline
+from expert_search.span_applicability import SpanApplicability
+
+def make_assessor():
+    return SpanApplicability(LaiwenAI(model="gpt-6-luna", max_retries=0))
+
+pipeline = GroundedPipeline(
+    encoder, index, catalog, planner, make_assessor(),
+    assessor_factory=make_assessor,
+)
+events = pipeline.run(demand, k=3, candidates=3, assessment_workers=3)
+```
+
+The factory must return independently usable assessors; the pipeline cannot establish provider thread safety or service capacity. Failures remain unresolved. Model variability means serial and concurrent runs need not return identical assessments.
