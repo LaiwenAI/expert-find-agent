@@ -48,13 +48,17 @@ class CandidateEvidencePipeline:
                 'source_snapshot_sha256':ranked['source_snapshot_sha256'],
                 'scope':'Candidate language-model ranking followed by lexical evidence selection; no model reasoning or relevance validation. Missing evidence does not establish inability.'}
 
-    def search_reranked(self,query,k=10,candidates=50,evidence_per_expert=1):
-        """Candidate-LM shortlist, adaptive BM25-max, then owned evidence.
+    def search_reranked(self,query,k=10,candidates=50,evidence_per_expert=1,aggregation='max'):
+        """Candidate-LM shortlist, adaptive BM25 aggregation, then owned evidence.
 
-        Scores and evidence reflect the supplied frozen corpus only. A zero
+        Vote sums the five highest source scores and omits zero-score experts;
+        it may use more scoring sources than the requested displayed evidence.
+        Max retains zero-score fallback results. Scores and evidence reflect the supplied frozen corpus only. A zero
         score can still yield fallback evidence; neither rank nor association
         proves semantic support, identity, personal role, or expert ability.
         """
+        if aggregation not in ('max','vote'):
+            raise ValueError('Require max or vote aggregation')
         if type(k)!=int or type(candidates)!=int or not 1<=k<=candidates<=50:
             raise ValueError('Require 1 <= k <= candidates <= 50')
         if type(evidence_per_expert)!=int or not 1<=evidence_per_expert<=10:
@@ -66,17 +70,23 @@ class CandidateEvidencePipeline:
         source_ids=[eid for expert in pool for eid in self.evidence_by_expert[expert]]
         scoring_start=time.perf_counter()
         routed=self.evidence.adaptive_document_scores(query,source_ids)
-        scores={expert:max((routed['scores'].get(eid,0.) for eid in self.evidence_by_expert[expert]),default=0.) for expert in pool}
-        ranking=sorted(pool,key=lambda expert:(-scores[expert],expert))[:k]
+        scores={}
+        for expert in pool:
+            values=[routed['scores'][eid] for eid in self.evidence_by_expert[expert]]
+            scores[expert]=max(values,default=0.) if aggregation=='max' else sum(sorted(values,reverse=True)[:5])
+        # Vote follows the lexical baseline: candidates with no matching source
+        # are not returned; max retains its existing zero-score fallback.
+        eligible=pool if aggregation=='max' else [expert for expert in pool if scores[expert]>0]
+        ranking=sorted(eligible,key=lambda expert:(-scores[expert],expert))[:k]
         scoring_seconds=time.perf_counter()-scoring_start
         evidence_start=time.perf_counter()
         evidence=self.evidence.evidence_from_scores(ranking,self.evidence_by_expert,routed['scores'],evidence_per_expert)
         evidence_seconds=time.perf_counter()-evidence_start
         result=[dict(expert=expert_rows[expert],score=scores[expert],evidence=evidence[expert]) for expert in ranking]
         return dict(results=result,source_snapshot_sha256=candidates_result['source_snapshot_sha256'],
-                    route=routed['route'],estimated_global_postings=routed['estimated_global_postings'],
+                    aggregation=aggregation,route=routed['route'],estimated_global_postings=routed['estimated_global_postings'],
                     estimated_selective_probes=routed['estimated_selective_probes'],
                     timing=dict(ranking_seconds=candidates_result['seconds'],scoring_seconds=scoring_seconds,
                                 evidence_seconds=evidence_seconds,total_seconds=time.perf_counter()-start,
                                 initialization_seconds=self.initialization_seconds),
-                    scope='Candidate-LM shortlist and adaptive exact BM25-max followed by owned evidence. Zero scores can return fallback evidence; association, source semantics, individual role and ability remain unverified.')
+                    scope='Candidate-LM shortlist and adaptive BM25 aggregation followed by owned evidence. Max may return zero-score fallback evidence; vote omits zero-score candidates. Association, source semantics, individual role and ability remain unverified.')
