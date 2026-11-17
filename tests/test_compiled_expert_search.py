@@ -41,6 +41,7 @@ class CompiledExpertSearchTest(unittest.TestCase):
             resident=CandidateEvidencePipeline(root,root/'index',root/'fast.sqlite',scoring='resident')
             adaptive=CandidateEvidencePipeline(root,root/'index',root/'fast.sqlite',scoring='resident-adaptive')
             shared=CandidateEvidencePipeline(root,root/'index',root/'fast.sqlite',scoring='resident-adaptive',share_query_tokens=True)
+            batched=CandidateEvidencePipeline(root,root/'index',root/'fast.sqlite',scoring='resident-batched',share_query_tokens=True)
             with self.assertRaises(ValueError):
                 CandidateEvidencePipeline(root,root/'index',root/'fast.sqlite',share_query_tokens=True)
             for query in ('alpha alpha', 'beta', '\u673a\u5668 alpha', 'unmatched'):
@@ -49,7 +50,10 @@ class CompiledExpertSearchTest(unittest.TestCase):
                     actual=shared.search_reranked(query,k=2,candidates=2,aggregation=mode)
                     self.assertEqual(actual['results'],expected['results'])
                     self.assertEqual(actual['source_snapshot_sha256'],expected['source_snapshot_sha256'])
-            shared.evidence.db.close()
+                    batch_result=batched.search_reranked(query,k=2,candidates=2,aggregation=mode)
+                    self.assertEqual(batch_result['results'],expected['results'])
+                    self.assertEqual(batch_result['route'],'resident-batched')
+            shared.evidence.db.close();batched.evidence.db.close()
             for mode in ('max','vote'):
                 expected=pipeline.search_reranked('alpha',k=2,candidates=2,aggregation=mode)['results']
                 actual=resident.search_reranked('alpha',k=2,candidates=2,aggregation=mode)

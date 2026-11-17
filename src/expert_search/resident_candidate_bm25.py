@@ -47,6 +47,51 @@ class ResidentCandidateBM25:
         self.array_bytes = indices.nbytes + values.nbytes
         self.initialization_seconds = time.perf_counter() - start
 
+    def selected_scores_batched(self, query, evidence_ids, *, _tokens=None, batch_limit=100000):
+        """Batch adjacent short postings while preserving per-source term order.
+
+        The temporary batch has at most ``batch_limit`` postings. Long lists
+        retain the ordinary selected-position intersection. Scores have the
+        same term order as selected_scores; this does not alter retrieval
+        relevance or establish semantic support.
+        """
+        if type(batch_limit) is not int or batch_limit < 1:
+            raise ValueError('Require a positive posting batch limit')
+        identifiers = list(dict.fromkeys(evidence_ids))
+        if any(eid not in self.evidence_positions for eid in identifiers):
+            raise ValueError('Unknown evidence ID')
+        positions = np.array(sorted(self.evidence_positions[eid] for eid in identifiers), dtype=np.int32)
+        totals = np.zeros(len(positions), dtype=np.float64)
+        pending = []; pending_count = 0
+
+        def flush():
+            nonlocal pending_count
+            if not pending: return
+            docs = np.concatenate([self.indices[lo:hi] for lo, hi in pending])
+            values = np.concatenate([self.values[lo:hi] for lo, hi in pending])
+            locations = np.searchsorted(positions, docs)
+            slots = np.flatnonzero(locations < len(positions))
+            slots = slots[positions[locations[slots]] == docs[slots]]
+            np.add.at(totals, locations[slots], values[slots])
+            pending.clear(); pending_count = 0
+
+        for term in sorted(set(tokens(query) if _tokens is None else _tokens)):
+            offsets = self.offsets.get(term)
+            if offsets is None or not len(positions): continue
+            lo, hi = offsets; count = hi - lo
+            if count < len(positions) and count <= batch_limit:
+                if pending_count + count > batch_limit: flush()
+                pending.append((lo, hi)); pending_count += count
+            else:
+                flush(); postings = self.indices[lo:hi]
+                locations = np.searchsorted(postings, positions)
+                slots = np.flatnonzero(locations < len(postings))
+                slots = slots[postings[locations[slots]] == positions[slots]]
+                totals[slots] += self.values[lo + locations[slots]]
+        flush()
+        score_by_position = dict(zip(positions.tolist(), totals.tolist()))
+        return {eid: score_by_position[self.evidence_positions[eid]] for eid in identifiers}
+
     def selected_scores(self, query, evidence_ids, *, _tokens=None):
         """Return exact scores for unique selected IDs; absent matches are zero."""
         identifiers = list(dict.fromkeys(evidence_ids))

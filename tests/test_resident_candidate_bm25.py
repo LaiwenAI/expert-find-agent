@@ -21,6 +21,7 @@ class ResidentCandidateBM25Test(unittest.TestCase):
                 for ids in ([], ['3','1','0'], ['2','2','0']):
                     self.assertEqual(resident.selected_scores(query, ids), sqlite.filtered_global_document_scores(query, ids))
                     self.assertEqual(adaptive.selected_scores(query, ids), resident.selected_scores(query, ids))
+                    self.assertEqual(adaptive.selected_scores_batched(query, ids, batch_limit=2), resident.selected_scores(query, ids))
             with self.assertRaises(ValueError): resident.selected_scores('alpha', ['missing'])
             with self.assertRaises(ValueError): adaptive.selected_scores('alpha', ['missing'])
             sqlite.db.close()
@@ -40,6 +41,7 @@ class ResidentCandidateBM25Test(unittest.TestCase):
                 resident.adaptive_intersection=False;expected=resident.selected_scores('alpha beta gamma delta',ids)
                 resident.adaptive_intersection=True;actual=resident.selected_scores('alpha beta gamma delta',ids)
                 self.assertEqual(actual,expected)
+                self.assertEqual(resident.selected_scores_batched('alpha beta gamma delta',ids,batch_limit=10),expected)
 
 
 if __name__ == '__main__':

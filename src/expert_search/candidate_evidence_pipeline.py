@@ -25,16 +25,17 @@ def verify_evidence_documents(corpus,searcher):
 class CandidateEvidencePipeline:
     def __init__(self,corpus='artifacts/corpus',language_index='artifacts/teacher-compiled-lm',
                  evidence_database='artifacts/fast-search-selective-v1.sqlite',scoring='sqlite',share_query_tokens=False):
-        if scoring not in ('sqlite','resident','resident-adaptive'):
-            raise ValueError('Require sqlite, resident, or resident-adaptive scoring')
-        if type(share_query_tokens) is not bool or (share_query_tokens and scoring not in ('resident','resident-adaptive')):
+        if scoring not in ('sqlite','resident','resident-adaptive','resident-batched'):
+            raise ValueError('Require sqlite, resident, resident-adaptive, or resident-batched scoring')
+        if type(share_query_tokens) is not bool or (share_query_tokens and scoring not in ('resident','resident-adaptive','resident-batched')):
             raise ValueError('Shared tokenization requires resident scoring')
         self.share_query_tokens=share_query_tokens
+        self.batch_resident_postings=scoring=='resident-batched'
         start=time.perf_counter()
         self.ranker=CompiledExpertSearch(corpus,language_index)
         self.evidence=FastSearch(corpus,evidence_database)
         self._resident_data_version = None
-        if scoring in ('resident','resident-adaptive'):
+        if scoring in ('resident','resident-adaptive','resident-batched'):
             self.evidence.db.execute('PRAGMA query_only=ON')
             self._resident_data_version = self.evidence.db.execute('PRAGMA data_version').fetchone()[0]
         verify_evidence_documents(corpus,self.evidence)
@@ -45,9 +46,9 @@ class CandidateEvidencePipeline:
         for _,(evidence_id,expert_id) in self.evidence.metadata.items():
             self.evidence_by_expert[expert_id].append(evidence_id)
         self.resident = None
-        if scoring in ('resident','resident-adaptive'):
+        if scoring in ('resident','resident-adaptive','resident-batched'):
             from .resident_candidate_bm25 import ResidentCandidateBM25
-            self.resident = ResidentCandidateBM25(evidence_database, adaptive_intersection=scoring=='resident-adaptive')
+            self.resident = ResidentCandidateBM25(evidence_database, adaptive_intersection=scoring in ('resident-adaptive','resident-batched'))
             expected = tuple(self.evidence.metadata[doc][0] for doc in sorted(self.evidence.metadata))
             if self.resident.ids != expected:
                 raise ValueError('Resident evidence snapshot mismatch')
@@ -101,7 +102,7 @@ class CandidateEvidencePipeline:
         source_ids=[eid for expert in pool for eid in self.evidence_by_expert[expert]]
         scoring_start=time.perf_counter()
         routed=(self.evidence.adaptive_document_scores(query,source_ids) if self.resident is None else
-                dict(scores=self.resident.selected_scores(query,source_ids,_tokens=query_tokens),route='resident',
+                dict(scores=(self.resident.selected_scores_batched if self.batch_resident_postings else self.resident.selected_scores)(query,source_ids,_tokens=query_tokens),route='resident-batched' if self.batch_resident_postings else 'resident',
                      estimated_global_postings=None,estimated_selective_probes=None))
         scores={}
         for expert in pool:
