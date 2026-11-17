@@ -39,7 +39,9 @@ class FastSearch(Search):
         self.metadata={i:(ev,eid) for i,ev,eid in self.db.execute('SELECT id,evidence_id,expert_id FROM docs')}
         self.evidence_documents={}
         self.ambiguous_evidence=set()
-        for doc,(evidence_id,_) in self.metadata.items():
+        self.owner_evidence=defaultdict(list)
+        for doc,(evidence_id,owner) in self.metadata.items():
+            self.owner_evidence[owner].append(evidence_id)
             if evidence_id in self.evidence_documents:self.ambiguous_evidence.add(evidence_id)
             self.evidence_documents[evidence_id]=doc
 
@@ -108,7 +110,11 @@ class FastSearch(Search):
         for expert in wanted:
             hits = []
             seen = set()
-            for evidence_id in evidence_by_expert.get(expert, []):
+            supplied = evidence_by_expert.get(expert, [])
+            expected = self.owner_evidence.get(expert, [])
+            if len(supplied) != len(expected) or set(supplied) != set(expected):
+                raise ValueError('Incomplete or foreign evidence list')
+            for evidence_id in supplied:
                 if evidence_id in seen or evidence_id in self.ambiguous_evidence or evidence_id not in self.evidence_documents or evidence_id not in scores:
                     raise ValueError('Missing, duplicate or ambiguous evidence score')
                 seen.add(evidence_id)

@@ -7,7 +7,7 @@ from pathlib import Path
 from expert_search.candidate_evidence_pipeline import CandidateEvidencePipeline
 
 
-def main():
+def main(output=Path('artifacts/local-temporal-score-reuse-v1')):
     parent = Path('artifacts/local-temporal-author-proxy-v1')
     raw = (parent / 'results.jsonl').read_bytes()
     summary = json.loads((parent / 'summary.json').read_text())
@@ -43,10 +43,13 @@ def main():
                   parent_sha256=summary['results_sha256'],
                   code_sha256={str(p): hashlib.sha256(p.read_bytes()).hexdigest() for p in (Path(__file__), Path('src/expert_search/candidate_evidence_pipeline.py'), Path('src/expert_search/fast_retrieval.py'))},
                   scope='Post-hoc alternating paired timings on 200 previously studied historical author-recovery title queries. Both paths use identical rankings and three lexical evidence items per expert. One measurement per query; excludes initialization, index construction and model reasoning. Local corpus association and identical evidence do not establish individual contribution, semantic support or industrial relevance.')
-    out = Path('artifacts/local-temporal-score-reuse-v1'); out.mkdir(parents=True, exist_ok=False)
+    out = Path(output); out.mkdir(parents=True, exist_ok=False)
     (out / 'summary.json').write_text(json.dumps(report, indent=2) + '\n')
     print(json.dumps(report, indent=2))
 
 
 if __name__ == '__main__':
-    main()
+    import argparse
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output', type=Path, default=Path('artifacts/local-temporal-score-reuse-v1'))
+    main(parser.parse_args().output)
