@@ -205,3 +205,6 @@ An experimental in-memory registry associates each outcome with one selected act
 
 \paragraph{Logging support diagnostic.}
 The simulated update replay records full action distributions. Two deterministic lexical actions assign zero probability to the fixed-dense target, so a conservative off-policy checker withholds its estimate. The checker also rejects missing outcomes and reports effective sample size when applicable. Logging support is necessary, not sufficient, for valid causal evaluation; propensity correctness, feedback missingness and confounding remain unresolved.
+
+\paragraph{Weak-overlap estimator simulation.}
+On 1,000 randomized action logs simulated from the same 73 frozen reviewer queries, the fixed-dense soft-label oracle is 0.422. When dense-action probability drops from 0.5 to 0.1, IPS root-mean-square error over draws increases from 0.056 to 0.166, while mean effective sample size falls from 36.42 to 7.34. The logs reuse the same data and use known action probabilities with complete simulated outcomes. This is a variance sanity check, not validation on real user feedback or industrial expert matching.
