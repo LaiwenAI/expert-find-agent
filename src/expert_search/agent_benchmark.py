@@ -7,7 +7,7 @@ from .agent import ExpertAgent
 from .benchmark import metrics
 
 
-def run(benchmark='artifacts/benchmark', output='artifacts/agent-benchmark', limit=10):
+def run(benchmark='artifacts/benchmark', output='artifacts/agent-benchmark', limit=10, compiled_database=None):
     root=Path(benchmark); out=Path(output); out.mkdir(parents=True,exist_ok=True)
     manifest=json.loads((root/'manifest.json').read_text())
     signature=hashlib.sha256((root/'manifest.json').read_bytes()).hexdigest()
@@ -15,10 +15,33 @@ def run(benchmark='artifacts/benchmark', output='artifacts/agent-benchmark', lim
     if marker.exists() and marker.read_text()!=signature:
         raise ValueError('Benchmark input changed; choose a fresh output directory')
     marker.write_text(signature)
+    code_marker=out/'agent-code-fingerprint.txt'
+    code_files=('agent.py','agent_benchmark.py','retrieval.py','fast_retrieval.py','expert_catalog.py','corpus.py','benchmark.py')
+    code_hash=hashlib.sha256()
+    for name in code_files:
+        payload=Path(__file__).with_name(name).read_bytes()
+        code_hash.update(name.encode()+b'\0'+str(len(payload)).encode()+b'\0'+payload)
+    code_signature=code_hash.hexdigest()
+    config_marker=out/'retrieval-configuration.json'
+    config={'compiled_database':str(Path(compiled_database).resolve()) if compiled_database else None}
+    if compiled_database:
+        h=hashlib.sha256()
+        with Path(compiled_database).open('rb') as stream:
+            for block in iter(lambda:stream.read(1024*1024),b''):h.update(block)
+        config['compiled_sha256']=h.hexdigest()
+    config_text=json.dumps(config,sort_keys=True)
+    if config_marker.exists() and config_marker.read_text()!=config_text:
+        raise ValueError('Retrieval configuration changed; choose a fresh output directory')
+    if code_marker.exists() and code_marker.read_text()!=code_signature:
+        raise ValueError('Agent benchmark code changed; choose a fresh output directory')
+    if not code_marker.exists() and any(out.glob('*.json')):
+        raise ValueError('Existing results have no code fingerprint; choose a fresh output directory')
+    code_marker.write_text(code_signature)
+    config_marker.write_text(config_text)
     queries={}
     for line in (root/'runs.jsonl').read_text().splitlines():
         r=json.loads(line); queries.setdefault(r['query_id'],r)
-    agent=ExpertAgent(); excluded=set(manifest['excluded_evidence'])
+    agent=ExpertAgent(compiled_database=compiled_database); excluded=set(manifest['excluded_evidence'])
     for qid,q in list(queries.items())[:limit]:
         path=out/f'{qid}.json'
         if path.exists(): continue

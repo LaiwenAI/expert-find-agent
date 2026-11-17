@@ -42,10 +42,14 @@ class Search:
             for doc,tf,length in rows:
                 scores[doc]+=(idf*(1+math.log(tf))/math.sqrt(max(1,length)) if method=='tfidf-max' else idf*tf*2.2/(tf+1.2*(.25+.75*length/self.avg)))
         grouped=defaultdict(list)
-        for doc,score in scores.items():
-            r=json.loads(self.db.execute('SELECT body FROM docs WHERE id=?',(doc,)).fetchone()[0])
-            if r['id'] not in exclude:
-                grouped[r['expert_id']].append((score,r))
+        doc_ids=list(scores)
+        for start in range(0,len(doc_ids),500):
+            batch=doc_ids[start:start+500]
+            placeholders=','.join('?' for _ in batch)
+            for doc,body in self.db.execute(f'SELECT id,body FROM docs WHERE id IN ({placeholders})',batch):
+                r=json.loads(body)
+                if r['id'] not in exclude:
+                    grouped[r['expert_id']].append((scores[doc],r))
         result=[]
         for eid, hits in grouped.items():
             hits.sort(key=lambda h:(-h[0],h[1]['id']))

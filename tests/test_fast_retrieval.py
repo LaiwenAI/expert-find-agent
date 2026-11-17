@@ -4,8 +4,30 @@ import unittest
 from pathlib import Path
 from expert_search.retrieval import Search,index
 from expert_search.fast_retrieval import FastSearch,compile_index
+from expert_search.agent import verify_compiled_documents
 
 class FastTest(unittest.TestCase):
+    def test_batched_lookup_crosses_sql_parameter_boundary(self):
+        with tempfile.TemporaryDirectory() as d:
+            p=Path(d)
+            (p/'experts.jsonl').write_text('\n'.join(json.dumps({'id':x}) for x in ['a','b']))
+            evidence=[{'id':str(i),'expert_id':'a' if i%2 else 'b','text':'robot control'} for i in range(1001)]
+            (p/'evidence.jsonl').write_text('\n'.join(json.dumps(x) for x in evidence))
+            index(p,p/'old');compile_index(p/'old',p/'fast')
+            verify_compiled_documents(p/'old',p/'fast')
+            old=Search(p,p/'old');fast=FastSearch(p,p/'fast')
+            for method in ['bm25-max','bm25-vote','tfidf-max']:
+                a=old.search('robot control',2,method,['0','1']);b=fast.search('robot control',2,method,['0','1'])
+                self.assertEqual([r['id'] for r in a],[r['id'] for r in b])
+                for x,y in zip(a,b):
+                    self.assertAlmostEqual(x['score'],y['score'])
+                    self.assertEqual([e['id'] for e in x['evidence']],[e['id'] for e in y['evidence']])
+            import sqlite3
+            with sqlite3.connect(p/'fast') as db:
+                db.execute("UPDATE docs SET body='{}' WHERE id=0")
+            with self.assertRaises(ValueError):
+                verify_compiled_documents(p/'old',p/'fast')
+
     def test_exact_rank_and_scores(self):
         with tempfile.TemporaryDirectory() as d:
             p=Path(d)

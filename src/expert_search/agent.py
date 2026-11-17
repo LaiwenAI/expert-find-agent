@@ -4,6 +4,7 @@ This is a hybrid adaptation of PageIndex, not the PageIndex implementation.
 """
 import json
 import hashlib
+import sqlite3
 from pathlib import Path
 import time
 from collections import defaultdict
@@ -11,13 +12,31 @@ from .retrieval import Search
 from .expert_catalog import ExpertCatalog
 
 
+def verify_compiled_documents(database, compiled_database):
+    """Require matching document IDs and bodies before using a compiled index."""
+    def digest(path):
+        h=hashlib.sha256()
+        with sqlite3.connect(f'file:{Path(path).resolve()}?mode=ro',uri=True) as db:
+            for doc,body in db.execute('SELECT id,body FROM docs ORDER BY id'):
+                payload=body.encode('utf-8')
+                h.update(str(doc).encode()+b'\0'+str(len(payload)).encode()+b'\0'+payload)
+        return h.digest()
+    if digest(database)!=digest(compiled_database):
+        raise ValueError('Compiled index documents differ from the source index')
+
+
 class ExpertAgent:
-    def __init__(self, corpus='artifacts/corpus', database='artifacts/search.sqlite', client=None):
+    def __init__(self, corpus='artifacts/corpus', database='artifacts/search.sqlite', client=None, compiled_database=None):
         if client is None:
             from laiwenai import LaiwenAI
-            client=LaiwenAI()
+            client=LaiwenAI(model='gpt-6-luna')
         self.client=client
-        self.searcher=Search(corpus,database)
+        if compiled_database is None:
+            self.searcher=Search(corpus,database)
+        else:
+            from .fast_retrieval import FastSearch
+            verify_compiled_documents(database,compiled_database)
+            self.searcher=FastSearch(corpus,compiled_database)
         catalog_key=hashlib.sha256(str(Path(corpus).resolve()).encode()).hexdigest()[:16]
         self.catalog=ExpertCatalog(corpus,'artifacts/expert-catalog-'+catalog_key)
         self.trace=[]
@@ -40,15 +59,19 @@ class ExpertAgent:
     def run(self, query, k=5, candidates=20, exclude=()):
         if not query.strip() or not 1<=k<=candidates<=50:
             raise ValueError('Require a nonempty query and 1 <= k <= candidates <= 50')
+        run_start=time.perf_counter()
         self.trace=[]; self.usage=dict.fromkeys(self.usage,0)
         plan=self.ask('plan','Extract technical requirements and bilingual retrieval queries. Schema: {"requirements":[str],"queries":[str]}. Maximum 4 queries.',{'demand':query})
         queries=[query]+[q for q in plan.get('queries',[])[:4] if isinstance(q,str) and q.strip()]
+        retrieval_start=time.perf_counter()
         fused=defaultdict(float)
         for q in queries:
             for rank,r in enumerate(self.searcher.search(q,candidates,exclude=exclude),1):
                 fused[r['id']]+=1/(60+rank)
         ids=sorted(fused,key=lambda x:(-fused[x],x))[:candidates]
+        retrieval_seconds=time.perf_counter()-retrieval_start
         # Compact tree: expert -> evidence kind/field -> explicit source leaves.
+        tree_start=time.perf_counter()
         trees=[]; leaves={}
         branches_by_expert={eid:defaultdict(list) for eid in ids}
         for row in self.catalog.for_experts(ids):
@@ -59,6 +82,7 @@ class ExpertAgent:
             branches={key:values[:40] for key,values in branches_by_expert[eid].items()}
             trees.append({'expert':self.searcher.experts[eid],'branches':branches})
         visible={leaf['id'] for tree in trees for branch in tree['branches'].values() for leaf in branch}
+        tree_seconds=time.perf_counter()-tree_start
         route=self.ask('route','Navigate these expert evidence trees. Select at most 30 leaf IDs to read based on demand and technical requirements. Schema: {"leaf_ids":[str]}. Only select IDs present in trees.',{'demand':query,'requirements':plan.get('requirements',[]),'trees':trees})
         selected=[]
         for leaf in route.get('leaf_ids',[]):
@@ -77,4 +101,6 @@ class ExpertAgent:
                 results.append(dict(expert=self.searcher.experts[eid],reason=row.get('reason',''),missing=row.get('missing',[]),evidence=[leaves[x] for x in dict.fromkeys(cites)]))
             if len(results)==k: break
         return dict(query=query,results=results,trace=self.trace,usage=self.usage,candidate_ids=ids,
+                    timing={'run_seconds':time.perf_counter()-run_start,'retrieval_seconds':retrieval_seconds,
+                            'tree_seconds':tree_seconds,'scope':'Run call only; excludes initialization and index construction.'},
                     method='hybrid-evidence-tree',notice='Citation membership is validated; relevance judgments are model-generated.')
