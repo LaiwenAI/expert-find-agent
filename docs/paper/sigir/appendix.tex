@@ -199,3 +199,6 @@ A post-hoc variant of the same split keeps separate two-arm policies above and b
 
 \paragraph{Incumbent guard under sparse feedback.}
 An experimental router retains a fixed incumbent until each arm has three outcomes in a context. On the same post-hoc split, selecting dense as incumbent leaves both buckets on dense at all three checkpoints, because lexical has only one observed outcome per bucket. Old/new P@5 remains 0.480/0.376, exactly the fixed dense baseline. The incumbent and threshold were chosen after data inspection; this no-switch result neither establishes a statistical safety guarantee nor demonstrates learning. Feedback is simulated and selection bias remains.
+
+\paragraph{Exposure-linked simulated feedback.}
+An experimental in-memory registry associates each outcome with one selected action and its logged propensity, rejects conflicting duplicates, and leaves missing outcomes pending. Applied to the same simulated 20-update replay, it records all 20 exposures and outcomes and reproduces the guarded checkpoints. Deterministic actions lack policy overlap; logging propensity does not itself remove selection bias or establish off-policy validity. No real user feedback is present.
