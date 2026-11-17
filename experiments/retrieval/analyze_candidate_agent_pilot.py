@@ -39,6 +39,13 @@ def main():
                      'mean_prompt_tokens':statistics.mean(r['result']['usage']['prompt_tokens'] for r in rows) if complete else None,
                      'mean_completion_tokens':statistics.mean(r['result']['usage']['completion_tokens'] for r in rows) if complete else None,
                      'mean_returned_successes':statistics.mean(len(r['result']['results']) for r in valid) if valid else None}
+        if valid:
+            model_times=[sum(t['seconds'] for t in r['result']['trace']) for r in valid]
+            output[arm]['mean_model_call_seconds_successes']=statistics.mean(model_times)
+            output[arm]['mean_non_model_seconds_successes']=statistics.mean(r['attempt_seconds']-seconds for r,seconds in zip(valid,model_times))
+            output[arm]['max_model_call_seconds_successes']=max(model_times)
+            output[arm]['reasoning_tokens_complete']=all(all(t.get('reasoning_tokens') is not None for t in r['result']['trace']) for r in valid)
+            output[arm]['mean_reasoning_tokens_successes']=statistics.mean(sum(t['reasoning_tokens'] for t in r['result']['trace']) for r in valid) if output[arm]['reasoning_tokens_complete'] else None
     print(json.dumps({'arms':output,'common_success_pairs':len(overlaps),'mean_candidate_overlap':statistics.mean(overlaps) if overlaps else None,
                       'scope':'Exploratory development timing, different candidates and evidence budgets; no gold, semantic citation verification or causal attribution. Initialization and index build excluded.'},indent=2))
 

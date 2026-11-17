@@ -1,5 +1,5 @@
 import unittest
-from expert_search.evaluation_gain import snapshot_gain_interval,actionable_gain_interval,latest_gain_interval,condensed_ndcg
+from expert_search.evaluation_gain import snapshot_gain_interval,actionable_gain_interval,latest_gain_interval,condensed_ndcg,time_integrated_gain_interval
 
 
 class EvaluationGainTest(unittest.TestCase):
@@ -22,3 +22,11 @@ class EvaluationGainTest(unittest.TestCase):
         self.assertEqual(actionable_gain_interval(['a'],{'a':1},1)['upper'],0.)
         self.assertEqual(actionable_gain_interval(['a'],{'a':2},1)['lower'],1.)
         self.assertEqual(actionable_gain_interval(['a'],{'a':None},1)['upper'],1.)
+
+    def test_time_integration_preserves_delay_regressions_and_unknowns(self):
+        result=time_integrated_gain_interval(iter([(2,.5,1.),(4,0.,.25)]),5)
+        self.assertAlmostEqual(result['lower'],.2)
+        self.assertAlmostEqual(result['upper'],.45)
+        self.assertEqual(time_integrated_gain_interval([(8,1.,1.)],5)['upper'],0.)
+        with self.assertRaises(ValueError):time_integrated_gain_interval([(2,0.,1.),(1,0.,1.)],5)
+        with self.assertRaises(ValueError):time_integrated_gain_interval([],0)

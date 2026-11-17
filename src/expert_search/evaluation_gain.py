@@ -43,6 +43,26 @@ def latest_gain_interval(events,deadline):
     return dict(lower=answer[0],upper=answer[1])
 
 
+def time_integrated_gain_interval(events,horizon):
+    """Integrate the latest complete-result gain over a fixed time budget.
+
+    Before the first result, gain is zero. Later snapshots replace earlier
+    ones, even when quality falls. Bounds reflect unjudged results rather
+    than uncertainty from sampling, rating disagreement, or timing noise.
+    """
+    if type(horizon) not in (int,float) or not math.isfinite(horizon) or horizon<=0:raise ValueError('Invalid horizon')
+    events=list(events);latest_gain_interval(events,horizon)
+    cursor=0.;lower=upper=0.;current=(0.,0.)
+    for timestamp,lo,hi in events:
+        if timestamp>horizon:break
+        duration=timestamp-cursor
+        lower+=duration*current[0];upper+=duration*current[1]
+        cursor=timestamp;current=(lo,hi)
+    lower+=(horizon-cursor)*current[0];upper+=(horizon-cursor)*current[1]
+    return {'lower':lower/horizon,'upper':upper/horizon,'horizon':horizon,
+            'scope':'Time average of latest complete snapshot gain; no result before its arrival. Incomplete-label bounds are not confidence intervals or actual expert ability.'}
+
+
 def condensed_ndcg(ranking,judgments,k=5):
     """Diagnostic on judged items only, explicitly undefined without positives."""
     snapshot_gain_interval(ranking,judgments,k)
