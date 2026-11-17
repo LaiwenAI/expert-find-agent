@@ -460,3 +460,12 @@ PYTHONPATH=src python experiments/evidencebench_role_test.py --stage evaluate
 ```
 
 编译只输入来源句子；评价才使用假设和方面标注。协议锁定来源与实现，已有产物可续用。第三方原文和模型响应不随源码包分发。
+
+真实来源固定3片段预算诊断（复用本地五对银标，含API调用；不是专家排名评测）：
+
+```bash
+PYTHONPATH=src .venv-mlx/bin/python experiments/enterprise_role_budget.py
+PYTHONPATH=src .venv-mlx/bin/python experiments/enterprise_query_budget.py
+```
+
+前者离线编译单条来源角色，后者从原需求进行来源盲规划。协议在选择与指标前固定；标签只用于选择后引用保留诊断。原文与返回轨迹保留本地，不进入源码包。
