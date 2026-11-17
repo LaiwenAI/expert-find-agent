@@ -10,13 +10,13 @@ class FastTest(unittest.TestCase):
         with tempfile.TemporaryDirectory() as d:
             p=Path(d)
             (p/'experts.jsonl').write_text('\n'.join(json.dumps({'id':x}) for x in ['a','b']))
-            evidence=[{'id':str(i),'expert_id':'a' if i<6 else 'b','text':t} for i,t in enumerate(['robot control']*6+['机器人 control','biology'])]
+            evidence=[{'id':str(i),'expert_id':'a' if i<6 else 'b','text':t} for i,t in enumerate(['robot control']*6+['\u673a\u5668\u4eba control','biology'])]
             (p/'evidence.jsonl').write_text('\n'.join(json.dumps(x) for x in evidence))
             index(p,p/'old');compile_index(p/'old',p/'fast')
             old=Search(p,p/'old');fast=FastSearch(p,p/'fast')
             for method in ['bm25-max','bm25-vote','tfidf-max']:
                 for excluded in [[],['0','1'],[str(i) for i in range(8)]]:
-                    a=old.search('robot 机器人 control',2,method,excluded);b=fast.search('robot 机器人 control',2,method,excluded)
+                    a=old.search('robot \u673a\u5668\u4eba control',2,method,excluded);b=fast.search('robot \u673a\u5668\u4eba control',2,method,excluded)
                     self.assertEqual([r['id'] for r in a],[r['id'] for r in b])
                     for x,y in zip(a,b):
                         self.assertAlmostEqual(x['score'],y['score'])

@@ -13,7 +13,7 @@ def validate_clauses(demand, quotes):
     """Map exact, unique source spans; reject titles and marked background."""
     text=demand['query'];body_start=text.find('\n')+1
     if not isinstance(quotes,list) or len(quotes)>2:raise ValueError('Expected at most two clauses')
-    headings=list(re.finditer(r'（[一二三四五六七八九十]+）([^\s。]{1,20})',text))
+    headings=list(re.finditer('\uff08[\u4e00\u4e8c\u4e09\u56db\u4e94\u516d\u4e03\u516b\u4e5d\u5341]+\uff09([^\\s\u3002]{1,20})',text))
     clauses=[]
     for quote in quotes:
         if not isinstance(quote,str) or not 25<=len(quote)<=400 or text.count(quote)!=1:
@@ -21,7 +21,7 @@ def validate_clauses(demand, quotes):
         start=text.index(quote);end=start+len(quote)
         if start<body_start:raise ValueError('Title is not a technical requirement')
         prior=[h for h in headings if h.start()<=start]
-        if prior and '背景' in prior[-1].group(1):raise ValueError('Background is not a requirement')
+        if prior and '\u80cc\u666f' in prior[-1].group(1):raise ValueError('Background is not a requirement')
         if any(start<c[1] and end>c[0] for c in clauses):raise ValueError('Overlapping clauses')
         clauses.append((start,end,quote))
     return clauses

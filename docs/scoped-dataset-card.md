@@ -1,33 +1,33 @@
-# 来源支持状态审阅数据
+# Source-Support Status Review Data
 
-这是一份本地 silver 诊断集，不是完整产业专家匹配金标。输入来自真实企业需求和教师资料，但标签回答的是“所给资料快照是否支持这个窄化研究主题查询”，不能推断专家实际不具备某项能力或无法完成未来项目。
+This is a local silver diagnostic set, not a complete gold standard for industry-expert matching. The inputs come from real company needs and teacher profiles, but the labels answer the question, “Does the supplied material snapshot support this narrowed research-topic query?” They cannot be used to infer that an expert actually lacks a capability or cannot complete a future project.
 
-## 构造与审核
+## Construction and Review
 
-同一二十条需求采用旧词法候选和冻结研究领域语义候选两条构造路线，共八十次生成，三十七对进入逐条件复审。最终十四对通过，十三对被复审否决，十对保持未决。两条路线同时改变候选与来源策略，接受率差异不是单因素因果效果。
+The same twenty needs were used in two construction routes—legacy lexical candidates and frozen research-domain semantic candidates—for a total of eighty generations. Thirty-seven pairs entered condition-by-condition review. Fourteen pairs passed, thirteen were rejected in review, and ten remained unresolved. The two routes changed both candidates and source strategies, so the difference in acceptance rates is not a single-factor causal effect.
 
-每个样本只涉及一位教师。基础查询包含二至三项分别考察的研究主题；反事实只替换其中一项。请求的两个审核模型为 gpt-4o 和 gpt-6-luna，后者显式关闭额外推理；它们不接收生成器的预期标签、引用或理由。每个条件 ID 必须完整且唯一，支持引用必须在一条原文快照中精确出现一次，需求关联必须有原需求中的精确引用。导出重新核验原始模型输出、输入源产物哈希和完整模型集合。
+Each sample involves only one teacher. The base query contains two to three separately assessed research topics; the counterfactual replaces only one of them. The two requested review models were gpt-4o and gpt-6-luna, with additional reasoning explicitly disabled for the latter. They do not receive the generator’s expected labels, citations, or rationale. Each condition ID must be complete and unique, a supporting citation must appear exactly once in a single original-text snapshot, and a need association must have an exact citation from the original need. The export rechecks the original model outputs, input-source artifact hashes, and complete model set.
 
-引用可定位不代表语义蕴涵已被人工证实。两个模型家族与前一轮生成审核有重合，API 模型别名也不保证未来返回完全相同的结果。拒绝或未决不表示真实负例。
+A locatable citation does not mean that its semantic entailment has been verified by a human. The two model families overlap with those used in the previous generation review, and API model aliases do not guarantee that future calls will return exactly the same results. Rejection or unresolved status does not mean a true negative.
 
-## 内容与来源重建
+## Content and Source Reconstruction
 
-本地产物位于 `artifacts/dataset-release/scoped-capabilities-audited/`：
+Local artifacts are located at `artifacts/dataset-release/scoped-capabilities-audited/`:
 
-- `pairs.jsonl`：十四对查询，包含基础查询、替换查询、条件及来源引用。
-- `source_snapshots` 字段：列出审核时的全部输入来源，不限于被引用的正向证据。每项包含证据 ID、所属专家、来源位置、实际供给的原文前缀长度和 SHA-256。
-- `train.jsonl`、`validation.jsonl`、`test.jsonl`：分别为八、三、三对；同一对的两个变体始终在一起。
-- `splits.json`：记录共享需求、专家、全部输入及引用来源哈希、规范化重复查询的连通分组及文件校验和。
+- `pairs.jsonl`: fourteen query pairs, including base queries, replacement queries, conditions, and source citations.
+- The `source_snapshots` field: lists all input sources available during review, not only the cited positive evidence. Each item contains an evidence ID, associated expert, source location, length of the original-text prefix actually supplied, and SHA-256.
+- `train.jsonl`, `validation.jsonl`, `test.jsonl`: eight, three, and three pairs, respectively; both variants of a pair are always kept together.
+- `splits.json`: records the shared need, expert, hashes of all inputs and cited sources, connected groups of normalized duplicate queries, and file checksums.
 
-十四对覆盖十条需求和十四位教师，形成十个连通分量，最大分量两对。上述分组资源没有跨切分重合，但模板仍共享，也没有排除近重复来源和语义改写泄漏。三个测试样本不足以做有说服力的显著性分析。
+The fourteen pairs cover ten needs and fourteen teachers, forming ten connected components, with a maximum component size of two pairs. The resource groups described above do not overlap across splits, but templates are still shared, and near-duplicate sources and semantic paraphrase leakage have not been ruled out. Three test samples are insufficient for a persuasive significance analysis.
 
-导出不包含教师/需求原文、模型轨迹和模型理由。复现实验须在本地持有原语料，加载器按每项前缀长度和哈希重建审核时的完整输入，并验证专家归属；不会只读取被引用的支持片段来人为简化反事实。
+The export does not include the original teacher/need texts, model traces, or model rationales. Reproducing the experiment requires holding the original corpus locally. The loader reconstructs the complete review-time inputs using each item’s prefix length and hash, and verifies expert association; it does not read only the cited supporting passages to artificially simplify the counterfactual.
 
-## 标签与基线
+## Labels and Baselines
 
-基础查询标签为 `supported`，反事实为 `unknown`；unknown 是资料不足，不是能力否定。其他专家未判定，不能据此计算全库匹配精度或将所有其他人当作负例。
+The base-query label is `supported`, and the counterfactual label is `unknown`; unknown means insufficient material, not a denial of capability. Other experts were not assessed, so these results cannot be used to calculate matching precision across the full corpus or to treat everyone else as a negative example.
 
-`scoped_silver_benchmark` 提供恒定 unknown 和逐主题字面匹配两个诊断基线。后者直接接收已生成的条件结构，排除了自然语言解析。在三个测试对上字面基线已达到 1.0 的状态准确率；全部十四对为 0.9286。这表明当前诊断集区分度有限，不能用于证明复杂 agent 的必要性。恒定 unknown 的准确率为 0.5，支持预测为空时 precision 定义为未定义，而非满分。
+`scoped_silver_benchmark` provides constant-unknown and per-topic literal-matching diagnostic baselines. The latter receives the already-generated condition structure directly, excluding natural-language parsing. On the three test pairs, the literal baseline already achieves 1.0 status accuracy; across all fourteen pairs, it achieves 0.9286. This indicates that the current diagnostic set has limited discriminative power and cannot be used to demonstrate the necessity of a complex agent. The constant-unknown baseline has an accuracy of 0.5; when the set of predicted supports is empty, precision is defined as undefined, not as a perfect score.
 
 ```bash
 PYTHONPATH=src python3 -m expert_search.scoped_dataset_audit --export
@@ -35,4 +35,4 @@ PYTHONPATH=src python3 -m expert_search.grouped_dataset
 PYTHONPATH=src python3 -m expert_search.scoped_silver_benchmark --split test
 ```
 
-上述导出需要已保存的审核结果。原语料、私有数据和第三方材料不随软件审阅包再分发。这批派生查询也尚未作为公开数据发布；MIT 软件许可不自动覆盖数据。后续主基准需要更强的关系/来源对照和独立审核，而不是仅扩充同一模板。
+The export described above requires saved review results. The original corpus, private data, and third-party materials are not redistributed with the software review package. These derived queries have also not yet been released as public data; the MIT software license does not automatically cover the data. A future primary benchmark needs stronger relation/source controls and independent review, rather than merely expanding the same template.

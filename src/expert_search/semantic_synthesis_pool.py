@@ -17,7 +17,7 @@ def prepare(output='artifacts/synthesis-semantic-v1'):
     lexical = FastSearch('artifacts/corpus','artifacts/fast-search.sqlite')
     fields = {}
     for _,row in records('artifacts/corpus/evidence.jsonl'):
-        if row.get('field') in ('研究领域_CN','研究领域_EN'):
+        if row.get('field') in ('\u7814\u7a76\u9886\u57df_CN','\u7814\u7a76\u9886\u57df_EN'):
             fields.setdefault(row['expert_id'],[]).append(row)
     demands = [r for _,r in records('artifacts/demands/queries.jsonl')]
     jobs,overlap = [],0

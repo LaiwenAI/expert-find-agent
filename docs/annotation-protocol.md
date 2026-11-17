@@ -1,22 +1,22 @@
-# 真实企业需求评测协议
+# Historical Industrial-Demand Annotation Protocol
 
-历史研究入口；当前任务定义、证据边界与最新结果以 [SIGIR英文LaTeX主稿](paper/sigir/main.tex) 为准。资料不足不作为真实能力负标签。
-来源：data/真实企业需求/全国大学生创业服务网_产业命题.xlsx。固定随机种子 42，抽样 20 条同时有命题名称和内容的记录。当前导出代码直接拼接标题与完整内容，没有自动删除企业介绍；技术条款抽取是另一个步骤。因此后续不能声称原始查询已排除背景或品牌词。
+This is a historical research entry point. The [current English SIGIR main paper](paper/sigir/main.tex) defines the latest task, evidence boundaries, and results. Insufficient material is not a negative label for actual expert ability.
 
-`PYTHONPATH=src python3 -m expert_search demands` 导出查询、三种基线的排名及候选并集标注池。候选按 expert_id 排序，标注表不显示算法名称和排名。证据目前取首次召回方法的前三条，后续需补充跨方法证据并集，避免证据展示偏差。
+Source: `data/\u771f\u5b9e\u4f01\u4e1a\u9700\u6c42/\u5168\u56fd\u5927\u5b66\u751f\u521b\u4e1a\u670d\u52a1\u7f51_\u4ea7\u4e1a\u547d\u9898.xlsx`. Original-language path components are Unicode-escaped. A fixed random seed of 42 selects 20 records containing both a proposition title and content. The export concatenates the title and complete content; it does not automatically remove company introductions. Technical-condition extraction is a separate step. The original queries therefore cannot be described as excluding background or brand terms.
 
-每对需求和专家由至少两位具备领域知识的标注者独立评分：
+`PYTHONPATH=src python3 -m expert_search demands` exports queries, rankings from three baselines, and a union candidate pool for annotation. Candidates are sorted by `expert_id`; annotators do not see algorithm names or ranks. Evidence currently comes from the first retrieval method's top three records. A cross-method evidence union is still needed to control presentation bias.
 
-- 0：无证据支持相关能力。
-- 1：属于相关领域，但缺少核心技术能力的直接证据。
-- 2：证据支持部分关键技术要求。
-- 3：证据支持核心需求与应用场景，且能明确指出支持片段。
+At least two domain-knowledgeable annotators independently grade each demand/expert pair:
 
-记录证据来源、评分理由和无法判断的缺失信息。未知填 null，不将缺失资料自动视作能力不足。两人评分冲突需第三方裁决。报告加权一致性及裁决比例。标注者不能查看模型推荐理由，以免受到推荐系统的影响。
+- **0:** the supplied evidence does not support relevant capability.
+- **1:** the field is related, but direct evidence for the core technical capability is missing.
+- **2:** evidence supports some important technical requirements.
+- **3:** evidence supports the core need and application setting, with identifiable supporting passages.
 
-用分级 nDCG@10；以 grade>=2 为相关标准计算 MRR@10 与 Recall@10。池外专家未标注，Recall 仅针对已判相关池，不能称为全库召回率。按查询配对 bootstrap 报告置信区间。保存算法版本、语料 SHA256、随机种子、配置、每条查询排序和失败记录。
+Record sources, reasons, and missing information that prevents judgment. Use `null` for unknowns; do not automatically convert missing material into inadequate capability. Conflicts require a third adjudicator. Report weighted agreement and the adjudication fraction. Hide model recommendation explanations from annotators to avoid influencing their assessments.
 
-目前没有人工 gold，不能发布真实需求上的准确率，也不能用同一个模型自评结果宣称人工验证。代理论文作者恢复任务单独报告。
+Use graded nDCG@10. Treat `grade>=2` as relevant for MRR@10 and Recall@10. Experts outside the pool remain unjudged: recall is relative to the judged relevant pool, not full-corpus recall. Report query-paired bootstrap intervals and preserve algorithm versions, corpus SHA256, seeds, configuration, per-query rankings, and failures.
 
+Human gold labels are not yet available. Model self-assessment cannot be described as human validation or used to establish real-demand accuracy. Report the paper-author recovery proxy separately.
 
-企业希望新项目达到的性能或交付目标，不自动要求候选人在既往成果中已达到该目标。评分针对支持开展该项研究的技术基础与匹配程度；未知既往联合经验应记录为缺口，不能直接将潜在相关性判零。明确的个人资质条件与未来技术目标需区分标注。
+A future project's requested performance or delivery target does not automatically require the candidate to have achieved it historically. Grade the documented technical foundation and match for undertaking the research. Record unknown prior integration experience as a gap instead of directly assigning zero potential relevance. Distinguish explicit personal qualifications from future technical goals.

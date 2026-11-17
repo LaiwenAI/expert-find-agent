@@ -74,7 +74,7 @@ def prepare(output='artifacts/source-counterfactual-demand-ranked-v3',local=Fals
     selected=[]
     for old in jobs:
         options=sorted(papers[old['expert_id']],key=lambda s:(-float(vector[s['id']]@vector[old['id']]),s['id']))
-        relational=[s for s in options if re.search(r'\b(for|using|via|based)\b|基于|应用|用于|结合',s.get('title') or '',re.I)]
+        relational=[s for s in options if re.search('\\b(for|using|via|based)\\b|\u57fa\u4e8e|\u5e94\u7528|\u7528\u4e8e|\u7ed3\u5408',s.get('title') or '',re.I)]
         if len(options)<5 or not relational:raise ValueError('Original cohort no longer eligible')
         first=relational[0]
         picked=[first]+[s for s in options if s['id']!=first['id']][:3]

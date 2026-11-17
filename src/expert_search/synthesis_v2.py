@@ -20,7 +20,7 @@ def render_scoped_queries(constraints, counterfactual):
     if replacement in texts:raise ValueError('Counterfactual repeats an existing capability')
     changed=list(texts);changed[index]=replacement
     def render(items):
-        return '寻找研究主题包括以下各项的专家：'+'；'.join(items)+'。各项分别考察，不要求联合应用。'
+        return '\u5bfb\u627e\u7814\u7a76\u4e3b\u9898\u5305\u62ec\u4ee5\u4e0b\u5404\u9879\u7684\u4e13\u5bb6\uff1a'+'\uff1b'.join(items)+'\u3002\u5404\u9879\u5206\u522b\u8003\u5bdf\uff0c\u4e0d\u8981\u6c42\u8054\u5408\u5e94\u7528\u3002'
     return render(texts),render(changed)
 
 
@@ -45,7 +45,7 @@ def worker(job, out):
              'replacing exactly that one capability. Constraint text must describe a research TOPIC, not a promise '
              'to provide records or a claim of sole authorship/independent leadership. '
              if canonical else '')+
-            ('Use explicit independent scope: the Chinese query must contain 分别 and ask for separate research records, '
+            ('Use explicit independent scope: the Chinese query must contain \u5206\u522b and ask for separate research records, '
              'not a joint application. The two capabilities must share a concrete technical topic with the original '
              'demand, beyond generic words such as technology, system, algorithm or model. If the expert is off-topic, '
              'return empty query and constraints. Do not use a title that merely resembles the demand as evidence of relevance. '
@@ -82,12 +82,12 @@ def worker(job, out):
         if not 2<=len(cs)<=3 or any(c.get('label')!='supported' for c in cs):
             errors.append('Require 2–3 supported capabilities')
         if not generated.get('original_demand_gaps'):errors.append('Missing original-demand limitation')
-        if scoped and '分别' not in generated.get('query',''):errors.append('Missing explicit independent scope')
+        if scoped and '\u5206\u522b' not in generated.get('query',''):errors.append('Missing explicit independent scope')
         result['validation_errors']=errors
         if errors:result['status']='rejected_structure'
         else:
             instruction=(
-                ('Evaluate scope exactly as written: 分别 means independent capabilities of the same person; '
+                ('Evaluate scope exactly as written: \u5206\u522b means independent capabilities of the same person; '
                  'do not impose a joint-application requirement on independent capabilities. Conversely, if the query '
                  'does require a joint application, require evidence for that relationship. Also decide whether '
                  'query A and the original demand share a concrete technical topic (not just generic technology, '

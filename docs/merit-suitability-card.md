@@ -1,24 +1,24 @@
-# MERIT公开专业匹配测试适配
+# MERIT Public Expertise Matching Test Adaptation
 
-本适配只用于**论文—审稿人专业匹配**，不能替代企业需求迁移或项目成功的标签。[MERIT（EMNLP 2026）](https://aclanthology.org/2026.emnlp-main.2227/)在论文4.1节说明：LR-Bench专业度来自1–5分人工自评，4/5为正，其余为负；适配固定作者公开的610对测试数据，而非模型生成银标。
+This adaptation is only for **paper-reviewer expertise matching** and cannot replace labels for enterprise requirement transfer or project success. [MERIT (EMNLP 2026)](https://aclanthology.org/2026.emnlp-main.2227/) states in Section 4.1 that LR-Bench expertise is based on human self-ratings on a 1-5 scale, with 4/5 as positive and the rest as negative; this adaptation fixes the authors' publicly released 610 for testing rather than model-generated silver labels.
 
-官方代码固定提交`5fad0ea06148c3c8817aac841de46c98a75eb40c`，来源[MERIT仓库](https://github.com/Luli3220/MERIT)。选择性下载9个文件，共20,021,659字节，逐项校验Git blob SHA-1、文件长度及SHA-256；清单见`docs/exploration/merit-release-assets-20261117.json`。数据与作者代码存放在`data/public/merit-release-20261117`，不随本仓库MIT源码包再分发。
+The official code is pinned to commit `5fad0ea06148c3c8817aac841de46c98a75eb40c`, sourced from the [MERIT repository](https://github.com/Luli3220/MERIT). A selective download of 9 files totaling 20,021,659 bytes was verified item by item against Git blob SHA-1, file length, and SHA-256; see `docs/exploration/merit-release-assets-20261117.json` for the manifest. The data and author code are stored in `data/public/merit-release-20261117` and are not redistributed with this repository's MIT source package.
 
-610对中正例254、负例356，规范化标题对应509个不同目标论文。作者资料只提供论文列表，不能据此保证审稿人身份独立；精确标题分组也不等于语义近重复排除。作者的人工自评比本地同模型银标独立，但仍是特定任务的自评标准，不证明未来企业项目能力。
+610 contains 254 positive and 356 negative examples, corresponding to 509 distinct target papers after title normalization. The author materials provide only a list of papers and therefore cannot guarantee reviewer identity independence; exact title grouping also does not amount to semantic near-duplicate exclusion. The authors' human self-ratings are independent of locally generated same-model silver labels, but remain self-rating standards for a specific task and do not prove capability on future enterprise projects.
 
-## 冻结比较
+## Frozen Comparison
 
-所有臂使用`gpt-6-luna`，不训练任何模型，也不运行MERIT已训练的4B/8B权重：
+All arms use `gpt-6-luna`. No models are trained, and the MERIT-trained 4B/8B weights are not run:
 
-1. `official-long`：直接读取作者发布的完整系统/用户提示，生成要求、证据、总结及最终标签，上限4096完成token。
-2. `short-chat`：保留同一核心加补充技能的判定要求及全部目标/资料文本，只返回严格schema下的短标签，上限128完成token。
-3. `native-choice`：同一短判定要求和完整资料，用原生Decisions返回二选一结果。
+1. `official-long`: directly uses the complete system/user prompts released by the authors and generates requirements, evidence, a summary, and a final label, with a cap of 4096 completion tokens.
+2. `short-chat`: retains the same decision requirement for the core plus supplementary skills and all target/material text, returning only a short label under a strict schema, with a cap of 128 completion tokens.
+3. `native-choice`: uses the same short decision requirement and complete materials, returning a binary result via native Decisions.
 
-这是实际提示、生成量及接口组合的对照，不能称为精确复现MERIT训练方法，也不是两个接口内部计算完全相同的实验。按原始610顺序循环六种调用排列、三并发、无重试。目标标题/摘要/引言及候选全部论文标题/摘要保留，不沿用作者本地评测脚本的5K prompt截断/过滤。分数只在推理后读入评价；推理case/payload不含`score`或人工标签。
+This is a comparison of the actual prompts, generation volumes, and interface combinations. It cannot be called an exact reproduction of the MERIT training method, nor is it an experiment in which the internal computations of the two interfaces are completely identical. The six call permutations are cycled in original 610 order, with three concurrent calls and no retries. The target title/abstract/introduction and all candidate paper titles/abstracts are retained; the 5K prompt truncation/filtering in the authors' local evaluation script is not carried over. Scores are read for evaluation only after inference; inference cases/payloads contain neither `score` nor human labels.
 
-## 失败与评价
+## Failures and Evaluation
 
-API错误、缺最终字段、格式不符保持`label=null`，不补0。分析器必须检查610×3个终态文件全部存在，缺任何一个即拒绝输出准确率报告。报告有效部分的precision/recall/F1/accuracy、覆盖率，以及包含失败项的全队列最坏/最好识别区间；区间不是置信区间。比较另在共同有效配对上按目标论文标题分组bootstrap，时延使用所有实际尝试，包含错误等待。分组不能覆盖未知审稿人身份相关性。不能保证预训练未见这些公开资料或标签。
+API errors, missing final fields, and format mismatches remain `label=null`; no 0 is imputed. The analyzer must check that all 610 x 3 terminal files exist and refuse to output an accuracy report if any are missing. The report gives precision/recall/F1/accuracy on valid cases, coverage, and the worst-/best-case recognition interval for the full queue including failures; the interval is not a confidence interval. Comparisons are also bootstrapped by target-paper title on commonly valid paired cases. Latency uses all actual attempts, including waiting time for errors. Grouping cannot account for unknown reviewer-identity correlations. It cannot be guaranteed that pretraining did not include these public materials or labels.
 
 ```bash
 python experiments/fetch_merit_release_assets.py
@@ -27,4 +27,4 @@ PYTHONPATH=src python experiments/merit_suitability_comparison.py
 PYTHONPATH=src python experiments/analyze_merit_suitability.py
 ```
 
-推理命令产生付费API调用；已有结果按冻结输入摘要复用。完整610对及1830次请求已全部有效完成：完整推理/短Chat/原生Decisions准确率分别73.28%/68.69%/71.15%，请求均值3.84/1.64/0.91秒。原生相对完整推理的准确率差为-2.13个百分点，论文分组bootstrap区间[-5.51,1.32]；跨零不能证明等效。它是成本与质量权衡，不能称为精度提升。原始企业100条需求的20条封存集未参与本公开辅助任务。
+The inference command makes paid API calls; existing results are reused when the frozen input digest matches. All 610 cases and 1830 requests completed with valid results: accuracy for full inference/short Chat/native Decisions was 73.28%/68.69%/71.15%, respectively, and mean request times were 3.84/1.64/0.91 seconds. The accuracy difference for native Decisions relative to full inference was -2.13 percentage points, with a paper-grouped bootstrap interval of [-5.51,1.32]; crossing zero does not prove equivalence. This is a cost-quality trade-off and cannot be described as an accuracy improvement. The 20-item sealed set from the original enterprise 100 requirements was not used in this public auxiliary task.

@@ -1,38 +1,38 @@
-# GPU 集群实验
+# GPU Cluster Experiments
 
-用户提供的操作文档：https://docs.qq.com/doc/DSGpxVUNDeFVQaWV1 。已读取公开预览中的节点、存储、Slurm 提交和环境要求；文档完整数据接口返回 401，未将未读部分推测成规则。
+User-provided operating documentation: https://docs.qq.com/doc/DSGpxVUNDeFVQaWV1. The node, storage, Slurm submission, and environment requirements were read from the public preview; the document’s complete data interface returned 401, so unread portions were not inferred as rules.
 
-登录入口为 `dxzhou@10.21.50.60`（ws0）。仅用于登录、Slurm 提交和状态查询。计算、模型校验、解包、安装环境均经 Slurm 在计算节点执行。已有 `/opt/miniconda3`，不安装另一套 Miniconda。
+The login entry point is `dxzhou@10.21.50.60` (ws0). It is used only for login, Slurm submission, and status queries. Computation, model validation, unpacking, and environment installation are all performed on compute nodes via Slurm. `/opt/miniconda3` already exists; no additional Miniconda installation is needed.
 
-2026-11-16 探查：Slurm gpu 分区包含 ws1–ws6。ws1 空闲但只有根文件系统；ws2–ws5 的 GPU 均已分配。ws6 有一张可调度 48GB RTX 4090，数据盘 `/mnt/sda` 约 6.1TB 可用；根目录不可直接创建 zdx，但用户拥有 `/mnt/sda/dxzhou`。实际实验目录为：
+2026-11-16 inspection: the Slurm gpu partition includes ws1–ws6. ws1 was idle but had only its root filesystem; GPUs on ws2–ws5 were all allocated. ws6 had one schedulable 48GB RTX 4090, with approximately 6.1TB available on data disk `/mnt/sda`; zdx could not be created directly in the root directory, but the user owns `/mnt/sda/dxzhou`. The actual experiment directory is:
 
 ```
 /mnt/sda/dxzhou/zdx/expert-find-agent
 ```
 
-独立 Python venv 位于该目录，基于现有 Miniconda 的 Python 3.13 创建。实测 PyTorch 2.15.0+cu132、Transformers 5.23.0、CUDA 13.2；驱动 595.84。作业仅看到其分配 GPU。集群状态随时变化，后续作业应重新查询。
+An independent Python venv is located in that directory, created with Python 3.13 from the existing Miniconda installation. Tested versions: PyTorch 2.15.0+cu132, Transformers 5.23.0, CUDA 13.2; driver 595.84. Jobs see only their allocated GPU. Cluster status can change at any time, so it should be queried again for later jobs.
 
-从本地经登录节点提交：
+Submit from the local machine through the login node:
 
 ```sh
 ssh dxzhou@10.21.50.60 sbatch < experiments/cluster_qwen_embeddings.sbatch
 ```
 
-脚本指定单节点、单 GPU、4 CPU、8GB 主存，最长 45 分钟，任务结束自动释放。模型和数据已传入计算节点大盘；代码在计算节点执行。模型权重先逐文件校验官方固定修订的摘要，然后执行 CUDA smoke，再依次跑 SIGIR 和 NIPS 的冻结 Qwen3 Embedding 基线。两种硬件后端使用不同结果目录，不能混用缓存。
+The script specifies one node, one GPU, 4 CPUs, 8GB of main memory, and a maximum runtime of 45 minutes; resources are released automatically when the job ends. The model and data have been transferred to the compute node’s large disk; code runs on the compute node. Model weights are first checked file by file against the official fixed-revision digests, followed by a CUDA smoke test, then the frozen Qwen3 Embedding baselines for SIGIR and NIPS are run in sequence. The two hardware backends use different result directories; their caches must not be mixed.
 
-首个正式实验 Job ID 为 39221，Slurm accounting 已确认 COMPLETED、ExitCode 0:0，总用时 77 秒；SIGIR 和 NIPS 编码与评分均完成，结果已回传本地。分配资源为单 GPU、4 CPU、8GB 主存。
+The first formal experiment, Job ID 39221, was confirmed by Slurm accounting as COMPLETED, ExitCode 0:0, with a total runtime of 77 seconds; encoding and scoring for SIGIR and NIPS both completed, and the results were returned locally. Allocated resources were one GPU, 4 CPUs, and 8GB of main memory.
 
-日志位于 `logs/qwen-<jobid>.out` 与 `.err`。每 32 个输入保存一个带摘要的 NPZ 块，可在协议不变时续跑。查询向量缓存评分不包含在线编码时延。原始企业/教师资料及 `.env` 未上传本轮任务，输入仅为已有公开 CoF 归档和官方冻结模型。
-
-
-后续授权研究继续在计算节点执行。作业39249在ws6运行需求先行论文检索，COMPLETED、ExitCode 0:0、10秒：读取此前已建立的完整归属来源向量，仅选择54409篇论文，对原固定20条真实企业需求编码及召回；本轮包含原始需求文本和教师论文前缀，不再是仅公开CoF输入。GPU仍由Slurm分配，未在ws0计算。结果及运行环境已回传本地，未传输密钥或.env。提交脚本为 `experiments/cluster_demand_papers.sbatch`。
+Logs are located at `logs/qwen-<jobid>.out` and `.err`. One NPZ chunk with a digest is saved for every 32 inputs, allowing a run to resume as long as the protocol remains unchanged. Scoring with cached query vectors does not include online encoding latency. The original company/teacher materials and `.env` were not uploaded for this round; the inputs consisted only of the existing public CoF archive and the official frozen model.
 
 
-全尺度冻结嵌入及来源融合：KDD作业39252在ws6完成（0:0，9分04秒），处理99594个来源及174查询；SciRepEval作业39253处理73257来源及107查询后因DOI文件名写出失败，编码块均已保留。修复为URL编码文件名后，39260在21秒内复用缓存完成评分/融合，状态COMPLETED、0:0；不把恢复时间当作编码耗时。完整向量留在计算节点，结果JSON和运行信息回传本地；BM25分数快照哈希本地/远端一致。所有模型编码只在Slurm计算节点执行。
-
-2026-11-17重新探查：ws6四张GPU均已分配；ws5可分配RTX5090（约32GB），大盘为`/media/Ws5_4TB`。在`/media/Ws5_4TB/zdx/expert-find-agent`创建环境，依赖安装作业39285完成；官方模型逐文件摘要验证后，39289用68秒完成原始EvidenceBench测试集来源向量，39292用7秒完成固定评价，两者0:0。本地仅回传结果与日志，完整向量留计算节点。两次直接tar回传遇到Slurm二进制流截断，最终改用计算节点gzip+base64回传；解压结果JSON的SHA256与计算节点一致，未重跑计算作业。
-
-全库来源归属检索实验：39309在ws5用RTX5090重新编码固定20条完整需求（4秒，0:0）；39313在ws6单CPU/8GB完成96749来源的精确/ANN对照（61秒，0:0）；39326单CPU/8GB在同一图上比较efSearch下限64和512（63秒，0:0）。ws6未请求GPU，因为四张GPU当时已被分配。faiss-cpu1.16.0安装通过计算节点Slurm执行；模型权重按原固定官方摘要逐文件验证。只回传查询向量、协议、评价和日志，完整来源向量仍留大盘。两组结果的协议/向量/评价/摘要已核对本地与计算节点SHA256。
+Subsequent authorized research continued to run on compute nodes. Job 39249 ran a requirements-first paper search on ws6 and completed with COMPLETED, ExitCode 0:0, in 10 seconds: it read the previously established complete attribution-source vectors, selected only 54409 papers, and encoded and retrieved against the original fixed set of 20 real company requirements. This round included the original requirement texts and teacher-paper prefixes, and was no longer limited to public CoF inputs. The GPU was still allocated by Slurm; no computation was performed on ws0. Results and runtime environment were returned locally; no keys or .env files were transferred. The submission script is `experiments/cluster_demand_papers.sbatch`.
 
 
-双语检索诊断：39435在ws6单张RTX4090、4CPU、12GB配额下完成，0:0，用时2分51秒。固定1000个construction真实需求衍生意图，每类200个，对应2000个中英文视图；核验原始来源、向量与官方模型文件摘要后批量编码，无截断。比较相同96749来源和9861专家上的精确/ef64/ef512，CPU计时不含批量编码或索引构建。结果经独立Slurm CPU步骤gzip+base64回传，本地检查CRC、相对路径和协议/查询向量/评价摘要。脚本为`experiments/cluster_bilingual_retrieval.sbatch`。检索稳定性和精确排序保留率不等于专家相关性精度。
+Full-scale frozen embeddings and source fusion: KDD Job 39252 completed on ws6 (0:0, 9 minutes 04 seconds), processing 99594 sources and 174 queries. SciRepEval Job 39253 processed 73257 sources and 107 queries, then failed when writing a DOI filename; all encoding chunks were retained. After fixing the issue by URL-encoding filenames, Job 39260 reused the cache to complete scoring/fusion in 21 seconds, with status COMPLETED, 0:0; recovery time is not counted as encoding time. Full vectors remain on the compute node, while result JSON and runtime information were returned locally. The BM25 score snapshot hashes match locally and remotely. All model encoding was performed only on Slurm compute nodes.
+
+2026-11-17 re-inspection: all four GPUs on ws6 were allocated; an RTX5090 (approximately 32GB) was available on ws5, with large disk `/media/Ws5_4TB`. An environment was created in `/media/Ws5_4TB/zdx/expert-find-agent`, and dependency installation Job 39285 completed. After verifying the official model file digests one by one, Job 39289 completed source-vector generation for the original EvidenceBench test set in 68 seconds, and Job 39292 completed the fixed evaluation in 7 seconds; both exited 0:0. Only results and logs were returned locally; full vectors remain on the compute node. Two direct tar transfers back encountered Slurm binary-stream truncation, so the final transfer used gzip+base64 on the compute node. The SHA256 of the decompressed result JSON matches the compute-node copy; the compute jobs were not rerun.
+
+Full-corpus source-attribution retrieval experiment: Job 39309 re-encoded the fixed 20 complete requirements on ws5 using an RTX5090 (4 seconds, 0:0); Job 39313 completed an exact/ANN comparison over 96749 sources on ws6 with one CPU and 8GB (61 seconds, 0:0); Job 39326 compared efSearch lower bounds of 64 and 512 on the same graph with one CPU and 8GB (63 seconds, 0:0). No GPU was requested on ws6 because all four GPUs were allocated at the time. Installing faiss-cpu1.16.0 was performed via Slurm on a compute node; model weights were verified file by file against the original fixed official digests. Only query vectors, protocol, evaluation, and logs were returned; full source vectors remain on the large disk. The protocol, vectors, evaluation, and digests for both result sets were checked against local and compute-node SHA256 values.
+
+
+Bilingual retrieval diagnostics: Job 39435 completed on ws6 with one RTX4090, a 4CPU, 12GB allocation, exiting 0:0 in 2 minutes 51 seconds. It used 1000 fixed construction real requirements to derive intents, 200 per category, corresponding to 2000 Chinese and English views. After verifying the original sources, vectors, and official model-file digests, it performed batch encoding without truncation. It compared exact/ef64/ef512 over the same 96749 sources and 9861 experts; CPU timings exclude batch encoding and index construction. Results were returned via an independent Slurm CPU step using gzip+base64. Locally, CRC, relative paths, and protocol/query-vector/evaluation digests were checked. The script is `experiments/cluster_bilingual_retrieval.sbatch`. Retrieval stability and exact-ranking retention rate are not equivalent to expert relevance precision.

@@ -10,7 +10,7 @@ def run():
     corpus=Path('artifacts/corpus');experts={e['id']:e for _,e in records(corpus/'experts.jsonl')};areas=defaultdict(list);titles=defaultdict(list);fallback=defaultdict(list)
     for _,e in records(corpus/'evidence.jsonl'):
         if e['text'].strip() and len(fallback[e['expert_id']])<1:fallback[e['expert_id']].append(e)
-        if e.get('field') in ('研究领域_CN','研究领域_EN') and e['text'].strip():areas[e['expert_id']].append(e)
+        if e.get('field') in ('\u7814\u7a76\u9886\u57df_CN','\u7814\u7a76\u9886\u57df_EN') and e['text'].strip():areas[e['expert_id']].append(e)
         if e['kind']=='paper' and e.get('title') and len(titles[e['expert_id']])<3:titles[e['expert_id']].append(e)
     rows=[];unavailable=[]
     for eid in sorted(experts):

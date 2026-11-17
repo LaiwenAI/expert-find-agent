@@ -1,62 +1,242 @@
-# 专家搜索 Agent
+<p align="center">
+  <img src="docs/assets/expert-find-agent-banner.svg" alt="Expert Find Agent — evidence-based expert search" width="100%">
+</p>
 
-源码已在[LaiwenAI/expert-find-agent](https://github.com/LaiwenAI/expert-find-agent)公开（MIT），默认分支为`research/prototype-20261117`。当前为研究原型；真实原文数据包仍仅在本地，尚未证明专家精度与端到端效率的联合优势。
+<p align="center">
+  <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.10%2B-3776AB?logo=python&amp;logoColor=white" alt="Python 3.10 or newer"></a>
+  <a href="https://numpy.org/"><img src="https://img.shields.io/badge/NumPy-1.26%2B-013243?logo=numpy&amp;logoColor=white" alt="NumPy 1.26 or newer"></a>
+  <a href="https://pypi.org/project/laiwenai/"><img src="https://img.shields.io/badge/laiwenai-0.0.12-7C3AED?logo=pypi&amp;logoColor=white" alt="laiwenai 0.0.12"></a>
+  <a href="https://github.com/facebookresearch/faiss"><img src="https://img.shields.io/badge/FAISS-optional-00897B" alt="Optional FAISS vector retrieval"></a>
+  <a href="LICENSE"><img src="https://img.shields.io/badge/License-MIT-475569" alt="MIT software license"></a>
+</p>
 
-面向企业技术需求的 evidence-based expert search 研究原型：从专家论文和简介中定位证据，探索直接能力与方法迁移的判断及排序。沿用 PageIndex 可追溯层次目录的思路，检验全库粗筛、专家能力分支和原文细查的组合。当前 agent 采用 BM25 召回与证据树导航；语义能力目录、适用性协议和全库多分支路由仍在独立实验中验证。
+<h1 align="center">Expert Find Agent</h1>
 
-```bash
-pip install -r requirements.txt
-PYTHONPATH=src python3 -m expert_search prepare
-PYTHONPATH=src python3 -m expert_search index
-PYTHONPATH=src python3 -m expert_search search '机器人运动控制' -k 5
-PYTHONPATH=src python3 -m expert_search agent '寻找机器人运动控制与强化学习专家' -k 3 --candidates 8
+<p align="center">Find and rank experts for industrial technical needs using traceable evidence from publications and researcher profiles.</p>
+
+## Project Overview
+
+Expert Find Agent is a research prototype for evidence-based expert discovery, industrial R&D collaboration, and conditional method transfer. It connects candidate researchers to their supplied sources and investigates whether documented research methods can address a requested operation.
+
+**Core features:**
+
+- **Expert retrieval:** BM25 and TF-IDF baselines, plus experimental frozen-vector and approximate-search indexes.
+- **Evidence navigation:** an expert-to-source tree, bounded source views, and citation ownership checks.
+- **Data construction:** original-demand preparation, five-intent bilingual query synthesis, and explicit unresolved audit states.
+- **Reproducible evaluation:** public benchmark adapters, timing boundaries, source hashes, and an editable English SIGIR paper.
+
+The CLI provides a hybrid lexical-retrieval and model-assisted evidence-tree workflow. Vector routing, method frames, and newer reasoning strategies are separate research modules. Independent industrial relevance labels and a joint end-to-end accuracy/latency advantage remain research goals.
+
+## Technical Architecture
+
+Python handles normalization, retrieval, evaluation, and command-line execution. JSONL preserves records and provenance; SQLite supports the lexical index. `laiwenai` connects model-assisted stages to a configured OpenAI-compatible service. NumPy and optional FAISS support vector experiments; optional local encoders remain frozen.
+
+```mermaid
+flowchart LR
+    Q["Technical requirement"] --> CLI["Command-line interface"]
+    RAW[("Local researcher records")] --> PREP["Normalization and provenance"]
+    PREP --> STORE[("JSONL corpus / SQLite index")]
+    CLI --> RET["BM25 / TF-IDF retrieval"]
+    STORE --> RET
+    RET --> TREE["Expert evidence tree"]
+    STORE --> TREE
+    TREE <--> MODEL["laiwenai / Model API"]
+    TREE --> CHECK["Source ownership and output validation"]
+    CHECK --> OUT["Ranked experts and citations"]
+    STORE -. "Independent experiments" .-> EXP["Frozen vectors / FAISS / Method frames"]
+    EXP -.-> EVAL["Research benchmarks"]
+    OUT -.-> EVAL
 ```
 
-模型配置见 `.env.example`；请在仓库根目录运行，agent 从本目录 `.env` 读取配置。
+Source ownership establishes consistency with supplied records. It does not establish personal contribution, semantic correctness, or future delivery capability. See the [method notes](docs/research-methods.md) and [paper](docs/paper/sigir/main.tex) for the evidence contract and current results.
 
-- [使用与复现](docs/usage.md)
-- [PageIndex 专家索引设计审查](docs/exploration/pageindex-expert-design.md)
-- [GPU 集群运行方式](docs/cluster.md)
-- [问题定义和论文方法](docs/research-methods.md)
-- [Benchmark 结果](docs/benchmark-results.md)
-- [真实需求构造与控制实验](docs/paper/sigir/main.tex)
-- [人工标注协议](docs/annotation-protocol.md)
-- [MERIT公开人工自评任务适配](docs/merit-suitability-card.md)
-- [从原始数据重建的新评测集](docs/fresh-evaluation-data-card.md)
+## Repository Structure
 
-Benchmark 比较 BM25-max、BM25-vote、TF-IDF 变体与混合证据树 agent。论文作者恢复属于代理任务，不能作为企业需求匹配准确率。当前版本为研究原型，主要限制是词法候选召回、叶子展示截断及缺少真实需求人工 gold。
+The tree includes local directories created during data preparation and experiments.
 
-## 无训练技术探索与论文
-
-- [SIGIR英文LaTeX正文](docs/paper/sigir/main.tex)
-- [英文LaTeX附录](docs/paper/sigir/appendix.tex)
-- [正文与独立附录PDF的编译方法](docs/paper/sigir/README.md)
-- [1,000条真实需求与5,000条双语合成查询数据说明](docs/bilingual-query-data-card.md)
-- [1,000对双语检索诊断](docs/exploration/bilingual-retrieval-20261117.md)
-- [全文翻译三组试验](docs/exploration/translation-pilot-20261117.md)
-- [新增顶会全文审查](docs/exploration/topconf-review-20261117.md)
-- [实验协议、元数据和复现附录](docs/paper/sigir/appendix.tex)
-- [质量与时间的计时边界](docs/paper/sigir/appendix.tex)
-- [已完成结果自动表](docs/paper/sigir/appendix.tex)
-- [最接近工作的审查](docs/exploration/closest-work-review.md)
-- [实验复现入口](docs/exploration/reproduction-map.md)
-
-当前研究尚未证明完整 agent 同时超过强基线的精度与端到端效率。已确认渐进向量计算的局部收益，保留卡片、路由、合成审核等正负结果。500 条原词条件与 49 条语义条件是诊断数据，不替代真实企业需求 gold。
-
-本地冻结编码器可选依赖：`pip install -e '.[local]'`。建议使用隔离环境，不需训练模型。
-
-
-## 持久化的快速候选检索
-
-已有本地教师语料时，构建并校验经典候选语言模型的精确编译索引：
-
-```bash
-PYTHONPATH=src OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 python3 experiments/teacher_compiled_lm.py
-PYTHONPATH=src python3 -m expert_search.compiled_expert_search '机器人运动控制与路径规划' -k 5
+```text
+.
+├── .env                         # Local provider credentials; not tracked
+├── .env.example                 # Configuration template
+├── .gitignore                   # Local data, credentials, and cache exclusions
+├── data/                        # Local raw inputs and downloaded datasets
+│   └── teachers/shenzhen/       # Researcher JSONL files and papers.jsonl
+├── artifacts/                   # Local corpora, indexes, protocols, and results
+├── docs/                        # Maintained documentation
+│   ├── assets/                  # Editable README banner
+│   ├── exploration/             # Literature reviews and experiment notes
+│   └── paper/sigir/             # English LaTeX main paper and supplement
+├── experiments/                 # Reproducible experiment entry points
+│   ├── bilingual/               # Synthesis, translation, and retrieval diagnostics
+│   ├── metadata/                # Publication dates and citation metadata
+│   ├── maintenance/             # Repository language checks
+│   └── paper/                   # Result export and PDF builds
+├── src/expert_search/           # Python package
+│   ├── __main__.py              # CLI entry point
+│   ├── agent.py                 # Model-assisted evidence-tree navigation
+│   ├── retrieval.py             # Lexical retrieval
+│   ├── bilingual/               # Language-specific validation helpers
+│   └── metadata/                # Source metadata helpers
+├── tests/                       # Automated checks
+├── logs/                        # Local execution logs
+├── output/pdf/                  # Compiled paper artifacts
+├── release/                     # Local source archives
+├── tmp/                         # Regenerable temporary files
+├── pyproject.toml               # Package metadata and optional dependencies
+└── README.md
 ```
 
-索引绑定语料快照，从磁盘加载后可重复查询；结果是主题相关性排序，能力支持仍需原文核验。完整真实需求计时将初始化与持久进程中的查询分开，质量结论只使用有标签的公开基准。
+## Quick Start
 
-该持久化入口现使用浮点上下界筛选与精确前 K 重放，保留参考模型的返回分数和有序结果。完整教师库20条需求×5次配对运行中，前五名和分数全部一致，暖查询均值14.43→6.43ms；这是同一统计模型的执行优化，不提供相关性提升或端到端代理速度结论。复验：`experiments/certified_topk_benchmark.py`。
+### Requirements
 
-统一执行路径原型：`OwnedVectorIndex` → `GroundedPipeline`，贯通需求规划、实际查询编码、归属来源检索与固定片段适用性核验。真实21人队列的执行脚本是 `experiments/grounded_pipeline_smoke.py`；约15–18秒的结果仍未满足低延迟目标，语义正确性未独立验证，详见[当前初稿](docs/paper/sigir/main.tex)。
+- Python **3.10+**; the current local environment uses Python 3.11.
+- A virtual environment and the dependencies in `pyproject.toml`.
+- Local researcher data for the enterprise-search CLI.
+- An API key for model-assisted commands; lexical search does not require one.
+- Tectonic for paper builds. GPU experiments use separate Slurm environments described in the [cluster guide](docs/cluster.md).
+
+### Installation
+
+```bash
+git clone https://github.com/LaiwenAI/expert-find-agent.git
+cd expert-find-agent
+python3 -m venv .venv
+source .venv/bin/activate
+python -m pip --isolated install --index-url https://pypi.org/simple -e .
+```
+
+Install the optional ANN dependency when needed:
+
+```bash
+python -m pip --isolated install --index-url https://pypi.org/simple -e ".[ann]"
+```
+
+Other optional environments are defined in `pyproject.toml`; they are not required for the basic lexical CLI.
+
+### Configuration
+
+Run commands from the repository root. Copy the template, then edit `.env`:
+
+```bash
+cp .env.example .env
+```
+
+```dotenv
+LAIWEN_API_KEY=your_api_key_here
+LAIWEN_BASE_URL=https://your-provider.example/v1
+LAIWEN_MODEL=gpt-6-luna
+LAIWEN_TIMEOUT=30.0
+LAIWEN_LOG_CONSOLE=False
+LAIWEN_LOG_FILE=False
+```
+
+Replace the key and example URL with credentials and an endpoint from the same provider. `agent` sends the query and selected researcher material to that configured service. Keep `.env` local.
+
+### Running
+
+First place the expected researcher JSONL files under `data/teachers/shenzhen/`. Profile records use `teacher_id`; `papers.jsonl` links papers through the same field. The supported profile fields are defined in [corpus.py](src/expert_search/corpus.py).
+
+```bash
+python -m expert_search prepare --data data
+python -m expert_search index
+python -m expert_search search "robotic motion control" --method bm25-max -k 5
+python -m expert_search agent "Find experts in robotic control and reinforcement learning" -k 3 --candidates 8
+```
+
+A source-only checkout can first verify the CLI without loading private data:
+
+```bash
+python -m expert_search --help
+python -m unittest discover -s tests
+```
+
+See the [usage guide](docs/usage.md) for additional methods, data adapters, and experiment commands.
+
+## Development and Maintenance
+
+### Common Commands
+
+```bash
+# CLI help and offline checks
+PYTHONPATH=src python -m expert_search --help
+PYTHONPATH=src python -m unittest discover -s tests
+python experiments/maintenance/check_repository_language.py
+
+# Local evaluation reports; requires the corresponding prepared artifacts
+PYTHONPATH=src python -m expert_search benchmark
+PYTHONPATH=src python -m expert_search report
+PYTHONPATH=src python -m expert_search verify
+
+# Compile the committed paper snapshot without private experimental data
+python experiments/paper/build_sigir.py --frozen-results
+
+# Refresh paper numbers from local experimental artifacts and compile
+python experiments/paper/build_sigir.py
+```
+
+### Testing
+
+Run the offline suite after code changes. Relevant checks cover source ownership, snapshot binding, parsing, ranking behavior, and incomplete-result accounting. Model calls and cluster runs are separate experiments; passing unit tests does not establish recommendation accuracy.
+
+For reproducible experiments, preserve input hashes, model settings, terminal failures, and timing boundaries. Report retrieval, encoding, model requests, offline preparation, and complete-result latency separately.
+
+### Data and Files
+
+- `data/`, `artifacts/`, `logs/`, `release/`, `tmp/`, and local environments are excluded from source control.
+- Store raw inputs and model traces locally. Do not overwrite original-language source records during translation or normalization.
+- Keep source code, documentation, configuration examples, and editable figures in the repository.
+- Retain experiment protocols and meaningful negative results; remove regenerable previews and unused temporary files.
+- Language-specific schema keys and fixtures use Unicode escapes in source files, preserving bilingual behavior while keeping repository text English. See the [repository language policy](docs/repository-language.md).
+
+The **MIT license applies to repository software**. Original data, literature, upstream benchmarks, and the vendored ACM template retain their own terms. The [source release notes](docs/open-source.md) describe the publication boundary.
+
+### Development Workflow
+
+1. Inspect the existing implementation and related experiment before adding another variant.
+2. Freeze the source snapshot, candidate/view scope, model settings, and comparison protocol.
+3. Implement the change and run the relevant offline checks.
+4. Run model or GPU experiments separately, preserving failed and unresolved records.
+5. Update the documentation and paper from verified results, then package the intended source files.
+
+The project explores training-free compositions. A component-level speedup, source match, or model-screened synthetic query is not evidence of complete-system superiority.
+
+## Deployment and Release
+
+The current deliverable is a Python CLI and research package. Install it in a virtual environment on the target machine and provide local data and configuration as described above.
+
+Build the reproducible source archive:
+
+```bash
+python experiments/build_release.py
+```
+
+This creates `release/expert-find-agent-source.zip` with a per-file SHA-256 manifest. It excludes credentials, raw enterprise/researcher data, model weights, downloaded corpora, and model traces. GPU jobs run on Slurm compute nodes, with project storage under the user's `zdx` directory; the login node is used for submission and monitoring.
+
+Research and release references:
+
+- [SIGIR main paper](docs/paper/sigir/main.tex) and [supplement](docs/paper/sigir/appendix.tex)
+- [Paper build instructions](docs/paper/sigir/README.md)
+- [Bilingual query construction data card](docs/bilingual-query-data-card.md)
+- [Fresh industrial evaluation data card](docs/fresh-evaluation-data-card.md)
+- [MERIT suitability benchmark](docs/merit-suitability-card.md)
+- [Benchmark results](docs/benchmark-results.md) and [reproduction map](docs/exploration/reproduction-map.md)
+- [PageIndex-inspired design review](docs/exploration/pageindex-expert-design.md)
+- [Annotation protocol](docs/annotation-protocol.md)
+
+## Frequently Asked Questions
+
+**Why does a fresh checkout fail during `prepare`?**  
+The enterprise/researcher raw files are not distributed with the software. Supply the expected local files before building the corpus. Public benchmark adapters have separate preparation steps and source terms.
+
+**Why does `agent` fail while lexical search works?**  
+Check the repository-root `.env`, provider URL, API key, and model availability. The lexical path does not call the model service.
+
+**Can the paper compile without private data?**  
+Yes. Use `python experiments/paper/build_sigir.py --frozen-results`. Refreshing result tables instead requires the local authoritative experimental artifacts.
+
+**Are the synthetic queries and model judgments human gold labels?**  
+No. Construction records retain their screening and unresolved states. See the data cards for the distinction between original needs, derived bilingual intents, source-scoped judgments, and human-rated auxiliary tasks.
+
+**Does a cited paper prove the expert can deliver the requested project?**  
+A supplied association and localized passage support a scoped historical claim. Personal contribution, conditional applicability, and future delivery require separate evidence.

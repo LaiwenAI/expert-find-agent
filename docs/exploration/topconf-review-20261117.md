@@ -1,34 +1,34 @@
-# 顶会文献审查与当前方案边界（2026-11-17）
+# Top-Conference Literature Review and Boundaries of the Current Approach (2026-11-17)
 
-范围：优先阅读本地ScIRGen、MERIT、CaRR全文，并补充ETS及HippoRAG 2。已提取全文、核对首页与发表页；不是对整个文献目录已完成逐篇审查的声明。保留已有有效索引和引用检查，不将组合中每个组件都视为原创。
+Scope: Prioritize reading the full texts of ScIRGen, MERIT, and CaRR locally, and supplement them with ETS and HippoRAG 2. The full texts have been extracted, and the title pages and publication pages checked; this is not a claim that every paper in the literature catalog has been reviewed individually. Retain the existing valid index and citation checks; do not treat every component in the combination as original.
 
-| 工作与正式发表信息 | 与本项目直接相关的结论 | 无训练约束下的处理 |
+| Work and formal publication information | Conclusions directly relevant to this project | Treatment under the no-training constraint |
 |---|---|---|
-| [ScIRGen，KDD 2025](https://kdd.org/kdd2025/datasets-and-benchmarks-track-papers-2/)，DOI 10.1145/3711896.3737432 | 任务导向生成、材料与论文对齐、分层解析和质量筛选已有系统方案 | 可借鉴数据流程，不能只凭“真实材料+模型生成+审核”主张首创 |
-| [MERIT，EMNLP 2026主会](https://aclanthology.org/2026.emnlp-main.2227/) | 将关键专家维度与偶然主题重合分开，用rubric表达要求 | 可借鉴要求结构；其RL与蒸馏训练不作为本项目执行路线 |
-| [CaRR，ACL 2026主会](https://aclanthology.org/2026.acl-long.950/) | 覆盖、引用支撑和证据连通性需要分别检查 | 可借鉴评价分解；不能把原子要求或引用链检查本身宣称为新指标理论 |
-| [ETS，ACL 2025主会](https://aclanthology.org/2025.acl-long.1175/) | 把证据集合选择视为有依赖的搜索，非逐句独立打分 | 原文方法训练策略/价值模型；不能直接称为无需训练的现成实现 |
-| [HippoRAG 2，ICML 2025](https://proceedings.mlr.press/v267/gutierrez25a.html) | 结合篇章与结构化片段，并在检索中保留上下文与回退 | 可作为无自有训练的结构化检索对照；图传播不能替代教师归属和事实支持 |
+| [ScIRGen, KDD 2025](https://kdd.org/kdd2025/datasets-and-benchmarks-track-papers-2/), DOI 10.1145/3711896.3737432 | Task-oriented generation, alignment between materials and papers, hierarchical parsing, and quality filtering already have a systematic approach | Its data workflow can be borrowed; “real materials + model generation + review” alone cannot support a claim of being first |
+| [MERIT, EMNLP 2026 Main Conference](https://aclanthology.org/2026.emnlp-main.2227/) | Separates key expert dimensions from incidental topical overlap, and uses a rubric to express requirements | Its requirements structure can be borrowed; its RL and distillation training are not part of this project’s implementation route |
+| [CaRR, ACL 2026 Main Conference](https://aclanthology.org/2026.acl-long.950/) | Coverage, citation support, and evidence connectivity need to be checked separately | Its evaluation decomposition can be borrowed; atomic requirements or citation-chain checking themselves cannot be claimed as a new metric theory |
+| [ETS, ACL 2025 Main Conference](https://aclanthology.org/2025.acl-long.1175/) | Treats evidence-set selection as a search with dependencies, rather than scoring each sentence independently | The original method trains strategies/value models; it cannot be described directly as a ready-to-use no-training implementation |
+| [HippoRAG 2, ICML 2025](https://proceedings.mlr.press/v267/gutierrez25a.html) | Combines passages with structured chunks, and preserves context and fallback during retrieval | Can serve as a structured-retrieval comparison without in-house training; graph propagation cannot replace teacher attribution or factual support |
 
-本地ScIRGen PDF是带KDD发表页的arXiv版本，正式发表另由KDD名单核实。MERIT、CaRR本地PDF带正式ACL Anthology页码。新增ETS、HippoRAG 2使用官方论文集PDF，而非仅凭文件名认定发表。
+The local ScIRGen PDF is an arXiv version with a KDD publication page; the formal publication was separately verified against the KDD list. The local MERIT and CaRR PDFs include the formal ACL Anthology pages. The newly added ETS and HippoRAG 2 use PDFs from the official proceedings, rather than inferring publication status from filenames alone.
 
-## 已新增PDF
+## Newly Added PDFs
 
-位于 `/Users/zhoudixin/Desktop/Lai/Benchmark/literatures/method/`：
+Located at `/Users/zhoudixin/Desktop/Lai/Benchmark/literatures/method/`:
 
 - `2025_ACL_Enhancing Retrieval-Augmented Generation via Evidence Tree Search.pdf`
 - `2025_ICML_From RAG to Memory - Non-Parametric Continual Learning for Large Language Models.pdf`
 
-原文、来源网址及SHA256另存于文献目录的新增清单。未修改用户已有论文，也未把预印本或期刊文章重命名为顶会论文。
+The original texts, source URLs, and SHA256 values are stored separately in the literature catalog’s additions list. The user’s existing papers were not modified, and no preprint or journal article was renamed as a top-conference paper.
 
-## 对现有实验的直接影响
+## Direct Implications for Existing Experiments
 
-目前在线适用性核验既慢又不稳定。新增EvidenceBench辅助开发对照只检验论文内证据选择：37篇、6310句，取10句时BM25/Qwen/MMR覆盖率为0.3375/0.4770/0.4599。Qwen前30句经Decisions独立重排为0.5619，平均在线2.816秒；同候选闭集chat集合选择为0.5904，平均请求2.040秒（35个有效输出、2个语义回退）。后者与前者差的区间跨零，运行时间也非随机配对，不主张接口优劣或完整系统收益。
+Current online applicability verification is both slow and unstable. The newly added EvidenceBench auxiliary development comparison tests only evidence selection within papers: 37 papers, 6310 sentences, and, when selecting 10 sentences, BM25/Qwen/MMR coverage rates of 0.3375/0.4770/0.4599. The top 30 Qwen sentences, independently reranked by Decisions, achieved 0.5619, with an average online time of 2.816 seconds; closed-set chat set selection over the same candidates achieved 0.5904, with an average request time of 2.040 seconds (35 valid outputs, 2 semantic fallbacks). The interval for the difference between the latter and the former crosses zero, and runtime was not randomly paired; no claim is made about interface superiority or gains to the complete system.
 
-它暴露了集合互补性与逐项相关性的区别，支持把集合选择加入强对照，而不是把独立概率排序直接等同于充分证据。该辅助数据由专家指导的上游流程生成和验证，不是所有句子均人工重标，也不是企业专家适用性金标。指标沿用上游方面覆盖定义，不能列作我们的新指标。
+This exposes the distinction between set complementarity and item-wise relevance, supporting the inclusion of set selection in strong comparisons rather than equating independent probability ranking directly with sufficient evidence. This auxiliary data was generated and validated by an expert-guided upstream process; not all sentences were manually relabeled, and it is not enterprise-expert applicability gold data. The metric follows the upstream aspect-coverage definition and cannot be listed as our new metric.
 
-## 下一项可证伪实验
+## Next Falsifiable Experiment
 
-考察需求无关的来源角色索引：只根据论文原文区分本研究方法、对象、发现及局限，保留原句和教师归属；背景及引用他人的研究另行标记。查询侧结合粗检索与原文回退，不从角色预测直接硬判专家能力。该方向与已有知识编译、上下文检索重叠，创新只能由特定场景的组合效果建立。
+Investigate demand-independent source-role indexing: distinguish, based only on the paper’s original text, the methods, subjects, findings, and limitations of the study; retain the original sentences and teacher attribution; and mark background and studies cited by others separately. On the query side, combine coarse retrieval with fallback to the original text; do not make hard judgments about expert capability directly from role prediction. This direction overlaps with existing knowledge compilation and contextual retrieval; innovation can only be established through combined effects in a specific setting.
 
-先在未用于调规则的来源证据测试上检验覆盖损失和在线调用节约，同时计入离线编译成本及复用条件；再回到真实企业需求与教师来源。若不能维持原文证据覆盖，不替换默认路径。未来目标、方法迁移与既往事实始终分开，不能把来源核验结果升级为完整项目能力标签。
+First test coverage loss and online-call savings on a source-evidence test set not used to tune rules, while also accounting for offline compilation costs and conditions for reuse; then return to real enterprise requirements and teacher sources. If original-text evidence coverage cannot be maintained, do not replace the default path. Future goals, method transfer, and established facts must always remain separate; source-verification results cannot be upgraded into complete project capability labels.

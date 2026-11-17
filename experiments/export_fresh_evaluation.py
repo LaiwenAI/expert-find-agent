@@ -27,7 +27,7 @@ def run():
     lineage=json.loads((ROOT/'raw-lineage.json').read_text());selection=json.loads((ROOT/'selection.json').read_text())
     for path,expected in lineage['raw_teacher_files'].items():
         if sha(Path(path))!=expected:raise ValueError('Original teacher file changed')
-    workbook=next(Path('data/真实企业需求').glob('*.xlsx'))
+    workbook=next(Path('data/\u771f\u5b9e\u4f01\u4e1a\u9700\u6c42').glob('*.xlsx'))
     if sha(workbook)!=selection['workbook_sha256']:raise ValueError('Original demand workbook changed')
     queries=[json.loads(s) for s in (ROOT/'queries.jsonl').read_text().splitlines()];jobs=[json.loads(s) for s in (ROOT/'evaluation-jobs.jsonl').read_text().splitlines()]
     wanted=set(json.loads((ROOT/'eligible-source-ids.json').read_text()));splits=json.loads((ROOT/'expert-splits.json').read_text())
@@ -44,7 +44,7 @@ def run():
                     seen.add(eid)
                     if eid not in splits:continue
                     provenance=dict(file=str(path),line=line,record_sha256=hashlib.sha256(body).hexdigest())
-                    experts.append(dict(id=eid,name=row.get('教师姓名_CN') or row.get('教师姓名_EN'),institution=row.get('机构名_CN',''),college=row.get('学院名_CN',''),url=row.get('教师详情页链接或访问方式_CN',''),split=splits[eid],provenance=provenance))
+                    experts.append(dict(id=eid,name=row.get('\u6559\u5e08\u59d3\u540d_CN') or row.get('\u6559\u5e08\u59d3\u540d_EN'),institution=row.get('\u673a\u6784\u540d_CN',''),college=row.get('\u5b66\u9662\u540d_CN',''),url=row.get('\u6559\u5e08\u8be6\u60c5\u9875\u94fe\u63a5\u6216\u8bbf\u95ee\u65b9\u5f0f_CN',''),split=splits[eid],provenance=provenance))
                     for field in FIELDS:
                         sid=eid+':'+field;value=row.get(field)
                         if sid not in wanted:continue

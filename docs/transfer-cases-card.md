@@ -1,37 +1,37 @@
-# 条件性方法迁移案例 v1
+# Conditional Method Transfer Cases v1
 
-本地目录：`artifacts/dataset-release/transfer-candidates-v1`。本集合用于区分“论文记录了什么”与“方法可能如何帮助企业需求”，当前不是专家排序金标或已验证高质量benchmark。
+Local directory: `artifacts/dataset-release/transfer-candidates-v1`. This collection is intended to distinguish “what the paper records” from “how the method might help with an enterprise need”; it is not currently an expert-ranking gold standard or a validated high-quality benchmark.
 
-## 构造与筛查
+## Construction and Screening
 
-复用固定20条完整真实需求，不按前期生成成败筛选。候选来自完整54409篇论文的Qwen检索首位专家及其前三来源前缀，每篇最多1200字符。生成器必须从一篇同作者论文中提出一个实际能力事实，再为一个真实目标操作给出条件性输入/输出连接、未验证假设和剩余需求缺口。所有引用通过原文句段ID恢复偏移，不生成引用字符串，不把独立论文拼成既往已经实现的系统。
+Reuse the fixed 20 complete real-world needs; do not filter based on whether earlier generation succeeded. Candidates come from the top-ranked experts returned by Qwen retrieval over all 54409 papers, and the first 1200 characters of each of their top three sources. The generator must identify an actual capability fact from a paper by the same author, then provide a conditional input/output connection for one real target operation, an unvalidated hypothesis, and the remaining need gap. All citations recover offsets through source sentence IDs; citation strings are not generated, and separate papers are not combined into a system that was supposedly already implemented.
 
-事实筛查使用gpt-6-luna原生Decisions；另一次chat请求隐藏生成器的机制、假设、缺口和引用选择，从完整需求与该论文重新构造连接。两者使用同一模型，不能称为独立审核。筛查通过仍只叫模型筛查候选，不叫已确认适合专家。
+Fact screening uses native Decisions in gpt-6-luna; a separate chat request hides the generator’s mechanism, hypothesis, gap, and citation selection, and reconstructs the connection from the complete need and that paper. Both use the same model, so they cannot be called independent reviews. Passing screening still means only a model-screened candidate, not a candidate confirmed as suitable for experts.
 
-| 阶段 | 数量 |
+| Stage | Count |
 |---|---:|
-| 固定原始需求/任务 | 20 |
-| 无提案 | 9 |
-| 条件性提案 | 11 |
-| 模型事实筛查与隐藏解释后的重建通过 | 11 |
-| 同作者真实来源控制对 | 8 |
-| 缺少真实替换论文 / 替换长度不足 | 1 / 2 |
-| 人工审核记录 / 已有人类标签 | 20 / 0 |
+| Fixed original needs/tasks | 20 |
+| No proposal | 9 |
+| Conditional proposal | 11 |
+| Passed model fact screening and reconstruction after hiding the explanation | 11 |
+| Same-author real-source control pairs | 8 |
+| Missing real replacement paper / replacement too short | 1 / 2 |
+| Human review records / existing human labels | 20 / 0 |
 
-控制视图删除关键论文及全文/首行标题的精确别名，再用同作者、原视图外的真实论文替换，保持文档数，字符数不低于原视图80%。8对在分开、随机先后次序的原生事实请求中呈现完整来源supported、控制来源unknown。这个标签只描述指定能力事实在快照中的支撑，不描述专家无能力、方法无法迁移或项目不适合。精确别名去重未证明不存在语义重复。
+The control view removes the key paper and exact aliases of its full-text/first-line title, then replaces it with a real paper by the same author that is outside the original view, keeping the document count unchanged and the character count at no less than 80% of the original view. In separate native fact requests with randomized order, all 8 pairs are presented as supported by the complete source and unknown for the control source. This label describes only whether the specified capability fact is supported in the snapshot; it does not describe an expert’s lack of ability, the method’s inability to transfer, or the project’s unsuitability. Deduplication of exact aliases does not establish the absence of semantic duplicates.
 
-## 文件与标签范围
+## Files and Label Scope
 
-- `cases.jsonl`：全部20条，保留拒绝和阶段状态、原需求、来源、能力事实、条件性机制、未验证假设及缺口。
-- `source-pairs.jsonl`：8对16视图。`model_fact_label`只适用于能力事实；`transfer_validity`、`expert_fit`及`human_review`均为空。
-- `human-review.jsonl`：全部20条，打乱顺序。第一阶段先审核原需求与来源，再在第二阶段查看提案；不显示模型筛查标签或算法排名。`source_case_id`用于本地回溯，不是模型标签。
-- `manifest.json`：输出与全部父工件的SHA256。
-- `verification.json`：当前引用归属、偏移、文档数与长度检查，非语义真值证明。
+- `cases.jsonl`: All 20 items, retaining refusals and stage status, original need, sources, capability facts, conditional mechanisms, unvalidated hypotheses, and gaps.
+- `source-pairs.jsonl`: 8 pairs, 16 views. `model_fact_label` applies only to capability facts; `transfer_validity`, `expert_fit`, and `human_review` are all empty.
+- `human-review.jsonl`: All 20 items, in shuffled order. In phase one, review the original need and sources; view the proposal only in phase two. Model screening labels and algorithmic rankings are not shown. `source_case_id` is for local traceability, not a model label.
+- `manifest.json`: SHA256 hashes for the outputs and all parent artifacts.
+- `verification.json`: Current checks of citation attribution, offsets, document counts, and lengths; not proof of semantic ground truth.
 
-案件、配对视图及审核包SHA256分别为`d1715e8d2e84a30685f6fdd3b8156d3742c19123659102c258ea4057e280a8e4`、`f733534afedb92a054672b1f63560217f2858be99c00bec995272471476ee82e`、`5afc4c2ca60245dcd7cfd73bed6bbc26cd06ff7efc68f971c84724fc5445a000`。
+The SHA256 hashes for the cases, paired views, and review package are `d1715e8d2e84a30685f6fdd3b8156d3742c19123659102c258ea4057e280a8e4`, `f733534afedb92a054672b1f63560217f2858be99c00bec995272471476ee82e`, and `5afc4c2ca60245dcd7cfd73bed6bbc26cd06ff7efc68f971c84724fc5445a000`, respectively.
 
-## 限制与发布
+## Limitations and Release
 
-全部来自已复用的20条开发需求，候选被检索器选择，论文仅保留前缀。当前与旧五对数据重合1条需求、1名专家，不作为新独立测试集，也不将两集合相加声称独立样本量。没有近重复、学术团队或研究家族切分审计。筛查收益不能当作检索准确率，同模型确认偏差、迁移解释的可证伪性及完整需求覆盖仍待检验。
+All items come from the 20 reused development needs; candidates were selected by the retriever, and only paper prefixes were retained. There is overlap with the old five-pair data: 1 need and 1 expert. This is not treated as a new independent test set, and the two collections are not added together to claim an independent sample size. No audit has been conducted for near-duplicates, academic teams, or research-family splits. Screening gains cannot be treated as retrieval accuracy; confirmation bias from using the same model, the falsifiability of transfer explanations, and coverage of complete needs remain to be tested.
 
-本集合含真实企业原需求和教师论文前缀，仅在本地保存；MIT软件许可不覆盖来源资料，源码包不包含这些文本和模型响应，当前尚未公开数据。源事实/条件性迁移分离是本研究拟探索的构造方式，原创性与质量尚未证实。
+This collection contains real enterprise needs and prefixes of teachers’ papers, and is stored locally only; the MIT software license does not cover the source materials. The source package does not include these texts or model responses, and the data have not yet been made public. Separating source facts from conditional transfer is a construction approach this study proposes to explore; its originality and quality have not yet been established.

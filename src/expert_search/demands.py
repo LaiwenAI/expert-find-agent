@@ -7,14 +7,14 @@ from .retrieval import Search
 
 def export(data='data', output='artifacts/demands', n=20, seed=42):
     from openpyxl import load_workbook
-    source=next((Path(data)/'真实企业需求').glob('*.xlsx'))
+    source=next((Path(data)/'\u771f\u5b9e\u4f01\u4e1a\u9700\u6c42').glob('*.xlsx'))
     book=load_workbook(source,read_only=True,data_only=True)
     sheet=book.active
     rows=list(sheet.values); header=list(rows[0]); records=[]
     for line,values in enumerate(rows[1:],2):
         r=dict(zip(header,values))
-        if r.get('命题名称') and r.get('命题内容及答题要求'):
-            records.append(dict(id=f'demand-{line}',title=r['命题名称'],query=r['命题名称']+'\n'+r['命题内容及答题要求'],url=r.get('详情链接'),source=f'{source}:{sheet.title}:{line}'))
+        if r.get('\u547d\u9898\u540d\u79f0') and r.get('\u547d\u9898\u5185\u5bb9\u53ca\u7b54\u9898\u8981\u6c42'):
+            records.append(dict(id=f'demand-{line}',title=r['\u547d\u9898\u540d\u79f0'],query=r['\u547d\u9898\u540d\u79f0']+'\n'+r['\u547d\u9898\u5185\u5bb9\u53ca\u7b54\u9898\u8981\u6c42'],url=r.get('\u8be6\u60c5\u94fe\u63a5'),source=f'{source}:{sheet.title}:{line}'))
     random.Random(seed).shuffle(records); records=records[:n]
     out=Path(output); out.mkdir(parents=True,exist_ok=True)
     (out/'queries.jsonl').write_text('\n'.join(json.dumps(r,ensure_ascii=False) for r in records)+'\n')

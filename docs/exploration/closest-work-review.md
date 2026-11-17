@@ -1,46 +1,46 @@
-# 最接近工作的进一步审查
+# Further Review of the Closest Related Work
 
-## 产业专家语义树（Feng 等，2026）
+## Industry Expert Semantic Tree (Feng et al., 2026)
 
-本地全文：docs/research/2026_MDPI_Bridging the Semantic Gap in Industry Academia Collaboration A Two-Stage RAG System for Intelligent Expert Recommendation.txt；DOI：https://doi.org/10.3390/mca31030102 。已阅读方法与实验部分。
+Local full text: docs/research/2026_MDPI_Bridging the Semantic Gap in Industry Academia Collaboration A Two-Stage RAG System for Intelligent Expert Recommendation.txt; DOI: https://doi.org/10.3390/mca31030102. The methods and experiments sections have been read.
 
-其方法包含离线领域/关键词抽取、语义归一化、领域—概念—成果—专家层次、在线 LLM 意图解析、语义匹配和峰值成果聚合，并提供 Top-3 平均聚合对照。实验规模为 100 位专家、999 篇论文、1,000 项专利、20 条人工标注真实需求。原文报告 P@5=0.784、R@10=0.812、平均检索延迟 115.8ms。
+Its method includes offline domain/keyword extraction, semantic normalization, a domain–concept–outcome–expert hierarchy, online LLM intent parsing, semantic matching, and peak-outcome aggregation, and provides a Top-3 average aggregation comparison. The experiment scale is 100 experts, 999 papers, 1,000 patents, and 20 manually annotated real-world needs. The original reports P@5=0.784, R@10=0.812, and an average retrieval latency of 115.8ms.
 
-这与本项目“产业术语→学术能力→专家证据”的任务非常接近。仅使用语义树、离线 LLM、峰值成果或 Top-3 聚合，不能作为独立贡献。应保留其有效设计并列为领域内比较对象。延迟比较需统一在线意图解析、网络编码和解释生成的计时边界，不能直接对比不同硬件和数据规模的论文数字。
+This is very close to this project’s task of “industry terminology → academic capabilities → expert evidence.” Using only a semantic tree, offline LLMs, peak-outcome aggregation, or Top-3 aggregation cannot constitute an independent contribution. Effective designs should be retained and this work included as an in-domain comparison. Latency comparisons require consistent timing boundaries for online intent parsing, network encoding, and explanation generation; figures from papers with different hardware and dataset sizes cannot be compared directly.
 
-可验证的差异方向：来源约束的合成任务及反事实修复、必要条件与未知状态、无需逐次生成的来源化能力卡、多分辨率召回与有限增量证据判定。是否带来增益仍以实验为准。
+Verifiable directions for differentiation: source-constrained synthetic tasks and counterfactual repair, necessary conditions and unknown states, sourced capability cards that do not require per-query generation, and multi-resolution recall with bounded incremental evidence determination. Whether these provide gains remains subject to experimental validation.
 
-## LiteRAG（2026 预印本）
+## LiteRAG (2026 preprint)
 
-全文：https://arxiv.org/html/2609.10239v1 。方法部分表明，它组合语义、词法及社区锚点信号，以查询自适应阈值和 hub 惩罚扩展子图，设定深度及扩展数量上限，最后构造紧凑关系链上下文。它已经将模型移出检索控制循环。
+Full text: https://arxiv.org/html/2609.10239v1. The methods section shows that it combines semantic, lexical, and community-anchor signals; expands subgraphs using query-adaptive thresholds and hub penalties; sets limits on depth and expansion count; and ultimately constructs compact relational-chain context. It has already moved the model out of the retrieval control loop.
 
-因此本项目应借鉴其算法化检索与紧凑证据思想，而非声称“离线组织、在线少生成”为新概念。差异应落在专家能力的条件组合与证据状态、数据合成审核闭环，以及质量—时间验证。该论文主要研究图问答，不能把其报告收益直接移用到专家排序。
+Therefore, this project should borrow its algorithmic retrieval and compact-evidence ideas, rather than claim that “offline organization and little online generation” is a new concept. The differences should lie in conditional combinations of expert capabilities and evidence states, the data-synthesis review loop, and quality–time validation. This paper primarily studies graph question answering, so its reported gains cannot be directly transferred to expert ranking.
 
-## 对当前实验的影响
+## Implications for the Current Experiments
 
-- 保留 dense、BM25、画像聚合及来源化摘要，分别作为基线或消融组件。
-- 图索引、早停、批处理和缓存引用已有工作，不因为已有就删除。
-- 研究结论围绕完整组合与数据/协议的实际贡献，避免以算法名称变化冒充新方法。
-- 必须报告领域内标签（CMU 等）和产业任务上的局限；SciFact 只验证检索组件。
-# 约束与范围评价的补充近邻审查
+- Retain dense, BM25, profile aggregation, and sourced summaries as baselines or ablation components, respectively.
+- Graph indexing, early stopping, batching, and cached references are already established techniques; do not remove them merely because they already exist.
+- Center the research conclusions on the actual contributions of the full combination and the data/protocol, avoiding presenting a change in algorithm name as a new method.
+- Limitations on in-domain labels (CMU, etc.) and industry tasks must be reported; SciFact validates only the retrieval component.
+# Supplementary Review of Nearby Work on Constraints and Scope Evaluation
 
-新增核对三项与当前数据/指标直接相关的原始工作：
+Three original works directly related to the current data/metrics were additionally checked:
 
-- FollowIR（NAACL 2025，https://arxiv.org/html/2403.15246v3 ）使用成对修改的检索指令及 p-MRR 检查排序是否响应条件变化。我们的单条件反事实并非新的评价思想；需要保留该基线，并区分排序响应与证据支持正确性。
-- ComLQ（AAAI 2026，https://arxiv.org/html/2511.12004v2 ）构造带逻辑结构的查询，并以 LSNC 检查否定约束。以 LLM 加逻辑结构合成复杂检索任务、补充约束违反指标都有明确前作，不能声称首次。其生成数据有专家验证；我们当前模型审核不具同等保证。官方代码/数据入口为 https://github.com/xgl-git/ComLQR-main ，尚未接入本地检索实验。
-- n-Clue（2026 预印本，https://arxiv.org/abs/2607.24165 ，官方仓库 https://github.com/sunggukcha/n_clue ）评价完整条件证据相对部分条件匹配的排序，直接覆盖“只满足部分条件不应被高分补偿”的动机。我们的 mandatory gate 需要与其 complete-first / n-Clue Score 比较；不能把 AND 门控本身视为新理论。当前仓库准备下载用于独立复算，尚未将冻结榜单结果当作本方法成绩。
+- FollowIR (NAACL 2025, https://arxiv.org/html/2403.15246v3) uses paired, modified retrieval instructions and p-MRR to check whether rankings respond to changes in conditions. Our single-condition counterfactual is not a new evaluation idea; this baseline should be retained, and ranking responsiveness should be distinguished from the correctness of evidence support.
+- ComLQ (AAAI 2026, https://arxiv.org/html/2511.12004v2) constructs queries with logical structure and uses LSNC to check negation constraints. Using LLMs with logical structures to synthesize complex retrieval tasks, and adding constraint-violation metrics, both have clear prior work; we cannot claim to be the first. Its generated data are expert-validated; our current model review does not offer an equivalent guarantee. The official code/data entry point is https://github.com/xgl-git/ComLQR-main; it has not yet been integrated into local retrieval experiments.
+- n-Clue (2026 preprint, https://arxiv.org/abs/2607.24165, official repository https://github.com/sunggukcha/n_clue) evaluates the ranking of complete-constraint evidence relative to partial-constraint matches, directly addressing the motivation that “satisfying only some conditions should not be compensated for by a high score.” Our mandatory gate needs to be compared with its complete-first / n-Clue Score; AND gating itself cannot be treated as a new theory. The current repository is preparing to download it for independent reproduction; frozen leaderboard results have not been treated as results for our method.
 
-可能保留的场景差异是：同一专家多来源能力证据、独立能力与联合应用的关系范围、资料缺失与实际不具备能力的区分，以及限定端到端时间下的证据完成度。这些仍是待验证的组合研究方向，不是已证明的原创贡献。
+Potentially distinctive aspects of the setting are: capability evidence from multiple sources for the same expert, the scope of relationships between independent capabilities and joint applications, the distinction between missing information and an actual lack of capability, and evidence completeness under a bounded end-to-end time. These remain directions for combined research that require validation, not original contributions that have been proven.
 
-后续实测更新：n-Clue 固定提交 8a19258 的官方声明和文件校验全部通过；ComLQ 固定提交 93d3219 的 11,251 文档、2,909 查询已接入并跑完 BM25/TF-IDF，摘要见 comlq-lexical-results.json。前者为冻结榜单复算，后者是本地新运行的词法基线，不能混称为我们的模型方法成绩。
+Follow-up empirical update: All official declarations and file checksums for n-Clue’s fixed commit 8a19258 passed; ComLQ’s fixed commit 93d3219, with 11,251 documents and 2,909 queries, has been integrated and BM25/TF-IDF runs have been completed. The summary is in comlq-lexical-results.json. The former is a reproduction of a frozen leaderboard; the latter is a newly run local lexical baseline. They must not be conflated with results for our model method.
 
 
-## 查询关联与标注预算的进一步边界
+## Further Boundaries for Query-Association and Annotation Budgets
 
-[Diaz 等（CIKM 2020）](https://www.microsoft.com/en-us/research/publication/evaluating-stochastic-rankings-with-expected-exposure/)研究重复查询下的期望曝光与公平性。[Boratto 等（IPM 2021）](https://arxiv.org/abs/2006.04275)提出基于物品推荐概率和真阳性率的流行度相关评价。当前跨查询曝光—相关性关联并不等同于这两种定义，但它不是“首次消除流行度影响”的证据。
+[Diaz et al. (CIKM 2020)](https://www.microsoft.com/en-us/research/publication/evaluating-stochastic-rankings-with-expected-exposure/) study expected exposure and fairness under repeated queries. [Boratto et al. (IPM 2021)](https://arxiv.org/abs/2006.04275) propose popularity-related evaluation based on item recommendation probabilities and true-positive rates. The current cross-query exposure–relevance association is not equivalent to either definition, but it is not evidence of “being the first to eliminate popularity effects.”
 
-[Schnabel 等（ICTIR 2016）](https://www.microsoft.com/en-us/research/publication/unbiased-comparative-evaluation-ranking-functions/)把缺失判定下的系统比较写成 Monte Carlo 估计，给出无偏估计及优化采样分布。我们的确定性盒区间与按绝对系数优先询问，处理的是固定未知标签的最坏情形宽度；不能把它包装成新无偏采样理论，也不能将识别区间称为置信区间。回放显示 lift 的标注成本可能远高于普通精度差，当前不具已验证的指标贡献。
+[Schnabel et al. (ICTIR 2016)](https://www.microsoft.com/en-us/research/publication/unbiased-comparative-evaluation-ranking-functions/) formulate system comparison under missing judgments as a Monte Carlo estimate, providing an unbiased estimator and an optimized sampling distribution. Our deterministic box intervals and querying by priority of absolute coefficient address the worst-case width for fixed unknown labels; they cannot be presented as a new unbiased sampling theory, nor can identification intervals be called confidence intervals. Replay shows that the annotation cost of lift may be far higher than that of ordinary precision differences; currently, there is no validated metric contribution.
 
-## 必须保留的经典专家模型
+## Classic Expert Models That Must Be Retained
 
-[Balog、Azzopardi、de Rijke（SIGIR 2006）](https://doi.org/10.1145/1148170.1148181)分别在候选词分布与文档查询似然层面进行边缘化。我们实现了文档归一化关联下的 Model 1，以及文档中心/候选中心两种关联下的 Model 2，固定 λ=.5，无标签调参。候选词分布是归一化文档概率的平均，不能错误实现成拼接词频。预编译加性词—专家贡献是工程优化，当前语义排序本身仍是经典模型。NIPS 结果提醒后续方法不能只对比 BM25 和弱画像融合。
+[Balog, Azzopardi, de Rijke (SIGIR 2006)](https://doi.org/10.1145/1148170.1148181) marginalize at the candidate-term distribution and document-query likelihood levels, respectively. We implemented Model 1 with document-normalized association, and Model 2 with both document-centered and candidate-centered association, fixing λ=.5 with no label-based tuning. The candidate-term distribution is the average of normalized document probabilities; it must not be incorrectly implemented as concatenated term frequencies. Precompiled additive term–expert contributions are an engineering optimization; the semantic ranking itself remains a classic model. The NIPS results are a reminder that subsequent methods must not compare only against BM25 and weak profile fusion.

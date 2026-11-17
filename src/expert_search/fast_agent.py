@@ -25,7 +25,7 @@ class FastExpertAgent:
 
     def events(self,query,k=5,explain=False):
         if not query.strip() or k<1:raise ValueError('Invalid query or k')
-        start=time.perf_counter();explicit=re.findall('「([^」]+)」',query)
+        start=time.perf_counter();explicit=re.findall('\u300c([^\u300d]+)\u300d',query)
         if explicit:
             matches=set(self.literal.get(explicit[0],set()))
             for term in explicit[1:]:matches.intersection_update(self.literal.get(term,set()))

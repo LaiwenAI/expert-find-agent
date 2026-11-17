@@ -1,17 +1,17 @@
-# 需求锚定的同作者来源控制数据
+# Requirement-Anchored, Same-Author Source-Control Data
 
-当前本地版本：`artifacts/dataset-release/paper-controls-combined-v3`，5对、10视图。每对包含完整来源视图和同作者论文替换视图；标签分别为supported和unknown，仅描述快照对指定窄条件的支持。unknown不是专家无能力，不是相关性负例。全部为同一提供商的双模型银标，没有人工金标。
+Current local version: `artifacts/dataset-release/paper-controls-combined-v3`, 5 pairs, 10 views. Each pair contains a full-source view and a same-author paper-replacement view; labels are `supported` and `unknown`, and describe only whether the snapshot supports the specified narrow condition. `unknown` does not mean expert incompetence and is not a relevance negative. All labels are silver labels from two models from the same provider; there are no human gold labels.
 
-| 构造队列 | 对数 | 选择方式 |
+| Construction cohort | Pair count | Selection method |
 |---|---:|---|
-| development | 2 | 前期领域重合及论文来源探索 |
-| new_cohort | 2 | 排除早期需求/专家ID后固定抽样，仍受领域重合与论文可用性限制 |
-| demand_first | 1 | 复用原固定20条需求，全库论文向量首位专家及其前三来源 |
+| development | 2 | Early exploration of domain overlap and paper sources |
+| new_cohort | 2 | Fixed sampling after excluding early demand/expert IDs; still limited by domain overlap and paper availability |
+| demand_first | 1 | Reuse the original fixed 20 demands; take the top-ranked expert by paper-vector search across the full corpus and that expert's top three sources |
 
-需求先行漏斗完整保留：20条需求→20个检索任务→9个构造候选→4个双模型支持候选→3对可构造真实替换视图→1对双模型控制接纳。11个不可直接构造任务不代表没有潜在合适专家；5个跨度审查拒绝、1个缺替换来源、2个控制审查分歧未被删除或改成确定标签。构造收益不是检索准确率。
+The demand-first funnel is retained in full: 20 demands -> 20 retrieval tasks -> 9 construction candidates -> 4 candidates supported by both models -> 3 pairs for which a genuine replacement view can be constructed -> 1 pairs accepted by both models for the control. The 11 tasks that cannot be directly constructed do not mean there are no potentially suitable experts; the 5 span-review rejections, 1 cases missing a replacement source, and 2 control-review disagreements were not deleted or changed to definitive labels. Construction yield is not retrieval accuracy.
 
-记录保留完整原需求、窄条件、剩余需求缺口、来源归属及快照、引用偏移、模型审核、队列及父工件哈希。examples SHA256：`a2bd29e467c3a4945bcbd96fe7554f05a102bfcdb761f3f984b71dd7bc1bf52a`。三个队列两两的专家ID、需求ID、规范化条件和来源全文精确重合均为零；尚未检查语义近重复。不得仅据精确去重宣布无泄漏。
+Records retain the complete original demand, narrow condition, remaining demand gap, source attribution and snapshot, citation offsets, model reviews, cohort, and parent-artifact hashes. examples SHA256: `a2bd29e467c3a4945bcbd96fe7554f05a102bfcdb761f3f984b71dd7bc1bf52a`. Across the three cohorts, exact overlap in expert IDs, demand IDs, normalized conditions, and full source text is zero for every pair of cohorts; semantic near-duplicates have not yet been checked. Do not declare the data leakage-free based only on exact deduplication.
 
-当前无训练/测试切分。配对视图不是独立样本；未来切分必须以需求、专家和共享来源的连通分组为单位，保留构造时的全部拒绝及分歧。样本太少，不用于显著性、泛化能力或系统SOTA结论。文献事实支持与未来需求适用性须分开评价，不能把该二分类标签用作完整项目能力金标。
+There is currently no train/test split. Paired views are not independent samples; future splitting must use connected groups formed by demand, expert, and shared sources, and retain all construction-time rejections and disagreements. The sample is too small for conclusions about statistical significance, generalization ability, or system SOTA. Evidence for facts in the literature and applicability to future demands must be evaluated separately; this binary label must not be used as a gold label for overall project capability.
 
-本数据目前仅为本地研究工件，包含原始企业需求及教师论文片段。MIT软件许可不覆盖这些来源，尚未公开发布，未完成数据来源再分发授权说明。源码审阅包包含代码和本卡，不包含原始文本、数据样本及模型轨迹。公开benchmark适配器与本合成数据是不同交付物。
+This data is currently only a local research artifact and contains original enterprise demands and excerpts from instructor papers. The MIT software license does not cover these sources; the data has not been publicly released, and documentation of authorization to redistribute the data sources is incomplete. The source-review package contains code and this card, but not the original text, data samples, or model traces. The public benchmark adapter and this synthetic data are separate deliverables.

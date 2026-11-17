@@ -1,41 +1,41 @@
-# Benchmark 结果
+# Benchmark Results
 
-历史研究入口；当前任务定义、证据边界与最新结果以 [SIGIR英文LaTeX主稿](paper/sigir/main.tex) 为准。资料不足不作为真实能力负标签。
-任务：留出论文标题→已知关联专家恢复。代理标签来自论文归属，不是人工需求相关性。
-语料 SHA256：`925c6e60d3db3d6f7d13ff3f8bd850d2e0202b2205c0281314c6625773a50537`；随机种子 42。
+Historical research entry point; the current task definition, evidence boundaries, and latest results are governed by the [SIGIR English LaTeX main manuscript](paper/sigir/main.tex). Insufficient data is not treated as a negative label for actual capability.
+Task: recover known associated experts from held-out paper titles. Proxy labels come from paper attribution, not human judgments of relevance.
+Corpus SHA256: `925c6e60d3db3d6f7d13ff3f8bd850d2e0202b2205c0281314c6625773a50537`; random seed 42.
 
-## 全部基线查询
+## All baseline queries
 
-| 方法 | 查询数 | nDCG@10 | MRR@10 | Recall@10 | 平均秒数 |
+| Method | Number of queries | nDCG@10 | MRR@10 | Recall@10 | Average seconds |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | bm25-max | 30 | 0.3848 | 0.3541 | 0.5333 | 1.482 |
 | bm25-vote | 30 | 0.4052 | 0.3572 | 0.6333 | 1.439 |
 | tfidf-max | 30 | 0.3274 | 0.3233 | 0.3833 | 1.452 |
 
-## 同一模型评测查询子集
+## Evaluation query subset shared with the same model
 
-| 方法 | 查询数 | nDCG@10 | MRR@10 | Recall@10 | 平均秒数 |
+| Method | Number of queries | nDCG@10 | MRR@10 | Recall@10 | Average seconds |
 | --- | ---: | ---: | ---: | ---: | ---: |
 | bm25-max | 10 | 0.5642 | 0.5147 | 0.8500 | 1.508 |
 | bm25-vote | 10 | 0.5675 | 0.5083 | 0.8500 | 1.436 |
 | hybrid-evidence-tree | 10 | 0.5551 | 0.5500 | 0.6000 | 16.451 |
 | tfidf-max | 10 | 0.5244 | 0.5500 | 0.5500 | 1.456 |
 
-模型实验失败数：0。失败按零分计入，不能只汇总成功请求。
+Failed model experiments: 0. Failures are counted as zero scores; successful requests alone must not be aggregated.
 
-配对 bootstrap（2,000 次，seed=42）：树 agent 减 BM25-vote 的 nDCG@10 差值。
-平均差 -0.0124，95% bootstrap 区间 [-0.2631, 0.2339]。小样本结果不应外推。
+Paired bootstrap (2,000 iterations, seed=42): tree agent minus BM25-vote difference in nDCG@10.
+Mean difference -0.0124, 95% bootstrap interval [-0.2631, 0.2339]. Results from this small sample should not be extrapolated.
 
-成功请求总 prompt tokens：312027；completion tokens：6754。未配置价格表，不估算金额。
-成功请求的候选集已知作者召回率：0.9000；这约束后续排序可达上限。
+Total prompt tokens for successful requests: 312027; completion tokens: 6754. No price list was configured, so monetary cost is not estimated.
+Recall of known authors in the candidate set for successful requests: 0.9000; this constrains the attainable ceiling for subsequent ranking.
 
-## 解释限制
+## Interpretation limitations
 
-作者归属不包含所有相关专家；Recall 是已知标签恢复率。标题对应证据及所有包含该完整标题的字段均被排除；相关论文和改写内容仍可提供信息。集合统计仍包含被排除文档。
-基线在同一进程顺序运行，耗时包含缓存效应；模型耗时还受服务负载影响。没有人工 gold 和统计显著性证据，不能据此声称真实企业需求上的优越性。
-树 agent 的首阶段候选受 BM25 限制，后续模型查证可能改善解释，也可能损失排名；需结合逐查询结果检查。
-原始数据：artifacts/benchmark/runs.jsonl；模型阶段输出和来源：artifacts/agent-benchmark/paper-*.json。
+Author attribution does not include all relevant experts; Recall is the recovery rate for known labels. Evidence corresponding to the title and all fields containing that complete title were excluded; related papers and paraphrased content may still provide information. Aggregate set statistics still include excluded documents.
+Baselines ran sequentially in the same process, and runtime includes caching effects; model runtime is also affected by service load. Without human gold labels and evidence of statistical significance, these results cannot support claims of superiority on actual enterprise needs.
+The tree agent's first-stage candidates are limited by BM25. Subsequent model verification may improve explanations, but may also cause ranking losses; per-query results should be examined.
+Raw data: artifacts/benchmark/runs.jsonl; model-stage outputs and sources: artifacts/agent-benchmark/paper-*.json.
 
-## 本次结论
+## Conclusion for this run
 
-在同一 10 查询子集上，树 agent 的 nDCG@10 为 0.5551，低于 BM25-vote 的 0.5675；配对区间包含零，没有优越性证据。模型路径更慢，并消耗额外 token。其已验证的功能是沿专家证据树查证、提供原文来源和列出缺失要求。当前建议把 BM25-vote 作为快速检索入口，按需使用 agent 提供查证说明。此建议仅基于当前代理实验的工程权衡，不是对真实需求推荐效果的证明。
+On the same 10-query subset, the tree agent's nDCG@10 was 0.5551, below BM25-vote's 0.5675; the paired interval includes zero, so there is no evidence of superiority. The model path is slower and consumes additional tokens. Its verified functions are checking evidence along an expert evidence tree, providing original-text sources, and listing missing requirements. The current recommendation is to use BM25-vote as a fast retrieval entry point and, when needed, use the agent to provide verification explanations. This recommendation is based only on engineering trade-offs in the current proxy experiment, and does not prove recommendation effectiveness for actual needs.

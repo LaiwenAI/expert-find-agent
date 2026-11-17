@@ -13,7 +13,7 @@ from .progressive_dense import top_indices
 def build(output='artifacts/chinese-concepts'):
     out=Path(output);out.mkdir(parents=True,exist_ok=True);concepts=defaultdict(list)
     for _,r in records('artifacts/corpus/evidence.jsonl'):
-        if r.get('field')!='研究领域_CN':continue
+        if r.get('field')!='\u7814\u7a76\u9886\u57df_CN':continue
         for phrase in r['text'].splitlines():
             phrase=phrase.strip()
             if 3<=len(phrase)<=40:

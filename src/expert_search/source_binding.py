@@ -78,10 +78,10 @@ def candidate_families(demand, postings, limit=20, screen=True):
     # Longest matched substrings reduce redundant nested phrases; this is NOT
     # a technical-term or requirement-span validator.
     maximal = sorted(p for p in eligible if not any(p != other and p in other for other in eligible))
-    # Mining without this gate produces fragments such as “技术的”/“与应用”.
+    # This gate excludes syntactically incomplete fragments rather than treating them as capabilities.
     # Passing is only a syntactic screen, never proof of technical relevance.
-    functional = set('的与于及和为在对是其该本了中以按从由将所等')
-    generic = {'影响因素', '系统设计', '研究方法', '研究结果', '发展趋势'}
+    functional = set('\u7684\u4e0e\u4e8e\u53ca\u548c\u4e3a\u5728\u5bf9\u662f\u5176\u8be5\u672c\u4e86\u4e2d\u4ee5\u6309\u4ece\u7531\u5c06\u6240\u7b49')
+    generic = {'\u5f71\u54cd\u56e0\u7d20', '\u7cfb\u7edf\u8bbe\u8ba1', '\u7814\u7a76\u65b9\u6cd5', '\u7814\u7a76\u7ed3\u679c', '\u53d1\u5c55\u8d8b\u52bf'}
     if screen:
         maximal = [p for p in maximal if len(p) >= 4 and not any(c in functional for c in p) and p not in generic]
     pairs = list(itertools.combinations(maximal, 2))
@@ -132,9 +132,9 @@ def build(output='artifacts/source-binding', per_demand=20):
             demand_spans = [dict(start=demand['query'].index(f), end=demand['query'].index(f)+len(f), quote=f) for f in facets]
             queries = []
             for mode in ('same_record', 'distinct_records'):
-                rule = ('至少一条题名记录同时逐字包含' if mode == 'same_record' else
-                        '至少两条不同题名记录，分别逐字包含以下各项（同一条记录不能重复使用）')
-                query = '检索当前资料库中的专家：'+rule+'“'+facets[0]+'”和“'+facets[1]+'”。仅判断题名记录，不推断解决企业问题的能力；规范化后相同题名算同一记录。'
+                rule = ('\u81f3\u5c11\u4e00\u6761\u9898\u540d\u8bb0\u5f55\u540c\u65f6\u9010\u5b57\u5305\u542b' if mode == 'same_record' else
+                        '\u81f3\u5c11\u4e24\u6761\u4e0d\u540c\u9898\u540d\u8bb0\u5f55\uff0c\u5206\u522b\u9010\u5b57\u5305\u542b\u4ee5\u4e0b\u5404\u9879\uff08\u540c\u4e00\u6761\u8bb0\u5f55\u4e0d\u80fd\u91cd\u590d\u4f7f\u7528\uff09')
+                query = '\u68c0\u7d22\u5f53\u524d\u8d44\u6599\u5e93\u4e2d\u7684\u4e13\u5bb6\uff1a'+rule+'“'+facets[0]+'\u201d\u548c\u201c'+facets[1]+'\u201d\u3002\u4ec5\u5224\u65ad\u9898\u540d\u8bb0\u5f55\uff0c\u4e0d\u63a8\u65ad\u89e3\u51b3\u4f01\u4e1a\u95ee\u9898\u7684\u80fd\u529b\uff1b\u89c4\u8303\u5316\u540e\u76f8\u540c\u9898\u540d\u7b97\u540c\u4e00\u8bb0\u5f55\u3002'
                 certificates = {}
                 for expert, witness in family[mode].items():
                     certificates[expert] = [dict(record_key=key, evidence_ids=sorted(edges[expert, key]),

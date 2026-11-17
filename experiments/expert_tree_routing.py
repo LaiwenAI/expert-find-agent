@@ -13,7 +13,7 @@ def routing_inputs():
     catalog=ExpertCatalog();items=[]
     for eid,tree in sorted(trees.items()):
         for source in catalog.for_experts([eid]):
-            if source.get('field') in ('研究领域_CN','研究领域_EN'):
+            if source.get('field') in ('\u7814\u7a76\u9886\u57df_CN','\u7814\u7a76\u9886\u57df_EN'):
                 items.append(dict(id=source['id'],expert_id=eid,kind='area',text=source['text'],source_ids=[source['id']]))
         for node in tree['nodes']:
             items.append(dict(id=node['id'],expert_id=eid,kind='node',verified=audited[eid][node['id']]=='supported',

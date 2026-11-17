@@ -18,7 +18,7 @@ POLICY='pool-v1:bm25-max5,bm25-vote5,area5;common-top3-plus-area;4000chars/sourc
 def prepare(source='artifacts/dataset-release/scoped-capabilities/pairs.jsonl',output='artifacts/pooled-scope'):
     out=Path(output);out.mkdir(parents=True,exist_ok=True)
     engine=FastSearch('artifacts/corpus','artifacts/fast-search.sqlite');area=AreaSearch()
-    profiles={r['expert_id']:r for _,r in records('artifacts/corpus/evidence.jsonl') if r.get('field')=='研究领域_CN'}
+    profiles={r['expert_id']:r for _,r in records('artifacts/corpus/evidence.jsonl') if r.get('field')=='\u7814\u7a76\u9886\u57df_CN'}
     queries=[r for _,r in records(source)];contexts=[];runs=[]
     for query in queries:
         rankings={method:[r['id'] for r in engine.search(query['query'],5,method)]

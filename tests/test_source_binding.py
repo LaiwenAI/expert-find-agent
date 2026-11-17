@@ -24,8 +24,8 @@ class SourceBindingTest(unittest.TestCase):
     def test_duplicate_titles_do_not_create_independence(self):
         self.assertEqual(record_key('Alpha  BETA'), record_key('alpha beta'))
         postings, _, edges = phrase_index([
-            dict(id='p1', expert_id='e', title='机器学习图像识别'),
-            dict(id='p2', expert_id='e', title='机器学习图像识别')])
-        first, second = postings['机器学习']['e'], postings['图像识别']['e']
+            dict(id='p1', expert_id='e', title='\u673a\u5668\u5b66\u4e60\u56fe\u50cf\u8bc6\u522b'),
+            dict(id='p2', expert_id='e', title='\u673a\u5668\u5b66\u4e60\u56fe\u50cf\u8bc6\u522b')])
+        first, second = postings['\u673a\u5668\u5b66\u4e60']['e'], postings['\u56fe\u50cf\u8bc6\u522b']['e']
         self.assertIsNone(binding_witness([first, second], 'distinct_records'))
         self.assertEqual(len(edges['e', next(iter(first))]), 2)

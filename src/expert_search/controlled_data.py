@@ -10,11 +10,11 @@ from .corpus import records
 def build(limit=500,seed=42,output='artifacts/controlled-constraints'):
     areas=defaultdict(set);spans={};sources={}
     for _,r in records('artifacts/corpus/evidence.jsonl'):
-        if r.get('field')!='研究领域_CN':continue
+        if r.get('field')!='\u7814\u7a76\u9886\u57df_CN':continue
         cursor=0
         for line in r['text'].splitlines(keepends=True):
             phrase=line.strip()
-            if 3<=len(phrase)<=40 and not any(x in phrase for x in ['http','。','：']):
+            if 3<=len(phrase)<=40 and not any(x in phrase for x in ['http','\u3002','\uff1a']):
                 areas[phrase].add(r['expert_id'])
                 spans[(r['expert_id'],phrase)]=dict(evidence_id=r['id'],start=cursor+line.index(phrase),end=cursor+line.index(phrase)+len(phrase),source=r['source'])
                 sources[r['id']]=r['text']
@@ -31,7 +31,7 @@ def build(limit=500,seed=42,output='artifacts/controlled-constraints'):
         used.add(key);support=areas[a]&areas[b];partial=areas[a]^areas[b]
         references=[dict(constraint=phrase,**spans[(eid,phrase)]) for phrase in [a,b]]
         for ref in references:assert sources[ref['evidence_id']][ref['start']:ref['end']]==ref['constraint']
-        rows.append(dict(id='conjunction-'+str(len(rows)),query=f'寻找公开研究方向同时明确列有「{a}」与「{b}」的专家',
+        rows.append(dict(id='conjunction-'+str(len(rows)),query=f'\u5bfb\u627e\u516c\u5f00\u7814\u7a76\u65b9\u5411\u540c\u65f6\u660e\u786e\u5217\u6709\u300c{a}\u300d\u4e0e\u300c{b}\u300d\u7684\u4e13\u5bb6',
             constraints=[a,b],known_both=sorted(support),known_one=sorted(partial),construction_expert=eid,references=references,
             label_semantics='Exact phrase membership in indexed research-area lines, not actual ability or semantic relevance'))
         if len(rows)==limit:break

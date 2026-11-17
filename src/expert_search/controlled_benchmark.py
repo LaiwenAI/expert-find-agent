@@ -13,7 +13,7 @@ def run(output='artifacts/controlled-constraints/results'):
     out=Path(output);out.mkdir(parents=True,exist_ok=True)
     index=defaultdict(set)
     for _,r in records('artifacts/corpus/evidence.jsonl'):
-        if r.get('field')=='研究领域_CN':
+        if r.get('field')=='\u7814\u7a76\u9886\u57df_CN':
             for line in r['text'].splitlines():index[line.strip()].add(r['expert_id'])
     engine=FastSearch('artifacts/corpus','artifacts/fast-search.sqlite');rows=[]
     for _,q in records('artifacts/controlled-constraints/queries.jsonl'):
@@ -23,7 +23,7 @@ def run(output='artifacts/controlled-constraints/results'):
             else:
                 start=time.perf_counter()
                 if method=='explicit-conjunction-reference':
-                    terms=re.findall('「([^」]+)」',q['query'])
+                    terms=re.findall('\u300c([^\u300d]+)\u300d',q['query'])
                     if len(terms)!=2:raise ValueError('Unsupported query grammar')
                     ranking=sorted(index[terms[0]]&index[terms[1]])[:10]
                 else:ranking=[r['id'] for r in engine.search(q['query'],10,method)]

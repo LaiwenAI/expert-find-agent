@@ -9,13 +9,13 @@ import unicodedata
 from .constraints import numeric_anchors, UNIT
 
 COMPARATORS = (
-    ('>=', r'not (?:below|under|lower than|less than)|no (?:less|lower) than|at least|不低于|不少于|不小于|大于等于|至少|≥|>='),
-    ('<=', r'not (?:above|over|higher than|greater than|more than)|no (?:greater|higher|more) than|at most|up to|不超过|不高于|不大于|小于等于|至多|≤|<='),
-    ('>', r'greater than|more than|higher than|over|above|大于|超过|高于|>'),
-    ('<', r'less than|lower than|under|below|小于|低于|<'),
+    ('>=', 'not (?:below|under|lower than|less than)|no (?:less|lower) than|at least|\u4e0d\u4f4e\u4e8e|\u4e0d\u5c11\u4e8e|\u4e0d\u5c0f\u4e8e|\u5927\u4e8e\u7b49\u4e8e|\u81f3\u5c11|\u2265|>='),
+    ('<=', 'not (?:above|over|higher than|greater than|more than)|no (?:greater|higher|more) than|at most|up to|\u4e0d\u8d85\u8fc7|\u4e0d\u9ad8\u4e8e|\u4e0d\u5927\u4e8e|\u5c0f\u4e8e\u7b49\u4e8e|\u81f3\u591a|\u2264|<='),
+    ('>', 'greater than|more than|higher than|over|above|\u5927\u4e8e|\u8d85\u8fc7|\u9ad8\u4e8e|>'),
+    ('<', 'less than|lower than|under|below|\u5c0f\u4e8e|\u4f4e\u4e8e|<'),
     ('+/-', r'plus or minus|±'),
 )
-NEGATION = re.compile(r'\b(?:not|no|never|without|neither)\b|不|未|非|无', re.I)
+NEGATION = re.compile('\\b(?:not|no|never|without|neither)\\b|\u4e0d|\u672a|\u975e|\u65e0', re.I)
 
 
 def checked_anchors(text):
@@ -23,7 +23,7 @@ def checked_anchors(text):
     for row in rows:
         prefix = unicodedata.normalize('NFKC', text[max(0, row['start'] - 100):row['start']])
         # A conservative clause scope. Negation in an earlier clause is irrelevant.
-        prefix = re.split(r'[。；;!?！？\n,，]', prefix)[-1]
+        prefix = re.split('[\u3002\uff1b;!?\uff01\uff1f\\n,\uff0c]', prefix)[-1]
         operator = None
         residue = prefix
         for name, expression in COMPARATORS:
@@ -37,7 +37,7 @@ def checked_anchors(text):
             suffix = unicodedata.normalize('NFKC', text[row['end']:row['end'] + 30])
             unit = UNIT.match(suffix)
             postfix = suffix[unit.end():] if unit else suffix
-            if re.match(r'\s*(?:以上|以下)', postfix):
+            if re.match('\\s*(?:\u4ee5\u4e0a|\u4ee5\u4e0b)', postfix):
                 operator = row['operator']
         row['operator'] = operator
         row['uncertain_negation'] = bool(NEGATION.search(residue))

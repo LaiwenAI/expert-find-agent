@@ -27,16 +27,16 @@ def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()
 
 def run():
     parent=Path('artifacts/fresh-method-data-v1');selection=json.loads((parent/'selection.json').read_text());registry=json.loads((parent/'prior-use.json').read_text());old=list(map(json.loads,(parent/'queries.jsonl').read_text().splitlines()))
-    workbook=Path('data/真实企业需求/全国大学生创业服务网_产业命题.xlsx')
+    workbook=Path('data/\u771f\u5b9e\u4f01\u4e1a\u9700\u6c42/\u5168\u56fd\u5927\u5b66\u751f\u521b\u4e1a\u670d\u52a1\u7f51_\u4ea7\u4e1a\u547d\u9898.xlsx')
     if sha(workbook)!=selection['workbook_sha256']:raise ValueError('Changed original workbook')
     old_ids=set(registry['demand_ids'])|{r['id'] for r in old};old_aliases=set(registry['query_hashes'])
     for r in old:
         old_aliases.add(conservative_prior_hash(r['demand']));old_aliases.add(conservative_prior_hash(r['demand'].split('\n',1)[1]))
     book=load_workbook(workbook,read_only=True,data_only=True);lines=iter(book.active.values);header=list(next(lines));rows=[]
     for line,values in enumerate(lines,2):
-        r=dict(zip(header,values));title=r.get('命题名称');body=r.get('命题内容及答题要求')
+        r=dict(zip(header,values));title=r.get('\u547d\u9898\u540d\u79f0');body=r.get('\u547d\u9898\u5185\u5bb9\u53ca\u7b54\u9898\u8981\u6c42')
         if not title or not body:continue
-        text=str(title)+'\n'+str(body);rows.append(dict(id='demand-'+str(line),zh=text,title=str(title),company=str(r.get('命题企业') or ''),category=str(r.get('命题类别') or ''),track=str(r.get('命题组别') or ''),url=r.get('详情链接'),source_row=line))
+        text=str(title)+'\n'+str(body);rows.append(dict(id='demand-'+str(line),zh=text,title=str(title),company=str(r.get('\u547d\u9898\u4f01\u4e1a') or ''),category=str(r.get('\u547d\u9898\u7c7b\u522b') or ''),track=str(r.get('\u547d\u9898\u7ec4\u522b') or ''),url=r.get('\u8be6\u60c5\u94fe\u63a5'),source_row=line))
     book.close();prior_companies={company_key(r['company']) for r in rows if r['id'] in old_ids and company_key(r['company'])};excluded=Counter();selected=[];seen={};aliases=[]
     for r in rows:
         company=company_key(r['company']);body=r['zh'].split('\n',1)[1]

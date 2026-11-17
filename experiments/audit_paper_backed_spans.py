@@ -9,7 +9,7 @@ PROMPT='Return one JSON object with exactly these fields: {"demand_aligned":bool
 
 def spans(text):
     result={}
-    for match in re.finditer(r'[^\n。！？.!?]+(?:[。！？.!?]|$)',text):
+    for match in re.finditer('[^\\n\u3002\uff01\uff1f.!?]+(?:[\u3002\uff01\uff1f.!?]|$)',text):
         for start in range(match.start(),match.end(),320):
             end=min(start+400,match.end());quote=text[start:end]
             if len(quote)>=10 and text.count(quote)==1:

@@ -15,8 +15,8 @@ def run(source='artifacts/synthesis-scope-v5',output='artifacts/scoped-binding-v
         record=json.loads(path.read_text())
         if record['status']!='silver_candidate':continue
         texts=[c['text'] for c in record['example']['constraints']]
-        constraint=('资料明确记载同一项研究将以下各项研究主题联合应用于一套技术方案：'+'；'.join(texts)+
-                    '。分别列出这些主题、分别存在不同项目或论文，不足以证明此项联合应用要求。')
+        constraint=('\u8d44\u6599\u660e\u786e\u8bb0\u8f7d\u540c\u4e00\u9879\u7814\u7a76\u5c06\u4ee5\u4e0b\u5404\u9879\u7814\u7a76\u4e3b\u9898\u8054\u5408\u5e94\u7528\u4e8e\u4e00\u5957\u6280\u672f\u65b9\u6848\uff1a'+'\uff1b'.join(texts)+
+                    '\u3002\u5206\u522b\u5217\u51fa\u8fd9\u4e9b\u4e3b\u9898\u3001\u5206\u522b\u5b58\u5728\u4e0d\u540c\u9879\u76ee\u6216\u8bba\u6587\uff0c\u4e0d\u8db3\u4ee5\u8bc1\u660e\u6b64\u9879\u8054\u5408\u5e94\u7528\u8981\u6c42\u3002')
         evidence=list(record['sources'].values())
         if any(e['expert_id']!=record['expert_id'] for e in evidence):raise ValueError('Mixed expert sources')
         pairs.append(dict(constraint=constraint,text='\n\n'.join(e['text'] for e in evidence)))

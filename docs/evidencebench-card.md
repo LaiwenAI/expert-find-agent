@@ -1,19 +1,19 @@
-# EvidenceBench辅助适配
+# EvidenceBench-Assisted Adaptation
 
-上游：[EvidenceBench，COLM 2025](https://github.com/EvidenceBench/EvidenceBench)。固定版本：`bf1d9633c694381c7b016fd56ee9f95f48593cc3`。适配器验证官方文件的Git blob SHA1，并记录SHA256；不重新分配来源句子索引。
+Upstream: [EvidenceBench, COLM 2025](https://github.com/EvidenceBench/EvidenceBench). Pinned version: `bf1d9633c694381c7b016fd56ee9f95f48593cc3`. The adapter verifies the official files’ Git blob SHA1 and records SHA256; it does not reassign source-sentence indices.
 
-当前运行原开发集37篇、6310句，固定返回10句，衡量不同证据方面的覆盖。标注只传给选择后的评价函数，模型输入只有假设、来源原文与候选句。该任务不是作者识别、专家排序或产业适用性判断。上游标签由专家指导的生成与验证流程提供，不称为我们新建的全人工金标。
+The current run uses the original development set of 37 papers and 6310 sentences, returns a fixed 10 sentences, and measures coverage across different evidence aspects. Labels are passed only to the evaluator after selection; the model input consists only of the hypothesis, source text, and candidate sentences. This task is not author identification, expert ranking, or an assessment of industrial applicability. Upstream labels are provided by an expert-guided generation and validation process; they are not described as a new, entirely human-produced gold standard created by us.
 
-原始dev沿用上游CC-BY-NC-SA，原始test沿用上游CC-BY；来源数据不进入本项目源码审阅包。当前测试集未用于调规则，`prepare('test')`仅提供可固定版本获取的入口。
+The original dev set retains the upstream CC-BY-NC-SA license, and the original test set retains the upstream CC-BY license; source data are not included in this project’s source-code review package. The current test set was not used to adjust the rules; `prepare('test')` only provides an entry point for obtaining a pinned version.
 
-- BM25/Qwen/固定MMR方面覆盖：0.3375/0.4770/0.4599。
-- Qwen前30句+原生Decisions：0.5619，37例有效。
-- 同候选闭集chat集合选择：0.5904，35例有效、2例按语义回退计入。
+- BM25/Qwen/fixed MMR aspect coverage: 0.3375/0.4770/0.4599.
+- Qwen top 30 sentences + native Decisions: 0.5619, 37 valid cases.
+- Closed-set chat selection over the same candidates: 0.5904, 35 valid cases, with 2 cases counted as semantic fallbacks.
 
-全部为开发期辅助结果，非发表论文的完整复现，非新SOTA或新指标。两类模型选择目标不同，接口运行顺序也不构成随机配对时延。独立相关概率不能替代集合互补性；后续角色编译假设仍需独立检验。
+All results are development-stage auxiliary results, not a complete reproduction of a published paper, a new SOTA, or a new metric. The two types of model selection have different objectives, and the interface execution order does not constitute randomly paired latency measurement. Independent relevance probabilities cannot substitute for set complementarity; the subsequent role-compilation hypothesis still requires independent testing.
 
-来源角色编译v1（固定规则、全37篇）：编译输入只有原文；完整编号分区9篇有效、28篇回退，方面覆盖0.4826，较同次Qwen +0.0056，95% bootstrap区间[-0.0312,0.0402]。离线编译139.08秒。失败主要是句子ID重复/遗漏，未重试修复或删除；不纳入默认方法，不声称质量保持或端到端加速。结果见`artifacts/evidencebench-role-index-v1/summary.json`。
+Source-role compilation v1 (fixed rules, all 37 papers): compilation input was source text only; complete numbered partitioning was valid for 9 papers and fell back for 28, with aspect coverage of 0.4826, +0.0056 over Qwen in the same run, and a 95% bootstrap interval of [-0.0312,0.0402]. Offline compilation took 139.08 seconds. Failures were primarily duplicate/omitted sentence IDs; there was no retry, repair, or deletion. This is not included in the default method, and no claim is made that quality is preserved or that end-to-end speed is improved. Results are in `artifacts/evidencebench-role-index-v1/summary.json`.
 
-保守规范化开发诊断v1：同角色重复去重，跨角色冲突169句、遗漏46句均标为不确定；非法ID或错误结构仍整篇回退。复用原始来源编译响应，没有重试模型，没有读取查询来修复角色。37篇均可规范化，方面覆盖0.5580；相对同次Qwen +0.0809，95% bootstrap区间[0.0209,0.1442]。这是看到开发结构失败后制定的规则，不能称为独立验证。在线查询编码、排序和角色优先排列均值42.25毫秒，离线模型139.08秒；时序与以往接口比较未随机配对。原始测试集293篇已固定同一规则，协议为`artifacts/evidencebench-role-test-v1/protocol.json`，结果见下。
+Conservative normalization development diagnostic v1: duplicates within the same role were deduplicated; 169 cross-role conflicts and 46 omissions were both marked uncertain; invalid IDs or incorrect structures still caused a full-paper fallback. The original source compilation responses were reused; the model was not retried, and queries were not read to repair roles. All 37 papers could be normalized, with aspect coverage of 0.5580; +0.0809 relative to Qwen in the same run, with a 95% bootstrap interval of [0.0209,0.1442]. These rules were devised after observing development-set structural failures and cannot be described as independent validation. Mean online query encoding, ranking, and role-priority ordering time was 42.25 milliseconds; offline model time was 139.08 seconds; timing comparisons with previous interfaces were not randomly paired. The original test set of 293 papers has been fixed under the same rules; the protocol is `artifacts/evidencebench-role-test-v1/protocol.json`, and results follow below.
 
-固定原始测试结果：293条查询/284篇论文，291条可规范化、2条回退，方面覆盖0.4935，对照Qwen0.4324，差+0.0611，论文分组bootstrap区间[0.0377,0.0840]。逐条指标和角色规范化已独立重算；开发/测试paper ID、完整原文、假设精确交集为0，未做近重复审计。RTX5090查询编码与排序/角色选择8.35毫秒，不含初始化和来源向量加载/构建；四并发离线API请求耗时累计1162.77秒，非墙钟或端到端收益。向量作业39289、评价39292均完成0:0。该结果只支持辅助证据选择改进，不证明企业专家排序或新方法原创性。完整协议和审计在`artifacts/evidencebench-role-test-v1/`。
+Fixed original test results: 293 queries/284 papers; 291 queries could be normalized and 2 fell back; aspect coverage was 0.4935, versus 0.4324 for Qwen, a difference of +0.0611, with a paper-grouped bootstrap interval of [0.0377,0.0840]. Per-query metrics and role normalization were independently recomputed; the intersection of development/test paper IDs, complete source texts, and exact hypotheses was 0; no near-duplicate audit was performed. Query encoding and ranking/role selection on an RTX5090 took 8.35 milliseconds, excluding initialization and source-vector loading/building; four concurrent offline API requests took a cumulative 1162.77 seconds, not wall-clock time or an end-to-end gain. Both the vector job (39289) and evaluation job (39292) completed with status 0:0. This result supports only improved auxiliary evidence selection; it does not establish enterprise expert ranking or the originality of a new method. The complete protocol and audit are in `artifacts/evidencebench-role-test-v1/`.

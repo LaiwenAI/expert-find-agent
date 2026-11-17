@@ -1,28 +1,28 @@
-# PageIndex 到专家证据索引：设计与验证计划
+# PageIndex to Expert Evidence Index: Design and Validation Plan
 
-审查对象：VectifyAI/PageIndex，commit `c9f1a879d3b3906ec2617724a905f5cb5e32546e`。来源：https://github.com/VectifyAI/PageIndex 。本地研究副本在 `artifacts/third-party/PageIndex`，未将上游实现并入本项目。
+Review target: VectifyAI/PageIndex, commit `c9f1a879d3b3906ec2617724a905f5cb5e32546e`. Source: https://github.com/VectifyAI/PageIndex. The local research copy is at `artifacts/third-party/PageIndex`; the upstream implementation has not been merged into this project.
 
-官方当前实现将结构提取、摘要与代理检索分开；树节点包含标题、摘要和原文位置。`tree_optimize.py` 进一步以路由成本和扫描成本决定合并/展开，而非树越深越好。其页级成本模型不能直接用于多来源专家资料，需要实测 token、调用次数和端到端延迟。README 的金融问答效果及商业检索接口性能不代表专家任务结果，也不能自动归于开放源码树导航。
+The current official implementation separates structure extraction, summarization, and agent retrieval; tree nodes contain titles, summaries, and original-text locations. `tree_optimize.py` further determines whether to merge or expand based on routing cost and scanning cost, rather than assuming that a deeper tree is better. Its page-level cost model cannot be applied directly to multi-source expert materials; token usage, call counts, and end-to-end latency need to be measured. The README’s financial question-answering results and the performance of the commercial retrieval interface do not represent results on expert tasks, nor can they automatically be attributed to open-source tree navigation.
 
-## 与现有实现的差距
+## Gaps in the Existing Implementation
 
-现有 `ExpertAgent` 已有“专家→证据种类/字段→叶子”的浅树，但在线遍历整张 docs 表、每分支直接截前40条，再让模型选最多30条。它没有离线能力语义节点，没有全局专家范围缩减，也没有证明路由保留了所需证据。仅将该结构命名为 PageIndex 不构成改进。
+The existing `ExpertAgent` already has a shallow “expert → evidence type/field → leaf” tree, but it traverses the entire docs table online, takes only the first 40 records directly from each branch, and then has the model select at most 30 records. It has no offline capability-semantic nodes, no global reduction of the expert search scope, and no evidence that routing preserves the required evidence. Merely naming this structure PageIndex does not constitute an improvement.
 
-## 拟实现的两层粗到细索引
+## Proposed Two-Level Coarse-to-Fine Index
 
-1. 全局路由目录：技术问题/方法/对象→候选专家；同时保留来源归属及多领域交叉链接，避免强迫专家只属于一个领域。该层用预计算词法或冻结向量快速召回，先不对全库进行 LLM 串行树搜索。
-2. 专家证据树：专家→问题与方法能力节点→真实论文/简介→原文跨度。摘要用于定位，叶子原文用于判断。节点记录已展示事实、来源及缺口，不将潜在迁移写成已经完成的项目。
-3. 需求驱动细查：将企业需求分成保真条件，对每个候选只展开可能改变排序的能力分支，批量判定证据与适用性。若粗摘要无信息，保留原文回退或多路径探索，不能据摘要没有提到便永久排除专家。
-4. 输出：专家排序、直接应用证据、可解释方法迁移及假设、未覆盖需求。高置信事实与未来解决能力分别表示。
+1. Global routing directory: technical problem/method/object → candidate experts; also preserve source attribution and cross-links across domains, avoiding the forced assignment of an expert to only one domain. Use precomputed lexical or frozen-vector retrieval at this layer for fast candidate retrieval, rather than first performing serial LLM tree search over the entire corpus.
+2. Expert evidence tree: expert → problem and method capability nodes → actual papers/profiles → original-text spans. Summaries are for locating evidence; leaf-level original text is for assessment. Nodes record facts already demonstrated, sources, and gaps; they do not present potential transfer as a completed project.
+3. Requirement-driven detailed search: divide enterprise requirements into fidelity conditions, and for each candidate expand only capability branches that could change the ranking, assessing evidence and applicability in batches. If a coarse summary contains no information, retain an original-text fallback or multi-path exploration; an expert must not be permanently excluded merely because the summary does not mention something.
+4. Output: expert ranking, evidence of direct application, explainable method transfer and its assumptions, and unmet requirements. High-confidence facts and future problem-solving capabilities are represented separately.
 
-## 需要验证的组合贡献
+## Combined Contribution to Validate
 
-可研究的贡献是将来源可回溯的专家能力目录、需求范围保真、受预算的展开顺序和适用性排序结合，减少无关专家及无效原文读取。树索引、分层搜索、离线摘要、上界剪枝均已有前作，不能单独宣称首创。是否有用由实验决定。
+A potential contribution to study is combining a source-traceable expert capability directory, requirement-scope fidelity, budgeted expansion order, and applicability ranking to reduce irrelevant experts and unnecessary original-text reading. Tree indexing, hierarchical search, offline summarization, and upper-bound pruning all have prior work and must not be claimed as individually novel. Whether this is useful will be determined by experiments.
 
-对照至少包括：完整证据阅读、平坦冻结 embedding +固定top证据、现有浅证据树、专家语义树、带全局粗路由的专家语义树。保持候选规模、模型和 token预算可比较。分别记录专家召回、所需证据召回、最终适用性排序、引用支持、迁移理由有效性，以及在线编码/路由/读取/判断各阶段耗时。精确评分上界只能保证其定义的分数，不能保证保留潜在真实专家或语义推理质量。
+At minimum, comparisons should include: reading all evidence; flat frozen embedding + fixed top evidence; the existing shallow evidence tree; an expert semantic tree; and an expert semantic tree with global coarse routing. Keep candidate scale, model, and token budget comparable. Record expert recall, required-evidence recall, final applicability ranking, citation support, validity of transfer rationale, and the time spent in each online stage: encoding, routing, reading, and assessment. An exact-score upper bound can guarantee only the score as defined; it cannot guarantee retention of potentially true experts or the quality of semantic reasoning.
 
-先在真实数据中有丰富论文证据的专家集合上构建可复查节点和固定对照，随后扩展至完整 10673 人。两个阶段均必须报告缺资料的专家，不能默认为负例。
+First build reviewable nodes and fixed baselines for a set of experts with abundant paper evidence in real data, then expand to all 10673 people. Both stages must report experts with missing information; they must not be treated as negative examples by default.
 
-## 已落实的第一项改动
+## First Change Implemented
 
-新增 `ExpertCatalog`，在离线阶段为全部原始证据建立专家归属与文件偏移索引，绑定语料 SHA256。现有 ExpertAgent 构造候选树时已改为只读取候选专家来源，去掉每次查询解析全库原文的环节，其他路由和排序逻辑暂不改变。21 位专家、296 个来源的三次交替顺序对照中，内容及顺序与完整扫描完全相同；扫描约 347ms，候选读取中位数约 1.44ms（首次约7.05ms）。这是来源读取工程优化，不是端到端 agent 加速或语义树精度证据。完整现有 87 项测试通过。下一阶段仍需真正的问题/方法能力分支及粗路由召回检验。
+Added `ExpertCatalog`, which creates an expert-attribution and file-offset index for all original evidence during the offline stage, bound to the corpus SHA256. When the existing ExpertAgent constructs a candidate tree, it now reads only sources belonging to candidate experts, removing the step of parsing the entire corpus’s original text on every query; other routing and ranking logic remain unchanged for now. In three alternating-order comparisons involving 21 experts and 296 sources, the content and order were exactly the same as with a full scan; scanning took about 347ms, while candidate reading had a median of about 1.44ms (about 7.05ms on the first run). This is an engineering optimization for source reading, not evidence of end-to-end agent acceleration or semantic-tree accuracy. All 87 existing tests passed. The next stage still requires genuine problem/method capability branches and testing coarse-routing recall.

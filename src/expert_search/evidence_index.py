@@ -15,7 +15,7 @@ def build(corpus='artifacts/corpus/evidence.jsonl', target='artifacts/evidence-s
     count=0
     for _,r in records(corpus):
         # Preserve original character offsets; split only at sentence or line boundaries.
-        for match in re.finditer(r'[^\n。！？]+[。！？]?',r['text']):
+        for match in re.finditer('[^\\n\u3002\uff01\uff1f]+[\u3002\uff01\uff1f]?',r['text']):
             text=match.group()
             if len(text.strip())<12:continue
             row=dict(evidence_id=r['id'],expert_id=r['expert_id'],text=text,start=match.start(),end=match.end(),source=r['source'])

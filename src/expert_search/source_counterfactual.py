@@ -139,13 +139,13 @@ def prepare(output='artifacts/source-counterfactual-v2',limit=6):
     for _,r in records('artifacts/corpus/evidence.jsonl'):
         if r['expert_id'] not in wanted:continue
         if r['kind']=='paper' and r['text'].strip():papers[r['expert_id']].append(dict(r,text=r['text'][:1200]))
-        if r.get('field') in ('研究领域_CN','研究领域_EN'):fields[r['expert_id']].append(dict(r,text=r['text'][:4000]))
+        if r.get('field') in ('\u7814\u7a76\u9886\u57df_CN','\u7814\u7a76\u9886\u57df_EN'):fields[r['expert_id']].append(dict(r,text=r['text'][:4000]))
     selected=[]
     used=set()
     for job in jobs:
         eid=job['expert_id']
         options=sorted(papers[eid],key=lambda p:p['id'])
-        relational=[p for p in options if re.search(r'\b(for|using|via|based)\b|基于|应用|用于|结合',p.get('title') or '',re.I)]
+        relational=[p for p in options if re.search('\\b(for|using|via|based)\\b|\u57fa\u4e8e|\u5e94\u7528|\u7528\u4e8e|\u7ed3\u5408',p.get('title') or '',re.I)]
         if eid in used or len(options)<5 or not fields[eid] or not relational:continue
         primary=(relational+[p for p in options if p not in relational])[:4]
         picked={p['id']:p for p in fields[eid]+primary}

@@ -23,7 +23,7 @@ def prepare():
     strata={s:[] for s in BUDGET}
     for row in map(json.loads,path.read_text().splitlines()):
         if row['split']!='development':continue
-        field=row.get('field','');s='paper' if row['kind']=='paper' else 'project' if field=='项目列表' else 'patent' if field=='专利列表' else 'biography' if field.startswith('个人简介_') else 'research_fields' if field.startswith('研究领域_') else None
+        field=row.get('field','');s='paper' if row['kind']=='paper' else 'project' if field=='\u9879\u76ee\u5217\u8868' else 'patent' if field=='\u4e13\u5229\u5217\u8868' else 'biography' if field.startswith('\u4e2a\u4eba\u7b80\u4ecb_') else 'research_fields' if field.startswith('\u7814\u7a76\u9886\u57df_') else None
         if s in strata:strata[s].append(row)
     selected=[]
     for s,budget in BUDGET.items():

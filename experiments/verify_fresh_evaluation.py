@@ -40,7 +40,7 @@ def run(directory):
                 for kind,record in lines[line]:
                     if record['provenance']['record_sha256']!=record_hash:raise ValueError('Raw record hash mismatch')
                     if kind=='expert':
-                        if record['id']!=original['teacher_id'] or record['name']!=(original.get('教师姓名_CN') or original.get('教师姓名_EN')):raise ValueError('Teacher identity mismatch')
+                        if record['id']!=original['teacher_id'] or record['name']!=(original.get('\u6559\u5e08\u59d3\u540d_CN') or original.get('\u6559\u5e08\u59d3\u540d_EN')):raise ValueError('Teacher identity mismatch')
                     else:
                         if record['expert_id']!=original['teacher_id'] or record['expert_id'] not in experts:raise ValueError('Raw teacher_id/source linkage mismatch')
                         field=record['provenance']['field']
@@ -52,7 +52,7 @@ def run(directory):
     if sha(workbook)!=provenance['selection']['workbook_sha256']:raise ValueError('Changed original XLSX')
     book=load_workbook(workbook,read_only=True,data_only=True);data=list(book.active.values);header=list(data[0]);book.close()
     for query in queries.values():
-        original=dict(zip(header,data[query['provenance']['row']-1]));text=str(original['命题名称'])+'\n'+str(original['命题内容及答题要求'])
+        original=dict(zip(header,data[query['provenance']['row']-1]));text=str(original['\u547d\u9898\u540d\u79f0'])+'\n'+str(original['\u547d\u9898\u5185\u5bb9\u53ca\u7b54\u9898\u8981\u6c42'])
         if query['text']!=text:raise ValueError('Demand text does not match original workbook row')
     prior=json.loads((root/'prior-use.json').read_text())
     if set(queries)&set(prior['demand_ids']) or set(experts)&set(prior['expert_ids']):raise ValueError('Prior entity leakage')

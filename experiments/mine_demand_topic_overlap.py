@@ -8,12 +8,12 @@ from expert_search.corpus import records
 
 
 def run():
-    source=next(Path('data/真实企业需求').glob('*.xlsx'))
+    source=next(Path('data/\u771f\u5b9e\u4f01\u4e1a\u9700\u6c42').glob('*.xlsx'))
     book=load_workbook(source,read_only=True,data_only=True);sheet=book.active
     iterator=iter(sheet.values);header=next(iterator)
     topics=defaultdict(list)
     for _,e in records('artifacts/corpus/evidence.jsonl'):
-        if e.get('field')!='研究领域_CN':continue
+        if e.get('field')!='\u7814\u7a76\u9886\u57df_CN':continue
         for phrase in e['text'].splitlines():
             phrase=phrase.strip()
             if 4<=len(phrase)<=24 and all(c.isalnum() or '\u4e00'<=c<='\u9fff' for c in phrase):
@@ -23,8 +23,8 @@ def run():
     pairs=[];demands=0
     for line,values in enumerate(iterator,2):
         d=dict(zip(header,values))
-        if not d.get('命题名称') or not d.get('命题内容及答题要求'):continue
-        demands+=1;text=str(d['命题名称'])+'\n'+str(d['命题内容及答题要求'])
+        if not d.get('\u547d\u9898\u540d\u79f0') or not d.get('\u547d\u9898\u5185\u5bb9\u53ca\u7b54\u9898\u8981\u6c42'):continue
+        demands+=1;text=str(d['\u547d\u9898\u540d\u79f0'])+'\n'+str(d['\u547d\u9898\u5185\u5bb9\u53ca\u7b54\u9898\u8981\u6c42'])
         candidates=set()
         for i in range(len(text)-2):candidates.update(first.get(text[i:i+3],()))
         hits=[p for p in candidates if text.count(p)==1]
@@ -38,7 +38,7 @@ def run():
             for m in sorted(unique.values(),key=lambda m:(-len(m['topic']),m['topic'])):
                 if all(m['end']<=x['start'] or m['start']>=x['end'] for x in chosen):chosen.append(m)
             if len(chosen)>=2 or any(len(m['topic'])>=8 for m in chosen):
-                pairs.append(dict(demand_id=f'demand-{line}',title=str(d['命题名称']),demand=text,expert_id=eid,matches=chosen))
+                pairs.append(dict(demand_id=f'demand-{line}',title=str(d['\u547d\u9898\u540d\u79f0']),demand=text,expert_id=eid,matches=chosen))
     pairs.sort(key=lambda r:(-sum(len(m['topic']) for m in r['matches']),r['demand_id'],r['expert_id']))
     out=Path('artifacts/demand-topic-overlap-v1');out.mkdir(exist_ok=True)
     (out/'candidates.jsonl').write_text(''.join(json.dumps(r,ensure_ascii=False)+'\n' for r in pairs))

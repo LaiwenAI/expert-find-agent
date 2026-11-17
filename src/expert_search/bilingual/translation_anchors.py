@@ -22,7 +22,7 @@ def protect(text):
         operator = None
         for name, expression in COMPARATORS:
             match = re.search(r'(?<![A-Za-z])(?:' + expression + r')\s*$', prefix, re.I)
-            if match and not NEGATION.search(re.split(r'[。；;!?！？\n,，]', prefix[:match.start()])[-1]):
+            if match and not NEGATION.search(re.split('[\u3002\uff1b;!?\uff01\uff1f\\n,\uff0c]', prefix[:match.start()])[-1]):
                 start -= len(prefix) - match.start()
                 operator = name
                 break
@@ -31,10 +31,10 @@ def protect(text):
         if unit_match:
             unit = UNITS[unit_match.group(1)]
             end += unit_match.end()
-        postfix = re.match(r'\s*(以上|以下)', text[end:])
+        postfix = re.match('\\s*(\u4ee5\u4e0a|\u4ee5\u4e0b)', text[end:])
         # Contradictory prefix/postfix comparisons are left for the reviewer.
         if postfix and operator is None:
-            operator = '>=' if postfix.group(1) == '以上' else '<='
+            operator = '>=' if postfix.group(1) == '\u4ee5\u4e0a' else '<='
             end += postfix.end()
         literal = unicodedata.normalize('NFKC', anchor['literal'])
         canonical = ((operator + ' ') if operator else '') + literal + ((' ' + unit) if unit else '')

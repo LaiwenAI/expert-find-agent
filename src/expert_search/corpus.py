@@ -3,7 +3,7 @@ import json
 from collections import Counter
 from pathlib import Path
 
-FIELDS = ('研究领域_CN','研究领域_EN','个人简介_CN','个人简介_EN','论文列表','项目列表','专利列表')
+FIELDS = ('\u7814\u7a76\u9886\u57df_CN','\u7814\u7a76\u9886\u57df_EN','\u4e2a\u4eba\u7b80\u4ecb_CN','\u4e2a\u4eba\u7b80\u4ecb_EN','\u8bba\u6587\u5217\u8868','\u9879\u76ee\u5217\u8868','\u4e13\u5229\u5217\u8868')
 
 def records(path):
     with Path(path).open(encoding='utf-8') as f:
@@ -25,9 +25,9 @@ def build(data, output):
             if eid in experts:
                 duplicates.append(eid)
                 continue
-            experts[eid] = dict(id=eid, name=row.get('教师姓名_CN') or row.get('教师姓名_EN'),
-                institution=row.get('机构名_CN',''), college=row.get('学院名_CN',''),
-                url=row.get('教师详情页链接或访问方式_CN',''))
+            experts[eid] = dict(id=eid, name=row.get('\u6559\u5e08\u59d3\u540d_CN') or row.get('\u6559\u5e08\u59d3\u540d_EN'),
+                institution=row.get('\u673a\u6784\u540d_CN',''), college=row.get('\u5b66\u9662\u540d_CN',''),
+                url=row.get('\u6559\u5e08\u8be6\u60c5\u9875\u94fe\u63a5\u6216\u8bbf\u95ee\u65b9\u5f0f_CN',''))
             for key in FIELDS:
                 value = row.get(key)
                 if value:

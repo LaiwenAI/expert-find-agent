@@ -7,8 +7,8 @@ from expert_search.span_applicability import source_spans
 
 class MethodFrameTest(unittest.TestCase):
     def test_concrete_profile_operation_allowed_and_missing_io_preserved(self):
-        source=dict(id='profile',expert_id='e',kind='profile',text='本项目研发了一种用于温度预测的有限元求解方法。')
-        value=dict(frames=[dict(operation='采用有限元求解进行温度预测。',input=None,output='温度预测结果。',conditions=[],span_ids=['p0'])])
+        source=dict(id='profile',expert_id='e',kind='profile',text='\u672c\u9879\u76ee\u7814\u53d1\u4e86\u4e00\u79cd\u7528\u4e8e\u6e29\u5ea6\u9884\u6d4b\u7684\u6709\u9650\u5143\u6c42\u89e3\u65b9\u6cd5\u3002')
+        value=dict(frames=[dict(operation='\u91c7\u7528\u6709\u9650\u5143\u6c42\u89e3\u8fdb\u884c\u6e29\u5ea6\u9884\u6d4b\u3002',input=None,output='\u6e29\u5ea6\u9884\u6d4b\u7ed3\u679c\u3002',conditions=[],span_ids=['p0'])])
         calls=[]
         def chat(**kw):
             calls.append(kw)

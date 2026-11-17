@@ -64,7 +64,7 @@ def run():
     for i in safe_profiles:
         # Detail experience supplements papers; broad field-only labels are not method witnesses.
         field=records[i]['id'].rsplit(':',1)[-1]
-        if field in {'项目列表','专利列表','个人简介_CN','个人简介_EN'}:profiles_by_owner.setdefault(records[i]['expert_id'],[]).append(i)
+        if field in {'\u9879\u76ee\u5217\u8868','\u4e13\u5229\u5217\u8868','\u4e2a\u4eba\u7b80\u4ecb_CN','\u4e2a\u4eba\u7b80\u4ecb_EN'}:profiles_by_owner.setdefault(records[i]['expert_id'],[]).append(i)
     matrix=np.ascontiguousarray(full[paper_positions]);owners={}
     for i,r in enumerate(papers):owners.setdefault(r['expert_id'],[]).append(i)
     order=np.asarray([i for e in eids for i in owners[e]],dtype=np.int64);starts=np.asarray([0]+list(np.cumsum([len(owners[e]) for e in eids])[:-1]),dtype=np.int64)

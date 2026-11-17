@@ -2,6 +2,7 @@
 import argparse
 import hashlib
 import json
+import re
 import zipfile
 from pathlib import Path
 
@@ -12,10 +13,11 @@ def build(output):
     for directory in ('src','tests','experiments'):
         names.extend(str(p.relative_to(root)) for p in (root/directory).rglob('*.py'))
     names.extend(str(p.relative_to(root)) for p in (root/'experiments').rglob('*.sbatch'))
+    names.extend(str(p.relative_to(root)) for p in (root/'docs/assets').glob('*.svg'))
     names.extend(str(p.relative_to(root)) for p in (root/'docs/paper/sigir').rglob('*.tex'))
     names.extend(str(p.relative_to(root)) for p in (root/'docs/paper/sigir').rglob('*.json'))
     names.extend('docs/paper/sigir/template/'+n for n in ('acmart.cls','acmart.dtx','acmart.ins','ACM-Reference-Format.bst','README'))
-    names.extend(['docs/exploration/factored-decision-20261117.md','docs/exploration/bilingual-retrieval-20261117.md','docs/exploration/translation-pilot-20261117.md','docs/bilingual-query-data-card.md','docs/merit-suitability-card.md','docs/fresh-evaluation-data-card.md','docs/transfer-cases-card.md','docs/evidencebench-card.md','docs/exploration/topconf-review-20261117.md','docs/research-methods.md','docs/benchmark-results.md','docs/annotation-protocol.md','docs/exploration/pageindex-expert-design.md','docs/exploration/closest-work-review.md','docs/exploration/reproduction-map.md','docs/cluster.md','docs/paper-controls-data-card.md','docs/paper/references.bib','docs/usage.md','docs/open-source.md','docs/scoped-dataset-card.md'])
+    names.extend(['docs/repository-language.md','docs/exploration/factored-decision-20261117.md','docs/exploration/bilingual-retrieval-20261117.md','docs/exploration/translation-pilot-20261117.md','docs/bilingual-query-data-card.md','docs/merit-suitability-card.md','docs/fresh-evaluation-data-card.md','docs/transfer-cases-card.md','docs/evidencebench-card.md','docs/exploration/topconf-review-20261117.md','docs/research-methods.md','docs/benchmark-results.md','docs/annotation-protocol.md','docs/exploration/pageindex-expert-design.md','docs/exploration/closest-work-review.md','docs/exploration/reproduction-map.md','docs/cluster.md','docs/paper-controls-data-card.md','docs/paper/references.bib','docs/usage.md','docs/open-source.md','docs/scoped-dataset-card.md'])
     names.extend('docs/exploration/'+name for name in (
         'topconf-downloads-20261117.json','latest-prior-art-20261117.json','merit-release-assets-20261117.json','source-publication-20261117.json',
         'selectivity-fusion-protocol-v1.json','selectivity-fusion-freeze-observation.json',
@@ -26,7 +28,11 @@ def build(output):
         'teacher-certified-topk.json','demand-ranked-source-controls.json',
         'current-evidence.json'))
     files={name:(root/name).read_bytes() for name in sorted(set(names))}
-    manifest=dict(files={name:hashlib.sha256(body).hexdigest() for name,body in files.items()},
+    language_pattern=re.compile(r'[\u2e80-\u2fdf\u3000-\u303f\u3100-\u312f\u31a0-\u31bf\u3400-\u4dbf\u4e00-\u9fff\uf900-\ufaff\uff00-\uffef\U00020000-\U0003134f]')
+    for name,body in files.items():
+        if language_pattern.search(name) or language_pattern.search(body.decode('utf-8')):
+            raise ValueError('Non-English text in source release: '+name)
+    manifest=dict(repository_language='English; language-specific fixtures use Unicode escapes.',files={name:hashlib.sha256(body).hexdigest() for name,body in files.items()},
         scope='Source snapshot of the public research prototype; not a complete experimental-data release.',
         exclusions=['credentials','raw enterprise/teacher data','model weights','third-party corpora',
                     'model traces and quoted evidence','local virtual environments'],

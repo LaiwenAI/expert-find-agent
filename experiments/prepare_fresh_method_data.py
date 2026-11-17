@@ -44,16 +44,16 @@ def run():
         registry=dict(parents={str(p):hashlib.sha256(p.read_bytes()).hexdigest() for p in paths},demand_ids=sorted(demand_ids),expert_ids=sorted(expert_ids),query_hashes=sorted(query_hashes),source_prefix_hashes=sorted(source_hashes),normalized_source_hashes=sorted(normalized_sources),paper_title_hashes=sorted(paper_titles),
                       scope='Explicit prior selected/evaluated local nonpublic job/query/case/example JSONL files; not the whole indexed corpus. Recursive IDs plus normalized full demand/body, source prefixes and exact paper-title aliases. Does not establish no semantic or team-family leakage.')
         registry_path.write_text(json.dumps(registry,indent=2))
-    workbook=next(Path('data/真实企业需求').glob('*.xlsx'))
+    workbook=next(Path('data/\u771f\u5b9e\u4f01\u4e1a\u9700\u6c42').glob('*.xlsx'))
     book=load_workbook(workbook,read_only=True,data_only=True);sheet=book.active;lines=iter(sheet.values);header=list(next(lines));pool=[]
     used_ids=set(registry['demand_ids']);used_hashes=set(registry['query_hashes']);seen=set()
     for line,values in enumerate(lines,2):
-        record=dict(zip(header,values));title=record.get('命题名称');body=record.get('命题内容及答题要求')
+        record=dict(zip(header,values));title=record.get('\u547d\u9898\u540d\u79f0');body=record.get('\u547d\u9898\u5185\u5bb9\u53ca\u7b54\u9898\u8981\u6c42')
         if not title or not body:continue
         title,body=str(title),str(body);text=title+'\n'+body;key='demand-'+str(line)
         hashes={normalized_hash(text),normalized_hash(body)}
         if key in used_ids or hashes&used_hashes or hashes&seen:continue
-        seen.update(hashes);pool.append(dict(id=key,demand=text,title=title,url=record.get('详情链接'),source_row=line))
+        seen.update(hashes);pool.append(dict(id=key,demand=text,title=title,url=record.get('\u8be6\u60c5\u94fe\u63a5'),source_row=line))
     book.close();random.Random(20261117).shuffle(pool);queries=pool[:100]
     if len(queries)!=100:raise ValueError('Insufficient new demands under frozen exclusions')
     body=''.join(json.dumps(q,ensure_ascii=False)+'\n' for q in queries);path=ROOT/'queries.jsonl'

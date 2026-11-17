@@ -1,61 +1,61 @@
-# 从原始数据重建的新评测数据 v1
+# New Evaluation Dataset Reconstructed from Raw Data v1
 
-本地成品：`artifacts/dataset-release/fresh-enterprise-eval-v1`。本集合用于**给定专家证据视图的部分技术方法匹配评测**，目前含开发银标和封存未标注集，不是已人工验证的专家能力金标。
+Local artifact: `artifacts/dataset-release/fresh-enterprise-eval-v1`. This collection is for **partial technical-method matching evaluation given expert evidence views**. It currently contains development silver labels and a sealed, unlabeled set; it is not a human-verified expert-capability gold standard.
 
-## 来源与规模
+## Sources and Scale
 
-企业需求直接读取`data/真实企业需求/全国大学生创业服务网_产业命题.xlsx`，教师与论文直接读取`data/teachers/shenzhen/*.jsonl`。重新规范化全部10673名教师、96749条来源，与原冻结向量输入逐字节一致。成品导出时再次逐条读取原始JSONL，保留原字段值、来源行号及记录SHA256；没有从旧实验输出改写或生成来源原文。
+Enterprise requirements were read directly from `data/\u771f\u5b9e\u4f01\u4e1a\u9700\u6c42/\u5168\u56fd\u5927\u5b66\u751f\u521b\u4e1a\u670d\u52a1\u7f51_\u4ea7\u4e1a\u547d\u9898.xlsx`, and teachers and papers directly from `data/teachers/shenzhen/*.jsonl`. All 10673 teachers and 96749 source records were renormalized, and are byte-for-byte identical to the original frozen vector inputs. During artifact export, the original JSONL was read again record by record, preserving original field values, source line numbers, and record SHA256 hashes; no source text was rewritten or generated from old experiment outputs.
 
-| 项目 | 数量 |
+| Item | Count |
 |---|---:|
-| 新完整企业需求 | 100 |
-| 专家语料范围 | 5192名 |
-| 来源语料 | 66491条（42304论文、24187简介字段） |
-| 候选专家证据视图 | 700（每需求5个密集检索候选+2个随机候选） |
-| 实际选中专家 / 来源 | 549名 / 2267条 |
-| 开发 / 封存需求 | 80 / 20 |
-| 开发候选视图 | 560 |
-| 开发一致性银标 / 未判定 | 183 / 377 |
-| 银标0 / 1 / 2 / 3 | 10 / 120 / 53 / 0 |
-| 封存未标注视图 / 人工标签 | 140 / 0 |
+| New complete enterprise requirements | 100 |
+| Expert-corpus scope | 5192 people |
+| Source corpus | 66491 records (42304 papers, 24187 profile fields) |
+| Candidate expert evidence views | 700 (5 dense-retrieval candidates + 2 random candidates per requirement) |
+| Experts / sources actually selected | 549 people / 2267 records |
+| Development / sealed requirements | 80 / 20 |
+| Development candidate views | 560 |
+| Development consensus silver labels / undetermined | 183 / 377 |
+| Silver labels 0 / 1 / 2 / 3 | 10 / 120 / 53 / 0 |
+| Sealed unlabeled views / human labels | 140 / 0 |
 
-按种子20261117抽取此前未进入旧选定案例/标注工件的需求，排除历史36条需求、1798名专家、登记的来源前缀与论文标题别名。并非声称这些文本从未被模型预训练或既有语料索引读取。新语料是有论文来源的专家子集，不代表无论文者没有能力，也不代表深圳之外的专家群体。
+Using seed 20261117, requirements not previously included in old selected cases or annotation artifacts were sampled, excluding the historical 36 requirements, 1798 experts, registered source prefixes, and paper-title aliases. This does not claim that these texts were never read by model pretraining or existing corpus indexes. The new corpus is a subset of experts with paper sources; it does not mean that people without papers lack ability, nor does it represent expert groups outside Shenzhen.
 
-在任何新标注前，将专家按论文前缀/标题别名的连通分组切分，最大组84名专家；需求另固定80/20。开发与封存的专家、来源ID、规范化前缀和论文标题别名均无精确交集。语义近重复、机构/团队家族相关性尚未完成审核。
+Before any new annotation, experts were split by connected groups of paper prefixes/title aliases; the largest group contained 84 experts. Requirements were separately fixed at an 80/20 split. There is no exact overlap between development and sealed expert, source, normalized-prefix, or paper-title-alias IDs. Semantic near-duplicates and institution/team-family relationships have not yet been reviewed.
 
-## 评测单位及标签
+## Evaluation Unit and Labels
 
-单位为`query_id + expert_id + snapshot`。每个视图最多包含3篇相关论文与1条详细简介/项目/专利记录，每来源最多1200字符。语料文件保留原字段全文；评测输入必须按`snapshots.jsonl`的范围读取，不能悄悄替换成额外原文，再把结果当作同一标签任务。
+The unit is `query_id + expert_id + snapshot`. Each view contains at most 3 relevant papers and 1 detailed profile/project/patent record, with at most 1200 characters per source. Corpus files retain the full text of the original fields; evaluation inputs must be read within the scope of `snapshots.jsonl`. Extra source text must not be silently substituted and the result then treated as the same labeling task.
 
-- 0：该固定视图未展示足够技术匹配支撑，**不是专家无能力**。
-- 1：只有主题/领域相邻，尚无具体功能连接。
-- 2：有文献方法基础和具体、附条件的目标操作迁移连接，仍有数据、领域、验证等假设。
-- 3：来源记录了实际目标对象上的相同技术操作，仍不等于完成未来性能或交付目标。
-- `null`：审查分歧、格式/网络失败、见证不足或封存未标注，**不得补0**。
+- 0: This fixed view does not show sufficient support for a technical match; **this does not mean the expert lacks the capability**.
+- 1: Only topic/field adjacency, with no specific functional connection yet.
+- 2: A literature-based methodological foundation and a specific, conditional connection to transferring the target operation, still involving assumptions about data, domain, validation, and so on.
+- 3: Source records document the same technical operation on the actual target object; this still does not mean that future performance or delivery goals have been achieved.
+- `null`: Review disagreement, format/network failure, insufficient evidence, or a sealed unlabeled item; **do not fill in 0**.
 
-仅开发集调用gpt-6-luna。两次不同候选顺序的结构化审查与一次隐藏既有结论的原生Decisions分类须完全一致；正向方法匹配还须分别通过两份引用/连接审核。共有53条条件性方法匹配，覆盖34条开发需求。全部仍是同模型/同提供商的多过程银标，存在共同偏差；一致性不是正确性、人工审核或实际项目成功证据。当前源归属依照原始`teacher_id`，没有独立核验所有论文署名及个人贡献角色。
+Only the development set was evaluated with gpt-6-luna. Two structured reviews with different candidate orderings and one native Decisions classification with prior conclusions hidden had to agree completely; positive method matches also had to pass two separate citation/connection reviews. There are 53 conditional method matches, covering 34 development requirements. All remain multi-process silver labels from the same model/provider and are subject to shared biases; agreement is not evidence of correctness, human review, or actual project success. Current source attribution follows the original `teacher_id`; all paper authorship and individual contribution roles have not been independently verified.
 
-## 文件
+## Files
 
-- `queries.jsonl`：原始完整需求、标题、Excel行号和文件摘要。
-- `experts.jsonl`：研究人员基本学术信息、切分及原始记录定位。
-- `corpus.jsonl`：从原始字段重建的全文、原字段值、归属和逐记录摘要。
-- `pools.jsonl`、`snapshots.jsonl`：固定候选池及可见原文范围。
-- `judgments.jsonl`：全部700个标签状态，包含未判定与封存项。
-- `qrels-silver-development.tsv`：仅183条已筛选开发银标；必须与完整未判定掩码一起使用，不能按传统闭世界做其余专家的负标签。
-- `silver-rationales.jsonl`：两次提案及原生分类/引用审核结果；不等于独立金标。
-- `human-review.jsonl`：700条无模型标签、无检索来源标记的人工审核材料；没有隐藏原文中的作者身份。审核时保持视图边界，另存填写结果，勿修改冻结数据。
-- `dense-baseline-runs.jsonl`：固定Qwen来源向量的离线基线排名，不是在线时延。
-- `splits.json`、`provenance.json`、`manifest.json`、`verification.json`：切分、完整来源链、成员摘要和回溯校验。
+- `queries.jsonl`: Original complete requirements, titles, Excel row numbers, and file digests.
+- `experts.jsonl`: Researchers’ basic academic information, split, and pointers to original records.
+- `corpus.jsonl`: Full text reconstructed from original fields, original field values, attribution, and per-record digests.
+- `pools.jsonl`, `snapshots.jsonl`: Fixed candidate pool and visible source-text scope.
+- `judgments.jsonl`: Label status for all 700 items, including undetermined and sealed items.
+- `qrels-silver-development.tsv`: Only the 183 screened development silver labels; must be used together with the complete undetermined mask. Do not treat the remaining experts as negative labels under the traditional closed-world assumption.
+- `silver-rationales.jsonl`: Results of the two proposals and native classification/citation reviews; not an independent gold standard.
+- `human-review.jsonl`: Human-review materials for 700 items without model labels or retrieval-source markers; author identities hidden in the source text are not included. Maintain the view boundary during review, save completed results separately, and do not modify the frozen data.
+- `dense-baseline-runs.jsonl`: Offline baseline rankings using fixed Qwen source vectors; not online latency.
+- `splits.json`, `provenance.json`, `manifest.json`, `verification.json`: Split, complete source lineage, membership summary, and provenance validation.
 
-## 指标与边界
+## Metrics and Limitations
 
-基准入口是`experiments/benchmark_fresh_evaluation.py`，比较BM25-max、TF-IDF-max、Qwen论文最大分、Qwen可见来源最大分及随机排序。全部使用相同7个候选视图，候选池来自密集检索加随机，尚不是多检索器合并的完整判断池，不用于声称全库召回或真实专家精度。
+The benchmark entry point is `experiments/benchmark_fresh_evaluation.py`, comparing BM25-max, TF-IDF-max, Qwen paper maximum score, Qwen maximum score over visible sources, and random ranking. All use the same 7 candidate views. The candidate pool comes from dense retrieval plus random sampling; it is not a complete judgment pool merged across multiple retrievers and is not for claiming full-corpus recall or real-world expert precision.
 
-主协议只给具体方法连接（2/3）技术收益，主题相邻（1）不获此项信用；未判定位置使折扣收益形成上下界。界限条件于现有银标，不是语义正确率置信区间。另报告已判项上的condensed nDCG、已知正向方法MRR和标注覆盖。稀疏标注会使condensed nDCG很高，必须连同未判定比例阅读。收益、未知状态及截止时间快照的组合是本场景的评测协议探索，不声称发明DCG、区间数学或一般最优性理论。
+Under the primary protocol, only specific method connections (2/3) receive technical gain; topic adjacency (1) receives no credit for this item. Undetermined positions yield upper and lower bounds on discounted gain. These bounds are conditional on the existing silver labels, not confidence intervals for semantic accuracy. Also reported are condensed nDCG on judged items, MRR for known positive methods, and annotation coverage. Sparse annotations can make condensed nDCG very high, so it must be read together with the proportion of undetermined items. Combining gain, unknown status, and a cutoff-time snapshot is an exploration of an evaluation protocol for this scenario; it does not claim to invent DCG, interval mathematics, or a general theory of optimality.
 
-目前开发银标仅覆盖32.7%的候选视图，各基线的未知标注收益区间高度重叠；不能据此宣布新方法SOTA、端到端优势或独立泛化。封存20条需求没有模型/人工评测标签，待方法冻结和可信审核后使用。
+The current development silver labels cover only 32.7% of candidate views, and the unknown-label gain intervals for the baselines overlap substantially; this does not support declaring a new method SOTA, an end-to-end advantage, or independent generalization. The 20 sealed requirements have no model or human evaluation labels and should be used after the method is frozen and a trustworthy review is conducted.
 
-## 发布状态
+## Release Status
 
-当前为本地研究数据包，包含真实企业原文和教师资料，未公开分发。原始README未提供统一再分发许可，软件MIT许可不覆盖来源文本。源码包公开/审阅范围仅包含构造、验证、评测代码和本卡，不包含这些文本、模型响应或密钥。原始来源、自动归属及银标的语义质量仍需后续审核，尚不能称为已完成的高质量金标benchmark。
+This is currently a local research data package containing real enterprise source text and teacher information; it has not been publicly distributed. The original README does not provide a uniform redistribution license, and the software’s MIT license does not cover the source texts. The public/review scope of the source package includes only construction, validation, and evaluation code and this card; it does not include these texts, model responses, or keys. The semantic quality of the original sources, automated attribution, and silver labels still requires further review; this cannot yet be described as a completed, high-quality gold-standard benchmark.

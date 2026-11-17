@@ -10,7 +10,7 @@ from .progressive_dense import top_indices
 
 class AreaSearch:
     def __init__(self,corpus='artifacts/corpus/evidence.jsonl'):
-        rows=[r for _,r in records(corpus) if r.get('field')=='研究领域_CN']
+        rows=[r for _,r in records(corpus) if r.get('field')=='\u7814\u7a76\u9886\u57df_CN']
         self.ids=[r['expert_id'] for r in rows];self.evidence=rows
         if len(self.ids)!=len(set(self.ids)):raise ValueError('Duplicate research-area profiles')
         counts=[Counter(tokens(r['text'])) for r in rows];n=len(rows)
