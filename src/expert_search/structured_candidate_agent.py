@@ -19,7 +19,7 @@ class StructuredCandidateAgent:
             if client is None:
                 from laiwenai import LaiwenAI
                 client=LaiwenAI(model='gpt-6-luna')
-            matcher=PartialMethodMatcher(client)
+            matcher=PartialMethodMatcher(client,field_limits={'mechanism':480,'assumption':240,'gap':300})
         self.matcher=matcher
 
     def run(self,query,k=3,candidates=5,rerank_pool=50,evidence_per_expert=1,source_chars=1200):
@@ -59,7 +59,7 @@ class StructuredCandidateAgent:
                         raise ValueError('Invalid source span')
         selected=[dict(row,expert=expert_records[row['expert_id']]) for row in ranking[:k]]
         hashes={sid:hashlib.sha256(source['text'].encode()).hexdigest() for sources in source_views.values() for sid,source in sources.items()}
-        return {'status':'structurally_valid','results':selected,'candidate_ids':ids,'source_view_sha256':hashes,
+        return {'status':'structurally_valid','results':selected,'candidate_ids':list(expert_records),'model_ranked_candidate_ids':ids,'source_view_sha256':hashes,
                 'completion':{'requested':k,'returned':len(selected),'status':'complete' if len(selected)==k else 'partial'},
                 'matcher':result,'source_snapshot_sha256':retrieved['source_snapshot_sha256'],'retrieval_timing':retrieved['timing'],
                 'seconds':time.perf_counter()-start,'scope':'Structured model hypotheses with checked demand and owned source spans; method transfer, personal role, time and semantic support remain unverified.'}

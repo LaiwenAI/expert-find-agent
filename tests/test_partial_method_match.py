@@ -22,3 +22,34 @@ class PartialMethodTest(unittest.TestCase):
         r=resolve_view(dict(experts=rows,read_sources=[]),mapping)
         self.assertEqual([a['level'] for a in r['ranking']],['insufficient','insufficient'])
         self.assertTrue(all(a['scope']=='partial_method_fit_only' for a in r['ranking']))
+
+class PartialMethodFailureCategoryTest(unittest.TestCase):
+    def test_categories_do_not_emit_model_data(self):
+        import json
+        from expert_search.partial_method_match import failure_category
+        self.assertEqual(failure_category(ValueError('Missing full-demand gap')),'demand_gap')
+        self.assertEqual(failure_category(ValueError('private arbitrary text')),'other_value_error')
+        self.assertEqual(failure_category(json.JSONDecodeError('error','private',0)),'invalid_json')
+        self.assertEqual(failure_category(TimeoutError()),'non_validation_error')
+
+class PartialMethodMultilingualBudgetTest(unittest.TestCase):
+    def test_long_complete_english_is_accepted_only_with_explicit_budget(self):
+        from expert_search.partial_method_match import build_view,resolve_view
+        source={'id':'s','expert_id':'a','text':'A complete source method.','kind':'paper'}
+        _,mapping=build_view('Demand operation',{'a':{'s':source}},{},'raw')
+        row={'id':'c0','l':'t','d':['d0'],'e':['c0:s0:p0'],'m':'method '+('x'*130),'a':['validate '+('x'*85)],'g':['gap '+('x'*105)]}
+        response={'experts':[row],'read_sources':[]}
+        with self.assertRaises(ValueError):resolve_view(response,mapping)
+        accepted=resolve_view(response,mapping,{'mechanism':480,'assumption':240,'gap':300})
+        self.assertEqual(accepted['ranking'][0]['level'],'transferable_method')
+        row['m']='x'*481
+        with self.assertRaises(ValueError):resolve_view(response,mapping,{'mechanism':480,'assumption':240,'gap':300})
+
+class PartialMethodSchemaDiagnosticsTest(unittest.TestCase):
+    def test_counts_field_defects_without_copying_text(self):
+        from expert_search.partial_method_match import schema_diagnostics
+        mapping={'experts':{'c0':'a'}};limits={'mechanism':4,'assumption':4,'gap':4}
+        response={'experts':[{'id':'c0','l':'t','m':'secret','a':[],'g':['secret']} ]}
+        result=schema_diagnostics(response,mapping,limits)
+        self.assertEqual(result['mechanism_too_long'],1);self.assertEqual(result['gap_too_long'],1)
+        self.assertEqual(result['missing_positive_assumption'],1);self.assertNotIn('secret',repr(result))

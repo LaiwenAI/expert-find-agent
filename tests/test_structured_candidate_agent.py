@@ -22,7 +22,22 @@ class StructuredAgentTest(unittest.TestCase):
         agent=StructuredCandidateAgent(Pipeline(),matcher=Matcher())
         result=agent.run('demand',k=1,candidates=1,rerank_pool=1)
         self.assertEqual(result['results'][0]['expert']['id'],'a');self.assertEqual(result['status'],'structurally_valid')
+        self.assertEqual(result['candidate_ids'],['a']);self.assertEqual(result['model_ranked_candidate_ids'],['a'])
         with self.assertRaisesRegex(ValueError,'source span'):StructuredCandidateAgent(Pipeline(),matcher=Matcher('invent')).run('demand',k=1,candidates=1,rerank_pool=1)
+
+    def test_candidate_retrieval_order_is_distinct_from_model_order(self):
+        class Two(Pipeline):
+            def search_reranked(self,*a,**k):
+                result=super().search_reranked(*a,**k)
+                result['results'].append({'expert':{'id':'b'},'evidence':[{'id':'t','expert_id':'b','text':'other'}]})
+                return result
+        class Reverse:
+            def match(self,*args):
+                rows=[{'expert_id':e,'level':'insufficient','demand_citations':[],'evidence':[],'mechanism':'',
+                       'assumptions':[],'remaining_demand_gaps':['unknown']} for e in ('b','a')]
+                return {'status':'structurally_valid','result':{'ranking':rows}}
+        result=StructuredCandidateAgent(Two(),matcher=Reverse()).run('demand',k=1,candidates=2,rerank_pool=2)
+        self.assertEqual(result['candidate_ids'],['a','b']);self.assertEqual(result['model_ranked_candidate_ids'],['b','a'])
 
     def test_missing_and_failures_do_not_invent_answers(self):
         class Empty(Pipeline):
