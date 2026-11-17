@@ -61,7 +61,11 @@ class CandidateReasoningAgent:
                 rejected+=1;continue
             results.append({'expert':experts[eid],'reason':reason,'missing':missing,'evidence':anchored});seen.add(eid)
             if len(results)==k:break
+        completion = {'requested':k, 'returned':len(results), 'rejected':rejected,
+                      'status':'empty' if not results else 'complete' if len(results)==k else 'partial',
+                      'scope':'Structural count only; empty may be an abstention and complete does not establish relevance or evidence entailment.'}
         return {'query':query,'retrieval_strategy':retrieval,'results':results,'candidate_ids':[r['expert']['id'] for r in retrieved['results']],
+                'completion':completion,
                 'trace':self.helper.trace,'usage':self.helper.usage,'rejected_results':rejected,
                 'timing':{'run_seconds':time.perf_counter()-start,'retrieval':retrieved['timing']},
                 'scope':'One model call after candidate-LM retrieval and lexical evidence selection. Citation ownership and exact quote offsets are checked against visible supplied records; source identity, individual contribution, semantic support and expert ability are not independently verified.'}

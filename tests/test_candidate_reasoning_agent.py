@@ -33,12 +33,21 @@ class CandidateReasoningAgentTest(unittest.TestCase):
         self.assertEqual(result['results'][0]['evidence'][0]['start'],0)
         self.assertEqual(result['results'][0]['evidence'][0]['end'],8)
         self.assertEqual(result['rejected_results'],1)
+        self.assertEqual(result['completion']['status'],'complete')
         with self.assertRaises(ValueError):agent.run('need',k=2,candidates=2,evidence_per_expert=0)
         result=agent.run('need',k=2,candidates=2,retrieval='adaptive_bm25',rerank_pool=4)
         self.assertEqual(agent.pipeline.rerank_args,('need',2,4,1))
         self.assertEqual(result['retrieval_strategy'],'adaptive_bm25')
         with self.assertRaises(ValueError):agent.run('need',k=2,candidates=2,retrieval='adaptive_bm25',rerank_pool=1)
         with self.assertRaises(ValueError):agent.run('need',k=2,candidates=2,retrieval='invalid')
+
+    def test_reports_partial_results_without_fabricating_missing_experts(self):
+        agent=CandidateReasoningAgent(FakePipeline(),client=object())
+        agent.helper.ask=lambda *_: {'results':[{'expert_id':'b','reason':'r','missing':[],'citations':[{'evidence_id':'s2','quote':'source b'}]}]}
+        result=agent.run('need',k=2,candidates=2)
+        self.assertEqual(result['completion']['status'],'partial')
+        self.assertEqual(result['completion']['returned'],1)
+        self.assertEqual([row['expert']['id'] for row in result['results']],['b'])
 
     def test_rejects_invented_and_truncated_quotes(self):
         agent=CandidateReasoningAgent(FakePipeline(),client=object())
@@ -47,6 +56,9 @@ class CandidateReasoningAgentTest(unittest.TestCase):
         result=agent.run('need',k=2,candidates=2)
         self.assertEqual(result['results'],[])
         self.assertEqual(result['rejected_results'],2)
+        self.assertEqual(result['completion']['status'],'empty')
+        self.assertEqual(result['completion']['requested'],2)
+        self.assertEqual(result['completion']['returned'],0)
 
 
 if __name__=='__main__':unittest.main()
