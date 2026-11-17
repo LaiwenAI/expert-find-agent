@@ -12,7 +12,7 @@ from pathlib import Path
 from expert_search.cof_benchmark import load
 from expert_search.fast_retrieval import FastSearch
 from expert_search.resident_candidate_bm25 import ResidentCandidateBM25
-from expert_search.retrieval import tokens
+from expert_search.shared_owner_gate import SharedOwnerGate
 
 
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
@@ -51,38 +51,11 @@ def main():
     if not memory:raise ValueError('No simulated corrections')
     lexical=FastSearch(root/'unique-profile-corpus',root/'unique-profile-corpus/fast.sqlite')
     resident=ResidentCandidateBM25(root/'unique-profile-corpus/fast.sqlite',adaptive_intersection=True)
-    # Coauthored papers can be associated with multiple reviewers; each
-    # posting is expanded to every owner before the per-term maxima are made.
-    start=time.perf_counter()
-    experts=sorted(reviewers);positions={e:i for i,e in enumerate(experts)}
-    owners={pid:[] for pid in resident.ids}
-    for eid,r in reviewers.items():
-        for pid in set(r['papers']):owners[pid].append(positions[eid])
-    term_bounds={}
-    for term,(lo,hi) in resident.offsets.items():
-        maxima={}
-        for pos,value in zip(resident.indices[lo:hi],resident.values[lo:hi]):
-            for owner in owners[resident.ids[int(pos)]]:
-                maxima[owner]=max(maxima.get(owner,0.),float(value))
-        term_bounds[term]=maxima
-    bound_init=time.perf_counter()-start
+    gate=SharedOwnerGate(resident,{e:r['papers'] for e,r in reviewers.items()})
+    bound_init=gate.initialization_seconds
     def certified(query,candidate):
-        candidate_ids=sorted(set(reviewers[candidate]['papers']))
-        candidate_scores=resident.selected_scores(query,candidate_ids)
-        threshold=max(candidate_scores.values(),default=0.)
-        if threshold<=0:return False,0
-        upper=np.zeros(len(experts),dtype=np.float64)
-        for term in sorted(set(tokens(query))):
-            for owner,value in term_bounds.get(term,{}).items():
-                upper[owner]=np.nextafter(upper[owner]+value,np.inf)
-        possible=[e for e in experts if e!=candidate and upper[positions[e]]>=threshold]
-        sources=sorted({pid for e in possible for pid in reviewers[e]['papers']})
-        exact=resident.selected_scores(query,sources)
-        ahead=0
-        for eid in possible:
-            value=max((exact[pid] for pid in set(reviewers[eid]['papers'])),default=0.)
-            if value>threshold or (value==threshold and eid<candidate):ahead+=1
-        return ahead<50,len(possible)
+        result=gate.contains(query,candidate,50)
+        return result['accepted'],result['possible_competitors']
     def evaluate(subset):
         changes={'ungated':[],'gated':[],'local':[]};routes=0;insertions={'ungated':0,'gated':0,'local':0};extra=[];local_times=[];exact_checks=0;certified_times=[];possible_counts=[];certified_checks=0
         for row in subset:
@@ -133,8 +106,8 @@ def main():
             'old':evaluate(old),'new':evaluate(new),
             'input_sha256':{'runs':sha(source),'summary':sha(summary),'papers':sha(root/'SIGIR_papers_test.json'),
               'reviewers':sha(root/'SIGIR_reviewers_test.json'),'labels':sha(root/'SIGIR_queries_test_soft.json'),
-              'lexical_index':sha(root/'unique-profile-corpus/fast.sqlite'),'resident_code':sha(Path('src/expert_search/resident_candidate_bm25.py')),'lexical_code':sha(Path('src/expert_search/fast_retrieval.py')),'script':sha(Path(__file__))},
+              'lexical_index':sha(root/'unique-profile-corpus/fast.sqlite'),'gate_code':sha(Path('src/expert_search/shared_owner_gate.py')),'resident_code':sha(Path('src/expert_search/resident_candidate_bm25.py')),'lexical_code':sha(Path('src/expert_search/fast_retrieval.py')),'script':sha(Path(__file__))},
             'scope':'Candidate threshold certification uses upward-rounded per-term owner maxima and exact scores for all owners whose bound reaches the candidate score, including lexicographic ties. It was checked against global membership on this sample only, not semantic relevance. Timings include query-specific bounds and competitor scoring but exclude bound construction. Local gate checks only positive BM25 among the proposed reviewer sources and is not equivalent to the global top-50 gate. Exact candidate scores are checked against full lexical scores, but no output equivalence is claimed. Timings are one sequential observation per case, not independent or end-to-end. Post-hoc reused public reviewer cohort with simulated feedback and query-similarity memory. The global gate requires a positive maximum score and top-50 position; the local gate requires only a positive candidate-source score. Lexical matching is a retrieval heuristic, not verified source entailment, individual contribution or suitability. It adds a serial full-lexical scoring step for each potential insertion; per-call exploratory CPU timing excludes index load, query encoding, memory lookup, source reading, model reasoning, feedback cost and serving. No human corrections, independent labels, generalization or enterprise end-to-end claim.'}
-    out=Path('artifacts/cof-memory-certified-gate-v2');out.mkdir(exist_ok=False);(out/'summary.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result,indent=2))
+    out=Path('artifacts/cof-memory-certified-gate-v3');out.mkdir(exist_ok=False);(out/'summary.json').write_text(json.dumps(result,indent=2)+'\n');print(json.dumps(result,indent=2))
 
 if __name__=='__main__':main()
