@@ -74,6 +74,7 @@ class ProgressiveDecisionAgent:
             return
         selected_rows=[rows[i] for i in selected]
         yield {'stage':'screen','results':[dict(deepcopy(rows[i]),screen_label=labels[f'c{i}']) for i in selected],
+               'judgments':[{'expert_id':row['expert']['id'],'label':labels.get(f'c{i}')} for i,row in enumerate(rows)],
                'selected':len(selected),'seconds':time.perf_counter()-start,
                'scope':'Model choices are uncalibrated and not verified relevance, evidence entailment, or individual contribution.'}
         if not selected:

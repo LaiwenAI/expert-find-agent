@@ -85,7 +85,7 @@ def main(output):
                'baseline_metrics':{t:precision_metrics(base,labels[t][qid]) for t in labels}}
         if screen['stage']=='screen':
             ranked = [r['expert']['id'] for r in screen['results'][:5]]
-            row.update(screened=ranked, selected=screen['selected'], screened_metrics={t:precision_metrics(ranked,labels[t][qid]) for t in labels})
+            row.update(screened=ranked, selected=screen['selected'], judgments=screen['judgments'], screened_metrics={t:precision_metrics(ranked,labels[t][qid]) for t in labels})
         else: row['error_type']=screen.get('error_type',screen.get('reason'))
         print(qid, row['stage'], flush=True)
         return row

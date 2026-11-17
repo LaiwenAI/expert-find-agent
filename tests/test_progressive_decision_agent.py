@@ -24,6 +24,8 @@ class ProgressiveDecisionTest(unittest.TestCase):
             first=next(events);self.assertEqual(first['stage'],'retrieval');self.assertFalse(calls);ask.assert_not_called()
             first['results'][0]['evidence'][0]['text']='altered'
             screen=next(events);self.assertEqual(screen['stage'],'screen');self.assertEqual(screen['results'][0]['expert']['id'],'b');ask.assert_not_called()
+            self.assertEqual(screen['judgments'],[{'expert_id':'a','label':'topic_only'},{'expert_id':'b','label':'transferable_method'}])
+            screen['judgments'][1]['label']='altered'
             screen['results'][0]['evidence'][0]['text']='altered'
             final=next(events);self.assertEqual(final['stage'],'explanation');self.assertEqual(final['results'][0]['evidence'][0]['text'],'two')
             self.assertEqual(final['completion']['status'],'complete')
@@ -37,6 +39,19 @@ class ProgressiveDecisionTest(unittest.TestCase):
         self.assertEqual(events[-1]['completion']['requested'],2)
         self.assertEqual(events[-1]['completion']['status'],'partial')
         self.assertEqual(events[-1]['explanation_call_completion']['status'],'complete')
+
+    def test_missing_evidence_is_not_a_negative_choice(self):
+        class MixedPipeline(Pipeline):
+            def search_reranked(self,*args,**kwargs):
+                result=super().search_reranked(*args,**kwargs)
+                result['results'][0]['evidence']=[]
+                return result
+        def choice(client,records,questions):
+            self.assertEqual([q['name'] for q in questions],['c1'])
+            return {'labels':{'c1':'topic_only'}}
+        agent=ProgressiveDecisionAgent(MixedPipeline(),client=object(),decision_fn=choice)
+        events=list(agent.events('query',k=1,candidates=2,rerank_pool=2,explanation_candidates=1))
+        self.assertEqual(events[1]['judgments'],[{'expert_id':'a','label':None},{'expert_id':'b','label':'topic_only'}])
 
     def test_empty_source_is_not_screened(self):
         class EmptyPipeline:
