@@ -38,6 +38,13 @@ class CompiledExpertSearchTest(unittest.TestCase):
             self.assertEqual([r['expert']['id'] for r in reranked['results']],['a','b'])
             self.assertEqual(reranked['results'][1]['score'],0.)
             self.assertTrue(all(e['expert_id']==r['expert']['id'] for r in reranked['results'] for e in r['evidence']))
+            resident=CandidateEvidencePipeline(root,root/'index',root/'fast.sqlite',scoring='resident')
+            for mode in ('max','vote'):
+                expected=pipeline.search_reranked('alpha',k=2,candidates=2,aggregation=mode)['results']
+                actual=resident.search_reranked('alpha',k=2,candidates=2,aggregation=mode)
+                self.assertEqual(actual['results'],expected)
+                self.assertEqual(actual['route'],'resident')
+            resident.evidence.db.close()
             with self.assertRaises(ValueError):pipeline.search_reranked('alpha',k=3,candidates=2)
             vote=pipeline.search_reranked('alpha',k=2,candidates=2,aggregation='vote')
             self.assertEqual([r['expert']['id'] for r in vote['results']],['a'])

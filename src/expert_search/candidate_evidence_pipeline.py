@@ -23,7 +23,9 @@ def verify_evidence_documents(corpus,searcher):
 
 class CandidateEvidencePipeline:
     def __init__(self,corpus='artifacts/corpus',language_index='artifacts/teacher-compiled-lm',
-                 evidence_database='artifacts/fast-search-selective-v1.sqlite'):
+                 evidence_database='artifacts/fast-search-selective-v1.sqlite',scoring='sqlite'):
+        if scoring not in ('sqlite','resident'):
+            raise ValueError('Require sqlite or resident scoring')
         start=time.perf_counter()
         self.ranker=CompiledExpertSearch(corpus,language_index)
         self.evidence=FastSearch(corpus,evidence_database)
@@ -34,6 +36,13 @@ class CandidateEvidencePipeline:
         self.evidence_by_expert=defaultdict(list)
         for _,(evidence_id,expert_id) in self.evidence.metadata.items():
             self.evidence_by_expert[expert_id].append(evidence_id)
+        self.resident = None
+        if scoring == 'resident':
+            from .resident_candidate_bm25 import ResidentCandidateBM25
+            self.resident = ResidentCandidateBM25(evidence_database)
+            expected = tuple(self.evidence.metadata[doc][0] for doc in sorted(self.evidence.metadata))
+            if self.resident.ids != expected:
+                raise ValueError('Resident evidence snapshot mismatch')
         self.initialization_seconds=time.perf_counter()-start
 
     def search(self,query,k=5,evidence_per_expert=3):
@@ -69,7 +78,9 @@ class CandidateEvidencePipeline:
         expert_rows={row['expert']['id']:row['expert'] for row in candidates_result['results']}
         source_ids=[eid for expert in pool for eid in self.evidence_by_expert[expert]]
         scoring_start=time.perf_counter()
-        routed=self.evidence.adaptive_document_scores(query,source_ids)
+        routed=(self.evidence.adaptive_document_scores(query,source_ids) if self.resident is None else
+                dict(scores=self.resident.selected_scores(query,source_ids),route='resident',
+                     estimated_global_postings=None,estimated_selective_probes=None))
         scores={}
         for expert in pool:
             values=[routed['scores'][eid] for eid in self.evidence_by_expert[expert]]
