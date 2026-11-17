@@ -57,7 +57,7 @@ def check(root, review):
             arms[arm][field] = {'counts': dict(sorted(counts.items())), 'cases': n,
                                 'supported_fraction_bounds': [supported / n, (supported + unknown) / n]}
     return {'cases': len(original), 'arms': arms, 'review_sha256': digest(review),
-            'scope': 'Descriptive bounds among returned cases only: uncertain, unknown and missing labels may be positive or negative. Arms have different candidate sets, repeated experts and an unresolved attempt; bounds are not paired query metrics, confidence intervals, expert-level recall, end-to-end accuracy or proof of personal contribution.'}
+            'scope': 'Descriptive bounds among returned cases only: uncertain, unknown and missing labels may be positive or negative. Arms may have different candidate sets, repeated experts and failed attempts omitted from returned cases; bounds are not paired query metrics, confidence intervals, expert-level recall, end-to-end accuracy or proof of personal contribution.'}
 
 
 if __name__ == '__main__':
