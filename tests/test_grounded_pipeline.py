@@ -56,6 +56,37 @@ class GroundedPipelineTest(unittest.TestCase):
         self.assertEqual(events[-1]['error_type'],'ValueError')
         self.assertEqual(assessor.calls,[])
 
+    def test_encoding_and_retrieval_errors_are_explicit(self):
+        class FailedEncoder:
+            def encode(self,texts,query=False):raise TimeoutError()
+        class InvalidEncoder:
+            def encode(self,texts,query=False):return [[float('nan'),0]]
+        class FailedIndex:
+            def search_vector(self,q,k):raise RuntimeError()
+        class DuplicateIndex:
+            def search_vector(self,q,k):return dict(hits=[dict(id='a',evidence=[dict(id='s')]),dict(id='a',evidence=[dict(id='s')])])
+        for encoder,index,stage in ((FailedEncoder(),Index(),'encoding'),(InvalidEncoder(),Index(),'encoding'),(Encoder(),FailedIndex(),'retrieval'),(Encoder(),DuplicateIndex(),'retrieval')):
+            with self.subTest(stage=stage,encoder=type(encoder).__name__,index=type(index).__name__):
+                assessor=Assessor();events=GroundedPipeline(encoder,index,Catalog(),Planner(),assessor).run('Find a method.',k=1,candidates=2)
+                self.assertEqual(events[-1]['stage'],stage);self.assertEqual(events[-1]['status'],'unresolved');self.assertEqual(assessor.calls,[])
+
+    def test_missing_evidence_and_candidate_shortfall_are_not_complete(self):
+        class EmptyEvidence:
+            def search_vector(self,q,k):return dict(hits=[dict(id='a',evidence=[])])
+        assessor=Assessor();events=GroundedPipeline(Encoder(),EmptyEvidence(),Catalog(),Planner(),assessor).run('Find a method.',k=1,candidates=2)
+        self.assertEqual(events[-1]['status'],'partial');self.assertEqual(events[-1]['unresolved_experts'],['a']);self.assertEqual(assessor.calls,[])
+        class ShortIndex:
+            def search_vector(self,q,k):return dict(hits=[dict(id='a',evidence=[dict(id='s')])])
+        events=GroundedPipeline(Encoder(),ShortIndex(),Catalog(),Planner(),Assessor()).run('Find a method.',k=1,candidates=2)
+        self.assertEqual(events[-1]['status'],'partial');self.assertEqual(events[-1]['candidate_count'],1)
+
+    def test_invalid_plan_and_boolean_budgets_are_rejected(self):
+        class Malformed:
+            def plan(self,demand):return {}
+        pipeline=GroundedPipeline(Encoder(),Index(),Catalog(),Malformed(),Assessor())
+        self.assertEqual(pipeline.run('Find a method.')[0]['status'],'unresolved')
+        with self.assertRaises(ValueError):pipeline.run('Find a method.',k=True,candidates=2)
+
     def test_planning_failure_never_silently_becomes_empty_success(self):
         class Broken:
             def plan(self,demand):raise TimeoutError()
