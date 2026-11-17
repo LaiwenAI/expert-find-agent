@@ -60,6 +60,7 @@ class FastTest(unittest.TestCase):
                 full=fast.document_scores(query)
                 chosen=[str(i) for i in range(8)]
                 self.assertEqual(fast.selective_document_scores(query,chosen),{eid:full.get(eid,0.) for eid in chosen})
+                self.assertEqual(fast.filtered_global_document_scores(query,chosen),{eid:full.get(eid,0.) for eid in chosen})
             self.assertEqual(fast.selective_document_scores('biology',[]),{})
             fast.prepare_adaptive_scoring()
             for query in ['biology','robot control','unmatched']:
@@ -69,6 +70,7 @@ class FastTest(unittest.TestCase):
             self.assertEqual(fast.adaptive_document_scores('robot',['0'])['route'],'selective')
             self.assertEqual(fast.adaptive_document_scores('biology',['0','1','7'])['route'],'global')
             with self.assertRaises(ValueError):fast.adaptive_document_scores('biology',['missing'])
+            with self.assertRaises(ValueError):fast.filtered_global_document_scores('biology',['missing'])
             with self.assertRaises(ValueError):fast.selective_document_scores('biology',['missing'])
             owners={'a':[str(i) for i in range(6)], 'b':['6','7']}
             for query in ['robot control','unmatched','biology',long_query]:

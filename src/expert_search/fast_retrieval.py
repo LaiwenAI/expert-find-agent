@@ -150,6 +150,23 @@ class FastSearch(Search):
                 for doc,value in self.db.execute(sql,batch+chunk):scores[doc]+=value
         return {eid:scores[self.evidence_documents[eid]] for eid in identifiers}
 
+    def filtered_global_document_scores(self, query, evidence_ids):
+        """Scan global postings but accumulate only selected evidence scores.
+
+        Term iteration and arithmetic match document_scores; unscored selected
+        documents return zero. Ambiguous or unknown source IDs are rejected.
+        """
+        identifiers = list(dict.fromkeys(evidence_ids))
+        if any(eid not in self.evidence_documents or eid in self.ambiguous_evidence for eid in identifiers):
+            raise ValueError('Unknown or ambiguous evidence ID')
+        allowed = {self.evidence_documents[eid] for eid in identifiers}
+        scores = defaultdict(float)
+        for term in sorted(set(tokens(query))):
+            for doc, value in self.db.execute('SELECT doc,bm25 FROM scores WHERE term=?', (term,)):
+                if doc in allowed:
+                    scores[doc] += value
+        return {eid: scores[self.evidence_documents[eid]] for eid in identifiers}
+
     def prepare_adaptive_scoring(self):
         """Cache posting counts for a simple cost-based scoring route."""
         self.term_posting_counts=dict(self.db.execute('SELECT term,count(*) FROM scores GROUP BY term'))
@@ -171,7 +188,7 @@ class FastSearch(Search):
         if selective_work < global_work:
             scores=self.selective_document_scores(query,identifiers);route='selective'
         else:
-            full=self.document_scores(query);scores={eid:full.get(eid,0.) for eid in identifiers};route='global'
+            scores=self.filtered_global_document_scores(query,identifiers);route='global'
         return dict(scores=scores,route=route,estimated_global_postings=global_work,
                     estimated_selective_probes=selective_work)
 
