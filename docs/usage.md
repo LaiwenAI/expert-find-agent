@@ -492,3 +492,15 @@ PYTHONPATH=src .venv-local/bin/python experiments/export_transfer_cases.py
 ```
 
 输入为已有需求先行检索任务；来源控制需要完整本地语料catalog。输出本地`transfer-candidates-v1`，标签范围和未完成审核见[迁移案例数据卡](transfer-cases-card.md)。不把未知事实来源视作负能力标签，不把条件性迁移解释视作已实现未来项目。
+
+全库归属来源检索基线（需要既有冻结来源矩阵；编码需CUDA，索引/比较仅用CPU）：
+
+```bash
+PYTHONPATH=src python experiments/global_owned_routing.py --stage encode
+PYTHONPATH=src python experiments/global_owned_routing.py --stage benchmark
+PYTHONPATH=src python experiments/global_owned_effort.py
+PYTHONPATH=src python experiments/verify_global_owned_routing.py
+PYTHONPATH=src python experiments/verify_global_owned_routing.py --directory artifacts/global-owned-effort-v1
+```
+
+对应Slurm脚本为`cluster_global_owned_encode.sbatch`（ws5 GPU）、`cluster_global_owned_routing.sbatch`和`cluster_global_owned_effort.sbatch`（ws6 CPU）。`ExactOwnedVectorIndex`为最大来源点积的高效全量参考；默认ANN与固定efSearch512对照均为成熟近似搜索基线。比较仅衡量原始语义排序保留及局部耗时，不能当作真实专家精度或最终代理时延。

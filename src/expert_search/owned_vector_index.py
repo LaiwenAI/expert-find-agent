@@ -30,11 +30,17 @@ class OwnedVectorIndex:
         start=time.perf_counter();q=np.asarray(query,dtype=np.float32)
         if q.shape!=(self.vectors.shape[1],) or not np.isfinite(q).all() or type(k) is not int or not 1<=k<=500:
             raise ValueError('Invalid query vector or result budget')
-        requested=set(self.owners) if eligible is None else set(eligible)
-        available=requested & set(self.owners);unavailable=sorted(requested-set(self.owners))
+        if eligible is None:
+            available=self.owners;unavailable=[]
+        else:
+            requested=set(eligible)
+            available=requested & self.owners.keys();unavailable=sorted(requested-self.owners.keys())
         if not available:return dict(hits=[],unavailable_experts=unavailable,seconds=time.perf_counter()-start,branch='no_sources')
-        all_rows=sorted({i for e in available for i in self.owners[e]});route=None
-        if len(all_rows)<=self.switch_sources:candidates=sorted(available);branch='eligible_full'
+        # The global universe is known at construction; do not enumerate every
+        # owner/source edge merely to decide whether an ANN query is warranted.
+        source_count=len(self.vectors) if eligible is None else len({i for e in available for i in self.owners[e]})
+        route=None
+        if source_count<=self.switch_sources:candidates=sorted(available);branch='eligible_full'
         else:
             route=expand_sources(self.index,q,self.source_owners,available,target=max(k,10),initial=32,limit=1024)
             candidates=route['candidates'];branch='ann'
@@ -49,3 +55,29 @@ class OwnedVectorIndex:
         return dict(hits=hits[:k],branch=branch,source_rows=len(selected),candidate_experts=len(candidates),
                     depths=route['depths'] if route else [],unavailable_experts=unavailable,seconds=time.perf_counter()-start,
                     notice='Maximum source dot product; ANN stopping is heuristic. Retrieval relevance and ownership metadata need original-source verification.')
+
+
+class ExactOwnedVectorIndex(OwnedVectorIndex):
+    """Full-score reference without materializing a copied full vector matrix."""
+    def __init__(self,vectors,source_ids,source_owners):
+        from types import SimpleNamespace
+        super().__init__(vectors,source_ids,source_owners,index=SimpleNamespace(ntotal=len(vectors)),switch_sources=len(vectors))
+        self.owner_ids=sorted(self.owners)
+        counts=np.asarray([len(self.owners[e]) for e in self.owner_ids],dtype=np.int64)
+        self.owner_starts=np.concatenate(([0],np.cumsum(counts)[:-1]))
+        self.owner_rows=np.asarray([i for e in self.owner_ids for i in self.owners[e]],dtype=np.int64)
+
+    def search_vector(self,query,k=5,eligible=None):
+        if eligible is not None:return super().search_vector(query,k,eligible)
+        start=time.perf_counter();q=np.asarray(query,dtype=np.float32)
+        if q.shape!=(self.vectors.shape[1],) or not np.isfinite(q).all() or type(k) is not int or not 1<=k<=500:
+            raise ValueError('Invalid query vector or result budget')
+        scores=np.einsum('ij,j->i',self.vectors,q,optimize=False)
+        maxima=np.maximum.reduceat(scores[self.owner_rows],self.owner_starts)
+        best=np.argsort(-maxima,kind='stable')[:k];hits=[]
+        for position in best:
+            eid=self.owner_ids[position]
+            ordered=sorted(self.owners[eid],key=lambda i:(-float(scores[i]),self.source_ids[i]))
+            hits.append(dict(id=eid,score=float(maxima[position]),evidence=[dict(id=self.source_ids[i],score=float(scores[i])) for i in ordered[:3]]))
+        return dict(hits=hits,branch='exact_full',source_rows=len(self.vectors),candidate_experts=len(self.owner_ids),depths=[],unavailable_experts=[],seconds=time.perf_counter()-start,
+                    notice='Exact maximum source dot-product ranking under this FP32 summation, not semantic expertise accuracy.')

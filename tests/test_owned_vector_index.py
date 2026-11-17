@@ -1,6 +1,6 @@
 import unittest
 import numpy as np
-from expert_search.owned_vector_index import OwnedVectorIndex
+from expert_search.owned_vector_index import OwnedVectorIndex, ExactOwnedVectorIndex
 
 
 class Index:
@@ -25,3 +25,12 @@ class OwnedVectorIndexTest(unittest.TestCase):
     def test_duplicate_source_ids_and_nonfinite_vectors_rejected(self):
         with self.assertRaises(ValueError):OwnedVectorIndex([[1],[2]],['s','s'],[['a'],['a']],index=Index())
         with self.assertRaises(ValueError):self.index.search_vector([float('nan'),0])
+
+    def test_full_reference_preserves_shared_ownership_and_canonical_ties(self):
+        exact=ExactOwnedVectorIndex([[1,0],[1,0],[0,1]],['z','a','b'],[['second','first'],['first'],['third']])
+        result=exact.search_vector([1,0])
+        self.assertEqual([h['id'] for h in result['hits']],['first','second','third'])
+        self.assertEqual([s['id'] for s in result['hits'][0]['evidence']],['a','z'])
+        filtered=exact.search_vector([1,0],eligible=['second','missing'])
+        self.assertEqual([h['id'] for h in filtered['hits']],['second'])
+        self.assertEqual(filtered['unavailable_experts'],['missing'])
