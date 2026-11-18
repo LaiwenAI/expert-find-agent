@@ -39,7 +39,7 @@ def normalize_text(value):
     return re.sub(r'\W+', '', unicodedata.normalize('NFKC', value).casefold())
 
 
-def public_training_texts():
+def public_training_texts(extra=0):
     archive = Path('artifacts/public/cof/data.zip')
     if sha(archive) != SHA256:
         raise ValueError('Unexpected CoF archive')
@@ -61,9 +61,10 @@ def public_training_texts():
             if old is None or value < old:
                 candidates[title] = value
     ordered = sorted(candidates, key=lambda title: hashlib.sha256(f'{SEED}:{title}'.encode()).digest())
-    if len(ordered) < FIT_ROWS + CALIBRATION_ROWS:
+    count = FIT_ROWS + CALIBRATION_ROWS + extra
+    if len(ordered) < count:
         raise ValueError('Insufficient disjoint training papers')
-    return [candidates[t] for t in ordered[:FIT_ROWS + CALIBRATION_ROWS]]
+    return [candidates[t] for t in ordered[:count]]
 
 
 def unit(vectors):
@@ -118,7 +119,7 @@ def fit(training, variants, output):
             if best is None or value > best[0]:
                 best = value, alpha, weights, bias
         _, alpha, weights, bias = best
-        projections[mode] = AlignedEncoder(encoder, weights, bias)
+        projections[mode.replace('layers_', 'aligned_')] = AlignedEncoder(encoder, weights, bias)
         weights_for_save[f'{mode}_weights'] = weights
         weights_for_save[f'{mode}_bias'] = bias
         details[mode] = {
@@ -136,20 +137,20 @@ def fit(training, variants, output):
     }
 
 
-def benchmark(variants, projections, ranker, connection, queries, labels):
+def benchmark(variants, projections, ranker, connection, queries, labels, arms=ARMS):
     payloads = {qid: json.dumps({'query': query}, ensure_ascii=False) for qid, query in queries.items()}
 
     def run(arm, qid):
-        mode, aligned = ARMS[arm]
+        mode, aligned = arms[arm]
         variants.configure(mode)
-        encoder = projections[mode] if aligned else variants.encoder
+        encoder = projections[arm] if aligned else variants.encoder
         return request(ranker, connection, encoder, payloads[qid], 'host_reduction')
 
-    for arm in ARMS:
+    for arm in arms:
         run(arm, next(iter(queries)))
     rng = random.Random(SEED)
-    order = list(ARMS)
-    results = {q: {arm: {'timings': []} for arm in ARMS} for q in queries}
+    order = list(arms)
+    results = {q: {arm: {'timings': []} for arm in arms} for q in queries}
     for repeat in range(REPEATS):
         cohort = list(queries)
         rng.shuffle(cohort)
@@ -163,18 +164,18 @@ def benchmark(variants, projections, ranker, connection, queries, labels):
                     raise ValueError(f'Unstable response: {qid}/{arm}')
                 row.update(rank=rank, response_sha256=fingerprint)
                 row['timings'].append(timing)
-    for qid, arms in results.items():
-        ref = arms['full']['rank']
-        for row in arms.values():
+    for qid, observations in results.items():
+        ref = observations['full']['rank']
+        for row in observations.values():
             row['top5_overlap'] = len(set(ref) & set(row['rank'])) / len(ref)
             row['quality'] = {task: compare_labels(ref, row['rank'], by_query[qid])
                               for task, by_query in labels.items()}
     return results
 
 
-def summarize(rows):
+def summarize(rows, arms=ARMS):
     reports = {}
-    for arm in ARMS:
+    for arm in arms:
         data = [value[arm] for value in rows.values()]
         baseline = [value['full'] for value in rows.values()]
         timings = [1000 * timing['total'] for r in data for timing in r['timings']]
