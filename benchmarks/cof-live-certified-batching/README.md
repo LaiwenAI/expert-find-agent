@@ -33,8 +33,23 @@ Job `40593` repeats the fixed-shape references alongside dynamic batches that pa
 
 Each column compares the same 73 queries. All three dynamic policies agree with one another on every ordered result. Each differs from the fixed-shape reference on two queries per support setting. With two required sources, filling slots uses fewer calls and processes more token slots, increasing P95 by 5.75 ms relative to dynamic one-per-expert. The paired descriptive interval for the P95 reduction is −19.52 to +5.46 ms. Limiting the sequence width alone leaves the cost of adding rows. The faster dynamic baseline warrants its own comparison when the application permits a change in decision semantics. [Raw aggregates and paired intervals](dynamic-shape-v1.json)
 
+## Selective fixed-shape rechecks
+
+Job `40600` scores each wave using dynamic shapes, then repeats only pairs with an absolute logit margin at most 0.25 in the original four-slot shape. The fixed-width reference scores replace those pairs before the next expert scheduling decision. The same band is used on reused SIGIR queries and on SciRepEval queries after excluding profile overlaps. The two query sets are disjoint by paper ID and normalized title. In each SciRepEval setting, eight prepared candidate prompts across five queries hit the shared token cap. Timing includes each extra GPU call.
+
+| Dataset | Required sources | Dynamic exact | Guarded exact | Fastest fixed-shape P95 | Guarded P95 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| SIGIR | 1 | 71/73 | 73/73 | 235.54 ms | 209.12 ms |
+| SIGIR | 2 | 71/73 | 73/73 | 226.49 ms | 207.17 ms |
+| SciRepEval | 1 | 85/91 | 91/91 | 265.74 ms | 242.24 ms |
+| SciRepEval | 2 | 87/91 | 91/91 | 316.40 ms | 261.60 ms |
+
+Exactness includes expert order and cited source IDs. The guard reproduces all reference outputs and lowers P95 by 8.5% to 17.3% relative to the fastest fixed-shape arm. It is slower than unguarded dynamic scoring in all four comparisons. SciRepEval with one required source has one residual decision-sign difference that leaves the ranking and citations intact. The finite guard is an empirical control tied to the measured checkpoint and environment. [Results](margin-guard-v1.json)
+
 ## Reproduce
 
 Run [the GPU comparison](../../experiments/retrieval/cof_live_certified_batching.py) on a Slurm CUDA compute node with `COF_INPUT_MANIFEST EMBEDDING_CHECKPOINT RERANKER_CHECKPOINT NEW_RESULT_JSON`. Add `--prefix-control` with a separate output path for the consecutive-source controls. The replay uses the published CoF inputs described in [the bounded adjustment benchmark](../cof-bounded-adjustment/README.md).
 
 Add `--compare-dynamic` with a separate output path to reproduce the dynamic-shape controls.
+
+Add `--guard-shape` to replay the selective rechecks. Add `--dataset SciRepEval` for the filtered SciRepEval cache.

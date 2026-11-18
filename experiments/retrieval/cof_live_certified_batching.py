@@ -31,15 +31,20 @@ SUPPORT = (1, 2)
 METHODS = ("exhaustive", "one_per_expert", "fill_idle_slots")
 PREFIX_CONTROL = ("exhaustive", "one_per_expert", "prefix_two", "prefix_three")
 DYNAMIC_METHODS = (*METHODS, "dynamic_one", "dynamic_fill", "dynamic_length_fit")
+GUARD_METHODS = (*METHODS, "dynamic_one", "guarded_dynamic")
+GUARD_MARGIN = .25
 SCHEDULE_FOR = {"dynamic_one": "one_per_expert", "dynamic_fill": "fill_idle_slots",
-                "dynamic_length_fit": "fill_same_length"}
+                "dynamic_length_fit": "fill_same_length", "guarded_dynamic": "one_per_expert"}
 PER_EXPERT = {"one_per_expert": 1, "prefix_two": 2, "prefix_three": 3}
 
 
 class WaveReader:
-    def __init__(self, reader, query, documents, sources, *, dynamic=False):
+    def __init__(self, reader, query, documents, sources, *, dynamic=False, guard=None):
         self.reader = reader
         self.dynamic = dynamic
+        self.guard = guard
+        self.recheck_calls = 0
+        self.rechecked_pairs = 0
         self.padded_tokens = 0
         self.inputs = {}
         self.truncated = 0
@@ -56,10 +61,22 @@ class WaveReader:
     def length(self, doc):
         return len(self.inputs[doc]["input_ids"])
 
-    @torch.inference_mode()
     def score(self, jobs):
         batch = [self.inputs[doc] for _, doc in jobs]
-        if self.dynamic:
+        values = self._forward(batch, self.dynamic)
+        if self.guard is not None:
+            indices = [i for i, value in enumerate(values) if abs(value) <= self.guard]
+            if indices:
+                self.recheck_calls += 1
+                self.rechecked_pairs += len(indices)
+                corrected = self._forward([batch[i] for i in indices], dynamic=False)
+                for i, fixed in zip(indices, corrected, strict=True):
+                    values[i] = fixed
+        return values
+
+    @torch.inference_mode()
+    def _forward(self, batch, dynamic):
+        if dynamic:
             tensors = self.reader.tokenizer.pad(batch, padding=True, return_tensors="pt")
         else:
             filled = batch + [batch[0]] * (WIDTH - len(batch))
@@ -68,7 +85,7 @@ class WaveReader:
         self.padded_tokens += tensors["input_ids"].numel()
         inputs = tensors.to("cuda")
         logits = self.reader.model(**inputs, use_cache=False, logits_to_keep=1).logits
-        values = logits[:len(jobs), -1, self.reader.labels].float()
+        values = logits[:len(batch), -1, self.reader.labels].float()
         return (values[:, 0] - values[:, 1]).cpu().tolist()
 
 
@@ -132,7 +149,8 @@ def summarize(rows, methods):
                 p95_ms=float(np.quantile([a["ms"] for a in arms], .95)),
                 p50_ms=float(np.median([a["ms"] for a in arms])),
                 average={key: mean(arm[key] for arm in arms)
-                         for key in ("calls", "checks", "unique_reads", "padded_tokens", "hard_p5", "confirmed_hard_p5")},
+                         for key in ("calls", "checks", "unique_reads", "padded_tokens",
+                                     "recheck_calls", "rechecked_pairs", "hard_p5", "confirmed_hard_p5")},
                 latency_saved_vs_one_per_expert=paired_interval([
                     row["one_per_expert"]["ms"] - row[method]["ms"] for row in values
                 ]),
@@ -145,25 +163,42 @@ def run(args):
         raise FileExistsError(args.output)
     if not os.environ.get("SLURM_JOB_ID") or not torch.cuda.is_available():
         raise RuntimeError("A Slurm CUDA allocation is required")
-    root, papers, reviewers, labels = load("SIGIR")
-    ids = verify_inputs(args.manifest)
-    if len(ids) != 73 or any(set(ids) != grades.keys() for grades in labels.values()):
-        raise ValueError("Unexpected SIGIR query set")
-    ownership = defaultdict(list)
-    for owner, profile in reviewers.items():
-        for doc in set(profile["papers"]):
-            ownership[doc].append(owner)
-    source_ids = sorted(ownership)
-    cache = root / "qwen-embedding-torch-v1"
-    vectors = np.load(cache / "vectors.npy", allow_pickle=False)
     provenance = verify_checkpoint(args.embedding)
-    if (vectors.shape != (len(source_ids) + len(ids), 1024)
-            or provenance != json.loads((cache / "protocol.json").read_bytes())["checkpoint"]
-            or set(ids).intersection(ownership)):
-        raise ValueError("Changed source-vector snapshot")
     torch.backends.cuda.matmul.allow_tf32 = False
-    index = GpuOwnedVectorIndex(ExactOwnedVectorIndex(vectors[:len(source_ids)], source_ids,
-                                                    [ownership[doc] for doc in source_ids]))
+    if args.dataset == "SIGIR":
+        root, papers, reviewers, labels = load("SIGIR")
+        ids = verify_inputs(args.manifest)
+        if len(ids) != 73 or any(set(ids) != grades.keys() for grades in labels.values()):
+            raise ValueError("Unexpected SIGIR query set")
+        ownership = defaultdict(list)
+        for owner, profile in reviewers.items():
+            for doc in set(profile["papers"]):
+                ownership[doc].append(owner)
+        source_ids = sorted(ownership)
+        cache = root / "qwen-embedding-torch-v1"
+        vectors = np.load(cache / "vectors.npy", allow_pickle=False)
+        if (vectors.shape != (len(source_ids) + len(ids), 1024)
+                or provenance != json.loads((cache / "protocol.json").read_bytes())["checkpoint"]
+                or set(ids).intersection(ownership)):
+            raise ValueError("Changed source-vector snapshot")
+        source_index = ExactOwnedVectorIndex(vectors[:len(source_ids)], source_ids,
+                                             [ownership[doc] for doc in source_ids])
+        hard_labels = labels["hard"]
+        inputs = digest(args.manifest)
+    else:
+        from experiments.retrieval.cof_compact_profile_shortlist import read_data
+
+        root, papers, _, source_index, ids, _, hard_labels = read_data(args.dataset, provenance)
+        ownership = {doc: set() for doc in source_index.source_ids}
+        for owner, positions in source_index.owners.items():
+            for pos in positions:
+                ownership[source_index.source_ids[pos]].add(owner)
+        inputs = {
+            "protocol": digest(root / "qwen-embedding-torch-v1" / "protocol.json"),
+            "vectors": digest(root / "qwen-embedding-torch-v1" / "vectors.npy"),
+            "hard_labels": digest(root / f"{args.dataset}_queries_test_hard.json"),
+        }
+    index = GpuOwnedVectorIndex(source_index)
     encoder = QwenTorchEmbedding(args.embedding, batch_size=1)
     encoder.model.config.use_cache = False
     reranker = Reranker(args.reranker)
@@ -178,14 +213,24 @@ def run(args):
         if len(ordered) != POOL or any(e not in ownership[d] for e, docs in ordered for d in docs):
             raise ValueError("Unexpected source ownership")
         reader = WaveReader(reranker, query, texts, {d for _, docs in ordered for d in docs},
-                            dynamic=method in SCHEDULE_FOR)
+                            dynamic=method in SCHEDULE_FOR,
+                            guard=GUARD_MARGIN if method == "guarded_dynamic" else None)
         result = schedule(ordered, reader, count, SCHEDULE_FOR.get(method, method))
         result["padded_tokens"] = reader.padded_tokens
+        result["calls"] += reader.recheck_calls
+        result["recheck_calls"] = reader.recheck_calls
+        result["rechecked_pairs"] = reader.rechecked_pairs
         result["ms"] = (perf_counter() - start) * 1000
         result["truncated"] = reader.truncated
         return ordered, result
 
-    methods = PREFIX_CONTROL if args.prefix_control else DYNAMIC_METHODS if args.compare_dynamic else METHODS
+    methods = METHODS
+    if args.prefix_control:
+        methods = PREFIX_CONTROL
+    elif args.compare_dynamic:
+        methods = DYNAMIC_METHODS
+    elif args.guard_shape:
+        methods = GUARD_METHODS
     for count in SUPPORT:
         for method in methods:
             measure(ids[0], count, method)
@@ -208,9 +253,9 @@ def run(args):
                 arm["score_differences"] = sum(value != expected[key] for key, value in actual.items())
                 arm["decision_differences"] = sum((value >= 0.) != (expected[key] >= 0.)
                                                   for key, value in actual.items())
-                supported = labels["hard"][qid]
-                arm["hard_p5"] = sum(supported[e] > 0 for e, _ in arm["selected"]) / TOP
-                arm["confirmed_hard_p5"] = sum(supported[e] > 0 and bool(docs)
+                supported = hard_labels[qid]
+                arm["hard_p5"] = sum(supported.get(e, 0) > 0 for e, _ in arm["selected"]) / TOP
+                arm["confirmed_hard_p5"] = sum(supported.get(e, 0) > 0 and bool(docs)
                                                  for e, docs in arm["selected"]) / TOP
             by_count[count] = arms
         rows.append(dict(id=qid, support=by_count))
@@ -218,7 +263,8 @@ def run(args):
             print(f"Completed {i+1}/{len(ids)}", flush=True)
     write_json(args.output, dict(
         job=os.environ["SLURM_JOB_ID"], gpu=torch.cuda.get_device_name(), queries=len(rows),
-        script_sha256=digest(Path(__file__)), input_sha256=digest(args.manifest),
+        dataset=args.dataset, guard_margin=GUARD_MARGIN if args.guard_shape else None,
+        script_sha256=digest(Path(__file__)), input_sha256=inputs,
         embedding=provenance, reranker=reranker.provenance, report=summarize(rows, methods), rows=rows,
     ))
 
@@ -230,4 +276,6 @@ if __name__ == "__main__":
     modes = parser.add_mutually_exclusive_group()
     modes.add_argument("--prefix-control", action="store_true")
     modes.add_argument("--compare-dynamic", action="store_true")
+    modes.add_argument("--guard-shape", action="store_true")
+    parser.add_argument("--dataset", choices=("SIGIR", "SciRepEval"), default="SIGIR")
     run(parser.parse_args())
