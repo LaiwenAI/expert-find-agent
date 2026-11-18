@@ -13,3 +13,7 @@ The decisions describe eligibility under the specific displayed constraint. They
 The generator and GPU evaluation live in the [counterfactual experiment](../../experiments/transfer/constraint_counterfactual.py). Scores include the number of pairs for which both intact sides are correct and the number of eligibility decisions made after the comparable measurement was hidden. Do not train on individual members and test on other members of the same base case.
 
 The dataset consists of original fictional fixtures. It includes no enterprise requests, researcher identities, or copied source documents.
+
+## Raw-text stress extension
+
+The 96 rows in `stress.jsonl` extend the same source families. The paired requests keep identical evidence text. The controls add a second measurement, add a proposed target in the same card, replace the point measurement with a range crossing the bounds, or provide an incompatible unit. There are 24 requests per control. The [raw-text evaluation](../../experiments/transfer/raw_numeric_evidence.py) parses both the limit and the source number from visible text and reports exact source quotes. No pre-normalized reading is provided to the comparison.
