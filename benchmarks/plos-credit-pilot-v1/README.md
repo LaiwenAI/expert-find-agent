@@ -26,3 +26,20 @@ The byline proxy promotes all 629 candidates and coincides with 244 declared rol
 Job `40279` repeats the same cases with cyclic permutations of the three option meanings. Scoped accuracy remains higher than the all-author input (97.93% versus 88.08%). When other authors' declarations remain and the target record is removed, the reader falsely attributes the role in 213/629 cases, claims absence in 405/629, and correctly reports unavailable in 11/629. The failure persists under option rotation. These checks motivate deciding whether the target record is available before prompting the model.
 
 Run [the attribution evaluator](../../experiments/credit/attribution_controls.py) on the pinned PLOS XML snapshot and the Qwen checkpoint. Run with `--rotate-labels` for the option-order control. Local outputs are `artifacts/plos-credit-attribution-v1` and `artifacts/plos-credit-attribution-rotated-v1`.
+
+## Compound roles with source retrieval
+
+Slurm job `40297` retrieves a paper before checking its contributor declarations. The index contains 100 PLOS papers. The test has twelve labeled papers with four controlled query views each. These views use the title, an abstract body excerpt, the final abstract sentence, and a light edit of that sentence. They are derived from the source records and share the same twelve papers. The controls compare title-and-introduction and full-abstract indices. The dense embedding truncates at 512 tokens.
+
+| Source policy | Correct source / 48 | Mixed request P50 / P95 |
+| --- | ---: | ---: |
+| Full-abstract BM25 | 48 | 0.097 / 0.184 ms |
+| Full-abstract dense | 44 | 6.991 / 7.119 ms |
+| Exact title, then short-index lexical/dense agreement | 33 | 7.110 / 7.322 ms |
+| Exact title or unique excerpt, then full-abstract BM25 | 48 | 0.040 / 0.178 ms |
+
+A normalized quote is accepted only when it occurs in one abstract in the snapshot. The combined policy uses 12 title hits, 24 literal excerpt hits and 12 lexical fallbacks. The exact route is faster on literal inputs. Edited excerpts miss the literal route and add overhead relative to full BM25 (P95 0.190 versus 0.118 ms). Timing on ws5 covers a local lookup from the query lead through a role check, with warm resident indices and seven repeats. It is a controlled source-recovery workload. Natural paraphrases, broader corpora, concurrent service tails and latency outside the process require separate tests.
+
+The 132 atomic role queries yield 685 role pairs, with 300 having no single author declared for both roles. Given the correct paper, same-author intersection recovers all 685 exact sets against the publisher tags. Matching either role recovers 137 and promotes an unsupported coauthor in 548. Paper-level pooling promotes an unsupported coauthor in all 685 selected contrasts. With the correct paper retrieved but its role records withheld, the same-author route returns unknown on all 685 cases. For edited excerpts, short-index agreement leaves 383/685 unresolved. Full-abstract BM25 and the combined policy both recover all 685 exact sets on those excerpts. The controls distinguish source lookup failure from wrong-author attribution.
+
+Run [the compound retrieval evaluator](../../experiments/credit/conjunctive_source_retrieval.py) with the pinned XML sources and a [PLOS Search API](https://api.plos.org/solr/search-fields/) snapshot. The snapshot requests `id,title,abstract`, 500 rows, sorted by `publication_date desc,id asc`. Its query is `title:("machine translation" OR "information retrieval" OR "recommendation system" OR "recommender system" OR "transformer model" OR "text classification" OR "sentiment analysis") AND journal:"PLOS ONE" AND publication_date:[2020-01-01T00:00:00Z TO 2026-01-01T00:00:00Z]`. The evaluator pins the returned JSON hash. Local result: `artifacts/plos-credit-conjunctive-v5`.
