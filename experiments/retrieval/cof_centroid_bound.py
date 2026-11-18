@@ -13,6 +13,18 @@ def digest(path):
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
+def split_sources(source_vectors, rows, count):
+    local = source_vectors[rows]
+    selected = [0]
+    while len(selected) < min(count, len(rows)):
+        distances = np.linalg.norm(local[:, None] - local[selected], axis=2).min(axis=1)
+        distances[selected] = -1
+        selected.append(int(np.argmax(distances)))
+    assignment = np.linalg.norm(local[:, None] - local[selected], axis=2).argmin(axis=1)
+    return [rows[assignment == j] for j in range(len(selected)) if np.any(assignment == j)]
+
+
+
 def main():
     root, _, reviewers, labels = load('SIGIR')
     manifest = Path('artifacts/cof-gpu-public-input-v1/input-provenance.json')
@@ -30,19 +42,9 @@ def main():
     if len(vectors) != len(papers) + len(queries):
         raise ValueError('Unexpected vector count')
     source_vectors = vectors[:len(papers)]
-    def split(rows, count):
-        local = source_vectors[rows]
-        selected = [0]
-        while len(selected) < min(count, len(rows)):
-            distances = np.linalg.norm(local[:, None] - local[selected], axis=2).min(axis=1)
-            distances[selected] = -1
-            selected.append(int(np.argmax(distances)))
-        assignment = np.linalg.norm(local[:, None] - local[selected], axis=2).argmin(axis=1)
-        return [rows[assignment == j] for j in range(len(selected)) if np.any(assignment == j)]
-
     layouts = {}
     for count in (1, 2, 4):
-        parts = [(e, part) for e, rows in enumerate(owners) for part in split(rows, count)]
+        parts = [(e, part) for e, rows in enumerate(owners) for part in split_sources(source_vectors, rows, count)]
         parent, groups = zip(*parts)
         centers = np.stack([source_vectors[rows].mean(axis=0) for rows in groups])
         radii = np.array([np.linalg.norm(source_vectors[rows] - center, axis=1).max()
