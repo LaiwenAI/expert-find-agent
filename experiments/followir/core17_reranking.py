@@ -42,12 +42,12 @@ def write_json(path, data):
         stream.write("\n")
 
 
-def prepare(root, output):
+def prepare(root, output, *, revision=REVISION, files=FILES, topics=20, changed_pairs=436):
     from pyarrow import parquet
 
     def load(name):
         path = root / f"{name}.parquet"
-        if digest(path) != FILES[name]:
+        if digest(path) != files[name]:
             raise ValueError(f"Unexpected upstream file: {path}")
         return parquet.read_table(path).to_pylist()
 
@@ -75,9 +75,9 @@ def prepare(root, output):
                           pool=sorted(pool), qrels=[before, after], invalidated=sorted(invalidated)))
         used.update(pool)
     docs = {r["_id"]: f'{r["title"]}\n{r["text"]}' for r in load("corpus") if r["_id"] in used}
-    if set(docs) != used or len(pairs) != 20 or sum(len(p["invalidated"]) for p in pairs) != 436:
+    if set(docs) != used or len(pairs) != topics or sum(len(p["invalidated"]) for p in pairs) != changed_pairs:
         raise ValueError("Unexpected benchmark inventory")
-    write_json(output, dict(revision=REVISION, upstream_sha256=FILES, pairs=pairs, docs=docs))
+    write_json(output, dict(revision=revision, upstream_sha256=files, pairs=pairs, docs=docs))
 
 
 def pmrr(before, after, invalidated):

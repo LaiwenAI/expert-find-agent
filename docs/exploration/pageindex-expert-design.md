@@ -189,3 +189,27 @@ The frozen top-ten shortlist contains 52/436 rejudged pairs. The cross-encoder w
 Jobs `40348` and `40352` used an RTX 5090. The dense pass includes live query encoding and scoring pre-encoded candidates. The verifier timing adds tokenization, model inference and sorting for ten documents. Corpus embedding, first-stage candidate selection, network and initialization are outside these intervals.
 
 Use [the dense replay](../../experiments/followir/core17_reranking.py) with `prepare PARQUET_DIR PREPARED_JSON` and `run PREPARED_JSON CHECKPOINT DENSE_RESULTS`. Name each pinned Parquet file for its subset, using `default.parquet` for the main qrels. Run [the cross-encoder replay](../../experiments/followir/core17_verifier.py) with `PREPARED_JSON DENSE_RESULTS RERANKER_CHECKPOINT RERANKER_RESULTS`. PyArrow is required only for preparation. The artifact stores rankings and timings and uses the externally hosted corpus during replay.
+
+### Training a Small Conditional Decision Head
+
+A rank-16 bilinear head adds a learned residual to frozen Qwen3-Embedding-0.6B scores. The document-side projection can be stored at indexing time. Queries require one embedding and one projected score per candidate. The comparison includes frozen joint encoding, a learned topic-only control, joint encoding with binary supervision, and the same head with an extra matched-pair loss. Each matched pair has the same source topic, query and narrative, with one positive and one negative candidate.
+
+Training uses the authors' [synthetic examples](https://huggingface.co/datasets/jhu-clsp/FollowIR-train/tree/545192353a0192e2ed0e4f1604ff8a231f8733). An exact normalized-query group hash splits training from validation. A token-overlap audit excludes possible duplicates with the two evaluation inputs before fitting. The rejection threshold allows up to 5% observed false flags on synthetic validation positives. Evaluate the resulting fixed threshold on the frozen encoder's top ten under the revised narrative. A false rejection is a flagged candidate with a positive human judgment under both narratives. Unjudged flags are reported separately.
+
+| Route | Core17 nDCG@10 | Core17 p-MRR | News21 nDCG@10 | News21 p-MRR |
+| --- | ---: | ---: | ---: | ---: |
+| Frozen joint encoding | 0.2973 | +0.0513 | 0.3267 | +0.0226 |
+| Topic-only decision head | 0.1448 | 0.0000 | 0.2063 | 0.0000 |
+| Joint head, binary loss | 0.1538 | +0.0559 | 0.2261 | +0.0122 |
+| Joint head, binary and pair losses | 0.1492 | +0.0571 | 0.2173 | +0.0161 |
+
+The matched-pair head reduces revised top-ten invalidations from 50 to 32 on Core17 and from 115 to 84 on News21 when it controls the whole ranking. Relevance also drops on both collections (paired topic-bootstrap 95% intervals for the nDCG difference are −0.2262 to −0.0776 and −0.1629 to −0.0574). Pair supervision adds +0.0012 and +0.0039 p-MRR over binary-only training, with both intervals crossing zero. Frozen and matched-pair P95 are 7.54 / 7.57 ms on Core17 and 7.55 / 7.60 ms on News21. Timing includes warm query encoding and scoring fixed pools with cached document projections.
+
+| Matched-pair flags on the frozen top ten | Invalidated flagged | Still-relevant flagged | Unjudged flagged |
+| --- | ---: | ---: | ---: |
+| Core17 | 2 / 50 | 2 / 67 | 1 |
+| News21 | 0 / 115 | 4 / 89 | 2 |
+
+Job `40359` on RTX 5090 excludes 34 overlapping training rows under the text-similarity audit and uses 1,391 training rows, 389 matched contrasts, and 351 validation rows. Each head flags 8/166 synthetic validation positives. No normalized training document text exactly matches an evaluation body. The human rejudgments concern passages. Deployment would additionally require expert identity, supporting evidence and end-to-end validation. Keep the frozen path. The training contrasts hold the criteria fixed and swap documents. Future supervision can test the complementary intervention, holding the evidence fixed while varying one condition, with examples that should retain their original relevance.
+
+Use [the feature command](../../experiments/followir/decision_features.py) to prepare the pinned [News21 Parquets](https://huggingface.co/datasets/jhu-clsp/news21-instructions-mteb/tree/39db677749b3b783bb277d0e2d4712f5f133f52b), then cache both evaluation corpora with `cache PREPARED_JSON CHECKPOINT VECTORS`. Run [the GPU trainer and replay](../../experiments/followir/conditional_decision.py) with `TRAIN_JSONL CHECKPOINT OUTPUT_JSON` and `--evaluation PREPARED_JSON VECTORS` once for each collection.
