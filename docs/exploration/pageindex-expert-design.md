@@ -133,3 +133,19 @@ Guarded reuse saves 15.55 ms mean on SciRepEval (paired 95% interval -21.02 to -
 The optimization has established systems precedents. Assess any research contribution through expert-specific assignment, completeness and evidence-quality constraints beyond reuse itself. [SGLang (NeurIPS 2024)](https://proceedings.neurips.cc/paper_files/paper/2024/hash/724be4472168f31ba1c9ac630f15dec8-Abstract-Conference.html) · [CacheBlend (EuroSys 2025)](https://doi.org/10.1145/3689031.3696098)
 
 Run [guarded shared requests](../../experiments/retrieval/cof_guarded_shared_requests.py) on a CUDA node with the CoF frozen indices and the same Qwen checkpoints as the two preceding experiments. Local output is `artifacts/cof-guarded-shared-requests-v1`. The [PLOS role pilot](../../benchmarks/plos-credit-pilot-v1/README.md) supplies a separate attribution target from publisher-declared contributions.
+
+## Extracting Explicit Constraint Values
+
+[IFEval](https://github.com/google-research/google-research/tree/7117df5f368e1301e34bd014be9c93e24a4e73c6/instruction_following_eval) provides labeled response constraints. The diagnostic scores a four-kind projection of its prompts: word bounds, sentence bounds, forbidden terms and comma bans. It selects 72 prompts with a target annotation and 24 without one by a fixed ID hash. Exact success requires the entire projected set, including each numeric value and bound direction. This is a parser diagnostic on response instructions. Enterprise search intent and general instruction following need different evaluations.
+
+A first Qwen3-4B JSON generation trial passed structure checks on 12/96 full prompts. An interface revision passed on 2/12 disjoint format-check prompts. The bounded experiment replaces open generation with fixed choices over values proposed from the source. Full and localized readers receive the same candidates. The localized reader sees cue-bearing sentences and adjacent text. The hybrid accepts directly parsed literal counts and comma bans when each tracked cue is covered, otherwise it runs the full candidate reader.
+
+| Route | Exact projected set / 96 | Prompts with extra constraints | Reader calls | Request P50 / P95 |
+| --- | ---: | ---: | ---: | ---: |
+| Full candidate verification | 49 | 41 | 75 | 14.87 / 111.68 ms |
+| Localized candidate verification | 48 | 39 | 75 | 14.66 / 117.16 ms |
+| Literal rules, then full verification | 55 | 35 | 50 | 11.10 / 111.73 ms |
+
+The hybrid handles 25 source prompts directly, all matching the projected labels on this sample. It gains 6.25 percentage points in exact set recovery over full verification (paired request-bootstrap 95% interval +2.08 to +11.46). This interval describes the sampled prompts. Template relationships can reduce effective independence. The reduction in reader calls improves median latency while P95 is essentially unchanged. The localized route shortens 38 prompts and matches only 21/43 forbidden terms, versus 26/43 with full context. Proposal coverage already omits 13/43 forbidden terms, 2/21 word bounds and 3/21 sentence bounds. Even a source-derived candidate can be assigned to an unintended scope. Extra constraints remain a failure mode in 35 hybrid outputs.
+
+Run [the bounded extractor](../../experiments/ifeval/anchored_constraint_extraction.py) with the pinned IFEval input file and open Qwen checkpoint. Slurm job `40334` measures all three live arms in rotating order on an RTX 5090. Timing covers warm candidate generation and inference. Local records are in `artifacts/ifeval-bounded-constraints-v1`.
