@@ -31,3 +31,7 @@ Measure complete query wall time, P50/P95/P99, failures, queueing, token usage a
 ## Promotion gate
 
 Do not deploy an adaptive policy based on these simulations. Advance to a confirmatory comparison only after frozen data partitions, independent judgments, operational feedback logging, predefined statistical criteria and complete cost measurement are available. If those prerequisites are missing, continue treating the results as development evidence and publish their limitations.
+
+## Open-weight decision pilot
+
+On ws5 Slurm job 39762, frozen Qwen3-4B-Instruct-2507 (pinned model revision `cdbee75f17c01a7cc42f958dc650907174af0554`) scores single-token binary labels for the first 20 previously explored MERIT reviewer pairs. All inputs fit the 8,192-token cap. Twelve decisions match the binary reviewer self-rating, with eight false positives and no false negatives; the greedy first token is a valid digit in all cases and also matches 12 labels. Mean unbatched GPU forward time is 0.169 s, excluding tokenization, model initialization, retrieval and serving. This small nonrandom pilot is not enterprise expert fit or evidence support, and the two-label normalized scores are not calibrated probabilities. Job 39753 failed before inference due to a tokenizer return-type mismatch; corrected job 39762 completed 0:0. Reproduce using `experiments/cluster_open_decision_pilot.sbatch` after preparing the pinned model and public inputs.

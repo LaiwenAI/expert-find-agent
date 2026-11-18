@@ -258,6 +258,9 @@ On the same 30 reused queries with cached CPU query vectors and reviewer self-ra
 On all 73 previously explored reviewer queries, placing candidates that pass lexical membership first and appending rejected dense candidates preserves the pool but changes the ranking. For a pool of ten, soft P@5 is 0.433 versus 0.425 for dense: 15 queries improve, 14 decline and 44 tie. For a pool of 50, the values are 0.422 and 0.425. This is a post-hoc reviewer-label diagnostic without timing or source-level judgments; backfill is not established as an improvement.
 \paragraph{Feedback-memory split sensitivity.}
 Thirty overlapping random splits of the same 73 previously explored queries replay the simulated correction memory. On new folds, the mean soft P@5 difference from dense averages $+0.011$; 21 split means are positive, eight negative and one zero. Splits are dependent, the threshold was chosen previously, and reviewer ratings simulate corrections. Old and new folds have the same sampling role, so this does not evaluate temporal retention, actual user feedback or agent cost.
+\paragraph{Open-weight decision pilot.}
+On the first 20 previously explored MERIT reviewer-rating pairs, frozen Qwen3-4B-Instruct-2507 selects between single-token labels by next-token score. All 20 inputs fit the 8,192-token cap; 12 decisions match the binary reviewer rating, including eight false positives and no false negatives. The unconstrained greedy first token is a valid digit in all 20 and has the same accuracy. Mean GPU forward time is 0.169 seconds, excluding tokenization, initialization, retrieval and serving. This small nonrandom pilot is neither an enterprise-quality benchmark nor a complete-agent comparison; normalized two-label scores are not calibrated probabilities.
+
 
 
 
