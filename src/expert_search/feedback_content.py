@@ -24,11 +24,14 @@ def _phrase_in_query(phrase, query):
     return re.search(pattern, query.casefold()) is not None
 
 
-def apply_corrections(query, ranking, corrections, owned_sources):
+def apply_corrections(query, ranking, corrections, owned_sources, *, scope_verdicts=None):
     """Stable promotion/demotion from exact query phrases and owned source quotes.
 
     ``owned_sources`` maps expert IDs to source-ID/text mappings. Invalid or
     ambiguous corrections abstain; lexical inclusion is not entailment.
+    A caller must supply an explicit True scope verdict for each correction;
+    absent, false and unknown verdicts do not change the ranking. The caller
+    is responsible for the origin and correctness of those verdicts.
     """
     if not isinstance(query, str) or not isinstance(ranking, list) or len(set(ranking)) != len(ranking):
         raise ValueError('Invalid query or ranking')
@@ -45,6 +48,8 @@ def apply_corrections(query, ranking, corrections, owned_sources):
             audit.append('unanchored'); continue
         if not _phrase_in_query(correction.query_phrase, query):
             audit.append('out_of_scope'); continue
+        if scope_verdicts is None or scope_verdicts.get(correction) is not True:
+            audit.append('scope_unconfirmed'); continue
         votes.setdefault(correction.expert_id, set()).add(correction.action)
         audit.append('matched')
     def bucket(expert):

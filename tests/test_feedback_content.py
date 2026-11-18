@@ -6,7 +6,7 @@ class FeedbackContentTests(unittest.TestCase):
     def test_text_changes_ranking_only_when_scope_and_source_match(self):
         ranking=['a','b','c']; sources={'b':{'p':'A verified quote in a paper.'}}
         valid=Correction('b','battery','p','verified quote','promote')
-        self.assertEqual(apply_corrections('battery recycling',ranking,[valid],sources)['ranking'],['b','a','c'])
+        self.assertEqual(apply_corrections('battery recycling',ranking,[valid],sources,scope_verdicts={valid:True})['ranking'],['b','a','c'])
         changed=Correction('b','solar','p','verified quote','promote')
         self.assertEqual(apply_corrections('battery recycling',ranking,[changed],sources)['ranking'],ranking)
         swapped=Correction('b','battery','p','unrelated quote','promote')
@@ -17,12 +17,20 @@ class FeedbackContentTests(unittest.TestCase):
         english=Correction('b','battery','p','quoted','promote')
         chinese=Correction('b','\u7535\u6c60','p','quoted','promote')
         self.assertEqual(apply_corrections('batteryless sensors',['a','b'],[english],sources)['ranking'],['a','b'])
-        self.assertEqual(apply_corrections('\u7535\u6c60\u56de\u6536',['a','b'],[chinese],sources)['ranking'],['b','a'])
+        self.assertEqual(apply_corrections('\u7535\u6c60\u56de\u6536',['a','b'],[chinese],sources,scope_verdicts={chinese:True})['ranking'],['b','a'])
+
+    def test_scope_requires_explicit_affirmation(self):
+        correction=Correction('b','battery','p','quoted','promote')
+        sources={'b':{'p':'quoted'}}
+        for verdict in (None, {}, {correction:False}, {correction:None}):
+            result=apply_corrections('battery',['a','b'],[correction],sources,scope_verdicts=verdict)
+            self.assertEqual(result['ranking'],['a','b'])
+            self.assertEqual(result['audit'],['scope_unconfirmed'])
 
     def test_conflicting_corrections_abstain(self):
         sources={'b':{'p':'quoted'}}
         corrections=[Correction('b','query','p','quoted',a) for a in ('promote','demote')]
-        result=apply_corrections('query',['a','b'],corrections,sources)
+        result=apply_corrections('query',['a','b'],corrections,sources,scope_verdicts={c:True for c in corrections})
         self.assertEqual(result['ranking'],['a','b'])
         self.assertEqual(result['conflicts'],['b'])
 
