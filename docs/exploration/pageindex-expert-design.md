@@ -71,3 +71,23 @@ Job 40200 ran on one RTX 4090 on ws6. The learned gate used eight initial-search
 The fixed threshold targeted 25% in calibration. It reached 41% and 32% in the evaluation venues. At matched call counts, the learned rule had +0.59 and -1.32 known hard P@5 points relative to the simple score margin rule. Both paired missing-label bounds span zero. The learned policy offers no stable advantage here. It also retains most of the always-on P95, despite reducing mean latency.
 
 The [benchmark](../../experiments/retrieval/cof_fragment_gate.py) measures branch costs and replays the frozen gate. It does not run an independent HTTP service. Timing, candidate outcomes, and report hashes are under `artifacts/cof-fragment-gate-v1`. Reproduction checked the venue split, all route counts, and label bounds.
+
+## QASPER Human-Annotated Evidence and Reader Cost
+
+[QASPER (NAACL 2021)](https://aclanthology.org/2021.naacl-main.365/) supplies human-selected evidence paragraphs. The known-paper test isolates evidence acquisition after a source is selected. It does not assess expert identity, contribution attribution or screening across a global corpus.
+
+Frozen Qwen3-Embedding-0.6B scores source paragraphs exactly within each paper. After two paragraphs, the policies stop, extend down the dense order, or prioritize unread sections. The learned policy predicts incremental evidence gain, weighting completion of any one annotator’s set above partial recall. It uses score margins, source structure, and initial query-term coverage. A deterministic paper split of the official development set supplied 401 fitting and 525 calibration questions. Both gates targeted 90% of the fixed-five context budget on calibration. No exact paper IDs, normalized titles, or complete body texts are shared between development and test.
+
+| Policy | Official evidence F1 | Entire evidence set recovered | Context tokens mean / P95 |
+| --- | ---: | ---: | ---: |
+| Fixed two | 32.81% | 44.35% | 221 / 445 |
+| Fixed five | 26.05% | 65.21% | 558 / 978 |
+| Fixed eight | 21.53% | 75.40% | 894 / 1,529 |
+| Score-gap gate | 30.17% | 60.11% | 512 / 1,275 |
+| Learned gate | 29.07% | 58.92% | 516 / 1,299 |
+
+Official text-only evidence F1 and tokens include all 1,451 test questions. Complete evidence means recovering every text paragraph from at least one nonempty, fully alignable answer annotation. This measure covers 1,256 questions across 402 papers and excludes image evidence. The learned gate's complete-evidence difference from fixed five is -6.29 percentage points (95% paper-bootstrap interval -8.50 to -4.08). It spends more tokens than the score-gap gate and offers no improvement in complete annotation coverage. Reporting F1 alone would favor fixed two, even though it loses 20.86 points in complete coverage. Both adaptive policies reduce mean tokens and increase P95. The shared live encoder, exact scoring, routing and comparison-context materialization took 7.23 ms at P95 on the RTX 5090 in job `40230`. This timing is shared across arms and cannot establish reader or service speedup.
+
+A separately locked 72-question sample, one hash-selected question per paper, replays fixed five and the learned route through the same local BF16 Qwen3-4B-Instruct-2507 reader. Job `40235` alternates arm order; mean reader time falls from 184 to 162 ms (paired interval -53 to +8 ms), while P95 is 475 versus 478 ms. Answer F1 is 46.29% versus 43.69% (paired difference -2.60 points, 95% interval -8.49 to +3.67). Mean prompt tokens are 644 versus 597. Greedy generation is capped at 48 tokens and hits the cap in 11 versus 8 requests. The timed reader includes prompt construction through decoding, starting from already selected contexts. The sample does not establish a latency or answer-quality advantage. These results motivate a bounded expansion policy that measures complete evidence alongside F1 and caps reader-tail cost.
+
+Reproduction: extract the official [development](https://qasper-dataset.s3.us-west-2.amazonaws.com/qasper-train-dev-v0.3.tgz) and [test and evaluator](https://qasper-dataset.s3.us-west-2.amazonaws.com/qasper-test-and-evaluator-v0.3.tgz) assets into `artifacts/public/qasper-v0.3`. Run [adaptive evidence](../../experiments/qasper/adaptive_evidence.py) and [paired reader](../../experiments/qasper/paired_reader.py) on a CUDA node with the pinned open-weight checkpoints. Source and evaluator hashes are verified by the runners. Local outputs are `artifacts/qasper-adaptive-evidence-v1` and `artifacts/qasper-paired-reader-v1`; source text and model outputs are excluded from the release package.
