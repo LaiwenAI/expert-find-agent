@@ -36,3 +36,26 @@ A post-hoc simulation uses the stored native-choice probability scores to decide
 A subsequent fresh-call pilot fixes the 0.75 threshold and selects 40 distinct target-title groups from the replay test partition by a label-blind hash. The paired arms alternate order with three workers and no retries. All 80 arm attempts succeed; the cascade escalates 19 cases and matches self-ratings on 35/40, versus 34/40 for full reasoning. Mean measured arm times are 3.06 and 5.14 seconds respectively, including both serial calls on escalation but excluding client initialization. These requests are new but the same source cases and overall benchmark were previously studied. Forty pairs are insufficient to establish equivalence or a general latency distribution; no industrial expert-fit conclusion follows. Run `PYTHONPATH=src python -m experiments.merit_selective_live_pilot` to create a new local pilot directory; the script refuses to overwrite an existing run.
 
 A separate integration pilot uses the reusable `selective_decision` component with the same fixed threshold on 12 further distinct title groups, excluding all 40 initial pilot groups. All 24 arm attempts succeed, and four component calls escalate. Each arm agrees with 10/12 self-ratings; measured mean times are 2.35 seconds for the cascade and 4.16 seconds for full reasoning. These are new calls but the overall 610-pair source was previously examined. The pilot verifies connectivity and routing, not equivalence, robust latency, or enterprise suitability. Reproduce with `PYTHONPATH=src python -m experiments.merit_selective_live_pilot --component`; the original pilot protocol is required to exclude its groups.
+
+## LR-Bench pairwise retrieval
+
+This separate benchmark uses the two original [LR-Bench pairwise files](https://huggingface.co/datasets/Gnociew/LR-bench/tree/6b950b4a6f309d4e6fd3749744d2ddd9005fa6f8). For every row, the anchor ID, both alternative IDs, comparison type and reference ratings match the [RATE release predictions](https://github.com/Gnociew/RATE-Reviewer-Assignment/tree/8b85915315a5ebca92cda8a0d901ecaaeb8c0cba/predictions). The released profiles and candidates are fixed. No scored pairs contain an exact target title-and-abstract match in either supplied profile. This check does not establish freedom from near-duplicates or pretraining overlap.
+
+| Method | Paper ranks reviewers, accuracy / loss | Reviewer ranks papers, accuracy / loss |
+| --- | ---: | ---: |
+| BM25 max | 64.62% / 0.2806 | 68.75% / 0.2636 |
+| Frozen Qwen3-Embedding-0.6B max | 66.51% / 0.2620 | 74.32% / 0.2041 |
+| Frozen Qwen3-Embedding-0.6B top-three mean | 67.45% / 0.2580 | 75.93% / 0.1889 |
+| RATE author predictions | 76.89% / 0.1795 | 75.25% / 0.1926 |
+
+The [official evaluator](https://github.com/Gnociew/RATE-Reviewer-Assignment/blob/8b85915315a5ebca92cda8a0d901ecaaeb8c0cba/evaluation_script.py) reports strict pairwise accuracy and rating-gap-weighted Kendall loss. The paper-centric split contains 212 pairs and 150 anchors. The reviewer-centric split contains 1,184 pairs and 187 anchors. A paired bootstrap by anchor gives a top-three minus RATE accuracy difference of -9.43 percentage points (95% interval -16.53 to -1.88) on paper-centric comparisons and +0.68 points (-2.35 to +3.59) on reviewer-centric comparisons. The directions should be kept separate. Paper-centric comparisons are closer to finding people for a request and should be the primary LR-Bench measure. Reviewer-centric results do not establish equivalence. Both splits concern self-rated familiarity.
+
+The frozen model embeds titles and abstracts with a 512-token limit and reuses the profile vectors. Slurm job `40205` on `ws5` (RTX 5090) embedded 1,493 unique profile texts in 6.26 s and 689 distinct targets in 3.25 s at batch size 32. Cached scoring and aggregation for 896 unique target/profile combinations took 8.18 ms in total. These are batch component measurements. The released RATE predictions have no comparable serving timing.
+
+To reproduce, save `evaluations_pc.json` and `evaluations_rc.json` from the pinned dataset above, plus `RATE_pc.json`, `RATE_rc.json`, and `evaluation_script.py` (renamed `rate-evaluation_script.py`) from the pinned RATE release into the same directory. The runner verifies their hashes. Use the official frozen Qwen revision `97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3` and its verified checkpoint provenance file.
+
+```bash
+PYTHONPATH=src:. python -m experiments.retrieval.lrbench_frozen_baselines \
+  --release artifacts/lrbench-release-6b950b4 \
+  --output artifacts/lrbench-frozen-v1
+```
