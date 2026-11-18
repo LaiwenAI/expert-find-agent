@@ -26,6 +26,26 @@ Job `40363` ran frozen Qwen3-4B-Instruct-2507 on an RTX 5090. Every cell shows t
 
 In the descriptive condition, the scoped route gets 25/112 change pairs and 60/112 stable pairs exactly right. It produces 92 false promotions, compared with 32 for the all-author reader. The clustered 95% interval for the scoped reader's change in exact group accuracy is −5.0 to +19.6 percentage points. Scoped descriptive P95 is 36.85 ms, compared with 69.68 ms for all-author evidence. These are warm local batches of four judgments, excluding retrieval. A smaller input does not ensure better attribution. When the target declaration is hidden, the availability guard returns unavailable with zero model calls and zero promotions.
 
+## Shared parsing before attribution
+
+The two requirements are now marked in the same request format for every arm. The direct reader decides separately for the two authors in one batch. The factored routes resolve the two task phrases once per request and reuse the predicted roles for both authors. They use nearest-definition embeddings, one batched full-glossary reader, or a reader over the union of lexical and dense top-three roles per phrase. The invariance route attempts to skip that last reader when every distinct role pair in the two shortlists yields the same decisions for both authors.
+
+The two language conditions reuse the same test articles and labels. One uses the 14 authored phrases. The second uses all 49 [NISO task examples](https://zenodo.org/records/18421449), with no exact phrase shared between conditions. These NISO examples were also used in earlier diagnostics. The structured boundary is supplied by the benchmark input; open-ended request segmentation is outside this test.
+
+| Route | Authored groups exact / 112 | NISO groups exact / 112 | NISO request P95 |
+| --- | ---: | ---: | ---: |
+| Direct reader | 3 | 1 | 24.49 ms |
+| Dense definition match | 46 | 23 | 8.40 ms |
+| Full-glossary reader | 87 | 44 | 50.94 ms |
+| Shortlist reader | 62 | 51 | 37.29 ms |
+| Invariance route | 62 | 51 | 36.12 ms |
+
+On NISO wording, the shortlist improves exact group accuracy by 44.64 percentage points over direct reading (paper-bootstrap interval +33.04 to +56.73). It recovers 124/224 exact role sets and makes six false promotions, compared with ten for direct reading. Both correct-role candidates are present in only 144/224 ordered shortlists. Phrasings recur across papers, so the paper bootstrap alone does not quantify generalization to new language.
+
+Invariance skips 40/224 NISO requests and gets 24 of those two-author decisions wrong. The correct role pair is absent from the ordered shortlist in every incorrect skip. Directly relying on agreement within the shortlist therefore repeats upstream coverage errors, even when aggregate accuracy matches the shortlist-reader arm.
+
+Run [the factored replay](../../experiments/credit/factored_role_edits.py) with `FIXTURE EXAMPLES_JSON EMBEDDING_CHECKPOINT READER_CHECKPOINT NEW_RESULT_JSON`. Job `40367` used frozen Qwen3-Embedding-0.6B and Qwen3-4B-Instruct-2507 on RTX 5090. Latencies are warm single-request measurements with one request version and two candidate authors. Source lookup, transport and open-ended segmentation are outside the measured path.
+
 ## Reproduce
 
 Run [the builder](../../experiments/credit/counterfactual_role_edits.py) with `SNAPSHOT OUTPUT --capture-from CATALOG PILOT_MANIFEST`. Use the pinned catalog described in [the compound retrieval experiment](../plos-credit-pilot-v1/README.md#compound-roles-with-source-retrieval) and its pilot manifest. The source cache can be reused for subsequent builds. The released fixture contains derived records, with article URLs and hashes for rebuild and audit.
