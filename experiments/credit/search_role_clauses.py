@@ -23,6 +23,7 @@ METHODS = ("bm25_ridge", "confirmed_ridge", "confirmed_clause", "confirmed_full_
 PROSE_METHODS = ("first_cut", "embedding_cut", "reader_cut", "oracle_cut")
 SOURCE_POLICY = {"score": .75, "margin": .05}
 STYLES = ("literal_excerpt", "abridged_excerpt")
+PARAPHRASE_METHODS = ("bm25", "dense", "one_reader", "reranked", "supplied_source")
 
 
 def prepare(args):
@@ -71,9 +72,9 @@ def views(record):
     return dict(literal_excerpt=full, abridged_excerpt=shortened)
 
 
-def summary(rows, methods=METHODS):
+def summary(rows, methods=METHODS, styles=STYLES):
     results = {}
-    for style in STYLES:
+    for style in styles:
         results[style] = {}
         for state in ("present", "withheld"):
             values = [r for r in rows if r["style"] == style and r["state"] == state]
@@ -133,14 +134,34 @@ def run(args):
         if paper["source_sha256"] != row["source_sha256"] or paper["roles"] != row["roles_by_author"]:
             raise ValueError("Changed contributor declarations")
     groups = [json.loads(line) for line in pair_path.read_text().splitlines()]
-    target_views = {row["doi"]: views(records[row["doi"]]) for row in groups}
+    if args.paraphrases is not None:
+        from experiments.credit.source_paraphrases import Search, validate
+
+        if args.prose or args.source_gates is None or args.source_reranker is None:
+            raise ValueError("Paraphrases require frozen source gates and a reranker with structured role fields")
+        gates = json.loads(args.source_gates.read_bytes())
+        expected = {"catalog": digest(args.catalog), "fixture": fixture_hash, "queries": digest(args.paraphrases)}
+        if gates["inputs"] != expected:
+            raise ValueError("Source gate inputs differ from the original calibration run")
+        clues = validate(args.paraphrases, args.fixture / "manifest.json", catalog)
+        target_views = {row["doi"]: {"paraphrase": row["query"]} for row in clues if row["split"] == "test"}
+        source = Search(records, args.embedding, args.source_reranker)
+        source_policies = gates["policies"]
+        if not all(source_policies[method] for method in ("dense", "one_reader", "reranked")):
+            raise ValueError("Expected nonempty frozen source policies")
+        methods, styles = PARAPHRASE_METHODS, ("paraphrase",)
+    else:
+        if args.source_gates is not None or args.source_reranker is not None:
+            raise ValueError("Source gates and reranker require paraphrases")
+        target_views = {row["doi"]: views(records[row["doi"]]) for row in groups}
+        methods, styles = PROSE_METHODS if args.prose else METHODS, STYLES
     phrases = json.loads((args.fixture / "boundary-phrases.json").read_bytes())
     if digest(args.examples) != NISO_SHA256:
         raise ValueError("Changed glossary")
     glossary = json.loads(args.examples.read_bytes())
     provenance = verify_checkpoint(args.embedding)
     torch.backends.cuda.matmul.allow_tf32 = False
-    encoder = QwenTorchEmbedding(args.embedding)
+    encoder = source.encoder if args.paraphrases is not None else QwenTorchEmbedding(args.embedding)
     tokenizer, model, reader_provenance = load_reader(args.reader)
     reader = Reader(tokenizer, model)
     definitions = [f"{role}: {glossary['definitions'][role]}" for role in ROLES]
@@ -150,26 +171,25 @@ def run(args):
                 key=lambda s: stable("fine-tune-split", role, s))] for role in ROLES]
     fit = [r for variants in ordered for r in variants[:-1]]
     held = [v[-1] for v in ordered]
-    ids = sorted(records)
-    docs = {}
-    segments = {}
-    notices = {}
-    for i, doi in enumerate(ids):
-        paper = records[doi]
-        text = paper["title"] + "\n" + paper["abstract"]
-        while text in docs:
-            text += "\n"
-        docs[text] = i
-        segments[doi] = [normalized(s).split() for s in [paper["title"], *sentences(paper["abstract"])]]
-        notices[doi] = notice_kind(paper["title"])
-    with TemporaryDirectory() as folder:
-        lexical = build_lexical(docs, Path(folder))
+    if args.paraphrases is None:
+        ids = sorted(records)
+        docs = {}
+        segments = {}
+        notices = {}
+        for i, doi in enumerate(ids):
+            paper = records[doi]
+            text = paper["title"] + "\n" + paper["abstract"]
+            while text in docs:
+                text += "\n"
+            docs[text] = i
+            segments[doi] = [normalized(s).split() for s in [paper["title"], *sentences(paper["abstract"])]]
+            notices[doi] = notice_kind(paper["title"])
+        with TemporaryDirectory() as folder:
+            lexical = build_lexical(docs, Path(folder))
     with torch.inference_mode():
         x = torch.cat([encode(encoder, [t for t, _ in part]) for part in (fit, held)])
         y = torch.tensor([role for _, role in (*fit, *held)], device="cuda")
         bank = ridge(x, y)
-
-        methods = PROSE_METHODS if args.prose else METHODS
 
         def choose_cut(activity, method, expected):
             candidates = spans(activity)
@@ -208,22 +228,30 @@ def run(args):
                 raise ValueError("Nonfinite boundary scores")
             return options[int(scores.argmax().item())], len(candidates)
 
-        def execute(text, hidden, method, expected):
+        def execute(text, hidden, method, expected, target):
             start = perf_counter()
             if args.prose:
                 lead, activity = split_request(text)
                 tasks = None
             else:
                 lead, *tasks = split(text)
-            scores = lexical.document_scores(lead)
-            candidates = [ids[int(i)] for i in sorted(scores, key=lambda i: (-scores[i], int(i)))
-                          if ids[int(i)] != hidden]
-            if method == "bm25_ridge":
-                doi = candidates[0] if candidates else None
+            if args.paraphrases is not None:
+                if method == "supplied_source":
+                    doi = target if hidden is None else None
+                else:
+                    observation, _, _, _ = source.run(lead, hidden, method)
+                    doi = observation[0] if method == "bm25" or accepts(observation, source_policies[method]) else None
             else:
-                typed = [d for d in candidates if notices[d] == notice_kind(lead)][:4]
-                observation = measure(normalized(lead).split(), typed, segments, "ordered")
-                doi = observation[0] if accepts(observation, SOURCE_POLICY) else None
+                scores = lexical.document_scores(lead)
+                candidates = [ids[int(i)] for i in sorted(scores, key=lambda i: (-scores[i], int(i)))
+                              if ids[int(i)] != hidden]
+                if method == "bm25_ridge":
+                    doi = candidates[0] if candidates else None
+                else:
+                    typed = [d for d in candidates if notices[d] == notice_kind(lead)][:4]
+                    observation = measure(normalized(lead).split(), typed, segments, "ordered")
+                    doi = observation[0] if accepts(observation, SOURCE_POLICY) else None
+            source_ms = (perf_counter() - start) * 1000
             authors = None
             cut_exact = None
             candidate_cuts = 0
@@ -234,18 +262,18 @@ def run(args):
                     cut_exact = tasks == expected
                 if tasks is None:
                     return dict(doi=doi, authors=None, cut_exact=cut_exact, candidate_cuts=candidate_cuts,
-                                ms=(perf_counter()-start)*1000)
+                                ms=(perf_counter()-start)*1000, source_ms=source_ms)
                 if method == "confirmed_full_reader":
                     rankings = choose_batched(router, tasks, [list(range(len(ROLES)))] * len(tasks), 0)
                 else:
-                    if args.prose or method == "confirmed_clause":
+                    if args.prose or method == "confirmed_clause" or args.paraphrases is not None:
                         tasks = reader_quotes(reader, tasks)
                     rankings = (encode(encoder, tasks) @ bank.T).argmax(1).tolist()
                 required = {ROLES[i] for i in rankings}
                 if len(required) == len(tasks):
                     authors = [i for i, own in enumerate(roles, 1) if required.issubset(own)]
             return dict(doi=doi, authors=authors, cut_exact=cut_exact, candidate_cuts=candidate_cuts,
-                        ms=(perf_counter()-start)*1000)
+                        ms=(perf_counter()-start)*1000, source_ms=source_ms)
 
         rows = []
         for i, group in enumerate(groups):
@@ -262,11 +290,11 @@ def run(args):
                     gold = [ordinal for ordinal, own in enumerate(records[doi]["roles"], 1)
                             if set(required).issubset(own)]
                     for state, hidden in (("present", None), ("withheld", doi)):
-                        if not i:
+                        if not i and (args.paraphrases is None or not rows):
                             for method in methods:
-                                execute(text, hidden, method, tasks)
+                                execute(text, hidden, method, tasks, doi)
                         order = (i + len(rows)) % len(methods)
-                        arms = {m: execute(text, hidden, m, tasks) for m in methods[order:] + methods[:order]}
+                        arms = {m: execute(text, hidden, m, tasks, doi) for m in methods[order:] + methods[:order]}
                         if hidden and any(a["doi"] == hidden for a in arms.values()):
                             raise AssertionError("Returned an unavailable document")
                         rows.append(dict(id=group["id"], doi=doi, style=style, state=state,
@@ -276,7 +304,10 @@ def run(args):
         catalog_sha256=digest(args.catalog), script_sha256=digest(Path(__file__)),
         training_sha256=digest(args.training), phrase_sha256=digest(args.fixture / "boundary-phrases.json"),
         embedding=provenance, reader=reader_provenance, sources=len(records),
-        policy=SOURCE_POLICY, prose=args.prose, report=summary(rows, methods), rows=rows,
+        policy=SOURCE_POLICY if args.paraphrases is None else source_policies,
+        prose=args.prose, report=summary(rows, methods, styles), rows=rows,
+        source_gate_sha256=digest(args.source_gates) if args.paraphrases is not None else None,
+        source_reranker=source.reranker.provenance if args.paraphrases is not None else None,
     ))
 
 
@@ -291,5 +322,7 @@ if __name__ == "__main__":
     for name in ("fixture", "catalog", "examples", "training", "embedding", "reader", "output"):
         replay.add_argument(name, type=Path)
     replay.add_argument("--prose", action="store_true")
+    for option in ("--paraphrases", "--source-gates", "--source-reranker"):
+        replay.add_argument(option, type=Path)
     args = parser.parse_args()
     (prepare if args.command == "prepare" else run)(args)

@@ -36,6 +36,22 @@ The 4B boundary reader reproduces all author sets from the supplied-boundary ref
 
 Add `--prose` to the search command below. This diagnostic learns nothing from its test requests. Its input grammar still uses two fixed envelopes and quoted clues. A separate [source-paraphrase diagnostic](../plos-credit-source-paraphrases-v1/README.md) tests paper identification from unquoted clues. End-to-end attribution from independently written requests remains unmeasured.
 
+## Unquoted source clues with structured role requirements
+
+Job `40554` combines the [24 paper paraphrases and frozen source policies](../plos-credit-source-paraphrases-v1/README.md) with the original 80 requirement pairs. Each selected source goes through the same 4B credited-fragment selection and ridge role mapping. The supplied-source reference abstains whenever the target is withheld.
+
+| Source decision | Correct source / 160 | Exact DOI and author set / 160 | Both versions exact / 80 | Withheld source selected / 160 | Present P95 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| BM25 top hit | 120 | 89 | 37 | 160 | 23.79 ms |
+| Dense score and gap | 60 | 43 | 19 | 0 | 30.60 ms |
+| Verify one candidate | 120 | 88 | 36 | 0 | 38.31 ms |
+| Rerank four candidates | 112 | 83 | 34 | 0 | 52.60 ms |
+| Supplied source | 160 | 120 | 49 | 0 | 23.67 ms |
+
+Top-hit verification lowers full request P95 by 27% relative to four-candidate reranking. Its exact attribution difference is +3.13 points (descriptive 95% article-bootstrap interval −12.86 to +19.51). Supplying the correct source yields another 32 exact responses. Unguarded BM25 returns 149 unsupported author citations when the target is withheld. Each guarded method abstains in every withheld view. The 160 cases reuse 24 source clues. Timing covers warm local query parsing, source retrieval and author attribution. Human-written integrated requests and open-world false-confirmation rates remain unmeasured. [Aggregate results](paraphrase-attribution-v1.json)
+
+Append `--paraphrases benchmarks/plos-credit-source-paraphrases-v1/queries.json --source-gates benchmarks/plos-credit-source-paraphrases-v1/gates-results.json --source-reranker RERANKER_CHECKPOINT` to the structured replay command and use a fresh output path.
+
 ## Reproduce
 
 Run [the search comparison](../../experiments/credit/search_role_clauses.py) with:
