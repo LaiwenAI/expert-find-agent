@@ -61,3 +61,24 @@ After rotating option positions, the shortlist and full methods score 35/49 and 
 A known-paper replay maps two pre-split phrases to roles and intersects the exact publisher declarations for those roles. It reuses the same 49 descriptions across the 685 derived cases. The full and narrow readers recover 278 and 326 exact role pairs. They return the exact contributor set in 460 and 479 cases and promote an unsupported coauthor in 128 and 89 cases. A correct-looking author set can occur even when the role labels are wrong. These diagnostics measure the propagation of role-mapping mistakes. Integrated compound language, independent expert queries and enterprise transfer require separate evaluation.
 
 Download the pinned NISO PDF, extract it using [the PDF adapter](../../experiments/credit/parse_niso_examples.py), then run [the role router](../../experiments/credit/role_language_router.py) with the extracted examples and original PLOS source snapshot. Job `40303` runs the primary configuration. Job `40306` runs `--option-offset 5` and `--shortlist-size 5` separately. The source package includes the adapters and reports, with upstream NISO text kept in the local input snapshot.
+
+## Joint handling of compound requests
+
+The compound request diagnostic selects one example for each of the 91 unordered CRediT role pairs, with the known source chosen deterministically from the publisher fixture. Each pair combines two NISO task examples into a complete request. A second template adds an explicitly excluded activity. The source paper stays fixed. The examples are authored by NISO and the request templates are generated for this evaluation.
+
+The oracle boundary arms receive the two required task phrases already separated, with any excluded activity removed. The batched control processes both phrases in one embedding batch and one reader batch. The joint full-glossary arm consumes the complete request and predicts two distinct roles with a shared prefix cache. The joint shortlist arm sees the complete request, retrieves a union of lexical/dense roles, and chooses one candidate pair in a single reader forward. All arms intersect the publisher declarations for the predicted roles. Duplicate role predictions are marked unresolved.
+
+| Method | Exact pair, conjunction / excluded | Exact author set, conjunction / excluded | P95, conjunction / excluded |
+| --- | ---: | ---: | ---: |
+| Oracle boundary, sequential | 49 / 49 | 68 / 68 | 44.11 / 44.21 ms |
+| Oracle boundary, batched | 50 / 50 | 69 / 69 | 36.25 / 36.35 ms |
+| Joint full glossary | 11 / 20 | 45 / 47 | 40.01 / 40.48 ms |
+| Joint shortlisted pair | 10 / 16 | 42 / 48 | 30.30 / 33.20 ms |
+
+Each column of paired counts has 91 requests. Unsupported author promotions occur on 6/91 per template for the batched boundary control and 22/91 per template for the joint shortlist. The shortlist contains both required roles in 38 and 39 cases and correctly selects the pair on 10 and 16 of those respectively. Both shortlist coverage and pair selection limit the method. Count role-pair recovery separately because different role pairs can yield the same author set. These are warm, paired request timings from local input through author-set lookup on a single RTX 5090. The oracle split is a diagnostic control. Its latency excludes producing the split from a complete request.
+
+Constraining model output to a well-formed pair addresses format. Semantic coverage and fidelity of the parsed request require separate checks. [Grammar-Constrained Decoding, EMNLP 2023](https://aclanthology.org/2023.emnlp-main.674/)
+
+Rotating option positions preserves the gap. Across the two templates, the batched boundary arm gets 47 and 47 role pairs right, compared with 9 and 14 for the joint shortlist. The same 91 pairs are reused across both configurations. The strict role check distinguishes correct interpretation from accidental author-set agreement.
+
+Run [the joint request evaluator](../../experiments/credit/joint_role_requests.py) with the NISO and PLOS snapshots. Job `40312` ran the default configuration and `--option-offset 5`. Local outputs are `artifacts/credit-joint-requests-v2` and `artifacts/credit-joint-requests-rotated-v1`.
