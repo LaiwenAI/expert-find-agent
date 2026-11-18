@@ -1,0 +1,837 @@
+{
+  "job": "40624",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "model": {
+    "repo": "Qwen/Qwen3-4B-Instruct-2507",
+    "revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "files": {
+      "LICENSE": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+      "config.json": "5beea1a4a34c62782bfb2f911c606741a3bab8f92d80a118fa053c28af12e8ba",
+      "generation_config.json": "835fffe355c9438e7a25be099b3fccaa98350b83451f9fd2d99512e74f1ade48",
+      "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+      "model-00001-of-00003.safetensors": "75311d91bb08cf0b882913da464a1e722a31fb44db35208663487efb7a3d8ed6",
+      "model-00002-of-00003.safetensors": "0b48adbb1f60e901153d91907ba11ce63bd4b8b584482e730f48808d055dfba1",
+      "model-00003-of-00003.safetensors": "7dd39ccca5e4de123c74c14af44c9bf2eb75df33b4614382af0134528e060d5d",
+      "model.safetensors.index.json": "d6c42883a895dfef5b0080ed2116a1bcd764f558406b98923d675978a1abf29c",
+      "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+      "tokenizer_config.json": "a62ff0a2472a0fa1b8eaabcb57c59b58afa42a22831dc141400b6e0cf2b65ce3",
+      "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    }
+  },
+  "fixture_sha256": "ea0f51d70820319a72ef291e6caf4ce20094709eedf2a464705266ca7d7cdd4c",
+  "script_sha256": "f35a1a4cf7917acfe8cea74f1934511e6f06d89af22cb95c2bb681f4e02741af",
+  "report": {
+    "en": {
+      "all": {
+        "direct": {
+          "cases": 96,
+          "correct": 37,
+          "true_approvals": 28,
+          "false_approvals": 17,
+          "p95_ms": 16.44116034731269
+        },
+        "scope_only": {
+          "cases": 96,
+          "correct": 42,
+          "true_approvals": 24,
+          "false_approvals": 30,
+          "exact_source_set": 42,
+          "wrong_attribution_selections": 48,
+          "p95_ms": 29.136510100215673
+        },
+        "joint_check": {
+          "cases": 96,
+          "correct": 60,
+          "true_approvals": 30,
+          "false_approvals": 30,
+          "exact_source_set": 60,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 29.362828470766544
+        },
+        "factor_fields": {
+          "cases": 96,
+          "correct": 84,
+          "true_approvals": 36,
+          "false_approvals": 12,
+          "exact_source_set": 84,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 48.16997144371271
+        },
+        "oracle": {
+          "cases": 96,
+          "correct": 96,
+          "true_approvals": 36,
+          "false_approvals": 0,
+          "exact_source_set": 96,
+          "wrong_attribution_selections": 0
+        }
+      },
+      "direct_support": {
+        "direct": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 12,
+          "false_approvals": 0,
+          "p95_ms": 16.445040702819824
+        },
+        "scope_only": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 12,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 29.132846277207136
+        },
+        "joint_check": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 12,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 29.307895246893167
+        },
+        "factor_fields": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 12,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 40.26141930371523
+        },
+        "oracle": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 12,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0
+        }
+      },
+      "review_only": {
+        "direct": {
+          "cases": 12,
+          "correct": 0,
+          "true_approvals": 0,
+          "false_approvals": 2,
+          "p95_ms": 16.461076866835356
+        },
+        "scope_only": {
+          "cases": 12,
+          "correct": 0,
+          "true_approvals": 0,
+          "false_approvals": 12,
+          "exact_source_set": 0,
+          "wrong_attribution_selections": 12,
+          "p95_ms": 25.89255403727293
+        },
+        "joint_check": {
+          "cases": 12,
+          "correct": 6,
+          "true_approvals": 0,
+          "false_approvals": 6,
+          "exact_source_set": 6,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 29.455584567040205
+        },
+        "factor_fields": {
+          "cases": 12,
+          "correct": 6,
+          "true_approvals": 0,
+          "false_approvals": 6,
+          "exact_source_set": 6,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 48.19496590644121
+        },
+        "oracle": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 0,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0
+        }
+      },
+      "other_person_passes": {
+        "direct": {
+          "cases": 12,
+          "correct": 9,
+          "true_approvals": 0,
+          "false_approvals": 2,
+          "p95_ms": 16.40048511326313
+        },
+        "scope_only": {
+          "cases": 12,
+          "correct": 0,
+          "true_approvals": 0,
+          "false_approvals": 0,
+          "exact_source_set": 0,
+          "wrong_attribution_selections": 12,
+          "p95_ms": 25.678412802517414
+        },
+        "joint_check": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 0,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 29.328482504934072
+        },
+        "factor_fields": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 0,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 47.87311162799597
+        },
+        "oracle": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 0,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0
+        }
+      },
+      "other_person_only": {
+        "direct": {
+          "cases": 12,
+          "correct": 0,
+          "true_approvals": 0,
+          "false_approvals": 1,
+          "p95_ms": 16.41111308708787
+        },
+        "scope_only": {
+          "cases": 12,
+          "correct": 0,
+          "true_approvals": 0,
+          "false_approvals": 12,
+          "exact_source_set": 0,
+          "wrong_attribution_selections": 12,
+          "p95_ms": 25.66648181527853
+        },
+        "joint_check": {
+          "cases": 12,
+          "correct": 0,
+          "true_approvals": 0,
+          "false_approvals": 12,
+          "exact_source_set": 0,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 29.301762022078037
+        },
+        "factor_fields": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 0,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 36.7436682805419
+        },
+        "oracle": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 0,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0
+        }
+      },
+      "personal_conflict": {
+        "direct": {
+          "cases": 12,
+          "correct": 0,
+          "true_approvals": 0,
+          "false_approvals": 8,
+          "p95_ms": 16.399453766644
+        },
+        "scope_only": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 0,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 29.15916694328189
+        },
+        "joint_check": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 0,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 29.350268002599478
+        },
+        "factor_fields": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 0,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 51.406044978648424
+        },
+        "oracle": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 0,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0
+        }
+      },
+      "other_person_conflicts": {
+        "direct": {
+          "cases": 12,
+          "correct": 11,
+          "true_approvals": 11,
+          "false_approvals": 0,
+          "p95_ms": 16.376078501343727
+        },
+        "scope_only": {
+          "cases": 12,
+          "correct": 0,
+          "true_approvals": 0,
+          "false_approvals": 0,
+          "exact_source_set": 0,
+          "wrong_attribution_selections": 12,
+          "p95_ms": 25.680974777787924
+        },
+        "joint_check": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 12,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 29.321900382637978
+        },
+        "factor_fields": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 12,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 47.88439152762294
+        },
+        "oracle": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 12,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0
+        }
+      },
+      "joint_work": {
+        "direct": {
+          "cases": 12,
+          "correct": 5,
+          "true_approvals": 5,
+          "false_approvals": 0,
+          "p95_ms": 16.461566276848316
+        },
+        "scope_only": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 12,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 29.175613448023796
+        },
+        "joint_check": {
+          "cases": 12,
+          "correct": 6,
+          "true_approvals": 6,
+          "false_approvals": 0,
+          "exact_source_set": 6,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 29.38403282314539
+        },
+        "factor_fields": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 12,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 40.355875715613365
+        },
+        "oracle": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 12,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0
+        }
+      },
+      "proposed_only": {
+        "direct": {
+          "cases": 12,
+          "correct": 0,
+          "true_approvals": 0,
+          "false_approvals": 4,
+          "p95_ms": 16.405622381716967
+        },
+        "scope_only": {
+          "cases": 12,
+          "correct": 6,
+          "true_approvals": 0,
+          "false_approvals": 6,
+          "exact_source_set": 6,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 25.675443466752768
+        },
+        "joint_check": {
+          "cases": 12,
+          "correct": 0,
+          "true_approvals": 0,
+          "false_approvals": 12,
+          "exact_source_set": 0,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 29.34521660208702
+        },
+        "factor_fields": {
+          "cases": 12,
+          "correct": 6,
+          "true_approvals": 0,
+          "false_approvals": 6,
+          "exact_source_set": 6,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 36.79256206378341
+        },
+        "oracle": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 0,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0
+        }
+      }
+    },
+    "zh": {
+      "all": {
+        "direct": {
+          "cases": 96,
+          "correct": 43,
+          "true_approvals": 34,
+          "false_approvals": 32,
+          "p95_ms": 16.46166341379285
+        },
+        "scope_only": {
+          "cases": 96,
+          "correct": 42,
+          "true_approvals": 24,
+          "false_approvals": 30,
+          "exact_source_set": 36,
+          "wrong_attribution_selections": 48,
+          "p95_ms": 29.266894329339266
+        },
+        "joint_check": {
+          "cases": 96,
+          "correct": 76,
+          "true_approvals": 30,
+          "false_approvals": 14,
+          "exact_source_set": 70,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 29.415252152830362
+        },
+        "factor_fields": {
+          "cases": 96,
+          "correct": 84,
+          "true_approvals": 36,
+          "false_approvals": 12,
+          "exact_source_set": 78,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 51.450828555971384
+        },
+        "oracle": {
+          "cases": 96,
+          "correct": 96,
+          "true_approvals": 36,
+          "false_approvals": 0,
+          "exact_source_set": 96,
+          "wrong_attribution_selections": 0
+        }
+      },
+      "direct_support": {
+        "direct": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 12,
+          "false_approvals": 0,
+          "p95_ms": 16.42702128738165
+        },
+        "scope_only": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 12,
+          "false_approvals": 0,
+          "exact_source_set": 6,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 29.174048360437155
+        },
+        "joint_check": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 12,
+          "false_approvals": 0,
+          "exact_source_set": 6,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 29.41899048164487
+        },
+        "factor_fields": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 12,
+          "false_approvals": 0,
+          "exact_source_set": 6,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 51.38848004862666
+        },
+        "oracle": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 12,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0
+        }
+      },
+      "review_only": {
+        "direct": {
+          "cases": 12,
+          "correct": 1,
+          "true_approvals": 0,
+          "false_approvals": 4,
+          "p95_ms": 16.47430555894971
+        },
+        "scope_only": {
+          "cases": 12,
+          "correct": 0,
+          "true_approvals": 0,
+          "false_approvals": 12,
+          "exact_source_set": 0,
+          "wrong_attribution_selections": 12,
+          "p95_ms": 29.281253088265657
+        },
+        "joint_check": {
+          "cases": 12,
+          "correct": 6,
+          "true_approvals": 0,
+          "false_approvals": 6,
+          "exact_source_set": 6,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 29.439624305814505
+        },
+        "factor_fields": {
+          "cases": 12,
+          "correct": 6,
+          "true_approvals": 0,
+          "false_approvals": 6,
+          "exact_source_set": 6,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 51.453802082687616
+        },
+        "oracle": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 0,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0
+        }
+      },
+      "other_person_passes": {
+        "direct": {
+          "cases": 12,
+          "correct": 6,
+          "true_approvals": 0,
+          "false_approvals": 6,
+          "p95_ms": 16.427056398242712
+        },
+        "scope_only": {
+          "cases": 12,
+          "correct": 0,
+          "true_approvals": 0,
+          "false_approvals": 0,
+          "exact_source_set": 0,
+          "wrong_attribution_selections": 12,
+          "p95_ms": 29.23364546149969
+        },
+        "joint_check": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 0,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 29.35197725892067
+        },
+        "factor_fields": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 0,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 51.47595554590225
+        },
+        "oracle": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 0,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0
+        }
+      },
+      "other_person_only": {
+        "direct": {
+          "cases": 12,
+          "correct": 0,
+          "true_approvals": 0,
+          "false_approvals": 5,
+          "p95_ms": 16.427651420235634
+        },
+        "scope_only": {
+          "cases": 12,
+          "correct": 0,
+          "true_approvals": 0,
+          "false_approvals": 12,
+          "exact_source_set": 0,
+          "wrong_attribution_selections": 12,
+          "p95_ms": 29.233495332300663
+        },
+        "joint_check": {
+          "cases": 12,
+          "correct": 10,
+          "true_approvals": 0,
+          "false_approvals": 2,
+          "exact_source_set": 10,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 29.319227393716574
+        },
+        "factor_fields": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 0,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 40.35629127174616
+        },
+        "oracle": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 0,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0
+        }
+      },
+      "personal_conflict": {
+        "direct": {
+          "cases": 12,
+          "correct": 2,
+          "true_approvals": 0,
+          "false_approvals": 10,
+          "p95_ms": 16.416554898023605
+        },
+        "scope_only": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 0,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 29.21448666602373
+        },
+        "joint_check": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 0,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 29.327207431197166
+        },
+        "factor_fields": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 0,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 51.43896257504821
+        },
+        "oracle": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 0,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0
+        }
+      },
+      "other_person_conflicts": {
+        "direct": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 12,
+          "false_approvals": 0,
+          "p95_ms": 16.421322245150805
+        },
+        "scope_only": {
+          "cases": 12,
+          "correct": 0,
+          "true_approvals": 0,
+          "false_approvals": 0,
+          "exact_source_set": 0,
+          "wrong_attribution_selections": 12,
+          "p95_ms": 29.2293019592762
+        },
+        "joint_check": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 12,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 29.357161559164524
+        },
+        "factor_fields": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 12,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 51.45409228280187
+        },
+        "oracle": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 12,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0
+        }
+      },
+      "joint_work": {
+        "direct": {
+          "cases": 12,
+          "correct": 10,
+          "true_approvals": 10,
+          "false_approvals": 0,
+          "p95_ms": 16.49727365002036
+        },
+        "scope_only": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 12,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 29.328034538775682
+        },
+        "joint_check": {
+          "cases": 12,
+          "correct": 6,
+          "true_approvals": 6,
+          "false_approvals": 0,
+          "exact_source_set": 6,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 29.429493192583323
+        },
+        "factor_fields": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 12,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 40.51896212622523
+        },
+        "oracle": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 12,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0
+        }
+      },
+      "proposed_only": {
+        "direct": {
+          "cases": 12,
+          "correct": 0,
+          "true_approvals": 0,
+          "false_approvals": 7,
+          "p95_ms": 16.412160266190767
+        },
+        "scope_only": {
+          "cases": 12,
+          "correct": 6,
+          "true_approvals": 0,
+          "false_approvals": 6,
+          "exact_source_set": 6,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 29.235519003123045
+        },
+        "joint_check": {
+          "cases": 12,
+          "correct": 6,
+          "true_approvals": 0,
+          "false_approvals": 6,
+          "exact_source_set": 6,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 29.338146280497313
+        },
+        "factor_fields": {
+          "cases": 12,
+          "correct": 6,
+          "true_approvals": 0,
+          "false_approvals": 6,
+          "exact_source_set": 6,
+          "wrong_attribution_selections": 0,
+          "p95_ms": 40.357699152082205
+        },
+        "oracle": {
+          "cases": 12,
+          "correct": 12,
+          "true_approvals": 0,
+          "false_approvals": 0,
+          "exact_source_set": 12,
+          "wrong_attribution_selections": 0
+        }
+      }
+    }
+  },
+  "both_orders_correct": {
+    "en": {
+      "direct": 17,
+      "scope_only": 21,
+      "joint_check": 30,
+      "factor_fields": 42,
+      "oracle": 48
+    },
+    "zh": {
+      "direct": 17,
+      "scope_only": 21,
+      "joint_check": 38,
+      "factor_fields": 42,
+      "oracle": 48
+    }
+  }
+}
