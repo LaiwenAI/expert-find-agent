@@ -91,3 +91,30 @@ Official text-only evidence F1 and tokens include all 1,451 test questions. Comp
 A separately locked 72-question sample, one hash-selected question per paper, replays fixed five and the learned route through the same local BF16 Qwen3-4B-Instruct-2507 reader. Job `40235` alternates arm order; mean reader time falls from 184 to 162 ms (paired interval -53 to +8 ms), while P95 is 475 versus 478 ms. Answer F1 is 46.29% versus 43.69% (paired difference -2.60 points, 95% interval -8.49 to +3.67). Mean prompt tokens are 644 versus 597. Greedy generation is capped at 48 tokens and hits the cap in 11 versus 8 requests. The timed reader includes prompt construction through decoding, starting from already selected contexts. The sample does not establish a latency or answer-quality advantage. These results motivate a bounded expansion policy that measures complete evidence alongside F1 and caps reader-tail cost.
 
 Reproduction: extract the official [development](https://qasper-dataset.s3.us-west-2.amazonaws.com/qasper-train-dev-v0.3.tgz) and [test and evaluator](https://qasper-dataset.s3.us-west-2.amazonaws.com/qasper-test-and-evaluator-v0.3.tgz) assets into `artifacts/public/qasper-v0.3`. Run [adaptive evidence](../../experiments/qasper/adaptive_evidence.py) and [paired reader](../../experiments/qasper/paired_reader.py) on a CUDA node with the pinned open-weight checkpoints. Source and evaluator hashes are verified by the runners. Local outputs are `artifacts/qasper-adaptive-evidence-v1` and `artifacts/qasper-paired-reader-v1`; source text and model outputs are excluded from the release package.
+
+## Shared Sources With Separate Expert Checks
+
+[TREC 2006](https://trec.nist.gov/data/t15_enterprise.html) provides separate expert and supporting-document judgments. A replay holds the ten initial candidates fixed using a leave-topic-out prior and hides each document grade until its expert-specific check. Each source read can be reused by ID across candidates. The source-sharing policy favors documents connected to several unresolved candidates. The controls are round robin, cache-first round robin, and a source-sharing replay whose individual check cap is inherited from the cache-first arm.
+
+| Policy at cap 10 reads / 20 checks | Mean reads | Mean checks | Supported P@5 |
+| --- | ---: | ---: | ---: |
+| Round robin | 9.26 | 12.99 | 20.95% |
+| Cache first | 9.14 | 13.12 | 19.86% |
+| Share by source | 6.39 | 17.24 | 23.74% |
+| Share by source, matched check cap | 4.65 | 13.10 | 21.26% |
+
+Across 49 topics and 12 fixed source-order draws per topic, the independent-noise profile assumes 90% sensitivity and 1% false-positive rate. With the same caps, sharing gains 3.88 percentage points over cache first (topic-bootstrap 95% interval +0.68 to +7.62) while making more checks. Compared with round robin, the point gain is 2.79 points. With the matched check cap, the cache-first difference falls to +1.39 points (-1.60 to +4.86). The unconstrained sharing arm also increases unsupported promotions from 4.15% to 6.09%. Under linear costs, it is cheaper than cache first only when a document read costs more than 1.50 expert checks. Shared-cost simulation results are not service timings or measured verifier error rates. The pool already exposes judged candidate-source links and the matched cap is a comparison control.
+
+The source-sharing opportunity also varies in an actual retrieval workload. Among the full exact CoF top-five lists from the [shortlist benchmark](../merit-suitability-card.md#global-shortlist-validation-on-cof), there were repeated source IDs in 49/91 SciRepEval queries and 0/34 NIPS queries. Deduplicating SciRepEval source IDs within each query reduces 1,365 expert/source links to 1,244 document reads (8.9% fewer). Ownership checks still apply to each link.
+
+A live Qwen3-4B-Instruct-2507 test compares separate forwards, left-padded full batching, and prefix KV reuse followed by separate expert suffixes. It selects one shared source in each of 48 SciRepEval queries with overlap. Across the 109 checks, the common query-and-source prefix averaged 393 tokens. Inputs are token-identical across arms, with correct position IDs in the batch arm.
+
+| Verifier execution | Median / P95 group time | Choices matching separate forwards |
+| --- | ---: | ---: |
+| Separate forwards | 56.08 / 94.76 ms | 109 / 109 |
+| Full batch | 53.82 / 91.43 ms | 106 / 109 |
+| Shared prefix | 49.77 / 65.09 ms | 108 / 109 |
+
+On RTX 5090, mean group time falls by 6.72 ms relative to full batching (paired 95% interval -9.40 to -4.21). This is a forward-pass measurement on shared-source requests only. One BF16 decision changes relative to separate forwards, and no human labels establish whether either choice is valid. A fallback for near-tied decisions needs separate evaluation before adopting reuse. Distinct suffixes and per-expert judgments are retained.
+
+Reproduce using [the replay](../../experiments/trec_enterprise/shared_source_budget.py) and [the live prefix comparison](../../experiments/retrieval/cof_shared_prefix_reader.py). Jobs `40245` and `40251` used ws5. Local records are in `artifacts/trec-shared-source-budget-v2` and `artifacts/cof-shared-prefix-reader-v1`.
