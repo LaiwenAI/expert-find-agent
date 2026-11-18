@@ -43,3 +43,21 @@ A normalized quote is accepted only when it occurs in one abstract in the snapsh
 The 132 atomic role queries yield 685 role pairs, with 300 having no single author declared for both roles. Given the correct paper, same-author intersection recovers all 685 exact sets against the publisher tags. Matching either role recovers 137 and promotes an unsupported coauthor in 548. Paper-level pooling promotes an unsupported coauthor in all 685 selected contrasts. With the correct paper retrieved but its role records withheld, the same-author route returns unknown on all 685 cases. For edited excerpts, short-index agreement leaves 383/685 unresolved. Full-abstract BM25 and the combined policy both recover all 685 exact sets on those excerpts. The controls distinguish source lookup failure from wrong-author attribution.
 
 Run [the compound retrieval evaluator](../../experiments/credit/conjunctive_source_retrieval.py) with the pinned XML sources and a [PLOS Search API](https://api.plos.org/solr/search-fields/) snapshot. The snapshot requests `id,title,abstract`, 500 rows, sorted by `publication_date desc,id asc`. Its query is `title:("machine translation" OR "information retrieval" OR "recommendation system" OR "recommender system" OR "transformer model" OR "text classification" OR "sentiment analysis") AND journal:"PLOS ONE" AND publication_date:[2020-01-01T00:00:00Z TO 2026-01-01T00:00:00Z]`. The evaluator pins the returned JSON hash. Local result: `artifacts/plos-credit-conjunctive-v5`.
+
+## Language interpretation before attribution
+
+The [NISO role examples](https://doi.org/10.5281/zenodo.18421449) supply 49 human-written tasks covering the fourteen CRediT roles. Each model receives the official role definitions as a glossary. The example text omits the table's target role label. Agreement measures the example's assigned role in the table. Some tasks also plausibly relate to other roles.
+
+| Role mapping | Correct / 49 | Request P95 | Mean reader tokens |
+| --- | ---: | ---: | ---: |
+| BM25 over the glossary | 19 | 0.06 ms | 0 |
+| Frozen Qwen3 embedding | 23 | 7.02 ms | 0 |
+| Qwen3-4B with all roles | 30 | 26.35 ms | 410 |
+| Qwen3-4B with union of lexical and dense top three | 34 | 22.48 ms | 160 |
+| Use agreement, otherwise run the full reader | 30 | 33.33 ms | 285 |
+
+After rotating option positions, the shortlist and full methods score 35/49 and 32/49. Increasing the shortlist to the union of each top five raises candidate coverage from 40 to 45 examples, but yields 22 correct in the original ordering. The wider comparison has one option-order configuration. The timed routes recompute their own glossary retrieval and model inference on a single RTX 5090. Timing uses three warm repeats.
+
+A known-paper replay maps two pre-split phrases to roles and intersects the exact publisher declarations for those roles. It reuses the same 49 descriptions across the 685 derived cases. The full and narrow readers recover 278 and 326 exact role pairs. They return the exact contributor set in 460 and 479 cases and promote an unsupported coauthor in 128 and 89 cases. A correct-looking author set can occur even when the role labels are wrong. These diagnostics measure the propagation of role-mapping mistakes. Integrated compound language, independent expert queries and enterprise transfer require separate evaluation.
+
+Download the pinned NISO PDF, extract it using [the PDF adapter](../../experiments/credit/parse_niso_examples.py), then run [the role router](../../experiments/credit/role_language_router.py) with the extracted examples and original PLOS source snapshot. Job `40303` runs the primary configuration. Job `40306` runs `--option-offset 5` and `--shortlist-size 5` separately. The source package includes the adapters and reports, with upstream NISO text kept in the local input snapshot.
