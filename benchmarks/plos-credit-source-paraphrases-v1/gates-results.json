@@ -1,0 +1,241 @@
+{
+  "inputs": {
+    "catalog": "5ca56a96abb53d7a5e200bc6f6f3a99d2d5fc306eee9826809b0899ab8376347",
+    "fixture": "239f69b91899114f98335daa6f3b6a47b508dae88810e36849fe3b3e06c74939",
+    "queries": "a91b718dca75e73471a7e17e4fa23c5f76b5310fae473e80f5b7db214c0f2158"
+  },
+  "corpus_size": 165,
+  "job": "40540",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "transfer_head_sha256": "464e2f8e24e4495c350c3c73f190af0c0e20bdb943b1d894cb78370eefd5b405",
+  "policies": {
+    "bm25": null,
+    "ordered": {
+      "score": 0.75,
+      "margin": 0.05
+    },
+    "dense": {
+      "score": 0.6580702066421509,
+      "margin": 0.12182694673538208
+    },
+    "reranked": {
+      "score": 2.8375000000000012,
+      "margin": 2.9000000000000004
+    },
+    "agreement": {
+      "score": 0.5544388294219971,
+      "margin": 0.05409850676854451
+    },
+    "transfer": {
+      "score": 1.3456583415509547,
+      "margin": 1.359597483866929
+    },
+    "one_reader": {
+      "score": 2.25,
+      "margin": 0.04791462421417236
+    }
+  },
+  "calibration": {
+    "dense": {
+      "policy": {
+        "score": 0.6580702066421509,
+        "margin": 0.12182694673538208
+      },
+      "selected_targets": 8,
+      "present_unjudged": 0,
+      "withheld_accepts": 0
+    },
+    "reranked": {
+      "policy": {
+        "score": 2.8375000000000012,
+        "margin": 2.9000000000000004
+      },
+      "selected_targets": 10,
+      "present_unjudged": 0,
+      "withheld_accepts": 0
+    },
+    "agreement": {
+      "policy": {
+        "score": 0.5544388294219971,
+        "margin": 0.05409850676854451
+      },
+      "selected_targets": 8,
+      "present_unjudged": 0,
+      "withheld_accepts": 0
+    },
+    "transfer": {
+      "policy": {
+        "score": 1.3456583415509547,
+        "margin": 1.359597483866929
+      },
+      "selected_targets": 5,
+      "present_unjudged": 0,
+      "withheld_accepts": 0
+    },
+    "one_reader": {
+      "policy": {
+        "score": 2.25,
+        "margin": 0.04791462421417236
+      },
+      "selected_targets": 9,
+      "present_unjudged": 0,
+      "withheld_accepts": 0
+    }
+  },
+  "summary": {
+    "bm25": {
+      "present": {
+        "queries": 24,
+        "pool_hits": 21,
+        "top_hits": 18,
+        "exact": 18,
+        "wrong": 6,
+        "abstained": 0,
+        "p95_ms": 0.146450474858284,
+        "truncated": 0
+      },
+      "withheld": {
+        "queries": 24,
+        "pool_hits": 0,
+        "top_hits": 0,
+        "exact": 0,
+        "wrong": 24,
+        "abstained": 0,
+        "p95_ms": 0.1447858288884163,
+        "truncated": 0
+      }
+    },
+    "ordered": {
+      "present": {
+        "queries": 24,
+        "pool_hits": 21,
+        "top_hits": 7,
+        "exact": 0,
+        "wrong": 0,
+        "abstained": 24,
+        "p95_ms": 0.5787857808172703,
+        "truncated": 0
+      },
+      "withheld": {
+        "queries": 24,
+        "pool_hits": 0,
+        "top_hits": 0,
+        "exact": 0,
+        "wrong": 0,
+        "abstained": 24,
+        "p95_ms": 0.5659177899360656,
+        "truncated": 0
+      }
+    },
+    "dense": {
+      "present": {
+        "queries": 24,
+        "pool_hits": 24,
+        "top_hits": 23,
+        "exact": 9,
+        "wrong": 0,
+        "abstained": 15,
+        "p95_ms": 7.102219387888908,
+        "truncated": 0
+      },
+      "withheld": {
+        "queries": 24,
+        "pool_hits": 0,
+        "top_hits": 0,
+        "exact": 0,
+        "wrong": 0,
+        "abstained": 24,
+        "p95_ms": 7.112183887511492,
+        "truncated": 0
+      }
+    },
+    "reranked": {
+      "present": {
+        "queries": 24,
+        "pool_hits": 24,
+        "top_hits": 24,
+        "exact": 17,
+        "wrong": 0,
+        "abstained": 7,
+        "p95_ms": 33.133398834615946,
+        "truncated": 0
+      },
+      "withheld": {
+        "queries": 24,
+        "pool_hits": 0,
+        "top_hits": 0,
+        "exact": 0,
+        "wrong": 0,
+        "abstained": 24,
+        "p95_ms": 32.49559458345175,
+        "truncated": 0
+      }
+    },
+    "agreement": {
+      "present": {
+        "queries": 24,
+        "pool_hits": 24,
+        "top_hits": 18,
+        "exact": 16,
+        "wrong": 0,
+        "abstained": 8,
+        "p95_ms": 7.215835805982351,
+        "truncated": 0
+      },
+      "withheld": {
+        "queries": 24,
+        "pool_hits": 0,
+        "top_hits": 0,
+        "exact": 0,
+        "wrong": 1,
+        "abstained": 23,
+        "p95_ms": 7.167496625334024,
+        "truncated": 0
+      }
+    },
+    "transfer": {
+      "present": {
+        "queries": 24,
+        "pool_hits": 24,
+        "top_hits": 23,
+        "exact": 5,
+        "wrong": 0,
+        "abstained": 19,
+        "p95_ms": 7.1651809848845005,
+        "truncated": 0
+      },
+      "withheld": {
+        "queries": 24,
+        "pool_hits": 0,
+        "top_hits": 0,
+        "exact": 0,
+        "wrong": 0,
+        "abstained": 24,
+        "p95_ms": 7.184035237878561,
+        "truncated": 0
+      }
+    },
+    "one_reader": {
+      "present": {
+        "queries": 24,
+        "pool_hits": 24,
+        "top_hits": 23,
+        "exact": 18,
+        "wrong": 0,
+        "abstained": 6,
+        "p95_ms": 14.935706835240126,
+        "truncated": 0
+      },
+      "withheld": {
+        "queries": 24,
+        "pool_hits": 0,
+        "top_hits": 0,
+        "exact": 0,
+        "wrong": 0,
+        "abstained": 24,
+        "p95_ms": 14.892367832362652,
+        "truncated": 0
+      }
+    }
+  }
+}

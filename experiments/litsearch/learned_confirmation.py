@@ -50,6 +50,14 @@ def observation(pool, scores):
     return (pool[first], float(scores[first]), float(gap)), [pool[i] for i in order]
 
 
+def confirmation_features(cosine, sparse, title_hits, abstract_hits):
+    """Candidate features shared by the training and transfer evaluations."""
+    return np.column_stack((
+        cosine, cosine - cosine[0], 1 / np.arange(1, len(cosine) + 1), np.log1p(sparse),
+        sparse / max(1, sparse.max()), title_hits, abstract_hits,
+    ))
+
+
 class Endpoint:
     def __init__(self, papers, vectors, encoder, lexical, reranker):
         self.ids = [r["corpusid"] for r in papers]
@@ -81,10 +89,7 @@ class Endpoint:
             title, abstract = self.tokens[doc]
             title_hits.append(len(terms & title) / max(1, len(terms)))
             abstract_hits.append(len(terms & abstract) / max(1, len(terms)))
-        return np.column_stack((
-            cosine, cosine - cosine[0], 1 / np.arange(1, len(pool) + 1), np.log1p(selected),
-            selected / max(1, selected.max()), title_hits, abstract_hits,
-        ))
+        return confirmation_features(cosine, selected, title_hits, abstract_hits)
 
     def train(self, rows):
         features, labels = [], []

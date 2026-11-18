@@ -17,6 +17,7 @@ from experiments.followir.core17_reranking import digest, write_json
 
 QUERY_SHA256 = "a91b718dca75e73471a7e17e4fa23c5f76b5310fae473e80f5b7db214c0f2158"
 METHODS = ("bm25", "ordered", "dense", "reranked")
+GATE_METHODS = ("agreement", "transfer", "one_reader")
 STATES = ("present", "withheld")
 TASK = "Identify the particular research paper described by the clue. Require the specific combination of contributions, rather than general topical relevance."
 
@@ -51,11 +52,11 @@ def observation(scored):
     if not scored:
         return None, 0., 0.
     doi, score = scored[0]
-    return doi, score, score - scored[1][1] if len(scored) > 1 else 0.
+    return doi, float(score), float(score - scored[1][1]) if len(scored) > 1 else 0.
 
 
 class Search:
-    def __init__(self, records, embedding, reranking):
+    def __init__(self, records, embedding, reranking, head_path=None):
         import torch
 
         from expert_search.qwen_embedding_torch import QwenTorchEmbedding
@@ -65,6 +66,7 @@ class Search:
 
         self.ids = sorted(records)
         self.docs = {doi: paper_text(records[doi]) for doi in self.ids}
+        self.positions = {doi: i for i, doi in enumerate(self.ids)}
         self.segments = {
             doi: [re.findall(r"\w+", segment.casefold()) for segment in
                   [record["title"], *sentences(record["abstract"])]]
@@ -72,6 +74,17 @@ class Search:
         }
         self.notices = {doi: notice_kind(r["title"]) for doi, r in records.items()}
         self.embedding_provenance = verify_checkpoint(embedding)
+        self.head = None
+        if head_path is not None:
+            head = json.loads(head_path.read_bytes())
+            if head["embedding"] != self.embedding_provenance:
+                raise ValueError("Transferred head and embedding checkpoints must match")
+            self.head = head["fitted"]
+            self.tokens = {
+                doi: tuple(set(re.findall(r"\w+", text.casefold())) for text in
+                           (record["title"], record["abstract"]))
+                for doi, record in records.items()
+            }
         torch.backends.cuda.matmul.allow_tf32 = False
         start = perf_counter()
         with TemporaryDirectory() as folder:
@@ -85,6 +98,23 @@ class Search:
         start = perf_counter()
         self.vectors = self.encoder.encode([self.docs[doi] for doi in self.ids])
         self.dense_build_ms = (perf_counter() - start) * 1000
+
+    def transfer(self, query, ranked):
+        from experiments.litsearch.learned_confirmation import confirmation_features
+
+        pool = [doi for doi, _ in ranked]
+        cosine = np.asarray([value for _, value in ranked], dtype=np.float32)
+        lexical, _ = self.lexical.document_arrays(query)
+        sparse = lexical[[self.positions[doi] for doi in pool]]
+        terms = set(re.findall(r"\w+", query.casefold()))
+        title, abstract = zip(*[
+            tuple(len(terms & tokens) / max(1, len(terms)) for tokens in self.tokens[doi])
+            for doi in pool
+        ], strict=True)
+        features = confirmation_features(cosine, sparse, title, abstract)
+        scores = ((features - self.head["center"]) / self.head["scale"]) @ self.head["coefficients"]
+        return observation(sorted(zip(pool, scores + self.head["bias"], strict=True),
+                                  key=lambda row: (-row[1], row[0])))
 
     def run(self, query, hidden, method):
         start = perf_counter()
@@ -110,6 +140,17 @@ class Search:
         elif method == "reranked":
             scores, truncated = self.reranker.score(query, self.docs, pool, task=TASK)
             result = observation(sorted(zip(pool, scores, strict=True), key=lambda row: (-row[1], row[0])))
+        elif method == "one_reader":
+            scores, truncated = self.reranker.score(query, self.docs, pool[:1], task=TASK)
+            result = pool[0], scores[0], observation(ranked)[2]
+        elif method == "transfer":
+            result = self.transfer(query, ranked[:4])
+        elif method == "agreement":
+            scores = self.lexical.document_scores(query)
+            best = min((i for i in scores if self.ids[int(i)] != hidden),
+                       key=lambda i: (-scores[i], self.ids[int(i)]), default=None)
+            agrees = best is not None and self.ids[int(best)] == pool[0]
+            result = observation(ranked) if agrees else (None, 0., 0.)
         else:
             result = observation(ranked)
         return result, pool, (perf_counter() - start) * 1000, truncated
@@ -127,15 +168,17 @@ def run(args):
         raise RuntimeError("A Slurm CUDA allocation is required")
     catalog = json.loads(args.catalog.read_bytes())
     queries = validate(args.queries, args.fixture, catalog)
-    search = Search(catalog["records"], args.embedding, args.reranking)
-    for method in METHODS:
+    all_methods = METHODS + GATE_METHODS if args.transfer_head is not None else METHODS
+    search = Search(catalog["records"], args.embedding, args.reranking, args.transfer_head)
+    for method in all_methods:
         search.run("Which study diagnosed electrical equipment faults?", None, method)
 
     rows = []
     for i, query in enumerate(queries):
         views = {state: {} for state in STATES}
         measurements = {state: {} for state in STATES}
-        methods = METHODS[i % len(METHODS):] + METHODS[:i % len(METHODS)]
+        offset = i % len(all_methods)
+        methods = all_methods[offset:] + all_methods[:offset]
         for state in STATES[::1 if i % 2 == 0 else -1]:
             hidden = query["doi"] if state == "withheld" else None
             for method in methods:
@@ -148,7 +191,8 @@ def run(args):
 
     calibration = [row for row in rows if row["split"] == "calibration"]
     test = [row for row in rows if row["split"] == "test"]
-    learned = {method: calibrate(calibration, method, 0.) for method in ("dense", "reranked")}
+    learned = {method: calibrate(calibration, method, 0.)
+               for method in all_methods if method not in {"bm25", "ordered"}}
     policies = {"bm25": None, "ordered": SOURCE_POLICY,
                 **{method: value["policy"] for method, value in learned.items()}}
     summary = {}
@@ -176,6 +220,7 @@ def run(args):
         embedding=search.embedding_provenance, reranking=search.reranker.provenance,
         lexical_build_ms=search.lexical_build_ms, dense_build_ms=search.dense_build_ms,
         policies=policies, calibration=learned, summary=summary, rows=rows,
+        transfer_head_sha256=digest(args.transfer_head) if args.transfer_head is not None else None,
     ))
     print(json.dumps(summary, indent=2))
 
@@ -184,4 +229,5 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ("catalog", "fixture", "queries", "embedding", "reranking", "output"):
         parser.add_argument(name, type=Path)
+    parser.add_argument("--transfer-head", type=Path)
     run(parser.parse_args())

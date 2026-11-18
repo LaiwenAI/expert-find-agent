@@ -19,6 +19,20 @@ Dense retrieval ranked 23 of the 24 targets first before confirmation. The reran
 
 This small, model-authored set tests source identification. Independent human requests, larger catalogs, contributor attribution and tail-latency effects need separate tests.
 
+## Follow-up: cheaper confirmation
+
+Slurm job 40540 repeated the same split and compared three confirmation strategies. Each threshold was chosen on the original 11 calibration clues. The LitSearch head retained all seven coefficients learned on 128 separate LitSearch questions. Its input uses a four-candidate shortlist here, compared with six in training.
+
+| Method | Correct source confirmed | Wrong source, target withheld | Present-view P95 |
+| --- | ---: | ---: | ---: |
+| Dense score and gap | 9/24 | 0/24 | 7.10 ms |
+| BM25 and dense top hit agree | 16/24 | 1/24 | 7.22 ms |
+| Frozen LitSearch head | 5/24 | 0/24 | 7.17 ms |
+| Verify dense top hit using one cross-encoder call and dense gap | 18/24 | 0/24 | 14.94 ms |
+| Four-candidate reranking | 17/24 | 0/24 | 33.13 ms |
+
+All five methods made zero wrong confirmations in the present view. Top-hit verification uses its absolute cross-encoder score and the gap between the first two dense results. The one-candidate route had 55% lower observed P95 than four-candidate reranking on this reused diagnostic. The sample provides limited evidence about the false-confirmation rate, and top-hit verification cannot recover a misranked source. [Follow-up results](gates-results.json)
+
 ## Reproduction
 
 Build the catalog using the `prepare` command documented in [the external benchmark](../plos-credit-external-search/README.md). Run on a Slurm-allocated CUDA node with the verified local checkpoints.
@@ -34,3 +48,5 @@ PYTHONPATH=src:. OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 python -m experiments.
 ```
 
 The generated JSON includes source ranks, score gaps, thresholds, per-request timing and checkpoint hashes. [Published results](results.json) include aggregate counts, thresholds and provenance. P95 covers warm local source retrieval and confirmation scoring. It excludes offline indexing, model load, author attribution, transport and queueing.
+
+To reproduce the follow-up, append `--transfer-head benchmarks/plos-credit-source-paraphrases-v1/litsearch-head.json` and use a new output path. The head's training protocol is in [the LitSearch experiment](../../experiments/litsearch/learned_confirmation.py).
