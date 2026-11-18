@@ -36,10 +36,10 @@ def build(output):
         if language_pattern.search(name) or language_pattern.search(body.decode('utf-8')):
             raise ValueError('Non-English text in source release: '+name)
     manifest=dict(repository_language='English; language-specific fixtures use Unicode escapes.',files={name:hashlib.sha256(body).hexdigest() for name,body in files.items()},
-        scope='Source snapshot and the CC0 OpenAlex author-recovery proxy; not a complete enterprise experimental-data release.',
+        scope='Source snapshot and scoped public benchmark fixtures, including OpenAlex author recovery and PLOS contributor-role attribution.',
         exclusions=['credentials','raw enterprise/teacher data','model weights','other third-party corpora',
                     'model traces and quoted evidence','local virtual environments'],
-        license_status='MIT for repository software; OpenAlex metadata and the author-recovery proxy are CC0; vendored unmodified ACM acmart retains its upstream LPPL license; other third-party datasets and literature retain their own terms and are excluded.')
+        license_status='Repository software is MIT. OpenAlex metadata and the author-recovery proxy are CC0. The PLOS contributor-role fixture credits CC BY 4.0 source records. Vendored ACM acmart retains its upstream LPPL license. Other third-party datasets and literature are excluded.')
     files['RELEASE-MANIFEST.json']=json.dumps(manifest,indent=2).encode()
     target=Path(output);target.parent.mkdir(parents=True,exist_ok=True)
     with zipfile.ZipFile(target,'w',compression=zipfile.ZIP_DEFLATED) as archive:

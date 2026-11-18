@@ -118,3 +118,18 @@ A live Qwen3-4B-Instruct-2507 test compares separate forwards, left-padded full 
 On RTX 5090, mean group time falls by 6.72 ms relative to full batching (paired 95% interval -9.40 to -4.21). This is a forward-pass measurement on shared-source requests only. One BF16 decision changes relative to separate forwards, and no human labels establish whether either choice is valid. A fallback for near-tied decisions needs separate evaluation before adopting reuse. Distinct suffixes and per-expert judgments are retained.
 
 Reproduce using [the replay](../../experiments/trec_enterprise/shared_source_budget.py) and [the live prefix comparison](../../experiments/retrieval/cof_shared_prefix_reader.py). Jobs `40245` and `40251` used ws5. Local records are in `artifacts/trec-shared-source-budget-v2` and `artifacts/cof-shared-prefix-reader-v1`.
+
+### Guarded Verification on Mixed Requests
+
+Job `40259` reruns query encoding, global exact expert retrieval, owned citation materialization and local verification on every measured request. A fixed greedy source assignment is shared across arms. Full batching and source-prefix reuse use the same prompt tokens. Both guarded arms recheck low-margin choices with the serial reference at a fixed 1.125-logit margin. The threshold was frozen from the exploratory BF16 logit scale before this run. KDD and SciRepEval have disjoint released query IDs, normalized query titles and profile paper IDs.
+
+| Collection | Shared queries | P95 ordinary batch | P95 guarded batch | P95 guarded reuse | Guarded reuse match |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| SciRepEval | 49 / 91 | 216 ms | 346 ms | 297 ms | 455 / 455 |
+| KDD | 138 / 170 | 222 ms | 382 ms | 353 ms | 850 / 850 |
+
+Guarded reuse saves 15.55 ms mean on SciRepEval (paired 95% interval -21.02 to -10.86) and 41.40 ms on KDD (-46.57 to -36.38) relative to guarded batching. Guarded batching matches all serial decisions too. Ordinary batching differs in 5 and 15 choices. Reuse calls serial fallback for 218/455 and 346/850 checks. This validates mechanical reproducibility relative to a reference on the observed queries. The result does not establish that the reference decisions are semantically correct or that the heuristic margin certifies parity. Timing covers model inference and in-memory retrieval, excluding HTTP, cold startup and external source I/O.
+
+The optimization has established systems precedents. Assess any research contribution through expert-specific assignment, completeness and evidence-quality constraints beyond reuse itself. [SGLang (NeurIPS 2024)](https://proceedings.neurips.cc/paper_files/paper/2024/hash/724be4472168f31ba1c9ac630f15dec8-Abstract-Conference.html) · [CacheBlend (EuroSys 2025)](https://doi.org/10.1145/3689031.3696098)
+
+Run [guarded shared requests](../../experiments/retrieval/cof_guarded_shared_requests.py) on a CUDA node with the CoF frozen indices and the same Qwen checkpoints as the two preceding experiments. Local output is `artifacts/cof-guarded-shared-requests-v1`. The [PLOS role pilot](../../benchmarks/plos-credit-pilot-v1/README.md) supplies a separate attribution target from publisher-declared contributions.

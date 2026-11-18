@@ -8,7 +8,7 @@ Build a local source review archive with:
 python3 experiments/build_release.py
 ```
 
-The archive includes source, tests, experiment scripts, paper drafts, usage documentation and the [OpenAlex temporal author-recovery proxy](../benchmarks/openalex-author-recovery-v1/README.md), plus SHA-256 hashes for each file. The proxy contains only selected OpenAlex CC0 metadata and known-author associations; it is not an enterprise-fit benchmark. The archive excludes credentials, local environments, other downloaded corpora, model weights, real enterprise/teacher data, evidence quotations and model traces. It is not a complete enterprise benchmark/data release.
+The archive includes source, tests, experiment scripts, paper drafts, usage documentation, the [OpenAlex temporal author-recovery proxy](../benchmarks/openalex-author-recovery-v1/README.md), the [PLOS contributor-role pilot](../benchmarks/plos-credit-pilot-v1/README.md), and SHA-256 hashes for each file. The proxy contains only selected OpenAlex CC0 metadata and known-author associations; it is not an enterprise-fit benchmark. The archive excludes credentials, local environments, other downloaded corpora, model weights, real enterprise/teacher data, evidence quotations and model traces. It is not a complete enterprise benchmark/data release.
 
 After installing the package, run offline unit checks with:
 

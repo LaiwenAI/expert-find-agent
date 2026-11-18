@@ -13,6 +13,9 @@
     "benchmarks/openalex-author-recovery-v1/qrels.jsonl": "5a68eab07f2058def493fae9c58f9c677856b3bc5635dd1a355792a5ead54055",
     "benchmarks/openalex-author-recovery-v1/queries.jsonl": "7ad190c893ed4a12e7e871145dc1660606a4a954d1b7708583377f7823b46764",
     "benchmarks/openalex-author-recovery-v1/source-records.jsonl": "55b193291ed4f7fb7b22e066bb667b58ae1ba85d2bb885074cbee3365f45e512",
+    "benchmarks/plos-credit-pilot-v1/README.md": "b14bd79c4e6f228d6b6813be7e23983e9e42ed884a63810c915644ff2b602606",
+    "benchmarks/plos-credit-pilot-v1/manifest.json": "4cd80c70967b2b8234589af40b615ff262a57a6249bb4fcd2ff9147bf77eea43",
+    "benchmarks/plos-credit-pilot-v1/queries.json": "e32f48b253b54dec341f6ee0dd9eee8a581489c97b747bb264793f1c9b5bc101",
     "benchmarks/transfer-constraint-counterfactual-v1/README.md": "455e4aa6053a63af925722bdb45ec7776d3b217b5cdbea6d6ba9ac05bd7001eb",
     "benchmarks/transfer-constraint-counterfactual-v1/cases.json": "daf87afe444b4cb44d1da8c249b38333eca9c886b9696a7b6c010ad41fdb3996",
     "benchmarks/transfer-constraint-counterfactual-v1/stress.jsonl": "d6f0af05cae92b3c1dfe6df339b5ff36e0ec43e5b71ff73c3d32029c7332d778",
@@ -38,7 +41,7 @@
     "docs/exploration/latest-prior-art-20261117.json": "7981d133266f6bd0a7ba1ca2aacf8a196e8c8e53dbab0f16c0078fcdb2639cfc",
     "docs/exploration/merit-release-assets-20261117.json": "4969af17fa1a9e4843290c4f2d2e109136a223a96251819fcae09e46bf0784fa",
     "docs/exploration/oversearch-cost-baseline.md": "dab86e620f5390971ff13317b0925743ebcb7fb0097db87e4b68305797c44a4d",
-    "docs/exploration/pageindex-expert-design.md": "388e2224d56bbb88e963c74fd244a2721b37089d81f44dba8b10065ac56f0f60",
+    "docs/exploration/pageindex-expert-design.md": "2455e7dffc5250f74627e30fd6291eb9417c28bac64c1e77f18a98b0ab3c17d4",
     "docs/exploration/reproduction-map.md": "6dcdd1bcc27fded0642a30822f21df434adc0eba87401262be3e363d6250c72a",
     "docs/exploration/selectivity-fusion-freeze-observation.json": "44fdadb2d88613397a4fa6f34c9fb8fad49cc096ca91f8cb691f15ed1ca09c8c",
     "docs/exploration/selectivity-fusion-protocol-v1.json": "9b7b1d3994f76d9c00f28d924266edb1db0691f3838e3953c824585aa0771e24",
@@ -56,7 +59,7 @@
     "docs/fresh-evaluation-data-card.md": "2f62b6d703be16b1bac477474062b3f2818ec9664a1988d2a12db22c4a8ac8b0",
     "docs/grounding-review-protocol.md": "fda17743ae970e26e75db6408e5610c1e7779407ce3bfc778375299583df5d93",
     "docs/merit-suitability-card.md": "69ac7161aca864487290557a29ecd1f89f6ea1a07a1741c04c1b84738a9c68a2",
-    "docs/open-source.md": "7683cc1a68f3631549448c30838ce08c3b19be6a546a849f2dff386cbc84e869",
+    "docs/open-source.md": "124f496a3151549bb310feb628d136797c41287b91b050555848befb14cd091f",
     "docs/paper-controls-data-card.md": "aaa5e9623e9b4f0c5bb37ee4690e02e1b61330f3097d67ab05f03fe8119c161a",
     "docs/paper/references.bib": "00bbc56684ffa2fbd188934698f56b59d1e51d7bae37913933d01d00e36f029b",
     "docs/paper/sigir/README.md": "9772f846059679ce9938ce28899771f7774334083e5bcaff797f9ef5d52b5e55",
@@ -230,7 +233,7 @@
     "experiments/build_blind_review.py": "aa2bcb8d6192258fcfc8417d5218f32e6f4d4742cf61b7c13be2ab1208c99b69",
     "experiments/build_expert_semantic_tree.py": "f5b256bfafce2a01bd8858d68df20de4728ec19ee81b01d6127cfa65e4ee268b",
     "experiments/build_method_signatures.py": "0a43e0fbb1286f1077c7448381d810375bba80542ff668801fa018330178c47c",
-    "experiments/build_release.py": "3a29df1b1fbb0111235ab8491a44a1af3224232c218701e20e05e8b3de925323",
+    "experiments/build_release.py": "b0212865687091cb4dd3c26e64da3827a4d8f42f5797c150163755329304b5d7",
     "experiments/cache_fresh_dense_runs.py": "ae0e6c6b4ffb0915751fbb3f015c4e8426f06352c9f38f3b01f2c4fd8be219e6",
     "experiments/certified_topk_benchmark.py": "bc56d2736a14f0c29bb649082aca6250ea024e165d2d78419650ad988c6e169a",
     "experiments/check_prioritized_fresh_review.py": "3f8021439f6f579fb52076d5f27f2092426a9c3b2c8ad166ca2a0e1d638bea2f",
@@ -311,6 +314,7 @@
     "experiments/compile_retrieved_source_facts.py": "fb6c52605baa837164c22a0c28d7474aff164a8e5f3a9535ee0cc955cd966a59",
     "experiments/compiled_lm_benchmark.py": "cd3fd8b214429f58f5d5b9904aa74905751daf6a04807ba14441f8cc3be31c40",
     "experiments/concrete_partial_comparison.py": "c44793f44deaa748786fc7c9086e4780ff95ced0f31475b9d3708e75f77d601a",
+    "experiments/credit/plos_role_inventory.py": "fc1af73c2327bbab4e68a428839348bc8fda969bafa9a3d464675960fbcb8f14",
     "experiments/current_evidence.py": "e0147b6b55198ab94a91bfeef48368d39e929e09c647e73b15e9e12dbd7e8cd9",
     "experiments/decision/hotpot_cached_action_cascade.py": "558450501d0e6ab505b3a297d6d886b6a7de9f38c81e61c40562cfd46bed2795",
     "experiments/decision/hotpot_evidence_action.py": "0c86071c9819bc8f671623998305e55fd3532fc311e58212f657883331e32826",
@@ -508,6 +512,7 @@
     "experiments/retrieval/cof_gate_budget_quality.py": "25b4860d3729e2905da298ff4d077c172fb0b89d71cc492adb11b2743c3847de",
     "experiments/retrieval/cof_gpu_quality_diagnostic.py": "ac6328c62baa6d2d0a2872d33c6180be2250e5e90e53d36df2bb0d744515f965",
     "experiments/retrieval/cof_guarded_feedback_pilot.py": "a7249f099ddd5ce3acc2079bbe7da263389b4ac3b5c8cd4ed6b547be2247e01f",
+    "experiments/retrieval/cof_guarded_shared_requests.py": "f4f2ded6d0e79d4f2e7a8619d45888493102e3bd262d998e80d8f12fb1352c0c",
     "experiments/retrieval/cof_heldout_encoder_comparison.py": "aecc8e830ff19f69719ec207c48cd9d763aeca0581d7cc9d661b6794626fcf41",
     "experiments/retrieval/cof_joint_review_coverage.py": "d89e87bb687c4d61188979eb711e7008a4a68d84d69d6efa8600eaa10c52b502",
     "experiments/retrieval/cof_length_pool_http.py": "2fb75a27415bc726cde213ea8504c93393b42bf549f8a4bc5365b0f63b05d3ea",
@@ -1006,7 +1011,7 @@
     "tests/test_vector_catalog_binding.py": "b0602ae47c0c200fa9fde6cc13df9e556ff0dcce447c3eea16c00e87d7b0bc51",
     "tests/test_witness_planner.py": "7bfd8e473d66ef8e33cc349d797558917a76146434686cef41cbe5e523377c10"
   },
-  "scope": "Source snapshot and the CC0 OpenAlex author-recovery proxy; not a complete enterprise experimental-data release.",
+  "scope": "Source snapshot and scoped public benchmark fixtures, including OpenAlex author recovery and PLOS contributor-role attribution.",
   "exclusions": [
     "credentials",
     "raw enterprise/teacher data",
@@ -1015,5 +1020,5 @@
     "model traces and quoted evidence",
     "local virtual environments"
   ],
-  "license_status": "MIT for repository software; OpenAlex metadata and the author-recovery proxy are CC0; vendored unmodified ACM acmart retains its upstream LPPL license; other third-party datasets and literature retain their own terms and are excluded."
+  "license_status": "Repository software is MIT. OpenAlex metadata and the author-recovery proxy are CC0. The PLOS contributor-role fixture credits CC BY 4.0 source records. Vendored ACM acmart retains its upstream LPPL license. Other third-party datasets and literature are excluded."
 }
