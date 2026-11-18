@@ -27,8 +27,13 @@ TILE = 128
 
 
 @triton.jit
-def segmented_maximum(scores, edge_sources, offsets, maxima, witnesses, TILE: tl.constexpr):
+def segmented_maximum(scores, edge_sources, offsets, maxima, witnesses,
+                      SOURCES: tl.constexpr, OWNERS: tl.constexpr, TILE: tl.constexpr):
     owner = tl.program_id(0)
+    query = tl.program_id(1)
+    scores += query * SOURCES
+    maxima += query * OWNERS
+    witnesses += query * OWNERS
     begin = tl.load(offsets + owner)
     end = tl.load(offsets + owner + 1)
     lanes = tl.arange(0, TILE)
@@ -50,6 +55,10 @@ def segmented_maximum(scores, edge_sources, offsets, maxima, witnesses, TILE: tl
 
 @triton.jit
 def pack_top(maxima, witnesses, packed, OWNERS: tl.constexpr, WIDTH: tl.constexpr, K: tl.constexpr):
+    query = tl.program_id(1)
+    maxima += query * OWNERS
+    witnesses += query * OWNERS
+    packed += query * K * 3
     owners = tl.arange(0, WIDTH)
     remaining = tl.load(maxima + owners, owners < OWNERS, other=float('-inf'))
     for rank in tl.static_range(K):
@@ -65,24 +74,34 @@ def pack_top(maxima, witnesses, packed, OWNERS: tl.constexpr, WIDTH: tl.constexp
 class SegmentedOwnerRanking:
     """CSR owner-to-source adjacency with explicit stable expert and source ties."""
 
-    def __init__(self, ranker):
+    def __init__(self, ranker, batch_capacity=1):
         index = ranker.index
-        count = len(index.owner_ids)
-        if not TOP_K <= count <= 8192 or len(index.owner_rows) >= np.iinfo(np.int32).max:
+        self.owner_count = len(index.owner_ids)
+        self.source_count = len(index.source_ids)
+        if not TOP_K <= self.owner_count <= 8192 or len(index.owner_rows) >= np.iinfo(np.int32).max:
             raise ValueError('Unsupported registry size for this experimental kernel')
+        if not 1 <= batch_capacity <= 8:
+            raise ValueError('Batch capacity must be between 1 and 8')
         self.rows = ranker.owner_rows.to(torch.int32)
         self.offsets = torch.tensor([*index.owner_starts, len(index.owner_rows)], device='cuda', dtype=torch.int32)
-        self.maxima = torch.empty(count, device='cuda', dtype=torch.float32)
-        self.witnesses = torch.empty(count, device='cuda', dtype=torch.int32)
-        self.packed = torch.empty((TOP_K, 3), device='cuda', dtype=torch.int32)
+        self.maxima = torch.empty((batch_capacity, self.owner_count), device='cuda', dtype=torch.float32)
+        self.witnesses = torch.empty((batch_capacity, self.owner_count), device='cuda', dtype=torch.int32)
+        self.packed = torch.empty((batch_capacity, TOP_K, 3), device='cuda', dtype=torch.int32)
 
     def rank(self, scores):
-        n = self.maxima.numel()
-        segmented_maximum[(n,)](scores, self.rows, self.offsets, self.maxima, self.witnesses, TILE, num_warps=4)
-        pack_top[(1,)](self.maxima, self.witnesses, self.packed, n, triton.next_power_of_2(n), TOP_K, num_warps=4)
-        output = self.packed.cpu().numpy()
-        return list(zip(output[:, 0].tolist(), output[:, 1].tolist(),
-                        output[:, 2].view(np.float32).tolist(), strict=True))
+        return self.rank_batch(scores.unsqueeze(0))[0]
+
+    def rank_batch(self, scores):
+        if (scores.ndim != 2 or not 1 <= len(scores) <= len(self.packed)
+                or scores.shape[1] != self.source_count or not scores.is_contiguous()):
+            raise ValueError('Score buffer does not match the retrieval workspace')
+        n, batch = self.owner_count, len(scores)
+        segmented_maximum[(n, batch)](scores, self.rows, self.offsets, self.maxima, self.witnesses,
+                                      self.source_count, n, TILE, num_warps=4)
+        pack_top[(1, batch)](self.maxima, self.witnesses, self.packed, n, triton.next_power_of_2(n), TOP_K, num_warps=4)
+        output = self.packed[:batch].cpu().numpy()
+        return [list(zip(row[:, 0].tolist(), row[:, 1].tolist(),
+                         row[:, 2].view(np.float32).tolist(), strict=True)) for row in output]
 
     @property
     def bytes(self):
@@ -90,22 +109,27 @@ class SegmentedOwnerRanking:
                    (self.rows, self.offsets, self.maxima, self.witnesses, self.packed))
 
 
-def run_dataset(dataset, folder, checkpoint, encoder):
+def prepare_cohort(dataset, folder, checkpoint):
     root, papers, profiles, grades = load(dataset)
     meta = json.loads((root / 'manifest.json').read_text())
     omit = set(meta['exact_query_texts_in_profiles']) | set(meta['query_ids_in_profiles'])
     source_ids = {p for profile in profiles.values() for p in profile['papers']}
     source_titles = {' '.join(papers[p]['title'].casefold().split()) for p in source_ids}
     omit.update(q for q in grades['soft'] if ' '.join(papers[q]['title'].casefold().split()) in source_titles)
-    ranker, db, queries, labels, inventory = prepare(dataset, folder, checkpoint, exclude_queries=omit)
+    return (*prepare(dataset, folder, checkpoint, exclude_queries=omit), profiles)
+
+
+def run_dataset(dataset, folder, checkpoint, encoder):
+    ranker, db, queries, labels, inventory, profiles = prepare_cohort(dataset, folder, checkpoint)
+    size = len(ranker.index.source_ids)
     device = SegmentedOwnerRanking(ranker)
     ranks = {'host': ranker.rank_host, 'scatter': ranker.rank_device, 'segmented': device.rank}
 
     rng = random.Random(SEED)
     cases = sorted(queries)
     # Exact ties, negative scores, and many repeated scores including shared sources.
-    for values in (torch.full((len(source_ids),), -.5, device='cuda'),
-                   torch.arange(len(source_ids), device='cuda').remainder(7).float() - 3):
+    for values in (torch.full((size,), -.5, device='cuda'),
+                   torch.arange(size, device='cuda').remainder(7).float() - 3):
         expected = ranks['host'](values)
         assert all(rank(values) == expected for rank in ranks.values())
     print(dataset, 'exact tie controls passed', len(cases), flush=True)

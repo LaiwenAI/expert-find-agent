@@ -2,6 +2,7 @@
 
 import argparse
 from collections import defaultdict, deque
+from concurrent.futures import Future
 from functools import partial
 import json
 import os
@@ -37,7 +38,7 @@ def choose_bucket(queues, now, patience, cap, closing):
     return None, deadline - now
 
 
-def bucket_worker(pending, ranker, database, encoder, cap, warm_query, ready, *, patience):
+def bucket_worker(pending, ranker, database, encoder, cap, warm_query, ready, *, patience, rank_batch=None):
     queues = defaultdict(deque)
     closing = False
 
@@ -56,8 +57,15 @@ def bucket_worker(pending, ranker, database, encoder, cap, warm_query, ready, *,
     try:
         with sqlite3.connect(database) as connection:
             for size in (1, cap):
-                for vector in encoder.encode([warm_query] * size, query=True):
-                    serialize_hits(ranker, connection, ranker.rank_host(ranker.score(vector)))
+                begun = time.perf_counter()
+                vectors = encoder.encode([warm_query] * size, query=True)
+                if rank_batch is None:
+                    for vector in vectors:
+                        serialize_hits(ranker, connection, ranker.rank_host(ranker.score(vector)))
+                else:
+                    batch = [(warm_query, begun, Future()) for _ in range(size)]
+                    deliver_batch(ranker, connection, batch, vectors, begun, time.perf_counter(),
+                                  rank_batch=rank_batch)
             ready.set_result(True)
             while queues or not closing:
                 while not closing:
@@ -81,7 +89,8 @@ def bucket_worker(pending, ranker, database, encoder, cap, warm_query, ready, *,
                 begun = time.perf_counter()
                 try:
                     vectors = encoder.forward([ids for ids, _, _ in batch], width)
-                    deliver_batch(ranker, connection, batch, vectors, begun, time.perf_counter())
+                    deliver_batch(ranker, connection, batch, vectors, begun, time.perf_counter(),
+                                  rank_batch=rank_batch)
                 except Exception as error:
                     for _, _, future in batch:
                         if not future.done():

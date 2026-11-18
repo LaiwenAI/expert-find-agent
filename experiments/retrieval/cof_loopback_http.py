@@ -68,9 +68,12 @@ class Server(ThreadingHTTPServer):
         return connection, address
 
 
-def deliver_batch(ranker, connection, batch, vectors, begun, encoded):
-    for (_, arrived, future), vector in zip(batch, vectors, strict=True):
-        rank = ranker.rank_host(ranker.score(vector))
+def deliver_batch(ranker, connection, batch, vectors, begun, encoded, *, rank_batch=None):
+    if rank_batch is None:
+        ranks = (ranker.rank_host(ranker.score(vector)) for vector in vectors)
+    else:
+        ranks = rank_batch(vectors)
+    for (_, arrived, future), rank in zip(batch, ranks, strict=True):
         response, _ = serialize_hits(ranker, connection, rank)
         finished = time.perf_counter()
         future.set_result((response, len(batch), (begun - arrived) * 1000,
