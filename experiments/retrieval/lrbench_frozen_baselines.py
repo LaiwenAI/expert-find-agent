@@ -83,7 +83,7 @@ def paired_stats(evaluator, split, predictions):
             raise ValueError("Unexpected reference-label orientation")
         result[arm] = {"accuracy": accuracy, "weighted_kendall_loss": loss,
                        "ties": sum(row["positive_score"] == row["negative_score"] for row in rows)}
-    for arm in ARMS:
+    for arm in correct.keys() - {"rate"}:
         interval = clustered_paired_interval(correct[arm] - correct["rate"], groups)
         interval["sampling_unit"] = "paper anchor" if split == "pc" else "reviewer anchor"
         result[arm]["accuracy_delta_vs_rate"] = interval

@@ -14,14 +14,19 @@ class QwenTorchEmbedding:
         self.tokenizer=AutoTokenizer.from_pretrained(path,local_files_only=True,trust_remote_code=False,padding_side='left')
         self.model=AutoModel.from_pretrained(path,local_files_only=True,trust_remote_code=False,dtype=torch.bfloat16,attn_implementation='sdpa').to('cuda').eval()
 
-    def encode(self,texts,query=False):
+    def encode(self,texts,query=False,*,mean_pool=False):
         torch=self.torch;rows=[]
         inputs=[('Instruct: '+TASK+'\nQuery:'+text) if query else text for text in texts]
         with torch.inference_mode():
             for start in range(0,len(inputs),self.batch_size):
                 batch=self.tokenizer(inputs[start:start+self.batch_size],padding=True,truncation=True,max_length=self.max_length,return_tensors='pt').to('cuda')
-                hidden=self.model(**batch).last_hidden_state[:,-1,:].float()
-                vectors=torch.nn.functional.normalize(hidden,p=2,dim=1)
+                hidden=self.model(**batch).last_hidden_state
+                if mean_pool:
+                    mask=batch['attention_mask'].unsqueeze(-1)
+                    pooled=(hidden.float()*mask).sum(dim=1)/mask.sum(dim=1)
+                else:
+                    pooled=hidden[:,-1,:].float()
+                vectors=torch.nn.functional.normalize(pooled,p=2,dim=1)
                 array=vectors.cpu().numpy()
                 if not np.isfinite(array).all():raise ValueError('Nonfinite embedding')
                 rows.append(array)

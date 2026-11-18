@@ -59,3 +59,26 @@ PYTHONPATH=src:. python -m experiments.retrieval.lrbench_frozen_baselines \
   --release artifacts/lrbench-release-6b950b4 \
   --output artifacts/lrbench-frozen-v1
 ```
+
+### Matched-size profile comparison
+
+A fixed 2 × 2 comparison uses frozen Qwen3-Embedding-0.6B and the [RATE-0.6B checkpoint](https://huggingface.co/Gnociew/RATE-0.6B/tree/3afb29314108e4fdf834e48a7b5b30fa64d9afe7). Both use BF16, mean pooling over non-padding tokens, and the RATE paper prompt. The compact arm embeds one author profile from the released keywords. The raw arm averages the three highest paper-to-paper cosine scores, using the paper prompt for profile sources as well. Token IDs match across checkpoints for all 2,447 distinct inputs, with a maximum length of 823 and no truncation. The [RATE paper](https://aclanthology.org/2026.acl-long.2035/) describes training on top of Qwen3-Embedding.
+
+| Checkpoint and profile | Paper ranks reviewers, accuracy / loss | Reviewer ranks papers, accuracy / loss |
+| --- | ---: | ---: |
+| Frozen, raw top-three | 70.28% / 0.2394 | 75.59% / 0.1895 |
+| Frozen, compact keywords | 73.11% / 0.2247 | 73.56% / 0.2145 |
+| RATE-0.6B, raw top-three | 70.75% / 0.2287 | 75.59% / 0.1858 |
+| RATE-0.6B, compact keywords | 75.47% / 0.1955 | 74.32% / 0.2035 |
+
+On the paper-centric split, the compact-minus-raw accuracy difference was +2.83 pp (anchor bootstrap 95% interval -3.80 to +8.99) with the frozen checkpoint and +4.72 pp (-1.42 to +10.35) with RATE-0.6B. Changing only the checkpoint with compact profiles gave +2.36 pp (-0.50 to +5.34). Compact profiles are a candidate for first-pass ranking. These exploratory comparisons do not establish a quality gain or equivalence. Both models lose point-estimate accuracy in the reverse direction with compact profiles.
+
+The release contains 276 distinct compact profiles versus 1,493 distinct raw-history texts. In Slurm job `40216` on an RTX 5090, RATE-0.6B took 2.24 s to encode compact profiles versus 6.80 s for raw history offline. On the same 896 candidate scores, cached dot products took 1.40 ms versus 5.26 ms for raw aggregation, while batched target encoding took 3.34 s. These measurements exclude index lookup and service overhead. Repeat job `40212` produced identical prediction files. The next validation needs matched candidate recall on an independent paper-centric collection and an explicit trace from compact scores back to source-level evidence.
+
+Reproduce using the assets from the preceding section plus `data/keywords.json` and `scripts/RATE.py` (save as `rate-RATE.py`) from RATE commit `8b85915315a5ebca92cda8a0d901ecaaeb8c0cba`. Download `config.json`, `tokenizer.json`, `tokenizer_config.json`, and `model.safetensors` from the pinned RATE-0.6B revision and place them under `artifacts/models/rate-0.6b`. Write `checkpoint-provenance.json` in the same format as the frozen checkpoint, with the RATE repository, revision, and SHA-256 of each file. The runner verifies upstream inputs and checkpoint hashes.
+
+```bash
+PYTHONPATH=src:. python -m experiments.retrieval.lrbench_matched_profiles \
+  --release artifacts/lrbench-release-6b950b4 \
+  --output artifacts/lrbench-matched-profiles-v2
+```
