@@ -256,6 +256,9 @@ On the same 30 reused queries, three paired repeats at each of 1, 5, 10, 20 and 
 On the same 30 reused queries with cached CPU query vectors and reviewer self-ratings, dense top-50 soft-label recall is 0.253; filtering by lexical top-50 membership reduces it to 0.133. Hard-label recall falls from 0.258 to 0.136. With five dense candidates, soft P@5 falls from 0.447 to 0.353, with a fixed denominator of five and no backfill. Matching the full lexical decision therefore does not imply preserved dense retrieval quality. These reviewer labels are not industrial fit or source-support judgments, and the cohort is not held out.
 \paragraph{Backfill diagnostic.}
 On all 73 previously explored reviewer queries, placing candidates that pass lexical membership first and appending rejected dense candidates preserves the pool but changes the ranking. For a pool of ten, soft P@5 is 0.433 versus 0.425 for dense: 15 queries improve, 14 decline and 44 tie. For a pool of 50, the values are 0.422 and 0.425. This is a post-hoc reviewer-label diagnostic without timing or source-level judgments; backfill is not established as an improvement.
+\paragraph{Feedback-memory split sensitivity.}
+Thirty overlapping random splits of the same 73 previously explored queries replay the simulated correction memory. On new folds, the mean soft P@5 difference from dense averages $+0.011$; 21 split means are positive, eight negative and one zero. Splits are dependent, the threshold was chosen previously, and reviewer ratings simulate corrections. Old and new folds have the same sampling role, so this does not evaluate temporal retention, actual user feedback or agent cost.
+
 
 
 
