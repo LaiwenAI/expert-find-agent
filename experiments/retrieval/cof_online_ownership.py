@@ -147,6 +147,21 @@ def prepare(dataset, folder, model_manifest, *, exclude_queries=(), exclude_sour
     return ranker, db, {q: text(papers[q]) for q in queries}, labels, metadata
 
 
+def serialize_hits(ranker, connection, rank):
+    ids = [ranker.index.source_ids[source] for _, source, _ in rank]
+    placeholders = ','.join('?' for _ in ids)
+    evidence = {source: (title, excerpt) for source, title, excerpt in connection.execute(
+        f'SELECT id, title, excerpt FROM source WHERE id IN ({placeholders})', ids
+    )}
+    hits = []
+    for (owner, _, score), source in zip(rank, ids, strict=True):
+        expert = ranker.index.owner_ids[owner]
+        title, excerpt = evidence[source]
+        hits.append({'expert': expert, 'source': source, 'score': score, 'title': title, 'excerpt': excerpt})
+    delivered = json.dumps(hits, ensure_ascii=False, separators=(',', ':')).encode()
+    return delivered, [row['expert'] for row in hits]
+
+
 def request(ranker, connection, encoder, query, method, eligible=None):
     started = time.perf_counter()
     decoded = json.loads(query)
@@ -160,19 +175,9 @@ def request(ranker, connection, encoder, query, method, eligible=None):
             raise ValueError('Eligibility filtering requires host reduction')
         rank = ranker.rank_device(scores)
     retrieved = time.perf_counter()
-    ids = [ranker.index.source_ids[source] for _, source, _ in rank]
-    placeholders = ','.join('?' for _ in ids)
-    evidence = {source: (title, excerpt) for source, title, excerpt in connection.execute(
-        f'SELECT id, title, excerpt FROM source WHERE id IN ({placeholders})', ids
-    )}
-    hits = []
-    for (owner, _, score), source in zip(rank, ids, strict=True):
-        expert = ranker.index.owner_ids[owner]
-        title, excerpt = evidence[source]
-        hits.append({'expert': expert, 'source': source, 'score': score, 'title': title, 'excerpt': excerpt})
-    delivered = json.dumps(hits, ensure_ascii=False, separators=(',', ':')).encode()
+    delivered, experts = serialize_hits(ranker, connection, rank)
     finished = time.perf_counter()
-    return delivered, [row['expert'] for row in hits], {
+    return delivered, experts, {
         'encode': encoded - started, 'search': retrieved - encoded,
         'hydrate_and_serialize': finished - retrieved, 'total': finished - started,
     }
