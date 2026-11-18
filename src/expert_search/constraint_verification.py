@@ -22,6 +22,45 @@ def _rank(owners, observed, top, optimistic):
     return result
 
 
+def _local_certificate(owners, read, top):
+    ranking = []
+    reads = checks = 0
+    for expert, requirements in owners:
+        if any(not witnesses for witnesses in requirements):
+            continue
+        observed = {}
+        cursors = [0] * len(requirements)
+        while True:
+            citations = []
+            frontier = Counter()
+            for i, witnesses in enumerate(requirements):
+                cursor = cursors[i]
+                while cursor < len(witnesses):
+                    source = witnesses[cursor]
+                    if source not in observed:
+                        frontier[source] += 1
+                        break
+                    if observed[source].get(i) is True:
+                        break
+                    cursor += 1
+                cursors[i] = cursor
+                if cursor == len(witnesses):
+                    break
+                citations.append(witnesses[cursor])
+            if len(citations) < len(requirements):
+                break
+            if not frontier:
+                ranking.append((expert, tuple(citations)))
+                break
+            source = max(frontier, key=frontier.__getitem__)
+            observed[source] = read(expert, source)
+            reads += 1
+            checks += sum(source in witnesses for witnesses in requirements)
+        if len(ranking) == top:
+            break
+    return dict(ranking=ranking, reads=reads, checks=checks)
+
+
 def resolve_constraints(owners, read, *, top, strategy="certificate"):
     """Read source declarations until the ranked experts and first witnesses are determined.
 
@@ -31,6 +70,10 @@ def resolve_constraints(owners, read, *, top, strategy="certificate"):
     """
     if type(top) is not int or top < 1:
         raise ValueError("Expected a positive result count")
+    if strategy == "local_certificate":
+        # A fixed expert order lets us finish one optimistic candidate at a time.
+        # A cursor never revisits a witness already ruled out for its criterion.
+        return _local_certificate(owners, read, top)
     if strategy not in {"exhaustive", "short_circuit", "bundled_first", "certificate"}:
         raise ValueError("Unknown constraint verification strategy")
     observed = {}
