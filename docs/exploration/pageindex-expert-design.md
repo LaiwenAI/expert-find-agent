@@ -42,3 +42,19 @@ The two HotpotQA runs use one shared index of 14,950 canonical passages from 1,5
 - **Controls.** An equal-degree random graph averaged 104 successes. A random switch at the same call rate averaged 259.3. The learned switch improved by 3 hits over the comparison cue rule. Its paper-cluster paired 95% interval was -0.98 to +2.16 percentage points. The rule is a strong baseline.
 - **Publication relevance.** The supported claim is that article-title links help this benchmark under the tested budget and hurt comparison cases when used indiscriminately. The shared corpus includes benchmark contexts. Expert constraints, contributor attribution, action provenance and benefit over budget-matched strong retrieval need separate evidence. Graph expansion and context-conditioned retrieval have published precedents. [PullNet](https://aclanthology.org/D19-1242/) · [Multi-Hop Dense Retrieval](https://openreview.net/forum?id=EMHoBG0avc1)
 - **Reproduction.** Run [shared source navigation](../../experiments/hotpotqa/shared_source_navigation.py) and [the held-out switch](../../experiments/hotpotqa/learned_source_navigation.py) on the pinned distractor development input. Both jobs ran on one RTX 5090 on ws5. Store reports under `artifacts/hotpot-shared-source-navigation-v1` and `artifacts/hotpot-learned-source-navigation-v1`. The latter contains a separate paired cue-rule comparison derived from the frozen rows.
+
+## Expert-Ranking Check of Source Complementarity
+
+Slurm job 40195 tested one RTX 4090 on ws6. Each arm reranked the same 20 experts from exact dense retrieval and returned up to two owned 500-character excerpts per expert. Fragment methods scored the title and up to two abstract sentences using frozen Qwen. The bottleneck methods maximized the weakest fragment score in one source or across two sources.
+
+| Method | SIGIR hard P@5 | SIGIR P95 (ms) | SciRepEval known hard P@5 | SciRepEval P95 (ms) |
+| --- | ---: | ---: | ---: | ---: |
+| Exact dense | 20.27% | 13.36 | 15.38% | 14.53 |
+| Fragment mean | 20.00% | 28.81 | 16.48% | 29.85 |
+| Single-source bottleneck | 20.82% | 28.75 | 14.73% | 29.78 |
+| Two-source bottleneck | 20.55% | 28.93 | 15.60% | 30.00 |
+
+- SIGIR used 73 queries and fully judged returns. The paired two-source versus single-source hard P@5 change was -0.27 percentage points, with a descriptive 95% interval from -1.92 to +1.37.
+- SciRepEval used 91 queries. About 42% of returned positions had labels. The two-source versus single-source hard P@5 difference could range from -7.69 to +9.01 points under the missing labels. A judged-only shortlist analysis is conditional on the initial candidate pool.
+- Exact dense remains the default for ranking. These experiments leave open selective fragment scoring and source verification. The reviewer grades score experts, and the heuristic fragments have no separate hard-constraint gold.
+- Reproduction uses [the source-pair benchmark](../../experiments/retrieval/cof_complementary_source_pairs.py) and the pinned CoF vector indices. Output is under `artifacts/cof-source-pairs-v1`. The paired metrics, character budgets, and candidate-source ownership were checked against the original records.
