@@ -71,6 +71,20 @@ Each view has 246 author-written requests. All arms retrieve identical ordered p
 
 Job `40441` uses an RTX 5090. Head optimization takes 0.20 s over 1,536 candidate-view examples (84 labeled target occurrences), excluding feature materialization. Train, calibration, and test have mutually disjoint labeled target IDs. Request timing includes live query encoding, search, and reranker calls. It excludes initialization, transport, full-text retrieval, and personal attribution.
 
+### Dense top-two control and threshold sensitivity
+
+Job `40446` adds a fixed dense top-two control and refits thresholds on the same 96 calibration questions at four ceilings. The original arms reproduce every test decision score and candidate order. Each table cell shows **known returned / unjudged returned with targets present / returned after withholding** on the 246 author-written questions.
+
+| Policy | 2% ceiling | 5% ceiling | 10% ceiling | 15% ceiling | Present P95 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Dense cosine gate | 32 / 4 / 6 | 55 / 13 / 30 | 64 / 21 / 40 | 74 / 24 / 52 | 7.42 ms |
+| Learned gate | 10 / 1 / 3 | 45 / 10 / 20 | 55 / 11 / 27 | 64 / 14 / 35 | 8.83 ms |
+| Rerank dense top two | 23 / 2 / 3 | 30 / 7 / 9 | 42 / 8 / 14 | 47 / 13 / 20 | 25.02 ms |
+| Rerank learned top two | 18 / 2 / 4 | 13 / 3 / 4 | 47 / 9 / 17 | 55 / 12 / 22 | 26.32 ms |
+| Rerank top six | 21 / 2 / 4 | 32 / 3 / 5 | 28 / 5 / 7 | 32 / 10 / 13 | 65.01 ms |
+
+At the 2% calibration setting, dense top two uses 62% less P95 latency and returns two more known targets than top six with one fewer withheld-view return. The paired difference in known-target return rate is +0.81 points (descriptive 95% interval −2.03 to +3.66, bootstrap over 245 target-connected groups). The ordering changes at other thresholds. At 5%, learned top two returns 19 fewer known targets than top six at similar withheld counts. Dense top two is therefore a necessary control for the learned selector. The cohort was previously explored, and the withheld-view counts measure incomplete-label behavior. A noninferiority claim needs fresh adjudication and a margin fixed before testing.
+
 Run [the learned replay](../../experiments/litsearch/learned_confirmation.py) with `PROJECTION VECTORS EMBEDDING_CHECKPOINT RERANKER_CHECKPOINT NEW_RESULT_JSON`.
 
 ## Reproduce

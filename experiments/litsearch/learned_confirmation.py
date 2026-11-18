@@ -23,9 +23,10 @@ from experiments.litsearch.source_withholding import POOL, QUERY_SHA256, REVISIO
 from experiments.retrieval.lrbench_frozen_baselines import build_lexical
 
 
-METHODS = ("cosine", "learned", "reader_two", "reader_six", "cascade")
+METHODS = ("cosine", "learned", "cosine_two", "reader_two", "reader_six", "cascade")
 VIEWS = ("present", "withheld")
 TWO = 2
+CALIBRATION_BUDGETS = (.02, .05, .10, .15)
 
 
 def split_training(questions):
@@ -123,9 +124,10 @@ class Endpoint:
         called = False
         if method == "cosine":
             scored, _ = observation(pool, cosine)
-        elif method == "reader_six":
-            values, _ = self.reranker.score(text, self.docs, pool, task=TASK)
-            scored, _ = observation(pool, values)
+        elif method in ("reader_six", "cosine_two"):
+            candidates = pool if method == "reader_six" else pool[:TWO]
+            values, _ = self.reranker.score(text, self.docs, candidates, task=TASK)
+            scored, _ = observation(candidates, values)
             called = True
         else:
             center, scale, weights, bias = self.head
@@ -213,6 +215,19 @@ def summarize(rows, method, threshold):
     return report
 
 
+def calibration_sweep(validation, test, fitted):
+    sweep = {}
+    for budget in CALIBRATION_BUDGETS:
+        policies = fitted if budget == .10 else {
+            method: calibrate_method(rows, budget) for method, rows in validation.items()
+        }
+        sweep[f"{budget:.2f}"] = {
+            method: dict(calibration=fit, test=summarize(test[method], method, fit["policy"]))
+            for method, fit in policies.items()
+        }
+    return sweep
+
+
 def run(args):
     if args.output.exists():
         raise FileExistsError(args.output)
@@ -260,6 +275,7 @@ def run(args):
         train_targets=sorted({d for row in training for d in row["corpusids"]}), fitted=fitted,
         calibrations=policy_fit, cascade_first=first_policy, thresholds=thresholds,
         validation=validation_rows, test=set_test, embedding=provenance, reranker=reader.provenance,
+        calibration_sweep=calibration_sweep(validation_rows, set_test, policy_fit),
         gpu=torch.cuda.get_device_name(), report={
             method: summarize(rows, method, thresholds[method]) for method, rows in set_test.items()
         },
