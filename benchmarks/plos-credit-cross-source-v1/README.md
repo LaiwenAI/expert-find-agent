@@ -35,3 +35,20 @@ Compare BM25, dense retrieval, and reciprocal-rank fusion for source selection. 
 Every route gets 59/59 exact for full titles. The role proposer gets all role pairs right in these controlled phrasings, so the observed failures are at source selection. The eight repaired BM25 requests represent two publication pairs out of fifteen, and the extra link under fusion comes from a different publication pair than the one requested. The identity signal can repair weak source clues and can also support the wrong papers. These are exploratory shortlist comparisons. Job `40401` motivated testing identity repair on the stronger BM25 baseline, and job `40405` reuses the same cases for that comparison on RTX 5090.
 
 Run [the search replay](../../experiments/credit/cross_source_search.py) with `FIXTURE EXAMPLES_JSON ROLE_TRAINING_JSON PHRASES_JSON EMBEDDING_CHECKPOINT NEW_RESULT_JSON XML_DIRECTORY [XML_DIRECTORY...]`. It verifies all 130 source XML digests. Timings cover warm local request parsing through source-linked output, with no network or index initialization. The source hints are derived from the target articles, and the envelope and role phrases are controlled.
+
+## Unavailable source audit
+
+Repeat the same requests with both sources visible, with the left source unavailable, and with the right source unavailable. The availability filter removes the source before candidate ranking and keeps the original BM25 statistics fixed. Include a fourth view with an automatically edited abstract clue to test the limits of literal matching. The required result is unresolved when either requested paper is unavailable, even if a different paper can supply a verified link.
+
+The literal route first looks for a unique exact title, then a unique contiguous match in the title or abstract of visible articles. Both clues need a source match before the identity check can resolve the query. Compare this route with BM25 and the two BM25 identity-repair arms.
+
+| Route | Both visible, exact / 236 | One unavailable, unresolved / 472 | One unavailable, wrong-source links | One unavailable, false empty answers |
+| --- | ---: | ---: | ---: | ---: |
+| BM25 | 208 | 297 | 1 | 174 |
+| BM25 and identity-first | 216 | 284 | 17 | 171 |
+| BM25 and one-sided repair | 212 | 284 | 17 | 171 |
+| Literal source guard | 177 | 472 | 0 | 0 |
+
+Each wrong-source link in this run occurs on a different request with an unavailable source. A false empty answer confidently returns zero matches based on the wrong papers. One-sided repair behaves identically to unrestricted repair when a paper is withheld, so constraining the number of swaps does not stop this failure. The literal guard accepts all 177 complete requests in the three literal styles, and abstains on all 59 complete requests in the edited-abstract style. The edits are automatic and the results share 15 publication pairs. These controls show the need to verify document relevance separately from author identity and to test source absence apart from ranking on complete collections.
+
+Add `--audit-missing-source` to the search replay. Job `40409` runs the audit on RTX 5090 with the 130-source snapshot and one unchanged embedding checkpoint.

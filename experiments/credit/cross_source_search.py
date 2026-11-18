@@ -11,7 +11,7 @@ from xml.etree import ElementTree as ET
 import numpy as np
 
 from expert_search.qwen_embedding_torch import QwenTorchEmbedding
-from experiments.credit.conjunctive_source_retrieval import TASK as SOURCE_TASK, sentences
+from experiments.credit.conjunctive_source_retrieval import TASK as SOURCE_TASK, edit_conclusion, sentences
 from experiments.credit.counterfactual_role_edits import fingerprint
 from experiments.credit.cross_source_identity import eligible, load, pairs, xml_sources
 from experiments.credit.plos_role_inventory import ROLES
@@ -23,7 +23,8 @@ from experiments.retrieval.lrbench_frozen_baselines import build_lexical
 
 METHODS = ("bm25", "dense", "fused", "identity_first", "corroborated",
            "bm25_identity", "bm25_one_side", "oracle_roles")
-LEXICAL_ONLY = {"bm25", "bm25_identity", "bm25_one_side"}
+OPEN_SET_METHODS = ("bm25", "bm25_identity", "bm25_one_side", "literal")
+LEXICAL_ONLY = set(OPEN_SET_METHODS)
 STYLES = ("title", "abstract", "title_sketch")
 FORMAT = re.compile(
     r'Across "([^"]+)" and "([^"]+)", find the same person who did (.+?) in the first study'
@@ -48,9 +49,10 @@ def lead(document, style):
     title, abstract = document
     if style == "title":
         return title
-    if style == "abstract":
+    if style in ("abstract", "edited_abstract"):
         parsed = sentences(abstract)
-        return parsed[len(parsed) // 2] if parsed else title
+        excerpt = parsed[len(parsed) // 2] if parsed else title
+        return edit_conclusion(excerpt) if style == "edited_abstract" else excerpt
     terms = normalized(title).split()
     if len(terms) < 5:
         return title
@@ -72,10 +74,28 @@ class Search:
         self.evidence = evidence
         self.ridge = ridge
         self.bank = encoder.encode(["\n".join(documents[doi]) for doi in self.ids])
+        self.titles = {doi: normalized(title) for doi, (title, _) in documents.items()}
+        self.normalized_text = {
+            doi: (f" {normalized(title)} ", f" {normalized(abstract)} ")
+            for doi, (title, abstract) in documents.items()
+        }
 
-    def lexical(self, text):
+    def lexical(self, text, unavailable):
         scores = self.index.document_scores(text)
-        return [self.ids[int(i)] for i in sorted(scores, key=lambda i: (-scores[i], self.ids[int(i)]))[:K]]
+        hits = [i for i in scores if self.ids[int(i)] != unavailable]
+        return [self.ids[int(i)] for i in sorted(hits, key=lambda i: (-scores[i], self.ids[int(i)]))[:K]]
+
+    def literal(self, text, unavailable):
+        literal = normalized(text)
+        if not literal:
+            return []
+        exact = [doi for doi, title in self.titles.items() if title == literal and doi != unavailable]
+        if exact:
+            return exact if len(exact) == 1 else []
+        snippet = f" {literal} "
+        hits = [doi for doi, fields in self.normalized_text.items()
+                if doi != unavailable and any(snippet in text for text in fields)]
+        return hits if len(hits) == 1 else []
 
     def identify(self, first, second, roles):
         if first == second or first not in self.evidence or second not in self.evidence or roles[0] == roles[1]:
@@ -86,7 +106,7 @@ class Search:
         complete = all(author["roles"] for doi in (first, second) for author in self.evidence[doi]["authors"])
         return matches, bool(matches) or (complete and all(x["person"] for x in a + b))
 
-    def run(self, request, method, reference_roles=None):
+    def run(self, request, method, reference_roles=None, *, unavailable=None):
         start = perf_counter()
         parsed = FORMAT.fullmatch(request)
         if not parsed:
@@ -102,10 +122,12 @@ class Search:
         dense, lexical = [], []
         if method not in LEXICAL_ONLY:
             order = np.argsort(-(vectors[2:] @ self.bank.T), axis=1, kind="stable")
-            dense = [[self.ids[i] for i in ranked[:K]] for ranked in order]
-        if method != "dense":
-            lexical = [self.lexical(value) for value in (left, right)]
-        if method in LEXICAL_ONLY:
+            dense = [[self.ids[i] for i in ranked if self.ids[i] != unavailable][:K] for ranked in order]
+        if method not in ("dense", "literal"):
+            lexical = [self.lexical(value, unavailable) for value in (left, right)]
+        if method == "literal":
+            banks = [self.literal(value, unavailable) for value in (left, right)]
+        elif method in LEXICAL_ONLY:
             banks = lexical
         elif method == "dense":
             banks = dense
@@ -141,12 +163,12 @@ class Search:
                     banks=banks, duration=(perf_counter() - start) * 1000)
 
 
-def summarize(rows):
+def summarize(rows, methods=METHODS, styles=STYLES):
     result = {}
-    for style in STYLES:
+    for style in styles:
         result[style] = {}
         current = [row for row in rows if row["style"] == style]
-        for method in METHODS:
+        for method in methods:
             runs = [row["arms"][method] for row in current]
             result[style][method] = dict(
                 requests=len(runs), sources_exact=sum(r["sources_exact"] for r in runs),
@@ -156,6 +178,9 @@ def summarize(rows):
                 unsupported=sum(r["unsupported"] for r in runs),
                 source_switches=sum(r["source"] != r["initial"] for r in runs),
                 no_link_promotions=sum(bool(r["citations"]) for row, r in zip(current, runs) if row["kind"] == "no_link"),
+                unresolved=sum(not r["resolved"] and not r["citations"] for r in runs),
+                wrong_resolved_empty=sum(r["resolved"] and not r["citations"] and not r["sources_exact"]
+                                         for r in runs),
                 p50_p95_ms=np.quantile([r["duration"] for r in runs], [.5,.95]).tolist(),
             )
     return result
@@ -192,34 +217,44 @@ def run(args):
             raise ValueError("Duplicate searchable documents")
         lexical = build_lexical({text: i for i, text in enumerate(texts)}, Path(scratch))
     search = Search(embedder, lexical, documents, ownership, banks["ridge"])
-    rows = []
+    rows = {"all_present": []}
+    if args.audit_missing_source:
+        rows.update(missing_left=[], missing_right=[])
+    methods = OPEN_SET_METHODS if args.audit_missing_source else METHODS
+    styles = (*STYLES, "edited_abstract") if args.audit_missing_source else STYLES
     for i, q in enumerate(queries):
         source = q["left"], q["right"]
         roles = [q["left_role"], q["right_role"]]
         gold = {(source[0], a, source[1], b) for a, b in q["gold"]}
         text = [paraphrases[r][int(fingerprint(q["id"], r), 16) % len(paraphrases[r])] for r in roles]
-        for style in STYLES:
+        for style in styles:
             left, right = [lead(documents[doi], style).replace('"', "'") for doi in source]
             request = (f'Across "{left}" and "{right}", find the same person who did {text[0]} in the first study'
                        f' and {text[1]} in the second study.')
-            if not rows:
-                for method in METHODS:
+            if not rows["all_present"]:
+                for method in methods:
                     search.run(request, method, roles)
-            estimates = {}
-            offset = i % len(METHODS)
-            for method in METHODS[offset:] + METHODS[:offset]:
-                result = search.run(request, method, roles)
-                found = set(map(tuple, result["citations"]))
-                result.update(
-                    sources_exact=result["source"] == source,
-                    roles_exact=result["roles"] == roles,
-                    exact=result["source"] == source and result["resolved"] and found == gold,
-                    unsupported=len(found - gold),
-                )
-                estimates[method] = result
-            rows.append(dict(id=q["id"], left=source[0], right=source[1], kind=q["kind"], style=style, arms=estimates))
+            for scenario, records in rows.items():
+                unavailable = {"all_present": None, "missing_left": source[0], "missing_right": source[1]}[scenario]
+                estimates = {}
+                offset = i % len(methods)
+                for method in methods[offset:] + methods[:offset]:
+                    result = search.run(request, method, roles, unavailable=unavailable)
+                    found = set(map(tuple, result["citations"]))
+                    result.update(
+                        sources_exact=result["source"] == source,
+                        roles_exact=result["roles"] == roles,
+                        exact=result["source"] == source and result["resolved"] and found == gold,
+                        unsupported=len(found - gold),
+                    )
+                    estimates[method] = result
+                records.append(dict(id=q["id"], left=source[0], right=source[1], kind=q["kind"],
+                                    style=style, arms=estimates))
     with args.output.open("x") as stream:
-        json.dump(dict(summary=summarize(rows), rows=rows, fit=fit, embedding=provenance,
+        summary = {key: summarize(records, methods, styles) for key, records in rows.items()}
+        if not args.audit_missing_source:
+            summary, rows = summary["all_present"], rows["all_present"]
+        json.dump(dict(summary=summary, rows=rows, fit=fit, embedding=provenance,
                        fixture_sha256=digest(args.fixture / "manifest.json"), script_sha256=digest(Path(__file__))),
                   stream, indent=2)
         stream.write("\n")
@@ -230,4 +265,5 @@ if __name__ == "__main__":
     for name in ("fixture", "glossary", "training", "phrases", "embedding", "output"):
         parser.add_argument(name, type=Path)
     parser.add_argument("sources", nargs="+", type=Path)
+    parser.add_argument("--audit-missing-source", action="store_true")
     run(parser.parse_args())
