@@ -1,0 +1,341 @@
+{
+  "metadata": {
+    "projection_sha256": "9b8d8e70881449dfe0fad5ec4b270af71533c2058a193d38ea2092394f451b7a",
+    "replay_sha256": "ec0378188a69376ed83cc7f8e2fabb7ab88198d68c7972f7256168c7f6ef05c6",
+    "cases_sha256": "96ff5b11c873ca1ef4307f1744c5e1314fcd1bbb9e2a3e70ed1a97f3ad7f3e08",
+    "queries": 246,
+    "unique_unjudged": 28,
+    "known_controls": 12,
+    "review_cases": 40,
+    "unjudged_selections": 101
+  },
+  "judgment_origin": "open_model_pilot",
+  "verdicts": {
+    "unjudged": {
+      "supported": 15,
+      "invalid": 8,
+      "unsupported": 5
+    },
+    "known_controls": {
+      "supported": 10,
+      "invalid": 2
+    }
+  },
+  "routes": [
+    {
+      "budget": "0.02",
+      "method": "fixed_single",
+      "state": "present",
+      "requests": 246,
+      "known": 9,
+      "unjudged": 0,
+      "labels": {},
+      "unsupported_if_review_is_correct": [
+        0,
+        0
+      ]
+    },
+    {
+      "budget": "0.02",
+      "method": "fixed_single",
+      "state": "withheld",
+      "requests": 246,
+      "known": 0,
+      "unjudged": 0,
+      "labels": {},
+      "unsupported_if_review_is_correct": [
+        0,
+        0
+      ]
+    },
+    {
+      "budget": "0.02",
+      "method": "fixed_two",
+      "state": "present",
+      "requests": 246,
+      "known": 23,
+      "unjudged": 2,
+      "labels": {
+        "supported": 1,
+        "invalid": 1
+      },
+      "unsupported_if_review_is_correct": [
+        0,
+        1
+      ]
+    },
+    {
+      "budget": "0.02",
+      "method": "fixed_two",
+      "state": "withheld",
+      "requests": 246,
+      "known": 0,
+      "unjudged": 3,
+      "labels": {
+        "invalid": 2,
+        "supported": 1
+      },
+      "unsupported_if_review_is_correct": [
+        0,
+        2
+      ]
+    },
+    {
+      "budget": "0.02",
+      "method": "gap",
+      "state": "present",
+      "requests": 246,
+      "known": 30,
+      "unjudged": 5,
+      "labels": {
+        "supported": 4,
+        "invalid": 1
+      },
+      "unsupported_if_review_is_correct": [
+        0,
+        1
+      ]
+    },
+    {
+      "budget": "0.02",
+      "method": "gap",
+      "state": "withheld",
+      "requests": 246,
+      "known": 0,
+      "unjudged": 6,
+      "labels": {
+        "supported": 5,
+        "invalid": 1
+      },
+      "unsupported_if_review_is_correct": [
+        0,
+        1
+      ]
+    },
+    {
+      "budget": "0.02",
+      "method": "hash",
+      "state": "present",
+      "requests": 246,
+      "known": 16,
+      "unjudged": 1,
+      "labels": {
+        "invalid": 1
+      },
+      "unsupported_if_review_is_correct": [
+        0,
+        1
+      ]
+    },
+    {
+      "budget": "0.02",
+      "method": "hash",
+      "state": "withheld",
+      "requests": 246,
+      "known": 0,
+      "unjudged": 2,
+      "labels": {
+        "invalid": 2
+      },
+      "unsupported_if_review_is_correct": [
+        0,
+        2
+      ]
+    },
+    {
+      "budget": "0.05",
+      "method": "fixed_single",
+      "state": "present",
+      "requests": 246,
+      "known": 43,
+      "unjudged": 6,
+      "labels": {
+        "supported": 2,
+        "invalid": 3,
+        "unsupported": 1
+      },
+      "unsupported_if_review_is_correct": [
+        1,
+        4
+      ]
+    },
+    {
+      "budget": "0.05",
+      "method": "fixed_single",
+      "state": "withheld",
+      "requests": 246,
+      "known": 0,
+      "unjudged": 14,
+      "labels": {
+        "supported": 8,
+        "invalid": 4,
+        "unsupported": 2
+      },
+      "unsupported_if_review_is_correct": [
+        2,
+        6
+      ]
+    },
+    {
+      "budget": "0.05",
+      "method": "fixed_two",
+      "state": "present",
+      "requests": 246,
+      "known": 30,
+      "unjudged": 7,
+      "labels": {
+        "supported": 5,
+        "invalid": 2
+      },
+      "unsupported_if_review_is_correct": [
+        0,
+        2
+      ]
+    },
+    {
+      "budget": "0.05",
+      "method": "fixed_two",
+      "state": "withheld",
+      "requests": 246,
+      "known": 0,
+      "unjudged": 9,
+      "labels": {
+        "invalid": 5,
+        "supported": 4
+      },
+      "unsupported_if_review_is_correct": [
+        0,
+        5
+      ]
+    },
+    {
+      "budget": "0.05",
+      "method": "gap",
+      "state": "present",
+      "requests": 246,
+      "known": 36,
+      "unjudged": 6,
+      "labels": {
+        "supported": 3,
+        "invalid": 2,
+        "unsupported": 1
+      },
+      "unsupported_if_review_is_correct": [
+        1,
+        3
+      ]
+    },
+    {
+      "budget": "0.05",
+      "method": "gap",
+      "state": "withheld",
+      "requests": 246,
+      "known": 0,
+      "unjudged": 12,
+      "labels": {
+        "supported": 7,
+        "invalid": 3,
+        "unsupported": 2
+      },
+      "unsupported_if_review_is_correct": [
+        2,
+        5
+      ]
+    },
+    {
+      "budget": "0.05",
+      "method": "hash",
+      "state": "present",
+      "requests": 246,
+      "known": 52,
+      "unjudged": 9,
+      "labels": {
+        "supported": 4,
+        "invalid": 4,
+        "unsupported": 1
+      },
+      "unsupported_if_review_is_correct": [
+        1,
+        5
+      ]
+    },
+    {
+      "budget": "0.05",
+      "method": "hash",
+      "state": "withheld",
+      "requests": 246,
+      "known": 0,
+      "unjudged": 19,
+      "labels": {
+        "invalid": 5,
+        "supported": 12,
+        "unsupported": 2
+      },
+      "unsupported_if_review_is_correct": [
+        2,
+        7
+      ]
+    }
+  ],
+  "paired_gap_minus_fixed_two": [
+    {
+      "budget": "0.02",
+      "state": "present",
+      "unsupported_difference": [
+        0,
+        0
+      ],
+      "shared_alternatives": 2
+    },
+    {
+      "budget": "0.02",
+      "state": "withheld",
+      "unsupported_difference": [
+        -1,
+        0
+      ],
+      "shared_alternatives": 2
+    },
+    {
+      "budget": "0.05",
+      "state": "present",
+      "unsupported_difference": [
+        1,
+        1
+      ],
+      "shared_alternatives": 5
+    },
+    {
+      "budget": "0.05",
+      "state": "withheld",
+      "unsupported_difference": [
+        -1,
+        3
+      ],
+      "shared_alternatives": 5
+    }
+  ],
+  "pilot_provenance": {
+    "cases_sha256": "96ff5b11c873ca1ef4307f1744c5e1314fcd1bbb9e2a3e70ed1a97f3ad7f3e08",
+    "judgments_sha256": "93a2b569dd1eff02fb907a2e78dbe6353c8a5ad79bee87cced1dcd736c2c5f1b",
+    "job": "40567",
+    "model": {
+      "repo": "Qwen/Qwen3-4B-Instruct-2507",
+      "revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "files": {
+        "LICENSE": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+        "config.json": "5beea1a4a34c62782bfb2f911c606741a3bab8f92d80a118fa053c28af12e8ba",
+        "generation_config.json": "835fffe355c9438e7a25be099b3fccaa98350b83451f9fd2d99512e74f1ade48",
+        "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+        "model-00001-of-00003.safetensors": "75311d91bb08cf0b882913da464a1e722a31fb44db35208663487efb7a3d8ed6",
+        "model-00002-of-00003.safetensors": "0b48adbb1f60e901153d91907ba11ce63bd4b8b584482e730f48808d055dfba1",
+        "model-00003-of-00003.safetensors": "7dd39ccca5e4de123c74c14af44c9bf2eb75df33b4614382af0134528e060d5d",
+        "model.safetensors.index.json": "d6c42883a895dfef5b0080ed2116a1bcd764f558406b98923d675978a1abf29c",
+        "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+        "tokenizer_config.json": "a62ff0a2472a0fa1b8eaabcb57c59b58afa42a22831dc141400b6e0cf2b65ce3",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    },
+    "gpu": "NVIDIA GeForce RTX 5090"
+  }
+}

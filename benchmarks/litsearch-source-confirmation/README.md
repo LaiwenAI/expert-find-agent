@@ -124,6 +124,16 @@ At the 2% calibration ceiling, dense-gap routing reduces scored documents by 30%
 
 Run [the live depth router](../../experiments/litsearch/adaptive_depth.py) with `PROJECTION VECTORS EMBEDDING_CHECKPOINT RERANKER_CHECKPOINT RAW_DEPTH_REPLAY_JSON NEW_RESULT_JSON`. Generate the raw reference using the top-hit depth replay above. [Aggregate results](adaptive-depth-v1.json)
 
+## Blinded review of alternative sources
+
+The four depth policies at the two calibration ceilings make 101 unjudged selections across their two views. Deduplication leaves 28 distinct query–paper pairs. The review packet adds 12 released-target controls for 40 cases. Reviewers receive the question, title, and abstract in shuffled order. A separate key retains policy, view, and original label information. Complete two independent reviews and adjudicate disagreements before opening the key.
+
+Use supported, unsupported, or insufficient. A supported judgment needs an exact quote. Invalid and unresolved judgments contribute to the upper bound on unsupported returns. Identical query–paper selections from both policies cancel in the paired comparison. These bounds are conditional on the adjudicated labels and the available abstracts.
+
+Slurm job `40567` tests the workflow with frozen Qwen3-4B-Instruct-2507. Of the 28 unjudged cases, 15 receive supported, five unsupported, and eight invalid judgments. Across all 40 cases, five responses fail JSON extraction and five supported responses fail the quote check. For the 2% ceiling in the withheld view, the model marks five of six gap-router alternatives and one of three fixed-two alternatives as supported. These model judgments exercise the pipeline. Human adjudication is pending. [Pilot aggregates and provenance](alternative-review-pilot-v1.json)
+
+Run [the review tool](../../experiments/litsearch/alternative_review.py) with `build PROJECTION RAW_ADAPTIVE_REPLAY_JSON NEW_PACKET_DIRECTORY`. Share only the generated `review` folder with reviewers. Use `score PACKET FINAL_JUDGMENTS NEW_REPORT --origin human_adjudication` after adjudication. The packet and raw model replies remain local.
+
 ## Reproduce
 
 Download [the pinned query Parquet](https://huggingface.co/datasets/princeton-nlp/LitSearch/resolve/9573fb284a1026c998df47024b888a163f0f0e25/query/full-00000-of-00001.parquet). Run [the projection tool](../../experiments/litsearch/prepare_titles.py) with `QUERY_PARQUET NEW_PROJECTION.json.gz` in an environment with PyArrow. It reads only the three selected columns from the six corpus shards using range requests. Full article bodies and third-party dataset rows are omitted from the release.
