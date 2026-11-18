@@ -30,12 +30,17 @@ POOL = 10
 SUPPORT = (1, 2)
 METHODS = ("exhaustive", "one_per_expert", "fill_idle_slots")
 PREFIX_CONTROL = ("exhaustive", "one_per_expert", "prefix_two", "prefix_three")
+DYNAMIC_METHODS = (*METHODS, "dynamic_one", "dynamic_fill", "dynamic_length_fit")
+SCHEDULE_FOR = {"dynamic_one": "one_per_expert", "dynamic_fill": "fill_idle_slots",
+                "dynamic_length_fit": "fill_same_length"}
 PER_EXPERT = {"one_per_expert": 1, "prefix_two": 2, "prefix_three": 3}
 
 
 class WaveReader:
-    def __init__(self, reader, query, documents, sources):
+    def __init__(self, reader, query, documents, sources, *, dynamic=False):
         self.reader = reader
+        self.dynamic = dynamic
+        self.padded_tokens = 0
         self.inputs = {}
         self.truncated = 0
         self.maximum = 0
@@ -48,12 +53,20 @@ class WaveReader:
             self.maximum = max(self.maximum, len(tokens))
         self.maximum = ((self.maximum + LENGTH_BUCKET - 1) // LENGTH_BUCKET) * LENGTH_BUCKET
 
+    def length(self, doc):
+        return len(self.inputs[doc]["input_ids"])
+
     @torch.inference_mode()
     def score(self, jobs):
         batch = [self.inputs[doc] for _, doc in jobs]
-        filled = batch + [batch[0]] * (WIDTH - len(batch))
-        inputs = self.reader.tokenizer.pad(filled, padding="max_length", max_length=self.maximum,
-                                          return_tensors="pt").to("cuda")
+        if self.dynamic:
+            tensors = self.reader.tokenizer.pad(batch, padding=True, return_tensors="pt")
+        else:
+            filled = batch + [batch[0]] * (WIDTH - len(batch))
+            tensors = self.reader.tokenizer.pad(filled, padding="max_length", max_length=self.maximum,
+                                               return_tensors="pt")
+        self.padded_tokens += tensors["input_ids"].numel()
+        inputs = tensors.to("cuda")
         logits = self.reader.model(**inputs, use_cache=False, logits_to_keep=1).logits
         values = logits[:len(jobs), -1, self.reader.labels].float()
         return (values[:, 0] - values[:, 1]).cpu().tolist()
@@ -75,10 +88,16 @@ def schedule(ordered, reader, count, method):
             boundary = rank[confirmed[TOP - 1]] if len(confirmed) >= TOP else len(rank)
             eligible = [e for e in pending if rank[e] < boundary and len(accepted[e]) < count
                         and len(accepted[e]) + len(pending[e]) - seen[e] >= count]
-            if method == "fill_idle_slots":
+            if method in ("fill_idle_slots", "fill_same_length"):
                 jobs = [(e, pending[e][seen[e]]) for e in eligible[:WIDTH]]
-                if len(jobs) < WIDTH:
-                    suffix = [(e, doc) for e in eligible for doc in pending[e][seen[e] + 1:]]
+                if 0 < len(jobs) < WIDTH:
+                    limit = max(reader.length(doc) for _, doc in jobs) if method == "fill_same_length" else None
+                    suffix = []
+                    for expert in eligible:
+                        for doc in pending[expert][seen[expert] + 1:]:
+                            if limit is not None and reader.length(doc) > limit:
+                                break
+                            suffix.append((expert, doc))
                     jobs.extend(suffix[:WIDTH - len(jobs)])
             else:
                 jobs = [(e, doc) for e in eligible
@@ -113,7 +132,7 @@ def summarize(rows, methods):
                 p95_ms=float(np.quantile([a["ms"] for a in arms], .95)),
                 p50_ms=float(np.median([a["ms"] for a in arms])),
                 average={key: mean(arm[key] for arm in arms)
-                         for key in ("calls", "checks", "unique_reads", "hard_p5", "confirmed_hard_p5")},
+                         for key in ("calls", "checks", "unique_reads", "padded_tokens", "hard_p5", "confirmed_hard_p5")},
                 latency_saved_vs_one_per_expert=paired_interval([
                     row["one_per_expert"]["ms"] - row[method]["ms"] for row in values
                 ]),
@@ -158,13 +177,15 @@ def run(args):
         ordered = [(row["id"], [w["id"] for w in row["evidence"]]) for row in hits]
         if len(ordered) != POOL or any(e not in ownership[d] for e, docs in ordered for d in docs):
             raise ValueError("Unexpected source ownership")
-        reader = WaveReader(reranker, query, texts, {d for _, docs in ordered for d in docs})
-        result = schedule(ordered, reader, count, method)
+        reader = WaveReader(reranker, query, texts, {d for _, docs in ordered for d in docs},
+                            dynamic=method in SCHEDULE_FOR)
+        result = schedule(ordered, reader, count, SCHEDULE_FOR.get(method, method))
+        result["padded_tokens"] = reader.padded_tokens
         result["ms"] = (perf_counter() - start) * 1000
         result["truncated"] = reader.truncated
         return ordered, result
 
-    methods = PREFIX_CONTROL if args.prefix_control else METHODS
+    methods = PREFIX_CONTROL if args.prefix_control else DYNAMIC_METHODS if args.compare_dynamic else METHODS
     for count in SUPPORT:
         for method in methods:
             measure(ids[0], count, method)
@@ -206,5 +227,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ("manifest", "embedding", "reranker", "output"):
         parser.add_argument(name, type=Path)
-    parser.add_argument("--prefix-control", action="store_true")
+    modes = parser.add_mutually_exclusive_group()
+    modes.add_argument("--prefix-control", action="store_true")
+    modes.add_argument("--compare-dynamic", action="store_true")
     run(parser.parse_args())

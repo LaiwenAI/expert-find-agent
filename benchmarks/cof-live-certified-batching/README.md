@@ -19,6 +19,22 @@ Job `40584` measures filling idle slots on the same 73 requests. Each row gives 
 
 Idle-slot filling reduces P95 by 10.3% and 5.7% in the two settings. It uses fewer GPU calls on 35 and 27 requests, respectively, with no requests using more calls. Both settings reproduce the exhaustive ordered experts and citations on all 73 requests. Every evaluated candidate–source margin agrees with the fixed-shape exhaustive reference. That equality applies to this checkpoint, hardware, and workload. The comparison uses a fixed-shape baseline and measures one warm request at a time. [Results and paired latency intervals](results.json)
 
+## Dynamic-shape controls
+
+Job `40593` repeats the fixed-shape references alongside dynamic batches that pad only to their current longest row. The stricter fill strategy takes consecutive extra sources only while their token length fits that width. All strategies prepare the same initial candidate prompts. Token slots include real and padding tokens.
+
+| Schedule | One-source P95 | Two-source P95 | Mean token slots with two sources | Exact ordered results vs fixed exhaustive, one / two |
+| --- | ---: | ---: | ---: | ---: |
+| Fixed shape, one per expert | 263.20 ms | 239.85 ms | 15,676 | 73 / 73 |
+| Fixed shape, fill idle slots | 235.53 ms | 226.53 ms | 14,785 | 73 / 73 |
+| Dynamic shape, one per expert | 200.08 ms | 179.95 ms | 10,871 | 71 / 71 |
+| Dynamic shape, fill available slots | 198.79 ms | 185.69 ms | 11,602 | 71 / 71 |
+| Dynamic shape, fill within current width | 198.10 ms | 185.32 ms | 11,348 | 71 / 71 |
+
+Each column compares the same 73 queries. All three dynamic policies agree with one another on every ordered result. Each differs from the fixed-shape reference on two queries per support setting. With two required sources, filling slots uses fewer calls and processes more token slots, increasing P95 by 5.75 ms relative to dynamic one-per-expert. The paired descriptive interval for the P95 reduction is −19.52 to +5.46 ms. Limiting the sequence width alone leaves the cost of adding rows. The faster dynamic baseline warrants its own comparison when the application permits a change in decision semantics. [Raw aggregates and paired intervals](dynamic-shape-v1.json)
+
 ## Reproduce
 
 Run [the GPU comparison](../../experiments/retrieval/cof_live_certified_batching.py) on a Slurm CUDA compute node with `COF_INPUT_MANIFEST EMBEDDING_CHECKPOINT RERANKER_CHECKPOINT NEW_RESULT_JSON`. Add `--prefix-control` with a separate output path for the consecutive-source controls. The replay uses the published CoF inputs described in [the bounded adjustment benchmark](../cof-bounded-adjustment/README.md).
+
+Add `--compare-dynamic` with a separate output path to reproduce the dynamic-shape controls.
