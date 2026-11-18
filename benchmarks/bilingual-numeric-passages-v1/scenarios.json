@@ -1,0 +1,134 @@
+[
+  {
+    "id": "queue-display",
+    "unit": "ms",
+    "limit": 210,
+    "operator": "<=",
+    "text": {
+      "en": {
+        "subject": "clinic queue display",
+        "setting": "at peak arrivals",
+        "metric": "screen update delay",
+        "other_metric": "ticket printing time",
+        "other_setting": "under a light load"
+      },
+      "zh": {
+        "subject": "\u95e8\u8bca\u53eb\u53f7\u5c4f",
+        "setting": "\u5230\u8fbe\u9ad8\u5cf0\u65f6",
+        "metric": "\u753b\u9762\u66f4\u65b0\u5ef6\u8fdf",
+        "other_metric": "\u53d6\u53f7\u6253\u5370\u65f6\u957f",
+        "other_setting": "\u4f4e\u8d1f\u8f7d\u65f6"
+      }
+    }
+  },
+  {
+    "id": "upload",
+    "unit": "%",
+    "limit": 94,
+    "operator": ">=",
+    "text": {
+      "en": {
+        "subject": "archive uploader",
+        "setting": "on a congested connection",
+        "metric": "successful upload rate",
+        "other_metric": "checksum pass rate",
+        "other_setting": "on a private lab link"
+      },
+      "zh": {
+        "subject": "\u6863\u6848\u4e0a\u4f20\u7a0b\u5e8f",
+        "setting": "\u8fde\u63a5\u62e5\u5835\u65f6",
+        "metric": "\u4e0a\u4f20\u6210\u529f\u7387",
+        "other_metric": "\u6821\u9a8c\u548c\u901a\u8fc7\u7387",
+        "other_setting": "\u5b9e\u9a8c\u5ba4\u4e13\u7528\u94fe\u8def\u4e0a"
+      }
+    }
+  },
+  {
+    "id": "receipt",
+    "unit": "%",
+    "limit": 87,
+    "operator": ">",
+    "text": {
+      "en": {
+        "subject": "mobile receipt reader",
+        "setting": "for crumpled receipts",
+        "metric": "line extraction recall",
+        "other_metric": "corner detection recall",
+        "other_setting": "for flat receipts"
+      },
+      "zh": {
+        "subject": "\u79fb\u52a8\u7968\u636e\u9605\u8bfb\u5668",
+        "setting": "\u7968\u636e\u8d77\u76b1\u65f6",
+        "metric": "\u6587\u672c\u884c\u63d0\u53d6\u53ec\u56de\u7387",
+        "other_metric": "\u89d2\u70b9\u68c0\u6d4b\u53ec\u56de\u7387",
+        "other_setting": "\u7968\u636e\u5e73\u6574\u65f6"
+      }
+    }
+  },
+  {
+    "id": "terminal",
+    "unit": "ms",
+    "limit": 175,
+    "operator": "<",
+    "text": {
+      "en": {
+        "subject": "public payment kiosk",
+        "setting": "after a network outage",
+        "metric": "reconnect time",
+        "other_metric": "initial boot time",
+        "other_setting": "before the outage"
+      },
+      "zh": {
+        "subject": "\u516c\u5171\u7f34\u8d39\u7ec8\u7aef",
+        "setting": "\u7f51\u7edc\u4e2d\u65ad\u6062\u590d\u540e",
+        "metric": "\u91cd\u8fde\u65f6\u957f",
+        "other_metric": "\u9996\u6b21\u542f\u52a8\u65f6\u957f",
+        "other_setting": "\u7f51\u7edc\u4e2d\u65ad\u524d"
+      }
+    }
+  },
+  {
+    "id": "shelf",
+    "unit": "%",
+    "limit": 89,
+    "operator": ">=",
+    "text": {
+      "en": {
+        "subject": "book return kiosk",
+        "setting": "under reflective covers",
+        "metric": "classification accuracy",
+        "other_metric": "barcode recognition rate",
+        "other_setting": "under matte covers"
+      },
+      "zh": {
+        "subject": "\u56fe\u4e66\u5f52\u8fd8\u7ec8\u7aef",
+        "setting": "\u5c01\u9762\u53cd\u5149\u65f6",
+        "metric": "\u5206\u7c7b\u51c6\u786e\u7387",
+        "other_metric": "\u6761\u7801\u8bc6\u522b\u7387",
+        "other_setting": "\u5c01\u9762\u65e0\u53cd\u5149\u65f6"
+      }
+    }
+  },
+  {
+    "id": "inventory",
+    "unit": "ms",
+    "limit": 145,
+    "operator": "<=",
+    "text": {
+      "en": {
+        "subject": "parcel inventory terminal",
+        "setting": "during bulk imports",
+        "metric": "query response time",
+        "other_metric": "background synchronization time",
+        "other_setting": "between imports"
+      },
+      "zh": {
+        "subject": "\u5305\u88f9\u5e93\u5b58\u7ec8\u7aef",
+        "setting": "\u6279\u91cf\u5bfc\u5165\u671f\u95f4",
+        "metric": "\u67e5\u8be2\u54cd\u5e94\u65f6\u95f4",
+        "other_metric": "\u540e\u53f0\u540c\u6b65\u65f6\u957f",
+        "other_setting": "\u4e24\u6b21\u5bfc\u5165\u4e4b\u95f4"
+      }
+    }
+  }
+]
