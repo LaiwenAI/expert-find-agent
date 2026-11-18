@@ -26,9 +26,12 @@ class EvidenceHead:
             self.input_weight, self.input_bias = weights['0.weight'], weights['0.bias']
             self.output_weight, self.output_bias = weights['2.weight'][0], weights['2.bias'][0]
 
-    def choose(self, features):
+    def scores(self, features):
         hidden = np.maximum((features - self.center) / self.scale @ self.input_weight.T + self.input_bias, 0)
-        return int((hidden @ self.output_weight + self.output_bias).argmax())
+        return hidden @ self.output_weight + self.output_bias
+
+    def choose(self, features):
+        return int(self.scores(features).argmax())
 
 
 def request(question, context, method, encoder, head):
