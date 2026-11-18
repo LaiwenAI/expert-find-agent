@@ -35,36 +35,24 @@ def normalize(question):
     return ' '.join(question.casefold().split())
 
 
-def examples(row):
-    question = row['question']
-    titles, sentences = zip(*row['context'], strict=True)
+def candidate_actions(question, context):
+    titles, sentences = zip(*context, strict=True)
     text = ['\n'.join([title, *parts]) for title, parts in zip(titles, sentences, strict=True)]
-    if len(set(titles)) != len(titles):
-        return None
-    available = dict(zip(titles, map(len, sentences), strict=True))
-    facts = {tuple(fact) for fact in row['supporting_facts']}
-    if not facts or any(title not in available or type(i) is not int or not 0 <= i < available[title]
-                        for title, i in facts):
-        return None
-    target = {title for title, _ in facts}
-    if len(target) < 2:
-        return None
-
     first, second, *remaining = bm25(question, text)[:CANDIDATE_LIMIT]
+    cap = len(text[second])
+    actions = [second] + [p for p in remaining if len(text[p]) <= cap]
+    rank = {doc: i + 2 for i, doc in enumerate([second, *remaining])}
+    return titles, text, first, actions, rank
+
+
+def action_features(question, titles, text, first, actions, rank):
     query = words(question)
     consumed = words(text[first])
     missing = query - consumed
-    cap = len(text[second])
-    features = np.zeros((CANDIDATE_LIMIT - 1, len(FEATURES)), dtype=np.float32)
-    outcomes = np.zeros(CANDIDATE_LIMIT - 1, dtype=np.float32)
-    lengths = np.zeros(CANDIDATE_LIMIT - 1, dtype=np.int32)
-    actions = [second] + [p for p in remaining if len(text[p]) <= cap]
-    count = len(actions)
-    gaps = []
-    rank = {doc: i + 2 for i, doc in enumerate([second, *remaining])}
+    cap = len(text[actions[0]])
+    features = np.zeros((len(actions), len(FEATURES)), dtype=np.float32)
     for slot, doc in enumerate(actions):
         tokens = words(text[doc])
-        gaps.append(len(missing & tokens))
         features[slot] = [
             rank[doc], len(query & tokens) / max(len(query), 1),
             len(missing & tokens) / max(len(missing), 1),
@@ -73,9 +61,33 @@ def examples(row):
             len(text[doc]) / max(cap, 1), len(query),
             len(consumed & query) / max(len(query), 1), len(tokens),
         ]
+    return features
+
+
+def examples(row):
+    question = row['question']
+    context = list(row['context'])
+    available = {title: len(sentences) for title, sentences in context}
+    if len(available) != len(context):
+        return None
+    facts = {tuple(fact) for fact in row['supporting_facts']}
+    if not facts or any(title not in available or type(i) is not int or not 0 <= i < available[title]
+                        for title, i in facts):
+        return None
+    target = {title for title, _ in facts}
+    if len(target) < 2:
+        return None
+
+    titles, text, first, actions, rank = candidate_actions(question, context)
+    count = len(actions)
+    features = np.zeros((CANDIDATE_LIMIT - 1, len(FEATURES)), dtype=np.float32)
+    features[:count] = action_features(question, titles, text, first, actions, rank)
+    outcomes = np.zeros(CANDIDATE_LIMIT - 1, dtype=np.float32)
+    lengths = np.zeros(CANDIDATE_LIMIT - 1, dtype=np.int32)
+    for slot, doc in enumerate(actions):
         outcomes[slot] = target <= {titles[first], titles[doc]}
         lengths[slot] = len(text[first]) + 1 + len(text[doc])
-    return row['_id'], features, outcomes, lengths, count, int(np.argmax(gaps))
+    return row['_id'], features, outcomes, lengths, count, int(features[:count, 2].argmax())
 
 
 def training_rows(parquets):
