@@ -22,6 +22,7 @@ from experiments.credit.evaluate_role_edits import MEANINGS, prompt
 from experiments.credit.factored_role_edits import candidate_lists, choose_batched
 from experiments.credit.plos_role_inventory import ROLES
 from experiments.credit.role_language_router import NISO_SHA256, TASK, Router
+from experiments.credit.role_prototypes import evaluate_atomic, train_banks
 from experiments.qasper.adaptive_evidence import digest
 from experiments.qasper.paired_reader import load_reader
 from experiments.retrieval.lrbench_frozen_baselines import build_lexical
@@ -69,7 +70,7 @@ class Endpoint:
         return (self.ids[int(min(hits, key=lambda i: (-hits[i], self.ids[int(i)])))] if hits else None)
 
     @torch.inference_mode()
-    def run(self, text, method, rotation, option_order, oracle=None):
+    def run(self, text, method, rotation, option_order, oracle=None, *, proposal_bank=None, read_roles=True):
         started = perf_counter()
         lead, activity = split_request(text)
         selected = self.bm25(lead) if method != "dense_joint" else None
@@ -107,14 +108,22 @@ class Endpoint:
                 np.fill_diagonal(scores, -np.inf)
                 return float(scores.max())
             selected_atoms = max(segments, key=split_score)
-            dense_ranks = [np.argsort(-values[atom], kind="stable").tolist() for atom in selected_atoms]
-            shortlist = candidate_lists(self.router, selected_atoms, dense_ranks, 3)
-            predictions = choose_batched(self.router, selected_atoms, shortlist, rotation)
+            if proposal_bank is None:
+                proposal_scores = [values[atom] for atom in selected_atoms]
+            else:
+                positions = {atom: i for i, atom in enumerate(atoms)}
+                proposal_scores = vector_batch[[positions[atom] for atom in selected_atoms]] @ proposal_bank.T
+            dense_ranks = [np.argsort(-scores, kind="stable").tolist() for scores in proposal_scores]
+            if read_roles:
+                shortlist = candidate_lists(self.router, selected_atoms, dense_ranks, 3)
+                predictions = choose_batched(self.router, selected_atoms, shortlist, rotation)
+                calls = 1
+            else:
+                predictions = [rank[0] for rank in dense_ranks]
             predicted_roles = [ROLES[i] for i in predictions]
             if len(set(predicted_roles)) == 2:
                 returned = [a for a, source in enumerate(records, 1) if label(source, predicted_roles) == POSITIVE]
                 complete = True
-            calls = 1
         citations = [[selected, author] for author in returned]
         return dict(source=selected, complete=complete, returned=returned, citations=citations,
                     roles=predicted_roles, calls=calls, cuts=len(segments),
@@ -122,15 +131,15 @@ class Endpoint:
                     ms=(perf_counter()-started)*1000)
 
 
-def summarize(rows):
+def summarize(rows, methods=METHODS, views=VIEWS, reference_name="bm25_direct"):
     metrics = {}
-    for lead_style in VIEWS:
+    for lead_style in views:
         group = [row for row in rows if row["lead"] == lead_style]
         papers = [row["doi"] for row in group]
         report = {}
-        for method in METHODS:
+        for method in methods:
             runs = [row["arms"][method] for row in group]
-            reference = [row["arms"]["bm25_direct"] for row in group]
+            reference = [row["arms"][reference_name] for row in group]
             report[method] = dict(
                 requests=len(runs), source_exact=sum(item["source"] == row["doi"] for item, row in zip(runs, group)),
                 multi_cut=sum(item["cuts"] > 1 for item in runs),
@@ -184,6 +193,20 @@ def run(args):
         index = build_lexical({text: i for i, text in enumerate(documents)}, directory / "sources")
     router = Router(glossary, lexical, embedder.encode(glossary), embedder, reader_model, tokenizer, 3)
     endpoint = Endpoint(router, reader, index, doi_list, documents, source_roles)
+    variants = {method: (method, {}) for method in METHODS}
+    views, reference = VIEWS, "bm25_direct"
+    fit = None
+    if args.role_training:
+        banks, fit = train_banks(args.role_training, router, upstream["examples"])
+        fit["input_sha256"] = digest(args.role_training)
+        fit["atomic"] = evaluate_atomic(router, banks, upstream["examples"])
+        variants = {
+            f"{name}_{'reader' if use_reader else 'embed'}":
+                ("bm25_factored", dict(proposal_bank=bank if name != "definitions" else None, read_roles=use_reader))
+            for name, bank in banks.items() for use_reader in (False, True)
+        }
+        views, reference = ("edited_conclusion",), "definitions_reader"
+    methods = tuple(variants)
     rows = []
     for i, group in enumerate(groups):
         doi = group["doi"]
@@ -195,6 +218,8 @@ def run(args):
         rotation = rng // (2 * len(FORMATS))
         option_order = sorted(MEANINGS, key=lambda meaning: fingerprint(group["id"], meaning))
         for lead_style, value in zip(VIEWS, (title, description), strict=True):
+            if lead_style not in views:
+                continue
             for view_index, view in enumerate(("before", "after")):
                 roles = group[view]
                 pieces = [phrases[r][int(fingerprint(group["id"], r), 16) % len(phrases[r])] for r in roles]
@@ -202,23 +227,24 @@ def run(args):
                 text = template.format(lead=value.replace('"', "'"), activity=connector.join(oracle))
                 wanted = [j for j, evidence in enumerate(source_roles[doi], 1) if label(evidence, roles) == POSITIVE]
                 wanted_pairs = {(doi, j) for j in wanted}
-                shift = (i + view_index) % len(METHODS)
+                shift = (i + view_index) % len(methods)
                 if not rows:
-                    for method in METHODS:
-                        endpoint.run(text, method, rotation, option_order, oracle)
+                    for method, settings in variants.values():
+                        endpoint.run(text, method, rotation, option_order, oracle, **settings)
                 arms = {}
-                for method in METHODS[shift:] + METHODS[:shift]:
-                    item = endpoint.run(text, method, rotation, option_order, oracle)
+                for variant in methods[shift:] + methods[:shift]:
+                    method, settings = variants[variant]
+                    item = endpoint.run(text, method, rotation, option_order, oracle, **settings)
                     citations = set(map(tuple, item["citations"]))
                     item["unsupported"] = len(citations - wanted_pairs)
                     item["roles_exact"] = item["roles"] is not None and set(item["roles"]) == set(roles)
                     item["success"] = item["complete"] and item["source"] == doi and citations == wanted_pairs
-                    arms[method] = item
+                    arms[variant] = item
                 rows.append(dict(id=group["id"], doi=doi, view=view, lead=lead_style, wanted=wanted, arms=arms))
     with args.output.open("x") as stream:
-        json.dump(dict(summary=summarize(rows), rows=rows, collection_sha256=digest(args.collection),
+        json.dump(dict(summary=summarize(rows, methods, views, reference), rows=rows, collection_sha256=digest(args.collection),
                        fixture_sha256=digest(path), script_sha256=digest(Path(__file__)), embedding=embedding,
-                       checkpoint=checkpoint, gpu=torch.cuda.get_device_name()), stream, indent=2)
+                       checkpoint=checkpoint, gpu=torch.cuda.get_device_name(), fit=fit), stream, indent=2)
         stream.write("\n")
 
 
@@ -226,4 +252,5 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ("fixture", "collection", "glossary", "embedding", "reader", "output"):
         parser.add_argument(name, type=Path)
+    parser.add_argument("--role-training", type=Path)
     run(parser.parse_args())

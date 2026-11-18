@@ -63,6 +63,29 @@ Success requires the correct source and exact author set, with a resolved result
 
 Run [the integrated replay](../../experiments/credit/retrieve_and_attribute.py) with `FIXTURE CATALOG EXAMPLES_JSON EMBEDDING_CHECKPOINT READER_CHECKPOINT NEW_RESULT_JSON`. Job `40371` uses the same frozen Qwen checkpoints on RTX 5090. Timing covers local parsing, source lookup, inference and construction of source-linked results. The quoted source descriptions are derived from the test articles. This controlled replay leaves independently authored search descriptions, cross-article person identification, concurrent serving and enterprise relevance for separate evaluation.
 
+## Learning role proposals from synthetic tasks
+
+[The training fixture](role-training.json) contains six authored task descriptions per role. None shares an exact normalized string with the 49 NISO examples. Frozen task embeddings form a mean prototype for each role and train a ridge classifier with penalty 0.1. Each method stores 14 vectors and uses one projection at runtime. The source, split selector and lexical glossary remain fixed. The reader sees the same official definitions and only its candidate list changes.
+
+| Role proposal bank | NISO top one / 49 | NISO dense top three / 49 | NISO lexical–dense union / 49 |
+| --- | ---: | ---: | ---: |
+| Definitions | 23 | 31 | 40 |
+| Mean prototypes | 34 | 41 | 45 |
+| Ridge classifier | 34 | 43 | 47 |
+
+| Route on edited source leads | Exact role sets / 224 | Exact author sets / 224 | Unsupported promotions | P95 |
+| --- | ---: | ---: | ---: | ---: |
+| Definitions only | 51 | 74 | 27 | 8.78 ms |
+| Prototypes only | 102 | 123 | 42 | 8.82 ms |
+| Ridge only | 104 | 124 | 48 | 8.82 ms |
+| Definitions and reader | 103 | 124 | 27 | 36.87 ms |
+| Prototypes and reader | 120 | 139 | 36 | 36.50 ms |
+| Ridge and reader | 131 | 148 | 33 | 36.53 ms |
+
+Ridge proposals with the reader recover both edited versions in 52/112 groups, compared with 32/112 for definitions and reader. The per-request author-set gain is 10.7 percentage points (paper-bootstrap interval +3.1 to +16.5). The learned proposals increase unsupported promotions by six. Dropping the reader increases promotions further, so equal exact-set counts alone would give the wrong deployment decision. All six arms recover the same source on every request and the same 90 exact task boundaries. The atomic examples recur in the compound benchmark and were used in earlier diagnostics.
+
+Add `--role-training benchmarks/plos-credit-edits-v1/role-training.json` to the integrated replay. Job `40375` fits the proposal matrices and runs the full benchmark replay on RTX 5090. The embedding and language model weights remain frozen. See [the trainer](../../experiments/credit/role_prototypes.py).
+
 ## Reproduce
 
 Run [the builder](../../experiments/credit/counterfactual_role_edits.py) with `SNAPSHOT OUTPUT --capture-from CATALOG PILOT_MANIFEST`. Use the pinned catalog described in [the compound retrieval experiment](../plos-credit-pilot-v1/README.md#compound-roles-with-source-retrieval) and its pilot manifest. The source cache can be reused for subsequent builds. The released fixture contains derived records, with article URLs and hashes for rebuild and audit.
