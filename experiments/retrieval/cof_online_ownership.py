@@ -53,10 +53,13 @@ class OwnerRanking:
         with torch.inference_mode():
             return torch.mv(self.vectors, torch.as_tensor(query, device='cuda'))
 
-    def rank_host(self, scores):
+    def rank_host(self, scores, eligible=None):
         scores = scores.cpu().numpy()
         maxima = np.maximum.reduceat(scores[self.index.owner_rows], self.index.owner_starts)
-        best = np.argsort(-maxima, kind='stable')[:TOP_K]
+        ordered = np.argsort(-maxima, kind='stable')
+        if eligible is not None:
+            ordered = [i for i in ordered if self.index.owner_ids[i] in eligible]
+        best = ordered[:TOP_K]
         results = []
         for owner in best:
             rows = self.index.owners[self.index.owner_ids[owner]]
@@ -85,16 +88,18 @@ class OwnerRanking:
         ))
 
 
-def prepare(dataset, folder, model_manifest):
+def prepare(dataset, folder, model_manifest, *, exclude_queries=(), exclude_sources=()):
     root, papers, reviewers, labels = load(dataset)
     ownership = defaultdict(list)
     for reviewer, profile in reviewers.items():
         for paper in set(profile['papers']):
             ownership[paper].append(reviewer)
     sources = sorted(ownership)
-    queries = sorted(labels['soft'])
+    all_queries = sorted(labels['soft'])
+    queries = [query for query in all_queries if query not in exclude_queries]
     inventory = json.loads((root / 'manifest.json').read_text())
-    if inventory['exact_query_texts_in_profiles'] or inventory['query_ids_in_profiles']:
+    overlaps = set(inventory['exact_query_texts_in_profiles']) | set(inventory['query_ids_in_profiles'])
+    if overlaps.intersection(queries):
         raise ValueError('Queries present in profiles')
     vector_dir = root / 'qwen-embedding-torch-v1'
     protocol = json.loads((vector_dir / 'protocol.json').read_text())
@@ -105,12 +110,16 @@ def prepare(dataset, folder, model_manifest):
     if protocol['checkpoint'] != json.loads(model_manifest.read_text()):
         raise ValueError('Embedding checkpoint differs from index')
     items = [dict(id='doc:' + key, text=text(papers[key]), query=False) for key in sources]
-    items += [dict(id='query:' + key, text=text(papers[key]), query=True) for key in queries]
+    items += [dict(id='query:' + key, text=text(papers[key]), query=True) for key in all_queries]
     if hashlib.sha256(json.dumps(items, sort_keys=True).encode()).hexdigest() != protocol['input_sha256']:
         raise ValueError('Changed embedding input order')
     matrix = np.load(vectors, allow_pickle=False)
     if matrix.shape != (len(items), 1024) or matrix.dtype != np.float32:
         raise ValueError('Unexpected vector matrix')
+    if exclude_sources:
+        keep = [i for i, source in enumerate(sources) if source not in exclude_sources]
+        matrix = matrix[keep]
+        sources = [sources[i] for i in keep]
     started = time.perf_counter()
     db = folder / f'{dataset}-sources.sqlite'
     with sqlite3.connect(db) as connection:
@@ -138,13 +147,18 @@ def prepare(dataset, folder, model_manifest):
     return ranker, db, {q: text(papers[q]) for q in queries}, labels, metadata
 
 
-def request(ranker, connection, encoder, query, method):
+def request(ranker, connection, encoder, query, method, eligible=None):
     started = time.perf_counter()
     decoded = json.loads(query)
     vector = encoder.encode([decoded['query']], query=True)[0]
     encoded = time.perf_counter()
     scores = ranker.score(vector)
-    rank = ranker.rank_host(scores) if method == 'host_reduction' else ranker.rank_device(scores)
+    if method == 'host_reduction':
+        rank = ranker.rank_host(scores, eligible)
+    else:
+        if eligible is not None:
+            raise ValueError('Eligibility filtering requires host reduction')
+        rank = ranker.rank_device(scores)
     retrieved = time.perf_counter()
     ids = [ranker.index.source_ids[source] for _, source, _ in rank]
     placeholders = ','.join('?' for _ in ids)

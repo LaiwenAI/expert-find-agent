@@ -138,14 +138,15 @@ def fit(training, variants, output):
     }
 
 
-def benchmark(variants, projections, ranker, connection, queries, labels, arms=ARMS):
+def benchmark(variants, projections, ranker, connection, queries, labels, arms=ARMS, eligible=None):
     payloads = {qid: json.dumps({'query': query}, ensure_ascii=False) for qid, query in queries.items()}
 
     def run(arm, qid):
         mode, aligned = arms[arm]
         variants.configure(mode)
         encoder = projections[arm] if aligned else variants.encoder
-        return request(ranker, connection, encoder, payloads[qid], 'host_reduction')
+        pool = None if eligible is None else eligible[qid]
+        return request(ranker, connection, encoder, payloads[qid], 'host_reduction', pool)
 
     for arm in arms:
         run(arm, next(iter(queries)))
