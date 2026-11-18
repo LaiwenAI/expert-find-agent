@@ -87,6 +87,26 @@ At the 2% calibration setting, dense top two uses 62% less P95 latency and retur
 
 Run [the learned replay](../../experiments/litsearch/learned_confirmation.py) with `PROJECTION VECTORS EMBEDDING_CHECKPOINT RERANKER_CHECKPOINT NEW_RESULT_JSON`.
 
+## Verify only the dense top hit
+
+Job 40546 runs the four warm routes on one RTX 5090. Each uses the same exact dense index, 96 calibration questions, and 246 author-written test questions. The single-candidate method uses the cross-encoder score of the dense first hit and the dense first-versus-second gap. Its absolute-score control reuses that same reader score without the gap. The dense, two-candidate and six-candidate arms reproduce the previous test pool and decision score in all 492 views each.
+
+Cells report **known returned / unjudged returned with targets present / returned after withholding**. The percentages are calibration ceilings. P95 includes query encoding, dense search and verification.
+
+| Method | 2% ceiling | 5% ceiling | 10% ceiling | 15% ceiling | Present P95 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Dense cosine and gap | 32 / 4 / 6 | 55 / 13 / 30 | 64 / 21 / 40 | 74 / 24 / 52 | 7.29 ms |
+| Verify top hit, cross-encoder score only | 0 / 0 / 0 | 2 / 0 / 0 | 13 / 4 / 4 | 34 / 11 / 11 | 14.86 ms |
+| Verify top hit, cross-encoder score and dense gap | 9 / 0 / 0 | 43 / 6 / 14 | 49 / 10 / 16 | 47 / 12 / 17 | 14.86 ms |
+| Rerank dense top two | 23 / 2 / 3 | 30 / 7 / 9 | 42 / 8 / 14 | 47 / 13 / 20 | 24.95 ms |
+| Rerank dense top six | 21 / 2 / 4 | 32 / 3 / 5 | 28 / 5 / 7 | 32 / 10 / 13 | 64.94 ms |
+
+Single verification lowers P95 by 77% relative to six-candidate reranking. At the 2% setting, it returns 12 fewer known sources than six-candidate reranking, a paired difference of −4.88 points with a descriptive 95% interval of −8.16 to −2.02. At 10% it returns 21 more known sources and nine more unjudged alternatives after withholding. The top hit covers 106 of the 246 questions before filtering. Six-candidate reranking raises that ceiling to 131. The latency advantage replicated on the larger corpus. Confirmation quality and acceptance differ with the operating point.
+
+Calibration and test questions come from different writing protocols. The empirical ceilings support a comparison of fixed policies. Formal risk control would require assumptions about the shift and adequate judgments of alternatives. [Non-Exchangeable Conformal Risk Control](https://proceedings.iclr.cc/paper_files/paper/2024/hash/de04896f011beff76c91e094f72727f4-Abstract-Conference.html)
+
+Run [the depth replay](../../experiments/litsearch/top_hit_confirmation.py) with `PROJECTION VECTORS EMBEDDING_CHECKPOINT RERANKER_CHECKPOINT NEW_RESULT_JSON`. [Aggregate results and paired intervals](top-hit-confirmation-v1.json)
+
 ## Reproduce
 
 Download [the pinned query Parquet](https://huggingface.co/datasets/princeton-nlp/LitSearch/resolve/9573fb284a1026c998df47024b888a163f0f0e25/query/full-00000-of-00001.parquet). Run [the projection tool](../../experiments/litsearch/prepare_titles.py) with `QUERY_PARQUET NEW_PROJECTION.json.gz` in an environment with PyArrow. It reads only the three selected columns from the six corpus shards using range requests. Full article bodies and third-party dataset rows are omitted from the release.
