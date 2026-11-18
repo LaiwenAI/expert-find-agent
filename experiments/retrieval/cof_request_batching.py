@@ -49,7 +49,7 @@ def load_plan(query_ids, rate):
     return times, qids
 
 
-def pipeline(encoder, ranker, connection, plan, queries, mode):
+def pipeline(encoder, ranker, connection, plan, queries, mode, review=None):
     arrivals, qids = plan
     maximum, wait = MODES[mode]
     encoder.batch_size = maximum
@@ -73,7 +73,12 @@ def pipeline(encoder, ranker, connection, plan, queries, mode):
         vectors = encoder.encode(query_strings, query=True)
         encoded = time.perf_counter()
         for i, vec in enumerate(vectors):
-            rank = ranker.rank_host(ranker.score(vec))
+            scores = ranker.score(vec)
+            details = {}
+            if review is not None and len(batch) > 1:
+                rank, details = review(scores, query_strings[i])
+            else:
+                rank = ranker.rank_host(scores)
             body, experts = serialize_hits(ranker, connection, rank)
             finished = time.perf_counter()
             arrived = start + arrivals[cursor + i]
@@ -82,6 +87,7 @@ def pipeline(encoder, ranker, connection, plan, queries, mode):
                 'query': batch[i], 'batch': len(batch), 'queue_ms': 1000 * (begun - arrived),
                 'service_ms': 1000 * (finished - begun), 'total_ms': 1000 * (finished - arrived),
                 'batch_encode_ms': 1000 * (encoded - begun),
+                **details,
             })
         cursor = stop
     end = time.perf_counter()
