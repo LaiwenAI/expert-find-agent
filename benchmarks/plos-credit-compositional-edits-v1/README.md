@@ -58,6 +58,23 @@ The decision-aware route reproduces the full reader's output on every request. E
 
 Run [the routing replay](../../experiments/credit/route_compositional_atoms.py) using the live replay arguments below.
 
+## Small model training
+
+The [training replay](../../experiments/credit/train_role_decision.py) uses the same 84 synthetic descriptions. Each run fits on 70 descriptions and selects a checkpoint by accuracy and cross-entropy on 14 separate synthetic descriptions, one per role. NISO exact normalized phrases are excluded from all training and selection. Compare a frozen ridge control, a trained linear head on the frozen encoder, and a head with rank-eight Q/V adapters in the last three Qwen3-Embedding-0.6B blocks. Both learned arms start at the same ridge ranking.
+
+| Training split seed | Ridge correct, atomic / compositional | Trained head correct, atomic / compositional | LoRA correct, atomic / compositional |
+| --- | ---: | ---: | ---: |
+| 1977 | 36 / 125 | 35 / 124 | 37 / 127 |
+| 2027 | 35 / 123 | 36 / 132 | 37 / 128 |
+| 2039 | 35 / 124 | 35 / 128 | 33 / 124 |
+| 2053 | 34 / 127 | 37 / 128 | 34 / 128 |
+
+Each row evaluates the same 49 NISO phrases and 156 test views. The ridge fitted on all 84 descriptions gets 34/49 and 122/156 in every run. Head-only training uses 14,350 trainable parameters and LoRA uses 137,230. In the original run, LoRA updates all 73,728 initially zero output-projection adapter entries, improves two decisions over the matched 70-description ridge, and makes four unsupported promotions versus five. It does not recover additional supported requests in that comparison (20/30 in both). Sequential warm LoRA P95 across the repeats is 8.65–8.72 ms.
+
+Jobs `40483` and `40487` execute on RTX 5090. The repeat reproduces the original seed's saved checkpoints byte for byte and every decision. LoRA matches or improves the matched ridge on these views but beats the trained head in only one of four runs. These repeats vary training examples and optimization order while reusing the same evaluation cohorts. They measure split sensitivity and leave wording and domain generalization for fresh examples.
+
+Run the training replay with `FIXTURE NISO_EXAMPLES_JSON ROLE_TRAINING_JSON EMBEDDING_CHECKPOINT NEW_OUTPUT_DIRECTORY` and `--seed` set to the chosen split seed.
+
 ## Reproduce
 
 Build with `python -m experiments.credit.compositional_edits NEW_FIXTURE XML_DIRECTORY [XML_DIRECTORY...]`. Replay with `python -m experiments.credit.compositional_edits NEW_REPORT.json --replay FIXTURE`.
