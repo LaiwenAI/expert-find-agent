@@ -80,3 +80,22 @@ Run the training replay with `FIXTURE NISO_EXAMPLES_JSON ROLE_TRAINING_JSON EMBE
 Build with `python -m experiments.credit.compositional_edits NEW_FIXTURE XML_DIRECTORY [XML_DIRECTORY...]`. Replay with `python -m experiments.credit.compositional_edits NEW_REPORT.json --replay FIXTURE`.
 
 Run [the live replay](../../experiments/credit/live_compositional_edits.py) with `FIXTURE NISO_EXAMPLES_JSON ROLE_TRAINING_JSON EMBEDDING_CHECKPOINT READER_CHECKPOINT NEW_RESULT_JSON` on a Slurm CUDA compute node. Use the pinned glossary and training descriptions from the [requirement-edit benchmark](../plos-credit-edits-v1/README.md).
+
+## Ranked conjunction of hard constraints
+
+The ranked replay builds fixed candidate orders from visible byline positions and CRediT publisher identifiers. It reveals each expert's declarations one publication at a time. The controller requires a positive witness for every criterion and returns the first permitted witness in canonical source order. A declaration read can resolve several criteria for the same expert. When pessimistic and optimistic assignments to unread witnesses produce the same ranked experts and citations, the output is determined under this monotone rule.
+
+The 108 test views cover 36 requirement versions in each of three availability conditions. They come from 18 edit groups in three publisher-linked components. The original scope requires a specific publication for each role. A separate scope permits either publication from the same identity. Every schedule reproduces the exhaustive ordered experts and citations at Top-1 and Top-3. When either specified publication is withheld, each scoped route returns no confirmed candidate.
+
+Mean expert–publication declarations read with both sources available:
+
+| Role scope and result limit | Exhaustive | Short-circuit in request order | Fixed ordering by constraints per source | Certificate |
+| --- | ---: | ---: | ---: | ---: |
+| Specified publication, Top-1 | 3.67 | 2.22 | 1.78 | 1.78 |
+| Specified publication, Top-3 | 3.67 | 2.67 | 2.17 | 2.17 |
+| Either publication, Top-1 | 3.67 | 2.50 | 2.50 | 2.50 |
+| Either publication, Top-3 | 3.67 | 3.67 | 3.67 | 3.67 |
+
+Bundled ordering and the certificate tie on this fixture. The comparison validates stopping and citation fidelity on publisher annotations. The experiment observes declaration labels through an oracle, uses supplied identity and role identifiers, and measures work counts with a small number of publication components. Live source discovery, evidence interpretation, and enterprise expertise remain outside this measurement. [Aggregates](constraint-certificate-v1.json)
+
+Run [the ranked replay](../../experiments/credit/constraint_certificate.py) with `FIXTURE NEW_RESULT_JSON`.
