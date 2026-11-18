@@ -26,3 +26,19 @@ First build reviewable nodes and fixed baselines for a set of experts with abund
 ## First Change Implemented
 
 Added `ExpertCatalog`, which creates an expert-attribution and file-offset index for all original evidence during the offline stage, bound to the corpus SHA256. When the existing ExpertAgent constructs a candidate tree, it now reads only sources belonging to candidate experts, removing the step of parsing the entire corpus’s original text on every query; other routing and ranking logic remain unchanged for now. In three alternating-order comparisons involving 21 experts and 296 sources, the content and order were exactly the same as with a full scan; scanning took about 347ms, while candidate reading had a median of about 1.44ms (about 7.05ms on the first run). This is an engineering optimization for source reading, not evidence of end-to-end agent acceleration or semantic-tree accuracy. All 87 existing tests passed. The next stage still requires genuine problem/method capability branches and testing coarse-routing recall.
+
+## Cross-Source Navigation Evidence
+
+The two HotpotQA runs use one shared index of 14,950 canonical passages from 1,536 development questions. Every arm fixes the first dense result and limits the two returned passages to 1,600 characters. Success requires both annotated sources. The same success counts held when requiring all exact normalized supporting sentences.
+
+| Held-out result | Flat dense | Follow title link when available | Comparison cue rule | Learned switch |
+| --- | ---: | ---: | ---: | ---: |
+| All questions | 172 / 512 | 283 / 512 | 288 / 512 | 291 / 512 |
+| Bridge | 83 / 404 | 214 / 404 | 203 / 404 | 206 / 404 |
+| Comparison | 89 / 108 | 69 / 108 | 85 / 108 | 85 / 108 |
+| Request P95 (ms) | 7.151 | 7.152 | 7.158 | 7.159 |
+
+- **Replication.** Job 40183 returned both sources for 202 of 512 queries with flat ranking and 286 with links. The graph helped bridge queries and hurt comparisons. Job 40189 reproduced the direction on new questions with normalized support titles and questions disjoint from the fitting cohort. The fixed switch fits 198 differing actions from the earlier 512 queries.
+- **Controls.** An equal-degree random graph averaged 104 successes. A random switch at the same call rate averaged 259.3. The learned switch improved by 3 hits over the comparison cue rule. Its paper-cluster paired 95% interval was -0.98 to +2.16 percentage points. The rule is a strong baseline.
+- **Publication relevance.** The supported claim is that article-title links help this benchmark under the tested budget and hurt comparison cases when used indiscriminately. The shared corpus includes benchmark contexts. Expert constraints, contributor attribution, action provenance and benefit over budget-matched strong retrieval need separate evidence. Graph expansion and context-conditioned retrieval have published precedents. [PullNet](https://aclanthology.org/D19-1242/) · [Multi-Hop Dense Retrieval](https://openreview.net/forum?id=EMHoBG0avc1)
+- **Reproduction.** Run [shared source navigation](../../experiments/hotpotqa/shared_source_navigation.py) and [the held-out switch](../../experiments/hotpotqa/learned_source_navigation.py) on the pinned distractor development input. Both jobs ran on one RTX 5090 on ws5. Store reports under `artifacts/hotpot-shared-source-navigation-v1` and `artifacts/hotpot-learned-source-navigation-v1`. The latter contains a separate paired cue-rule comparison derived from the frozen rows.
