@@ -1,0 +1,414 @@
+{
+  "sigir": {
+    "job": "40611",
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "queries": 73,
+    "dataset": "SIGIR",
+    "guard_margin": 0.25,
+    "script_sha256": "41538bb1f7f7ad88b04b654afabff4dab775680f21e315a1e584bde490f3b837",
+    "input_sha256": "246622d3502855f6d6779787d8950dbbc1ce1f99c5dfdbd1091cccdcb18781a3",
+    "deferred_code_sha256": "45e94e1eb0b24debc36e2ad095703f4e65148315b532b884c1d6135f82934755",
+    "embedding": {
+      "repository": "Qwen/Qwen3-Embedding-0.6B",
+      "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "files": {
+        "config.json": "b5bf1f51fc45be473a54718cef92448d90a1be001bf9b9a44b8c7f10a19feaa9",
+        "model.safetensors": "0437e45c94563b09e13cb7a64478fc406947a93cb34a7e05870fc8dcd48e23fd",
+        "tokenizer.json": "def76fb086971c7867b829c23a26261e38d9d74e02139253b38aeb9df8b4b50a",
+        "tokenizer_config.json": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0"
+      },
+      "policy": "Official frozen BF16 weights; no own training or quantization."
+    },
+    "reranker": {
+      "repository": "Qwen/Qwen3-Reranker-0.6B",
+      "revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+      "policy": "Official frozen BF16 checkpoint; no own training or quantization. Revision recorded before downloading weights.",
+      "files": {
+        "config.json": "d479c427a9ca5295218063d4f9aca4f297ab4ac27487cca7af42c84643d51ef0",
+        "expected-large-files.json": "cd9940a651fcf3d97ffc28f0242a9a620c0da5b9acad1861ef14faf5ee784f0e",
+        "generation_config.json": "81051cd3f6e77013827148d0b8a6ead93f8ac390d5ab805f849199f0af6a08db",
+        "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+        "model.safetensors": "27cd75a405b9c1b46b59abfd88aaa209e6fed2a1972cde9b70e7659537c5e65b",
+        "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+        "tokenizer_config.json": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    },
+    "report": {
+      "1": {
+        "exhaustive": {
+          "exact_experts_and_sources": 73,
+          "score_differences": 0,
+          "decision_differences": 0,
+          "p95_ms": 287.1315833181143,
+          "p50_ms": 222.17684425413609,
+          "average": {
+            "calls": 8,
+            "checks": 30,
+            "unique_reads": 30,
+            "padded_tokens": 18712.54794520548,
+            "recheck_calls": 0,
+            "rechecked_pairs": 0,
+            "hard_p5": 0.20273972602739726,
+            "confirmed_hard_p5": 0.12602739726027398
+          },
+          "latency_saved_vs_guarded_dynamic": {
+            "mean": -86.8225019067934,
+            "percentile_95": [
+              -98.50782634664888,
+              -75.42202046319638
+            ],
+            "queries": 73,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000
+          }
+        },
+        "guarded_dynamic": {
+          "exact_experts_and_sources": 73,
+          "score_differences": 1046,
+          "decision_differences": 0,
+          "p95_ms": 209.8342899233102,
+          "p50_ms": 147.7402113378048,
+          "average": {
+            "calls": 6.178082191780822,
+            "checks": 19.958904109589042,
+            "unique_reads": 19.958904109589042,
+            "padded_tokens": 10236.356164383562,
+            "recheck_calls": 0.3013698630136986,
+            "rechecked_pairs": 0.410958904109589,
+            "hard_p5": 0.20273972602739726,
+            "confirmed_hard_p5": 0.12602739726027398
+          },
+          "latency_saved_vs_guarded_dynamic": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 73,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000
+          }
+        },
+        "deferred_dynamic": {
+          "exact_experts_and_sources": 73,
+          "score_differences": 1088,
+          "decision_differences": 1,
+          "p95_ms": 217.20621064305305,
+          "p50_ms": 149.09694716334343,
+          "average": {
+            "calls": 6.328767123287672,
+            "checks": 20.753424657534246,
+            "unique_reads": 20.753424657534246,
+            "padded_tokens": 10426.09589041096,
+            "recheck_calls": 0.2328767123287671,
+            "rechecked_pairs": 0.3698630136986301,
+            "hard_p5": 0.20273972602739726,
+            "confirmed_hard_p5": 0.12602739726027398
+          },
+          "latency_saved_vs_guarded_dynamic": {
+            "mean": -2.6449816275949347,
+            "percentile_95": [
+              -5.436251455382125,
+              -0.4049655662415781
+            ],
+            "queries": 73,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000
+          }
+        }
+      },
+      "2": {
+        "exhaustive": {
+          "exact_experts_and_sources": 73,
+          "score_differences": 0,
+          "decision_differences": 0,
+          "p95_ms": 287.8287613391876,
+          "p50_ms": 222.39491902291775,
+          "average": {
+            "calls": 8,
+            "checks": 30,
+            "unique_reads": 30,
+            "padded_tokens": 18712.54794520548,
+            "recheck_calls": 0,
+            "rechecked_pairs": 0,
+            "hard_p5": 0.20547945205479454,
+            "confirmed_hard_p5": 0.0684931506849315
+          },
+          "latency_saved_vs_guarded_dynamic": {
+            "mean": -65.37372424994429,
+            "percentile_95": [
+              -73.54757333978093,
+              -57.050867391469545
+            ],
+            "queries": 73,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000
+          }
+        },
+        "guarded_dynamic": {
+          "exact_experts_and_sources": 73,
+          "score_differences": 1134,
+          "decision_differences": 0,
+          "p95_ms": 207.13443644344804,
+          "p50_ms": 156.74792975187302,
+          "average": {
+            "calls": 7.273972602739726,
+            "checks": 22.794520547945204,
+            "unique_reads": 22.794520547945204,
+            "padded_tokens": 12097.356164383562,
+            "recheck_calls": 0.5616438356164384,
+            "rechecked_pairs": 0.726027397260274,
+            "hard_p5": 0.20547945205479454,
+            "confirmed_hard_p5": 0.0684931506849315
+          },
+          "latency_saved_vs_guarded_dynamic": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 73,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000
+          }
+        },
+        "deferred_dynamic": {
+          "exact_experts_and_sources": 73,
+          "score_differences": 1150,
+          "decision_differences": 3,
+          "p95_ms": 191.9019985944032,
+          "p50_ms": 149.92941357195377,
+          "average": {
+            "calls": 7.027397260273973,
+            "checks": 23.054794520547944,
+            "unique_reads": 23.054794520547944,
+            "padded_tokens": 11525.410958904109,
+            "recheck_calls": 0.2465753424657534,
+            "rechecked_pairs": 0.4520547945205479,
+            "hard_p5": 0.20547945205479454,
+            "confirmed_hard_p5": 0.0684931506849315
+          },
+          "latency_saved_vs_guarded_dynamic": {
+            "mean": 6.275262224347624,
+            "percentile_95": [
+              2.8244832607164776,
+              10.395523805605016
+            ],
+            "queries": 73,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000
+          }
+        }
+      }
+    }
+  },
+  "scirepeval": {
+    "job": "40611",
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "queries": 91,
+    "dataset": "SciRepEval",
+    "guard_margin": 0.25,
+    "script_sha256": "41538bb1f7f7ad88b04b654afabff4dab775680f21e315a1e584bde490f3b837",
+    "input_sha256": {
+      "protocol": "d119d82622581f208c155e5531de54be2ee086531c8cace1432008d4a4dd20db",
+      "vectors": "ad7c660bce0b3d086d5747e4c7aeb1082ff1d4ccbfa9f7fadcc3901eb8f875cf",
+      "hard_labels": "e29e89d070c211b951d6f118e17ac05ebc8d058326cfc786ab375f88c31362e5"
+    },
+    "deferred_code_sha256": "45e94e1eb0b24debc36e2ad095703f4e65148315b532b884c1d6135f82934755",
+    "embedding": {
+      "repository": "Qwen/Qwen3-Embedding-0.6B",
+      "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "files": {
+        "config.json": "b5bf1f51fc45be473a54718cef92448d90a1be001bf9b9a44b8c7f10a19feaa9",
+        "model.safetensors": "0437e45c94563b09e13cb7a64478fc406947a93cb34a7e05870fc8dcd48e23fd",
+        "tokenizer.json": "def76fb086971c7867b829c23a26261e38d9d74e02139253b38aeb9df8b4b50a",
+        "tokenizer_config.json": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0"
+      },
+      "policy": "Official frozen BF16 weights; no own training or quantization."
+    },
+    "reranker": {
+      "repository": "Qwen/Qwen3-Reranker-0.6B",
+      "revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+      "policy": "Official frozen BF16 checkpoint; no own training or quantization. Revision recorded before downloading weights.",
+      "files": {
+        "config.json": "d479c427a9ca5295218063d4f9aca4f297ab4ac27487cca7af42c84643d51ef0",
+        "expected-large-files.json": "cd9940a651fcf3d97ffc28f0242a9a620c0da5b9acad1861ef14faf5ee784f0e",
+        "generation_config.json": "81051cd3f6e77013827148d0b8a6ead93f8ac390d5ab805f849199f0af6a08db",
+        "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+        "model.safetensors": "27cd75a405b9c1b46b59abfd88aaa209e6fed2a1972cde9b70e7659537c5e65b",
+        "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+        "tokenizer_config.json": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      }
+    },
+    "report": {
+      "1": {
+        "exhaustive": {
+          "exact_experts_and_sources": 91,
+          "score_differences": 0,
+          "decision_differences": 0,
+          "p95_ms": 388.5127557441592,
+          "p50_ms": 228.98101061582565,
+          "average": {
+            "calls": 8,
+            "checks": 30,
+            "unique_reads": 27.153846153846153,
+            "padded_tokens": 20592.527472527472,
+            "recheck_calls": 0,
+            "rechecked_pairs": 0,
+            "hard_p5": 0.16703296703296705,
+            "confirmed_hard_p5": 0.15384615384615385
+          },
+          "latency_saved_vs_guarded_dynamic": {
+            "mean": -118.85210593323131,
+            "percentile_95": [
+              -133.68286186123044,
+              -104.68367575565456
+            ],
+            "queries": 91,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000
+          }
+        },
+        "guarded_dynamic": {
+          "exact_experts_and_sources": 91,
+          "score_differences": 939,
+          "decision_differences": 1,
+          "p95_ms": 242.0747336000204,
+          "p50_ms": 111.0195480287075,
+          "average": {
+            "calls": 5.285714285714286,
+            "checks": 15.912087912087912,
+            "unique_reads": 14.340659340659341,
+            "padded_tokens": 9644.65934065934,
+            "recheck_calls": 0.6483516483516484,
+            "rechecked_pairs": 0.8241758241758241,
+            "hard_p5": 0.16703296703296705,
+            "confirmed_hard_p5": 0.15384615384615385
+          },
+          "latency_saved_vs_guarded_dynamic": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 91,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000
+          }
+        },
+        "deferred_dynamic": {
+          "exact_experts_and_sources": 91,
+          "score_differences": 1038,
+          "decision_differences": 1,
+          "p95_ms": 236.46849859505892,
+          "p50_ms": 130.83322905004025,
+          "average": {
+            "calls": 5.4945054945054945,
+            "checks": 17.142857142857142,
+            "unique_reads": 15.395604395604396,
+            "padded_tokens": 9773.021978021978,
+            "recheck_calls": 0.4725274725274725,
+            "rechecked_pairs": 0.7032967032967034,
+            "hard_p5": 0.16703296703296705,
+            "confirmed_hard_p5": 0.15384615384615385
+          },
+          "latency_saved_vs_guarded_dynamic": {
+            "mean": -1.8651363245405994,
+            "percentile_95": [
+              -5.758087754577071,
+              1.9580667787282666
+            ],
+            "queries": 91,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000
+          }
+        }
+      },
+      "2": {
+        "exhaustive": {
+          "exact_experts_and_sources": 91,
+          "score_differences": 0,
+          "decision_differences": 0,
+          "p95_ms": 389.22696374356747,
+          "p50_ms": 229.91326823830605,
+          "average": {
+            "calls": 8,
+            "checks": 30,
+            "unique_reads": 27.153846153846153,
+            "padded_tokens": 20592.527472527472,
+            "recheck_calls": 0,
+            "rechecked_pairs": 0,
+            "hard_p5": 0.15824175824175826,
+            "confirmed_hard_p5": 0.1010989010989011
+          },
+          "latency_saved_vs_guarded_dynamic": {
+            "mean": -67.85758398473263,
+            "percentile_95": [
+              -79.80365916513479,
+              -56.087722197932365
+            ],
+            "queries": 91,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000
+          }
+        },
+        "guarded_dynamic": {
+          "exact_experts_and_sources": 91,
+          "score_differences": 1283,
+          "decision_differences": 0,
+          "p95_ms": 261.8887582793832,
+          "p50_ms": 171.30011692643166,
+          "average": {
+            "calls": 7.582417582417582,
+            "checks": 22.406593406593405,
+            "unique_reads": 20.186813186813186,
+            "padded_tokens": 14002.791208791208,
+            "recheck_calls": 1.1318681318681318,
+            "rechecked_pairs": 1.3296703296703296,
+            "hard_p5": 0.15824175824175826,
+            "confirmed_hard_p5": 0.1010989010989011
+          },
+          "latency_saved_vs_guarded_dynamic": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 91,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000
+          }
+        },
+        "deferred_dynamic": {
+          "exact_experts_and_sources": 91,
+          "score_differences": 1368,
+          "decision_differences": 7,
+          "p95_ms": 233.49630367010832,
+          "p50_ms": 154.51478958129883,
+          "average": {
+            "calls": 7.087912087912088,
+            "checks": 23.13186813186813,
+            "unique_reads": 20.846153846153847,
+            "padded_tokens": 12451.42857142857,
+            "recheck_calls": 0.3956043956043956,
+            "rechecked_pairs": 0.6703296703296703,
+            "hard_p5": 0.15824175824175826,
+            "confirmed_hard_p5": 0.1010989010989011
+          },
+          "latency_saved_vs_guarded_dynamic": {
+            "mean": 17.22797604052575,
+            "percentile_95": [
+              12.676497473084664,
+              22.136971411285
+            ],
+            "queries": 91,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000
+          }
+        }
+      }
+    }
+  }
+}

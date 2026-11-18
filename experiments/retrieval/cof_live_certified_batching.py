@@ -12,6 +12,7 @@ import numpy as np
 import torch
 
 from expert_search.cof_benchmark import load
+from expert_search.deferred_verification import defer_and_rank
 from expert_search.gpu_owned_vector_index import GpuOwnedVectorIndex
 from expert_search.owned_vector_index import ExactOwnedVectorIndex
 from expert_search.qwen_embedding_torch import QwenTorchEmbedding
@@ -32,6 +33,7 @@ METHODS = ("exhaustive", "one_per_expert", "fill_idle_slots")
 PREFIX_CONTROL = ("exhaustive", "one_per_expert", "prefix_two", "prefix_three")
 DYNAMIC_METHODS = (*METHODS, "dynamic_one", "dynamic_fill", "dynamic_length_fit")
 GUARD_METHODS = (*METHODS, "dynamic_one", "guarded_dynamic")
+DEFERRED_METHODS = ("exhaustive", "guarded_dynamic", "deferred_dynamic")
 GUARD_MARGIN = .25
 SCHEDULE_FOR = {"dynamic_one": "one_per_expert", "dynamic_fill": "fill_idle_slots",
                 "dynamic_length_fit": "fill_same_length", "guarded_dynamic": "one_per_expert"}
@@ -67,12 +69,15 @@ class WaveReader:
         if self.guard is not None:
             indices = [i for i, value in enumerate(values) if abs(value) <= self.guard]
             if indices:
-                self.recheck_calls += 1
-                self.rechecked_pairs += len(indices)
-                corrected = self._forward([batch[i] for i in indices], dynamic=False)
+                corrected = self.recheck([jobs[i] for i in indices])
                 for i, fixed in zip(indices, corrected, strict=True):
                     values[i] = fixed
         return values
+
+    def recheck(self, jobs):
+        self.recheck_calls += 1
+        self.rechecked_pairs += len(jobs)
+        return self._forward([self.inputs[doc] for _, doc in jobs], dynamic=False)
 
     @torch.inference_mode()
     def _forward(self, batch, dynamic):
@@ -135,6 +140,7 @@ def schedule(ordered, reader, count, method):
 
 def summarize(rows, methods):
     report = {}
+    baseline = "guarded_dynamic" if "guarded_dynamic" in methods and "one_per_expert" not in methods else "one_per_expert"
     for count in SUPPORT:
         values = [row["support"][count] for row in rows]
         reference = [row["exhaustive"] for row in values]
@@ -151,9 +157,9 @@ def summarize(rows, methods):
                 average={key: mean(arm[key] for arm in arms)
                          for key in ("calls", "checks", "unique_reads", "padded_tokens",
                                      "recheck_calls", "rechecked_pairs", "hard_p5", "confirmed_hard_p5")},
-                latency_saved_vs_one_per_expert=paired_interval([
-                    row["one_per_expert"]["ms"] - row[method]["ms"] for row in values
-                ]),
+                **{f"latency_saved_vs_{baseline}": paired_interval([
+                    row[baseline]["ms"] - row[method]["ms"] for row in values
+                ])},
             )
     return report
 
@@ -213,9 +219,13 @@ def run(args):
         if len(ordered) != POOL or any(e not in ownership[d] for e, docs in ordered for d in docs):
             raise ValueError("Unexpected source ownership")
         reader = WaveReader(reranker, query, texts, {d for _, docs in ordered for d in docs},
-                            dynamic=method in SCHEDULE_FOR,
+                            dynamic=method in SCHEDULE_FOR or method == "deferred_dynamic",
                             guard=GUARD_MARGIN if method == "guarded_dynamic" else None)
-        result = schedule(ordered, reader, count, SCHEDULE_FOR.get(method, method))
+        if method == "deferred_dynamic":
+            result = defer_and_rank(ordered, reader.score, reader.recheck,
+                                    support=count, top=TOP, width=WIDTH, band=GUARD_MARGIN)
+        else:
+            result = schedule(ordered, reader, count, SCHEDULE_FOR.get(method, method))
         result["padded_tokens"] = reader.padded_tokens
         result["calls"] += reader.recheck_calls
         result["recheck_calls"] = reader.recheck_calls
@@ -231,6 +241,8 @@ def run(args):
         methods = DYNAMIC_METHODS
     elif args.guard_shape:
         methods = GUARD_METHODS
+    elif args.defer_rechecks:
+        methods = DEFERRED_METHODS
     for count in SUPPORT:
         for method in methods:
             measure(ids[0], count, method)
@@ -263,8 +275,9 @@ def run(args):
             print(f"Completed {i+1}/{len(ids)}", flush=True)
     write_json(args.output, dict(
         job=os.environ["SLURM_JOB_ID"], gpu=torch.cuda.get_device_name(), queries=len(rows),
-        dataset=args.dataset, guard_margin=GUARD_MARGIN if args.guard_shape else None,
+        dataset=args.dataset, guard_margin=GUARD_MARGIN if args.guard_shape or args.defer_rechecks else None,
         script_sha256=digest(Path(__file__)), input_sha256=inputs,
+        deferred_code_sha256=digest(Path(defer_and_rank.__code__.co_filename)),
         embedding=provenance, reranker=reranker.provenance, report=summarize(rows, methods), rows=rows,
     ))
 
@@ -277,5 +290,6 @@ if __name__ == "__main__":
     modes.add_argument("--prefix-control", action="store_true")
     modes.add_argument("--compare-dynamic", action="store_true")
     modes.add_argument("--guard-shape", action="store_true")
+    modes.add_argument("--defer-rechecks", action="store_true")
     parser.add_argument("--dataset", choices=("SIGIR", "SciRepEval"), default="SIGIR")
     run(parser.parse_args())

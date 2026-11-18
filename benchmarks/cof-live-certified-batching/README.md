@@ -46,6 +46,21 @@ Job `40600` scores each wave using dynamic shapes, then repeats only pairs with 
 
 Exactness includes expert order and cited source IDs. The guard reproduces all reference outputs and lowers P95 by 8.5% to 17.3% relative to the fastest fixed-shape arm. It is slower than unguarded dynamic scoring in all four comparisons. SciRepEval with one required source has one residual decision-sign difference that leaves the ranking and citations intact. The finite guard is an empirical control tied to the measured checkpoint and environment. [Results](margin-guard-v1.json)
 
+## Defer rechecks until they can change the output
+
+Job `40611` leaves a margin within 0.25 unresolved. It treats unresolved and unexamined evidence as rejected for a pessimistic result and accepted for an optimistic result. When the two outcomes agree in expert order and cited sources, every intermediate assignment gives that result. Otherwise, the scheduler reads the reachable source frontier and resolves tentative citations in the optimistic result. This certificate assumes the correctness of trusted signs outside the band and fixed-shape rechecks.
+
+The same 164 queries and model checkpoints are reused. Each value shows immediate rechecking followed by deferred rechecking.
+
+| Dataset | Required sources | Mean recheck calls | Request P95 | Exact ordered outputs vs exhaustive |
+| --- | ---: | ---: | ---: | ---: |
+| SIGIR | 1 | 0.30 to 0.23 | 209.83 to 217.21 ms | 73/73 |
+| SIGIR | 2 | 0.56 to 0.25 | 207.13 to 191.90 ms | 73/73 |
+| SciRepEval | 1 | 0.65 to 0.47 | 242.07 to 236.47 ms | 91/91 |
+| SciRepEval | 2 | 1.13 to 0.40 | 261.89 to 233.50 ms | 91/91 |
+
+The two-source settings reduce P95 by 7.4% and 10.8%. Delaying a recheck can lead to additional dynamic reads. For example, SciRepEval with one required source checks 17.14 distinct pairs on average, up from 15.91. Provisional margins may differ in sign without being used as final evidence. These are model-output comparisons with one or two supporting sources. Distinct expertise constraints, independently adjudicated evidence, and concurrent service are separate evaluation settings. [Aggregates](deferred-rechecks-v1.json)
+
 ## Reproduce
 
 Run [the GPU comparison](../../experiments/retrieval/cof_live_certified_batching.py) on a Slurm CUDA compute node with `COF_INPUT_MANIFEST EMBEDDING_CHECKPOINT RERANKER_CHECKPOINT NEW_RESULT_JSON`. Add `--prefix-control` with a separate output path for the consecutive-source controls. The replay uses the published CoF inputs described in [the bounded adjustment benchmark](../cof-bounded-adjustment/README.md).
@@ -53,3 +68,5 @@ Run [the GPU comparison](../../experiments/retrieval/cof_live_certified_batching
 Add `--compare-dynamic` with a separate output path to reproduce the dynamic-shape controls.
 
 Add `--guard-shape` to replay the selective rechecks. Add `--dataset SciRepEval` for the filtered SciRepEval cache.
+
+Add `--defer-rechecks` to compare immediate and output-sensitive rechecks.
