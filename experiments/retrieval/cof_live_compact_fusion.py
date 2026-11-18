@@ -1,4 +1,5 @@
 """Compare lexical and compact cross-encoder fusion on a fixed expert pool."""
+import argparse
 import hashlib
 import math
 import json
@@ -20,7 +21,7 @@ from expert_search.owned_vector_index import ExactOwnedVectorIndex
 from expert_search.qwen_embedding_torch import QwenTorchEmbedding
 from expert_search.statistics import paired_interval
 
-def main():
+def main(source_budget=False):
     if not os.environ.get('SLURM_JOB_ID') or not torch.cuda.is_available():
         raise RuntimeError('Requires Slurm CUDA allocation')
     torch.backends.cuda.matmul.allow_tf32 = False
@@ -75,6 +76,24 @@ def main():
     prefix = tokenizer.encode(PREFIX, add_special_tokens=False)
     suffix = tokenizer.encode(SUFFIX, add_special_tokens=False)
 
+    separator = tokenizer.encode('\n\nNext publication:\n', add_special_tokens=False)
+
+    def encode_evidence(source_list, arm):
+        first = tokenizer.encode(paper_text(source_list[0]), add_special_tokens=False)
+        if arm == 'single_short':
+            return first[:128], source_list[:1]
+        if arm == 'single_long' or len(source_list) == 1:
+            return first[:256], source_list[:1]
+        second = tokenizer.encode(paper_text(source_list[1]), add_special_tokens=False)
+        if arm == 'two_matched':
+            cap = min(256, len(first))
+            available = cap - len(separator)
+            if available < 2 or not second:
+                return first[:cap], source_list[:1]
+            second_count = min(len(second), available // 2)
+            return first[:available-second_count] + separator + second[:second_count], source_list[:2]
+        return first[:128] + separator + second[:128-len(separator)], source_list[:2]
+
     def run(query_id, arm):
         began = time.perf_counter()
         query = paper_text(query_id)
@@ -87,16 +106,30 @@ def main():
         views = [paper_text(source)[:1200] for source in source_ids]
         order = list(range(len(ids)))
         truncations = 0
+        used_tokens = []
+        used_sources = []
+        source_pairs = [[witness['id'] for witness in item['evidence'][:2]] for item in candidates]
         if arm == 'lexical_fusion':
             second_order = bm25(query, views)
-        elif arm == 'cross_fusion':
+        elif arm != 'dense':
             sequences = []
-            for view in views:
-                body = tokenizer.encode(f'<Instruct>: {TASK}\n<Query>: {query}\n<Document>: {view}',
-                                        add_special_tokens=False)
-                packed, raw = pack_tokens(prefix, body, suffix, 1024)
-                truncations += raw > len(packed)
-                sequences.append({'input_ids': packed})
+            if source_budget:
+                query_tokens = tokenizer.encode(f'<Instruct>: {TASK}\n<Query>: {query}\n<Document>: ',
+                                                add_special_tokens=False)
+                for expert, sources in zip(ids, source_pairs, strict=True):
+                    if any(expert not in ownership[source] for source in sources):
+                        raise ValueError('Unowned secondary source')
+                    evidence, selected = encode_evidence(sources, arm)
+                    used_tokens.append(len(evidence))
+                    used_sources.append(selected)
+                    sequences.append({'input_ids': prefix + query_tokens + evidence + suffix})
+            else:
+                for view in views:
+                    body = tokenizer.encode(f'<Instruct>: {TASK}\n<Query>: {query}\n<Document>: {view}',
+                                            add_special_tokens=False)
+                    packed, raw = pack_tokens(prefix, body, suffix, 1024)
+                    truncations += raw > len(packed)
+                    sequences.append({'input_ids': packed})
             inputs = tokenizer.pad(sequences, padding=True, return_tensors='pt').to('cuda')
             with torch.inference_mode():
                 logits = model(**inputs, use_cache=False, logits_to_keep=1).logits[:, -1, token_ids].float().cpu()
@@ -105,12 +138,13 @@ def main():
         if arm != 'dense':
             second_rank = {i: rank for rank, i in enumerate(second_order, start=1)}
             order.sort(key=lambda i: -(1/(61+i) + 1/(60+second_rank[i])))
-        hits = [{'expert':ids[i], 'source':source_ids[i], 'view_sha256':hashlib.sha256(views[i].encode()).hexdigest()}
+        hits = [{'expert': ids[i], 'sources': used_sources[i]} if used_sources else
+                {'expert':ids[i], 'source':source_ids[i], 'view_sha256':hashlib.sha256(views[i].encode()).hexdigest()}
                 for i in order[:5]]
         return {'hits':hits, 'pool':ids, 'sources':source_ids, 'seconds':time.perf_counter()-began,
-                'truncations':truncations}
+                'truncations':truncations, 'document_tokens':used_tokens, 'used_sources':used_sources}
 
-    methods = ('dense','lexical_fusion','cross_fusion')
+    methods = ('dense','single_short','single_long','two_sources','two_matched') if source_budget else ('dense','lexical_fusion','cross_fusion')
     for arm in methods:
         run(query_ids[0], arm)
     rows = []
@@ -123,9 +157,11 @@ def main():
                 raise ValueError('Matched arms produced different candidates or evidence')
             result['precision5'] = {task:sum(labels[task][query_id][h['expert']] > 0 for h in result['hits'])/5
                                     for task in labels}
+        if source_budget and results['two_matched']['document_tokens'] != results['single_long']['document_tokens']:
+            raise ValueError('Unequal matched document budgets')
         rows.append({'query_id':query_id, 'arms':results})
 
-    out = Path('artifacts/cof-live-compact-fusion-v1')
+    out = Path('artifacts/cof-live-source-budget-v2' if source_budget else 'artifacts/cof-live-compact-fusion-v1')
     out.mkdir(exist_ok=False)
     (out/'rows.json').write_text(json.dumps(rows, indent=2)+'\n')
     report = {'queries':len(rows), 'job_id':os.environ['SLURM_JOB_ID'], 'init_seconds':init_seconds,
@@ -133,6 +169,12 @@ def main():
               'script_sha256':sha(Path(__file__)), 'models_sha256':[sha(embed_manifest),sha(model_manifest)],
               'results':{}, 'paired_delta':{},
               'scope':'Reused CoF SIGIR reviewer self-ratings. Matched sources and candidates. Lexical fusion runs candidate-local BM25 and cross fusion uses Qwen3-Reranker-0.6B. Both score the same bounded source views. Both fuse ranks with dense using equal-weight reciprocal rank fusion k=60. Warm sequential timing excludes initialization, index build, storage and serving.'}
+    if source_budget:
+        report['scope'] = ('Previously explored CoF SIGIR reviewer self-ratings. Fixed dense candidates, '
+                           'same model, equal-weight RRF. Single long and two sources share a 256-document-token '
+                           'cap including the separator. The matched arm also equals actual single-long length per candidate. Short uses up to 128 tokens. '
+                           'Actual input length can be shorter. Warm pipeline includes encoding, ranking, '
+                           'source read from memory and model scoring, excluding initialization, storage and serving.')
     for arm in methods:
         seconds = sorted(r['arms'][arm]['seconds'] for r in rows)
         report['results'][arm] = {
@@ -141,13 +183,24 @@ def main():
             'truncated_prompts':sum(r['arms'][arm]['truncations'] for r in rows),
             'precision5':{task:statistics.mean(r['arms'][arm]['precision5'][task] for r in rows) for task in labels},
         }
+        if source_budget and arm != 'dense':
+            report['results'][arm]['mean_document_tokens'] = statistics.mean(
+                n for r in rows for n in r['arms'][arm]['document_tokens'])
+            report['results'][arm]['two_source_slots'] = sum(
+                len(s) == 2 for r in rows for s in r['arms'][arm]['used_sources'])
         if arm != 'dense':
             report['paired_delta'][arm] = {task: paired_interval([
                 r['arms'][arm]['precision5'][task] - r['arms']['dense']['precision5'][task] for r in rows])
                 for task in labels}
+    if source_budget:
+        report['two_minus_long'] = {arm: {task: paired_interval([
+            r['arms'][arm]['precision5'][task] - r['arms']['single_long']['precision5'][task]
+            for r in rows]) for task in labels} for arm in ('two_sources','two_matched')}
     (out/'summary.json').write_text(json.dumps(report, indent=2)+'\n')
     print(json.dumps(report, indent=2))
 
 
 if __name__ == '__main__':
-    main()
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--source-budget", action="store_true")
+    main(parser.parse_args().source_budget)
