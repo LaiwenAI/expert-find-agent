@@ -14,15 +14,18 @@ UNITS = {
     'kB': ('storage', Decimal(1000)), 'MB': ('storage', Decimal(1000000)),
     'items/s': ('item_rate', Decimal(1)), 'requests/s': ('request_rate', Decimal(1)),
     'W': ('power', Decimal(1)),
+    '\uff05': ('ratio', Decimal('.01')),
+    '\u6beb\u79d2': ('duration', Decimal('.001')),
+    '\u79d2': ('duration', Decimal(1)),
 }
 UNIT = re.compile(r'\s*(' + '|'.join(map(re.escape, sorted(UNITS, key=len, reverse=True))) + r')(?![A-Za-z/])')
 COMPARATORS = (
-    (r'(?:at most|no greater than|no more than|≤|<=)\s*$', operator.le),
-    (r'(?:at least|no lower than|no less than|≥|>=)\s*$', operator.ge),
-    (r'(?:strictly below|strictly less than|<)\s*$', operator.lt),
-    (r'(?:strictly above|strictly more than|>)\s*$', operator.gt),
+    (r'(?:at most|no greater than|no more than|\u4e0d\u8d85\u8fc7|\u81f3\u591a|≤|<=)\s*$', operator.le),
+    (r'(?:at least|no lower than|no less than|\u81f3\u5c11|\u4e0d\u4f4e\u4e8e|≥|>=)\s*$', operator.ge),
+    (r'(?:strictly below|strictly less than|(?<!\u4e0d)\u4f4e\u4e8e|<)\s*$', operator.lt),
+    (r'(?:strictly above|strictly more than|(?<!\u4e0d)\u9ad8\u4e8e|>)\s*$', operator.gt),
 )
-RANGE = re.compile(r'(?:\bbetween\b|\bfrom\b)\s*\d|\d\s*[–—-]\s*\d|\d\s+to\s+\d', re.I)
+RANGE = re.compile(r'(?:\bbetween\b|\bfrom\b)\s*\d|\d\s*[–—-]\s*\d|\d\s+to\s+\d|\d\s*(?:\u81f3|\u5230)\s*\d', re.I)
 
 
 @dataclass(frozen=True)

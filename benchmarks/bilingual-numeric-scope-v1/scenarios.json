@@ -1,0 +1,178 @@
+[
+  {
+    "id": "checkout",
+    "unit": "ms",
+    "limit": 85,
+    "operator": "<=",
+    "text": {
+      "en": {
+        "subject": "payment terminal",
+        "setting": "during queued transactions",
+        "metric": "end-to-end latency",
+        "other_metric": "receipt printing time",
+        "other_setting": "during idle operation"
+      },
+      "zh": {
+        "subject": "\u652f\u4ed8\u7ec8\u7aef",
+        "setting": "\u4ea4\u6613\u6392\u961f\u65f6",
+        "metric": "\u7aef\u5230\u7aef\u65f6\u5ef6",
+        "other_metric": "\u5c0f\u7968\u6253\u5370\u8017\u65f6",
+        "other_setting": "\u8bbe\u5907\u7a7a\u95f2\u65f6"
+      }
+    }
+  },
+  {
+    "id": "helpdesk",
+    "unit": "%",
+    "limit": 88,
+    "operator": ">=",
+    "text": {
+      "en": {
+        "subject": "support ticket classifier",
+        "setting": "on multilingual tickets",
+        "metric": "macro recall",
+        "other_metric": "routing precision",
+        "other_setting": "on monolingual tickets"
+      },
+      "zh": {
+        "subject": "\u5de5\u5355\u5206\u7c7b\u5668",
+        "setting": "\u591a\u8bed\u8a00\u5de5\u5355\u6761\u4ef6\u4e0b",
+        "metric": "\u5b8f\u5e73\u5747\u53ec\u56de\u7387",
+        "other_metric": "\u8def\u7531\u7cbe\u786e\u7387",
+        "other_setting": "\u5355\u8bed\u5de5\u5355\u6761\u4ef6\u4e0b"
+      }
+    }
+  },
+  {
+    "id": "switch",
+    "unit": "ms",
+    "limit": 110,
+    "operator": "<",
+    "text": {
+      "en": {
+        "subject": "office network switch",
+        "setting": "under bursty traffic",
+        "metric": "maximum failover time",
+        "other_metric": "health-check interval",
+        "other_setting": "under steady traffic"
+      },
+      "zh": {
+        "subject": "\u529e\u516c\u7f51\u7edc\u4ea4\u6362\u673a",
+        "setting": "\u7a81\u53d1\u6d41\u91cf\u6761\u4ef6\u4e0b",
+        "metric": "\u6700\u5927\u6545\u969c\u5207\u6362\u65f6\u95f4",
+        "other_metric": "\u5065\u5eb7\u68c0\u67e5\u95f4\u9694",
+        "other_setting": "\u7a33\u5b9a\u6d41\u91cf\u6761\u4ef6\u4e0b"
+      }
+    }
+  },
+  {
+    "id": "warehouse",
+    "unit": "%",
+    "limit": 92,
+    "operator": ">",
+    "text": {
+      "en": {
+        "subject": "inventory scanner",
+        "setting": "with partially occluded labels",
+        "metric": "label recognition rate",
+        "other_metric": "package detection rate",
+        "other_setting": "with unobstructed labels"
+      },
+      "zh": {
+        "subject": "\u5e93\u5b58\u626b\u63cf\u4eea",
+        "setting": "\u6807\u7b7e\u5c40\u90e8\u906e\u6321\u65f6",
+        "metric": "\u6807\u7b7e\u8bc6\u522b\u7387",
+        "other_metric": "\u5305\u88f9\u68c0\u6d4b\u7387",
+        "other_setting": "\u6807\u7b7e\u65e0\u906e\u6321\u65f6"
+      }
+    }
+  },
+  {
+    "id": "renderer",
+    "unit": "ms",
+    "limit": 135,
+    "operator": "<=",
+    "text": {
+      "en": {
+        "subject": "document renderer",
+        "setting": "on a cold cache",
+        "metric": "P95 rendering time",
+        "other_metric": "median upload time",
+        "other_setting": "on a warm cache"
+      },
+      "zh": {
+        "subject": "\u6587\u6863\u6e32\u67d3\u5668",
+        "setting": "\u7f13\u5b58\u672a\u9884\u70ed\u65f6",
+        "metric": "P95 \u6e32\u67d3\u65f6\u95f4",
+        "other_metric": "\u4e0a\u4f20\u8017\u65f6\u4e2d\u4f4d\u6570",
+        "other_setting": "\u7f13\u5b58\u5df2\u9884\u70ed\u65f6"
+      }
+    }
+  },
+  {
+    "id": "mail",
+    "unit": "%",
+    "limit": 86,
+    "operator": ">=",
+    "text": {
+      "en": {
+        "subject": "mail sorting system",
+        "setting": "on mixed envelope sizes",
+        "metric": "correct routing rate",
+        "other_metric": "barcode detection rate",
+        "other_setting": "on uniform envelope sizes"
+      },
+      "zh": {
+        "subject": "\u90ae\u4ef6\u5206\u62e3\u7cfb\u7edf",
+        "setting": "\u4fe1\u5c01\u5c3a\u5bf8\u6df7\u5408\u65f6",
+        "metric": "\u6b63\u786e\u5206\u62e3\u7387",
+        "other_metric": "\u6761\u7801\u68c0\u6d4b\u7387",
+        "other_setting": "\u4fe1\u5c01\u5c3a\u5bf8\u4e00\u81f4\u65f6"
+      }
+    }
+  },
+  {
+    "id": "display",
+    "unit": "ms",
+    "limit": 220,
+    "operator": "<",
+    "text": {
+      "en": {
+        "subject": "public information display",
+        "setting": "after power restoration",
+        "metric": "startup latency",
+        "other_metric": "content refresh time",
+        "other_setting": "during normal operation"
+      },
+      "zh": {
+        "subject": "\u516c\u5171\u4fe1\u606f\u663e\u793a\u5c4f",
+        "setting": "\u6062\u590d\u4f9b\u7535\u540e",
+        "metric": "\u542f\u52a8\u5ef6\u8fdf",
+        "other_metric": "\u5185\u5bb9\u5237\u65b0\u8017\u65f6",
+        "other_setting": "\u4f9b\u7535\u6b63\u5e38\u65f6"
+      }
+    }
+  },
+  {
+    "id": "library",
+    "unit": "%",
+    "limit": 81,
+    "operator": ">",
+    "text": {
+      "en": {
+        "subject": "library search kiosk",
+        "setting": "with misspelled queries",
+        "metric": "first-page recall",
+        "other_metric": "click-through rate",
+        "other_setting": "with clean queries"
+      },
+      "zh": {
+        "subject": "\u56fe\u4e66\u9986\u68c0\u7d22\u7ec8\u7aef",
+        "setting": "\u67e5\u8be2\u542b\u62fc\u5199\u9519\u8bef\u65f6",
+        "metric": "\u9996\u9875\u53ec\u56de\u7387",
+        "other_metric": "\u70b9\u51fb\u7387",
+        "other_setting": "\u67e5\u8be2\u62fc\u5199\u6b63\u786e\u65f6"
+      }
+    }
+  }
+]
