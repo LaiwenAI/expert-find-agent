@@ -36,6 +36,25 @@ At 10%, dense top two recovers 13 strong returns after local calibration, compar
 
 Run the calibration replay with `DATA_DIR FROZEN_CSFCUBE_RESULT_JSON NEW_RESULT_JSON`. P95 comes from the original measured GPU requests. The agreement check reuses the two-paper observation and omits comparison overhead.
 
+## Adaptive depth on judged candidate pools
+
+Job `40574` selects depth before one cross-encoder call. The experiment preserves the earlier five query-paper folds and stages. For each fold, fit the dense-gap split and two acceptance rules on the other four folds. Fixed routes use the same score and margin grid as the adaptive stages. The hash route chooses depth without retrieval scores. Every held-out route runs live, with source-present and strong-source-withheld views. Dense, top-two, and top-six pool membership and decision scores match the previous measurement in all 100 views.
+
+Cells show **strong returns with sources present / grade-zero returns after withholding / grade-one returns after withholding** across 50 queries. P95 is for the source-present 10% setting.
+
+| Method | 5% ceiling | 10% ceiling | 20% ceiling | Present P95 |
+| --- | ---: | ---: | ---: | ---: |
+| Dense score and gap | 9 / 1 / 0 | 10 / 2 / 0 | 15 / 3 / 7 | 7.68 ms |
+| Verify dense top hit | 8 / 2 / 2 | 9 / 2 / 6 | 16 / 3 / 11 | 16.54 ms |
+| Rerank top two | 1 / 1 / 3 | 12 / 2 / 3 | 16 / 2 / 6 | 25.88 ms |
+| Rerank top six | 5 / 2 / 2 | 15 / 2 / 3 | 19 / 4 / 7 | 53.90 ms |
+| Dense-gap routing | 12 / 2 / 2 | 15 / 2 / 4 | 15 / 3 / 7 | 23.23 ms |
+| Query-hash routing | 7 / 2 / 3 | 15 / 2 / 8 | 13 / 3 / 6 | 25.77 ms |
+
+At 10%, the gap router and top six each return 15 strong papers. The gap router's P95 is 57% lower, and it returns one additional weakly relevant paper in the withheld view. It also returns five grade 0–1 papers in the present view, compared with two for top six. At 20%, the gap router returns four fewer strong papers. This controlled comparison distinguishes weak matches and judged irrelevance. The small out-of-fold study and its preselected pools leave open-world equal-risk deployment unverified. [Results and grouped intervals](adaptive-depth-v1.json)
+
+Run [the live replay](../../experiments/csfcube/adaptive_depth.py) with `DATA_DIR RAW_FROZEN_CSFCUBE_RESULT_JSON EMBEDDING_CHECKPOINT RERANKER_CHECKPOINT NEW_RESULT_JSON` on a Slurm compute node.
+
 ## Reproduce
 
 Fetch the four source files from [CSFCube revision `7ffe012`](https://github.com/iesl/CSFCube/tree/7ffe012c1d92c470f185fc086086caf5b8e05ef3): `abstracts-csfcube-preds.jsonl` and the three `test-pid2anns-csfcube-*.json` files. Run [the transfer test](../../experiments/csfcube/frozen_confirmation.py) with `DATA_DIR LITSEARCH_DEPTH_RESULT_JSON EMBEDDING_CHECKPOINT RERANKER_CHECKPOINT NEW_RESULT_JSON`. The LitSearch input comes from the [depth-controlled replay](../litsearch-source-confirmation/README.md#dense-top-two-control-and-threshold-sensitivity). Dataset files remain under the upstream license and are retrieved separately.
