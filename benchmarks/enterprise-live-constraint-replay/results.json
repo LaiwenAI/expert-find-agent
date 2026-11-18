@@ -1,0 +1,111 @@
+{
+  "inputs": {
+    "jobs": "1a5f22f6edca44f8b201869cfe047fb980cea97b6e4c7b2bcfe6dfc3191cc4a6",
+    "requirements": "0aa473811a6003247b8310031228a81a5ec4ab3c8116fa769b266249cfdfd04c"
+  },
+  "script_sha256": "a0ab20936f30a74b01f96f63f93009cc3842ed73b3f661efcf89279119b5f383",
+  "verifier": {
+    "repository": "Qwen/Qwen3-Reranker-0.6B",
+    "revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+    "policy": "Official frozen BF16 checkpoint; no own training or quantization. Revision recorded before downloading weights.",
+    "files": {
+      "config.json": "d479c427a9ca5295218063d4f9aca4f297ab4ac27487cca7af42c84643d51ef0",
+      "expected-large-files.json": "cd9940a651fcf3d97ffc28f0242a9a620c0da5b9acad1861ef14faf5ee784f0e",
+      "generation_config.json": "81051cd3f6e77013827148d0b8a6ead93f8ac390d5ab805f849199f0af6a08db",
+      "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+      "model.safetensors": "27cd75a405b9c1b46b59abfd88aaa209e6fed2a1972cde9b70e7659537c5e65b",
+      "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+      "tokenizer_config.json": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0",
+      "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    }
+  },
+  "top": 3,
+  "total_candidates": 56,
+  "total_sources": 209,
+  "total_truncated": 2,
+  "report": {
+    "0.90": {
+      "exhaustive": {
+        "requests": 8,
+        "exact": 8,
+        "returned": 0,
+        "nonempty": 0,
+        "mean_source_reads": 26.125,
+        "mean_criterion_scores": 52.25
+      },
+      "short_circuit": {
+        "requests": 8,
+        "exact": 8,
+        "returned": 0,
+        "nonempty": 0,
+        "mean_source_reads": 26.125,
+        "mean_criterion_scores": 52.25
+      },
+      "bundled_first": {
+        "requests": 8,
+        "exact": 8,
+        "returned": 0,
+        "nonempty": 0,
+        "mean_source_reads": 26.125,
+        "mean_criterion_scores": 52.25
+      },
+      "certificate": {
+        "requests": 8,
+        "exact": 8,
+        "returned": 0,
+        "nonempty": 0,
+        "mean_source_reads": 26.125,
+        "mean_criterion_scores": 52.25
+      }
+    },
+    "0.50": {
+      "exhaustive": {
+        "requests": 8,
+        "exact": 8,
+        "returned": 1,
+        "nonempty": 1,
+        "mean_source_reads": 26.125,
+        "mean_criterion_scores": 52.25
+      },
+      "short_circuit": {
+        "requests": 8,
+        "exact": 8,
+        "returned": 1,
+        "nonempty": 1,
+        "mean_source_reads": 26,
+        "mean_criterion_scores": 52
+      },
+      "bundled_first": {
+        "requests": 8,
+        "exact": 8,
+        "returned": 1,
+        "nonempty": 1,
+        "mean_source_reads": 26,
+        "mean_criterion_scores": 52
+      },
+      "certificate": {
+        "requests": 8,
+        "exact": 8,
+        "returned": 1,
+        "nonempty": 1,
+        "mean_source_reads": 26,
+        "mean_criterion_scores": 52
+      }
+    }
+  },
+  "coverage": {
+    "0.90": {
+      "criterion_slots": 112,
+      "supported_slots": 1,
+      "candidates_with_any": 1,
+      "candidates_with_all": 0
+    },
+    "0.50": {
+      "criterion_slots": 112,
+      "supported_slots": 4,
+      "candidates_with_any": 3,
+      "candidates_with_all": 1
+    }
+  },
+  "review_cases": 48
+}
