@@ -65,7 +65,7 @@ def render(author, required, style):
     raise ValueError(f"Unknown rendering: {style}")
 
 
-def matched_groups(doi, authors):
+def matched_groups(doi, authors, cap=CAP_PER_STRATUM):
     available = sorted(set().union(*authors))
     groups = defaultdict(list)
     for anchor, before, after in permutations(available, 3):
@@ -85,7 +85,7 @@ def matched_groups(doi, authors):
                 groups[pattern].append((item_id, [anchor, before], [anchor, after], changed, unchanged))
     result = []
     for pattern in PATTERNS:
-        selected = sorted(groups[pattern])[:CAP_PER_STRATUM]
+        selected = sorted(groups[pattern])[:cap]
         for key, old, new, flip, stable in selected:
             result.append(dict(
                 id=key, doi=doi, split=split_for(doi), before=old, after=new,

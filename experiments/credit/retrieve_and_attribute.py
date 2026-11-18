@@ -23,7 +23,7 @@ from experiments.credit.evaluate_role_edits import MEANINGS, prompt
 from experiments.credit.factored_role_edits import candidate_lists, choose_batched
 from experiments.credit.plos_role_inventory import ROLES
 from experiments.credit.role_language_router import NISO_SHA256, TASK, Router
-from experiments.credit.role_prototypes import evaluate_atomic, train_banks
+from experiments.credit.role_prototypes import evaluate_atomic, normalized, train_banks
 from experiments.qasper.adaptive_evidence import digest
 from experiments.qasper.paired_reader import load_reader
 from experiments.retrieval.lrbench_frozen_baselines import build_lexical
@@ -181,15 +181,18 @@ def replay(endpoint, collection, source_roles, groups, phrases, views, variants)
     for i, group in enumerate(groups):
         doi = group["doi"]
         title, _, full_text = collection[doi]
-        description = edit_conclusion(sentences(full_text.split("\n", 1)[1])[-1])
+        abstract = sentences(full_text.split("\n", 1)[1])
+        leads = dict(
+            title=title, edited_conclusion=edit_conclusion(abstract[-1]),
+            abstract_body=abstract[len(abstract) // 2],
+        )
         rng = int(fingerprint(group["id"], "source")[:8], 16)
         template, _ = FORMATS[rng % len(FORMATS)]
         connector = (" and ", " as well as ")[(rng // len(FORMATS)) % 2]
         rotation = rng // (2 * len(FORMATS))
         option_order = sorted(MEANINGS, key=lambda meaning: fingerprint(group["id"], meaning))
-        for lead_style, value in zip(VIEWS, (title, description), strict=True):
-            if lead_style not in views:
-                continue
+        for lead_style in views:
+            value = leads[lead_style]
             for view_index, view in enumerate(("before", "after")):
                 roles = group[view]
                 pieces = [phrases[r][int(fingerprint(group["id"], r), 16) % len(phrases[r])] for r in roles]
@@ -215,8 +218,12 @@ def replay(endpoint, collection, source_roles, groups, phrases, views, variants)
 
 
 def run(args):
-    if args.calibrate_role_route and args.role_training is None:
-        raise ValueError("Role route calibration requires the role training fixture")
+    if (args.calibrate_role_route or args.frozen_role_route) and args.role_training is None:
+        raise ValueError("Role routing requires the role training fixture")
+    if bool(args.transfer_phrases) != bool(args.frozen_role_route):
+        raise ValueError("A frozen transfer requires both the policy and its phrase file")
+    if args.transfer_niso_control and not args.frozen_role_route:
+        raise ValueError("The NISO language control requires the frozen transfer setup")
     if args.output.exists():
         raise FileExistsError(args.output)
     if digest(args.glossary) != NISO_SHA256:
@@ -235,7 +242,10 @@ def run(args):
         group = json.loads(line)
         groups[group["split"]].append(group)
     source_roles = {r["doi"]: r["roles_by_author"] for r in manifest["sources"]}
-    collection, _ = prepare_collection(args.collection, {})
+    collection, _ = prepare_collection(args.collection, {}, checksum=manifest["catalog_sha256"])
+    if args.frozen_role_route:
+        for previous in manifest["excluded_old_articles"]:
+            del collection[previous]
     doi_list = sorted(collection)
     documents = [collection[doi][2] for doi in doi_list]
     if not source_roles.keys() <= collection.keys() or len(set(documents)) != len(documents):
@@ -271,7 +281,8 @@ def run(args):
         views, reference = ("edited_conclusion",), "definitions_reader"
     calibration = None
     validation = None
-    if args.calibrate_role_route:
+    frozen = None
+    if args.calibrate_role_route or args.frozen_role_route:
         reference = "ridge_reader"
         ridge = dict(proposal_bank=banks["ridge"])
         corroboration = dict(corroboration_bank=banks["prototypes"])
@@ -279,10 +290,33 @@ def run(args):
             reference: ("bm25_factored", ridge),
             "ridge_embed": ("bm25_factored", dict(**ridge, **corroboration, read_roles=False)),
         }
-        validation = replay(endpoint, collection, source_roles, groups["validation"], phrases, views, variants)
-        if {row["doi"] for row in validation} & {group["doi"] for group in groups["test"]}:
-            raise ValueError("Calibration and testing share an article")
-        calibration = {mode: calibrate(validation, mode) for mode in MODES}
+        if args.frozen_role_route:
+            frozen = json.loads(args.frozen_role_route.read_bytes())
+            if (frozen["training_sha256"] != fit["input_sha256"]
+                    or frozen["phrase_sha256"] != digest(args.transfer_phrases)
+                    or frozen["embedding_revision"] != embedding["revision"]
+                    or frozen["reader_revision"] != checkpoint["revision"]
+                    or frozen["calibration_fixture_sha256"] == digest(path)
+                    or set(frozen["calibration_dois"]) & set(source_roles)):
+                raise ValueError("Mismatched frozen policy or overlapping articles")
+            authored = json.loads(args.transfer_phrases.read_bytes())
+            original = json.loads(args.role_training.read_bytes())
+            previous_text = {normalized(item) for role in ROLES for item in phrases[role] + original[role]}
+            transfer_text = {normalized(item) for role in authored for item in authored[role]}
+            if set(authored) != set(ROLES) or len(transfer_text) != 2 * len(ROLES) or transfer_text & previous_text:
+                raise ValueError("Unexpected transfer phrase inventory or exact overlap")
+            if args.transfer_niso_control:
+                views = ("abstract_body",)
+            else:
+                phrases = authored
+                views = ("title", "abstract_body")
+            variants.update(bm25_direct=("bm25_direct", {}), definitions_reader=("bm25_factored", {}))
+            calibration = frozen["policies"]
+        else:
+            validation = replay(endpoint, collection, source_roles, groups["validation"], phrases, views, variants)
+            if {row["doi"] for row in validation} & {group["doi"] for group in groups["test"]}:
+                raise ValueError("Calibration and testing share an article")
+            calibration = {mode: calibrate(validation, mode) for mode in MODES}
         variants.update({
             mode: ("bm25_factored", dict(**ridge, **corroboration, policy=policy))
             for mode, policy in calibration.items()
@@ -292,7 +326,10 @@ def run(args):
         json.dump(dict(summary=summarize(rows, variants, views, reference), rows=rows, collection_sha256=digest(args.collection),
                        fixture_sha256=digest(path), script_sha256=digest(Path(__file__)), embedding=embedding,
                        checkpoint=checkpoint, gpu=torch.cuda.get_device_name(), fit=fit,
-                       calibration=calibration, validation=validation), stream, indent=2)
+                       calibration=calibration, validation=validation,
+                       frozen_policy_sha256=digest(args.frozen_role_route) if frozen else None,
+                       transfer_language=("niso" if args.transfer_niso_control else "authored")
+                       if frozen else None), stream, indent=2)
         stream.write("\n")
 
 
@@ -301,5 +338,9 @@ if __name__ == "__main__":
     for name in ("fixture", "collection", "glossary", "embedding", "reader", "output"):
         parser.add_argument(name, type=Path)
     parser.add_argument("--role-training", type=Path)
-    parser.add_argument("--calibrate-role-route", action="store_true")
+    policy = parser.add_mutually_exclusive_group()
+    policy.add_argument("--calibrate-role-route", action="store_true")
+    policy.add_argument("--frozen-role-route", type=Path)
+    parser.add_argument("--transfer-phrases", type=Path)
+    parser.add_argument("--transfer-niso-control", action="store_true")
     run(parser.parse_args())

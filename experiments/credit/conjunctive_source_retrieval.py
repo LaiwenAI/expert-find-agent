@@ -113,8 +113,8 @@ def controls(fixture, source_dir):
     return queries, declarations, meta["rows_sha256"]
 
 
-def prepare_collection(path, cases):
-    if digest(path) != COLLECTION_SHA256:
+def prepare_collection(path, cases, *, checksum=COLLECTION_SHA256):
+    if digest(path) != checksum:
         raise ValueError("Changed PLOS Search snapshot")
     source = json.loads(path.read_bytes())["response"]
     indexed, abstracts = {}, {}
