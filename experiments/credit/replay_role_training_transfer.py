@@ -90,8 +90,15 @@ def restore_adapter(encoder, weights, head):
 def evaluate(encoder, predictor, bank, groups, authors):
     from experiments.credit.train_role_decision import encode
 
+    def roles(texts):
+        return [ROLES[i] for i in predictor(encode(encoder, texts)).argmax(1).tolist()]
+
+    return evaluate_roles(roles, bank, groups, authors)
+
+
+def evaluate_roles(resolve, bank, groups, authors):
     atomic = [(role, text) for role in ROLES for text in bank[role]]
-    predictions = predictor(encode(encoder, [text for _, text in atomic])).argmax(1).tolist()
+    predictions = resolve([text for _, text in atomic])
     results = []
     for group in groups:
         requests = [
@@ -99,7 +106,7 @@ def evaluate(encoder, predictor, bank, groups, authors):
             for view in ("before", "after")
         ]
         start = perf_counter()
-        mapped = [ROLES[i] for i in predictor(encode(encoder, sum(requests, []))).argmax(1).tolist()]
+        mapped = resolve(sum(requests, []))
         after = perf_counter()
         roles = (mapped[:2], mapped[2:])
         paper = authors[group["doi"]]
@@ -108,7 +115,7 @@ def evaluate(encoder, predictor, bank, groups, authors):
         results.append(dict(id=group["id"], doi=group["doi"], changed=changed, stable=stable_pair,
                             ms=(after-start)*1000))
     records = list(zip(groups, results, strict=True))
-    return dict(atomic_correct=sum(ROLES[i] == role for i, (role, _) in zip(predictions, atomic, strict=True)),
+    return dict(atomic_correct=sum(i == role for i, (role, _) in zip(predictions, atomic, strict=True)),
                 atomic_total=len(atomic),
                 joint_groups=sum(r["changed"] == g["changed_labels"] and r["stable"] == g["stable_labels"]
                                  for g, r in records),
