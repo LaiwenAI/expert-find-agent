@@ -149,3 +149,43 @@ A first Qwen3-4B JSON generation trial passed structure checks on 12/96 full pro
 The hybrid handles 25 source prompts directly, all matching the projected labels on this sample. It gains 6.25 percentage points in exact set recovery over full verification (paired request-bootstrap 95% interval +2.08 to +11.46). This interval describes the sampled prompts. Template relationships can reduce effective independence. The reduction in reader calls improves median latency while P95 is essentially unchanged. The localized route shortens 38 prompts and matches only 21/43 forbidden terms, versus 26/43 with full context. Proposal coverage already omits 13/43 forbidden terms, 2/21 word bounds and 3/21 sentence bounds. Even a source-derived candidate can be assigned to an unintended scope. Extra constraints remain a failure mode in 35 hybrid outputs.
 
 Run [the bounded extractor](../../experiments/ifeval/anchored_constraint_extraction.py) with the pinned IFEval input file and open Qwen checkpoint. Slurm job `40334` measures all three live arms in rotating order on an RTX 5090. Timing covers warm candidate generation and inference. Local records are in `artifacts/ifeval-bounded-constraints-v1`.
+
+## Exclusion Clauses and Relevance
+
+[ComLQ](https://arxiv.org/html/2511.12004v2) includes 2,909 logical queries and 11,251 passages. We compare BM25, BM25 plus exact dense reciprocal rank fusion, and two rerankers over the fused top 100. A fixed surface rule splits an explicit exclusion marker into two clauses. The first reranker boosts similarity to the positive clause. The second also subtracts similarity rank for the excluded clause. The benchmark type labels are used only to group results. The rule activates on 519 of 984 negation queries and zero of the other 1,925.
+
+| Method | All nDCG@10 | Routed nDCG@10 | Routed Recall@100 | Routed P95 |
+| --- | ---: | ---: | ---: | ---: |
+| BM25 | 0.6663 | 0.5321 | 0.9493 | 3.82 ms |
+| Fused retrieval | 0.7389 | 0.6427 | 0.9936 | 11.61 ms |
+| Positive clause boost | 0.7427 | 0.6643 | 0.9936 | 13.09 ms |
+| With exclusion penalty | 0.6720 | 0.2676 | 0.9936 | 13.12 ms |
+
+The penalty loses 0.3750 nDCG@10 on routed queries relative to fused retrieval (paired bootstrap 95% interval −0.3979 to −0.3518). Removing the penalty from the very same model call yields 0.6645, which controls for minor embedding changes across batch shapes. This is a relevance result. The released qrels contain relevance grades and lack separate labels for exclusion violations. Testing that second outcome requires document-level judgments under both versions of the constraint.
+
+Run [the retrieval replay](../../experiments/comlq/scoped_exclusion.py) with `--archive artifacts/public/comlq-upstream/dataset.zip --output artifacts/comlq-scoped-retrieval-v1`. The [archive](https://github.com/xgl-git/ComLQR-main/blob/93d321997cad1306d64f2587a3ffba832dda87a7/dataset.zip) is pinned by SHA-256 in the loader. Slurm job `40338` used an RTX 5090 and frozen Qwen3-Embedding-0.6B at revision `97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3`. The measured interval is query processing through passage ranking on a warm index.
+
+### Human Rejudgments Under Changed Criteria
+
+[FollowIR Core17](https://aclanthology.org/2025.naacl-long.597/) keeps the 20 topic texts fixed and varies their relevance narratives. The [released passage pools](https://huggingface.co/datasets/jhu-clsp/core17-instructions-mteb/tree/7030c7efc3585d9020f243b12862997889243b78) contain the same 1,000 candidates in each pair, including all 436 topic–passage pairs that were rejudged from relevant to nonrelevant. Scores use the paper's p-MRR, averaged first over changed passages within a topic and then across topics. The modified qrels also provide a common reference for comparing nDCG@10 across methods. The two metrics capture rank response and relevance under the current criteria.
+
+The frozen Qwen3 bi-encoder receives the topic alone, the topic and narrative together, or their separately encoded representations with equal-weight score fusion. For the cross-encoder comparison, use only the ten best candidates from the topic-only bi-encoder, with the baseline ranks unchanged below ten. This holds exposure fixed across both instruction variants. The cross-encoder uses the same Qwen3-Reranker-0.6B checkpoint in both arms.
+
+| Bi-encoder input | Changed nDCG@10 | p-MRR | Rejudged passages in top ten, before → after | P95 |
+| --- | ---: | ---: | ---: | ---: |
+| Topic only | 0.2158 | 0.0000 | 52 → 52 | 7.39 ms |
+| Joint topic and narrative | 0.2973 | +0.0513 | 52 → 50 | 7.61 ms |
+| Separate embeddings | 0.2510 | +0.0251 | 52 → 49 | 9.29 ms |
+
+Joint encoding improves relevance over the topic-only control (paired topic bootstrap 95% interval +0.0088 to +0.1618 nDCG). Its p-MRR interval is −0.0036 to +0.1105. Almost as many rejudged passages remain near the top after the criteria change.
+
+| Cross-encoder input | Changed nDCG@10 | p-MRR | Rejudged passages in top five, before → after | Added P95 |
+| --- | ---: | ---: | ---: | ---: |
+| Topic only | 0.2196 | 0.0000 | 37 → 37 | 78.91 ms |
+| Topic and narrative | 0.2345 | +0.0059 | 34 → 34 | 90.57 ms |
+
+The frozen top-ten shortlist contains 52/436 rejudged pairs. The cross-encoder with criteria leaves the aggregate top-five count unchanged across narratives, and its p-MRR interval is −0.0019 to +0.0155. Keep joint encoding as the lower-cost comparison and measure constraint verification separately from relevance scoring. These results cover one public collection and fixed passage pools. They do not establish expert-level exclusion or full-request latency.
+
+Jobs `40348` and `40352` used an RTX 5090. The dense pass includes live query encoding and scoring pre-encoded candidates. The verifier timing adds tokenization, model inference and sorting for ten documents. Corpus embedding, first-stage candidate selection, network and initialization are outside these intervals.
+
+Use [the dense replay](../../experiments/followir/core17_reranking.py) with `prepare PARQUET_DIR PREPARED_JSON` and `run PREPARED_JSON CHECKPOINT DENSE_RESULTS`. Name each pinned Parquet file for its subset, using `default.parquet` for the main qrels. Run [the cross-encoder replay](../../experiments/followir/core17_verifier.py) with `PREPARED_JSON DENSE_RESULTS RERANKER_CHECKPOINT RERANKER_RESULTS`. PyArrow is required only for preparation. The artifact stores rankings and timings and uses the externally hosted corpus during replay.
