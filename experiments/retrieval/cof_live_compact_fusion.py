@@ -20,8 +20,9 @@ from expert_search.gpu_owned_vector_index import GpuOwnedVectorIndex
 from expert_search.owned_vector_index import ExactOwnedVectorIndex
 from expert_search.qwen_embedding_torch import QwenTorchEmbedding
 from expert_search.statistics import paired_interval
+from expert_search.retrieval import tokens
 
-def main(source_budget=False):
+def main(source_budget=False, complement=False):
     if not os.environ.get('SLURM_JOB_ID') or not torch.cuda.is_available():
         raise RuntimeError('Requires Slurm CUDA allocation')
     torch.backends.cuda.matmul.allow_tf32 = False
@@ -78,20 +79,31 @@ def main(source_budget=False):
 
     separator = tokenizer.encode('\n\nNext publication:\n', add_special_tokens=False)
 
-    def encode_evidence(source_list, arm):
+    def encode_evidence(source_list, arm, query_terms):
         first = tokenizer.encode(paper_text(source_list[0]), add_special_tokens=False)
         if arm == 'single_short':
             return first[:128], source_list[:1]
         if arm == 'single_long' or len(source_list) == 1:
             return first[:256], source_list[:1]
         second = tokenizer.encode(paper_text(source_list[1]), add_special_tokens=False)
-        if arm == 'two_matched':
+        if arm in ('two_matched', 'two_complement'):
             cap = min(256, len(first))
             available = cap - len(separator)
             if available < 2 or not second:
                 return first[:cap], source_list[:1]
             second_count = min(len(second), available // 2)
-            return first[:available-second_count] + separator + second[:second_count], source_list[:2]
+            first_slice = first[:available-second_count]
+            selected = source_list[:2]
+            if arm == 'two_complement' and len(source_list) > 2 and second_count:
+                alternate = tokenizer.encode(paper_text(source_list[2]), add_special_tokens=False)
+                if len(alternate) >= second_count:
+                    missing = query_terms - set(tokens(tokenizer.decode(first_slice)))
+                    current = len(missing & set(tokens(tokenizer.decode(second[:second_count]))))
+                    proposed = len(missing & set(tokens(tokenizer.decode(alternate[:second_count]))))
+                    if proposed > current:
+                        second = alternate
+                        selected = [source_list[0], source_list[2]]
+            return first_slice + separator + second[:second_count], selected
         return first[:128] + separator + second[:128-len(separator)], source_list[:2]
 
     def run(query_id, arm):
@@ -108,7 +120,9 @@ def main(source_budget=False):
         truncations = 0
         used_tokens = []
         used_sources = []
-        source_pairs = [[witness['id'] for witness in item['evidence'][:2]] for item in candidates]
+        depth = 3 if arm == 'two_complement' else 2
+        source_pairs = [[witness['id'] for witness in item['evidence'][:depth]] for item in candidates]
+        query_terms = set(tokens(query)) if arm == 'two_complement' else set()
         if arm == 'lexical_fusion':
             second_order = bm25(query, views)
         elif arm != 'dense':
@@ -119,7 +133,7 @@ def main(source_budget=False):
                 for expert, sources in zip(ids, source_pairs, strict=True):
                     if any(expert not in ownership[source] for source in sources):
                         raise ValueError('Unowned secondary source')
-                    evidence, selected = encode_evidence(sources, arm)
+                    evidence, selected = encode_evidence(sources, arm, query_terms)
                     used_tokens.append(len(evidence))
                     used_sources.append(selected)
                     sequences.append({'input_ids': prefix + query_tokens + evidence + suffix})
@@ -145,6 +159,8 @@ def main(source_budget=False):
                 'truncations':truncations, 'document_tokens':used_tokens, 'used_sources':used_sources}
 
     methods = ('dense','single_short','single_long','two_sources','two_matched') if source_budget else ('dense','lexical_fusion','cross_fusion')
+    if complement:
+        methods = ('dense','single_long','two_matched','two_complement')
     for arm in methods:
         run(query_ids[0], arm)
     rows = []
@@ -159,9 +175,13 @@ def main(source_budget=False):
                                     for task in labels}
         if source_budget and results['two_matched']['document_tokens'] != results['single_long']['document_tokens']:
             raise ValueError('Unequal matched document budgets')
+        if complement and results['two_complement']['document_tokens'] != results['two_matched']['document_tokens']:
+            raise ValueError('Unequal complement budgets')
         rows.append({'query_id':query_id, 'arms':results})
 
     out = Path('artifacts/cof-live-source-budget-v2' if source_budget else 'artifacts/cof-live-compact-fusion-v1')
+    if complement:
+        out = Path('artifacts/cof-live-complementary-source-v1')
     out.mkdir(exist_ok=False)
     (out/'rows.json').write_text(json.dumps(rows, indent=2)+'\n')
     report = {'queries':len(rows), 'job_id':os.environ['SLURM_JOB_ID'], 'init_seconds':init_seconds,
@@ -195,7 +215,17 @@ def main(source_budget=False):
     if source_budget:
         report['two_minus_long'] = {arm: {task: paired_interval([
             r['arms'][arm]['precision5'][task] - r['arms']['single_long']['precision5'][task]
-            for r in rows]) for task in labels} for arm in ('two_sources','two_matched')}
+            for r in rows]) for task in labels} for arm in methods if arm.startswith('two_')}
+    if complement:
+        report['scope'] += (' Complement selection replaces the second dense source with the third only '
+                            'if its equal-length slice contains more unmet query terms. This is lexical '
+                            'coverage, not a judgment of actual evidence support.')
+        report['replaced_second'] = sum(
+            a != b for r in rows for a,b in zip(r['arms']['two_matched']['used_sources'],
+                                               r['arms']['two_complement']['used_sources']))
+        report['complement_minus_matched'] = {task: paired_interval([
+            r['arms']['two_complement']['precision5'][task]-r['arms']['two_matched']['precision5'][task]
+            for r in rows]) for task in labels}
     (out/'summary.json').write_text(json.dumps(report, indent=2)+'\n')
     print(json.dumps(report, indent=2))
 
@@ -203,4 +233,6 @@ def main(source_budget=False):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--source-budget", action="store_true")
-    main(parser.parse_args().source_budget)
+    parser.add_argument("--complement", action="store_true")
+    args = parser.parse_args()
+    main(args.source_budget or args.complement, args.complement)
