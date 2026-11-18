@@ -20,6 +20,7 @@ from experiments.followir.core17_reranking import digest, write_json
 
 
 METHODS = ("bm25_ridge", "confirmed_ridge", "confirmed_clause", "confirmed_full_reader")
+PROSE_METHODS = ("first_cut", "embedding_cut", "reader_cut", "oracle_cut")
 SOURCE_POLICY = {"score": .75, "margin": .05}
 STYLES = ("literal_excerpt", "abridged_excerpt")
 
@@ -70,14 +71,14 @@ def views(record):
     return dict(literal_excerpt=full, abridged_excerpt=shortened)
 
 
-def summary(rows):
+def summary(rows, methods=METHODS):
     results = {}
     for style in STYLES:
         results[style] = {}
         for state in ("present", "withheld"):
             values = [r for r in rows if r["style"] == style and r["state"] == state]
             results[style][state] = {}
-            for method in METHODS:
+            for method in methods:
                 arms = [r["arms"][method] for r in values]
                 counts = Counter()
                 for row, arm in zip(values, arms, strict=True):
@@ -86,6 +87,10 @@ def summary(rows):
                     counts["source_exact"] += arm["doi"] == target
                     counts["source_selected"] += arm["doi"] is not None
                     counts["unresolved"] += arm["authors"] is None
+                    if arm.get("cut_exact") is not None:
+                        counts["cut_evaluated"] += 1
+                        counts["cut_exact"] += arm["cut_exact"]
+                        counts["multiple_cut_options"] += arm["candidate_cuts"] > 1
                     if state == "present":
                         counts["exact"] += arm["doi"] == target and arm["authors"] == expected
                     if arm["authors"] is not None:
@@ -101,6 +106,7 @@ def run(args):
     from expert_search.qwen_embedding_torch import QwenTorchEmbedding
     from experiments.credit.attribution_controls import Reader
     from experiments.credit.factored_role_edits import choose_batched
+    from experiments.credit.retrieve_and_attribute import FORMATS, spans, split_request
     from experiments.credit.role_clause_selection import reader_quotes
     from experiments.credit.role_language_router import NISO_SHA256, Router
     from experiments.credit.role_prototypes import normalized
@@ -163,9 +169,52 @@ def run(args):
         y = torch.tensor([role for _, role in (*fit, *held)], device="cuda")
         bank = ridge(x, y)
 
-        def execute(text, hidden, method):
+        methods = PROSE_METHODS if args.prose else METHODS
+
+        def choose_cut(activity, method, expected):
+            candidates = spans(activity)
+            if method == "oracle_cut":
+                return expected, len(candidates)
+            if not candidates:
+                return None, 0
+            if len(candidates) == 1 or method == "first_cut":
+                return candidates[0], len(candidates)
+            if method == "embedding_cut":
+                atoms = list(dict.fromkeys(part for pair in candidates for part in pair))
+                vectors = encode(encoder, atoms) @ bank.T
+                values = dict(zip(atoms, vectors, strict=True))
+
+                def proposal_score(pair):
+                    scores = values[pair[0]][:, None] + values[pair[1]][None, :]
+                    scores.fill_diagonal_(-torch.inf)
+                    return scores.max().item()
+
+                return max(candidates, key=proposal_score), len(candidates)
+            if len(candidates) > len(router.ids):
+                return None, len(candidates)
+            options = candidates
+            rotation = int(stable(activity, "candidate-order"), 16) % len(options)
+            options = options[rotation:] + options[:rotation]
+            menu = "\n".join(f"{chr(65+i)}: [{left}] / [{right}]" for i, (left, right) in enumerate(options))
+            prompt = (
+                "Select the boundary between the two top-level contributor requirements. "
+                "Each requirement may contain subordinate clauses about other contributors. "
+                "Keep these subordinate clauses within their own requirement. Choose a letter.\n"
+                f"Requirement text: {activity}\n{menu}\nAnswer:"
+            )
+            inputs = tokenizer(prompt, add_special_tokens=False, return_tensors="pt").to("cuda")
+            scores = model(**inputs, use_cache=False, logits_to_keep=1).logits[0, -1, router.ids[:len(options)]]
+            if not torch.isfinite(scores).all():
+                raise ValueError("Nonfinite boundary scores")
+            return options[int(scores.argmax().item())], len(candidates)
+
+        def execute(text, hidden, method, expected):
             start = perf_counter()
-            lead, *tasks = split(text)
+            if args.prose:
+                lead, activity = split_request(text)
+                tasks = None
+            else:
+                lead, *tasks = split(text)
             scores = lexical.document_scores(lead)
             candidates = [ids[int(i)] for i in sorted(scores, key=lambda i: (-scores[i], int(i)))
                           if ids[int(i)] != hidden]
@@ -176,18 +225,27 @@ def run(args):
                 observation = measure(normalized(lead).split(), typed, segments, "ordered")
                 doi = observation[0] if accepts(observation, SOURCE_POLICY) else None
             authors = None
+            cut_exact = None
+            candidate_cuts = 0
             roles = records[doi]["roles"] if doi else None
             if roles and all(roles):
+                if args.prose:
+                    tasks, candidate_cuts = choose_cut(activity, method, expected)
+                    cut_exact = tasks == expected
+                if tasks is None:
+                    return dict(doi=doi, authors=None, cut_exact=cut_exact, candidate_cuts=candidate_cuts,
+                                ms=(perf_counter()-start)*1000)
                 if method == "confirmed_full_reader":
                     rankings = choose_batched(router, tasks, [list(range(len(ROLES)))] * len(tasks), 0)
                 else:
-                    if method == "confirmed_clause":
+                    if args.prose or method == "confirmed_clause":
                         tasks = reader_quotes(reader, tasks)
                     rankings = (encode(encoder, tasks) @ bank.T).argmax(1).tolist()
                 required = {ROLES[i] for i in rankings}
                 if len(required) == len(tasks):
                     authors = [i for i, own in enumerate(roles, 1) if required.issubset(own)]
-            return dict(doi=doi, authors=authors, ms=(perf_counter()-start)*1000)
+            return dict(doi=doi, authors=authors, cut_exact=cut_exact, candidate_cuts=candidate_cuts,
+                        ms=(perf_counter()-start)*1000)
 
         rows = []
         for i, group in enumerate(groups):
@@ -195,16 +253,20 @@ def run(args):
             for style, lead in target_views[doi].items():
                 for side in ("before", "after"):
                     required = group[side]
-                    tasks = [min(phrases[r], key=lambda phrase: stable(group["id"], r, phrase)) for r in required]
-                    text = render(lead, tasks)
+                    tasks = tuple(min(phrases[r], key=lambda phrase: stable(group["id"], r, phrase)) for r in required)
+                    if args.prose:
+                        form, _ = FORMATS[i % len(FORMATS)]
+                        text = form.format(lead=lead.replace('"', "'"), activity=" and ".join(tasks))
+                    else:
+                        text = render(lead, tasks)
                     gold = [ordinal for ordinal, own in enumerate(records[doi]["roles"], 1)
                             if set(required).issubset(own)]
                     for state, hidden in (("present", None), ("withheld", doi)):
                         if not i:
-                            for method in METHODS:
-                                execute(text, hidden, method)
-                        order = (i + len(rows)) % len(METHODS)
-                        arms = {m: execute(text, hidden, m) for m in METHODS[order:] + METHODS[:order]}
+                            for method in methods:
+                                execute(text, hidden, method, tasks)
+                        order = (i + len(rows)) % len(methods)
+                        arms = {m: execute(text, hidden, m, tasks) for m in methods[order:] + methods[:order]}
                         if hidden and any(a["doi"] == hidden for a in arms.values()):
                             raise AssertionError("Returned an unavailable document")
                         rows.append(dict(id=group["id"], doi=doi, style=style, state=state,
@@ -214,7 +276,7 @@ def run(args):
         catalog_sha256=digest(args.catalog), script_sha256=digest(Path(__file__)),
         training_sha256=digest(args.training), phrase_sha256=digest(args.fixture / "boundary-phrases.json"),
         embedding=provenance, reader=reader_provenance, sources=len(records),
-        policy=SOURCE_POLICY, report=summary(rows), rows=rows,
+        policy=SOURCE_POLICY, prose=args.prose, report=summary(rows, methods), rows=rows,
     ))
 
 
@@ -228,5 +290,6 @@ if __name__ == "__main__":
     replay = subs.add_parser("run")
     for name in ("fixture", "catalog", "examples", "training", "embedding", "reader", "output"):
         replay.add_argument(name, type=Path)
+    replay.add_argument("--prose", action="store_true")
     args = parser.parse_args()
     (prepare if args.command == "prepare" else run)(args)

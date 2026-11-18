@@ -19,6 +19,23 @@ Clause selection corrects 19 requests and loses one against guarded ridge. The p
 
 Timing includes loading the structured request fields, source retrieval, optional reader execution, and source-bound result assembly from resident data. The source hints come from the target abstracts, the role fields are supplied, and two clue styles reuse the same articles and role scenarios. This experiment measures retrieval and attribution within the controlled publisher task. Open-ended expert ranking, human-written needs, and close semantic source paraphrases require separate evaluation.
 
+## Requirement boundaries in a single paragraph
+
+Render the same two requirements in one sentence joined by “and,” with the quoted abstract clue before or after them. The generated phrases contain their own conjunctions and clauses about other contributors. The parser enumerates possible splits, then uses the first candidate, the maximum sum of two distinct role scores, a constrained 4B choice among candidate splits, or the two original spans as a reference. Every arm then runs the same credited-fragment selection and ridge role mapping. Source confirmation precedes boundary selection, so withholding the publication also avoids unnecessary boundary inference.
+
+On the abridged-clue view, 97 of 160 requests have multiple candidate boundaries. Job `40526` measures:
+
+| Boundary policy | Correct boundary / 160 | Exact DOI and author set / 160 | Both versions exact / 80 | Unsupported citations | Present P95 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| First conjunction | 92 | 117 | 50 | 16 | 24.41 ms |
+| Frozen embedding scores | 114 | 122 | 50 | 13 | 32.58 ms |
+| Candidate-constrained 4B | 159 | 120 | 49 | 19 | 38.41 ms |
+| Supplied boundaries | 160 | 120 | 49 | 19 | 24.17 ms |
+
+The 4B boundary reader reproduces all author sets from the supplied-boundary reference. Boundary accuracy and final attribution quality differ: improving the segmentation from 114 to 159 correct boundaries does not improve the author sets under the same downstream verifier. Every policy returns unresolved on all 160 withheld requests per clue style, with no selected source. The structured-input regression reruns the existing 640 request views and reproduces all DOI and author outputs from job `40521`.
+
+Add `--prose` to the search command below. This diagnostic learns nothing from its test requests. Its input grammar still uses two fixed envelopes and quoted clues. Independently written free text and source paraphrases remain outside the measured scope.
+
 ## Reproduce
 
 Run [the search comparison](../../experiments/credit/search_role_clauses.py) with:
