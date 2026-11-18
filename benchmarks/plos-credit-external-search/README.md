@@ -34,7 +34,7 @@ On the abridged-clue view, 97 of 160 requests have multiple candidate boundaries
 
 The 4B boundary reader reproduces all author sets from the supplied-boundary reference. Boundary accuracy and final attribution quality differ: improving the segmentation from 114 to 159 correct boundaries does not improve the author sets under the same downstream verifier. Every policy returns unresolved on all 160 withheld requests per clue style, with no selected source. The structured-input regression reruns the existing 640 request views and reproduces all DOI and author outputs from job `40521`.
 
-Add `--prose` to the search command below. This diagnostic learns nothing from its test requests. Its input grammar still uses two fixed envelopes and quoted clues. Independently written free text and source paraphrases remain outside the measured scope.
+Add `--prose` to the search command below. This diagnostic learns nothing from its test requests. Its input grammar still uses two fixed envelopes and quoted clues. A separate [source-paraphrase diagnostic](../plos-credit-source-paraphrases-v1/README.md) tests paper identification from unquoted clues. End-to-end attribution from independently written requests remains unmeasured.
 
 ## Reproduce
 
