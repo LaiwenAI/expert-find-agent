@@ -57,7 +57,7 @@ def audit(args):
 def checked_banks(args, glossary):
     from experiments.credit.role_prototypes import normalized
 
-    published_phrases = args.transfer / "phrases.json"
+    published_phrases = getattr(args, "comparison_phrases", None) or args.transfer / "phrases.json"
     new_phrases = args.phrases
     banks = {tag: json.loads(path.read_bytes()) for tag, path in
              (("transfer_wording", published_phrases), ("boundary_wording", new_phrases))}

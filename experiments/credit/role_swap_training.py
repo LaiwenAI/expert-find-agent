@@ -143,5 +143,6 @@ if __name__ == "__main__":
     test = commands.add_parser("run")
     for name in ("transfer", "audit", "phrases", "examples", "training", "generated", "embedding", "output"):
         test.add_argument(name, type=Path)
+    test.add_argument("--comparison-phrases", type=Path)
     args = parser.parse_args()
     (build if args.command == "build" else run)(args)
