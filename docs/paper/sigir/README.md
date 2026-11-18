@@ -1,6 +1,6 @@
 # SIGIR manuscript
 
-`main.tex` is the canonical editable English manuscript; `supplement.tex` builds the separate supplementary PDF from `appendix.tex`, containing English protocols and limitations. Obsolete Markdown manuscripts have been removed. The main file uses ACM `acmart` with `sigconf,natbib=true,anonymous=true,pbalance=true`, following the official SIGIR2027 full-paper guidance:
+`main.tex` is the canonical editable English manuscript; `supplement.tex` builds the separate supplementary PDF from `appendix.tex`, containing artifact pointers and earlier development comparisons. The main draft focuses on output-sensitive evidence verification, controlled attribution and current limits on enterprise claims. Obsolete Markdown manuscripts have been removed. The main file uses ACM `acmart` with `sigconf,natbib=true,anonymous=true,pbalance=true`, following the official SIGIR2027 full-paper guidance:
 https://sigir2027.org/pages/submit-full.html
 
 Build from repository root:

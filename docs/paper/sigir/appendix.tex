@@ -1,4 +1,17 @@
 \section{Protocols, Metadata, and Reproducibility}
+
+\subsection{Artifacts for the current main draft}
+The repository results associated with the manuscript are enumerated here. The aggregate JSON files and corresponding READMEs identify the executable experiment, checkpoint provenance and operating points. The raw private development records are kept locally.
+
+\begin{itemize}
+\item Live reviewer verification: \path{benchmarks/cof-live-certified-batching/deferred-rechecks-v1.json}. Rows in the main table use the immediate and deferred arms within job 40611. Both support counts use the same frozen candidate snapshot.
+\item Source acceptance: \path{benchmarks/litsearch-source-confirmation/adaptive-depth-v1.json} and \path{benchmarks/csfcube-frozen-confirmation/adaptive-depth-v1.json}. Withheld LitSearch citations are unjudged, while CSFCube returns retain their pool grades.
+\item Conjunctive criteria and private coverage: \path{benchmarks/plos-credit-compositional-edits-v1/constraint-certificate-v1.json} and \path{benchmarks/enterprise-live-constraint-replay/results.json}. The former reads publisher labels through a controlled interface. The latter replays scores from a local open verifier and does not infer elapsed GPU savings from read counts.
+\item Numerical scope and personal execution: \path{benchmarks/bilingual-numeric-passages-v1/results.json} and \path{benchmarks/bilingual-numeric-attribution-v1/results.json}. The two tests have distinct denominators.
+\end{itemize}
+
+The sections below document earlier development experiments and related infrastructure.
+
 \label{app:protocols}
 \subsection{Ownership and source views}
 Every view binds a query ID, expert ID, source ID, text hash, and character interval. The raw corpus retains full field text, while evaluation sees only frozen ranges. Expanding a source silently changes the labeled task. Ownership checks establish consistency with supplied associations, not real-world authorship or individual contribution. Source frames have globally unique keys formed from source ID and local frame ID. Repeated IDs, stale hashes, foreign quotations, and unadmitted cached frames are rejected. A null field means unreported, never impossible.
