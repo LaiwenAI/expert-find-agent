@@ -12,6 +12,13 @@ class FeedbackContentTests(unittest.TestCase):
         swapped=Correction('b','battery','p','unrelated quote','promote')
         self.assertEqual(apply_corrections('battery recycling',ranking,[swapped],sources)['audit'],['unanchored'])
 
+    def test_ascii_word_boundaries_and_chinese_phrase(self):
+        sources={'b':{'p':'quoted'}}
+        english=Correction('b','battery','p','quoted','promote')
+        chinese=Correction('b','\u7535\u6c60','p','quoted','promote')
+        self.assertEqual(apply_corrections('batteryless sensors',['a','b'],[english],sources)['ranking'],['a','b'])
+        self.assertEqual(apply_corrections('\u7535\u6c60\u56de\u6536',['a','b'],[chinese],sources)['ranking'],['b','a'])
+
     def test_conflicting_corrections_abstain(self):
         sources={'b':{'p':'quoted'}}
         corrections=[Correction('b','query','p','quoted',a) for a in ('promote','demote')]
