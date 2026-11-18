@@ -53,6 +53,26 @@ The [BM25 selection replay](../../experiments/litsearch/bm25_selection.py) compa
 
 Job `40431` alternates both implementations on the same resident 64,183-paper index. This is a retrieval-component timing, including scoring, selection, and target masking. It makes no change to relevance or evidence and excludes request verification.
 
+## Learned source gate and two-paper confirmation
+
+Keep exact dense top six fixed. Fit a seven-feature linear head over dense similarity and rank, resident BM25 scores, and title and abstract token overlap. The 128 training questions come from the inline subset and exclude all labeled targets and exact normalized questions from both calibration and test. Labels encode known targets versus unjudged candidates, including distractors exposed after target withholding. The embedding and reranker checkpoints stay frozen.
+
+Compare the dense cosine gate, the learned gate, reranking the learned head's top two, always reranking all six, and a live cascade. Each standalone method uses the same 10% calibration budgets for the two views. The cascade fits a cheap acceptance gate at 5%, then selects a two-paper backup threshold to keep the combined calibration counts within 10%. Test requests execute the chosen path live. Each source-withheld acceptance still counts as an unjudged alternative.
+
+| Policy | Known top one before gating | Known returned | Unjudged returned | Returned after withholding | Reranker calls | Present / withheld P95 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Cosine gate | 106 | 64 | 21 | 40 | 0 / 0 | 7.30 / 7.33 ms |
+| Learned gate | 117 | 55 | 11 | 27 | 0 / 0 | 8.69 / 8.74 ms |
+| Rerank two | 128 | 47 | 9 | 17 | 246 / 246 | 26.08 / 25.65 ms |
+| Rerank six | 131 | 28 | 5 | 7 | 246 / 246 | 65.01 / 72.17 ms |
+| Learned gate, then rerank two | 126 | 67 | 16 | 32 | 191 / 226 | 23.78 / 25.14 ms |
+
+Each view has 246 author-written requests. All arms retrieve identical ordered pools and cover 177 known targets with the targets present. The rerank-two and live cascade routes reduce present-view P95 by 60% and 63%, respectively, relative to rerank six. Rerank two returns 24 new known targets and loses five returned by rerank six. It also returns 17 unjudged alternatives after withholding, compared with seven for rerank six. The cascade returns 32 after withholding, exceeding its 10% calibration ceiling on the author-written test. These policies have different test operating points. Equal-risk speedup requires an independent quality check at matched acceptance, including adjudication of alternatives. [Cascade ranking](https://doi.org/10.1145/2009916.2009934) supplies the efficiency precedent.
+
+Job `40441` uses an RTX 5090. Head optimization takes 0.20 s over 1,536 candidate-view examples (84 labeled target occurrences), excluding feature materialization. Train, calibration, and test have mutually disjoint labeled target IDs. Request timing includes live query encoding, search, and reranker calls. It excludes initialization, transport, full-text retrieval, and personal attribution.
+
+Run [the learned replay](../../experiments/litsearch/learned_confirmation.py) with `PROJECTION VECTORS EMBEDDING_CHECKPOINT RERANKER_CHECKPOINT NEW_RESULT_JSON`.
+
 ## Reproduce
 
 Download [the pinned query Parquet](https://huggingface.co/datasets/princeton-nlp/LitSearch/resolve/9573fb284a1026c998df47024b888a163f0f0e25/query/full-00000-of-00001.parquet). Run [the projection tool](../../experiments/litsearch/prepare_titles.py) with `QUERY_PARQUET NEW_PROJECTION.json.gz` in an environment with PyArrow. It reads only the three selected columns from the six corpus shards using range requests. Full article bodies and third-party dataset rows are omitted from the release.
