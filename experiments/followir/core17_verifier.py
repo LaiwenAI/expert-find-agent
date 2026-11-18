@@ -38,19 +38,22 @@ class Reranker:
         self.labels = [ids[0] for ids in labels]
 
     @torch.inference_mode()
-    def rank(self, query, docs, pool):
-        start = perf_counter()
+    def score(self, query, docs, pool, *, task=TASK):
         sequences = []
         truncated = 0
         for doc in pool:
-            body = self.tokenizer.encode(f"<Instruct>: {TASK}\n<Query>: {query}\n<Document>: {docs[doc]}",
+            body = self.tokenizer.encode(f"<Instruct>: {task}\n<Query>: {query}\n<Document>: {docs[doc]}",
                                          add_special_tokens=False)
             packed, raw = pack_tokens(self.prefix, body, self.suffix, 1024)
             sequences.append(dict(input_ids=packed))
             truncated += raw > len(packed)
         inputs = self.tokenizer.pad(sequences, padding=True, return_tensors="pt").to("cuda")
         logits = self.model(**inputs, use_cache=False, logits_to_keep=1).logits[:, -1, self.labels].float()
-        margins = (logits[:, 0] - logits[:, 1]).cpu().tolist()
+        return (logits[:, 0] - logits[:, 1]).cpu().tolist(), truncated
+
+    def rank(self, query, docs, pool):
+        start = perf_counter()
+        margins, truncated = self.score(query, docs, pool)
         ranking = [pool[i] for i in sorted(range(len(pool)), key=lambda i: (-margins[i], i))]
         return ranking, (perf_counter() - start) * 1000, truncated
 
