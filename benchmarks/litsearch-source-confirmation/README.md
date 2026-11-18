@@ -20,6 +20,39 @@ BM25 top six exposes at least one known target on 148/246 questions. The coverag
 
 The PLOS lexical threshold transfers poorly to author questions. The results separate missing candidate exposure from source confirmation after retrieval. Job `40422` runs a title-and-abstract BM25 index and the frozen reranker on RTX 5090. Timing covers the warm local path, with P95 for every request, including abstentions. The index build takes 17.03 seconds and is reported separately. The comparison leaves corpus-wide dense retrieval and full-paper confirmation for additional testing.
 
+## Full-corpus dense and fused candidates
+
+Use the same documents, calibration rows and test questions. The frozen Qwen3-Embedding-0.6B model encodes every title and abstract once for the index. Dense search scores the full resident matrix in FP32 and includes live query encoding in the timer. Reciprocal rank fusion combines the first 24 hits per channel at constant 60. All three retrieval routes pass six candidates to the same reranker. The run reports unfiltered ranking, a shared reranker threshold from job `40422`, and route-specific thresholds fitted on the identical calibration split. No cross-request cache reuse is measured.
+
+| Candidates | Known target in six / 246 | Initial top one | Reranked top one | Retrieval P95 | Including reranking P95 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| BM25 | 148 | 99 | 113 | 13.70 ms | 70.63 ms |
+| Exact dense | 177 | 106 | 131 | 7.34 ms | 65.05 ms |
+| Fusion | 175 | 119 | 129 | 21.18 ms | 78.30 ms |
+
+| Candidates | Shared threshold, known / withheld accepts | Route-specific threshold, known / withheld accepts |
+| --- | ---: | ---: |
+| BM25 | 42 / 10 | 42 / 10 |
+| Exact dense | 43 / 10 | 28 / 7 |
+| Fusion | 43 / 10 | 49 / 12 |
+
+Dense retrieval increases coverage by 11.79 percentage points relative to BM25 (target-connected bootstrap 95% interval +5.31 to +17.89). The shared verification threshold returns only one additional known target. Recalibration can further trade known-target recovery against accepting unjudged alternatives. The corpus and labels are the same in both tables. The integrated comparison uses the original BM25 selection path. The array comparison below measures the cheaper equivalent component separately.
+
+Jobs `40426` and `40428` use an RTX 5090. Building the dense vectors takes 196.21 seconds and uses 262,893,568 bytes for the resident matrix. Cold preparation, transport, full-paper evidence and author attribution are outside the measured path.
+
+Build [the dense cache](../../experiments/litsearch/dense_cache.py) with `PROJECTION EMBEDDING_CHECKPOINT NEW_VECTORS.npz`. Run [the candidate comparison](../../experiments/litsearch/dense_retrieval.py) with `PROJECTION VECTORS EMBEDDING_CHECKPOINT RERANKER_CHECKPOINT NEW_RESULT_JSON`. The reader verifies source-ID ordering and the frozen checkpoint and projection hashes.
+
+## Exact BM25 selection
+
+The [BM25 selection replay](../../experiments/litsearch/bm25_selection.py) compares the original Python score dictionary and heap against partitioning the resident arrays. It retains the same postings, scores and numeric document-ID tie break. Both target-present and target-withheld views are tested at depths six and 24. Run with `PROJECTION NEW_RESULT_JSON`.
+
+| Selection depth | Heap P50 / P95 | Array P50 / P95 | Exact ordered matches |
+| --- | ---: | ---: | ---: |
+| 6 | 12.69 / 13.28 ms | 0.94 / 1.44 ms | 492 / 492 |
+| 24 | 12.69 / 13.30 ms | 0.94 / 1.44 ms | 492 / 492 |
+
+Job `40431` alternates both implementations on the same resident 64,183-paper index. This is a retrieval-component timing, including scoring, selection, and target masking. It makes no change to relevance or evidence and excludes request verification.
+
 ## Reproduce
 
 Download [the pinned query Parquet](https://huggingface.co/datasets/princeton-nlp/LitSearch/resolve/9573fb284a1026c998df47024b888a163f0f0e25/query/full-00000-of-00001.parquet). Run [the projection tool](../../experiments/litsearch/prepare_titles.py) with `QUERY_PARQUET NEW_PROJECTION.json.gz` in an environment with PyArrow. It reads only the three selected columns from the six corpus shards using range requests. Full article bodies and third-party dataset rows are omitted from the release.

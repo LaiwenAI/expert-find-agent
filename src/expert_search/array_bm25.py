@@ -17,7 +17,7 @@ class ArrayBM25:
         self.postings={term:(np.array([i for i,_ in rows],dtype=np.int32),np.array([v for _,v in rows],dtype=np.float64)) for term,rows in postings.items()}
         self.array_bytes=sum(i.nbytes+v.nbytes for i,v in self.postings.values())
 
-    def document_scores(self,query):
+    def document_arrays(self,query):
         scores=np.zeros(len(self.ids),dtype=np.float64)
         active=np.zeros(len(self.ids),dtype=bool)
         for term in sorted(set(tokens(query))):
@@ -26,6 +26,10 @@ class ArrayBM25:
                 indices,values=posting
                 # Compiled SQLite has exactly one posting per term/document.
                 scores[indices]+=values;active[indices]=True
+        return scores,active
+
+    def document_scores(self,query):
+        scores,active=self.document_arrays(query)
         return {self.ids[i]:float(scores[i]) for i in np.flatnonzero(active)}
 
     def profile_scores(self,query,profiles):
