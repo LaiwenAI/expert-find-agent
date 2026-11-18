@@ -14,6 +14,7 @@ def build(output):
         names.extend(str(p.relative_to(root)) for p in (root/directory).rglob('*.py'))
     names.extend(str(p.relative_to(root)) for p in (root/'experiments').rglob('*.sbatch'))
     names.extend(str(p.relative_to(root)) for p in (root/'docs/assets').glob('*.svg'))
+    names.append('artifacts/scifact-history-for-binary-v1.json')
     names.extend(str(p.relative_to(root)) for p in (root/'benchmarks').rglob('*') if p.is_file() and p.suffix in ('.jsonl','.json','.md'))
     names.extend(['docs/grounding-review-protocol.md', 'docs/exploration/channel-fusion-20261117.md', 'docs/exploration/bilingual-audit-order-controls-20261117.md', 'docs/exploration/enterprise-review-readiness-20261117.md', 'docs/exploration/fixed-evidence-routing-pilot.md', 'docs/exploration/oversearch-cost-baseline.md'])
     names.extend(str(p.relative_to(root)) for p in (root/'docs/paper/sigir').rglob('*.tex'))
