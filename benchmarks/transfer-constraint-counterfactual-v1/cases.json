@@ -1,0 +1,5474 @@
+[
+  {
+    "id": "retail-forecasting-1-0",
+    "pair": "retail-forecasting-1",
+    "query": "Adapt rolling-window backtesting for store replenishment in peak promotion shifts; require absolute forecast error at most 5 %.",
+    "scope": {
+      "use": "store replenishment",
+      "setting": "peak promotion shifts",
+      "metric": "absolute forecast error",
+      "method": "rolling-window backtesting"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for absolute forecast error in peak promotion shifts is 0 %; the target is a proposal.",
+        "reading": "0"
+      },
+      {
+        "role": "off_scope",
+        "text": "In offline simulation, the pilot measured absolute forecast error of 11 %.",
+        "reading": "11"
+      },
+      {
+        "role": "measurement",
+        "text": "In peak promotion shifts the pilot measured absolute forecast error of 5 %.",
+        "reading": "5"
+      },
+      {
+        "role": "unrelated",
+        "text": "In peak promotion shifts, the team documented 17 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": "<=",
+    "bound": "5",
+    "gold_source": 2,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "retail-forecasting-1-1",
+    "pair": "retail-forecasting-1",
+    "query": "Adapt rolling-window backtesting for store replenishment in peak promotion shifts; require absolute forecast error at most 3 %.",
+    "scope": {
+      "use": "store replenishment",
+      "setting": "peak promotion shifts",
+      "metric": "absolute forecast error",
+      "method": "rolling-window backtesting"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for absolute forecast error in peak promotion shifts is 0 %; the target is a proposal.",
+        "reading": "0"
+      },
+      {
+        "role": "off_scope",
+        "text": "In offline simulation, the pilot measured absolute forecast error of 11 %.",
+        "reading": "11"
+      },
+      {
+        "role": "measurement",
+        "text": "In peak promotion shifts the pilot measured absolute forecast error of 5 %.",
+        "reading": "5"
+      },
+      {
+        "role": "unrelated",
+        "text": "In peak promotion shifts, the team documented 17 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": "<=",
+    "bound": "3",
+    "gold_source": 2,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "retail-forecasting-1-u",
+    "pair": "retail-forecasting-1",
+    "query": "Adapt rolling-window backtesting for store replenishment in peak promotion shifts; require absolute forecast error at most 5 %.",
+    "scope": {
+      "use": "store replenishment",
+      "setting": "peak promotion shifts",
+      "metric": "absolute forecast error",
+      "method": "rolling-window backtesting"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for absolute forecast error in peak promotion shifts is 0 %; the target is a proposal.",
+        "reading": "0"
+      },
+      {
+        "role": "off_scope",
+        "text": "In offline simulation, the pilot measured absolute forecast error of 11 %.",
+        "reading": "11"
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of absolute forecast error in peak promotion shifts. Results are pending.",
+        "reading": null
+      },
+      {
+        "role": "unrelated",
+        "text": "In peak promotion shifts, the team documented 17 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": "<=",
+    "bound": "5",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "retail-forecasting-2-0",
+    "pair": "retail-forecasting-2",
+    "query": "Adapt rolling-window backtesting for store replenishment in peak promotion shifts; require absolute forecast error at most 7 %.",
+    "scope": {
+      "use": "store replenishment",
+      "setting": "peak promotion shifts",
+      "metric": "absolute forecast error",
+      "method": "rolling-window backtesting"
+    },
+    "cards": [
+      {
+        "role": "unrelated",
+        "text": "In peak promotion shifts, the team documented 18 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for absolute forecast error in peak promotion shifts is 2 %; the target is a proposal.",
+        "reading": "2"
+      },
+      {
+        "role": "off_scope",
+        "text": "In offline simulation, the pilot measured absolute forecast error of 13 %.",
+        "reading": "13"
+      },
+      {
+        "role": "measurement",
+        "text": "The observed absolute forecast error was 7 % during peak promotion shifts.",
+        "reading": "7"
+      }
+    ],
+    "operator": "<=",
+    "bound": "7",
+    "gold_source": 3,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "retail-forecasting-2-1",
+    "pair": "retail-forecasting-2",
+    "query": "Adapt rolling-window backtesting for store replenishment in peak promotion shifts; require absolute forecast error at most 5 %.",
+    "scope": {
+      "use": "store replenishment",
+      "setting": "peak promotion shifts",
+      "metric": "absolute forecast error",
+      "method": "rolling-window backtesting"
+    },
+    "cards": [
+      {
+        "role": "unrelated",
+        "text": "In peak promotion shifts, the team documented 18 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for absolute forecast error in peak promotion shifts is 2 %; the target is a proposal.",
+        "reading": "2"
+      },
+      {
+        "role": "off_scope",
+        "text": "In offline simulation, the pilot measured absolute forecast error of 13 %.",
+        "reading": "13"
+      },
+      {
+        "role": "measurement",
+        "text": "The observed absolute forecast error was 7 % during peak promotion shifts.",
+        "reading": "7"
+      }
+    ],
+    "operator": "<=",
+    "bound": "5",
+    "gold_source": 3,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "retail-forecasting-2-u",
+    "pair": "retail-forecasting-2",
+    "query": "Adapt rolling-window backtesting for store replenishment in peak promotion shifts; require absolute forecast error at most 7 %.",
+    "scope": {
+      "use": "store replenishment",
+      "setting": "peak promotion shifts",
+      "metric": "absolute forecast error",
+      "method": "rolling-window backtesting"
+    },
+    "cards": [
+      {
+        "role": "unrelated",
+        "text": "In peak promotion shifts, the team documented 18 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for absolute forecast error in peak promotion shifts is 2 %; the target is a proposal.",
+        "reading": "2"
+      },
+      {
+        "role": "off_scope",
+        "text": "In offline simulation, the pilot measured absolute forecast error of 13 %.",
+        "reading": "13"
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of absolute forecast error in peak promotion shifts. Results are pending.",
+        "reading": null
+      }
+    ],
+    "operator": "<=",
+    "bound": "7",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "retail-forecasting-3-0",
+    "pair": "retail-forecasting-3",
+    "query": "Adapt rolling-window backtesting for store replenishment in peak promotion shifts; require absolute forecast error at most 9 %.",
+    "scope": {
+      "use": "store replenishment",
+      "setting": "peak promotion shifts",
+      "metric": "absolute forecast error",
+      "method": "rolling-window backtesting"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for absolute forecast error in peak promotion shifts is 4 %; the target is a proposal.",
+        "reading": "4"
+      },
+      {
+        "role": "measurement",
+        "text": "For peak promotion shifts, the recorded measurement of absolute forecast error was 9 %.",
+        "reading": "9"
+      },
+      {
+        "role": "off_scope",
+        "text": "In offline simulation, the pilot measured absolute forecast error of 15 %.",
+        "reading": "15"
+      },
+      {
+        "role": "unrelated",
+        "text": "In peak promotion shifts, the team documented 19 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": "<=",
+    "bound": "9",
+    "gold_source": 1,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "retail-forecasting-3-1",
+    "pair": "retail-forecasting-3",
+    "query": "Adapt rolling-window backtesting for store replenishment in peak promotion shifts; require absolute forecast error at most 7 %.",
+    "scope": {
+      "use": "store replenishment",
+      "setting": "peak promotion shifts",
+      "metric": "absolute forecast error",
+      "method": "rolling-window backtesting"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for absolute forecast error in peak promotion shifts is 4 %; the target is a proposal.",
+        "reading": "4"
+      },
+      {
+        "role": "measurement",
+        "text": "For peak promotion shifts, the recorded measurement of absolute forecast error was 9 %.",
+        "reading": "9"
+      },
+      {
+        "role": "off_scope",
+        "text": "In offline simulation, the pilot measured absolute forecast error of 15 %.",
+        "reading": "15"
+      },
+      {
+        "role": "unrelated",
+        "text": "In peak promotion shifts, the team documented 19 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": "<=",
+    "bound": "7",
+    "gold_source": 1,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "retail-forecasting-3-u",
+    "pair": "retail-forecasting-3",
+    "query": "Adapt rolling-window backtesting for store replenishment in peak promotion shifts; require absolute forecast error at most 9 %.",
+    "scope": {
+      "use": "store replenishment",
+      "setting": "peak promotion shifts",
+      "metric": "absolute forecast error",
+      "method": "rolling-window backtesting"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for absolute forecast error in peak promotion shifts is 4 %; the target is a proposal.",
+        "reading": "4"
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of absolute forecast error in peak promotion shifts. Results are pending.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In offline simulation, the pilot measured absolute forecast error of 15 %.",
+        "reading": "15"
+      },
+      {
+        "role": "unrelated",
+        "text": "In peak promotion shifts, the team documented 19 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": "<=",
+    "bound": "9",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "retail-forecasting-4-0",
+    "pair": "retail-forecasting-4",
+    "query": "Adapt rolling-window backtesting for store replenishment in peak promotion shifts; require absolute forecast error at most 11 %.",
+    "scope": {
+      "use": "store replenishment",
+      "setting": "peak promotion shifts",
+      "metric": "absolute forecast error",
+      "method": "rolling-window backtesting"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for absolute forecast error in peak promotion shifts is 6 %; the target is a proposal.",
+        "reading": "6"
+      },
+      {
+        "role": "unrelated",
+        "text": "In peak promotion shifts, the team documented 20 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In offline simulation, the pilot measured absolute forecast error of 17 %.",
+        "reading": "17"
+      },
+      {
+        "role": "measurement",
+        "text": "In peak promotion shifts the pilot measured absolute forecast error of 11 %.",
+        "reading": "11"
+      }
+    ],
+    "operator": "<=",
+    "bound": "11",
+    "gold_source": 3,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "retail-forecasting-4-1",
+    "pair": "retail-forecasting-4",
+    "query": "Adapt rolling-window backtesting for store replenishment in peak promotion shifts; require absolute forecast error at most 9 %.",
+    "scope": {
+      "use": "store replenishment",
+      "setting": "peak promotion shifts",
+      "metric": "absolute forecast error",
+      "method": "rolling-window backtesting"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for absolute forecast error in peak promotion shifts is 6 %; the target is a proposal.",
+        "reading": "6"
+      },
+      {
+        "role": "unrelated",
+        "text": "In peak promotion shifts, the team documented 20 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In offline simulation, the pilot measured absolute forecast error of 17 %.",
+        "reading": "17"
+      },
+      {
+        "role": "measurement",
+        "text": "In peak promotion shifts the pilot measured absolute forecast error of 11 %.",
+        "reading": "11"
+      }
+    ],
+    "operator": "<=",
+    "bound": "9",
+    "gold_source": 3,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "retail-forecasting-4-u",
+    "pair": "retail-forecasting-4",
+    "query": "Adapt rolling-window backtesting for store replenishment in peak promotion shifts; require absolute forecast error at most 11 %.",
+    "scope": {
+      "use": "store replenishment",
+      "setting": "peak promotion shifts",
+      "metric": "absolute forecast error",
+      "method": "rolling-window backtesting"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for absolute forecast error in peak promotion shifts is 6 %; the target is a proposal.",
+        "reading": "6"
+      },
+      {
+        "role": "unrelated",
+        "text": "In peak promotion shifts, the team documented 20 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In offline simulation, the pilot measured absolute forecast error of 17 %.",
+        "reading": "17"
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of absolute forecast error in peak promotion shifts. Results are pending.",
+        "reading": null
+      }
+    ],
+    "operator": "<=",
+    "bound": "11",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "warehouse-routing-1-0",
+    "pair": "warehouse-routing-1",
+    "query": "Adapt graph search with admissible bounds for warehouse picking in crowded operating shifts; require median planning time strictly below 57 ms.",
+    "scope": {
+      "use": "warehouse picking",
+      "setting": "crowded operating shifts",
+      "metric": "median planning time",
+      "method": "graph search with admissible bounds"
+    },
+    "cards": [
+      {
+        "role": "unrelated",
+        "text": "In crowded operating shifts, the team documented 17 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In empty aisles, the pilot measured median planning time of 63 ms.",
+        "reading": "63"
+      },
+      {
+        "role": "target",
+        "text": "The design target for median planning time in crowded operating shifts is 52 ms; the target is a proposal.",
+        "reading": "52"
+      },
+      {
+        "role": "measurement",
+        "text": "In crowded operating shifts the pilot measured median planning time of 57 ms.",
+        "reading": "57"
+      }
+    ],
+    "operator": "<",
+    "bound": "57",
+    "gold_source": 3,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "warehouse-routing-1-1",
+    "pair": "warehouse-routing-1",
+    "query": "Adapt graph search with admissible bounds for warehouse picking in crowded operating shifts; require median planning time strictly below 59 ms.",
+    "scope": {
+      "use": "warehouse picking",
+      "setting": "crowded operating shifts",
+      "metric": "median planning time",
+      "method": "graph search with admissible bounds"
+    },
+    "cards": [
+      {
+        "role": "unrelated",
+        "text": "In crowded operating shifts, the team documented 17 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In empty aisles, the pilot measured median planning time of 63 ms.",
+        "reading": "63"
+      },
+      {
+        "role": "target",
+        "text": "The design target for median planning time in crowded operating shifts is 52 ms; the target is a proposal.",
+        "reading": "52"
+      },
+      {
+        "role": "measurement",
+        "text": "In crowded operating shifts the pilot measured median planning time of 57 ms.",
+        "reading": "57"
+      }
+    ],
+    "operator": "<",
+    "bound": "59",
+    "gold_source": 3,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "warehouse-routing-1-u",
+    "pair": "warehouse-routing-1",
+    "query": "Adapt graph search with admissible bounds for warehouse picking in crowded operating shifts; require median planning time strictly below 57 ms.",
+    "scope": {
+      "use": "warehouse picking",
+      "setting": "crowded operating shifts",
+      "metric": "median planning time",
+      "method": "graph search with admissible bounds"
+    },
+    "cards": [
+      {
+        "role": "unrelated",
+        "text": "In crowded operating shifts, the team documented 17 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In empty aisles, the pilot measured median planning time of 63 ms.",
+        "reading": "63"
+      },
+      {
+        "role": "target",
+        "text": "The design target for median planning time in crowded operating shifts is 52 ms; the target is a proposal.",
+        "reading": "52"
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of median planning time in crowded operating shifts. Results are pending.",
+        "reading": null
+      }
+    ],
+    "operator": "<",
+    "bound": "57",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "warehouse-routing-2-0",
+    "pair": "warehouse-routing-2",
+    "query": "Adapt graph search with admissible bounds for warehouse picking in crowded operating shifts; require median planning time strictly below 59 ms.",
+    "scope": {
+      "use": "warehouse picking",
+      "setting": "crowded operating shifts",
+      "metric": "median planning time",
+      "method": "graph search with admissible bounds"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for median planning time in crowded operating shifts is 54 ms; the target is a proposal.",
+        "reading": "54"
+      },
+      {
+        "role": "unrelated",
+        "text": "In crowded operating shifts, the team documented 18 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In empty aisles, the pilot measured median planning time of 65 ms.",
+        "reading": "65"
+      },
+      {
+        "role": "measurement",
+        "text": "The observed median planning time was 0.059 s during crowded operating shifts.",
+        "reading": "59"
+      }
+    ],
+    "operator": "<",
+    "bound": "59",
+    "gold_source": 3,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "warehouse-routing-2-1",
+    "pair": "warehouse-routing-2",
+    "query": "Adapt graph search with admissible bounds for warehouse picking in crowded operating shifts; require median planning time strictly below 61 ms.",
+    "scope": {
+      "use": "warehouse picking",
+      "setting": "crowded operating shifts",
+      "metric": "median planning time",
+      "method": "graph search with admissible bounds"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for median planning time in crowded operating shifts is 54 ms; the target is a proposal.",
+        "reading": "54"
+      },
+      {
+        "role": "unrelated",
+        "text": "In crowded operating shifts, the team documented 18 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In empty aisles, the pilot measured median planning time of 65 ms.",
+        "reading": "65"
+      },
+      {
+        "role": "measurement",
+        "text": "The observed median planning time was 0.059 s during crowded operating shifts.",
+        "reading": "59"
+      }
+    ],
+    "operator": "<",
+    "bound": "61",
+    "gold_source": 3,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "warehouse-routing-2-u",
+    "pair": "warehouse-routing-2",
+    "query": "Adapt graph search with admissible bounds for warehouse picking in crowded operating shifts; require median planning time strictly below 59 ms.",
+    "scope": {
+      "use": "warehouse picking",
+      "setting": "crowded operating shifts",
+      "metric": "median planning time",
+      "method": "graph search with admissible bounds"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for median planning time in crowded operating shifts is 54 ms; the target is a proposal.",
+        "reading": "54"
+      },
+      {
+        "role": "unrelated",
+        "text": "In crowded operating shifts, the team documented 18 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In empty aisles, the pilot measured median planning time of 65 ms.",
+        "reading": "65"
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of median planning time in crowded operating shifts. Results are pending.",
+        "reading": null
+      }
+    ],
+    "operator": "<",
+    "bound": "59",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "warehouse-routing-3-0",
+    "pair": "warehouse-routing-3",
+    "query": "Adapt graph search with admissible bounds for warehouse picking in crowded operating shifts; require median planning time strictly below 61 ms.",
+    "scope": {
+      "use": "warehouse picking",
+      "setting": "crowded operating shifts",
+      "metric": "median planning time",
+      "method": "graph search with admissible bounds"
+    },
+    "cards": [
+      {
+        "role": "measurement",
+        "text": "For crowded operating shifts, the recorded measurement of median planning time was 61 ms.",
+        "reading": "61"
+      },
+      {
+        "role": "unrelated",
+        "text": "In crowded operating shifts, the team documented 19 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for median planning time in crowded operating shifts is 56 ms; the target is a proposal.",
+        "reading": "56"
+      },
+      {
+        "role": "off_scope",
+        "text": "In empty aisles, the pilot measured median planning time of 67 ms.",
+        "reading": "67"
+      }
+    ],
+    "operator": "<",
+    "bound": "61",
+    "gold_source": 0,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "warehouse-routing-3-1",
+    "pair": "warehouse-routing-3",
+    "query": "Adapt graph search with admissible bounds for warehouse picking in crowded operating shifts; require median planning time strictly below 63 ms.",
+    "scope": {
+      "use": "warehouse picking",
+      "setting": "crowded operating shifts",
+      "metric": "median planning time",
+      "method": "graph search with admissible bounds"
+    },
+    "cards": [
+      {
+        "role": "measurement",
+        "text": "For crowded operating shifts, the recorded measurement of median planning time was 61 ms.",
+        "reading": "61"
+      },
+      {
+        "role": "unrelated",
+        "text": "In crowded operating shifts, the team documented 19 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for median planning time in crowded operating shifts is 56 ms; the target is a proposal.",
+        "reading": "56"
+      },
+      {
+        "role": "off_scope",
+        "text": "In empty aisles, the pilot measured median planning time of 67 ms.",
+        "reading": "67"
+      }
+    ],
+    "operator": "<",
+    "bound": "63",
+    "gold_source": 0,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "warehouse-routing-3-u",
+    "pair": "warehouse-routing-3",
+    "query": "Adapt graph search with admissible bounds for warehouse picking in crowded operating shifts; require median planning time strictly below 61 ms.",
+    "scope": {
+      "use": "warehouse picking",
+      "setting": "crowded operating shifts",
+      "metric": "median planning time",
+      "method": "graph search with admissible bounds"
+    },
+    "cards": [
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of median planning time in crowded operating shifts. Results are pending.",
+        "reading": null
+      },
+      {
+        "role": "unrelated",
+        "text": "In crowded operating shifts, the team documented 19 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for median planning time in crowded operating shifts is 56 ms; the target is a proposal.",
+        "reading": "56"
+      },
+      {
+        "role": "off_scope",
+        "text": "In empty aisles, the pilot measured median planning time of 67 ms.",
+        "reading": "67"
+      }
+    ],
+    "operator": "<",
+    "bound": "61",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "warehouse-routing-4-0",
+    "pair": "warehouse-routing-4",
+    "query": "Adapt graph search with admissible bounds for warehouse picking in crowded operating shifts; require median planning time strictly below 63 ms.",
+    "scope": {
+      "use": "warehouse picking",
+      "setting": "crowded operating shifts",
+      "metric": "median planning time",
+      "method": "graph search with admissible bounds"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for median planning time in crowded operating shifts is 58 ms; the target is a proposal.",
+        "reading": "58"
+      },
+      {
+        "role": "unrelated",
+        "text": "In crowded operating shifts, the team documented 20 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "measurement",
+        "text": "In crowded operating shifts the pilot measured median planning time of 0.063 s.",
+        "reading": "63"
+      },
+      {
+        "role": "off_scope",
+        "text": "In empty aisles, the pilot measured median planning time of 69 ms.",
+        "reading": "69"
+      }
+    ],
+    "operator": "<",
+    "bound": "63",
+    "gold_source": 2,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "warehouse-routing-4-1",
+    "pair": "warehouse-routing-4",
+    "query": "Adapt graph search with admissible bounds for warehouse picking in crowded operating shifts; require median planning time strictly below 65 ms.",
+    "scope": {
+      "use": "warehouse picking",
+      "setting": "crowded operating shifts",
+      "metric": "median planning time",
+      "method": "graph search with admissible bounds"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for median planning time in crowded operating shifts is 58 ms; the target is a proposal.",
+        "reading": "58"
+      },
+      {
+        "role": "unrelated",
+        "text": "In crowded operating shifts, the team documented 20 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "measurement",
+        "text": "In crowded operating shifts the pilot measured median planning time of 0.063 s.",
+        "reading": "63"
+      },
+      {
+        "role": "off_scope",
+        "text": "In empty aisles, the pilot measured median planning time of 69 ms.",
+        "reading": "69"
+      }
+    ],
+    "operator": "<",
+    "bound": "65",
+    "gold_source": 2,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "warehouse-routing-4-u",
+    "pair": "warehouse-routing-4",
+    "query": "Adapt graph search with admissible bounds for warehouse picking in crowded operating shifts; require median planning time strictly below 63 ms.",
+    "scope": {
+      "use": "warehouse picking",
+      "setting": "crowded operating shifts",
+      "metric": "median planning time",
+      "method": "graph search with admissible bounds"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for median planning time in crowded operating shifts is 58 ms; the target is a proposal.",
+        "reading": "58"
+      },
+      {
+        "role": "unrelated",
+        "text": "In crowded operating shifts, the team documented 20 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of median planning time in crowded operating shifts. Results are pending.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In empty aisles, the pilot measured median planning time of 69 ms.",
+        "reading": "69"
+      }
+    ],
+    "operator": "<",
+    "bound": "63",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "inspection-1-0",
+    "pair": "inspection-1",
+    "query": "Adapt retrieval of representative instances for visual component inspection in low-light line operation; require macro recall at least 85 %.",
+    "scope": {
+      "use": "visual component inspection",
+      "setting": "low-light line operation",
+      "metric": "macro recall",
+      "method": "retrieval of representative instances"
+    },
+    "cards": [
+      {
+        "role": "unrelated",
+        "text": "In low-light line operation, the team documented 17 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for macro recall in low-light line operation is 90 %; the target is a proposal.",
+        "reading": "90"
+      },
+      {
+        "role": "measurement",
+        "text": "In low-light line operation the pilot measured macro recall of 85 %.",
+        "reading": "85"
+      },
+      {
+        "role": "off_scope",
+        "text": "In well-lit lab, the pilot measured macro recall of 79 %.",
+        "reading": "79"
+      }
+    ],
+    "operator": ">=",
+    "bound": "85",
+    "gold_source": 2,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "inspection-1-1",
+    "pair": "inspection-1",
+    "query": "Adapt retrieval of representative instances for visual component inspection in low-light line operation; require macro recall at least 87 %.",
+    "scope": {
+      "use": "visual component inspection",
+      "setting": "low-light line operation",
+      "metric": "macro recall",
+      "method": "retrieval of representative instances"
+    },
+    "cards": [
+      {
+        "role": "unrelated",
+        "text": "In low-light line operation, the team documented 17 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for macro recall in low-light line operation is 90 %; the target is a proposal.",
+        "reading": "90"
+      },
+      {
+        "role": "measurement",
+        "text": "In low-light line operation the pilot measured macro recall of 85 %.",
+        "reading": "85"
+      },
+      {
+        "role": "off_scope",
+        "text": "In well-lit lab, the pilot measured macro recall of 79 %.",
+        "reading": "79"
+      }
+    ],
+    "operator": ">=",
+    "bound": "87",
+    "gold_source": 2,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "inspection-1-u",
+    "pair": "inspection-1",
+    "query": "Adapt retrieval of representative instances for visual component inspection in low-light line operation; require macro recall at least 85 %.",
+    "scope": {
+      "use": "visual component inspection",
+      "setting": "low-light line operation",
+      "metric": "macro recall",
+      "method": "retrieval of representative instances"
+    },
+    "cards": [
+      {
+        "role": "unrelated",
+        "text": "In low-light line operation, the team documented 17 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for macro recall in low-light line operation is 90 %; the target is a proposal.",
+        "reading": "90"
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of macro recall in low-light line operation. Results are pending.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In well-lit lab, the pilot measured macro recall of 79 %.",
+        "reading": "79"
+      }
+    ],
+    "operator": ">=",
+    "bound": "85",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "inspection-2-0",
+    "pair": "inspection-2",
+    "query": "Adapt retrieval of representative instances for visual component inspection in low-light line operation; require macro recall at least 87 %.",
+    "scope": {
+      "use": "visual component inspection",
+      "setting": "low-light line operation",
+      "metric": "macro recall",
+      "method": "retrieval of representative instances"
+    },
+    "cards": [
+      {
+        "role": "off_scope",
+        "text": "In well-lit lab, the pilot measured macro recall of 81 %.",
+        "reading": "81"
+      },
+      {
+        "role": "unrelated",
+        "text": "In low-light line operation, the team documented 18 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "measurement",
+        "text": "The observed macro recall was 87 % during low-light line operation.",
+        "reading": "87"
+      },
+      {
+        "role": "target",
+        "text": "The design target for macro recall in low-light line operation is 92 %; the target is a proposal.",
+        "reading": "92"
+      }
+    ],
+    "operator": ">=",
+    "bound": "87",
+    "gold_source": 2,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "inspection-2-1",
+    "pair": "inspection-2",
+    "query": "Adapt retrieval of representative instances for visual component inspection in low-light line operation; require macro recall at least 89 %.",
+    "scope": {
+      "use": "visual component inspection",
+      "setting": "low-light line operation",
+      "metric": "macro recall",
+      "method": "retrieval of representative instances"
+    },
+    "cards": [
+      {
+        "role": "off_scope",
+        "text": "In well-lit lab, the pilot measured macro recall of 81 %.",
+        "reading": "81"
+      },
+      {
+        "role": "unrelated",
+        "text": "In low-light line operation, the team documented 18 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "measurement",
+        "text": "The observed macro recall was 87 % during low-light line operation.",
+        "reading": "87"
+      },
+      {
+        "role": "target",
+        "text": "The design target for macro recall in low-light line operation is 92 %; the target is a proposal.",
+        "reading": "92"
+      }
+    ],
+    "operator": ">=",
+    "bound": "89",
+    "gold_source": 2,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "inspection-2-u",
+    "pair": "inspection-2",
+    "query": "Adapt retrieval of representative instances for visual component inspection in low-light line operation; require macro recall at least 87 %.",
+    "scope": {
+      "use": "visual component inspection",
+      "setting": "low-light line operation",
+      "metric": "macro recall",
+      "method": "retrieval of representative instances"
+    },
+    "cards": [
+      {
+        "role": "off_scope",
+        "text": "In well-lit lab, the pilot measured macro recall of 81 %.",
+        "reading": "81"
+      },
+      {
+        "role": "unrelated",
+        "text": "In low-light line operation, the team documented 18 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of macro recall in low-light line operation. Results are pending.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for macro recall in low-light line operation is 92 %; the target is a proposal.",
+        "reading": "92"
+      }
+    ],
+    "operator": ">=",
+    "bound": "87",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "inspection-3-0",
+    "pair": "inspection-3",
+    "query": "Adapt retrieval of representative instances for visual component inspection in low-light line operation; require macro recall at least 89 %.",
+    "scope": {
+      "use": "visual component inspection",
+      "setting": "low-light line operation",
+      "metric": "macro recall",
+      "method": "retrieval of representative instances"
+    },
+    "cards": [
+      {
+        "role": "unrelated",
+        "text": "In low-light line operation, the team documented 19 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for macro recall in low-light line operation is 94 %; the target is a proposal.",
+        "reading": "94"
+      },
+      {
+        "role": "off_scope",
+        "text": "In well-lit lab, the pilot measured macro recall of 83 %.",
+        "reading": "83"
+      },
+      {
+        "role": "measurement",
+        "text": "For low-light line operation, the recorded measurement of macro recall was 89 %.",
+        "reading": "89"
+      }
+    ],
+    "operator": ">=",
+    "bound": "89",
+    "gold_source": 3,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "inspection-3-1",
+    "pair": "inspection-3",
+    "query": "Adapt retrieval of representative instances for visual component inspection in low-light line operation; require macro recall at least 91 %.",
+    "scope": {
+      "use": "visual component inspection",
+      "setting": "low-light line operation",
+      "metric": "macro recall",
+      "method": "retrieval of representative instances"
+    },
+    "cards": [
+      {
+        "role": "unrelated",
+        "text": "In low-light line operation, the team documented 19 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for macro recall in low-light line operation is 94 %; the target is a proposal.",
+        "reading": "94"
+      },
+      {
+        "role": "off_scope",
+        "text": "In well-lit lab, the pilot measured macro recall of 83 %.",
+        "reading": "83"
+      },
+      {
+        "role": "measurement",
+        "text": "For low-light line operation, the recorded measurement of macro recall was 89 %.",
+        "reading": "89"
+      }
+    ],
+    "operator": ">=",
+    "bound": "91",
+    "gold_source": 3,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "inspection-3-u",
+    "pair": "inspection-3",
+    "query": "Adapt retrieval of representative instances for visual component inspection in low-light line operation; require macro recall at least 89 %.",
+    "scope": {
+      "use": "visual component inspection",
+      "setting": "low-light line operation",
+      "metric": "macro recall",
+      "method": "retrieval of representative instances"
+    },
+    "cards": [
+      {
+        "role": "unrelated",
+        "text": "In low-light line operation, the team documented 19 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for macro recall in low-light line operation is 94 %; the target is a proposal.",
+        "reading": "94"
+      },
+      {
+        "role": "off_scope",
+        "text": "In well-lit lab, the pilot measured macro recall of 83 %.",
+        "reading": "83"
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of macro recall in low-light line operation. Results are pending.",
+        "reading": null
+      }
+    ],
+    "operator": ">=",
+    "bound": "89",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "inspection-4-0",
+    "pair": "inspection-4",
+    "query": "Adapt retrieval of representative instances for visual component inspection in low-light line operation; require macro recall at least 91 %.",
+    "scope": {
+      "use": "visual component inspection",
+      "setting": "low-light line operation",
+      "metric": "macro recall",
+      "method": "retrieval of representative instances"
+    },
+    "cards": [
+      {
+        "role": "measurement",
+        "text": "In low-light line operation the pilot measured macro recall of 91 %.",
+        "reading": "91"
+      },
+      {
+        "role": "off_scope",
+        "text": "In well-lit lab, the pilot measured macro recall of 85 %.",
+        "reading": "85"
+      },
+      {
+        "role": "target",
+        "text": "The design target for macro recall in low-light line operation is 96 %; the target is a proposal.",
+        "reading": "96"
+      },
+      {
+        "role": "unrelated",
+        "text": "In low-light line operation, the team documented 20 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": ">=",
+    "bound": "91",
+    "gold_source": 0,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "inspection-4-1",
+    "pair": "inspection-4",
+    "query": "Adapt retrieval of representative instances for visual component inspection in low-light line operation; require macro recall at least 93 %.",
+    "scope": {
+      "use": "visual component inspection",
+      "setting": "low-light line operation",
+      "metric": "macro recall",
+      "method": "retrieval of representative instances"
+    },
+    "cards": [
+      {
+        "role": "measurement",
+        "text": "In low-light line operation the pilot measured macro recall of 91 %.",
+        "reading": "91"
+      },
+      {
+        "role": "off_scope",
+        "text": "In well-lit lab, the pilot measured macro recall of 85 %.",
+        "reading": "85"
+      },
+      {
+        "role": "target",
+        "text": "The design target for macro recall in low-light line operation is 96 %; the target is a proposal.",
+        "reading": "96"
+      },
+      {
+        "role": "unrelated",
+        "text": "In low-light line operation, the team documented 20 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": ">=",
+    "bound": "93",
+    "gold_source": 0,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "inspection-4-u",
+    "pair": "inspection-4",
+    "query": "Adapt retrieval of representative instances for visual component inspection in low-light line operation; require macro recall at least 91 %.",
+    "scope": {
+      "use": "visual component inspection",
+      "setting": "low-light line operation",
+      "metric": "macro recall",
+      "method": "retrieval of representative instances"
+    },
+    "cards": [
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of macro recall in low-light line operation. Results are pending.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In well-lit lab, the pilot measured macro recall of 85 %.",
+        "reading": "85"
+      },
+      {
+        "role": "target",
+        "text": "The design target for macro recall in low-light line operation is 96 %; the target is a proposal.",
+        "reading": "96"
+      },
+      {
+        "role": "unrelated",
+        "text": "In low-light line operation, the team documented 20 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": ">=",
+    "bound": "91",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "content-indexing-1-0",
+    "pair": "content-indexing-1",
+    "query": "Adapt incremental postings maintenance for document indexing in recovery after bulk deletes; require throughput strictly above 117 items/s.",
+    "scope": {
+      "use": "document indexing",
+      "setting": "recovery after bulk deletes",
+      "metric": "throughput",
+      "method": "incremental postings maintenance"
+    },
+    "cards": [
+      {
+        "role": "off_scope",
+        "text": "In steady inserts, the pilot measured throughput of 111 items/s.",
+        "reading": "111"
+      },
+      {
+        "role": "measurement",
+        "text": "In recovery after bulk deletes the pilot measured throughput of 117 items/s.",
+        "reading": "117"
+      },
+      {
+        "role": "target",
+        "text": "The design target for throughput in recovery after bulk deletes is 122 items/s; the target is a proposal.",
+        "reading": "122"
+      },
+      {
+        "role": "unrelated",
+        "text": "In recovery after bulk deletes, the team documented 17 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": ">",
+    "bound": "117",
+    "gold_source": 1,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "content-indexing-1-1",
+    "pair": "content-indexing-1",
+    "query": "Adapt incremental postings maintenance for document indexing in recovery after bulk deletes; require throughput strictly above 115 items/s.",
+    "scope": {
+      "use": "document indexing",
+      "setting": "recovery after bulk deletes",
+      "metric": "throughput",
+      "method": "incremental postings maintenance"
+    },
+    "cards": [
+      {
+        "role": "off_scope",
+        "text": "In steady inserts, the pilot measured throughput of 111 items/s.",
+        "reading": "111"
+      },
+      {
+        "role": "measurement",
+        "text": "In recovery after bulk deletes the pilot measured throughput of 117 items/s.",
+        "reading": "117"
+      },
+      {
+        "role": "target",
+        "text": "The design target for throughput in recovery after bulk deletes is 122 items/s; the target is a proposal.",
+        "reading": "122"
+      },
+      {
+        "role": "unrelated",
+        "text": "In recovery after bulk deletes, the team documented 17 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": ">",
+    "bound": "115",
+    "gold_source": 1,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "content-indexing-1-u",
+    "pair": "content-indexing-1",
+    "query": "Adapt incremental postings maintenance for document indexing in recovery after bulk deletes; require throughput strictly above 117 items/s.",
+    "scope": {
+      "use": "document indexing",
+      "setting": "recovery after bulk deletes",
+      "metric": "throughput",
+      "method": "incremental postings maintenance"
+    },
+    "cards": [
+      {
+        "role": "off_scope",
+        "text": "In steady inserts, the pilot measured throughput of 111 items/s.",
+        "reading": "111"
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of throughput in recovery after bulk deletes. Results are pending.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for throughput in recovery after bulk deletes is 122 items/s; the target is a proposal.",
+        "reading": "122"
+      },
+      {
+        "role": "unrelated",
+        "text": "In recovery after bulk deletes, the team documented 17 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": ">",
+    "bound": "117",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "content-indexing-2-0",
+    "pair": "content-indexing-2",
+    "query": "Adapt incremental postings maintenance for document indexing in recovery after bulk deletes; require throughput strictly above 119 items/s.",
+    "scope": {
+      "use": "document indexing",
+      "setting": "recovery after bulk deletes",
+      "metric": "throughput",
+      "method": "incremental postings maintenance"
+    },
+    "cards": [
+      {
+        "role": "measurement",
+        "text": "The observed throughput was 119 items/s during recovery after bulk deletes.",
+        "reading": "119"
+      },
+      {
+        "role": "unrelated",
+        "text": "In recovery after bulk deletes, the team documented 18 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for throughput in recovery after bulk deletes is 124 items/s; the target is a proposal.",
+        "reading": "124"
+      },
+      {
+        "role": "off_scope",
+        "text": "In steady inserts, the pilot measured throughput of 113 items/s.",
+        "reading": "113"
+      }
+    ],
+    "operator": ">",
+    "bound": "119",
+    "gold_source": 0,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "content-indexing-2-1",
+    "pair": "content-indexing-2",
+    "query": "Adapt incremental postings maintenance for document indexing in recovery after bulk deletes; require throughput strictly above 117 items/s.",
+    "scope": {
+      "use": "document indexing",
+      "setting": "recovery after bulk deletes",
+      "metric": "throughput",
+      "method": "incremental postings maintenance"
+    },
+    "cards": [
+      {
+        "role": "measurement",
+        "text": "The observed throughput was 119 items/s during recovery after bulk deletes.",
+        "reading": "119"
+      },
+      {
+        "role": "unrelated",
+        "text": "In recovery after bulk deletes, the team documented 18 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for throughput in recovery after bulk deletes is 124 items/s; the target is a proposal.",
+        "reading": "124"
+      },
+      {
+        "role": "off_scope",
+        "text": "In steady inserts, the pilot measured throughput of 113 items/s.",
+        "reading": "113"
+      }
+    ],
+    "operator": ">",
+    "bound": "117",
+    "gold_source": 0,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "content-indexing-2-u",
+    "pair": "content-indexing-2",
+    "query": "Adapt incremental postings maintenance for document indexing in recovery after bulk deletes; require throughput strictly above 119 items/s.",
+    "scope": {
+      "use": "document indexing",
+      "setting": "recovery after bulk deletes",
+      "metric": "throughput",
+      "method": "incremental postings maintenance"
+    },
+    "cards": [
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of throughput in recovery after bulk deletes. Results are pending.",
+        "reading": null
+      },
+      {
+        "role": "unrelated",
+        "text": "In recovery after bulk deletes, the team documented 18 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for throughput in recovery after bulk deletes is 124 items/s; the target is a proposal.",
+        "reading": "124"
+      },
+      {
+        "role": "off_scope",
+        "text": "In steady inserts, the pilot measured throughput of 113 items/s.",
+        "reading": "113"
+      }
+    ],
+    "operator": ">",
+    "bound": "119",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "content-indexing-3-0",
+    "pair": "content-indexing-3",
+    "query": "Adapt incremental postings maintenance for document indexing in recovery after bulk deletes; require throughput strictly above 121 items/s.",
+    "scope": {
+      "use": "document indexing",
+      "setting": "recovery after bulk deletes",
+      "metric": "throughput",
+      "method": "incremental postings maintenance"
+    },
+    "cards": [
+      {
+        "role": "off_scope",
+        "text": "In steady inserts, the pilot measured throughput of 115 items/s.",
+        "reading": "115"
+      },
+      {
+        "role": "unrelated",
+        "text": "In recovery after bulk deletes, the team documented 19 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "measurement",
+        "text": "For recovery after bulk deletes, the recorded measurement of throughput was 121 items/s.",
+        "reading": "121"
+      },
+      {
+        "role": "target",
+        "text": "The design target for throughput in recovery after bulk deletes is 126 items/s; the target is a proposal.",
+        "reading": "126"
+      }
+    ],
+    "operator": ">",
+    "bound": "121",
+    "gold_source": 2,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "content-indexing-3-1",
+    "pair": "content-indexing-3",
+    "query": "Adapt incremental postings maintenance for document indexing in recovery after bulk deletes; require throughput strictly above 119 items/s.",
+    "scope": {
+      "use": "document indexing",
+      "setting": "recovery after bulk deletes",
+      "metric": "throughput",
+      "method": "incremental postings maintenance"
+    },
+    "cards": [
+      {
+        "role": "off_scope",
+        "text": "In steady inserts, the pilot measured throughput of 115 items/s.",
+        "reading": "115"
+      },
+      {
+        "role": "unrelated",
+        "text": "In recovery after bulk deletes, the team documented 19 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "measurement",
+        "text": "For recovery after bulk deletes, the recorded measurement of throughput was 121 items/s.",
+        "reading": "121"
+      },
+      {
+        "role": "target",
+        "text": "The design target for throughput in recovery after bulk deletes is 126 items/s; the target is a proposal.",
+        "reading": "126"
+      }
+    ],
+    "operator": ">",
+    "bound": "119",
+    "gold_source": 2,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "content-indexing-3-u",
+    "pair": "content-indexing-3",
+    "query": "Adapt incremental postings maintenance for document indexing in recovery after bulk deletes; require throughput strictly above 121 items/s.",
+    "scope": {
+      "use": "document indexing",
+      "setting": "recovery after bulk deletes",
+      "metric": "throughput",
+      "method": "incremental postings maintenance"
+    },
+    "cards": [
+      {
+        "role": "off_scope",
+        "text": "In steady inserts, the pilot measured throughput of 115 items/s.",
+        "reading": "115"
+      },
+      {
+        "role": "unrelated",
+        "text": "In recovery after bulk deletes, the team documented 19 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of throughput in recovery after bulk deletes. Results are pending.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for throughput in recovery after bulk deletes is 126 items/s; the target is a proposal.",
+        "reading": "126"
+      }
+    ],
+    "operator": ">",
+    "bound": "121",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "content-indexing-4-0",
+    "pair": "content-indexing-4",
+    "query": "Adapt incremental postings maintenance for document indexing in recovery after bulk deletes; require throughput strictly above 123 items/s.",
+    "scope": {
+      "use": "document indexing",
+      "setting": "recovery after bulk deletes",
+      "metric": "throughput",
+      "method": "incremental postings maintenance"
+    },
+    "cards": [
+      {
+        "role": "off_scope",
+        "text": "In steady inserts, the pilot measured throughput of 117 items/s.",
+        "reading": "117"
+      },
+      {
+        "role": "measurement",
+        "text": "In recovery after bulk deletes the pilot measured throughput of 123 items/s.",
+        "reading": "123"
+      },
+      {
+        "role": "target",
+        "text": "The design target for throughput in recovery after bulk deletes is 128 items/s; the target is a proposal.",
+        "reading": "128"
+      },
+      {
+        "role": "unrelated",
+        "text": "In recovery after bulk deletes, the team documented 20 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": ">",
+    "bound": "123",
+    "gold_source": 1,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "content-indexing-4-1",
+    "pair": "content-indexing-4",
+    "query": "Adapt incremental postings maintenance for document indexing in recovery after bulk deletes; require throughput strictly above 121 items/s.",
+    "scope": {
+      "use": "document indexing",
+      "setting": "recovery after bulk deletes",
+      "metric": "throughput",
+      "method": "incremental postings maintenance"
+    },
+    "cards": [
+      {
+        "role": "off_scope",
+        "text": "In steady inserts, the pilot measured throughput of 117 items/s.",
+        "reading": "117"
+      },
+      {
+        "role": "measurement",
+        "text": "In recovery after bulk deletes the pilot measured throughput of 123 items/s.",
+        "reading": "123"
+      },
+      {
+        "role": "target",
+        "text": "The design target for throughput in recovery after bulk deletes is 128 items/s; the target is a proposal.",
+        "reading": "128"
+      },
+      {
+        "role": "unrelated",
+        "text": "In recovery after bulk deletes, the team documented 20 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": ">",
+    "bound": "121",
+    "gold_source": 1,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "content-indexing-4-u",
+    "pair": "content-indexing-4",
+    "query": "Adapt incremental postings maintenance for document indexing in recovery after bulk deletes; require throughput strictly above 123 items/s.",
+    "scope": {
+      "use": "document indexing",
+      "setting": "recovery after bulk deletes",
+      "metric": "throughput",
+      "method": "incremental postings maintenance"
+    },
+    "cards": [
+      {
+        "role": "off_scope",
+        "text": "In steady inserts, the pilot measured throughput of 117 items/s.",
+        "reading": "117"
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of throughput in recovery after bulk deletes. Results are pending.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for throughput in recovery after bulk deletes is 128 items/s; the target is a proposal.",
+        "reading": "128"
+      },
+      {
+        "role": "unrelated",
+        "text": "In recovery after bulk deletes, the team documented 20 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": ">",
+    "bound": "123",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "delivery-1-0",
+    "pair": "delivery-1",
+    "query": "Adapt adaptive scheduling for parcel allocation in during simultaneous depot outages; require P95 dispatch time at most 87 ms.",
+    "scope": {
+      "use": "parcel allocation",
+      "setting": "during simultaneous depot outages",
+      "metric": "P95 dispatch time",
+      "method": "adaptive scheduling"
+    },
+    "cards": [
+      {
+        "role": "unrelated",
+        "text": "In during simultaneous depot outages, the team documented 17 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for P95 dispatch time in during simultaneous depot outages is 82 ms; the target is a proposal.",
+        "reading": "82"
+      },
+      {
+        "role": "measurement",
+        "text": "In during simultaneous depot outages the pilot measured P95 dispatch time of 87 ms.",
+        "reading": "87"
+      },
+      {
+        "role": "off_scope",
+        "text": "In normal operation, the pilot measured P95 dispatch time of 93 ms.",
+        "reading": "93"
+      }
+    ],
+    "operator": "<=",
+    "bound": "87",
+    "gold_source": 2,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "delivery-1-1",
+    "pair": "delivery-1",
+    "query": "Adapt adaptive scheduling for parcel allocation in during simultaneous depot outages; require P95 dispatch time at most 85 ms.",
+    "scope": {
+      "use": "parcel allocation",
+      "setting": "during simultaneous depot outages",
+      "metric": "P95 dispatch time",
+      "method": "adaptive scheduling"
+    },
+    "cards": [
+      {
+        "role": "unrelated",
+        "text": "In during simultaneous depot outages, the team documented 17 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for P95 dispatch time in during simultaneous depot outages is 82 ms; the target is a proposal.",
+        "reading": "82"
+      },
+      {
+        "role": "measurement",
+        "text": "In during simultaneous depot outages the pilot measured P95 dispatch time of 87 ms.",
+        "reading": "87"
+      },
+      {
+        "role": "off_scope",
+        "text": "In normal operation, the pilot measured P95 dispatch time of 93 ms.",
+        "reading": "93"
+      }
+    ],
+    "operator": "<=",
+    "bound": "85",
+    "gold_source": 2,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "delivery-1-u",
+    "pair": "delivery-1",
+    "query": "Adapt adaptive scheduling for parcel allocation in during simultaneous depot outages; require P95 dispatch time at most 87 ms.",
+    "scope": {
+      "use": "parcel allocation",
+      "setting": "during simultaneous depot outages",
+      "metric": "P95 dispatch time",
+      "method": "adaptive scheduling"
+    },
+    "cards": [
+      {
+        "role": "unrelated",
+        "text": "In during simultaneous depot outages, the team documented 17 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for P95 dispatch time in during simultaneous depot outages is 82 ms; the target is a proposal.",
+        "reading": "82"
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of P95 dispatch time in during simultaneous depot outages. Results are pending.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In normal operation, the pilot measured P95 dispatch time of 93 ms.",
+        "reading": "93"
+      }
+    ],
+    "operator": "<=",
+    "bound": "87",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "delivery-2-0",
+    "pair": "delivery-2",
+    "query": "Adapt adaptive scheduling for parcel allocation in during simultaneous depot outages; require P95 dispatch time at most 89 ms.",
+    "scope": {
+      "use": "parcel allocation",
+      "setting": "during simultaneous depot outages",
+      "metric": "P95 dispatch time",
+      "method": "adaptive scheduling"
+    },
+    "cards": [
+      {
+        "role": "measurement",
+        "text": "The observed P95 dispatch time was 0.089 s during during simultaneous depot outages.",
+        "reading": "89"
+      },
+      {
+        "role": "target",
+        "text": "The design target for P95 dispatch time in during simultaneous depot outages is 84 ms; the target is a proposal.",
+        "reading": "84"
+      },
+      {
+        "role": "off_scope",
+        "text": "In normal operation, the pilot measured P95 dispatch time of 95 ms.",
+        "reading": "95"
+      },
+      {
+        "role": "unrelated",
+        "text": "In during simultaneous depot outages, the team documented 18 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": "<=",
+    "bound": "89",
+    "gold_source": 0,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "delivery-2-1",
+    "pair": "delivery-2",
+    "query": "Adapt adaptive scheduling for parcel allocation in during simultaneous depot outages; require P95 dispatch time at most 87 ms.",
+    "scope": {
+      "use": "parcel allocation",
+      "setting": "during simultaneous depot outages",
+      "metric": "P95 dispatch time",
+      "method": "adaptive scheduling"
+    },
+    "cards": [
+      {
+        "role": "measurement",
+        "text": "The observed P95 dispatch time was 0.089 s during during simultaneous depot outages.",
+        "reading": "89"
+      },
+      {
+        "role": "target",
+        "text": "The design target for P95 dispatch time in during simultaneous depot outages is 84 ms; the target is a proposal.",
+        "reading": "84"
+      },
+      {
+        "role": "off_scope",
+        "text": "In normal operation, the pilot measured P95 dispatch time of 95 ms.",
+        "reading": "95"
+      },
+      {
+        "role": "unrelated",
+        "text": "In during simultaneous depot outages, the team documented 18 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": "<=",
+    "bound": "87",
+    "gold_source": 0,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "delivery-2-u",
+    "pair": "delivery-2",
+    "query": "Adapt adaptive scheduling for parcel allocation in during simultaneous depot outages; require P95 dispatch time at most 89 ms.",
+    "scope": {
+      "use": "parcel allocation",
+      "setting": "during simultaneous depot outages",
+      "metric": "P95 dispatch time",
+      "method": "adaptive scheduling"
+    },
+    "cards": [
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of P95 dispatch time in during simultaneous depot outages. Results are pending.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for P95 dispatch time in during simultaneous depot outages is 84 ms; the target is a proposal.",
+        "reading": "84"
+      },
+      {
+        "role": "off_scope",
+        "text": "In normal operation, the pilot measured P95 dispatch time of 95 ms.",
+        "reading": "95"
+      },
+      {
+        "role": "unrelated",
+        "text": "In during simultaneous depot outages, the team documented 18 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": "<=",
+    "bound": "89",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "delivery-3-0",
+    "pair": "delivery-3",
+    "query": "Adapt adaptive scheduling for parcel allocation in during simultaneous depot outages; require P95 dispatch time at most 91 ms.",
+    "scope": {
+      "use": "parcel allocation",
+      "setting": "during simultaneous depot outages",
+      "metric": "P95 dispatch time",
+      "method": "adaptive scheduling"
+    },
+    "cards": [
+      {
+        "role": "off_scope",
+        "text": "In normal operation, the pilot measured P95 dispatch time of 97 ms.",
+        "reading": "97"
+      },
+      {
+        "role": "unrelated",
+        "text": "In during simultaneous depot outages, the team documented 19 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "measurement",
+        "text": "For during simultaneous depot outages, the recorded measurement of P95 dispatch time was 91 ms.",
+        "reading": "91"
+      },
+      {
+        "role": "target",
+        "text": "The design target for P95 dispatch time in during simultaneous depot outages is 86 ms; the target is a proposal.",
+        "reading": "86"
+      }
+    ],
+    "operator": "<=",
+    "bound": "91",
+    "gold_source": 2,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "delivery-3-1",
+    "pair": "delivery-3",
+    "query": "Adapt adaptive scheduling for parcel allocation in during simultaneous depot outages; require P95 dispatch time at most 89 ms.",
+    "scope": {
+      "use": "parcel allocation",
+      "setting": "during simultaneous depot outages",
+      "metric": "P95 dispatch time",
+      "method": "adaptive scheduling"
+    },
+    "cards": [
+      {
+        "role": "off_scope",
+        "text": "In normal operation, the pilot measured P95 dispatch time of 97 ms.",
+        "reading": "97"
+      },
+      {
+        "role": "unrelated",
+        "text": "In during simultaneous depot outages, the team documented 19 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "measurement",
+        "text": "For during simultaneous depot outages, the recorded measurement of P95 dispatch time was 91 ms.",
+        "reading": "91"
+      },
+      {
+        "role": "target",
+        "text": "The design target for P95 dispatch time in during simultaneous depot outages is 86 ms; the target is a proposal.",
+        "reading": "86"
+      }
+    ],
+    "operator": "<=",
+    "bound": "89",
+    "gold_source": 2,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "delivery-3-u",
+    "pair": "delivery-3",
+    "query": "Adapt adaptive scheduling for parcel allocation in during simultaneous depot outages; require P95 dispatch time at most 91 ms.",
+    "scope": {
+      "use": "parcel allocation",
+      "setting": "during simultaneous depot outages",
+      "metric": "P95 dispatch time",
+      "method": "adaptive scheduling"
+    },
+    "cards": [
+      {
+        "role": "off_scope",
+        "text": "In normal operation, the pilot measured P95 dispatch time of 97 ms.",
+        "reading": "97"
+      },
+      {
+        "role": "unrelated",
+        "text": "In during simultaneous depot outages, the team documented 19 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of P95 dispatch time in during simultaneous depot outages. Results are pending.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for P95 dispatch time in during simultaneous depot outages is 86 ms; the target is a proposal.",
+        "reading": "86"
+      }
+    ],
+    "operator": "<=",
+    "bound": "91",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "delivery-4-0",
+    "pair": "delivery-4",
+    "query": "Adapt adaptive scheduling for parcel allocation in during simultaneous depot outages; require P95 dispatch time at most 93 ms.",
+    "scope": {
+      "use": "parcel allocation",
+      "setting": "during simultaneous depot outages",
+      "metric": "P95 dispatch time",
+      "method": "adaptive scheduling"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for P95 dispatch time in during simultaneous depot outages is 88 ms; the target is a proposal.",
+        "reading": "88"
+      },
+      {
+        "role": "measurement",
+        "text": "In during simultaneous depot outages the pilot measured P95 dispatch time of 0.093 s.",
+        "reading": "93"
+      },
+      {
+        "role": "off_scope",
+        "text": "In normal operation, the pilot measured P95 dispatch time of 99 ms.",
+        "reading": "99"
+      },
+      {
+        "role": "unrelated",
+        "text": "In during simultaneous depot outages, the team documented 20 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": "<=",
+    "bound": "93",
+    "gold_source": 1,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "delivery-4-1",
+    "pair": "delivery-4",
+    "query": "Adapt adaptive scheduling for parcel allocation in during simultaneous depot outages; require P95 dispatch time at most 91 ms.",
+    "scope": {
+      "use": "parcel allocation",
+      "setting": "during simultaneous depot outages",
+      "metric": "P95 dispatch time",
+      "method": "adaptive scheduling"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for P95 dispatch time in during simultaneous depot outages is 88 ms; the target is a proposal.",
+        "reading": "88"
+      },
+      {
+        "role": "measurement",
+        "text": "In during simultaneous depot outages the pilot measured P95 dispatch time of 0.093 s.",
+        "reading": "93"
+      },
+      {
+        "role": "off_scope",
+        "text": "In normal operation, the pilot measured P95 dispatch time of 99 ms.",
+        "reading": "99"
+      },
+      {
+        "role": "unrelated",
+        "text": "In during simultaneous depot outages, the team documented 20 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": "<=",
+    "bound": "91",
+    "gold_source": 1,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "delivery-4-u",
+    "pair": "delivery-4",
+    "query": "Adapt adaptive scheduling for parcel allocation in during simultaneous depot outages; require P95 dispatch time at most 93 ms.",
+    "scope": {
+      "use": "parcel allocation",
+      "setting": "during simultaneous depot outages",
+      "metric": "P95 dispatch time",
+      "method": "adaptive scheduling"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for P95 dispatch time in during simultaneous depot outages is 88 ms; the target is a proposal.",
+        "reading": "88"
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of P95 dispatch time in during simultaneous depot outages. Results are pending.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In normal operation, the pilot measured P95 dispatch time of 99 ms.",
+        "reading": "99"
+      },
+      {
+        "role": "unrelated",
+        "text": "In during simultaneous depot outages, the team documented 20 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": "<=",
+    "bound": "93",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "museum-1-0",
+    "pair": "museum-1",
+    "query": "Adapt temperature-aware feedback control for display case monitoring in during daytime door openings; require maximum temperature drift strictly below 107 mK.",
+    "scope": {
+      "use": "display case monitoring",
+      "setting": "during daytime door openings",
+      "metric": "maximum temperature drift",
+      "method": "temperature-aware feedback control"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for maximum temperature drift in during daytime door openings is 102 mK; the target is a proposal.",
+        "reading": "102"
+      },
+      {
+        "role": "measurement",
+        "text": "In during daytime door openings the pilot measured maximum temperature drift of 107 mK.",
+        "reading": "107"
+      },
+      {
+        "role": "off_scope",
+        "text": "In with doors sealed, the pilot measured maximum temperature drift of 113 mK.",
+        "reading": "113"
+      },
+      {
+        "role": "unrelated",
+        "text": "In during daytime door openings, the team documented 17 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": "<",
+    "bound": "107",
+    "gold_source": 1,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "museum-1-1",
+    "pair": "museum-1",
+    "query": "Adapt temperature-aware feedback control for display case monitoring in during daytime door openings; require maximum temperature drift strictly below 109 mK.",
+    "scope": {
+      "use": "display case monitoring",
+      "setting": "during daytime door openings",
+      "metric": "maximum temperature drift",
+      "method": "temperature-aware feedback control"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for maximum temperature drift in during daytime door openings is 102 mK; the target is a proposal.",
+        "reading": "102"
+      },
+      {
+        "role": "measurement",
+        "text": "In during daytime door openings the pilot measured maximum temperature drift of 107 mK.",
+        "reading": "107"
+      },
+      {
+        "role": "off_scope",
+        "text": "In with doors sealed, the pilot measured maximum temperature drift of 113 mK.",
+        "reading": "113"
+      },
+      {
+        "role": "unrelated",
+        "text": "In during daytime door openings, the team documented 17 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": "<",
+    "bound": "109",
+    "gold_source": 1,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "museum-1-u",
+    "pair": "museum-1",
+    "query": "Adapt temperature-aware feedback control for display case monitoring in during daytime door openings; require maximum temperature drift strictly below 107 mK.",
+    "scope": {
+      "use": "display case monitoring",
+      "setting": "during daytime door openings",
+      "metric": "maximum temperature drift",
+      "method": "temperature-aware feedback control"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for maximum temperature drift in during daytime door openings is 102 mK; the target is a proposal.",
+        "reading": "102"
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of maximum temperature drift in during daytime door openings. Results are pending.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In with doors sealed, the pilot measured maximum temperature drift of 113 mK.",
+        "reading": "113"
+      },
+      {
+        "role": "unrelated",
+        "text": "In during daytime door openings, the team documented 17 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": "<",
+    "bound": "107",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "museum-2-0",
+    "pair": "museum-2",
+    "query": "Adapt temperature-aware feedback control for display case monitoring in during daytime door openings; require maximum temperature drift strictly below 109 mK.",
+    "scope": {
+      "use": "display case monitoring",
+      "setting": "during daytime door openings",
+      "metric": "maximum temperature drift",
+      "method": "temperature-aware feedback control"
+    },
+    "cards": [
+      {
+        "role": "off_scope",
+        "text": "In with doors sealed, the pilot measured maximum temperature drift of 115 mK.",
+        "reading": "115"
+      },
+      {
+        "role": "measurement",
+        "text": "The observed maximum temperature drift was 0.109 K during during daytime door openings.",
+        "reading": "109"
+      },
+      {
+        "role": "unrelated",
+        "text": "In during daytime door openings, the team documented 18 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for maximum temperature drift in during daytime door openings is 104 mK; the target is a proposal.",
+        "reading": "104"
+      }
+    ],
+    "operator": "<",
+    "bound": "109",
+    "gold_source": 1,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "museum-2-1",
+    "pair": "museum-2",
+    "query": "Adapt temperature-aware feedback control for display case monitoring in during daytime door openings; require maximum temperature drift strictly below 111 mK.",
+    "scope": {
+      "use": "display case monitoring",
+      "setting": "during daytime door openings",
+      "metric": "maximum temperature drift",
+      "method": "temperature-aware feedback control"
+    },
+    "cards": [
+      {
+        "role": "off_scope",
+        "text": "In with doors sealed, the pilot measured maximum temperature drift of 115 mK.",
+        "reading": "115"
+      },
+      {
+        "role": "measurement",
+        "text": "The observed maximum temperature drift was 0.109 K during during daytime door openings.",
+        "reading": "109"
+      },
+      {
+        "role": "unrelated",
+        "text": "In during daytime door openings, the team documented 18 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for maximum temperature drift in during daytime door openings is 104 mK; the target is a proposal.",
+        "reading": "104"
+      }
+    ],
+    "operator": "<",
+    "bound": "111",
+    "gold_source": 1,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "museum-2-u",
+    "pair": "museum-2",
+    "query": "Adapt temperature-aware feedback control for display case monitoring in during daytime door openings; require maximum temperature drift strictly below 109 mK.",
+    "scope": {
+      "use": "display case monitoring",
+      "setting": "during daytime door openings",
+      "metric": "maximum temperature drift",
+      "method": "temperature-aware feedback control"
+    },
+    "cards": [
+      {
+        "role": "off_scope",
+        "text": "In with doors sealed, the pilot measured maximum temperature drift of 115 mK.",
+        "reading": "115"
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of maximum temperature drift in during daytime door openings. Results are pending.",
+        "reading": null
+      },
+      {
+        "role": "unrelated",
+        "text": "In during daytime door openings, the team documented 18 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for maximum temperature drift in during daytime door openings is 104 mK; the target is a proposal.",
+        "reading": "104"
+      }
+    ],
+    "operator": "<",
+    "bound": "109",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "museum-3-0",
+    "pair": "museum-3",
+    "query": "Adapt temperature-aware feedback control for display case monitoring in during daytime door openings; require maximum temperature drift strictly below 111 mK.",
+    "scope": {
+      "use": "display case monitoring",
+      "setting": "during daytime door openings",
+      "metric": "maximum temperature drift",
+      "method": "temperature-aware feedback control"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for maximum temperature drift in during daytime door openings is 106 mK; the target is a proposal.",
+        "reading": "106"
+      },
+      {
+        "role": "measurement",
+        "text": "For during daytime door openings, the recorded measurement of maximum temperature drift was 111 mK.",
+        "reading": "111"
+      },
+      {
+        "role": "off_scope",
+        "text": "In with doors sealed, the pilot measured maximum temperature drift of 117 mK.",
+        "reading": "117"
+      },
+      {
+        "role": "unrelated",
+        "text": "In during daytime door openings, the team documented 19 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": "<",
+    "bound": "111",
+    "gold_source": 1,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "museum-3-1",
+    "pair": "museum-3",
+    "query": "Adapt temperature-aware feedback control for display case monitoring in during daytime door openings; require maximum temperature drift strictly below 113 mK.",
+    "scope": {
+      "use": "display case monitoring",
+      "setting": "during daytime door openings",
+      "metric": "maximum temperature drift",
+      "method": "temperature-aware feedback control"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for maximum temperature drift in during daytime door openings is 106 mK; the target is a proposal.",
+        "reading": "106"
+      },
+      {
+        "role": "measurement",
+        "text": "For during daytime door openings, the recorded measurement of maximum temperature drift was 111 mK.",
+        "reading": "111"
+      },
+      {
+        "role": "off_scope",
+        "text": "In with doors sealed, the pilot measured maximum temperature drift of 117 mK.",
+        "reading": "117"
+      },
+      {
+        "role": "unrelated",
+        "text": "In during daytime door openings, the team documented 19 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": "<",
+    "bound": "113",
+    "gold_source": 1,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "museum-3-u",
+    "pair": "museum-3",
+    "query": "Adapt temperature-aware feedback control for display case monitoring in during daytime door openings; require maximum temperature drift strictly below 111 mK.",
+    "scope": {
+      "use": "display case monitoring",
+      "setting": "during daytime door openings",
+      "metric": "maximum temperature drift",
+      "method": "temperature-aware feedback control"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for maximum temperature drift in during daytime door openings is 106 mK; the target is a proposal.",
+        "reading": "106"
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of maximum temperature drift in during daytime door openings. Results are pending.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In with doors sealed, the pilot measured maximum temperature drift of 117 mK.",
+        "reading": "117"
+      },
+      {
+        "role": "unrelated",
+        "text": "In during daytime door openings, the team documented 19 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": "<",
+    "bound": "111",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "museum-4-0",
+    "pair": "museum-4",
+    "query": "Adapt temperature-aware feedback control for display case monitoring in during daytime door openings; require maximum temperature drift strictly below 113 mK.",
+    "scope": {
+      "use": "display case monitoring",
+      "setting": "during daytime door openings",
+      "metric": "maximum temperature drift",
+      "method": "temperature-aware feedback control"
+    },
+    "cards": [
+      {
+        "role": "unrelated",
+        "text": "In during daytime door openings, the team documented 20 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for maximum temperature drift in during daytime door openings is 108 mK; the target is a proposal.",
+        "reading": "108"
+      },
+      {
+        "role": "measurement",
+        "text": "In during daytime door openings the pilot measured maximum temperature drift of 0.113 K.",
+        "reading": "113"
+      },
+      {
+        "role": "off_scope",
+        "text": "In with doors sealed, the pilot measured maximum temperature drift of 119 mK.",
+        "reading": "119"
+      }
+    ],
+    "operator": "<",
+    "bound": "113",
+    "gold_source": 2,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "museum-4-1",
+    "pair": "museum-4",
+    "query": "Adapt temperature-aware feedback control for display case monitoring in during daytime door openings; require maximum temperature drift strictly below 115 mK.",
+    "scope": {
+      "use": "display case monitoring",
+      "setting": "during daytime door openings",
+      "metric": "maximum temperature drift",
+      "method": "temperature-aware feedback control"
+    },
+    "cards": [
+      {
+        "role": "unrelated",
+        "text": "In during daytime door openings, the team documented 20 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for maximum temperature drift in during daytime door openings is 108 mK; the target is a proposal.",
+        "reading": "108"
+      },
+      {
+        "role": "measurement",
+        "text": "In during daytime door openings the pilot measured maximum temperature drift of 0.113 K.",
+        "reading": "113"
+      },
+      {
+        "role": "off_scope",
+        "text": "In with doors sealed, the pilot measured maximum temperature drift of 119 mK.",
+        "reading": "119"
+      }
+    ],
+    "operator": "<",
+    "bound": "115",
+    "gold_source": 2,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "museum-4-u",
+    "pair": "museum-4",
+    "query": "Adapt temperature-aware feedback control for display case monitoring in during daytime door openings; require maximum temperature drift strictly below 113 mK.",
+    "scope": {
+      "use": "display case monitoring",
+      "setting": "during daytime door openings",
+      "metric": "maximum temperature drift",
+      "method": "temperature-aware feedback control"
+    },
+    "cards": [
+      {
+        "role": "unrelated",
+        "text": "In during daytime door openings, the team documented 20 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for maximum temperature drift in during daytime door openings is 108 mK; the target is a proposal.",
+        "reading": "108"
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of maximum temperature drift in during daytime door openings. Results are pending.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In with doors sealed, the pilot measured maximum temperature drift of 119 mK.",
+        "reading": "119"
+      }
+    ],
+    "operator": "<",
+    "bound": "113",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "rental-1-0",
+    "pair": "rental-1",
+    "query": "Adapt similarity-based record linking for rental equipment catalog cleanup in after supplier feed migration; require precision at least 89 %.",
+    "scope": {
+      "use": "rental equipment catalog cleanup",
+      "setting": "after supplier feed migration",
+      "metric": "precision",
+      "method": "similarity-based record linking"
+    },
+    "cards": [
+      {
+        "role": "measurement",
+        "text": "In after supplier feed migration the pilot measured precision of 89 %.",
+        "reading": "89"
+      },
+      {
+        "role": "target",
+        "text": "The design target for precision in after supplier feed migration is 94 %; the target is a proposal.",
+        "reading": "94"
+      },
+      {
+        "role": "unrelated",
+        "text": "In after supplier feed migration, the team documented 17 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In before migration, the pilot measured precision of 83 %.",
+        "reading": "83"
+      }
+    ],
+    "operator": ">=",
+    "bound": "89",
+    "gold_source": 0,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "rental-1-1",
+    "pair": "rental-1",
+    "query": "Adapt similarity-based record linking for rental equipment catalog cleanup in after supplier feed migration; require precision at least 91 %.",
+    "scope": {
+      "use": "rental equipment catalog cleanup",
+      "setting": "after supplier feed migration",
+      "metric": "precision",
+      "method": "similarity-based record linking"
+    },
+    "cards": [
+      {
+        "role": "measurement",
+        "text": "In after supplier feed migration the pilot measured precision of 89 %.",
+        "reading": "89"
+      },
+      {
+        "role": "target",
+        "text": "The design target for precision in after supplier feed migration is 94 %; the target is a proposal.",
+        "reading": "94"
+      },
+      {
+        "role": "unrelated",
+        "text": "In after supplier feed migration, the team documented 17 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In before migration, the pilot measured precision of 83 %.",
+        "reading": "83"
+      }
+    ],
+    "operator": ">=",
+    "bound": "91",
+    "gold_source": 0,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "rental-1-u",
+    "pair": "rental-1",
+    "query": "Adapt similarity-based record linking for rental equipment catalog cleanup in after supplier feed migration; require precision at least 89 %.",
+    "scope": {
+      "use": "rental equipment catalog cleanup",
+      "setting": "after supplier feed migration",
+      "metric": "precision",
+      "method": "similarity-based record linking"
+    },
+    "cards": [
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of precision in after supplier feed migration. Results are pending.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for precision in after supplier feed migration is 94 %; the target is a proposal.",
+        "reading": "94"
+      },
+      {
+        "role": "unrelated",
+        "text": "In after supplier feed migration, the team documented 17 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In before migration, the pilot measured precision of 83 %.",
+        "reading": "83"
+      }
+    ],
+    "operator": ">=",
+    "bound": "89",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "rental-2-0",
+    "pair": "rental-2",
+    "query": "Adapt similarity-based record linking for rental equipment catalog cleanup in after supplier feed migration; require precision at least 91 %.",
+    "scope": {
+      "use": "rental equipment catalog cleanup",
+      "setting": "after supplier feed migration",
+      "metric": "precision",
+      "method": "similarity-based record linking"
+    },
+    "cards": [
+      {
+        "role": "off_scope",
+        "text": "In before migration, the pilot measured precision of 85 %.",
+        "reading": "85"
+      },
+      {
+        "role": "target",
+        "text": "The design target for precision in after supplier feed migration is 96 %; the target is a proposal.",
+        "reading": "96"
+      },
+      {
+        "role": "measurement",
+        "text": "The observed precision was 91 % during after supplier feed migration.",
+        "reading": "91"
+      },
+      {
+        "role": "unrelated",
+        "text": "In after supplier feed migration, the team documented 18 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": ">=",
+    "bound": "91",
+    "gold_source": 2,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "rental-2-1",
+    "pair": "rental-2",
+    "query": "Adapt similarity-based record linking for rental equipment catalog cleanup in after supplier feed migration; require precision at least 93 %.",
+    "scope": {
+      "use": "rental equipment catalog cleanup",
+      "setting": "after supplier feed migration",
+      "metric": "precision",
+      "method": "similarity-based record linking"
+    },
+    "cards": [
+      {
+        "role": "off_scope",
+        "text": "In before migration, the pilot measured precision of 85 %.",
+        "reading": "85"
+      },
+      {
+        "role": "target",
+        "text": "The design target for precision in after supplier feed migration is 96 %; the target is a proposal.",
+        "reading": "96"
+      },
+      {
+        "role": "measurement",
+        "text": "The observed precision was 91 % during after supplier feed migration.",
+        "reading": "91"
+      },
+      {
+        "role": "unrelated",
+        "text": "In after supplier feed migration, the team documented 18 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": ">=",
+    "bound": "93",
+    "gold_source": 2,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "rental-2-u",
+    "pair": "rental-2",
+    "query": "Adapt similarity-based record linking for rental equipment catalog cleanup in after supplier feed migration; require precision at least 91 %.",
+    "scope": {
+      "use": "rental equipment catalog cleanup",
+      "setting": "after supplier feed migration",
+      "metric": "precision",
+      "method": "similarity-based record linking"
+    },
+    "cards": [
+      {
+        "role": "off_scope",
+        "text": "In before migration, the pilot measured precision of 85 %.",
+        "reading": "85"
+      },
+      {
+        "role": "target",
+        "text": "The design target for precision in after supplier feed migration is 96 %; the target is a proposal.",
+        "reading": "96"
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of precision in after supplier feed migration. Results are pending.",
+        "reading": null
+      },
+      {
+        "role": "unrelated",
+        "text": "In after supplier feed migration, the team documented 18 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": ">=",
+    "bound": "91",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "rental-3-0",
+    "pair": "rental-3",
+    "query": "Adapt similarity-based record linking for rental equipment catalog cleanup in after supplier feed migration; require precision at least 93 %.",
+    "scope": {
+      "use": "rental equipment catalog cleanup",
+      "setting": "after supplier feed migration",
+      "metric": "precision",
+      "method": "similarity-based record linking"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for precision in after supplier feed migration is 98 %; the target is a proposal.",
+        "reading": "98"
+      },
+      {
+        "role": "measurement",
+        "text": "For after supplier feed migration, the recorded measurement of precision was 93 %.",
+        "reading": "93"
+      },
+      {
+        "role": "unrelated",
+        "text": "In after supplier feed migration, the team documented 19 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In before migration, the pilot measured precision of 87 %.",
+        "reading": "87"
+      }
+    ],
+    "operator": ">=",
+    "bound": "93",
+    "gold_source": 1,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "rental-3-1",
+    "pair": "rental-3",
+    "query": "Adapt similarity-based record linking for rental equipment catalog cleanup in after supplier feed migration; require precision at least 95 %.",
+    "scope": {
+      "use": "rental equipment catalog cleanup",
+      "setting": "after supplier feed migration",
+      "metric": "precision",
+      "method": "similarity-based record linking"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for precision in after supplier feed migration is 98 %; the target is a proposal.",
+        "reading": "98"
+      },
+      {
+        "role": "measurement",
+        "text": "For after supplier feed migration, the recorded measurement of precision was 93 %.",
+        "reading": "93"
+      },
+      {
+        "role": "unrelated",
+        "text": "In after supplier feed migration, the team documented 19 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In before migration, the pilot measured precision of 87 %.",
+        "reading": "87"
+      }
+    ],
+    "operator": ">=",
+    "bound": "95",
+    "gold_source": 1,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "rental-3-u",
+    "pair": "rental-3",
+    "query": "Adapt similarity-based record linking for rental equipment catalog cleanup in after supplier feed migration; require precision at least 93 %.",
+    "scope": {
+      "use": "rental equipment catalog cleanup",
+      "setting": "after supplier feed migration",
+      "metric": "precision",
+      "method": "similarity-based record linking"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for precision in after supplier feed migration is 98 %; the target is a proposal.",
+        "reading": "98"
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of precision in after supplier feed migration. Results are pending.",
+        "reading": null
+      },
+      {
+        "role": "unrelated",
+        "text": "In after supplier feed migration, the team documented 19 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In before migration, the pilot measured precision of 87 %.",
+        "reading": "87"
+      }
+    ],
+    "operator": ">=",
+    "bound": "93",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "rental-4-0",
+    "pair": "rental-4",
+    "query": "Adapt similarity-based record linking for rental equipment catalog cleanup in after supplier feed migration; require precision at least 95 %.",
+    "scope": {
+      "use": "rental equipment catalog cleanup",
+      "setting": "after supplier feed migration",
+      "metric": "precision",
+      "method": "similarity-based record linking"
+    },
+    "cards": [
+      {
+        "role": "off_scope",
+        "text": "In before migration, the pilot measured precision of 89 %.",
+        "reading": "89"
+      },
+      {
+        "role": "unrelated",
+        "text": "In after supplier feed migration, the team documented 20 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for precision in after supplier feed migration is 100 %; the target is a proposal.",
+        "reading": "100"
+      },
+      {
+        "role": "measurement",
+        "text": "In after supplier feed migration the pilot measured precision of 95 %.",
+        "reading": "95"
+      }
+    ],
+    "operator": ">=",
+    "bound": "95",
+    "gold_source": 3,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "rental-4-1",
+    "pair": "rental-4",
+    "query": "Adapt similarity-based record linking for rental equipment catalog cleanup in after supplier feed migration; require precision at least 97 %.",
+    "scope": {
+      "use": "rental equipment catalog cleanup",
+      "setting": "after supplier feed migration",
+      "metric": "precision",
+      "method": "similarity-based record linking"
+    },
+    "cards": [
+      {
+        "role": "off_scope",
+        "text": "In before migration, the pilot measured precision of 89 %.",
+        "reading": "89"
+      },
+      {
+        "role": "unrelated",
+        "text": "In after supplier feed migration, the team documented 20 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for precision in after supplier feed migration is 100 %; the target is a proposal.",
+        "reading": "100"
+      },
+      {
+        "role": "measurement",
+        "text": "In after supplier feed migration the pilot measured precision of 95 %.",
+        "reading": "95"
+      }
+    ],
+    "operator": ">=",
+    "bound": "97",
+    "gold_source": 3,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "rental-4-u",
+    "pair": "rental-4",
+    "query": "Adapt similarity-based record linking for rental equipment catalog cleanup in after supplier feed migration; require precision at least 95 %.",
+    "scope": {
+      "use": "rental equipment catalog cleanup",
+      "setting": "after supplier feed migration",
+      "metric": "precision",
+      "method": "similarity-based record linking"
+    },
+    "cards": [
+      {
+        "role": "off_scope",
+        "text": "In before migration, the pilot measured precision of 89 %.",
+        "reading": "89"
+      },
+      {
+        "role": "unrelated",
+        "text": "In after supplier feed migration, the team documented 20 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for precision in after supplier feed migration is 100 %; the target is a proposal.",
+        "reading": "100"
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of precision in after supplier feed migration. Results are pending.",
+        "reading": null
+      }
+    ],
+    "operator": ">=",
+    "bound": "95",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "networking-1-0",
+    "pair": "networking-1",
+    "query": "Adapt priority-aware retry scheduling for office gateway request delivery in under bursty office traffic; require successful deliveries strictly above 157 requests/s.",
+    "scope": {
+      "use": "office gateway request delivery",
+      "setting": "under bursty office traffic",
+      "metric": "successful deliveries",
+      "method": "priority-aware retry scheduling"
+    },
+    "cards": [
+      {
+        "role": "off_scope",
+        "text": "In constant rate lab traffic, the pilot measured successful deliveries of 151 requests/s.",
+        "reading": "151"
+      },
+      {
+        "role": "unrelated",
+        "text": "In under bursty office traffic, the team documented 17 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for successful deliveries in under bursty office traffic is 162 requests/s; the target is a proposal.",
+        "reading": "162"
+      },
+      {
+        "role": "measurement",
+        "text": "In under bursty office traffic the pilot measured successful deliveries of 157 requests/s.",
+        "reading": "157"
+      }
+    ],
+    "operator": ">",
+    "bound": "157",
+    "gold_source": 3,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "networking-1-1",
+    "pair": "networking-1",
+    "query": "Adapt priority-aware retry scheduling for office gateway request delivery in under bursty office traffic; require successful deliveries strictly above 155 requests/s.",
+    "scope": {
+      "use": "office gateway request delivery",
+      "setting": "under bursty office traffic",
+      "metric": "successful deliveries",
+      "method": "priority-aware retry scheduling"
+    },
+    "cards": [
+      {
+        "role": "off_scope",
+        "text": "In constant rate lab traffic, the pilot measured successful deliveries of 151 requests/s.",
+        "reading": "151"
+      },
+      {
+        "role": "unrelated",
+        "text": "In under bursty office traffic, the team documented 17 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for successful deliveries in under bursty office traffic is 162 requests/s; the target is a proposal.",
+        "reading": "162"
+      },
+      {
+        "role": "measurement",
+        "text": "In under bursty office traffic the pilot measured successful deliveries of 157 requests/s.",
+        "reading": "157"
+      }
+    ],
+    "operator": ">",
+    "bound": "155",
+    "gold_source": 3,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "networking-1-u",
+    "pair": "networking-1",
+    "query": "Adapt priority-aware retry scheduling for office gateway request delivery in under bursty office traffic; require successful deliveries strictly above 157 requests/s.",
+    "scope": {
+      "use": "office gateway request delivery",
+      "setting": "under bursty office traffic",
+      "metric": "successful deliveries",
+      "method": "priority-aware retry scheduling"
+    },
+    "cards": [
+      {
+        "role": "off_scope",
+        "text": "In constant rate lab traffic, the pilot measured successful deliveries of 151 requests/s.",
+        "reading": "151"
+      },
+      {
+        "role": "unrelated",
+        "text": "In under bursty office traffic, the team documented 17 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for successful deliveries in under bursty office traffic is 162 requests/s; the target is a proposal.",
+        "reading": "162"
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of successful deliveries in under bursty office traffic. Results are pending.",
+        "reading": null
+      }
+    ],
+    "operator": ">",
+    "bound": "157",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "networking-2-0",
+    "pair": "networking-2",
+    "query": "Adapt priority-aware retry scheduling for office gateway request delivery in under bursty office traffic; require successful deliveries strictly above 159 requests/s.",
+    "scope": {
+      "use": "office gateway request delivery",
+      "setting": "under bursty office traffic",
+      "metric": "successful deliveries",
+      "method": "priority-aware retry scheduling"
+    },
+    "cards": [
+      {
+        "role": "unrelated",
+        "text": "In under bursty office traffic, the team documented 18 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In constant rate lab traffic, the pilot measured successful deliveries of 153 requests/s.",
+        "reading": "153"
+      },
+      {
+        "role": "measurement",
+        "text": "The observed successful deliveries was 159 requests/s during under bursty office traffic.",
+        "reading": "159"
+      },
+      {
+        "role": "target",
+        "text": "The design target for successful deliveries in under bursty office traffic is 164 requests/s; the target is a proposal.",
+        "reading": "164"
+      }
+    ],
+    "operator": ">",
+    "bound": "159",
+    "gold_source": 2,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "networking-2-1",
+    "pair": "networking-2",
+    "query": "Adapt priority-aware retry scheduling for office gateway request delivery in under bursty office traffic; require successful deliveries strictly above 157 requests/s.",
+    "scope": {
+      "use": "office gateway request delivery",
+      "setting": "under bursty office traffic",
+      "metric": "successful deliveries",
+      "method": "priority-aware retry scheduling"
+    },
+    "cards": [
+      {
+        "role": "unrelated",
+        "text": "In under bursty office traffic, the team documented 18 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In constant rate lab traffic, the pilot measured successful deliveries of 153 requests/s.",
+        "reading": "153"
+      },
+      {
+        "role": "measurement",
+        "text": "The observed successful deliveries was 159 requests/s during under bursty office traffic.",
+        "reading": "159"
+      },
+      {
+        "role": "target",
+        "text": "The design target for successful deliveries in under bursty office traffic is 164 requests/s; the target is a proposal.",
+        "reading": "164"
+      }
+    ],
+    "operator": ">",
+    "bound": "157",
+    "gold_source": 2,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "networking-2-u",
+    "pair": "networking-2",
+    "query": "Adapt priority-aware retry scheduling for office gateway request delivery in under bursty office traffic; require successful deliveries strictly above 159 requests/s.",
+    "scope": {
+      "use": "office gateway request delivery",
+      "setting": "under bursty office traffic",
+      "metric": "successful deliveries",
+      "method": "priority-aware retry scheduling"
+    },
+    "cards": [
+      {
+        "role": "unrelated",
+        "text": "In under bursty office traffic, the team documented 18 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In constant rate lab traffic, the pilot measured successful deliveries of 153 requests/s.",
+        "reading": "153"
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of successful deliveries in under bursty office traffic. Results are pending.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for successful deliveries in under bursty office traffic is 164 requests/s; the target is a proposal.",
+        "reading": "164"
+      }
+    ],
+    "operator": ">",
+    "bound": "159",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "networking-3-0",
+    "pair": "networking-3",
+    "query": "Adapt priority-aware retry scheduling for office gateway request delivery in under bursty office traffic; require successful deliveries strictly above 161 requests/s.",
+    "scope": {
+      "use": "office gateway request delivery",
+      "setting": "under bursty office traffic",
+      "metric": "successful deliveries",
+      "method": "priority-aware retry scheduling"
+    },
+    "cards": [
+      {
+        "role": "unrelated",
+        "text": "In under bursty office traffic, the team documented 19 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for successful deliveries in under bursty office traffic is 166 requests/s; the target is a proposal.",
+        "reading": "166"
+      },
+      {
+        "role": "measurement",
+        "text": "For under bursty office traffic, the recorded measurement of successful deliveries was 161 requests/s.",
+        "reading": "161"
+      },
+      {
+        "role": "off_scope",
+        "text": "In constant rate lab traffic, the pilot measured successful deliveries of 155 requests/s.",
+        "reading": "155"
+      }
+    ],
+    "operator": ">",
+    "bound": "161",
+    "gold_source": 2,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "networking-3-1",
+    "pair": "networking-3",
+    "query": "Adapt priority-aware retry scheduling for office gateway request delivery in under bursty office traffic; require successful deliveries strictly above 159 requests/s.",
+    "scope": {
+      "use": "office gateway request delivery",
+      "setting": "under bursty office traffic",
+      "metric": "successful deliveries",
+      "method": "priority-aware retry scheduling"
+    },
+    "cards": [
+      {
+        "role": "unrelated",
+        "text": "In under bursty office traffic, the team documented 19 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for successful deliveries in under bursty office traffic is 166 requests/s; the target is a proposal.",
+        "reading": "166"
+      },
+      {
+        "role": "measurement",
+        "text": "For under bursty office traffic, the recorded measurement of successful deliveries was 161 requests/s.",
+        "reading": "161"
+      },
+      {
+        "role": "off_scope",
+        "text": "In constant rate lab traffic, the pilot measured successful deliveries of 155 requests/s.",
+        "reading": "155"
+      }
+    ],
+    "operator": ">",
+    "bound": "159",
+    "gold_source": 2,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "networking-3-u",
+    "pair": "networking-3",
+    "query": "Adapt priority-aware retry scheduling for office gateway request delivery in under bursty office traffic; require successful deliveries strictly above 161 requests/s.",
+    "scope": {
+      "use": "office gateway request delivery",
+      "setting": "under bursty office traffic",
+      "metric": "successful deliveries",
+      "method": "priority-aware retry scheduling"
+    },
+    "cards": [
+      {
+        "role": "unrelated",
+        "text": "In under bursty office traffic, the team documented 19 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for successful deliveries in under bursty office traffic is 166 requests/s; the target is a proposal.",
+        "reading": "166"
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of successful deliveries in under bursty office traffic. Results are pending.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In constant rate lab traffic, the pilot measured successful deliveries of 155 requests/s.",
+        "reading": "155"
+      }
+    ],
+    "operator": ">",
+    "bound": "161",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "networking-4-0",
+    "pair": "networking-4",
+    "query": "Adapt priority-aware retry scheduling for office gateway request delivery in under bursty office traffic; require successful deliveries strictly above 163 requests/s.",
+    "scope": {
+      "use": "office gateway request delivery",
+      "setting": "under bursty office traffic",
+      "metric": "successful deliveries",
+      "method": "priority-aware retry scheduling"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for successful deliveries in under bursty office traffic is 168 requests/s; the target is a proposal.",
+        "reading": "168"
+      },
+      {
+        "role": "off_scope",
+        "text": "In constant rate lab traffic, the pilot measured successful deliveries of 157 requests/s.",
+        "reading": "157"
+      },
+      {
+        "role": "measurement",
+        "text": "In under bursty office traffic the pilot measured successful deliveries of 163 requests/s.",
+        "reading": "163"
+      },
+      {
+        "role": "unrelated",
+        "text": "In under bursty office traffic, the team documented 20 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": ">",
+    "bound": "163",
+    "gold_source": 2,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "networking-4-1",
+    "pair": "networking-4",
+    "query": "Adapt priority-aware retry scheduling for office gateway request delivery in under bursty office traffic; require successful deliveries strictly above 161 requests/s.",
+    "scope": {
+      "use": "office gateway request delivery",
+      "setting": "under bursty office traffic",
+      "metric": "successful deliveries",
+      "method": "priority-aware retry scheduling"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for successful deliveries in under bursty office traffic is 168 requests/s; the target is a proposal.",
+        "reading": "168"
+      },
+      {
+        "role": "off_scope",
+        "text": "In constant rate lab traffic, the pilot measured successful deliveries of 157 requests/s.",
+        "reading": "157"
+      },
+      {
+        "role": "measurement",
+        "text": "In under bursty office traffic the pilot measured successful deliveries of 163 requests/s.",
+        "reading": "163"
+      },
+      {
+        "role": "unrelated",
+        "text": "In under bursty office traffic, the team documented 20 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": ">",
+    "bound": "161",
+    "gold_source": 2,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "networking-4-u",
+    "pair": "networking-4",
+    "query": "Adapt priority-aware retry scheduling for office gateway request delivery in under bursty office traffic; require successful deliveries strictly above 163 requests/s.",
+    "scope": {
+      "use": "office gateway request delivery",
+      "setting": "under bursty office traffic",
+      "metric": "successful deliveries",
+      "method": "priority-aware retry scheduling"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for successful deliveries in under bursty office traffic is 168 requests/s; the target is a proposal.",
+        "reading": "168"
+      },
+      {
+        "role": "off_scope",
+        "text": "In constant rate lab traffic, the pilot measured successful deliveries of 157 requests/s.",
+        "reading": "157"
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of successful deliveries in under bursty office traffic. Results are pending.",
+        "reading": null
+      },
+      {
+        "role": "unrelated",
+        "text": "In under bursty office traffic, the team documented 20 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": ">",
+    "bound": "163",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "document-rendering-1-0",
+    "pair": "document-rendering-1",
+    "query": "Adapt content-addressed caching for report generation in after clearing the rendering cache; require P95 render time at most 132 ms.",
+    "scope": {
+      "use": "report generation",
+      "setting": "after clearing the rendering cache",
+      "metric": "P95 render time",
+      "method": "content-addressed caching"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for P95 render time in after clearing the rendering cache is 127 ms; the target is a proposal.",
+        "reading": "127"
+      },
+      {
+        "role": "off_scope",
+        "text": "In with a warm cache, the pilot measured P95 render time of 138 ms.",
+        "reading": "138"
+      },
+      {
+        "role": "measurement",
+        "text": "In after clearing the rendering cache the pilot measured P95 render time of 132 ms.",
+        "reading": "132"
+      },
+      {
+        "role": "unrelated",
+        "text": "In after clearing the rendering cache, the team documented 17 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": "<=",
+    "bound": "132",
+    "gold_source": 2,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "document-rendering-1-1",
+    "pair": "document-rendering-1",
+    "query": "Adapt content-addressed caching for report generation in after clearing the rendering cache; require P95 render time at most 130 ms.",
+    "scope": {
+      "use": "report generation",
+      "setting": "after clearing the rendering cache",
+      "metric": "P95 render time",
+      "method": "content-addressed caching"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for P95 render time in after clearing the rendering cache is 127 ms; the target is a proposal.",
+        "reading": "127"
+      },
+      {
+        "role": "off_scope",
+        "text": "In with a warm cache, the pilot measured P95 render time of 138 ms.",
+        "reading": "138"
+      },
+      {
+        "role": "measurement",
+        "text": "In after clearing the rendering cache the pilot measured P95 render time of 132 ms.",
+        "reading": "132"
+      },
+      {
+        "role": "unrelated",
+        "text": "In after clearing the rendering cache, the team documented 17 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": "<=",
+    "bound": "130",
+    "gold_source": 2,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "document-rendering-1-u",
+    "pair": "document-rendering-1",
+    "query": "Adapt content-addressed caching for report generation in after clearing the rendering cache; require P95 render time at most 132 ms.",
+    "scope": {
+      "use": "report generation",
+      "setting": "after clearing the rendering cache",
+      "metric": "P95 render time",
+      "method": "content-addressed caching"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for P95 render time in after clearing the rendering cache is 127 ms; the target is a proposal.",
+        "reading": "127"
+      },
+      {
+        "role": "off_scope",
+        "text": "In with a warm cache, the pilot measured P95 render time of 138 ms.",
+        "reading": "138"
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of P95 render time in after clearing the rendering cache. Results are pending.",
+        "reading": null
+      },
+      {
+        "role": "unrelated",
+        "text": "In after clearing the rendering cache, the team documented 17 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": "<=",
+    "bound": "132",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "document-rendering-2-0",
+    "pair": "document-rendering-2",
+    "query": "Adapt content-addressed caching for report generation in after clearing the rendering cache; require P95 render time at most 134 ms.",
+    "scope": {
+      "use": "report generation",
+      "setting": "after clearing the rendering cache",
+      "metric": "P95 render time",
+      "method": "content-addressed caching"
+    },
+    "cards": [
+      {
+        "role": "measurement",
+        "text": "The observed P95 render time was 0.134 s during after clearing the rendering cache.",
+        "reading": "134"
+      },
+      {
+        "role": "off_scope",
+        "text": "In with a warm cache, the pilot measured P95 render time of 140 ms.",
+        "reading": "140"
+      },
+      {
+        "role": "target",
+        "text": "The design target for P95 render time in after clearing the rendering cache is 129 ms; the target is a proposal.",
+        "reading": "129"
+      },
+      {
+        "role": "unrelated",
+        "text": "In after clearing the rendering cache, the team documented 18 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": "<=",
+    "bound": "134",
+    "gold_source": 0,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "document-rendering-2-1",
+    "pair": "document-rendering-2",
+    "query": "Adapt content-addressed caching for report generation in after clearing the rendering cache; require P95 render time at most 132 ms.",
+    "scope": {
+      "use": "report generation",
+      "setting": "after clearing the rendering cache",
+      "metric": "P95 render time",
+      "method": "content-addressed caching"
+    },
+    "cards": [
+      {
+        "role": "measurement",
+        "text": "The observed P95 render time was 0.134 s during after clearing the rendering cache.",
+        "reading": "134"
+      },
+      {
+        "role": "off_scope",
+        "text": "In with a warm cache, the pilot measured P95 render time of 140 ms.",
+        "reading": "140"
+      },
+      {
+        "role": "target",
+        "text": "The design target for P95 render time in after clearing the rendering cache is 129 ms; the target is a proposal.",
+        "reading": "129"
+      },
+      {
+        "role": "unrelated",
+        "text": "In after clearing the rendering cache, the team documented 18 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": "<=",
+    "bound": "132",
+    "gold_source": 0,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "document-rendering-2-u",
+    "pair": "document-rendering-2",
+    "query": "Adapt content-addressed caching for report generation in after clearing the rendering cache; require P95 render time at most 134 ms.",
+    "scope": {
+      "use": "report generation",
+      "setting": "after clearing the rendering cache",
+      "metric": "P95 render time",
+      "method": "content-addressed caching"
+    },
+    "cards": [
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of P95 render time in after clearing the rendering cache. Results are pending.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In with a warm cache, the pilot measured P95 render time of 140 ms.",
+        "reading": "140"
+      },
+      {
+        "role": "target",
+        "text": "The design target for P95 render time in after clearing the rendering cache is 129 ms; the target is a proposal.",
+        "reading": "129"
+      },
+      {
+        "role": "unrelated",
+        "text": "In after clearing the rendering cache, the team documented 18 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": "<=",
+    "bound": "134",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "document-rendering-3-0",
+    "pair": "document-rendering-3",
+    "query": "Adapt content-addressed caching for report generation in after clearing the rendering cache; require P95 render time at most 136 ms.",
+    "scope": {
+      "use": "report generation",
+      "setting": "after clearing the rendering cache",
+      "metric": "P95 render time",
+      "method": "content-addressed caching"
+    },
+    "cards": [
+      {
+        "role": "unrelated",
+        "text": "In after clearing the rendering cache, the team documented 19 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "measurement",
+        "text": "For after clearing the rendering cache, the recorded measurement of P95 render time was 136 ms.",
+        "reading": "136"
+      },
+      {
+        "role": "target",
+        "text": "The design target for P95 render time in after clearing the rendering cache is 131 ms; the target is a proposal.",
+        "reading": "131"
+      },
+      {
+        "role": "off_scope",
+        "text": "In with a warm cache, the pilot measured P95 render time of 142 ms.",
+        "reading": "142"
+      }
+    ],
+    "operator": "<=",
+    "bound": "136",
+    "gold_source": 1,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "document-rendering-3-1",
+    "pair": "document-rendering-3",
+    "query": "Adapt content-addressed caching for report generation in after clearing the rendering cache; require P95 render time at most 134 ms.",
+    "scope": {
+      "use": "report generation",
+      "setting": "after clearing the rendering cache",
+      "metric": "P95 render time",
+      "method": "content-addressed caching"
+    },
+    "cards": [
+      {
+        "role": "unrelated",
+        "text": "In after clearing the rendering cache, the team documented 19 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "measurement",
+        "text": "For after clearing the rendering cache, the recorded measurement of P95 render time was 136 ms.",
+        "reading": "136"
+      },
+      {
+        "role": "target",
+        "text": "The design target for P95 render time in after clearing the rendering cache is 131 ms; the target is a proposal.",
+        "reading": "131"
+      },
+      {
+        "role": "off_scope",
+        "text": "In with a warm cache, the pilot measured P95 render time of 142 ms.",
+        "reading": "142"
+      }
+    ],
+    "operator": "<=",
+    "bound": "134",
+    "gold_source": 1,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "document-rendering-3-u",
+    "pair": "document-rendering-3",
+    "query": "Adapt content-addressed caching for report generation in after clearing the rendering cache; require P95 render time at most 136 ms.",
+    "scope": {
+      "use": "report generation",
+      "setting": "after clearing the rendering cache",
+      "metric": "P95 render time",
+      "method": "content-addressed caching"
+    },
+    "cards": [
+      {
+        "role": "unrelated",
+        "text": "In after clearing the rendering cache, the team documented 19 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of P95 render time in after clearing the rendering cache. Results are pending.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for P95 render time in after clearing the rendering cache is 131 ms; the target is a proposal.",
+        "reading": "131"
+      },
+      {
+        "role": "off_scope",
+        "text": "In with a warm cache, the pilot measured P95 render time of 142 ms.",
+        "reading": "142"
+      }
+    ],
+    "operator": "<=",
+    "bound": "136",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "document-rendering-4-0",
+    "pair": "document-rendering-4",
+    "query": "Adapt content-addressed caching for report generation in after clearing the rendering cache; require P95 render time at most 138 ms.",
+    "scope": {
+      "use": "report generation",
+      "setting": "after clearing the rendering cache",
+      "metric": "P95 render time",
+      "method": "content-addressed caching"
+    },
+    "cards": [
+      {
+        "role": "measurement",
+        "text": "In after clearing the rendering cache the pilot measured P95 render time of 0.138 s.",
+        "reading": "138"
+      },
+      {
+        "role": "unrelated",
+        "text": "In after clearing the rendering cache, the team documented 20 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for P95 render time in after clearing the rendering cache is 133 ms; the target is a proposal.",
+        "reading": "133"
+      },
+      {
+        "role": "off_scope",
+        "text": "In with a warm cache, the pilot measured P95 render time of 144 ms.",
+        "reading": "144"
+      }
+    ],
+    "operator": "<=",
+    "bound": "138",
+    "gold_source": 0,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "document-rendering-4-1",
+    "pair": "document-rendering-4",
+    "query": "Adapt content-addressed caching for report generation in after clearing the rendering cache; require P95 render time at most 136 ms.",
+    "scope": {
+      "use": "report generation",
+      "setting": "after clearing the rendering cache",
+      "metric": "P95 render time",
+      "method": "content-addressed caching"
+    },
+    "cards": [
+      {
+        "role": "measurement",
+        "text": "In after clearing the rendering cache the pilot measured P95 render time of 0.138 s.",
+        "reading": "138"
+      },
+      {
+        "role": "unrelated",
+        "text": "In after clearing the rendering cache, the team documented 20 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for P95 render time in after clearing the rendering cache is 133 ms; the target is a proposal.",
+        "reading": "133"
+      },
+      {
+        "role": "off_scope",
+        "text": "In with a warm cache, the pilot measured P95 render time of 144 ms.",
+        "reading": "144"
+      }
+    ],
+    "operator": "<=",
+    "bound": "136",
+    "gold_source": 0,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "document-rendering-4-u",
+    "pair": "document-rendering-4",
+    "query": "Adapt content-addressed caching for report generation in after clearing the rendering cache; require P95 render time at most 138 ms.",
+    "scope": {
+      "use": "report generation",
+      "setting": "after clearing the rendering cache",
+      "metric": "P95 render time",
+      "method": "content-addressed caching"
+    },
+    "cards": [
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of P95 render time in after clearing the rendering cache. Results are pending.",
+        "reading": null
+      },
+      {
+        "role": "unrelated",
+        "text": "In after clearing the rendering cache, the team documented 20 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for P95 render time in after clearing the rendering cache is 133 ms; the target is a proposal.",
+        "reading": "133"
+      },
+      {
+        "role": "off_scope",
+        "text": "In with a warm cache, the pilot measured P95 render time of 144 ms.",
+        "reading": "144"
+      }
+    ],
+    "operator": "<=",
+    "bound": "138",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "inventory-1-0",
+    "pair": "inventory-1",
+    "query": "Adapt constraint-guided allocation for inventory redistribution in under partial weekly counts; require order coverage strictly above 78 %.",
+    "scope": {
+      "use": "inventory redistribution",
+      "setting": "under partial weekly counts",
+      "metric": "order coverage",
+      "method": "constraint-guided allocation"
+    },
+    "cards": [
+      {
+        "role": "measurement",
+        "text": "In under partial weekly counts the pilot measured order coverage of 78 %.",
+        "reading": "78"
+      },
+      {
+        "role": "off_scope",
+        "text": "In with full stock counts, the pilot measured order coverage of 72 %.",
+        "reading": "72"
+      },
+      {
+        "role": "unrelated",
+        "text": "In under partial weekly counts, the team documented 17 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for order coverage in under partial weekly counts is 83 %; the target is a proposal.",
+        "reading": "83"
+      }
+    ],
+    "operator": ">",
+    "bound": "78",
+    "gold_source": 0,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "inventory-1-1",
+    "pair": "inventory-1",
+    "query": "Adapt constraint-guided allocation for inventory redistribution in under partial weekly counts; require order coverage strictly above 76 %.",
+    "scope": {
+      "use": "inventory redistribution",
+      "setting": "under partial weekly counts",
+      "metric": "order coverage",
+      "method": "constraint-guided allocation"
+    },
+    "cards": [
+      {
+        "role": "measurement",
+        "text": "In under partial weekly counts the pilot measured order coverage of 78 %.",
+        "reading": "78"
+      },
+      {
+        "role": "off_scope",
+        "text": "In with full stock counts, the pilot measured order coverage of 72 %.",
+        "reading": "72"
+      },
+      {
+        "role": "unrelated",
+        "text": "In under partial weekly counts, the team documented 17 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for order coverage in under partial weekly counts is 83 %; the target is a proposal.",
+        "reading": "83"
+      }
+    ],
+    "operator": ">",
+    "bound": "76",
+    "gold_source": 0,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "inventory-1-u",
+    "pair": "inventory-1",
+    "query": "Adapt constraint-guided allocation for inventory redistribution in under partial weekly counts; require order coverage strictly above 78 %.",
+    "scope": {
+      "use": "inventory redistribution",
+      "setting": "under partial weekly counts",
+      "metric": "order coverage",
+      "method": "constraint-guided allocation"
+    },
+    "cards": [
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of order coverage in under partial weekly counts. Results are pending.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In with full stock counts, the pilot measured order coverage of 72 %.",
+        "reading": "72"
+      },
+      {
+        "role": "unrelated",
+        "text": "In under partial weekly counts, the team documented 17 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for order coverage in under partial weekly counts is 83 %; the target is a proposal.",
+        "reading": "83"
+      }
+    ],
+    "operator": ">",
+    "bound": "78",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "inventory-2-0",
+    "pair": "inventory-2",
+    "query": "Adapt constraint-guided allocation for inventory redistribution in under partial weekly counts; require order coverage strictly above 80 %.",
+    "scope": {
+      "use": "inventory redistribution",
+      "setting": "under partial weekly counts",
+      "metric": "order coverage",
+      "method": "constraint-guided allocation"
+    },
+    "cards": [
+      {
+        "role": "measurement",
+        "text": "The observed order coverage was 80 % during under partial weekly counts.",
+        "reading": "80"
+      },
+      {
+        "role": "unrelated",
+        "text": "In under partial weekly counts, the team documented 18 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In with full stock counts, the pilot measured order coverage of 74 %.",
+        "reading": "74"
+      },
+      {
+        "role": "target",
+        "text": "The design target for order coverage in under partial weekly counts is 85 %; the target is a proposal.",
+        "reading": "85"
+      }
+    ],
+    "operator": ">",
+    "bound": "80",
+    "gold_source": 0,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "inventory-2-1",
+    "pair": "inventory-2",
+    "query": "Adapt constraint-guided allocation for inventory redistribution in under partial weekly counts; require order coverage strictly above 78 %.",
+    "scope": {
+      "use": "inventory redistribution",
+      "setting": "under partial weekly counts",
+      "metric": "order coverage",
+      "method": "constraint-guided allocation"
+    },
+    "cards": [
+      {
+        "role": "measurement",
+        "text": "The observed order coverage was 80 % during under partial weekly counts.",
+        "reading": "80"
+      },
+      {
+        "role": "unrelated",
+        "text": "In under partial weekly counts, the team documented 18 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In with full stock counts, the pilot measured order coverage of 74 %.",
+        "reading": "74"
+      },
+      {
+        "role": "target",
+        "text": "The design target for order coverage in under partial weekly counts is 85 %; the target is a proposal.",
+        "reading": "85"
+      }
+    ],
+    "operator": ">",
+    "bound": "78",
+    "gold_source": 0,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "inventory-2-u",
+    "pair": "inventory-2",
+    "query": "Adapt constraint-guided allocation for inventory redistribution in under partial weekly counts; require order coverage strictly above 80 %.",
+    "scope": {
+      "use": "inventory redistribution",
+      "setting": "under partial weekly counts",
+      "metric": "order coverage",
+      "method": "constraint-guided allocation"
+    },
+    "cards": [
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of order coverage in under partial weekly counts. Results are pending.",
+        "reading": null
+      },
+      {
+        "role": "unrelated",
+        "text": "In under partial weekly counts, the team documented 18 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In with full stock counts, the pilot measured order coverage of 74 %.",
+        "reading": "74"
+      },
+      {
+        "role": "target",
+        "text": "The design target for order coverage in under partial weekly counts is 85 %; the target is a proposal.",
+        "reading": "85"
+      }
+    ],
+    "operator": ">",
+    "bound": "80",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "inventory-3-0",
+    "pair": "inventory-3",
+    "query": "Adapt constraint-guided allocation for inventory redistribution in under partial weekly counts; require order coverage strictly above 82 %.",
+    "scope": {
+      "use": "inventory redistribution",
+      "setting": "under partial weekly counts",
+      "metric": "order coverage",
+      "method": "constraint-guided allocation"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for order coverage in under partial weekly counts is 87 %; the target is a proposal.",
+        "reading": "87"
+      },
+      {
+        "role": "measurement",
+        "text": "For under partial weekly counts, the recorded measurement of order coverage was 82 %.",
+        "reading": "82"
+      },
+      {
+        "role": "off_scope",
+        "text": "In with full stock counts, the pilot measured order coverage of 76 %.",
+        "reading": "76"
+      },
+      {
+        "role": "unrelated",
+        "text": "In under partial weekly counts, the team documented 19 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": ">",
+    "bound": "82",
+    "gold_source": 1,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "inventory-3-1",
+    "pair": "inventory-3",
+    "query": "Adapt constraint-guided allocation for inventory redistribution in under partial weekly counts; require order coverage strictly above 80 %.",
+    "scope": {
+      "use": "inventory redistribution",
+      "setting": "under partial weekly counts",
+      "metric": "order coverage",
+      "method": "constraint-guided allocation"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for order coverage in under partial weekly counts is 87 %; the target is a proposal.",
+        "reading": "87"
+      },
+      {
+        "role": "measurement",
+        "text": "For under partial weekly counts, the recorded measurement of order coverage was 82 %.",
+        "reading": "82"
+      },
+      {
+        "role": "off_scope",
+        "text": "In with full stock counts, the pilot measured order coverage of 76 %.",
+        "reading": "76"
+      },
+      {
+        "role": "unrelated",
+        "text": "In under partial weekly counts, the team documented 19 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": ">",
+    "bound": "80",
+    "gold_source": 1,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "inventory-3-u",
+    "pair": "inventory-3",
+    "query": "Adapt constraint-guided allocation for inventory redistribution in under partial weekly counts; require order coverage strictly above 82 %.",
+    "scope": {
+      "use": "inventory redistribution",
+      "setting": "under partial weekly counts",
+      "metric": "order coverage",
+      "method": "constraint-guided allocation"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for order coverage in under partial weekly counts is 87 %; the target is a proposal.",
+        "reading": "87"
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of order coverage in under partial weekly counts. Results are pending.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In with full stock counts, the pilot measured order coverage of 76 %.",
+        "reading": "76"
+      },
+      {
+        "role": "unrelated",
+        "text": "In under partial weekly counts, the team documented 19 follow-up maintenance checks.",
+        "reading": null
+      }
+    ],
+    "operator": ">",
+    "bound": "82",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "inventory-4-0",
+    "pair": "inventory-4",
+    "query": "Adapt constraint-guided allocation for inventory redistribution in under partial weekly counts; require order coverage strictly above 84 %.",
+    "scope": {
+      "use": "inventory redistribution",
+      "setting": "under partial weekly counts",
+      "metric": "order coverage",
+      "method": "constraint-guided allocation"
+    },
+    "cards": [
+      {
+        "role": "unrelated",
+        "text": "In under partial weekly counts, the team documented 20 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for order coverage in under partial weekly counts is 89 %; the target is a proposal.",
+        "reading": "89"
+      },
+      {
+        "role": "off_scope",
+        "text": "In with full stock counts, the pilot measured order coverage of 78 %.",
+        "reading": "78"
+      },
+      {
+        "role": "measurement",
+        "text": "In under partial weekly counts the pilot measured order coverage of 84 %.",
+        "reading": "84"
+      }
+    ],
+    "operator": ">",
+    "bound": "84",
+    "gold_source": 3,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "inventory-4-1",
+    "pair": "inventory-4",
+    "query": "Adapt constraint-guided allocation for inventory redistribution in under partial weekly counts; require order coverage strictly above 82 %.",
+    "scope": {
+      "use": "inventory redistribution",
+      "setting": "under partial weekly counts",
+      "metric": "order coverage",
+      "method": "constraint-guided allocation"
+    },
+    "cards": [
+      {
+        "role": "unrelated",
+        "text": "In under partial weekly counts, the team documented 20 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for order coverage in under partial weekly counts is 89 %; the target is a proposal.",
+        "reading": "89"
+      },
+      {
+        "role": "off_scope",
+        "text": "In with full stock counts, the pilot measured order coverage of 78 %.",
+        "reading": "78"
+      },
+      {
+        "role": "measurement",
+        "text": "In under partial weekly counts the pilot measured order coverage of 84 %.",
+        "reading": "84"
+      }
+    ],
+    "operator": ">",
+    "bound": "82",
+    "gold_source": 3,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "inventory-4-u",
+    "pair": "inventory-4",
+    "query": "Adapt constraint-guided allocation for inventory redistribution in under partial weekly counts; require order coverage strictly above 84 %.",
+    "scope": {
+      "use": "inventory redistribution",
+      "setting": "under partial weekly counts",
+      "metric": "order coverage",
+      "method": "constraint-guided allocation"
+    },
+    "cards": [
+      {
+        "role": "unrelated",
+        "text": "In under partial weekly counts, the team documented 20 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for order coverage in under partial weekly counts is 89 %; the target is a proposal.",
+        "reading": "89"
+      },
+      {
+        "role": "off_scope",
+        "text": "In with full stock counts, the pilot measured order coverage of 78 %.",
+        "reading": "78"
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of order coverage in under partial weekly counts. Results are pending.",
+        "reading": null
+      }
+    ],
+    "operator": ">",
+    "bound": "84",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "index-snapshot-1-0",
+    "pair": "index-snapshot-1",
+    "query": "Adapt delta-based metadata compaction for search index snapshots in after a full profile rebuild; require snapshot storage strictly below 637 kB.",
+    "scope": {
+      "use": "search index snapshots",
+      "setting": "after a full profile rebuild",
+      "metric": "snapshot storage",
+      "method": "delta-based metadata compaction"
+    },
+    "cards": [
+      {
+        "role": "off_scope",
+        "text": "In before a full rebuild, the pilot measured snapshot storage of 643 kB.",
+        "reading": "643"
+      },
+      {
+        "role": "unrelated",
+        "text": "In after a full profile rebuild, the team documented 17 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for snapshot storage in after a full profile rebuild is 632 kB; the target is a proposal.",
+        "reading": "632"
+      },
+      {
+        "role": "measurement",
+        "text": "In after a full profile rebuild the pilot measured snapshot storage of 637 kB.",
+        "reading": "637"
+      }
+    ],
+    "operator": "<",
+    "bound": "637",
+    "gold_source": 3,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "index-snapshot-1-1",
+    "pair": "index-snapshot-1",
+    "query": "Adapt delta-based metadata compaction for search index snapshots in after a full profile rebuild; require snapshot storage strictly below 639 kB.",
+    "scope": {
+      "use": "search index snapshots",
+      "setting": "after a full profile rebuild",
+      "metric": "snapshot storage",
+      "method": "delta-based metadata compaction"
+    },
+    "cards": [
+      {
+        "role": "off_scope",
+        "text": "In before a full rebuild, the pilot measured snapshot storage of 643 kB.",
+        "reading": "643"
+      },
+      {
+        "role": "unrelated",
+        "text": "In after a full profile rebuild, the team documented 17 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for snapshot storage in after a full profile rebuild is 632 kB; the target is a proposal.",
+        "reading": "632"
+      },
+      {
+        "role": "measurement",
+        "text": "In after a full profile rebuild the pilot measured snapshot storage of 637 kB.",
+        "reading": "637"
+      }
+    ],
+    "operator": "<",
+    "bound": "639",
+    "gold_source": 3,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "index-snapshot-1-u",
+    "pair": "index-snapshot-1",
+    "query": "Adapt delta-based metadata compaction for search index snapshots in after a full profile rebuild; require snapshot storage strictly below 637 kB.",
+    "scope": {
+      "use": "search index snapshots",
+      "setting": "after a full profile rebuild",
+      "metric": "snapshot storage",
+      "method": "delta-based metadata compaction"
+    },
+    "cards": [
+      {
+        "role": "off_scope",
+        "text": "In before a full rebuild, the pilot measured snapshot storage of 643 kB.",
+        "reading": "643"
+      },
+      {
+        "role": "unrelated",
+        "text": "In after a full profile rebuild, the team documented 17 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for snapshot storage in after a full profile rebuild is 632 kB; the target is a proposal.",
+        "reading": "632"
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of snapshot storage in after a full profile rebuild. Results are pending.",
+        "reading": null
+      }
+    ],
+    "operator": "<",
+    "bound": "637",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "index-snapshot-2-0",
+    "pair": "index-snapshot-2",
+    "query": "Adapt delta-based metadata compaction for search index snapshots in after a full profile rebuild; require snapshot storage strictly below 639 kB.",
+    "scope": {
+      "use": "search index snapshots",
+      "setting": "after a full profile rebuild",
+      "metric": "snapshot storage",
+      "method": "delta-based metadata compaction"
+    },
+    "cards": [
+      {
+        "role": "off_scope",
+        "text": "In before a full rebuild, the pilot measured snapshot storage of 645 kB.",
+        "reading": "645"
+      },
+      {
+        "role": "unrelated",
+        "text": "In after a full profile rebuild, the team documented 18 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for snapshot storage in after a full profile rebuild is 634 kB; the target is a proposal.",
+        "reading": "634"
+      },
+      {
+        "role": "measurement",
+        "text": "The observed snapshot storage was 0.639 MB during after a full profile rebuild.",
+        "reading": "639"
+      }
+    ],
+    "operator": "<",
+    "bound": "639",
+    "gold_source": 3,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "index-snapshot-2-1",
+    "pair": "index-snapshot-2",
+    "query": "Adapt delta-based metadata compaction for search index snapshots in after a full profile rebuild; require snapshot storage strictly below 641 kB.",
+    "scope": {
+      "use": "search index snapshots",
+      "setting": "after a full profile rebuild",
+      "metric": "snapshot storage",
+      "method": "delta-based metadata compaction"
+    },
+    "cards": [
+      {
+        "role": "off_scope",
+        "text": "In before a full rebuild, the pilot measured snapshot storage of 645 kB.",
+        "reading": "645"
+      },
+      {
+        "role": "unrelated",
+        "text": "In after a full profile rebuild, the team documented 18 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for snapshot storage in after a full profile rebuild is 634 kB; the target is a proposal.",
+        "reading": "634"
+      },
+      {
+        "role": "measurement",
+        "text": "The observed snapshot storage was 0.639 MB during after a full profile rebuild.",
+        "reading": "639"
+      }
+    ],
+    "operator": "<",
+    "bound": "641",
+    "gold_source": 3,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "index-snapshot-2-u",
+    "pair": "index-snapshot-2",
+    "query": "Adapt delta-based metadata compaction for search index snapshots in after a full profile rebuild; require snapshot storage strictly below 639 kB.",
+    "scope": {
+      "use": "search index snapshots",
+      "setting": "after a full profile rebuild",
+      "metric": "snapshot storage",
+      "method": "delta-based metadata compaction"
+    },
+    "cards": [
+      {
+        "role": "off_scope",
+        "text": "In before a full rebuild, the pilot measured snapshot storage of 645 kB.",
+        "reading": "645"
+      },
+      {
+        "role": "unrelated",
+        "text": "In after a full profile rebuild, the team documented 18 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for snapshot storage in after a full profile rebuild is 634 kB; the target is a proposal.",
+        "reading": "634"
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of snapshot storage in after a full profile rebuild. Results are pending.",
+        "reading": null
+      }
+    ],
+    "operator": "<",
+    "bound": "639",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "index-snapshot-3-0",
+    "pair": "index-snapshot-3",
+    "query": "Adapt delta-based metadata compaction for search index snapshots in after a full profile rebuild; require snapshot storage strictly below 641 kB.",
+    "scope": {
+      "use": "search index snapshots",
+      "setting": "after a full profile rebuild",
+      "metric": "snapshot storage",
+      "method": "delta-based metadata compaction"
+    },
+    "cards": [
+      {
+        "role": "measurement",
+        "text": "For after a full profile rebuild, the recorded measurement of snapshot storage was 641 kB.",
+        "reading": "641"
+      },
+      {
+        "role": "target",
+        "text": "The design target for snapshot storage in after a full profile rebuild is 636 kB; the target is a proposal.",
+        "reading": "636"
+      },
+      {
+        "role": "unrelated",
+        "text": "In after a full profile rebuild, the team documented 19 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In before a full rebuild, the pilot measured snapshot storage of 647 kB.",
+        "reading": "647"
+      }
+    ],
+    "operator": "<",
+    "bound": "641",
+    "gold_source": 0,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "index-snapshot-3-1",
+    "pair": "index-snapshot-3",
+    "query": "Adapt delta-based metadata compaction for search index snapshots in after a full profile rebuild; require snapshot storage strictly below 643 kB.",
+    "scope": {
+      "use": "search index snapshots",
+      "setting": "after a full profile rebuild",
+      "metric": "snapshot storage",
+      "method": "delta-based metadata compaction"
+    },
+    "cards": [
+      {
+        "role": "measurement",
+        "text": "For after a full profile rebuild, the recorded measurement of snapshot storage was 641 kB.",
+        "reading": "641"
+      },
+      {
+        "role": "target",
+        "text": "The design target for snapshot storage in after a full profile rebuild is 636 kB; the target is a proposal.",
+        "reading": "636"
+      },
+      {
+        "role": "unrelated",
+        "text": "In after a full profile rebuild, the team documented 19 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In before a full rebuild, the pilot measured snapshot storage of 647 kB.",
+        "reading": "647"
+      }
+    ],
+    "operator": "<",
+    "bound": "643",
+    "gold_source": 0,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "index-snapshot-3-u",
+    "pair": "index-snapshot-3",
+    "query": "Adapt delta-based metadata compaction for search index snapshots in after a full profile rebuild; require snapshot storage strictly below 641 kB.",
+    "scope": {
+      "use": "search index snapshots",
+      "setting": "after a full profile rebuild",
+      "metric": "snapshot storage",
+      "method": "delta-based metadata compaction"
+    },
+    "cards": [
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of snapshot storage in after a full profile rebuild. Results are pending.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for snapshot storage in after a full profile rebuild is 636 kB; the target is a proposal.",
+        "reading": "636"
+      },
+      {
+        "role": "unrelated",
+        "text": "In after a full profile rebuild, the team documented 19 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In before a full rebuild, the pilot measured snapshot storage of 647 kB.",
+        "reading": "647"
+      }
+    ],
+    "operator": "<",
+    "bound": "641",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "index-snapshot-4-0",
+    "pair": "index-snapshot-4",
+    "query": "Adapt delta-based metadata compaction for search index snapshots in after a full profile rebuild; require snapshot storage strictly below 643 kB.",
+    "scope": {
+      "use": "search index snapshots",
+      "setting": "after a full profile rebuild",
+      "metric": "snapshot storage",
+      "method": "delta-based metadata compaction"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for snapshot storage in after a full profile rebuild is 638 kB; the target is a proposal.",
+        "reading": "638"
+      },
+      {
+        "role": "unrelated",
+        "text": "In after a full profile rebuild, the team documented 20 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "measurement",
+        "text": "In after a full profile rebuild the pilot measured snapshot storage of 0.643 MB.",
+        "reading": "643"
+      },
+      {
+        "role": "off_scope",
+        "text": "In before a full rebuild, the pilot measured snapshot storage of 649 kB.",
+        "reading": "649"
+      }
+    ],
+    "operator": "<",
+    "bound": "643",
+    "gold_source": 2,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "index-snapshot-4-1",
+    "pair": "index-snapshot-4",
+    "query": "Adapt delta-based metadata compaction for search index snapshots in after a full profile rebuild; require snapshot storage strictly below 645 kB.",
+    "scope": {
+      "use": "search index snapshots",
+      "setting": "after a full profile rebuild",
+      "metric": "snapshot storage",
+      "method": "delta-based metadata compaction"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for snapshot storage in after a full profile rebuild is 638 kB; the target is a proposal.",
+        "reading": "638"
+      },
+      {
+        "role": "unrelated",
+        "text": "In after a full profile rebuild, the team documented 20 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "measurement",
+        "text": "In after a full profile rebuild the pilot measured snapshot storage of 0.643 MB.",
+        "reading": "643"
+      },
+      {
+        "role": "off_scope",
+        "text": "In before a full rebuild, the pilot measured snapshot storage of 649 kB.",
+        "reading": "649"
+      }
+    ],
+    "operator": "<",
+    "bound": "645",
+    "gold_source": 2,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "index-snapshot-4-u",
+    "pair": "index-snapshot-4",
+    "query": "Adapt delta-based metadata compaction for search index snapshots in after a full profile rebuild; require snapshot storage strictly below 643 kB.",
+    "scope": {
+      "use": "search index snapshots",
+      "setting": "after a full profile rebuild",
+      "metric": "snapshot storage",
+      "method": "delta-based metadata compaction"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for snapshot storage in after a full profile rebuild is 638 kB; the target is a proposal.",
+        "reading": "638"
+      },
+      {
+        "role": "unrelated",
+        "text": "In after a full profile rebuild, the team documented 20 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of snapshot storage in after a full profile rebuild. Results are pending.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In before a full rebuild, the pilot measured snapshot storage of 649 kB.",
+        "reading": "649"
+      }
+    ],
+    "operator": "<",
+    "bound": "643",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "returns-1-0",
+    "pair": "returns-1",
+    "query": "Adapt duplicate-aware classification for product return triage in when packaging labels are missing; require class-balanced accuracy at least 83 %.",
+    "scope": {
+      "use": "product return triage",
+      "setting": "when packaging labels are missing",
+      "metric": "class-balanced accuracy",
+      "method": "duplicate-aware classification"
+    },
+    "cards": [
+      {
+        "role": "off_scope",
+        "text": "In with readable labels, the pilot measured class-balanced accuracy of 77 %.",
+        "reading": "77"
+      },
+      {
+        "role": "target",
+        "text": "The design target for class-balanced accuracy in when packaging labels are missing is 88 %; the target is a proposal.",
+        "reading": "88"
+      },
+      {
+        "role": "unrelated",
+        "text": "In when packaging labels are missing, the team documented 17 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "measurement",
+        "text": "In when packaging labels are missing the pilot measured class-balanced accuracy of 83 %.",
+        "reading": "83"
+      }
+    ],
+    "operator": ">=",
+    "bound": "83",
+    "gold_source": 3,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "returns-1-1",
+    "pair": "returns-1",
+    "query": "Adapt duplicate-aware classification for product return triage in when packaging labels are missing; require class-balanced accuracy at least 85 %.",
+    "scope": {
+      "use": "product return triage",
+      "setting": "when packaging labels are missing",
+      "metric": "class-balanced accuracy",
+      "method": "duplicate-aware classification"
+    },
+    "cards": [
+      {
+        "role": "off_scope",
+        "text": "In with readable labels, the pilot measured class-balanced accuracy of 77 %.",
+        "reading": "77"
+      },
+      {
+        "role": "target",
+        "text": "The design target for class-balanced accuracy in when packaging labels are missing is 88 %; the target is a proposal.",
+        "reading": "88"
+      },
+      {
+        "role": "unrelated",
+        "text": "In when packaging labels are missing, the team documented 17 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "measurement",
+        "text": "In when packaging labels are missing the pilot measured class-balanced accuracy of 83 %.",
+        "reading": "83"
+      }
+    ],
+    "operator": ">=",
+    "bound": "85",
+    "gold_source": 3,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "returns-1-u",
+    "pair": "returns-1",
+    "query": "Adapt duplicate-aware classification for product return triage in when packaging labels are missing; require class-balanced accuracy at least 83 %.",
+    "scope": {
+      "use": "product return triage",
+      "setting": "when packaging labels are missing",
+      "metric": "class-balanced accuracy",
+      "method": "duplicate-aware classification"
+    },
+    "cards": [
+      {
+        "role": "off_scope",
+        "text": "In with readable labels, the pilot measured class-balanced accuracy of 77 %.",
+        "reading": "77"
+      },
+      {
+        "role": "target",
+        "text": "The design target for class-balanced accuracy in when packaging labels are missing is 88 %; the target is a proposal.",
+        "reading": "88"
+      },
+      {
+        "role": "unrelated",
+        "text": "In when packaging labels are missing, the team documented 17 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of class-balanced accuracy in when packaging labels are missing. Results are pending.",
+        "reading": null
+      }
+    ],
+    "operator": ">=",
+    "bound": "83",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "returns-2-0",
+    "pair": "returns-2",
+    "query": "Adapt duplicate-aware classification for product return triage in when packaging labels are missing; require class-balanced accuracy at least 85 %.",
+    "scope": {
+      "use": "product return triage",
+      "setting": "when packaging labels are missing",
+      "metric": "class-balanced accuracy",
+      "method": "duplicate-aware classification"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for class-balanced accuracy in when packaging labels are missing is 90 %; the target is a proposal.",
+        "reading": "90"
+      },
+      {
+        "role": "unrelated",
+        "text": "In when packaging labels are missing, the team documented 18 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In with readable labels, the pilot measured class-balanced accuracy of 79 %.",
+        "reading": "79"
+      },
+      {
+        "role": "measurement",
+        "text": "The observed class-balanced accuracy was 85 % during when packaging labels are missing.",
+        "reading": "85"
+      }
+    ],
+    "operator": ">=",
+    "bound": "85",
+    "gold_source": 3,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "returns-2-1",
+    "pair": "returns-2",
+    "query": "Adapt duplicate-aware classification for product return triage in when packaging labels are missing; require class-balanced accuracy at least 87 %.",
+    "scope": {
+      "use": "product return triage",
+      "setting": "when packaging labels are missing",
+      "metric": "class-balanced accuracy",
+      "method": "duplicate-aware classification"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for class-balanced accuracy in when packaging labels are missing is 90 %; the target is a proposal.",
+        "reading": "90"
+      },
+      {
+        "role": "unrelated",
+        "text": "In when packaging labels are missing, the team documented 18 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In with readable labels, the pilot measured class-balanced accuracy of 79 %.",
+        "reading": "79"
+      },
+      {
+        "role": "measurement",
+        "text": "The observed class-balanced accuracy was 85 % during when packaging labels are missing.",
+        "reading": "85"
+      }
+    ],
+    "operator": ">=",
+    "bound": "87",
+    "gold_source": 3,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "returns-2-u",
+    "pair": "returns-2",
+    "query": "Adapt duplicate-aware classification for product return triage in when packaging labels are missing; require class-balanced accuracy at least 85 %.",
+    "scope": {
+      "use": "product return triage",
+      "setting": "when packaging labels are missing",
+      "metric": "class-balanced accuracy",
+      "method": "duplicate-aware classification"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for class-balanced accuracy in when packaging labels are missing is 90 %; the target is a proposal.",
+        "reading": "90"
+      },
+      {
+        "role": "unrelated",
+        "text": "In when packaging labels are missing, the team documented 18 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In with readable labels, the pilot measured class-balanced accuracy of 79 %.",
+        "reading": "79"
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of class-balanced accuracy in when packaging labels are missing. Results are pending.",
+        "reading": null
+      }
+    ],
+    "operator": ">=",
+    "bound": "85",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "returns-3-0",
+    "pair": "returns-3",
+    "query": "Adapt duplicate-aware classification for product return triage in when packaging labels are missing; require class-balanced accuracy at least 87 %.",
+    "scope": {
+      "use": "product return triage",
+      "setting": "when packaging labels are missing",
+      "metric": "class-balanced accuracy",
+      "method": "duplicate-aware classification"
+    },
+    "cards": [
+      {
+        "role": "unrelated",
+        "text": "In when packaging labels are missing, the team documented 19 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for class-balanced accuracy in when packaging labels are missing is 92 %; the target is a proposal.",
+        "reading": "92"
+      },
+      {
+        "role": "measurement",
+        "text": "For when packaging labels are missing, the recorded measurement of class-balanced accuracy was 87 %.",
+        "reading": "87"
+      },
+      {
+        "role": "off_scope",
+        "text": "In with readable labels, the pilot measured class-balanced accuracy of 81 %.",
+        "reading": "81"
+      }
+    ],
+    "operator": ">=",
+    "bound": "87",
+    "gold_source": 2,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "returns-3-1",
+    "pair": "returns-3",
+    "query": "Adapt duplicate-aware classification for product return triage in when packaging labels are missing; require class-balanced accuracy at least 89 %.",
+    "scope": {
+      "use": "product return triage",
+      "setting": "when packaging labels are missing",
+      "metric": "class-balanced accuracy",
+      "method": "duplicate-aware classification"
+    },
+    "cards": [
+      {
+        "role": "unrelated",
+        "text": "In when packaging labels are missing, the team documented 19 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for class-balanced accuracy in when packaging labels are missing is 92 %; the target is a proposal.",
+        "reading": "92"
+      },
+      {
+        "role": "measurement",
+        "text": "For when packaging labels are missing, the recorded measurement of class-balanced accuracy was 87 %.",
+        "reading": "87"
+      },
+      {
+        "role": "off_scope",
+        "text": "In with readable labels, the pilot measured class-balanced accuracy of 81 %.",
+        "reading": "81"
+      }
+    ],
+    "operator": ">=",
+    "bound": "89",
+    "gold_source": 2,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "returns-3-u",
+    "pair": "returns-3",
+    "query": "Adapt duplicate-aware classification for product return triage in when packaging labels are missing; require class-balanced accuracy at least 87 %.",
+    "scope": {
+      "use": "product return triage",
+      "setting": "when packaging labels are missing",
+      "metric": "class-balanced accuracy",
+      "method": "duplicate-aware classification"
+    },
+    "cards": [
+      {
+        "role": "unrelated",
+        "text": "In when packaging labels are missing, the team documented 19 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "target",
+        "text": "The design target for class-balanced accuracy in when packaging labels are missing is 92 %; the target is a proposal.",
+        "reading": "92"
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of class-balanced accuracy in when packaging labels are missing. Results are pending.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In with readable labels, the pilot measured class-balanced accuracy of 81 %.",
+        "reading": "81"
+      }
+    ],
+    "operator": ">=",
+    "bound": "87",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  },
+  {
+    "id": "returns-4-0",
+    "pair": "returns-4",
+    "query": "Adapt duplicate-aware classification for product return triage in when packaging labels are missing; require class-balanced accuracy at least 89 %.",
+    "scope": {
+      "use": "product return triage",
+      "setting": "when packaging labels are missing",
+      "metric": "class-balanced accuracy",
+      "method": "duplicate-aware classification"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for class-balanced accuracy in when packaging labels are missing is 94 %; the target is a proposal.",
+        "reading": "94"
+      },
+      {
+        "role": "unrelated",
+        "text": "In when packaging labels are missing, the team documented 20 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In with readable labels, the pilot measured class-balanced accuracy of 83 %.",
+        "reading": "83"
+      },
+      {
+        "role": "measurement",
+        "text": "In when packaging labels are missing the pilot measured class-balanced accuracy of 89 %.",
+        "reading": "89"
+      }
+    ],
+    "operator": ">=",
+    "bound": "89",
+    "gold_source": 3,
+    "view": "intact",
+    "gold": "eligible"
+  },
+  {
+    "id": "returns-4-1",
+    "pair": "returns-4",
+    "query": "Adapt duplicate-aware classification for product return triage in when packaging labels are missing; require class-balanced accuracy at least 91 %.",
+    "scope": {
+      "use": "product return triage",
+      "setting": "when packaging labels are missing",
+      "metric": "class-balanced accuracy",
+      "method": "duplicate-aware classification"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for class-balanced accuracy in when packaging labels are missing is 94 %; the target is a proposal.",
+        "reading": "94"
+      },
+      {
+        "role": "unrelated",
+        "text": "In when packaging labels are missing, the team documented 20 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In with readable labels, the pilot measured class-balanced accuracy of 83 %.",
+        "reading": "83"
+      },
+      {
+        "role": "measurement",
+        "text": "In when packaging labels are missing the pilot measured class-balanced accuracy of 89 %.",
+        "reading": "89"
+      }
+    ],
+    "operator": ">=",
+    "bound": "91",
+    "gold_source": 3,
+    "view": "intact",
+    "gold": "reject"
+  },
+  {
+    "id": "returns-4-u",
+    "pair": "returns-4",
+    "query": "Adapt duplicate-aware classification for product return triage in when packaging labels are missing; require class-balanced accuracy at least 89 %.",
+    "scope": {
+      "use": "product return triage",
+      "setting": "when packaging labels are missing",
+      "metric": "class-balanced accuracy",
+      "method": "duplicate-aware classification"
+    },
+    "cards": [
+      {
+        "role": "target",
+        "text": "The design target for class-balanced accuracy in when packaging labels are missing is 94 %; the target is a proposal.",
+        "reading": "94"
+      },
+      {
+        "role": "unrelated",
+        "text": "In when packaging labels are missing, the team documented 20 follow-up maintenance checks.",
+        "reading": null
+      },
+      {
+        "role": "off_scope",
+        "text": "In with readable labels, the pilot measured class-balanced accuracy of 83 %.",
+        "reading": "83"
+      },
+      {
+        "role": "occluded",
+        "text": "The pilot has planned measurement of class-balanced accuracy in when packaging labels are missing. Results are pending.",
+        "reading": null
+      }
+    ],
+    "operator": ">=",
+    "bound": "89",
+    "gold_source": null,
+    "view": "occluded",
+    "gold": "unknown"
+  }
+]
