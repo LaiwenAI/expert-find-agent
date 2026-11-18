@@ -39,7 +39,7 @@ def normalize_text(value):
     return re.sub(r'\W+', '', unicodedata.normalize('NFKC', value).casefold())
 
 
-def public_training_texts(extra=0):
+def public_training_texts(extra=0, *, include_ids=False):
     archive = Path('artifacts/public/cof/data.zip')
     if sha(archive) != SHA256:
         raise ValueError('Unexpected CoF archive')
@@ -56,7 +56,7 @@ def public_training_texts(extra=0):
             title = normalize_text(item.get('title', ''))
             if not title or not item.get('abstract') or item['paper'] in excluded_keys or title in excluded_titles:
                 continue
-            value = text(item)
+            value = (text(item), item['paper'])
             old = candidates.get(title)
             if old is None or value < old:
                 candidates[title] = value
@@ -64,7 +64,8 @@ def public_training_texts(extra=0):
     count = FIT_ROWS + CALIBRATION_ROWS + extra
     if len(ordered) < count:
         raise ValueError('Insufficient disjoint training papers')
-    return [candidates[t] for t in ordered[:count]]
+    selected = [candidates[t] for t in ordered[:count]]
+    return selected if include_ids else [value for value, _ in selected]
 
 
 def unit(vectors):
