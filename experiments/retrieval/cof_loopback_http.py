@@ -68,6 +68,15 @@ class Server(ThreadingHTTPServer):
         return connection, address
 
 
+def deliver_batch(ranker, connection, batch, vectors, begun, encoded):
+    for (_, arrived, future), vector in zip(batch, vectors, strict=True):
+        rank = ranker.rank_host(ranker.score(vector))
+        response, _ = serialize_hits(ranker, connection, rank)
+        finished = time.perf_counter()
+        future.set_result((response, len(batch), (begun - arrived) * 1000,
+                           (finished - begun) * 1000, (encoded - begun) * 1000))
+
+
 def worker(pending, ranker, database, encoder, cap, warm_query, ready):
     try:
         with sqlite3.connect(database) as connection:
@@ -88,12 +97,7 @@ def worker(pending, ranker, database, encoder, cap, warm_query, ready):
                 try:
                     vectors = encoder.encode([item[0] for item in batch], query=True)
                     encoded = time.perf_counter()
-                    for (_, arrived, future), vector in zip(batch, vectors, strict=True):
-                        rank = ranker.rank_host(ranker.score(vector))
-                        response, _ = serialize_hits(ranker, connection, rank)
-                        finished = time.perf_counter()
-                        future.set_result((response, len(batch), (begun - arrived) * 1000,
-                                           (finished - begun) * 1000, (encoded - begun) * 1000))
+                    deliver_batch(ranker, connection, batch, vectors, begun, encoded)
                 except Exception as error:
                     for _, _, future in batch:
                         if not future.done():
@@ -170,11 +174,11 @@ async def load(port, plan, queries):
                                 'issued_requests_per_second': (len(ids) - 1) / arrivals[-1]}
 
 
-def compare_method(ranker, database, encoder, mode, plan, queries):
+def compare_method(ranker, database, encoder, mode, plan, queries, worker_impl=worker):
     with Server(('127.0.0.1', 0), Handler) as server:
         server.pending = Queue()
         ready = Future()
-        gpu = Thread(target=worker, args=(server.pending, ranker, database, encoder, METHODS[mode],
+        gpu = Thread(target=worker_impl, args=(server.pending, ranker, database, encoder, METHODS[mode],
                                          next(iter(queries.values())), ready))
         gpu.start()
         try:

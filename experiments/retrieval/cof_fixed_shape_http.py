@@ -34,28 +34,40 @@ class FixedShape:
     def encode(self, texts, query=False):
         if len(texts) > CAP:
             raise ValueError('Dispatch exceeds the fixed slot count')
-        inputs = [('Instruct: ' + TASK + '\nQuery:' + text) if query else text for text in texts]
-        ids = self.tokenizer(inputs, padding=False, truncation=True, max_length=self.max_length)['input_ids']
+        ids = self.tokenize(texts, query)
         groups = defaultdict(list)
         for i, tokens in enumerate(ids):
-            width = min(self.max_length, ((len(tokens) + BUCKET - 1) // BUCKET) * BUCKET)
-            groups[width].append((i, tokens))
+            groups[self.width(tokens)].append((i, tokens))
         vectors = None
+        for width, members in sorted(groups.items()):
+            encoded = self.forward([tokens for _, tokens in members], width)
+            if vectors is None:
+                vectors = np.empty((len(texts), encoded.shape[1]), dtype=np.float32)
+            vectors[[position for position, _ in members]] = encoded
+        if vectors is None:
+            raise ValueError('Empty fixed-shape encoder input')
+        return vectors
+
+    def tokenize(self, texts, query=False):
+        inputs = [('Instruct: ' + TASK + '\nQuery:' + text) if query else text for text in texts]
+        return self.tokenizer(inputs, padding=False, truncation=True, max_length=self.max_length)['input_ids']
+
+    def width(self, tokens):
+        return min(self.max_length, ((len(tokens) + BUCKET - 1) // BUCKET) * BUCKET)
+
+    def forward(self, rows, width):
+        if not 0 < len(rows) <= CAP or any(self.width(ids) != width for ids in rows):
+            raise ValueError('Rows must share a fixed length bucket')
+        padded = rows + [rows[0]] * (CAP - len(rows))
         with torch.inference_mode():
-            for width, members in sorted(groups.items()):
-                real = [tokens for _, tokens in members]
-                padded = real + [real[0]] * (CAP - len(real))
-                batch = self.tokenizer.pad({'input_ids': padded}, padding='max_length',
-                                           max_length=width, return_tensors='pt').to('cuda')
-                hidden = self.model(**batch).last_hidden_state[:len(real), -1, :].float()
-                encoded = torch.nn.functional.normalize(hidden, p=2, dim=1).cpu().numpy()
-                if vectors is None:
-                    vectors = np.empty((len(texts), encoded.shape[1]), dtype=np.float32)
-                vectors[[position for position, _ in members]] = encoded
-                self.forward_shapes[width] += 1
-                self.real_rows[width] += len(members)
-        if vectors is None or not np.isfinite(vectors).all():
+            batch = self.tokenizer.pad({'input_ids': padded}, padding='max_length',
+                                       max_length=width, return_tensors='pt').to('cuda')
+            hidden = self.model(**batch).last_hidden_state[:len(rows), -1, :].float()
+            vectors = torch.nn.functional.normalize(hidden, p=2, dim=1).cpu().numpy()
+        if not np.isfinite(vectors).all():
             raise ValueError('Invalid fixed-shape encoder output')
+        self.forward_shapes[width] += 1
+        self.real_rows[width] += len(rows)
         return vectors
 
 
