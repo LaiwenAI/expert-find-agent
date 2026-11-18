@@ -40,9 +40,18 @@ FORMATS = (
 CONNECTIVES = re.compile(r"\s+(?:and also|as well as|and)\s+", re.IGNORECASE)
 
 
-def spans(activity):
-    return [(activity[:m.start()].strip(), activity[m.end():].strip()) for m in CONNECTIVES.finditer(activity)
-            if len(activity[:m.start()].split()) >= 2 and len(activity[m.end():].split()) >= 2]
+def spans(activity, prefer_explicit=False):
+    candidates = []
+    explicit = []
+    for match in CONNECTIVES.finditer(activity):
+        left, right = activity[:match.start()].strip(), activity[match.end():].strip()
+        if min(len(left.split()), len(right.split())) < 2:
+            continue
+        pair = (left, right)
+        candidates.append(pair)
+        if len(match[0].split()) > 1:
+            explicit.append(pair)
+    return explicit if prefer_explicit and len(explicit) == 1 else candidates
 
 
 def query(task, value):
@@ -72,7 +81,7 @@ class Endpoint:
 
     @torch.inference_mode()
     def run(self, text, method, rotation, option_order, oracle=None, *, proposal_bank=None, read_roles=True,
-            corroboration_bank=None, policy=None):
+            corroboration_bank=None, policy=None, split_bank=None, prefer_explicit=False):
         started = perf_counter()
         lead, activity = split_request(text)
         selected = self.bm25(lead) if method != "dense_joint" else None
@@ -81,7 +90,7 @@ class Endpoint:
         rendered = []
         segments = []
         if method != "bm25_direct":
-            segments = [oracle] if method == "oracle_boundaries" else spans(activity)
+            segments = [oracle] if method == "oracle_boundaries" else spans(activity, prefer_explicit)
             atoms = list(dict.fromkeys(atom for pair in segments for atom in pair))
             rendered = [query(TASK, atom) for atom in atoms]
             if method == "dense_joint":
@@ -104,7 +113,7 @@ class Endpoint:
             complete = "unavailable" not in decoded
             calls = 1
         elif records and segments:
-            matrix = vector_batch[:len(atoms)] @ self.router.vectors.T
+            matrix = vector_batch[:len(atoms)] @ (self.router.vectors if split_bank is None else split_bank).T
             values = dict(zip(atoms, matrix, strict=True))
             # Score each cut by the best product-space role pair with two distinct roles.
             def split_score(pair):
@@ -224,6 +233,8 @@ def run(args):
         raise ValueError("A frozen transfer requires both the policy and its phrase file")
     if args.transfer_niso_control and not args.frozen_role_route:
         raise ValueError("The NISO language control requires the frozen transfer setup")
+    if args.audit_boundaries and not args.frozen_role_route:
+        raise ValueError("The boundary audit requires the frozen transfer setup")
     if args.output.exists():
         raise FileExistsError(args.output)
     if digest(args.glossary) != NISO_SHA256:
@@ -321,6 +332,20 @@ def run(args):
             mode: ("bm25_factored", dict(**ridge, **corroboration, policy=policy))
             for mode, policy in calibration.items()
         })
+        if args.audit_boundaries:
+            views = ("abstract_body",)
+            variants = {
+                "ridge_reader": variants["ridge_reader"],
+                "ridge_split": ("bm25_factored", dict(**ridge, split_bank=banks["ridge"])),
+                "explicit_connector": ("bm25_factored", dict(**ridge, prefer_explicit=True)),
+                "explicit_and_ridge": ("bm25_factored", dict(**ridge, prefer_explicit=True, split_bank=banks["ridge"])),
+                "oracle_split": ("oracle_boundaries", ridge),
+                "margin": variants["margin"],
+                "explicit_ridge_margin": ("bm25_factored", dict(
+                    **ridge, **corroboration, prefer_explicit=True, split_bank=banks["ridge"],
+                    policy=calibration["margin"],
+                )),
+            }
     rows = replay(endpoint, collection, source_roles, groups["test"], phrases, views, variants)
     with args.output.open("x") as stream:
         json.dump(dict(summary=summarize(rows, variants, views, reference), rows=rows, collection_sha256=digest(args.collection),
@@ -329,7 +354,7 @@ def run(args):
                        calibration=calibration, validation=validation,
                        frozen_policy_sha256=digest(args.frozen_role_route) if frozen else None,
                        transfer_language=("niso" if args.transfer_niso_control else "authored")
-                       if frozen else None), stream, indent=2)
+                       if frozen else None, boundary_audit=args.audit_boundaries), stream, indent=2)
         stream.write("\n")
 
 
@@ -343,4 +368,5 @@ if __name__ == "__main__":
     policy.add_argument("--frozen-role-route", type=Path)
     parser.add_argument("--transfer-phrases", type=Path)
     parser.add_argument("--transfer-niso-control", action="store_true")
+    parser.add_argument("--audit-boundaries", action="store_true")
     run(parser.parse_args())

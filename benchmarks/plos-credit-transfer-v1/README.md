@@ -34,6 +34,26 @@ Job `40389` repeats the 256 abstract requests using [NISO task examples](https:/
 
 The fast-route share falls from 202/256 to 68/256 with NISO wording, despite identifying every source under both conditions. Exact task boundaries fall from 205 to 107. The margin gate introduces zero new unsupported citations on these paired samples relative to always reading, and P95 is essentially flat on NISO wording. Report speed and error changes separately for each wording source. The wording control followed the initial transfer and uses the same frozen thresholds.
 
+### Task-boundary ablation
+
+Hold BM25 source lookup and ridge role proposals fixed. Compare the original role-definition score for selecting a split, the ridge score for selecting a split, and a rule that uses a unique multiword conjunction such as “as well as” before scoring any remaining candidates. Also test both changes together. The oracle supplies the authored gold split and isolates the remaining role interpretation errors. All methods use the same role reader unless explicitly routed by the original frozen margin.
+
+A pre-inference check finds the reference boundary in all candidate lists. The multiword rule reduces ambiguity on 61 authored requests and 107 NISO requests, without removing a reference boundary on either cohort. These are controlled conjunctions in known request forms. Exact coordinator cues can be less reliable in open-ended requests.
+
+| NISO route on abstract leads | Exact splits / 256 | Exact author sets / 256 | Unsupported citations | Fast returns | Mean |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Definition split and always read | 107 | 172 | 29 | 0 | 33.35 ms |
+| Ridge split and always read | 219 | 187 | 27 | 0 | 33.17 ms |
+| Explicit connector and always read | 182 | 184 | 21 | 0 | 33.08 ms |
+| Explicit connector and ridge split, always read | 240 | 194 | 22 | 0 | 33.04 ms |
+| Oracle split and always read | 256 | 198 | 22 | 0 | 32.95 ms |
+| Original split and frozen margin | 107 | 177 | 24 | 68 | 26.95 ms |
+| Explicit connector and ridge split, frozen margin | 240 | 202 | 16 | 101 | 23.65 ms |
+
+Changing the splitter with the same frozen margin gains 25 exact answers on NISO wording (article-bootstrap interval +5.0 to +14.5 percentage points). It loses seven previously exact answers and introduces two unsupported citations even though net unsupported citations fall by eight. P95 stays near 35.5 ms for both margin routes. With authored phrases, the same change moves from 241 to 256 exact answers, from 202 to 235 fast returns, and adds zero unsupported citations. The oracle comparison shows that correct boundaries alone leave 58 of the 256 NISO requests without an exact author set with this reader. A front-end change requires evaluating the routing threshold again.
+
+Run the frozen transfer with `--audit-boundaries`. Jobs `40392` and `40393` replay authored and NISO wording on the same abstract leads, using RTX 5090. The ablation was designed after the original transfer and reuses those cases.
+
 ## Reproduce
 
 The second catalog uses the query below, fields `id,title,abstract`, at most 100 rows, and `publication_date desc,id asc` sorting.
