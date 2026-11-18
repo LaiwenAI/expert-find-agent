@@ -86,6 +86,24 @@ Ridge proposals with the reader recover both edited versions in 52/112 groups, c
 
 Add `--role-training benchmarks/plos-credit-edits-v1/role-training.json` to the integrated replay. Job `40375` fits the proposal matrices and runs the full benchmark replay on RTX 5090. The embedding and language model weights remain frozen. See [the trainer](../../experiments/credit/role_prototypes.py).
 
+## Calibrating the fast route
+
+The router requires two distinct top roles and a minimum top-two score margin across the two activity phrases. A second variant also requires the ridge classifier and mean prototypes to agree on both roles. Both scores reuse the same encoded task phrases. If the gate fails, the request reuses those embeddings for shortlist reading. The empty-only variant takes the fast path only when the proposed roles yield no author with both declarations. It can shorten execution but can also suppress a qualified candidate.
+
+Calibration uses 192 edited requests from eight validation articles. For each gate, choose the widest margin range with zero lost exact answers and zero new unsupported author citations relative to the ridge reader. The threshold is frozen before the live replay of the 224 requests from eight separate test articles. Some task wording recurs across the article split. The guard is calibrated on observed cases, with no guarantee of equivalent predictions on new requests.
+
+| Route | Exact author sets / 224 | Unsupported citations | New unsupported citations vs always read | Reader calls | Mean | P95 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Always read | 148 | 33 | 0 | 224 | 33.99 ms | 36.91 ms |
+| Always use ridge roles | 124 | 48 | 33 | 0 | 8.60 ms | 8.80 ms |
+| Margin gate | 152 | 32 | 2 | 155 | 26.27 ms | 36.73 ms |
+| Margin and agreement | 152 | 32 | 2 | 155 | 26.28 ms | 36.75 ms |
+| Empty-only margin gate | 149 | 32 | 0 | 217 | 33.18 ms | 36.81 ms |
+
+The two general gates make the same 69 fast decisions on test. The margin gate reduces mean request time by 22.7% while P95 changes by 0.18 ms. It introduces two unsupported author citations and removes three others, despite zero new unsupported citations on validation. The empty-only gate prevents new positive citations on the fast path by construction, with seven bypasses in this replay. None of the calibrated gates loses a correct author set from the always-read reference on this test. Both latency distribution and per-request error changes are necessary to assess routing.
+
+Add `--calibrate-role-route` to the synthetic-proposal replay. Job `40379` tested the first two gates. The empty-only variant was added in response to its test errors, with its threshold still selected on validation. Job `40382` reports the exploratory comparison across all three gates on RTX 5090. See [the calibration code](../../experiments/credit/calibrate_role_route.py).
+
 ## Reproduce
 
 Run [the builder](../../experiments/credit/counterfactual_role_edits.py) with `SNAPSHOT OUTPUT --capture-from CATALOG PILOT_MANIFEST`. Use the pinned catalog described in [the compound retrieval experiment](../plos-credit-pilot-v1/README.md#compound-roles-with-source-retrieval) and its pilot manifest. The source cache can be reused for subsequent builds. The released fixture contains derived records, with article URLs and hashes for rebuild and audit.

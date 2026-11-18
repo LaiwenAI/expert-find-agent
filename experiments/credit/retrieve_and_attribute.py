@@ -14,6 +14,7 @@ import torch
 from expert_search.qwen_embedding_torch import QwenTorchEmbedding
 from expert_search.statistics import clustered_paired_interval
 from experiments.credit.attribution_controls import LABELS, Reader
+from experiments.credit.calibrate_role_route import MODES, calibrate, should_accept
 from experiments.credit.conjunctive_source_retrieval import (
     TASK as SOURCE_TASK, edit_conclusion, prepare_collection, sentences,
 )
@@ -70,7 +71,8 @@ class Endpoint:
         return (self.ids[int(min(hits, key=lambda i: (-hits[i], self.ids[int(i)])))] if hits else None)
 
     @torch.inference_mode()
-    def run(self, text, method, rotation, option_order, oracle=None, *, proposal_bank=None, read_roles=True):
+    def run(self, text, method, rotation, option_order, oracle=None, *, proposal_bank=None, read_roles=True,
+            corroboration_bank=None, policy=None):
         started = perf_counter()
         lead, activity = split_request(text)
         selected = self.bm25(lead) if method != "dense_joint" else None
@@ -91,6 +93,8 @@ class Endpoint:
         returned = []
         calls = 0
         complete = False
+        route_features = None
+        fast_return = False
         if records and method == "bm25_direct":
             prompts = [prompt("Which authors did both " + activity + "?", author, [(author, source)], option_order)
                        for author, source in enumerate(records, 1)]
@@ -112,14 +116,25 @@ class Endpoint:
                 proposal_scores = [values[atom] for atom in selected_atoms]
             else:
                 positions = {atom: i for i, atom in enumerate(atoms)}
-                proposal_scores = vector_batch[[positions[atom] for atom in selected_atoms]] @ proposal_bank.T
+                selected_vectors = vector_batch[[positions[atom] for atom in selected_atoms]]
+                proposal_scores = selected_vectors @ proposal_bank.T
             dense_ranks = [np.argsort(-scores, kind="stable").tolist() for scores in proposal_scores]
-            if read_roles:
+            predictions = [rank[0] for rank in dense_ranks]
+            if corroboration_bank is not None:
+                alternative = (selected_vectors @ corroboration_bank.T).argmax(axis=1).tolist()
+                proposed = {ROLES[i] for i in predictions}
+                route_features = dict(
+                    distinct=len(set(predictions)) == 2,
+                    agreement=alternative == predictions,
+                    empty=not any(proposed.issubset(source) for source in records),
+                    margin=min(float(scores[rank[0]] - scores[rank[1]])
+                               for scores, rank in zip(proposal_scores, dense_ranks, strict=True)),
+                )
+            fast_return = policy is not None and should_accept(route_features, policy)
+            if read_roles and not fast_return:
                 shortlist = candidate_lists(self.router, selected_atoms, dense_ranks, 3)
                 predictions = choose_batched(self.router, selected_atoms, shortlist, rotation)
                 calls = 1
-            else:
-                predictions = [rank[0] for rank in dense_ranks]
             predicted_roles = [ROLES[i] for i in predictions]
             if len(set(predicted_roles)) == 2:
                 returned = [a for a, source in enumerate(records, 1) if label(source, predicted_roles) == POSITIVE]
@@ -127,6 +142,7 @@ class Endpoint:
         citations = [[selected, author] for author in returned]
         return dict(source=selected, complete=complete, returned=returned, citations=citations,
                     roles=predicted_roles, calls=calls, cuts=len(segments),
+                    route_features=route_features, fast_return=fast_return,
                     boundary_exact=selected_atoms == oracle if selected_atoms is not None else False,
                     ms=(perf_counter()-started)*1000)
 
@@ -148,6 +164,9 @@ def summarize(rows, methods=METHODS, views=VIEWS, reference_name="bm25_direct"):
                 full_author_set_exact=sum(item["success"] for item in runs),
                 unresolved=sum(not item["complete"] for item in runs),
                 unsupported_promotions=sum(item["unsupported"] for item in runs),
+                reader_calls=sum(item["calls"] for item in runs),
+                fast_returns=sum(item["fast_return"] for item in runs),
+                mean_ms=float(np.mean([item["ms"] for item in runs])),
                 p50_p95_ms=np.quantile([item["ms"] for item in runs], [.5, .95]).tolist(),
                 success_delta=clustered_paired_interval(
                     [int(run["success"]) - int(ref["success"]) for run, ref in zip(runs, reference)], papers),
@@ -156,56 +175,7 @@ def summarize(rows, methods=METHODS, views=VIEWS, reference_name="bm25_direct"):
     return metrics
 
 
-def run(args):
-    if args.output.exists():
-        raise FileExistsError(args.output)
-    if digest(args.glossary) != NISO_SHA256:
-        raise ValueError("Changed NISO snapshot")
-    upstream = json.loads(args.glossary.read_bytes())
-    glossary = [f"{role}: {upstream['definitions'][role]}" for role in ROLES]
-    phrases = defaultdict(list)
-    for example in upstream["examples"]:
-        phrases[example["role"]].append(example["text"])
-    manifest = json.loads((args.fixture / "manifest.json").read_bytes())
-    path = args.fixture / "pairs.jsonl"
-    if digest(path) != manifest["pairs_sha256"]:
-        raise ValueError("Changed counterfactual fixture")
-    groups = [g for line in path.read_text().splitlines() if (g := json.loads(line))["split"] == "test"]
-    source_roles = {r["doi"]: r["roles_by_author"] for r in manifest["sources"]}
-    collection, _ = prepare_collection(args.collection, {})
-    doi_list = sorted(collection)
-    documents = [collection[doi][2] for doi in doi_list]
-    if not source_roles.keys() <= collection.keys() or len(set(documents)) != len(documents):
-        raise ValueError("Mismatched collection")
-    embedding = json.loads((args.embedding / "checkpoint-provenance.json").read_bytes())
-    for name, expected in embedding["files"].items():
-        if digest(args.embedding / name) != expected:
-            raise ValueError(f"Changed embedding checkpoint: {name}")
-    embedder = QwenTorchEmbedding(args.embedding)
-    embedder.model.config.use_cache = False
-    tokenizer, reader_model, checkpoint = load_reader(args.reader)
-    reader = Reader(tokenizer, reader_model)
-    with TemporaryDirectory() as root:
-        directory = Path(root)
-        (directory / "glossary").mkdir()
-        (directory / "sources").mkdir()
-        lexical = build_lexical({text: i for i, text in enumerate(glossary)}, directory / "glossary")
-        index = build_lexical({text: i for i, text in enumerate(documents)}, directory / "sources")
-    router = Router(glossary, lexical, embedder.encode(glossary), embedder, reader_model, tokenizer, 3)
-    endpoint = Endpoint(router, reader, index, doi_list, documents, source_roles)
-    variants = {method: (method, {}) for method in METHODS}
-    views, reference = VIEWS, "bm25_direct"
-    fit = None
-    if args.role_training:
-        banks, fit = train_banks(args.role_training, router, upstream["examples"])
-        fit["input_sha256"] = digest(args.role_training)
-        fit["atomic"] = evaluate_atomic(router, banks, upstream["examples"])
-        variants = {
-            f"{name}_{'reader' if use_reader else 'embed'}":
-                ("bm25_factored", dict(proposal_bank=bank if name != "definitions" else None, read_roles=use_reader))
-            for name, bank in banks.items() for use_reader in (False, True)
-        }
-        views, reference = ("edited_conclusion",), "definitions_reader"
+def replay(endpoint, collection, source_roles, groups, phrases, views, variants):
     methods = tuple(variants)
     rows = []
     for i, group in enumerate(groups):
@@ -241,10 +211,88 @@ def run(args):
                     item["success"] = item["complete"] and item["source"] == doi and citations == wanted_pairs
                     arms[variant] = item
                 rows.append(dict(id=group["id"], doi=doi, view=view, lead=lead_style, wanted=wanted, arms=arms))
+    return rows
+
+
+def run(args):
+    if args.calibrate_role_route and args.role_training is None:
+        raise ValueError("Role route calibration requires the role training fixture")
+    if args.output.exists():
+        raise FileExistsError(args.output)
+    if digest(args.glossary) != NISO_SHA256:
+        raise ValueError("Changed NISO snapshot")
+    upstream = json.loads(args.glossary.read_bytes())
+    glossary = [f"{role}: {upstream['definitions'][role]}" for role in ROLES]
+    phrases = defaultdict(list)
+    for example in upstream["examples"]:
+        phrases[example["role"]].append(example["text"])
+    manifest = json.loads((args.fixture / "manifest.json").read_bytes())
+    path = args.fixture / "pairs.jsonl"
+    if digest(path) != manifest["pairs_sha256"]:
+        raise ValueError("Changed counterfactual fixture")
+    groups = defaultdict(list)
+    for line in path.read_text().splitlines():
+        group = json.loads(line)
+        groups[group["split"]].append(group)
+    source_roles = {r["doi"]: r["roles_by_author"] for r in manifest["sources"]}
+    collection, _ = prepare_collection(args.collection, {})
+    doi_list = sorted(collection)
+    documents = [collection[doi][2] for doi in doi_list]
+    if not source_roles.keys() <= collection.keys() or len(set(documents)) != len(documents):
+        raise ValueError("Mismatched collection")
+    embedding = json.loads((args.embedding / "checkpoint-provenance.json").read_bytes())
+    for name, expected in embedding["files"].items():
+        if digest(args.embedding / name) != expected:
+            raise ValueError(f"Changed embedding checkpoint: {name}")
+    embedder = QwenTorchEmbedding(args.embedding)
+    embedder.model.config.use_cache = False
+    tokenizer, reader_model, checkpoint = load_reader(args.reader)
+    reader = Reader(tokenizer, reader_model)
+    with TemporaryDirectory() as root:
+        directory = Path(root)
+        (directory / "glossary").mkdir()
+        (directory / "sources").mkdir()
+        lexical = build_lexical({text: i for i, text in enumerate(glossary)}, directory / "glossary")
+        index = build_lexical({text: i for i, text in enumerate(documents)}, directory / "sources")
+    router = Router(glossary, lexical, embedder.encode(glossary), embedder, reader_model, tokenizer, 3)
+    endpoint = Endpoint(router, reader, index, doi_list, documents, source_roles)
+    variants = {method: (method, {}) for method in METHODS}
+    views, reference = VIEWS, "bm25_direct"
+    fit = None
+    if args.role_training:
+        banks, fit = train_banks(args.role_training, router, upstream["examples"])
+        fit["input_sha256"] = digest(args.role_training)
+        fit["atomic"] = evaluate_atomic(router, banks, upstream["examples"])
+        variants = {
+            f"{name}_{'reader' if use_reader else 'embed'}":
+                ("bm25_factored", dict(proposal_bank=bank if name != "definitions" else None, read_roles=use_reader))
+            for name, bank in banks.items() for use_reader in (False, True)
+        }
+        views, reference = ("edited_conclusion",), "definitions_reader"
+    calibration = None
+    validation = None
+    if args.calibrate_role_route:
+        reference = "ridge_reader"
+        ridge = dict(proposal_bank=banks["ridge"])
+        corroboration = dict(corroboration_bank=banks["prototypes"])
+        variants = {
+            reference: ("bm25_factored", ridge),
+            "ridge_embed": ("bm25_factored", dict(**ridge, **corroboration, read_roles=False)),
+        }
+        validation = replay(endpoint, collection, source_roles, groups["validation"], phrases, views, variants)
+        if {row["doi"] for row in validation} & {group["doi"] for group in groups["test"]}:
+            raise ValueError("Calibration and testing share an article")
+        calibration = {mode: calibrate(validation, mode) for mode in MODES}
+        variants.update({
+            mode: ("bm25_factored", dict(**ridge, **corroboration, policy=policy))
+            for mode, policy in calibration.items()
+        })
+    rows = replay(endpoint, collection, source_roles, groups["test"], phrases, views, variants)
     with args.output.open("x") as stream:
-        json.dump(dict(summary=summarize(rows, methods, views, reference), rows=rows, collection_sha256=digest(args.collection),
+        json.dump(dict(summary=summarize(rows, variants, views, reference), rows=rows, collection_sha256=digest(args.collection),
                        fixture_sha256=digest(path), script_sha256=digest(Path(__file__)), embedding=embedding,
-                       checkpoint=checkpoint, gpu=torch.cuda.get_device_name(), fit=fit), stream, indent=2)
+                       checkpoint=checkpoint, gpu=torch.cuda.get_device_name(), fit=fit,
+                       calibration=calibration, validation=validation), stream, indent=2)
         stream.write("\n")
 
 
@@ -253,4 +301,5 @@ if __name__ == "__main__":
     for name in ("fixture", "collection", "glossary", "embedding", "reader", "output"):
         parser.add_argument(name, type=Path)
     parser.add_argument("--role-training", type=Path)
+    parser.add_argument("--calibrate-role-route", action="store_true")
     run(parser.parse_args())
