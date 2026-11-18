@@ -17,6 +17,7 @@ from experiments.credit.cross_source_identity import eligible, load, pairs, xml_
 from experiments.credit.plos_role_inventory import ROLES
 from experiments.credit.role_language_router import NISO_SHA256, TASK
 from experiments.credit.role_prototypes import normalized, train_banks
+from experiments.credit.source_confirmation import MODES, TIERS, accepts, calibrate, length_tier, measure, notice_kind
 from experiments.qasper.adaptive_evidence import digest
 from experiments.retrieval.lrbench_frozen_baselines import build_lexical
 
@@ -24,8 +25,12 @@ from experiments.retrieval.lrbench_frozen_baselines import build_lexical
 METHODS = ("bm25", "dense", "fused", "identity_first", "corroborated",
            "bm25_identity", "bm25_one_side", "oracle_roles")
 OPEN_SET_METHODS = ("bm25", "bm25_identity", "bm25_one_side", "literal")
-LEXICAL_ONLY = set(OPEN_SET_METHODS)
+TIERED = tuple(f"{mode}_tiered" for mode in MODES)
+TYPED = tuple(f"{mode}_typed" for mode in MODES)
+CONFIRMATION_METHODS = ("bm25", "bm25_identity", "literal", *MODES, *TIERED, *TYPED)
+LEXICAL_ONLY = set(OPEN_SET_METHODS) | set(CONFIRMATION_METHODS)
 STYLES = ("title", "abstract", "title_sketch")
+CONFIRMATION_STYLES = (*STYLES, "edited_abstract", "abridged_abstract")
 FORMAT = re.compile(
     r'Across "([^"]+)" and "([^"]+)", find the same person who did (.+?) in the first study'
     r' and (.+) in the second study\.\Z',
@@ -49,10 +54,14 @@ def lead(document, style):
     title, abstract = document
     if style == "title":
         return title
-    if style in ("abstract", "edited_abstract"):
+    if style in ("abstract", "edited_abstract", "abridged_abstract"):
         parsed = sentences(abstract)
         excerpt = parsed[len(parsed) // 2] if parsed else title
-        return edit_conclusion(excerpt) if style == "edited_abstract" else excerpt
+        if style == "edited_abstract":
+            return edit_conclusion(excerpt)
+        if style == "abridged_abstract" and len(excerpt.split()) >= 8:
+            return " ".join(word for i, word in enumerate(excerpt.split()) if i % 5 != 2)
+        return excerpt
     terms = normalized(title).split()
     if len(terms) < 5:
         return title
@@ -75,14 +84,69 @@ class Search:
         self.ridge = ridge
         self.bank = encoder.encode(["\n".join(documents[doi]) for doi in self.ids])
         self.titles = {doi: normalized(title) for doi, (title, _) in documents.items()}
+        self.notice_kinds = {doi: notice_kind(title) for doi, (title, _) in documents.items()}
         self.normalized_text = {
             doi: (f" {normalized(title)} ", f" {normalized(abstract)} ")
             for doi, (title, abstract) in documents.items()
         }
+        self.segments = {
+            doi: [normalized(text).split() for text in (title, *sentences(abstract))]
+            for doi, (title, abstract) in documents.items()
+        }
+        self.policies = {}
 
-    def lexical(self, text, unavailable):
+    def calibrate_sources(self, documents, targets):
+        fitting = sorted(set(documents) - targets)
+        samples = {mode: {tier: [] for tier in TIERS} for mode in (*MODES, *TYPED)}
+        for doi in fitting:
+            for style in CONFIRMATION_STYLES:
+                text = lead(documents[doi], style)
+                query = normalized(text).split()
+                for unavailable in (None, doi):
+                    candidates = self.lexical(text, unavailable)
+                    typed = self.lexical(text, unavailable, match_notice=True)
+                    for mode in MODES:
+                        observation = measure(query, candidates, self.segments, mode)
+                        typed_observation = measure(query, typed, self.segments, mode)
+                        wanted = doi if unavailable is None else None
+                        samples[mode][length_tier(query)].append((observation, wanted))
+                        samples[f"{mode}_typed"][length_tier(query)].append((typed_observation, wanted))
+        pooled = {mode: [sample for rows in samples[mode].values() for sample in rows] for mode in MODES}
+        self.policies = {mode: calibrate(sample) for mode, sample in pooled.items()}
+        self.policies.update({
+            f"{mode}_tiered": {tier: calibrate(sample) for tier, sample in tiers.items()}
+            for mode, tiers in samples.items() if mode in MODES
+        })
+        self.policies.update({
+            mode: {tier: calibrate(sample) for tier, sample in samples[mode].items()} for mode in TYPED
+        })
+        return {
+            "calibration_dois": fitting, "test_dois": sorted(targets),
+            "policies": self.policies,
+            "observations_per_method": {mode: len(s) for mode, s in pooled.items()},
+            "accepted": {mode: sum(accepts(observation, self.policies[mode]) for observation, _ in sample)
+                         for mode, sample in pooled.items()},
+            "accepted_by_tier": {
+                mode: {tier: sum(accepts(observation, self.policies[mode if mode in TYPED else f"{mode}_tiered"][tier])
+                                 for observation, _ in sample) for tier, sample in tiers.items()}
+                for mode, tiers in samples.items()
+            },
+            "most_confident_wrong": {
+                mode: {
+                    tier: dict(zip(("score", "margin"), max(
+                        ((score, gap) for (doi, score, gap), wanted in sample if doi and doi != wanted),
+                        default=(0., 0.),
+                    ), strict=True))
+                    for tier, sample in tiers.items()
+                } for mode, tiers in samples.items()
+            },
+        }
+
+    def lexical(self, text, unavailable, *, match_notice=False):
         scores = self.index.document_scores(text)
-        hits = [i for i in scores if self.ids[int(i)] != unavailable]
+        kind = notice_kind(text) if match_notice else None
+        hits = [i for i in scores if self.ids[int(i)] != unavailable
+                and (not match_notice or self.notice_kinds[self.ids[int(i)]] == kind)]
         return [self.ids[int(i)] for i in sorted(hits, key=lambda i: (-scores[i], self.ids[int(i)]))[:K]]
 
     def literal(self, text, unavailable):
@@ -124,8 +188,16 @@ class Search:
             order = np.argsort(-(vectors[2:] @ self.bank.T), axis=1, kind="stable")
             dense = [[self.ids[i] for i in ranked if self.ids[i] != unavailable][:K] for ranked in order]
         if method not in ("dense", "literal"):
-            lexical = [self.lexical(value, unavailable) for value in (left, right)]
-        if method == "literal":
+            lexical = [self.lexical(value, unavailable, match_notice=method in TYPED) for value in (left, right)]
+        verification = None
+        if method in MODES or method in TIERED or method in TYPED:
+            queries = [normalized(value).split() for value in (left, right)]
+            verification = [measure(query, shortlist, self.segments, method.split("_", 1)[0])
+                            for query, shortlist in zip(queries, lexical, strict=True)]
+            policy = self.policies[method]
+            policies = ([policy[length_tier(query)] for query in queries] if method not in MODES else [policy, policy])
+            banks = [[row[0]] if accepts(row, rule) else [] for row, rule in zip(verification, policies, strict=True)]
+        elif method == "literal":
             banks = [self.literal(value, unavailable) for value in (left, right)]
         elif method in LEXICAL_ONLY:
             banks = lexical
@@ -160,7 +232,7 @@ class Search:
                         source, links, resolved = (a, b), verified, complete
         citations = [[source[0], i, source[1], j] for i, j in links]
         return dict(source=source, initial=initial, roles=roles, resolved=resolved, citations=citations,
-                    banks=banks, duration=(perf_counter() - start) * 1000)
+                    banks=banks, verification=verification, duration=(perf_counter() - start) * 1000)
 
 
 def summarize(rows, methods=METHODS, styles=STYLES):
@@ -217,11 +289,16 @@ def run(args):
             raise ValueError("Duplicate searchable documents")
         lexical = build_lexical({text: i for i, text in enumerate(texts)}, Path(scratch))
     search = Search(embedder, lexical, documents, ownership, banks["ridge"])
+    calibration = None
     rows = {"all_present": []}
-    if args.audit_missing_source:
+    if args.audit_missing_source or args.confirm_sources:
         rows.update(missing_left=[], missing_right=[])
     methods = OPEN_SET_METHODS if args.audit_missing_source else METHODS
     styles = (*STYLES, "edited_abstract") if args.audit_missing_source else STYLES
+    if args.confirm_sources:
+        targets = {q[key] for q in queries for key in ("left", "right")}
+        calibration = search.calibrate_sources(documents, targets)
+        methods, styles = CONFIRMATION_METHODS, CONFIRMATION_STYLES
     for i, q in enumerate(queries):
         source = q["left"], q["right"]
         roles = [q["left_role"], q["right_role"]]
@@ -252,9 +329,9 @@ def run(args):
                                     style=style, arms=estimates))
     with args.output.open("x") as stream:
         summary = {key: summarize(records, methods, styles) for key, records in rows.items()}
-        if not args.audit_missing_source:
+        if not (args.audit_missing_source or args.confirm_sources):
             summary, rows = summary["all_present"], rows["all_present"]
-        json.dump(dict(summary=summary, rows=rows, fit=fit, embedding=provenance,
+        json.dump(dict(summary=summary, rows=rows, fit=fit, embedding=provenance, source_calibration=calibration,
                        fixture_sha256=digest(args.fixture / "manifest.json"), script_sha256=digest(Path(__file__))),
                   stream, indent=2)
         stream.write("\n")
@@ -265,5 +342,7 @@ if __name__ == "__main__":
     for name in ("fixture", "glossary", "training", "phrases", "embedding", "output"):
         parser.add_argument(name, type=Path)
     parser.add_argument("sources", nargs="+", type=Path)
-    parser.add_argument("--audit-missing-source", action="store_true")
+    mode = parser.add_mutually_exclusive_group()
+    mode.add_argument("--audit-missing-source", action="store_true")
+    mode.add_argument("--confirm-sources", action="store_true")
     run(parser.parse_args())
