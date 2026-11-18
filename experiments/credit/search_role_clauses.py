@@ -1,0 +1,232 @@
+"""Replay source retrieval, credited-clause selection and author attribution together."""
+
+import argparse
+from collections import Counter
+import json
+import os
+from pathlib import Path
+from tempfile import TemporaryDirectory
+from time import perf_counter
+
+import numpy as np
+
+from experiments.credit.compositional_edits import stable
+from experiments.credit.conjunctive_source_retrieval import sentences
+from experiments.credit.cross_source_identity import load
+from experiments.credit.cross_source_search import searchable_text
+from experiments.credit.plos_role_inventory import ROLES
+from experiments.credit.source_confirmation import accepts, measure, notice_kind
+from experiments.followir.core17_reranking import digest, write_json
+
+
+METHODS = ("bm25_ridge", "confirmed_ridge", "confirmed_clause", "confirmed_full_reader")
+SOURCE_POLICY = {"score": .75, "margin": .05}
+STYLES = ("literal_excerpt", "abridged_excerpt")
+
+
+def prepare(args):
+    if args.output.exists():
+        raise FileExistsError(args.output)
+    desired = {}
+    for path, field in ((args.prior, "input_sources"), (args.external, "inventory")):
+        for row in json.loads(path.read_bytes())[field]:
+            expected = desired.setdefault(row["doi"], row["source_sha256"])
+            if row["source_sha256"] != expected:
+                raise ValueError("Conflicting publisher source")
+    loaded = load(args.xml)
+    corpus = searchable_text(args.xml)
+    if not desired.keys() <= loaded.keys() or not desired.keys() <= corpus.keys():
+        raise ValueError("Incomplete publisher inputs")
+    rows = {}
+    for doi, expected in sorted(desired.items()):
+        source = loaded[doi]
+        if source["source_sha256"] != expected:
+            raise ValueError("Changed publisher record")
+        title, abstract = corpus[doi]
+        rows[doi] = dict(title=title, abstract=abstract, source_sha256=expected,
+                         roles=[r["roles"] for r in source["authors"]])
+    write_json(args.output, dict(prior_sha256=digest(args.prior), external_sha256=digest(args.external), records=rows))
+
+
+def split(text):
+    fields = text.splitlines()
+    if len(fields) != 3 or any(not line.startswith(tag) for line, tag in zip(
+        fields, ("Study: ", "Required action 1: ", "Required action 2: "), strict=True,
+    )):
+        raise ValueError("Unrecognized request format")
+    return [line.split(": ", maxsplit=1)[1] for line in fields]
+
+
+def render(lead, phrases):
+    return f"Study: {lead}\nRequired action 1: {phrases[0]}\nRequired action 2: {phrases[1]}"
+
+
+def views(record):
+    parts = [s for s in sentences(record["abstract"]) if 12 <= len(s.split()) <= 62]
+    if not parts:
+        raise ValueError("No eligible abstract span")
+    full = parts[len(parts)//2]
+    shortened = " ".join(word for i, word in enumerate(full.split()) if i % 5 != 2)
+    return dict(literal_excerpt=full, abridged_excerpt=shortened)
+
+
+def summary(rows):
+    results = {}
+    for style in STYLES:
+        results[style] = {}
+        for state in ("present", "withheld"):
+            values = [r for r in rows if r["style"] == style and r["state"] == state]
+            results[style][state] = {}
+            for method in METHODS:
+                arms = [r["arms"][method] for r in values]
+                counts = Counter()
+                for row, arm in zip(values, arms, strict=True):
+                    target, expected = row["doi"], row["gold"]
+                    counts["requests"] += 1
+                    counts["source_exact"] += arm["doi"] == target
+                    counts["source_selected"] += arm["doi"] is not None
+                    counts["unresolved"] += arm["authors"] is None
+                    if state == "present":
+                        counts["exact"] += arm["doi"] == target and arm["authors"] == expected
+                    if arm["authors"] is not None:
+                        counts["unsupported_citations"] += len(arm["authors"]) if state == "withheld" or arm["doi"] != target else len(set(arm["authors"]) - set(expected))
+                        counts["wrong_source_empty"] += not arm["authors"] and (state == "withheld" or arm["doi"] != target)
+                results[style][state][method] = dict(counts, p95_ms=float(np.quantile([x["ms"] for x in arms], .95)))
+    return results
+
+
+def run(args):
+    import torch
+
+    from expert_search.qwen_embedding_torch import QwenTorchEmbedding
+    from experiments.credit.attribution_controls import Reader
+    from experiments.credit.factored_role_edits import choose_batched
+    from experiments.credit.role_clause_selection import reader_quotes
+    from experiments.credit.role_language_router import NISO_SHA256, Router
+    from experiments.credit.role_prototypes import normalized
+    from experiments.credit.train_role_decision import encode, ridge
+    from experiments.litsearch.dense_cache import verify_checkpoint
+    from experiments.qasper.paired_reader import load_reader
+    from experiments.retrieval.lrbench_frozen_baselines import build_lexical
+
+    if args.output.exists():
+        raise FileExistsError(args.output)
+    if not os.environ.get("SLURM_JOB_ID") or not torch.cuda.is_available():
+        raise RuntimeError("A Slurm CUDA allocation is required")
+    fixture_hash = digest(args.fixture / "manifest.json")
+    catalog = json.loads(args.catalog.read_bytes())
+    if catalog["external_sha256"] != fixture_hash:
+        raise ValueError("Changed external fixture")
+    records = catalog["records"]
+    manifest = json.loads((args.fixture / "manifest.json").read_bytes())
+    pair_path = args.fixture / "pairs.jsonl"
+    if manifest["pairs_sha256"] != digest(pair_path):
+        raise ValueError("Changed public group labels")
+    for row in manifest["sources"]:
+        paper = records[row["doi"]]
+        if paper["source_sha256"] != row["source_sha256"] or paper["roles"] != row["roles_by_author"]:
+            raise ValueError("Changed contributor declarations")
+    groups = [json.loads(line) for line in pair_path.read_text().splitlines()]
+    target_views = {row["doi"]: views(records[row["doi"]]) for row in groups}
+    phrases = json.loads((args.fixture / "boundary-phrases.json").read_bytes())
+    if digest(args.examples) != NISO_SHA256:
+        raise ValueError("Changed glossary")
+    glossary = json.loads(args.examples.read_bytes())
+    provenance = verify_checkpoint(args.embedding)
+    torch.backends.cuda.matmul.allow_tf32 = False
+    encoder = QwenTorchEmbedding(args.embedding)
+    tokenizer, model, reader_provenance = load_reader(args.reader)
+    reader = Reader(tokenizer, model)
+    definitions = [f"{role}: {glossary['definitions'][role]}" for role in ROLES]
+    router = Router(definitions, None, None, encoder, model, tokenizer, 3)
+    original = json.loads(args.training.read_bytes())
+    ordered = [[(text, ROLES.index(role)) for text in sorted(original[role],
+                key=lambda s: stable("fine-tune-split", role, s))] for role in ROLES]
+    fit = [r for variants in ordered for r in variants[:-1]]
+    held = [v[-1] for v in ordered]
+    ids = sorted(records)
+    docs = {}
+    segments = {}
+    notices = {}
+    for i, doi in enumerate(ids):
+        paper = records[doi]
+        text = paper["title"] + "\n" + paper["abstract"]
+        while text in docs:
+            text += "\n"
+        docs[text] = i
+        segments[doi] = [normalized(s).split() for s in [paper["title"], *sentences(paper["abstract"])]]
+        notices[doi] = notice_kind(paper["title"])
+    with TemporaryDirectory() as folder:
+        lexical = build_lexical(docs, Path(folder))
+    with torch.inference_mode():
+        x = torch.cat([encode(encoder, [t for t, _ in part]) for part in (fit, held)])
+        y = torch.tensor([role for _, role in (*fit, *held)], device="cuda")
+        bank = ridge(x, y)
+
+        def execute(text, hidden, method):
+            start = perf_counter()
+            lead, *tasks = split(text)
+            scores = lexical.document_scores(lead)
+            candidates = [ids[int(i)] for i in sorted(scores, key=lambda i: (-scores[i], int(i)))
+                          if ids[int(i)] != hidden]
+            if method == "bm25_ridge":
+                doi = candidates[0] if candidates else None
+            else:
+                typed = [d for d in candidates if notices[d] == notice_kind(lead)][:4]
+                observation = measure(normalized(lead).split(), typed, segments, "ordered")
+                doi = observation[0] if accepts(observation, SOURCE_POLICY) else None
+            authors = None
+            roles = records[doi]["roles"] if doi else None
+            if roles and all(roles):
+                if method == "confirmed_full_reader":
+                    rankings = choose_batched(router, tasks, [list(range(len(ROLES)))] * len(tasks), 0)
+                else:
+                    if method == "confirmed_clause":
+                        tasks = reader_quotes(reader, tasks)
+                    rankings = (encode(encoder, tasks) @ bank.T).argmax(1).tolist()
+                required = {ROLES[i] for i in rankings}
+                if len(required) == len(tasks):
+                    authors = [i for i, own in enumerate(roles, 1) if required.issubset(own)]
+            return dict(doi=doi, authors=authors, ms=(perf_counter()-start)*1000)
+
+        rows = []
+        for i, group in enumerate(groups):
+            doi = group["doi"]
+            for style, lead in target_views[doi].items():
+                for side in ("before", "after"):
+                    required = group[side]
+                    tasks = [min(phrases[r], key=lambda phrase: stable(group["id"], r, phrase)) for r in required]
+                    text = render(lead, tasks)
+                    gold = [ordinal for ordinal, own in enumerate(records[doi]["roles"], 1)
+                            if set(required).issubset(own)]
+                    for state, hidden in (("present", None), ("withheld", doi)):
+                        if not i:
+                            for method in METHODS:
+                                execute(text, hidden, method)
+                        order = (i + len(rows)) % len(METHODS)
+                        arms = {m: execute(text, hidden, m) for m in METHODS[order:] + METHODS[:order]}
+                        if hidden and any(a["doi"] == hidden for a in arms.values()):
+                            raise AssertionError("Returned an unavailable document")
+                        rows.append(dict(id=group["id"], doi=doi, style=style, state=state,
+                                         side=side, gold=gold, arms=arms))
+    write_json(args.output, dict(
+        job_id=os.environ["SLURM_JOB_ID"], gpu=torch.cuda.get_device_name(),
+        catalog_sha256=digest(args.catalog), script_sha256=digest(Path(__file__)),
+        training_sha256=digest(args.training), phrase_sha256=digest(args.fixture / "boundary-phrases.json"),
+        embedding=provenance, reader=reader_provenance, sources=len(records),
+        policy=SOURCE_POLICY, report=summary(rows), rows=rows,
+    ))
+
+
+if __name__ == "__main__":
+    parser = argparse.ArgumentParser(description=__doc__)
+    subs = parser.add_subparsers(dest="command", required=True)
+    build = subs.add_parser("prepare")
+    for name in ("prior", "external", "output"):
+        build.add_argument(name, type=Path)
+    build.add_argument("xml", type=Path, nargs="+")
+    replay = subs.add_parser("run")
+    for name in ("fixture", "catalog", "examples", "training", "embedding", "reader", "output"):
+        replay.add_argument(name, type=Path)
+    args = parser.parse_args()
+    (prepare if args.command == "prepare" else run)(args)
