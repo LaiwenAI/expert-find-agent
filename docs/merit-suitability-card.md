@@ -82,3 +82,19 @@ PYTHONPATH=src:. python -m experiments.retrieval.lrbench_matched_profiles \
   --release artifacts/lrbench-release-6b950b4 \
   --output artifacts/lrbench-matched-profiles-v2
 ```
+
+### Global shortlist validation on CoF
+
+The LR-Bench comparisons hold candidates fixed. This test evaluates the global shortlist on [CoF](https://github.com/yuzhimanhua/CoF) using 34 NIPS and 91 SciRepEval queries. Sixteen SciRepEval targets with a profile overlap by ID, normalized title or exact text were excluded. Each lexical root encodes up to 32 title terms selected by profile frequency and corpus IDF. A normalized centroid of original paper vectors provides an equal-size control. After choosing 20 or 50 experts by root score, the system ranks only their owned papers. The full reference scores all papers with the same frozen Qwen embedding and max aggregation on the same RTX 4090.
+
+| Global route | NIPS known-positive recall / cached P95 | SciRepEval known-positive recall / cached P95 |
+| --- | ---: | ---: |
+| Full exact | 100% / 0.32 ms | 100% / 1.22 ms |
+| Keyword top 20 | 64.1% / 0.71 ms | 37.2% / 1.79 ms |
+| Keyword top 50 | 84.4% / 1.23 ms | 55.8% / 3.57 ms |
+| Centroid top 20 | 78.1% / 0.69 ms | 48.7% / 1.80 ms |
+| Centroid top 50 | 92.2% / 1.34 ms | 69.9% / 4.33 ms |
+
+At 50 experts, the keyword route scored about 2,096 of 14,913 source rows per NIPS query and 4,148 of 73,257 per SciRepEval query. It still ran slower when root scoring, subset gathering, ownership aggregation and citation selection were included. Retention of the exact baseline's top five was 69.4% and 51.6%. All emitted sources resolved to titles from the original reviewer profiles. Shared experts retained the baseline source order. This establishes source traceability, not support for a claim about expertise. Incomplete reviewer judgments leave paired P@5 differences uncertain. Timing starts with a cached query vector and excludes encoding, source text fetch and model verification.
+
+The tested title-based profile route should not replace full exact retrieval at this scale. It uses a different profile construction from RATE, so the shortlist failure does not generalize to all compact representations. Run `PYTHONPATH=src:. python -m experiments.retrieval.cof_compact_profile_shortlist --output artifacts/cof-compact-profile-shortlist-v1` on a CUDA node with the frozen CoF matrices from `experiments.cof_qwen_embedding`. The runner validates the vector payload and ordering. Slurm job `40227` supplied the recorded run.
