@@ -33,10 +33,14 @@ def normalized_name(author):
     return "".join(char for char in normalized if char.isalnum()) or None
 
 
+def xml_sources(folder):
+    return sorted(path for path in folder.glob("*.xml") if not path.name.startswith("."))
+
+
 def load(folders):
     raw_sources = {}
     for folder in folders:
-        for path in sorted(folder.glob("*.xml")):
+        for path in xml_sources(folder):
             raw = path.read_bytes()
             metadata = ET.fromstring(raw).find("./front/article-meta")
             doi = metadata.findtext("article-id[@pub-id-type='doi']")

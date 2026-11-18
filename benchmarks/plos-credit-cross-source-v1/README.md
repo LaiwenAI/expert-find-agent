@@ -15,3 +15,23 @@ The four extra visible name links are missing a published identifier on at least
 [Source records](sources.json) store paper DOIs, author ordinals, and fixture-local tokens for identifiers and normalized names. [Queries](queries.json) contain declared role pairs and expected ordinal links. [The manifest](manifest.json) pins the input XML inventory and fixture hashes. Data provided by PLOS, with each source credited by its DOI under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). [CRediT](https://credit.niso.org/) is maintained by NISO.
 
 Replay the frozen fixture with `python -m experiments.credit.cross_source_identity NEW_REPORT.json --replay benchmarks/plos-credit-cross-source-v1`. Rebuild with `python -m experiments.credit.cross_source_identity NEW_FIXTURE XML_DIRECTORY [XML_DIRECTORY...]` using the manifest's publisher XML records.
+
+## Retrieving the two sources
+
+The integrated replay indexes titles and abstracts for all 130 articles. Each of the 59 requests has three views using full titles, middle abstract sentences, or four consecutive normalized title terms. Both source hints and both natural-language role phrases appear in a controlled sentence format. The frozen Qwen3 encoder and synthetic-task ridge head recover the roles. A result counts as exact only when both publications, the resolved status, and all returned author-ordinal links match the fixture.
+
+Compare BM25, dense retrieval, and reciprocal-rank fusion for source selection. The identity-first variants try source pairs from the top four per hint when the initial pair yields no verified link. One BM25 variant can replace only one source. The corroboration variant starts from fusion, allows replacements only from both systems' top three, and locks a source if the two systems agree on its top result.
+
+| Route | Abstract exact / 59 | Short-title exact / 59 | Short-title source replacements | Unsupported short-title links | Short-title P95 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| BM25 | 59 | 31 | 0 | 0 | 8.40 ms |
+| Dense | 39 | 18 | 0 | 0 | 8.47 ms |
+| Fusion | 54 | 22 | 0 | 0 | 8.59 ms |
+| Fusion and identity-first | 56 | 34 | 13 | 1 | 8.59 ms |
+| Fusion and corroborated repair | 54 | 22 | 0 | 0 | 8.55 ms |
+| BM25 and identity-first | 59 | 39 | 8 | 0 | 8.44 ms |
+| BM25 and one-sided repair | 59 | 35 | 4 | 0 | 8.40 ms |
+
+Every route gets 59/59 exact for full titles. The role proposer gets all role pairs right in these controlled phrasings, so the observed failures are at source selection. The eight repaired BM25 requests represent two publication pairs out of fifteen, and the extra link under fusion comes from a different publication pair than the one requested. The identity signal can repair weak source clues and can also support the wrong papers. These are exploratory shortlist comparisons. Job `40401` motivated testing identity repair on the stronger BM25 baseline, and job `40405` reuses the same cases for that comparison on RTX 5090.
+
+Run [the search replay](../../experiments/credit/cross_source_search.py) with `FIXTURE EXAMPLES_JSON ROLE_TRAINING_JSON PHRASES_JSON EMBEDDING_CHECKPOINT NEW_RESULT_JSON XML_DIRECTORY [XML_DIRECTORY...]`. It verifies all 130 source XML digests. Timings cover warm local request parsing through source-linked output, with no network or index initialization. The source hints are derived from the target articles, and the envelope and role phrases are controlled.
