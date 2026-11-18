@@ -107,6 +107,23 @@ Calibration and test questions come from different writing protocols. The empiri
 
 Run [the depth replay](../../experiments/litsearch/top_hit_confirmation.py) with `PROJECTION VECTORS EMBEDDING_CHECKPOINT RERANKER_CHECKPOINT NEW_RESULT_JSON`. [Aggregate results and paired intervals](top-hit-confirmation-v1.json)
 
+## Route verification depth from the dense gap
+
+Job `40560` selects one or two candidates before the cross-encoder call. The router fits its split from three dense-gap quantiles on the 96 calibration questions, with a separate acceptance rule at each depth. Both rules share a ceiling on unjudged returns in each view. A query-hash control uses the same fitting procedure and no retrieval scores when choosing a depth. Every test request runs the selected depth live. Candidate lists and score observations match the earlier fixed-depth replay.
+
+Cells show **known returned / unjudged returned with targets present / returned after withholding**. P95 and documents scored are for the source-present view at the 2% calibration ceiling.
+
+| Route | 2% ceiling | 5% ceiling | Documents scored | Present P95 |
+| --- | ---: | ---: | ---: | ---: |
+| Fixed single | 9 / 0 / 0 | 43 / 6 / 14 | 246 | 15.06 ms |
+| Fixed two | 23 / 2 / 3 | 30 / 7 / 9 | 492 | 24.93 ms |
+| Dense-gap routing | 30 / 5 / 6 | 36 / 6 / 12 | 343 | 19.79 ms |
+| Query-hash routing | 16 / 1 / 2 | 52 / 9 / 19 | 295 | 19.35 ms |
+
+At the 2% calibration ceiling, dense-gap routing reduces scored documents by 30% and P95 by 21% against fixed two. It adds seven known returns and three withheld-view returns. The known-return difference is +2.85 points (descriptive grouped 95% interval −0.41 to +6.45). At 5%, the query-hash control returns more known and unjudged sources than the dense-gap router. These repeated author-written queries show a latency and candidate-budget gain. Equal-risk quality needs an independent comparison with human judgments of the returned alternatives.
+
+Run [the live depth router](../../experiments/litsearch/adaptive_depth.py) with `PROJECTION VECTORS EMBEDDING_CHECKPOINT RERANKER_CHECKPOINT RAW_DEPTH_REPLAY_JSON NEW_RESULT_JSON`. Generate the raw reference using the top-hit depth replay above. [Aggregate results](adaptive-depth-v1.json)
+
 ## Reproduce
 
 Download [the pinned query Parquet](https://huggingface.co/datasets/princeton-nlp/LitSearch/resolve/9573fb284a1026c998df47024b888a163f0f0e25/query/full-00000-of-00001.parquet). Run [the projection tool](../../experiments/litsearch/prepare_titles.py) with `QUERY_PARQUET NEW_PROJECTION.json.gz` in an environment with PyArrow. It reads only the three selected columns from the six corpus shards using range requests. Full article bodies and third-party dataset rows are omitted from the release.
