@@ -13,4 +13,4 @@ cd /media/Ws5_4TB/zdx/expert-find-agent
 export PYTHONPATH="$PWD/src:$PWD"
 export OPENBLAS_NUM_THREADS=1
 export OMP_NUM_THREADS=1
-venv/bin/python -u -m experiments.scifact.open_verdict_evidence_ablation --rotate-labels --output artifacts/scifact-open-verdict-ablation-v2
+venv/bin/python -u -m experiments.scifact.open_verdict_evidence_ablation --cross-order --output artifacts/scifact-open-verdict-factorial-v1
