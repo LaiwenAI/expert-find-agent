@@ -116,7 +116,12 @@ def export(out):
         'establish a relevant result, and uncertain when the judgment cannot be made reliably. New support '
         'requires a concrete capability absent from the first source. Shared words alone do not qualify. '
         'Use the rationale field to explain the relationship to the first source. Use null for unfinished '
-        'options. A judge should not assume individual contribution from a paper association.\n')
+        'options. A judge should not assume individual contribution from a paper association.\n\n'
+        'Save one copy of blind-review.jsonl per reviewer. After both submissions are saved, run: \n\n'
+        '`PYTHONPATH=src:. python -m experiments.retrieval.cof_complement_review compare '
+        'PACKET reviewer-a.jsonl reviewer-b.jsonl --output review-summary.json`\n\n'
+        'The summary reports agreement, paired new-support and conflict differences, and worst-case '
+        'bounds under missing, disputed or uncertain labels. It omits excerpts and per-case arm identities.\n')
 
 
 def read_review(path):
@@ -164,6 +169,78 @@ def validate(packet, review):
     return {'cases':len(submitted), 'counts':dict(counts)}
 
 
+def compare_reviews(packet, reviewer_a, reviewer_b):
+    """Report paired rates only where both reviewers agree on definite labels."""
+    reviews = (reviewer_a, reviewer_b)
+    validation = [validate(packet, path) for path in reviews]
+    a, b = [read_review(path) for path in reviews]
+    reviewer_ids = [
+        {row['reviewer_id'].strip() for row in review.values()
+         if any(row[field]['label'] is not None for field in FIELDS)}
+        for review in (a, b)
+    ]
+    if any(len(ids) > 1 for ids in reviewer_ids) or reviewer_ids[0] & reviewer_ids[1]:
+        raise ValueError('Provide separate submissions from two distinct reviewer IDs')
+    mapping = json.loads((packet/'mapping.json').read_text())
+    if set(mapping) != set(a):
+        raise ValueError('Mapping does not cover the exact review cohort')
+    panel = Counter()
+    by_arm = {arm:Counter() for arm in ('dense_second', 'complement')}
+    metrics = {target:{'counts':Counter(), 'lower':0, 'upper':0}
+               for target in ('new_support', 'conflict')}
+    for case in sorted(a):
+        match = mapping[case]['options']
+        if {match[field]['arm'] for field in FIELDS} != set(by_arm):
+            raise ValueError('Each case must contain one option per arm')
+        labels = {}
+        for field in FIELDS:
+            first, second = a[case][field]['label'], b[case][field]['label']
+            if first is None or second is None:
+                status = 'missing'
+            elif first != second:
+                status = 'disagreed'
+            else:
+                status = first
+            labels[match[field]['arm']] = status
+            by_arm[match[field]['arm']][status] += 1
+            panel[status] += 1
+        for target, estimate in metrics.items():
+            def bounds(label):
+                return (0,1) if label in ('missing','disagreed','uncertain') else (int(label == target),)*2
+            base_lo, base_hi = bounds(labels['dense_second'])
+            alt_lo, alt_hi = bounds(labels['complement'])
+            estimate['lower'] += alt_lo-base_hi
+            estimate['upper'] += alt_hi-base_lo
+            if base_lo != base_hi or alt_lo != alt_hi:
+                estimate['counts']['incomplete'] += 1
+            else:
+                category = ('complement_only' if alt_lo > base_lo else
+                            'dense_only' if alt_lo < base_lo else 'both' if alt_lo else 'neither')
+                estimate['counts'][category] += 1
+
+    count = len(a)
+    comparisons = {}
+    for target, result in metrics.items():
+        counts = result['counts']
+        evaluated = count-counts['incomplete']
+        delta = counts['complement_only']-counts['dense_only']
+        comparisons[target] = {
+            'paired_counts':dict(counts),
+            'complete_pair_rate_delta':delta/evaluated if evaluated else None,
+            'full_sample_identification_bounds':[result['lower']/count,result['upper']/count],
+        }
+    jointly_reviewed = 2*count-panel['missing']
+    return {
+        'cases':count, 'manifest_sha256':sha(packet/'manifest.json'),
+        'submissions':[{'sha256':sha(path), **checksum} for path,checksum in zip(reviews,validation)],
+        'jointly_reviewed_options':jointly_reviewed,
+        'exact_agreement':(jointly_reviewed-panel['disagreed'])/jointly_reviewed if jointly_reviewed else None,
+        'status_by_arm':{arm:dict(counts) for arm, counts in by_arm.items()},
+        'comparison':comparisons,
+        'scope':'Conditional on sampled source substitutions, one per selected query. A verdict counts as definite only when both reviewers agree and do not mark uncertainty. Bounds are worst-case ranges over missing, disputed and uncertain labels, not sampling confidence intervals. Quotes and reviewer IDs receive structural checks only.',
+    }
+
+
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest='command', required=True)
@@ -171,8 +248,19 @@ if __name__ == '__main__':
     check = commands.add_parser('validate')
     check.add_argument('packet', type=Path)
     check.add_argument('review', type=Path)
+    compare = commands.add_parser('compare')
+    compare.add_argument('packet', type=Path)
+    compare.add_argument('reviewer_a', type=Path)
+    compare.add_argument('reviewer_b', type=Path)
+    compare.add_argument('--output', type=Path, required=True)
     args = parser.parse_args()
     if args.command == 'export':
         export(args.packet)
-    else:
+    elif args.command == 'validate':
         print(json.dumps(validate(args.packet,args.review),indent=2))
+    else:
+        report = compare_reviews(args.packet,args.reviewer_a,args.reviewer_b)
+        with args.output.open('x') as stream:
+            json.dump(report,stream,indent=2)
+            stream.write('\n')
+        print(json.dumps(report,indent=2))
