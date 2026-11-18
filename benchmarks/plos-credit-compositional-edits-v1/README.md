@@ -39,6 +39,25 @@ Job `40474` on RTX 5090 renders the three supplied task spans using pinned NISO 
 
 The factored route labels all 36 known-different-author controls correctly. It still misses 12 of 30 supported requests, and stable-pair accuracy remains low. Test views reuse three publication components and reused taxonomy phrases. Timing measures local decisions given the cited source records and supplied requirement boundaries.
 
+## Decision-aware language checks
+
+All policies reject a known identity mismatch and skip language checks for withheld records. Among the remaining atoms, the ridge head and BM25 glossary retrieval supply sets of possible role labels. Select the smallest shortlist width per retrieval channel that covers every one of the 23 unique visible phrases in the calibration split. The resulting width is fixed for test. The test has 32 visible phrases, 17 of which occur in calibration.
+
+The full-glossary reader resolves every visible atom. The shortlist reader resolves the same atoms using shorter menus. The decision-aware route checks whether every proposed role agrees on membership in that author's declaration. It reads only disputed atoms unless a visible rejection already settles the conjunction. When it reads, it uses the full glossary. Glossary order for each atom is held constant between the full-glossary and decision-aware routes. The route's default decisions depend on proposal coverage.
+
+At width four per channel, the union contains the reference role for all 252 visible test atoms. On the 156 requests, Slurm job `40480` measures:
+
+| Route | Correct / 156 | Unsupported promotions | Supported cases missed / 30 | Atoms sent to reader | Warm P95 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Ridge top role | 122 | 5 | 12 | 0 | 8.46 ms |
+| Full glossary | 126 | 1 | 13 | 252 | 70.09 ms |
+| Shortlist glossary | 124 | 2 | 14 | 252 | 49.38 ms |
+| Read only disputed atoms | 126 | 1 | 13 | 252 | 77.00 ms |
+
+The decision-aware route reproduces the full reader's output on every request. Each eligible visible atom still has both a declared and an undeclared role among its proposals, so none is removed. The shortlist cuts P95 by about 30% and loses two correct decisions. The prototype with three arms (job `40477`) reproduces the decisions of the shared arms. The initial ridge errors include confusion of Formal analysis with Software and of Methodology with Conceptualization. The test uses the same three publication components and repeated phrases as the preceding replay.
+
+Run [the routing replay](../../experiments/credit/route_compositional_atoms.py) using the live replay arguments below.
+
 ## Reproduce
 
 Build with `python -m experiments.credit.compositional_edits NEW_FIXTURE XML_DIRECTORY [XML_DIRECTORY...]`. Replay with `python -m experiments.credit.compositional_edits NEW_REPORT.json --replay FIXTURE`.
