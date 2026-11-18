@@ -46,6 +46,23 @@ Invariance skips 40/224 NISO requests and gets 24 of those two-author decisions 
 
 Run [the factored replay](../../experiments/credit/factored_role_edits.py) with `FIXTURE EXAMPLES_JSON EMBEDDING_CHECKPOINT READER_CHECKPOINT NEW_RESULT_JSON`. Job `40367` used frozen Qwen3-Embedding-0.6B and Qwen3-4B-Instruct-2507 on RTX 5090. Latencies are warm single-request measurements with one request version and two candidate authors. Source lookup, transport and open-ended segmentation are outside the measured path.
 
+## Retrieval and attribution from plain text
+
+Two sentence templates place a quoted source description before or after the tasks. The tasks have no field labels, and some NISO phrases contain conjunctions of their own. The splitter enumerates candidate boundaries and scores each split by the best pair of distinct glossary roles. Factored arms decode those roles with a batched shortlist reader and return the author ordinals whose own declarations contain both. The dense variant embeds the source lead and all task spans together.
+
+The index contains 100 PLOS articles, with contributor declarations available for 44. The eight test articles each supply title and edited-last-sentence leads. Every arm receives the same requests, including the direct reader that judges all authors from the top BM25 paper in one batch. The oracle split supplies only the task boundary and uses the same BM25 retrieval and role mapping as the factored arm.
+
+| Route | Title author sets exact / 224 | Edited source hits / 224 | Edited author sets exact / 224 | Edited request P95 |
+| --- | ---: | ---: | ---: | ---: |
+| BM25 and direct reader | 35 | 224 | 35 | 64.50 ms |
+| BM25 and factored reader | 124 | 224 | 124 | 38.26 ms |
+| Joint dense source and task encoding | 125 | 160 | 92 | 37.81 ms |
+| BM25 and oracle task boundaries | 132 | 224 | 132 | 37.12 ms |
+
+Success requires the correct source and exact author set, with a resolved result. The BM25 factored route succeeds on both versions in 32/112 groups, compared with 1/112 for direct reading. Its per-request gain over direct reading is 39.7 percentage points (paper-bootstrap interval +31.3 to +47.3). The splitter recovers 90/224 exact boundaries, and role normalization recovers 103/224 exact role sets. Supplying the oracle split raises these counts to 224 and 113. The dense source variant misses two of the eight edited-description articles, affecting 64 requests. The same leads and task phrases recur across requests.
+
+Run [the integrated replay](../../experiments/credit/retrieve_and_attribute.py) with `FIXTURE CATALOG EXAMPLES_JSON EMBEDDING_CHECKPOINT READER_CHECKPOINT NEW_RESULT_JSON`. Job `40371` uses the same frozen Qwen checkpoints on RTX 5090. Timing covers local parsing, source lookup, inference and construction of source-linked results. The quoted source descriptions are derived from the test articles. This controlled replay leaves independently authored search descriptions, cross-article person identification, concurrent serving and enterprise relevance for separate evaluation.
+
 ## Reproduce
 
 Run [the builder](../../experiments/credit/counterfactual_role_edits.py) with `SNAPSHOT OUTPUT --capture-from CATALOG PILOT_MANIFEST`. Use the pinned catalog described in [the compound retrieval experiment](../plos-credit-pilot-v1/README.md#compound-roles-with-source-retrieval) and its pilot manifest. The source cache can be reused for subsequent builds. The released fixture contains derived records, with article URLs and hashes for rebuild and audit.
