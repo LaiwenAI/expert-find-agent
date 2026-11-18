@@ -9,6 +9,8 @@ The research plan prioritizes feedback-driven continual improvement of an expert
 - Public reviewer ratings and EvidenceBench provide auxiliary evaluation. Reviewer ratings are not enterprise suitability labels, and model-assisted sentence aspects are not expert-level gold.
 - Component timing and concurrent assessment pilots exclude parts of the agent. They are useful implementation baselines, not a full-agent quality or cost claim.
 
+A proposed confirmatory comparison and feedback-collection design is detailed in [feedback-evaluation-protocol.md](feedback-evaluation-protocol.md). It is not preregistered and does not claim the proposed text-aware arms are implemented.
+
 ## Adjusted experimental sequence
 
 1. **Freeze a static agent and strong retrieval baselines.** Version the corpus, source ownership, models, prompts, index, candidate and evidence budgets, failure policy, and timing scope. Include fixed lexical and dense ranking, a fixed agent, and direct feedback-free retrieval. Compare the same query cohort and report all attempts, unresolved outputs, initialization, query encoding, retrieval, reasoning, and total cost. Index changes require a separate arm.
