@@ -58,3 +58,16 @@ Slurm job 40195 tested one RTX 4090 on ws6. Each arm reranked the same 20 expert
 - SciRepEval used 91 queries. About 42% of returned positions had labels. The two-source versus single-source hard P@5 difference could range from -7.69 to +9.01 points under the missing labels. A judged-only shortlist analysis is conditional on the initial candidate pool.
 - Exact dense remains the default for ranking. These experiments leave open selective fragment scoring and source verification. The reviewer grades score experts, and the heuristic fragments have no separate hard-constraint gold.
 - Reproduction uses [the source-pair benchmark](../../experiments/retrieval/cof_complementary_source_pairs.py) and the pinned CoF vector indices. Output is under `artifacts/cof-source-pairs-v1`. The paired metrics, character budgets, and candidate-source ownership were checked against the original records.
+
+## Selective Fragment Scoring
+
+Job 40200 ran on one RTX 4090 on ws6. The learned gate used eight initial-search features, including score margins, query length and source count. It fit 111 identified hard-label differences from 243 SIGIR and KDD queries. Of those, 13 favored fragmentation and 13 favored the default. Exact query IDs and normalized titles were disjoint between calibration and the NIPS and SciRepEval replays. Profiles could overlap.
+
+| Venue | Frozen gate calls | Known hard P@5 difference vs. dense | Missing-label bounds | P95 dense / learned / always (ms) |
+| --- | ---: | ---: | ---: | ---: |
+| NIPS | 14 / 34 | -1.18 pp | -5.29 to +4.71 pp | 14.05 / 28.03 / 29.36 |
+| SciRepEval | 29 / 91 | -0.44 pp | -3.08 to +3.52 pp | 14.69 / 29.32 / 30.04 |
+
+The fixed threshold targeted 25% in calibration. It reached 41% and 32% in the evaluation venues. At matched call counts, the learned rule had +0.59 and -1.32 known hard P@5 points relative to the simple score margin rule. Both paired missing-label bounds span zero. The learned policy offers no stable advantage here. It also retains most of the always-on P95, despite reducing mean latency.
+
+The [benchmark](../../experiments/retrieval/cof_fragment_gate.py) measures branch costs and replays the frozen gate. It does not run an independent HTTP service. Timing, candidate outcomes, and report hashes are under `artifacts/cof-fragment-gate-v1`. Reproduction checked the venue split, all route counts, and label bounds.
