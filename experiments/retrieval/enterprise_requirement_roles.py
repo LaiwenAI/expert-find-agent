@@ -58,10 +58,10 @@ def prompt_data(text, clauses, index, full):
 
 
 class ScopedReader(Reader):
-    def judge(self, text, clauses, indices, full):
+    def judge(self, text, clauses, indices, full, *, context=None):
         rows = []
         for index in indices:
-            payload = prompt_data(text, clauses, index, full)
+            payload = prompt_data(text, clauses, index, full) if context is None else context(index)
             messages = [
                 dict(role="system", content=PROMPT),
                 dict(role="user", content=json.dumps(payload, ensure_ascii=False)),

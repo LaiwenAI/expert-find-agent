@@ -1,0 +1,150 @@
+{
+  "controls_sha256": "ca96d57855c1acb463a3bbce8bb21e3578d5c8465c340958fd74fe209cea5000",
+  "development_sha256": "9ac317f0cca12de8db872b5b70b666448b1d0c1feb587b1fca8233f39c2c6ba0",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "job": "40700",
+  "model": {
+    "files": {
+      "LICENSE": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+      "config.json": "5beea1a4a34c62782bfb2f911c606741a3bab8f92d80a118fa053c28af12e8ba",
+      "generation_config.json": "835fffe355c9438e7a25be099b3fccaa98350b83451f9fd2d99512e74f1ade48",
+      "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+      "model-00001-of-00003.safetensors": "75311d91bb08cf0b882913da464a1e722a31fb44db35208663487efb7a3d8ed6",
+      "model-00002-of-00003.safetensors": "0b48adbb1f60e901153d91907ba11ce63bd4b8b584482e730f48808d055dfba1",
+      "model-00003-of-00003.safetensors": "7dd39ccca5e4de123c74c14af44c9bf2eb75df33b4614382af0134528e060d5d",
+      "model.safetensors.index.json": "d6c42883a895dfef5b0080ed2116a1bcd764f558406b98923d675978a1abf29c",
+      "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+      "tokenizer_config.json": "a62ff0a2472a0fa1b8eaabcb57c59b58afa42a22831dc141400b6e0cf2b65ce3",
+      "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    },
+    "repo": "Qwen/Qwen3-4B-Instruct-2507",
+    "revision": "cdbee75f17c01a7cc42f958dc650907174af0554"
+  },
+  "raw_file_sha256": "6ee51c9e246c4d4f886f5b17ab893626e84f9c168f2ab19dfb13c79e81c0e481",
+  "report": {
+    "controls": {
+      "arms": {
+        "full": {
+          "agrees_with_full": 72,
+          "both_pair_roles_correct": 13,
+          "by_layout": {
+            "adjacent": {
+              "cases": 24,
+              "correct": 21
+            },
+            "distant": {
+              "cases": 24,
+              "correct": 16
+            },
+            "reset": {
+              "cases": 24,
+              "correct": 10
+            }
+          },
+          "classified": 72,
+          "correct": 47,
+          "false_prior_qualification": 1,
+          "missed_prior_qualification": 22,
+          "p95_ms": 20.221359562128782,
+          "padded_tokens": 16926,
+          "prior_qualification_views": 15,
+          "shares_prior_status": 72
+        },
+        "heading": {
+          "agrees_with_full": 60,
+          "both_pair_roles_correct": 19,
+          "by_layout": {
+            "adjacent": {
+              "cases": 24,
+              "correct": 21
+            },
+            "distant": {
+              "cases": 24,
+              "correct": 17
+            },
+            "reset": {
+              "cases": 24,
+              "correct": 17
+            }
+          },
+          "classified": 72,
+          "correct": 55,
+          "false_prior_qualification": 0,
+          "missed_prior_qualification": 17,
+          "p95_ms": 16.134838573634624,
+          "padded_tokens": 15264,
+          "prior_qualification_views": 19,
+          "shares_prior_status": 66
+        },
+        "local": {
+          "agrees_with_full": 60,
+          "both_pair_roles_correct": 9,
+          "by_layout": {
+            "adjacent": {
+              "cases": 24,
+              "correct": 21
+            },
+            "distant": {
+              "cases": 24,
+              "correct": 12
+            },
+            "reset": {
+              "cases": 24,
+              "correct": 12
+            }
+          },
+          "classified": 72,
+          "correct": 45,
+          "false_prior_qualification": 0,
+          "missed_prior_qualification": 27,
+          "p95_ms": 15.950309671461582,
+          "padded_tokens": 14604,
+          "prior_qualification_views": 9,
+          "shares_prior_status": 66
+        }
+      },
+      "injected_headings": 48,
+      "pairs": 36,
+      "requests": 72
+    },
+    "development": {
+      "arms": {
+        "full": {
+          "agrees_with_full": 1452,
+          "both_pair_roles_correct": 0,
+          "by_layout": {},
+          "classified": 1452,
+          "p95_ms": 4651.297331415112,
+          "padded_tokens": 1669590,
+          "prior_qualification_views": 71,
+          "shares_prior_status": 1452
+        },
+        "heading": {
+          "agrees_with_full": 1194,
+          "both_pair_roles_correct": 0,
+          "by_layout": {},
+          "classified": 1452,
+          "p95_ms": 753.4081418067213,
+          "padded_tokens": 435881,
+          "prior_qualification_views": 15,
+          "shares_prior_status": 1374
+        },
+        "local": {
+          "agrees_with_full": 1194,
+          "both_pair_roles_correct": 0,
+          "by_layout": {},
+          "classified": 1452,
+          "p95_ms": 753.7206227891144,
+          "padded_tokens": 435881,
+          "prior_qualification_views": 15,
+          "shares_prior_status": 1374
+        }
+      },
+      "injected_headings": 0,
+      "pairs": 0,
+      "requests": 80
+    }
+  },
+  "role_reader_sha256": "4908c32bfbec7b123fb354089b09a563e2e3c01213f63567916f7978f1a9afb4",
+  "script_sha256": "0114fecaae4b11d64578640b4f5e02602678ef6824fddf6d90a08d96204ae199"
+}
