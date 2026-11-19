@@ -60,30 +60,47 @@ def request(index, encoder, reranker, typed, texts, query, labels, arm):
     candidates = index.search_query(query, encoder, "mean_max")
     reader = WaveReader(reranker, query, texts, {doc for _, docs in candidates for doc in docs},
                         dynamic=True, guard=GUARD_MARGIN, cache=True)
-    typed_forwards = typed_documents = typed_rejections = 0
+    typed_forwards = typed_documents = typed_rejections = proposed_confirmations = 0
+    deferred = arm == "deferred_typed"
 
-    def score(jobs):
+    def needs_confirmation(margin):
+        return margin >= 0. and (arm == "confirm_all" or margin < BAND)
+
+    def verify(jobs, margins, positions):
         nonlocal typed_forwards, typed_documents, typed_rejections
-        margins = reader.score(jobs)
-        if arm == "generic":
+        if not positions:
             return margins
-        verify = [i for i, margin in enumerate(margins) if margin >= 0.
-                  and (arm == "confirm_all" or margin < BAND)]
-        if not verify:
-            return margins
-        votes = typed.support(query, [texts[jobs[i][1]] for i in verify])
+        votes = typed.support(query, [texts[jobs[i][1]] for i in positions])
         typed_forwards += 1
-        typed_documents += len(verify)
-        for i, supported in zip(verify, votes, strict=True):
+        typed_documents += len(positions)
+        for i, supported in zip(positions, votes, strict=True):
             if not supported:
                 margins[i] = -1.
                 typed_rejections += 1
         return margins
 
-    # Numerical boundary cases are made definitive by the shared generic reader.
-    # The separate semantic confirmation can reject a generic positive.
-    result = resolve_shared_frontier(candidates, score, reader.recheck, reader.length,
-                                     support=2, top=TOP, width=WIDTH, band=-1., cost_aware=False)
+    def score(jobs):
+        nonlocal proposed_confirmations
+        margins = reader.score(jobs)
+        if arm == "generic":
+            return margins
+        positions = [i for i, margin in enumerate(margins) if needs_confirmation(margin)]
+        proposed_confirmations += len(positions)
+        if deferred:
+            # Zero denotes a generic positive still awaiting semantic confirmation.
+            # Stabilized generic negatives and high positives are definitive.
+            return [0. if needs_confirmation(margin) else (1. if margin >= 0. else -1.)
+                    for margin in margins]
+        return verify(jobs, margins, positions)
+
+    def recheck(jobs):
+        if not deferred:
+            raise AssertionError("Immediate semantic checks should leave no pending verdicts")
+        return verify(jobs, [1.] * len(jobs), list(range(len(jobs))))
+
+    result = resolve_shared_frontier(candidates, score, recheck, reader.length,
+                                     support=2, top=TOP, width=WIDTH, band=0. if deferred else -1.,
+                                     cost_aware=False)
     elapsed = (perf_counter() - begin) * 1000
     selected = result["selected"]
     known = sum(labels.get(expert, 0) > 0 for expert, _ in selected)
@@ -95,19 +112,20 @@ def request(index, encoder, reranker, typed, texts, query, labels, arm):
         cited_experts=sum(bool(docs) for _, docs in selected), elapsed=elapsed,
         generic_forwards=reader.score_calls+reader.recheck_calls, typed_forwards=typed_forwards,
         typed_documents=typed_documents, typed_rejections=typed_rejections,
+        proposed_confirmations=proposed_confirmations,
     )
 
 
-def summarize(rows):
+def summarize(rows, arms=ARMS):
     report = {}
-    for arm in ARMS:
+    for arm in arms:
         result = [row[arm] for row in rows]
         baseline = [row["generic"] for row in rows]
         report[arm] = dict(
             p5=mean(r["p5"] for r in result),
             **{key: sum(r[key] for r in result) for key in ("positive_cited", "negative_cited", "cited_experts")},
             **{key: mean(r[key] for r in result) for key in
-               ("generic_forwards", "typed_forwards", "typed_documents", "typed_rejections")},
+               ("generic_forwards", "typed_forwards", "typed_documents", "typed_rejections", "proposed_confirmations")},
             latency_p50_p95_ms=np.quantile([r["elapsed"] for r in result], [.5,.95]).tolist(),
             exact_order=sum([expert for expert, _ in a["ranked"]] == [expert for expert, _ in b["ranked"]]
                             for a,b in zip(result,baseline,strict=True)),
@@ -115,10 +133,16 @@ def summarize(rows):
                 [(a["positive_cited"]-b["positive_cited"])/TOP for a,b in zip(result,baseline,strict=True)]),
             paired_p5_delta=paired_interval([a["p5"]-b["p5"] for a,b in zip(result,baseline,strict=True)]),
         )
+        if "deferred_typed" in arms:
+            immediate = [row["selective"] for row in rows]
+            report[arm]["exact_ranked_citations_vs_immediate"] = sum(
+                a["ranked"] == b["ranked"] for a, b in zip(result, immediate, strict=True))
+            report[arm]["mean_ms_saved_vs_immediate"] = paired_interval(
+                [b["elapsed"] - a["elapsed"] for a,b in zip(result,immediate,strict=True)])
     return report
 
 
-def run(dataset, embedding, reranker, reader, output):
+def run(dataset, embedding, reranker, reader, output, compare_deferred=False):
     if output.exists() or not os.environ.get("SLURM_JOB_ID") or not torch.cuda.is_available():
         raise ValueError("Require a fresh output and Slurm CUDA allocation")
     torch.backends.cuda.matmul.allow_tf32 = False
@@ -131,18 +155,19 @@ def run(dataset, embedding, reranker, reader, output):
     encoder.model.config.use_cache = False
     rerank = Reranker(reranker)
     typed = TypedReader(reader)
+    arms = ("generic", "selective", "deferred_typed") if compare_deferred else ARMS
     chosen = profiles.select(dataset, ids, texts)
     warmup = next(qid for qid in ids if qid not in chosen)
 
     def measure(qid, arm):
         return request(index, encoder, rerank, typed, texts, texts[qid], labels[qid], arm)
 
-    for arm in ARMS:
+    for arm in arms:
         measure(warmup, arm)
     rows = []
     for i, qid in enumerate(chosen):
-        offset = i % len(ARMS)
-        row = {arm: measure(qid, arm) for arm in ARMS[offset:] + ARMS[:offset]}
+        offset = i % len(arms)
+        row = {arm: measure(qid, arm) for arm in arms[offset:] + arms[:offset]}
         if any(r["candidate_ids"] != row["generic"]["candidate_ids"] for r in row.values()):
             raise AssertionError("Different candidate pool")
         rows.append(row)
@@ -154,7 +179,7 @@ def run(dataset, embedding, reranker, reader, output):
         vector_protocol_sha256=digest(root / "qwen-embedding-torch-v1/protocol.json"),
         hard_label_sha256=digest(root / f"{dataset}_queries_test_hard.json"), upper_margin=BAND,
         embedding_revision=provenance["revision"], reranker_revision=rerank.provenance["revision"],
-        typed_revision=typed.provenance["revision"], arms=summarize(rows),
+        typed_revision=typed.provenance["revision"], arms=summarize(rows, arms),
     ))
 
 
@@ -163,4 +188,5 @@ if __name__ == "__main__":
     parser.add_argument("dataset", choices=("KDD","SciRepEval"))
     for key in ("embedding","reranker","reader","output"):
         parser.add_argument(key,type=Path)
+    parser.add_argument("--compare-deferred", action="store_true")
     run(**vars(parser.parse_args()))

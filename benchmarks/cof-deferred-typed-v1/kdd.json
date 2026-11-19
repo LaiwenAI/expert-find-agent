@@ -1,0 +1,157 @@
+{
+  "dataset": "KDD",
+  "queries": 122,
+  "job": "42112",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "code_sha256": "c271c0d197a0819399cf57df1b40626f5bdee088f3e28ac4452a2d60436d50a9",
+  "cohort_sha256": "e090a584e0a4f57fb0a405299386431bbff839ffacbccdbb9a11ea8d6a3229ac",
+  "vector_protocol_sha256": "85e4010895e8717c57d19113bdfaf3fb0c68afbb49f74635baac036eb06445a0",
+  "hard_label_sha256": "4bc5ec19077f96d700e6da0c09139c34a000b800c0536b64eb166874a381a2d6",
+  "upper_margin": 3.0,
+  "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "reranker_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+  "typed_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+  "arms": {
+    "generic": {
+      "p5": 0.03770491803278689,
+      "positive_cited": 15,
+      "negative_cited": 44,
+      "cited_experts": 315,
+      "generic_forwards": 5.89344262295082,
+      "typed_forwards": 0,
+      "typed_documents": 0,
+      "typed_rejections": 0,
+      "proposed_confirmations": 0,
+      "latency_p50_p95_ms": [
+        164.86534848809242,
+        261.4917917177081
+      ],
+      "exact_order": 122,
+      "paired_positive_cited_delta": {
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "paired_p5_delta": {
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "exact_ranked_citations_vs_immediate": 36,
+      "mean_ms_saved_vs_immediate": {
+        "mean": 154.14576499616024,
+        "percentile_95": [
+          129.66763833041503,
+          180.86530406478425
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      }
+    },
+    "selective": {
+      "p5": 0.03934426229508197,
+      "positive_cited": 8,
+      "negative_cited": 21,
+      "cited_experts": 136,
+      "generic_forwards": 5.852459016393443,
+      "typed_forwards": 2.6639344262295084,
+      "typed_documents": 4.204918032786885,
+      "typed_rejections": 3.5655737704918034,
+      "proposed_confirmations": 4.204918032786885,
+      "latency_p50_p95_ms": [
+        306.5927717834711,
+        612.1982992626727
+      ],
+      "exact_order": 47,
+      "paired_positive_cited_delta": {
+        "mean": -0.011475409836065575,
+        "percentile_95": [
+          -0.02131147540983607,
+          -0.003278688524590164
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "paired_p5_delta": {
+        "mean": 0.001639344262295082,
+        "percentile_95": [
+          -0.006557377049180328,
+          0.009836065573770493
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "exact_ranked_citations_vs_immediate": 122,
+      "mean_ms_saved_vs_immediate": {
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      }
+    },
+    "deferred_typed": {
+      "p5": 0.03934426229508197,
+      "positive_cited": 8,
+      "negative_cited": 22,
+      "cited_experts": 137,
+      "generic_forwards": 7.213114754098361,
+      "typed_forwards": 1.098360655737705,
+      "typed_documents": 2.959016393442623,
+      "typed_rejections": 2.5,
+      "proposed_confirmations": 4.418032786885246,
+      "latency_p50_p95_ms": [
+        273.4506921842694,
+        567.4310255795716
+      ],
+      "exact_order": 47,
+      "paired_positive_cited_delta": {
+        "mean": -0.011475409836065575,
+        "percentile_95": [
+          -0.02131147540983607,
+          -0.003278688524590164
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "paired_p5_delta": {
+        "mean": 0.001639344262295082,
+        "percentile_95": [
+          -0.006557377049180328,
+          0.009836065573770493
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "exact_ranked_citations_vs_immediate": 117,
+      "mean_ms_saved_vs_immediate": {
+        "mean": 23.062197735807935,
+        "percentile_95": [
+          14.662641294102077,
+          31.306130812717143
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      }
+    }
+  }
+}
