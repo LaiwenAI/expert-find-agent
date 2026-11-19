@@ -1,0 +1,133 @@
+{
+  "job": "43308",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "fixture_sha256": "97cb650c04c788ed9e61542f02eb281e48733f8848e14434d7275bec2cfd44be",
+  "code_sha256": "9f2e8f46e6a4362897d0aeba6931eb27247021df0114ef308a33dcb3523ceeb8",
+  "checkpoint": "cdbee75f17c01a7cc42f958dc650907174af0554",
+  "articles": 134,
+  "targets": 60,
+  "source_depth": 4,
+  "window_word_budget": 80,
+  "cutoffs": {
+    "lead": 22.25,
+    "directed": 26.125
+  },
+  "panels": {
+    "calibration": {
+      "present": {
+        "lead": {
+          "queries": 30,
+          "at_four": 21,
+          "lexical_correct": 16,
+          "lexical_wrong": 14,
+          "proposed_correct": 18,
+          "accepted_correct": 2,
+          "accepted_wrong": 0,
+          "accepted_correct_owner_links": 2,
+          "accepted_wrong_owner_links": 0,
+          "reader_pairs": 120,
+          "p95_ms": 55.02550704404712
+        },
+        "directed": {
+          "queries": 30,
+          "at_four": 21,
+          "lexical_correct": 16,
+          "lexical_wrong": 14,
+          "proposed_correct": 20,
+          "accepted_correct": 0,
+          "accepted_wrong": 0,
+          "accepted_correct_owner_links": 0,
+          "accepted_wrong_owner_links": 0,
+          "reader_pairs": 120,
+          "p95_ms": 55.97306815907359
+        }
+      },
+      "withheld": {
+        "lead": {
+          "queries": 30,
+          "at_four": 0,
+          "lexical_correct": 0,
+          "lexical_wrong": 30,
+          "proposed_correct": 0,
+          "accepted_correct": 0,
+          "accepted_wrong": 0,
+          "accepted_correct_owner_links": 0,
+          "accepted_wrong_owner_links": 0,
+          "reader_pairs": 120,
+          "p95_ms": 55.01066241413355
+        },
+        "directed": {
+          "queries": 30,
+          "at_four": 0,
+          "lexical_correct": 0,
+          "lexical_wrong": 30,
+          "proposed_correct": 0,
+          "accepted_correct": 0,
+          "accepted_wrong": 0,
+          "accepted_correct_owner_links": 0,
+          "accepted_wrong_owner_links": 0,
+          "reader_pairs": 120,
+          "p95_ms": 56.9363304413855
+        }
+      }
+    },
+    "test": {
+      "present": {
+        "lead": {
+          "queries": 30,
+          "at_four": 21,
+          "lexical_correct": 16,
+          "lexical_wrong": 14,
+          "proposed_correct": 17,
+          "accepted_correct": 2,
+          "accepted_wrong": 0,
+          "accepted_correct_owner_links": 2,
+          "accepted_wrong_owner_links": 0,
+          "reader_pairs": 120,
+          "p95_ms": 59.872974175959826
+        },
+        "directed": {
+          "queries": 30,
+          "at_four": 21,
+          "lexical_correct": 16,
+          "lexical_wrong": 14,
+          "proposed_correct": 18,
+          "accepted_correct": 0,
+          "accepted_wrong": 0,
+          "accepted_correct_owner_links": 0,
+          "accepted_wrong_owner_links": 0,
+          "reader_pairs": 120,
+          "p95_ms": 67.37861959263681
+        }
+      },
+      "withheld": {
+        "lead": {
+          "queries": 30,
+          "at_four": 0,
+          "lexical_correct": 0,
+          "lexical_wrong": 30,
+          "proposed_correct": 0,
+          "accepted_correct": 0,
+          "accepted_wrong": 0,
+          "accepted_correct_owner_links": 0,
+          "accepted_wrong_owner_links": 0,
+          "reader_pairs": 120,
+          "p95_ms": 59.852496441453695
+        },
+        "directed": {
+          "queries": 30,
+          "at_four": 0,
+          "lexical_correct": 0,
+          "lexical_wrong": 30,
+          "proposed_correct": 0,
+          "accepted_correct": 0,
+          "accepted_wrong": 0,
+          "accepted_correct_owner_links": 0,
+          "accepted_wrong_owner_links": 0,
+          "reader_pairs": 120,
+          "p95_ms": 67.43655717000364
+        }
+      }
+    }
+  }
+}
