@@ -22,6 +22,15 @@ Across full development requests the cascade uses 55 full-context checks for 1,4
 
 RTX 5090 job 40689 measures prompt creation and frozen-model classification within each request. The [blind review export](../../experiments/retrieval/export_enterprise_requirement_role_review.py) produces 43 development spans from 29 requests, oversampling qualification disagreements and retaining agreement controls. The evaluator receives full text, an exact target excerpt, and empty role and rationale fields. The local method mapping stays separate. The packet contains no completed human judgments, and its targeted selection does not estimate population error. [Aggregate results](results.json)
 
+Give two reviewers separate copies of the frozen form and the same role instructions. Keep each source and offset intact. For a qualification decision, the rationale should identify the statement that makes the prior achievement or credential an explicit applicant requirement. A third reviewer adjudicates disagreements or unresolved roles after both submissions exist. The [scorer](../../experiments/retrieval/score_enterprise_requirement_role_review.py) checks packet integrity, scores the three routes on the same clauses, and reports count bounds for missing, mixed and uncertain labels. The output contains aggregate counts only.
+
+```sh
+PYTHONPATH=src:. python -m experiments.retrieval.score_enterprise_requirement_role_review \
+  PRIVATE_PACKET PRIVATE_PAIRED_TRACE --review-a FIRST_JSONL --review-b SECOND_JSONL
+```
+
+Use `--adjudication THIRD_JSONL` when available. All submitted files must keep the full case set. Leave unreviewed fields null. The file-based checks establish distinct reviewer IDs and unchanged content. Independent assignment and semantic adjudication remain part of the review protocol.
+
 ## Reproduce
 
 On a Slurm compute node with the pinned checkpoint, run:
