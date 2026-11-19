@@ -1,0 +1,892 @@
+{
+  "job": "42206",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "dataset_hashes": [
+    "7461c6fd1a13459590317c5ccdc8651dd2daf7c1ad8ae4b10ccd88d164fccd5a",
+    "544934677f5d133873e6d38f4557f8966f4efa5d3d70874ffe6913f2091b86b5",
+    "7ad1808dbc30c62e0a1427a53022d0dfaff668a1fde3c4b612a2d266edd753ad"
+  ],
+  "script_sha256": "209b5238c736b08d6efdec27726710fb1b2f37cc790718b19f0af7bea57a507d",
+  "projection_sha256": "efafc98182faffc18b56c69844986597370b35f42989cd81adadede054f0b8cf",
+  "control_sha256": "efa208987fd7528a98a7896da588edab307abe840d237a00fdff07f976e06296",
+  "model_revision": "0a71e92a985b6e1ad1828cf67ce9c459639c1dca",
+  "caps": {
+    "matched": [
+      21,
+      28
+    ],
+    "strict": [
+      10,
+      10
+    ]
+  },
+  "panel_hashes": {
+    "train": "6d4294211566bd8fd48c45247af5b4f95d81da71b1e5b09dfeebe6196be19005",
+    "development": "9e7d6aea634a12492644507994d3f3b2fb046029ea7111e604e26f81b0695111",
+    "test": "df071a8a1e6993af5e1783a9dc2137ca50bbe82a7e2f474bfe9ab28da536efbb"
+  },
+  "pair_counts": {
+    "train": 1200,
+    "development": 400,
+    "test": 400
+  },
+  "report": {
+    "frozen": {
+      "training": {},
+      "item_accuracy": 0.44875,
+      "single_p95_ms": 1.2373719364404678,
+      "four_item_batch_p95_ms": 1.8468827940523622,
+      "raw_accepted": [
+        165,
+        43,
+        11
+      ],
+      "operating_points": {
+        "matched": {
+          "threshold": 1.011962890625,
+          "development_accepted": [
+            146,
+            21,
+            11
+          ],
+          "test_accepted": [
+            139,
+            20,
+            6
+          ],
+          "batched_threshold_changes": 1,
+          "support_delta_vs_frozen": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 400,
+            "clusters": 400,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "refute_delta_vs_frozen": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "insufficient_delta_vs_frozen": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          }
+        },
+        "strict": {
+          "threshold": 2.0703125,
+          "development_accepted": [
+            112,
+            10,
+            7
+          ],
+          "test_accepted": [
+            100,
+            12,
+            2
+          ],
+          "batched_threshold_changes": 2,
+          "support_delta_vs_frozen": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 400,
+            "clusters": 400,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "refute_delta_vs_frozen": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "insufficient_delta_vs_frozen": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          }
+        }
+      }
+    },
+    "classification_20261119": {
+      "training": {
+        "trainable": 1923459,
+        "changed": 1867633,
+        "updates": 150,
+        "seconds": 0.7946666497737169,
+        "losses": [
+          1.1129316902160644,
+          0.9077576231956482
+        ],
+        "seed": 20261119,
+        "weight_sha256": "c7bd1157d3506da725e2c530bd15593216e17c8a22c4c778c124115b05f452c6"
+      },
+      "item_accuracy": 0.5975,
+      "single_p95_ms": 1.2476169504225254,
+      "four_item_batch_p95_ms": 1.862203981727361,
+      "raw_accepted": [
+        305,
+        107,
+        51
+      ],
+      "operating_points": {
+        "matched": {
+          "threshold": 1.1669921875,
+          "development_accepted": [
+            158,
+            21,
+            20
+          ],
+          "test_accepted": [
+            144,
+            26,
+            8
+          ],
+          "batched_threshold_changes": 1,
+          "support_delta_vs_frozen": {
+            "mean": 0.0125,
+            "percentile_95": [
+              -0.015,
+              0.04
+            ],
+            "queries": 400,
+            "clusters": 400,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "refute_delta_vs_frozen": {
+            "mean": 0.03,
+            "percentile_95": [
+              -0.005,
+              0.065
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "insufficient_delta_vs_frozen": {
+            "mean": 0.01,
+            "percentile_95": [
+              -0.015,
+              0.035
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          }
+        },
+        "strict": {
+          "threshold": 1.6875,
+          "development_accepted": [
+            118,
+            10,
+            8
+          ],
+          "test_accepted": [
+            98,
+            13,
+            2
+          ],
+          "batched_threshold_changes": 0,
+          "support_delta_vs_frozen": {
+            "mean": -0.005,
+            "percentile_95": [
+              -0.03,
+              0.02
+            ],
+            "queries": 400,
+            "clusters": 400,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "refute_delta_vs_frozen": {
+            "mean": 0.005,
+            "percentile_95": [
+              -0.01,
+              0.025
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "insufficient_delta_vs_frozen": {
+            "mean": 0.0,
+            "percentile_95": [
+              -0.015,
+              0.015
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          }
+        }
+      }
+    },
+    "contrastive_20261119": {
+      "training": {
+        "trainable": 1923459,
+        "changed": 1862988,
+        "updates": 150,
+        "seconds": 0.7284800708293915,
+        "losses": [
+          1.304068299929301,
+          1.087905072371165
+        ],
+        "seed": 20261119,
+        "weight_sha256": "c29544733b49fa7725ebf5f19b5a43b0aa68a8a355ea440bbd71554ac759b73b"
+      },
+      "item_accuracy": 0.5925,
+      "single_p95_ms": 1.2763253413140774,
+      "four_item_batch_p95_ms": 1.9332811236381526,
+      "raw_accepted": [
+        302,
+        106,
+        45
+      ],
+      "operating_points": {
+        "matched": {
+          "threshold": 1.408203125,
+          "development_accepted": [
+            159,
+            21,
+            20
+          ],
+          "test_accepted": [
+            144,
+            24,
+            6
+          ],
+          "batched_threshold_changes": 2,
+          "support_delta_vs_frozen": {
+            "mean": 0.0125,
+            "percentile_95": [
+              -0.0125,
+              0.04
+            ],
+            "queries": 400,
+            "clusters": 400,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "refute_delta_vs_frozen": {
+            "mean": 0.02,
+            "percentile_95": [
+              -0.015,
+              0.055
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "insufficient_delta_vs_frozen": {
+            "mean": 0.0,
+            "percentile_95": [
+              -0.02,
+              0.02
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          }
+        },
+        "strict": {
+          "threshold": 1.90234375,
+          "development_accepted": [
+            128,
+            10,
+            7
+          ],
+          "test_accepted": [
+            102,
+            14,
+            2
+          ],
+          "batched_threshold_changes": 2,
+          "support_delta_vs_frozen": {
+            "mean": 0.005,
+            "percentile_95": [
+              -0.0175,
+              0.0275
+            ],
+            "queries": 400,
+            "clusters": 400,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "refute_delta_vs_frozen": {
+            "mean": 0.01,
+            "percentile_95": [
+              0.0,
+              0.025
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "insufficient_delta_vs_frozen": {
+            "mean": 0.0,
+            "percentile_95": [
+              -0.015,
+              0.015
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          }
+        }
+      }
+    },
+    "risk_tail_20261119": {
+      "training": {
+        "trainable": 1923459,
+        "changed": 1860978,
+        "updates": 150,
+        "seconds": 0.8073050361126661,
+        "losses": [
+          1.8395014762878419,
+          1.48547704855601
+        ],
+        "seed": 20261119,
+        "weight_sha256": "59f288a799ba890cf2b752cd9d7129cb67c56f3d462184b60ed7834b884885a8"
+      },
+      "item_accuracy": 0.585,
+      "single_p95_ms": 1.2824918143451214,
+      "four_item_batch_p95_ms": 1.9036643207073212,
+      "raw_accepted": [
+        326,
+        125,
+        67
+      ],
+      "operating_points": {
+        "matched": {
+          "threshold": 0.9912109375,
+          "development_accepted": [
+            148,
+            21,
+            13
+          ],
+          "test_accepted": [
+            139,
+            21,
+            6
+          ],
+          "batched_threshold_changes": 1,
+          "support_delta_vs_frozen": {
+            "mean": 0.0,
+            "percentile_95": [
+              -0.025,
+              0.025
+            ],
+            "queries": 400,
+            "clusters": 400,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "refute_delta_vs_frozen": {
+            "mean": 0.005,
+            "percentile_95": [
+              -0.025,
+              0.035
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "insufficient_delta_vs_frozen": {
+            "mean": 0.0,
+            "percentile_95": [
+              -0.02,
+              0.02
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          }
+        },
+        "strict": {
+          "threshold": 1.228515625,
+          "development_accepted": [
+            128,
+            10,
+            9
+          ],
+          "test_accepted": [
+            113,
+            15,
+            2
+          ],
+          "batched_threshold_changes": 0,
+          "support_delta_vs_frozen": {
+            "mean": 0.0325,
+            "percentile_95": [
+              0.01,
+              0.055
+            ],
+            "queries": 400,
+            "clusters": 400,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "refute_delta_vs_frozen": {
+            "mean": 0.015,
+            "percentile_95": [
+              0.0,
+              0.035
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "insufficient_delta_vs_frozen": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          }
+        }
+      }
+    },
+    "classification_20261120": {
+      "training": {
+        "trainable": 1923459,
+        "changed": 1867181,
+        "updates": 150,
+        "seconds": 0.6965918578207493,
+        "losses": [
+          1.1081144738197326,
+          0.9064433224995931
+        ],
+        "seed": 20261120,
+        "weight_sha256": "5c680319bc605217f4f64e03d86bfffcd0700d90b489bbff42c33ac0792ebcbd"
+      },
+      "item_accuracy": 0.5975,
+      "single_p95_ms": 1.2944445945322514,
+      "four_item_batch_p95_ms": 1.9379449076950548,
+      "raw_accepted": [
+        305,
+        105,
+        49
+      ],
+      "operating_points": {
+        "matched": {
+          "threshold": 1.2333984375,
+          "development_accepted": [
+            156,
+            21,
+            20
+          ],
+          "test_accepted": [
+            141,
+            26,
+            8
+          ],
+          "batched_threshold_changes": 0,
+          "support_delta_vs_frozen": {
+            "mean": 0.005,
+            "percentile_95": [
+              -0.025,
+              0.0325
+            ],
+            "queries": 400,
+            "clusters": 400,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "refute_delta_vs_frozen": {
+            "mean": 0.03,
+            "percentile_95": [
+              -0.005,
+              0.065
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "insufficient_delta_vs_frozen": {
+            "mean": 0.01,
+            "percentile_95": [
+              -0.015,
+              0.035
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          }
+        },
+        "strict": {
+          "threshold": 1.73046875,
+          "development_accepted": [
+            122,
+            10,
+            9
+          ],
+          "test_accepted": [
+            98,
+            14,
+            2
+          ],
+          "batched_threshold_changes": 0,
+          "support_delta_vs_frozen": {
+            "mean": -0.005,
+            "percentile_95": [
+              -0.03,
+              0.02
+            ],
+            "queries": 400,
+            "clusters": 400,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "refute_delta_vs_frozen": {
+            "mean": 0.01,
+            "percentile_95": [
+              0.0,
+              0.025
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "insufficient_delta_vs_frozen": {
+            "mean": 0.0,
+            "percentile_95": [
+              -0.015,
+              0.015
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          }
+        }
+      }
+    },
+    "contrastive_20261120": {
+      "training": {
+        "trainable": 1923459,
+        "changed": 1862258,
+        "updates": 150,
+        "seconds": 0.6675719413906336,
+        "losses": [
+          1.3028607400258383,
+          1.0867536067962646
+        ],
+        "seed": 20261120,
+        "weight_sha256": "c6be0181e32ccb1babe6d7a1696fc599546ea92609b9380f7c0b35d6b8787874"
+      },
+      "item_accuracy": 0.58625,
+      "single_p95_ms": 1.284802332520485,
+      "four_item_batch_p95_ms": 1.8953756429255006,
+      "raw_accepted": [
+        294,
+        101,
+        42
+      ],
+      "operating_points": {
+        "matched": {
+          "threshold": 1.435546875,
+          "development_accepted": [
+            155,
+            21,
+            19
+          ],
+          "test_accepted": [
+            144,
+            24,
+            6
+          ],
+          "batched_threshold_changes": 3,
+          "support_delta_vs_frozen": {
+            "mean": 0.0125,
+            "percentile_95": [
+              -0.0125,
+              0.0375
+            ],
+            "queries": 400,
+            "clusters": 400,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "refute_delta_vs_frozen": {
+            "mean": 0.02,
+            "percentile_95": [
+              -0.015,
+              0.055
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "insufficient_delta_vs_frozen": {
+            "mean": 0.0,
+            "percentile_95": [
+              -0.02,
+              0.02
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          }
+        },
+        "strict": {
+          "threshold": 1.92578125,
+          "development_accepted": [
+            129,
+            10,
+            8
+          ],
+          "test_accepted": [
+            109,
+            14,
+            2
+          ],
+          "batched_threshold_changes": 2,
+          "support_delta_vs_frozen": {
+            "mean": 0.0225,
+            "percentile_95": [
+              0.0,
+              0.045
+            ],
+            "queries": 400,
+            "clusters": 400,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "refute_delta_vs_frozen": {
+            "mean": 0.01,
+            "percentile_95": [
+              0.0,
+              0.025
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "insufficient_delta_vs_frozen": {
+            "mean": 0.0,
+            "percentile_95": [
+              -0.015,
+              0.015
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          }
+        }
+      }
+    },
+    "risk_tail_20261120": {
+      "training": {
+        "trainable": 1923459,
+        "changed": 1860937,
+        "updates": 150,
+        "seconds": 0.7172918245196342,
+        "losses": [
+          1.8330896361668905,
+          1.4842370923360189
+        ],
+        "seed": 20261120,
+        "weight_sha256": "574a422efcf2cc2372da98758c8db35fc070ad224d7f73852843585ffec6652c"
+      },
+      "item_accuracy": 0.59125,
+      "single_p95_ms": 1.2651163153350353,
+      "four_item_batch_p95_ms": 1.8983061425387857,
+      "raw_accepted": [
+        317,
+        116,
+        55
+      ],
+      "operating_points": {
+        "matched": {
+          "threshold": 1.0634765625,
+          "development_accepted": [
+            154,
+            21,
+            10
+          ],
+          "test_accepted": [
+            141,
+            21,
+            6
+          ],
+          "batched_threshold_changes": 0,
+          "support_delta_vs_frozen": {
+            "mean": 0.005,
+            "percentile_95": [
+              -0.0125,
+              0.0225
+            ],
+            "queries": 400,
+            "clusters": 400,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "refute_delta_vs_frozen": {
+            "mean": 0.005,
+            "percentile_95": [
+              -0.015,
+              0.025
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "insufficient_delta_vs_frozen": {
+            "mean": 0.0,
+            "percentile_95": [
+              -0.02,
+              0.02
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          }
+        },
+        "strict": {
+          "threshold": 1.2705078125,
+          "development_accepted": [
+            131,
+            10,
+            9
+          ],
+          "test_accepted": [
+            117,
+            16,
+            3
+          ],
+          "batched_threshold_changes": 0,
+          "support_delta_vs_frozen": {
+            "mean": 0.0425,
+            "percentile_95": [
+              0.0225,
+              0.065
+            ],
+            "queries": 400,
+            "clusters": 400,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "refute_delta_vs_frozen": {
+            "mean": 0.02,
+            "percentile_95": [
+              0.005,
+              0.04
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "insufficient_delta_vs_frozen": {
+            "mean": 0.005,
+            "percentile_95": [
+              0.0,
+              0.015
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          }
+        }
+      }
+    }
+  }
+}

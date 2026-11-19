@@ -54,12 +54,29 @@ def support_margin(logits):
     return logits[:, 0] - logits[:, 1:].max(dim=1).values
 
 
-def fit(tokenizer, model, positions, pairs, arm, weights):
+def upper_tail_loss(logits, labels):
+    from torch.nn import functional as F
+
+    margins = support_margin(logits)
+    supports = margins[labels == 0]
+    comparisons = []
+    for label in (1, 2):
+        negatives = margins[labels == label]
+        if negatives.numel():
+            # Pool the riskiest quarter within each failure class. The loss
+            # equally weights refutation and insufficient-evidence comparisons.
+            hard_count = max(1, (negatives.numel() + 3) // 4)
+            hard = negatives.topk(hard_count).values
+            comparisons.append(F.softplus(1. + hard[:, None] - supports[None, :]).mean())
+    return sum(comparisons) / len(comparisons)
+
+
+def fit(tokenizer, model, positions, pairs, arm, weights, *, seed=SEED, name=None):
     import torch
     from safetensors.torch import save_file
     from torch.nn import functional as F
 
-    torch.manual_seed(SEED)
+    torch.manual_seed(seed)
     last = str(model.config.num_hidden_layers-1)
     prefixes = ("classifier.", f"roberta.encoder.layer.{last}.")
     selected = {}
@@ -74,7 +91,7 @@ def fit(tokenizer, model, positions, pairs, arm, weights):
     model.float().train()
     optimizer = torch.optim.AdamW(selected.values(), lr=3e-5, weight_decay=.01)
     start = perf_counter()
-    random = np.random.default_rng(SEED)
+    random = np.random.default_rng(seed)
     loss_by_epoch = []
     updates = 0
     for epoch in range(EPOCHS):
@@ -92,6 +109,8 @@ def fit(tokenizer, model, positions, pairs, arm, weights):
                 if arm == "contrastive":
                     margin = support_margin(logits).reshape(-1,2)
                     loss = loss + .4*F.softplus(margin[:, 1] - margin[:, 0]).mean()
+                elif arm == "risk_tail":
+                    loss = loss + .4*upper_tail_loss(logits, target)
             if not torch.isfinite(loss).item():
                 raise ValueError("Nonfinite training loss")
             loss.backward()
@@ -106,10 +125,10 @@ def fit(tokenizer, model, positions, pairs, arm, weights):
     changed = sum(int(torch.count_nonzero(param.detach().cpu() != initial[name])) for name,param in selected.items())
     if not changed:
         raise ValueError("Training produced no changed parameters")
-    path = weights/f"{arm}.safetensors"
+    path = weights/f"{name or arm}.safetensors"
     save_file({name:param.detach().cpu().contiguous() for name,param in selected.items()}, str(path))
     return dict(trainable=sum(p.numel() for p in selected.values()), changed=changed, updates=updates,
-                seconds=seconds, losses=loss_by_epoch, weight_sha256=digest(path))
+                seconds=seconds, losses=loss_by_epoch, seed=seed, weight_sha256=digest(path))
 
 
 def evaluate(tokenizer, model, positions, pairs, batch_size):
@@ -174,7 +193,7 @@ def summarize(observations, pairs, caps):
     return report
 
 
-def run(projection, control, checkpoint, output, weights):
+def run(projection, control, checkpoint, output, weights, *, compare_tail=False):
     import torch
     from experiments.scifact.small_nli_verifier import load
 
@@ -198,11 +217,18 @@ def run(projection, control, checkpoint, output, weights):
         raise ValueError("Cohort overlap")
     weights.mkdir()
     observations = {}
-    for arm in ARMS:
+    arms = [(arm, arm, SEED) for arm in ARMS]
+    if compare_tail:
+        arms = [("frozen", "frozen", SEED)] + [
+            (f"{arm}_{seed}", arm, seed)
+            for seed in (SEED, SEED + 1) for arm in (*ARMS[1:], "risk_tail")
+        ]
+    for name, arm, seed in arms:
         tokenizer, model, positions, provenance = load(checkpoint,"minilm")
-        training = {} if arm == "frozen" else fit(tokenizer, model, positions, pairs["train"], arm, weights)
+        training = {} if arm == "frozen" else fit(
+            tokenizer, model, positions, pairs["train"], arm, weights, seed=seed, name=name)
         evaluate(tokenizer,model,positions,pairs["development"][:2],1)
-        observations[arm] = dict(training=training,
+        observations[name] = dict(training=training,
                                  development=evaluate(tokenizer,model,positions,pairs["development"],1),
                                  test=evaluate(tokenizer,model,positions,pairs["test"],1),
                                  batched=evaluate(tokenizer,model,positions,pairs["test"],4))
@@ -228,5 +254,7 @@ if __name__ == "__main__":
         for field in fields:
             command.add_argument(field,type=Path)
         command.set_defaults(action=action)
+        if name == "run":
+            command.add_argument("--compare-tail", action="store_true")
     args=vars(parser.parse_args())
     args.pop("action")(**args)
