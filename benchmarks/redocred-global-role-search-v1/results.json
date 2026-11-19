@@ -1,0 +1,455 @@
+{
+  "resident_index": {
+    "inputs": {
+      "dev": "051ee1d057204a5d08ef5502beacdadf191245b5eaf0e29ec2c607cf002c016f",
+      "test": "ea673b7ef91e16510d7eb88863d3903e47318dc5653ef361266f27ae3b84723c"
+    },
+    "code_sha256": "da190cc71dc3b90a74ffb11366944b4e9ffd5246b677f3beea19d0df0abd282b",
+    "documents": 1000,
+    "queries": 161,
+    "query_reference_documents": 41,
+    "query_work_seen_in_alias_dictionary": 161,
+    "queries_with_multiple_positive_documents": 1,
+    "distinct_positive_pairs": 281,
+    "max_documents": 4,
+    "top": 5,
+    "postings": 105839,
+    "arms": {
+      "flat_four": {
+        "documents": 644,
+        "postings_visited": 116600,
+        "documents_scored": 84153,
+        "person_occurrences_scored": 3518,
+        "positive_source_recalled": 146,
+        "positives": 177,
+        "rivals": 144,
+        "unjudged": 484,
+        "any_positive": 129,
+        "p50_p95_ms": [
+          0.10025000665336847,
+          0.2507089520804584
+        ],
+        "positive_p5_delta_vs_boost": {
+          "mean": -0.018633540372670808,
+          "percentile_95": [
+            -0.031326482400188996,
+            -0.007453416149068324
+          ],
+          "queries": 161,
+          "clusters": 41,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        },
+        "differing_ranked_results_vs_boost": 36,
+        "positive_source_recalled_no_exact_alias": 0
+      },
+      "alias_boost_four": {
+        "documents": 644,
+        "postings_visited": 116600,
+        "documents_scored": 84153,
+        "person_occurrences_scored": 3548,
+        "positive_source_recalled": 161,
+        "positives": 192,
+        "rivals": 176,
+        "unjudged": 437,
+        "any_positive": 143,
+        "p50_p95_ms": [
+          0.10291603393852711,
+          0.24987501092255116
+        ],
+        "positive_p5_delta_vs_boost": {
+          "mean": 0.0,
+          "percentile_95": [
+            0.0,
+            0.0
+          ],
+          "queries": 161,
+          "clusters": 41,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        },
+        "differing_ranked_results_vs_boost": 0,
+        "positive_source_recalled_no_exact_alias": 0
+      },
+      "alias_route_four": {
+        "documents": 165,
+        "postings_visited": 1177,
+        "documents_scored": 165,
+        "person_occurrences_scored": 1136,
+        "positive_source_recalled": 161,
+        "positives": 222,
+        "rivals": 254,
+        "unjudged": 197,
+        "any_positive": 156,
+        "p50_p95_ms": [
+          0.015833007637411356,
+          0.021916988771408796
+        ],
+        "positive_p5_delta_vs_boost": {
+          "mean": 0.037267080745341616,
+          "percentile_95": [
+            0.021427448337825696,
+            0.05291005291005291
+          ],
+          "queries": 161,
+          "clusters": 41,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        },
+        "differing_ranked_results_vs_boost": 142,
+        "positive_source_recalled_no_exact_alias": 0
+      }
+    }
+  },
+  "with_verification": {
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "job": "43034",
+    "checkpoint": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "code_sha256": "dc72e268290d7865a713d8218d3b91221701c6a0b021dca8d6ada89018d6b3ab",
+    "retrieval_code_sha256": "da190cc71dc3b90a74ffb11366944b4e9ffd5246b677f3beea19d0df0abd282b",
+    "input_hashes": {
+      "dev": "051ee1d057204a5d08ef5502beacdadf191245b5eaf0e29ec2c607cf002c016f",
+      "test": "ea673b7ef91e16510d7eb88863d3903e47318dc5653ef361266f27ae3b84723c"
+    },
+    "test": 161,
+    "development": 172,
+    "arms": {
+      "flat_four": {
+        "threshold": -12.25,
+        "development_competing": 171,
+        "development_cap": 8,
+        "development": {
+          "proposed": {
+            "positive": 154,
+            "competing": 171,
+            "unjudged": 535
+          },
+          "accepted": {
+            "positive": 112,
+            "competing": 8,
+            "unjudged": 16
+          },
+          "requests_with_confirmed_pair": 89,
+          "proposed_pair_count": 860,
+          "p50_p95_ms": [
+            51.49245075881481,
+            56.640206184238195
+          ]
+        },
+        "test": {
+          "proposed": {
+            "positive": 177,
+            "competing": 144,
+            "unjudged": 484
+          },
+          "accepted": {
+            "positive": 126,
+            "competing": 4,
+            "unjudged": 10
+          },
+          "requests_with_confirmed_pair": 91,
+          "proposed_pair_count": 805,
+          "p50_p95_ms": [
+            52.137184888124466,
+            57.69103020429611
+          ]
+        },
+        "shared_numeric_cutoff_test": {
+          "proposed": {
+            "positive": 177,
+            "competing": 144,
+            "unjudged": 484
+          },
+          "accepted": {
+            "positive": 107,
+            "competing": 3,
+            "unjudged": 8
+          },
+          "requests_with_confirmed_pair": 80,
+          "proposed_pair_count": 805,
+          "p50_p95_ms": [
+            52.137184888124466,
+            57.69103020429611
+          ]
+        },
+        "matched_absolute_acceptance_cap": {
+          "cap": 8,
+          "threshold": -12.25,
+          "development": {
+            "proposed": {
+              "positive": 154,
+              "competing": 171,
+              "unjudged": 535
+            },
+            "accepted": {
+              "positive": 112,
+              "competing": 8,
+              "unjudged": 16
+            },
+            "requests_with_confirmed_pair": 89,
+            "proposed_pair_count": 860,
+            "p50_p95_ms": [
+              51.49245075881481,
+              56.640206184238195
+            ]
+          },
+          "test": {
+            "proposed": {
+              "positive": 177,
+              "competing": 144,
+              "unjudged": 484
+            },
+            "accepted": {
+              "positive": 126,
+              "competing": 4,
+              "unjudged": 10
+            },
+            "requests_with_confirmed_pair": 91,
+            "proposed_pair_count": 805,
+            "p50_p95_ms": [
+              52.137184888124466,
+              57.69103020429611
+            ]
+          }
+        },
+        "accepted_positive_p5_delta_vs_boost": {
+          "mean": 0.009937888198757764,
+          "percentile_95": [
+            -0.006779661016949152,
+            0.027586206896551724
+          ],
+          "queries": 161,
+          "clusters": 41,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      },
+      "alias_boost_four": {
+        "threshold": 0.25,
+        "development_competing": 205,
+        "development_cap": 10,
+        "development": {
+          "proposed": {
+            "positive": 187,
+            "competing": 205,
+            "unjudged": 468
+          },
+          "accepted": {
+            "positive": 121,
+            "competing": 10,
+            "unjudged": 8
+          },
+          "requests_with_confirmed_pair": 100,
+          "proposed_pair_count": 860,
+          "p50_p95_ms": [
+            51.574164070189,
+            57.22079603001475
+          ]
+        },
+        "test": {
+          "proposed": {
+            "positive": 192,
+            "competing": 176,
+            "unjudged": 437
+          },
+          "accepted": {
+            "positive": 118,
+            "competing": 3,
+            "unjudged": 9
+          },
+          "requests_with_confirmed_pair": 91,
+          "proposed_pair_count": 805,
+          "p50_p95_ms": [
+            52.12085135281086,
+            57.593414559960365
+          ]
+        },
+        "shared_numeric_cutoff_test": {
+          "proposed": {
+            "positive": 192,
+            "competing": 176,
+            "unjudged": 437
+          },
+          "accepted": {
+            "positive": 118,
+            "competing": 3,
+            "unjudged": 9
+          },
+          "requests_with_confirmed_pair": 91,
+          "proposed_pair_count": 805,
+          "p50_p95_ms": [
+            52.12085135281086,
+            57.593414559960365
+          ]
+        },
+        "matched_absolute_acceptance_cap": {
+          "cap": 8,
+          "threshold": 4.375,
+          "development": {
+            "proposed": {
+              "positive": 187,
+              "competing": 205,
+              "unjudged": 468
+            },
+            "accepted": {
+              "positive": 115,
+              "competing": 8,
+              "unjudged": 7
+            },
+            "requests_with_confirmed_pair": 95,
+            "proposed_pair_count": 860,
+            "p50_p95_ms": [
+              51.574164070189,
+              57.22079603001475
+            ]
+          },
+          "test": {
+            "proposed": {
+              "positive": 192,
+              "competing": 176,
+              "unjudged": 437
+            },
+            "accepted": {
+              "positive": 111,
+              "competing": 3,
+              "unjudged": 9
+            },
+            "requests_with_confirmed_pair": 86,
+            "proposed_pair_count": 805,
+            "p50_p95_ms": [
+              52.12085135281086,
+              57.593414559960365
+            ]
+          }
+        },
+        "accepted_positive_p5_delta_vs_boost": {
+          "mean": 0.0,
+          "percentile_95": [
+            0.0,
+            0.0
+          ],
+          "queries": 161,
+          "clusters": 41,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      },
+      "alias_route_four": {
+        "threshold": -13.75,
+        "development_competing": 285,
+        "development_cap": 14,
+        "development": {
+          "proposed": {
+            "positive": 217,
+            "competing": 285,
+            "unjudged": 254
+          },
+          "accepted": {
+            "positive": 156,
+            "competing": 14,
+            "unjudged": 20
+          },
+          "requests_with_confirmed_pair": 115,
+          "proposed_pair_count": 756,
+          "p50_p95_ms": [
+            44.88791897892952,
+            57.19466181471944
+          ]
+        },
+        "test": {
+          "proposed": {
+            "positive": 222,
+            "competing": 254,
+            "unjudged": 197
+          },
+          "accepted": {
+            "positive": 165,
+            "competing": 4,
+            "unjudged": 9
+          },
+          "requests_with_confirmed_pair": 116,
+          "proposed_pair_count": 673,
+          "p50_p95_ms": [
+            47.94415645301342,
+            56.940674781799316
+          ]
+        },
+        "shared_numeric_cutoff_test": {
+          "proposed": {
+            "positive": 222,
+            "competing": 254,
+            "unjudged": 197
+          },
+          "accepted": {
+            "positive": 136,
+            "competing": 3,
+            "unjudged": 9
+          },
+          "requests_with_confirmed_pair": 99,
+          "proposed_pair_count": 673,
+          "p50_p95_ms": [
+            47.94415645301342,
+            56.940674781799316
+          ]
+        },
+        "matched_absolute_acceptance_cap": {
+          "cap": 8,
+          "threshold": 3.75,
+          "development": {
+            "proposed": {
+              "positive": 217,
+              "competing": 285,
+              "unjudged": 254
+            },
+            "accepted": {
+              "positive": 135,
+              "competing": 8,
+              "unjudged": 11
+            },
+            "requests_with_confirmed_pair": 101,
+            "proposed_pair_count": 756,
+            "p50_p95_ms": [
+              44.88791897892952,
+              57.19466181471944
+            ]
+          },
+          "test": {
+            "proposed": {
+              "positive": 222,
+              "competing": 254,
+              "unjudged": 197
+            },
+            "accepted": {
+              "positive": 131,
+              "competing": 3,
+              "unjudged": 9
+            },
+            "requests_with_confirmed_pair": 96,
+            "proposed_pair_count": 673,
+            "p50_p95_ms": [
+              47.94415645301342,
+              56.940674781799316
+            ]
+          }
+        },
+        "accepted_positive_p5_delta_vs_boost": {
+          "mean": 0.058385093167701865,
+          "percentile_95": [
+            0.04049079754601227,
+            0.07727272727272727
+          ],
+          "queries": 161,
+          "clusters": 41,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      }
+    }
+  }
+}
