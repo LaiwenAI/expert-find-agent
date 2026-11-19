@@ -1,0 +1,122 @@
+{
+  "model": {
+    "repository": "Qwen/Qwen3-Embedding-0.6B",
+    "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+    "files": {
+      "config.json": "b5bf1f51fc45be473a54718cef92448d90a1be001bf9b9a44b8c7f10a19feaa9",
+      "model.safetensors": "0437e45c94563b09e13cb7a64478fc406947a93cb34a7e05870fc8dcd48e23fd",
+      "tokenizer.json": "def76fb086971c7867b829c23a26261e38d9d74e02139253b38aeb9df8b4b50a",
+      "tokenizer_config.json": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0"
+    },
+    "policy": "Official frozen BF16 weights; no own training or quantization."
+  },
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "job": "40637",
+  "script_sha256": "69ff82dc8f44eb83c1966cda4b76043b1164199bada963ea0d6e5aa3e25375d6",
+  "data_sha256": "6e29ad410e6e39aa1936017fb965b30a20eb2e7751997f55b97c9d281aa884e5",
+  "source_timing": {
+    "counting_seconds": 0.8683367017656565,
+    "encoding_seconds": 57.58698811195791,
+    "paragraphs": 19710
+  },
+  "query_encoding_seconds": 0.625872541218996,
+  "index_compilation_seconds": 0.09790672548115253,
+  "timing_repeats": 5,
+  "rows_sha256": "e8425f5a50dcc979d980a0a8f5cafa80b62539460470c59e18463f375dcbf0aa",
+  "report": {
+    "questions": 1451,
+    "evidence_evaluable": 1256,
+    "papers": 416,
+    "mean_paragraphs": 46.239145416953825,
+    "methods": {
+      "flat": {
+        "exact_dense_top5": 1451,
+        "mean_checked_paragraphs": 46.239145416953825,
+        "mean_opened_sections": 13.500344589937974,
+        "any_paragraph_skipped": 0,
+        "fewer_than_top5": 0,
+        "cpu_p95_us": 8.710999999999999,
+        "complete_evidence": 0.6520700636942676,
+        "evidence_f1": 0.2912589238247133,
+        "complete_delta_vs_flat": {
+          "mean": 0.0,
+          "percentile_95": [
+            0.0,
+            0.0
+          ],
+          "queries": 1256,
+          "clusters": 402,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      },
+      "centroid_beam": {
+        "exact_dense_top5": 133,
+        "mean_checked_paragraphs": 6.154376292212268,
+        "mean_opened_sections": 2,
+        "any_paragraph_skipped": 1451,
+        "fewer_than_top5": 702,
+        "cpu_p95_us": 8.361,
+        "complete_evidence": 0.5238853503184714,
+        "evidence_f1": 0.2931101953415899,
+        "complete_delta_vs_flat": {
+          "mean": -0.12818471337579618,
+          "percentile_95": [
+            -0.15517241379310345,
+            -0.10100990631060022
+          ],
+          "queries": 1256,
+          "clusters": 402,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      },
+      "centroid_min5": {
+        "exact_dense_top5": 241,
+        "mean_checked_paragraphs": 8.228807718814611,
+        "mean_opened_sections": 2.7146795313576844,
+        "any_paragraph_skipped": 1450,
+        "fewer_than_top5": 0,
+        "cpu_p95_us": 10.73,
+        "complete_evidence": 0.5923566878980892,
+        "evidence_f1": 0.2702390776058225,
+        "complete_delta_vs_flat": {
+          "mean": -0.059713375796178345,
+          "percentile_95": [
+            -0.08483006299775414,
+            -0.03456337526066561
+          ],
+          "queries": 1256,
+          "clusters": 402,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      },
+      "bounded_sections": {
+        "exact_dense_top5": 1451,
+        "mean_checked_paragraphs": 42.07305306685045,
+        "mean_opened_sections": 9.35354927636113,
+        "any_paragraph_skipped": 1358,
+        "fewer_than_top5": 0,
+        "cpu_p95_us": 43.170500000000004,
+        "complete_evidence": 0.6520700636942676,
+        "evidence_f1": 0.2912589238247133,
+        "complete_delta_vs_flat": {
+          "mean": 0.0,
+          "percentile_95": [
+            0.0,
+            0.0
+          ],
+          "queries": 1256,
+          "clusters": 402,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      }
+    }
+  }
+}
