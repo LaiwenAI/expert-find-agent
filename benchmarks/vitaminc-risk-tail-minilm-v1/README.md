@@ -12,14 +12,14 @@ Each cell reports true supports / false accepts on refutations / false accepts o
 
 | Model | Seed | Matched development caps | Strict development caps | Single-item P95 |
 | --- | --- | ---: | ---: | ---: |
-| Frozen | — | 139 / 20 / 6 | 100 / 12 / 2 | 1.24 ms |
-| Classification | 20261119 | 144 / 26 / 8 | 98 / 13 / 2 | 1.25 ms |
-| Within-pair | 20261119 | 144 / 24 / 6 | 102 / 14 / 2 | 1.28 ms |
-| Class-specific upper tail | 20261119 | 139 / 21 / 6 | 113 / 15 / 2 | 1.28 ms |
-| Classification | 20261120 | 141 / 26 / 8 | 98 / 14 / 2 | 1.29 ms |
-| Within-pair | 20261120 | 144 / 24 / 6 | 109 / 14 / 2 | 1.28 ms |
+| Frozen | — | 139 / 20 / 6 | 100 / 12 / 2 | 1.25 ms |
+| Classification | 20261119 | 144 / 26 / 8 | 98 / 13 / 2 | 1.24 ms |
+| Within-pair | 20261119 | 144 / 24 / 6 | 102 / 14 / 2 | 1.27 ms |
+| Class-specific upper tail | 20261119 | 139 / 21 / 6 | 113 / 15 / 2 | 1.25 ms |
+| Classification | 20261120 | 141 / 26 / 8 | 98 / 14 / 2 | 1.28 ms |
+| Within-pair | 20261120 | 144 / 24 / 6 | 109 / 14 / 2 | 1.27 ms |
 | Class-specific upper tail | 20261120 | 141 / 21 / 6 | 117 / 16 / 3 | 1.27 ms |
 
-Job 42206 reproduces the earlier seed's classification and within-pair weight hashes exactly. Both class-specific runs increased retained support at the strict operating point versus the frozen model (13 and 17 more), with paired 95% intervals of +1.00 to +5.50 and +2.25 to +6.50 percentage points. Both also accepted more refutations. At the matched point, the class-specific runs accepted one more refutation than frozen, and had equal or slightly higher true support. The apparent benefit depends on the selected operating point. Training for the highest-margin negatives does not yet improve quality under a verified held-out risk constraint. The earlier 4B control remains stronger on true-support recovery and is much slower on these supplied evidence inputs. [Aggregate results](results.json)
+Job 42215 repeats job 42206 after correcting a filename collision in weight export. It preserves all six training hashes and all operating-point decisions. It also reproduces the earlier seed's classification and within-pair weight hashes exactly. Both class-specific runs increased retained support at the strict operating point versus the frozen model (13 and 17 more), with paired 95% intervals of +1.00 to +5.50 and +2.25 to +6.50 percentage points. Both also accepted more refutations. At the matched point, the class-specific runs accepted one more refutation than frozen, and had equal or slightly higher true support. The apparent benefit depends on the selected operating point. Training for the highest-margin negatives does not yet improve quality under a verified held-out risk constraint. The earlier 4B control remains stronger on true-support recovery and is much slower on these supplied evidence inputs. [Aggregate results](results.json)
 
 Rebuild the same projection and use the previous training command with `--compare-tail` and new output and weights paths inside a Slurm CUDA allocation.

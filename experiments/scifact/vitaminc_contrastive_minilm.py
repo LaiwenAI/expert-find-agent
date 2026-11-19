@@ -71,7 +71,7 @@ def upper_tail_loss(logits, labels):
     return sum(comparisons) / len(comparisons)
 
 
-def fit(tokenizer, model, positions, pairs, arm, weights, *, seed=SEED, name=None):
+def fit(tokenizer, model, positions, pairs, arm, weights, *, seed=SEED, artifact_name=None):
     import torch
     from safetensors.torch import save_file
     from torch.nn import functional as F
@@ -125,7 +125,9 @@ def fit(tokenizer, model, positions, pairs, arm, weights, *, seed=SEED, name=Non
     changed = sum(int(torch.count_nonzero(param.detach().cpu() != initial[name])) for name,param in selected.items())
     if not changed:
         raise ValueError("Training produced no changed parameters")
-    path = weights/f"{name or arm}.safetensors"
+    path = weights/f"{artifact_name or arm}.safetensors"
+    if path.exists():
+        raise FileExistsError(path)
     save_file({name:param.detach().cpu().contiguous() for name,param in selected.items()}, str(path))
     return dict(trainable=sum(p.numel() for p in selected.values()), changed=changed, updates=updates,
                 seconds=seconds, losses=loss_by_epoch, seed=seed, weight_sha256=digest(path))
@@ -226,7 +228,7 @@ def run(projection, control, checkpoint, output, weights, *, compare_tail=False)
     for name, arm, seed in arms:
         tokenizer, model, positions, provenance = load(checkpoint,"minilm")
         training = {} if arm == "frozen" else fit(
-            tokenizer, model, positions, pairs["train"], arm, weights, seed=seed, name=name)
+            tokenizer, model, positions, pairs["train"], arm, weights, seed=seed, artifact_name=name)
         evaluate(tokenizer,model,positions,pairs["development"][:2],1)
         observations[name] = dict(training=training,
                                  development=evaluate(tokenizer,model,positions,pairs["development"],1),
