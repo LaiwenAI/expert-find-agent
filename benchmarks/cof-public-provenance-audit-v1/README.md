@@ -8,6 +8,19 @@ Check whether the candidate's name or confirmed ORCID appears on the cited bylin
 
 Only public paper titles go to Crossref and only resolved public DOIs go to Europe PMC. Raw title-to-author records stay in the local cache. Requests are sequential and paced for the public API. The aggregate contains counts without names, identifiers, abstracts or role text.
 
+## Verified audit
+
+The lookup covered all 232 distinct paper titles. Crossref returned one normalized exact DOI for 163 titles, multiple exact DOIs for 17, and no exact title among the first five results for 52.
+
+| Panel | Citation cases | Unique exact citation DOI | Candidate slots | One common byline name across anchors | Repeated valid ORCID across anchors | Common candidate name on cited byline |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| KDD | 82 | 47 | 32 | 14 | 0 | 21 |
+| SciRepEval | 36 | 31 | 17 | 5 | 0 | 7 |
+
+The citation matches represent 63 distinct DOIs. Europe PMC completed lookups for 39 and gave no unique open XML match in those responses. Lookups for 24 DOIs failed after retries. These requests account for 25 citation cases and remain unresolved. The audit retrieved zero XML records and has no evidence about the prevalence of personal contribution statements.
+
+The common-name links are leads for review. Twenty-one KDD and seven SciRepEval cases also contain the proposed name on the cited byline, which establishes only a bibliographic match under this heuristic. Decisive author-level evaluation needs a source that links a particular person to specific work. This blind packet cannot be used as ground truth for personal attribution based on registry coverage alone. [Aggregate results](results.json)
+
 ## Reproduce
 
 Use the frozen local CoF review packet. The Crossref title search is live, so exact outputs can change with metadata or service coverage. A local cache permits a paused capture to resume.
