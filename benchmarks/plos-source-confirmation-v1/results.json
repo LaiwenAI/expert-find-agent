@@ -1,0 +1,342 @@
+{
+  "job": "41562",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "script_sha256": "8b9a951523fec3a1c54a915dfabfe478c1c8585b87ca2612ac3df550a6a052b8",
+  "frozen_sha256": "1b9d9b1fae5397b790be93df66b42d8295105f4a57ade1ca3618e6ee40d2c322",
+  "panel_sha256": "c621d1d985ac7a5768b289b342068991de9aef20df3bcfa4f3db8578404087bc",
+  "anchor_pairs": 25,
+  "components": 15,
+  "evaluated_queries": 150,
+  "expanded_proposals_checked": 49,
+  "verification_pairs": 128,
+  "retrieval_p50_p95_ms": [
+    8.674578741192818,
+    9.052279870957136
+  ],
+  "confirmation_p50_p95_ms": [
+    11.005109176039696,
+    13.908465951681135
+  ],
+  "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "reranker_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+  "results": {
+    "all": {
+      "top4": {
+        "cross_encoder_calls": 0,
+        "present": 50,
+        "present_exact": 30,
+        "present_wrong_accepts": 1,
+        "present_unresolved": 19,
+        "missing": 100,
+        "missing_false_accepts": 3,
+        "estimated_factored_p50_p95_ms": [
+          8.674578741192818,
+          9.052279870957136
+        ]
+      },
+      "expanded": {
+        "cross_encoder_calls": 0,
+        "present": 50,
+        "present_exact": 40,
+        "present_wrong_accepts": 1,
+        "present_unresolved": 9,
+        "missing": 100,
+        "missing_false_accepts": 8,
+        "estimated_factored_p50_p95_ms": [
+          8.674578741192818,
+          9.052279870957136
+        ]
+      },
+      "dense_rank_gate": {
+        "cross_encoder_calls": 0,
+        "present": 50,
+        "present_exact": 1,
+        "present_wrong_accepts": 0,
+        "present_unresolved": 49,
+        "missing": 100,
+        "missing_false_accepts": 1,
+        "estimated_factored_p50_p95_ms": [
+          8.674578741192818,
+          9.052279870957136
+        ]
+      },
+      "absolute_gate": {
+        "cross_encoder_calls": 49,
+        "present": 50,
+        "present_exact": 20,
+        "present_wrong_accepts": 0,
+        "present_unresolved": 30,
+        "missing": 100,
+        "missing_false_accepts": 1,
+        "estimated_factored_p50_p95_ms": [
+          8.85416753590107,
+          22.44811914861202
+        ]
+      },
+      "relative_gate": {
+        "cross_encoder_calls": 49,
+        "present": 50,
+        "present_exact": 19,
+        "present_wrong_accepts": 0,
+        "present_unresolved": 31,
+        "missing": 100,
+        "missing_false_accepts": 1,
+        "estimated_factored_p50_p95_ms": [
+          8.85416753590107,
+          22.44811914861202
+        ]
+      },
+      "selective_dense_rank_gate": {
+        "cross_encoder_calls": 0,
+        "present": 50,
+        "present_exact": 30,
+        "present_wrong_accepts": 1,
+        "present_unresolved": 19,
+        "missing": 100,
+        "missing_false_accepts": 4,
+        "estimated_factored_p50_p95_ms": [
+          8.674578741192818,
+          9.052279870957136
+        ]
+      },
+      "selective_absolute_gate": {
+        "cross_encoder_calls": 15,
+        "present": 50,
+        "present_exact": 31,
+        "present_wrong_accepts": 1,
+        "present_unresolved": 18,
+        "missing": 100,
+        "missing_false_accepts": 4,
+        "estimated_factored_p50_p95_ms": [
+          8.702362887561321,
+          21.187921054661263
+        ]
+      },
+      "selective_relative_gate": {
+        "cross_encoder_calls": 15,
+        "present": 50,
+        "present_exact": 30,
+        "present_wrong_accepts": 1,
+        "present_unresolved": 19,
+        "missing": 100,
+        "missing_false_accepts": 4,
+        "estimated_factored_p50_p95_ms": [
+          8.702362887561321,
+          21.187921054661263
+        ]
+      }
+    },
+    "result": {
+      "top4": {
+        "cross_encoder_calls": 0,
+        "present": 25,
+        "present_exact": 20,
+        "present_wrong_accepts": 0,
+        "present_unresolved": 5,
+        "missing": 50,
+        "missing_false_accepts": 2,
+        "estimated_factored_p50_p95_ms": [
+          8.893383666872978,
+          9.113932587206364
+        ]
+      },
+      "expanded": {
+        "cross_encoder_calls": 0,
+        "present": 25,
+        "present_exact": 25,
+        "present_wrong_accepts": 0,
+        "present_unresolved": 0,
+        "missing": 50,
+        "missing_false_accepts": 6,
+        "estimated_factored_p50_p95_ms": [
+          8.893383666872978,
+          9.113932587206364
+        ]
+      },
+      "dense_rank_gate": {
+        "cross_encoder_calls": 0,
+        "present": 25,
+        "present_exact": 1,
+        "present_wrong_accepts": 0,
+        "present_unresolved": 24,
+        "missing": 50,
+        "missing_false_accepts": 1,
+        "estimated_factored_p50_p95_ms": [
+          8.893383666872978,
+          9.113932587206364
+        ]
+      },
+      "absolute_gate": {
+        "cross_encoder_calls": 31,
+        "present": 25,
+        "present_exact": 16,
+        "present_wrong_accepts": 0,
+        "present_unresolved": 9,
+        "missing": 50,
+        "missing_false_accepts": 1,
+        "estimated_factored_p50_p95_ms": [
+          9.016057476401329,
+          22.66935408115387
+        ]
+      },
+      "relative_gate": {
+        "cross_encoder_calls": 31,
+        "present": 25,
+        "present_exact": 15,
+        "present_wrong_accepts": 0,
+        "present_unresolved": 10,
+        "missing": 50,
+        "missing_false_accepts": 1,
+        "estimated_factored_p50_p95_ms": [
+          9.016057476401329,
+          22.66935408115387
+        ]
+      },
+      "selective_dense_rank_gate": {
+        "cross_encoder_calls": 0,
+        "present": 25,
+        "present_exact": 20,
+        "present_wrong_accepts": 0,
+        "present_unresolved": 5,
+        "missing": 50,
+        "missing_false_accepts": 3,
+        "estimated_factored_p50_p95_ms": [
+          8.893383666872978,
+          9.113932587206364
+        ]
+      },
+      "selective_absolute_gate": {
+        "cross_encoder_calls": 9,
+        "present": 25,
+        "present_exact": 21,
+        "present_wrong_accepts": 0,
+        "present_unresolved": 4,
+        "missing": 50,
+        "missing_false_accepts": 3,
+        "estimated_factored_p50_p95_ms": [
+          8.901968598365784,
+          22.561460360884666
+        ]
+      },
+      "selective_relative_gate": {
+        "cross_encoder_calls": 9,
+        "present": 25,
+        "present_exact": 20,
+        "present_wrong_accepts": 0,
+        "present_unresolved": 5,
+        "missing": 50,
+        "missing_false_accepts": 3,
+        "estimated_factored_p50_p95_ms": [
+          8.901968598365784,
+          22.561460360884666
+        ]
+      }
+    },
+    "keywords": {
+      "top4": {
+        "cross_encoder_calls": 0,
+        "present": 25,
+        "present_exact": 10,
+        "present_wrong_accepts": 1,
+        "present_unresolved": 14,
+        "missing": 50,
+        "missing_false_accepts": 1,
+        "estimated_factored_p50_p95_ms": [
+          8.38240422308445,
+          8.717671409249306
+        ]
+      },
+      "expanded": {
+        "cross_encoder_calls": 0,
+        "present": 25,
+        "present_exact": 15,
+        "present_wrong_accepts": 1,
+        "present_unresolved": 9,
+        "missing": 50,
+        "missing_false_accepts": 2,
+        "estimated_factored_p50_p95_ms": [
+          8.38240422308445,
+          8.717671409249306
+        ]
+      },
+      "dense_rank_gate": {
+        "cross_encoder_calls": 0,
+        "present": 25,
+        "present_exact": 0,
+        "present_wrong_accepts": 0,
+        "present_unresolved": 25,
+        "missing": 50,
+        "missing_false_accepts": 0,
+        "estimated_factored_p50_p95_ms": [
+          8.38240422308445,
+          8.717671409249306
+        ]
+      },
+      "absolute_gate": {
+        "cross_encoder_calls": 18,
+        "present": 25,
+        "present_exact": 4,
+        "present_wrong_accepts": 0,
+        "present_unresolved": 21,
+        "missing": 50,
+        "missing_false_accepts": 0,
+        "estimated_factored_p50_p95_ms": [
+          8.426034823060036,
+          19.966782443225384
+        ]
+      },
+      "relative_gate": {
+        "cross_encoder_calls": 18,
+        "present": 25,
+        "present_exact": 4,
+        "present_wrong_accepts": 0,
+        "present_unresolved": 21,
+        "missing": 50,
+        "missing_false_accepts": 0,
+        "estimated_factored_p50_p95_ms": [
+          8.426034823060036,
+          19.966782443225384
+        ]
+      },
+      "selective_dense_rank_gate": {
+        "cross_encoder_calls": 0,
+        "present": 25,
+        "present_exact": 10,
+        "present_wrong_accepts": 1,
+        "present_unresolved": 14,
+        "missing": 50,
+        "missing_false_accepts": 1,
+        "estimated_factored_p50_p95_ms": [
+          8.38240422308445,
+          8.717671409249306
+        ]
+      },
+      "selective_absolute_gate": {
+        "cross_encoder_calls": 6,
+        "present": 25,
+        "present_exact": 10,
+        "present_wrong_accepts": 1,
+        "present_unresolved": 14,
+        "missing": 50,
+        "missing_false_accepts": 1,
+        "estimated_factored_p50_p95_ms": [
+          8.386962115764618,
+          19.186608679592606
+        ]
+      },
+      "selective_relative_gate": {
+        "cross_encoder_calls": 6,
+        "present": 25,
+        "present_exact": 10,
+        "present_wrong_accepts": 1,
+        "present_unresolved": 14,
+        "missing": 50,
+        "missing_false_accepts": 1,
+        "estimated_factored_p50_p95_ms": [
+          8.386962115764618,
+          19.186608679592606
+        ]
+      }
+    }
+  }
+}
