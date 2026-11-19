@@ -1,0 +1,317 @@
+{
+  "job": "41141",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "cohort": 80,
+  "development_sha256": "30661871ac08a61e7e74d67d75491878c7e4194f217483b60d06426c4b36e4c5",
+  "corpus_sha256": "c9e8d6e13bb05900427ab1d785d6024256f61e8bb34f220c3816fb79d1921780",
+  "script_sha256": "9946f3f3b6e909fae275442a0eb366495c8ef344c9879af0cbc4a0c623812d9b",
+  "sources": 52667,
+  "experts": 4154,
+  "model_revisions": {
+    "embedding": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+    "role_reader": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "verifier": "e61197ed45024b0ed8a2d74b80b4d909f1255473"
+  },
+  "report": {
+    "full_batch": {
+      "positive_experts": 70,
+      "queries_changed_supported_set": 2,
+      "added_positive_experts": 2,
+      "missing_positive_experts": 0,
+      "queries_changed_ranking_or_citations": 3,
+      "verify_p50_p95_ms": [
+        59.76778734475374,
+        172.44508070871234
+      ],
+      "factored_complete_p50_p95_ms": [
+        192.3773381859064,
+        2108.9444437995553
+      ],
+      "pairs": 1280,
+      "calls": 115,
+      "clipped": 0
+    },
+    "two_wave_full": {
+      "positive_experts": 68,
+      "queries_changed_supported_set": 0,
+      "added_positive_experts": 0,
+      "missing_positive_experts": 0,
+      "queries_changed_ranking_or_citations": 0,
+      "verify_p50_p95_ms": [
+        50.29719416052103,
+        176.19742061942816
+      ],
+      "factored_complete_p50_p95_ms": [
+        188.4574620053172,
+        2112.437905371189
+      ],
+      "pairs": 1280,
+      "calls": 174,
+      "clipped": 0
+    },
+    "gap_only": {
+      "positive_experts": 68,
+      "queries_changed_supported_set": 0,
+      "added_positive_experts": 0,
+      "missing_positive_experts": 0,
+      "queries_changed_ranking_or_citations": 0,
+      "verify_p50_p95_ms": [
+        48.56051970273256,
+        147.36532699316732
+      ],
+      "factored_complete_p50_p95_ms": [
+        181.09600245952606,
+        2081.2646500766273
+      ],
+      "pairs": 1180,
+      "calls": 173,
+      "clipped": 0
+    },
+    "budget_replay": {
+      "6": {
+        "rank_order": {
+          "retained": 58,
+          "reads": 480
+        },
+        "smallest_gap": {
+          "retained": 59,
+          "reads": 479
+        },
+        "paired_retention_difference": {
+          "mean": 0.0125,
+          "percentile_95": [
+            0.0,
+            0.0375
+          ],
+          "queries": 80,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000
+        }
+      },
+      "8": {
+        "rank_order": {
+          "retained": 66,
+          "reads": 640
+        },
+        "smallest_gap": {
+          "retained": 68,
+          "reads": 629
+        },
+        "paired_retention_difference": {
+          "mean": 0.025,
+          "percentile_95": [
+            0.0,
+            0.0625
+          ],
+          "queries": 80,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000
+        }
+      }
+    }
+  },
+  "strata": {
+    "single_criterion": {
+      "requests": 55,
+      "report": {
+        "full_batch": {
+          "positive_experts": 67,
+          "queries_changed_supported_set": 2,
+          "added_positive_experts": 2,
+          "missing_positive_experts": 0,
+          "queries_changed_ranking_or_citations": 3,
+          "verify_p50_p95_ms": [
+            45.62430642545223,
+            79.09524291753769
+          ],
+          "factored_complete_p50_p95_ms": [
+            163.3870992809534,
+            539.1182143241166
+          ],
+          "pairs": 550,
+          "calls": 55,
+          "clipped": 0
+        },
+        "two_wave_full": {
+          "positive_experts": 65,
+          "queries_changed_supported_set": 0,
+          "added_positive_experts": 0,
+          "missing_positive_experts": 0,
+          "queries_changed_ranking_or_citations": 0,
+          "verify_p50_p95_ms": [
+            43.703118339180946,
+            64.66193851083517
+          ],
+          "factored_complete_p50_p95_ms": [
+            156.1875157058239,
+            532.9390199854969
+          ],
+          "pairs": 550,
+          "calls": 110,
+          "clipped": 0
+        },
+        "gap_only": {
+          "positive_experts": 65,
+          "queries_changed_supported_set": 0,
+          "added_positive_experts": 0,
+          "missing_positive_experts": 0,
+          "queries_changed_ranking_or_citations": 0,
+          "verify_p50_p95_ms": [
+            38.54348324239254,
+            63.17760441452264
+          ],
+          "factored_complete_p50_p95_ms": [
+            154.64407950639725,
+            532.7836997807025
+          ],
+          "pairs": 495,
+          "calls": 109,
+          "clipped": 0
+        },
+        "budget_replay": {
+          "6": {
+            "rank_order": {
+              "retained": 55,
+              "reads": 330
+            },
+            "smallest_gap": {
+              "retained": 56,
+              "reads": 329
+            },
+            "paired_retention_difference": {
+              "mean": 0.01818181818181818,
+              "percentile_95": [
+                0.0,
+                0.05454545454545454
+              ],
+              "queries": 55,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000
+            }
+          },
+          "8": {
+            "rank_order": {
+              "retained": 63,
+              "reads": 440
+            },
+            "smallest_gap": {
+              "retained": 65,
+              "reads": 429
+            },
+            "paired_retention_difference": {
+              "mean": 0.03636363636363636,
+              "percentile_95": [
+                0.0,
+                0.09090909090909091
+              ],
+              "queries": 55,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000
+            }
+          }
+        }
+      }
+    },
+    "multiple_criteria": {
+      "requests": 25,
+      "report": {
+        "full_batch": {
+          "positive_experts": 3,
+          "queries_changed_supported_set": 0,
+          "added_positive_experts": 0,
+          "missing_positive_experts": 0,
+          "queries_changed_ranking_or_citations": 0,
+          "verify_p50_p95_ms": [
+            108.86956192553043,
+            291.6824251413342
+          ],
+          "factored_complete_p50_p95_ms": [
+            493.8915614038706,
+            2999.3547279387685
+          ],
+          "pairs": 730,
+          "calls": 60,
+          "clipped": 0
+        },
+        "two_wave_full": {
+          "positive_experts": 3,
+          "queries_changed_supported_set": 0,
+          "added_positive_experts": 0,
+          "missing_positive_experts": 0,
+          "queries_changed_ranking_or_citations": 0,
+          "verify_p50_p95_ms": [
+            108.00738260149956,
+            234.93242971599088
+          ],
+          "factored_complete_p50_p95_ms": [
+            493.15342493355274,
+            2981.357461214063
+          ],
+          "pairs": 730,
+          "calls": 64,
+          "clipped": 0
+        },
+        "gap_only": {
+          "positive_experts": 3,
+          "queries_changed_supported_set": 0,
+          "added_positive_experts": 0,
+          "missing_positive_experts": 0,
+          "queries_changed_ranking_or_citations": 0,
+          "verify_p50_p95_ms": [
+            106.29305243492126,
+            232.85692371428
+          ],
+          "factored_complete_p50_p95_ms": [
+            493.6771225184202,
+            2981.164895743129
+          ],
+          "pairs": 685,
+          "calls": 64,
+          "clipped": 0
+        },
+        "budget_replay": {
+          "6": {
+            "rank_order": {
+              "retained": 3,
+              "reads": 150
+            },
+            "smallest_gap": {
+              "retained": 3,
+              "reads": 150
+            },
+            "paired_retention_difference": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 25,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000
+            }
+          },
+          "8": {
+            "rank_order": {
+              "retained": 3,
+              "reads": 200
+            },
+            "smallest_gap": {
+              "retained": 3,
+              "reads": 200
+            },
+            "paired_retention_difference": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 25,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000
+            }
+          }
+        }
+      }
+    }
+  }
+}
