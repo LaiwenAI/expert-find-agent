@@ -1,0 +1,115 @@
+{
+  "projection_sha256": "2ee7ce4dea5ef4e172f7379bafc2cd068ca6ab592219b600d53f3652c284ca67",
+  "script_sha256": "4df9f3dd8141b3da96b38716b33db90a818e444aedc93149273b1e3dae488274",
+  "job": "41579",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "reranker_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+  "bonus": 0.1,
+  "max_batch": 8,
+  "reviewers": 58,
+  "cases": 477,
+  "distinct_queries": 463,
+  "publications": 799,
+  "index_seconds": 3.6074443385004997,
+  "results": {
+    "dense": {
+      "weighted_pairwise_loss": 0.23449725563470747,
+      "comparable_pairs": 1653,
+      "p50_p95_ms": [
+        7.5610000640153885,
+        7.802752032876015
+      ],
+      "mean_checks": 0,
+      "mean_calls": 0,
+      "truncated_checks": 0,
+      "witness_matches_full": 457,
+      "max_score_difference_from_full": 0.09997040428864867,
+      "comparable_order_disagreements_vs_full": 55
+    },
+    "first_two": {
+      "weighted_pairwise_loss": 0.23683288567090974,
+      "comparable_pairs": 1653,
+      "p50_p95_ms": [
+        22.71035872399807,
+        28.55040654540062
+      ],
+      "mean_checks": 2,
+      "mean_calls": 1,
+      "truncated_checks": 8,
+      "witness_matches_full": 466,
+      "max_score_difference_from_full": 0.06731605464622847,
+      "comparable_order_disagreements_vs_full": 7
+    },
+    "first_five": {
+      "weighted_pairwise_loss": 0.23543150764918838,
+      "comparable_pairs": 1653,
+      "p50_p95_ms": [
+        41.75645858049393,
+        59.10099968314171
+      ],
+      "mean_checks": 4.853249475890985,
+      "mean_calls": 1,
+      "truncated_checks": 19,
+      "witness_matches_full": 476,
+      "max_score_difference_from_full": 0.010356012220157473,
+      "comparable_order_disagreements_vs_full": 2
+    },
+    "cross_only": {
+      "weighted_pairwise_loss": 0.2806259488497022,
+      "comparable_pairs": 1653,
+      "p50_p95_ms": [
+        121.4933730661869,
+        195.8396676927805
+      ],
+      "mean_checks": 14.614255765199161,
+      "mean_calls": 2.2557651991614254,
+      "truncated_checks": 83,
+      "witness_matches_full": 261,
+      "max_score_difference_from_full": 13.432376897712752,
+      "comparable_order_disagreements_vs_full": 310
+    },
+    "full": {
+      "weighted_pairwise_loss": 0.2356650706528086,
+      "comparable_pairs": 1653,
+      "p50_p95_ms": [
+        122.17802368104458,
+        195.18760330975053
+      ],
+      "mean_checks": 14.614255765199161,
+      "mean_calls": 2.2557651991614254,
+      "truncated_checks": 83,
+      "witness_matches_full": 477,
+      "max_score_difference_from_full": 0.0,
+      "comparable_order_disagreements_vs_full": 0
+    },
+    "bounded": {
+      "weighted_pairwise_loss": 0.23554828915099849,
+      "comparable_pairs": 1653,
+      "p50_p95_ms": [
+        34.249767661094666,
+        92.76176169514653
+      ],
+      "mean_checks": 4.645702306079665,
+      "mean_calls": 1.6603773584905661,
+      "truncated_checks": 11,
+      "witness_matches_full": 474,
+      "max_score_difference_from_full": 0.014683191307356735,
+      "comparable_order_disagreements_vs_full": 3
+    },
+    "bounded_upfront": {
+      "weighted_pairwise_loss": 0.23578185215461872,
+      "comparable_pairs": 1653,
+      "p50_p95_ms": [
+        35.35982593894005,
+        94.40073445439339
+      ],
+      "mean_checks": 4.80293501048218,
+      "mean_calls": 1.1383647798742138,
+      "truncated_checks": 14,
+      "witness_matches_full": 477,
+      "max_score_difference_from_full": 0.005187987945461159,
+      "comparable_order_disagreements_vs_full": 3
+    }
+  }
+}
