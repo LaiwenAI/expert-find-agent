@@ -37,6 +37,19 @@ Job 41693 covers 11 article pairs out of 25 available declared links. It uses 89
 
 With two reads, averaging the three scoped matches per owner finds 88 of 89 exact positive results. The more conservative bottleneck score finds 81. With four available reads up to 89 exact positives are recoverable, and adaptation uses 378 reads versus 436 for the static owner policy. All scope-aware final checks reject all 89 paired negatives. Removing owner specificity with the same four-read source-scoped schedule misattributes roles in 74 negative cases. The identical timing scale across routes reflects the common query encoding, which dominates the resident lookup replay.
 
+## Live text verification
+
+Job 41702 reruns the same 178 requests with Qwen3-Reranker-0.6B. After each selected text read, score each clause attached to the article. Use predicted role checks to update the search state and issue an answer. The declared role sets only determine the benchmark labels. The prompts contain the rendered definition text and the clause phrase. Identity and scope remain metadata. Compare a fixed margin threshold of zero with a stricter threshold of one. These cutoffs are exploratory, without risk calibration.
+
+| Policy | Positive requests with a correct return / 89 | Negative requests with an unsupported return / 89 | Both variants exact / 89 | P95 |
+| --- | ---: | ---: | ---: | ---: |
+| Source-scoped, four | 16 | 6 | 11 | 42.42 ms |
+| Owner mean, two | 19 | 8 | 13 | 24.94 ms |
+| Adaptive, four | 19 | 9 | 12 | 33.19 ms |
+| Adaptive, four, stricter | 2 | 2 | 2 | 32.94 ms |
+
+The two-read owner-mean route saves time relative to four-read source-scoped verification, but accepts eight negative requests and recovers just 19 positives. Its exact-reader version recovers 88. The stricter adaptive variant reduces unsupported returns from nine to two and loses 17 of 19 correct positive returns. Identity-aware scheduling avoids mixing owners. Semantic verdicts can still attach an unsupported claim to the correct record. The formatter uses declarations derived from publisher roles, so evaluation of raw publisher prose remains open. [Exact replay aggregates](replay.json) · [Live verification aggregates](live.json)
+
 ## Reproduce
 
 Rebuild the pinned source projection and glossary using the [previous source experiment](../plos-scoped-search-v1/README.md). Use the verified open embedding checkpoint and a Slurm CUDA allocation.
@@ -45,4 +58,8 @@ Rebuild the pinned source projection and glossary using the [previous source exp
 PYTHONPATH=src:. OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 TOKENIZERS_PARALLELISM=false \
   python -m experiments.credit.linked_witness_dispatch \
   PINNED_SOURCE_PROJECTION NISO_EXAMPLES EMBEDDING_CHECKPOINT NEW_RESULTS
+
+PYTHONPATH=src:. OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 TOKENIZERS_PARALLELISM=false \
+  python -m experiments.credit.live_linked_witness_verification \
+  PINNED_SOURCE_PROJECTION NISO_EXAMPLES EMBEDDING_CHECKPOINT RERANKER_CHECKPOINT NEW_LIVE_RESULTS
 ```
