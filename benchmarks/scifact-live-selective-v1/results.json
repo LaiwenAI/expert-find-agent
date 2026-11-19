@@ -1,0 +1,243 @@
+{
+  "job": "41293",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "archive_sha256": "11c621288d41ac144d29b13b0f8503b3820b7d6e8b1f6ff24dff335c196d76be",
+  "script_sha256": "aadb521a6bac606c1db9c5fe9aacab8e1c8a7ef79625dc452a4fb45ce43f1177",
+  "models": {
+    "short": "8adb042d524ecd5c26d3e3ba0e3fbcf7e2d0864c",
+    "full": "cdbee75f17c01a7cc42f958dc650907174af0554"
+  },
+  "train_cases": 309,
+  "test_cases": 226,
+  "label_totals": {
+    "support": 97,
+    "unknown": 82,
+    "contradict": 47
+  },
+  "calibration_false_support_cap": 0.05,
+  "calibration_fallback_cap": 0.5,
+  "thresholds": {
+    "short": 1.791015625,
+    "full": 1.0
+  },
+  "gates": {
+    "fixed_sample": {
+      "reject": -6.00625,
+      "accept": 2.9565429687500018,
+      "calibration_report": {
+        "support": {
+          "cases": 140,
+          "predicted_support": 57
+        },
+        "contradict": {
+          "cases": 47,
+          "predicted_support": 0
+        },
+        "unknown": {
+          "cases": 122,
+          "predicted_support": 4
+        }
+      },
+      "calibration_fallbacks": 153
+    },
+    "selective": {
+      "reject": -3.79375,
+      "accept": 2.9565429687500018,
+      "calibration_report": {
+        "support": {
+          "cases": 140,
+          "predicted_support": 75
+        },
+        "contradict": {
+          "cases": 47,
+          "predicted_support": 0
+        },
+        "unknown": {
+          "cases": 122,
+          "predicted_support": 3
+        }
+      },
+      "calibration_fallbacks": 154
+    }
+  },
+  "report": {
+    "short": {
+      "labels": {
+        "support": {
+          "cases": 97,
+          "predicted_support": 20
+        },
+        "contradict": {
+          "cases": 47,
+          "predicted_support": 0
+        },
+        "unknown": {
+          "cases": 82,
+          "predicted_support": 0
+        }
+      },
+      "full_reader_inputs": 0,
+      "p50_p95_ms": [
+        16.714368015527725,
+        22.506577521562573
+      ],
+      "full_reader_batches": 0
+    },
+    "full": {
+      "labels": {
+        "support": {
+          "cases": 97,
+          "predicted_support": 48
+        },
+        "contradict": {
+          "cases": 47,
+          "predicted_support": 4
+        },
+        "unknown": {
+          "cases": 82,
+          "predicted_support": 2
+        }
+      },
+      "full_reader_inputs": 226,
+      "p50_p95_ms": [
+        625.7129777222872,
+        796.6680634766817
+      ],
+      "full_reader_batches": 15
+    },
+    "fixed_sample": {
+      "labels": {
+        "support": {
+          "cases": 97,
+          "predicted_support": 31
+        },
+        "contradict": {
+          "cases": 47,
+          "predicted_support": 1
+        },
+        "unknown": {
+          "cases": 82,
+          "predicted_support": 0
+        }
+      },
+      "full_reader_inputs": 93,
+      "p50_p95_ms": [
+        361.23248748481274,
+        529.7953471541402
+      ],
+      "full_reader_batches": 8
+    },
+    "selective": {
+      "labels": {
+        "support": {
+          "cases": 97,
+          "predicted_support": 39
+        },
+        "contradict": {
+          "cases": 47,
+          "predicted_support": 2
+        },
+        "unknown": {
+          "cases": 82,
+          "predicted_support": 2
+        }
+      },
+      "full_reader_inputs": 101,
+      "p50_p95_ms": [
+        250.1167431473732,
+        426.2338310480118
+      ],
+      "full_reader_batches": 14
+    }
+  },
+  "serial_report": {
+    "short": {
+      "labels": {
+        "support": {
+          "cases": 97,
+          "predicted_support": 21
+        },
+        "contradict": {
+          "cases": 47,
+          "predicted_support": 0
+        },
+        "unknown": {
+          "cases": 82,
+          "predicted_support": 0
+        }
+      },
+      "full_reader_inputs": 0,
+      "p50_p95_ms": [
+        4.664943553507328,
+        4.839898552745581
+      ],
+      "full_reader_batches": 0
+    },
+    "full": {
+      "labels": {
+        "support": {
+          "cases": 97,
+          "predicted_support": 49
+        },
+        "contradict": {
+          "cases": 47,
+          "predicted_support": 4
+        },
+        "unknown": {
+          "cases": 82,
+          "predicted_support": 2
+        }
+      },
+      "full_reader_inputs": 226,
+      "p50_p95_ms": [
+        26.31605789065361,
+        37.8260868601501
+      ],
+      "full_reader_batches": 226
+    },
+    "fixed_sample": {
+      "labels": {
+        "support": {
+          "cases": 97,
+          "predicted_support": 31
+        },
+        "contradict": {
+          "cases": 47,
+          "predicted_support": 1
+        },
+        "unknown": {
+          "cases": 82,
+          "predicted_support": 0
+        }
+      },
+      "full_reader_inputs": 93,
+      "p50_p95_ms": [
+        4.824329167604446,
+        40.26426142081618
+      ],
+      "full_reader_batches": 93
+    },
+    "selective": {
+      "labels": {
+        "support": {
+          "cases": 97,
+          "predicted_support": 39
+        },
+        "contradict": {
+          "cases": 47,
+          "predicted_support": 2
+        },
+        "unknown": {
+          "cases": 82,
+          "predicted_support": 2
+        }
+      },
+      "full_reader_inputs": 103,
+      "p50_p95_ms": [
+        4.815460182726383,
+        39.81417557224631
+      ],
+      "full_reader_batches": 103
+    }
+  }
+}
