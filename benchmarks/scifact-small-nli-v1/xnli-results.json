@@ -1,0 +1,485 @@
+{
+  "job": "41221",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "cases": 5010,
+  "parquet_sha256": "599e3a0191403f19cbe802afdf69841152000b41eaed725e4f463d432c0ffb49",
+  "script_sha256": "24a28e105f513f2151a3bd831e691d720f1f468b91f90c1a3a9c3e44b353d041",
+  "projected_sha256": "766f10336767b2a9da9d72d0273bcc817b339e3311e2ace99dffa8c638fcece1",
+  "counts": {
+    "contradiction": 1670,
+    "entailment": 1670,
+    "neutral": 1670
+  },
+  "models": {
+    "mdeberta": [
+      "MoritzLaurer/mDeBERTa-v3-base-mnli-xnli",
+      "8adb042d524ecd5c26d3e3ba0e3fbcf7e2d0864c"
+    ],
+    "minilm": [
+      "MoritzLaurer/multilingual-MiniLMv2-L6-mnli-xnli",
+      "0a71e92a985b6e1ad1828cf67ce9c459639c1dca"
+    ]
+  },
+  "results": {
+    "mdeberta": {
+      "en_en": {
+        "correct": 4418,
+        "over_limit": 0,
+        "false_entailment_on_contradiction": 17,
+        "confusion": [
+          {
+            "gold": "contradiction",
+            "predicted": "contradiction",
+            "cases": 1538
+          },
+          {
+            "gold": "contradiction",
+            "predicted": "entailment",
+            "cases": 17
+          },
+          {
+            "gold": "contradiction",
+            "predicted": "neutral",
+            "cases": 115
+          },
+          {
+            "gold": "entailment",
+            "predicted": "contradiction",
+            "cases": 47
+          },
+          {
+            "gold": "entailment",
+            "predicted": "entailment",
+            "cases": 1437
+          },
+          {
+            "gold": "entailment",
+            "predicted": "neutral",
+            "cases": 186
+          },
+          {
+            "gold": "neutral",
+            "predicted": "contradiction",
+            "cases": 117
+          },
+          {
+            "gold": "neutral",
+            "predicted": "entailment",
+            "cases": 110
+          },
+          {
+            "gold": "neutral",
+            "predicted": "neutral",
+            "cases": 1443
+          }
+        ],
+        "batch_p50_p95_ms": [
+          5.39487786591053,
+          5.657635256648064
+        ],
+        "exact_agreement_with_en_en": 5010
+      },
+      "en_zh": {
+        "correct": 4119,
+        "over_limit": 0,
+        "false_entailment_on_contradiction": 94,
+        "confusion": [
+          {
+            "gold": "contradiction",
+            "predicted": "contradiction",
+            "cases": 1463
+          },
+          {
+            "gold": "contradiction",
+            "predicted": "entailment",
+            "cases": 94
+          },
+          {
+            "gold": "contradiction",
+            "predicted": "neutral",
+            "cases": 113
+          },
+          {
+            "gold": "entailment",
+            "predicted": "contradiction",
+            "cases": 88
+          },
+          {
+            "gold": "entailment",
+            "predicted": "entailment",
+            "cases": 1447
+          },
+          {
+            "gold": "entailment",
+            "predicted": "neutral",
+            "cases": 135
+          },
+          {
+            "gold": "neutral",
+            "predicted": "contradiction",
+            "cases": 160
+          },
+          {
+            "gold": "neutral",
+            "predicted": "entailment",
+            "cases": 301
+          },
+          {
+            "gold": "neutral",
+            "predicted": "neutral",
+            "cases": 1209
+          }
+        ],
+        "batch_p50_p95_ms": [
+          5.223361775279045,
+          5.522945616394281
+        ],
+        "exact_agreement_with_en_en": 4268
+      },
+      "zh_en": {
+        "correct": 4161,
+        "over_limit": 0,
+        "false_entailment_on_contradiction": 51,
+        "confusion": [
+          {
+            "gold": "contradiction",
+            "predicted": "contradiction",
+            "cases": 1432
+          },
+          {
+            "gold": "contradiction",
+            "predicted": "entailment",
+            "cases": 51
+          },
+          {
+            "gold": "contradiction",
+            "predicted": "neutral",
+            "cases": 187
+          },
+          {
+            "gold": "entailment",
+            "predicted": "contradiction",
+            "cases": 71
+          },
+          {
+            "gold": "entailment",
+            "predicted": "entailment",
+            "cases": 1312
+          },
+          {
+            "gold": "entailment",
+            "predicted": "neutral",
+            "cases": 287
+          },
+          {
+            "gold": "neutral",
+            "predicted": "contradiction",
+            "cases": 126
+          },
+          {
+            "gold": "neutral",
+            "predicted": "entailment",
+            "cases": 127
+          },
+          {
+            "gold": "neutral",
+            "predicted": "neutral",
+            "cases": 1417
+          }
+        ],
+        "batch_p50_p95_ms": [
+          5.136553198099136,
+          5.426650866866112
+        ],
+        "exact_agreement_with_en_en": 4401
+      },
+      "zh_zh": {
+        "correct": 4061,
+        "over_limit": 0,
+        "false_entailment_on_contradiction": 87,
+        "confusion": [
+          {
+            "gold": "contradiction",
+            "predicted": "contradiction",
+            "cases": 1411
+          },
+          {
+            "gold": "contradiction",
+            "predicted": "entailment",
+            "cases": 87
+          },
+          {
+            "gold": "contradiction",
+            "predicted": "neutral",
+            "cases": 172
+          },
+          {
+            "gold": "entailment",
+            "predicted": "contradiction",
+            "cases": 92
+          },
+          {
+            "gold": "entailment",
+            "predicted": "entailment",
+            "cases": 1381
+          },
+          {
+            "gold": "entailment",
+            "predicted": "neutral",
+            "cases": 197
+          },
+          {
+            "gold": "neutral",
+            "predicted": "contradiction",
+            "cases": 156
+          },
+          {
+            "gold": "neutral",
+            "predicted": "entailment",
+            "cases": 245
+          },
+          {
+            "gold": "neutral",
+            "predicted": "neutral",
+            "cases": 1269
+          }
+        ],
+        "batch_p50_p95_ms": [
+          5.020443350076675,
+          5.238177627325058
+        ],
+        "exact_agreement_with_en_en": 4181
+      }
+    },
+    "minilm": {
+      "en_en": {
+        "correct": 3953,
+        "over_limit": 0,
+        "false_entailment_on_contradiction": 61,
+        "confusion": [
+          {
+            "gold": "contradiction",
+            "predicted": "contradiction",
+            "cases": 1389
+          },
+          {
+            "gold": "contradiction",
+            "predicted": "entailment",
+            "cases": 61
+          },
+          {
+            "gold": "contradiction",
+            "predicted": "neutral",
+            "cases": 220
+          },
+          {
+            "gold": "entailment",
+            "predicted": "contradiction",
+            "cases": 172
+          },
+          {
+            "gold": "entailment",
+            "predicted": "entailment",
+            "cases": 1236
+          },
+          {
+            "gold": "entailment",
+            "predicted": "neutral",
+            "cases": 262
+          },
+          {
+            "gold": "neutral",
+            "predicted": "contradiction",
+            "cases": 207
+          },
+          {
+            "gold": "neutral",
+            "predicted": "entailment",
+            "cases": 135
+          },
+          {
+            "gold": "neutral",
+            "predicted": "neutral",
+            "cases": 1328
+          }
+        ],
+        "batch_p50_p95_ms": [
+          2.2586341947317123,
+          2.488898951560259
+        ],
+        "exact_agreement_with_en_en": 5010
+      },
+      "en_zh": {
+        "correct": 3454,
+        "over_limit": 0,
+        "false_entailment_on_contradiction": 160,
+        "confusion": [
+          {
+            "gold": "contradiction",
+            "predicted": "contradiction",
+            "cases": 1240
+          },
+          {
+            "gold": "contradiction",
+            "predicted": "entailment",
+            "cases": 160
+          },
+          {
+            "gold": "contradiction",
+            "predicted": "neutral",
+            "cases": 270
+          },
+          {
+            "gold": "entailment",
+            "predicted": "contradiction",
+            "cases": 298
+          },
+          {
+            "gold": "entailment",
+            "predicted": "entailment",
+            "cases": 1048
+          },
+          {
+            "gold": "entailment",
+            "predicted": "neutral",
+            "cases": 324
+          },
+          {
+            "gold": "neutral",
+            "predicted": "contradiction",
+            "cases": 275
+          },
+          {
+            "gold": "neutral",
+            "predicted": "entailment",
+            "cases": 229
+          },
+          {
+            "gold": "neutral",
+            "predicted": "neutral",
+            "cases": 1166
+          }
+        ],
+        "batch_p50_p95_ms": [
+          2.1554259583353996,
+          2.4026137776672836
+        ],
+        "exact_agreement_with_en_en": 3672
+      },
+      "zh_en": {
+        "correct": 3581,
+        "over_limit": 0,
+        "false_entailment_on_contradiction": 245,
+        "confusion": [
+          {
+            "gold": "contradiction",
+            "predicted": "contradiction",
+            "cases": 1227
+          },
+          {
+            "gold": "contradiction",
+            "predicted": "entailment",
+            "cases": 245
+          },
+          {
+            "gold": "contradiction",
+            "predicted": "neutral",
+            "cases": 198
+          },
+          {
+            "gold": "entailment",
+            "predicted": "contradiction",
+            "cases": 162
+          },
+          {
+            "gold": "entailment",
+            "predicted": "entailment",
+            "cases": 1283
+          },
+          {
+            "gold": "entailment",
+            "predicted": "neutral",
+            "cases": 225
+          },
+          {
+            "gold": "neutral",
+            "predicted": "contradiction",
+            "cases": 199
+          },
+          {
+            "gold": "neutral",
+            "predicted": "entailment",
+            "cases": 400
+          },
+          {
+            "gold": "neutral",
+            "predicted": "neutral",
+            "cases": 1071
+          }
+        ],
+        "batch_p50_p95_ms": [
+          2.0563220605254173,
+          2.2627445869147778
+        ],
+        "exact_agreement_with_en_en": 3822
+      },
+      "zh_zh": {
+        "correct": 3623,
+        "over_limit": 0,
+        "false_entailment_on_contradiction": 175,
+        "confusion": [
+          {
+            "gold": "contradiction",
+            "predicted": "contradiction",
+            "cases": 1226
+          },
+          {
+            "gold": "contradiction",
+            "predicted": "entailment",
+            "cases": 175
+          },
+          {
+            "gold": "contradiction",
+            "predicted": "neutral",
+            "cases": 269
+          },
+          {
+            "gold": "entailment",
+            "predicted": "contradiction",
+            "cases": 170
+          },
+          {
+            "gold": "entailment",
+            "predicted": "entailment",
+            "cases": 1230
+          },
+          {
+            "gold": "entailment",
+            "predicted": "neutral",
+            "cases": 270
+          },
+          {
+            "gold": "neutral",
+            "predicted": "contradiction",
+            "cases": 246
+          },
+          {
+            "gold": "neutral",
+            "predicted": "entailment",
+            "cases": 257
+          },
+          {
+            "gold": "neutral",
+            "predicted": "neutral",
+            "cases": 1167
+          }
+        ],
+        "batch_p50_p95_ms": [
+          1.9481563940644264,
+          2.1068764850497246
+        ],
+        "exact_agreement_with_en_en": 3779
+      }
+    }
+  }
+}

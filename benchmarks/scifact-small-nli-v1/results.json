@@ -1,0 +1,252 @@
+{
+  "job": "41204",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "archive_sha256": "11c621288d41ac144d29b13b0f8503b3820b7d6e8b1f6ff24dff335c196d76be",
+  "script_sha256": "7f13cc5f7f4bf4f0380a19be8c20fdc9cd9d1045574186b68a475d7d57af01e6",
+  "max_tokens": 512,
+  "calibration_cases": 309,
+  "evaluation_cases": 226,
+  "threshold_cap": 0.05,
+  "report": {
+    "mdeberta": {
+      "repo": "MoritzLaurer/mDeBERTa-v3-base-mnli-xnli",
+      "revision": "8adb042d524ecd5c26d3e3ba0e3fbcf7e2d0864c",
+      "threshold": 1.55078125,
+      "calibration_no_truncation": {
+        "support": {
+          "cases": 122,
+          "predicted_support": 26
+        },
+        "contradict": {
+          "cases": 32,
+          "predicted_support": 1
+        },
+        "unknown": {
+          "cases": 108,
+          "predicted_support": 3
+        }
+      },
+      "evaluation": {
+        "raw_support": {
+          "support": {
+            "cases": 97,
+            "predicted_support": 38
+          },
+          "contradict": {
+            "cases": 47,
+            "predicted_support": 3
+          },
+          "unknown": {
+            "cases": 82,
+            "predicted_support": 7
+          }
+        },
+        "calibrated_support": {
+          "support": {
+            "cases": 97,
+            "predicted_support": 23
+          },
+          "contradict": {
+            "cases": 47,
+            "predicted_support": 0
+          },
+          "unknown": {
+            "cases": 82,
+            "predicted_support": 0
+          }
+        },
+        "skipped": {
+          "support": 18,
+          "unknown": 8,
+          "contradict": 8
+        },
+        "confusion": [
+          {
+            "gold": "contradict",
+            "predicted": "contradiction",
+            "cases": 16
+          },
+          {
+            "gold": "contradict",
+            "predicted": "entailment",
+            "cases": 3
+          },
+          {
+            "gold": "contradict",
+            "predicted": "neutral",
+            "cases": 20
+          },
+          {
+            "gold": "contradict",
+            "predicted": "over_limit",
+            "cases": 8
+          },
+          {
+            "gold": "support",
+            "predicted": "contradiction",
+            "cases": 3
+          },
+          {
+            "gold": "support",
+            "predicted": "entailment",
+            "cases": 38
+          },
+          {
+            "gold": "support",
+            "predicted": "neutral",
+            "cases": 38
+          },
+          {
+            "gold": "support",
+            "predicted": "over_limit",
+            "cases": 18
+          },
+          {
+            "gold": "unknown",
+            "predicted": "contradiction",
+            "cases": 9
+          },
+          {
+            "gold": "unknown",
+            "predicted": "entailment",
+            "cases": 7
+          },
+          {
+            "gold": "unknown",
+            "predicted": "neutral",
+            "cases": 58
+          },
+          {
+            "gold": "unknown",
+            "predicted": "over_limit",
+            "cases": 8
+          }
+        ]
+      },
+      "evaluation_batch_p50_p95_ms": [
+        35.532308742403984,
+        41.00505653768778
+      ]
+    },
+    "minilm": {
+      "repo": "MoritzLaurer/multilingual-MiniLMv2-L6-mnli-xnli",
+      "revision": "0a71e92a985b6e1ad1828cf67ce9c459639c1dca",
+      "threshold": 1.223541259765625,
+      "calibration_no_truncation": {
+        "support": {
+          "cases": 124,
+          "predicted_support": 21
+        },
+        "contradict": {
+          "cases": 33,
+          "predicted_support": 1
+        },
+        "unknown": {
+          "cases": 110,
+          "predicted_support": 1
+        }
+      },
+      "evaluation": {
+        "raw_support": {
+          "support": {
+            "cases": 97,
+            "predicted_support": 41
+          },
+          "contradict": {
+            "cases": 47,
+            "predicted_support": 14
+          },
+          "unknown": {
+            "cases": 82,
+            "predicted_support": 14
+          }
+        },
+        "calibrated_support": {
+          "support": {
+            "cases": 97,
+            "predicted_support": 8
+          },
+          "contradict": {
+            "cases": 47,
+            "predicted_support": 2
+          },
+          "unknown": {
+            "cases": 82,
+            "predicted_support": 3
+          }
+        },
+        "skipped": {
+          "support": 14,
+          "unknown": 8,
+          "contradict": 7
+        },
+        "confusion": [
+          {
+            "gold": "contradict",
+            "predicted": "contradiction",
+            "cases": 9
+          },
+          {
+            "gold": "contradict",
+            "predicted": "entailment",
+            "cases": 14
+          },
+          {
+            "gold": "contradict",
+            "predicted": "neutral",
+            "cases": 17
+          },
+          {
+            "gold": "contradict",
+            "predicted": "over_limit",
+            "cases": 7
+          },
+          {
+            "gold": "support",
+            "predicted": "contradiction",
+            "cases": 18
+          },
+          {
+            "gold": "support",
+            "predicted": "entailment",
+            "cases": 41
+          },
+          {
+            "gold": "support",
+            "predicted": "neutral",
+            "cases": 24
+          },
+          {
+            "gold": "support",
+            "predicted": "over_limit",
+            "cases": 14
+          },
+          {
+            "gold": "unknown",
+            "predicted": "contradiction",
+            "cases": 18
+          },
+          {
+            "gold": "unknown",
+            "predicted": "entailment",
+            "cases": 14
+          },
+          {
+            "gold": "unknown",
+            "predicted": "neutral",
+            "cases": 42
+          },
+          {
+            "gold": "unknown",
+            "predicted": "over_limit",
+            "cases": 8
+          }
+        ]
+      },
+      "evaluation_batch_p50_p95_ms": [
+        9.021051228046417,
+        9.643763676285744
+      ]
+    }
+  }
+}
