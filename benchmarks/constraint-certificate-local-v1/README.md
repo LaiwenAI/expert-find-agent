@@ -41,6 +41,21 @@ Counts sum 20 seeded pools per condition. Mean time is controller-only on ws6 wi
 
 Necessary probing for ranked expensive predicates is established prior work. This test adds an explicitly ordered citation obligation and a read that can jointly reveal several criteria for an expert. The hindsight bound holds for a fixed indexed pool and stable Boolean observations. [SIGMOD 2002: Minimal Probing](https://doi.org/10.1145/564691.564731) · [SODA 2014: Stochastic Boolean Function Evaluation](https://doi.org/10.1137/1.9781611973402.107)
 
+## Live open-model control
+
+The same scoped PLOS declarations drive 108 held-out three-role tasks with Top-3 and cross-publication witnesses. The RTX 4090 runs the frozen Qwen3-Reranker-0.6B on each source-criterion pair. We compare two claim placements with the same source content. All timings start with a fixed in-memory candidate pool and exclude retrieval, indexing and service overhead.
+
+| Claim placement and schedule | Exact expert order and citations / 108 | Unsupported expert-citation outputs / returned | Mean GPU calls | P95 |
+| --- | ---: | ---: | ---: | ---: |
+| Structured role lookup | 108 | 0 / 78 | 0 | 0.03 ms |
+| Claim in document, full batch | 18 | 141 / 216 | 1.00 | 19.85 ms |
+| Claim in query, full batch | 38 | 95 / 171 | 1.00 | 19.81 ms |
+| Claim in query, shortest-first serial | 36 | 97 / 173 | 2.44 | 59.66 ms |
+| Claim in query, refutation-first serial | 36 | 97 / 173 | 2.44 | 59.64 ms |
+| Claim in query, prefetch four sources | 38 | 95 / 171 | 1.00 | 19.84 ms |
+
+Full batch scored all 792 pairs in either placement. Shortest-first, refutation-first and prefetch also scored 792. Prefetch collapsed to one model call per request and reproduced the full-batch output on all queries. The serial schedules differed from full batch on two requests under claim-in-query. The role-in-query full batch misclassified 178 of 260 negative criteria at the fixed zero logit-margin threshold, versus 260 of 260 with the claim in the document. A matching controller output still inherits those judgment errors. The typed control is applicable when role declarations are already structured and trusted. [Aggregate live results](live-scheduling-controls.json)
+
 ## Reproduce
 
 ```sh
@@ -48,4 +63,7 @@ PYTHONPATH=src:. python -m experiments.credit.local_constraint_certificate \
   benchmarks/plos-credit-compositional-edits-v1 /path/to/new-results.json
 PYTHONPATH=src:. python -m experiments.credit.constraint_read_lower_bound \
   benchmarks/plos-credit-compositional-edits-v1 /path/to/new-lower-bound.json --stress
+PYTHONPATH=src:. OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
+  python -m experiments.credit.live_constraint_dispatch \
+  benchmarks/plos-credit-compositional-edits-v1 QWEN_RERANKER_CHECKPOINT NEW_LIVE_RESULTS
 ```

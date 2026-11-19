@@ -37,12 +37,15 @@ class Reranker:
             raise ValueError("Expected distinct single-token yes/no answers")
         self.labels = [ids[0] for ids in labels]
 
-    @torch.inference_mode()
     def score(self, query, docs, pool, *, task=TASK):
+        return self.score_pairs([(query, docs[doc]) for doc in pool], task=task)
+
+    @torch.inference_mode()
+    def score_pairs(self, pairs, *, task=TASK):
         sequences = []
         truncated = 0
-        for doc in pool:
-            body = self.tokenizer.encode(f"<Instruct>: {task}\n<Query>: {query}\n<Document>: {docs[doc]}",
+        for query, document in pairs:
+            body = self.tokenizer.encode(f"<Instruct>: {task}\n<Query>: {query}\n<Document>: {document}",
                                          add_special_tokens=False)
             packed, raw = pack_tokens(self.prefix, body, self.suffix, 1024)
             sequences.append(dict(input_ids=packed))
