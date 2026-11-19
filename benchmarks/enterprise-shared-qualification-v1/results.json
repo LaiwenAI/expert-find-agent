@@ -1,0 +1,190 @@
+{
+  "job": "43289",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "queries": 80,
+  "code_sha256": "77e2001a99e97d4e2bd7f87a8fd107aa5a33cc1e93a06f1fa3238b760f430cca",
+  "queries_sha256": "30661871ac08a61e7e74d67d75491878c7e4194f217483b60d06426c4b36e4c5",
+  "source_sha256": "c9e8d6e13bb05900427ab1d785d6024256f61e8bb34f220c3816fb79d1921780",
+  "role_windows_sha256": "a96c36183cefa019156a296c7698c195ff25b5d687971b08328357111eb86382",
+  "models": {
+    "encoder": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+    "verifier": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+    "parser": "cdbee75f17c01a7cc42f958dc650907174af0554"
+  },
+  "metrics": {
+    "guarded": {
+      "p50_p95_ms": [
+        177.1139893680811,
+        1067.8627701476212
+      ],
+      "paired_p95_delta_vs_guarded": [
+        0.0,
+        0.0
+      ],
+      "primary_verifier_p95_ms": 114.59010243415833,
+      "changes": {
+        "initial": 0,
+        "extra": 0,
+        "ranked": 0,
+        "decisions": 0,
+        "retrieved": 0,
+        "qualifications": 0,
+        "invoked": 0
+      },
+      "issued": 37,
+      "fallback_guard_reasons": {},
+      "primary": {
+        "logical_pairs": 1280,
+        "logical_tokens": 298626,
+        "packed_batches": 97,
+        "executed_tokens": 385612,
+        "padded_batches": 34,
+        "guard_rechecks": 16
+      },
+      "fallback": {
+        "logical_pairs": 184,
+        "logical_tokens": 33562,
+        "padded_batches": 32,
+        "executed_tokens": 35546,
+        "packed_batches": 14
+      },
+      "original_pairs": 1280,
+      "exact_duplicates": 14,
+      "removed_due_to_objective": 0,
+      "staged": 0,
+      "canonical_rechecks": 0
+    },
+    "shared": {
+      "p50_p95_ms": [
+        177.45315190404654,
+        1073.7872473895545
+      ],
+      "paired_p95_delta_vs_guarded": [
+        -10.339421592652798,
+        6.131881847977638
+      ],
+      "primary_verifier_p95_ms": 117.60651795193549,
+      "changes": {
+        "initial": 0,
+        "extra": 0,
+        "ranked": 0,
+        "decisions": 0,
+        "retrieved": 0,
+        "qualifications": 0,
+        "invoked": 0
+      },
+      "issued": 37,
+      "fallback_guard_reasons": {
+        "sign_or_witness_gap": 1
+      },
+      "primary": {
+        "logical_pairs": 1286,
+        "logical_tokens": 298974,
+        "packed_batches": 97,
+        "executed_tokens": 384916,
+        "padded_batches": 34,
+        "guard_rechecks": 16
+      },
+      "fallback": {
+        "logical_pairs": 184,
+        "logical_tokens": 33562,
+        "padded_batches": 32,
+        "executed_tokens": 35546,
+        "packed_batches": 14
+      },
+      "original_pairs": 1280,
+      "exact_duplicates": 14,
+      "removed_due_to_objective": 0,
+      "staged": 0,
+      "canonical_rechecks": 1
+    },
+    "qualification_first": {
+      "p50_p95_ms": [
+        177.33702901750803,
+        996.7590528540309
+      ],
+      "paired_p95_delta_vs_guarded": [
+        -118.15908383578073,
+        57.94131942093372
+      ],
+      "primary_verifier_p95_ms": 125.96642225980754,
+      "changes": {
+        "initial": 0,
+        "extra": 0,
+        "ranked": 0,
+        "decisions": 3,
+        "retrieved": 0,
+        "qualifications": 0,
+        "invoked": 0
+      },
+      "issued": 37,
+      "fallback_guard_reasons": {
+        "sign_or_witness_gap": 6
+      },
+      "primary": {
+        "logical_pairs": 1079,
+        "logical_tokens": 238544,
+        "packed_batches": 94,
+        "executed_tokens": 324346,
+        "padded_batches": 33,
+        "guard_rechecks": 16
+      },
+      "fallback": {
+        "logical_pairs": 184,
+        "logical_tokens": 33562,
+        "padded_batches": 32,
+        "executed_tokens": 35546,
+        "packed_batches": 14
+      },
+      "original_pairs": 1280,
+      "exact_duplicates": 14,
+      "removed_due_to_objective": 357,
+      "staged": 25,
+      "canonical_rechecks": 6
+    },
+    "automatic": {
+      "p50_p95_ms": [
+        177.84073762595654,
+        996.401627734303
+      ],
+      "paired_p95_delta_vs_guarded": [
+        -120.71270681917667,
+        57.72669054567814
+      ],
+      "primary_verifier_p95_ms": 110.24271743372077,
+      "changes": {
+        "initial": 0,
+        "extra": 0,
+        "ranked": 0,
+        "decisions": 2,
+        "retrieved": 0,
+        "qualifications": 0,
+        "invoked": 0
+      },
+      "issued": 37,
+      "fallback_guard_reasons": {
+        "sign_or_witness_gap": 2
+      },
+      "primary": {
+        "logical_pairs": 1147,
+        "logical_tokens": 259821,
+        "packed_batches": 93,
+        "executed_tokens": 344711,
+        "padded_batches": 30,
+        "guard_rechecks": 16
+      },
+      "fallback": {
+        "logical_pairs": 184,
+        "logical_tokens": 33562,
+        "padded_batches": 32,
+        "executed_tokens": 35546,
+        "packed_batches": 14
+      },
+      "original_pairs": 1280,
+      "exact_duplicates": 14,
+      "removed_due_to_objective": 199,
+      "staged": 7,
+      "canonical_rechecks": 2
+    }
+  }
+}
