@@ -1,0 +1,213 @@
+{
+  "gates": {
+    "cutoff": 0.3342594504356384,
+    "embedding": {
+      "files": {
+        "config.json": "b5bf1f51fc45be473a54718cef92448d90a1be001bf9b9a44b8c7f10a19feaa9",
+        "model.safetensors": "0437e45c94563b09e13cb7a64478fc406947a93cb34a7e05870fc8dcd48e23fd",
+        "tokenizer.json": "def76fb086971c7867b829c23a26261e38d9d74e02139253b38aeb9df8b4b50a",
+        "tokenizer_config.json": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0"
+      },
+      "policy": "Official frozen BF16 weights; no own training or quantization.",
+      "repository": "Qwen/Qwen3-Embedding-0.6B",
+      "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3"
+    },
+    "fitted": {
+      "examples": 84,
+      "feature_seconds": 0.051960957236588,
+      "fit_seconds": 0.3574182288721204,
+      "ridge_penalty": 0.1
+    },
+    "fixture_sha256": "74168d853ad21c795269c904fb7f8081cdf5a3e91ce7385ef8683495fd2ca7d5",
+    "glossary_sha256": "c107b4e780218e58aec4e2a13f2d7072533962a6a73b82d23e4273b43aafd528",
+    "gpu": "NVIDIA GeForce RTX 4090",
+    "job": "40818",
+    "oracle_increment": {
+      "correct_no_match": 15,
+      "supported": 34
+    },
+    "post_run_audit": {
+      "matching_original_query_outcomes": {
+        "entropy": 119,
+        "evidence": 119,
+        "first": 120,
+        "lowest_margin": 119,
+        "none": 120
+      }
+    },
+    "queries": 120,
+    "raw_file_sha256": "4fd33157020fa95aae7f1b6ec5bd92c1038709dd15d94f76f4a9a7201bcbc419",
+    "report": {
+      "entropy": {
+        "correct_no_match": 18,
+        "false_no_match": 0,
+        "mean_files": 12.441666666666666,
+        "p95_machine_ms": 16.10241651069373,
+        "positive": 61,
+        "questions": 89,
+        "supported": 61,
+        "unresolved": 41,
+        "unsupported": 0
+      },
+      "evidence": {
+        "correct_no_match": 18,
+        "false_no_match": 0,
+        "mean_files": 12.408333333333333,
+        "p95_machine_ms": 16.101791220717132,
+        "positive": 62,
+        "questions": 89,
+        "supported": 62,
+        "unresolved": 40,
+        "unsupported": 0
+      },
+      "evidence_gate": {
+        "correct_no_match": 17,
+        "false_no_match": 0,
+        "mean_files": 10.983333333333333,
+        "p95_machine_ms": 16.098270728252828,
+        "positive": 62,
+        "questions": 63,
+        "supported": 62,
+        "unresolved": 41,
+        "unsupported": 0
+      },
+      "first": {
+        "correct_no_match": 18,
+        "false_no_match": 0,
+        "mean_files": 12.275,
+        "p95_machine_ms": 16.105421842075884,
+        "positive": 59,
+        "questions": 89,
+        "supported": 59,
+        "unresolved": 43,
+        "unsupported": 0
+      },
+      "lowest_margin": {
+        "correct_no_match": 18,
+        "false_no_match": 0,
+        "mean_files": 12.408333333333333,
+        "p95_machine_ms": 16.10309793613851,
+        "positive": 62,
+        "questions": 89,
+        "supported": 62,
+        "unresolved": 40,
+        "unsupported": 0
+      },
+      "majority_gate": {
+        "correct_no_match": 17,
+        "false_no_match": 0,
+        "mean_files": 10.933333333333334,
+        "p95_machine_ms": 16.09789899084717,
+        "positive": 62,
+        "questions": 62,
+        "supported": 62,
+        "unresolved": 41,
+        "unsupported": 0
+      },
+      "none": {
+        "correct_no_match": 3,
+        "false_no_match": 0,
+        "mean_files": 6.925,
+        "p95_machine_ms": 16.107224812731147,
+        "positive": 28,
+        "questions": 0,
+        "supported": 28,
+        "unresolved": 89,
+        "unsupported": 0
+      }
+    },
+    "robust_script_sha256": "1751311da5cc73d2f46a221771a7a1432b2b8f3ba70f47790988ce7affaa55f6",
+    "script_sha256": "d4c4fa3283a35fc52e3378d4881f81b138ac8a002afca411d5dba9d47d413cad",
+    "training_sha256": "3365bdd2588d8dfff12de71cf7663808c25689f831a1ba42288a8bb8b53bfdc2"
+  },
+  "initial": {
+    "cutoff": 0.3395301103591919,
+    "embedding": {
+      "files": {
+        "config.json": "b5bf1f51fc45be473a54718cef92448d90a1be001bf9b9a44b8c7f10a19feaa9",
+        "model.safetensors": "0437e45c94563b09e13cb7a64478fc406947a93cb34a7e05870fc8dcd48e23fd",
+        "tokenizer.json": "def76fb086971c7867b829c23a26261e38d9d74e02139253b38aeb9df8b4b50a",
+        "tokenizer_config.json": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0"
+      },
+      "policy": "Official frozen BF16 weights; no own training or quantization.",
+      "repository": "Qwen/Qwen3-Embedding-0.6B",
+      "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3"
+    },
+    "fitted": {
+      "examples": 84,
+      "feature_seconds": 0.04135006107389927,
+      "fit_seconds": 0.05098288133740425,
+      "ridge_penalty": 0.1
+    },
+    "fixture_sha256": "74168d853ad21c795269c904fb7f8081cdf5a3e91ce7385ef8683495fd2ca7d5",
+    "glossary_sha256": "c107b4e780218e58aec4e2a13f2d7072533962a6a73b82d23e4273b43aafd528",
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "job": "40795",
+    "oracle_increment": {
+      "correct_no_match": 15,
+      "supported": 34
+    },
+    "queries": 120,
+    "raw_file_sha256": "2f7727e2f22a9bb84c64f5cdc3c3c0b9c78fa5f8dc3851762ba547e95779d77f",
+    "report": {
+      "entropy": {
+        "correct_no_match": 18,
+        "false_no_match": 0,
+        "mean_files": 12.375,
+        "p95_machine_ms": 8.786533959209919,
+        "positive": 61,
+        "questions": 89,
+        "supported": 61,
+        "unresolved": 41,
+        "unsupported": 0
+      },
+      "evidence": {
+        "correct_no_match": 18,
+        "false_no_match": 0,
+        "mean_files": 12.341666666666667,
+        "p95_machine_ms": 8.81324065849185,
+        "positive": 62,
+        "questions": 89,
+        "supported": 62,
+        "unresolved": 40,
+        "unsupported": 0
+      },
+      "first": {
+        "correct_no_match": 18,
+        "false_no_match": 0,
+        "mean_files": 12.191666666666666,
+        "p95_machine_ms": 8.794603403657675,
+        "positive": 59,
+        "questions": 89,
+        "supported": 59,
+        "unresolved": 43,
+        "unsupported": 0
+      },
+      "lowest_margin": {
+        "correct_no_match": 18,
+        "false_no_match": 0,
+        "mean_files": 12.333333333333334,
+        "p95_machine_ms": 8.788673765957355,
+        "positive": 62,
+        "questions": 89,
+        "supported": 62,
+        "unresolved": 40,
+        "unsupported": 0
+      },
+      "none": {
+        "correct_no_match": 3,
+        "false_no_match": 0,
+        "mean_files": 6.866666666666666,
+        "p95_machine_ms": 8.731517288833857,
+        "positive": 28,
+        "questions": 0,
+        "supported": 28,
+        "unresolved": 89,
+        "unsupported": 0
+      }
+    },
+    "robust_script_sha256": "1751311da5cc73d2f46a221771a7a1432b2b8f3ba70f47790988ce7affaa55f6",
+    "script_sha256": "5d07c77fc6c14900e64f4f7044a5a4ad52aa18890e83009c59e528a850571e1f",
+    "training_sha256": "3365bdd2588d8dfff12de71cf7663808c25689f831a1ba42288a8bb8b53bfdc2"
+  }
+}
