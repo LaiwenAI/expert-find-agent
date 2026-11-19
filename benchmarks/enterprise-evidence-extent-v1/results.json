@@ -1,0 +1,46 @@
+{
+  "job": "41146",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "requests": 25,
+  "corpus_sha256": "c9e8d6e13bb05900427ab1d785d6024256f61e8bb34f220c3816fb79d1921780",
+  "development_sha256": "30661871ac08a61e7e74d67d75491878c7e4194f217483b60d06426c4b36e4c5",
+  "script_sha256": "558047cec5266c5c6943f119f90df18717688a0c5b9b860d86a9ff81e1c76309",
+  "model_revisions": {
+    "embedding": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+    "role_reader": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "verifier": "e61197ed45024b0ed8a2d74b80b4d909f1255473"
+  },
+  "report": {
+    "criterion_slots": 365,
+    "baseline_pairs": 730,
+    "new_complete_experts": 0,
+    "pair_counts": {
+      "deeper_sources": 1839,
+      "later_spans": 212,
+      "interaction": 883
+    },
+    "supported_slots": {
+      "two_openings": 46,
+      "eight_openings": 48,
+      "two_with_later_spans": 52,
+      "eight_with_later_spans": 56
+    },
+    "supported_experts": {
+      "two_openings": 3,
+      "eight_openings": 3,
+      "two_with_later_spans": 3,
+      "eight_with_later_spans": 3
+    },
+    "queries_with_support": {
+      "two_openings": 2,
+      "eight_openings": 2,
+      "two_with_later_spans": 2,
+      "eight_with_later_spans": 2
+    }
+  },
+  "packet_size": 19,
+  "packet_categories": {
+    "added_support": 7,
+    "no_support": 12
+  }
+}
