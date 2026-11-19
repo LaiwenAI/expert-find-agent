@@ -27,9 +27,9 @@ PROMPT = (
 )
 
 
-def corpus(archive):
+def corpus(archive, split="Gold_test"):
     with ZipFile(archive) as bundle:
-        test = json.loads(bundle.read("Complete_dataset/Gold_test.json"))
+        test = json.loads(bundle.read(f"Complete_dataset/{split}.json"))
         cache = {}
         for key, row in sorted(test.items()):
             sources, gold = [], []
@@ -52,7 +52,7 @@ def choice(key, statement, sources, controller, cutoff, arm):
     return select(task, controller, depth, cutoff if arm == "adaptive" else None)
 
 
-def measure(tokenizer, reader, digits, statement, section, sources, selected):
+def label_scores(tokenizer, reader, digits, statement, section, sources, selected, *, prompt=PROMPT):
     import torch
 
     blocks = []
@@ -60,7 +60,7 @@ def measure(tokenizer, reader, digits, statement, section, sources, selected):
         lines_read = "\n".join(lines[index] for index in sorted(indices))
         blocks.append(f"{('Primary', 'Secondary')[side]} trial, {section}:\n{lines_read}")
     messages = [
-        {"role": "system", "content": PROMPT},
+        {"role": "system", "content": prompt},
         {"role": "user", "content": "\n\n".join(blocks) + f"\n\nStatement: {statement}"},
     ]
     model_input = tokenizer.apply_chat_template(messages, tokenize=True, return_dict=True,
@@ -73,6 +73,11 @@ def measure(tokenizer, reader, digits, statement, section, sources, selected):
         values = logits.float().cpu().numpy()
     if not np.isfinite(values).all():
         raise ValueError("Nonfinite label scores")
+    return values, n_tokens
+
+
+def measure(tokenizer, reader, digits, statement, section, sources, selected):
+    values, n_tokens = label_scores(tokenizer, reader, digits, statement, section, sources, selected)
     return int(values[:2].argmax()), int(values.argmax()), n_tokens
 
 

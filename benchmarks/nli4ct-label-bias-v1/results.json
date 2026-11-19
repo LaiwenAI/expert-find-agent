@@ -1,0 +1,319 @@
+{
+  "job": "42014",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "reader_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+  "test_cases": 500,
+  "calibration_cases": 200,
+  "archive_sha256": "dd972c46e69a5bc5e5fb74c2105b5444722d81879ab96b214545b943e4e7ebbe",
+  "frozen_controller_sha256": "935d9eae069df231e55641e36b19508ddc9cedd08dd6400004950a0f61431918",
+  "script_sha256": "dfda9580a376016b1c8b61aecfa1c4eb2d47e686cbfa509232faf9441871c54f",
+  "reader_script_sha256": "adc7530541436a2c8a111b50f99f00c2e23fb3695885da819ee5e6b781d9af58",
+  "report": {
+    "fixed_two": {
+      "correction": -1.040625,
+      "results": {
+        "original": {
+          "correct": 322,
+          "entailment_predictions": 114,
+          "entailment_correct": 93,
+          "contradiction_correct": 229,
+          "changes_vs_original": 0,
+          "mean_margin": -4.659,
+          "accuracy_delta_vs_original": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 500,
+            "clusters": 113,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "connected trial component; query-weighted mean"
+          },
+          "mean_tokens": 376.948,
+          "p95_ms": 40.407649893313646
+        },
+        "swap_tokens": {
+          "correct": 340,
+          "entailment_predictions": 134,
+          "entailment_correct": 112,
+          "contradiction_correct": 228,
+          "changes_vs_original": 96,
+          "mean_margin": -7.1985,
+          "accuracy_delta_vs_original": {
+            "mean": 0.036,
+            "percentile_95": [
+              0.0,
+              0.06912503676831061
+            ],
+            "queries": 500,
+            "clusters": 113,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "connected trial component; query-weighted mean"
+          },
+          "mean_tokens": 376.948,
+          "p95_ms": 40.3969595208764
+        },
+        "swap_order": {
+          "correct": 319,
+          "entailment_predictions": 385,
+          "entailment_correct": 227,
+          "contradiction_correct": 92,
+          "changes_vs_original": 271,
+          "mean_margin": 5.3885,
+          "accuracy_delta_vs_original": {
+            "mean": -0.006,
+            "percentile_95": [
+              -0.0519488555998457,
+              0.03398140809721946
+            ],
+            "queries": 500,
+            "clusters": 113,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "connected trial component; query-weighted mean"
+          },
+          "mean_tokens": 376.948,
+          "p95_ms": 40.25431927293539
+        },
+        "swap_both": {
+          "correct": 354,
+          "entailment_predictions": 234,
+          "entailment_correct": 169,
+          "contradiction_correct": 185,
+          "changes_vs_original": 188,
+          "mean_margin": 0.506,
+          "accuracy_delta_vs_original": {
+            "mean": 0.064,
+            "percentile_95": [
+              0.02499760536398468,
+              0.10085883969580603
+            ],
+            "queries": 500,
+            "clusters": 113,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "connected trial component; query-weighted mean"
+          },
+          "mean_tokens": 376.948,
+          "p95_ms": 40.30227055773138
+        },
+        "single_call_correction": {
+          "correct": 322,
+          "entailment_predictions": 104,
+          "entailment_correct": 88,
+          "contradiction_correct": 234,
+          "changes_vs_original": 10,
+          "mean_margin": -5.699625,
+          "accuracy_delta_vs_original": {
+            "mean": 0.0,
+            "percentile_95": [
+              -0.010917542303493448,
+              0.01327433628318584
+            ],
+            "queries": 500,
+            "clusters": 113,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "connected trial component; query-weighted mean"
+          }
+        },
+        "two_mappings_average": {
+          "correct": 338,
+          "entailment_predictions": 128,
+          "entailment_correct": 108,
+          "contradiction_correct": 230,
+          "changes_vs_original": 76,
+          "mean_margin": -5.92875,
+          "accuracy_delta_vs_original": {
+            "mean": 0.032,
+            "percentile_95": [
+              0.0,
+              0.06444466145833333
+            ],
+            "queries": 500,
+            "clusters": 113,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "connected trial component; query-weighted mean"
+          }
+        },
+        "four_variants_average": {
+          "correct": 363,
+          "entailment_predictions": 177,
+          "entailment_correct": 145,
+          "contradiction_correct": 218,
+          "changes_vs_original": 107,
+          "mean_margin": -1.49075,
+          "accuracy_delta_vs_original": {
+            "mean": 0.082,
+            "percentile_95": [
+              0.04273373983739837,
+              0.11737089201877934
+            ],
+            "queries": 500,
+            "clusters": 113,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "connected trial component; query-weighted mean"
+          }
+        }
+      }
+    },
+    "gold_only": {
+      "correction": -0.66875,
+      "results": {
+        "original": {
+          "correct": 330,
+          "entailment_predictions": 134,
+          "entailment_correct": 107,
+          "contradiction_correct": 223,
+          "changes_vs_original": 0,
+          "mean_margin": -3.84625,
+          "accuracy_delta_vs_original": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 500,
+            "clusters": 113,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "connected trial component; query-weighted mean"
+          },
+          "mean_tokens": 368.658,
+          "p95_ms": 46.94561371579766
+        },
+        "swap_tokens": {
+          "correct": 350,
+          "entailment_predictions": 162,
+          "entailment_correct": 131,
+          "contradiction_correct": 219,
+          "changes_vs_original": 96,
+          "mean_margin": -5.19725,
+          "accuracy_delta_vs_original": {
+            "mean": 0.04,
+            "percentile_95": [
+              0.005570254931273074,
+              0.0708955223880597
+            ],
+            "queries": 500,
+            "clusters": 113,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "connected trial component; query-weighted mean"
+          },
+          "mean_tokens": 368.658,
+          "p95_ms": 47.02931782230735
+        },
+        "swap_order": {
+          "correct": 319,
+          "entailment_predictions": 393,
+          "entailment_correct": 231,
+          "contradiction_correct": 88,
+          "changes_vs_original": 259,
+          "mean_margin": 5.917,
+          "accuracy_delta_vs_original": {
+            "mean": -0.022,
+            "percentile_95": [
+              -0.06512833394227256,
+              0.015555771725032422
+            ],
+            "queries": 500,
+            "clusters": 113,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "connected trial component; query-weighted mean"
+          },
+          "mean_tokens": 368.658,
+          "p95_ms": 47.07840960472822
+        },
+        "swap_both": {
+          "correct": 371,
+          "entailment_predictions": 269,
+          "entailment_correct": 195,
+          "contradiction_correct": 176,
+          "changes_vs_original": 191,
+          "mean_margin": 2.006,
+          "accuracy_delta_vs_original": {
+            "mean": 0.082,
+            "percentile_95": [
+              0.03535204991087344,
+              0.1202291475453874
+            ],
+            "queries": 500,
+            "clusters": 113,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "connected trial component; query-weighted mean"
+          },
+          "mean_tokens": 368.658,
+          "p95_ms": 47.07449832931161
+        },
+        "single_call_correction": {
+          "correct": 330,
+          "entailment_predictions": 126,
+          "entailment_correct": 103,
+          "contradiction_correct": 227,
+          "changes_vs_original": 8,
+          "mean_margin": -4.515000000000001,
+          "accuracy_delta_vs_original": {
+            "mean": 0.0,
+            "percentile_95": [
+              -0.01020408163265306,
+              0.012153836382113805
+            ],
+            "queries": 500,
+            "clusters": 113,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "connected trial component; query-weighted mean"
+          }
+        },
+        "two_mappings_average": {
+          "correct": 355,
+          "entailment_predictions": 159,
+          "entailment_correct": 132,
+          "contradiction_correct": 223,
+          "changes_vs_original": 77,
+          "mean_margin": -4.52175,
+          "accuracy_delta_vs_original": {
+            "mean": 0.05,
+            "percentile_95": [
+              0.020658326729310544,
+              0.07974200825171071
+            ],
+            "queries": 500,
+            "clusters": 113,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "connected trial component; query-weighted mean"
+          }
+        },
+        "four_variants_average": {
+          "correct": 370,
+          "entailment_predictions": 206,
+          "entailment_correct": 163,
+          "contradiction_correct": 207,
+          "changes_vs_original": 110,
+          "mean_margin": -0.280125,
+          "accuracy_delta_vs_original": {
+            "mean": 0.08,
+            "percentile_95": [
+              0.03909004659653169,
+              0.1145043498656659
+            ],
+            "queries": 500,
+            "clusters": 113,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "connected trial component; query-weighted mean"
+          }
+        }
+      }
+    }
+  }
+}
