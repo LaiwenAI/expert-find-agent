@@ -1,0 +1,851 @@
+{
+  "job": "42867",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "queries": 72,
+  "author_groups": 70,
+  "sources": 197,
+  "omissions": {
+    "calibration": 6,
+    "test": 10,
+    "plos-independent-cascade-v1": 17,
+    "ineligible_new_source": 15,
+    "ineligible_new_query": 12
+  },
+  "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "capture_sha256": "8ca06e7a41c74a1e65f89e45ec3008214cb6a80e0cecb56cb595cacb84f364ff",
+  "code_sha256": "6d505f56a3f09e6f1fb82ae984fad79361d1ac8838f3de4dd398cf3ea7d412de",
+  "results": {
+    "result": {
+      "correct_nominations": {
+        "present": 70,
+        "withheld": 0
+      },
+      "panels": {
+        "present/supported": {
+          "forced/none": {
+            "clean": 56,
+            "returned": 71,
+            "wrong_source": 1,
+            "wrong_role": 14,
+            "wrong_author": 0,
+            "component_p95_ms": 15.083050262182951,
+            "clean_delta_vs_forced": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "relative/body": {
+            "clean": 4,
+            "returned": 4,
+            "wrong_source": 0,
+            "wrong_role": 0,
+            "wrong_author": 0,
+            "component_p95_ms": 15.313964430242777,
+            "clean_delta_vs_forced": {
+              "mean": -0.7222222222222222,
+              "percentile_95": [
+                -0.821917808219178,
+                -0.6197183098591549
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "outside_contrast/body": {
+            "clean": 9,
+            "returned": 9,
+            "wrong_source": 0,
+            "wrong_role": 0,
+            "wrong_author": 0,
+            "component_p95_ms": 15.313212294131517,
+            "clean_delta_vs_forced": {
+              "mean": -0.6527777777777778,
+              "percentile_95": [
+                -0.7638888888888888,
+                -0.5416666666666666
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "definition_contrast/body": {
+            "clean": 18,
+            "returned": 31,
+            "wrong_source": 0,
+            "wrong_role": 13,
+            "wrong_author": 0,
+            "component_p95_ms": 15.31344261020422,
+            "clean_delta_vs_forced": {
+              "mean": -0.5277777777777778,
+              "percentile_95": [
+                -0.6438356164383562,
+                -0.4166666666666667
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "definition_contrast/none": {
+            "clean": 19,
+            "returned": 34,
+            "wrong_source": 1,
+            "wrong_role": 14,
+            "wrong_author": 0,
+            "component_p95_ms": 15.080430824309587,
+            "clean_delta_vs_forced": {
+              "mean": -0.5138888888888888,
+              "percentile_95": [
+                -0.6301369863013698,
+                -0.4
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          }
+        },
+        "present/unsupported": {
+          "forced/none": {
+            "clean": 0,
+            "returned": 66,
+            "wrong_source": 1,
+            "wrong_role": 65,
+            "wrong_author": 0,
+            "component_p95_ms": 15.008822828531265,
+            "clean_delta_vs_forced": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "relative/body": {
+            "clean": 0,
+            "returned": 1,
+            "wrong_source": 0,
+            "wrong_role": 1,
+            "wrong_author": 0,
+            "component_p95_ms": 15.216429810971022,
+            "clean_delta_vs_forced": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "outside_contrast/body": {
+            "clean": 0,
+            "returned": 0,
+            "wrong_source": 0,
+            "wrong_role": 0,
+            "wrong_author": 0,
+            "component_p95_ms": 15.216257143765688,
+            "clean_delta_vs_forced": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "definition_contrast/body": {
+            "clean": 0,
+            "returned": 0,
+            "wrong_source": 0,
+            "wrong_role": 0,
+            "wrong_author": 0,
+            "component_p95_ms": 15.216202847659588,
+            "clean_delta_vs_forced": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "definition_contrast/none": {
+            "clean": 0,
+            "returned": 0,
+            "wrong_source": 0,
+            "wrong_role": 0,
+            "wrong_author": 0,
+            "component_p95_ms": 15.007887315005064,
+            "clean_delta_vs_forced": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          }
+        },
+        "withheld/supported": {
+          "forced/none": {
+            "clean": 0,
+            "returned": 56,
+            "wrong_source": 56,
+            "wrong_role": 0,
+            "wrong_author": 0,
+            "component_p95_ms": 15.00641219317913,
+            "clean_delta_vs_forced": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "relative/body": {
+            "clean": 0,
+            "returned": 0,
+            "wrong_source": 0,
+            "wrong_role": 0,
+            "wrong_author": 0,
+            "component_p95_ms": 15.269278082996607,
+            "clean_delta_vs_forced": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "outside_contrast/body": {
+            "clean": 0,
+            "returned": 0,
+            "wrong_source": 0,
+            "wrong_role": 0,
+            "wrong_author": 0,
+            "component_p95_ms": 15.268626902252436,
+            "clean_delta_vs_forced": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "definition_contrast/body": {
+            "clean": 0,
+            "returned": 0,
+            "wrong_source": 0,
+            "wrong_role": 0,
+            "wrong_author": 0,
+            "component_p95_ms": 15.268650464713573,
+            "clean_delta_vs_forced": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "definition_contrast/none": {
+            "clean": 0,
+            "returned": 29,
+            "wrong_source": 29,
+            "wrong_role": 0,
+            "wrong_author": 0,
+            "component_p95_ms": 15.00302255153656,
+            "clean_delta_vs_forced": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          }
+        },
+        "withheld/unsupported": {
+          "forced/none": {
+            "clean": 0,
+            "returned": 56,
+            "wrong_source": 56,
+            "wrong_role": 0,
+            "wrong_author": 0,
+            "component_p95_ms": 14.920993708074093,
+            "clean_delta_vs_forced": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "relative/body": {
+            "clean": 0,
+            "returned": 0,
+            "wrong_source": 0,
+            "wrong_role": 0,
+            "wrong_author": 0,
+            "component_p95_ms": 15.153680182993412,
+            "clean_delta_vs_forced": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "outside_contrast/body": {
+            "clean": 0,
+            "returned": 0,
+            "wrong_source": 0,
+            "wrong_role": 0,
+            "wrong_author": 0,
+            "component_p95_ms": 15.15355920419097,
+            "clean_delta_vs_forced": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "definition_contrast/body": {
+            "clean": 0,
+            "returned": 0,
+            "wrong_source": 0,
+            "wrong_role": 0,
+            "wrong_author": 0,
+            "component_p95_ms": 15.153512079268694,
+            "clean_delta_vs_forced": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "definition_contrast/none": {
+            "clean": 0,
+            "returned": 0,
+            "wrong_source": 0,
+            "wrong_role": 0,
+            "wrong_author": 0,
+            "component_p95_ms": 14.920215867459774,
+            "clean_delta_vs_forced": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          }
+        }
+      }
+    },
+    "keywords": {
+      "correct_nominations": {
+        "present": 57,
+        "withheld": 0
+      },
+      "panels": {
+        "present/supported": {
+          "forced/none": {
+            "clean": 47,
+            "returned": 68,
+            "wrong_source": 11,
+            "wrong_role": 10,
+            "wrong_author": 0,
+            "component_p95_ms": 14.499422255903482,
+            "clean_delta_vs_forced": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "relative/body": {
+            "clean": 3,
+            "returned": 3,
+            "wrong_source": 0,
+            "wrong_role": 0,
+            "wrong_author": 0,
+            "component_p95_ms": 14.536967407912016,
+            "clean_delta_vs_forced": {
+              "mean": -0.6111111111111112,
+              "percentile_95": [
+                -0.7222222222222222,
+                -0.5
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "outside_contrast/body": {
+            "clean": 5,
+            "returned": 5,
+            "wrong_source": 0,
+            "wrong_role": 0,
+            "wrong_author": 0,
+            "component_p95_ms": 14.536213595420122,
+            "clean_delta_vs_forced": {
+              "mean": -0.5833333333333334,
+              "percentile_95": [
+                -0.6986301369863014,
+                -0.4657534246575342
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "definition_contrast/body": {
+            "clean": 14,
+            "returned": 24,
+            "wrong_source": 1,
+            "wrong_role": 9,
+            "wrong_author": 0,
+            "component_p95_ms": 14.536293596029282,
+            "clean_delta_vs_forced": {
+              "mean": -0.4583333333333333,
+              "percentile_95": [
+                -0.5753424657534246,
+                -0.34285714285714286
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "definition_contrast/none": {
+            "clean": 17,
+            "returned": 33,
+            "wrong_source": 6,
+            "wrong_role": 10,
+            "wrong_author": 0,
+            "component_p95_ms": 14.496457111090422,
+            "clean_delta_vs_forced": {
+              "mean": -0.4166666666666667,
+              "percentile_95": [
+                -0.5342465753424658,
+                -0.3055555555555556
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          }
+        },
+        "present/unsupported": {
+          "forced/none": {
+            "clean": 0,
+            "returned": 63,
+            "wrong_source": 11,
+            "wrong_role": 52,
+            "wrong_author": 0,
+            "component_p95_ms": 14.484138134866953,
+            "clean_delta_vs_forced": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "relative/body": {
+            "clean": 0,
+            "returned": 1,
+            "wrong_source": 0,
+            "wrong_role": 1,
+            "wrong_author": 0,
+            "component_p95_ms": 14.52921126037836,
+            "clean_delta_vs_forced": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "outside_contrast/body": {
+            "clean": 0,
+            "returned": 0,
+            "wrong_source": 0,
+            "wrong_role": 0,
+            "wrong_author": 0,
+            "component_p95_ms": 14.528929069638252,
+            "clean_delta_vs_forced": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "definition_contrast/body": {
+            "clean": 0,
+            "returned": 0,
+            "wrong_source": 0,
+            "wrong_role": 0,
+            "wrong_author": 0,
+            "component_p95_ms": 14.52886639162898,
+            "clean_delta_vs_forced": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "definition_contrast/none": {
+            "clean": 0,
+            "returned": 0,
+            "wrong_source": 0,
+            "wrong_role": 0,
+            "wrong_author": 0,
+            "component_p95_ms": 14.483445975929499,
+            "clean_delta_vs_forced": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          }
+        },
+        "withheld/supported": {
+          "forced/none": {
+            "clean": 0,
+            "returned": 48,
+            "wrong_source": 48,
+            "wrong_role": 0,
+            "wrong_author": 0,
+            "component_p95_ms": 14.496857859194279,
+            "clean_delta_vs_forced": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "relative/body": {
+            "clean": 0,
+            "returned": 0,
+            "wrong_source": 0,
+            "wrong_role": 0,
+            "wrong_author": 0,
+            "component_p95_ms": 14.55154586583376,
+            "clean_delta_vs_forced": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "outside_contrast/body": {
+            "clean": 0,
+            "returned": 1,
+            "wrong_source": 1,
+            "wrong_role": 0,
+            "wrong_author": 0,
+            "component_p95_ms": 14.550987631082535,
+            "clean_delta_vs_forced": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "definition_contrast/body": {
+            "clean": 0,
+            "returned": 2,
+            "wrong_source": 2,
+            "wrong_role": 0,
+            "wrong_author": 0,
+            "component_p95_ms": 14.550847839564085,
+            "clean_delta_vs_forced": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "definition_contrast/none": {
+            "clean": 0,
+            "returned": 24,
+            "wrong_source": 24,
+            "wrong_role": 0,
+            "wrong_author": 0,
+            "component_p95_ms": 14.494812581688166,
+            "clean_delta_vs_forced": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          }
+        },
+        "withheld/unsupported": {
+          "forced/none": {
+            "clean": 0,
+            "returned": 46,
+            "wrong_source": 46,
+            "wrong_role": 0,
+            "wrong_author": 0,
+            "component_p95_ms": 14.467715565115213,
+            "clean_delta_vs_forced": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "relative/body": {
+            "clean": 0,
+            "returned": 0,
+            "wrong_source": 0,
+            "wrong_role": 0,
+            "wrong_author": 0,
+            "component_p95_ms": 14.523572847247124,
+            "clean_delta_vs_forced": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "outside_contrast/body": {
+            "clean": 0,
+            "returned": 0,
+            "wrong_source": 0,
+            "wrong_role": 0,
+            "wrong_author": 0,
+            "component_p95_ms": 14.523400273174047,
+            "clean_delta_vs_forced": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "definition_contrast/body": {
+            "clean": 0,
+            "returned": 0,
+            "wrong_source": 0,
+            "wrong_role": 0,
+            "wrong_author": 0,
+            "component_p95_ms": 14.523406326770782,
+            "clean_delta_vs_forced": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "definition_contrast/none": {
+            "clean": 0,
+            "returned": 0,
+            "wrong_source": 0,
+            "wrong_role": 0,
+            "wrong_author": 0,
+            "component_p95_ms": 14.46716245263815,
+            "clean_delta_vs_forced": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 72,
+              "clusters": 70,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          }
+        }
+      }
+    }
+  }
+}
