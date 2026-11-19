@@ -1,0 +1,131 @@
+{
+  "review_cases": 80,
+  "case_status": {
+    "supported": 0,
+    "unresolved": 80,
+    "adverse": 0
+  },
+  "diagnostic_strata": {
+    "all": {
+      "queries": 80,
+      "reference": {
+        "confirmed": 0,
+        "unresolved": 73,
+        "slots": 400,
+        "lower": 0.0,
+        "upper": 0.1825
+      },
+      "criterion": {
+        "confirmed": 0,
+        "unresolved": 73,
+        "slots": 400,
+        "lower": 0.0,
+        "upper": 0.1825
+      },
+      "unresolved_nonshared_views": 58,
+      "paired": {
+        "shared_views": 44,
+        "hit_delta": {
+          "lower": -0.0725,
+          "upper": 0.0725
+        },
+        "adverse_group_rate_delta": {
+          "lower": -0.1875,
+          "upper": 0.2
+        },
+        "scope": "Primary minus reference. Hit denominator is all frozen Top-K slots. Risk denominator is all frozen groups, including abstentions and failures. Bounds describe unresolved labels on this panel and are distinct from sampling confidence intervals."
+      }
+    },
+    "changed": {
+      "queries": 18,
+      "reference": {
+        "confirmed": 0,
+        "unresolved": 46,
+        "slots": 90,
+        "lower": 0.0,
+        "upper": 0.5111111111111111
+      },
+      "criterion": {
+        "confirmed": 0,
+        "unresolved": 46,
+        "slots": 90,
+        "lower": 0.0,
+        "upper": 0.5111111111111111
+      },
+      "unresolved_nonshared_views": 58,
+      "paired": {
+        "shared_views": 17,
+        "hit_delta": {
+          "lower": -0.32222222222222224,
+          "upper": 0.32222222222222224
+        },
+        "adverse_group_rate_delta": {
+          "lower": -0.8333333333333334,
+          "upper": 0.8888888888888888
+        },
+        "scope": "Primary minus reference. Hit denominator is all frozen Top-K slots. Risk denominator is all frozen groups, including abstentions and failures. Bounds describe unresolved labels on this panel and are distinct from sampling confidence intervals."
+      }
+    },
+    "people_or_order": {
+      "queries": 7,
+      "reference": {
+        "confirmed": 0,
+        "unresolved": 17,
+        "slots": 35,
+        "lower": 0.0,
+        "upper": 0.4857142857142857
+      },
+      "criterion": {
+        "confirmed": 0,
+        "unresolved": 17,
+        "slots": 35,
+        "lower": 0.0,
+        "upper": 0.4857142857142857
+      },
+      "unresolved_nonshared_views": 18,
+      "paired": {
+        "shared_views": 8,
+        "hit_delta": {
+          "lower": -0.2571428571428571,
+          "upper": 0.2571428571428571
+        },
+        "adverse_group_rate_delta": {
+          "lower": -0.5714285714285714,
+          "upper": 0.7142857142857143
+        },
+        "scope": "Primary minus reference. Hit denominator is all frozen Top-K slots. Risk denominator is all frozen groups, including abstentions and failures. Bounds describe unresolved labels on this panel and are distinct from sampling confidence intervals."
+      }
+    },
+    "evidence_only": {
+      "queries": 11,
+      "reference": {
+        "confirmed": 0,
+        "unresolved": 29,
+        "slots": 55,
+        "lower": 0.0,
+        "upper": 0.5272727272727272
+      },
+      "criterion": {
+        "confirmed": 0,
+        "unresolved": 29,
+        "slots": 55,
+        "lower": 0.0,
+        "upper": 0.5272727272727272
+      },
+      "unresolved_nonshared_views": 40,
+      "paired": {
+        "shared_views": 9,
+        "hit_delta": {
+          "lower": -0.36363636363636365,
+          "upper": 0.36363636363636365
+        },
+        "adverse_group_rate_delta": {
+          "lower": -1.0,
+          "upper": 1.0
+        },
+        "scope": "Primary minus reference. Hit denominator is all frozen Top-K slots. Risk denominator is all frozen groups, including abstentions and failures. Bounds describe unresolved labels on this panel and are distinct from sampling confidence intervals."
+      }
+    }
+  },
+  "scope": "Finite development workload. Person, request and exact evidence coordinates share labels. All three evidence fields must be supported. Unresolved labels are bounded, not imputed. The calculation does not give a sampling confidence interval or validate production precision."
+}

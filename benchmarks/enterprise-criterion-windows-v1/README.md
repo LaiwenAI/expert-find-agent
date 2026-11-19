@@ -96,6 +96,36 @@ any labeled field. The existing reconciliation tool preserves
 disagreements and unresolved fields for adjudication. Keep all
 private files local and share aggregate counts only.
 
+### Paired bounds before annotation
+
+Score the complete 80-request development replay with five
+recommendation slots per request. A hit requires a positive
+review of method fit, constraint support and personal
+contribution for the displayed view. Empty slots contribute
+zero. Identical views for the same request and expert cancel
+between policies, even when a shared view has not been
+reviewed. Different citation spans for the same expert retain
+separate labels. Reuse the strict reconciliation and paired
+bound routines from the existing evidence gate.
+
+The two arms share 44 exact views across all requests. The
+58 nonshared views leave the short-minus-reference evidence
+P@5 difference between −7.25 and +7.25 percentage points.
+Of these 58 views, 40 are on the 11 requests where expert
+order stayed the same and evidence changed. Reviewing only
+the seven person-or-order changes would leave a 10-point
+range attributable to the evidence-only views on the full
+cohort. Each resolved nonshared view reduces the width of
+the finite-panel hit difference by one of the 400 slots
+(0.25 points). The scorer can create a private queue of
+unresolved nonshared views, grouped by request and ordered
+by their potential contribution to the interval width.
+
+These are identification bounds for this development trace.
+They do not measure sampling uncertainty, prospective
+coverage or confirmed candidate errors.
+[Bounds with empty reviews](review-bounds-aggregate.json)
+
 ## Reproduce
 
 Use the authorized [enterprise development resources](../enterprise-role-first-query-v1)
@@ -120,4 +150,14 @@ PYTHONPATH=src:. python -m experiments.retrieval.build_enterprise_window_review 
 
 PYTHONPATH=src:. python -m experiments.retrieval.reconcile_joint_review \
   PRIVATE_PACKET_DIR REVIEWER_A_JSONL REVIEWER_B_JSONL --output PRIVATE_RECONCILIATION
+```
+
+
+Score the paired difference after reconciliation. Keep the optional
+priority queue local.
+
+```sh
+PYTHONPATH=src:. python -m experiments.retrieval.score_enterprise_window_review \
+  PRIVATE_TRACE_JSON PRIVATE_PACKET_DIR PRIVATE_RECONCILIATION NEW_AGGREGATE_BOUNDS \
+  --priority PRIVATE_PRIORITY_JSON
 ```
