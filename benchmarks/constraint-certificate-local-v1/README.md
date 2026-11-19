@@ -25,11 +25,27 @@ An oracle enumerates all subsets of reads and finds the smallest subset that cer
 
 The candidate-local state removes repeated whole-pool work. The fixed bundled control remains faster in the sparse stress setting and reads fewer sources there. Gains on top of that control would require a better action order on a more discriminating fixture, cheaper judgments, or an index that rules out candidates with admissible evidence. [Timing aggregates](results.json)
 
+## Stronger fixed control and exact scaling bound
+
+The hindsight minimum can be computed directly. A returned expert requires the union of source prefixes through the first positive witness of every criterion. An excluded expert above the cutoff requires reading all witnesses for one fully failed criterion. The cheapest such criterion is sufficient. Sum these obligations in the fixed expert order and stop at the last confirmed expert, or inspect the full pool if fewer than K qualify. Source reads are keyed by expert and source. The calculation assumes any unread witness can still support its declared criteria. The direct minimum matched subset enumeration in 330 small randomized comparisons, including unavailable evidence.
+
+The adaptive policy prioritizes refuting the criterion with fewest unread sources, then prefers a source shared by more current criteria. The fixed shortest-first control sorts criteria once by initial width, then by source sharing. Both preserve exhaustive ranked citations and reach the minimum of 605 reads across 432 publisher cases.
+
+| Synthetic Top-3, 1,000 experts | Hindsight minimum | Fixed bundled | Fixed shortest-first | Adaptive refutation-first | Fixed / adaptive mean CPU |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Equal widths, 3% support | 80,003 | 81,605 | 81,605 | 80,993 | 7.07 / 23.75 ms |
+| One narrow criterion, 3% support | 21,695 | 69,376 | 21,899 | 21,761 | 4.11 / 9.27 ms |
+| One narrow criterion, 35% support | 697 | 1,176 | 724 | 726 | 0.11 / 0.22 ms |
+
+Counts sum 20 seeded pools per condition. Mean time is controller-only on ws6 with in-memory, independently generated labels and one rotated timing per arm and pool. Width-aware fixed order accounts for most of the reduction in reads. The adaptive variant saves fewer than 1% of reads over that control in the rows with gains and has higher controller cost. Net savings with a live verifier depend on its marginal source-read cost and batching behavior. [Aggregate scheduling results](scheduling-controls.json)
+
+Necessary probing for ranked expensive predicates is established prior work. This test adds an explicitly ordered citation obligation and a read that can jointly reveal several criteria for an expert. The hindsight bound holds for a fixed indexed pool and stable Boolean observations. [SIGMOD 2002: Minimal Probing](https://doi.org/10.1145/564691.564731) · [SODA 2014: Stochastic Boolean Function Evaluation](https://doi.org/10.1137/1.9781611973402.107)
+
 ## Reproduce
 
 ```sh
 PYTHONPATH=src:. python -m experiments.credit.local_constraint_certificate \
   benchmarks/plos-credit-compositional-edits-v1 /path/to/new-results.json
 PYTHONPATH=src:. python -m experiments.credit.constraint_read_lower_bound \
-  benchmarks/plos-credit-compositional-edits-v1 /path/to/new-lower-bound.json
+  benchmarks/plos-credit-compositional-edits-v1 /path/to/new-lower-bound.json --stress
 ```

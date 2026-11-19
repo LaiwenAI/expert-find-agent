@@ -27,7 +27,10 @@ class ConstraintVerificationTest(unittest.TestCase):
             read = lambda e, s: scores[e, s]
             for top in (1, 3):
                 reference = resolve_constraints(pool, read, top=top, strategy="exhaustive")
-                for strategy in ("certificate", "local_certificate", "short_circuit", "bundled_first"):
+                for strategy in (
+                    "certificate", "local_certificate", "refutation_first",
+                    "short_circuit", "bundled_first", "shortest_first",
+                ):
                     self.assertEqual(resolve_constraints(pool, read, top=top, strategy=strategy)["ranking"],
                                      reference["ranking"])
 

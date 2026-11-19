@@ -22,7 +22,7 @@ def _rank(owners, observed, top, optimistic):
     return result
 
 
-def _local_certificate(owners, read, top):
+def _local_certificate(owners, read, top, *, refutation_first=False):
     ranking = []
     reads = checks = 0
     for expert, requirements in owners:
@@ -33,6 +33,7 @@ def _local_certificate(owners, read, top):
         while True:
             citations = []
             frontier = Counter()
+            refutations = []
             for i, witnesses in enumerate(requirements):
                 cursor = cursors[i]
                 while cursor < len(witnesses):
@@ -47,12 +48,20 @@ def _local_certificate(owners, read, top):
                 if cursor == len(witnesses):
                     break
                 citations.append(witnesses[cursor])
+                if refutation_first and witnesses[cursor] not in observed:
+                    suffix = witnesses[cursor:]
+                    if not any(observed.get(source, {}).get(i) is True for source in suffix):
+                        width = len(set(suffix) - observed.keys())
+                        refutations.append((width, witnesses[cursor]))
             if len(citations) < len(requirements):
                 break
             if not frontier:
                 ranking.append((expert, tuple(citations)))
                 break
-            source = max(frontier, key=frontier.__getitem__)
+            if refutations:
+                _, source = min(refutations, key=lambda item: (item[0], -frontier[item[1]]))
+            else:
+                source = max(frontier, key=frontier.__getitem__)
             observed[source] = read(expert, source)
             reads += 1
             checks += sum(source in witnesses for witnesses in requirements)
@@ -70,11 +79,11 @@ def resolve_constraints(owners, read, *, top, strategy="certificate"):
     """
     if type(top) is not int or top < 1:
         raise ValueError("Expected a positive result count")
-    if strategy == "local_certificate":
+    if strategy in {"local_certificate", "refutation_first"}:
         # A fixed expert order lets us finish one optimistic candidate at a time.
         # A cursor never revisits a witness already ruled out for its criterion.
-        return _local_certificate(owners, read, top)
-    if strategy not in {"exhaustive", "short_circuit", "bundled_first", "certificate"}:
+        return _local_certificate(owners, read, top, refutation_first=strategy == "refutation_first")
+    if strategy not in {"exhaustive", "short_circuit", "bundled_first", "shortest_first", "certificate"}:
         raise ValueError("Unknown constraint verification strategy")
     observed = {}
     possibilities = dict(owners)
@@ -89,15 +98,18 @@ def resolve_constraints(owners, read, *, top, strategy="certificate"):
         for expert, requirements in owners:
             for source in dict.fromkeys(source for witnesses in requirements for source in witnesses):
                 observe(expert, source)
-    elif strategy in {"short_circuit", "bundled_first"}:
+    elif strategy in {"short_circuit", "bundled_first", "shortest_first"}:
         confirmed = 0
         for expert, requirements in owners:
             if any(not witnesses for witnesses in requirements):
                 continue
             ordered_checks = list(enumerate(requirements))
-            if strategy == "bundled_first":
+            if strategy in {"bundled_first", "shortest_first"}:
                 share = Counter(source for sources in requirements for source in sources)
-                ordered_checks.sort(key=lambda item: -share[item[1][0]])
+                if strategy == "shortest_first":
+                    ordered_checks.sort(key=lambda item: (len(set(item[1])), -share[item[1][0]]))
+                else:
+                    ordered_checks.sort(key=lambda item: -share[item[1][0]])
             for i, witnesses in ordered_checks:
                 for source in witnesses:
                     if (expert, source) not in observed:
