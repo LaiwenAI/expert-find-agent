@@ -1,0 +1,793 @@
+{
+  "annotations_sha256": "19641067e53a771f25081af1c3ec52b7c893fe12fcacc19800f7bc2b446fc060",
+  "cpu": {
+    "inputs": {
+      "dev": "051ee1d057204a5d08ef5502beacdadf191245b5eaf0e29ec2c607cf002c016f",
+      "test": "ea673b7ef91e16510d7eb88863d3903e47318dc5653ef361266f27ae3b84723c"
+    },
+    "code_sha256": "1071a871e71e59316c97eb26f39fb3e6782d7c693a1b4bb7e451ede38d8494fa",
+    "ner_projection_sha256": "76de6cb50fc5ea1b17a26bb9007893b4283b87b71fd57de0d09dbc74f013de1e",
+    "ner_model": "en_core_web_sm",
+    "ner_version": "3.8.0",
+    "engine_version": "3.8.7",
+    "extraction_seconds": 6.183620791998692,
+    "documents": 1000,
+    "aliases": {
+      "annotated": 9049,
+      "automatic": 7619
+    },
+    "people": {
+      "annotated": 3034,
+      "automatic": 3828
+    },
+    "panels": {
+      "exact": {
+        "gold": {
+          "opened": 236,
+          "fallback": 25,
+          "exact_key": 161,
+          "source": 161,
+          "available": 161,
+          "candidates": 694,
+          "person_mentions_scored": 1481,
+          "strict_positive": 212,
+          "proposed_positive": 212,
+          "proposed_rival": 215,
+          "queries": 161,
+          "p50_p95_ms": [
+            0.017207989003509283,
+            0.06204104283824563
+          ],
+          "positive_p5_delta_vs_auto_bm25": {
+            "mean": 0.09068322981366461,
+            "percentile_95": [
+              0.06785515873015874,
+              0.11321069182389933
+            ],
+            "queries": 161,
+            "clusters": 41,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "auto_sources": {
+          "opened": 392,
+          "fallback": 77,
+          "exact_key": 99,
+          "source": 155,
+          "available": 155,
+          "candidates": 743,
+          "person_mentions_scored": 2343,
+          "strict_positive": 186,
+          "proposed_positive": 186,
+          "proposed_rival": 165,
+          "queries": 161,
+          "p50_p95_ms": [
+            0.024042034056037664,
+            1.6230830224230886
+          ],
+          "positive_p5_delta_vs_auto_bm25": {
+            "mean": 0.05838509316770188,
+            "percentile_95": [
+              0.03972602739726028,
+              0.07515923566878982
+            ],
+            "queries": 161,
+            "clusters": 41,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "auto_people": {
+          "opened": 236,
+          "fallback": 25,
+          "exact_key": 161,
+          "source": 161,
+          "available": 136,
+          "candidates": 710,
+          "person_mentions_scored": 1573,
+          "strict_positive": 171,
+          "proposed_positive": 172,
+          "proposed_rival": 165,
+          "queries": 161,
+          "p50_p95_ms": [
+            0.016874982975423336,
+            0.058917037677019835
+          ],
+          "positive_p5_delta_vs_auto_bm25": {
+            "mean": 0.040993788819875775,
+            "percentile_95": [
+              0.02624892241379311,
+              0.05655172413793103
+            ],
+            "queries": 161,
+            "clusters": 41,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "auto_bm25": {
+          "opened": 644,
+          "fallback": 161,
+          "exact_key": 99,
+          "source": 146,
+          "available": 126,
+          "candidates": 805,
+          "person_mentions_scored": 3953,
+          "strict_positive": 135,
+          "proposed_positive": 139,
+          "proposed_rival": 100,
+          "queries": 161,
+          "p50_p95_ms": [
+            0.11454196646809578,
+            0.27487502666190267
+          ],
+          "positive_p5_delta_vs_auto_bm25": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 161,
+            "clusters": 41,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "title_only": {
+          "opened": 488,
+          "fallback": 109,
+          "exact_key": 57,
+          "source": 154,
+          "available": 131,
+          "candidates": 771,
+          "person_mentions_scored": 3065,
+          "strict_positive": 147,
+          "proposed_positive": 151,
+          "proposed_rival": 122,
+          "queries": 161,
+          "p50_p95_ms": [
+            0.5708750104531646,
+            1.3704579905606806
+          ],
+          "positive_p5_delta_vs_auto_bm25": {
+            "mean": 0.014906832298136646,
+            "percentile_95": [
+              0.005813953488372093,
+              0.025157232704402517
+            ],
+            "queries": 161,
+            "clusters": 41,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "auto_full": {
+          "opened": 392,
+          "fallback": 77,
+          "exact_key": 99,
+          "source": 155,
+          "available": 130,
+          "candidates": 747,
+          "person_mentions_scored": 2556,
+          "strict_positive": 149,
+          "proposed_positive": 152,
+          "proposed_rival": 129,
+          "queries": 161,
+          "p50_p95_ms": [
+            0.026124995201826096,
+            1.5298749785870314
+          ],
+          "positive_p5_delta_vs_auto_bm25": {
+            "mean": 0.016149068322981366,
+            "percentile_95": [
+              0.006369426751592358,
+              0.02638888888888889
+            ],
+            "queries": 161,
+            "clusters": 41,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        }
+      },
+      "transposition": {
+        "auto_full": {
+          "opened": 313,
+          "fallback": 56,
+          "exact_key": 0,
+          "source": 129,
+          "available": 107,
+          "candidates": 662,
+          "person_mentions_scored": 2068,
+          "strict_positive": 129,
+          "proposed_positive": 130,
+          "proposed_rival": 121,
+          "queries": 145,
+          "p50_p95_ms": [
+            0.024500011932104826,
+            1.6927668126299977
+          ],
+          "positive_p5_delta_vs_auto_bm25": {
+            "mean": 0.07034482758620689,
+            "percentile_95": [
+              0.03972578451374721,
+              0.11039060632618913
+            ],
+            "queries": 145,
+            "clusters": 35,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "gold": {
+          "opened": 151,
+          "fallback": 2,
+          "exact_key": 0,
+          "source": 145,
+          "available": 145,
+          "candidates": 601,
+          "person_mentions_scored": 1064,
+          "strict_positive": 200,
+          "proposed_positive": 200,
+          "proposed_rival": 220,
+          "queries": 145,
+          "p50_p95_ms": [
+            0.021082989405840635,
+            0.037641380913555615
+          ],
+          "positive_p5_delta_vs_auto_bm25": {
+            "mean": 0.16689655172413792,
+            "percentile_95": [
+              0.13007926829268293,
+              0.20345243041130032
+            ],
+            "queries": 145,
+            "clusters": 35,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "auto_sources": {
+          "opened": 313,
+          "fallback": 56,
+          "exact_key": 0,
+          "source": 129,
+          "available": 129,
+          "candidates": 658,
+          "person_mentions_scored": 1907,
+          "strict_positive": 165,
+          "proposed_positive": 165,
+          "proposed_rival": 155,
+          "queries": 145,
+          "p50_p95_ms": [
+            0.023917004000395536,
+            1.6911582206375895
+          ],
+          "positive_p5_delta_vs_auto_bm25": {
+            "mean": 0.11862068965517243,
+            "percentile_95": [
+              0.0792446704239157,
+              0.16133333333333333
+            ],
+            "queries": 145,
+            "clusters": 35,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "auto_people": {
+          "opened": 151,
+          "fallback": 2,
+          "exact_key": 0,
+          "source": 145,
+          "available": 121,
+          "candidates": 619,
+          "person_mentions_scored": 1062,
+          "strict_positive": 159,
+          "proposed_positive": 159,
+          "proposed_rival": 175,
+          "queries": 145,
+          "p50_p95_ms": [
+            0.019833038095384836,
+            0.03328338498249649
+          ],
+          "positive_p5_delta_vs_auto_bm25": {
+            "mean": 0.1103448275862069,
+            "percentile_95": [
+              0.07792092862889324,
+              0.1490486300677383
+            ],
+            "queries": 145,
+            "clusters": 35,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "auto_bm25": {
+          "opened": 580,
+          "fallback": 145,
+          "exact_key": 0,
+          "source": 91,
+          "available": 79,
+          "candidates": 725,
+          "person_mentions_scored": 3591,
+          "strict_positive": 76,
+          "proposed_positive": 79,
+          "proposed_rival": 49,
+          "queries": 145,
+          "p50_p95_ms": [
+            0.11087500024586916,
+            0.2886414062231779
+          ],
+          "positive_p5_delta_vs_auto_bm25": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 145,
+            "clusters": 35,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "title_only": {
+          "opened": 439,
+          "fallback": 98,
+          "exact_key": 0,
+          "source": 118,
+          "available": 98,
+          "candidates": 697,
+          "person_mentions_scored": 2813,
+          "strict_positive": 114,
+          "proposed_positive": 117,
+          "proposed_rival": 100,
+          "queries": 145,
+          "p50_p95_ms": [
+            0.5780419451184571,
+            1.4762913924641885
+          ],
+          "positive_p5_delta_vs_auto_bm25": {
+            "mean": 0.05241379310344827,
+            "percentile_95": [
+              0.02222222222222222,
+              0.09189386466758727
+            ],
+            "queries": 145,
+            "clusters": 35,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        }
+      }
+    }
+  },
+  "with_verification": {
+    "inputs": {
+      "dev": "051ee1d057204a5d08ef5502beacdadf191245b5eaf0e29ec2c607cf002c016f",
+      "test": "ea673b7ef91e16510d7eb88863d3903e47318dc5653ef361266f27ae3b84723c"
+    },
+    "code_sha256": "1071a871e71e59316c97eb26f39fb3e6782d7c693a1b4bb7e451ede38d8494fa",
+    "ner_projection_sha256": "76de6cb50fc5ea1b17a26bb9007893b4283b87b71fd57de0d09dbc74f013de1e",
+    "ner_model": "en_core_web_sm",
+    "ner_version": "3.8.0",
+    "engine_version": "3.8.7",
+    "extraction_seconds": 6.183620791998692,
+    "documents": 1000,
+    "aliases": {
+      "annotated": 9049,
+      "automatic": 7619
+    },
+    "people": {
+      "annotated": 3034,
+      "automatic": 3828
+    },
+    "panels": {
+      "exact": {
+        "gold": {
+          "opened": 236,
+          "fallback": 25,
+          "exact_key": 161,
+          "source": 161,
+          "available": 161,
+          "candidates": 694,
+          "person_mentions_scored": 1481,
+          "strict_positive": 212,
+          "proposed_positive": 212,
+          "proposed_rival": 215,
+          "accepted_positive": 129,
+          "accepted_rival": 3,
+          "accepted_unjudged": 10,
+          "queries": 161,
+          "p50_p95_ms": [
+            48.13344031572342,
+            56.564388796687126
+          ],
+          "positive_p5_delta_vs_auto_bm25": {
+            "mean": 0.052173913043478265,
+            "percentile_95": [
+              0.035357491062723435,
+              0.07006369426751592
+            ],
+            "queries": 161,
+            "clusters": 41,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "auto_sources": {
+          "opened": 392,
+          "fallback": 77,
+          "exact_key": 99,
+          "source": 155,
+          "available": 155,
+          "candidates": 743,
+          "person_mentions_scored": 2343,
+          "strict_positive": 186,
+          "proposed_positive": 186,
+          "proposed_rival": 165,
+          "accepted_positive": 116,
+          "accepted_rival": 2,
+          "accepted_unjudged": 10,
+          "queries": 161,
+          "p50_p95_ms": [
+            51.93089880049229,
+            57.6140433549881
+          ],
+          "positive_p5_delta_vs_auto_bm25": {
+            "mean": 0.0360248447204969,
+            "percentile_95": [
+              0.02085825664621677,
+              0.05113771645021644
+            ],
+            "queries": 161,
+            "clusters": 41,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "auto_people": {
+          "opened": 236,
+          "fallback": 25,
+          "exact_key": 161,
+          "source": 161,
+          "available": 136,
+          "candidates": 710,
+          "person_mentions_scored": 1573,
+          "strict_positive": 171,
+          "proposed_positive": 172,
+          "proposed_rival": 165,
+          "accepted_positive": 109,
+          "accepted_rival": 3,
+          "accepted_unjudged": 11,
+          "queries": 161,
+          "p50_p95_ms": [
+            48.61714877188206,
+            57.29925073683262
+          ],
+          "positive_p5_delta_vs_auto_bm25": {
+            "mean": 0.027329192546583853,
+            "percentile_95": [
+              0.013872832369942198,
+              0.04266666666666667
+            ],
+            "queries": 161,
+            "clusters": 41,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "auto_bm25": {
+          "opened": 644,
+          "fallback": 161,
+          "exact_key": 99,
+          "source": 146,
+          "available": 126,
+          "candidates": 805,
+          "person_mentions_scored": 3953,
+          "strict_positive": 135,
+          "proposed_positive": 139,
+          "proposed_rival": 100,
+          "accepted_positive": 87,
+          "accepted_rival": 3,
+          "accepted_unjudged": 6,
+          "queries": 161,
+          "p50_p95_ms": [
+            53.200092166662216,
+            59.22764539718628
+          ],
+          "positive_p5_delta_vs_auto_bm25": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 161,
+            "clusters": 41,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "title_only": {
+          "opened": 488,
+          "fallback": 109,
+          "exact_key": 57,
+          "source": 154,
+          "available": 131,
+          "candidates": 771,
+          "person_mentions_scored": 3065,
+          "strict_positive": 147,
+          "proposed_positive": 151,
+          "proposed_rival": 122,
+          "accepted_positive": 97,
+          "accepted_rival": 3,
+          "accepted_unjudged": 10,
+          "queries": 161,
+          "p50_p95_ms": [
+            52.10249125957489,
+            58.00873599946499
+          ],
+          "positive_p5_delta_vs_auto_bm25": {
+            "mean": 0.012422360248447204,
+            "percentile_95": [
+              0.0036585365853658543,
+              0.02251655629139073
+            ],
+            "queries": 161,
+            "clusters": 41,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "auto_full": {
+          "opened": 392,
+          "fallback": 77,
+          "exact_key": 99,
+          "source": 155,
+          "available": 130,
+          "candidates": 747,
+          "person_mentions_scored": 2556,
+          "strict_positive": 149,
+          "proposed_positive": 152,
+          "proposed_rival": 129,
+          "accepted_positive": 98,
+          "accepted_rival": 3,
+          "accepted_unjudged": 10,
+          "queries": 161,
+          "p50_p95_ms": [
+            52.037788555026054,
+            57.9870380461216
+          ],
+          "positive_p5_delta_vs_auto_bm25": {
+            "mean": 0.013664596273291927,
+            "percentile_95": [
+              0.003921568627450981,
+              0.02413793103448276
+            ],
+            "queries": 161,
+            "clusters": 41,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        }
+      },
+      "transposition": {
+        "auto_full": {
+          "opened": 313,
+          "fallback": 56,
+          "exact_key": 0,
+          "source": 129,
+          "available": 107,
+          "candidates": 662,
+          "person_mentions_scored": 2068,
+          "strict_positive": 129,
+          "proposed_positive": 130,
+          "proposed_rival": 121,
+          "accepted_positive": 76,
+          "accepted_rival": 1,
+          "accepted_unjudged": 6,
+          "queries": 145,
+          "p50_p95_ms": [
+            52.36578546464443,
+            58.88591557741164
+          ],
+          "positive_p5_delta_vs_auto_bm25": {
+            "mean": 0.04275862068965517,
+            "percentile_95": [
+              0.02158273381294964,
+              0.06887529085376766
+            ],
+            "queries": 145,
+            "clusters": 35,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "gold": {
+          "opened": 151,
+          "fallback": 2,
+          "exact_key": 0,
+          "source": 145,
+          "available": 145,
+          "candidates": 601,
+          "person_mentions_scored": 1064,
+          "strict_positive": 200,
+          "proposed_positive": 200,
+          "proposed_rival": 220,
+          "accepted_positive": 111,
+          "accepted_rival": 1,
+          "accepted_unjudged": 9,
+          "queries": 145,
+          "p50_p95_ms": [
+            47.705117613077164,
+            57.60222636163234
+          ],
+          "positive_p5_delta_vs_auto_bm25": {
+            "mean": 0.0910344827586207,
+            "percentile_95": [
+              0.06551567398119124,
+              0.11896606285464863
+            ],
+            "queries": 145,
+            "clusters": 35,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "auto_sources": {
+          "opened": 313,
+          "fallback": 56,
+          "exact_key": 0,
+          "source": 129,
+          "available": 129,
+          "candidates": 658,
+          "person_mentions_scored": 1907,
+          "strict_positive": 165,
+          "proposed_positive": 165,
+          "proposed_rival": 155,
+          "accepted_positive": 91,
+          "accepted_rival": 1,
+          "accepted_unjudged": 8,
+          "queries": 145,
+          "p50_p95_ms": [
+            52.2027350962162,
+            57.92846567928791
+          ],
+          "positive_p5_delta_vs_auto_bm25": {
+            "mean": 0.06344827586206896,
+            "percentile_95": [
+              0.037142857142857144,
+              0.09271619157308762
+            ],
+            "queries": 145,
+            "clusters": 35,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "auto_people": {
+          "opened": 151,
+          "fallback": 2,
+          "exact_key": 0,
+          "source": 145,
+          "available": 121,
+          "candidates": 619,
+          "person_mentions_scored": 1062,
+          "strict_positive": 159,
+          "proposed_positive": 159,
+          "proposed_rival": 175,
+          "accepted_positive": 93,
+          "accepted_rival": 1,
+          "accepted_unjudged": 9,
+          "queries": 145,
+          "p50_p95_ms": [
+            47.98953980207443,
+            57.71698094904423
+          ],
+          "positive_p5_delta_vs_auto_bm25": {
+            "mean": 0.06620689655172415,
+            "percentile_95": [
+              0.04313725490196079,
+              0.09365186615186613
+            ],
+            "queries": 145,
+            "clusters": 35,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "auto_bm25": {
+          "opened": 580,
+          "fallback": 145,
+          "exact_key": 0,
+          "source": 91,
+          "available": 79,
+          "candidates": 725,
+          "person_mentions_scored": 3591,
+          "strict_positive": 76,
+          "proposed_positive": 79,
+          "proposed_rival": 49,
+          "accepted_positive": 45,
+          "accepted_rival": 1,
+          "accepted_unjudged": 2,
+          "queries": 145,
+          "p50_p95_ms": [
+            54.27758768200874,
+            60.18797382712364
+          ],
+          "positive_p5_delta_vs_auto_bm25": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 145,
+            "clusters": 35,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "title_only": {
+          "opened": 439,
+          "fallback": 98,
+          "exact_key": 0,
+          "source": 118,
+          "available": 98,
+          "candidates": 697,
+          "person_mentions_scored": 2813,
+          "strict_positive": 114,
+          "proposed_positive": 117,
+          "proposed_rival": 100,
+          "accepted_positive": 70,
+          "accepted_rival": 1,
+          "accepted_unjudged": 5,
+          "queries": 145,
+          "p50_p95_ms": [
+            53.033920004963875,
+            58.68804492056369
+          ],
+          "positive_p5_delta_vs_auto_bm25": {
+            "mean": 0.034482758620689655,
+            "percentile_95": [
+              0.0136986301369863,
+              0.06069027093596059
+            ],
+            "queries": 145,
+            "clusters": 35,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        }
+      }
+    },
+    "job": "43049",
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "checkpoint": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "cutoff": 0.25
+  }
+}
