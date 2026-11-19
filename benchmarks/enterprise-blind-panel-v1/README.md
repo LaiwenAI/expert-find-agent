@@ -46,6 +46,17 @@ The third row exceeds this panel's size. At 75% true coverage and 2% conditional
 python -m experiments.enterprise_review_gate 123 --coverage-floor .60 --risk-ceiling .05   --actual-coverage .75 --actual-risk .02
 ```
 
+## Evidence-bound gate dry run
+
+On the 80 legacy development requests, 389 of 400 dense Top-5 recommendation views exactly matched the shared blind packet. The remaining 11 views across nine requests used different citation spans or sets. The gate rejected applying those shared-packet judgments to the original dense run. A separate replay used the exact shared views and exercised all 80 requests. All 80 issued cases stayed unresolved because the reviews were blank. This wiring check uses one placeholder group per request. [Aggregate dry run](gate-wiring.json)
+
+For a frozen evaluation, the frame records one query ID, group ID and text hash per row. The protocol pins that frame, the policy, cutoff, required fields and probability settings. Execution binds the output and review packet hashes. Record one explicit outcome per query, including abstention and execution failure. Each recommendation supplies its expert, blind case and exact source IDs, offsets and text hashes. The gate verifies the reconciliation and counts each group once. A definite failure on any required field takes priority over unresolved evidence. The hashes check integrity of the supplied files. Chronology and review independence require the study procedure.
+
+```sh
+python -m experiments.retrieval.score_enterprise_evidence_gate   FRAME PROTOCOL OUTPUTS EXECUTION_MANIFEST BLIND_PACKET RECONCILIATION
+python -m experiments.retrieval.audit_enterprise_gate_views   LEGACY_DATASET DEVELOPMENT_PACKET DEVELOPMENT_RECONCILIATION
+```
+
 ## External sampling frames
 
 A university technology-transfer posting supplies four Nantong requests with issuer, project and technical problem fields. The Xi'an science bureau's third and fourth public calls list 50 requests each and link to detailed attachments. These frames may support a separate external cohort after eligibility, organizational overlap, and source availability are checked. The published counts are requests before deduplication. [Nantong posting](https://kjcyc.usts.edu.cn/info/1029/6055.htm) · [Xi'an third call](https://xakj.xa.gov.cn/kjdt/tzgg/2099713781650178049.html) · [Xi'an fourth call](https://xakj.xa.gov.cn/kjdt/tzgg/2105191117492449281.html)
