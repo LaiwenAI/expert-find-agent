@@ -1,0 +1,332 @@
+{
+  "job": "42863",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "thresholds": {
+    "absolute": 0.65487003326416,
+    "relative": 0.09743535518646239,
+    "outside_contrast": 0.12767392396926877,
+    "definition_contrast": 0.11286592483520506
+  },
+  "calibration": {
+    "eligible_phrases": 5,
+    "unsupported_phrases": 5
+  },
+  "examples_sha256": "c107b4e780218e58aec4e2a13f2d7072533962a6a73b82d23e4273b43aafd528",
+  "capture_sha256": "01b02c2e4d718e343a623faa954622eadb35bedfef75fac2f6d8ff43a70f0fd2",
+  "code_sha256": "9ea3d438ada115af3a82dd56e61c6f11fd21f2a0e3178539242b74de27b9b92d",
+  "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "panels": {
+    "human_supported": {
+      "cases": 8,
+      "controller_p95_ms": 7.236175891011953,
+      "methods": {
+        "absolute": {
+          "valid": 0,
+          "invalid": 0,
+          "abstained": 8,
+          "forced_correct": 5,
+          "valid_delta_vs_absolute": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 8,
+            "clusters": 5,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "relative": {
+          "valid": 1,
+          "invalid": 0,
+          "abstained": 7,
+          "forced_correct": 5,
+          "valid_delta_vs_absolute": {
+            "mean": 0.125,
+            "percentile_95": [
+              0.0,
+              0.5
+            ],
+            "queries": 8,
+            "clusters": 5,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "outside_contrast": {
+          "valid": 1,
+          "invalid": 0,
+          "abstained": 7,
+          "forced_correct": 5,
+          "valid_delta_vs_absolute": {
+            "mean": 0.125,
+            "percentile_95": [
+              0.0,
+              0.3333333333333333
+            ],
+            "queries": 8,
+            "clusters": 5,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "definition_contrast": {
+          "valid": 3,
+          "invalid": 1,
+          "abstained": 4,
+          "forced_correct": 7,
+          "valid_delta_vs_absolute": {
+            "mean": 0.375,
+            "percentile_95": [
+              0.0,
+              0.75
+            ],
+            "queries": 8,
+            "clusters": 5,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        }
+      }
+    },
+    "human_unsupported": {
+      "cases": 16,
+      "controller_p95_ms": 7.097404915839434,
+      "methods": {
+        "absolute": {
+          "valid": 0,
+          "invalid": 0,
+          "abstained": 16,
+          "forced_correct": 0,
+          "valid_delta_vs_absolute": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 16,
+            "clusters": 5,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "relative": {
+          "valid": 0,
+          "invalid": 1,
+          "abstained": 15,
+          "forced_correct": 0,
+          "valid_delta_vs_absolute": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 16,
+            "clusters": 5,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "outside_contrast": {
+          "valid": 0,
+          "invalid": 0,
+          "abstained": 16,
+          "forced_correct": 0,
+          "valid_delta_vs_absolute": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 16,
+            "clusters": 5,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "definition_contrast": {
+          "valid": 0,
+          "invalid": 0,
+          "abstained": 16,
+          "forced_correct": 0,
+          "valid_delta_vs_absolute": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 16,
+            "clusters": 5,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        }
+      }
+    },
+    "publication_supported": {
+      "cases": 45,
+      "controller_p95_ms": 7.249324768781662,
+      "methods": {
+        "absolute": {
+          "valid": 0,
+          "invalid": 0,
+          "abstained": 45,
+          "forced_correct": 25,
+          "valid_delta_vs_absolute": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 45,
+            "clusters": 44,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "relative": {
+          "valid": 6,
+          "invalid": 0,
+          "abstained": 39,
+          "forced_correct": 25,
+          "valid_delta_vs_absolute": {
+            "mean": 0.13333333333333333,
+            "percentile_95": [
+              0.044444444444444446,
+              0.24444444444444444
+            ],
+            "queries": 45,
+            "clusters": 44,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "outside_contrast": {
+          "valid": 6,
+          "invalid": 0,
+          "abstained": 39,
+          "forced_correct": 25,
+          "valid_delta_vs_absolute": {
+            "mean": 0.13333333333333333,
+            "percentile_95": [
+              0.044444444444444446,
+              0.24444444444444444
+            ],
+            "queries": 45,
+            "clusters": 44,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "definition_contrast": {
+          "valid": 14,
+          "invalid": 4,
+          "abstained": 27,
+          "forced_correct": 39,
+          "valid_delta_vs_absolute": {
+            "mean": 0.3111111111111111,
+            "percentile_95": [
+              0.17777777777777778,
+              0.45454545454545453
+            ],
+            "queries": 45,
+            "clusters": 44,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        }
+      }
+    },
+    "publication_unsupported": {
+      "cases": 45,
+      "controller_p95_ms": 7.204790040850639,
+      "methods": {
+        "absolute": {
+          "valid": 0,
+          "invalid": 0,
+          "abstained": 45,
+          "forced_correct": 0,
+          "valid_delta_vs_absolute": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 45,
+            "clusters": 44,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "relative": {
+          "valid": 0,
+          "invalid": 1,
+          "abstained": 44,
+          "forced_correct": 0,
+          "valid_delta_vs_absolute": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 45,
+            "clusters": 44,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "outside_contrast": {
+          "valid": 0,
+          "invalid": 0,
+          "abstained": 45,
+          "forced_correct": 0,
+          "valid_delta_vs_absolute": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 45,
+            "clusters": 44,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "definition_contrast": {
+          "valid": 0,
+          "invalid": 0,
+          "abstained": 45,
+          "forced_correct": 0,
+          "valid_delta_vs_absolute": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 45,
+            "clusters": 44,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        }
+      }
+    }
+  }
+}
