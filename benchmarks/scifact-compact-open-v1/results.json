@@ -1,0 +1,132 @@
+{
+  "job": "41321",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+  "pairs": 37,
+  "claims": 37,
+  "papers": 30,
+  "components": 30,
+  "projection_sha256": "86fe38b4638787a1696c0d987c89b6ac8c4d618eacd2a0917b9b6cbddef70461",
+  "script_sha256": "861cf4a9a6208f67fc5506084a71744b417872c1ccc686963e32f31fd3d38b1f",
+  "cutoffs": {
+    "full": 1.0,
+    "two_lexical_windows": -3.75
+  },
+  "sliced_results": {
+    "all": {
+      "support": {
+        "pairs": 26,
+        "full_support": 12,
+        "compact_support": 10,
+        "gained": 1,
+        "lost": 3,
+        "paired_delta": {
+          "mean": -0.07692307692307693,
+          "percentile_95": [
+            -0.23076923076923078,
+            0.07692307692307693
+          ],
+          "queries": 26,
+          "clusters": 26,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "connected claim/document component"
+        }
+      },
+      "contradict": {
+        "pairs": 11,
+        "full_support": 1,
+        "compact_support": 0,
+        "gained": 0,
+        "lost": 1,
+        "paired_delta": {
+          "mean": -0.09090909090909091,
+          "percentile_95": [
+            -0.2727272727272727,
+            0.0
+          ],
+          "queries": 11,
+          "clusters": 11,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "connected claim/document component"
+        }
+      }
+    },
+    "citation": {
+      "support": {
+        "pairs": 22,
+        "full_support": 12,
+        "compact_support": 10,
+        "gained": 1,
+        "lost": 3,
+        "paired_delta": {
+          "mean": -0.09090909090909091,
+          "percentile_95": [
+            -0.2727272727272727,
+            0.09090909090909091
+          ],
+          "queries": 22,
+          "clusters": 22,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "connected claim/document component"
+        }
+      },
+      "contradict": {
+        "pairs": 11,
+        "full_support": 1,
+        "compact_support": 0,
+        "gained": 0,
+        "lost": 1,
+        "paired_delta": {
+          "mean": -0.09090909090909091,
+          "percentile_95": [
+            -0.2727272727272727,
+            0.0
+          ],
+          "queries": 11,
+          "clusters": 11,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "connected claim/document component"
+        }
+      }
+    },
+    "pooling": {
+      "support": {
+        "pairs": 4,
+        "full_support": 0,
+        "compact_support": 0,
+        "gained": 0,
+        "lost": 0,
+        "paired_delta": {
+          "mean": 0.0,
+          "percentile_95": [
+            0.0,
+            0.0
+          ],
+          "queries": 4,
+          "clusters": 4,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "connected claim/document component"
+        }
+      }
+    }
+  },
+  "p50_p95_ms": {
+    "full": [
+      26.727627962827682,
+      41.67473874986172
+    ],
+    "two_lexical_windows": [
+      19.99189518392086,
+      28.324795514345144
+    ]
+  },
+  "p95_speedup_interval": [
+    1.064070587760379,
+    1.7409577684955775
+  ]
+}
