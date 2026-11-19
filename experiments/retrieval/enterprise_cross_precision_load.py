@@ -113,8 +113,8 @@ async def send_trace(port, texts, indices, times):
     return await asyncio.gather(*(issue(i,t) for i,t in zip(indices,times,strict=True)))
 
 
-def workload(texts, indices, times, search):
-    pending, ready = Queue(), Future()
+def workload(texts, indices, times, search, *, pending_factory=Queue, strata=None):
+    pending, ready = pending_factory(), Future()
     worker = Thread(target=serve, args=(pending,search,ready))
     with Server(("127.0.0.1",0), RequestHandler) as server:
         server.pending = pending
@@ -133,7 +133,7 @@ def workload(texts, indices, times, search):
             worker.join()
     bodies, rows = zip(*result, strict=True)
     end = max(row["done"] for row in rows)
-    return bodies, dict(
+    report = dict(
         completed=len(rows), final_completion_seconds=end,
         drain_seconds=max(0., end-float(times[-1])),
         observed_offered_rate=(len(rows)-1)/times[-1],
@@ -141,6 +141,19 @@ def workload(texts, indices, times, search):
         quantiles_ms={field:np.quantile([row[field] for row in rows],[.5,.95,.99]).tolist()
                       for field in ("total_ms","queue_ms","service_ms","release_lag_ms")},
     )
+    if strata is not None:
+        report["strata"] = {
+            name: {
+                "requests": len(subset),
+                "total_p50_p95_max_ms": np.quantile([r["total_ms"] for r in subset], [.5, .95, 1.]).tolist(),
+                "queue_p95_max_ms": np.quantile([r["queue_ms"] for r in subset], [.95, 1.]).tolist(),
+            }
+            for name, subset in ((name, [row for index, row in zip(indices, rows, strict=True) if index in members])
+                                 for name, members in strata.items())
+            if subset
+        }
+    return bodies, report
+
 
 
 def run(queries, corpus, models, output):
