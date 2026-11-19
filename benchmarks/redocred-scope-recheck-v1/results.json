@@ -1,0 +1,486 @@
+{
+  "job": "43354",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "code_sha256": "b007060e3d835679eb47dbc32d4476c10ac95382caea0a79ec77a512b2a0105d",
+  "base_sha256": "da759c8728cc2a34e4ba724a7b45f439a49771987de66a4d8801b8169ddd306a",
+  "model_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+  "independent_assets": {
+    "original": "c40a137a1c57f3e2daaf5ebf511eaa1518f9305ffaa3052d46271921a91826f2",
+    "extended": "6828a3eea60c41aa222326c69afa33652aa2d9d7a3a6675a55ca2d771e329c00"
+  },
+  "calibration_assets": {
+    "original": "051ee1d057204a5d08ef5502beacdadf191245b5eaf0e29ec2c607cf002c016f",
+    "extended": "ccc81b3c34b741c6ff12993edd6672b549b4e960cfb7180f475ee3d60ff659cc"
+  },
+  "heldout_eligible_by_original_labels": {
+    "disjoint": 131,
+    "shared": 163
+  },
+  "distinct_documents": {
+    "calibration": 47,
+    "test": 189
+  },
+  "thresholds": {
+    "compact": 11.75,
+    "margin": 4.625,
+    "full": 16.625
+  },
+  "policies": {
+    "scope_recheck": {
+      "compact": 11.75,
+      "floor": -16.5,
+      "full": null,
+      "calibration_full_calls": 0
+    },
+    "absolute_recheck": {
+      "compact": 11.75,
+      "floor": -16.5,
+      "full": null,
+      "calibration_full_calls": 0
+    }
+  },
+  "calibration": {
+    "compact_absolute": {
+      "combined": {
+        "cases": 64,
+        "accepted_known": 67,
+        "known": 179,
+        "accepted_unjudged": 3,
+        "unjudged": 77,
+        "complete_known": 8,
+        "full_batches": 0,
+        "p95_ms": 66.86045564711094
+      },
+      "disjoint": {
+        "cases": 27,
+        "accepted_known": 17,
+        "known": 54,
+        "accepted_unjudged": 1,
+        "unjudged": 54,
+        "complete_known": 2,
+        "full_batches": 0,
+        "p95_ms": 67.17671621590853
+      },
+      "shared": {
+        "cases": 37,
+        "accepted_known": 50,
+        "known": 125,
+        "accepted_unjudged": 2,
+        "unjudged": 23,
+        "complete_known": 6,
+        "full_batches": 0,
+        "p95_ms": 66.34029597043991
+      },
+      "paired_known_delta": {
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 64,
+        "clusters": 47,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000,
+        "sampling_unit": "whole source paper; query-weighted mean"
+      }
+    },
+    "compact_work_margin": {
+      "combined": {
+        "cases": 64,
+        "accepted_known": 75,
+        "known": 179,
+        "accepted_unjudged": 3,
+        "unjudged": 77,
+        "complete_known": 11,
+        "full_batches": 0,
+        "p95_ms": 66.86045564711094
+      },
+      "disjoint": {
+        "cases": 27,
+        "accepted_known": 33,
+        "known": 54,
+        "accepted_unjudged": 2,
+        "unjudged": 54,
+        "complete_known": 11,
+        "full_batches": 0,
+        "p95_ms": 67.17671621590853
+      },
+      "shared": {
+        "cases": 37,
+        "accepted_known": 42,
+        "known": 125,
+        "accepted_unjudged": 1,
+        "unjudged": 23,
+        "complete_known": 0,
+        "full_batches": 0,
+        "p95_ms": 66.34029597043991
+      },
+      "paired_known_delta": {
+        "mean": 0.03125,
+        "percentile_95": [
+          -0.07083333333333333,
+          0.1269857533177205
+        ],
+        "queries": 64,
+        "clusters": 47,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000,
+        "sampling_unit": "whole source paper; query-weighted mean"
+      }
+    },
+    "full_absolute": {
+      "combined": {
+        "cases": 64,
+        "accepted_known": 54,
+        "known": 179,
+        "accepted_unjudged": 3,
+        "unjudged": 77,
+        "complete_known": 4,
+        "full_batches": 64,
+        "p95_ms": 106.49121394380923
+      },
+      "disjoint": {
+        "cases": 27,
+        "accepted_known": 10,
+        "known": 54,
+        "accepted_unjudged": 2,
+        "unjudged": 54,
+        "complete_known": 0,
+        "full_batches": 27,
+        "p95_ms": 110.4697359725833
+      },
+      "shared": {
+        "cases": 37,
+        "accepted_known": 44,
+        "known": 125,
+        "accepted_unjudged": 1,
+        "unjudged": 23,
+        "complete_known": 4,
+        "full_batches": 37,
+        "p95_ms": 96.90590910613537
+      },
+      "paired_known_delta": {
+        "mean": -0.05078125,
+        "percentile_95": [
+          -0.08196881403688523,
+          -0.0211864406779661
+        ],
+        "queries": 64,
+        "clusters": 47,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000,
+        "sampling_unit": "whole source paper; query-weighted mean"
+      }
+    },
+    "scope_recheck": {
+      "combined": {
+        "cases": 64,
+        "accepted_known": 67,
+        "known": 179,
+        "accepted_unjudged": 3,
+        "unjudged": 77,
+        "complete_known": 8,
+        "full_batches": 0,
+        "p95_ms": 66.86045564711094
+      },
+      "disjoint": {
+        "cases": 27,
+        "accepted_known": 17,
+        "known": 54,
+        "accepted_unjudged": 1,
+        "unjudged": 54,
+        "complete_known": 2,
+        "full_batches": 0,
+        "p95_ms": 67.17671621590853
+      },
+      "shared": {
+        "cases": 37,
+        "accepted_known": 50,
+        "known": 125,
+        "accepted_unjudged": 2,
+        "unjudged": 23,
+        "complete_known": 6,
+        "full_batches": 0,
+        "p95_ms": 66.34029597043991
+      },
+      "paired_known_delta": {
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 64,
+        "clusters": 47,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000,
+        "sampling_unit": "whole source paper; query-weighted mean"
+      }
+    },
+    "absolute_recheck": {
+      "combined": {
+        "cases": 64,
+        "accepted_known": 67,
+        "known": 179,
+        "accepted_unjudged": 3,
+        "unjudged": 77,
+        "complete_known": 8,
+        "full_batches": 0,
+        "p95_ms": 66.86045564711094
+      },
+      "disjoint": {
+        "cases": 27,
+        "accepted_known": 17,
+        "known": 54,
+        "accepted_unjudged": 1,
+        "unjudged": 54,
+        "complete_known": 2,
+        "full_batches": 0,
+        "p95_ms": 67.17671621590853
+      },
+      "shared": {
+        "cases": 37,
+        "accepted_known": 50,
+        "known": 125,
+        "accepted_unjudged": 2,
+        "unjudged": 23,
+        "complete_known": 6,
+        "full_batches": 0,
+        "p95_ms": 66.34029597043991
+      },
+      "paired_known_delta": {
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 64,
+        "clusters": 47,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000,
+        "sampling_unit": "whole source paper; query-weighted mean"
+      }
+    }
+  },
+  "test": {
+    "compact_absolute": {
+      "combined": {
+        "cases": 240,
+        "accepted_known": 245,
+        "known": 636,
+        "accepted_unjudged": 24,
+        "unjudged": 324,
+        "complete_known": 25,
+        "full_batches": 0,
+        "p95_ms": 71.16429805755615
+      },
+      "disjoint": {
+        "cases": 120,
+        "accepted_known": 63,
+        "known": 240,
+        "accepted_unjudged": 8,
+        "unjudged": 240,
+        "complete_known": 7,
+        "full_batches": 0,
+        "p95_ms": 71.3312281295657
+      },
+      "shared": {
+        "cases": 120,
+        "accepted_known": 182,
+        "known": 396,
+        "accepted_unjudged": 16,
+        "unjudged": 84,
+        "complete_known": 18,
+        "full_batches": 0,
+        "p95_ms": 70.87543038651347
+      },
+      "paired_known_delta": {
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 240,
+        "clusters": 189,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000,
+        "sampling_unit": "whole source paper; query-weighted mean"
+      }
+    },
+    "compact_work_margin": {
+      "combined": {
+        "cases": 240,
+        "accepted_known": 268,
+        "known": 636,
+        "accepted_unjudged": 10,
+        "unjudged": 324,
+        "complete_known": 42,
+        "full_batches": 0,
+        "p95_ms": 71.16429805755615
+      },
+      "disjoint": {
+        "cases": 120,
+        "accepted_known": 139,
+        "known": 240,
+        "accepted_unjudged": 3,
+        "unjudged": 240,
+        "complete_known": 42,
+        "full_batches": 0,
+        "p95_ms": 71.3312281295657
+      },
+      "shared": {
+        "cases": 120,
+        "accepted_known": 129,
+        "known": 396,
+        "accepted_unjudged": 7,
+        "unjudged": 84,
+        "complete_known": 0,
+        "full_batches": 0,
+        "p95_ms": 70.87543038651347
+      },
+      "paired_known_delta": {
+        "mean": 0.023958333333333335,
+        "percentile_95": [
+          -0.02008149121911374,
+          0.06759722613100683
+        ],
+        "queries": 240,
+        "clusters": 189,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000,
+        "sampling_unit": "whole source paper; query-weighted mean"
+      }
+    },
+    "full_absolute": {
+      "combined": {
+        "cases": 240,
+        "accepted_known": 179,
+        "known": 636,
+        "accepted_unjudged": 17,
+        "unjudged": 324,
+        "complete_known": 12,
+        "full_batches": 240,
+        "p95_ms": 118.1649755686521
+      },
+      "disjoint": {
+        "cases": 120,
+        "accepted_known": 49,
+        "known": 240,
+        "accepted_unjudged": 6,
+        "unjudged": 240,
+        "complete_known": 4,
+        "full_batches": 120,
+        "p95_ms": 113.63885086029767
+      },
+      "shared": {
+        "cases": 120,
+        "accepted_known": 130,
+        "known": 396,
+        "accepted_unjudged": 11,
+        "unjudged": 84,
+        "complete_known": 8,
+        "full_batches": 120,
+        "p95_ms": 123.00119670107959
+      },
+      "paired_known_delta": {
+        "mean": -0.06875,
+        "percentile_95": [
+          -0.09456734210055466,
+          -0.04515237957680366
+        ],
+        "queries": 240,
+        "clusters": 189,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000,
+        "sampling_unit": "whole source paper; query-weighted mean"
+      }
+    },
+    "scope_recheck": {
+      "combined": {
+        "cases": 240,
+        "accepted_known": 245,
+        "known": 636,
+        "accepted_unjudged": 24,
+        "unjudged": 324,
+        "complete_known": 25,
+        "full_batches": 0,
+        "p95_ms": 71.16429805755615
+      },
+      "disjoint": {
+        "cases": 120,
+        "accepted_known": 63,
+        "known": 240,
+        "accepted_unjudged": 8,
+        "unjudged": 240,
+        "complete_known": 7,
+        "full_batches": 0,
+        "p95_ms": 71.3312281295657
+      },
+      "shared": {
+        "cases": 120,
+        "accepted_known": 182,
+        "known": 396,
+        "accepted_unjudged": 16,
+        "unjudged": 84,
+        "complete_known": 18,
+        "full_batches": 0,
+        "p95_ms": 70.87543038651347
+      },
+      "paired_known_delta": {
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 240,
+        "clusters": 189,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000,
+        "sampling_unit": "whole source paper; query-weighted mean"
+      }
+    },
+    "absolute_recheck": {
+      "combined": {
+        "cases": 240,
+        "accepted_known": 245,
+        "known": 636,
+        "accepted_unjudged": 24,
+        "unjudged": 324,
+        "complete_known": 25,
+        "full_batches": 0,
+        "p95_ms": 71.16429805755615
+      },
+      "disjoint": {
+        "cases": 120,
+        "accepted_known": 63,
+        "known": 240,
+        "accepted_unjudged": 8,
+        "unjudged": 240,
+        "complete_known": 7,
+        "full_batches": 0,
+        "p95_ms": 71.3312281295657
+      },
+      "shared": {
+        "cases": 120,
+        "accepted_known": 182,
+        "known": 396,
+        "accepted_unjudged": 16,
+        "unjudged": 84,
+        "complete_known": 18,
+        "full_batches": 0,
+        "p95_ms": 70.87543038651347
+      },
+      "paired_known_delta": {
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 240,
+        "clusters": 189,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000,
+        "sampling_unit": "whole source paper; query-weighted mean"
+      }
+    }
+  }
+}

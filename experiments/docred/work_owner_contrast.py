@@ -46,7 +46,11 @@ def roles(document):
 
 
 def cases(original, extended, split):
-    for doc, newer in documents(original, extended, split):
+    yield from cases_from_documents(documents(original, extended, split))
+
+
+def cases_from_documents(document_pairs):
+    for doc, newer in document_pairs:
         old = roles(doc)
         updated = roles(newer)
         if not old <= updated:
