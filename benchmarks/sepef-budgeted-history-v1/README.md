@@ -12,7 +12,7 @@ For each question, restrict candidates to experts with at least one retained ans
 | 8 | 26,123 | 17,020 | 17,998 | 18,033 |
 | 16 | 51,889 | 17,371 | 18,092 | 18,095 |
 
-The test split has 19,995 questions. The full-history community scope reaches 18,100. At eight slots, reserving the most active communities recovers 1,013 reachable questions versus recency. Applying the same historical prior changes Hit@5 from 38.83% to 38.79% and MRR@10 from 0.2446 to 0.2455. The added availability barely changes this prior's top-ranked predictions. These results support using community reservation as an equal-budget text retrieval control. Testing the selected answer texts is a separate stage.
+The test split has 19,995 questions. The full-history community scope reaches 18,100. At eight slots, reserving the most active communities recovers 1,013 reachable questions versus recency. Applying the same historical prior changes Hit@5 from 38.83% to 38.79% and MRR@10 from 0.2446 to 0.2455. The added availability barely changes this prior's top-ranked predictions. These results support using community reservation as an equal-budget text retrieval control. The [matched text panel](../sepef-source-coverage-v1/README.md) tests whether the added coverage improves ranking.
 
 ## Reproduce
 
