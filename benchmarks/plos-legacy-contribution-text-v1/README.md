@@ -10,7 +10,7 @@ These notes are authored publisher text. The eligible legacy format uses concise
 
 ## RTX 5090 results
 
-Job 42615 downloads and checks 42 calibration and 40 test publications. The parser retains 30 computing and 20 energy papers, with one same-paper contrast per publication. Only the task wording and held-out source domain change across calibration and test. No captured byline name in a retained test record matches a parsed calibration byline name.
+The local capture downloads 42 calibration and 40 test publications. GPU job 42615 verifies their checksums before scoring. The parser retains 30 computing and 20 energy papers, with one same-paper contrast per publication. Only the task wording and held-out source domain change across calibration and test. No captured byline name in a retained test record matches a parsed calibration byline name.
 
 | Route | Relevant author ranks higher / 20 | Accepted supported author / 20 | Accepted wrong author / 20 | Both correct | Paired P95 |
 | --- | ---: | ---: | ---: | ---: | ---: |
