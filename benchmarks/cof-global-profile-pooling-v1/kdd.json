@@ -1,0 +1,211 @@
+{
+  "dataset": "KDD",
+  "job": "41607",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "experts": 737,
+  "sources": 99594,
+  "queries": 122,
+  "index_seconds": 0.34756825864315033,
+  "known_positives": 242,
+  "cohort_sha256": "e090a584e0a4f57fb0a405299386431bbff839ffacbccdbb9a11ea8d6a3229ac",
+  "hard_label_sha256": "4bc5ec19077f96d700e6da0c09139c34a000b800c0536b64eb166874a381a2d6",
+  "script_sha256": "dab16c2c689f7f6c1b7ce1941939547b145f86ee0111f3c361c992a8b3ea8bc2",
+  "reference_request_sha256": "5dcdc24bd4b31cfaf5de0103662807edf47a384ff65630d79f8d74de16eac725",
+  "vector_protocol_sha256": "85e4010895e8717c57d19113bdfaf3fb0c68afbb49f74635baac036eb06445a0",
+  "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "reranker_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+  "arms": {
+    "dense": {
+      "known_positive_recall_at_10": 0.13636363636363635,
+      "known_positive_p5_delta": {
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "partial_label_p5_delta_bounds": [
+        0.0,
+        0.0
+      ],
+      "known_positives_added_at_10": 0,
+      "known_positives_lost_at_10": 0,
+      "p5": 0.03770491803278689,
+      "judged": 0.14754098360655737,
+      "cited_p5": 0.021311475409836068,
+      "citation_coverage": 0.43278688524590164,
+      "calls": 3.1557377049180326,
+      "retrieval_ms": [
+        8.806074038147926,
+        10.040788259357214
+      ],
+      "complete_ms": [
+        81.77482429891825,
+        126.32449408993124
+      ]
+    },
+    "centroid": {
+      "known_positive_recall_at_10": 0.1446280991735537,
+      "known_positive_p5_delta": {
+        "mean": -0.0016393442622950807,
+        "percentile_95": [
+          -0.019672131147540982,
+          0.01475409836065574
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "partial_label_p5_delta_bounds": [
+        -0.6737704918032787,
+        0.6770491803278689
+      ],
+      "known_positives_added_at_10": 24,
+      "known_positives_lost_at_10": 22,
+      "p5": 0.036065573770491806,
+      "judged": 0.14098360655737704,
+      "cited_p5": 0.00819672131147541,
+      "citation_coverage": 0.2459016393442623,
+      "calls": 3.377049180327869,
+      "retrieval_ms": [
+        8.292543701827526,
+        9.085114300251007
+      ],
+      "complete_ms": [
+        90.9159705042839,
+        145.4502467997372
+      ]
+    },
+    "top_three": {
+      "known_positive_recall_at_10": 0.1652892561983471,
+      "known_positive_p5_delta": {
+        "mean": -0.008196721311475412,
+        "percentile_95": [
+          -0.018032786885245903,
+          0.001639344262295082
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "partial_label_p5_delta_bounds": [
+        -0.32459016393442625,
+        0.29672131147540987
+      ],
+      "known_positives_added_at_10": 10,
+      "known_positives_lost_at_10": 3,
+      "p5": 0.029508196721311476,
+      "judged": 0.15901639344262294,
+      "cited_p5": 0.01639344262295082,
+      "citation_coverage": 0.5016393442622951,
+      "calls": 2.9918032786885247,
+      "retrieval_ms": [
+        21.96348737925291,
+        22.63471484184265
+      ],
+      "complete_ms": [
+        92.66392514109612,
+        144.02710180729628
+      ]
+    },
+    "mean_max": {
+      "known_positive_recall_at_10": 0.1859504132231405,
+      "known_positive_p5_delta": {
+        "mean": 0.0016393442622950826,
+        "percentile_95": [
+          -0.011475409836065575,
+          0.013114754098360657
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "partial_label_p5_delta_bounds": [
+        -0.4,
+        0.3836065573770492
+      ],
+      "known_positives_added_at_10": 17,
+      "known_positives_lost_at_10": 5,
+      "p5": 0.03934426229508197,
+      "judged": 0.16721311475409836,
+      "cited_p5": 0.019672131147540985,
+      "citation_coverage": 0.42622950819672134,
+      "calls": 3.262295081967213,
+      "retrieval_ms": [
+        8.641067892313004,
+        9.731004759669302
+      ],
+      "complete_ms": [
+        86.34046651422977,
+        134.57169011235237
+      ]
+    },
+    "two_centers": {
+      "known_positive_recall_at_10": 0.15702479338842976,
+      "known_positive_p5_delta": {
+        "mean": -0.0032786885245901644,
+        "percentile_95": [
+          -0.021311475409836064,
+          0.013114754098360656
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "partial_label_p5_delta_bounds": [
+        -0.6475409836065574,
+        0.6475409836065574
+      ],
+      "known_positives_added_at_10": 26,
+      "known_positives_lost_at_10": 21,
+      "p5": 0.03442622950819672,
+      "judged": 0.14098360655737704,
+      "cited_p5": 0.00819672131147541,
+      "citation_coverage": 0.2655737704918033,
+      "calls": 3.3114754098360657,
+      "retrieval_ms": [
+        8.503950200974941,
+        9.375544637441635
+      ],
+      "complete_ms": [
+        89.56488966941833,
+        138.99008417502046
+      ]
+    },
+    "two_centers_max": {
+      "known_positive_recall_at_10": 0.18181818181818182,
+      "known_positive_p5_delta": {
+        "mean": -0.006557377049180328,
+        "percentile_95": [
+          -0.019672131147540985,
+          0.004918032786885247
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "partial_label_p5_delta_bounds": [
+        -0.4098360655737705,
+        0.3885245901639344
+      ],
+      "known_positives_added_at_10": 16,
+      "known_positives_lost_at_10": 5,
+      "p5": 0.03114754098360656,
+      "judged": 0.1557377049180328,
+      "cited_p5": 0.013114754098360656,
+      "citation_coverage": 0.4032786885245902,
+      "calls": 3.442622950819672,
+      "retrieval_ms": [
+        8.844321593642235,
+        9.799287840723991
+      ],
+      "complete_ms": [
+        90.94003029167652,
+        142.39780576899645
+      ]
+    }
+  }
+}
