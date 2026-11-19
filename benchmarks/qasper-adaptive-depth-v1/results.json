@@ -1,0 +1,430 @@
+{
+  "data_assets": {
+    "qasper-dev-v0.3.json": "2ae7ee62a65b1c4225791c70de80c2aad4e8998cf1fd4f09a53103db4f21af93",
+    "qasper-test-v0.3.json": "6e29ad410e6e39aa1936017fb965b30a20eb2e7751997f55b97c9d281aa884e5"
+  },
+  "embedding": {
+    "files": {
+      "config.json": "b5bf1f51fc45be473a54718cef92448d90a1be001bf9b9a44b8c7f10a19feaa9",
+      "model.safetensors": "0437e45c94563b09e13cb7a64478fc406947a93cb34a7e05870fc8dcd48e23fd",
+      "tokenizer.json": "def76fb086971c7867b829c23a26261e38d9d74e02139253b38aeb9df8b4b50a",
+      "tokenizer_config.json": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0"
+    },
+    "policy": "Official frozen BF16 weights; no own training or quantization.",
+    "repository": "Qwen/Qwen3-Embedding-0.6B",
+    "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3"
+  },
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "job": "40718",
+  "model": {
+    "center": [
+      3.749323254253454,
+      0.6116913666144621,
+      0.5246491794162591,
+      0.08704218719820349,
+      0.011059901106618326,
+      0.037830928324639246,
+      0.0971101998978924,
+      0.17989462250764351
+    ],
+    "coefficients": [
+      [
+        -0.06220216903550702,
+        -0.06147814583190448,
+        -0.05494532468923534,
+        -0.03329827791090728
+      ],
+      [
+        0.006000797486369292,
+        0.012062580389487869,
+        0.009183542015505818,
+        0.0008719797228044561
+      ],
+      [
+        -0.027288222856990705,
+        -0.019081373396173128,
+        -0.027535069423927375,
+        -0.03253346502223703
+      ],
+      [
+        0.07643479906763445,
+        0.07175785187705709,
+        0.08440823106610637,
+        0.0765038000045709
+      ],
+      [
+        0.05065158132219024,
+        0.053229625233120255,
+        0.03921554304562175,
+        0.037030482476348235
+      ],
+      [
+        -0.013951281076257257,
+        -0.017090279033906485,
+        -0.025021487343150076,
+        -0.018230485480740043
+      ],
+      [
+        0.04064253870340207,
+        0.03957017918609925,
+        0.04011714837428583,
+        0.04422722604082434
+      ],
+      [
+        0.02408225329086939,
+        0.005510045244147165,
+        0.0009825174635700773,
+        -0.0020047058214432687
+      ]
+    ],
+    "intercept": [
+      0.5260115606936416,
+      0.5433526011560693,
+      0.5895953757225434,
+      0.6011560693641619
+    ],
+    "scale": [
+      0.5229069757873129,
+      0.10926364781486977,
+      0.10745592194890584,
+      0.046941317467501006,
+      0.010306226452672648,
+      0.02524936999413085,
+      0.05136967852335015,
+      0.085370368045444
+    ]
+  },
+  "offline": {
+    "development": {
+      "counting_seconds": 0.7253487203270197,
+      "encoding_seconds": 39.58827038295567,
+      "paragraphs": 13194
+    },
+    "test": {
+      "counting_seconds": 0.21622797474265099,
+      "encoding_seconds": 14.522799177095294,
+      "paragraphs": 5054
+    }
+  },
+  "partitions": {
+    "calibration": 76,
+    "calibration_evaluable": 61,
+    "fit": 205,
+    "fit_evaluable": 173
+  },
+  "policies": {
+    "fixed16": {
+      "baseline_complete": 0.639344262295082,
+      "grid": [
+        {
+          "checks": 24.69736842105263,
+          "complete": 0.6229508196721312,
+          "penalty": 0.0
+        },
+        {
+          "checks": 22.276315789473685,
+          "complete": 0.6229508196721312,
+          "penalty": 0.01
+        },
+        {
+          "checks": 21.539473684210527,
+          "complete": 0.6229508196721312,
+          "penalty": 0.02
+        },
+        {
+          "checks": 18.80263157894737,
+          "complete": 0.6229508196721312,
+          "penalty": 0.04
+        },
+        {
+          "checks": 13.605263157894736,
+          "complete": 0.6229508196721312,
+          "penalty": 0.08
+        },
+        {
+          "checks": 6.078947368421052,
+          "complete": 0.5573770491803278,
+          "penalty": 0.16
+        },
+        {
+          "checks": 0,
+          "complete": 0.5409836065573771,
+          "penalty": 0.32
+        },
+        {
+          "checks": 0,
+          "complete": 0.5409836065573771,
+          "penalty": 0.64
+        },
+        {
+          "checks": 0,
+          "complete": 0.5409836065573771,
+          "penalty": 1.28
+        },
+        {
+          "checks": 0,
+          "complete": 0.5409836065573771,
+          "penalty": 2.56
+        },
+        {
+          "checks": 0,
+          "complete": 0.5409836065573771,
+          "penalty": 5.12
+        }
+      ],
+      "selected": {
+        "checks": 13.605263157894736,
+        "complete": 0.6229508196721312,
+        "penalty": 0.08
+      },
+      "target_checks": 15.973684210526315
+    },
+    "fixed32": {
+      "baseline_complete": 0.639344262295082,
+      "grid": [
+        {
+          "checks": 24.69736842105263,
+          "complete": 0.6229508196721312,
+          "penalty": 0.0
+        },
+        {
+          "checks": 22.276315789473685,
+          "complete": 0.6229508196721312,
+          "penalty": 0.01
+        },
+        {
+          "checks": 21.539473684210527,
+          "complete": 0.6229508196721312,
+          "penalty": 0.02
+        },
+        {
+          "checks": 18.80263157894737,
+          "complete": 0.6229508196721312,
+          "penalty": 0.04
+        },
+        {
+          "checks": 13.605263157894736,
+          "complete": 0.6229508196721312,
+          "penalty": 0.08
+        },
+        {
+          "checks": 6.078947368421052,
+          "complete": 0.5573770491803278,
+          "penalty": 0.16
+        },
+        {
+          "checks": 0,
+          "complete": 0.5409836065573771,
+          "penalty": 0.32
+        },
+        {
+          "checks": 0,
+          "complete": 0.5409836065573771,
+          "penalty": 0.64
+        },
+        {
+          "checks": 0,
+          "complete": 0.5409836065573771,
+          "penalty": 1.28
+        },
+        {
+          "checks": 0,
+          "complete": 0.5409836065573771,
+          "penalty": 2.56
+        },
+        {
+          "checks": 0,
+          "complete": 0.5409836065573771,
+          "penalty": 5.12
+        }
+      ],
+      "selected": {
+        "checks": 13.605263157894736,
+        "complete": 0.6229508196721312,
+        "penalty": 0.08
+      },
+      "target_checks": 30.144736842105264
+    }
+  },
+  "post_run_audit": {
+    "fixed_and_certified_order_matches_previous_run": {
+      "certified": 96,
+      "dense": 96,
+      "exhaustive": 96,
+      "fixed16": 96,
+      "fixed32": 96,
+      "fixed8": 96
+    },
+    "hindsight_oracle_on_evaluable_requests": {
+      "fixed16": {
+        "check_budget": 1321,
+        "maximum_possible_complete": 59
+      },
+      "fixed32": {
+        "check_budget": 2492,
+        "maximum_possible_complete": 59
+      }
+    },
+    "possible_complete": 59
+  },
+  "ranker_script_sha256": "92f43e6a0b950f41f70f4fa94fdd06a29cd22f087fbb4dbcffcbf3f332332b86",
+  "raw_file_sha256": "0688008d6a1d7128352dfafbf212da8c6ed2367acf65065f7665b85eb28c39b0",
+  "report": {
+    "arms": {
+      "adaptive16": {
+        "actions": {
+          "certified": 0,
+          "dense": 23,
+          "exhaustive": 0,
+          "fixed16": 58,
+          "fixed32": 14,
+          "fixed8": 1
+        },
+        "complete": 0.6867469879518072,
+        "complete_delta_vs_budget_baseline": {
+          "bootstrap_repeats": 10000,
+          "clusters": 83,
+          "mean": 0.0,
+          "percentile_95": [
+            -0.04819277108433735,
+            0.04819277108433735
+          ],
+          "queries": 83,
+          "sampling_unit": "whole source paper; query-weighted mean",
+          "seed": 20261116
+        },
+        "f1": 0.31541746846122243,
+        "mean_checks": 14.34375,
+        "p95_ms": 108.39305445551872
+      },
+      "adaptive32": {
+        "actions": {
+          "certified": 0,
+          "dense": 23,
+          "exhaustive": 0,
+          "fixed16": 58,
+          "fixed32": 14,
+          "fixed8": 1
+        },
+        "complete": 0.6867469879518072,
+        "complete_delta_vs_budget_baseline": {
+          "bootstrap_repeats": 10000,
+          "clusters": 83,
+          "mean": -0.012048192771084338,
+          "percentile_95": [
+            -0.04819277108433735,
+            0.024096385542168676
+          ],
+          "queries": 83,
+          "sampling_unit": "whole source paper; query-weighted mean",
+          "seed": 20261116
+        },
+        "f1": 0.31541746846122243,
+        "mean_checks": 14.34375,
+        "p95_ms": 108.76185866072774
+      },
+      "certified": {
+        "actions": {
+          "certified": 96,
+          "dense": 0,
+          "exhaustive": 0,
+          "fixed16": 0,
+          "fixed32": 0,
+          "fixed8": 0
+        },
+        "complete": 0.6987951807228916,
+        "f1": 0.3206852930061554,
+        "mean_checks": 38.5,
+        "p95_ms": 235.99242186173797
+      },
+      "dense": {
+        "actions": {
+          "certified": 0,
+          "dense": 96,
+          "exhaustive": 0,
+          "fixed16": 0,
+          "fixed32": 0,
+          "fixed8": 0
+        },
+        "complete": 0.5542168674698795,
+        "f1": 0.264865522696848,
+        "mean_checks": 0,
+        "p95_ms": 7.064908742904663
+      },
+      "exhaustive": {
+        "actions": {
+          "certified": 0,
+          "dense": 0,
+          "exhaustive": 96,
+          "fixed16": 0,
+          "fixed32": 0,
+          "fixed8": 0
+        },
+        "complete": 0.6987951807228916,
+        "f1": 0.3206852930061554,
+        "mean_checks": 52.645833333333336,
+        "p95_ms": 294.3253330886364
+      },
+      "fixed16": {
+        "actions": {
+          "certified": 0,
+          "dense": 0,
+          "exhaustive": 0,
+          "fixed16": 96,
+          "fixed32": 0,
+          "fixed8": 0
+        },
+        "complete": 0.6867469879518072,
+        "f1": 0.317242952214417,
+        "mean_checks": 15.927083333333334,
+        "p95_ms": 74.767732527107
+      },
+      "fixed32": {
+        "actions": {
+          "certified": 0,
+          "dense": 0,
+          "exhaustive": 0,
+          "fixed16": 0,
+          "fixed32": 96,
+          "fixed8": 0
+        },
+        "complete": 0.6987951807228916,
+        "f1": 0.3206852930061554,
+        "mean_checks": 30.010416666666668,
+        "p95_ms": 132.3629324324429
+      },
+      "fixed8": {
+        "actions": {
+          "certified": 0,
+          "dense": 0,
+          "exhaustive": 0,
+          "fixed16": 0,
+          "fixed32": 0,
+          "fixed8": 96
+        },
+        "complete": 0.6144578313253012,
+        "f1": 0.29142539627637915,
+        "mean_checks": 8,
+        "p95_ms": 42.69633302465081
+      }
+    },
+    "test_evaluable": 83,
+    "test_queries": 96
+  },
+  "reranker": {
+    "files": {
+      "config.json": "d479c427a9ca5295218063d4f9aca4f297ab4ac27487cca7af42c84643d51ef0",
+      "expected-large-files.json": "cd9940a651fcf3d97ffc28f0242a9a620c0da5b9acad1861ef14faf5ee784f0e",
+      "generation_config.json": "81051cd3f6e77013827148d0b8a6ead93f8ac390d5ab805f849199f0af6a08db",
+      "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+      "model.safetensors": "27cd75a405b9c1b46b59abfd88aaa209e6fed2a1972cde9b70e7659537c5e65b",
+      "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+      "tokenizer_config.json": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0",
+      "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    },
+    "policy": "Official frozen BF16 checkpoint; no own training or quantization. Revision recorded before downloading weights.",
+    "repository": "Qwen/Qwen3-Reranker-0.6B",
+    "revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473"
+  },
+  "script_sha256": "1eeb2fe5b1fff57d4af13c4d2ea4018813cdb58a870b0e15914ce02d42fdc56e"
+}
