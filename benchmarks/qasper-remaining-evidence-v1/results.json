@@ -1,0 +1,154 @@
+{
+  "arms": {
+    "anchored_full": {
+      "difference_ci": {
+        "bootstrap_repeats": 10000,
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 137,
+        "seed": 20261116
+      },
+      "gains": 0,
+      "hit": 40,
+      "losses": 0,
+      "mean_pairs": 47.18248175182482,
+      "reachable": 137,
+      "rerank_p95_ms": 554.8494447022674,
+      "selection_misses": 97,
+      "shortlist_misses": 0,
+      "truncations": 25
+    },
+    "anchored_top4": {
+      "difference_ci": {
+        "bootstrap_repeats": 10000,
+        "mean": -0.10948905109489052,
+        "percentile_95": [
+          -0.1897810218978102,
+          -0.029197080291970802
+        ],
+        "queries": 137,
+        "seed": 20261116
+      },
+      "gains": 10,
+      "hit": 25,
+      "losses": 25,
+      "mean_pairs": 4,
+      "reachable": 36,
+      "rerank_p95_ms": 39.10826779901981,
+      "selection_misses": 11,
+      "shortlist_misses": 101,
+      "truncations": 3
+    },
+    "gap_top4": {
+      "difference_ci": {
+        "bootstrap_repeats": 10000,
+        "mean": -0.12408759124087591,
+        "percentile_95": [
+          -0.2116788321167883,
+          -0.0364963503649635
+        ],
+        "queries": 137,
+        "seed": 20261116
+      },
+      "gains": 10,
+      "hit": 23,
+      "losses": 27,
+      "mean_pairs": 4,
+      "reachable": 34,
+      "rerank_p95_ms": 39.55116383731365,
+      "selection_misses": 11,
+      "shortlist_misses": 103,
+      "truncations": 3
+    },
+    "gap_top8": {
+      "difference_ci": {
+        "bootstrap_repeats": 10000,
+        "mean": -0.10218978102189781,
+        "percentile_95": [
+          -0.18248175182481752,
+          -0.029197080291970802
+        ],
+        "queries": 137,
+        "seed": 20261116
+      },
+      "gains": 8,
+      "hit": 26,
+      "losses": 22,
+      "mean_pairs": 8,
+      "reachable": 57,
+      "rerank_p95_ms": 77.26731896400449,
+      "selection_misses": 31,
+      "shortlist_misses": 80,
+      "truncations": 6
+    },
+    "question_full": {
+      "difference_ci": {
+        "bootstrap_repeats": 10000,
+        "mean": -0.06569343065693431,
+        "percentile_95": [
+          -0.145985401459854,
+          0.014598540145985401
+        ],
+        "queries": 137,
+        "seed": 20261116
+      },
+      "gains": 12,
+      "hit": 31,
+      "losses": 21,
+      "mean_pairs": 47.18248175182482,
+      "reachable": 137,
+      "rerank_p95_ms": 249.44962263107294,
+      "selection_misses": 106,
+      "shortlist_misses": 0,
+      "truncations": 0
+    },
+    "question_top4": {
+      "difference_ci": {
+        "bootstrap_repeats": 10000,
+        "mean": -0.15328467153284672,
+        "percentile_95": [
+          -0.24087591240875914,
+          -0.06569343065693431
+        ],
+        "queries": 137,
+        "seed": 20261116
+      },
+      "gains": 9,
+      "hit": 19,
+      "losses": 30,
+      "mean_pairs": 4,
+      "reachable": 36,
+      "rerank_p95_ms": 22.588193789124485,
+      "selection_misses": 17,
+      "shortlist_misses": 101,
+      "truncations": 0
+    }
+  },
+  "checkpoint": {
+    "files": {
+      "config.json": "d479c427a9ca5295218063d4f9aca4f297ab4ac27487cca7af42c84643d51ef0",
+      "expected-large-files.json": "cd9940a651fcf3d97ffc28f0242a9a620c0da5b9acad1861ef14faf5ee784f0e",
+      "generation_config.json": "81051cd3f6e77013827148d0b8a6ead93f8ac390d5ab805f849199f0af6a08db",
+      "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+      "model.safetensors": "27cd75a405b9c1b46b59abfd88aaa209e6fed2a1972cde9b70e7659537c5e65b",
+      "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+      "tokenizer_config.json": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0",
+      "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    },
+    "policy": "Official frozen BF16 checkpoint; no own training or quantization. Revision recorded before downloading weights.",
+    "repository": "Qwen/Qwen3-Reranker-0.6B",
+    "revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473"
+  },
+  "dataset": "QASPER v0.3 official test",
+  "evaluated": 137,
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "selected": 137,
+  "skipped": 0,
+  "versions": {
+    "cuda": "13.2",
+    "torch": "2.15.0+cu132"
+  }
+}
