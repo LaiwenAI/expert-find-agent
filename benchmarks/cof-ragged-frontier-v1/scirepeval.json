@@ -1,0 +1,122 @@
+{
+  "dataset": "SciRepEval",
+  "job": "42796",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "queries": 59,
+  "cohort_sha256": "faad2fb6a0b8f2f2a9a80a9df2dff092518464e6c3c4d989e8819c0fe090efed",
+  "code_sha256": "9dcf87a9c53a285c9e2cbe2b79a6e0d40d27a7d3605cf3d634970d5cf585e813",
+  "vector_protocol_sha256": "d119d82622581f208c155e5531de54be2ee086531c8cace1432008d4a4dd20db",
+  "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "reranker_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+  "packed_attention_isolation": true,
+  "arms": {
+    "frontier4": {
+      "comparisons": {
+        "frontier4": {
+          "exact_outputs": 59,
+          "latency_delta": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 59,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000
+          }
+        },
+        "frontier8": {
+          "exact_outputs": 59,
+          "latency_delta": {
+            "mean": -0.7124120464264336,
+            "percentile_95": [
+              -3.3225425305949936,
+              1.6619376751389012
+            ],
+            "queries": 59,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000
+          }
+        }
+      },
+      "cited_positives": 21,
+      "p95_ms": 111.74053940922019,
+      "forwards": 3.830508474576271,
+      "docs": 11.711864406779661,
+      "padded_tokens": 6550.169491525424,
+      "rechecks": 0.3898305084745763
+    },
+    "frontier8": {
+      "comparisons": {
+        "frontier4": {
+          "exact_outputs": 59,
+          "latency_delta": {
+            "mean": 0.7124120464264336,
+            "percentile_95": [
+              -1.6619376751389037,
+              3.3225425305949927
+            ],
+            "queries": 59,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000
+          }
+        },
+        "frontier8": {
+          "exact_outputs": 59,
+          "latency_delta": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 59,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000
+          }
+        }
+      },
+      "cited_positives": 21,
+      "p95_ms": 120.17510905861853,
+      "forwards": 2.7796610169491527,
+      "docs": 11.508474576271187,
+      "padded_tokens": 6892.5084745762715,
+      "rechecks": 0.4915254237288136
+    },
+    "ragged8": {
+      "comparisons": {
+        "frontier4": {
+          "exact_outputs": 59,
+          "latency_delta": {
+            "mean": -18.8890152563483,
+            "percentile_95": [
+              -21.561776460700873,
+              -16.02505942632965
+            ],
+            "queries": 59,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000
+          }
+        },
+        "frontier8": {
+          "exact_outputs": 59,
+          "latency_delta": {
+            "mean": -19.601427302774738,
+            "percentile_95": [
+              -22.678673812740687,
+              -16.704938709893725
+            ],
+            "queries": 59,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000
+          }
+        }
+      },
+      "cited_positives": 21,
+      "p95_ms": 92.55679640918967,
+      "forwards": 2.7966101694915255,
+      "docs": 11.508474576271187,
+      "padded_tokens": 5930.932203389831,
+      "rechecks": 0.4576271186440678
+    }
+  }
+}

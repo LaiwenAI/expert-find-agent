@@ -108,7 +108,7 @@ def summarize(rows):
     return result
 
 
-def run(dataset, embedding, reranker, output):
+def run(dataset, embedding, reranker, output, *, methods=tuple(ARMS), measure=verify, aggregate=summarize, setup=None):
     if output.exists() or not os.environ.get("SLURM_JOB_ID") or not torch.cuda.is_available():
         raise ValueError("Require fresh output and Slurm CUDA")
     torch.backends.cuda.matmul.allow_tf32 = False
@@ -126,24 +126,24 @@ def run(dataset, embedding, reranker, output):
         weights = reader.model.lm_head.weight[reader.labels].contiguous()
     chosen = select(dataset, ids, texts)
     warmup = next(q for q in ids if q not in chosen)
-    arms = tuple(ARMS)
+    calibration = setup(reader, weights) if setup is not None else {}
     rows = []
     for i, q in enumerate([warmup, *chosen]):
         candidates = index.search_query(texts[q], encoder, "mean_max")[:TOP]
-        offset = i % len(arms)
+        offset = i % len(methods)
         relevant = {expert for expert, grade in labels[q].items() if grade > 0}
-        row = {arm: verify(reader, weights, candidates, texts, texts[q], arm, relevant)
-               for arm in arms[offset:] + arms[:offset]}
+        row = {arm: measure(reader, weights, candidates, texts, texts[q], arm, relevant)
+               for arm in methods[offset:] + methods[:offset]}
         if i:
             rows.append(row)
         if i and i % 25 == 0:
             print(f"{dataset}: {i}/{len(chosen)}", flush=True)
     write_json(output, dict(
         dataset=dataset, job=os.environ["SLURM_JOB_ID"], gpu=torch.cuda.get_device_name(), queries=len(chosen),
-        cohort_sha256=sha256("\n".join(chosen).encode()).hexdigest(), code_sha256=digest(Path(__file__)),
+        cohort_sha256=sha256("\n".join(chosen).encode()).hexdigest(), code_sha256=digest(Path(measure.__code__.co_filename)),
         vector_protocol_sha256=digest(root / "qwen-embedding-torch-v1/protocol.json"),
         embedding_revision=provenance["revision"], reranker_revision=reader.provenance["revision"],
-        arms=summarize(rows),
+        **calibration, arms=aggregate(rows),
     ))
 
 
