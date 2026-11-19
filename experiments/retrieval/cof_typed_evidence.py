@@ -19,7 +19,7 @@ from experiments.litsearch.dense_cache import verify_checkpoint
 from experiments.qasper.paired_reader import load_reader
 from experiments.retrieval import cof_global_profile_pooling as profiles
 from experiments.retrieval.cof_compact_profile_shortlist import read_data
-from experiments.retrieval.cof_live_certified_batching import GUARD_MARGIN, TOP, WIDTH, WaveReader
+from experiments.retrieval.cof_live_certified_batching import GUARD_MARGIN, LENGTH_BUCKET, TOP, WIDTH, WaveReader
 
 ARMS = ("generic", "selective", "confirm_all")
 BAND = 3.
@@ -41,25 +41,43 @@ class TypedReader:
             raise ValueError("Expected three distinct single-token labels")
         self.digits = [ids[0] for ids in encoded]
 
-    @torch.inference_mode()
-    def support(self, query, documents):
+    def tokenize(self, query, documents):
         prompts = [self.tokenizer.apply_chat_template(
             [{"role": "system", "content": TYPED_PROMPT},
              {"role": "user", "content": f"Query paper:\n{query}\n\nCandidate publication:\n{doc}"}],
             tokenize=False, add_generation_prompt=True,
         ) for doc in documents]
-        batch = self.tokenizer(prompts, add_special_tokens=False, padding=True, return_tensors="pt").to("cuda")
+        return [{"input_ids": ids} for ids in self.tokenizer(prompts, add_special_tokens=False)["input_ids"]]
+
+    @torch.inference_mode()
+    def score_ids(self, tokens, width=None):
+        size = len(tokens)
+        rows = tokens if width is None else tokens + [tokens[0]] * (WIDTH - size)
+        batch = self.tokenizer.pad(rows, padding=True if width is None else "max_length",
+                                   max_length=width, return_tensors="pt").to("cuda")
         if batch["input_ids"].shape[1] > 4096:
             raise ValueError("Unexpected prompt length")
-        logits = self.model(**batch, use_cache=False, logits_to_keep=1).logits[:, -1, self.digits]
+        logits = self.model(**batch, use_cache=False, logits_to_keep=1).logits[:size, -1, self.digits]
         return (logits.argmax(dim=1) == 0).cpu().tolist()
 
+    def support(self, query, documents):
+        return self.score_ids(self.tokenize(query, documents))
 
-def request(index, encoder, reranker, typed, texts, query, labels, arm):
+    def prepare_fixed(self, query, documents):
+        tokens = dict(zip(documents, self.tokenize(query, documents.values()), strict=True))
+        longest = max(len(row["input_ids"]) for row in tokens.values())
+        return tokens, ((longest + LENGTH_BUCKET - 1) // LENGTH_BUCKET) * LENGTH_BUCKET
+
+
+def request(index, encoder, reranker, typed, texts, query, labels, arm, *,
+            fixed_generic=False, fixed_typed=False, audit=False):
     begin = perf_counter()
     candidates = index.search_query(query, encoder, "mean_max")
-    reader = WaveReader(reranker, query, texts, {doc for _, docs in candidates for doc in docs},
-                        dynamic=True, guard=GUARD_MARGIN, cache=True)
+    sources = {doc for _, docs in candidates for doc in docs}
+    reader = WaveReader(reranker, query, texts, sources, dynamic=not fixed_generic,
+                        guard=None if fixed_generic else GUARD_MARGIN, cache=True)
+    fixed_inputs = typed.prepare_fixed(query, {doc: texts[doc] for doc in sorted(sources)}) if fixed_typed else None
+    generic_trace, typed_trace = {}, {}
     typed_forwards = typed_documents = typed_rejections = proposed_confirmations = 0
     deferred = arm == "deferred_typed"
 
@@ -70,7 +88,14 @@ def request(index, encoder, reranker, typed, texts, query, labels, arm):
         nonlocal typed_forwards, typed_documents, typed_rejections
         if not positions:
             return margins
-        votes = typed.support(query, [texts[jobs[i][1]] for i in positions])
+        docs = [jobs[i][1] for i in positions]
+        if fixed_inputs is None:
+            votes = typed.support(query, [texts[doc] for doc in docs])
+        else:
+            tokens, width = fixed_inputs
+            votes = typed.score_ids([tokens[doc] for doc in docs], width)
+        if audit:
+            typed_trace.update(zip(docs, votes, strict=True))
         typed_forwards += 1
         typed_documents += len(positions)
         for i, supported in zip(positions, votes, strict=True):
@@ -82,6 +107,8 @@ def request(index, encoder, reranker, typed, texts, query, labels, arm):
     def score(jobs):
         nonlocal proposed_confirmations
         margins = reader.score(jobs)
+        if audit:
+            generic_trace.update((doc, margin) for (_, doc), margin in zip(jobs, margins, strict=True))
         if arm == "generic":
             return margins
         positions = [i for i, margin in enumerate(margins) if needs_confirmation(margin)]
@@ -113,7 +140,7 @@ def request(index, encoder, reranker, typed, texts, query, labels, arm):
         generic_forwards=reader.score_calls+reader.recheck_calls, typed_forwards=typed_forwards,
         typed_documents=typed_documents, typed_rejections=typed_rejections,
         proposed_confirmations=proposed_confirmations,
-    )
+    ) | ({"generic_trace": generic_trace, "typed_trace": typed_trace} if audit else {})
 
 
 def summarize(rows, arms=ARMS):

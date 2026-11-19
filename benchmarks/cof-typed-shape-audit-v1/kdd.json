@@ -1,0 +1,122 @@
+{
+  "dataset": "KDD",
+  "queries": 122,
+  "job": "42135",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "cohort_sha256": "e090a584e0a4f57fb0a405299386431bbff839ffacbccdbb9a11ea8d6a3229ac",
+  "script_sha256": "0ee2374500841999146b97e99cee9fe03b90c3fb195dd1630f55eb5cfed3f4c7",
+  "runner_sha256": "2a9da4b10a19915a75101416e15127a78f58e98d9c9eeb5aac71dc0da837f175",
+  "vector_protocol_sha256": "85e4010895e8717c57d19113bdfaf3fb0c68afbb49f74635baac036eb06445a0",
+  "hard_label_sha256": "4bc5ec19077f96d700e6da0c09139c34a000b800c0536b64eb166874a381a2d6",
+  "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "reranker_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+  "typed_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+  "report": {
+    "dynamic": {
+      "queries": 122,
+      "common_generic": 2207,
+      "common_typed": 337,
+      "generic_score_drift": 428,
+      "generic_threshold_drift": 3,
+      "typed_decision_drift": 7,
+      "exact": 117,
+      "queries_with_generic_threshold_drift": 3,
+      "queries_with_typed_drift": 5,
+      "dynamic_disagreements_repaired": 0,
+      "timing": {
+        "selective": {
+          "latency_p50_p95_ms": [
+            308.0145036801696,
+            615.3670929372311
+          ],
+          "typed_forwards": 2.6639344262295084,
+          "generic_forwards": 5.852459016393443,
+          "exact_vs_dynamic_immediate": 122
+        },
+        "deferred_typed": {
+          "latency_p50_p95_ms": [
+            274.18221440166235,
+            568.895058054477
+          ],
+          "typed_forwards": 1.098360655737705,
+          "generic_forwards": 7.213114754098361,
+          "exact_vs_dynamic_immediate": 117
+        }
+      },
+      "paired_ms_saved": {
+        "mean": 23.51936401768786,
+        "percentile_95": [
+          15.09765743499347,
+          31.78967287588376
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      }
+    },
+    "fixed": {
+      "queries": 122,
+      "common_generic": 2213,
+      "common_typed": 344,
+      "generic_score_drift": 0,
+      "generic_threshold_drift": 0,
+      "typed_decision_drift": 0,
+      "exact": 122,
+      "queries_with_generic_threshold_drift": 0,
+      "queries_with_typed_drift": 0,
+      "dynamic_disagreements_repaired": 5,
+      "timing": {
+        "selective": {
+          "latency_p50_p95_ms": [
+            650.3448681905866,
+            1331.969000957906
+          ],
+          "typed_forwards": 2.6557377049180326,
+          "generic_forwards": 5.032786885245901,
+          "exact_vs_dynamic_immediate": 114
+        },
+        "deferred_typed": {
+          "latency_p50_p95_ms": [
+            400.65435972064734,
+            914.8080927319824
+          ],
+          "typed_forwards": 1.0901639344262295,
+          "generic_forwards": 6.270491803278689,
+          "exact_vs_dynamic_immediate": 114
+        }
+      },
+      "paired_ms_saved": {
+        "mean": 237.28617870050377,
+        "percentile_95": [
+          201.48845224786305,
+          272.987142476238
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      }
+    },
+    "generic_fixed": {
+      "queries": 5,
+      "common_generic": 86,
+      "common_typed": 30,
+      "generic_score_drift": 0,
+      "generic_threshold_drift": 0,
+      "typed_decision_drift": 7,
+      "exact": 1,
+      "queries_with_generic_threshold_drift": 0,
+      "queries_with_typed_drift": 5
+    },
+    "typed_fixed": {
+      "queries": 5,
+      "common_generic": 96,
+      "common_typed": 32,
+      "generic_score_drift": 21,
+      "generic_threshold_drift": 1,
+      "typed_decision_drift": 0,
+      "exact": 4,
+      "queries_with_generic_threshold_drift": 1,
+      "queries_with_typed_drift": 0
+    }
+  }
+}
