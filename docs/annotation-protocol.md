@@ -34,7 +34,7 @@ For zero observed events among `n` independently sampled groups, the exact one-s
 | 2% | 149 |
 | 1% | 299 |
 
-These are best-case sample sizes for the binary risk event. Freeze the gate and total or prespecified sequential sample size before opening test outcomes. Plan paired ranking-quality precision and any separately claimed stratum independently.
+These are best-case sample sizes for the binary risk event. Freeze the gate and total or prespecified sequential sample size before opening test outcomes. Plan paired ranking-quality precision and any separately claimed stratum independently. For a joint evaluation of recommendation coverage and risk among covered groups, use the separate [conditional-risk design calculation](../benchmarks/enterprise-blind-panel-v1/README.md#joint-coverage-and-risk-planning).
 
 ## Bilingual intent-pair review
 
