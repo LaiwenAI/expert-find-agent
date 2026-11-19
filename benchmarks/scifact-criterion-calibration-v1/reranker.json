@@ -1,0 +1,210 @@
+{
+  "job": "41158",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "archive_sha256": "11c621288d41ac144d29b13b0f8503b3820b7d6e8b1f6ff24dff335c196d76be",
+  "script_sha256": "a60e9136ea8f9936eace7a4cdf31a2048d81b84b44a2dcfe9176d8b84a4e9ec8",
+  "verifier": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+  "threshold_cap": 0.05,
+  "maximum_abstract_characters": 2500,
+  "calibration_cases": 309,
+  "evaluation_cases": 226,
+  "calibration": {
+    "existing": {
+      "threshold": 7.25,
+      "labels": {
+        "support": {
+          "cases": 140,
+          "predicted_support": 15
+        },
+        "contradict": {
+          "cases": 47,
+          "predicted_support": 2
+        },
+        "unknown": {
+          "cases": 122,
+          "predicted_support": 0
+        }
+      }
+    },
+    "explicit": {
+      "threshold": 6.375,
+      "labels": {
+        "support": {
+          "cases": 140,
+          "predicted_support": 22
+        },
+        "contradict": {
+          "cases": 47,
+          "predicted_support": 2
+        },
+        "unknown": {
+          "cases": 122,
+          "predicted_support": 0
+        }
+      }
+    },
+    "contradiction_adjusted": {
+      "threshold": 0.625,
+      "labels": {
+        "support": {
+          "cases": 140,
+          "predicted_support": 8
+        },
+        "contradict": {
+          "cases": 47,
+          "predicted_support": 1
+        },
+        "unknown": {
+          "cases": 122,
+          "predicted_support": 4
+        }
+      }
+    }
+  },
+  "evaluation": {
+    "existing_zero": {
+      "labels": {
+        "support": {
+          "cases": 97,
+          "predicted_support": 91
+        },
+        "contradict": {
+          "cases": 47,
+          "predicted_support": 41
+        },
+        "unknown": {
+          "cases": 82,
+          "predicted_support": 37
+        }
+      },
+      "binary_accuracy_delta_vs_existing_zero": {
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 226,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      }
+    },
+    "explicit_zero": {
+      "labels": {
+        "support": {
+          "cases": 97,
+          "predicted_support": 89
+        },
+        "contradict": {
+          "cases": 47,
+          "predicted_support": 36
+        },
+        "unknown": {
+          "cases": 82,
+          "predicted_support": 19
+        }
+      },
+      "binary_accuracy_delta_vs_existing_zero": {
+        "mean": 0.09292035398230089,
+        "percentile_95": [
+          0.05309734513274336,
+          0.13716814159292035
+        ],
+        "queries": 226,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      }
+    },
+    "existing_calibrated": {
+      "labels": {
+        "support": {
+          "cases": 97,
+          "predicted_support": 5
+        },
+        "contradict": {
+          "cases": 47,
+          "predicted_support": 1
+        },
+        "unknown": {
+          "cases": 82,
+          "predicted_support": 1
+        }
+      },
+      "binary_accuracy_delta_vs_existing_zero": {
+        "mean": -0.04424778761061947,
+        "percentile_95": [
+          -0.15486725663716813,
+          0.07079646017699115
+        ],
+        "queries": 226,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      }
+    },
+    "explicit_calibrated": {
+      "labels": {
+        "support": {
+          "cases": 97,
+          "predicted_support": 12
+        },
+        "contradict": {
+          "cases": 47,
+          "predicted_support": 3
+        },
+        "unknown": {
+          "cases": 82,
+          "predicted_support": 1
+        }
+      },
+      "binary_accuracy_delta_vs_existing_zero": {
+        "mean": -0.022123893805309734,
+        "percentile_95": [
+          -0.12831858407079647,
+          0.08849557522123894
+        ],
+        "queries": 226,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      }
+    },
+    "contradiction_adjusted_calibrated": {
+      "labels": {
+        "support": {
+          "cases": 97,
+          "predicted_support": 1
+        },
+        "contradict": {
+          "cases": 47,
+          "predicted_support": 4
+        },
+        "unknown": {
+          "cases": 82,
+          "predicted_support": 0
+        }
+      },
+      "binary_accuracy_delta_vs_existing_zero": {
+        "mean": -0.07079646017699115,
+        "percentile_95": [
+          -0.18141592920353983,
+          0.03982300884955752
+        ],
+        "queries": 226,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      }
+    }
+  },
+  "evaluation_batch_p50_p95_ms": {
+    "existing": [
+      115.43764732778072,
+      154.23893872648478
+    ],
+    "explicit": [
+      117.05762147903442,
+      156.61276821047068
+    ],
+    "refute": [
+      115.10812304913998,
+      149.95481856167316
+    ]
+  }
+}

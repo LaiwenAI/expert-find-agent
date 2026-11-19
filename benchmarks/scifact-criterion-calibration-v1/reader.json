@@ -1,0 +1,103 @@
+{
+  "job": "41166",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "archive_sha256": "11c621288d41ac144d29b13b0f8503b3820b7d6e8b1f6ff24dff335c196d76be",
+  "script_sha256": "3fe2f905ba40855938522df7e8958d98f3c0887cba0d8bd09b1cefb09a922db9",
+  "revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+  "calibration_cases": 309,
+  "evaluation_cases": 226,
+  "calibrated_threshold": 1.0,
+  "calibration_labels": {
+    "support": {
+      "cases": 140,
+      "predicted_support": 78
+    },
+    "contradict": {
+      "cases": 47,
+      "predicted_support": 1
+    },
+    "unknown": {
+      "cases": 122,
+      "predicted_support": 6
+    }
+  },
+  "direct_support": {
+    "support": {
+      "cases": 97,
+      "predicted_support": 49
+    },
+    "contradict": {
+      "cases": 47,
+      "predicted_support": 4
+    },
+    "unknown": {
+      "cases": 82,
+      "predicted_support": 2
+    }
+  },
+  "calibrated_support": {
+    "support": {
+      "cases": 97,
+      "predicted_support": 48
+    },
+    "contradict": {
+      "cases": 47,
+      "predicted_support": 4
+    },
+    "unknown": {
+      "cases": 82,
+      "predicted_support": 2
+    }
+  },
+  "direct_confusion": [
+    {
+      "gold": "contradict",
+      "predicted": "contradict",
+      "cases": 38
+    },
+    {
+      "gold": "contradict",
+      "predicted": "support",
+      "cases": 4
+    },
+    {
+      "gold": "contradict",
+      "predicted": "unknown",
+      "cases": 5
+    },
+    {
+      "gold": "support",
+      "predicted": "contradict",
+      "cases": 38
+    },
+    {
+      "gold": "support",
+      "predicted": "support",
+      "cases": 49
+    },
+    {
+      "gold": "support",
+      "predicted": "unknown",
+      "cases": 10
+    },
+    {
+      "gold": "unknown",
+      "predicted": "contradict",
+      "cases": 24
+    },
+    {
+      "gold": "unknown",
+      "predicted": "support",
+      "cases": 2
+    },
+    {
+      "gold": "unknown",
+      "predicted": "unknown",
+      "cases": 56
+    }
+  ],
+  "evaluation_batch_p50_p95_ms": [
+    628.3936817198992,
+    798.1817532330751
+  ]
+}
