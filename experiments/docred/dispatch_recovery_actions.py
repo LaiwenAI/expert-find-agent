@@ -130,10 +130,10 @@ def assess(query, observations, gold, identities):
                 ms=elapsed)
 
 
-def summarize(panels):
+def summarize(panels, reference="staged_depth"):
     aggregate = {}
     for style, results in panels.items():
-        baseline = results["staged_depth"]
+        baseline = results[reference]
         groups = [row["group"] for row in baseline]
         aggregate[style] = {}
         for arm, items in results.items():
@@ -144,7 +144,8 @@ def summarize(panels):
                       for row, ref in zip(items, baseline, strict=True)]
             aggregate[style][arm] = totals | dict(
                 queries=len(items), p95_ms=float(np.quantile([row["ms"] for row in items], .95)),
-                grounded_p5_change_vs_staged=clustered_paired_interval(deltas, groups),
+                **{f"grounded_p5_change_vs_{reference.removesuffix('_depth')}":
+                   clustered_paired_interval(deltas, groups)},
             )
     return aggregate
 
