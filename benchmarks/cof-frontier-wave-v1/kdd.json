@@ -1,0 +1,97 @@
+{
+  "dataset": "KDD",
+  "job": "42782",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "queries": 122,
+  "cohort_sha256": "e090a584e0a4f57fb0a405299386431bbff839ffacbccdbb9a11ea8d6a3229ac",
+  "code_sha256": "4d090c74caafb9d6b4205e3a768939b38df6ad0f050100668e704f2271ee099f",
+  "vector_protocol_sha256": "85e4010895e8717c57d19113bdfaf3fb0c68afbb49f74635baac036eb06445a0",
+  "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "reranker_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+  "arms": {
+    "frontier4": {
+      "exact_outputs": 122,
+      "cited_positives": 12,
+      "p95_ms": 125.36909598857164,
+      "paired_latency_delta": {
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "forwards": 3.262295081967213,
+      "docs": 9.69672131147541,
+      "padded_tokens": 6691.704918032787,
+      "rechecks": 0.3442622950819672,
+      "speculative": 0,
+      "unused_speculative": 0
+    },
+    "fill4": {
+      "exact_outputs": 122,
+      "cited_positives": 12,
+      "p95_ms": 126.33724091574547,
+      "paired_latency_delta": {
+        "mean": 0.9761258318531708,
+        "percentile_95": [
+          0.507049589631621,
+          1.4777744803424986
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "forwards": 3.122950819672131,
+      "docs": 9.901639344262295,
+      "padded_tokens": 6846.270491803279,
+      "rechecks": 0.3360655737704918,
+      "speculative": 0.36065573770491804,
+      "unused_speculative": 0.20491803278688525
+    },
+    "frontier8": {
+      "exact_outputs": 122,
+      "cited_positives": 12,
+      "p95_ms": 128.8508974947035,
+      "paired_latency_delta": {
+        "mean": 0.5722697366212235,
+        "percentile_95": [
+          -0.8476622685118287,
+          2.0138915563307562
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "forwards": 2.278688524590164,
+      "docs": 9.631147540983607,
+      "padded_tokens": 6930.38524590164,
+      "rechecks": 0.36065573770491804,
+      "speculative": 0,
+      "unused_speculative": 0
+    },
+    "fill8": {
+      "exact_outputs": 122,
+      "cited_positives": 12,
+      "p95_ms": 131.70592356473205,
+      "paired_latency_delta": {
+        "mean": 4.210474091719409,
+        "percentile_95": [
+          2.4319864343851805,
+          6.040719040806907
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "forwards": 2.1639344262295084,
+      "docs": 10.21311475409836,
+      "padded_tokens": 7316.204918032787,
+      "rechecks": 0.36885245901639346,
+      "speculative": 0.7540983606557377,
+      "unused_speculative": 0.5819672131147541
+    }
+  }
+}
