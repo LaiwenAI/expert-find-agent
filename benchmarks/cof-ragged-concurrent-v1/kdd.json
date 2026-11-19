@@ -1,0 +1,139 @@
+{
+  "dataset": "KDD",
+  "job": "42808",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "workers": 4,
+  "extra_packed_backbone_bytes": 1191553024,
+  "samples": 40,
+  "repeats": 2,
+  "cohort_sha256": "b20e6e9c28c7cc60650dd3f3f1c7ca4b56e9cab7547a08d79e9520cf085382ad",
+  "code_sha256": "36fe36a59ac24a7f9ef345f5ddca0d52f1d50275147d427f5164a3dbe6de278a",
+  "vector_protocol_sha256": "85e4010895e8717c57d19113bdfaf3fb0c68afbb49f74635baac036eb06445a0",
+  "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "reranker_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+  "rates": {
+    "4": {
+      "padded4": {
+        "exact": 80,
+        "requests": 80,
+        "p95_ms": 126.56544102355838,
+        "worker_wait_p95_ms": 0.11982321739196777,
+        "arrival_lag_max_ms": 0.07589533925056458,
+        "throughput": 4.065657542132241,
+        "dynamic_launches": 0,
+        "merged_launches": 0,
+        "dynamic_groups": 0,
+        "serial": 324,
+        "fixed": 20
+      },
+      "packed8": {
+        "exact": 80,
+        "requests": 80,
+        "p95_ms": 92.81278727576134,
+        "worker_wait_p95_ms": 0.10784585028886791,
+        "arrival_lag_max_ms": 0.07338449358940125,
+        "throughput": 4.086524081164983,
+        "dynamic_launches": 0,
+        "merged_launches": 0,
+        "dynamic_groups": 0,
+        "serial": 236,
+        "fixed": 16
+      },
+      "packed8_merge": {
+        "exact": 80,
+        "requests": 80,
+        "p95_ms": 96.5476658195257,
+        "worker_wait_p95_ms": 0.10535502806305885,
+        "arrival_lag_max_ms": 0.07244758307933807,
+        "throughput": 4.0860958096561575,
+        "dynamic_launches": 156,
+        "merged_launches": 0,
+        "dynamic_groups": 156,
+        "serial": 80,
+        "fixed": 16
+      }
+    },
+    "8": {
+      "padded4": {
+        "exact": 80,
+        "requests": 80,
+        "p95_ms": 128.64259760826826,
+        "worker_wait_p95_ms": 0.11232728138566013,
+        "arrival_lag_max_ms": 0.06945803761482239,
+        "throughput": 8.058671810446286,
+        "dynamic_launches": 0,
+        "merged_launches": 0,
+        "dynamic_groups": 0,
+        "serial": 324,
+        "fixed": 20
+      },
+      "packed8": {
+        "exact": 80,
+        "requests": 80,
+        "p95_ms": 94.67619908973572,
+        "worker_wait_p95_ms": 0.12222798541188236,
+        "arrival_lag_max_ms": 0.07588975131511688,
+        "throughput": 8.140895341918597,
+        "dynamic_launches": 0,
+        "merged_launches": 0,
+        "dynamic_groups": 0,
+        "serial": 236,
+        "fixed": 16
+      },
+      "packed8_merge": {
+        "exact": 80,
+        "requests": 80,
+        "p95_ms": 99.72051922231911,
+        "worker_wait_p95_ms": 0.11345725506544112,
+        "arrival_lag_max_ms": 0.07592514157295227,
+        "throughput": 8.138900381259544,
+        "dynamic_launches": 156,
+        "merged_launches": 0,
+        "dynamic_groups": 156,
+        "serial": 80,
+        "fixed": 16
+      }
+    },
+    "12": {
+      "padded4": {
+        "exact": 80,
+        "requests": 80,
+        "p95_ms": 463.5434984229505,
+        "worker_wait_p95_ms": 95.92082202434538,
+        "arrival_lag_max_ms": 0.6006099283695221,
+        "throughput": 11.433722790983657,
+        "dynamic_launches": 0,
+        "merged_launches": 0,
+        "dynamic_groups": 0,
+        "serial": 324,
+        "fixed": 20
+      },
+      "packed8": {
+        "exact": 80,
+        "requests": 80,
+        "p95_ms": 108.50956654176113,
+        "worker_wait_p95_ms": 0.11795498430728908,
+        "arrival_lag_max_ms": 0.07172860205173492,
+        "throughput": 12.15689548030459,
+        "dynamic_launches": 0,
+        "merged_launches": 0,
+        "dynamic_groups": 0,
+        "serial": 236,
+        "fixed": 16
+      },
+      "packed8_merge": {
+        "exact": 80,
+        "requests": 80,
+        "p95_ms": 113.90190925449131,
+        "worker_wait_p95_ms": 0.12798923999071118,
+        "arrival_lag_max_ms": 0.07476843893527985,
+        "throughput": 12.147141448835018,
+        "dynamic_launches": 156,
+        "merged_launches": 0,
+        "dynamic_groups": 156,
+        "serial": 80,
+        "fixed": 16
+      }
+    }
+  }
+}

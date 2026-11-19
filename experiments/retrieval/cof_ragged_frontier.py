@@ -35,32 +35,38 @@ def packed_attention(module, query, key, value, attention_mask, *, offsets, max_
     return output.unsqueeze(0), None
 
 
+@torch.inference_mode()
+def packed_forward(model, weight, batch):
+    sequences = [row["input_ids"] for row in batch]
+    lengths = [len(sequence) for sequence in sequences]
+    offsets = [0]
+    for length in lengths:
+        offsets.append(offsets[-1] + length)
+    token_ids = torch.tensor([[token for seq in sequences for token in seq]], device="cuda")
+    positions = torch.tensor([[pos for length in lengths for pos in range(length)]], device="cuda")
+    endpoints = torch.tensor([n - 1 for n in offsets[1:]], device="cuda")
+    limits = torch.tensor(offsets, dtype=torch.int32, device="cuda")
+    hidden = model(input_ids=token_ids, position_ids=positions, attention_mask={"full_attention": None},
+                   offsets=limits, max_length=max(lengths), use_cache=False).last_hidden_state[0]
+    logits = torch.nn.functional.linear(hidden.index_select(0, endpoints), weight).float()
+    return (logits[:, 0] - logits[:, 1]).cpu().tolist(), offsets[-1]
+
+
 class RaggedWaveReader(BinaryWaveReader):
     @torch.inference_mode()
     def _forward(self, batch, dynamic):
         if not dynamic or len(batch) == 1:
             return super()._forward(batch, dynamic)
-        sequences = [row["input_ids"] for row in batch]
-        lengths = [len(sequence) for sequence in sequences]
-        offsets = [0]
-        for length in lengths:
-            offsets.append(offsets[-1] + length)
-        token_ids = torch.tensor([[token for seq in sequences for token in seq]], device="cuda")
-        positions = torch.tensor([[pos for length in lengths for pos in range(length)]], device="cuda")
-        endpoints = torch.tensor([n - 1 for n in offsets[1:]], device="cuda")
-        limits = torch.tensor(offsets, dtype=torch.int32, device="cuda")
         model = self.reader.model.model
         config = model.config
         prior = config._attn_implementation
         config._attn_implementation = PACKED_ATTENTION
         try:
-            hidden = model(input_ids=token_ids, position_ids=positions, attention_mask={"full_attention": None},
-                           offsets=limits, max_length=max(lengths), use_cache=False).last_hidden_state[0]
+            values, count = packed_forward(model, self.weight, batch)
         finally:
             config._attn_implementation = prior
-        logits = torch.nn.functional.linear(hidden.index_select(0, endpoints), self.weight).float()
-        self.padded_tokens += offsets[-1]
-        return (logits[:, 0] - logits[:, 1]).cpu().tolist()
+        self.padded_tokens += count
+        return values
 
 
 def setup(reader, weights):
