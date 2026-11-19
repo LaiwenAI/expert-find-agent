@@ -1,0 +1,156 @@
+{
+  "job": "41675",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "script_sha256": "eee7545dcb46665866a8eb0e98c004a7e57b2385b753ea5a66b67ed711d43e4e",
+  "parent_script_sha256": "88cf48b03aecf2115d52cfc5f956e3d23c098be93a0b758faecbc0e454d31f18",
+  "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "reranker_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+  "hotpot_sha256": "4e9ecb5c8d3b719f624d66b60f8d56bf227f03914f5f0753d6fa1b359d7104ea",
+  "qasper_train_sha256": "9458bfe76074a8fa8d1685af02bcc73537aa6d338ad20591dfaff1946bc88bf4",
+  "qasper_train_questions": 370,
+  "qasper_train_offline": {
+    "counting_seconds": 2.263140272349119,
+    "encoding_seconds": 62.177047139033675,
+    "paragraphs": 20508,
+    "lexical_index_seconds": 0.24354605190455914
+  },
+  "qasper_comparable": 220,
+  "target_fit_comparable": 162,
+  "hotpot_panels": {
+    "fit": {
+      "questions": 220,
+      "offline": {
+        "sentences": 9054,
+        "encoding_seconds": 7.954968398436904
+      },
+      "reachable": 163,
+      "two_swap_ceiling": 162,
+      "id_sha256": "52534b923ef242b9bb4062d7ecbc06557acbd4f5e4fa17f53225ea0d14553fa7"
+    },
+    "calibration": {
+      "questions": 100,
+      "offline": {
+        "sentences": 4045,
+        "encoding_seconds": 4.028008799999952
+      },
+      "reachable": 80,
+      "two_swap_ceiling": 79,
+      "id_sha256": "5ed94375fbdf3b05d5dd503bfc24c88c8d877667b2179cb23a9febb2df198d73"
+    },
+    "test": {
+      "questions": 256,
+      "offline": {
+        "sentences": 10553,
+        "encoding_seconds": 9.218606147915125
+      },
+      "reachable": 193,
+      "two_swap_ceiling": 192,
+      "id_sha256": "da5c2dd7c7440c37eeb6b20378c7df73c427b8711658884f25dd06e478f3e45d"
+    }
+  },
+  "calibration": {
+    "target_score_only": {
+      "complete": 55,
+      "edited": 78,
+      "threshold": 0.0
+    },
+    "target_joint": {
+      "complete": 60,
+      "edited": 89,
+      "threshold": 0.0
+    }
+  },
+  "source_threshold": 0.1,
+  "results": {
+    "pointwise": {
+      "complete": 122,
+      "changed": 0,
+      "gained": 0,
+      "lost": 0,
+      "paired_delta": {
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 256,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "p95_ms": 41.12092358991504,
+      "selector_p95_ms": 0.0
+    },
+    "two_doc_rule": {
+      "complete": 122,
+      "changed": 5,
+      "gained": 0,
+      "lost": 0,
+      "paired_delta": {
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 256,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "p95_ms": 41.12252499908209,
+      "selector_p95_ms": 0.0016223639249801636
+    },
+    "qasper_transfer": {
+      "complete": 102,
+      "changed": 169,
+      "gained": 6,
+      "lost": 26,
+      "paired_delta": {
+        "mean": -0.078125,
+        "percentile_95": [
+          -0.12109375,
+          -0.03515625
+        ],
+        "queries": 256,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "p95_ms": 41.55748849734664,
+      "selector_p95_ms": 0.5051437765359879
+    },
+    "target_score_only": {
+      "complete": 120,
+      "changed": 194,
+      "gained": 6,
+      "lost": 8,
+      "paired_delta": {
+        "mean": -0.0078125,
+        "percentile_95": [
+          -0.03515625,
+          0.01953125
+        ],
+        "queries": 256,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "p95_ms": 41.557933669537306,
+      "selector_p95_ms": 0.5047423765063286
+    },
+    "target_joint": {
+      "complete": 132,
+      "changed": 229,
+      "gained": 19,
+      "lost": 9,
+      "paired_delta": {
+        "mean": 0.0390625,
+        "percentile_95": [
+          0.0,
+          0.08203125
+        ],
+        "queries": 256,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "p95_ms": 41.557383723556995,
+      "selector_p95_ms": 0.5044047720730305
+    }
+  }
+}
