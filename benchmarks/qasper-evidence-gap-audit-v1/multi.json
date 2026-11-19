@@ -1,0 +1,192 @@
+{
+  "job": "41638",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "papers": 137,
+  "offline": {
+    "counting_seconds": 0.6477196495980024,
+    "encoding_seconds": 18.356181897222996,
+    "paragraphs": 6765,
+    "lexical_index_seconds": 0.08058498054742813
+  },
+  "panel": "multi_evidence",
+  "data_sha256": {
+    "qasper-dev-v0.3.json": "2ae7ee62a65b1c4225791c70de80c2aad4e8998cf1fd4f09a53103db4f21af93",
+    "qasper-test-v0.3.json": "6e29ad410e6e39aa1936017fb965b30a20eb2e7751997f55b97c9d281aa884e5"
+  },
+  "script_sha256": "06556ac02d8e0ddbbfafc8c1a7438c77e27424458a845fa255d37b20e1c4d77d",
+  "split_sha256": "4f80118cb4afdc7549b554b64ee3d71d723738d1611a57c8ddedc1fe158fe72a",
+  "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "reranker_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+  "arms": {
+    "flat16": {
+      "audit": {
+        "shortlist_miss": 54,
+        "complete": 43,
+        "selection_miss": 40
+      },
+      "checks": 15.978102189781023,
+      "clipped": 0,
+      "latency_ms": [
+        48.82240295410156,
+        71.70534133911133
+      ],
+      "complete_delta_vs_flat16": {
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 137,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "shortlist_delta_vs_flat16": {
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 137,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "feasible": 137
+    },
+    "section16": {
+      "audit": {
+        "shortlist_miss": 53,
+        "complete": 43,
+        "selection_miss": 41
+      },
+      "checks": 15.978102189781023,
+      "clipped": 0,
+      "latency_ms": [
+        49.659861251711845,
+        71.50555215775967
+      ],
+      "complete_delta_vs_flat16": {
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 137,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "shortlist_delta_vs_flat16": {
+        "mean": 0.0072992700729927005,
+        "percentile_95": [
+          -0.0364963503649635,
+          0.051094890510948905
+        ],
+        "queries": 137,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "feasible": 137
+    },
+    "dense_anchor16": {
+      "audit": {
+        "shortlist_miss": 49,
+        "complete": 43,
+        "selection_miss": 45
+      },
+      "checks": 15.978102189781023,
+      "clipped": 0,
+      "latency_ms": [
+        49.55623485147953,
+        71.51809707283974
+      ],
+      "complete_delta_vs_flat16": {
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 137,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "shortlist_delta_vs_flat16": {
+        "mean": 0.0364963503649635,
+        "percentile_95": [
+          0.0,
+          0.08029197080291971
+        ],
+        "queries": 137,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "feasible": 137
+    },
+    "verified_anchor16": {
+      "audit": {
+        "shortlist_miss": 47,
+        "complete": 43,
+        "selection_miss": 47
+      },
+      "checks": 15.978102189781023,
+      "clipped": 0,
+      "latency_ms": [
+        49.48232136666775,
+        71.47762514650822
+      ],
+      "complete_delta_vs_flat16": {
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 137,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "shortlist_delta_vs_flat16": {
+        "mean": 0.051094890510948905,
+        "percentile_95": [
+          0.0072992700729927005,
+          0.10218978102189781
+        ],
+        "queries": 137,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "feasible": 137
+    },
+    "flat32": {
+      "audit": {
+        "shortlist_miss": 20,
+        "selection_miss": 74,
+        "complete": 43
+      },
+      "checks": 30.1021897810219,
+      "clipped": 0,
+      "latency_ms": [
+        90.66892229020596,
+        124.68462474644181
+      ],
+      "complete_delta_vs_flat16": {
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 137,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "shortlist_delta_vs_flat16": {
+        "mean": 0.24817518248175183,
+        "percentile_95": [
+          0.17518248175182483,
+          0.32116788321167883
+        ],
+        "queries": 137,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "feasible": 137
+    }
+  }
+}

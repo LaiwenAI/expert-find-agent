@@ -1,0 +1,201 @@
+{
+  "job": "41631",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "papers": 416,
+  "offline": {
+    "counting_seconds": 2.1305266618728638,
+    "encoding_seconds": 57.95098391920328,
+    "paragraphs": 19710,
+    "lexical_index_seconds": 0.24296849966049194
+  },
+  "data_sha256": {
+    "qasper-dev-v0.3.json": "2ae7ee62a65b1c4225791c70de80c2aad4e8998cf1fd4f09a53103db4f21af93",
+    "qasper-test-v0.3.json": "6e29ad410e6e39aa1936017fb965b30a20eb2e7751997f55b97c9d281aa884e5"
+  },
+  "script_sha256": "155fe8d8f118ce4380104716160ff8a8756d2a020a78d06953041454576af185",
+  "split_sha256": "42add8b91f74032086383ad60d411bbfe4daf804a617ec4e8b43f3f7ee9624b7",
+  "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "reranker_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+  "arms": {
+    "flat16": {
+      "audit": {
+        "complete": 252,
+        "unscored": 66,
+        "selection_miss": 57,
+        "shortlist_miss": 34,
+        "output_capacity": 7
+      },
+      "checks": 15.867788461538462,
+      "clipped": 0,
+      "latency_ms": [
+        54.12375181913376,
+        79.67166136950254
+      ],
+      "complete_delta_vs_flat16": {
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 343,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "shortlist_delta_vs_flat16": {
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 343,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "feasible": 343
+    },
+    "section16": {
+      "audit": {
+        "complete": 254,
+        "unscored": 66,
+        "selection_miss": 56,
+        "shortlist_miss": 33,
+        "output_capacity": 7
+      },
+      "checks": 15.867788461538462,
+      "clipped": 0,
+      "latency_ms": [
+        53.759646601974964,
+        78.36830010637641
+      ],
+      "complete_delta_vs_flat16": {
+        "mean": 0.0058309037900874635,
+        "percentile_95": [
+          -0.0058309037900874635,
+          0.01749271137026239
+        ],
+        "queries": 343,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "shortlist_delta_vs_flat16": {
+        "mean": 0.0029154518950437317,
+        "percentile_95": [
+          -0.01749271137026239,
+          0.023323615160349854
+        ],
+        "queries": 343,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "feasible": 343
+    },
+    "dense_anchor16": {
+      "audit": {
+        "complete": 252,
+        "unscored": 66,
+        "shortlist_miss": 30,
+        "selection_miss": 61,
+        "output_capacity": 7
+      },
+      "checks": 15.867788461538462,
+      "clipped": 1,
+      "latency_ms": [
+        54.186319001019,
+        79.18166508898139
+      ],
+      "complete_delta_vs_flat16": {
+        "mean": 0.0,
+        "percentile_95": [
+          -0.008746355685131196,
+          0.008746355685131196
+        ],
+        "queries": 343,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "shortlist_delta_vs_flat16": {
+        "mean": 0.011661807580174927,
+        "percentile_95": [
+          -0.008746355685131196,
+          0.03206997084548105
+        ],
+        "queries": 343,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "feasible": 343
+    },
+    "verified_anchor16": {
+      "audit": {
+        "complete": 254,
+        "unscored": 66,
+        "shortlist_miss": 31,
+        "selection_miss": 58,
+        "output_capacity": 7
+      },
+      "checks": 15.867788461538462,
+      "clipped": 1,
+      "latency_ms": [
+        54.07622084021568,
+        79.23769950866699
+      ],
+      "complete_delta_vs_flat16": {
+        "mean": 0.0058309037900874635,
+        "percentile_95": [
+          0.0,
+          0.014577259475218658
+        ],
+        "queries": 343,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "shortlist_delta_vs_flat16": {
+        "mean": 0.008746355685131196,
+        "percentile_95": [
+          -0.011661807580174927,
+          0.029154518950437316
+        ],
+        "queries": 343,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "feasible": 343
+    },
+    "flat32": {
+      "audit": {
+        "complete": 255,
+        "unscored": 66,
+        "selection_miss": 81,
+        "shortlist_miss": 7,
+        "output_capacity": 7
+      },
+      "checks": 29.528846153846153,
+      "clipped": 2,
+      "latency_ms": [
+        96.68095223605633,
+        136.19773974642158
+      ],
+      "complete_delta_vs_flat16": {
+        "mean": 0.008746355685131196,
+        "percentile_95": [
+          0.0,
+          0.02040816326530612
+        ],
+        "queries": 343,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "shortlist_delta_vs_flat16": {
+        "mean": 0.07871720116618076,
+        "percentile_95": [
+          0.04956268221574344,
+          0.10787172011661808
+        ],
+        "queries": 343,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "feasible": 343
+    }
+  }
+}
