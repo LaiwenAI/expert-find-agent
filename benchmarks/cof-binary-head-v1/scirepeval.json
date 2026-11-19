@@ -1,0 +1,75 @@
+{
+  "dataset": "SciRepEval",
+  "job": "42776",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "queries": 59,
+  "vocab_rows": 151669,
+  "output_rows": 2,
+  "cohort_sha256": "faad2fb6a0b8f2f2a9a80a9df2dff092518464e6c3c4d989e8819c0fe090efed",
+  "code_sha256": "5991bffa253fedd1185f200dbbbb4b100c39837fc99c7f3e07c9dc7c8fdc975d",
+  "vector_protocol_sha256": "d119d82622581f208c155e5531de54be2ee086531c8cace1432008d4a4dd20db",
+  "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "reranker_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+  "arms": {
+    "full": {
+      "exact_responses": 59,
+      "exact_tokens": 59,
+      "exact_margin_maps": 59,
+      "common_max_abs_margin_delta": 0.0,
+      "rechecks": 23,
+      "mean_forwards": 3.830508474576271,
+      "mean_padded_tokens": 6550.169491525424,
+      "p95_ms": 113.69453147053716,
+      "latency_delta_ms": {
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 59,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      }
+    },
+    "two_rows": {
+      "exact_responses": 59,
+      "exact_tokens": 59,
+      "exact_margin_maps": 58,
+      "common_max_abs_margin_delta": 0.125,
+      "rechecks": 23,
+      "mean_forwards": 3.830508474576271,
+      "mean_padded_tokens": 6550.169491525424,
+      "p95_ms": 112.28769514709708,
+      "latency_delta_ms": {
+        "mean": -0.9386594075772722,
+        "percentile_95": [
+          -1.2237907008473146,
+          -0.7416734219355099
+        ],
+        "queries": 59,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      }
+    },
+    "two_rows_batched_tokenization": {
+      "exact_responses": 59,
+      "exact_tokens": 59,
+      "exact_margin_maps": 58,
+      "common_max_abs_margin_delta": 0.125,
+      "rechecks": 23,
+      "mean_forwards": 3.830508474576271,
+      "mean_padded_tokens": 6550.169491525424,
+      "p95_ms": 111.87209617346522,
+      "latency_delta_ms": {
+        "mean": -1.1927642370179548,
+        "percentile_95": [
+          -1.492676232010126,
+          -0.9513779235530204
+        ],
+        "queries": 59,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      }
+    }
+  }
+}

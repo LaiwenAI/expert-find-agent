@@ -1,0 +1,75 @@
+{
+  "dataset": "KDD",
+  "job": "42776",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "queries": 122,
+  "vocab_rows": 151669,
+  "output_rows": 2,
+  "cohort_sha256": "e090a584e0a4f57fb0a405299386431bbff839ffacbccdbb9a11ea8d6a3229ac",
+  "code_sha256": "5991bffa253fedd1185f200dbbbb4b100c39837fc99c7f3e07c9dc7c8fdc975d",
+  "vector_protocol_sha256": "85e4010895e8717c57d19113bdfaf3fb0c68afbb49f74635baac036eb06445a0",
+  "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "reranker_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+  "arms": {
+    "full": {
+      "exact_responses": 122,
+      "exact_tokens": 122,
+      "exact_margin_maps": 122,
+      "common_max_abs_margin_delta": 0.0,
+      "rechecks": 42,
+      "mean_forwards": 3.262295081967213,
+      "mean_padded_tokens": 6691.704918032787,
+      "p95_ms": 126.56823536381124,
+      "latency_delta_ms": {
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      }
+    },
+    "two_rows": {
+      "exact_responses": 122,
+      "exact_tokens": 122,
+      "exact_margin_maps": 122,
+      "common_max_abs_margin_delta": 0.0,
+      "rechecks": 42,
+      "mean_forwards": 3.262295081967213,
+      "mean_padded_tokens": 6691.704918032787,
+      "p95_ms": 125.56125922128557,
+      "latency_delta_ms": {
+        "mean": -0.7593134326524422,
+        "percentile_95": [
+          -0.9249813892863323,
+          -0.6253102668332028
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      }
+    },
+    "two_rows_batched_tokenization": {
+      "exact_responses": 122,
+      "exact_tokens": 122,
+      "exact_margin_maps": 122,
+      "common_max_abs_margin_delta": 0.0,
+      "rechecks": 42,
+      "mean_forwards": 3.262295081967213,
+      "mean_padded_tokens": 6691.704918032787,
+      "p95_ms": 124.82080943882465,
+      "latency_delta_ms": {
+        "mean": -0.929339849924455,
+        "percentile_95": [
+          -1.1060602504943238,
+          -0.7676118232889987
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      }
+    }
+  }
+}
