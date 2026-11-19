@@ -1,0 +1,146 @@
+{
+  "development_sha256": "30661871ac08a61e7e74d67d75491878c7e4194f217483b60d06426c4b36e4c5",
+  "corpus_sha256": "c9e8d6e13bb05900427ab1d785d6024256f61e8bb34f220c3816fb79d1921780",
+  "script_sha256": "72cd6456bd9ba83f92cda0d16c96684bed465da042041f839df8861f20580ac1",
+  "parser_sha256": "dd0c072c1abd35a1524a402f488522f5fe00e6ea3d423fd9421574432441c1a5",
+  "job": "41472",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "requests": 80,
+  "sources": 52667,
+  "experts": 4154,
+  "index_seconds": 296.9959825631231,
+  "model_revisions": {
+    "embedding": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+    "verifier": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+    "parser": "cdbee75f17c01a7cc42f958dc650907174af0554"
+  },
+  "arms": {
+    "independent": {
+      "clause_label_changes": 0,
+      "qualification_set_changes": 0,
+      "retrieved_order_changes": 0,
+      "rank_changes": 0,
+      "supported_set_changes": 0,
+      "citation_or_unresolved_changes": 0,
+      "queries_with_provisional_support": 34,
+      "pairs": 1280,
+      "clipped_pairs": 0,
+      "withheld_pairs": 0,
+      "supported": 70,
+      "overlong_qualifications": 0,
+      "rechecked": 0,
+      "p50_p95_ms": {
+        "parse": [
+          502.5098053738475,
+          5271.936503425235
+        ],
+        "query_embedding": [
+          8.445894345641136,
+          10.417710989713667
+        ],
+        "retrieve": [
+          0.510217621922493,
+          0.5614533089101315
+        ],
+        "verify_and_rank": [
+          59.80703420937061,
+          180.4754544049501
+        ],
+        "total": [
+          571.0658524185419,
+          5475.2160224132185
+        ]
+      },
+      "p95_speedup_ci95": [
+        1.0,
+        1.0
+      ]
+    },
+    "bf16_guard": {
+      "clause_label_changes": 10,
+      "qualification_set_changes": 0,
+      "retrieved_order_changes": 0,
+      "rank_changes": 0,
+      "supported_set_changes": 0,
+      "citation_or_unresolved_changes": 0,
+      "queries_with_provisional_support": 34,
+      "pairs": 1280,
+      "clipped_pairs": 0,
+      "withheld_pairs": 0,
+      "supported": 70,
+      "overlong_qualifications": 0,
+      "rechecked": 25,
+      "p50_p95_ms": {
+        "parse": [
+          121.91349174827337,
+          1849.7305805794892
+        ],
+        "query_embedding": [
+          8.40483233332634,
+          9.649990312755108
+        ],
+        "retrieve": [
+          0.5081780254840851,
+          0.5490875802934169
+        ],
+        "verify_and_rank": [
+          59.46661997586489,
+          180.44534437358377
+        ],
+        "total": [
+          193.76377388834953,
+          2151.5779215842485
+        ]
+      },
+      "p95_speedup_ci95": [
+        1.6846174797183961,
+        5.982815306423389
+      ]
+    },
+    "consensus": {
+      "clause_label_changes": 12,
+      "qualification_set_changes": 0,
+      "retrieved_order_changes": 0,
+      "rank_changes": 0,
+      "supported_set_changes": 0,
+      "citation_or_unresolved_changes": 0,
+      "queries_with_provisional_support": 34,
+      "pairs": 1280,
+      "clipped_pairs": 0,
+      "withheld_pairs": 0,
+      "supported": 70,
+      "overlong_qualifications": 0,
+      "rechecked": 7,
+      "p50_p95_ms": {
+        "parse": [
+          121.87373265624046,
+          1000.7623966783283
+        ],
+        "query_embedding": [
+          8.434083312749863,
+          9.460187330842018
+        ],
+        "retrieve": [
+          0.5097463726997375,
+          0.5706203170120716
+        ],
+        "verify_and_rank": [
+          59.7032131627202,
+          180.28232213109726
+        ],
+        "total": [
+          194.5436391979456,
+          1183.788871392607
+        ]
+      },
+      "p95_speedup_ci95": [
+        2.6945823825168578,
+        9.09102330410633
+      ]
+    }
+  },
+  "bf16_guard_over_consensus_p95_ci95": [
+    1.0141523196909723,
+    2.715163849287873
+  ]
+}
