@@ -1,0 +1,57 @@
+{
+  "requests": 80,
+  "original_issued": 34,
+  "inventory_candidates": 328,
+  "trace_sha256": "1be7c1d83adac0143904918d67a7fc7029b50febf7b9ea7df53825a9436029f9",
+  "private_manifest_sha256": "3a087af41a8d1d803511d9d5df1ff378fcadafce95915953b10adbf08e5ca0f5",
+  "code_sha256": "d3aa7db81550adf5097e7134daffea455023882ff1092c1d8520279b2dadbf41",
+  "job": "43026",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "tested_unresolved_slots": 330,
+  "checkpoint": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+  "prepared_sha256": "05bb63e686460b62d23605f817829a87487f29f9112371f44f9b6880aec38d0f",
+  "metrics": {
+    "whole_source": {
+      "candidate_slots_with_any_read": 330,
+      "completed_role_span_checks": 69,
+      "scheduled_reads": 660,
+      "slots_with_role_markers": 69,
+      "provisional_slots": 1,
+      "requests_with_provisional_role_support": 1,
+      "previously_abstained_requests_with_provisional_support": 0,
+      "verifier_only_ms_p50_p95": [
+        0.0003343448042869568,
+        13.681491184979679
+      ]
+    },
+    "role_passage": {
+      "candidate_slots_with_any_read": 106,
+      "completed_role_span_checks": 191,
+      "scheduled_reads": 191,
+      "slots_with_role_markers": 106,
+      "provisional_slots": 3,
+      "requests_with_provisional_role_support": 3,
+      "previously_abstained_requests_with_provisional_support": 1,
+      "verifier_only_ms_p50_p95": [
+        8.940696716308594e-05,
+        17.650223523378372
+      ]
+    }
+  },
+  "ungraded_review": {
+    "review_cases": 4,
+    "human_judgments": 0,
+    "paired_first_check_conditioned_on_both_eligible": {
+      "eligible_slots": 69,
+      "whole_source_first_supported": 1,
+      "role_passage_first_supported": 2
+    },
+    "packet_sha256": "8dcbad78e4d1fbe8c19f0aaf150e148e5b0218a595dd8aec429f282264a52c17",
+    "shared_exact_views": 0,
+    "same_expert_distinct_views": 0,
+    "recommendation_slots": {
+      "whole_source": 1,
+      "role_passage": 3
+    }
+  }
+}
