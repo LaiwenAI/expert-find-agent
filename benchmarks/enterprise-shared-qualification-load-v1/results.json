@@ -1,0 +1,828 @@
+{
+  "job": "43297",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "unique_queries": 80,
+  "sources": 52667,
+  "models": {
+    "encoder": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+    "verifier": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+    "parser": "cdbee75f17c01a7cc42f958dc650907174af0554"
+  },
+  "queries_sha256": "30661871ac08a61e7e74d67d75491878c7e4194f217483b60d06426c4b36e4c5",
+  "sources_sha256": "c9e8d6e13bb05900427ab1d785d6024256f61e8bb34f220c3816fb79d1921780",
+  "roles_sha256": "a96c36183cefa019156a296c7698c195ff25b5d687971b08328357111eb86382",
+  "vectors_sha256": "403fd19c50177eb4dd59a5f6fc07f5fe6ab49da223f5e1f4d172ec6cebeff2da",
+  "serial_sha256": "01eee3a7e73150d5fa5acc27cf3ce4803b1a4e2f52dc9467ea2de180671af7c0",
+  "code_sha256": "39e54997639ed4f4f06a393ee0b779c8f39ce7d4238070183ce078c2394e1072",
+  "workload_sha256": "a4b6db2d66c36b760130b9dc4eab13360785599093e27a89c40f93321caa7330",
+  "traces": [
+    {
+      "nominal_rate": 1.8,
+      "passes": 1,
+      "seed": 20261120,
+      "requests": 80,
+      "execution_order": [
+        "guarded",
+        "automatic"
+      ],
+      "issued_response_changes": 0,
+      "per_criterion_changes": 2,
+      "arms": {
+        "guarded": {
+          "completed": 80,
+          "final_completion_seconds": 45.99649921990931,
+          "drain_seconds": 0.5888909198852517,
+          "observed_offered_rate": 1.7397965441830625,
+          "completed_per_second": 1.7392627994908898,
+          "quantiles_ms": {
+            "total_ms": [
+              556.4706745393772,
+              3203.6565077359105,
+              3646.7267443653577
+            ],
+            "queue_ms": [
+              136.85192949999998,
+              2877.32264145,
+              3142.1682329999976
+            ],
+            "service_ms": [
+              176.6781435,
+              1040.2116401999995,
+              1897.6992486299907
+            ],
+            "release_lag_ms": [
+              0.8140002788779022,
+              2.1163771806909537,
+              3.2839124950221303
+            ]
+          },
+          "strata": {
+            "early": {
+              "requests": 40,
+              "total_p50_p95_max_ms": [
+                263.82944967219225,
+                1607.3128657512145,
+                1864.229063910143
+              ],
+              "queue_p95_max_ms": [
+                1233.7964580999999,
+                1632.050958
+              ]
+            },
+            "late": {
+              "requests": 40,
+              "total_p50_p95_max_ms": [
+                615.1468022560209,
+                3286.9064911928826,
+                3902.4175898714475
+              ],
+              "queue_p95_max_ms": [
+                3044.77880715,
+                3422.013251
+              ]
+            },
+            "longest_quartile": {
+              "requests": 20,
+              "total_p50_p95_max_ms": [
+                1005.1830741612671,
+                3237.438650924748,
+                3902.4175898714475
+              ],
+              "queue_p95_max_ms": [
+                1674.1526525500005,
+                2474.084849
+              ]
+            }
+          },
+          "model_work": {
+            "primary": {
+              "logical_pairs": 1280,
+              "logical_tokens": 298626,
+              "packed_batches": 97,
+              "executed_tokens": 385612,
+              "guard_rechecks": 16,
+              "padded_batches": 34
+            },
+            "fallback": {
+              "logical_pairs": 184,
+              "logical_tokens": 33562,
+              "padded_batches": 32,
+              "executed_tokens": 35546,
+              "packed_batches": 14
+            }
+          },
+          "routing": {
+            "staged": 0,
+            "fallback": 0,
+            "original_pairs": 1280,
+            "exact_duplicates": 14,
+            "removed_due_to_objective": 0
+          },
+          "issued": 37,
+          "fallback_invoked": 46,
+          "added_slots": 3
+        },
+        "automatic": {
+          "completed": 80,
+          "final_completion_seconds": 45.82424888573587,
+          "drain_seconds": 0.41664058571181073,
+          "observed_offered_rate": 1.7397965441830625,
+          "completed_per_second": 1.745800573828987,
+          "quantiles_ms": {
+            "total_ms": [
+              431.9408549640542,
+              3127.634562073114,
+              3624.2102201324337
+            ],
+            "queue_ms": [
+              141.5736425,
+              2800.8810469500004,
+              3077.2842393699975
+            ],
+            "service_ms": [
+              176.3495805,
+              968.5281218999994,
+              1884.3688262399912
+            ],
+            "release_lag_ms": [
+              0.8961137859042623,
+              2.07540710426688,
+              3.104231915535417
+            ]
+          },
+          "strata": {
+            "early": {
+              "requests": 40,
+              "total_p50_p95_max_ms": [
+                264.6464379569178,
+                1613.1567879676597,
+                1869.430932623045
+              ],
+              "queue_p95_max_ms": [
+                1239.4795826499999,
+                1636.234308
+              ]
+            },
+            "late": {
+              "requests": 40,
+              "total_p50_p95_max_ms": [
+                592.7885330343656,
+                3212.150899573123,
+                3881.042662037771
+              ],
+              "queue_p95_max_ms": [
+                2967.6942749,
+                3400.584627
+              ]
+            },
+            "longest_quartile": {
+              "requests": 20,
+              "total_p50_p95_max_ms": [
+                991.8964502407928,
+                3164.2286033667983,
+                3881.042662037771
+              ],
+              "queue_p95_max_ms": [
+                1674.1945838000006,
+                2395.439824
+              ]
+            }
+          },
+          "model_work": {
+            "primary": {
+              "logical_pairs": 1147,
+              "logical_tokens": 259821,
+              "packed_batches": 93,
+              "executed_tokens": 344711,
+              "guard_rechecks": 16,
+              "padded_batches": 30
+            },
+            "fallback": {
+              "logical_pairs": 184,
+              "logical_tokens": 33562,
+              "padded_batches": 32,
+              "executed_tokens": 35546,
+              "packed_batches": 14
+            }
+          },
+          "routing": {
+            "staged": 7,
+            "fallback": 2,
+            "original_pairs": 1280,
+            "exact_duplicates": 14,
+            "removed_due_to_objective": 199
+          },
+          "issued": 37,
+          "fallback_invoked": 46,
+          "added_slots": 3
+        }
+      }
+    },
+    {
+      "nominal_rate": 1.8,
+      "passes": 1,
+      "seed": 20261121,
+      "requests": 80,
+      "execution_order": [
+        "automatic",
+        "guarded"
+      ],
+      "issued_response_changes": 0,
+      "per_criterion_changes": 2,
+      "arms": {
+        "automatic": {
+          "completed": 80,
+          "final_completion_seconds": 49.05837152712047,
+          "drain_seconds": 0.5539082094011079,
+          "observed_offered_rate": 1.628716093249509,
+          "completed_per_second": 1.6307104681567826,
+          "quantiles_ms": {
+            "total_ms": [
+              522.1230022615746,
+              3788.9783684325034,
+              4511.622268211878
+            ],
+            "queue_ms": [
+              65.192477,
+              3015.9089517499983,
+              4217.700995779998
+            ],
+            "service_ms": [
+              169.55730599999998,
+              965.7729249499995,
+              1930.3768380899912
+            ],
+            "release_lag_ms": [
+              0.8872632078471554,
+              2.1475428265996124,
+              3.3845039318993573
+            ]
+          },
+          "strata": {
+            "early": {
+              "requests": 40,
+              "total_p50_p95_max_ms": [
+                1514.551875070175,
+                4448.0859717066505,
+                4555.86556141595
+              ],
+              "queue_p95_max_ms": [
+                4061.1028867999994,
+                4398.436973
+              ]
+            },
+            "late": {
+              "requests": 40,
+              "total_p50_p95_max_ms": [
+                369.7582942468287,
+                1243.7606979496538,
+                1679.8354720425266
+              ],
+              "queue_p95_max_ms": [
+                799.8778181999995,
+                1530.728206
+              ]
+            },
+            "longest_quartile": {
+              "requests": 20,
+              "total_p50_p95_max_ms": [
+                877.7003134026966,
+                4439.925673494362,
+                4499.861392803201
+              ],
+              "queue_p95_max_ms": [
+                1845.3188679000016,
+                4055.389499
+              ]
+            }
+          },
+          "model_work": {
+            "primary": {
+              "logical_pairs": 1147,
+              "logical_tokens": 259821,
+              "packed_batches": 93,
+              "executed_tokens": 344711,
+              "padded_batches": 30,
+              "guard_rechecks": 16
+            },
+            "fallback": {
+              "logical_pairs": 184,
+              "logical_tokens": 33562,
+              "packed_batches": 14,
+              "executed_tokens": 35546,
+              "padded_batches": 32
+            }
+          },
+          "routing": {
+            "staged": 7,
+            "fallback": 2,
+            "original_pairs": 1280,
+            "exact_duplicates": 14,
+            "removed_due_to_objective": 199
+          },
+          "issued": 37,
+          "fallback_invoked": 46,
+          "added_slots": 3
+        },
+        "guarded": {
+          "completed": 80,
+          "final_completion_seconds": 49.057183526456356,
+          "drain_seconds": 0.5527202087369929,
+          "observed_offered_rate": 1.628716093249509,
+          "completed_per_second": 1.6307499585021283,
+          "quantiles_ms": {
+            "total_ms": [
+              543.8035016885951,
+              4013.204683565777,
+              4737.928401053733
+            ],
+            "queue_ms": [
+              64.63004,
+              3241.202633349998,
+              4443.735654089998
+            ],
+            "service_ms": [
+              169.625311,
+              1036.2703150999996,
+              1928.9276630599907
+            ],
+            "release_lag_ms": [
+              0.8460946021962013,
+              2.0587589909094812,
+              2.7863885921844282
+            ]
+          },
+          "strata": {
+            "early": {
+              "requests": 40,
+              "total_p50_p95_max_ms": [
+                1672.8216922597492,
+                4673.441303026966,
+                4780.337089499036
+              ],
+              "queue_p95_max_ms": [
+                4288.0516314999995,
+                4623.115763
+              ]
+            },
+            "late": {
+              "requests": 40,
+              "total_p50_p95_max_ms": [
+                369.73889200363175,
+                1311.6161952130262,
+                1623.0538932335037
+              ],
+              "queue_p95_max_ms": [
+                792.1651962999994,
+                1473.688345
+              ]
+            },
+            "longest_quartile": {
+              "requests": 20,
+              "total_p50_p95_max_ms": [
+                952.3371538065744,
+                4666.127665417515,
+                4726.655205391058
+              ],
+              "queue_p95_max_ms": [
+                1924.4308061500017,
+                4282.367384
+              ]
+            }
+          },
+          "model_work": {
+            "primary": {
+              "logical_pairs": 1280,
+              "logical_tokens": 298626,
+              "packed_batches": 97,
+              "executed_tokens": 385612,
+              "padded_batches": 34,
+              "guard_rechecks": 16
+            },
+            "fallback": {
+              "logical_pairs": 184,
+              "logical_tokens": 33562,
+              "packed_batches": 14,
+              "executed_tokens": 35546,
+              "padded_batches": 32
+            }
+          },
+          "routing": {
+            "staged": 0,
+            "fallback": 0,
+            "original_pairs": 1280,
+            "exact_duplicates": 14,
+            "removed_due_to_objective": 0
+          },
+          "issued": 37,
+          "fallback_invoked": 46,
+          "added_slots": 3
+        }
+      }
+    },
+    {
+      "nominal_rate": 2.7,
+      "passes": 2,
+      "seed": 20261120,
+      "requests": 160,
+      "execution_order": [
+        "automatic",
+        "guarded"
+      ],
+      "issued_response_changes": 0,
+      "per_criterion_changes": 4,
+      "arms": {
+        "automatic": {
+          "completed": 160,
+          "final_completion_seconds": 55.93811588361859,
+          "drain_seconds": 0.947380004052711,
+          "observed_offered_rate": 2.891396113487602,
+          "completed_per_second": 2.86030370298646,
+          "quantiles_ms": {
+            "total_ms": [
+              3403.7465557343103,
+              7757.716517497298,
+              8068.8674554219515
+            ],
+            "queue_ms": [
+              3028.1868465,
+              7318.949467649996,
+              7884.36541857
+            ],
+            "service_ms": [
+              177.180877,
+              1000.6694175499972,
+              2214.5420645399954
+            ],
+            "release_lag_ms": [
+              0.75584315004118,
+              1.7321650161248308,
+              2.014838807141466
+            ]
+          },
+          "strata": {
+            "early": {
+              "requests": 80,
+              "total_p50_p95_max_ms": [
+                596.0808857005832,
+                3896.734685191101,
+                4432.914208881258
+              ],
+              "queue_p95_max_ms": [
+                3536.2363713999994,
+                4301.110178
+              ]
+            },
+            "late": {
+              "requests": 80,
+              "total_p50_p95_max_ms": [
+                5057.793772350713,
+                7936.127810709245,
+                8095.423428287447
+              ],
+              "queue_p95_max_ms": [
+                7714.0173255,
+                7965.54316
+              ]
+            },
+            "longest_quartile": {
+              "requests": 40,
+              "total_p50_p95_max_ms": [
+                3069.3973790174987,
+                7929.028944615119,
+                8095.423428287447
+              ],
+              "queue_p95_max_ms": [
+                6151.0213633999965,
+                7590.316657
+              ]
+            }
+          },
+          "model_work": {
+            "primary": {
+              "logical_pairs": 2294,
+              "logical_tokens": 519642,
+              "packed_batches": 186,
+              "executed_tokens": 689422,
+              "guard_rechecks": 32,
+              "padded_batches": 60
+            },
+            "fallback": {
+              "logical_pairs": 368,
+              "logical_tokens": 67124,
+              "padded_batches": 64,
+              "executed_tokens": 71092,
+              "packed_batches": 28
+            }
+          },
+          "routing": {
+            "staged": 14,
+            "fallback": 4,
+            "original_pairs": 2560,
+            "exact_duplicates": 28,
+            "removed_due_to_objective": 398
+          },
+          "issued": 74,
+          "fallback_invoked": 92,
+          "added_slots": 6
+        },
+        "guarded": {
+          "completed": 160,
+          "final_completion_seconds": 56.12474870122969,
+          "drain_seconds": 1.1340128216638092,
+          "observed_offered_rate": 2.891396113487602,
+          "completed_per_second": 2.850792274398093,
+          "quantiles_ms": {
+            "total_ms": [
+              3579.504951808241,
+              8094.938221455064,
+              8404.395449253736
+            ],
+            "queue_ms": [
+              3111.6854735,
+              7676.220298549997,
+              8249.85569683
+            ],
+            "service_ms": [
+              178.71790199999998,
+              1075.1444788499978,
+              2255.520078399995
+            ],
+            "release_lag_ms": [
+              0.7577409645702637,
+              1.8062403302052636,
+              2.698262079600429
+            ]
+          },
+          "strata": {
+            "early": {
+              "requests": 80,
+              "total_p50_p95_max_ms": [
+                631.5277561119269,
+                3961.359142252392,
+                4664.2209722471225
+              ],
+              "queue_p95_max_ms": [
+                3648.16325845,
+                4532.486444
+              ]
+            },
+            "late": {
+              "requests": 80,
+              "total_p50_p95_max_ms": [
+                5379.14441911134,
+                8313.666691672428,
+                8430.49101339811
+              ],
+              "queue_p95_max_ms": [
+                8043.605591750001,
+                8300.589614
+              ]
+            },
+            "longest_quartile": {
+              "requests": 40,
+              "total_p50_p95_max_ms": [
+                3252.5793423216364,
+                8301.455974951557,
+                8430.49101339811
+              ],
+              "queue_p95_max_ms": [
+                6595.263618349997,
+                7922.001282
+              ]
+            }
+          },
+          "model_work": {
+            "primary": {
+              "logical_pairs": 2560,
+              "logical_tokens": 597252,
+              "packed_batches": 194,
+              "executed_tokens": 771224,
+              "guard_rechecks": 32,
+              "padded_batches": 68
+            },
+            "fallback": {
+              "logical_pairs": 368,
+              "logical_tokens": 67124,
+              "padded_batches": 64,
+              "executed_tokens": 71092,
+              "packed_batches": 28
+            }
+          },
+          "routing": {
+            "staged": 0,
+            "fallback": 0,
+            "original_pairs": 2560,
+            "exact_duplicates": 28,
+            "removed_due_to_objective": 0
+          },
+          "issued": 74,
+          "fallback_invoked": 92,
+          "added_slots": 6
+        }
+      }
+    },
+    {
+      "nominal_rate": 2.7,
+      "passes": 2,
+      "seed": 20261121,
+      "requests": 160,
+      "execution_order": [
+        "guarded",
+        "automatic"
+      ],
+      "issued_response_changes": 0,
+      "per_criterion_changes": 4,
+      "arms": {
+        "guarded": {
+          "completed": 160,
+          "final_completion_seconds": 63.134400971233845,
+          "drain_seconds": 1.3671347127604179,
+          "observed_offered_rate": 2.574179005019311,
+          "completed_per_second": 2.5342760450503263,
+          "quantiles_ms": {
+            "total_ms": [
+              1304.4750845751641,
+              2583.4189491367165,
+              3092.9769007062505
+            ],
+            "queue_ms": [
+              818.9376024999999,
+              2255.1373436,
+              2858.3980295
+            ],
+            "service_ms": [
+              171.2745215,
+              1075.1566671999979,
+              2253.082773209995
+            ],
+            "release_lag_ms": [
+              0.7241066205860847,
+              1.8166631457832594,
+              2.7764189077846826
+            ]
+          },
+          "strata": {
+            "early": {
+              "requests": 80,
+              "total_p50_p95_max_ms": [
+                982.3635055036526,
+                2918.645620409471,
+                3137.4185936577455
+              ],
+              "queue_p95_max_ms": [
+                2285.79347075,
+                2903.870968
+              ]
+            },
+            "late": {
+              "requests": 80,
+              "total_p50_p95_max_ms": [
+                1584.5730430076976,
+                2429.074339518212,
+                3242.401369419383
+              ],
+              "queue_p95_max_ms": [
+                2101.49124205,
+                2341.316568
+              ]
+            },
+            "longest_quartile": {
+              "requests": 40,
+              "total_p50_p95_max_ms": [
+                1654.507070488984,
+                2990.1409494307472,
+                3242.401369419383
+              ],
+              "queue_p95_max_ms": [
+                1795.0553952999992,
+                2241.83123
+              ]
+            }
+          },
+          "model_work": {
+            "primary": {
+              "logical_pairs": 2560,
+              "logical_tokens": 597252,
+              "packed_batches": 194,
+              "executed_tokens": 771224,
+              "padded_batches": 68,
+              "guard_rechecks": 32
+            },
+            "fallback": {
+              "logical_pairs": 368,
+              "logical_tokens": 67124,
+              "packed_batches": 28,
+              "executed_tokens": 71092,
+              "padded_batches": 64
+            }
+          },
+          "routing": {
+            "staged": 0,
+            "fallback": 0,
+            "original_pairs": 2560,
+            "exact_duplicates": 28,
+            "removed_due_to_objective": 0
+          },
+          "issued": 74,
+          "fallback_invoked": 92,
+          "added_slots": 6
+        },
+        "automatic": {
+          "completed": 160,
+          "final_completion_seconds": 63.05472523160279,
+          "drain_seconds": 1.287458973129361,
+          "observed_offered_rate": 2.574179005019311,
+          "completed_per_second": 2.5374783477735083,
+          "quantiles_ms": {
+            "total_ms": [
+              1274.2596302873371,
+              2521.4118327034844,
+              2987.734595922936
+            ],
+            "queue_ms": [
+              784.197455,
+              2189.0164148,
+              2740.89987643
+            ],
+            "service_ms": [
+              169.3981995,
+              999.5329235999974,
+              2217.1623921899954
+            ],
+            "release_lag_ms": [
+              0.7927637630604778,
+              1.5642743913898156,
+              2.251922510000028
+            ]
+          },
+          "strata": {
+            "early": {
+              "requests": 80,
+              "total_p50_p95_max_ms": [
+                961.4924033906398,
+                2800.6590635218445,
+                3050.303298426403
+              ],
+              "queue_p95_max_ms": [
+                2201.8584023,
+                2785.325322
+              ]
+            },
+            "late": {
+              "requests": 80,
+              "total_p50_p95_max_ms": [
+                1520.4738848607312,
+                2289.3880528825152,
+                3163.4980705943576
+              ],
+              "queue_p95_max_ms": [
+                2011.2844856,
+                2203.514319
+              ]
+            },
+            "longest_quartile": {
+              "requests": 40,
+              "total_p50_p95_max_ms": [
+                1628.2725581590698,
+                2873.3868494246735,
+                3163.4980705943576
+              ],
+              "queue_p95_max_ms": [
+                1715.4202500499991,
+                2165.436281
+              ]
+            }
+          },
+          "model_work": {
+            "primary": {
+              "logical_pairs": 2294,
+              "logical_tokens": 519642,
+              "packed_batches": 186,
+              "executed_tokens": 689422,
+              "padded_batches": 60,
+              "guard_rechecks": 32
+            },
+            "fallback": {
+              "logical_pairs": 368,
+              "logical_tokens": 67124,
+              "packed_batches": 28,
+              "executed_tokens": 71092,
+              "padded_batches": 64
+            }
+          },
+          "routing": {
+            "staged": 14,
+            "fallback": 4,
+            "original_pairs": 2560,
+            "exact_duplicates": 28,
+            "removed_due_to_objective": 398
+          },
+          "issued": 74,
+          "fallback_invoked": 92,
+          "added_slots": 6
+        }
+      }
+    }
+  ]
+}
