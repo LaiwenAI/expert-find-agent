@@ -55,7 +55,7 @@ def forward_tokens(reader, rows, width=None):
 
 class WaveReader:
     def __init__(self, reader, query, documents, sources, *, dynamic=False, guard=None, cache=False,
-                 broker=None):
+                 broker=None, lazy=False):
         self.reader = reader
         self.dynamic = dynamic
         self.guard = guard
@@ -68,18 +68,27 @@ class WaveReader:
         self.score_cache = {} if cache else None
         self.recheck_cache = {} if cache else None
         self.inputs = {}
+        self.sources = sorted(sources)
+        self.query = query
+        self.documents = documents
         self.truncated = 0
         self.maximum = 0
-        for source in sorted(sources):
-            message = f"<Instruct>: {TASK}\n<Query>: {query}\n<Document>: {documents[source]}"
-            body = reader.tokenizer.encode(message, add_special_tokens=False)
-            tokens, raw = pack_tokens(reader.prefix, body, reader.suffix, CAP)
+        if not lazy:
+            self._prepare(self.sources)
+
+    def _prepare(self, sources):
+        for source in dict.fromkeys(sources):
+            if source in self.inputs:
+                continue
+            message = f"<Instruct>: {TASK}\n<Query>: {self.query}\n<Document>: {self.documents[source]}"
+            body = self.reader.tokenizer.encode(message, add_special_tokens=False)
+            tokens, raw = pack_tokens(self.reader.prefix, body, self.reader.suffix, CAP)
             self.inputs[source] = dict(input_ids=tokens)
             self.truncated += raw > len(tokens)
             self.maximum = max(self.maximum, len(tokens))
-        self.maximum = ((self.maximum + LENGTH_BUCKET - 1) // LENGTH_BUCKET) * LENGTH_BUCKET
 
     def length(self, doc):
+        self._prepare([doc])
         return len(self.inputs[doc]["input_ids"])
 
     def score(self, jobs):
@@ -88,6 +97,7 @@ class WaveReader:
     def _score(self, jobs):
         self.score_calls += 1
         self.scored_documents += len(jobs)
+        self._prepare(doc for _, doc in jobs)
         values = self._forward([self.inputs[doc] for _, doc in jobs], self.dynamic)
         if self.guard is not None:
             indices = [i for i, value in enumerate(values) if abs(value) <= self.guard]
@@ -120,7 +130,9 @@ class WaveReader:
 
     def _forward(self, batch, dynamic):
         rows = batch if dynamic else batch + [batch[0]] * (WIDTH - len(batch))
-        width = None if dynamic else self.maximum
+        if not dynamic and len(self.inputs) != len(self.sources):
+            self._prepare(self.sources)
+        width = None if dynamic else ((self.maximum + LENGTH_BUCKET - 1) // LENGTH_BUCKET) * LENGTH_BUCKET
         if self.broker is None:
             values, charged_width = forward_tokens(self.reader, rows, width)
         elif dynamic:
@@ -306,14 +318,14 @@ def prepare_runner(args):
             raise ValueError("Unexpected source ownership")
         bulk = method in ("guarded_bulk", "deferred_bulk", "guarded_bucketed")
         deferred = method in ("deferred_dynamic", "deferred_cached")
-        shared_frontier = method in ("shared_frontier", "cost_aware_frontier")
+        shared_frontier = method in ("shared_frontier", "cost_aware_frontier", "lazy_shared_frontier")
         def prepare_prompts():
             return WaveReader(
                 reranker, query, texts, {d for _, docs in ordered for d in docs},
                 dynamic=method in SCHEDULE_FOR or bulk or deferred or shared_frontier,
                 guard=GUARD_MARGIN if method in ("guarded_dynamic", "guarded_cached") else None,
                 cache=method in ("guarded_cached", "deferred_cached") or shared_frontier,
-                broker=broker,
+                broker=broker, lazy=method == "lazy_shared_frontier",
             )
 
         reader = prepare_prompts() if broker is None else broker.serial(prepare_prompts)
@@ -338,6 +350,8 @@ def prepare_runner(args):
         result["rechecked_pairs"] = reader.rechecked_pairs
         result["ms"] = (perf_counter() - start) * 1000
         result["truncated"] = reader.truncated
+        result["tokenized_documents"] = len(reader.inputs)
+        result["candidate_documents"] = len(reader.sources)
         return ordered, result
 
     measure.forward = lambda rows: forward_tokens(reranker, rows)
