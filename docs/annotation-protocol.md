@@ -21,6 +21,21 @@ Human gold labels are not yet available. Model self-assessment cannot be describ
 
 A future project's requested performance or delivery target does not automatically require the candidate to have achieved it historically. Grade the documented technical foundation and match for undertaking the research. Record unknown prior integration experience as a gap instead of directly assigning zero potential relevance. Distinguish explicit personal qualifications from future technical goals.
 
+## Sample adequacy for an enterprise risk gate
+
+Define the primary event before unsealing the evaluation set. One candidate event is a request having at least one promoted expert whose required evidence or personal contribution fails adjudication. Define any paired event against a fixed reference separately. Adjudicate unresolved cases or carry them into the upper risk bound. Multiple recommendations from one request or linked company group do not provide independent trials.
+
+For zero observed events among `n` independently sampled groups, the exact one-sided 95% upper limit is `1 - 0.05 ** (1/n)`. Even with no events in 20 independent groups, the upper limit is 13.91%. The sealed 20-request panel therefore supports feasibility assessment and exploratory proportions. A tighter risk gate requires more independent groups.
+
+| Example upper limit | Minimum independent groups if no events occur |
+| ---: | ---: |
+| 10% | 29 |
+| 5% | 59 |
+| 2% | 149 |
+| 1% | 299 |
+
+These are best-case sample sizes for the binary risk event. Freeze the gate and total or prespecified sequential sample size before opening test outcomes. Plan paired ranking-quality precision and any separately claimed stratum independently.
+
 ## Bilingual intent-pair review
 
 The local high-overlap packet contains two generated requests from the same original need, in both languages. It hides the intended type, previous screening status, internal identifiers, and overlap scores. The request order is fixed by the packet; do not infer a preferred request from its position. The packet is targeted, so its judgments do not estimate the frequency of semantic redundancy among all synthetic pairs.

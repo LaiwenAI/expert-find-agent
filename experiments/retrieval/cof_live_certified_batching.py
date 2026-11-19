@@ -44,11 +44,22 @@ SCHEDULE_FOR = {"dynamic_one": "one_per_expert", "dynamic_fill": "fill_idle_slot
 PER_EXPERT = {"one_per_expert": 1, "prefix_two": 2, "prefix_three": 3}
 
 
+@torch.inference_mode()
+def forward_tokens(reader, rows, width=None):
+    padding = True if width is None else "max_length"
+    tensors = reader.tokenizer.pad(rows, padding=padding, max_length=width, return_tensors="pt")
+    inputs = tensors.to("cuda")
+    values = reader.model(**inputs, use_cache=False, logits_to_keep=1).logits[:, -1, reader.labels].float()
+    return (values[:, 0] - values[:, 1]).cpu().tolist(), tensors["input_ids"].shape[1]
+
+
 class WaveReader:
-    def __init__(self, reader, query, documents, sources, *, dynamic=False, guard=None, cache=False):
+    def __init__(self, reader, query, documents, sources, *, dynamic=False, guard=None, cache=False,
+                 broker=None):
         self.reader = reader
         self.dynamic = dynamic
         self.guard = guard
+        self.broker = broker
         self.score_calls = 0
         self.scored_documents = 0
         self.recheck_calls = 0
@@ -107,19 +118,17 @@ class WaveReader:
             cache.update(zip(missing, score(fresh), strict=True))
         return [cache[doc] for _, doc in jobs]
 
-    @torch.inference_mode()
     def _forward(self, batch, dynamic):
-        if dynamic:
-            tensors = self.reader.tokenizer.pad(batch, padding=True, return_tensors="pt")
+        rows = batch if dynamic else batch + [batch[0]] * (WIDTH - len(batch))
+        width = None if dynamic else self.maximum
+        if self.broker is None:
+            values, charged_width = forward_tokens(self.reader, rows, width)
+        elif dynamic:
+            values, charged_width = self.broker.score(rows)
         else:
-            filled = batch + [batch[0]] * (WIDTH - len(batch))
-            tensors = self.reader.tokenizer.pad(filled, padding="max_length", max_length=self.maximum,
-                                               return_tensors="pt")
-        self.padded_tokens += tensors["input_ids"].numel()
-        inputs = tensors.to("cuda")
-        logits = self.reader.model(**inputs, use_cache=False, logits_to_keep=1).logits
-        values = logits[:len(batch), -1, self.reader.labels].float()
-        return (values[:, 0] - values[:, 1]).cpu().tolist()
+            values, charged_width = self.broker.fixed(lambda: forward_tokens(self.reader, rows, width))
+        self.padded_tokens += len(rows) * charged_width
+        return values[:len(batch)]
 
 
 def bulk_verify(ordered, reader, support, deferred, batch_size=None):
@@ -286,20 +295,27 @@ def prepare_runner(args):
     texts = {pid: (paper.get("title", "") + "\n" + paper.get("abstract", "")).strip()
              for pid, paper in papers.items()}
 
-    def measure(query, count, method):
+    def retrieve(query):
+        return index.search_vector(encoder.encode([query], query=True)[0], k=POOL)["hits"]
+
+    def measure(query, count, method, broker=None):
         start = perf_counter()
-        hits = index.search_vector(encoder.encode([query], query=True)[0], k=POOL)["hits"]
+        hits = retrieve(query) if broker is None else broker.serial(lambda: retrieve(query))
         ordered = [(row["id"], [w["id"] for w in row["evidence"]]) for row in hits]
         if len(ordered) != POOL or any(e not in ownership[d] for e, docs in ordered for d in docs):
             raise ValueError("Unexpected source ownership")
         bulk = method in ("guarded_bulk", "deferred_bulk", "guarded_bucketed")
         deferred = method in ("deferred_dynamic", "deferred_cached")
-        reader = WaveReader(
-            reranker, query, texts, {d for _, docs in ordered for d in docs},
-            dynamic=method in SCHEDULE_FOR or bulk or deferred,
-            guard=GUARD_MARGIN if method in ("guarded_dynamic", "guarded_cached") else None,
-            cache=method in ("guarded_cached", "deferred_cached"),
-        )
+        def prepare_prompts():
+            return WaveReader(
+                reranker, query, texts, {d for _, docs in ordered for d in docs},
+                dynamic=method in SCHEDULE_FOR or bulk or deferred,
+                guard=GUARD_MARGIN if method in ("guarded_dynamic", "guarded_cached") else None,
+                cache=method in ("guarded_cached", "deferred_cached"),
+                broker=broker,
+            )
+
+        reader = prepare_prompts() if broker is None else broker.serial(prepare_prompts)
         if bulk:
             batch_size = BUCKET_BATCH if method == "guarded_bucketed" else None
             result = bulk_verify(ordered, reader, count, method == "deferred_bulk", batch_size)
@@ -318,6 +334,7 @@ def prepare_runner(args):
         result["truncated"] = reader.truncated
         return ordered, result
 
+    measure.forward = lambda rows: forward_tokens(reranker, rows)
     return measure, ids, texts, hard_labels, inputs, provenance, reranker.provenance
 
 
