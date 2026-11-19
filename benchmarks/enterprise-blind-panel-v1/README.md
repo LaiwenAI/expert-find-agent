@@ -57,6 +57,26 @@ python -m experiments.retrieval.score_enterprise_evidence_gate   FRAME PROTOCOL 
 python -m experiments.retrieval.audit_enterprise_gate_views   LEGACY_DATASET DEVELOPMENT_PACKET DEVELOPMENT_RECONCILIATION
 ```
 
+## Exact-view review package
+
+Build one method-blinded packet for the original dense snapshots and the lexical Top-5 with the existing 1,200-character citation-prefix convention. The form supplies the candidate name and affiliation so that reviewers can check personal attribution. Method, rank and score stay private. Only a matching request, expert and exact set of source spans can share a judgment.
+
+| Development packet | Count |
+| --- | ---: |
+| Requests | 80 |
+| Dense / lexical recommendation slots | 400 / 400 |
+| Same request and expert, different evidence | 11 |
+| Shared exact evidence views | 0 |
+| Independent views requiring review | 800 |
+
+The package includes per-policy outputs compatible with the gate. Blank-form reconciliation leaves all 80 issued requests unresolved for both policies. This verifies the reference and output linkage with placeholder groups. The packet and candidate identities stay local. [Aggregate check](exact-review-dry-run.json)
+
+```sh
+PYTHONPATH=src:. python -m experiments.retrieval.build_exact_enterprise_review   LEGACY_DATASET LEXICAL_AUDIT NEW_PRIVATE_PACKET
+```
+
+See the [annotation protocol](../../docs/annotation-protocol.md) for independent review and adjudication.
+
 ## External sampling frames
 
 A university technology-transfer posting supplies four Nantong requests with issuer, project and technical problem fields. The Xi'an science bureau's third and fourth public calls list 50 requests each and link to detailed attachments. These frames may support a separate external cohort after eligibility, organizational overlap, and source availability are checked. The published counts are requests before deduplication. [Nantong posting](https://kjcyc.usts.edu.cn/info/1029/6055.htm) · [Xi'an third call](https://xakj.xa.gov.cn/kjdt/tzgg/2099713781650178049.html) · [Xi'an fourth call](https://xakj.xa.gov.cn/kjdt/tzgg/2105191117492449281.html)
