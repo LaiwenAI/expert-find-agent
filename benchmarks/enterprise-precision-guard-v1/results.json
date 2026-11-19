@@ -1,0 +1,304 @@
+{
+  "development_sha256": "30661871ac08a61e7e74d67d75491878c7e4194f217483b60d06426c4b36e4c5",
+  "controls_sha256": "ca96d57855c1acb463a3bbce8bb21e3578d5c8465c340958fd74fe209cea5000",
+  "script_sha256": "a69ef03283d486d685f71ede867a098f485ae32d904d64e0cbfabe2af56fa64a",
+  "job": "41416",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "model": {
+    "repo": "Qwen/Qwen3-4B-Instruct-2507",
+    "revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "files": {
+      "LICENSE": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+      "config.json": "5beea1a4a34c62782bfb2f911c606741a3bab8f92d80a118fa053c28af12e8ba",
+      "generation_config.json": "835fffe355c9438e7a25be099b3fccaa98350b83451f9fd2d99512e74f1ade48",
+      "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+      "model-00001-of-00003.safetensors": "75311d91bb08cf0b882913da464a1e722a31fb44db35208663487efb7a3d8ed6",
+      "model-00002-of-00003.safetensors": "0b48adbb1f60e901153d91907ba11ce63bd4b8b584482e730f48808d055dfba1",
+      "model-00003-of-00003.safetensors": "7dd39ccca5e4de123c74c14af44c9bf2eb75df33b4614382af0134528e060d5d",
+      "model.safetensors.index.json": "d6c42883a895dfef5b0080ed2116a1bcd764f558406b98923d675978a1abf29c",
+      "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+      "tokenizer_config.json": "a62ff0a2472a0fa1b8eaabcb57c59b58afa42a22831dc141400b6e0cf2b65ce3",
+      "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    }
+  },
+  "guard_cutoffs": {
+    "bf16_guard": 2.0,
+    "fp16_guard": 0.5
+  },
+  "results": {
+    "controls": {
+      "requests": 72,
+      "arms": {
+        "bf16_independent": {
+          "clauses": 504,
+          "changed_roles": 0,
+          "changed_qualification_requests": 0,
+          "qualification_added": 0,
+          "qualification_removed": 0,
+          "same_precision_qualification_disagreements": 0,
+          "rechecked": 0,
+          "original_slots": 135139,
+          "fallback_slots": 0,
+          "control_targets": 72,
+          "correct_controls": 60,
+          "false_qualification_controls": 2,
+          "missed_qualification_controls": 10,
+          "p50_p95_ms": [
+            100.84808059036732,
+            160.23392546921968
+          ],
+          "p95_guarded_over_arm_ci95": [
+            0.3365038280670608,
+            0.34080458139940045
+          ],
+          "max_logit_drift_vs_same_precision": 0.0
+        },
+        "bf16_cache": {
+          "clauses": 504,
+          "changed_roles": 2,
+          "changed_qualification_requests": 0,
+          "qualification_added": 0,
+          "qualification_removed": 0,
+          "same_precision_qualification_disagreements": 0,
+          "rechecked": 0,
+          "original_slots": 33133,
+          "fallback_slots": 0,
+          "control_targets": 72,
+          "correct_controls": 60,
+          "false_qualification_controls": 2,
+          "missed_qualification_controls": 10,
+          "p50_p95_ms": [
+            36.33695840835571,
+            53.300037141889334
+          ],
+          "p95_guarded_over_arm_ci95": [
+            1.017203615776301,
+            1.0213806209317027
+          ],
+          "max_logit_drift_vs_same_precision": 3.25
+        },
+        "bf16_guard": {
+          "clauses": 504,
+          "changed_roles": 2,
+          "changed_qualification_requests": 0,
+          "qualification_added": 0,
+          "qualification_removed": 0,
+          "same_precision_qualification_disagreements": 0,
+          "rechecked": 1,
+          "original_slots": 33133,
+          "fallback_slots": 1827,
+          "control_targets": 72,
+          "correct_controls": 60,
+          "false_qualification_controls": 2,
+          "missed_qualification_controls": 10,
+          "p50_p95_ms": [
+            36.078534089028835,
+            54.3504074215889
+          ],
+          "p95_guarded_over_arm_ci95": [
+            1.0,
+            1.0
+          ],
+          "max_logit_drift_vs_same_precision": 3.25
+        },
+        "fp16_independent": {
+          "clauses": 504,
+          "changed_roles": 3,
+          "changed_qualification_requests": 1,
+          "qualification_added": 1,
+          "qualification_removed": 0,
+          "same_precision_qualification_disagreements": 0,
+          "rechecked": 0,
+          "original_slots": 135139,
+          "fallback_slots": 0,
+          "control_targets": 72,
+          "correct_controls": 60,
+          "false_qualification_controls": 2,
+          "missed_qualification_controls": 10,
+          "p50_p95_ms": [
+            102.74057649075985,
+            163.6187699623406
+          ],
+          "p95_guarded_over_arm_ci95": [
+            0.32837106476266237,
+            0.3348452412122856
+          ],
+          "max_logit_drift_vs_same_precision": 0.0
+        },
+        "fp16_cache": {
+          "clauses": 504,
+          "changed_roles": 4,
+          "changed_qualification_requests": 1,
+          "qualification_added": 1,
+          "qualification_removed": 0,
+          "same_precision_qualification_disagreements": 0,
+          "rechecked": 0,
+          "original_slots": 33133,
+          "fallback_slots": 0,
+          "control_targets": 72,
+          "correct_controls": 60,
+          "false_qualification_controls": 2,
+          "missed_qualification_controls": 10,
+          "p50_p95_ms": [
+            36.652897484600544,
+            53.53734092786908
+          ],
+          "p95_guarded_over_arm_ci95": [
+            1.0128329381446215,
+            1.0190271073206976
+          ],
+          "max_logit_drift_vs_same_precision": 0.375
+        },
+        "fp16_guard": {
+          "clauses": 504,
+          "changed_roles": 4,
+          "changed_qualification_requests": 1,
+          "qualification_added": 1,
+          "qualification_removed": 0,
+          "same_precision_qualification_disagreements": 0,
+          "rechecked": 0,
+          "original_slots": 33133,
+          "fallback_slots": 0,
+          "control_targets": 72,
+          "correct_controls": 60,
+          "false_qualification_controls": 2,
+          "missed_qualification_controls": 10,
+          "p50_p95_ms": [
+            36.54666431248188,
+            54.92270663380623
+          ],
+          "p95_guarded_over_arm_ci95": [
+            0.9876860608253598,
+            0.9937832409953603
+          ],
+          "max_logit_drift_vs_same_precision": 0.375
+        }
+      }
+    },
+    "development": {
+      "requests": 80,
+      "arms": {
+        "bf16_independent": {
+          "clauses": 1452,
+          "changed_roles": 0,
+          "changed_qualification_requests": 0,
+          "qualification_added": 0,
+          "qualification_removed": 0,
+          "same_precision_qualification_disagreements": 0,
+          "rechecked": 0,
+          "original_slots": 1763694,
+          "fallback_slots": 0,
+          "p50_p95_ms": [
+            502.61655170470476,
+            5258.414013776923
+          ],
+          "p95_guarded_over_arm_ci95": [
+            0.14685192072949554,
+            0.5474833114226579
+          ],
+          "max_logit_drift_vs_same_precision": 0.0
+        },
+        "bf16_cache": {
+          "clauses": 1452,
+          "changed_roles": 16,
+          "changed_qualification_requests": 3,
+          "qualification_added": 2,
+          "qualification_removed": 1,
+          "same_precision_qualification_disagreements": 3,
+          "rechecked": 0,
+          "original_slots": 166929,
+          "fallback_slots": 0,
+          "p50_p95_ms": [
+            117.89285205304623,
+            439.4228968769309
+          ],
+          "p95_guarded_over_arm_ci95": [
+            2.276765897445396,
+            5.972976816005871
+          ],
+          "max_logit_drift_vs_same_precision": 2.5
+        },
+        "bf16_guard": {
+          "clauses": 1452,
+          "changed_roles": 10,
+          "changed_qualification_requests": 0,
+          "qualification_added": 0,
+          "qualification_removed": 0,
+          "same_precision_qualification_disagreements": 0,
+          "rechecked": 25,
+          "original_slots": 166929,
+          "fallback_slots": 278199,
+          "p50_p95_ms": [
+            122.00535926967859,
+            1845.5522309057412
+          ],
+          "p95_guarded_over_arm_ci95": [
+            1.0,
+            1.0
+          ],
+          "max_logit_drift_vs_same_precision": 2.5
+        },
+        "fp16_independent": {
+          "clauses": 1452,
+          "changed_roles": 15,
+          "changed_qualification_requests": 3,
+          "qualification_added": 2,
+          "qualification_removed": 1,
+          "same_precision_qualification_disagreements": 0,
+          "rechecked": 0,
+          "original_slots": 1763694,
+          "fallback_slots": 0,
+          "p50_p95_ms": [
+            511.72038447111845,
+            5353.796375077212
+          ],
+          "p95_guarded_over_arm_ci95": [
+            0.14487018216885714,
+            0.5394161422336763
+          ],
+          "max_logit_drift_vs_same_precision": 0.0
+        },
+        "fp16_cache": {
+          "clauses": 1452,
+          "changed_roles": 15,
+          "changed_qualification_requests": 3,
+          "qualification_added": 2,
+          "qualification_removed": 1,
+          "same_precision_qualification_disagreements": 0,
+          "rechecked": 0,
+          "original_slots": 166929,
+          "fallback_slots": 0,
+          "p50_p95_ms": [
+            119.61669847369194,
+            445.0979364104566
+          ],
+          "p95_guarded_over_arm_ci95": [
+            2.250161973258787,
+            5.903139282556808
+          ],
+          "max_logit_drift_vs_same_precision": 0.375
+        },
+        "fp16_guard": {
+          "clauses": 1452,
+          "changed_roles": 12,
+          "changed_qualification_requests": 1,
+          "qualification_added": 0,
+          "qualification_removed": 1,
+          "same_precision_qualification_disagreements": 2,
+          "rechecked": 7,
+          "original_slots": 166929,
+          "fallback_slots": 82824,
+          "p50_p95_ms": [
+            120.68063672631979,
+            1014.4812448881562
+          ],
+          "p95_guarded_over_arm_ci95": [
+            1.0099195325416874,
+            3.7296487861693617
+          ],
+          "max_logit_drift_vs_same_precision": 2.375
+        }
+      }
+    }
+  }
+}
