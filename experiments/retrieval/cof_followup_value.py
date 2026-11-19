@@ -182,10 +182,10 @@ def measure(requests, weights):
     ) for method, rows in result.items()}
 
 
-def collect(dataset, encoder, verifier, provenance):
+def collect(dataset, encoder, verifier, provenance, *, select_queries=select):
     root, papers, _, reference, ids, _, labels = read_data(dataset, provenance)
     texts = {pid: (row.get("title", "") + "\n" + row.get("abstract", "")).strip() for pid, row in papers.items()}
-    chosen = ids if dataset == "SIGIR" else select(dataset, ids, texts)
+    chosen = ids if dataset == "SIGIR" else select_queries(dataset, ids, texts)
     if dataset == "SIGIR" and any(set(labels[qid]) != set(reference.owner_ids) for qid in chosen):
         raise ValueError("Expected full SIGIR reviewer judgments")
     index = ProfileIndex(reference)
