@@ -18,6 +18,7 @@ from experiments.credit import legacy_contribution_text as legacy
 from experiments.credit import legacy_open_attribution as source
 from experiments.credit import open_role_applicability as base
 from experiments.credit import role_applicability_gate as gate
+from experiments.credit import role_vector_student as vector_student
 from experiments.followir.core17_reranking import digest, write_json
 from experiments.followir.core17_verifier import Reranker
 from experiments.litsearch.dense_cache import verify_checkpoint
@@ -30,6 +31,8 @@ METHOD = "definition_contrast"
 BASELINE_SHA256 = "a5325a3b1bb0e7c21019726f740c77b5cbf0cf7580c2fbce3afd3cc79dca2f5e"
 ARMS = ("baseline", "single_head", "rival_heads")
 SHORTLIST_ARMS = (*ARMS, "two_head_veto", "two_head_repair")
+STRESS_SHA256 = "ac6c615d89b868292ab05b1e43a2dee5bef23dc6b11b799754e9d27398c46ee7"
+SHORTLIST_SHA256 = "0c991314386b634837fc0877180b1672489d64a5ea7ebb70fb5356c0aafb408d"
 VERIFIER_SHA256 = "b84cfa9ca6f9cd3088ec2747a26ebb52d4c2c49d2729aa6afa3ae09200b74543"
 METRICS = ("clean", "returned", "wrong_source", "wrong_role", "wrong_author")
 
@@ -124,6 +127,27 @@ def shortlist_actions(reader, index, phrase, candidates, nominated, initial, exp
                                 reachable=int(repair_checked and nominated == goal and expected in possible)),
     }
 
+def student_actions(student, index, candidates, definition_scores, vector, nominated, initial, expected, goal,
+                    gates_pass, shared_ms):
+    start = perf_counter()
+    membership = index.notes[nominated].memberships
+    first = membership.get(initial, set())
+    feasible = {head for head in candidates if head != initial and first & membership.get(head, set())}
+    checked = bool(gates_pass and feasible)
+    prep_ms = (perf_counter() - start) * 1000
+    records = {}
+    for name in vector_student.NAMES:
+        start = perf_counter()
+        chosen, confident = (student.decide(name, candidates, definition_scores, vector)
+                             if checked else (candidates[0], False))
+        row = base.outcome(index, nominated, goal, initial, expected, chosen, confident and chosen in feasible)
+        elapsed = (perf_counter() - start) * 1000
+        records[name] = dict(row, ms=shared_ms + prep_ms + elapsed, verify_ms=None,
+                             decision_ms=elapsed if checked else None,
+                             rescued=int(bool(row["clean"]) and chosen != candidates[0]))
+    return records
+
+
 def summarize(rows, arms=ARMS):
     report = {}
     for arm in arms:
@@ -135,6 +159,7 @@ def summarize(rows, arms=ARMS):
             verification_calls=len(costs),
             verification_p95_ms=float(np.quantile(costs, .95)) if costs else None,
             component_p95_ms=float(np.quantile([row["ms"] for row in observed], .95)),
+            component_mean_ms=float(np.mean([row["ms"] for row in observed])),
         )
         if arm != "baseline":
             for key in ("clean", "wrong_role"):
@@ -145,6 +170,10 @@ def summarize(rows, arms=ARMS):
             counts.update(changed_role=sum(row["changed_role"] for row in observed),
                           rescued=sum(row["rescued"] for row in observed),
                           reachable=sum(row["reachable"] for row in observed))
+        if arm in vector_student.NAMES:
+            decisions = [row["decision_ms"] for row in observed if row["decision_ms"] is not None]
+            counts.update(rescued=sum(row["rescued"] for row in observed), local_decisions=len(decisions),
+                          local_p95_ms=float(np.quantile(decisions, .95)) if decisions else None)
         report[arm] = counts
     return report
 
@@ -175,7 +204,7 @@ def matched_coverage(rows, report):
     return controls
 
 def run(old, first, fresh, niso, role_results, source_results, body_results, baseline_results,
-        embedding, reranker, output, shortlist_reference=None):
+        embedding, reranker, output, shortlist_reference=None, student_training=None, repair_reference=None, stress_phrases=None):
     if output.exists() or not os.environ.get("SLURM_JOB_ID") or not torch.cuda.is_available():
         raise ValueError("Require a fresh output and Slurm CUDA")
     for path, expected in (
@@ -189,6 +218,11 @@ def run(old, first, fresh, niso, role_results, source_results, body_results, bas
         raise ValueError("Changed verifier comparison result")
     prior = json.loads(shortlist_reference.read_bytes()) if shortlist_reference is not None else None
     arms = SHORTLIST_ARMS if prior is not None else ARMS
+    if student_training is not None and (prior is None or repair_reference is None):
+        raise ValueError("Student comparison requires frozen veto and repair controls")
+    if repair_reference is not None and (prior is None or digest(repair_reference) != SHORTLIST_SHA256):
+        raise ValueError("Two-head repair requires both pinned reference results")
+    prior_repair = json.loads(repair_reference.read_bytes()) if repair_reference is not None else None
 
     guide, controller, source_policy, body_policy, baseline = (
         json.loads(path.read_bytes()) for path in (niso, role_results, source_results, body_results, baseline_results)
@@ -218,8 +252,23 @@ def run(old, first, fresh, niso, role_results, source_results, body_results, bas
     if prior is not None:
         calibration["shortlist"] = calibrate_shortlist(reader, encoder, definitions)
 
+    if stress_phrases is not None and (student_training is None or digest(stress_phrases) != STRESS_SHA256):
+        raise ValueError("Stress wording requires a student and the pinned phrase bank")
+    stress = json.loads(stress_phrases.read_bytes()) if stress_phrases is not None else {}
+    stress_text = [phrase for phrases in stress.values() for phrase in phrases]
+    student = None
+    if student_training is not None:
+        student = vector_student.DutyStudent(
+            student_training, encoder, definitions, reader, score,
+            [row["text"] for row in guide["examples"]] + stress_text,
+        )
+        arms = (*arms, *vector_student.NAMES, "student_then_repair")
+
     panels = {}
-    for form in source.FORMS:
+    forms = [(form, False) for form in source.FORMS]
+    if stress:
+        forms.extend((form, True) for form in source.FORMS)
+    for form, stress_mode in forms:
         cuts = source_policy["thresholds"][form], body_policy["thresholds"][form]["lexical_body"]["threshold"]
         observations = {(state, kind): [] for state in ("present", "withheld")
                         for kind in ("supported", "unsupported")}
@@ -238,7 +287,10 @@ def run(old, first, fresh, niso, role_results, source_results, body_results, bas
                 source_pass, gate_ms = base.alternate(clue, nominated, index, bodies, dense, *cuts)
                 for kind, example, expected in (("supported", good, target), ("unsupported", bad, None)):
                     phrase = example["text"]
-                    proposed, signals, role_ms, definition_scores = gate.score_with_definitions(
+                    if stress_mode:
+                        phrases = stress[example["role"]]
+                        phrase = min(phrases, key=lambda text: legacy.stable("stress", doi, text))
+                    proposed, signals, role_ms, definition_scores, vector = gate.score_with_definitions(
                         phrase, encoder, bank, definitions, excluded,
                     )
                     chosen = proposed[METHOD]
@@ -262,6 +314,18 @@ def run(old, first, fresh, niso, role_results, source_results, body_results, bas
                                 reader, index, phrase, candidates, nominated, initial, expected, goal, accepted,
                                 control, shared_ms + shortlist_ms, calibration["shortlist"]["cutoff"],
                             ))
+                            if student is not None:
+                                records.update(student_actions(
+                                    student, index, candidates, definition_scores, vector, nominated, initial,
+                                    expected, goal, accepted, shared_ms + shortlist_ms,
+                                ))
+                                fast = records["supervised_ridge"]
+                                fallback = records["two_head_repair"]
+                                if fast["returned"]:
+                                    hybrid = fast.copy()
+                                else:
+                                    hybrid = dict(fallback, ms=fallback["ms"] + fast["ms"] - shared_ms - shortlist_ms)
+                                records["student_then_repair"] = hybrid
                             continue
                         record = records["baseline"].copy()
                         if control["returned"]:
@@ -278,26 +342,35 @@ def run(old, first, fresh, niso, role_results, source_results, body_results, bas
                         records[arm] = record
                     observations[state, kind].append((group, records))
 
-        panels[form] = {}
+        panel_key = f"stress_{form}" if stress_mode else form
+        panels[panel_key] = {}
         for (state, kind), rows in observations.items():
             panel = f"{state}/{kind}"
             values = summarize(rows, arms)
             expected = baseline["results"][form]["panels"][panel]["definition_contrast/body"]
-            if any(values["baseline"][k] != expected[k] for k in METRICS):
+            if not stress_mode and any(values["baseline"][k] != expected[k] for k in METRICS):
                 raise AssertionError(f"Baseline replay diverged in {form}/{panel}")
-            if prior is not None:
+            if not stress_mode and prior is not None:
                 for arm in ARMS:
                     previous = prior["panels"][form][panel][arm]
                     if any(values[arm][k] != previous[k] for k in METRICS):
                         raise AssertionError(f"Verifier replay diverged in {form}/{panel}/{arm}")
+            if not stress_mode and prior_repair is not None:
+                for arm in ("two_head_veto", "two_head_repair"):
+                    previous = prior_repair["panels"][form][panel][arm]
+                    if any(values[arm][k] != previous[k] for k in METRICS):
+                        raise AssertionError(f"Two-head replay diverged in {form}/{panel}/{arm}")
             values["proposal_at_matched_coverage"] = matched_coverage(rows, values)
-            panels[form][panel] = values
+            panels[panel_key][panel] = values
 
     write_json(output, dict(
         job=os.environ["SLURM_JOB_ID"], gpu=torch.cuda.get_device_name(), queries=len(queries),
         author_groups=len(set(groups)), sources=len(notes), calibration=calibration,
         baseline_sha256=digest(baseline_results), code_sha256=digest(Path(__file__)),
         **({"verifier_reference_sha256": digest(shortlist_reference)} if prior is not None else {}),
+        **({"stress_phrase_sha256": digest(stress_phrases)} if stress_phrases is not None else {}),
+        **({"student": student.metadata, "repair_reference_sha256": digest(repair_reference),
+            "student_code_sha256": digest(Path(vector_student.__file__))} if student is not None else {}),
         embedding_revision=provenance["revision"], reranker_revision=reader.provenance["revision"], panels=panels,
     ))
 
@@ -305,6 +378,9 @@ def run(old, first, fresh, niso, role_results, source_results, body_results, bas
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--shortlist-reference", type=Path)
+    parser.add_argument("--student-training", type=Path)
+    parser.add_argument("--repair-reference", type=Path)
+    parser.add_argument("--stress-phrases", type=Path)
     for key in ("old", "first", "fresh", "niso", "role_results", "source_results", "body_results",
                 "baseline_results", "embedding", "reranker", "output"):
         parser.add_argument(key, type=Path)
