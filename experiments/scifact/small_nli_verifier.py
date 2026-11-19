@@ -42,11 +42,11 @@ def load(checkpoint, model_name):
     return tokenizer, reader, [label_index[name] for name in LABELS], source
 
 
-def measure(tokenizer, reader, positions, rows):
+def measure(tokenizer, reader, positions, rows, *, batch_size=BATCH):
     verdicts = []
     times = []
-    for offset in range(0, len(rows), BATCH):
-        batch = rows[offset:offset + BATCH]
+    for offset in range(0, len(rows), batch_size):
+        batch = rows[offset:offset + batch_size]
         started = perf_counter()
         encoded = tokenizer([row["source"] for row in batch], [row["criterion"] for row in batch],
                             truncation=False, padding=False, verbose=False)
