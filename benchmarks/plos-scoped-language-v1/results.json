@@ -1,0 +1,527 @@
+{
+  "job": "41533",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+  "fixture_sha256": "f04b25afbefd303e61a191506b9a28164a4a9b36d6fc8d210f9c269194ac9c0d",
+  "examples_sha256": "c107b4e780218e58aec4e2a13f2d7072533962a6a73b82d23e4273b43aafd528",
+  "script_sha256": "f7bf39254f43d480b44bf94e157530428af7fda7bfbafcbe5534ef0e027caf14",
+  "balanced_joint": true,
+  "results": {
+    "all": {
+      "queries": 240,
+      "pairs": 120,
+      "arms": {
+        "joint_full": {
+          "scope_atoms_correct": 372,
+          "role_atoms_correct": 351,
+          "scoped_atoms_correct": 164,
+          "plan_correct": 0,
+          "expert_set_correct": 121,
+          "unsupported_ids": 18,
+          "missed_ids": 101,
+          "joint_correct": 0,
+          "pairs_exact": 0,
+          "p50_p95_ms": [
+            114.02955744415522,
+            119.31749349460006
+          ],
+          "mean_tokens": 2148.65
+        },
+        "model_scope_and_role": {
+          "scope_atoms_correct": 447,
+          "role_atoms_correct": 500,
+          "scoped_atoms_correct": 330,
+          "plan_correct": 24,
+          "expert_set_correct": 139,
+          "unsupported_ids": 6,
+          "missed_ids": 95,
+          "joint_correct": 24,
+          "pairs_exact": 4,
+          "p50_p95_ms": [
+            196.1057623848319,
+            200.7907592691481
+          ],
+          "mean_tokens": 2158.3
+        },
+        "factored_full": {
+          "scope_atoms_correct": 720,
+          "role_atoms_correct": 500,
+          "scoped_atoms_correct": 500,
+          "plan_correct": 84,
+          "expert_set_correct": 163,
+          "unsupported_ids": 5,
+          "missed_ids": 72,
+          "joint_correct": 84,
+          "pairs_exact": 35,
+          "p50_p95_ms": [
+            92.1251280233264,
+            94.0974454395473
+          ],
+          "mean_tokens": 1710.65
+        },
+        "factored_local": {
+          "scope_atoms_correct": 720,
+          "role_atoms_correct": 574,
+          "scoped_atoms_correct": 574,
+          "plan_correct": 122,
+          "expert_set_correct": 180,
+          "unsupported_ids": 6,
+          "missed_ids": 54,
+          "joint_correct": 122,
+          "pairs_exact": 56,
+          "p50_p95_ms": [
+            84.93376802653074,
+            85.73093125596642
+          ],
+          "mean_tokens": 1422.3583333333333
+        },
+        "oracle": {
+          "scope_atoms_correct": 720,
+          "role_atoms_correct": 720,
+          "scoped_atoms_correct": 720,
+          "plan_correct": 240,
+          "expert_set_correct": 240,
+          "unsupported_ids": 0,
+          "missed_ids": 0,
+          "joint_correct": 240,
+          "pairs_exact": 120,
+          "p50_p95_ms": [
+            0.0017033889889717102,
+            0.002883467823266983
+          ],
+          "mean_tokens": 0.0
+        }
+      }
+    },
+    "explicit": {
+      "queries": 120,
+      "pairs": 60,
+      "arms": {
+        "joint_full": {
+          "scope_atoms_correct": 193,
+          "role_atoms_correct": 164,
+          "scoped_atoms_correct": 81,
+          "plan_correct": 0,
+          "expert_set_correct": 64,
+          "unsupported_ids": 11,
+          "missed_ids": 45,
+          "joint_correct": 0,
+          "pairs_exact": 0,
+          "p50_p95_ms": [
+            113.93716651946306,
+            119.16179414838552
+          ],
+          "mean_tokens": 2141.875
+        },
+        "model_scope_and_role": {
+          "scope_atoms_correct": 263,
+          "role_atoms_correct": 248,
+          "scoped_atoms_correct": 190,
+          "plan_correct": 19,
+          "expert_set_correct": 72,
+          "unsupported_ids": 2,
+          "missed_ids": 46,
+          "joint_correct": 19,
+          "pairs_exact": 4,
+          "p50_p95_ms": [
+            195.5598508939147,
+            200.15932815149426
+          ],
+          "mean_tokens": 2144.75
+        },
+        "factored_full": {
+          "scope_atoms_correct": 360,
+          "role_atoms_correct": 248,
+          "scoped_atoms_correct": 248,
+          "plan_correct": 41,
+          "expert_set_correct": 81,
+          "unsupported_ids": 2,
+          "missed_ids": 37,
+          "joint_correct": 41,
+          "pairs_exact": 15,
+          "p50_p95_ms": [
+            91.93860832601786,
+            93.90574544668198
+          ],
+          "mean_tokens": 1703.875
+        },
+        "factored_local": {
+          "scope_atoms_correct": 360,
+          "role_atoms_correct": 287,
+          "scoped_atoms_correct": 287,
+          "plan_correct": 61,
+          "expert_set_correct": 90,
+          "unsupported_ids": 3,
+          "missed_ids": 27,
+          "joint_correct": 61,
+          "pairs_exact": 28,
+          "p50_p95_ms": [
+            84.91028659045696,
+            85.73106285184622
+          ],
+          "mean_tokens": 1422.3583333333333
+        },
+        "oracle": {
+          "scope_atoms_correct": 360,
+          "role_atoms_correct": 360,
+          "scoped_atoms_correct": 360,
+          "plan_correct": 120,
+          "expert_set_correct": 120,
+          "unsupported_ids": 0,
+          "missed_ids": 0,
+          "joint_correct": 120,
+          "pairs_exact": 60,
+          "p50_p95_ms": [
+            0.0017285346984863281,
+            0.0032374635338783264
+          ],
+          "mean_tokens": 0.0
+        }
+      }
+    },
+    "anaphoric": {
+      "queries": 120,
+      "pairs": 60,
+      "arms": {
+        "joint_full": {
+          "scope_atoms_correct": 179,
+          "role_atoms_correct": 187,
+          "scoped_atoms_correct": 83,
+          "plan_correct": 0,
+          "expert_set_correct": 57,
+          "unsupported_ids": 7,
+          "missed_ids": 56,
+          "joint_correct": 0,
+          "pairs_exact": 0,
+          "p50_p95_ms": [
+            114.30064588785172,
+            119.44208722561598
+          ],
+          "mean_tokens": 2155.425
+        },
+        "model_scope_and_role": {
+          "scope_atoms_correct": 184,
+          "role_atoms_correct": 252,
+          "scoped_atoms_correct": 140,
+          "plan_correct": 5,
+          "expert_set_correct": 67,
+          "unsupported_ids": 4,
+          "missed_ids": 49,
+          "joint_correct": 5,
+          "pairs_exact": 0,
+          "p50_p95_ms": [
+            198.4879532828927,
+            200.9669004008174
+          ],
+          "mean_tokens": 2171.85
+        },
+        "factored_full": {
+          "scope_atoms_correct": 360,
+          "role_atoms_correct": 252,
+          "scoped_atoms_correct": 252,
+          "plan_correct": 43,
+          "expert_set_correct": 82,
+          "unsupported_ids": 3,
+          "missed_ids": 35,
+          "joint_correct": 43,
+          "pairs_exact": 20,
+          "p50_p95_ms": [
+            92.1798711642623,
+            94.2013100720942
+          ],
+          "mean_tokens": 1717.425
+        },
+        "factored_local": {
+          "scope_atoms_correct": 360,
+          "role_atoms_correct": 287,
+          "scoped_atoms_correct": 287,
+          "plan_correct": 61,
+          "expert_set_correct": 90,
+          "unsupported_ids": 3,
+          "missed_ids": 27,
+          "joint_correct": 61,
+          "pairs_exact": 28,
+          "p50_p95_ms": [
+            84.94704123586416,
+            85.69586481899023
+          ],
+          "mean_tokens": 1422.3583333333333
+        },
+        "oracle": {
+          "scope_atoms_correct": 360,
+          "role_atoms_correct": 360,
+          "scoped_atoms_correct": 360,
+          "plan_correct": 120,
+          "expert_set_correct": 120,
+          "unsupported_ids": 0,
+          "missed_ids": 0,
+          "joint_correct": 120,
+          "pairs_exact": 60,
+          "p50_p95_ms": [
+            0.00169314444065094,
+            0.002633873373270035
+          ],
+          "mean_tokens": 0.0
+        }
+      }
+    },
+    "label_flip": {
+      "queries": 72,
+      "pairs": 36,
+      "arms": {
+        "joint_full": {
+          "scope_atoms_correct": 122,
+          "role_atoms_correct": 105,
+          "scoped_atoms_correct": 44,
+          "plan_correct": 0,
+          "expert_set_correct": 44,
+          "unsupported_ids": 2,
+          "missed_ids": 26,
+          "joint_correct": 0,
+          "pairs_exact": 0,
+          "p50_p95_ms": [
+            114.23212010413408,
+            119.12724236026406
+          ],
+          "mean_tokens": 2146.5
+        },
+        "model_scope_and_role": {
+          "scope_atoms_correct": 124,
+          "role_atoms_correct": 144,
+          "scoped_atoms_correct": 96,
+          "plan_correct": 5,
+          "expert_set_correct": 40,
+          "unsupported_ids": 0,
+          "missed_ids": 32,
+          "joint_correct": 5,
+          "pairs_exact": 1,
+          "p50_p95_ms": [
+            195.96682209521532,
+            200.36016097292304
+          ],
+          "mean_tokens": 2154.0
+        },
+        "factored_full": {
+          "scope_atoms_correct": 216,
+          "role_atoms_correct": 144,
+          "scoped_atoms_correct": 144,
+          "plan_correct": 21,
+          "expert_set_correct": 49,
+          "unsupported_ids": 0,
+          "missed_ids": 23,
+          "joint_correct": 21,
+          "pairs_exact": 9,
+          "p50_p95_ms": [
+            92.22935233265162,
+            94.07398169860244
+          ],
+          "mean_tokens": 1708.5
+        },
+        "factored_local": {
+          "scope_atoms_correct": 216,
+          "role_atoms_correct": 172,
+          "scoped_atoms_correct": 172,
+          "plan_correct": 38,
+          "expert_set_correct": 56,
+          "unsupported_ids": 0,
+          "missed_ids": 16,
+          "joint_correct": 38,
+          "pairs_exact": 18,
+          "p50_p95_ms": [
+            84.94868222624063,
+            85.65346412360668
+          ],
+          "mean_tokens": 1421.2222222222222
+        },
+        "oracle": {
+          "scope_atoms_correct": 216,
+          "role_atoms_correct": 216,
+          "scoped_atoms_correct": 216,
+          "plan_correct": 72,
+          "expert_set_correct": 72,
+          "unsupported_ids": 0,
+          "missed_ids": 0,
+          "joint_correct": 72,
+          "pairs_exact": 36,
+          "p50_p95_ms": [
+            0.001759268343448639,
+            0.002958159893751145
+          ],
+          "mean_tokens": 0.0
+        }
+      }
+    },
+    "stable": {
+      "queries": 72,
+      "pairs": 36,
+      "arms": {
+        "joint_full": {
+          "scope_atoms_correct": 104,
+          "role_atoms_correct": 120,
+          "scoped_atoms_correct": 59,
+          "plan_correct": 0,
+          "expert_set_correct": 32,
+          "unsupported_ids": 0,
+          "missed_ids": 40,
+          "joint_correct": 0,
+          "pairs_exact": 0,
+          "p50_p95_ms": [
+            113.95236570388079,
+            119.34764739125967
+          ],
+          "mean_tokens": 2144.3333333333335
+        },
+        "model_scope_and_role": {
+          "scope_atoms_correct": 140,
+          "role_atoms_correct": 176,
+          "scoped_atoms_correct": 112,
+          "plan_correct": 8,
+          "expert_set_correct": 38,
+          "unsupported_ids": 0,
+          "missed_ids": 34,
+          "joint_correct": 8,
+          "pairs_exact": 2,
+          "p50_p95_ms": [
+            195.5320192500949,
+            200.3456306643784
+          ],
+          "mean_tokens": 2149.6666666666665
+        },
+        "factored_full": {
+          "scope_atoms_correct": 216,
+          "role_atoms_correct": 175,
+          "scoped_atoms_correct": 175,
+          "plan_correct": 36,
+          "expert_set_correct": 49,
+          "unsupported_ids": 0,
+          "missed_ids": 23,
+          "joint_correct": 36,
+          "pairs_exact": 14,
+          "p50_p95_ms": [
+            91.90958458930254,
+            94.02526868507266
+          ],
+          "mean_tokens": 1706.3333333333333
+        },
+        "factored_local": {
+          "scope_atoms_correct": 216,
+          "role_atoms_correct": 194,
+          "scoped_atoms_correct": 194,
+          "plan_correct": 52,
+          "expert_set_correct": 60,
+          "unsupported_ids": 0,
+          "missed_ids": 12,
+          "joint_correct": 52,
+          "pairs_exact": 22,
+          "p50_p95_ms": [
+            84.83577240258455,
+            85.66079260781407
+          ],
+          "mean_tokens": 1421.138888888889
+        },
+        "oracle": {
+          "scope_atoms_correct": 216,
+          "role_atoms_correct": 216,
+          "scoped_atoms_correct": 216,
+          "plan_correct": 72,
+          "expert_set_correct": 72,
+          "unsupported_ids": 0,
+          "missed_ids": 0,
+          "joint_correct": 72,
+          "pairs_exact": 36,
+          "p50_p95_ms": [
+            0.001644715666770935,
+            0.0028538517653942117
+          ],
+          "mean_tokens": 0.0
+        }
+      }
+    },
+    "scope_swap": {
+      "queries": 96,
+      "pairs": 48,
+      "arms": {
+        "joint_full": {
+          "scope_atoms_correct": 146,
+          "role_atoms_correct": 126,
+          "scoped_atoms_correct": 61,
+          "plan_correct": 0,
+          "expert_set_correct": 45,
+          "unsupported_ids": 16,
+          "missed_ids": 35,
+          "joint_correct": 0,
+          "pairs_exact": 0,
+          "p50_p95_ms": [
+            114.08736649900675,
+            119.3827698007226
+          ],
+          "mean_tokens": 2153.5
+        },
+        "model_scope_and_role": {
+          "scope_atoms_correct": 183,
+          "role_atoms_correct": 180,
+          "scoped_atoms_correct": 122,
+          "plan_correct": 11,
+          "expert_set_correct": 61,
+          "unsupported_ids": 6,
+          "missed_ids": 29,
+          "joint_correct": 11,
+          "pairs_exact": 1,
+          "p50_p95_ms": [
+            197.0314895734191,
+            200.82923909649253
+          ],
+          "mean_tokens": 2168.0
+        },
+        "factored_full": {
+          "scope_atoms_correct": 288,
+          "role_atoms_correct": 181,
+          "scoped_atoms_correct": 181,
+          "plan_correct": 27,
+          "expert_set_correct": 65,
+          "unsupported_ids": 5,
+          "missed_ids": 26,
+          "joint_correct": 27,
+          "pairs_exact": 12,
+          "p50_p95_ms": [
+            92.193353921175,
+            94.132243655622
+          ],
+          "mean_tokens": 1715.5
+        },
+        "factored_local": {
+          "scope_atoms_correct": 288,
+          "role_atoms_correct": 208,
+          "scoped_atoms_correct": 208,
+          "plan_correct": 32,
+          "expert_set_correct": 64,
+          "unsupported_ids": 6,
+          "missed_ids": 26,
+          "joint_correct": 32,
+          "pairs_exact": 16,
+          "p50_p95_ms": [
+            84.98044032603502,
+            85.80832881852984
+          ],
+          "mean_tokens": 1424.125
+        },
+        "oracle": {
+          "scope_atoms_correct": 288,
+          "role_atoms_correct": 288,
+          "scoped_atoms_correct": 288,
+          "plan_correct": 96,
+          "expert_set_correct": 96,
+          "unsupported_ids": 0,
+          "missed_ids": 0,
+          "joint_correct": 96,
+          "pairs_exact": 48,
+          "p50_p95_ms": [
+            0.0017005950212478638,
+            0.0027422793209552765
+          ],
+          "mean_tokens": 0.0
+        }
+      }
+    }
+  }
+}
