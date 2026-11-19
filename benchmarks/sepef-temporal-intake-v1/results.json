@@ -1,0 +1,82 @@
+{
+  "job": "40871",
+  "latest_history_timestamp": 1577836476,
+  "profile_cutoff_utc": 1577836799,
+  "qrels": {
+    "test": 19995,
+    "val": 16710
+  },
+  "raw_file_sha256": "ac49dccb509192b804cd71da4d3899eb450965ae7d15159cd48c6dc7701f39e1",
+  "released_experts": 3306,
+  "reports": {
+    "all_history": {
+      "answers": 564690,
+      "communities": 50,
+      "experts": 3275,
+      "report": {
+        "test": {
+          "community": {
+            "hit5": 0.38794698674668665,
+            "label_in_scope": 18100,
+            "mrr10": 0.24552048726467332
+          },
+          "global": {
+            "hit5": 0.06691672918229558,
+            "label_in_scope": 19090,
+            "mrr10": 0.0462354080583638
+          }
+        },
+        "val": {
+          "community": {
+            "hit5": 0.3419509275882705,
+            "label_in_scope": 15499,
+            "mrr10": 0.21923180682606175
+          },
+          "global": {
+            "hit5": 0.05601436265709156,
+            "label_in_scope": 16003,
+            "mrr10": 0.03595090859004683
+          }
+        }
+      }
+    },
+    "recent8": {
+      "answers": 26123,
+      "communities": 50,
+      "experts": 3275,
+      "report": {
+        "test": {
+          "community": {
+            "hit5": 0.05716429107276819,
+            "label_in_scope": 17020,
+            "mrr10": 0.029113528382095525
+          },
+          "global": {
+            "hit5": 0.00015003750937734434,
+            "label_in_scope": 19090,
+            "mrr10": 5.001250312578144e-05
+          }
+        },
+        "val": {
+          "community": {
+            "hit5": 0.06157989228007181,
+            "label_in_scope": 14731,
+            "mrr10": 0.03328206187721448
+          },
+          "global": {
+            "hit5": 5.984440454817474e-05,
+            "label_in_scope": 16003,
+            "mrr10": 1.994813484939158e-05
+          }
+        }
+      }
+    }
+  },
+  "script_sha256": "5d9d04ca4efbc03dbe60526e6f282a8f2c3b606befdd3548f082ec22a528e2a7",
+  "source_sha256": {
+    "expert_test_data.json": "9e2856bb4bcf09dbe8e565c278b28da3737d915f2f7273a6919c51fad3e6ae51",
+    "test/qrels.json": "701ff0d4e1e13f07051c65d99f39196f7de694fdb7d1b755582c4202507de2d7",
+    "val/qrels.json": "bf2a6b1d42c2c22612374fcceee33be983d43611481e2efe5df726cc2dd2be78"
+  },
+  "upstream": "SE-PEF/SE-PEF/"
+}
