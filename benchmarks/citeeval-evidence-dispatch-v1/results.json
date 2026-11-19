@@ -1,0 +1,249 @@
+{
+  "input_sha256": {
+    "dev.human.out": "a0cd392684239628b559e4d0255bbece0e4a9d8f31669b0c3d9a9cd2e90a1eed",
+    "test.human.out": "dbf59518a2cc96522b340ae0b5ae6a032ae2d9ca2088484876f29140b7488d71",
+    "dev.metric": "b861f51d0d11b19e5c11542309e401fd98fd3f4e1ca15003d4d614e7db78881f",
+    "test.metric": "4dc8ee5d0de4f10916ead55152aefa8ad4b0c6497a7de7d15662ab44bffb5545"
+  },
+  "script_sha256": "f58c53bb5de9edd8f96faf6fa91cd75505d2c12134e59a1fc095a9bd6da2ea2d",
+  "job": "42712",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "checkpoint": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+  "calibration": {
+    "unanimous_no_add": 248,
+    "unresolved_statements": 70,
+    "positive": 32,
+    "inconsistent_consensus_edits": 7
+  },
+  "test": {
+    "unanimous_no_add": 702,
+    "unresolved_statements": 243,
+    "overlap_responses_removed": 416,
+    "inconsistent_consensus_edits": 32,
+    "positive": 89
+  },
+  "gates": {
+    "query_lexical": {
+      "threshold": 1.0,
+      "calibration_no_add_accepted": 0,
+      "cap": 24
+    },
+    "claim_lexical": {
+      "threshold": 0.6499655942579149,
+      "calibration_no_add_accepted": 24,
+      "cap": 24
+    },
+    "residual_lexical": {
+      "threshold": 1.0,
+      "calibration_no_add_accepted": 0,
+      "cap": 24
+    },
+    "neural_top_two": {
+      "threshold": 2.5,
+      "calibration_no_add_accepted": 24,
+      "cap": 24
+    },
+    "neural_all": {
+      "threshold": 3.6875,
+      "calibration_no_add_accepted": 24,
+      "cap": 24
+    }
+  },
+  "report": {
+    "queries": 138,
+    "neural_top_two_minus_all_positive": {
+      "forced": {
+        "mean": 0.0,
+        "percentile_95": [
+          -0.10185657596371882,
+          0.10256410256410256
+        ],
+        "queries": 89,
+        "clusters": 51,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000,
+        "sampling_unit": "normalized query"
+      },
+      "gated": {
+        "mean": 0.0449438202247191,
+        "percentile_95": [
+          -0.04938271604938271,
+          0.13095238095238096
+        ],
+        "queries": 89,
+        "clusters": 51,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000,
+        "sampling_unit": "normalized query"
+      }
+    },
+    "shortlist_reaches_consensus": 74,
+    "arms": {
+      "query_lexical": {
+        "forced_hits": 17,
+        "positive_by_existing_citations": {
+          "already_cited": {
+            "cases": 19,
+            "forced_hits": 5,
+            "gated_hits": 0
+          },
+          "uncited": {
+            "cases": 70,
+            "forced_hits": 12,
+            "gated_hits": 0
+          }
+        },
+        "gated_hits": 0,
+        "gated_nonconsensus": 0,
+        "gated_on_no_add": 0,
+        "p95_ms": 0.041146762669086456,
+        "mean_neural_passages_scored": 0.0,
+        "truncated": 0,
+        "gated_hit_delta_vs_query": {
+          "mean": 0.0,
+          "percentile_95": [
+            0.0,
+            0.0
+          ],
+          "queries": 791,
+          "clusters": 138,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      },
+      "claim_lexical": {
+        "forced_hits": 63,
+        "positive_by_existing_citations": {
+          "already_cited": {
+            "cases": 19,
+            "forced_hits": 13,
+            "gated_hits": 3
+          },
+          "uncited": {
+            "cases": 70,
+            "forced_hits": 50,
+            "gated_hits": 28
+          }
+        },
+        "gated_hits": 31,
+        "gated_nonconsensus": 3,
+        "gated_on_no_add": 64,
+        "p95_ms": 0.03410782665014267,
+        "mean_neural_passages_scored": 0.0,
+        "truncated": 0,
+        "gated_hit_delta_vs_query": {
+          "mean": 0.039190897597977246,
+          "percentile_95": [
+            0.025165562913907286,
+            0.05597989225508906
+          ],
+          "queries": 791,
+          "clusters": 138,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      },
+      "residual_lexical": {
+        "forced_hits": 61,
+        "positive_by_existing_citations": {
+          "already_cited": {
+            "cases": 19,
+            "forced_hits": 11,
+            "gated_hits": 0
+          },
+          "uncited": {
+            "cases": 70,
+            "forced_hits": 50,
+            "gated_hits": 0
+          }
+        },
+        "gated_hits": 0,
+        "gated_nonconsensus": 0,
+        "gated_on_no_add": 0,
+        "p95_ms": 0.023754313588142395,
+        "mean_neural_passages_scored": 0.0,
+        "truncated": 0,
+        "gated_hit_delta_vs_query": {
+          "mean": 0.0,
+          "percentile_95": [
+            0.0,
+            0.0
+          ],
+          "queries": 791,
+          "clusters": 138,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      },
+      "neural_top_two": {
+        "forced_hits": 68,
+        "positive_by_existing_citations": {
+          "already_cited": {
+            "cases": 19,
+            "forced_hits": 14,
+            "gated_hits": 5
+          },
+          "uncited": {
+            "cases": 70,
+            "forced_hits": 54,
+            "gated_hits": 42
+          }
+        },
+        "gated_hits": 47,
+        "gated_nonconsensus": 7,
+        "gated_on_no_add": 109,
+        "p95_ms": 9.052868001163006,
+        "mean_neural_passages_scored": 1.9987357774968395,
+        "truncated": 0,
+        "gated_hit_delta_vs_query": {
+          "mean": 0.05941845764854614,
+          "percentile_95": [
+            0.04145060402870522,
+            0.07985257985257985
+          ],
+          "queries": 791,
+          "clusters": 138,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      },
+      "neural_all": {
+        "forced_hits": 68,
+        "positive_by_existing_citations": {
+          "already_cited": {
+            "cases": 19,
+            "forced_hits": 15,
+            "gated_hits": 7
+          },
+          "uncited": {
+            "cases": 70,
+            "forced_hits": 53,
+            "gated_hits": 36
+          }
+        },
+        "gated_hits": 43,
+        "gated_nonconsensus": 8,
+        "gated_on_no_add": 116,
+        "p95_ms": 32.786997966468334,
+        "mean_neural_passages_scored": 8.394437420986094,
+        "truncated": 0,
+        "gated_hit_delta_vs_query": {
+          "mean": 0.05436156763590392,
+          "percentile_95": [
+            0.036410923276983094,
+            0.07519788918205805
+          ],
+          "queries": 791,
+          "clusters": 138,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      }
+    }
+  }
+}
