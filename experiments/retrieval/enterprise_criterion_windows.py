@@ -125,7 +125,7 @@ def summarize(rows):
     return report
 
 
-def run(queries, corpus, roles, vectors, meta, models, output):
+def run(queries, corpus, roles, vectors, meta, models, output, review_trace=None):
     from expert_search.gpu_owned_vector_index import GpuOwnedVectorIndex
     from expert_search.owned_vector_index import ExactOwnedVectorIndex
     from expert_search.qwen_embedding_torch import QwenTorchEmbedding
@@ -134,7 +134,7 @@ def run(queries, corpus, roles, vectors, meta, models, output):
     from experiments.retrieval.enterprise_gap_verification import DEVELOPMENT, SOURCE_INVENTORY
     from experiments.retrieval.enterprise_prefix_fork import ComparisonParser
 
-    route.role.require_cuda(output)
+    route.role.require_cuda(output, *([review_trace] if review_trace is not None else []))
     if (digest(queries), digest(corpus)) != (DEVELOPMENT, SOURCE_INVENTORY):
         raise ValueError("Only the development inputs are eligible")
     torch.backends.cuda.matmul.allow_tf32 = False
@@ -153,8 +153,9 @@ def run(queries, corpus, roles, vectors, meta, models, output):
                route.role.load_role_index(roles, SOURCE_INVENTORY, sources), route.EncodedReader(canonical))
     for arm in ARMS:
         search("Find an expert in sensor calibration.", arm, *fixture)
+    requests = rows(queries)
     observations = []
-    for i, request in enumerate(rows(queries)):
+    for i, request in enumerate(requests):
         offset = i % len(ARMS)
         observations.append({arm: search(request["text"], arm, *fixture) for arm in ARMS[offset:] + ARMS[:offset]})
         if (i + 1) % 20 == 0:
@@ -163,10 +164,24 @@ def run(queries, corpus, roles, vectors, meta, models, output):
         code_sha256=digest(Path(__file__)), models=dict(encoder=pinned["revision"],
             reranker=canonical.provenance["revision"], parser=parser.readers["bf16"].provenance["revision"]),
         char_budget=WINDOW_CHARS, metrics=summarize(observations)))
+    if review_trace is not None:
+        private = []
+        for request, result in zip(requests, observations, strict=True):
+            views = {}
+            for arm in ("reference", "criterion"):
+                row = result[arm]
+                views[arm] = [dict(expert=eid, citations=list(dict.fromkeys(spans)))
+                              for eid, spans in row["primary_spans"]] + row["rescue"]
+            private.append(dict(query_id=request["id"], views=views))
+        descriptor = os.open(review_trace, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+        with os.fdopen(descriptor, "w", encoding="utf-8") as stream:
+            json.dump(dict(aggregate_sha256=digest(output), queries_sha256=DEVELOPMENT,
+                           corpus_sha256=SOURCE_INVENTORY, records=private), stream)
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ("queries", "corpus", "roles", "vectors", "meta", "models", "output"):
         parser.add_argument(name, type=Path)
+    parser.add_argument("--review-trace", type=Path)
     run(**vars(parser.parse_args()))

@@ -58,6 +58,44 @@ of quality differences remain unresolved until blinded
 review, so retain full openings for issued claims while
 testing shorter windows as proposals. [Aggregate results](results.json)
 
+## Blinded evidence review
+
+The replay can write a restricted trace containing response IDs,
+expert IDs, and original citation offsets for the reference and
+criterion-window routes. Its manifest binds the trace to the
+aggregate execution and the pinned query and source inventories.
+The packet builder takes every request with different issued
+identities, order or citation views, plus up to four unchanged
+issued requests selected by fixed hash.
+
+Deduplicate on the exact request, person and citation span set.
+Randomize anonymous case order and the source aliases shown
+within each case. Preserve complete requirement text, given
+expert identity, and exact displayed excerpts for attribution.
+Only the private coordinator map records the methods and ranks.
+Reviewers may still infer some assignments from excerpt length.
+The packet is a diagnostic disagreement set and does not
+estimate population prevalence or closed-set ranking precision.
+The sealed cohort remains unused.
+
+Slurm job 43375 reproduces the preceding recommendation and
+source agreement counts. The packet covers 18 changed requests,
+including seven with different experts or order and 11 with
+evidence-only changes, plus four exact-view controls. The two
+policies issue 51 slots each in this review subset. Deduplication
+yields 80 review cases, with 22 exact shared views and 25
+request–expert pairs that have different citation views. Both
+reviewer copies pass evidence-binding validation. The blank
+reconciliation marks all 80 cases missing on each of the three
+fields. No review has been distributed or collected.
+[Packet aggregate](review-packet-aggregate.json)
+
+Use the two copies independently. The existing checker validates
+unchanged evidence and requires a reviewer ID and rationale for
+any labeled field. The existing reconciliation tool preserves
+disagreements and unresolved fields for adjudication. Keep all
+private files local and share aggregate counts only.
+
 ## Reproduce
 
 Use the authorized [enterprise development resources](../enterprise-role-first-query-v1)
@@ -68,4 +106,18 @@ PYTHONPATH=src:. OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 TOKENIZERS_PARALLELISM
   python -m experiments.retrieval.enterprise_criterion_windows \
   DEVELOPMENT_QUERIES DEVELOPMENT_CORPUS ROLE_WINDOWS VECTORS.npy \
   VECTOR_METADATA MODELS NEW_AGGREGATE_RESULTS
+```
+
+
+To prepare the restricted trace, include `--review-trace PRIVATE_TRACE_JSON`
+in the preceding replay. Build the review packet locally against the
+private full metadata catalog from the same development dataset.
+
+```sh
+PYTHONPATH=src:. python -m experiments.retrieval.build_enterprise_window_review \
+  DEVELOPMENT_QUERIES DEVELOPMENT_CORPUS PRIVATE_DATASET \
+  PRIVATE_TRACE_JSON NEW_AGGREGATE_RESULTS PRIVATE_PACKET_DIR
+
+PYTHONPATH=src:. python -m experiments.retrieval.reconcile_joint_review \
+  PRIVATE_PACKET_DIR REVIEWER_A_JSONL REVIEWER_B_JSONL --output PRIVATE_RECONCILIATION
 ```
