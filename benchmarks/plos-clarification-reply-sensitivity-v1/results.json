@@ -1,0 +1,737 @@
+{
+  "asked": 62,
+  "cutoff": 0.3342594504356384,
+  "embedding": {
+    "files": {
+      "config.json": "b5bf1f51fc45be473a54718cef92448d90a1be001bf9b9a44b8c7f10a19feaa9",
+      "model.safetensors": "0437e45c94563b09e13cb7a64478fc406947a93cb34a7e05870fc8dcd48e23fd",
+      "tokenizer.json": "def76fb086971c7867b829c23a26261e38d9d74e02139253b38aeb9df8b4b50a",
+      "tokenizer_config.json": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0"
+    },
+    "policy": "Official frozen BF16 weights; no own training or quantization.",
+    "repository": "Qwen/Qwen3-Embedding-0.6B",
+    "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3"
+  },
+  "fitted": {
+    "examples": 84,
+    "feature_seconds": 0.10086569935083389,
+    "fit_seconds": 0.1403476889245212,
+    "ridge_penalty": 0.1
+  },
+  "fixture_sha256": "74168d853ad21c795269c904fb7f8081cdf5a3e91ce7385ef8683495fd2ca7d5",
+  "glossary_sha256": "c107b4e780218e58aec4e2a13f2d7072533962a6a73b82d23e4273b43aafd528",
+  "gold_outside_menu": 9,
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "job": "40829",
+  "raw_file_sha256": "088d926082d153291c8defcf1bed52f5040ae0a7dc5aec104d25c1fc72962460",
+  "requests": 120,
+  "results": {
+    "0.0/0.0/top_rival": {
+      "confirm_independent": {
+        "correct_no_match": 17.0,
+        "false_no_match": 0.0,
+        "first_questions": 62.0,
+        "follow_up_questions": 48.0,
+        "fully_supported_positive": 62.0,
+        "unresolved": 41.0,
+        "unsafe_positive": 0.0
+      },
+      "confirm_shared": {
+        "correct_no_match": 17.0,
+        "false_no_match": 0.0,
+        "first_questions": 62.0,
+        "follow_up_questions": 48.0,
+        "fully_supported_positive": 62.0,
+        "unresolved": 41.0,
+        "unsafe_positive": 0.0
+      },
+      "keep_rival": {
+        "correct_no_match": 3.0,
+        "false_no_match": 0.0,
+        "first_questions": 62.0,
+        "fully_supported_positive": 50.0,
+        "unresolved": 67.0,
+        "unsafe_positive": 0.0
+      },
+      "trust_menu": {
+        "correct_no_match": 13.0,
+        "false_no_match": 0.0,
+        "first_questions": 62.0,
+        "fully_supported_positive": 61.0,
+        "unresolved": 46.0,
+        "unsafe_positive": 0.0
+      },
+      "trust_open": {
+        "correct_no_match": 17.0,
+        "false_no_match": 0.0,
+        "first_questions": 62.0,
+        "fully_supported_positive": 62.0,
+        "unresolved": 41.0,
+        "unsafe_positive": 0.0
+      }
+    },
+    "0.0/0.0/uniform": {
+      "confirm_independent": {
+        "correct_no_match": 17.0,
+        "false_no_match": 0.0,
+        "first_questions": 62.0,
+        "follow_up_questions": 48.0,
+        "fully_supported_positive": 62.0,
+        "unresolved": 41.0,
+        "unsafe_positive": 0.0
+      },
+      "confirm_shared": {
+        "correct_no_match": 17.0,
+        "false_no_match": 0.0,
+        "first_questions": 62.0,
+        "follow_up_questions": 48.0,
+        "fully_supported_positive": 62.0,
+        "unresolved": 41.0,
+        "unsafe_positive": 0.0
+      },
+      "keep_rival": {
+        "correct_no_match": 3.0,
+        "false_no_match": 0.0,
+        "first_questions": 62.0,
+        "fully_supported_positive": 50.0,
+        "unresolved": 67.0,
+        "unsafe_positive": 0.0
+      },
+      "trust_menu": {
+        "correct_no_match": 13.0,
+        "false_no_match": 0.0,
+        "first_questions": 62.0,
+        "fully_supported_positive": 61.0,
+        "unresolved": 46.0,
+        "unsafe_positive": 0.0
+      },
+      "trust_open": {
+        "correct_no_match": 17.0,
+        "false_no_match": 0.0,
+        "first_questions": 62.0,
+        "fully_supported_positive": 62.0,
+        "unresolved": 41.0,
+        "unsafe_positive": 0.0
+      }
+    },
+    "0.0/0.05/top_rival": {
+      "confirm_independent": {
+        "correct_no_match": 15.635,
+        "false_no_match": 0.0075000000000000015,
+        "first_questions": 62.0,
+        "follow_up_questions": 48.54999999999999,
+        "fully_supported_positive": 58.70750000000005,
+        "unresolved": 45.532499999999956,
+        "unsafe_positive": 0.11750000000000009
+      },
+      "confirm_shared": {
+        "correct_no_match": 15.967499999999996,
+        "false_no_match": 0.07875000000000001,
+        "first_questions": 62.0,
+        "follow_up_questions": 48.54999999999999,
+        "fully_supported_positive": 59.72875000000004,
+        "unresolved": 42.99124999999998,
+        "unsafe_positive": 1.2337500000000008
+      },
+      "keep_rival": {
+        "correct_no_match": 3.0,
+        "false_no_match": 0.0,
+        "first_questions": 62.0,
+        "fully_supported_positive": 49.7,
+        "unresolved": 66.35000000000002,
+        "unsafe_positive": 0.9500000000000003
+      },
+      "trust_menu": {
+        "correct_no_match": 12.499999999999998,
+        "false_no_match": 0.15000000000000002,
+        "first_questions": 62.0,
+        "fully_supported_positive": 59.80000000000003,
+        "unresolved": 45.650000000000006,
+        "unsafe_positive": 1.900000000000001
+      },
+      "trust_open": {
+        "correct_no_match": 16.299999999999997,
+        "false_no_match": 0.15000000000000002,
+        "first_questions": 62.0,
+        "fully_supported_positive": 60.750000000000036,
+        "unresolved": 40.45,
+        "unsafe_positive": 2.3499999999999996
+      }
+    },
+    "0.0/0.05/uniform": {
+      "confirm_independent": {
+        "correct_no_match": 15.635500872359962,
+        "false_no_match": 0.006553055914744227,
+        "first_questions": 62.0,
+        "follow_up_questions": 48.4946825396827,
+        "fully_supported_positive": 58.68780316931954,
+        "unresolved": 45.63686061643941,
+        "unsafe_positive": 0.03328228596649867
+      },
+      "confirm_shared": {
+        "correct_no_match": 15.997901951331496,
+        "false_no_match": 0.13275704743789157,
+        "first_questions": 62.0,
+        "follow_up_questions": 48.4946825396827,
+        "fully_supported_positive": 59.67271471597293,
+        "unresolved": 43.07108903837833,
+        "unsafe_positive": 1.1255372468793519
+      },
+      "keep_rival": {
+        "correct_no_match": 3.0,
+        "false_no_match": 0.0,
+        "first_questions": 62.0,
+        "fully_supported_positive": 49.415252525252605,
+        "unresolved": 66.21175324675333,
+        "unsafe_positive": 1.3729942279942253
+      },
+      "trust_menu": {
+        "correct_no_match": 12.543636363636361,
+        "false_no_match": 0.2518181818181819,
+        "first_questions": 62.0,
+        "fully_supported_positive": 59.70762626262634,
+        "unresolved": 45.67138888888892,
+        "unsafe_positive": 1.8255303030303036
+      },
+      "trust_open": {
+        "correct_no_match": 16.360303030303022,
+        "false_no_match": 0.25896103896103895,
+        "first_questions": 62.0,
+        "fully_supported_positive": 60.657626262626344,
+        "unresolved": 40.50531746031747,
+        "unsafe_positive": 2.2177922077922076
+      }
+    },
+    "0.0/0.1/top_rival": {
+      "confirm_independent": {
+        "correct_no_match": 14.340000000000005,
+        "false_no_match": 0.030000000000000006,
+        "first_questions": 62.0,
+        "follow_up_questions": 49.100000000000016,
+        "fully_supported_positive": 55.63000000000003,
+        "unresolved": 49.53000000000013,
+        "unsafe_positive": 0.47000000000000036
+      },
+      "confirm_shared": {
+        "correct_no_match": 14.970000000000004,
+        "false_no_match": 0.16500000000000004,
+        "first_questions": 62.0,
+        "follow_up_questions": 49.100000000000016,
+        "fully_supported_positive": 57.564999999999955,
+        "unresolved": 44.71500000000011,
+        "unsafe_positive": 2.585000000000001
+      },
+      "keep_rival": {
+        "correct_no_match": 3.0,
+        "false_no_match": 0.0,
+        "first_questions": 62.0,
+        "fully_supported_positive": 49.4,
+        "unresolved": 65.69999999999997,
+        "unsafe_positive": 1.9000000000000006
+      },
+      "trust_menu": {
+        "correct_no_match": 12.000000000000002,
+        "false_no_match": 0.30000000000000004,
+        "first_questions": 62.0,
+        "fully_supported_positive": 58.59999999999997,
+        "unresolved": 45.3,
+        "unsafe_positive": 3.800000000000002
+      },
+      "trust_open": {
+        "correct_no_match": 15.600000000000003,
+        "false_no_match": 0.30000000000000004,
+        "first_questions": 62.0,
+        "fully_supported_positive": 59.49999999999997,
+        "unresolved": 39.89999999999999,
+        "unsafe_positive": 4.699999999999999
+      }
+    },
+    "0.0/0.1/uniform": {
+      "confirm_independent": {
+        "correct_no_match": 14.342003489439858,
+        "false_no_match": 0.026212223658976908,
+        "first_questions": 62.0,
+        "follow_up_questions": 48.98936507936499,
+        "fully_supported_positive": 55.55121267727785,
+        "unresolved": 49.94744246575733,
+        "unsafe_positive": 0.13312914386599467
+      },
+      "confirm_shared": {
+        "correct_no_match": 15.03130477502296,
+        "false_no_match": 0.27206715079052746,
+        "first_questions": 62.0,
+        "follow_up_questions": 48.98936507936499,
+        "fully_supported_positive": 57.433232601265104,
+        "unresolved": 44.97903869319596,
+        "unsafe_positive": 2.284356779725202
+      },
+      "keep_rival": {
+        "correct_no_match": 3.0,
+        "false_no_match": 0.0,
+        "first_questions": 62.0,
+        "fully_supported_positive": 48.83050505050501,
+        "unresolved": 65.42350649350647,
+        "unsafe_positive": 2.7459884559884506
+      },
+      "trust_menu": {
+        "correct_no_match": 12.087272727272728,
+        "false_no_match": 0.5036363636363638,
+        "first_questions": 62.0,
+        "fully_supported_positive": 58.41525252525248,
+        "unresolved": 45.34277777777777,
+        "unsafe_positive": 3.6510606060606072
+      },
+      "trust_open": {
+        "correct_no_match": 15.720606060606066,
+        "false_no_match": 0.5179220779220779,
+        "first_questions": 62.0,
+        "fully_supported_positive": 59.315252525252475,
+        "unresolved": 40.010634920634914,
+        "unsafe_positive": 4.435584415584415
+      }
+    },
+    "0.0/0.2/top_rival": {
+      "confirm_independent": {
+        "correct_no_match": 11.960000000000006,
+        "false_no_match": 0.12000000000000002,
+        "first_questions": 62.0,
+        "follow_up_questions": 50.20000000000001,
+        "fully_supported_positive": 50.12000000000001,
+        "unresolved": 55.91999999999984,
+        "unsafe_positive": 1.8800000000000014
+      },
+      "confirm_shared": {
+        "correct_no_match": 13.080000000000004,
+        "false_no_match": 0.36,
+        "first_questions": 62.0,
+        "follow_up_questions": 50.20000000000001,
+        "fully_supported_positive": 53.559999999999974,
+        "unresolved": 47.35999999999987,
+        "unsafe_positive": 5.640000000000004
+      },
+      "keep_rival": {
+        "correct_no_match": 3.0,
+        "false_no_match": 0.0,
+        "first_questions": 62.0,
+        "fully_supported_positive": 48.8,
+        "unresolved": 64.39999999999998,
+        "unsafe_positive": 3.800000000000001
+      },
+      "trust_menu": {
+        "correct_no_match": 11.000000000000002,
+        "false_no_match": 0.6000000000000001,
+        "first_questions": 62.0,
+        "fully_supported_positive": 56.19999999999997,
+        "unresolved": 44.599999999999994,
+        "unsafe_positive": 7.600000000000004
+      },
+      "trust_open": {
+        "correct_no_match": 14.200000000000005,
+        "false_no_match": 0.6000000000000001,
+        "first_questions": 62.0,
+        "fully_supported_positive": 56.999999999999964,
+        "unresolved": 38.8,
+        "unsafe_positive": 9.399999999999999
+      }
+    },
+    "0.0/0.2/uniform": {
+      "confirm_independent": {
+        "correct_no_match": 11.96801395775942,
+        "false_no_match": 0.10484889463590763,
+        "first_questions": 62.0,
+        "follow_up_questions": 49.9787301587302,
+        "fully_supported_positive": 49.804850709111314,
+        "unresolved": 57.58976986302928,
+        "unsafe_positive": 0.5325165754639787
+      },
+      "confirm_shared": {
+        "correct_no_match": 13.20461303948577,
+        "false_no_match": 0.5703465252400319,
+        "first_questions": 62.0,
+        "follow_up_questions": 49.9787301587302,
+        "fully_supported_positive": 53.21767787980817,
+        "unresolved": 48.30551985214948,
+        "unsafe_positive": 4.7018427033164025
+      },
+      "keep_rival": {
+        "correct_no_match": 3.0,
+        "false_no_match": 0.0,
+        "first_questions": 62.0,
+        "fully_supported_positive": 47.66101010101008,
+        "unresolved": 63.84701298701293,
+        "unsafe_positive": 5.491976911976901
+      },
+      "trust_menu": {
+        "correct_no_match": 11.174545454545457,
+        "false_no_match": 1.0072727272727275,
+        "first_questions": 62.0,
+        "fully_supported_positive": 55.830505050505025,
+        "unresolved": 44.68555555555554,
+        "unsafe_positive": 7.3021212121212145
+      },
+      "trust_open": {
+        "correct_no_match": 14.441212121212125,
+        "false_no_match": 1.0358441558441558,
+        "first_questions": 62.0,
+        "fully_supported_positive": 56.63050505050502,
+        "unresolved": 39.02126984126983,
+        "unsafe_positive": 8.87116883116883
+      }
+    },
+    "0.2/0.0/top_rival": {
+      "confirm_independent": {
+        "correct_no_match": 11.960000000000006,
+        "false_no_match": 0.0,
+        "first_questions": 62.0,
+        "follow_up_questions": 38.39999999999999,
+        "fully_supported_positive": 49.76000000000002,
+        "unresolved": 58.27999999999997,
+        "unsafe_positive": 0.0
+      },
+      "confirm_shared": {
+        "correct_no_match": 13.080000000000004,
+        "false_no_match": 0.0,
+        "first_questions": 62.0,
+        "follow_up_questions": 38.39999999999999,
+        "fully_supported_positive": 52.47999999999998,
+        "unresolved": 54.43999999999998,
+        "unsafe_positive": 0.0
+      },
+      "keep_rival": {
+        "correct_no_match": 3.0,
+        "false_no_match": 0.0,
+        "first_questions": 62.0,
+        "fully_supported_positive": 45.59999999999999,
+        "unresolved": 71.40000000000002,
+        "unsafe_positive": 0.0
+      },
+      "trust_menu": {
+        "correct_no_match": 11.000000000000002,
+        "false_no_match": 0.0,
+        "first_questions": 62.0,
+        "fully_supported_positive": 54.39999999999996,
+        "unresolved": 54.60000000000003,
+        "unsafe_positive": 0.0
+      },
+      "trust_open": {
+        "correct_no_match": 14.200000000000005,
+        "false_no_match": 0.0,
+        "first_questions": 62.0,
+        "fully_supported_positive": 55.19999999999996,
+        "unresolved": 50.60000000000004,
+        "unsafe_positive": 0.0
+      }
+    },
+    "0.2/0.0/uniform": {
+      "confirm_independent": {
+        "correct_no_match": 11.960000000000006,
+        "false_no_match": 0.0,
+        "first_questions": 62.0,
+        "follow_up_questions": 38.39999999999999,
+        "fully_supported_positive": 49.76000000000002,
+        "unresolved": 58.27999999999997,
+        "unsafe_positive": 0.0
+      },
+      "confirm_shared": {
+        "correct_no_match": 13.080000000000004,
+        "false_no_match": 0.0,
+        "first_questions": 62.0,
+        "follow_up_questions": 38.39999999999999,
+        "fully_supported_positive": 52.47999999999998,
+        "unresolved": 54.43999999999998,
+        "unsafe_positive": 0.0
+      },
+      "keep_rival": {
+        "correct_no_match": 3.0,
+        "false_no_match": 0.0,
+        "first_questions": 62.0,
+        "fully_supported_positive": 45.59999999999999,
+        "unresolved": 71.40000000000002,
+        "unsafe_positive": 0.0
+      },
+      "trust_menu": {
+        "correct_no_match": 11.000000000000002,
+        "false_no_match": 0.0,
+        "first_questions": 62.0,
+        "fully_supported_positive": 54.39999999999996,
+        "unresolved": 54.60000000000003,
+        "unsafe_positive": 0.0
+      },
+      "trust_open": {
+        "correct_no_match": 14.200000000000005,
+        "false_no_match": 0.0,
+        "first_questions": 62.0,
+        "fully_supported_positive": 55.19999999999996,
+        "unresolved": 50.60000000000004,
+        "unsafe_positive": 0.0
+      }
+    },
+    "0.2/0.05/top_rival": {
+      "confirm_independent": {
+        "correct_no_match": 11.086400000000003,
+        "false_no_match": 0.004800000000000002,
+        "first_questions": 62.0,
+        "follow_up_questions": 38.83999999999997,
+        "fully_supported_positive": 47.65279999999998,
+        "unresolved": 61.180800000000175,
+        "unsafe_positive": 0.07520000000000013
+      },
+      "confirm_shared": {
+        "correct_no_match": 12.363200000000006,
+        "false_no_match": 0.06240000000000002,
+        "first_questions": 62.0,
+        "follow_up_questions": 38.83999999999997,
+        "fully_supported_positive": 50.92639999999998,
+        "unresolved": 55.67040000000004,
+        "unsafe_positive": 0.9776000000000009
+      },
+      "keep_rival": {
+        "correct_no_match": 3.0,
+        "false_no_match": 0.0,
+        "first_questions": 62.0,
+        "fully_supported_positive": 45.359999999999985,
+        "unresolved": 70.88000000000008,
+        "unsafe_positive": 0.7600000000000005
+      },
+      "trust_menu": {
+        "correct_no_match": 10.6,
+        "false_no_match": 0.12000000000000002,
+        "first_questions": 62.0,
+        "fully_supported_positive": 53.439999999999976,
+        "unresolved": 54.32000000000003,
+        "unsafe_positive": 1.5200000000000011
+      },
+      "trust_open": {
+        "correct_no_match": 13.639999999999999,
+        "false_no_match": 0.12000000000000002,
+        "first_questions": 62.0,
+        "fully_supported_positive": 54.199999999999974,
+        "unresolved": 50.160000000000046,
+        "unsafe_positive": 1.8800000000000014
+      }
+    },
+    "0.2/0.05/uniform": {
+      "confirm_independent": {
+        "correct_no_match": 11.086720558310379,
+        "false_no_match": 0.004193955785436309,
+        "first_questions": 62.0,
+        "follow_up_questions": 38.795746031746056,
+        "fully_supported_positive": 47.64019402836446,
+        "unresolved": 61.247590794521265,
+        "unsafe_positive": 0.02130066301855917
+      },
+      "confirm_shared": {
+        "correct_no_match": 12.387481491276404,
+        "false_no_match": 0.10568139347713373,
+        "first_questions": 62.0,
+        "follow_up_questions": 38.795746031746056,
+        "fully_supported_positive": 50.883147519232715,
+        "unresolved": 55.725922381387605,
+        "unsafe_positive": 0.8977672146261652
+      },
+      "keep_rival": {
+        "correct_no_match": 3.0,
+        "false_no_match": 0.0,
+        "first_questions": 62.0,
+        "fully_supported_positive": 45.13220202020196,
+        "unresolved": 70.76940259740265,
+        "unsafe_positive": 1.0983953823953843
+      },
+      "trust_menu": {
+        "correct_no_match": 10.63490909090909,
+        "false_no_match": 0.20145454545454547,
+        "first_questions": 62.0,
+        "fully_supported_positive": 53.366101010100955,
+        "unresolved": 54.33711111111111,
+        "unsafe_positive": 1.4604242424242446
+      },
+      "trust_open": {
+        "correct_no_match": 13.688242424242421,
+        "false_no_match": 0.2071688311688312,
+        "first_questions": 62.0,
+        "fully_supported_positive": 54.12610101010095,
+        "unresolved": 50.20425396825399,
+        "unsafe_positive": 1.7742337662337684
+      }
+    },
+    "0.2/0.1/top_rival": {
+      "confirm_independent": {
+        "correct_no_match": 10.257599999999998,
+        "false_no_match": 0.01920000000000001,
+        "first_questions": 62.0,
+        "follow_up_questions": 39.279999999999916,
+        "fully_supported_positive": 45.683199999999985,
+        "unresolved": 63.73919999999998,
+        "unsafe_positive": 0.3008000000000005
+      },
+      "confirm_shared": {
+        "correct_no_match": 11.668800000000001,
+        "false_no_match": 0.12960000000000002,
+        "first_questions": 62.0,
+        "follow_up_questions": 39.279999999999916,
+        "fully_supported_positive": 49.44159999999999,
+        "unresolved": 56.7296,
+        "unsafe_positive": 2.030399999999998
+      },
+      "keep_rival": {
+        "correct_no_match": 3.0,
+        "false_no_match": 0.0,
+        "first_questions": 62.0,
+        "fully_supported_positive": 45.11999999999997,
+        "unresolved": 70.36000000000001,
+        "unsafe_positive": 1.520000000000001
+      },
+      "trust_menu": {
+        "correct_no_match": 10.200000000000001,
+        "false_no_match": 0.24000000000000005,
+        "first_questions": 62.0,
+        "fully_supported_positive": 52.479999999999976,
+        "unresolved": 54.040000000000035,
+        "unsafe_positive": 3.0400000000000023
+      },
+      "trust_open": {
+        "correct_no_match": 13.080000000000004,
+        "false_no_match": 0.24000000000000005,
+        "first_questions": 62.0,
+        "fully_supported_positive": 53.199999999999974,
+        "unresolved": 49.72000000000004,
+        "unsafe_positive": 3.760000000000003
+      }
+    },
+    "0.2/0.1/uniform": {
+      "confirm_independent": {
+        "correct_no_match": 10.258882233241504,
+        "false_no_match": 0.016775823141745236,
+        "first_questions": 62.0,
+        "follow_up_questions": 39.19149206349204,
+        "fully_supported_positive": 45.63277611345779,
+        "unresolved": 64.0063631780848,
+        "unsafe_positive": 0.08520265207423668
+      },
+      "confirm_shared": {
+        "correct_no_match": 11.717683540863177,
+        "false_no_match": 0.21555674273970388,
+        "first_questions": 62.0,
+        "follow_up_questions": 39.19149206349204,
+        "fully_supported_positive": 49.34248906682994,
+        "unresolved": 56.90743555729638,
+        "unsafe_positive": 1.8168350922708878
+      },
+      "keep_rival": {
+        "correct_no_match": 3.0,
+        "false_no_match": 0.0,
+        "first_questions": 62.0,
+        "fully_supported_positive": 44.664404040404044,
+        "unresolved": 70.13880519480526,
+        "unsafe_positive": 2.1967907647907685
+      },
+      "trust_menu": {
+        "correct_no_match": 10.269818181818183,
+        "false_no_match": 0.40290909090909094,
+        "first_questions": 62.0,
+        "fully_supported_positive": 52.332202020202025,
+        "unresolved": 54.074222222222275,
+        "unsafe_positive": 2.9208484848484892
+      },
+      "trust_open": {
+        "correct_no_match": 13.17648484848485,
+        "false_no_match": 0.4143376623376624,
+        "first_questions": 62.0,
+        "fully_supported_positive": 53.052202020202024,
+        "unresolved": 49.808507936508,
+        "unsafe_positive": 3.5484675324675368
+      }
+    },
+    "0.2/0.2/top_rival": {
+      "confirm_independent": {
+        "correct_no_match": 8.734400000000004,
+        "false_no_match": 0.07680000000000003,
+        "first_questions": 62.0,
+        "follow_up_questions": 40.15999999999999,
+        "fully_supported_positive": 42.15679999999999,
+        "unresolved": 67.82880000000011,
+        "unsafe_positive": 1.203200000000002
+      },
+      "confirm_shared": {
+        "correct_no_match": 10.347200000000004,
+        "false_no_match": 0.2784000000000001,
+        "first_questions": 62.0,
+        "follow_up_questions": 40.15999999999999,
+        "fully_supported_positive": 46.67839999999998,
+        "unresolved": 58.334400000000095,
+        "unsafe_positive": 4.361600000000002
+      },
+      "keep_rival": {
+        "correct_no_match": 3.0,
+        "false_no_match": 0.0,
+        "first_questions": 62.0,
+        "fully_supported_positive": 44.64,
+        "unresolved": 69.32000000000005,
+        "unsafe_positive": 3.040000000000002
+      },
+      "trust_menu": {
+        "correct_no_match": 9.400000000000004,
+        "false_no_match": 0.4800000000000001,
+        "first_questions": 62.0,
+        "fully_supported_positive": 50.56,
+        "unresolved": 53.48000000000004,
+        "unsafe_positive": 6.0800000000000045
+      },
+      "trust_open": {
+        "correct_no_match": 11.960000000000006,
+        "false_no_match": 0.4800000000000001,
+        "first_questions": 62.0,
+        "fully_supported_positive": 51.2,
+        "unresolved": 48.84000000000005,
+        "unsafe_positive": 7.520000000000006
+      }
+    },
+    "0.2/0.2/uniform": {
+      "confirm_independent": {
+        "correct_no_match": 8.739528932966028,
+        "false_no_match": 0.06710329256698094,
+        "first_questions": 62.0,
+        "follow_up_questions": 39.98298412698405,
+        "fully_supported_positive": 41.95510445383125,
+        "unresolved": 68.8974527123391,
+        "unsafe_positive": 0.3408106082969467
+      },
+      "confirm_shared": {
+        "correct_no_match": 10.446249314967861,
+        "false_no_match": 0.44788930862115295,
+        "first_questions": 62.0,
+        "follow_up_questions": 39.98298412698405,
+        "fully_supported_positive": 46.429754247117614,
+        "unresolved": 58.95723429267729,
+        "unsafe_positive": 3.718872836616008
+      },
+      "keep_rival": {
+        "correct_no_match": 3.0,
+        "false_no_match": 0.0,
+        "first_questions": 62.0,
+        "fully_supported_positive": 43.72880808080809,
+        "unresolved": 68.87761038961045,
+        "unsafe_positive": 4.393581529581537
+      },
+      "trust_menu": {
+        "correct_no_match": 9.539636363636367,
+        "false_no_match": 0.8058181818181819,
+        "first_questions": 62.0,
+        "fully_supported_positive": 50.26440404040406,
+        "unresolved": 53.548444444444485,
+        "unsafe_positive": 5.8416969696969785
+      },
+      "trust_open": {
+        "correct_no_match": 12.152969696969704,
+        "false_no_match": 0.8286753246753248,
+        "first_questions": 62.0,
+        "fully_supported_positive": 50.90440404040406,
+        "unresolved": 49.01701587301593,
+        "unsafe_positive": 7.0969350649350735
+      }
+    }
+  },
+  "script_sha256": "e022e2e878488a6fc367197db47734a860abdf4bdf42adee34f8f337c5772dc0",
+  "selector_script_sha256": "d4c4fa3283a35fc52e3378d4881f81b138ac8a002afca411d5dba9d47d413cad",
+  "training_sha256": "3365bdd2588d8dfff12de71cf7663808c25689f831a1ba42288a8bb8b53bfdc2"
+}
