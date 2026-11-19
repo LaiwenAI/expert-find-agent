@@ -1,0 +1,101 @@
+{
+  "job": "43137",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "source_sha256": "c9e8d6e13bb05900427ab1d785d6024256f61e8bb34f220c3816fb79d1921780",
+  "queries_sha256": "30661871ac08a61e7e74d67d75491878c7e4194f217483b60d06426c4b36e4c5",
+  "role_index_sha256": "a96c36183cefa019156a296c7698c195ff25b5d687971b08328357111eb86382",
+  "vectors_sha256": "403fd19c50177eb4dd59a5f6fc07f5fe6ab49da223f5e1f4d172ec6cebeff2da",
+  "code_sha256": "c0f93bebd94eed60d40e72d6d1a5025444227e82ccaa8163a85447439eba1f1e",
+  "models": {
+    "encoder": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+    "parser": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "verifier": "e61197ed45024b0ed8a2d74b80b4d909f1255473"
+  },
+  "requests": 80,
+  "indexed_sources": 52667,
+  "indexed_role_windows": 5734,
+  "index_build_seconds": 297.34274644218385,
+  "role_read_cap": 2,
+  "metrics": {
+    "whole": {
+      "issued": 34,
+      "initially_unanswered_now_issued": 0,
+      "added_slots": 0,
+      "added_outside_initial_rank": 0,
+      "primary_pairs": 1280,
+      "primary_clipped": 0,
+      "primary_withheld": 0,
+      "rescue_pairs": 0,
+      "rescue_clipped": 0,
+      "invoked": 0,
+      "p50_p95_ms": [
+        187.06627003848553,
+        1129.4698866084211
+      ],
+      "paired_p95_delta_interval_ms": [
+        0.0,
+        0.0
+      ]
+    },
+    "deeper_on_abstain": {
+      "issued": 35,
+      "initially_unanswered_now_issued": 1,
+      "added_slots": 1,
+      "added_outside_initial_rank": 0,
+      "primary_pairs": 1280,
+      "primary_clipped": 0,
+      "primary_withheld": 0,
+      "rescue_pairs": 132,
+      "rescue_clipped": 0,
+      "invoked": 46,
+      "p50_p95_ms": [
+        195.1216198503971,
+        1131.3989710062733
+      ],
+      "paired_p95_delta_interval_ms": [
+        0.2223803661763668,
+        30.262429267168045
+      ]
+    },
+    "global_on_abstain": {
+      "issued": 37,
+      "initially_unanswered_now_issued": 3,
+      "added_slots": 3,
+      "added_outside_initial_rank": 3,
+      "primary_pairs": 1280,
+      "primary_clipped": 0,
+      "primary_withheld": 0,
+      "rescue_pairs": 184,
+      "rescue_clipped": 0,
+      "invoked": 46,
+      "p50_p95_ms": [
+        196.09681610018015,
+        1156.3933982513836
+      ],
+      "paired_p95_delta_interval_ms": [
+        15.183232724666595,
+        63.282692804932594
+      ]
+    },
+    "global_always": {
+      "issued": 37,
+      "initially_unanswered_now_issued": 3,
+      "added_slots": 14,
+      "added_outside_initial_rank": 14,
+      "primary_pairs": 1280,
+      "primary_clipped": 0,
+      "primary_withheld": 0,
+      "rescue_pairs": 254,
+      "rescue_clipped": 0,
+      "invoked": 79,
+      "p50_p95_ms": [
+        198.85970931500196,
+        1154.9930028617373
+      ],
+      "paired_p95_delta_interval_ms": [
+        12.839273735880852,
+        60.181209817528725
+      ]
+    }
+  }
+}
