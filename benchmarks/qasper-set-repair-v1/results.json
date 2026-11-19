@@ -1,0 +1,166 @@
+{
+  "job": "41666",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "panels": {
+    "train": {
+      "questions": 370,
+      "offline": {
+        "counting_seconds": 2.1669524759054184,
+        "encoding_seconds": 62.1854090411216,
+        "paragraphs": 20508,
+        "lexical_index_seconds": 0.2500293552875519
+      },
+      "reachable": 235,
+      "one_swap_ceiling": 180,
+      "two_swap_ceiling": 220,
+      "panel_sha256": "f18160cd907cb05e5d606487aff79d97ad912625d29ba716e3d89e525bb30ecd"
+    },
+    "dev": {
+      "questions": 112,
+      "offline": {
+        "counting_seconds": 0.5381169393658638,
+        "encoding_seconds": 16.53150474652648,
+        "paragraphs": 5252,
+        "lexical_index_seconds": 0.06835037097334862
+      },
+      "reachable": 80,
+      "one_swap_ceiling": 64,
+      "two_swap_ceiling": 75,
+      "panel_sha256": "eb5822493e2ba07d2d10b05545d9725077701b0350044952944357c441c296c9"
+    },
+    "test": {
+      "questions": 137,
+      "offline": {
+        "counting_seconds": 0.6448632888495922,
+        "encoding_seconds": 19.280105577781796,
+        "paragraphs": 6765,
+        "lexical_index_seconds": 0.08006327413022518
+      },
+      "reachable": 83,
+      "one_swap_ceiling": 66,
+      "two_swap_ceiling": 78,
+      "panel_sha256": "4f80118cb4afdc7549b554b64ee3d71d723738d1611a57c8ddedc1fe158fe72a"
+    }
+  },
+  "train_sha256": "9458bfe76074a8fa8d1685af02bcc73537aa6d338ad20591dfaff1946bc88bf4",
+  "data_sha256": {
+    "qasper-dev-v0.3.json": "2ae7ee62a65b1c4225791c70de80c2aad4e8998cf1fd4f09a53103db4f21af93",
+    "qasper-test-v0.3.json": "6e29ad410e6e39aa1936017fb965b30a20eb2e7751997f55b97c9d281aa884e5"
+  },
+  "script_sha256": "88cf48b03aecf2115d52cfc5f956e3d23c098be93a0b758faecbc0e454d31f18",
+  "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "reranker_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+  "fit_comparable_questions": [
+    220,
+    220
+  ],
+  "calibration": {
+    "additive": {
+      "complete": 33,
+      "edited": 0,
+      "threshold": 0.05
+    },
+    "joint_one": {
+      "complete": 38,
+      "edited": 102,
+      "threshold": 0.0
+    },
+    "joint_two": {
+      "complete": 40,
+      "edited": 95,
+      "threshold": 0.1
+    }
+  },
+  "results": {
+    "pointwise": {
+      "complete": 43,
+      "edited": 0,
+      "gains": 0,
+      "losses": 0,
+      "paired_delta": {
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 137,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "p95_ms": 73.96443858742714,
+      "selection_p95_ms": 0.00013224780559539795
+    },
+    "additive": {
+      "complete": 43,
+      "edited": 0,
+      "gains": 0,
+      "losses": 0,
+      "paired_delta": {
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 137,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "p95_ms": 74.4189977645874,
+      "selection_p95_ms": 0.5832336843013763
+    },
+    "joint_one": {
+      "complete": 48,
+      "edited": 123,
+      "gains": 10,
+      "losses": 5,
+      "paired_delta": {
+        "mean": 0.0364963503649635,
+        "percentile_95": [
+          -0.021897810218978103,
+          0.0948905109489051
+        ],
+        "queries": 137,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "p95_ms": 74.41615723073483,
+      "selection_p95_ms": 0.5800522863864899
+    },
+    "joint_two": {
+      "complete": 51,
+      "edited": 111,
+      "gains": 13,
+      "losses": 5,
+      "paired_delta": {
+        "mean": 0.058394160583941604,
+        "percentile_95": [
+          0.0,
+          0.11678832116788321
+        ],
+        "queries": 137,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "p95_ms": 74.41736347973347,
+      "selection_p95_ms": 0.5815096199512482
+    },
+    "forced_joint_two": {
+      "complete": 50,
+      "edited": 126,
+      "gains": 13,
+      "losses": 6,
+      "paired_delta": {
+        "mean": 0.051094890510948905,
+        "percentile_95": [
+          -0.0072992700729927005,
+          0.11678832116788321
+        ],
+        "queries": 137,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "p95_ms": 74.41719323396683,
+      "selection_p95_ms": 0.5811233073472977
+    }
+  }
+}
