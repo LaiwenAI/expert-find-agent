@@ -1,0 +1,453 @@
+{
+  "job": "42849",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "calibration": 30,
+  "capture_sha256": "f3a26e4350238038d4c0d835775d60475b630a53ea2cbf0e342014f99aac4f28",
+  "transfer_sha256": "01b02c2e4d718e343a623faa954622eadb35bedfef75fac2f6d8ff43a70f0fd2",
+  "script_sha256": "89dc2fb55f08bd73dfbe018eb0edb79104fb960f4e36efd6fbf8706b88b757e1",
+  "reranker_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+  "panels": {
+    "test": {
+      "papers": 20,
+      "arms": {
+        "top2_topic": {
+          "threshold": 4.999999999999999,
+          "supported": 0,
+          "invalid": 0,
+          "wrong_person": 0,
+          "misses_without_threshold": 3,
+          "false_attachment_query": 0,
+          "clean_success": 0,
+          "model_pairs": 39,
+          "truncated": 0,
+          "component_p95_ms": 8.741442486643791,
+          "true_difference_vs_all": {
+            "mean": -0.15,
+            "percentile_95": [
+              -0.3,
+              0.0
+            ],
+            "queries": 20,
+            "clusters": 20,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "wrong_difference_vs_all": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 20,
+            "clusters": 20,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "top2_person": {
+          "threshold": 6.749999999999999,
+          "supported": 5,
+          "invalid": 0,
+          "wrong_person": 0,
+          "misses_without_threshold": 1,
+          "false_attachment_query": 0,
+          "clean_success": 5,
+          "model_pairs": 78,
+          "truncated": 0,
+          "component_p95_ms": 8.869198802858591,
+          "true_difference_vs_all": {
+            "mean": 0.1,
+            "percentile_95": [
+              0.0,
+              0.25
+            ],
+            "queries": 20,
+            "clusters": 20,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "wrong_difference_vs_all": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 20,
+            "clusters": 20,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "all_person": {
+          "threshold": 6.812499999999999,
+          "supported": 3,
+          "invalid": 0,
+          "wrong_person": 0,
+          "misses_without_threshold": 0,
+          "false_attachment_query": 0,
+          "clean_success": 3,
+          "model_pairs": 160,
+          "truncated": 0,
+          "component_p95_ms": 12.780655268579725,
+          "true_difference_vs_all": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 20,
+            "clusters": 20,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "wrong_difference_vs_all": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 20,
+            "clusters": 20,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "top1_then_scope": {
+          "threshold": -3.1875000000000004,
+          "supported": 13,
+          "invalid": 2,
+          "wrong_person": 1,
+          "misses_without_threshold": 5,
+          "false_attachment_query": 2,
+          "clean_success": 13,
+          "model_pairs": 20,
+          "truncated": 0,
+          "component_p95_ms": 7.55690848454833,
+          "true_difference_vs_all": {
+            "mean": 0.5,
+            "percentile_95": [
+              0.3,
+              0.7
+            ],
+            "queries": 20,
+            "clusters": 20,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "wrong_difference_vs_all": {
+            "mean": 0.1,
+            "percentile_95": [
+              0.0,
+              0.25
+            ],
+            "queries": 20,
+            "clusters": 20,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "top2_scope": {
+          "threshold": -0.25000000000000006,
+          "supported": 11,
+          "invalid": 1,
+          "wrong_person": 0,
+          "misses_without_threshold": 2,
+          "false_attachment_query": 1,
+          "clean_success": 11,
+          "model_pairs": 34,
+          "truncated": 0,
+          "component_p95_ms": 8.847984578460455,
+          "true_difference_vs_all": {
+            "mean": 0.4,
+            "percentile_95": [
+              0.2,
+              0.6
+            ],
+            "queries": 20,
+            "clusters": 20,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "wrong_difference_vs_all": {
+            "mean": 0.05,
+            "percentile_95": [
+              0.0,
+              0.15
+            ],
+            "queries": 20,
+            "clusters": 20,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "scope_chars": {
+          "threshold": 0.5791479391419219,
+          "supported": 0,
+          "invalid": 0,
+          "wrong_person": 0,
+          "misses_without_threshold": 4,
+          "false_attachment_query": 0,
+          "clean_success": 0,
+          "model_pairs": 0,
+          "truncated": 0,
+          "component_p95_ms": 0.07561044767498971,
+          "true_difference_vs_all": {
+            "mean": -0.15,
+            "percentile_95": [
+              -0.3,
+              0.0
+            ],
+            "queries": 20,
+            "clusters": 20,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "wrong_difference_vs_all": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 20,
+            "clusters": 20,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        }
+      }
+    },
+    "transfer": {
+      "papers": 45,
+      "arms": {
+        "top2_topic": {
+          "threshold": 4.999999999999999,
+          "supported": 0,
+          "invalid": 0,
+          "wrong_person": 0,
+          "misses_without_threshold": 8,
+          "false_attachment_query": 0,
+          "clean_success": 0,
+          "model_pairs": 90,
+          "truncated": 0,
+          "component_p95_ms": 8.635182678699493,
+          "true_difference_vs_all": {
+            "mean": -0.15555555555555556,
+            "percentile_95": [
+              -0.2727272727272727,
+              -0.06521739130434782
+            ],
+            "queries": 45,
+            "clusters": 44,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "wrong_difference_vs_all": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 45,
+            "clusters": 44,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "top2_person": {
+          "threshold": 6.749999999999999,
+          "supported": 7,
+          "invalid": 0,
+          "wrong_person": 0,
+          "misses_without_threshold": 1,
+          "false_attachment_query": 0,
+          "clean_success": 7,
+          "model_pairs": 180,
+          "truncated": 0,
+          "component_p95_ms": 8.839257806539536,
+          "true_difference_vs_all": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 45,
+            "clusters": 44,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "wrong_difference_vs_all": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 45,
+            "clusters": 44,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "all_person": {
+          "threshold": 6.812499999999999,
+          "supported": 7,
+          "invalid": 0,
+          "wrong_person": 0,
+          "misses_without_threshold": 2,
+          "false_attachment_query": 0,
+          "clean_success": 7,
+          "model_pairs": 360,
+          "truncated": 0,
+          "component_p95_ms": 12.589149549603462,
+          "true_difference_vs_all": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 45,
+            "clusters": 44,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "wrong_difference_vs_all": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 45,
+            "clusters": 44,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "top1_then_scope": {
+          "threshold": -3.1875000000000004,
+          "supported": 30,
+          "invalid": 9,
+          "wrong_person": 4,
+          "misses_without_threshold": 13,
+          "false_attachment_query": 6,
+          "clean_success": 30,
+          "model_pairs": 45,
+          "truncated": 0,
+          "component_p95_ms": 7.464237883687019,
+          "true_difference_vs_all": {
+            "mean": 0.5111111111111111,
+            "percentile_95": [
+              0.36363636363636365,
+              0.6521739130434783
+            ],
+            "queries": 45,
+            "clusters": 44,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "wrong_difference_vs_all": {
+            "mean": 0.2,
+            "percentile_95": [
+              0.06818181818181818,
+              0.3617021276595745
+            ],
+            "queries": 45,
+            "clusters": 44,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "top2_scope": {
+          "threshold": -0.25000000000000006,
+          "supported": 22,
+          "invalid": 5,
+          "wrong_person": 2,
+          "misses_without_threshold": 6,
+          "false_attachment_query": 3,
+          "clean_success": 22,
+          "model_pairs": 82,
+          "truncated": 0,
+          "component_p95_ms": 8.65045078098774,
+          "true_difference_vs_all": {
+            "mean": 0.3333333333333333,
+            "percentile_95": [
+              0.2,
+              0.46808510638297873
+            ],
+            "queries": 45,
+            "clusters": 44,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "wrong_difference_vs_all": {
+            "mean": 0.1111111111111111,
+            "percentile_95": [
+              0.0,
+              0.24444444444444444
+            ],
+            "queries": 45,
+            "clusters": 44,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "scope_chars": {
+          "threshold": 0.5791479391419219,
+          "supported": 0,
+          "invalid": 0,
+          "wrong_person": 0,
+          "misses_without_threshold": 11,
+          "false_attachment_query": 0,
+          "clean_success": 0,
+          "model_pairs": 0,
+          "truncated": 0,
+          "component_p95_ms": 0.07656291127204895,
+          "true_difference_vs_all": {
+            "mean": -0.15555555555555556,
+            "percentile_95": [
+              -0.2727272727272727,
+              -0.06521739130434782
+            ],
+            "queries": 45,
+            "clusters": 44,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "wrong_difference_vs_all": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 45,
+            "clusters": 44,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        }
+      }
+    }
+  }
+}
