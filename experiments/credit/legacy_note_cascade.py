@@ -45,15 +45,19 @@ def score_pair(row, entry, version, encoder, feature_ids):
     return np.asarray(outputs).T
 
 
-def reader_pair(row, version, engines):
-    reader, tokenizer, digits = engines
+def reader_contexts(row, version):
     doi, text, tasks, good, other = row
     order = (other, good) if legacy.stable(doi)[0] % 2 else (good, other)
     query = [f"Target author initials: {owner}\nRequired contributions: "
              + "; ".join(legacy.PHRASES[task][version] for task in tasks) for owner in order]
-    values = indexed.judge(reader, tokenizer, digits, "Apply the decision separately to this author.",
-                           [f"{q}\n\n{text}" for q in query])
-    return np.asarray(values if order[0] == good else values[::-1])
+    return [f"{q}\n\n{text}" for q in query], order[0] != good
+
+
+def reader_pair(row, version, engines):
+    reader, tokenizer, digits = engines
+    docs, flipped = reader_contexts(row, version)
+    values = indexed.judge(reader, tokenizer, digits, "Apply the decision separately to this author.", docs)
+    return np.asarray(values[::-1] if flipped else values)
 
 
 def first_stage(scores, gate):
