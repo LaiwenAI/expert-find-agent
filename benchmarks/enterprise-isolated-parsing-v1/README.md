@@ -33,3 +33,5 @@ PYTHONPATH=src:. OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
 Use `--controls-only` for the public control run with the same pinned development file. The program exports aggregates. It leaves original enterprise requests outside the source package.
 
 Prior work establishes shared prompt attention and tree-structured attention. This experiment tests clause-role extraction under those execution choices, with exact-source anchors and task-specific numerical and quality checks. [Prompt Cache, MLSys 2024](https://proceedings.mlsys.org/paper_files/paper/2024/hash/a66caa1703fe34705a4368c3014c1966-Abstract-Conference.html) · [DeFT, ICLR 2025](https://proceedings.iclr.cc/paper_files/paper/2025/hash/a6df53f082619d02b9fad64a022e5de3-Abstract-Conference.html)
+
+The [margin-based follow-up](../enterprise-guarded-parsing-v1/README.md) measures the quality and latency trade-off of selective rechecks.
