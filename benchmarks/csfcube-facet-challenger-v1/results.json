@@ -1,0 +1,835 @@
+{
+  "job": "43333",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "queries": 50,
+  "query_papers": 34,
+  "offline_seconds": 34.34152778238058,
+  "query_views": {
+    "background": {
+      "questions": 16,
+      "fallback": 0,
+      "same_as_first": 16,
+      "mean_words": {
+        "full": 148.0625,
+        "matched_lead": 66.6875,
+        "facet": 66.6875
+      }
+    },
+    "method": {
+      "questions": 17,
+      "fallback": 0,
+      "same_as_first": 0,
+      "mean_words": {
+        "full": 152.41176470588235,
+        "matched_lead": 62.705882352941174,
+        "facet": 67.3529411764706
+      }
+    },
+    "result": {
+      "questions": 17,
+      "fallback": 0,
+      "same_as_first": 0,
+      "mean_words": {
+        "full": 159.88235294117646,
+        "matched_lead": 56.470588235294116,
+        "facet": 60.88235294117647
+      }
+    }
+  },
+  "compact_unique_vectors": 9397,
+  "document_fallbacks": {
+    "result": 126,
+    "method": 151,
+    "background": 12
+  },
+  "code_sha256": "9ea8e444cc5308c6f7bd1e1a58f306df0c9dfab5df80e1a72c8fd0ce09f7548b",
+  "reference_sha256": "82da4b53eb671ff9a13af2429c348084f3f635a5da816383940a48980a763e2c",
+  "stages": {
+    "dense_two": {
+      "present": {
+        "pair_count": 100,
+        "exposure": 35,
+        "changed": 0,
+        "gained": 0,
+        "lost": 0,
+        "reranked_strong": 29,
+        "retrieval_p95_ms": 7.759870309382677
+      },
+      "withheld": {
+        "pair_count": 100,
+        "exposure": 0,
+        "changed": 0,
+        "gained": 0,
+        "lost": 0,
+        "reranked_strong": 0,
+        "retrieval_p95_ms": 7.7807841822505
+      }
+    },
+    "lead_both": {
+      "present": {
+        "pair_count": 100,
+        "exposure": 34,
+        "changed": 30,
+        "gained": 2,
+        "lost": 3,
+        "reranked_strong": 26,
+        "retrieval_p95_ms": 15.172451362013817
+      },
+      "withheld": {
+        "pair_count": 100,
+        "exposure": 0,
+        "changed": 29,
+        "gained": 0,
+        "lost": 0,
+        "reranked_strong": 0,
+        "retrieval_p95_ms": 15.195275098085403
+      }
+    },
+    "facet_query": {
+      "present": {
+        "pair_count": 100,
+        "exposure": 36,
+        "changed": 25,
+        "gained": 4,
+        "lost": 3,
+        "reranked_strong": 28,
+        "retrieval_p95_ms": 15.09038107469678
+      },
+      "withheld": {
+        "pair_count": 100,
+        "exposure": 0,
+        "changed": 27,
+        "gained": 0,
+        "lost": 0,
+        "reranked_strong": 0,
+        "retrieval_p95_ms": 15.206839889287949
+      }
+    },
+    "facet_both": {
+      "present": {
+        "pair_count": 100,
+        "exposure": 37,
+        "changed": 29,
+        "gained": 4,
+        "lost": 2,
+        "reranked_strong": 28,
+        "retrieval_p95_ms": 15.161092206835747
+      },
+      "withheld": {
+        "pair_count": 100,
+        "exposure": 0,
+        "changed": 36,
+        "gained": 0,
+        "lost": 0,
+        "reranked_strong": 0,
+        "retrieval_p95_ms": 15.202086977660656
+      }
+    },
+    "facet_both_batched": {
+      "present": {
+        "pair_count": 100,
+        "exposure": 37,
+        "changed": 30,
+        "gained": 4,
+        "lost": 2,
+        "reranked_strong": 27,
+        "retrieval_p95_ms": 9.115993045270443
+      },
+      "withheld": {
+        "pair_count": 100,
+        "exposure": 0,
+        "changed": 36,
+        "gained": 0,
+        "lost": 0,
+        "reranked_strong": 0,
+        "retrieval_p95_ms": 9.070556331425905
+      }
+    },
+    "dense_six": {
+      "present": {
+        "pair_count": 300,
+        "exposure": 45,
+        "changed": 50,
+        "gained": 10,
+        "lost": 0,
+        "reranked_strong": 28,
+        "retrieval_p95_ms": 7.759870309382677
+      },
+      "withheld": {
+        "pair_count": 300,
+        "exposure": 0,
+        "changed": 50,
+        "gained": 0,
+        "lost": 0,
+        "reranked_strong": 0,
+        "retrieval_p95_ms": 7.7807841822505
+      }
+    }
+  },
+  "grouped": {
+    "0.05": {
+      "dense_two": {
+        "summary": {
+          "present": {
+            "relevance_grades": [
+              0,
+              2,
+              1,
+              3
+            ],
+            "abstained": 44,
+            "p95_ms": 25.99763739854096
+          },
+          "withheld": {
+            "relevance_grades": [
+              1,
+              3,
+              0,
+              0
+            ],
+            "abstained": 46,
+            "p95_ms": 23.36434805765748
+          }
+        },
+        "strong_delta": {
+          "mean": 0.0,
+          "percentile_95": [
+            0.0,
+            0.0
+          ],
+          "queries": 50,
+          "clusters": 34,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      },
+      "lead_both": {
+        "summary": {
+          "present": {
+            "relevance_grades": [
+              1,
+              2,
+              2,
+              5
+            ],
+            "abstained": 40,
+            "p95_ms": 35.28525233268738
+          },
+          "withheld": {
+            "relevance_grades": [
+              2,
+              2,
+              0,
+              0
+            ],
+            "abstained": 46,
+            "p95_ms": 30.468348413705826
+          }
+        },
+        "strong_delta": {
+          "mean": 0.06,
+          "percentile_95": [
+            0.0,
+            0.13333333333333333
+          ],
+          "queries": 50,
+          "clusters": 34,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      },
+      "facet_query": {
+        "summary": {
+          "present": {
+            "relevance_grades": [
+              0,
+              2,
+              1,
+              7
+            ],
+            "abstained": 40,
+            "p95_ms": 33.340184483677135
+          },
+          "withheld": {
+            "relevance_grades": [
+              0,
+              2,
+              0,
+              0
+            ],
+            "abstained": 48,
+            "p95_ms": 30.523631535470486
+          }
+        },
+        "strong_delta": {
+          "mean": 0.08,
+          "percentile_95": [
+            -0.0196078431372549,
+            0.2
+          ],
+          "queries": 50,
+          "clusters": 34,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      },
+      "facet_both": {
+        "summary": {
+          "present": {
+            "relevance_grades": [
+              0,
+              2,
+              2,
+              7
+            ],
+            "abstained": 39,
+            "p95_ms": 33.15403116866945
+          },
+          "withheld": {
+            "relevance_grades": [
+              1,
+              2,
+              0,
+              0
+            ],
+            "abstained": 47,
+            "p95_ms": 30.98435141146183
+          }
+        },
+        "strong_delta": {
+          "mean": 0.1,
+          "percentile_95": [
+            0.018867924528301886,
+            0.20835755813953455
+          ],
+          "queries": 50,
+          "clusters": 34,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      },
+      "facet_both_batched": {
+        "summary": {
+          "present": {
+            "relevance_grades": [
+              0,
+              2,
+              2,
+              7
+            ],
+            "abstained": 39,
+            "p95_ms": 26.974108722060905
+          },
+          "withheld": {
+            "relevance_grades": [
+              1,
+              2,
+              0,
+              0
+            ],
+            "abstained": 47,
+            "p95_ms": 26.43152298405766
+          }
+        },
+        "strong_delta": {
+          "mean": 0.1,
+          "percentile_95": [
+            0.018867924528301886,
+            0.20835755813953455
+          ],
+          "queries": 50,
+          "clusters": 34,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      },
+      "dense_six": {
+        "summary": {
+          "present": {
+            "relevance_grades": [
+              0,
+              1,
+              2,
+              4
+            ],
+            "abstained": 43,
+            "p95_ms": 54.07150024548171
+          },
+          "withheld": {
+            "relevance_grades": [
+              2,
+              2,
+              0,
+              0
+            ],
+            "abstained": 46,
+            "p95_ms": 56.38848934322595
+          }
+        },
+        "strong_delta": {
+          "mean": 0.04,
+          "percentile_95": [
+            -0.0425531914893617,
+            0.14583333333333334
+          ],
+          "queries": 50,
+          "clusters": 34,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      }
+    },
+    "0.1": {
+      "dense_two": {
+        "summary": {
+          "present": {
+            "relevance_grades": [
+              1,
+              3,
+              4,
+              9
+            ],
+            "abstained": 33,
+            "p95_ms": 25.99763739854096
+          },
+          "withheld": {
+            "relevance_grades": [
+              2,
+              4,
+              0,
+              0
+            ],
+            "abstained": 44,
+            "p95_ms": 23.36434805765748
+          }
+        },
+        "strong_delta": {
+          "mean": 0.0,
+          "percentile_95": [
+            0.0,
+            0.0
+          ],
+          "queries": 50,
+          "clusters": 34,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      },
+      "lead_both": {
+        "summary": {
+          "present": {
+            "relevance_grades": [
+              1,
+              3,
+              5,
+              8
+            ],
+            "abstained": 33,
+            "p95_ms": 35.28525233268738
+          },
+          "withheld": {
+            "relevance_grades": [
+              2,
+              5,
+              0,
+              0
+            ],
+            "abstained": 43,
+            "p95_ms": 30.468348413705826
+          }
+        },
+        "strong_delta": {
+          "mean": 0.0,
+          "percentile_95": [
+            -0.05660377358490566,
+            0.061224489795918366
+          ],
+          "queries": 50,
+          "clusters": 34,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      },
+      "facet_query": {
+        "summary": {
+          "present": {
+            "relevance_grades": [
+              1,
+              3,
+              4,
+              10
+            ],
+            "abstained": 32,
+            "p95_ms": 33.340184483677135
+          },
+          "withheld": {
+            "relevance_grades": [
+              2,
+              5,
+              0,
+              0
+            ],
+            "abstained": 43,
+            "p95_ms": 30.523631535470486
+          }
+        },
+        "strong_delta": {
+          "mean": 0.02,
+          "percentile_95": [
+            -0.041666666666666664,
+            0.09259259259259259
+          ],
+          "queries": 50,
+          "clusters": 34,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      },
+      "facet_both": {
+        "summary": {
+          "present": {
+            "relevance_grades": [
+              1,
+              2,
+              2,
+              9
+            ],
+            "abstained": 36,
+            "p95_ms": 33.15403116866945
+          },
+          "withheld": {
+            "relevance_grades": [
+              3,
+              3,
+              0,
+              0
+            ],
+            "abstained": 44,
+            "p95_ms": 30.98435141146183
+          }
+        },
+        "strong_delta": {
+          "mean": -0.04,
+          "percentile_95": [
+            -0.12244897959183673,
+            0.0392156862745098
+          ],
+          "queries": 50,
+          "clusters": 34,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      },
+      "facet_both_batched": {
+        "summary": {
+          "present": {
+            "relevance_grades": [
+              1,
+              2,
+              2,
+              9
+            ],
+            "abstained": 36,
+            "p95_ms": 26.974108722060905
+          },
+          "withheld": {
+            "relevance_grades": [
+              3,
+              3,
+              0,
+              0
+            ],
+            "abstained": 44,
+            "p95_ms": 26.43152298405766
+          }
+        },
+        "strong_delta": {
+          "mean": -0.04,
+          "percentile_95": [
+            -0.12244897959183673,
+            0.0392156862745098
+          ],
+          "queries": 50,
+          "clusters": 34,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      },
+      "dense_six": {
+        "summary": {
+          "present": {
+            "relevance_grades": [
+              1,
+              2,
+              5,
+              12
+            ],
+            "abstained": 30,
+            "p95_ms": 54.07150024548171
+          },
+          "withheld": {
+            "relevance_grades": [
+              3,
+              2,
+              0,
+              0
+            ],
+            "abstained": 45,
+            "p95_ms": 56.38848934322595
+          }
+        },
+        "strong_delta": {
+          "mean": 0.08,
+          "percentile_95": [
+            -0.02040816326530612,
+            0.19607843137254902
+          ],
+          "queries": 50,
+          "clusters": 34,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      }
+    },
+    "0.2": {
+      "dense_two": {
+        "summary": {
+          "present": {
+            "relevance_grades": [
+              2,
+              4,
+              6,
+              10
+            ],
+            "abstained": 28,
+            "p95_ms": 25.99763739854096
+          },
+          "withheld": {
+            "relevance_grades": [
+              3,
+              6,
+              0,
+              0
+            ],
+            "abstained": 41,
+            "p95_ms": 23.36434805765748
+          }
+        },
+        "strong_delta": {
+          "mean": 0.0,
+          "percentile_95": [
+            0.0,
+            0.0
+          ],
+          "queries": 50,
+          "clusters": 34,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      },
+      "lead_both": {
+        "summary": {
+          "present": {
+            "relevance_grades": [
+              2,
+              5,
+              8,
+              8
+            ],
+            "abstained": 27,
+            "p95_ms": 35.28525233268738
+          },
+          "withheld": {
+            "relevance_grades": [
+              3,
+              7,
+              0,
+              0
+            ],
+            "abstained": 40,
+            "p95_ms": 30.468348413705826
+          }
+        },
+        "strong_delta": {
+          "mean": 0.0,
+          "percentile_95": [
+            -0.08,
+            0.08
+          ],
+          "queries": 50,
+          "clusters": 34,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      },
+      "facet_query": {
+        "summary": {
+          "present": {
+            "relevance_grades": [
+              1,
+              4,
+              6,
+              11
+            ],
+            "abstained": 28,
+            "p95_ms": 33.340184483677135
+          },
+          "withheld": {
+            "relevance_grades": [
+              3,
+              6,
+              0,
+              0
+            ],
+            "abstained": 41,
+            "p95_ms": 30.523631535470486
+          }
+        },
+        "strong_delta": {
+          "mean": 0.02,
+          "percentile_95": [
+            -0.041666666666666664,
+            0.09259259259259259
+          ],
+          "queries": 50,
+          "clusters": 34,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      },
+      "facet_both": {
+        "summary": {
+          "present": {
+            "relevance_grades": [
+              1,
+              4,
+              6,
+              11
+            ],
+            "abstained": 28,
+            "p95_ms": 33.15403116866945
+          },
+          "withheld": {
+            "relevance_grades": [
+              3,
+              6,
+              0,
+              0
+            ],
+            "abstained": 41,
+            "p95_ms": 30.98435141146183
+          }
+        },
+        "strong_delta": {
+          "mean": 0.02,
+          "percentile_95": [
+            0.0,
+            0.06521739130434782
+          ],
+          "queries": 50,
+          "clusters": 34,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      },
+      "facet_both_batched": {
+        "summary": {
+          "present": {
+            "relevance_grades": [
+              1,
+              4,
+              6,
+              11
+            ],
+            "abstained": 28,
+            "p95_ms": 26.974108722060905
+          },
+          "withheld": {
+            "relevance_grades": [
+              3,
+              6,
+              0,
+              0
+            ],
+            "abstained": 41,
+            "p95_ms": 26.43152298405766
+          }
+        },
+        "strong_delta": {
+          "mean": 0.02,
+          "percentile_95": [
+            0.0,
+            0.06521739130434782
+          ],
+          "queries": 50,
+          "clusters": 34,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      },
+      "dense_six": {
+        "summary": {
+          "present": {
+            "relevance_grades": [
+              2,
+              4,
+              9,
+              11
+            ],
+            "abstained": 24,
+            "p95_ms": 54.07150024548171
+          },
+          "withheld": {
+            "relevance_grades": [
+              4,
+              6,
+              0,
+              0
+            ],
+            "abstained": 40,
+            "p95_ms": 56.38848934322595
+          }
+        },
+        "strong_delta": {
+          "mean": 0.08,
+          "percentile_95": [
+            -0.02040816326530612,
+            0.19230769230769232
+          ],
+          "queries": 50,
+          "clusters": 34,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      }
+    }
+  },
+  "batched_vs_separate": {
+    "present": {
+      "shortlists": 47,
+      "reranker_score_tuples": 47
+    },
+    "withheld": {
+      "shortlists": 49,
+      "reranker_score_tuples": 49
+    }
+  }
+}
