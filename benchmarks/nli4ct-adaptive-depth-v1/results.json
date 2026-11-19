@@ -1,0 +1,208 @@
+{
+  "archive_sha256": "dd972c46e69a5bc5e5fb74c2105b5444722d81879ab96b214545b943e4e7ebbe",
+  "script_sha256": "0c10e14f1860610b50b2d0f001a70b63c7579d791bf577ea6bd312c198deb5fc",
+  "cohort": {
+    "train": 1200,
+    "dev": 200,
+    "Gold_test": 500
+  },
+  "unique_trial_counts": {
+    "train": 618,
+    "dev": 100,
+    "Gold_test": 249
+  },
+  "dev_target_mean_sentences": 8.395,
+  "training_actions": 45013,
+  "learned_coefficients": [
+    0.17793589968708198,
+    0.2428944107038466,
+    -0.008606713548743174,
+    -1.2370421610366895,
+    -0.05220038378701077,
+    0.18140566891469645,
+    -0.009455376776154718,
+    0.018792762345674417,
+    -0.018410136228383008,
+    -0.03129457786613661,
+    0.0028927265532337773,
+    -0.0028314676338180586,
+    0.23796626319085057,
+    -0.6081802330860852
+  ],
+  "learned_intercept": 1.3377919588411724,
+  "max_rounds": 3,
+  "results": {
+    "lexical": {
+      "calibration": {
+        "cutoff": 0.07439803619092487,
+        "dev_complete_rate": 0.33,
+        "dev_mean_sentences": 7.775
+      },
+      "adaptive": {
+        "mean_sentences": 8.546,
+        "complete": 110
+      },
+      "fixed": [
+        {
+          "mean_sentences": 6.76,
+          "complete": 80
+        },
+        {
+          "mean_sentences": 9.402,
+          "complete": 172
+        },
+        {
+          "mean_sentences": 11.532,
+          "complete": 242
+        },
+        {
+          "mean_sentences": 13.328,
+          "complete": 278
+        }
+      ],
+      "matched_fixed": {
+        "rounds": [
+          0,
+          1
+        ],
+        "higher_depth_probability": 0.676003028009084,
+        "expected_complete": 142.19227857683575,
+        "adaptive_difference": {
+          "mean": -0.06438455715367143,
+          "percentile_95": [
+            -0.09330610537548971,
+            -0.03558274596782078
+          ],
+          "queries": 500,
+          "clusters": 113,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      },
+      "exhaustive_policy_replay_p95_ms": 0.3765211600693873,
+      "adaptive_by_trial_count": {
+        "1": {
+          "cases": 229,
+          "complete": 75,
+          "mean_sentences": 6.3755458515283845
+        },
+        "2": {
+          "cases": 271,
+          "complete": 35,
+          "mean_sentences": 10.380073800738007
+        }
+      },
+      "matched_fixed_envelope": {
+        "lower_cost_policy": [
+          "learned",
+          0
+        ],
+        "higher_cost_policy": [
+          "learned",
+          2
+        ],
+        "higher_policy_probability": 0.38178708849935855,
+        "expected_complete": 150.24882428388196,
+        "paired_difference": {
+          "mean": -0.08049764856776395,
+          "percentile_95": [
+            -0.10679973482035761,
+            -0.04845914500860855
+          ],
+          "queries": 500,
+          "clusters": 113,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      }
+    },
+    "learned": {
+      "calibration": {
+        "cutoff": 0.10016804153178198,
+        "dev_complete_rate": 0.58,
+        "dev_mean_sentences": 8.375
+      },
+      "adaptive": {
+        "mean_sentences": 9.932,
+        "complete": 268
+      },
+      "fixed": [
+        {
+          "mean_sentences": 6.76,
+          "complete": 80
+        },
+        {
+          "mean_sentences": 9.314,
+          "complete": 179
+        },
+        {
+          "mean_sentences": 11.438,
+          "complete": 264
+        },
+        {
+          "mean_sentences": 13.236,
+          "complete": 317
+        }
+      ],
+      "matched_fixed": {
+        "rounds": [
+          1,
+          2
+        ],
+        "higher_depth_probability": 0.2909604519774012,
+        "expected_complete": 203.73163841807911,
+        "adaptive_difference": {
+          "mean": 0.1285367231638418,
+          "percentile_95": [
+            0.08556228308241118,
+            0.16271710608913997
+          ],
+          "queries": 500,
+          "clusters": 113,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      },
+      "exhaustive_policy_replay_p95_ms": 0.4098669509403406,
+      "adaptive_by_trial_count": {
+        "1": {
+          "cases": 229,
+          "complete": 132,
+          "mean_sentences": 6.8034934497816595
+        },
+        "2": {
+          "cases": 271,
+          "complete": 136,
+          "mean_sentences": 12.575645756457565
+        }
+      },
+      "matched_fixed_envelope": {
+        "lower_cost_policy": [
+          "learned",
+          0
+        ],
+        "higher_cost_policy": [
+          "learned",
+          2
+        ],
+        "higher_policy_probability": 0.6780675502351432,
+        "expected_complete": 204.76442924326636,
+        "paired_difference": {
+          "mean": 0.1264711415134673,
+          "percentile_95": [
+            0.0898221192248033,
+            0.15519043715900044
+          ],
+          "queries": 500,
+          "clusters": 113,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      }
+    }
+  }
+}
