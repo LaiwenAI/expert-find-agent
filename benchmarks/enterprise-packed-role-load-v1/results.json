@@ -1,0 +1,476 @@
+{
+  "job": "43156",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "requests": 80,
+  "sources": 52667,
+  "role_windows": 5734,
+  "nominal_rate": 3.0,
+  "models": {
+    "encoder": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+    "verifier": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+    "parser": "cdbee75f17c01a7cc42f958dc650907174af0554"
+  },
+  "queries_sha256": "30661871ac08a61e7e74d67d75491878c7e4194f217483b60d06426c4b36e4c5",
+  "source_sha256": "c9e8d6e13bb05900427ab1d785d6024256f61e8bb34f220c3816fb79d1921780",
+  "vectors_sha256": "403fd19c50177eb4dd59a5f6fc07f5fe6ab49da223f5e1f4d172ec6cebeff2da",
+  "serial_sha256": "52b9bab61da7230790b0dc8fc0028814aec768f77d8cda9cb8470e3277634868",
+  "code_sha256": "6b37b7932d0a8e5698018c05b8f09d8aa127b6b685b3897dba3302e4970c16c8",
+  "traces": [
+    {
+      "seed": 20261119,
+      "execution_order": [
+        "padded_whole",
+        "padded_rescue",
+        "guarded_rescue"
+      ],
+      "responses_changed_guarded_vs_padded": 0,
+      "arms": {
+        "padded_whole": {
+          "completed": 80,
+          "final_completion_seconds": 30.387916130945086,
+          "drain_seconds": 4.82700177420109,
+          "observed_offered_rate": 3.0906562612521187,
+          "completed_per_second": 2.6326254046269786,
+          "quantiles_ms": {
+            "total_ms": [
+              997.6388548845775,
+              6410.121086257767,
+              6984.698884247417
+            ],
+            "queue_ms": [
+              728.6559225,
+              6010.270512199999,
+              6673.173119039998
+            ],
+            "service_ms": [
+              184.007652,
+              1129.7872118499993,
+              2003.8231137599905
+            ],
+            "release_lag_ms": [
+              0.6734594035764374,
+              1.4641089437075643,
+              2.0087997927916397
+            ]
+          },
+          "strata": {
+            "longest_quartile": {
+              "requests": 20,
+              "total_p50_p95_max_ms": [
+                1074.1078390201455,
+                5667.653763488077,
+                6399.847353701474
+              ],
+              "queue_p95_max_ms": [
+                4551.003365750001,
+                5111.006929
+              ]
+            },
+            "remainder": {
+              "requests": 60,
+              "total_p50_p95_max_ms": [
+                986.1461217064198,
+                6611.975693420768,
+                7076.569643008462
+              ],
+              "queue_p95_max_ms": [
+                6390.033759,
+                6882.42502
+              ]
+            }
+          },
+          "model_work": {
+            "primary": {
+              "logical_pairs": 1280,
+              "logical_tokens": 298626,
+              "padded_batches": 115,
+              "executed_tokens": 544236
+            },
+            "fallback": {}
+          },
+          "issued": 34,
+          "fallback_invoked": 0,
+          "added_slots": 0,
+          "clipped": 0
+        },
+        "padded_rescue": {
+          "completed": 80,
+          "final_completion_seconds": 31.042119305580854,
+          "drain_seconds": 5.481204948836858,
+          "observed_offered_rate": 3.0906562612521187,
+          "completed_per_second": 2.577143629031067,
+          "quantiles_ms": {
+            "total_ms": [
+              1194.3406695047684,
+              6864.202099497687,
+              7462.12406080457
+            ],
+            "queue_ms": [
+              941.2041455,
+              6489.0202783999985,
+              7150.225230519998
+            ],
+            "service_ms": [
+              187.45080000000002,
+              1157.919145649999,
+              2022.0016760399903
+            ],
+            "release_lag_ms": [
+              0.7739576507772572,
+              2.0570357129918726,
+              3.3726348084702162
+            ]
+          },
+          "strata": {
+            "longest_quartile": {
+              "requests": 20,
+              "total_p50_p95_max_ms": [
+                1251.765008787805,
+                6271.454410076282,
+                6853.911175285461
+              ],
+              "queue_p95_max_ms": [
+                5128.677733100001,
+                5740.269134
+              ]
+            },
+            "remainder": {
+              "requests": 60,
+              "total_p50_p95_max_ms": [
+                1194.3406695047684,
+                7067.63306893155,
+                7544.343900072327
+              ],
+              "queue_p95_max_ms": [
+                6843.7205063,
+                7350.121073
+              ]
+            }
+          },
+          "model_work": {
+            "primary": {
+              "logical_pairs": 1280,
+              "logical_tokens": 298626,
+              "padded_batches": 115,
+              "executed_tokens": 544236
+            },
+            "fallback": {
+              "logical_pairs": 184,
+              "logical_tokens": 33562,
+              "padded_batches": 46,
+              "executed_tokens": 41454
+            }
+          },
+          "issued": 37,
+          "fallback_invoked": 46,
+          "added_slots": 3,
+          "clipped": 0
+        },
+        "guarded_rescue": {
+          "completed": 80,
+          "final_completion_seconds": 29.431953670457006,
+          "drain_seconds": 3.871039313713009,
+          "observed_offered_rate": 3.0906562612521187,
+          "completed_per_second": 2.7181342052838926,
+          "quantiles_ms": {
+            "total_ms": [
+              884.1363482520838,
+              5847.281960974705,
+              6416.604326481545
+            ],
+            "queue_ms": [
+              597.8176699999999,
+              5469.383715749998,
+              6105.148524309998
+            ],
+            "service_ms": [
+              174.6477285,
+              1083.7899320999995,
+              1965.5536252099905
+            ],
+            "release_lag_ms": [
+              0.7038280761495486,
+              1.7979786421149946,
+              1.9016315684107796
+            ]
+          },
+          "strata": {
+            "longest_quartile": {
+              "requests": 20,
+              "total_p50_p95_max_ms": [
+                885.4599895348674,
+                4814.285766061537,
+                5836.128690172913
+              ],
+              "queue_p95_max_ms": [
+                3871.96416735,
+                4256.474603
+              ]
+            },
+            "remainder": {
+              "requests": 60,
+              "total_p50_p95_max_ms": [
+                884.1363482520838,
+                6066.110938039869,
+                6489.8058941093595
+              ],
+              "queue_p95_max_ms": [
+                5828.72281235,
+                6295.761708
+              ]
+            }
+          },
+          "model_work": {
+            "primary": {
+              "logical_pairs": 1280,
+              "logical_tokens": 298626,
+              "padded_batches": 34,
+              "executed_tokens": 385612,
+              "packed_batches": 97,
+              "guard_rechecks": 16
+            },
+            "fallback": {
+              "logical_pairs": 184,
+              "logical_tokens": 33562,
+              "padded_batches": 32,
+              "executed_tokens": 35546,
+              "packed_batches": 14
+            }
+          },
+          "issued": 37,
+          "fallback_invoked": 46,
+          "added_slots": 3,
+          "clipped": 0
+        }
+      }
+    },
+    {
+      "seed": 20261120,
+      "execution_order": [
+        "guarded_rescue",
+        "padded_rescue",
+        "padded_whole"
+      ],
+      "responses_changed_guarded_vs_padded": 0,
+      "arms": {
+        "guarded_rescue": {
+          "completed": 80,
+          "final_completion_seconds": 31.85037332214415,
+          "drain_seconds": 4.605808342129716,
+          "observed_offered_rate": 2.899660906971771,
+          "completed_per_second": 2.5117444995339993,
+          "quantiles_ms": {
+            "total_ms": [
+              1920.7887701547043,
+              4561.834279417735,
+              4751.362097699955
+            ],
+            "queue_ms": [
+              1399.8858045,
+              3653.2258489999995,
+              4442.43606105
+            ],
+            "service_ms": [
+              178.255857,
+              1078.6177993999997,
+              1940.9786052999907
+            ],
+            "release_lag_ms": [
+              0.7492701901976595,
+              2.037899132251564,
+              2.9674476738307978
+            ]
+          },
+          "strata": {
+            "longest_quartile": {
+              "requests": 20,
+              "total_p50_p95_max_ms": [
+                1693.270266348583,
+                4729.593294760176,
+                4858.84556221512
+              ],
+              "queue_p95_max_ms": [
+                3541.0262643,
+                3934.099372
+              ]
+            },
+            "remainder": {
+              "requests": 60,
+              "total_p50_p95_max_ms": [
+                1927.3767283070738,
+                3850.8535268787036,
+                4605.808342129716
+              ],
+              "queue_p95_max_ms": [
+                3673.0487891499984,
+                4473.262023
+              ]
+            }
+          },
+          "model_work": {
+            "primary": {
+              "logical_pairs": 1280,
+              "logical_tokens": 298626,
+              "packed_batches": 97,
+              "executed_tokens": 385612,
+              "guard_rechecks": 16,
+              "padded_batches": 34
+            },
+            "fallback": {
+              "logical_pairs": 184,
+              "logical_tokens": 33562,
+              "padded_batches": 32,
+              "executed_tokens": 35546,
+              "packed_batches": 14
+            }
+          },
+          "issued": 37,
+          "fallback_invoked": 46,
+          "added_slots": 3,
+          "clipped": 0
+        },
+        "padded_rescue": {
+          "completed": 80,
+          "final_completion_seconds": 32.841240115463734,
+          "drain_seconds": 5.596675135449299,
+          "observed_offered_rate": 2.899660906971771,
+          "completed_per_second": 2.4359616055524937,
+          "quantiles_ms": {
+            "total_ms": [
+              2067.6142488483515,
+              4990.513109948414,
+              5639.0865205991995
+            ],
+            "queue_ms": [
+              1698.951141,
+              4137.242982099999,
+              5387.5060748
+            ],
+            "service_ms": [
+              190.4396835,
+              1156.330110699999,
+              2002.5245546099904
+            ],
+            "release_lag_ms": [
+              0.8100417301726281,
+              2.0809828688111764,
+              2.4194261107523953
+            ]
+          },
+          "strata": {
+            "longest_quartile": {
+              "requests": 20,
+              "total_p50_p95_max_ms": [
+                1947.7987013478928,
+                5491.6635373551035,
+                5798.634112353593
+              ],
+              "queue_p95_max_ms": [
+                4059.5322852000004,
+                4686.92424
+              ]
+            },
+            "remainder": {
+              "requests": 60,
+              "total_p50_p95_max_ms": [
+                2123.1159663549606,
+                4339.855048719395,
+                5596.675135449299
+              ],
+              "queue_p95_max_ms": [
+                4137.242982099999,
+                5439.293245
+              ]
+            }
+          },
+          "model_work": {
+            "primary": {
+              "logical_pairs": 1280,
+              "logical_tokens": 298626,
+              "padded_batches": 115,
+              "executed_tokens": 544236
+            },
+            "fallback": {
+              "logical_pairs": 184,
+              "logical_tokens": 33562,
+              "padded_batches": 46,
+              "executed_tokens": 41454
+            }
+          },
+          "issued": 37,
+          "fallback_invoked": 46,
+          "added_slots": 3,
+          "clipped": 0
+        },
+        "padded_whole": {
+          "completed": 80,
+          "final_completion_seconds": 32.61053124628961,
+          "drain_seconds": 5.365966266275176,
+          "observed_offered_rate": 2.899660906971771,
+          "completed_per_second": 2.4531952391637994,
+          "quantiles_ms": {
+            "total_ms": [
+              1992.1657990548665,
+              4918.826962833539,
+              5407.491163240744
+            ],
+            "queue_ms": [
+              1596.43899,
+              4018.4964806499984,
+              5153.69255127
+            ],
+            "service_ms": [
+              186.0594165,
+              1127.968741099999,
+              1985.7626799799905
+            ],
+            "release_lag_ms": [
+              0.7691502970202935,
+              1.9088988317156108,
+              2.3021397027008534
+            ]
+          },
+          "strata": {
+            "longest_quartile": {
+              "requests": 20,
+              "total_p50_p95_max_ms": [
+                1872.0139798839514,
+                5308.128682797738,
+                5563.703870873123
+              ],
+              "queue_p95_max_ms": [
+                3931.8448868500004,
+                4505.090844
+              ]
+            },
+            "remainder": {
+              "requests": 60,
+              "total_p50_p95_max_ms": [
+                2052.3230606546895,
+                4225.003393932779,
+                5365.966266275176
+              ],
+              "queue_p95_max_ms": [
+                4023.7422196999983,
+                5207.124507
+              ]
+            }
+          },
+          "model_work": {
+            "primary": {
+              "logical_pairs": 1280,
+              "logical_tokens": 298626,
+              "padded_batches": 115,
+              "executed_tokens": 544236
+            },
+            "fallback": {}
+          },
+          "issued": 34,
+          "fallback_invoked": 0,
+          "added_slots": 0,
+          "clipped": 0
+        }
+      }
+    }
+  ]
+}
