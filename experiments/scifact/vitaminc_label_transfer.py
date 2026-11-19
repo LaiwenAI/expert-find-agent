@@ -29,10 +29,13 @@ def stable(*parts):
 def panel(path, *, seed="vitaminc-mapping-transfer-v1", per_control=PAIRS_PER_CONTROL,
           excluded_pages=(), excluded_claims=()):
     records = defaultdict(lambda: defaultdict(list))
-    for line in path.read_text().splitlines():
-        row = json.loads(line)
-        if row["revision_type"] == "real" and all(row[k].strip() for k in ("page", "claim", "evidence")):
-            records[row["page"], row["case_id"], row["claim"]][row["label"]].append(row)
+    with path.open() as stream:
+        for line in stream:
+            row = json.loads(line)
+            if (row["revision_type"] == "real"
+                    and row["page"] not in excluded_pages and row["claim"].casefold() not in excluded_claims
+                    and all(row[k].strip() for k in ("page", "claim", "evidence"))):
+                records[row["page"], row["case_id"], row["claim"]][row["label"]].append(row)
     pairs = []
     used_pages = set(excluded_pages)
     used_claims = set(excluded_claims)

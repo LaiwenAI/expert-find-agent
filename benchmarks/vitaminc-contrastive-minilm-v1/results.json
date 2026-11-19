@@ -1,0 +1,394 @@
+{
+  "job": "42190",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "dataset_hashes": [
+    "7461c6fd1a13459590317c5ccdc8651dd2daf7c1ad8ae4b10ccd88d164fccd5a",
+    "544934677f5d133873e6d38f4557f8966f4efa5d3d70874ffe6913f2091b86b5",
+    "7ad1808dbc30c62e0a1427a53022d0dfaff668a1fde3c4b612a2d266edd753ad"
+  ],
+  "script_sha256": "c8278b8ac72356d800098ee7d9c218e9c1dc388f8861810565313e860a1fa410",
+  "projection_sha256": "efafc98182faffc18b56c69844986597370b35f42989cd81adadede054f0b8cf",
+  "control_sha256": "efa208987fd7528a98a7896da588edab307abe840d237a00fdff07f976e06296",
+  "model_revision": "0a71e92a985b6e1ad1828cf67ce9c459639c1dca",
+  "caps": {
+    "matched": [
+      21,
+      28
+    ],
+    "strict": [
+      10,
+      10
+    ]
+  },
+  "panel_hashes": {
+    "train": "6d4294211566bd8fd48c45247af5b4f95d81da71b1e5b09dfeebe6196be19005",
+    "development": "9e7d6aea634a12492644507994d3f3b2fb046029ea7111e604e26f81b0695111",
+    "test": "df071a8a1e6993af5e1783a9dc2137ca50bbe82a7e2f474bfe9ab28da536efbb"
+  },
+  "pair_counts": {
+    "train": 1200,
+    "development": 400,
+    "test": 400
+  },
+  "report": {
+    "frozen": {
+      "training": {},
+      "item_accuracy": 0.44875,
+      "single_p95_ms": 1.2489925138652325,
+      "four_item_batch_p95_ms": 1.8294058740139008,
+      "raw_accepted": [
+        165,
+        43,
+        11
+      ],
+      "operating_points": {
+        "matched": {
+          "threshold": 1.011962890625,
+          "development_accepted": [
+            146,
+            21,
+            11
+          ],
+          "test_accepted": [
+            139,
+            20,
+            6
+          ],
+          "batched_threshold_changes": 1,
+          "support_delta_vs_frozen": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 400,
+            "clusters": 400,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "refute_delta_vs_frozen": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "insufficient_delta_vs_frozen": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          }
+        },
+        "strict": {
+          "threshold": 2.0703125,
+          "development_accepted": [
+            112,
+            10,
+            7
+          ],
+          "test_accepted": [
+            100,
+            12,
+            2
+          ],
+          "batched_threshold_changes": 2,
+          "support_delta_vs_frozen": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 400,
+            "clusters": 400,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "refute_delta_vs_frozen": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "insufficient_delta_vs_frozen": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          }
+        }
+      }
+    },
+    "classification": {
+      "training": {
+        "trainable": 1923459,
+        "changed": 1867633,
+        "updates": 150,
+        "seconds": 0.7573244106024504,
+        "losses": [
+          1.1129316902160644,
+          0.9077576231956482
+        ],
+        "weight_sha256": "c7bd1157d3506da725e2c530bd15593216e17c8a22c4c778c124115b05f452c6"
+      },
+      "item_accuracy": 0.5975,
+      "single_p95_ms": 1.2584006413817406,
+      "four_item_batch_p95_ms": 1.8493038602173326,
+      "raw_accepted": [
+        305,
+        107,
+        51
+      ],
+      "operating_points": {
+        "matched": {
+          "threshold": 1.1669921875,
+          "development_accepted": [
+            158,
+            21,
+            20
+          ],
+          "test_accepted": [
+            144,
+            26,
+            8
+          ],
+          "batched_threshold_changes": 1,
+          "support_delta_vs_frozen": {
+            "mean": 0.0125,
+            "percentile_95": [
+              -0.015,
+              0.04
+            ],
+            "queries": 400,
+            "clusters": 400,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "refute_delta_vs_frozen": {
+            "mean": 0.03,
+            "percentile_95": [
+              -0.005,
+              0.065
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "insufficient_delta_vs_frozen": {
+            "mean": 0.01,
+            "percentile_95": [
+              -0.015,
+              0.035
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          }
+        },
+        "strict": {
+          "threshold": 1.6875,
+          "development_accepted": [
+            118,
+            10,
+            8
+          ],
+          "test_accepted": [
+            98,
+            13,
+            2
+          ],
+          "batched_threshold_changes": 0,
+          "support_delta_vs_frozen": {
+            "mean": -0.005,
+            "percentile_95": [
+              -0.03,
+              0.02
+            ],
+            "queries": 400,
+            "clusters": 400,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "refute_delta_vs_frozen": {
+            "mean": 0.005,
+            "percentile_95": [
+              -0.01,
+              0.025
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "insufficient_delta_vs_frozen": {
+            "mean": 0.0,
+            "percentile_95": [
+              -0.015,
+              0.015
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          }
+        }
+      }
+    },
+    "contrastive": {
+      "training": {
+        "trainable": 1923459,
+        "changed": 1862988,
+        "updates": 150,
+        "seconds": 0.6739554945379496,
+        "losses": [
+          1.304068299929301,
+          1.087905072371165
+        ],
+        "weight_sha256": "c29544733b49fa7725ebf5f19b5a43b0aa68a8a355ea440bbd71554ac759b73b"
+      },
+      "item_accuracy": 0.5925,
+      "single_p95_ms": 1.2690099887549877,
+      "four_item_batch_p95_ms": 1.9067275337874887,
+      "raw_accepted": [
+        302,
+        106,
+        45
+      ],
+      "operating_points": {
+        "matched": {
+          "threshold": 1.408203125,
+          "development_accepted": [
+            159,
+            21,
+            20
+          ],
+          "test_accepted": [
+            144,
+            24,
+            6
+          ],
+          "batched_threshold_changes": 2,
+          "support_delta_vs_frozen": {
+            "mean": 0.0125,
+            "percentile_95": [
+              -0.0125,
+              0.04
+            ],
+            "queries": 400,
+            "clusters": 400,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "refute_delta_vs_frozen": {
+            "mean": 0.02,
+            "percentile_95": [
+              -0.015,
+              0.055
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "insufficient_delta_vs_frozen": {
+            "mean": 0.0,
+            "percentile_95": [
+              -0.02,
+              0.02
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          }
+        },
+        "strict": {
+          "threshold": 1.90234375,
+          "development_accepted": [
+            128,
+            10,
+            7
+          ],
+          "test_accepted": [
+            102,
+            14,
+            2
+          ],
+          "batched_threshold_changes": 2,
+          "support_delta_vs_frozen": {
+            "mean": 0.005,
+            "percentile_95": [
+              -0.0175,
+              0.0275
+            ],
+            "queries": 400,
+            "clusters": 400,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "refute_delta_vs_frozen": {
+            "mean": 0.01,
+            "percentile_95": [
+              0.0,
+              0.025
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          },
+          "insufficient_delta_vs_frozen": {
+            "mean": 0.0,
+            "percentile_95": [
+              -0.015,
+              0.015
+            ],
+            "queries": 200,
+            "clusters": 200,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "one page with a matched evidence pair"
+          }
+        }
+      }
+    }
+  }
+}

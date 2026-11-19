@@ -83,14 +83,7 @@ def statistics(gate, margins, targets, durations, groups):
                 factored_p50_p95_ms=np.quantile(duration, [.5, .95]).tolist())
 
 
-def run(dev, test, checkpoint, output):
-    import torch
-    from experiments.qasper.paired_reader import load_reader
-
-    if output.exists() or not os.environ.get("SLURM_JOB_ID") or not torch.cuda.is_available():
-        raise ValueError("Require a fresh output and Slurm CUDA allocation")
-    if digest(dev) != DEV_SHA256 or digest(test) != DATA_SHA256:
-        raise ValueError("Changed pinned VitaminC file")
+def cohorts(dev, test):
     explored = panel(test)
     old_pages = {a["page"] for a, _ in explored}
     old_claims = {a["claim"].casefold() for a, _ in explored}
@@ -100,6 +93,18 @@ def run(dev, test, checkpoint, output):
     current_claims = {a["claim"].casefold() for a, _ in held}
     development = panel(dev, seed="vitaminc-selective-v1-dev", per_control=PAIR_DEPTH,
                         excluded_pages=old_pages | current_pages, excluded_claims=old_claims | current_claims)
+    return development, held, old_pages, old_claims
+
+
+def run(dev, test, checkpoint, output):
+    import torch
+    from experiments.qasper.paired_reader import load_reader
+
+    if output.exists() or not os.environ.get("SLURM_JOB_ID") or not torch.cuda.is_available():
+        raise ValueError("Require a fresh output and Slurm CUDA allocation")
+    if digest(dev) != DEV_SHA256 or digest(test) != DATA_SHA256:
+        raise ValueError("Changed pinned VitaminC file")
+    development, held, old_pages, _ = cohorts(dev, test)
     tokenizer, reader, provenance = load_reader(checkpoint)
     digits = [tokenizer.encode(digit, add_special_tokens=False) for digit in "012"]
     if any(len(ids) != 1 for ids in digits) or len({ids[0] for ids in digits}) != 3:

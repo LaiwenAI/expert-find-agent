@@ -13,9 +13,6 @@ import torch
 from transformers import AutoModelForSequenceClassification, AutoTokenizer
 
 from experiments.followir.core17_reranking import digest, write_json
-from experiments.scifact.criterion_verifier_calibration import (
-    ARCHIVE, CAP, calibrate, counts, prepare, read_jsonl,
-)
 
 
 REVISIONS = {
@@ -72,6 +69,8 @@ def measure(tokenizer, reader, positions, rows):
 
 
 def fit(scores, gold):
+    from experiments.scifact.criterion_verifier_calibration import calibrate
+
     valid = [(score[1], label) for score, label in zip(scores, gold, strict=True) if score is not None]
     margins = [m for m, _ in valid]
     labels = [label for _, label in valid]
@@ -82,6 +81,8 @@ def fit(scores, gold):
 
 
 def summarize(scores, gold, threshold):
+    from experiments.scifact.criterion_verifier_calibration import counts
+
     return dict(
         raw_support=counts([row is not None and row[0] == "entailment" for row in scores], gold),
         calibrated_support=counts([row is not None and row[1] > threshold for row in scores], gold),
@@ -94,6 +95,8 @@ def summarize(scores, gold, threshold):
 
 
 def run(archive_path, checkpoints, output, private_input=None, private_output=None):
+    from experiments.scifact.criterion_verifier_calibration import ARCHIVE, CAP, prepare, read_jsonl
+
     if (output.exists() or not os.environ.get("SLURM_JOB_ID") or not torch.cuda.is_available()
             or (private_input is None) != (private_output is None)
             or (private_output is not None and private_output.exists())):
