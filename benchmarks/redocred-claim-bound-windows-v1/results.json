@@ -1,0 +1,986 @@
+{
+  "job": "43359",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "code_sha256": "d6e532a566e74fdd25c24d5d9fe535c49b6b1d451387335c8579c3fcb34c06dd",
+  "cohort_sha256": "b007060e3d835679eb47dbc32d4476c10ac95382caea0a79ec77a512b2a0105d",
+  "base_sha256": "da759c8728cc2a34e4ba724a7b45f439a49771987de66a4d8801b8169ddd306a",
+  "checkpoint": "cdbee75f17c01a7cc42f958dc650907174af0554",
+  "distinct_documents": {
+    "development": 47,
+    "previous": 189,
+    "fresh": 34
+  },
+  "panels": {
+    "development": 64,
+    "previous": 240,
+    "fresh": 38
+  },
+  "policies": {
+    "0.05": {
+      "cutoffs": {
+        "shared_four": 11.75,
+        "lexical_two": 4.75,
+        "bound_two": -1.25
+      },
+      "panels": {
+        "development": {
+          "shared_four": {
+            "groups": {
+              "combined": {
+                "rectangles": 64,
+                "known": 179,
+                "unjudged": 77,
+                "retained_known": 67,
+                "issued_unjudged": 3,
+                "all_known_retained": 8,
+                "exact_label_pattern": 6,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              },
+              "disjoint": {
+                "rectangles": 27,
+                "known": 54,
+                "unjudged": 54,
+                "retained_known": 17,
+                "issued_unjudged": 1,
+                "all_known_retained": 2,
+                "exact_label_pattern": 2,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              },
+              "shared": {
+                "rectangles": 37,
+                "known": 125,
+                "unjudged": 23,
+                "retained_known": 50,
+                "issued_unjudged": 2,
+                "all_known_retained": 6,
+                "exact_label_pattern": 4,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              }
+            },
+            "mean_words_per_batch": 467.4375,
+            "p95_ms": 66.65974110364914,
+            "model_pairs": 256,
+            "paired_known_delta": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 64,
+              "clusters": 47,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "lexical_two": {
+            "groups": {
+              "combined": {
+                "rectangles": 64,
+                "known": 179,
+                "unjudged": 77,
+                "retained_known": 83,
+                "issued_unjudged": 3,
+                "all_known_retained": 11,
+                "exact_label_pattern": 10,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              },
+              "disjoint": {
+                "rectangles": 27,
+                "known": 54,
+                "unjudged": 54,
+                "retained_known": 23,
+                "issued_unjudged": 1,
+                "all_known_retained": 5,
+                "exact_label_pattern": 5,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              },
+              "shared": {
+                "rectangles": 37,
+                "known": 125,
+                "unjudged": 23,
+                "retained_known": 60,
+                "issued_unjudged": 2,
+                "all_known_retained": 6,
+                "exact_label_pattern": 5,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              }
+            },
+            "mean_words_per_batch": 239.921875,
+            "p95_ms": 53.34894815459847,
+            "model_pairs": 256,
+            "paired_known_delta": {
+              "mean": 0.0625,
+              "percentile_95": [
+                0.020161290322580645,
+                0.1056338028169014
+              ],
+              "queries": 64,
+              "clusters": 47,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "bound_two": {
+            "groups": {
+              "combined": {
+                "rectangles": 64,
+                "known": 179,
+                "unjudged": 77,
+                "retained_known": 72,
+                "issued_unjudged": 3,
+                "all_known_retained": 9,
+                "exact_label_pattern": 9,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              },
+              "disjoint": {
+                "rectangles": 27,
+                "known": 54,
+                "unjudged": 54,
+                "retained_known": 26,
+                "issued_unjudged": 2,
+                "all_known_retained": 7,
+                "exact_label_pattern": 7,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              },
+              "shared": {
+                "rectangles": 37,
+                "known": 125,
+                "unjudged": 23,
+                "retained_known": 46,
+                "issued_unjudged": 1,
+                "all_known_retained": 2,
+                "exact_label_pattern": 2,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              }
+            },
+            "mean_words_per_batch": 239.671875,
+            "p95_ms": 53.63084822893142,
+            "model_pairs": 256,
+            "paired_known_delta": {
+              "mean": 0.01953125,
+              "percentile_95": [
+                -0.0528169014084507,
+                0.08846774193548379
+              ],
+              "queries": 64,
+              "clusters": 47,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          }
+        },
+        "previous": {
+          "shared_four": {
+            "groups": {
+              "combined": {
+                "rectangles": 240,
+                "known": 636,
+                "unjudged": 324,
+                "retained_known": 245,
+                "issued_unjudged": 24,
+                "all_known_retained": 25,
+                "exact_label_pattern": 17,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              },
+              "disjoint": {
+                "rectangles": 120,
+                "known": 240,
+                "unjudged": 240,
+                "retained_known": 63,
+                "issued_unjudged": 8,
+                "all_known_retained": 7,
+                "exact_label_pattern": 6,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              },
+              "shared": {
+                "rectangles": 120,
+                "known": 396,
+                "unjudged": 84,
+                "retained_known": 182,
+                "issued_unjudged": 16,
+                "all_known_retained": 18,
+                "exact_label_pattern": 11,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              }
+            },
+            "mean_words_per_batch": 460.76666666666665,
+            "p95_ms": 70.83307299762964,
+            "model_pairs": 960,
+            "paired_known_delta": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 240,
+              "clusters": 189,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "lexical_two": {
+            "groups": {
+              "combined": {
+                "rectangles": 240,
+                "known": 636,
+                "unjudged": 324,
+                "retained_known": 314,
+                "issued_unjudged": 27,
+                "all_known_retained": 43,
+                "exact_label_pattern": 28,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              },
+              "disjoint": {
+                "rectangles": 120,
+                "known": 240,
+                "unjudged": 240,
+                "retained_known": 92,
+                "issued_unjudged": 11,
+                "all_known_retained": 13,
+                "exact_label_pattern": 10,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              },
+              "shared": {
+                "rectangles": 120,
+                "known": 396,
+                "unjudged": 84,
+                "retained_known": 222,
+                "issued_unjudged": 16,
+                "all_known_retained": 30,
+                "exact_label_pattern": 18,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              }
+            },
+            "mean_words_per_batch": 240.1625,
+            "p95_ms": 54.29468955844637,
+            "model_pairs": 960,
+            "paired_known_delta": {
+              "mean": 0.071875,
+              "percentile_95": [
+                0.0496031746031746,
+                0.09451219512195122
+              ],
+              "queries": 240,
+              "clusters": 189,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "bound_two": {
+            "groups": {
+              "combined": {
+                "rectangles": 240,
+                "known": 636,
+                "unjudged": 324,
+                "retained_known": 297,
+                "issued_unjudged": 26,
+                "all_known_retained": 38,
+                "exact_label_pattern": 32,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              },
+              "disjoint": {
+                "rectangles": 120,
+                "known": 240,
+                "unjudged": 240,
+                "retained_known": 101,
+                "issued_unjudged": 9,
+                "all_known_retained": 21,
+                "exact_label_pattern": 19,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              },
+              "shared": {
+                "rectangles": 120,
+                "known": 396,
+                "unjudged": 84,
+                "retained_known": 196,
+                "issued_unjudged": 17,
+                "all_known_retained": 17,
+                "exact_label_pattern": 13,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              }
+            },
+            "mean_words_per_batch": 237.80833333333334,
+            "p95_ms": 55.87974311783909,
+            "model_pairs": 960,
+            "paired_known_delta": {
+              "mean": 0.05416666666666667,
+              "percentile_95": [
+                0.02678479570840682,
+                0.08189655172413793
+              ],
+              "queries": 240,
+              "clusters": 189,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          }
+        },
+        "fresh": {
+          "shared_four": {
+            "groups": {
+              "combined": {
+                "rectangles": 38,
+                "known": 116,
+                "unjudged": 36,
+                "retained_known": 59,
+                "issued_unjudged": 5,
+                "all_known_retained": 11,
+                "exact_label_pattern": 7,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              },
+              "disjoint": {
+                "rectangles": 9,
+                "known": 18,
+                "unjudged": 18,
+                "retained_known": 6,
+                "issued_unjudged": 0,
+                "all_known_retained": 1,
+                "exact_label_pattern": 1,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              },
+              "shared": {
+                "rectangles": 29,
+                "known": 98,
+                "unjudged": 18,
+                "retained_known": 53,
+                "issued_unjudged": 5,
+                "all_known_retained": 10,
+                "exact_label_pattern": 6,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              }
+            },
+            "mean_words_per_batch": 462.63157894736844,
+            "p95_ms": 68.68339572101831,
+            "model_pairs": 152,
+            "paired_known_delta": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 38,
+              "clusters": 34,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "lexical_two": {
+            "groups": {
+              "combined": {
+                "rectangles": 38,
+                "known": 116,
+                "unjudged": 36,
+                "retained_known": 65,
+                "issued_unjudged": 5,
+                "all_known_retained": 10,
+                "exact_label_pattern": 7,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              },
+              "disjoint": {
+                "rectangles": 9,
+                "known": 18,
+                "unjudged": 18,
+                "retained_known": 8,
+                "issued_unjudged": 0,
+                "all_known_retained": 1,
+                "exact_label_pattern": 1,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              },
+              "shared": {
+                "rectangles": 29,
+                "known": 98,
+                "unjudged": 18,
+                "retained_known": 57,
+                "issued_unjudged": 5,
+                "all_known_retained": 9,
+                "exact_label_pattern": 6,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              }
+            },
+            "mean_words_per_batch": 238.89473684210526,
+            "p95_ms": 53.90076097100973,
+            "model_pairs": 152,
+            "paired_known_delta": {
+              "mean": 0.039473684210526314,
+              "percentile_95": [
+                -0.00625,
+                0.08333333333333333
+              ],
+              "queries": 38,
+              "clusters": 34,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "bound_two": {
+            "groups": {
+              "combined": {
+                "rectangles": 38,
+                "known": 116,
+                "unjudged": 36,
+                "retained_known": 65,
+                "issued_unjudged": 6,
+                "all_known_retained": 10,
+                "exact_label_pattern": 8,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              },
+              "disjoint": {
+                "rectangles": 9,
+                "known": 18,
+                "unjudged": 18,
+                "retained_known": 10,
+                "issued_unjudged": 0,
+                "all_known_retained": 3,
+                "exact_label_pattern": 3,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              },
+              "shared": {
+                "rectangles": 29,
+                "known": 98,
+                "unjudged": 18,
+                "retained_known": 55,
+                "issued_unjudged": 6,
+                "all_known_retained": 7,
+                "exact_label_pattern": 5,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              }
+            },
+            "mean_words_per_batch": 234.57894736842104,
+            "p95_ms": 52.15890668332577,
+            "model_pairs": 152,
+            "paired_known_delta": {
+              "mean": 0.039473684210526314,
+              "percentile_95": [
+                -0.039473684210526314,
+                0.11538461538461539
+              ],
+              "queries": 38,
+              "clusters": 34,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          }
+        }
+      }
+    },
+    "0.1": {
+      "cutoffs": {
+        "shared_four": 4.75,
+        "lexical_two": -5.25,
+        "bound_two": -6.0
+      },
+      "panels": {
+        "development": {
+          "shared_four": {
+            "groups": {
+              "combined": {
+                "rectangles": 64,
+                "known": 179,
+                "unjudged": 77,
+                "retained_known": 82,
+                "issued_unjudged": 7,
+                "all_known_retained": 13,
+                "exact_label_pattern": 9,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              },
+              "disjoint": {
+                "rectangles": 27,
+                "known": 54,
+                "unjudged": 54,
+                "retained_known": 23,
+                "issued_unjudged": 2,
+                "all_known_retained": 5,
+                "exact_label_pattern": 5,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              },
+              "shared": {
+                "rectangles": 37,
+                "known": 125,
+                "unjudged": 23,
+                "retained_known": 59,
+                "issued_unjudged": 5,
+                "all_known_retained": 8,
+                "exact_label_pattern": 4,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              }
+            },
+            "mean_words_per_batch": 467.4375,
+            "p95_ms": 66.65974110364914,
+            "model_pairs": 256,
+            "paired_known_delta": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 64,
+              "clusters": 47,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "lexical_two": {
+            "groups": {
+              "combined": {
+                "rectangles": 64,
+                "known": 179,
+                "unjudged": 77,
+                "retained_known": 104,
+                "issued_unjudged": 7,
+                "all_known_retained": 18,
+                "exact_label_pattern": 16,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              },
+              "disjoint": {
+                "rectangles": 27,
+                "known": 54,
+                "unjudged": 54,
+                "retained_known": 30,
+                "issued_unjudged": 3,
+                "all_known_retained": 8,
+                "exact_label_pattern": 8,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              },
+              "shared": {
+                "rectangles": 37,
+                "known": 125,
+                "unjudged": 23,
+                "retained_known": 74,
+                "issued_unjudged": 4,
+                "all_known_retained": 10,
+                "exact_label_pattern": 8,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              }
+            },
+            "mean_words_per_batch": 239.921875,
+            "p95_ms": 53.34894815459847,
+            "model_pairs": 256,
+            "paired_known_delta": {
+              "mean": 0.0859375,
+              "percentile_95": [
+                0.04230769230769231,
+                0.13524590163934427
+              ],
+              "queries": 64,
+              "clusters": 47,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "bound_two": {
+            "groups": {
+              "combined": {
+                "rectangles": 64,
+                "known": 179,
+                "unjudged": 77,
+                "retained_known": 82,
+                "issued_unjudged": 6,
+                "all_known_retained": 12,
+                "exact_label_pattern": 10,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              },
+              "disjoint": {
+                "rectangles": 27,
+                "known": 54,
+                "unjudged": 54,
+                "retained_known": 29,
+                "issued_unjudged": 3,
+                "all_known_retained": 8,
+                "exact_label_pattern": 7,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              },
+              "shared": {
+                "rectangles": 37,
+                "known": 125,
+                "unjudged": 23,
+                "retained_known": 53,
+                "issued_unjudged": 3,
+                "all_known_retained": 4,
+                "exact_label_pattern": 3,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              }
+            },
+            "mean_words_per_batch": 239.671875,
+            "p95_ms": 53.63084822893142,
+            "model_pairs": 256,
+            "paired_known_delta": {
+              "mean": 0.0,
+              "percentile_95": [
+                -0.06646097046413502,
+                0.06618221507352932
+              ],
+              "queries": 64,
+              "clusters": 47,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          }
+        },
+        "previous": {
+          "shared_four": {
+            "groups": {
+              "combined": {
+                "rectangles": 240,
+                "known": 636,
+                "unjudged": 324,
+                "retained_known": 304,
+                "issued_unjudged": 32,
+                "all_known_retained": 45,
+                "exact_label_pattern": 28,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              },
+              "disjoint": {
+                "rectangles": 120,
+                "known": 240,
+                "unjudged": 240,
+                "retained_known": 86,
+                "issued_unjudged": 12,
+                "all_known_retained": 14,
+                "exact_label_pattern": 11,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              },
+              "shared": {
+                "rectangles": 120,
+                "known": 396,
+                "unjudged": 84,
+                "retained_known": 218,
+                "issued_unjudged": 20,
+                "all_known_retained": 31,
+                "exact_label_pattern": 17,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              }
+            },
+            "mean_words_per_batch": 460.76666666666665,
+            "p95_ms": 70.83307299762964,
+            "model_pairs": 960,
+            "paired_known_delta": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 240,
+              "clusters": 189,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "lexical_two": {
+            "groups": {
+              "combined": {
+                "rectangles": 240,
+                "known": 636,
+                "unjudged": 324,
+                "retained_known": 365,
+                "issued_unjudged": 34,
+                "all_known_retained": 63,
+                "exact_label_pattern": 44,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              },
+              "disjoint": {
+                "rectangles": 120,
+                "known": 240,
+                "unjudged": 240,
+                "retained_known": 109,
+                "issued_unjudged": 13,
+                "all_known_retained": 23,
+                "exact_label_pattern": 19,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              },
+              "shared": {
+                "rectangles": 120,
+                "known": 396,
+                "unjudged": 84,
+                "retained_known": 256,
+                "issued_unjudged": 21,
+                "all_known_retained": 40,
+                "exact_label_pattern": 25,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              }
+            },
+            "mean_words_per_batch": 240.1625,
+            "p95_ms": 54.29468955844637,
+            "model_pairs": 960,
+            "paired_known_delta": {
+              "mean": 0.06354166666666666,
+              "percentile_95": [
+                0.0411522633744856,
+                0.08739837398373984
+              ],
+              "queries": 240,
+              "clusters": 189,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "bound_two": {
+            "groups": {
+              "combined": {
+                "rectangles": 240,
+                "known": 636,
+                "unjudged": 324,
+                "retained_known": 320,
+                "issued_unjudged": 30,
+                "all_known_retained": 46,
+                "exact_label_pattern": 39,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              },
+              "disjoint": {
+                "rectangles": 120,
+                "known": 240,
+                "unjudged": 240,
+                "retained_known": 108,
+                "issued_unjudged": 11,
+                "all_known_retained": 24,
+                "exact_label_pattern": 22,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              },
+              "shared": {
+                "rectangles": 120,
+                "known": 396,
+                "unjudged": 84,
+                "retained_known": 212,
+                "issued_unjudged": 19,
+                "all_known_retained": 22,
+                "exact_label_pattern": 17,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              }
+            },
+            "mean_words_per_batch": 237.80833333333334,
+            "p95_ms": 55.87974311783909,
+            "model_pairs": 960,
+            "paired_known_delta": {
+              "mean": 0.016666666666666666,
+              "percentile_95": [
+                -0.011603375527426161,
+                0.044956713829552956
+              ],
+              "queries": 240,
+              "clusters": 189,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          }
+        },
+        "fresh": {
+          "shared_four": {
+            "groups": {
+              "combined": {
+                "rectangles": 38,
+                "known": 116,
+                "unjudged": 36,
+                "retained_known": 64,
+                "issued_unjudged": 5,
+                "all_known_retained": 12,
+                "exact_label_pattern": 8,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              },
+              "disjoint": {
+                "rectangles": 9,
+                "known": 18,
+                "unjudged": 18,
+                "retained_known": 7,
+                "issued_unjudged": 0,
+                "all_known_retained": 1,
+                "exact_label_pattern": 1,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              },
+              "shared": {
+                "rectangles": 29,
+                "known": 98,
+                "unjudged": 18,
+                "retained_known": 57,
+                "issued_unjudged": 5,
+                "all_known_retained": 11,
+                "exact_label_pattern": 7,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              }
+            },
+            "mean_words_per_batch": 462.63157894736844,
+            "p95_ms": 68.68339572101831,
+            "model_pairs": 152,
+            "paired_known_delta": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 38,
+              "clusters": 34,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "lexical_two": {
+            "groups": {
+              "combined": {
+                "rectangles": 38,
+                "known": 116,
+                "unjudged": 36,
+                "retained_known": 83,
+                "issued_unjudged": 6,
+                "all_known_retained": 18,
+                "exact_label_pattern": 15,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              },
+              "disjoint": {
+                "rectangles": 9,
+                "known": 18,
+                "unjudged": 18,
+                "retained_known": 13,
+                "issued_unjudged": 0,
+                "all_known_retained": 5,
+                "exact_label_pattern": 5,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              },
+              "shared": {
+                "rectangles": 29,
+                "known": 98,
+                "unjudged": 18,
+                "retained_known": 70,
+                "issued_unjudged": 6,
+                "all_known_retained": 13,
+                "exact_label_pattern": 10,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              }
+            },
+            "mean_words_per_batch": 238.89473684210526,
+            "p95_ms": 53.90076097100973,
+            "model_pairs": 152,
+            "paired_known_delta": {
+              "mean": 0.125,
+              "percentile_95": [
+                0.05921052631578947,
+                0.19594594594594594
+              ],
+              "queries": 38,
+              "clusters": 34,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "bound_two": {
+            "groups": {
+              "combined": {
+                "rectangles": 38,
+                "known": 116,
+                "unjudged": 36,
+                "retained_known": 76,
+                "issued_unjudged": 6,
+                "all_known_retained": 13,
+                "exact_label_pattern": 11,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              },
+              "disjoint": {
+                "rectangles": 9,
+                "known": 18,
+                "unjudged": 18,
+                "retained_known": 12,
+                "issued_unjudged": 0,
+                "all_known_retained": 4,
+                "exact_label_pattern": 4,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              },
+              "shared": {
+                "rectangles": 29,
+                "known": 98,
+                "unjudged": 18,
+                "retained_known": 64,
+                "issued_unjudged": 6,
+                "all_known_retained": 9,
+                "exact_label_pattern": 7,
+                "newly_annotated": 0,
+                "newly_annotated_retained": 0
+              }
+            },
+            "mean_words_per_batch": 234.57894736842104,
+            "p95_ms": 52.15890668332577,
+            "model_pairs": 152,
+            "paired_known_delta": {
+              "mean": 0.07894736842105263,
+              "percentile_95": [
+                -0.006578947368421052,
+                0.15625
+              ],
+              "queries": 38,
+              "clusters": 34,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          }
+        }
+      }
+    }
+  }
+}
