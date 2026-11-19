@@ -1,0 +1,121 @@
+{
+  "dataset": "KDD",
+  "queries": 122,
+  "job": "42090",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "code_sha256": "91c50d53e8f264d453111925a5fc438b86ac2d87c128a663c1b388e097313668",
+  "cohort_sha256": "e090a584e0a4f57fb0a405299386431bbff839ffacbccdbb9a11ea8d6a3229ac",
+  "vector_protocol_sha256": "85e4010895e8717c57d19113bdfaf3fb0c68afbb49f74635baac036eb06445a0",
+  "hard_label_sha256": "4bc5ec19077f96d700e6da0c09139c34a000b800c0536b64eb166874a381a2d6",
+  "upper_margin": 3.0,
+  "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "reranker_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+  "typed_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+  "arms": {
+    "generic": {
+      "p5": 0.03770491803278689,
+      "positive_cited": 15,
+      "negative_cited": 44,
+      "cited_experts": 315,
+      "generic_forwards": 5.89344262295082,
+      "typed_forwards": 0,
+      "typed_documents": 0,
+      "typed_rejections": 0,
+      "latency_p50_p95_ms": [
+        165.32655619084835,
+        262.53695990890265
+      ],
+      "exact_order": 122,
+      "paired_positive_cited_delta": {
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "paired_p5_delta": {
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      }
+    },
+    "selective": {
+      "p5": 0.03934426229508197,
+      "positive_cited": 8,
+      "negative_cited": 21,
+      "cited_experts": 136,
+      "generic_forwards": 5.852459016393443,
+      "typed_forwards": 2.6639344262295084,
+      "typed_documents": 4.204918032786885,
+      "typed_rejections": 3.5655737704918034,
+      "latency_p50_p95_ms": [
+        307.0793692022562,
+        612.7764008007944
+      ],
+      "exact_order": 47,
+      "paired_positive_cited_delta": {
+        "mean": -0.011475409836065575,
+        "percentile_95": [
+          -0.02131147540983607,
+          -0.003278688524590164
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "paired_p5_delta": {
+        "mean": 0.001639344262295082,
+        "percentile_95": [
+          -0.006557377049180328,
+          0.009836065573770493
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      }
+    },
+    "confirm_all": {
+      "p5": 0.03770491803278689,
+      "positive_cited": 2,
+      "negative_cited": 11,
+      "cited_experts": 63,
+      "generic_forwards": 5.721311475409836,
+      "typed_forwards": 3.0901639344262297,
+      "typed_documents": 6.450819672131147,
+      "typed_rejections": 4.909836065573771,
+      "latency_p50_p95_ms": [
+        368.0469896644354,
+        776.303479541093
+      ],
+      "exact_order": 46,
+      "paired_positive_cited_delta": {
+        "mean": -0.021311475409836068,
+        "percentile_95": [
+          -0.03442622950819672,
+          -0.009836065573770493
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "paired_p5_delta": {
+        "mean": 0.0,
+        "percentile_95": [
+          -0.00819672131147541,
+          0.00819672131147541
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      }
+    }
+  }
+}
