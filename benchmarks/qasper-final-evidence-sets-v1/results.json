@@ -1,0 +1,1056 @@
+{
+  "calibrated": {
+    "data_assets": {
+      "qasper-dev-v0.3.json": "2ae7ee62a65b1c4225791c70de80c2aad4e8998cf1fd4f09a53103db4f21af93",
+      "qasper-test-v0.3.json": "6e29ad410e6e39aa1936017fb965b30a20eb2e7751997f55b97c9d281aa884e5"
+    },
+    "embedding": {
+      "files": {
+        "config.json": "b5bf1f51fc45be473a54718cef92448d90a1be001bf9b9a44b8c7f10a19feaa9",
+        "model.safetensors": "0437e45c94563b09e13cb7a64478fc406947a93cb34a7e05870fc8dcd48e23fd",
+        "tokenizer.json": "def76fb086971c7867b829c23a26261e38d9d74e02139253b38aeb9df8b4b50a",
+        "tokenizer_config.json": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0"
+      },
+      "policy": "Official frozen BF16 weights; no own training or quantization.",
+      "repository": "Qwen/Qwen3-Embedding-0.6B",
+      "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3"
+    },
+    "fit_examples": 29477,
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "job": "40737",
+    "model": {
+      "center": [
+        0.2700941201330424,
+        0.1519712125037079,
+        0.1302031339068985,
+        0.16214203134145252,
+        0.6284509255688683,
+        0.38977842298757465,
+        0.25843878277979443,
+        0.05949083913202531,
+        0.1061040777775664,
+        0.6343386369032193
+      ],
+      "coefficients": [
+        0.0027532907639415526,
+        0.0006014807441738555,
+        0.010066173854507558,
+        0.013648722640991337,
+        0.002281123355391686,
+        0.0033944689889705325,
+        0.0008155960473374981,
+        0.008281331515407825,
+        -0.009744779525987908,
+        -0.0017639555625896413
+      ],
+      "intercept": 0.02275276769458674,
+      "scale": [
+        0.23927452889193018,
+        0.2809916285966034,
+        0.19363593038655516,
+        0.2829605028574634,
+        0.12282665775068287,
+        0.1176252009722623,
+        0.4377764022135855,
+        0.13704161350784197,
+        0.18812733192443504,
+        0.15052941501345313
+      ]
+    },
+    "offline": {
+      "additional": {
+        "counting_seconds": 0.25618043541908264,
+        "encoding_seconds": 16.948384501039982,
+        "lexical_index_seconds": 0.06990047171711922,
+        "paragraphs": 5670
+      },
+      "development": {
+        "counting_seconds": 0.7225758899003267,
+        "encoding_seconds": 39.55183218047023,
+        "lexical_index_seconds": 0.16313227452337742,
+        "paragraphs": 13194
+      },
+      "replication": {
+        "counting_seconds": 0.2791029755026102,
+        "encoding_seconds": 18.502892687916756,
+        "lexical_index_seconds": 0.07599020935595036,
+        "paragraphs": 6314
+      }
+    },
+    "post_run_audit": {
+      "additional_papers_disjoint": true,
+      "previous_pointwise_order_matches": {
+        "16": 144,
+        "32": 144
+      }
+    },
+    "raw_file_sha256": "f4ce6b4fedb79ede824bc815a531648a9053eb102a2ca8c86b0d5cd98b7a5dd4",
+    "report": {
+      "additional": {
+        "16": {
+          "arms": {
+            "coverage": {
+              "complete": 0.7523809523809524,
+              "complete_delta": {
+                "bootstrap_repeats": 10000,
+                "clusters": 105,
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 105,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "f1": 0.3244973544973545,
+              "gains": 0,
+              "losses": 0,
+              "selection_p95_us": 0.6454065442085265
+            },
+            "learned": {
+              "complete": 0.7523809523809524,
+              "complete_delta": {
+                "bootstrap_repeats": 10000,
+                "clusters": 105,
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 105,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "f1": 0.3244973544973545,
+              "gains": 0,
+              "losses": 0,
+              "selection_p95_us": 0.5020759999752044
+            },
+            "mmr": {
+              "complete": 0.7523809523809524,
+              "complete_delta": {
+                "bootstrap_repeats": 10000,
+                "clusters": 105,
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 105,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "f1": 0.3244973544973545,
+              "gains": 0,
+              "losses": 0,
+              "selection_p95_us": 0.6824731826782225
+            },
+            "pointwise": {
+              "complete": 0.7523809523809524,
+              "complete_delta": {
+                "bootstrap_repeats": 10000,
+                "clusters": 105,
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 105,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "f1": 0.3244973544973545,
+              "gains": 0,
+              "losses": 0,
+              "selection_p95_us": 0.40419399738311756
+            }
+          },
+          "evaluable": 105,
+          "maximum": 95,
+          "maximum_with_anchors": 94,
+          "shared_p95_ms": 84.40725188702343
+        },
+        "32": {
+          "arms": {
+            "coverage": {
+              "complete": 0.7619047619047619,
+              "complete_delta": {
+                "bootstrap_repeats": 10000,
+                "clusters": 105,
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 105,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "f1": 0.32767195767195767,
+              "gains": 0,
+              "losses": 0,
+              "selection_p95_us": 0.4588626325130462
+            },
+            "learned": {
+              "complete": 0.7619047619047619,
+              "complete_delta": {
+                "bootstrap_repeats": 10000,
+                "clusters": 105,
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 105,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "f1": 0.32767195767195767,
+              "gains": 0,
+              "losses": 0,
+              "selection_p95_us": 0.45131891965866083
+            },
+            "mmr": {
+              "complete": 0.7619047619047619,
+              "complete_delta": {
+                "bootstrap_repeats": 10000,
+                "clusters": 105,
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 105,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "f1": 0.32767195767195767,
+              "gains": 0,
+              "losses": 0,
+              "selection_p95_us": 0.46286731958389277
+            },
+            "pointwise": {
+              "complete": 0.7619047619047619,
+              "complete_delta": {
+                "bootstrap_repeats": 10000,
+                "clusters": 105,
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 105,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "f1": 0.32767195767195767,
+              "gains": 0,
+              "losses": 0,
+              "selection_p95_us": 0.4517845809459686
+            }
+          },
+          "evaluable": 105,
+          "maximum": 101,
+          "maximum_with_anchors": 100,
+          "shared_p95_ms": 143.49763635545963
+        }
+      },
+      "replication": {
+        "16": {
+          "arms": {
+            "coverage": {
+              "complete": 0.7165354330708661,
+              "complete_delta": {
+                "bootstrap_repeats": 10000,
+                "clusters": 127,
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 127,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "f1": 0.3079120791719217,
+              "gains": 0,
+              "losses": 0,
+              "selection_p95_us": 0.4903413355350494
+            },
+            "learned": {
+              "complete": 0.7165354330708661,
+              "complete_delta": {
+                "bootstrap_repeats": 10000,
+                "clusters": 127,
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 127,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "f1": 0.3079120791719217,
+              "gains": 0,
+              "losses": 0,
+              "selection_p95_us": 0.4684552550315856
+            },
+            "mmr": {
+              "complete": 0.7165354330708661,
+              "complete_delta": {
+                "bootstrap_repeats": 10000,
+                "clusters": 127,
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 127,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "f1": 0.3079120791719217,
+              "gains": 0,
+              "losses": 0,
+              "selection_p95_us": 0.4884786903858184
+            },
+            "pointwise": {
+              "complete": 0.7165354330708661,
+              "complete_delta": {
+                "bootstrap_repeats": 10000,
+                "clusters": 127,
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 127,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "f1": 0.3079120791719217,
+              "gains": 0,
+              "losses": 0,
+              "selection_p95_us": 0.49797818064689625
+            }
+          },
+          "evaluable": 127,
+          "maximum": 106,
+          "maximum_with_anchors": 106,
+          "shared_p95_ms": 78.45119750127196
+        },
+        "32": {
+          "arms": {
+            "coverage": {
+              "complete": 0.7086614173228346,
+              "complete_delta": {
+                "bootstrap_repeats": 10000,
+                "clusters": 127,
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 127,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "f1": 0.30753712604106304,
+              "gains": 0,
+              "losses": 0,
+              "selection_p95_us": 0.4616566002368927
+            },
+            "learned": {
+              "complete": 0.7086614173228346,
+              "complete_delta": {
+                "bootstrap_repeats": 10000,
+                "clusters": 127,
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 127,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "f1": 0.30753712604106304,
+              "gains": 0,
+              "losses": 0,
+              "selection_p95_us": 0.509154051542282
+            },
+            "mmr": {
+              "complete": 0.7086614173228346,
+              "complete_delta": {
+                "bootstrap_repeats": 10000,
+                "clusters": 127,
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 127,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "f1": 0.30753712604106304,
+              "gains": 0,
+              "losses": 0,
+              "selection_p95_us": 0.4602596163749694
+            },
+            "pointwise": {
+              "complete": 0.7086614173228346,
+              "complete_delta": {
+                "bootstrap_repeats": 10000,
+                "clusters": 127,
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 127,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "f1": 0.30753712604106304,
+              "gains": 0,
+              "losses": 0,
+              "selection_p95_us": 0.43157488107681274
+            }
+          },
+          "evaluable": 127,
+          "maximum": 118,
+          "maximum_with_anchors": 116,
+          "shared_p95_ms": 131.9622772745788
+        }
+      }
+    },
+    "reranker": {
+      "files": {
+        "config.json": "d479c427a9ca5295218063d4f9aca4f297ab4ac27487cca7af42c84643d51ef0",
+        "expected-large-files.json": "cd9940a651fcf3d97ffc28f0242a9a620c0da5b9acad1861ef14faf5ee784f0e",
+        "generation_config.json": "81051cd3f6e77013827148d0b8a6ead93f8ac390d5ab805f849199f0af6a08db",
+        "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+        "model.safetensors": "27cd75a405b9c1b46b59abfd88aaa209e6fed2a1972cde9b70e7659537c5e65b",
+        "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+        "tokenizer_config.json": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      },
+      "policy": "Official frozen BF16 checkpoint; no own training or quantization. Revision recorded before downloading weights.",
+      "repository": "Qwen/Qwen3-Reranker-0.6B",
+      "revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473"
+    },
+    "script_sha256": "fc469852bfc42ff9d97c1ff8181a90609058085d3caf49b3b7f741ffd614ec85",
+    "settings": {
+      "16": {
+        "coverage": {
+          "chosen": 0.0,
+          "scores": {
+            "0.0": 0.639344262295082,
+            "0.05": 0.639344262295082,
+            "0.15": 0.639344262295082,
+            "0.3": 0.6229508196721312,
+            "0.6": 0.6229508196721312
+          }
+        },
+        "learned": {
+          "chosen": 0.0,
+          "scores": {
+            "0.0": 0.639344262295082,
+            "0.05": 0.639344262295082,
+            "0.15": 0.639344262295082,
+            "0.3": 0.639344262295082,
+            "0.6": 0.639344262295082
+          }
+        },
+        "mmr": {
+          "chosen": 0.0,
+          "scores": {
+            "0.0": 0.639344262295082,
+            "0.05": 0.639344262295082,
+            "0.15": 0.639344262295082,
+            "0.3": 0.639344262295082,
+            "0.6": 0.639344262295082
+          }
+        }
+      },
+      "32": {
+        "coverage": {
+          "chosen": 0.0,
+          "scores": {
+            "0.0": 0.639344262295082,
+            "0.05": 0.639344262295082,
+            "0.15": 0.6229508196721312,
+            "0.3": 0.6229508196721312,
+            "0.6": 0.6229508196721312
+          }
+        },
+        "learned": {
+          "chosen": 0.0,
+          "scores": {
+            "0.0": 0.639344262295082,
+            "0.05": 0.639344262295082,
+            "0.15": 0.639344262295082,
+            "0.3": 0.639344262295082,
+            "0.6": 0.639344262295082
+          }
+        },
+        "mmr": {
+          "chosen": 0.0,
+          "scores": {
+            "0.0": 0.639344262295082,
+            "0.05": 0.639344262295082,
+            "0.15": 0.639344262295082,
+            "0.3": 0.639344262295082,
+            "0.6": 0.639344262295082
+          }
+        }
+      }
+    },
+    "shortlist_sha256": "f4da48f00e99040ce3af9e1b4b8105a418ab563072f5d7d81b7a13839e55af97"
+  },
+  "forced_positive": {
+    "data_assets": {
+      "qasper-dev-v0.3.json": "2ae7ee62a65b1c4225791c70de80c2aad4e8998cf1fd4f09a53103db4f21af93",
+      "qasper-test-v0.3.json": "6e29ad410e6e39aa1936017fb965b30a20eb2e7751997f55b97c9d281aa884e5"
+    },
+    "embedding": {
+      "files": {
+        "config.json": "b5bf1f51fc45be473a54718cef92448d90a1be001bf9b9a44b8c7f10a19feaa9",
+        "model.safetensors": "0437e45c94563b09e13cb7a64478fc406947a93cb34a7e05870fc8dcd48e23fd",
+        "tokenizer.json": "def76fb086971c7867b829c23a26261e38d9d74e02139253b38aeb9df8b4b50a",
+        "tokenizer_config.json": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0"
+      },
+      "policy": "Official frozen BF16 weights; no own training or quantization.",
+      "repository": "Qwen/Qwen3-Embedding-0.6B",
+      "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3"
+    },
+    "fit_examples": 29477,
+    "forced_positive": true,
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "job": "40743",
+    "model": {
+      "center": [
+        0.2700941201330424,
+        0.1519712125037079,
+        0.1302031339068985,
+        0.16214203134145252,
+        0.6284509255688683,
+        0.38977842298757465,
+        0.25843878277979443,
+        0.05949083913202531,
+        0.1061040777775664,
+        0.6343386369032193
+      ],
+      "coefficients": [
+        0.0027532907639415526,
+        0.0006014807441738555,
+        0.010066173854507558,
+        0.013648722640991337,
+        0.002281123355391686,
+        0.0033944689889705325,
+        0.0008155960473374981,
+        0.008281331515407825,
+        -0.009744779525987908,
+        -0.0017639555625896413
+      ],
+      "intercept": 0.02275276769458674,
+      "scale": [
+        0.23927452889193018,
+        0.2809916285966034,
+        0.19363593038655516,
+        0.2829605028574634,
+        0.12282665775068287,
+        0.1176252009722623,
+        0.4377764022135855,
+        0.13704161350784197,
+        0.18812733192443504,
+        0.15052941501345313
+      ]
+    },
+    "offline": {
+      "additional": {
+        "counting_seconds": 0.255516717210412,
+        "encoding_seconds": 16.966314371675253,
+        "lexical_index_seconds": 0.06929458305239677,
+        "paragraphs": 5670
+      },
+      "development": {
+        "counting_seconds": 0.7226135358214378,
+        "encoding_seconds": 39.5861840993166,
+        "lexical_index_seconds": 0.16512377560138702,
+        "paragraphs": 13194
+      },
+      "replication": {
+        "counting_seconds": 0.28125075437128544,
+        "encoding_seconds": 18.53952053375542,
+        "lexical_index_seconds": 0.07518374174833298,
+        "paragraphs": 6314
+      }
+    },
+    "post_run_audit": {
+      "fit_and_calibration_reproduced": true,
+      "pointwise_output_matches_calibrated_run": true
+    },
+    "raw_file_sha256": "9495d223218c4fe0e33cb19f4afb11b846b8c91ac17bc63f53aa23a8d7d47eb5",
+    "report": {
+      "additional": {
+        "16": {
+          "arms": {
+            "coverage": {
+              "complete": 0.7142857142857143,
+              "complete_delta": {
+                "bootstrap_repeats": 10000,
+                "clusters": 105,
+                "mean": -0.0380952380952381,
+                "percentile_95": [
+                  -0.09523809523809523,
+                  0.009523809523809525
+                ],
+                "queries": 105,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "f1": 0.3163114134542706,
+              "gains": 2,
+              "losses": 6,
+              "selection_p95_us": 51.845330744981766,
+              "sets_changed": 45,
+              "weight": 0.15
+            },
+            "learned": {
+              "complete": 0.7428571428571429,
+              "complete_delta": {
+                "bootstrap_repeats": 10000,
+                "clusters": 105,
+                "mean": -0.009523809523809525,
+                "percentile_95": [
+                  -0.02857142857142857,
+                  0.0
+                ],
+                "queries": 105,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "f1": 0.32404383975812545,
+              "gains": 0,
+              "losses": 1,
+              "selection_p95_us": 57.978276163339615,
+              "sets_changed": 4,
+              "weight": 0.6
+            },
+            "mmr": {
+              "complete": 0.7142857142857143,
+              "complete_delta": {
+                "bootstrap_repeats": 10000,
+                "clusters": 105,
+                "mean": -0.0380952380952381,
+                "percentile_95": [
+                  -0.08571428571428572,
+                  0.0
+                ],
+                "queries": 105,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "f1": 0.3105064247921391,
+              "gains": 1,
+              "losses": 5,
+              "selection_p95_us": 51.2879341840744,
+              "sets_changed": 50,
+              "weight": 0.6
+            },
+            "pointwise": {
+              "complete": 0.7523809523809524,
+              "complete_delta": {
+                "bootstrap_repeats": 10000,
+                "clusters": 105,
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 105,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "f1": 0.3244973544973545,
+              "gains": 0,
+              "losses": 0,
+              "selection_p95_us": 0.4104338586330413,
+              "sets_changed": 0,
+              "weight": 0
+            }
+          },
+          "evaluable": 105,
+          "maximum": 95,
+          "maximum_with_anchors": 94,
+          "shared_p95_ms": 84.42603033035992
+        },
+        "32": {
+          "arms": {
+            "coverage": {
+              "complete": 0.7428571428571429,
+              "complete_delta": {
+                "bootstrap_repeats": 10000,
+                "clusters": 105,
+                "mean": -0.01904761904761905,
+                "percentile_95": [
+                  -0.047619047619047616,
+                  0.0
+                ],
+                "queries": 105,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "f1": 0.3234089191232048,
+              "gains": 0,
+              "losses": 2,
+              "selection_p95_us": 52.496884018182755,
+              "sets_changed": 14,
+              "weight": 0.05
+            },
+            "learned": {
+              "complete": 0.7333333333333333,
+              "complete_delta": {
+                "bootstrap_repeats": 10000,
+                "clusters": 105,
+                "mean": -0.02857142857142857,
+                "percentile_95": [
+                  -0.06666666666666667,
+                  0.0
+                ],
+                "queries": 105,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "f1": 0.32213907785336354,
+              "gains": 0,
+              "losses": 3,
+              "selection_p95_us": 59.64422598481178,
+              "sets_changed": 8,
+              "weight": 0.6
+            },
+            "mmr": {
+              "complete": 0.6952380952380952,
+              "complete_delta": {
+                "bootstrap_repeats": 10000,
+                "clusters": 105,
+                "mean": -0.06666666666666667,
+                "percentile_95": [
+                  -0.12380952380952381,
+                  -0.01904761904761905
+                ],
+                "queries": 105,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "f1": 0.3041572184429327,
+              "gains": 1,
+              "losses": 8,
+              "selection_p95_us": 52.8569333255291,
+              "sets_changed": 61,
+              "weight": 0.6
+            },
+            "pointwise": {
+              "complete": 0.7619047619047619,
+              "complete_delta": {
+                "bootstrap_repeats": 10000,
+                "clusters": 105,
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 105,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "f1": 0.32767195767195767,
+              "gains": 0,
+              "losses": 0,
+              "selection_p95_us": 0.4027038812637329,
+              "sets_changed": 0,
+              "weight": 0
+            }
+          },
+          "evaluable": 105,
+          "maximum": 101,
+          "maximum_with_anchors": 100,
+          "shared_p95_ms": 143.32079309970135
+        }
+      },
+      "replication": {
+        "16": {
+          "arms": {
+            "coverage": {
+              "complete": 0.7165354330708661,
+              "complete_delta": {
+                "bootstrap_repeats": 10000,
+                "clusters": 127,
+                "mean": 0.0,
+                "percentile_95": [
+                  -0.031496062992125984,
+                  0.031496062992125984
+                ],
+                "queries": 127,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "f1": 0.3098805831089296,
+              "gains": 2,
+              "losses": 2,
+              "selection_p95_us": 52.17548459768295,
+              "sets_changed": 41,
+              "weight": 0.15
+            },
+            "learned": {
+              "complete": 0.7086614173228346,
+              "complete_delta": {
+                "bootstrap_repeats": 10000,
+                "clusters": 127,
+                "mean": -0.007874015748031496,
+                "percentile_95": [
+                  -0.023622047244094488,
+                  0.0
+                ],
+                "queries": 127,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "f1": 0.30928690731840336,
+              "gains": 0,
+              "losses": 1,
+              "selection_p95_us": 58.93399938941002,
+              "sets_changed": 8,
+              "weight": 0.6
+            },
+            "mmr": {
+              "complete": 0.7007874015748031,
+              "complete_delta": {
+                "bootstrap_repeats": 10000,
+                "clusters": 127,
+                "mean": -0.015748031496062992,
+                "percentile_95": [
+                  -0.03937007874015748,
+                  0.0
+                ],
+                "queries": 127,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "f1": 0.30508743225278656,
+              "gains": 0,
+              "losses": 2,
+              "selection_p95_us": 52.55378782749176,
+              "sets_changed": 60,
+              "weight": 0.6
+            },
+            "pointwise": {
+              "complete": 0.7165354330708661,
+              "complete_delta": {
+                "bootstrap_repeats": 10000,
+                "clusters": 127,
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 127,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "f1": 0.3079120791719217,
+              "gains": 0,
+              "losses": 0,
+              "selection_p95_us": 0.4665926098823546,
+              "sets_changed": 0,
+              "weight": 0
+            }
+          },
+          "evaluable": 127,
+          "maximum": 106,
+          "maximum_with_anchors": 106,
+          "shared_p95_ms": 78.251151740551
+        },
+        "32": {
+          "arms": {
+            "coverage": {
+              "complete": 0.7007874015748031,
+              "complete_delta": {
+                "bootstrap_repeats": 10000,
+                "clusters": 127,
+                "mean": -0.007874015748031496,
+                "percentile_95": [
+                  -0.023622047244094488,
+                  0.0
+                ],
+                "queries": 127,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "f1": 0.3049124541250525,
+              "gains": 0,
+              "losses": 1,
+              "selection_p95_us": 52.4924136698246,
+              "sets_changed": 12,
+              "weight": 0.05
+            },
+            "learned": {
+              "complete": 0.7086614173228346,
+              "complete_delta": {
+                "bootstrap_repeats": 10000,
+                "clusters": 127,
+                "mean": 0.0,
+                "percentile_95": [
+                  -0.023622047244094488,
+                  0.023622047244094488
+                ],
+                "queries": 127,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "f1": 0.3108804581245526,
+              "gains": 1,
+              "losses": 1,
+              "selection_p95_us": 59.61274728178978,
+              "sets_changed": 11,
+              "weight": 0.6
+            },
+            "mmr": {
+              "complete": 0.6850393700787402,
+              "complete_delta": {
+                "bootstrap_repeats": 10000,
+                "clusters": 127,
+                "mean": -0.023622047244094488,
+                "percentile_95": [
+                  -0.06299212598425197,
+                  0.007874015748031496
+                ],
+                "queries": 127,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "f1": 0.3043375259910693,
+              "gains": 1,
+              "losses": 4,
+              "selection_p95_us": 53.158774971961975,
+              "sets_changed": 73,
+              "weight": 0.6
+            },
+            "pointwise": {
+              "complete": 0.7086614173228346,
+              "complete_delta": {
+                "bootstrap_repeats": 10000,
+                "clusters": 127,
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 127,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "f1": 0.30753712604106304,
+              "gains": 0,
+              "losses": 0,
+              "selection_p95_us": 0.45094639062881464,
+              "sets_changed": 0,
+              "weight": 0
+            }
+          },
+          "evaluable": 127,
+          "maximum": 118,
+          "maximum_with_anchors": 116,
+          "shared_p95_ms": 132.0028856396675
+        }
+      }
+    },
+    "reranker": {
+      "files": {
+        "config.json": "d479c427a9ca5295218063d4f9aca4f297ab4ac27487cca7af42c84643d51ef0",
+        "expected-large-files.json": "cd9940a651fcf3d97ffc28f0242a9a620c0da5b9acad1861ef14faf5ee784f0e",
+        "generation_config.json": "81051cd3f6e77013827148d0b8a6ead93f8ac390d5ab805f849199f0af6a08db",
+        "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+        "model.safetensors": "27cd75a405b9c1b46b59abfd88aaa209e6fed2a1972cde9b70e7659537c5e65b",
+        "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+        "tokenizer_config.json": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      },
+      "policy": "Official frozen BF16 checkpoint; no own training or quantization. Revision recorded before downloading weights.",
+      "repository": "Qwen/Qwen3-Reranker-0.6B",
+      "revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473"
+    },
+    "script_sha256": "7d80c114cc8ca8ab66e28e145ceca1ac5b4cb7068f91def71f4805fe73b91214",
+    "settings": {
+      "16": {
+        "coverage": {
+          "chosen": 0.0,
+          "scores": {
+            "0.0": 0.639344262295082,
+            "0.05": 0.639344262295082,
+            "0.15": 0.639344262295082,
+            "0.3": 0.6229508196721312,
+            "0.6": 0.6229508196721312
+          }
+        },
+        "learned": {
+          "chosen": 0.0,
+          "scores": {
+            "0.0": 0.639344262295082,
+            "0.05": 0.639344262295082,
+            "0.15": 0.639344262295082,
+            "0.3": 0.639344262295082,
+            "0.6": 0.639344262295082
+          }
+        },
+        "mmr": {
+          "chosen": 0.0,
+          "scores": {
+            "0.0": 0.639344262295082,
+            "0.05": 0.639344262295082,
+            "0.15": 0.639344262295082,
+            "0.3": 0.639344262295082,
+            "0.6": 0.639344262295082
+          }
+        }
+      },
+      "32": {
+        "coverage": {
+          "chosen": 0.0,
+          "scores": {
+            "0.0": 0.639344262295082,
+            "0.05": 0.639344262295082,
+            "0.15": 0.6229508196721312,
+            "0.3": 0.6229508196721312,
+            "0.6": 0.6229508196721312
+          }
+        },
+        "learned": {
+          "chosen": 0.0,
+          "scores": {
+            "0.0": 0.639344262295082,
+            "0.05": 0.639344262295082,
+            "0.15": 0.639344262295082,
+            "0.3": 0.639344262295082,
+            "0.6": 0.639344262295082
+          }
+        },
+        "mmr": {
+          "chosen": 0.0,
+          "scores": {
+            "0.0": 0.639344262295082,
+            "0.05": 0.639344262295082,
+            "0.15": 0.639344262295082,
+            "0.3": 0.639344262295082,
+            "0.6": 0.639344262295082
+          }
+        }
+      }
+    },
+    "shortlist_sha256": "f4da48f00e99040ce3af9e1b4b8105a418ab563072f5d7d81b7a13839e55af97"
+  }
+}
