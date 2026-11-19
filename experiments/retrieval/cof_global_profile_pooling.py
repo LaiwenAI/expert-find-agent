@@ -103,10 +103,10 @@ class ProfileIndex:
         return self.centroids @ vector
 
 
-def summarize(rows, truths):
+def summarize(rows, truths, arms=ARMS):
     report = {}
     reference = [row["dense"] for row in rows]
-    for arm in ARMS:
+    for arm in arms:
         result = [row[arm] for row in rows]
         gains, losses, lower, upper = [], [], [], []
         for current, base, truth in zip(result, reference, truths, strict=True):

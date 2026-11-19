@@ -1,0 +1,185 @@
+{
+  "dataset": "KDD",
+  "job": "41853",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "experts": 737,
+  "sources": 99594,
+  "queries": 122,
+  "cohort_sha256": "e090a584e0a4f57fb0a405299386431bbff839ffacbccdbb9a11ea8d6a3229ac",
+  "index_seconds": 0.1845145169645548,
+  "known_positives": 242,
+  "script_sha256": "6fc532c9d43725303dc2b4d26b6f3b8a4fd5e93994b64ddbdd97abee750a6c9f",
+  "reference_request_sha256": "5dcdc24bd4b31cfaf5de0103662807edf47a384ff65630d79f8d74de16eac725",
+  "profile_runner_sha256": "517a141db255f691c0fd63c85aae40430814f9a49aaee9f8c08b3bd3bfab3f72",
+  "hard_label_sha256": "4bc5ec19077f96d700e6da0c09139c34a000b800c0536b64eb166874a381a2d6",
+  "vector_protocol_sha256": "85e4010895e8717c57d19113bdfaf3fb0c68afbb49f74635baac036eb06445a0",
+  "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "reranker_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+  "arms": {
+    "dense": {
+      "known_positive_recall_at_10": 0.13636363636363635,
+      "known_positive_p5_delta": {
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "partial_label_p5_delta_bounds": [
+        0.0,
+        0.0
+      ],
+      "known_positives_added_at_10": 0,
+      "known_positives_lost_at_10": 0,
+      "p5": 0.03770491803278689,
+      "judged": 0.14754098360655737,
+      "cited_p5": 0.021311475409836068,
+      "citation_coverage": 0.43278688524590164,
+      "calls": 3.1557377049180326,
+      "retrieval_ms": [
+        8.611297234892845,
+        9.493175521492958
+      ],
+      "complete_ms": [
+        81.36154059320688,
+        126.23864607885479
+      ],
+      "expanded_fraction": 0
+    },
+    "mean_max": {
+      "known_positive_recall_at_10": 0.1859504132231405,
+      "known_positive_p5_delta": {
+        "mean": 0.0016393442622950826,
+        "percentile_95": [
+          -0.011475409836065575,
+          0.013114754098360657
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "partial_label_p5_delta_bounds": [
+        -0.4,
+        0.3836065573770492
+      ],
+      "known_positives_added_at_10": 17,
+      "known_positives_lost_at_10": 5,
+      "p5": 0.03934426229508197,
+      "judged": 0.16721311475409836,
+      "cited_p5": 0.019672131147540985,
+      "citation_coverage": 0.42622950819672134,
+      "calls": 3.262295081967213,
+      "retrieval_ms": [
+        8.468381129205227,
+        8.994303736835718
+      ],
+      "complete_ms": [
+        86.31640672683716,
+        134.7516973502934
+      ],
+      "expanded_fraction": 0
+    },
+    "centered": {
+      "known_positive_recall_at_10": 0.1859504132231405,
+      "known_positive_p5_delta": {
+        "mean": 0.001639344262295083,
+        "percentile_95": [
+          -0.013114754098360656,
+          0.01639344262295082
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "partial_label_p5_delta_bounds": [
+        -0.5016393442622951,
+        0.4901639344262295
+      ],
+      "known_positives_added_at_10": 21,
+      "known_positives_lost_at_10": 9,
+      "p5": 0.03934426229508197,
+      "judged": 0.16229508196721312,
+      "cited_p5": 0.013114754098360656,
+      "citation_coverage": 0.3557377049180328,
+      "calls": 3.1885245901639343,
+      "retrieval_ms": [
+        8.943264372646809,
+        9.435848891735077
+      ],
+      "complete_ms": [
+        90.26650432497263,
+        132.54797188565135
+      ],
+      "expanded_fraction": 1
+    },
+    "fixed_fusion": {
+      "known_positive_recall_at_10": 0.19834710743801653,
+      "known_positive_p5_delta": {
+        "mean": -0.003278688524590163,
+        "percentile_95": [
+          -0.01639344262295082,
+          0.009836065573770491
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "partial_label_p5_delta_bounds": [
+        -0.4573770491803279,
+        0.439344262295082
+      ],
+      "known_positives_added_at_10": 20,
+      "known_positives_lost_at_10": 5,
+      "p5": 0.03442622950819672,
+      "judged": 0.15901639344262294,
+      "cited_p5": 0.014754098360655738,
+      "citation_coverage": 0.3885245901639344,
+      "calls": 3.278688524590164,
+      "retrieval_ms": [
+        9.067639708518982,
+        9.649030584841967
+      ],
+      "complete_ms": [
+        90.99290892481804,
+        134.831197373569
+      ],
+      "expanded_fraction": 1
+    },
+    "selective_fusion": {
+      "known_positive_recall_at_10": 0.19008264462809918,
+      "known_positive_p5_delta": {
+        "mean": -0.001639344262295081,
+        "percentile_95": [
+          -0.014754098360655736,
+          0.009836065573770494
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "partial_label_p5_delta_bounds": [
+        -0.4278688524590164,
+        0.40819672131147544
+      ],
+      "known_positives_added_at_10": 19,
+      "known_positives_lost_at_10": 6,
+      "p5": 0.036065573770491806,
+      "judged": 0.1639344262295082,
+      "cited_p5": 0.018032786885245903,
+      "citation_coverage": 0.4098360655737705,
+      "calls": 3.278688524590164,
+      "retrieval_ms": [
+        8.848881348967552,
+        9.308104496449232
+      ],
+      "complete_ms": [
+        89.67965096235275,
+        134.39104901626703
+      ],
+      "expanded_fraction": 0.5081967213114754
+    }
+  }
+}
