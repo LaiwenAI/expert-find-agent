@@ -71,7 +71,21 @@ def upper_tail_loss(logits, labels):
     return sum(comparisons) / len(comparisons)
 
 
-def fit(tokenizer, model, positions, pairs, arm, weights, *, seed=SEED, artifact_name=None):
+def rationale_loss(logits, labels):
+    import torch
+    from torch.nn import functional as F
+
+    groups = logits.reshape(-1, 2, 3)
+    targets = labels[::2]
+    indices = targets[:, None, None].expand(-1, 2, 1)
+    direction = groups.gather(2, indices).squeeze(2)
+    others = groups.masked_fill(
+        F.one_hot(targets, num_classes=3).bool().unsqueeze(1), -torch.inf)
+    margins = direction - others.max(dim=2).values
+    return F.softplus(1. + margins[:, 1] - margins[:, 0]).mean()
+
+
+def fit(tokenizer, model, positions, pairs, arm, weights, *, seed=SEED, artifact_name=None, epochs=EPOCHS):
     import torch
     from safetensors.torch import save_file
     from torch.nn import functional as F
@@ -94,7 +108,7 @@ def fit(tokenizer, model, positions, pairs, arm, weights, *, seed=SEED, artifact
     random = np.random.default_rng(seed)
     loss_by_epoch = []
     updates = 0
-    for epoch in range(EPOCHS):
+    for epoch in range(epochs):
         order = random.permutation(len(pairs))
         losses = []
         for i in range(0, len(order), TRAIN_BATCH//2):
@@ -111,6 +125,8 @@ def fit(tokenizer, model, positions, pairs, arm, weights, *, seed=SEED, artifact
                     loss = loss + .4*F.softplus(margin[:, 1] - margin[:, 0]).mean()
                 elif arm == "risk_tail":
                     loss = loss + .4*upper_tail_loss(logits, target)
+                elif arm == "rationale_pair":
+                    loss = loss + .4*rationale_loss(logits, target)
             if not torch.isfinite(loss).item():
                 raise ValueError("Nonfinite training loss")
             loss.backward()
