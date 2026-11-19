@@ -1,0 +1,195 @@
+{
+  "config": {
+    "block": 8,
+    "reranker_weight": 0.25,
+    "sample_salt": "qasper-certified-reranking-v1",
+    "top": 5
+  },
+  "data_sha256": "6e29ad410e6e39aa1936017fb965b30a20eb2e7751997f55b97c9d281aa884e5",
+  "embedding": {
+    "files": {
+      "config.json": "b5bf1f51fc45be473a54718cef92448d90a1be001bf9b9a44b8c7f10a19feaa9",
+      "model.safetensors": "0437e45c94563b09e13cb7a64478fc406947a93cb34a7e05870fc8dcd48e23fd",
+      "tokenizer.json": "def76fb086971c7867b829c23a26261e38d9d74e02139253b38aeb9df8b4b50a",
+      "tokenizer_config.json": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0"
+    },
+    "policy": "Official frozen BF16 weights; no own training or quantization.",
+    "repository": "Qwen/Qwen3-Embedding-0.6B",
+    "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3"
+  },
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "job": "40711",
+  "offline": {
+    "counting_seconds": 0.2078131027519703,
+    "encoding_seconds": 14.290445866063237,
+    "paragraphs": 5054
+  },
+  "raw_file_sha256": "064d823caacd8a2fe651ba951d156d55e6e5d233aaafea9441cae5ae53ea4487",
+  "report": {
+    "arms": {
+      "certified": {
+        "checked": 3696,
+        "complete_delta_vs_dense": {
+          "bootstrap_repeats": 10000,
+          "clusters": 83,
+          "mean": 0.14457831325301204,
+          "percentile_95": [
+            0.060240963855421686,
+            0.2289156626506024
+          ],
+          "queries": 83,
+          "sampling_unit": "whole source paper; query-weighted mean",
+          "seed": 20261116
+        },
+        "complete_evidence": 0.6987951807228916,
+        "evidence_f1": 0.3206852930061554,
+        "exact_exhaustive": 96,
+        "latency_ms": [
+          104.98870443552732,
+          234.0513695962727
+        ],
+        "mean_checks": 38.5,
+        "truncated": 0
+      },
+      "dense": {
+        "checked": 0,
+        "complete_delta_vs_dense": {
+          "bootstrap_repeats": 10000,
+          "clusters": 83,
+          "mean": 0.0,
+          "percentile_95": [
+            0.0,
+            0.0
+          ],
+          "queries": 83,
+          "sampling_unit": "whole source paper; query-weighted mean",
+          "seed": 20261116
+        },
+        "complete_evidence": 0.5542168674698795,
+        "evidence_f1": 0.264865522696848,
+        "exact_exhaustive": 10,
+        "latency_ms": [
+          6.883558817207813,
+          6.977371405810118
+        ],
+        "mean_checks": 0,
+        "truncated": 0
+      },
+      "exhaustive": {
+        "checked": 5054,
+        "complete_delta_vs_dense": {
+          "bootstrap_repeats": 10000,
+          "clusters": 83,
+          "mean": 0.14457831325301204,
+          "percentile_95": [
+            0.060240963855421686,
+            0.2289156626506024
+          ],
+          "queries": 83,
+          "sampling_unit": "whole source paper; query-weighted mean",
+          "seed": 20261116
+        },
+        "complete_evidence": 0.6987951807228916,
+        "evidence_f1": 0.3206852930061554,
+        "exact_exhaustive": 96,
+        "latency_ms": [
+          150.32655373215675,
+          292.3930576071143
+        ],
+        "mean_checks": 52.645833333333336,
+        "truncated": 0
+      },
+      "fixed16": {
+        "checked": 1529,
+        "complete_delta_vs_dense": {
+          "bootstrap_repeats": 10000,
+          "clusters": 83,
+          "mean": 0.13253012048192772,
+          "percentile_95": [
+            0.060240963855421686,
+            0.21686746987951808
+          ],
+          "queries": 83,
+          "sampling_unit": "whole source paper; query-weighted mean",
+          "seed": 20261116
+        },
+        "complete_evidence": 0.6867469879518072,
+        "evidence_f1": 0.317242952214417,
+        "exact_exhaustive": 87,
+        "latency_ms": [
+          53.62476222217083,
+          74.71267832443118
+        ],
+        "mean_checks": 15.927083333333334,
+        "truncated": 0
+      },
+      "fixed32": {
+        "checked": 2881,
+        "complete_delta_vs_dense": {
+          "bootstrap_repeats": 10000,
+          "clusters": 83,
+          "mean": 0.14457831325301204,
+          "percentile_95": [
+            0.060240963855421686,
+            0.2289156626506024
+          ],
+          "queries": 83,
+          "sampling_unit": "whole source paper; query-weighted mean",
+          "seed": 20261116
+        },
+        "complete_evidence": 0.6987951807228916,
+        "evidence_f1": 0.3206852930061554,
+        "exact_exhaustive": 94,
+        "latency_ms": [
+          94.0761798992753,
+          132.09100672975183
+        ],
+        "mean_checks": 30.010416666666668,
+        "truncated": 0
+      },
+      "fixed8": {
+        "checked": 768,
+        "complete_delta_vs_dense": {
+          "bootstrap_repeats": 10000,
+          "clusters": 83,
+          "mean": 0.060240963855421686,
+          "percentile_95": [
+            0.0,
+            0.12048192771084337
+          ],
+          "queries": 83,
+          "sampling_unit": "whole source paper; query-weighted mean",
+          "seed": 20261116
+        },
+        "complete_evidence": 0.6144578313253012,
+        "evidence_f1": 0.29142539627637915,
+        "exact_exhaustive": 59,
+        "latency_ms": [
+          30.61673603951931,
+          42.96541213989258
+        ],
+        "mean_checks": 8,
+        "truncated": 0
+      }
+    },
+    "evidence_evaluable": 83,
+    "mean_paragraphs": 52.645833333333336,
+    "questions": 96
+  },
+  "reranker": {
+    "files": {
+      "config.json": "d479c427a9ca5295218063d4f9aca4f297ab4ac27487cca7af42c84643d51ef0",
+      "expected-large-files.json": "cd9940a651fcf3d97ffc28f0242a9a620c0da5b9acad1861ef14faf5ee784f0e",
+      "generation_config.json": "81051cd3f6e77013827148d0b8a6ead93f8ac390d5ab805f849199f0af6a08db",
+      "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+      "model.safetensors": "27cd75a405b9c1b46b59abfd88aaa209e6fed2a1972cde9b70e7659537c5e65b",
+      "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+      "tokenizer_config.json": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0",
+      "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    },
+    "policy": "Official frozen BF16 checkpoint; no own training or quantization. Revision recorded before downloading weights.",
+    "repository": "Qwen/Qwen3-Reranker-0.6B",
+    "revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473"
+  },
+  "script_sha256": "92f43e6a0b950f41f70f4fa94fdd06a29cd22f087fbb4dbcffcbf3f332332b86"
+}
