@@ -1,0 +1,90 @@
+{
+  "dataset": "KDD",
+  "queries": 122,
+  "job": "41973",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "script_sha256": "4374d8ec124396f18f41002bb7b33f94848d94521783c4a027c42421b48588fc",
+  "request_sha256": "5dcdc24bd4b31cfaf5de0103662807edf47a384ff65630d79f8d74de16eac725",
+  "cohort_sha256": "e090a584e0a4f57fb0a405299386431bbff839ffacbccdbb9a11ea8d6a3229ac",
+  "hard_label_sha256": "4bc5ec19077f96d700e6da0c09139c34a000b800c0536b64eb166874a381a2d6",
+  "vector_protocol_sha256": "85e4010895e8717c57d19113bdfaf3fb0c68afbb49f74635baac036eb06445a0",
+  "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "reranker_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+  "report": {
+    "raw_prefix": {
+      "known_positive_p5": 0.03934426229508197,
+      "known_positive_cited_p5": 0.019672131147540985,
+      "cited_delta": {
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "citation_coverage": 0.42622950819672134,
+      "changed_selection": 0,
+      "judged_negative_with_citations": 40,
+      "complete_p50_p95_ms": [
+        85.45141015201807,
+        134.50611885637045
+      ],
+      "retrieval_p50_p95_ms": [
+        8.33906140178442,
+        8.72431742027402
+      ]
+    },
+    "deduplicate": {
+      "known_positive_p5": 0.03934426229508197,
+      "known_positive_cited_p5": 0.01639344262295082,
+      "cited_delta": {
+        "mean": -0.003278688524590164,
+        "percentile_95": [
+          -0.00819672131147541,
+          0.0
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "citation_coverage": 0.31311475409836065,
+      "changed_selection": 324,
+      "judged_negative_with_citations": 30,
+      "complete_p50_p95_ms": [
+        93.78529712557793,
+        137.766530457884
+      ],
+      "retrieval_p50_p95_ms": [
+        8.419827558100224,
+        8.831439726054668
+      ]
+    },
+    "diverse": {
+      "known_positive_p5": 0.03934426229508197,
+      "known_positive_cited_p5": 0.018032786885245903,
+      "cited_delta": {
+        "mean": -0.001639344262295082,
+        "percentile_95": [
+          -0.004918032786885246,
+          0.0
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "citation_coverage": 0.4245901639344262,
+      "changed_selection": 87,
+      "judged_negative_with_citations": 40,
+      "complete_p50_p95_ms": [
+        86.58696990460157,
+        134.15630441159007
+      ],
+      "retrieval_p50_p95_ms": [
+        8.460978977382183,
+        8.83017098531127
+      ]
+    }
+  }
+}
