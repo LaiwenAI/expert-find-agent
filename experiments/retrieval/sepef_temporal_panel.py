@@ -2,6 +2,7 @@
 
 import argparse
 from collections import Counter
+from concurrent.futures import ThreadPoolExecutor
 from hashlib import sha256
 import heapq
 import io
@@ -15,6 +16,7 @@ from zipfile import ZipFile
 URL = "https://zenodo.org/records/8332748/files/SE-PEF.zip?download=1"
 SIZE = 4_336_948_003
 WINDOW = 16 * 1024 * 1024
+CHUNK = 4 * 1024 * 1024
 PREFIX = "SE-PEF/SE-PEF/"
 SNAPSHOT = 1577836799  # 2019-12-31 23:59:59 UTC, upstream training boundary.
 TEST_START = 1609459199  # 2020-12-31 23:59:59 UTC, upstream test boundary.
@@ -24,11 +26,12 @@ SALT = "sepef-public-temporal-v1"
 
 
 class RemoteZip(io.RawIOBase):
-    def __init__(self):
+    def __init__(self, workers=1):
         self.position = 0
         self.start = -1
         self.buffer = b""
         self.bytes_transferred = 0
+        self.workers = workers
 
     def tell(self):
         return self.position
@@ -48,15 +51,14 @@ class RemoteZip(io.RawIOBase):
         while size > 0:
             if not self.start <= self.position < self.start + len(self.buffer):
                 self.start = self.position
-                end = min(SIZE, self.start + WINDOW) - 1
-                request = Request(URL, headers={"Range": f"bytes={self.start}-{end}",
-                                                "Accept-Encoding": "identity"})
-                with urlopen(request, timeout=45) as response:
-                    if response.status != 206 or response.headers.get("Content-Range") != f"bytes {self.start}-{end}/{SIZE}":
-                        raise IOError("Official archive range response differs")
-                    self.buffer = response.read(end - self.start + 2)
-                if len(self.buffer) != end - self.start + 1:
-                    raise IOError("Incomplete official archive range")
+                stop = min(SIZE, self.start + WINDOW)
+                ranges = [(offset, min(stop, offset + CHUNK) - 1)
+                          for offset in range(self.start, stop, CHUNK)]
+                if len(ranges) == 1 or self.workers == 1:
+                    self.buffer = b"".join(map(self.fetch, ranges))
+                else:
+                    with ThreadPoolExecutor(max_workers=self.workers) as pool:
+                        self.buffer = b"".join(pool.map(self.fetch, ranges))
                 self.bytes_transferred += len(self.buffer)
             offset = self.position - self.start
             take = min(len(self.buffer) - offset, size)
@@ -64,6 +66,18 @@ class RemoteZip(io.RawIOBase):
             self.position += take
             size -= take
         return b"".join(parts)
+
+    @staticmethod
+    def fetch(bounds):
+        start, end = bounds
+        request = Request(URL, headers={"Range": f"bytes={start}-{end}", "Accept-Encoding": "identity"})
+        with urlopen(request, timeout=45) as response:
+            if response.status != 206 or response.headers.get("Content-Range") != f"bytes {start}-{end}/{SIZE}":
+                raise IOError("Official archive range response differs")
+            payload = response.read(end - start + 2)
+        if len(payload) != end - start + 1:
+            raise IOError("Incomplete official archive range")
+        return payload
 
 
 def digest(data):
@@ -157,13 +171,13 @@ def read_answers(archive, wanted, output):
     return {name: raw_digest.hexdigest()}
 
 
-def run(output):
+def run(output, workers=1):
     if output.exists():
         raise FileExistsError(output)
-    if not os.environ.get("SLURM_JOB_ID"):
-        raise RuntimeError("Run the stream build on a Slurm compute node")
+    if not 1 <= workers <= 4:
+        raise ValueError("Workers must be between one and four")
     output.mkdir()
-    remote = RemoteZip()
+    remote = RemoteZip(workers)
     with ZipFile(remote) as archive:
         profiles, upstream = load_experts(archive)
         (output / "profiles.json").write_text(json.dumps(profiles, ensure_ascii=True) + "\n")
@@ -181,7 +195,7 @@ def run(output):
         wanted = {answer for history in profiles.values() for _, answer in history}
         upstream.update(read_answers(archive, wanted, output / "answers.jsonl"))
     report = dict(
-        job=os.environ["SLURM_JOB_ID"], archive_url=URL, archive_size=SIZE, bytes_transferred=remote.bytes_transferred,
+        job=os.environ.get("SLURM_JOB_ID"), archive_url=URL, archive_size=SIZE, bytes_transferred=remote.bytes_transferred,
         script_sha256=digest(Path(__file__).read_bytes()), profile_cutoff_utc=SNAPSHOT, test_start_utc=TEST_START,
         expert_profiles=len(profiles), source_answers=len(wanted), answers_per_expert=ANSWERS_PER_EXPERT,
         split=reports, source_sha256=upstream,
@@ -194,4 +208,5 @@ def run(output):
 if __name__ == "__main__":
     cli = argparse.ArgumentParser(description=__doc__)
     cli.add_argument("output", type=Path)
-    run(cli.parse_args().output)
+    cli.add_argument("--workers", type=int, default=1)
+    run(**vars(cli.parse_args()))

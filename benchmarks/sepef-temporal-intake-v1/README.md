@@ -34,7 +34,7 @@ PYTHONPATH=src:. python -m experiments.retrieval.sepef_history_prior METADATA_DI
 For text retrieval on Slurm compute nodes:
 
 ```sh
-PYTHONPATH=src:. python -m experiments.retrieval.sepef_temporal_panel NEW_PANEL_DIR
+PYTHONPATH=src:. python -m experiments.retrieval.sepef_temporal_panel NEW_PANEL_DIR --workers 4
 PYTHONPATH=src:. OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
   python -m experiments.retrieval.sepef_first_query PANEL_DIR QWEN_EMBEDDING_CHECKPOINT \
   SCRATCH_DIR NEW_GPU_RESULT_JSON
