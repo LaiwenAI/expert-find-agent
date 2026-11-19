@@ -61,7 +61,9 @@ class ProfileIndex:
         self.centroids = np.stack([row[0] for row in profiles])
         self.mode_centers = np.stack([row[1] for row in profiles]).reshape(-1, self.centroids.shape[-1])
 
-    def search_query(self, query, encoder, arm):
+    def search_query(self, query, encoder, arm, *, depth=3):
+        if type(depth) is not int or depth < 1 or (depth != 3 and arm not in {"mean_max", "two_centers_max"}):
+            raise ValueError("Custom source depth requires a blended ranker")
         vector = encoder.encode([query], query=True)[0]
         if arm == "dense":
             hits = self.gpu.search_vector(vector, k=POOL)["hits"]
@@ -89,7 +91,7 @@ class ProfileIndex:
         for i in np.argsort(-rank_scores, kind="stable")[:POOL]:
             owner = ref.owner_ids[i]
             if ordered_sources is None:
-                docs = sorted(ref.owners[owner], key=lambda doc: (-float(scores[doc]), ref.source_ids[doc]))[:3]
+                docs = sorted(ref.owners[owner], key=lambda doc: (-float(scores[doc]), ref.source_ids[doc]))[:depth]
             else:
                 docs = ordered_sources[i, self.mask[i]]
             hits.append((owner, [ref.source_ids[doc] for doc in docs]))
