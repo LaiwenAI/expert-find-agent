@@ -12,7 +12,7 @@ import numpy as np
 import torch
 
 from expert_search.cof_benchmark import load
-from expert_search.deferred_verification import _extreme, defer_and_rank
+from expert_search.deferred_verification import _extreme, defer_and_rank, resolve_shared_frontier
 from expert_search.gpu_owned_vector_index import GpuOwnedVectorIndex
 from expert_search.owned_vector_index import ExactOwnedVectorIndex
 from expert_search.qwen_embedding_torch import QwenTorchEmbedding
@@ -306,12 +306,13 @@ def prepare_runner(args):
             raise ValueError("Unexpected source ownership")
         bulk = method in ("guarded_bulk", "deferred_bulk", "guarded_bucketed")
         deferred = method in ("deferred_dynamic", "deferred_cached")
+        shared_frontier = method in ("shared_frontier", "cost_aware_frontier")
         def prepare_prompts():
             return WaveReader(
                 reranker, query, texts, {d for _, docs in ordered for d in docs},
-                dynamic=method in SCHEDULE_FOR or bulk or deferred,
+                dynamic=method in SCHEDULE_FOR or bulk or deferred or shared_frontier,
                 guard=GUARD_MARGIN if method in ("guarded_dynamic", "guarded_cached") else None,
-                cache=method in ("guarded_cached", "deferred_cached"),
+                cache=method in ("guarded_cached", "deferred_cached") or shared_frontier,
                 broker=broker,
             )
 
@@ -319,6 +320,11 @@ def prepare_runner(args):
         if bulk:
             batch_size = BUCKET_BATCH if method == "guarded_bucketed" else None
             result = bulk_verify(ordered, reader, count, method == "deferred_bulk", batch_size)
+        elif shared_frontier:
+            result = resolve_shared_frontier(
+                ordered, reader.score, reader.recheck, reader.length, support=count,
+                top=TOP, width=WIDTH, band=GUARD_MARGIN, cost_aware=method == "cost_aware_frontier",
+            )
         elif deferred:
             result = defer_and_rank(ordered, reader.score, reader.recheck,
                                     support=count, top=TOP, width=WIDTH, band=GUARD_MARGIN)
