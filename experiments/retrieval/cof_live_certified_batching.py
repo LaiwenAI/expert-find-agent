@@ -35,20 +35,27 @@ DYNAMIC_METHODS = (*METHODS, "dynamic_one", "dynamic_fill", "dynamic_length_fit"
 GUARD_METHODS = (*METHODS, "dynamic_one", "guarded_dynamic")
 DEFERRED_METHODS = ("exhaustive", "guarded_dynamic", "deferred_dynamic")
 STRONG_FIXED_METHODS = ("exhaustive", "guarded_bulk", "deferred_dynamic", "deferred_bulk")
+BUCKET_METHODS = ("exhaustive", "guarded_cached", "guarded_bucketed", "deferred_dynamic", "deferred_cached")
+BUCKET_BATCH = 8
 GUARD_MARGIN = .25
 SCHEDULE_FOR = {"dynamic_one": "one_per_expert", "dynamic_fill": "fill_idle_slots",
-                "dynamic_length_fit": "fill_same_length", "guarded_dynamic": "one_per_expert"}
+                "dynamic_length_fit": "fill_same_length", "guarded_dynamic": "one_per_expert",
+                "guarded_cached": "one_per_expert"}
 PER_EXPERT = {"one_per_expert": 1, "prefix_two": 2, "prefix_three": 3}
 
 
 class WaveReader:
-    def __init__(self, reader, query, documents, sources, *, dynamic=False, guard=None):
+    def __init__(self, reader, query, documents, sources, *, dynamic=False, guard=None, cache=False):
         self.reader = reader
         self.dynamic = dynamic
         self.guard = guard
+        self.score_calls = 0
+        self.scored_documents = 0
         self.recheck_calls = 0
         self.rechecked_pairs = 0
         self.padded_tokens = 0
+        self.score_cache = {} if cache else None
+        self.recheck_cache = {} if cache else None
         self.inputs = {}
         self.truncated = 0
         self.maximum = 0
@@ -65,8 +72,12 @@ class WaveReader:
         return len(self.inputs[doc]["input_ids"])
 
     def score(self, jobs):
-        batch = [self.inputs[doc] for _, doc in jobs]
-        values = self._forward(batch, self.dynamic)
+        return self._score_with_cache(jobs, self.score_cache, self._score)
+
+    def _score(self, jobs):
+        self.score_calls += 1
+        self.scored_documents += len(jobs)
+        values = self._forward([self.inputs[doc] for _, doc in jobs], self.dynamic)
         if self.guard is not None:
             indices = [i for i, value in enumerate(values) if abs(value) <= self.guard]
             if indices:
@@ -76,9 +87,25 @@ class WaveReader:
         return values
 
     def recheck(self, jobs):
+        return self._score_with_cache(jobs, self.recheck_cache, self._recheck)
+
+    def _recheck(self, jobs):
         self.recheck_calls += 1
         self.rechecked_pairs += len(jobs)
         return self._forward([self.inputs[doc] for _, doc in jobs], dynamic=False)
+
+    @staticmethod
+    def _score_with_cache(jobs, cache, score):
+        if cache is None:
+            return score(jobs)
+        missing = {}
+        for expert, doc in jobs:
+            if doc not in cache:
+                missing.setdefault(doc, expert)
+        if missing:
+            fresh = [(expert, doc) for doc, expert in missing.items()]
+            cache.update(zip(missing, score(fresh), strict=True))
+        return [cache[doc] for _, doc in jobs]
 
     @torch.inference_mode()
     def _forward(self, batch, dynamic):
@@ -95,12 +122,19 @@ class WaveReader:
         return (values[:, 0] - values[:, 1]).cpu().tolist()
 
 
-def bulk_verify(ordered, reader, support, deferred):
-    """Score each distinct document in one batch and selectively stabilize its verdict."""
+def bulk_verify(ordered, reader, support, deferred, batch_size=None):
+    """Score every distinct document and selectively stabilize tentative verdicts."""
     pairs = [(expert, doc) for expert, docs in ordered for doc in docs]
     unique = {doc: expert for expert, doc in reversed(pairs)}
     jobs = [(unique[doc], doc) for doc in dict.fromkeys(doc for _, doc in pairs)]
-    scores = {doc: value for (_, doc), value in zip(jobs, reader.score(jobs), strict=True)}
+    if batch_size is None:
+        batch_size = len(jobs)
+    else:
+        jobs.sort(key=lambda pair: reader.length(pair[1]))
+    scores = {}
+    for start in range(0, len(jobs), batch_size):
+        batch = jobs[start:start+batch_size]
+        scores.update((doc, value) for (_, doc), value in zip(batch, reader.score(batch), strict=True))
     trusted = {doc: value for doc, value in scores.items() if abs(value) > GUARD_MARGIN}
 
     def mapping(values):
@@ -173,9 +207,8 @@ def schedule(ordered, reader, count, method):
 
 def summarize(rows, methods):
     report = {}
-    baseline = "guarded_bulk" if "guarded_bulk" in methods else (
-        "guarded_dynamic" if "guarded_dynamic" in methods and "one_per_expert" not in methods else "one_per_expert"
-    )
+    baseline = next((name for name in ("one_per_expert", "guarded_cached", "guarded_bulk", "guarded_dynamic")
+                     if name in methods), "exhaustive")
     for count in SUPPORT:
         values = [row["support"][count] for row in rows]
         reference = [row["exhaustive"] for row in values]
@@ -191,7 +224,9 @@ def summarize(rows, methods):
                 p50_ms=float(np.median([a["ms"] for a in arms])),
                 average={key: mean(arm[key] for arm in arms)
                          for key in ("calls", "checks", "unique_reads", "padded_tokens",
-                                     "recheck_calls", "rechecked_pairs", "hard_p5", "confirmed_hard_p5")},
+                                     "recheck_calls", "rechecked_pairs", "hard_p5", "confirmed_hard_p5",
+                                     "score_calls", "scored_documents")
+                         if key in arms[0]},
                 **{f"latency_saved_vs_{baseline}": paired_interval([
                     row[baseline]["ms"] - row[method]["ms"] for row in values
                 ])},
@@ -227,7 +262,7 @@ def run(args):
         hard_labels = labels["hard"]
         inputs = digest(args.manifest)
     else:
-        from experiments.retrieval.cof_compact_profile_shortlist import read_data
+        from experiments.retrieval.cof_compact_profile_shortlist import read_data, title_tokens
 
         root, papers, _, source_index, ids, _, hard_labels = read_data(args.dataset, provenance)
         ownership = {doc: set() for doc in source_index.source_ids}
@@ -239,6 +274,13 @@ def run(args):
             "vectors": digest(root / "qwen-embedding-torch-v1" / "vectors.npy"),
             "hard_labels": digest(root / f"{args.dataset}_queries_test_hard.json"),
         }
+        if args.exclude_nips_titles:
+            if args.dataset != "SciRepEval":
+                raise ValueError("NIPS title exclusion is only defined for the SciRepEval panel")
+            _, nips_papers, _, _, nips_ids, _, _ = read_data("NIPS", provenance)
+            titles = {tuple(title_tokens(nips_papers[qid]["title"])) for qid in nips_ids}
+            ids = [qid for qid in ids if tuple(title_tokens(papers[qid]["title"])) not in titles]
+            inputs["nips_title_panel"] = digest(root.parent / "NIPS" / "qwen-embedding-torch-v1" / "protocol.json")
     index = GpuOwnedVectorIndex(source_index)
     encoder = QwenTorchEmbedding(args.embedding, batch_size=1)
     encoder.model.config.use_cache = False
@@ -253,18 +295,26 @@ def run(args):
         ordered = [(row["id"], [w["id"] for w in row["evidence"]]) for row in hits]
         if len(ordered) != POOL or any(e not in ownership[d] for e, docs in ordered for d in docs):
             raise ValueError("Unexpected source ownership")
-        reader = WaveReader(reranker, query, texts, {d for _, docs in ordered for d in docs},
-                            dynamic=method in SCHEDULE_FOR or method in ("deferred_dynamic", "guarded_bulk", "deferred_bulk"),
-                            guard=GUARD_MARGIN if method == "guarded_dynamic" else None)
-        if method in ("guarded_bulk", "deferred_bulk"):
-            result = bulk_verify(ordered, reader, count, method == "deferred_bulk")
-        elif method == "deferred_dynamic":
+        bulk = method in ("guarded_bulk", "deferred_bulk", "guarded_bucketed")
+        deferred = method in ("deferred_dynamic", "deferred_cached")
+        reader = WaveReader(
+            reranker, query, texts, {d for _, docs in ordered for d in docs},
+            dynamic=method in SCHEDULE_FOR or bulk or deferred,
+            guard=GUARD_MARGIN if method in ("guarded_dynamic", "guarded_cached") else None,
+            cache=method in ("guarded_cached", "deferred_cached"),
+        )
+        if bulk:
+            batch_size = BUCKET_BATCH if method == "guarded_bucketed" else None
+            result = bulk_verify(ordered, reader, count, method == "deferred_bulk", batch_size)
+        elif deferred:
             result = defer_and_rank(ordered, reader.score, reader.recheck,
                                     support=count, top=TOP, width=WIDTH, band=GUARD_MARGIN)
         else:
             result = schedule(ordered, reader, count, SCHEDULE_FOR.get(method, method))
         result["padded_tokens"] = reader.padded_tokens
-        result["calls"] += reader.recheck_calls
+        result["calls"] = reader.score_calls + reader.recheck_calls
+        result["score_calls"] = reader.score_calls
+        result["scored_documents"] = reader.scored_documents
         result["recheck_calls"] = reader.recheck_calls
         result["rechecked_pairs"] = reader.rechecked_pairs
         result["ms"] = (perf_counter() - start) * 1000
@@ -282,6 +332,8 @@ def run(args):
         methods = DEFERRED_METHODS
     elif args.strong_fixed:
         methods = STRONG_FIXED_METHODS
+    elif args.compare_buckets:
+        methods = BUCKET_METHODS
     for count in SUPPORT:
         for method in methods:
             measure(ids[0], count, method)
@@ -314,7 +366,9 @@ def run(args):
             print(f"Completed {i+1}/{len(ids)}", flush=True)
     write_json(args.output, dict(
         job=os.environ["SLURM_JOB_ID"], gpu=torch.cuda.get_device_name(), queries=len(rows),
-        dataset=args.dataset, guard_margin=GUARD_MARGIN if args.guard_shape or args.defer_rechecks or args.strong_fixed else None,
+        dataset=args.dataset,
+        guard_margin=GUARD_MARGIN if args.guard_shape or args.defer_rechecks or args.strong_fixed or args.compare_buckets else None,
+        bucket_batch=BUCKET_BATCH if args.compare_buckets else None,
         script_sha256=digest(Path(__file__)), input_sha256=inputs,
         deferred_code_sha256=digest(Path(defer_and_rank.__code__.co_filename)),
         embedding=provenance, reranker=reranker.provenance, report=summarize(rows, methods), rows=rows,
@@ -331,5 +385,7 @@ if __name__ == "__main__":
     modes.add_argument("--guard-shape", action="store_true")
     modes.add_argument("--defer-rechecks", action="store_true")
     modes.add_argument("--strong-fixed", action="store_true")
+    modes.add_argument("--compare-buckets", action="store_true")
     parser.add_argument("--dataset", choices=("SIGIR", "SciRepEval", "NIPS"), default="SIGIR")
+    parser.add_argument("--exclude-nips-titles", action="store_true")
     run(parser.parse_args())

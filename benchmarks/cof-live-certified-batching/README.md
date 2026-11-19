@@ -76,6 +76,19 @@ NIPS has 34 filtered queries. The 91 SciRepEval views include 32 matching normal
 
 Every method reproduces the exhaustive expert order and all cited source IDs in both support settings. With two sources required, NIPS deferred waves lower mean token slots from 21,573 under immediate bulk scoring to 12,344 despite using more GPU calls. This comparison measures warm single-request latency against a one-pass fixed control. It leaves length-bucketed bulk scoring, concurrent throughput, and a jointly timed comparison to immediate one-per-expert rechecking for separate study. [Aggregate results](strong-fixed-v1.json)
 
+## Length-bucketed fixed batches and shared scores
+
+Job `40653` reruns the 34 NIPS and 59 title-disjoint SciRepEval requests. The stronger fixed controls use immediate rechecking with request-local document scores and either one source per active expert or all distinct documents grouped in length-sorted batches of eight. The deferred method uses the same 0.25 band and request-local cache as the immediate per-expert control. A source score is shared only because the current verifier receives the query and document, without candidate-specific input. Expert ownership is still checked separately.
+
+| Cohort | Sources required | Immediate waves with cache | Length-bucketed fixed | Deferred waves without cache | Deferred waves with cache |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| NIPS | 1 | 208.92 ms | 282.57 ms | 201.97 ms | 202.07 ms |
+| NIPS | 2 | 321.10 ms | 282.80 ms | 244.96 ms | 244.98 ms |
+| Title-disjoint SciRepEval | 1 | 235.71 ms | 232.12 ms | 239.88 ms | 235.25 ms |
+| Title-disjoint SciRepEval | 2 | 248.70 ms | 231.47 ms | 210.53 ms | 199.42 ms |
+
+All arms match the fixed-shape exhaustive order and citations for all 93 requests in both settings. With two sources required, the deferred cached route reduces P95 against the fastest measured fixed control by 13.4% on NIPS and 13.8% on SciRepEval. Paired query-resampling intervals for the saving against length bucketing are +2.82 to +60.88 ms and -30.25 to +49.29 ms, respectively. The one-source setting has no consistent P95 winner. Cache savings are workload dependent. For two-source SciRepEval, the scorer sees 21.25 documents per request with caching versus 23.08 without it. Six NIPS source prompts across five requests reach the common 1,024-token cap. Timing covers warm single requests and preserves the same candidate inventory, human reviewer ranks, and model-selected citations. [Aggregates and intervals](bucket-baselines-v1.json)
+
 ## Reproduce
 
 Run [the GPU comparison](../../experiments/retrieval/cof_live_certified_batching.py) on a Slurm CUDA compute node with `COF_INPUT_MANIFEST EMBEDDING_CHECKPOINT RERANKER_CHECKPOINT NEW_RESULT_JSON`. Add `--prefix-control` with a separate output path for the consecutive-source controls. The replay uses the published CoF inputs described in [the bounded adjustment benchmark](../cof-bounded-adjustment/README.md).
@@ -87,3 +100,5 @@ Add `--guard-shape` to replay the selective rechecks. Add `--dataset SciRepEval`
 Add `--defer-rechecks` to compare immediate and output-sensitive rechecks.
 
 Use `--strong-fixed` and `--dataset NIPS` or `--dataset SciRepEval` for the large-batch control. To reproduce the title-disjoint panel, remove SciRepEval rows whose lowercased alphanumeric title tokens equal those of any retained NIPS query before aggregating.
+
+Use `--compare-buckets` for the length-bucketed control. Add `--exclude-nips-titles` with `--dataset SciRepEval` for the disjoint panel. For P95 intervals, jointly resample request indices for both arms within each panel and compute fixed-arm P95 minus deferred-cached P95 for each of 10,000 draws. Use random seed 20261119 and the 2.5th and 97.5th percentiles of differences.
