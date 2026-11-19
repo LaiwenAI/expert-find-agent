@@ -1,0 +1,182 @@
+{
+  "dataset": "KDD",
+  "queries": 122,
+  "job": "41926",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "script_sha256": "8a5646147cc293d64a995367542c291e84a1d91d99ffb740812a67e7dbe79793",
+  "profile_runner_sha256": "517a141db255f691c0fd63c85aae40430814f9a49aaee9f8c08b3bd3bfab3f72",
+  "request_sha256": "5dcdc24bd4b31cfaf5de0103662807edf47a384ff65630d79f8d74de16eac725",
+  "cohort_sha256": "e090a584e0a4f57fb0a405299386431bbff839ffacbccdbb9a11ea8d6a3229ac",
+  "known_positives": 242,
+  "hard_label_sha256": "4bc5ec19077f96d700e6da0c09139c34a000b800c0536b64eb166874a381a2d6",
+  "vector_protocol_sha256": "85e4010895e8717c57d19113bdfaf3fb0c68afbb49f74635baac036eb06445a0",
+  "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "reranker_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+  "arms": {
+    "dense": {
+      "known_positive_recall_at_10": 0.13636363636363635,
+      "known_positive_p5_delta": {
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "partial_label_p5_delta_bounds": [
+        0.0,
+        0.0
+      ],
+      "known_positives_added_at_10": 0,
+      "known_positives_lost_at_10": 0,
+      "p5": 0.03770491803278689,
+      "judged": 0.14754098360655737,
+      "cited_p5": 0.021311475409836068,
+      "citation_coverage": 0.43278688524590164,
+      "calls": 3.1557377049180326,
+      "retrieval_ms": [
+        8.442262187600136,
+        9.071613848209381
+      ],
+      "complete_ms": [
+        81.6843044012785,
+        126.60196432843802
+      ],
+      "search_query_characters": 1434.016393442623
+    },
+    "mean_max": {
+      "known_positive_recall_at_10": 0.1859504132231405,
+      "known_positive_p5_delta": {
+        "mean": 0.0016393442622950826,
+        "percentile_95": [
+          -0.011475409836065575,
+          0.013114754098360657
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "partial_label_p5_delta_bounds": [
+        -0.4,
+        0.3836065573770492
+      ],
+      "known_positives_added_at_10": 17,
+      "known_positives_lost_at_10": 5,
+      "p5": 0.03934426229508197,
+      "judged": 0.16721311475409836,
+      "cited_p5": 0.019672131147540985,
+      "citation_coverage": 0.42622950819672134,
+      "calls": 3.262295081967213,
+      "retrieval_ms": [
+        8.284551091492176,
+        8.63904245197773
+      ],
+      "complete_ms": [
+        85.88258363306522,
+        134.30070970207453
+      ],
+      "search_query_characters": 1434.016393442623
+    },
+    "method_instruction": {
+      "known_positive_recall_at_10": 0.1859504132231405,
+      "known_positive_p5_delta": {
+        "mean": -0.0032786885245901635,
+        "percentile_95": [
+          -0.01639344262295082,
+          0.009836065573770491
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "partial_label_p5_delta_bounds": [
+        -0.419672131147541,
+        0.40491803278688526
+      ],
+      "known_positives_added_at_10": 17,
+      "known_positives_lost_at_10": 5,
+      "p5": 0.03442622950819672,
+      "judged": 0.1557377049180328,
+      "cited_p5": 0.014754098360655738,
+      "citation_coverage": 0.4016393442622951,
+      "calls": 3.262295081967213,
+      "retrieval_ms": [
+        8.305389434099197,
+        8.631587121635675
+      ],
+      "complete_ms": [
+        89.20291718095541,
+        136.52122728526587
+      ],
+      "search_query_characters": 1434.016393442623
+    },
+    "lead_sentences": {
+      "known_positive_recall_at_10": 0.14049586776859505,
+      "known_positive_p5_delta": {
+        "mean": -0.008196721311475412,
+        "percentile_95": [
+          -0.02131147540983607,
+          0.004918032786885246
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "partial_label_p5_delta_bounds": [
+        -0.460655737704918,
+        0.4344262295081967
+      ],
+      "known_positives_added_at_10": 10,
+      "known_positives_lost_at_10": 9,
+      "p5": 0.029508196721311476,
+      "judged": 0.15737704918032788,
+      "cited_p5": 0.01639344262295082,
+      "citation_coverage": 0.3983606557377049,
+      "calls": 3.3934426229508197,
+      "retrieval_ms": [
+        8.117921650409698,
+        8.475654385983944
+      ],
+      "complete_ms": [
+        92.18441043049097,
+        128.84662821888924
+      ],
+      "search_query_characters": 528.1229508196722
+    },
+    "method_sentences": {
+      "known_positive_recall_at_10": 0.1446280991735537,
+      "known_positive_p5_delta": {
+        "mean": -0.006557377049180328,
+        "percentile_95": [
+          -0.019672131147540985,
+          0.006557377049180328
+        ],
+        "queries": 122,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "partial_label_p5_delta_bounds": [
+        -0.4557377049180328,
+        0.4426229508196721
+      ],
+      "known_positives_added_at_10": 13,
+      "known_positives_lost_at_10": 11,
+      "p5": 0.03114754098360656,
+      "judged": 0.14754098360655737,
+      "cited_p5": 0.011475409836065575,
+      "citation_coverage": 0.3836065573770492,
+      "calls": 3.30327868852459,
+      "retrieval_ms": [
+        8.198369294404984,
+        8.625913597643375
+      ],
+      "complete_ms": [
+        87.56086137145758,
+        137.9756473004817
+      ],
+      "search_query_characters": 578.5327868852459
+    }
+  }
+}
