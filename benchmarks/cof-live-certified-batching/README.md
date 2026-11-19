@@ -61,6 +61,21 @@ The same 164 queries and model checkpoints are reused. Each value shows immediat
 
 The two-source settings reduce P95 by 7.4% and 10.8%. Delaying a recheck can lead to additional dynamic reads. For example, SciRepEval with one required source checks 17.14 distinct pairs on average, up from 15.91. Provisional margins may differ in sign without being used as final evidence. These are model-output comparisons with one or two supporting sources. Distinct expertise constraints, independently adjudicated evidence, and concurrent service are separate evaluation settings. [Aggregates](deferred-rechecks-v1.json)
 
+## One large batch as a fixed control
+
+Job `40643` compares scoring all distinct sources in one dynamic batch with scoring only the current optimistic frontier. The encoder, candidate inventory, source order, and 0.25 guard are shared. Each bulk route scores each distinct source once per query and reuses its score across linked candidates. Immediate bulk rechecking resolves every tentative score in fixed groups of four. Deferred bulk and deferred waves resolve only tentative scores that can affect the current ranked citations. The fixed-shape exhaustive output remains the reference.
+
+NIPS has 34 filtered queries. The 91 SciRepEval views include 32 matching normalized NIPS titles despite distinct query IDs. The table uses the 59 SciRepEval views remaining after removing those titles. The full 91-view results are also published. Both cohorts reuse public queries from earlier project retrieval work.
+
+| Cohort | Sources required | Fixed-shape exhaustive P95 | Bulk with immediate rechecks | Bulk with deferred rechecks | Deferred waves |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| NIPS | 1 | 428.66 ms | 492.91 ms | 491.57 ms | 202.14 ms |
+| NIPS | 2 | 428.91 ms | 493.96 ms | 492.61 ms | 245.17 ms |
+| Title-disjoint SciRepEval | 1 | 325.09 ms | 349.08 ms | 348.05 ms | 240.70 ms |
+| Title-disjoint SciRepEval | 2 | 324.95 ms | 349.08 ms | 309.28 ms | 210.14 ms |
+
+Every method reproduces the exhaustive expert order and all cited source IDs in both support settings. With two sources required, NIPS deferred waves lower mean token slots from 21,573 under immediate bulk scoring to 12,344 despite using more GPU calls. This comparison measures warm single-request latency against a one-pass fixed control. It leaves length-bucketed bulk scoring, concurrent throughput, and a jointly timed comparison to immediate one-per-expert rechecking for separate study. [Aggregate results](strong-fixed-v1.json)
+
 ## Reproduce
 
 Run [the GPU comparison](../../experiments/retrieval/cof_live_certified_batching.py) on a Slurm CUDA compute node with `COF_INPUT_MANIFEST EMBEDDING_CHECKPOINT RERANKER_CHECKPOINT NEW_RESULT_JSON`. Add `--prefix-control` with a separate output path for the consecutive-source controls. The replay uses the published CoF inputs described in [the bounded adjustment benchmark](../cof-bounded-adjustment/README.md).
@@ -70,3 +85,5 @@ Add `--compare-dynamic` with a separate output path to reproduce the dynamic-sha
 Add `--guard-shape` to replay the selective rechecks. Add `--dataset SciRepEval` for the filtered SciRepEval cache.
 
 Add `--defer-rechecks` to compare immediate and output-sensitive rechecks.
+
+Use `--strong-fixed` and `--dataset NIPS` or `--dataset SciRepEval` for the large-batch control. To reproduce the title-disjoint panel, remove SciRepEval rows whose lowercased alphanumeric title tokens equal those of any retained NIPS query before aggregating.

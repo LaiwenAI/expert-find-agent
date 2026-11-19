@@ -12,7 +12,7 @@ import numpy as np
 import torch
 
 from expert_search.cof_benchmark import load
-from expert_search.deferred_verification import defer_and_rank
+from expert_search.deferred_verification import _extreme, defer_and_rank
 from expert_search.gpu_owned_vector_index import GpuOwnedVectorIndex
 from expert_search.owned_vector_index import ExactOwnedVectorIndex
 from expert_search.qwen_embedding_torch import QwenTorchEmbedding
@@ -34,6 +34,7 @@ PREFIX_CONTROL = ("exhaustive", "one_per_expert", "prefix_two", "prefix_three")
 DYNAMIC_METHODS = (*METHODS, "dynamic_one", "dynamic_fill", "dynamic_length_fit")
 GUARD_METHODS = (*METHODS, "dynamic_one", "guarded_dynamic")
 DEFERRED_METHODS = ("exhaustive", "guarded_dynamic", "deferred_dynamic")
+STRONG_FIXED_METHODS = ("exhaustive", "guarded_bulk", "deferred_dynamic", "deferred_bulk")
 GUARD_MARGIN = .25
 SCHEDULE_FOR = {"dynamic_one": "one_per_expert", "dynamic_fill": "fill_idle_slots",
                 "dynamic_length_fit": "fill_same_length", "guarded_dynamic": "one_per_expert"}
@@ -94,6 +95,38 @@ class WaveReader:
         return (values[:, 0] - values[:, 1]).cpu().tolist()
 
 
+def bulk_verify(ordered, reader, support, deferred):
+    """Score each distinct document in one batch and selectively stabilize its verdict."""
+    pairs = [(expert, doc) for expert, docs in ordered for doc in docs]
+    unique = {doc: expert for expert, doc in reversed(pairs)}
+    jobs = [(unique[doc], doc) for doc in dict.fromkeys(doc for _, doc in pairs)]
+    scores = {doc: value for (_, doc), value in zip(jobs, reader.score(jobs), strict=True)}
+    trusted = {doc: value for doc, value in scores.items() if abs(value) > GUARD_MARGIN}
+
+    def mapping(values):
+        return {pair: values[pair[1]] for pair in pairs if pair[1] in values}
+
+    def correct(documents):
+        for start in range(0, len(documents), WIDTH):
+            batch = [(unique[doc], doc) for doc in documents[start:start+WIDTH]]
+            for (_, doc), score in zip(batch, reader.recheck(batch), strict=True):
+                trusted[doc] = scores[doc] = score
+
+    if not deferred:
+        correct([doc for doc in scores if doc not in trusted])
+    while True:
+        fixed = mapping(trusted)
+        lower, _ = _extreme(ordered, fixed, support, TOP, False)
+        upper, _ = _extreme(ordered, fixed, support, TOP, True)
+        if lower == upper:
+            return dict(selected=lower, checks=len(jobs), calls=1, unique_reads=len(jobs),
+                        margins=mapping(scores))
+        pending = list(dict.fromkeys(doc for _, docs in upper for doc in docs if doc not in trusted))
+        if not pending:
+            raise AssertionError("Unequal bulk bounds with no tentative citation")
+        correct(pending[:WIDTH])
+
+
 def schedule(ordered, reader, count, method):
     pending = dict(ordered)
     seen = {e: 0 for e in pending}
@@ -140,7 +173,9 @@ def schedule(ordered, reader, count, method):
 
 def summarize(rows, methods):
     report = {}
-    baseline = "guarded_dynamic" if "guarded_dynamic" in methods and "one_per_expert" not in methods else "one_per_expert"
+    baseline = "guarded_bulk" if "guarded_bulk" in methods else (
+        "guarded_dynamic" if "guarded_dynamic" in methods and "one_per_expert" not in methods else "one_per_expert"
+    )
     for count in SUPPORT:
         values = [row["support"][count] for row in rows]
         reference = [row["exhaustive"] for row in values]
@@ -219,9 +254,11 @@ def run(args):
         if len(ordered) != POOL or any(e not in ownership[d] for e, docs in ordered for d in docs):
             raise ValueError("Unexpected source ownership")
         reader = WaveReader(reranker, query, texts, {d for _, docs in ordered for d in docs},
-                            dynamic=method in SCHEDULE_FOR or method == "deferred_dynamic",
+                            dynamic=method in SCHEDULE_FOR or method in ("deferred_dynamic", "guarded_bulk", "deferred_bulk"),
                             guard=GUARD_MARGIN if method == "guarded_dynamic" else None)
-        if method == "deferred_dynamic":
+        if method in ("guarded_bulk", "deferred_bulk"):
+            result = bulk_verify(ordered, reader, count, method == "deferred_bulk")
+        elif method == "deferred_dynamic":
             result = defer_and_rank(ordered, reader.score, reader.recheck,
                                     support=count, top=TOP, width=WIDTH, band=GUARD_MARGIN)
         else:
@@ -243,6 +280,8 @@ def run(args):
         methods = GUARD_METHODS
     elif args.defer_rechecks:
         methods = DEFERRED_METHODS
+    elif args.strong_fixed:
+        methods = STRONG_FIXED_METHODS
     for count in SUPPORT:
         for method in methods:
             measure(ids[0], count, method)
@@ -275,7 +314,7 @@ def run(args):
             print(f"Completed {i+1}/{len(ids)}", flush=True)
     write_json(args.output, dict(
         job=os.environ["SLURM_JOB_ID"], gpu=torch.cuda.get_device_name(), queries=len(rows),
-        dataset=args.dataset, guard_margin=GUARD_MARGIN if args.guard_shape or args.defer_rechecks else None,
+        dataset=args.dataset, guard_margin=GUARD_MARGIN if args.guard_shape or args.defer_rechecks or args.strong_fixed else None,
         script_sha256=digest(Path(__file__)), input_sha256=inputs,
         deferred_code_sha256=digest(Path(defer_and_rank.__code__.co_filename)),
         embedding=provenance, reranker=reranker.provenance, report=summarize(rows, methods), rows=rows,
@@ -291,5 +330,6 @@ if __name__ == "__main__":
     modes.add_argument("--compare-dynamic", action="store_true")
     modes.add_argument("--guard-shape", action="store_true")
     modes.add_argument("--defer-rechecks", action="store_true")
-    parser.add_argument("--dataset", choices=("SIGIR", "SciRepEval"), default="SIGIR")
+    modes.add_argument("--strong-fixed", action="store_true")
+    parser.add_argument("--dataset", choices=("SIGIR", "SciRepEval", "NIPS"), default="SIGIR")
     run(parser.parse_args())
