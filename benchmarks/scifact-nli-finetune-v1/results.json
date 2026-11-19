@@ -1,0 +1,377 @@
+{
+  "job": "41264",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "archive_sha256": "11c621288d41ac144d29b13b0f8503b3820b7d6e8b1f6ff24dff335c196d76be",
+  "xnli_sha256": "766f10336767b2a9da9d72d0273bcc817b339e3311e2ace99dffa8c638fcece1",
+  "script_sha256": "ed938d62573459551afb3fe618a78c254503ebec9d9d2fe582f1a95a527db254",
+  "model_revision": "8adb042d524ecd5c26d3e3ba0e3fbcf7e2d0864c",
+  "epochs": 3,
+  "batch": 8,
+  "seed": 719,
+  "threshold_cap": 0.05,
+  "split": {
+    "fit": {
+      "contradict": 36,
+      "support": 105,
+      "unknown": 92
+    },
+    "calibration": {
+      "contradict": 11,
+      "support": 35,
+      "unknown": 30
+    },
+    "test": {
+      "support": 97,
+      "unknown": 82,
+      "contradict": 47
+    }
+  },
+  "report": {
+    "frozen": {
+      "train": {
+        "trained": 0,
+        "updates": 0,
+        "training_seconds": 0.0
+      },
+      "threshold": 2.5078125,
+      "calibration": {
+        "support": {
+          "cases": 35,
+          "predicted_support": 11
+        },
+        "contradict": {
+          "cases": 11,
+          "predicted_support": 0
+        },
+        "unknown": {
+          "cases": 30,
+          "predicted_support": 0
+        }
+      },
+      "scifact": {
+        "raw_support": {
+          "support": {
+            "cases": 97,
+            "predicted_support": 40
+          },
+          "contradict": {
+            "cases": 47,
+            "predicted_support": 1
+          },
+          "unknown": {
+            "cases": 82,
+            "predicted_support": 3
+          }
+        },
+        "calibrated_support": {
+          "support": {
+            "cases": 97,
+            "predicted_support": 13
+          },
+          "contradict": {
+            "cases": 47,
+            "predicted_support": 0
+          },
+          "unknown": {
+            "cases": 82,
+            "predicted_support": 0
+          }
+        },
+        "skipped": {},
+        "confusion": [
+          {
+            "gold": "contradict",
+            "predicted": "contradiction",
+            "cases": 26
+          },
+          {
+            "gold": "contradict",
+            "predicted": "entailment",
+            "cases": 1
+          },
+          {
+            "gold": "contradict",
+            "predicted": "neutral",
+            "cases": 20
+          },
+          {
+            "gold": "support",
+            "predicted": "contradiction",
+            "cases": 11
+          },
+          {
+            "gold": "support",
+            "predicted": "entailment",
+            "cases": 40
+          },
+          {
+            "gold": "support",
+            "predicted": "neutral",
+            "cases": 46
+          },
+          {
+            "gold": "unknown",
+            "predicted": "contradiction",
+            "cases": 16
+          },
+          {
+            "gold": "unknown",
+            "predicted": "entailment",
+            "cases": 3
+          },
+          {
+            "gold": "unknown",
+            "predicted": "neutral",
+            "cases": 63
+          }
+        ]
+      },
+      "xnli": {
+        "en": {
+          "total": 5010,
+          "correct": 4418
+        },
+        "zh": {
+          "total": 5010,
+          "correct": 4061
+        }
+      },
+      "batch_p50_p95_ms": [
+        13.733144849538803,
+        19.11845616996288
+      ]
+    },
+    "head": {
+      "train": {
+        "trained": 592899,
+        "updates": 90,
+        "training_seconds": 0.8046340234577656,
+        "final_epoch_loss": 0.820776938398679,
+        "adapter_sha256": "f1f636df46f5b6abe09f19debe1ec5837056f0a14f102785ebf171bf93eb3bea"
+      },
+      "threshold": 3.6796875,
+      "calibration": {
+        "support": {
+          "cases": 35,
+          "predicted_support": 13
+        },
+        "contradict": {
+          "cases": 11,
+          "predicted_support": 0
+        },
+        "unknown": {
+          "cases": 30,
+          "predicted_support": 0
+        }
+      },
+      "scifact": {
+        "raw_support": {
+          "support": {
+            "cases": 97,
+            "predicted_support": 59
+          },
+          "contradict": {
+            "cases": 47,
+            "predicted_support": 9
+          },
+          "unknown": {
+            "cases": 82,
+            "predicted_support": 7
+          }
+        },
+        "calibrated_support": {
+          "support": {
+            "cases": 97,
+            "predicted_support": 15
+          },
+          "contradict": {
+            "cases": 47,
+            "predicted_support": 0
+          },
+          "unknown": {
+            "cases": 82,
+            "predicted_support": 0
+          }
+        },
+        "skipped": {},
+        "confusion": [
+          {
+            "gold": "contradict",
+            "predicted": "contradiction",
+            "cases": 20
+          },
+          {
+            "gold": "contradict",
+            "predicted": "entailment",
+            "cases": 9
+          },
+          {
+            "gold": "contradict",
+            "predicted": "neutral",
+            "cases": 18
+          },
+          {
+            "gold": "support",
+            "predicted": "contradiction",
+            "cases": 1
+          },
+          {
+            "gold": "support",
+            "predicted": "entailment",
+            "cases": 59
+          },
+          {
+            "gold": "support",
+            "predicted": "neutral",
+            "cases": 37
+          },
+          {
+            "gold": "unknown",
+            "predicted": "contradiction",
+            "cases": 7
+          },
+          {
+            "gold": "unknown",
+            "predicted": "entailment",
+            "cases": 7
+          },
+          {
+            "gold": "unknown",
+            "predicted": "neutral",
+            "cases": 68
+          }
+        ]
+      },
+      "xnli": {
+        "en": {
+          "total": 5010,
+          "correct": 4309
+        },
+        "zh": {
+          "total": 5010,
+          "correct": 4028
+        }
+      },
+      "batch_p50_p95_ms": [
+        13.862673193216324,
+        19.272956438362595
+      ]
+    },
+    "last_two": {
+      "train": {
+        "trained": 14768643,
+        "updates": 90,
+        "training_seconds": 0.9330431520938873,
+        "final_epoch_loss": 0.6394650270541509,
+        "adapter_sha256": "a2350f1597d2fc8a658e1df51acff31d02c33cff0f64d4bbaff7fbe440fa0ee3"
+      },
+      "threshold": 2.0791015625,
+      "calibration": {
+        "support": {
+          "cases": 35,
+          "predicted_support": 7
+        },
+        "contradict": {
+          "cases": 11,
+          "predicted_support": 0
+        },
+        "unknown": {
+          "cases": 30,
+          "predicted_support": 0
+        }
+      },
+      "scifact": {
+        "raw_support": {
+          "support": {
+            "cases": 97,
+            "predicted_support": 38
+          },
+          "contradict": {
+            "cases": 47,
+            "predicted_support": 3
+          },
+          "unknown": {
+            "cases": 82,
+            "predicted_support": 4
+          }
+        },
+        "calibrated_support": {
+          "support": {
+            "cases": 97,
+            "predicted_support": 9
+          },
+          "contradict": {
+            "cases": 47,
+            "predicted_support": 0
+          },
+          "unknown": {
+            "cases": 82,
+            "predicted_support": 0
+          }
+        },
+        "skipped": {},
+        "confusion": [
+          {
+            "gold": "contradict",
+            "predicted": "contradiction",
+            "cases": 18
+          },
+          {
+            "gold": "contradict",
+            "predicted": "entailment",
+            "cases": 3
+          },
+          {
+            "gold": "contradict",
+            "predicted": "neutral",
+            "cases": 26
+          },
+          {
+            "gold": "support",
+            "predicted": "contradiction",
+            "cases": 1
+          },
+          {
+            "gold": "support",
+            "predicted": "entailment",
+            "cases": 38
+          },
+          {
+            "gold": "support",
+            "predicted": "neutral",
+            "cases": 58
+          },
+          {
+            "gold": "unknown",
+            "predicted": "contradiction",
+            "cases": 4
+          },
+          {
+            "gold": "unknown",
+            "predicted": "entailment",
+            "cases": 4
+          },
+          {
+            "gold": "unknown",
+            "predicted": "neutral",
+            "cases": 74
+          }
+        ]
+      },
+      "xnli": {
+        "en": {
+          "total": 5010,
+          "correct": 4334
+        },
+        "zh": {
+          "total": 5010,
+          "correct": 3992
+        }
+      },
+      "batch_p50_p95_ms": [
+        14.003967866301537,
+        19.41172536462545
+      ]
+    }
+  }
+}
