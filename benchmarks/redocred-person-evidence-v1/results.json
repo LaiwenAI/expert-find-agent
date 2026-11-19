@@ -1,0 +1,390 @@
+{
+  "data_sha256": {
+    "dev": "051ee1d057204a5d08ef5502beacdadf191245b5eaf0e29ec2c607cf002c016f",
+    "test": "ea673b7ef91e16510d7eb88863d3903e47318dc5653ef361266f27ae3b84723c"
+  },
+  "checkpoint": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+  "job": "42966",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "code_sha256": "2cec053759fea310d9bf388b4b9882edcccb8e65a53c8123900f15105ec6cb4f",
+  "omissions": {
+    "dev": 0,
+    "test": 0
+  },
+  "dev_rival_cap": 8,
+  "thresholds": {
+    "lexical_two": 8.0625,
+    "local_two": 7.9375,
+    "joint_two": 8.1875,
+    "shared_two": 8.1875,
+    "full": 7.4375
+  },
+  "panels": {
+    "dev": {
+      "pairs": 172,
+      "documents": 49,
+      "with_annotated_evidence": 96,
+      "roles": {
+        "P175": 21,
+        "P676": 13,
+        "P161": 30,
+        "P57": 36,
+        "P86": 14,
+        "P162": 27,
+        "P58": 18,
+        "P170": 3,
+        "P50": 10
+      },
+      "arms": {
+        "lexical_two": {
+          "ordered": 119,
+          "both_correct": 17,
+          "accepted_supported": 20,
+          "accepted_rival": 8,
+          "annotated_evidence_retained": 83,
+          "ms_p95": 9.163218643516302,
+          "mean_sentences": 2.0,
+          "order_delta_vs_lexical": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 172,
+            "clusters": 49,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "both_delta_vs_lexical": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 172,
+            "clusters": 49,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "local_two": {
+          "ordered": 107,
+          "both_correct": 11,
+          "accepted_supported": 16,
+          "accepted_rival": 8,
+          "annotated_evidence_retained": 63,
+          "ms_p95": 9.124594554305077,
+          "mean_sentences": 2.0,
+          "order_delta_vs_lexical": {
+            "mean": -0.06976744186046512,
+            "percentile_95": [
+              -0.12834314929903165,
+              -0.006023194574706023
+            ],
+            "queries": 172,
+            "clusters": 49,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "both_delta_vs_lexical": {
+            "mean": -0.03488372093023256,
+            "percentile_95": [
+              -0.08772226173541962,
+              0.011363636363636364
+            ],
+            "queries": 172,
+            "clusters": 49,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "joint_two": {
+          "ordered": 110,
+          "both_correct": 12,
+          "accepted_supported": 17,
+          "accepted_rival": 8,
+          "annotated_evidence_retained": 82,
+          "ms_p95": 9.18625919148326,
+          "mean_sentences": 2.0,
+          "order_delta_vs_lexical": {
+            "mean": -0.05232558139534884,
+            "percentile_95": [
+              -0.1,
+              -0.00598713287710295
+            ],
+            "queries": 172,
+            "clusters": 49,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "both_delta_vs_lexical": {
+            "mean": -0.029069767441860465,
+            "percentile_95": [
+              -0.05660377358490566,
+              -0.0060596933187294765
+            ],
+            "queries": 172,
+            "clusters": 49,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "shared_two": {
+          "ordered": 108,
+          "both_correct": 11,
+          "accepted_supported": 16,
+          "accepted_rival": 8,
+          "annotated_evidence_retained": 79,
+          "ms_p95": 9.06019490212202,
+          "mean_sentences": 2.0,
+          "order_delta_vs_lexical": {
+            "mean": -0.06395348837209303,
+            "percentile_95": [
+              -0.11904761904761904,
+              -0.012046389149412046
+            ],
+            "queries": 172,
+            "clusters": 49,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "both_delta_vs_lexical": {
+            "mean": -0.03488372093023256,
+            "percentile_95": [
+              -0.06285714285714286,
+              -0.011363636363636364
+            ],
+            "queries": 172,
+            "clusters": 49,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "full": {
+          "ordered": 110,
+          "both_correct": 8,
+          "accepted_supported": 14,
+          "accepted_rival": 8,
+          "annotated_evidence_retained": 96,
+          "ms_p95": 12.34410060569644,
+          "mean_sentences": 8.215116279069768,
+          "order_delta_vs_lexical": {
+            "mean": -0.05232558139534884,
+            "percentile_95": [
+              -0.10555555555555556,
+              0.0
+            ],
+            "queries": 172,
+            "clusters": 49,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "both_delta_vs_lexical": {
+            "mean": -0.05232558139534884,
+            "percentile_95": [
+              -0.08670520231213873,
+              -0.018633540372670808
+            ],
+            "queries": 172,
+            "clusters": 49,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        }
+      }
+    },
+    "test": {
+      "pairs": 163,
+      "documents": 41,
+      "with_annotated_evidence": 80,
+      "roles": {
+        "P162": 26,
+        "P175": 24,
+        "P57": 38,
+        "P676": 7,
+        "P161": 29,
+        "P58": 18,
+        "P86": 15,
+        "P50": 4,
+        "P170": 2
+      },
+      "arms": {
+        "lexical_two": {
+          "ordered": 118,
+          "both_correct": 28,
+          "accepted_supported": 28,
+          "accepted_rival": 6,
+          "annotated_evidence_retained": 66,
+          "ms_p95": 9.057115763425827,
+          "mean_sentences": 2.0,
+          "order_delta_vs_lexical": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 163,
+            "clusters": 41,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "both_delta_vs_lexical": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 163,
+            "clusters": 41,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "local_two": {
+          "ordered": 113,
+          "both_correct": 19,
+          "accepted_supported": 20,
+          "accepted_rival": 5,
+          "annotated_evidence_retained": 38,
+          "ms_p95": 9.072812087833881,
+          "mean_sentences": 2.0,
+          "order_delta_vs_lexical": {
+            "mean": -0.03067484662576687,
+            "percentile_95": [
+              -0.12138728323699421,
+              0.0625
+            ],
+            "queries": 163,
+            "clusters": 41,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "both_delta_vs_lexical": {
+            "mean": -0.05521472392638037,
+            "percentile_95": [
+              -0.12258361369483474,
+              0.0125
+            ],
+            "queries": 163,
+            "clusters": 41,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "joint_two": {
+          "ordered": 112,
+          "both_correct": 26,
+          "accepted_supported": 26,
+          "accepted_rival": 7,
+          "annotated_evidence_retained": 61,
+          "ms_p95": 9.12573765963316,
+          "mean_sentences": 2.0,
+          "order_delta_vs_lexical": {
+            "mean": -0.03680981595092025,
+            "percentile_95": [
+              -0.10975609756097561,
+              0.02083697552447547
+            ],
+            "queries": 163,
+            "clusters": 41,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "both_delta_vs_lexical": {
+            "mean": -0.012269938650306749,
+            "percentile_95": [
+              -0.04102739726027397,
+              0.016574585635359115
+            ],
+            "queries": 163,
+            "clusters": 41,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "shared_two": {
+          "ordered": 113,
+          "both_correct": 17,
+          "accepted_supported": 18,
+          "accepted_rival": 6,
+          "annotated_evidence_retained": 50,
+          "ms_p95": 8.981339447200298,
+          "mean_sentences": 2.0,
+          "order_delta_vs_lexical": {
+            "mean": -0.03067484662576687,
+            "percentile_95": [
+              -0.08783783783783784,
+              0.02666666666666667
+            ],
+            "queries": 163,
+            "clusters": 41,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "both_delta_vs_lexical": {
+            "mean": -0.06748466257668712,
+            "percentile_95": [
+              -0.12418300653594772,
+              -0.018069583724118068
+            ],
+            "queries": 163,
+            "clusters": 41,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "full": {
+          "ordered": 113,
+          "both_correct": 27,
+          "accepted_supported": 35,
+          "accepted_rival": 10,
+          "annotated_evidence_retained": 80,
+          "ms_p95": 12.346198409795761,
+          "mean_sentences": 7.134969325153374,
+          "order_delta_vs_lexical": {
+            "mean": -0.03067484662576687,
+            "percentile_95": [
+              -0.09183673469387756,
+              0.03268511351909177
+            ],
+            "queries": 163,
+            "clusters": 41,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "both_delta_vs_lexical": {
+            "mean": -0.006134969325153374,
+            "percentile_95": [
+              -0.05000698324022346,
+              0.030490915878546496
+            ],
+            "queries": 163,
+            "clusters": 41,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        }
+      }
+    }
+  }
+}
