@@ -24,6 +24,7 @@ from experiments.retrieval.cof_shared_frontier import panel
 
 ARMS = ("dense", "sparse", "source_fusion", "expert_fusion", "union")
 RRF_CONSTANT = 60
+DEFERRED_ARMS = ("dense", "union", "deferred_union")
 
 
 def score_reciprocals(values, active=None):
@@ -32,6 +33,21 @@ def score_reciprocals(values, active=None):
     ranks = np.cumsum(counts) - counts + 1
     reciprocal = 1 / (RRF_CONSTANT + ranks[bins])
     return reciprocal if active is None else np.where(active, reciprocal, 0)
+
+
+def selected_reciprocals(values, rows, active=None):
+    """Evaluate full-inventory competition ranks only at requested source rows."""
+    ranks = len(values) + 1 - np.searchsorted(np.sort(values), values[rows], side="right")
+    reciprocal = 1 / (RRF_CONSTANT + ranks)
+    return reciprocal if active is None else np.where(active[rows], reciprocal, 0)
+
+
+def reserved_union(ordered, dense_expert, sparse_expert):
+    half = POOL // 2
+    dense_top = np.argsort(-dense_expert, kind="stable")[:half]
+    sparse_top = np.argsort(-sparse_expert, kind="stable")[:half]
+    included = set(list(dict.fromkeys([*dense_top, *sparse_top, *ordered]))[:POOL])
+    return [expert for expert in ordered if expert in included]
 
 
 class HybridIndex(CandidateIndex):
@@ -55,6 +71,43 @@ class HybridIndex(CandidateIndex):
         values, matches = self.lexical.document_arrays(query)
         return values[self.source_order], matches[self.source_order]
 
+    def sparse_top_three(self, scores):
+        # Zero padding and unmatched rows contribute zero to the top-three mean.
+        if np.any(scores < 0):
+            rows = self.source_rows(scores)
+            return np.sum(np.where(self.mask, scores[rows], 0), axis=1) / 3
+        owner_rows = self.reference.owner_rows
+        active = scores[owner_rows] > 0
+        groups, rows = self.group[active], owner_rows[active]
+        order = np.lexsort((rows, -scores[rows], groups))
+        groups, rows = groups[order], rows[order]
+        unique, starts, counts = np.unique(groups, return_index=True, return_counts=True)
+        contribution = np.zeros((len(self.counts), 3))
+        if len(unique):
+            positions = starts[:, None] + np.minimum(self.columns, counts[:, None] - 1)
+            contribution[unique] = np.where(self.columns < counts[:, None], scores[rows[positions]], 0)
+        return contribution.sum(axis=1) / 3
+
+    def deferred_union(self, vector, sparse, matched):
+        ref = self.reference
+        dense = torch.mv(self.gpu.vectors, torch.as_tensor(vector, device="cuda")).cpu().numpy()
+        dense_expert = np.maximum.reduceat(dense[ref.owner_rows], ref.owner_starts)
+        sparse_expert = self.sparse_top_three(sparse)
+        expert_rrf = score_reciprocals(dense_expert) + score_reciprocals(sparse_expert, sparse_expert > 0)
+        ordered = np.argsort(-expert_rrf, kind="stable")
+        experts = reserved_union(ordered, dense_expert, sparse_expert)
+
+        # Compute exact citation ranks for the shortlisted experts' sources.
+        owned = [ref.owner_rows[ref.owner_starts[e]:ref.owner_starts[e] + self.counts[e]] for e in experts]
+        selected = np.unique(np.concatenate(owned))
+        fused = selected_reciprocals(dense, selected) + selected_reciprocals(sparse, selected, matched)
+        hits = []
+        for expert, rows in zip(experts, owned, strict=True):
+            scores = fused[np.searchsorted(selected, rows)]
+            winning = rows[np.lexsort((rows, -scores))[:3]]
+            hits.append((ref.owner_ids[expert], [ref.source_ids[row] for row in winning]))
+        return hits
+
     def search_query(self, query, encoder, arm):
         if arm != "sparse":
             dense_vector = encoder.encode([query], query=True)[0]
@@ -62,6 +115,8 @@ class HybridIndex(CandidateIndex):
             return self.search(dense_vector, "dense")
 
         sparse, matched = self.sparse_scores(query)
+        if arm == "deferred_union":
+            return self.deferred_union(dense_vector, sparse, matched)
         sparse_rows = self.source_rows(sparse)
         sparse_expert = np.sum(np.where(self.mask, sparse[sparse_rows], 0), axis=1) / 3
         if arm == "sparse":
@@ -78,12 +133,7 @@ class HybridIndex(CandidateIndex):
         expert_rrf = score_reciprocals(dense_expert) + score_reciprocals(sparse_expert, sparse_expert > 0)
         ordered = np.argsort(-expert_rrf, kind="stable")
         if arm == "union":
-            half = POOL // 2
-            dense_top = np.argsort(-dense_expert, kind="stable")[:half]
-            sparse_top = np.argsort(-sparse_expert, kind="stable")[:half]
-            included = list(dict.fromkeys([*dense_top, *sparse_top, *ordered]))[:POOL]
-            allow = set(included)
-            ordered = [e for e in ordered if e in allow]
+            ordered = reserved_union(ordered, dense_expert, sparse_expert)
         return self.hits(ordered[:POOL], fused_rows)
 
     def hits(self, experts, rows):
@@ -113,14 +163,16 @@ def request(index, encoder, verifier, texts, query, truth, arm):
         cited_p5=sum(expert in positive and bool(docs) for expert, docs in outputs) / TOP,
         citation_coverage=sum(bool(docs) for _, docs in outputs) / TOP,
         calls=reader.score_calls + reader.recheck_calls,
+        ranked_sources=hits,
+        returned_citations=outputs,
         retrieval_ms=1000 * (retrieved - start),
         complete_ms=1000 * (finished - start),
     )
 
 
-def summary(rows):
+def summary(rows, arms=ARMS):
     out = {}
-    for arm in ARMS:
+    for arm in arms:
         values = [r[arm] for r in rows]
         out[arm] = dict(
             recall10=sum(len(r["candidates"]) for r in values) / sum(r["positives"] for r in values),
@@ -133,6 +185,11 @@ def summary(rows):
             **{key: np.quantile([r[key] for r in values], [0.5, 0.95]).tolist()
                for key in ("retrieval_ms", "complete_ms")},
         )
+    if "deferred_union" in arms:
+        out["deferred_union"]["ranked_source_agreement_vs_union"] = sum(
+            row["deferred_union"]["ranked_sources"] == row["union"]["ranked_sources"] for row in rows)
+        out["deferred_union"]["citation_agreement_vs_union"] = sum(
+            row["deferred_union"]["returned_citations"] == row["union"]["returned_citations"] for row in rows)
     return out
 
 
@@ -152,13 +209,14 @@ def run(args):
     verifier = Reranker(args.reranker)
     chosen = panel(ids, texts)
     sample = next(qid for qid in ids if qid not in chosen)
-    for arm in ARMS:
+    arms = DEFERRED_ARMS if args.deferred_union else ARMS
+    for arm in arms:
         request(index, encoder, verifier, texts, texts[sample], labels[sample], arm)
     rows = []
     for i, qid in enumerate(chosen):
-        offset = i % len(ARMS)
+        offset = i % len(arms)
         rows.append({arm: request(index, encoder, verifier, texts, texts[qid], labels[qid], arm)
-                     for arm in ARMS[offset:] + ARMS[:offset]})
+                     for arm in arms[offset:] + arms[:offset]})
         if (i + 1) % 30 == 0:
             print(f"Completed {i + 1} queries", flush=True)
     write_json(args.output, dict(
@@ -169,7 +227,7 @@ def run(args):
         vector_protocol_sha256=digest(root / "qwen-embedding-torch-v1/protocol.json"),
         hard_label_sha256=digest(root / "KDD_queries_test_hard.json"),
         embedding_revision=provenance["revision"], reranker_revision=verifier.provenance["revision"],
-        arms=summary(rows),
+        arms=summary(rows, arms),
     ))
 
 
@@ -177,4 +235,5 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ("embedding", "reranker", "lexical", "output"):
         parser.add_argument(name, type=Path)
+    parser.add_argument("--deferred-union", action="store_true")
     run(parser.parse_args())
