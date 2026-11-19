@@ -1,0 +1,663 @@
+{
+  "job": "41344",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+  "projection_sha256": "ea308f920097d46ab0c88edb8f577b01467460c163fa147c04f156693e9bdceb",
+  "script_sha256": "74a49370c513febaae8aa8a86aadda68e4c84150b16b20c6807c8b0649bcf3f5",
+  "thresholds": {
+    "full": 1.0,
+    "two_lexical_windows": -3.75
+  },
+  "results": {
+    "all": {
+      "full": {
+        "pairs": 399,
+        "labels": {
+          "contradict": 188,
+          "support": 211
+        },
+        "complete_rationale": 399,
+        "complete_gained": 182,
+        "complete_lost": 0,
+        "paired_delta": {
+          "mean": 0.45614035087719296,
+          "percentile_95": [
+            0.39058171745152354,
+            0.5197915427307657
+          ],
+          "queries": 399,
+          "clusters": 154,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        },
+        "accepted_as_support": {
+          "contradict": 11,
+          "support": 121
+        },
+        "evidence_words_mean": 204.1077694235589,
+        "evidence_tokens_mean": 308.140350877193,
+        "p50_p95_ms": [
+          27.58265845477581,
+          38.449217565357685
+        ]
+      },
+      "lexical_windows": {
+        "pairs": 399,
+        "labels": {
+          "contradict": 188,
+          "support": 211
+        },
+        "complete_rationale": 217,
+        "complete_gained": 0,
+        "complete_lost": 0,
+        "paired_delta": {
+          "mean": 0.0,
+          "percentile_95": [
+            0.0,
+            0.0
+          ],
+          "queries": 399,
+          "clusters": 154,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        },
+        "accepted_as_support": {
+          "contradict": 14,
+          "support": 122
+        },
+        "evidence_words_mean": 104.03258145363408,
+        "evidence_tokens_mean": 157.85714285714286,
+        "p50_p95_ms": [
+          20.715074613690376,
+          27.74171605706215
+        ]
+      },
+      "bm25_sentences": {
+        "pairs": 399,
+        "labels": {
+          "contradict": 188,
+          "support": 211
+        },
+        "complete_rationale": 237,
+        "complete_gained": 58,
+        "complete_lost": 38,
+        "paired_delta": {
+          "mean": 0.05012531328320802,
+          "percentile_95": [
+            0.002415313427623538,
+            0.09742157078833295
+          ],
+          "queries": 399,
+          "clusters": 154,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        },
+        "accepted_as_support": {
+          "contradict": 14,
+          "support": 132
+        },
+        "evidence_words_mean": 108.35588972431077,
+        "evidence_tokens_mean": 160.8095238095238,
+        "p50_p95_ms": [
+          20.83083987236023,
+          27.813122607767582
+        ]
+      },
+      "weighted_coverage": {
+        "pairs": 399,
+        "labels": {
+          "contradict": 188,
+          "support": 211
+        },
+        "complete_rationale": 233,
+        "complete_gained": 54,
+        "complete_lost": 38,
+        "paired_delta": {
+          "mean": 0.040100250626566414,
+          "percentile_95": [
+            -0.007853918456528011,
+            0.08718309859154924
+          ],
+          "queries": 399,
+          "clusters": 154,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        },
+        "accepted_as_support": {
+          "contradict": 14,
+          "support": 133
+        },
+        "evidence_words_mean": 108.44611528822055,
+        "evidence_tokens_mean": 161.16791979949875,
+        "p50_p95_ms": [
+          20.827744156122208,
+          27.822647988796234
+        ]
+      }
+    },
+    "prior_37": {
+      "full": {
+        "pairs": 37,
+        "labels": {
+          "support": 26,
+          "contradict": 11
+        },
+        "complete_rationale": 37,
+        "complete_gained": 17,
+        "complete_lost": 0,
+        "paired_delta": {
+          "mean": 0.4594594594594595,
+          "percentile_95": [
+            0.2777083333333334,
+            0.6470985691573922
+          ],
+          "queries": 37,
+          "clusters": 30,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        },
+        "accepted_as_support": {
+          "support": 12,
+          "contradict": 1
+        },
+        "evidence_words_mean": 207.67567567567568,
+        "evidence_tokens_mean": 327.18918918918916,
+        "p50_p95_ms": [
+          27.626538649201393,
+          42.99442991614342
+        ]
+      },
+      "lexical_windows": {
+        "pairs": 37,
+        "labels": {
+          "support": 26,
+          "contradict": 11
+        },
+        "complete_rationale": 20,
+        "complete_gained": 0,
+        "complete_lost": 0,
+        "paired_delta": {
+          "mean": 0.0,
+          "percentile_95": [
+            0.0,
+            0.0
+          ],
+          "queries": 37,
+          "clusters": 30,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        },
+        "accepted_as_support": {
+          "support": 10,
+          "contradict": 0
+        },
+        "evidence_words_mean": 99.89189189189189,
+        "evidence_tokens_mean": 166.45945945945945,
+        "p50_p95_ms": [
+          20.65533585846424,
+          29.226899519562693
+        ]
+      },
+      "bm25_sentences": {
+        "pairs": 37,
+        "labels": {
+          "support": 26,
+          "contradict": 11
+        },
+        "complete_rationale": 18,
+        "complete_gained": 1,
+        "complete_lost": 3,
+        "paired_delta": {
+          "mean": -0.05405405405405406,
+          "percentile_95": [
+            -0.19047619047619047,
+            0.05714285714285714
+          ],
+          "queries": 37,
+          "clusters": 30,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        },
+        "accepted_as_support": {
+          "support": 11,
+          "contradict": 1
+        },
+        "evidence_words_mean": 100.64864864864865,
+        "evidence_tokens_mean": 158.24324324324326,
+        "p50_p95_ms": [
+          20.841188728809357,
+          27.964129671454426
+        ]
+      },
+      "weighted_coverage": {
+        "pairs": 37,
+        "labels": {
+          "support": 26,
+          "contradict": 11
+        },
+        "complete_rationale": 18,
+        "complete_gained": 1,
+        "complete_lost": 3,
+        "paired_delta": {
+          "mean": -0.05405405405405406,
+          "percentile_95": [
+            -0.19444444444444445,
+            0.05714285714285714
+          ],
+          "queries": 37,
+          "clusters": 30,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        },
+        "accepted_as_support": {
+          "support": 11,
+          "contradict": 1
+        },
+        "evidence_words_mean": 101.54054054054055,
+        "evidence_tokens_mean": 160.13513513513513,
+        "p50_p95_ms": [
+          20.813878625631332,
+          28.12171541154384
+        ]
+      }
+    },
+    "other_open_pairs": {
+      "full": {
+        "pairs": 362,
+        "labels": {
+          "contradict": 177,
+          "support": 185
+        },
+        "complete_rationale": 362,
+        "complete_gained": 165,
+        "complete_lost": 0,
+        "paired_delta": {
+          "mean": 0.4558011049723757,
+          "percentile_95": [
+            0.3874677670416165,
+            0.5250018436578171
+          ],
+          "queries": 362,
+          "clusters": 125,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        },
+        "accepted_as_support": {
+          "contradict": 10,
+          "support": 109
+        },
+        "evidence_words_mean": 203.74309392265192,
+        "evidence_tokens_mean": 306.1933701657459,
+        "p50_p95_ms": [
+          27.581381611526012,
+          36.23479166999459
+        ]
+      },
+      "lexical_windows": {
+        "pairs": 362,
+        "labels": {
+          "contradict": 177,
+          "support": 185
+        },
+        "complete_rationale": 197,
+        "complete_gained": 0,
+        "complete_lost": 0,
+        "paired_delta": {
+          "mean": 0.0,
+          "percentile_95": [
+            0.0,
+            0.0
+          ],
+          "queries": 362,
+          "clusters": 125,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        },
+        "accepted_as_support": {
+          "contradict": 14,
+          "support": 112
+        },
+        "evidence_words_mean": 104.45580110497238,
+        "evidence_tokens_mean": 156.97790055248618,
+        "p50_p95_ms": [
+          20.72684094309807,
+          27.708524279296398
+        ]
+      },
+      "bm25_sentences": {
+        "pairs": 362,
+        "labels": {
+          "contradict": 177,
+          "support": 185
+        },
+        "complete_rationale": 219,
+        "complete_gained": 57,
+        "complete_lost": 35,
+        "paired_delta": {
+          "mean": 0.06077348066298342,
+          "percentile_95": [
+            0.008450704225352112,
+            0.1111111111111111
+          ],
+          "queries": 362,
+          "clusters": 125,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        },
+        "accepted_as_support": {
+          "contradict": 13,
+          "support": 121
+        },
+        "evidence_words_mean": 109.14364640883979,
+        "evidence_tokens_mean": 161.0718232044199,
+        "p50_p95_ms": [
+          20.829731598496437,
+          27.811153046786785
+        ]
+      },
+      "weighted_coverage": {
+        "pairs": 362,
+        "labels": {
+          "contradict": 177,
+          "support": 185
+        },
+        "complete_rationale": 215,
+        "complete_gained": 53,
+        "complete_lost": 35,
+        "paired_delta": {
+          "mean": 0.049723756906077346,
+          "percentile_95": [
+            -0.002809585574688862,
+            0.10091912595471594
+          ],
+          "queries": 362,
+          "clusters": 125,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        },
+        "accepted_as_support": {
+          "contradict": 13,
+          "support": 122
+        },
+        "evidence_words_mean": 109.15193370165746,
+        "evidence_tokens_mean": 161.27348066298342,
+        "p50_p95_ms": [
+          20.834491588175297,
+          27.82210810109973
+        ]
+      }
+    },
+    "pooling": {
+      "full": {
+        "pairs": 221,
+        "labels": {
+          "contradict": 103,
+          "support": 118
+        },
+        "complete_rationale": 221,
+        "complete_gained": 101,
+        "complete_lost": 0,
+        "paired_delta": {
+          "mean": 0.45701357466063347,
+          "percentile_95": [
+            0.37593916360243673,
+            0.5471698113207547
+          ],
+          "queries": 221,
+          "clusters": 68,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        },
+        "accepted_as_support": {
+          "contradict": 5,
+          "support": 65
+        },
+        "evidence_words_mean": 210.9547511312217,
+        "evidence_tokens_mean": 312.9457013574661,
+        "p50_p95_ms": [
+          27.786143124103546,
+          36.043744534254074
+        ]
+      },
+      "lexical_windows": {
+        "pairs": 221,
+        "labels": {
+          "contradict": 103,
+          "support": 118
+        },
+        "complete_rationale": 120,
+        "complete_gained": 0,
+        "complete_lost": 0,
+        "paired_delta": {
+          "mean": 0.0,
+          "percentile_95": [
+            0.0,
+            0.0
+          ],
+          "queries": 221,
+          "clusters": 68,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        },
+        "accepted_as_support": {
+          "contradict": 5,
+          "support": 64
+        },
+        "evidence_words_mean": 105.89592760180996,
+        "evidence_tokens_mean": 156.97737556561086,
+        "p50_p95_ms": [
+          20.65478265285492,
+          27.60198712348938
+        ]
+      },
+      "bm25_sentences": {
+        "pairs": 221,
+        "labels": {
+          "contradict": 103,
+          "support": 118
+        },
+        "complete_rationale": 121,
+        "complete_gained": 29,
+        "complete_lost": 28,
+        "paired_delta": {
+          "mean": 0.004524886877828055,
+          "percentile_95": [
+            -0.07246376811594203,
+            0.07692307692307693
+          ],
+          "queries": 221,
+          "clusters": 68,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        },
+        "accepted_as_support": {
+          "contradict": 6,
+          "support": 74
+        },
+        "evidence_words_mean": 111.42081447963801,
+        "evidence_tokens_mean": 162.81900452488688,
+        "p50_p95_ms": [
+          20.856326445937157,
+          27.78490073978901
+        ]
+      },
+      "weighted_coverage": {
+        "pairs": 221,
+        "labels": {
+          "contradict": 103,
+          "support": 118
+        },
+        "complete_rationale": 119,
+        "complete_gained": 26,
+        "complete_lost": 27,
+        "paired_delta": {
+          "mean": -0.004524886877828055,
+          "percentile_95": [
+            -0.08040808883125304,
+            0.06882940108892917
+          ],
+          "queries": 221,
+          "clusters": 68,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        },
+        "accepted_as_support": {
+          "contradict": 6,
+          "support": 75
+        },
+        "evidence_words_mean": 111.42986425339366,
+        "evidence_tokens_mean": 162.9049773755656,
+        "p50_p95_ms": [
+          20.86036279797554,
+          27.81437709927559
+        ]
+      }
+    },
+    "citation": {
+      "full": {
+        "pairs": 178,
+        "labels": {
+          "contradict": 85,
+          "support": 93
+        },
+        "complete_rationale": 178,
+        "complete_gained": 81,
+        "complete_lost": 0,
+        "paired_delta": {
+          "mean": 0.4550561797752809,
+          "percentile_95": [
+            0.370582788671024,
+            0.5376438407847575
+          ],
+          "queries": 178,
+          "clusters": 131,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        },
+        "accepted_as_support": {
+          "contradict": 6,
+          "support": 56
+        },
+        "evidence_words_mean": 195.6067415730337,
+        "evidence_tokens_mean": 302.1741573033708,
+        "p50_p95_ms": [
+          27.452624402940273,
+          40.45138824731113
+        ]
+      },
+      "lexical_windows": {
+        "pairs": 178,
+        "labels": {
+          "contradict": 85,
+          "support": 93
+        },
+        "complete_rationale": 97,
+        "complete_gained": 0,
+        "complete_lost": 0,
+        "paired_delta": {
+          "mean": 0.0,
+          "percentile_95": [
+            0.0,
+            0.0
+          ],
+          "queries": 178,
+          "clusters": 131,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        },
+        "accepted_as_support": {
+          "contradict": 9,
+          "support": 58
+        },
+        "evidence_words_mean": 101.71910112359551,
+        "evidence_tokens_mean": 158.9494382022472,
+        "p50_p95_ms": [
+          20.738601684570312,
+          27.90776491165161
+        ]
+      },
+      "bm25_sentences": {
+        "pairs": 178,
+        "labels": {
+          "contradict": 85,
+          "support": 93
+        },
+        "complete_rationale": 116,
+        "complete_gained": 29,
+        "complete_lost": 10,
+        "paired_delta": {
+          "mean": 0.10674157303370786,
+          "percentile_95": [
+            0.03389830508474576,
+            0.18085106382978725
+          ],
+          "queries": 178,
+          "clusters": 131,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        },
+        "accepted_as_support": {
+          "contradict": 8,
+          "support": 58
+        },
+        "evidence_words_mean": 104.5505617977528,
+        "evidence_tokens_mean": 158.31460674157304,
+        "p50_p95_ms": [
+          20.8020880818367,
+          27.850578539073467
+        ]
+      },
+      "weighted_coverage": {
+        "pairs": 178,
+        "labels": {
+          "contradict": 85,
+          "support": 93
+        },
+        "complete_rationale": 114,
+        "complete_gained": 28,
+        "complete_lost": 11,
+        "paired_delta": {
+          "mean": 0.09550561797752809,
+          "percentile_95": [
+            0.022598870056497175,
+            0.17032967032967034
+          ],
+          "queries": 178,
+          "clusters": 131,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        },
+        "accepted_as_support": {
+          "contradict": 8,
+          "support": 58
+        },
+        "evidence_words_mean": 104.74157303370787,
+        "evidence_tokens_mean": 159.01123595505618,
+        "p50_p95_ms": [
+          20.808283239603043,
+          27.847561519593
+        ]
+      }
+    }
+  }
+}
