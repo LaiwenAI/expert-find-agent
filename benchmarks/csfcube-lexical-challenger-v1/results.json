@@ -1,0 +1,1730 @@
+{
+  "job": "43323",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "reference_sha256": "82da4b53eb671ff9a13af2429c348084f3f635a5da816383940a48980a763e2c",
+  "code_sha256": "9feaa251ad3396bb4ed8e6d01aecbd5576af70921e2ec4d3eb86704221c26536",
+  "embedding": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "reranker": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+  "queries": 50,
+  "query_papers": 34,
+  "reports": {
+    "0.05": {
+      "dense_two": {
+        "summary": {
+          "present": {
+            "relevance_grades": [
+              0,
+              2,
+              1,
+              3
+            ],
+            "abstained": 44,
+            "p95_ms": 26.041670050472007
+          },
+          "withheld": {
+            "relevance_grades": [
+              1,
+              3,
+              0,
+              0
+            ],
+            "abstained": 46,
+            "p95_ms": 23.451045807451006
+          }
+        },
+        "thresholds": [
+          {
+            "calibration_size": 39,
+            "test_indices": [
+              3,
+              7,
+              14,
+              19,
+              20,
+              33,
+              36,
+              38,
+              40,
+              44,
+              49
+            ],
+            "policy": {
+              "score": 6.3125,
+              "margin": 1.0
+            }
+          },
+          {
+            "calibration_size": 39,
+            "test_indices": [
+              4,
+              6,
+              11,
+              12,
+              17,
+              21,
+              22,
+              24,
+              39,
+              43,
+              47
+            ],
+            "policy": {
+              "score": 6.125,
+              "margin": 1.75
+            }
+          },
+          {
+            "calibration_size": 39,
+            "test_indices": [
+              0,
+              8,
+              9,
+              15,
+              27,
+              29,
+              30,
+              31,
+              32,
+              46,
+              48
+            ],
+            "policy": {
+              "score": 6.8125,
+              "margin": 0.0
+            }
+          },
+          {
+            "calibration_size": 42,
+            "test_indices": [
+              1,
+              2,
+              10,
+              13,
+              16,
+              18,
+              35,
+              37
+            ],
+            "policy": {
+              "score": 6.4375,
+              "margin": 0.9375
+            }
+          },
+          {
+            "calibration_size": 41,
+            "test_indices": [
+              5,
+              23,
+              25,
+              26,
+              28,
+              34,
+              41,
+              42,
+              45
+            ],
+            "policy": {
+              "score": 6.0625,
+              "margin": 1.75
+            }
+          }
+        ],
+        "paired_strong_delta_vs_dense_two": {
+          "mean": 0.0,
+          "percentile_95": [
+            0.0,
+            0.0
+          ],
+          "queries": 50,
+          "clusters": 34,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      },
+      "lexical_challenger": {
+        "summary": {
+          "present": {
+            "relevance_grades": [
+              0,
+              2,
+              1,
+              4
+            ],
+            "abstained": 43,
+            "p95_ms": 26.677583437412963
+          },
+          "withheld": {
+            "relevance_grades": [
+              0,
+              2,
+              0,
+              0
+            ],
+            "abstained": 48,
+            "p95_ms": 24.07423313707113
+          }
+        },
+        "thresholds": [
+          {
+            "calibration_size": 39,
+            "test_indices": [
+              3,
+              7,
+              14,
+              19,
+              20,
+              33,
+              36,
+              38,
+              40,
+              44,
+              49
+            ],
+            "policy": {
+              "score": 6.3125,
+              "margin": 0.875
+            }
+          },
+          {
+            "calibration_size": 39,
+            "test_indices": [
+              4,
+              6,
+              11,
+              12,
+              17,
+              21,
+              22,
+              24,
+              39,
+              43,
+              47
+            ],
+            "policy": {
+              "score": 6.8125,
+              "margin": 0.875
+            }
+          },
+          {
+            "calibration_size": 39,
+            "test_indices": [
+              0,
+              8,
+              9,
+              15,
+              27,
+              29,
+              30,
+              31,
+              32,
+              46,
+              48
+            ],
+            "policy": {
+              "score": 6.8125,
+              "margin": 0.0
+            }
+          },
+          {
+            "calibration_size": 42,
+            "test_indices": [
+              1,
+              2,
+              10,
+              13,
+              16,
+              18,
+              35,
+              37
+            ],
+            "policy": {
+              "score": 6.4375,
+              "margin": 0.875
+            }
+          },
+          {
+            "calibration_size": 41,
+            "test_indices": [
+              5,
+              23,
+              25,
+              26,
+              28,
+              34,
+              41,
+              42,
+              45
+            ],
+            "policy": {
+              "score": 6.8125,
+              "margin": 0.0
+            }
+          }
+        ],
+        "paired_strong_delta_vs_dense_two": {
+          "mean": 0.02,
+          "percentile_95": [
+            -0.04081632653061224,
+            0.09259259259259259
+          ],
+          "queries": 50,
+          "clusters": 34,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      },
+      "dense_six": {
+        "summary": {
+          "present": {
+            "relevance_grades": [
+              0,
+              1,
+              2,
+              4
+            ],
+            "abstained": 43,
+            "p95_ms": 54.421200696378925
+          },
+          "withheld": {
+            "relevance_grades": [
+              2,
+              2,
+              0,
+              0
+            ],
+            "abstained": 46,
+            "p95_ms": 56.36645928025245
+          }
+        },
+        "thresholds": [
+          {
+            "calibration_size": 39,
+            "test_indices": [
+              3,
+              7,
+              14,
+              19,
+              20,
+              33,
+              36,
+              38,
+              40,
+              44,
+              49
+            ],
+            "policy": {
+              "score": 6.375,
+              "margin": 1.5625
+            }
+          },
+          {
+            "calibration_size": 39,
+            "test_indices": [
+              4,
+              6,
+              11,
+              12,
+              17,
+              21,
+              22,
+              24,
+              39,
+              43,
+              47
+            ],
+            "policy": {
+              "score": 6.0625,
+              "margin": 1.375
+            }
+          },
+          {
+            "calibration_size": 39,
+            "test_indices": [
+              0,
+              8,
+              9,
+              15,
+              27,
+              29,
+              30,
+              31,
+              32,
+              46,
+              48
+            ],
+            "policy": {
+              "score": 7.0625,
+              "margin": 0.0
+            }
+          },
+          {
+            "calibration_size": 42,
+            "test_indices": [
+              1,
+              2,
+              10,
+              13,
+              16,
+              18,
+              35,
+              37
+            ],
+            "policy": {
+              "score": 6.0625,
+              "margin": 1.375
+            }
+          },
+          {
+            "calibration_size": 41,
+            "test_indices": [
+              5,
+              23,
+              25,
+              26,
+              28,
+              34,
+              41,
+              42,
+              45
+            ],
+            "policy": {
+              "score": 5.9375,
+              "margin": 1.3125
+            }
+          }
+        ],
+        "paired_strong_delta_vs_dense_two": {
+          "mean": 0.04,
+          "percentile_95": [
+            -0.0425531914893617,
+            0.14583333333333334
+          ],
+          "queries": 50,
+          "clusters": 34,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      },
+      "lexical_challenger_agreement": {
+        "summary": {
+          "present": {
+            "relevance_grades": [
+              0,
+              1,
+              0,
+              3
+            ],
+            "abstained": 46,
+            "p95_ms": 26.677583437412963
+          },
+          "withheld": {
+            "relevance_grades": [
+              1,
+              2,
+              0,
+              0
+            ],
+            "abstained": 47,
+            "p95_ms": 24.07423313707113
+          }
+        },
+        "thresholds": [
+          {
+            "calibration_size": 39,
+            "test_indices": [
+              3,
+              7,
+              14,
+              19,
+              20,
+              33,
+              36,
+              38,
+              40,
+              44,
+              49
+            ],
+            "policy": {
+              "score": 6.625,
+              "margin": 0.875
+            }
+          },
+          {
+            "calibration_size": 39,
+            "test_indices": [
+              4,
+              6,
+              11,
+              12,
+              17,
+              21,
+              22,
+              24,
+              39,
+              43,
+              47
+            ],
+            "policy": {
+              "score": 6.5625,
+              "margin": 0.875
+            }
+          },
+          {
+            "calibration_size": 39,
+            "test_indices": [
+              0,
+              8,
+              9,
+              15,
+              27,
+              29,
+              30,
+              31,
+              32,
+              46,
+              48
+            ],
+            "policy": {
+              "score": 7.375,
+              "margin": 0.0
+            }
+          },
+          {
+            "calibration_size": 42,
+            "test_indices": [
+              1,
+              2,
+              10,
+              13,
+              16,
+              18,
+              35,
+              37
+            ],
+            "policy": {
+              "score": 7.375,
+              "margin": 0.0
+            }
+          },
+          {
+            "calibration_size": 41,
+            "test_indices": [
+              5,
+              23,
+              25,
+              26,
+              28,
+              34,
+              41,
+              42,
+              45
+            ],
+            "policy": {
+              "score": 7.375,
+              "margin": 0.0
+            }
+          }
+        ],
+        "paired_strong_delta_vs_dense_two": {
+          "mean": -0.02,
+          "percentile_95": [
+            -0.08888888888888889,
+            0.043478260869565216
+          ],
+          "queries": 50,
+          "clusters": 34,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      }
+    },
+    "0.1": {
+      "dense_two": {
+        "summary": {
+          "present": {
+            "relevance_grades": [
+              1,
+              3,
+              4,
+              9
+            ],
+            "abstained": 33,
+            "p95_ms": 26.041670050472007
+          },
+          "withheld": {
+            "relevance_grades": [
+              2,
+              4,
+              0,
+              0
+            ],
+            "abstained": 44,
+            "p95_ms": 23.451045807451006
+          }
+        },
+        "thresholds": [
+          {
+            "calibration_size": 39,
+            "test_indices": [
+              3,
+              7,
+              14,
+              19,
+              20,
+              33,
+              36,
+              38,
+              40,
+              44,
+              49
+            ],
+            "policy": {
+              "score": 6.125,
+              "margin": 0.25
+            }
+          },
+          {
+            "calibration_size": 39,
+            "test_indices": [
+              4,
+              6,
+              11,
+              12,
+              17,
+              21,
+              22,
+              24,
+              39,
+              43,
+              47
+            ],
+            "policy": {
+              "score": 6.0625,
+              "margin": 0.9375
+            }
+          },
+          {
+            "calibration_size": 39,
+            "test_indices": [
+              0,
+              8,
+              9,
+              15,
+              27,
+              29,
+              30,
+              31,
+              32,
+              46,
+              48
+            ],
+            "policy": {
+              "score": 6.0625,
+              "margin": 0.25
+            }
+          },
+          {
+            "calibration_size": 42,
+            "test_indices": [
+              1,
+              2,
+              10,
+              13,
+              16,
+              18,
+              35,
+              37
+            ],
+            "policy": {
+              "score": 6.125,
+              "margin": 0.0
+            }
+          },
+          {
+            "calibration_size": 41,
+            "test_indices": [
+              5,
+              23,
+              25,
+              26,
+              28,
+              34,
+              41,
+              42,
+              45
+            ],
+            "policy": {
+              "score": 6.0625,
+              "margin": 0.25
+            }
+          }
+        ],
+        "paired_strong_delta_vs_dense_two": {
+          "mean": 0.0,
+          "percentile_95": [
+            0.0,
+            0.0
+          ],
+          "queries": 50,
+          "clusters": 34,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      },
+      "lexical_challenger": {
+        "summary": {
+          "present": {
+            "relevance_grades": [
+              1,
+              3,
+              4,
+              9
+            ],
+            "abstained": 33,
+            "p95_ms": 26.677583437412963
+          },
+          "withheld": {
+            "relevance_grades": [
+              2,
+              3,
+              0,
+              0
+            ],
+            "abstained": 45,
+            "p95_ms": 24.07423313707113
+          }
+        },
+        "thresholds": [
+          {
+            "calibration_size": 39,
+            "test_indices": [
+              3,
+              7,
+              14,
+              19,
+              20,
+              33,
+              36,
+              38,
+              40,
+              44,
+              49
+            ],
+            "policy": {
+              "score": 6.125,
+              "margin": 0.25
+            }
+          },
+          {
+            "calibration_size": 39,
+            "test_indices": [
+              4,
+              6,
+              11,
+              12,
+              17,
+              21,
+              22,
+              24,
+              39,
+              43,
+              47
+            ],
+            "policy": {
+              "score": 6.125,
+              "margin": 0.3125
+            }
+          },
+          {
+            "calibration_size": 39,
+            "test_indices": [
+              0,
+              8,
+              9,
+              15,
+              27,
+              29,
+              30,
+              31,
+              32,
+              46,
+              48
+            ],
+            "policy": {
+              "score": 6.125,
+              "margin": 0.25
+            }
+          },
+          {
+            "calibration_size": 42,
+            "test_indices": [
+              1,
+              2,
+              10,
+              13,
+              16,
+              18,
+              35,
+              37
+            ],
+            "policy": {
+              "score": 6.125,
+              "margin": 0.0
+            }
+          },
+          {
+            "calibration_size": 41,
+            "test_indices": [
+              5,
+              23,
+              25,
+              26,
+              28,
+              34,
+              41,
+              42,
+              45
+            ],
+            "policy": {
+              "score": 6.125,
+              "margin": 0.25
+            }
+          }
+        ],
+        "paired_strong_delta_vs_dense_two": {
+          "mean": 0.0,
+          "percentile_95": [
+            -0.08163265306122448,
+            0.08
+          ],
+          "queries": 50,
+          "clusters": 34,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      },
+      "dense_six": {
+        "summary": {
+          "present": {
+            "relevance_grades": [
+              1,
+              2,
+              5,
+              12
+            ],
+            "abstained": 30,
+            "p95_ms": 54.421200696378925
+          },
+          "withheld": {
+            "relevance_grades": [
+              3,
+              2,
+              0,
+              0
+            ],
+            "abstained": 45,
+            "p95_ms": 56.36645928025245
+          }
+        },
+        "thresholds": [
+          {
+            "calibration_size": 39,
+            "test_indices": [
+              3,
+              7,
+              14,
+              19,
+              20,
+              33,
+              36,
+              38,
+              40,
+              44,
+              49
+            ],
+            "policy": {
+              "score": 6.375,
+              "margin": 0.125
+            }
+          },
+          {
+            "calibration_size": 39,
+            "test_indices": [
+              4,
+              6,
+              11,
+              12,
+              17,
+              21,
+              22,
+              24,
+              39,
+              43,
+              47
+            ],
+            "policy": {
+              "score": 6.375,
+              "margin": 0.0
+            }
+          },
+          {
+            "calibration_size": 39,
+            "test_indices": [
+              0,
+              8,
+              9,
+              15,
+              27,
+              29,
+              30,
+              31,
+              32,
+              46,
+              48
+            ],
+            "policy": {
+              "score": 6.0625,
+              "margin": 0.375
+            }
+          },
+          {
+            "calibration_size": 42,
+            "test_indices": [
+              1,
+              2,
+              10,
+              13,
+              16,
+              18,
+              35,
+              37
+            ],
+            "policy": {
+              "score": 6.375,
+              "margin": 0.0
+            }
+          },
+          {
+            "calibration_size": 41,
+            "test_indices": [
+              5,
+              23,
+              25,
+              26,
+              28,
+              34,
+              41,
+              42,
+              45
+            ],
+            "policy": {
+              "score": 6.0625,
+              "margin": 0.375
+            }
+          }
+        ],
+        "paired_strong_delta_vs_dense_two": {
+          "mean": 0.08,
+          "percentile_95": [
+            -0.02040816326530612,
+            0.19607843137254902
+          ],
+          "queries": 50,
+          "clusters": 34,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      },
+      "lexical_challenger_agreement": {
+        "summary": {
+          "present": {
+            "relevance_grades": [
+              1,
+              1,
+              3,
+              7
+            ],
+            "abstained": 38,
+            "p95_ms": 26.677583437412963
+          },
+          "withheld": {
+            "relevance_grades": [
+              3,
+              2,
+              0,
+              0
+            ],
+            "abstained": 45,
+            "p95_ms": 24.07423313707113
+          }
+        },
+        "thresholds": [
+          {
+            "calibration_size": 39,
+            "test_indices": [
+              3,
+              7,
+              14,
+              19,
+              20,
+              33,
+              36,
+              38,
+              40,
+              44,
+              49
+            ],
+            "policy": {
+              "score": 5.8125,
+              "margin": 0.0
+            }
+          },
+          {
+            "calibration_size": 39,
+            "test_indices": [
+              4,
+              6,
+              11,
+              12,
+              17,
+              21,
+              22,
+              24,
+              39,
+              43,
+              47
+            ],
+            "policy": {
+              "score": 6.0625,
+              "margin": 0.1875
+            }
+          },
+          {
+            "calibration_size": 39,
+            "test_indices": [
+              0,
+              8,
+              9,
+              15,
+              27,
+              29,
+              30,
+              31,
+              32,
+              46,
+              48
+            ],
+            "policy": {
+              "score": 5.8125,
+              "margin": 0.0
+            }
+          },
+          {
+            "calibration_size": 42,
+            "test_indices": [
+              1,
+              2,
+              10,
+              13,
+              16,
+              18,
+              35,
+              37
+            ],
+            "policy": {
+              "score": 6.0625,
+              "margin": 0.0
+            }
+          },
+          {
+            "calibration_size": 41,
+            "test_indices": [
+              5,
+              23,
+              25,
+              26,
+              28,
+              34,
+              41,
+              42,
+              45
+            ],
+            "policy": {
+              "score": 6.0625,
+              "margin": 0.0
+            }
+          }
+        ],
+        "paired_strong_delta_vs_dense_two": {
+          "mean": -0.06,
+          "percentile_95": [
+            -0.20930232558139536,
+            0.0784313725490196
+          ],
+          "queries": 50,
+          "clusters": 34,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      }
+    },
+    "0.2": {
+      "dense_two": {
+        "summary": {
+          "present": {
+            "relevance_grades": [
+              2,
+              4,
+              6,
+              10
+            ],
+            "abstained": 28,
+            "p95_ms": 26.041670050472007
+          },
+          "withheld": {
+            "relevance_grades": [
+              3,
+              6,
+              0,
+              0
+            ],
+            "abstained": 41,
+            "p95_ms": 23.451045807451006
+          }
+        },
+        "thresholds": [
+          {
+            "calibration_size": 39,
+            "test_indices": [
+              3,
+              7,
+              14,
+              19,
+              20,
+              33,
+              36,
+              38,
+              40,
+              44,
+              49
+            ],
+            "policy": {
+              "score": 5.8125,
+              "margin": 0.25
+            }
+          },
+          {
+            "calibration_size": 39,
+            "test_indices": [
+              4,
+              6,
+              11,
+              12,
+              17,
+              21,
+              22,
+              24,
+              39,
+              43,
+              47
+            ],
+            "policy": {
+              "score": 6.0625,
+              "margin": 0.3125
+            }
+          },
+          {
+            "calibration_size": 39,
+            "test_indices": [
+              0,
+              8,
+              9,
+              15,
+              27,
+              29,
+              30,
+              31,
+              32,
+              46,
+              48
+            ],
+            "policy": {
+              "score": 5.8125,
+              "margin": 0.25
+            }
+          },
+          {
+            "calibration_size": 42,
+            "test_indices": [
+              1,
+              2,
+              10,
+              13,
+              16,
+              18,
+              35,
+              37
+            ],
+            "policy": {
+              "score": 5.8125,
+              "margin": 0.0
+            }
+          },
+          {
+            "calibration_size": 41,
+            "test_indices": [
+              5,
+              23,
+              25,
+              26,
+              28,
+              34,
+              41,
+              42,
+              45
+            ],
+            "policy": {
+              "score": 5.8125,
+              "margin": 0.25
+            }
+          }
+        ],
+        "paired_strong_delta_vs_dense_two": {
+          "mean": 0.0,
+          "percentile_95": [
+            0.0,
+            0.0
+          ],
+          "queries": 50,
+          "clusters": 34,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      },
+      "lexical_challenger": {
+        "summary": {
+          "present": {
+            "relevance_grades": [
+              1,
+              3,
+              5,
+              10
+            ],
+            "abstained": 31,
+            "p95_ms": 26.677583437412963
+          },
+          "withheld": {
+            "relevance_grades": [
+              4,
+              5,
+              0,
+              0
+            ],
+            "abstained": 41,
+            "p95_ms": 24.07423313707113
+          }
+        },
+        "thresholds": [
+          {
+            "calibration_size": 39,
+            "test_indices": [
+              3,
+              7,
+              14,
+              19,
+              20,
+              33,
+              36,
+              38,
+              40,
+              44,
+              49
+            ],
+            "policy": {
+              "score": 5.8125,
+              "margin": 0.25
+            }
+          },
+          {
+            "calibration_size": 39,
+            "test_indices": [
+              4,
+              6,
+              11,
+              12,
+              17,
+              21,
+              22,
+              24,
+              39,
+              43,
+              47
+            ],
+            "policy": {
+              "score": 6.0,
+              "margin": 0.3125
+            }
+          },
+          {
+            "calibration_size": 39,
+            "test_indices": [
+              0,
+              8,
+              9,
+              15,
+              27,
+              29,
+              30,
+              31,
+              32,
+              46,
+              48
+            ],
+            "policy": {
+              "score": 5.8125,
+              "margin": 0.25
+            }
+          },
+          {
+            "calibration_size": 42,
+            "test_indices": [
+              1,
+              2,
+              10,
+              13,
+              16,
+              18,
+              35,
+              37
+            ],
+            "policy": {
+              "score": 4.8125,
+              "margin": 0.375
+            }
+          },
+          {
+            "calibration_size": 41,
+            "test_indices": [
+              5,
+              23,
+              25,
+              26,
+              28,
+              34,
+              41,
+              42,
+              45
+            ],
+            "policy": {
+              "score": 5.8125,
+              "margin": 0.25
+            }
+          }
+        ],
+        "paired_strong_delta_vs_dense_two": {
+          "mean": -0.02,
+          "percentile_95": [
+            -0.0625,
+            0.0
+          ],
+          "queries": 50,
+          "clusters": 34,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      },
+      "dense_six": {
+        "summary": {
+          "present": {
+            "relevance_grades": [
+              2,
+              4,
+              9,
+              11
+            ],
+            "abstained": 24,
+            "p95_ms": 54.421200696378925
+          },
+          "withheld": {
+            "relevance_grades": [
+              4,
+              6,
+              0,
+              0
+            ],
+            "abstained": 40,
+            "p95_ms": 56.36645928025245
+          }
+        },
+        "thresholds": [
+          {
+            "calibration_size": 39,
+            "test_indices": [
+              3,
+              7,
+              14,
+              19,
+              20,
+              33,
+              36,
+              38,
+              40,
+              44,
+              49
+            ],
+            "policy": {
+              "score": 5.75,
+              "margin": 0.3125
+            }
+          },
+          {
+            "calibration_size": 39,
+            "test_indices": [
+              4,
+              6,
+              11,
+              12,
+              17,
+              21,
+              22,
+              24,
+              39,
+              43,
+              47
+            ],
+            "policy": {
+              "score": 5.75,
+              "margin": 0.375
+            }
+          },
+          {
+            "calibration_size": 39,
+            "test_indices": [
+              0,
+              8,
+              9,
+              15,
+              27,
+              29,
+              30,
+              31,
+              32,
+              46,
+              48
+            ],
+            "policy": {
+              "score": 5.75,
+              "margin": 0.3125
+            }
+          },
+          {
+            "calibration_size": 42,
+            "test_indices": [
+              1,
+              2,
+              10,
+              13,
+              16,
+              18,
+              35,
+              37
+            ],
+            "policy": {
+              "score": 5.75,
+              "margin": 0.0
+            }
+          },
+          {
+            "calibration_size": 41,
+            "test_indices": [
+              5,
+              23,
+              25,
+              26,
+              28,
+              34,
+              41,
+              42,
+              45
+            ],
+            "policy": {
+              "score": 5.75,
+              "margin": 0.3125
+            }
+          }
+        ],
+        "paired_strong_delta_vs_dense_two": {
+          "mean": 0.08,
+          "percentile_95": [
+            -0.02040816326530612,
+            0.19230769230769232
+          ],
+          "queries": 50,
+          "clusters": 34,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      },
+      "lexical_challenger_agreement": {
+        "summary": {
+          "present": {
+            "relevance_grades": [
+              1,
+              2,
+              4,
+              7
+            ],
+            "abstained": 36,
+            "p95_ms": 26.677583437412963
+          },
+          "withheld": {
+            "relevance_grades": [
+              4,
+              3,
+              0,
+              0
+            ],
+            "abstained": 43,
+            "p95_ms": 24.07423313707113
+          }
+        },
+        "thresholds": [
+          {
+            "calibration_size": 39,
+            "test_indices": [
+              3,
+              7,
+              14,
+              19,
+              20,
+              33,
+              36,
+              38,
+              40,
+              44,
+              49
+            ],
+            "policy": {
+              "score": 3.625,
+              "margin": 0.25
+            }
+          },
+          {
+            "calibration_size": 39,
+            "test_indices": [
+              4,
+              6,
+              11,
+              12,
+              17,
+              21,
+              22,
+              24,
+              39,
+              43,
+              47
+            ],
+            "policy": {
+              "score": 6.0625,
+              "margin": 0.1875
+            }
+          },
+          {
+            "calibration_size": 39,
+            "test_indices": [
+              0,
+              8,
+              9,
+              15,
+              27,
+              29,
+              30,
+              31,
+              32,
+              46,
+              48
+            ],
+            "policy": {
+              "score": 4.1875,
+              "margin": 0.0
+            }
+          },
+          {
+            "calibration_size": 42,
+            "test_indices": [
+              1,
+              2,
+              10,
+              13,
+              16,
+              18,
+              35,
+              37
+            ],
+            "policy": {
+              "score": 5.8125,
+              "margin": 0.0
+            }
+          },
+          {
+            "calibration_size": 41,
+            "test_indices": [
+              5,
+              23,
+              25,
+              26,
+              28,
+              34,
+              41,
+              42,
+              45
+            ],
+            "policy": {
+              "score": 5.8125,
+              "margin": 0.0
+            }
+          }
+        ],
+        "paired_strong_delta_vs_dense_two": {
+          "mean": -0.1,
+          "percentile_95": [
+            -0.23529411764705882,
+            0.02
+          ],
+          "queries": 50,
+          "clusters": 34,
+          "seed": 20261116,
+          "bootstrap_repeats": 10000,
+          "sampling_unit": "whole source paper; query-weighted mean"
+        }
+      }
+    }
+  },
+  "observations": {
+    "present": {
+      "changed": 20,
+      "agreement": 27,
+      "lexical_ranks": {
+        "1": 22,
+        "4": 9,
+        "5": 7,
+        "2": 8,
+        "3": 3,
+        "6": 1
+      },
+      "lexical_ms_p95": 0.7356604561209679,
+      "strong_exposure_gains": 1,
+      "strong_exposure_losses": 4,
+      "strong_before_agreement_veto": 26,
+      "strong_rejected_by_agreement_veto": 11,
+      "dense_two": {
+        "model_pairs": 100,
+        "strong_exposure": 35,
+        "top_one_grades": [
+          10,
+          11,
+          15,
+          14
+        ]
+      },
+      "lexical_challenger": {
+        "model_pairs": 100,
+        "strong_exposure": 32,
+        "top_one_grades": [
+          9,
+          15,
+          13,
+          13
+        ]
+      },
+      "dense_six": {
+        "model_pairs": 300,
+        "strong_exposure": 45,
+        "top_one_grades": [
+          7,
+          15,
+          15,
+          13
+        ]
+      },
+      "lexical_challenger_agreement": {
+        "model_pairs": 100,
+        "strong_exposure": 32,
+        "top_one_grades": [
+          8,
+          4,
+          7,
+          8
+        ]
+      }
+    },
+    "withheld": {
+      "changed": 21,
+      "agreement": 22,
+      "lexical_ranks": {
+        "2": 13,
+        "3": 7,
+        "5": 5,
+        "1": 16,
+        "6": 4,
+        "4": 5
+      },
+      "lexical_ms_p95": 0.7163159549236296,
+      "strong_exposure_gains": 0,
+      "strong_exposure_losses": 0,
+      "strong_before_agreement_veto": 0,
+      "strong_rejected_by_agreement_veto": 0,
+      "dense_two": {
+        "model_pairs": 100,
+        "strong_exposure": 0,
+        "top_one_grades": [
+          13,
+          37,
+          0,
+          0
+        ]
+      },
+      "lexical_challenger": {
+        "model_pairs": 100,
+        "strong_exposure": 0,
+        "top_one_grades": [
+          16,
+          34,
+          0,
+          0
+        ]
+      },
+      "dense_six": {
+        "model_pairs": 300,
+        "strong_exposure": 0,
+        "top_one_grades": [
+          12,
+          38,
+          0,
+          0
+        ]
+      },
+      "lexical_challenger_agreement": {
+        "model_pairs": 100,
+        "strong_exposure": 0,
+        "top_one_grades": [
+          11,
+          11,
+          0,
+          0
+        ]
+      }
+    }
+  }
+}
