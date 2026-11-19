@@ -1,0 +1,110 @@
+{
+  "policy_sha256": "dba12a335b8d2dad96071f24a9581b34ecf5614d7b390d92593f60f702b4ba48",
+  "job": "41391",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "reader_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+  "script_sha256": "155611ef51354cf47fc960caaa7d4490be79c4d4dd99be1b82a0d94e582aecc2",
+  "cases": 500,
+  "arms": {
+    "initial": {
+      "correct": 301,
+      "paired_vs_fixed_two": {
+        "mean": -0.042,
+        "percentile_95": [
+          -0.07333333333333333,
+          -0.016054739243487225
+        ],
+        "queries": 500,
+        "clusters": 113,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000,
+        "sampling_unit": "whole source paper; query-weighted mean"
+      },
+      "mean_tokens": 290.962,
+      "latency_p50_p95_ms": [
+        17.204049974679947,
+        35.27075564488768
+      ]
+    },
+    "fixed_two": {
+      "correct": 322,
+      "paired_vs_fixed_two": {
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 500,
+        "clusters": 113,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000,
+        "sampling_unit": "whole source paper; query-weighted mean"
+      },
+      "mean_tokens": 376.948,
+      "latency_p50_p95_ms": [
+        24.569333530962467,
+        41.15462927147746
+      ]
+    },
+    "fixed_three": {
+      "correct": 324,
+      "paired_vs_fixed_two": {
+        "mean": 0.004,
+        "percentile_95": [
+          -0.01709558823529412,
+          0.021484900033602143
+        ],
+        "queries": 500,
+        "clusters": 113,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000,
+        "sampling_unit": "whole source paper; query-weighted mean"
+      },
+      "mean_tokens": 410.102,
+      "latency_p50_p95_ms": [
+        25.048513896763325,
+        44.81900809332728
+      ]
+    },
+    "coverage_stop": {
+      "correct": 311,
+      "paired_vs_fixed_two": {
+        "mean": -0.022,
+        "percentile_95": [
+          -0.047031496627923663,
+          -0.0021929824561403508
+        ],
+        "queries": 500,
+        "clusters": 113,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000,
+        "sampling_unit": "whole source paper; query-weighted mean"
+      },
+      "mean_tokens": 348.02,
+      "latency_p50_p95_ms": [
+        22.32376392930746,
+        37.704709731042385
+      ]
+    },
+    "verifier_policy": {
+      "correct": 302,
+      "paired_vs_fixed_two": {
+        "mean": -0.04,
+        "percentile_95": [
+          -0.06923076923076923,
+          -0.014402922106759043
+        ],
+        "queries": 500,
+        "clusters": 113,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000,
+        "sampling_unit": "whole source paper; query-weighted mean"
+      },
+      "mean_tokens": 291.5,
+      "latency_p50_p95_ms": [
+        17.429910600185394,
+        35.500740446150296
+      ]
+    }
+  }
+}
