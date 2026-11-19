@@ -29,6 +29,8 @@ TASK = ("Determine whether the contribution heading directly covers the requeste
 METHOD = "definition_contrast"
 BASELINE_SHA256 = "a5325a3b1bb0e7c21019726f740c77b5cbf0cf7580c2fbce3afd3cc79dca2f5e"
 ARMS = ("baseline", "single_head", "rival_heads")
+SHORTLIST_ARMS = (*ARMS, "two_head_veto", "two_head_repair")
+VERIFIER_SHA256 = "b84cfa9ca6f9cd3088ec2747a26ebb52d4c2c49d2729aa6afa3ae09200b74543"
 METRICS = ("clean", "returned", "wrong_source", "wrong_role", "wrong_author")
 
 
@@ -64,9 +66,67 @@ def calibrate(reader):
     return calibration
 
 
-def summarize(rows):
+def shortlist(definition_scores):
+    order = np.argsort(-definition_scores, kind="stable")[:2]
+    return tuple(roles.ROLES[i] for i in order)
+
+
+def confirm_shortlist(reader, phrase, candidates):
+    margins = score(reader, phrase, candidates)
+    return {head: min(margin, rival_gap(margins, head)) for head, margin in margins.items()}
+
+
+def calibrate_shortlist(reader, encoder, definitions):
+    examples = [(phrase, role) for role, phrase in roles.PARAPHRASES.items()]
+    examples.extend((phrase, None) for phrase in roles.OUTSIDE)
+    annotated = []
+    for phrase, gold in examples:
+        vector = encoder.encode([gate.query(phrase)])[0]
+        candidates = shortlist(definitions @ vector)
+        verdicts = confirm_shortlist(reader, phrase, candidates)
+        annotated.extend((value, head == gold) for head, value in verdicts.items())
+    cutoff = max(value for value, correct in annotated if not correct)
+    return dict(cutoff=cutoff, correct_retained=sum(val > max(0, cutoff) and good for val, good in annotated),
+                correct_pairs_proposed=sum(good for _, good in annotated), correct_phrases=len(roles.PARAPHRASES),
+                negative_pairs=sum(not good for _, good in annotated))
+
+
+def shortlist_actions(reader, index, phrase, candidates, nominated, initial, expected, goal, gates_pass,
+                      control, shared_ms, cutoff):
+    start = perf_counter()
+    selected = index.notes[nominated].memberships
+    known_members = selected.get(initial, set())
+    possible = {head for head in candidates if head != initial and known_members & selected.get(head, set())}
+    repair_checked = gates_pass and bool(possible)
+    repair_prep_ms = (perf_counter() - start) * 1000
+    veto_checked = bool(control["returned"])
+
+    start = perf_counter()
+    verdicts = confirm_shortlist(reader, phrase, candidates) if repair_checked or veto_checked else {}
+    verify_ms = (perf_counter() - start) * 1000
+    proposed = candidates[0]
+    if veto_checked and verdicts[proposed] <= cutoff:
+        control = dict.fromkeys(METRICS, 0)
+    veto_ms = verify_ms if veto_checked else 0.
+
+    start = perf_counter()
+    winner = max(verdicts, key=verdicts.get) if verdicts else proposed
+    # The second duty must be distinct and a repair needs a unique semantic winner.
+    repair = repair_checked and winner in possible and verdicts[winner] > max(0, cutoff)
+    repaired = base.outcome(index, nominated, goal, initial, expected, winner, repair)
+    repair_ms = repair_prep_ms + (verify_ms if repair_checked else 0.) + (perf_counter() - start) * 1000
+    return {
+        "two_head_veto": dict(control, verify_ms=verify_ms if veto_checked else None,
+                              ms=shared_ms + veto_ms),
+        "two_head_repair": dict(repaired, verify_ms=verify_ms if repair_checked else None,
+                                ms=shared_ms + repair_ms, changed_role=int(repair and winner != proposed),
+                                rescued=int(repair and winner != proposed and nominated == goal and winner == expected),
+                                reachable=int(repair_checked and nominated == goal and expected in possible)),
+    }
+
+def summarize(rows, arms=ARMS):
     report = {}
-    for arm in ARMS:
+    for arm in arms:
         observed = [records[arm] for _, records in rows]
         ref = [records["baseline"] for _, records in rows]
         counts = {key: sum(row[key] for row in observed) for key in METRICS}
@@ -81,6 +141,10 @@ def summarize(rows):
                 counts[f"{key}_delta"] = clustered_paired_interval(
                     [a[key] - b[key] for a, b in zip(observed, ref, strict=True)], [group for group, _ in rows],
                 )
+        if arm == "two_head_repair":
+            counts.update(changed_role=sum(row["changed_role"] for row in observed),
+                          rescued=sum(row["rescued"] for row in observed),
+                          reachable=sum(row["reachable"] for row in observed))
         report[arm] = counts
     return report
 
@@ -111,7 +175,7 @@ def matched_coverage(rows, report):
     return controls
 
 def run(old, first, fresh, niso, role_results, source_results, body_results, baseline_results,
-        embedding, reranker, output):
+        embedding, reranker, output, shortlist_reference=None):
     if output.exists() or not os.environ.get("SLURM_JOB_ID") or not torch.cuda.is_available():
         raise ValueError("Require a fresh output and Slurm CUDA")
     for path, expected in (
@@ -120,6 +184,11 @@ def run(old, first, fresh, niso, role_results, source_results, body_results, bas
     ):
         if digest(path) != expected:
             raise ValueError(f"Changed input: {path.name}")
+
+    if shortlist_reference is not None and digest(shortlist_reference) != VERIFIER_SHA256:
+        raise ValueError("Changed verifier comparison result")
+    prior = json.loads(shortlist_reference.read_bytes()) if shortlist_reference is not None else None
+    arms = SHORTLIST_ARMS if prior is not None else ARMS
 
     guide, controller, source_policy, body_policy, baseline = (
         json.loads(path.read_bytes()) for path in (niso, role_results, source_results, body_results, baseline_results)
@@ -146,6 +215,9 @@ def run(old, first, fresh, niso, role_results, source_results, body_results, bas
                                   for role, heading in HEADS.items()])
     excluded = encoder.encode([f"{name}: {guide['definitions'][name]}" for name in gate.EXCLUDED_PROTOTYPES])
 
+    if prior is not None:
+        calibration["shortlist"] = calibrate_shortlist(reader, encoder, definitions)
+
     panels = {}
     for form in source.FORMS:
         cuts = source_policy["thresholds"][form], body_policy["thresholds"][form]["lexical_body"]["threshold"]
@@ -166,7 +238,9 @@ def run(old, first, fresh, niso, role_results, source_results, body_results, bas
                 source_pass, gate_ms = base.alternate(clue, nominated, index, bodies, dense, *cuts)
                 for kind, example, expected in (("supported", good, target), ("unsupported", bad, None)):
                     phrase = example["text"]
-                    proposed, signals, role_ms = gate.score(phrase, encoder, bank, definitions, excluded)
+                    proposed, signals, role_ms, definition_scores = gate.score_with_definitions(
+                        phrase, encoder, bank, definitions, excluded,
+                    )
                     chosen = proposed[METHOD]
                     start = perf_counter()
                     accepted = source_pass and signals[METHOD] > controller["thresholds"][METHOD]
@@ -175,7 +249,20 @@ def run(old, first, fresh, niso, role_results, source_results, body_results, bas
                     records = {"baseline": dict(control, ms=shared_ms, verify_ms=None,
                                                 proposal_score=signals[METHOD])}
                     verification_order = ARMS[1:] if position % 2 == 0 else tuple(reversed(ARMS[1:]))
+                    if prior is not None:
+                        rotation = position % 3
+                        verification_order = (*ARMS[1:], "shortlist")
+                        verification_order = verification_order[rotation:] + verification_order[:rotation]
                     for arm in verification_order:
+                        if arm == "shortlist":
+                            start = perf_counter()
+                            candidates = shortlist(definition_scores)
+                            shortlist_ms = (perf_counter() - start) * 1000
+                            records.update(shortlist_actions(
+                                reader, index, phrase, candidates, nominated, initial, expected, goal, accepted,
+                                control, shared_ms + shortlist_ms, calibration["shortlist"]["cutoff"],
+                            ))
+                            continue
                         record = records["baseline"].copy()
                         if control["returned"]:
                             start = perf_counter()
@@ -194,10 +281,15 @@ def run(old, first, fresh, niso, role_results, source_results, body_results, bas
         panels[form] = {}
         for (state, kind), rows in observations.items():
             panel = f"{state}/{kind}"
-            values = summarize(rows)
+            values = summarize(rows, arms)
             expected = baseline["results"][form]["panels"][panel]["definition_contrast/body"]
             if any(values["baseline"][k] != expected[k] for k in METRICS):
                 raise AssertionError(f"Baseline replay diverged in {form}/{panel}")
+            if prior is not None:
+                for arm in ARMS:
+                    previous = prior["panels"][form][panel][arm]
+                    if any(values[arm][k] != previous[k] for k in METRICS):
+                        raise AssertionError(f"Verifier replay diverged in {form}/{panel}/{arm}")
             values["proposal_at_matched_coverage"] = matched_coverage(rows, values)
             panels[form][panel] = values
 
@@ -205,12 +297,14 @@ def run(old, first, fresh, niso, role_results, source_results, body_results, bas
         job=os.environ["SLURM_JOB_ID"], gpu=torch.cuda.get_device_name(), queries=len(queries),
         author_groups=len(set(groups)), sources=len(notes), calibration=calibration,
         baseline_sha256=digest(baseline_results), code_sha256=digest(Path(__file__)),
+        **({"verifier_reference_sha256": digest(shortlist_reference)} if prior is not None else {}),
         embedding_revision=provenance["revision"], reranker_revision=reader.provenance["revision"], panels=panels,
     ))
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--shortlist-reference", type=Path)
     for key in ("old", "first", "fresh", "niso", "role_results", "source_results", "body_results",
                 "baseline_results", "embedding", "reranker", "output"):
         parser.add_argument(key, type=Path)

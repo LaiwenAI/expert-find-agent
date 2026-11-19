@@ -47,6 +47,11 @@ def query(phrase):
 
 
 def score(phrase, encoder, bank, definitions, excluded):
+    prediction, confidence, elapsed, _ = score_with_definitions(phrase, encoder, bank, definitions, excluded)
+    return prediction, confidence, elapsed
+
+
+def score_with_definitions(phrase, encoder, bank, definitions, excluded):
     start = perf_counter()
     vec = encoder.encode([query(phrase)])[0]
     scores = bank @ vec
@@ -59,7 +64,7 @@ def score(phrase, encoder, bank, definitions, excluded):
                    definition_contrast=float(definition_scores[defined]) - outside)
     roles = dict.fromkeys(METHODS, prior.ROLES[order[0]])
     roles["definition_contrast"] = prior.ROLES[defined]
-    return roles, outputs, (perf_counter() - start) * 1000
+    return roles, outputs, (perf_counter() - start) * 1000, definition_scores
 
 
 def gate_threshold(positives, negatives, method):
