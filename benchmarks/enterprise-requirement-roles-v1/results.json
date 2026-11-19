@@ -1,0 +1,175 @@
+{
+  "job": "40689",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "model": {
+    "repo": "Qwen/Qwen3-4B-Instruct-2507",
+    "revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "files": {
+      "LICENSE": "832dd9e00a68dd83b3c3fb9f5588dad7dcf337a0db50f7d9483f310cd292e92e",
+      "config.json": "5beea1a4a34c62782bfb2f911c606741a3bab8f92d80a118fa053c28af12e8ba",
+      "generation_config.json": "835fffe355c9438e7a25be099b3fccaa98350b83451f9fd2d99512e74f1ade48",
+      "merges.txt": "599bab54075088774b1733fde865d5bd747cbcc7a547c5bc12610e874e26f5e3",
+      "model-00001-of-00003.safetensors": "75311d91bb08cf0b882913da464a1e722a31fb44db35208663487efb7a3d8ed6",
+      "model-00002-of-00003.safetensors": "0b48adbb1f60e901153d91907ba11ce63bd4b8b584482e730f48808d055dfba1",
+      "model-00003-of-00003.safetensors": "7dd39ccca5e4de123c74c14af44c9bf2eb75df33b4614382af0134528e060d5d",
+      "model.safetensors.index.json": "d6c42883a895dfef5b0080ed2116a1bcd764f558406b98923d675978a1abf29c",
+      "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+      "tokenizer_config.json": "a62ff0a2472a0fa1b8eaabcb57c59b58afa42a22831dc141400b6e0cf2b65ce3",
+      "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+    }
+  },
+  "script_sha256": "9ec242daba908f686fb91140cc4868ca332fc366838e431cdc4c65ffa69b4a2b",
+  "controls_sha256": "be7f7e6e1aa96f647601ac3b7c4c3943c05a130a775147d7ae248963ced6f025",
+  "development_sha256": "9ac317f0cca12de8db872b5b70b666448b1d0c1feb587b1fca8233f39c2c6ba0",
+  "fixed_local_margin": 1.5,
+  "controls": 48,
+  "development_queries": 80,
+  "report": {
+    "synthetic": {
+      "full": {
+        "classified_spans": 144,
+        "agrees_with_full": 144,
+        "prior_qualification": 44,
+        "matched_control": 110,
+        "false_prior_qualification": 20,
+        "missed_prior_qualification": 12,
+        "annotated_control_spans": 144,
+        "near_prior_disagreements": 0,
+        "queries_with_prior_qualification": 25,
+        "full_context_checks": 144,
+        "total_padded_tokens": 33772,
+        "mean_ms": 40.4168659200271,
+        "p95_ms": 53.16179050132632,
+        "confusion": {
+          "other -> prior_qualification": 19,
+          "operating_condition -> operating_condition": 23,
+          "future_work -> future_work": 46,
+          "prior_qualification -> prior_qualification": 24,
+          "other -> other": 17,
+          "prior_qualification -> future_work": 12,
+          "operating_condition -> future_work": 1,
+          "future_work -> other": 1,
+          "future_work -> prior_qualification": 1
+        }
+      },
+      "local": {
+        "classified_spans": 144,
+        "agrees_with_full": 114,
+        "prior_qualification": 45,
+        "matched_control": 130,
+        "false_prior_qualification": 10,
+        "missed_prior_qualification": 1,
+        "annotated_control_spans": 144,
+        "near_prior_disagreements": 27,
+        "queries_with_prior_qualification": 36,
+        "full_context_checks": 0,
+        "total_padded_tokens": 31356,
+        "mean_ms": 39.7759871945406,
+        "p95_ms": 52.294051088392735,
+        "confusion": {
+          "other -> other": 29,
+          "operating_condition -> operating_condition": 23,
+          "future_work -> future_work": 43,
+          "prior_qualification -> prior_qualification": 35,
+          "operating_condition -> future_work": 1,
+          "prior_qualification -> future_work": 1,
+          "future_work -> prior_qualification": 3,
+          "future_work -> operating_condition": 2,
+          "other -> prior_qualification": 7
+        }
+      },
+      "cascade": {
+        "classified_spans": 144,
+        "agrees_with_full": 130,
+        "prior_qualification": 31,
+        "matched_control": 122,
+        "false_prior_qualification": 7,
+        "missed_prior_qualification": 12,
+        "annotated_control_spans": 144,
+        "near_prior_disagreements": 13,
+        "queries_with_prior_qualification": 24,
+        "full_context_checks": 60,
+        "total_padded_tokens": 45386,
+        "mean_ms": 58.69515185865263,
+        "p95_ms": 82.32474736869335,
+        "confusion": {
+          "other -> other": 30,
+          "operating_condition -> operating_condition": 23,
+          "future_work -> future_work": 45,
+          "prior_qualification -> prior_qualification": 24,
+          "prior_qualification -> future_work": 12,
+          "operating_condition -> future_work": 1,
+          "other -> prior_qualification": 6,
+          "future_work -> other": 1,
+          "future_work -> operating_condition": 1,
+          "future_work -> prior_qualification": 1
+        }
+      }
+    },
+    "development": {
+      "full": {
+        "classified_spans": 1452,
+        "agrees_with_full": 1452,
+        "prior_qualification": 71,
+        "annotated_control_spans": 0,
+        "near_prior_disagreements": 0,
+        "queries_with_prior_qualification": 27,
+        "full_context_checks": 1452,
+        "total_padded_tokens": 1669590,
+        "mean_ms": 1287.2099654050544,
+        "p95_ms": 4642.213146388526,
+        "confusion": {}
+      },
+      "local": {
+        "classified_spans": 1452,
+        "agrees_with_full": 1194,
+        "prior_qualification": 15,
+        "annotated_control_spans": 0,
+        "near_prior_disagreements": 78,
+        "queries_with_prior_qualification": 12,
+        "full_context_checks": 0,
+        "total_padded_tokens": 435881,
+        "mean_ms": 305.8376065455377,
+        "p95_ms": 754.743362125009,
+        "confusion": {}
+      },
+      "cascade": {
+        "classified_spans": 1452,
+        "agrees_with_full": 1217,
+        "prior_qualification": 9,
+        "annotated_control_spans": 0,
+        "near_prior_disagreements": 64,
+        "queries_with_prior_qualification": 6,
+        "full_context_checks": 55,
+        "total_padded_tokens": 507293,
+        "mean_ms": 364.0375028597191,
+        "p95_ms": 918.6912677250797,
+        "confusion": {}
+      }
+    }
+  },
+  "raw_file_sha256": "0ce53d515a719d2fd5307d57a03d4c672f38ee949727c8be674f061d359dfd7c",
+  "review_queue": {
+    "cases": 43,
+    "source_requests": 29,
+    "selected_counts": {
+      "agreement_control": 12,
+      "other_role_disagreement": 12,
+      "full_only_prerequisite": 12,
+      "cascade_only_prerequisite": 1,
+      "both_prerequisite": 6
+    },
+    "available_counts": {
+      "agreement_control": 1209,
+      "other_role_disagreement": 171,
+      "full_only_prerequisite": 63,
+      "cascade_only_prerequisite": 1,
+      "both_prerequisite": 8
+    },
+    "development_sha256": "9ac317f0cca12de8db872b5b70b666448b1d0c1feb587b1fca8233f39c2c6ba0",
+    "trace_sha256": "0ce53d515a719d2fd5307d57a03d4c672f38ee949727c8be674f061d359dfd7c",
+    "review_sha256": "c8faabcf6fb412ba35d1142f6d05660fcef24d31303f1068fb1b29934d14f8de",
+    "human_labels": 0,
+    "scope": "Purposive model-disagreement and agreement audit for development. No population estimate."
+  }
+}
