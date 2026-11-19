@@ -1,0 +1,74 @@
+{
+  "dataset": "KDD",
+  "job": "42824",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "workers": 4,
+  "shared_weights": {
+    "shared_parameter_bytes": 1191553024,
+    "extra_parameter_bytes": 0
+  },
+  "panel_queries": 122,
+  "arrival_rps": 12,
+  "window_seconds": 12,
+  "windows": 3,
+  "saturated_seconds": 18,
+  "panel_sha256": "4b050586414320a927b518e7abb201f0cb5e6044f21a586685cea25af83a602f",
+  "code_sha256": "b53d8bc38edee77534ffa02a73eed3cda5e614729f9a85451d64a89961d94bae",
+  "vector_protocol_sha256": "85e4010895e8717c57d19113bdfaf3fb0c68afbb49f74635baac036eb06445a0",
+  "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "reranker_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+  "open_loop": {
+    "padded4": {
+      "requests": 432,
+      "exact": 432,
+      "p95_ms": 1558.5054168477654,
+      "worker_wait_p95_ms": 1206.4865191467106,
+      "arrival_lag_max_ms": 2.9858779162168503,
+      "drained_rps": 11.528011692622098,
+      "window_p95_ms": [
+        696.3404927402735,
+        1149.9359399080276,
+        1645.7993934862313
+      ],
+      "window_completed": [
+        137,
+        139,
+        137
+      ]
+    },
+    "packed8": {
+      "requests": 432,
+      "exact": 432,
+      "p95_ms": 167.19358311966047,
+      "worker_wait_p95_ms": 0.10939575731754303,
+      "arrival_lag_max_ms": 0.5234461277723312,
+      "drained_rps": 12.01782043653642,
+      "window_p95_ms": [
+        137.67210841178888,
+        182.2553839534521,
+        129.0771620348096
+      ],
+      "window_completed": [
+        144,
+        143,
+        145
+      ]
+    }
+  },
+  "saturation": {
+    "packed8": {
+      "exact": 273,
+      "submitted": 273,
+      "completed_within_window": 269,
+      "completed_rps": 14.944444444444445,
+      "p95_ms": 427.6164967566727
+    },
+    "padded4": {
+      "exact": 207,
+      "submitted": 207,
+      "completed_within_window": 203,
+      "completed_rps": 11.277777777777779,
+      "p95_ms": 528.9581397548318
+    }
+  }
+}
