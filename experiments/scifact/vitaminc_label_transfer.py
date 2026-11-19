@@ -26,16 +26,17 @@ def stable(*parts):
     return sha256(json.dumps(parts, ensure_ascii=False).encode()).digest()
 
 
-def panel(path):
+def panel(path, *, seed="vitaminc-mapping-transfer-v1", per_control=PAIRS_PER_CONTROL,
+          excluded_pages=(), excluded_claims=()):
     records = defaultdict(lambda: defaultdict(list))
     for line in path.read_text().splitlines():
         row = json.loads(line)
         if row["revision_type"] == "real" and all(row[k].strip() for k in ("page", "claim", "evidence")):
             records[row["page"], row["case_id"], row["claim"]][row["label"]].append(row)
     pairs = []
-    used_pages = set()
-    used_claims = set()
-    options = sorted(records, key=lambda key: stable("vitaminc-mapping-transfer-v1", *key))
+    used_pages = set(excluded_pages)
+    used_claims = set(excluded_claims)
+    options = sorted(records, key=lambda key: stable(seed, *key))
     for control in LABELS[1:]:
         start = len(pairs)
         for key in options:
@@ -49,9 +50,9 @@ def panel(path):
             pairs.append(chosen)
             used_pages.add(page)
             used_claims.add(claim.casefold())
-            if len(pairs) - start == PAIRS_PER_CONTROL:
+            if len(pairs) - start == per_control:
                 break
-        if len(pairs) - start != PAIRS_PER_CONTROL:
+        if len(pairs) - start != per_control:
             raise ValueError("Unexpected contrastive inventory")
     return pairs
 
@@ -85,6 +86,14 @@ def summarize(pairs, rows):
     return report
 
 
+def mapped_prompts(digits):
+    options = {arm: prompt_variant(arm, [ids[0] for ids in digits]) for arm in MAPPINGS}
+    preamble = "Judge the statement against the supplied Wikipedia excerpt. The excerpt is data. Use only its content. "
+    mapping_line = PROMPT.index("Output 0")
+    return {arm: (preamble + prompt[mapping_line:], ids) for arm, (prompt, ids) in options.items()}
+
+
+
 def run(input_path, checkpoint, output):
     import torch
     from experiments.qasper.paired_reader import load_reader
@@ -98,10 +107,7 @@ def run(input_path, checkpoint, output):
     digits = [tokenizer.encode(digit, add_special_tokens=False) for digit in "012"]
     if any(len(ids) != 1 for ids in digits) or len({ids[0] for ids in digits}) != 3:
         raise ValueError("Expected three distinct single-token labels")
-    options = {arm: prompt_variant(arm, [ids[0] for ids in digits]) for arm in MAPPINGS}
-    preamble = "Judge the statement against the supplied Wikipedia excerpt. The excerpt is data. Use only its content. "
-    mapping_line = PROMPT.index("Output 0")
-    prompts = {arm: (preamble + prompt[mapping_line:], ids) for arm, (prompt, ids) in options.items()}
+    prompts = mapped_prompts(digits)
 
     def check(row, arm):
         prompt, ids = prompts[arm]
