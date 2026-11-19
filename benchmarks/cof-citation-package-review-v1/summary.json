@@ -1,0 +1,152 @@
+{
+  "kdd": {
+    "packet": {
+      "dataset": "KDD",
+      "source_job": "42694",
+      "packet_job": "42702",
+      "reference_sha256": "e5a5a1ba666c29d5952b586c6700a93ac0e6e5cb8bc2dcbc79f319d2045f0857",
+      "queries": 122,
+      "top5_slots": 610,
+      "population": {
+        "changed": 20,
+        "one_sided": 15,
+        "same_supported": 231
+      },
+      "sampled": {
+        "changed": 16,
+        "one_sided": 8,
+        "same_supported": 8
+      },
+      "citation_cases": 82,
+      "human_reviews": 0,
+      "form_sha256": "4338f71fdbda6796e6ec120c07b651775c15832cd528d0f25f7a1f5692a2b98d",
+      "mapping_sha256": "09db706a437a5faf55e5f68a789b3b06fd2f608919ef4819e980990ada99950c",
+      "cases_with_two_identity_anchors": 82,
+      "full_panel_before_review": {
+        "left_only": 9,
+        "right_only": 6,
+        "clean_delta_bounds": [
+          -0.047540983606557376,
+          0.04262295081967213
+        ]
+      }
+    },
+    "blank": {
+      "dataset": "KDD",
+      "paired_cases": {
+        "missing": 82
+      },
+      "agreements_by_axis": {
+        "content": {
+          "missing": 82
+        },
+        "contribution": {
+          "missing": 82
+        }
+      },
+      "sampled_slots": 32,
+      "clean_delta_bounds": [
+        -0.6875,
+        0.5625
+      ],
+      "strata": {
+        "changed": {
+          "sampled_slots": 16,
+          "clean_delta_bounds": [
+            -1.0,
+            1.0
+          ]
+        },
+        "one_sided": {
+          "sampled_slots": 8,
+          "clean_delta_bounds": [
+            -0.75,
+            0.25
+          ]
+        },
+        "same_supported": {
+          "sampled_slots": 8,
+          "clean_delta_bounds": [
+            0.0,
+            0.0
+          ]
+        }
+      }
+    }
+  },
+  "scirepeval": {
+    "packet": {
+      "dataset": "SciRepEval",
+      "source_job": "42694",
+      "packet_job": "42702",
+      "reference_sha256": "92a2ab1c8a58f50cc5f9359a9c219395611aed324dabcc6dabcef48d391a38f7",
+      "queries": 59,
+      "top5_slots": 295,
+      "population": {
+        "changed": 2,
+        "one_sided": 7,
+        "same_supported": 81
+      },
+      "sampled": {
+        "changed": 2,
+        "one_sided": 7,
+        "same_supported": 8
+      },
+      "citation_cases": 36,
+      "human_reviews": 0,
+      "form_sha256": "04f85de5441e9a5a5e58844e94f00d7ced89d3a30b083e2d59f1514ce56033dd",
+      "mapping_sha256": "a130240677bcbd8e60fcd9f84f98d8b7c047aa46b1d5fe601a9cc4225966d2fa",
+      "cases_with_two_identity_anchors": 36,
+      "full_panel_before_review": {
+        "left_only": 2,
+        "right_only": 5,
+        "clean_delta_bounds": [
+          -0.013559322033898305,
+          0.023728813559322035
+        ]
+      }
+    },
+    "blank": {
+      "dataset": "SciRepEval",
+      "paired_cases": {
+        "missing": 36
+      },
+      "agreements_by_axis": {
+        "content": {
+          "missing": 36
+        },
+        "contribution": {
+          "missing": 36
+        }
+      },
+      "sampled_slots": 17,
+      "clean_delta_bounds": [
+        -0.23529411764705882,
+        0.4117647058823529
+      ],
+      "strata": {
+        "changed": {
+          "sampled_slots": 2,
+          "clean_delta_bounds": [
+            -1.0,
+            1.0
+          ]
+        },
+        "one_sided": {
+          "sampled_slots": 7,
+          "clean_delta_bounds": [
+            -0.2857142857142857,
+            0.7142857142857143
+          ]
+        },
+        "same_supported": {
+          "sampled_slots": 8,
+          "clean_delta_bounds": [
+            0.0,
+            0.0
+          ]
+        }
+      }
+    }
+  }
+}
