@@ -1,0 +1,88 @@
+{
+  "input_sha256": {
+    "ent06.qrels.expert": "b9a0fe026b2fb06273d8f30e6a5cc77a4fef8ed68babe8dc7f3e3a91a192b12d",
+    "ent06.qrels.expert-docs": "a31c82f786475dc17e88dcf2af8cad4528400a9bbbf5710f6ad2724000ac6e29"
+  },
+  "script_sha256": "22914ce5ef4285bd278bd30609df78d180c3c32b16cd94d53059a25b63b18ecc",
+  "topics": 49,
+  "topics_with_mixed_positive_experts": 44,
+  "topics_with_counterfactual": 25,
+  "shared": {
+    "documents": 104843,
+    "documents_positive_and_negative": 186,
+    "documents_positive_and_neutral": 3025,
+    "documents_with_support": 7423,
+    "mixed_positive_experts": 1741,
+    "other_owner_grade_0": 557,
+    "other_owner_grade_0_known_expert": 111,
+    "other_owner_grade_1": 15595,
+    "other_owner_grade_1_known_expert": 4475,
+    "positive_document_judged_pairs": 30437,
+    "shared_documents": 28364
+  },
+  "expert_hits": 76,
+  "expert_p5": 0.31020408163265306,
+  "variants": {
+    "reference": {
+      "supported": 69,
+      "clean": 69,
+      "slots_with_negative": 0,
+      "slots_with_neutral": 0,
+      "citations": 69,
+      "supporting_citations": 69,
+      "citation_precision": 1.0,
+      "supported_p5": 0.2816326530612245,
+      "clean_p5": 0.2816326530612245
+    },
+    "append": {
+      "supported": 69,
+      "clean": 14,
+      "slots_with_negative": 3,
+      "slots_with_neutral": 52,
+      "citations": 124,
+      "supporting_citations": 69,
+      "citation_precision": 0.5564516129032258,
+      "supported_p5": 0.2816326530612245,
+      "clean_p5": 0.05714285714285714
+    },
+    "swap": {
+      "supported": 14,
+      "clean": 14,
+      "slots_with_negative": 3,
+      "slots_with_neutral": 52,
+      "citations": 69,
+      "supporting_citations": 14,
+      "citation_precision": 0.2028985507246377,
+      "supported_p5": 0.05714285714285714,
+      "clean_p5": 0.05714285714285714
+    },
+    "matched_valid": {
+      "supported": 50,
+      "clean": 50,
+      "slots_with_negative": 0,
+      "slots_with_neutral": 0,
+      "citations": 100,
+      "supporting_citations": 100,
+      "citation_precision": 1.0
+    },
+    "matched_wrong": {
+      "supported": 50,
+      "clean": 0,
+      "slots_with_negative": 3,
+      "slots_with_neutral": 47,
+      "citations": 100,
+      "supporting_citations": 50,
+      "citation_precision": 0.5
+    }
+  },
+  "append_clean_delta": {
+    "mean": -0.22448979591836737,
+    "percentile_95": [
+      -0.30612244897959184,
+      -0.1469387755102041
+    ],
+    "queries": 49,
+    "seed": 20261116,
+    "bootstrap_repeats": 10000
+  }
+}
