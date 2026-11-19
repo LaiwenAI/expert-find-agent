@@ -45,7 +45,7 @@ def holdout(pid, refs):
     return sorted(shown), choices[shown]
 
 
-def shortlists(question, stats, shown):
+def shortlists(question, stats, shown, *, include_rankings=False):
     query = set(terms(question))
     remainder = query.difference(*(stats[idx] for idx in shown))
     frequency = Counter(token for doc in stats for token in doc)
@@ -58,11 +58,14 @@ def shortlists(question, stats, shown):
     gap = [sum(weights[w] for w in sorted(hit & remainder)) for hit in hits]
     by_question = sorted(candidates, key=lambda i: (-raw[i], i))
     by_gap = sorted(candidates, key=lambda i: (-(raw[i] + gap[i]), i))
-    return {
+    pools = {
         "question_full": candidates, "anchored_full": candidates,
         "question_top4": by_question[:4], "anchored_top4": by_question[:4],
         "gap_top4": by_gap[:4], "gap_top8": by_gap[:8],
     }
+    if include_rankings:
+        pools.update(question_ranked=by_question, gap_ranked=by_gap)
+    return pools
 
 
 def excerpt(tokenizer, text, cap):

@@ -1,0 +1,1386 @@
+{
+  "dataset": "QASPER v0.3",
+  "job": "42723",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "code_sha256": "18ec7e4dd67b871b1b66b3b01f2504b078df555b428e9e55c616df358cfece74",
+  "embedding": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "reranker": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+  "results": {
+    "dev": {
+      "papers": 112,
+      "index": {
+        "counting_seconds": 0.5350199602544308,
+        "encoding_seconds": 16.199412554502487,
+        "paragraphs": 5252
+      },
+      "vector_bytes": 21512192,
+      "panel_sha256": "eb5822493e2ba07d2d10b05545d9725077701b0350044952944357c441c296c9",
+      "arms": {
+        "4": {
+          "lexical": {
+            "reachable": 28,
+            "hit": 13,
+            "shortlist_misses": 84,
+            "selection_misses": 15,
+            "mean_pairs": 4,
+            "truncations": 0,
+            "retrieval_p95_ms": 0.8887302130460732,
+            "estimated_serial_p95_ms": 36.21237715706229,
+            "contrasts": {
+              "gap": {
+                "reachable": {
+                  "mean": 0.03571428571428571,
+                  "percentile_95": [
+                    0.008928571428571428,
+                    0.07142857142857142
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": 0.017857142857142856,
+                  "percentile_95": [
+                    0.0,
+                    0.044642857142857144
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "dense": {
+                "reachable": {
+                  "mean": -0.22321428571428573,
+                  "percentile_95": [
+                    -0.3392857142857143,
+                    -0.10714285714285714
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": -0.14285714285714285,
+                  "percentile_95": [
+                    -0.22321428571428573,
+                    -0.0625
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              }
+            }
+          },
+          "gap": {
+            "reachable": 24,
+            "hit": 11,
+            "shortlist_misses": 88,
+            "selection_misses": 13,
+            "mean_pairs": 4,
+            "truncations": 0,
+            "retrieval_p95_ms": 0.8887302130460732,
+            "estimated_serial_p95_ms": 36.21916454285383,
+            "contrasts": {
+              "gap": {
+                "reachable": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "dense": {
+                "reachable": {
+                  "mean": -0.25892857142857145,
+                  "percentile_95": [
+                    -0.375,
+                    -0.15178571428571427
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": -0.16071428571428573,
+                  "percentile_95": [
+                    -0.24107142857142858,
+                    -0.08035714285714286
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              }
+            }
+          },
+          "dense": {
+            "reachable": 53,
+            "hit": 29,
+            "shortlist_misses": 59,
+            "selection_misses": 24,
+            "mean_pairs": 4,
+            "truncations": 0,
+            "retrieval_p95_ms": 7.195094879716635,
+            "estimated_serial_p95_ms": 35.39969138801097,
+            "contrasts": {
+              "gap": {
+                "reachable": {
+                  "mean": 0.25892857142857145,
+                  "percentile_95": [
+                    0.15178571428571427,
+                    0.375
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": 0.16071428571428573,
+                  "percentile_95": [
+                    0.08035714285714286,
+                    0.24107142857142858
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "dense": {
+                "reachable": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              }
+            }
+          },
+          "anchored": {
+            "reachable": 61,
+            "hit": 26,
+            "shortlist_misses": 51,
+            "selection_misses": 35,
+            "mean_pairs": 4,
+            "truncations": 0,
+            "retrieval_p95_ms": 7.6622419990599155,
+            "estimated_serial_p95_ms": 43.379920441657305,
+            "contrasts": {
+              "gap": {
+                "reachable": {
+                  "mean": 0.33035714285714285,
+                  "percentile_95": [
+                    0.21428571428571427,
+                    0.44642857142857145
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": 0.13392857142857142,
+                  "percentile_95": [
+                    0.044642857142857144,
+                    0.22321428571428573
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "dense": {
+                "reachable": {
+                  "mean": 0.07142857142857142,
+                  "percentile_95": [
+                    -0.05357142857142857,
+                    0.19642857142857142
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": -0.026785714285714284,
+                  "percentile_95": [
+                    -0.10714285714285714,
+                    0.044642857142857144
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              }
+            }
+          },
+          "residual": {
+            "reachable": 22,
+            "hit": 14,
+            "shortlist_misses": 90,
+            "selection_misses": 8,
+            "mean_pairs": 4,
+            "truncations": 0,
+            "retrieval_p95_ms": 7.224198617041111,
+            "estimated_serial_p95_ms": 35.23780852556228,
+            "contrasts": {
+              "gap": {
+                "reachable": {
+                  "mean": -0.017857142857142856,
+                  "percentile_95": [
+                    -0.10714285714285714,
+                    0.07142857142857142
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": 0.026785714285714284,
+                  "percentile_95": [
+                    -0.03571428571428571,
+                    0.08928571428571429
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "dense": {
+                "reachable": {
+                  "mean": -0.2767857142857143,
+                  "percentile_95": [
+                    -0.36607142857142855,
+                    -0.1875
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": -0.13392857142857142,
+                  "percentile_95": [
+                    -0.21428571428571427,
+                    -0.05357142857142857
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              }
+            }
+          },
+          "hybrid": {
+            "reachable": 51,
+            "hit": 20,
+            "shortlist_misses": 61,
+            "selection_misses": 31,
+            "mean_pairs": 4,
+            "truncations": 0,
+            "retrieval_p95_ms": 8.441530261188744,
+            "estimated_serial_p95_ms": 44.16789049282669,
+            "contrasts": {
+              "gap": {
+                "reachable": {
+                  "mean": 0.24107142857142858,
+                  "percentile_95": [
+                    0.16071428571428573,
+                    0.33035714285714285
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": 0.08035714285714286,
+                  "percentile_95": [
+                    0.008928571428571428,
+                    0.15178571428571427
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "dense": {
+                "reachable": {
+                  "mean": -0.017857142857142856,
+                  "percentile_95": [
+                    -0.14285714285714285,
+                    0.10714285714285714
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": -0.08035714285714286,
+                  "percentile_95": [
+                    -0.16071428571428573,
+                    0.0
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              }
+            }
+          }
+        },
+        "8": {
+          "lexical": {
+            "reachable": 51,
+            "hit": 23,
+            "shortlist_misses": 61,
+            "selection_misses": 28,
+            "mean_pairs": 7.982142857142857,
+            "truncations": 0,
+            "retrieval_p95_ms": 0.8887302130460732,
+            "estimated_serial_p95_ms": 73.14292695373292,
+            "contrasts": {
+              "gap": {
+                "reachable": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    -0.026785714285714284,
+                    0.026785714285714284
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": 0.008928571428571428,
+                  "percentile_95": [
+                    0.0,
+                    0.026785714285714284
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "dense": {
+                "reachable": {
+                  "mean": -0.19642857142857142,
+                  "percentile_95": [
+                    -0.3125,
+                    -0.08035714285714286
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": -0.0625,
+                  "percentile_95": [
+                    -0.14285714285714285,
+                    0.026785714285714284
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              }
+            }
+          },
+          "gap": {
+            "reachable": 51,
+            "hit": 22,
+            "shortlist_misses": 61,
+            "selection_misses": 29,
+            "mean_pairs": 7.982142857142857,
+            "truncations": 0,
+            "retrieval_p95_ms": 0.8887302130460732,
+            "estimated_serial_p95_ms": 74.13791492581365,
+            "contrasts": {
+              "gap": {
+                "reachable": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "dense": {
+                "reachable": {
+                  "mean": -0.19642857142857142,
+                  "percentile_95": [
+                    -0.3125,
+                    -0.07142857142857142
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": -0.07142857142857142,
+                  "percentile_95": [
+                    -0.16071428571428573,
+                    0.017857142857142856
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              }
+            }
+          },
+          "dense": {
+            "reachable": 73,
+            "hit": 30,
+            "shortlist_misses": 39,
+            "selection_misses": 43,
+            "mean_pairs": 7.982142857142857,
+            "truncations": 0,
+            "retrieval_p95_ms": 7.195094879716635,
+            "estimated_serial_p95_ms": 75.69195404648781,
+            "contrasts": {
+              "gap": {
+                "reachable": {
+                  "mean": 0.19642857142857142,
+                  "percentile_95": [
+                    0.07142857142857142,
+                    0.3125
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": 0.07142857142857142,
+                  "percentile_95": [
+                    -0.017857142857142856,
+                    0.16071428571428573
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "dense": {
+                "reachable": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              }
+            }
+          },
+          "anchored": {
+            "reachable": 82,
+            "hit": 27,
+            "shortlist_misses": 30,
+            "selection_misses": 55,
+            "mean_pairs": 7.982142857142857,
+            "truncations": 0,
+            "retrieval_p95_ms": 7.6622419990599155,
+            "estimated_serial_p95_ms": 77.62780431658028,
+            "contrasts": {
+              "gap": {
+                "reachable": {
+                  "mean": 0.2767857142857143,
+                  "percentile_95": [
+                    0.16071428571428573,
+                    0.3841517857142825
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": 0.044642857142857144,
+                  "percentile_95": [
+                    -0.026785714285714284,
+                    0.11607142857142858
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "dense": {
+                "reachable": {
+                  "mean": 0.08035714285714286,
+                  "percentile_95": [
+                    -0.03571428571428571,
+                    0.1875
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": -0.026785714285714284,
+                  "percentile_95": [
+                    -0.08928571428571429,
+                    0.026785714285714284
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              }
+            }
+          },
+          "residual": {
+            "reachable": 34,
+            "hit": 17,
+            "shortlist_misses": 78,
+            "selection_misses": 17,
+            "mean_pairs": 7.982142857142857,
+            "truncations": 0,
+            "retrieval_p95_ms": 7.224198617041111,
+            "estimated_serial_p95_ms": 74.70262190327047,
+            "contrasts": {
+              "gap": {
+                "reachable": {
+                  "mean": -0.15178571428571427,
+                  "percentile_95": [
+                    -0.25,
+                    -0.044642857142857144
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": -0.044642857142857144,
+                  "percentile_95": [
+                    -0.125,
+                    0.03571428571428571
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "dense": {
+                "reachable": {
+                  "mean": -0.3482142857142857,
+                  "percentile_95": [
+                    -0.4375,
+                    -0.25892857142857145
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": -0.11607142857142858,
+                  "percentile_95": [
+                    -0.19642857142857142,
+                    -0.03571428571428571
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              }
+            }
+          },
+          "hybrid": {
+            "reachable": 80,
+            "hit": 28,
+            "shortlist_misses": 32,
+            "selection_misses": 52,
+            "mean_pairs": 7.982142857142857,
+            "truncations": 0,
+            "retrieval_p95_ms": 8.441530261188744,
+            "estimated_serial_p95_ms": 81.65322616696356,
+            "contrasts": {
+              "gap": {
+                "reachable": {
+                  "mean": 0.25892857142857145,
+                  "percentile_95": [
+                    0.16964285714285715,
+                    0.3482142857142857
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": 0.05357142857142857,
+                  "percentile_95": [
+                    -0.017857142857142856,
+                    0.125
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "dense": {
+                "reachable": {
+                  "mean": 0.0625,
+                  "percentile_95": [
+                    -0.044642857142857144,
+                    0.16964285714285715
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": -0.017857142857142856,
+                  "percentile_95": [
+                    -0.08928571428571429,
+                    0.05357142857142857
+                  ],
+                  "queries": 112,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "test": {
+      "papers": 137,
+      "index": {
+        "counting_seconds": 0.7491417042911053,
+        "encoding_seconds": 19.15508553571999,
+        "paragraphs": 6765
+      },
+      "vector_bytes": 27709440,
+      "panel_sha256": "4f80118cb4afdc7549b554b64ee3d71d723738d1611a57c8ddedc1fe158fe72a",
+      "arms": {
+        "4": {
+          "lexical": {
+            "reachable": 36,
+            "hit": 25,
+            "shortlist_misses": 101,
+            "selection_misses": 11,
+            "mean_pairs": 4,
+            "truncations": 3,
+            "retrieval_p95_ms": 0.9604874998331068,
+            "estimated_serial_p95_ms": 40.2129702270031,
+            "contrasts": {
+              "gap": {
+                "reachable": {
+                  "mean": 0.014598540145985401,
+                  "percentile_95": [
+                    -0.021897810218978103,
+                    0.051094890510948905
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": 0.014598540145985401,
+                  "percentile_95": [
+                    0.0,
+                    0.0364963503649635
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "dense": {
+                "reachable": {
+                  "mean": -0.23357664233576642,
+                  "percentile_95": [
+                    -0.3357664233576642,
+                    -0.13138686131386862
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": -0.12408759124087591,
+                  "percentile_95": [
+                    -0.20437956204379562,
+                    -0.043795620437956206
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              }
+            }
+          },
+          "gap": {
+            "reachable": 34,
+            "hit": 23,
+            "shortlist_misses": 103,
+            "selection_misses": 11,
+            "mean_pairs": 4,
+            "truncations": 3,
+            "retrieval_p95_ms": 0.9604874998331068,
+            "estimated_serial_p95_ms": 40.36804363131523,
+            "contrasts": {
+              "gap": {
+                "reachable": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "dense": {
+                "reachable": {
+                  "mean": -0.24817518248175183,
+                  "percentile_95": [
+                    -0.35036496350364965,
+                    -0.145985401459854
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": -0.1386861313868613,
+                  "percentile_95": [
+                    -0.21897810218978103,
+                    -0.051094890510948905
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              }
+            }
+          },
+          "dense": {
+            "reachable": 68,
+            "hit": 42,
+            "shortlist_misses": 69,
+            "selection_misses": 26,
+            "mean_pairs": 4,
+            "truncations": 1,
+            "retrieval_p95_ms": 7.2678349912166595,
+            "estimated_serial_p95_ms": 42.53821372985839,
+            "contrasts": {
+              "gap": {
+                "reachable": {
+                  "mean": 0.24817518248175183,
+                  "percentile_95": [
+                    0.145985401459854,
+                    0.35036496350364965
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": 0.1386861313868613,
+                  "percentile_95": [
+                    0.051094890510948905,
+                    0.21897810218978103
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "dense": {
+                "reachable": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              }
+            }
+          },
+          "anchored": {
+            "reachable": 73,
+            "hit": 36,
+            "shortlist_misses": 64,
+            "selection_misses": 37,
+            "mean_pairs": 4,
+            "truncations": 3,
+            "retrieval_p95_ms": 7.78561383485794,
+            "estimated_serial_p95_ms": 46.9860278069973,
+            "contrasts": {
+              "gap": {
+                "reachable": {
+                  "mean": 0.2846715328467153,
+                  "percentile_95": [
+                    0.17518248175182483,
+                    0.39416058394160586
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": 0.0948905109489051,
+                  "percentile_95": [
+                    0.0072992700729927005,
+                    0.17518248175182483
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "dense": {
+                "reachable": {
+                  "mean": 0.0364963503649635,
+                  "percentile_95": [
+                    -0.06569343065693431,
+                    0.1386861313868613
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": -0.043795620437956206,
+                  "percentile_95": [
+                    -0.11678832116788321,
+                    0.029197080291970802
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              }
+            }
+          },
+          "residual": {
+            "reachable": 27,
+            "hit": 20,
+            "shortlist_misses": 110,
+            "selection_misses": 7,
+            "mean_pairs": 4,
+            "truncations": 1,
+            "retrieval_p95_ms": 7.296286150813103,
+            "estimated_serial_p95_ms": 42.785752937197685,
+            "contrasts": {
+              "gap": {
+                "reachable": {
+                  "mean": -0.051094890510948905,
+                  "percentile_95": [
+                    -0.1386861313868613,
+                    0.0364963503649635
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": -0.021897810218978103,
+                  "percentile_95": [
+                    -0.0948905109489051,
+                    0.051094890510948905
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "dense": {
+                "reachable": {
+                  "mean": -0.29927007299270075,
+                  "percentile_95": [
+                    -0.3795620437956204,
+                    -0.21897810218978103
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": -0.16058394160583941,
+                  "percentile_95": [
+                    -0.24087591240875914,
+                    -0.08029197080291971
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              }
+            }
+          },
+          "hybrid": {
+            "reachable": 65,
+            "hit": 35,
+            "shortlist_misses": 72,
+            "selection_misses": 30,
+            "mean_pairs": 4,
+            "truncations": 3,
+            "retrieval_p95_ms": 8.712359517812729,
+            "estimated_serial_p95_ms": 47.939348220825195,
+            "contrasts": {
+              "gap": {
+                "reachable": {
+                  "mean": 0.22627737226277372,
+                  "percentile_95": [
+                    0.145985401459854,
+                    0.30656934306569344
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": 0.08759124087591241,
+                  "percentile_95": [
+                    0.014598540145985401,
+                    0.16058394160583941
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "dense": {
+                "reachable": {
+                  "mean": -0.021897810218978103,
+                  "percentile_95": [
+                    -0.13138686131386862,
+                    0.08759124087591241
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": -0.051094890510948905,
+                  "percentile_95": [
+                    -0.13138686131386862,
+                    0.029197080291970802
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              }
+            }
+          }
+        },
+        "8": {
+          "lexical": {
+            "reachable": 57,
+            "hit": 26,
+            "shortlist_misses": 80,
+            "selection_misses": 31,
+            "mean_pairs": 8,
+            "truncations": 6,
+            "retrieval_p95_ms": 0.9604874998331068,
+            "estimated_serial_p95_ms": 79.43589575588702,
+            "contrasts": {
+              "gap": {
+                "reachable": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    -0.021897810218978103,
+                    0.021897810218978103
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "dense": {
+                "reachable": {
+                  "mean": -0.22627737226277372,
+                  "percentile_95": [
+                    -0.3284671532846715,
+                    -0.12408759124087591
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": -0.08029197080291971,
+                  "percentile_95": [
+                    -0.15328467153284672,
+                    -0.014598540145985401
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              }
+            }
+          },
+          "gap": {
+            "reachable": 57,
+            "hit": 26,
+            "shortlist_misses": 80,
+            "selection_misses": 31,
+            "mean_pairs": 8,
+            "truncations": 6,
+            "retrieval_p95_ms": 0.9604874998331068,
+            "estimated_serial_p95_ms": 79.88238520920275,
+            "contrasts": {
+              "gap": {
+                "reachable": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "dense": {
+                "reachable": {
+                  "mean": -0.22627737226277372,
+                  "percentile_95": [
+                    -0.3284671532846715,
+                    -0.12408759124087591
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": -0.08029197080291971,
+                  "percentile_95": [
+                    -0.15328467153284672,
+                    -0.014598540145985401
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              }
+            }
+          },
+          "dense": {
+            "reachable": 88,
+            "hit": 37,
+            "shortlist_misses": 49,
+            "selection_misses": 51,
+            "mean_pairs": 8,
+            "truncations": 3,
+            "retrieval_p95_ms": 7.2678349912166595,
+            "estimated_serial_p95_ms": 81.66392706334588,
+            "contrasts": {
+              "gap": {
+                "reachable": {
+                  "mean": 0.22627737226277372,
+                  "percentile_95": [
+                    0.12408759124087591,
+                    0.3284671532846715
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": 0.08029197080291971,
+                  "percentile_95": [
+                    0.014598540145985401,
+                    0.15328467153284672
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "dense": {
+                "reachable": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              }
+            }
+          },
+          "anchored": {
+            "reachable": 90,
+            "hit": 39,
+            "shortlist_misses": 47,
+            "selection_misses": 51,
+            "mean_pairs": 8,
+            "truncations": 6,
+            "retrieval_p95_ms": 7.78561383485794,
+            "estimated_serial_p95_ms": 84.81307812035084,
+            "contrasts": {
+              "gap": {
+                "reachable": {
+                  "mean": 0.24087591240875914,
+                  "percentile_95": [
+                    0.13138686131386862,
+                    0.35036496350364965
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": 0.0948905109489051,
+                  "percentile_95": [
+                    0.021897810218978103,
+                    0.1678832116788321
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "dense": {
+                "reachable": {
+                  "mean": 0.014598540145985401,
+                  "percentile_95": [
+                    -0.08029197080291971,
+                    0.10948905109489052
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": 0.014598540145985401,
+                  "percentile_95": [
+                    -0.0364963503649635,
+                    0.06569343065693431
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              }
+            }
+          },
+          "residual": {
+            "reachable": 44,
+            "hit": 28,
+            "shortlist_misses": 93,
+            "selection_misses": 16,
+            "mean_pairs": 8,
+            "truncations": 1,
+            "retrieval_p95_ms": 7.296286150813103,
+            "estimated_serial_p95_ms": 82.46434889733789,
+            "contrasts": {
+              "gap": {
+                "reachable": {
+                  "mean": -0.0948905109489051,
+                  "percentile_95": [
+                    -0.1897810218978102,
+                    0.0
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": 0.014598540145985401,
+                  "percentile_95": [
+                    -0.051094890510948905,
+                    0.08759124087591241
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "dense": {
+                "reachable": {
+                  "mean": -0.32116788321167883,
+                  "percentile_95": [
+                    -0.40145985401459855,
+                    -0.24087591240875914
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": -0.06569343065693431,
+                  "percentile_95": [
+                    -0.145985401459854,
+                    0.014598540145985401
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              }
+            }
+          },
+          "hybrid": {
+            "reachable": 95,
+            "hit": 37,
+            "shortlist_misses": 42,
+            "selection_misses": 58,
+            "mean_pairs": 8,
+            "truncations": 6,
+            "retrieval_p95_ms": 8.712359517812729,
+            "estimated_serial_p95_ms": 85.76897792518139,
+            "contrasts": {
+              "gap": {
+                "reachable": {
+                  "mean": 0.2773722627737226,
+                  "percentile_95": [
+                    0.19708029197080293,
+                    0.35766423357664234
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": 0.08029197080291971,
+                  "percentile_95": [
+                    0.021897810218978103,
+                    0.145985401459854
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "dense": {
+                "reachable": {
+                  "mean": 0.051094890510948905,
+                  "percentile_95": [
+                    -0.043795620437956206,
+                    0.145985401459854
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "hit": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    -0.051094890510948905,
+                    0.051094890510948905
+                  ],
+                  "queries": 137,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
