@@ -1,0 +1,188 @@
+{
+  "requests": 80,
+  "sources": 52667,
+  "experts": 4154,
+  "development_sha256": "30661871ac08a61e7e74d67d75491878c7e4194f217483b60d06426c4b36e4c5",
+  "corpus_sha256": "c9e8d6e13bb05900427ab1d785d6024256f61e8bb34f220c3816fb79d1921780",
+  "model_manifests": {
+    "qwen3-embedding-0.6b": "7fe3b53ee70453b25f3d9d3d38a743f43a967ecd9a73800b103399c1b2086955",
+    "qwen3-4b-instruct-2507": "afe957088656024b36dbcbfa800c7bbf87676d80c3c115d0b4cf6280fb864bcc",
+    "qwen3-reranker-0.6b": "ec846b82d5677f2b004dc6f6364988d3dcd27f6aa4ec58f252bd3f9964bb4d55"
+  },
+  "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "cutoff": 2.0,
+  "k": 5,
+  "source_depth": 2,
+  "source_chars": 800,
+  "criterion_chars": 320,
+  "index_seconds": 297.1333991661668,
+  "hardware": "NVIDIA GeForce RTX 5090",
+  "torch_version": "2.15.0+cu132",
+  "slurm_job_id": "41115",
+  "arms": {
+    "independent": {
+      "clause_label_changes": 0,
+      "qualification_set_changes": 0,
+      "retrieved_order_changes": 0,
+      "rank_changes": 0,
+      "supported_set_changes": 0,
+      "citation_or_unresolved_changes": 0,
+      "queries_with_provisional_support": 34,
+      "pairs": 1280,
+      "clipped_pairs": 0,
+      "withheld_pairs": 0,
+      "supported": 70,
+      "overlong_qualifications": 0,
+      "rechecked": 0,
+      "p50_p95_ms": {
+        "parse": [
+          502.6741810142994,
+          5271.122078970069
+        ],
+        "query_embedding": [
+          8.680988103151321,
+          10.995460860431194
+        ],
+        "retrieve": [
+          0.5116360262036324,
+          0.576570350676775
+        ],
+        "verify_and_rank": [
+          59.821623377501965,
+          180.5630944669246
+        ],
+        "total": [
+          571.3432412594557,
+          5476.060991361732
+        ]
+      },
+      "p95_speedup_ci95": [
+        1.0,
+        1.0
+      ]
+    },
+    "cache": {
+      "clause_label_changes": 16,
+      "qualification_set_changes": 3,
+      "retrieved_order_changes": 0,
+      "rank_changes": 0,
+      "supported_set_changes": 0,
+      "citation_or_unresolved_changes": 3,
+      "queries_with_provisional_support": 34,
+      "pairs": 1290,
+      "clipped_pairs": 0,
+      "withheld_pairs": 0,
+      "supported": 70,
+      "overlong_qualifications": 0,
+      "rechecked": 0,
+      "p50_p95_ms": {
+        "parse": [
+          117.71641671657562,
+          439.19247677549697
+        ],
+        "query_embedding": [
+          8.65493156015873,
+          10.408565029501915
+        ],
+        "retrieve": [
+          0.5050338804721832,
+          0.5604160018265247
+        ],
+        "verify_and_rank": [
+          59.98658109456301,
+          197.08959702402348
+        ],
+        "total": [
+          191.50172267109156,
+          642.636768054217
+        ]
+      },
+      "p95_speedup_ci95": [
+        6.605110269982285,
+        12.697495404388595
+      ]
+    },
+    "margin_recheck": {
+      "clause_label_changes": 0,
+      "qualification_set_changes": 0,
+      "retrieved_order_changes": 0,
+      "rank_changes": 0,
+      "supported_set_changes": 0,
+      "citation_or_unresolved_changes": 0,
+      "queries_with_provisional_support": 34,
+      "pairs": 1280,
+      "clipped_pairs": 0,
+      "withheld_pairs": 0,
+      "supported": 70,
+      "overlong_qualifications": 0,
+      "rechecked": 56,
+      "p50_p95_ms": {
+        "parse": [
+          161.11441794782877,
+          3281.064571999013
+        ],
+        "query_embedding": [
+          8.661028929054737,
+          10.612732637673616
+        ],
+        "retrieve": [
+          0.5107540637254715,
+          0.5659589543938636
+        ],
+        "verify_and_rank": [
+          59.60135627537966,
+          180.6075257249176
+        ],
+        "total": [
+          231.00313544273376,
+          3425.487611908465
+        ]
+      },
+      "p95_speedup_ci95": [
+        1.153239365148586,
+        3.563972250216953
+      ]
+    },
+    "qualification_recheck": {
+      "clause_label_changes": 10,
+      "qualification_set_changes": 0,
+      "retrieved_order_changes": 0,
+      "rank_changes": 0,
+      "supported_set_changes": 0,
+      "citation_or_unresolved_changes": 0,
+      "queries_with_provisional_support": 34,
+      "pairs": 1280,
+      "clipped_pairs": 0,
+      "withheld_pairs": 0,
+      "supported": 70,
+      "overlong_qualifications": 0,
+      "rechecked": 25,
+      "p50_p95_ms": {
+        "parse": [
+          122.17234261333942,
+          1847.8151910006998
+        ],
+        "query_embedding": [
+          8.621114306151867,
+          10.481135919690132
+        ],
+        "retrieve": [
+          0.5065696313977242,
+          0.5631952546536922
+        ],
+        "verify_and_rank": [
+          59.56235993653536,
+          180.3248373791575
+        ],
+        "total": [
+          194.5945592597127,
+          2152.825073711574
+        ]
+      },
+      "p95_speedup_ci95": [
+        1.6855009845775242,
+        5.986822284564564
+      ]
+    }
+  }
+}

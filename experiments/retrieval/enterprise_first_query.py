@@ -1,4 +1,4 @@
-"""Time live development searches with three interchangeable requirement readers."""
+"""Time live development searches with interchangeable requirement readers."""
 
 import argparse
 from collections import Counter
@@ -100,12 +100,12 @@ def evaluate(text, method, reader, embedding, index, sources, reranker):
                            total=finished - start))
 
 
-def summarize(results):
+def summarize(results, arms=ARMS):
     report = {}
     rng = np.random.default_rng(719)
     sample = rng.integers(len(results), size=(4999, len(results)))
     paired_reference = np.array([row["independent"]["times"]["total"] for row in results])
-    for arm in ARMS:
+    for arm in arms:
         counts = Counter()
         for row in results:
             reference, current = row["independent"], row[arm]
@@ -129,7 +129,7 @@ def summarize(results):
     return report
 
 
-def run(queries, corpus, models, output):
+def run(queries, corpus, models, output, qualification_guard=False):
     if output.exists() or not torch.cuda.is_available() or not os.environ.get("SLURM_JOB_ID"):
         raise ValueError("Require a new output path and Slurm CUDA allocation")
     requests = read_rows(queries)
@@ -153,10 +153,16 @@ def run(queries, corpus, models, output):
     reader = GuardedReader(models / "qwen3-4b-instruct-2507")
     verifier = Reranker(models / "qwen3-reranker-0.6b")
     warmup = "Find an expert in optical inspection. Prior experience testing polymer films is required."
-    for method in ARMS:
+    arms = (*ARMS, "qualification_recheck") if qualification_guard else ARMS
+    for method in arms:
         evaluate(warmup, method, reader, embedding, index, sources, verifier)
     results = []
-    orders = tuple(permutations(ARMS))
+    if qualification_guard:
+        # Balance arm positions and first-order carryover on the 80 requests.
+        orders = tuple(tuple(arms[(i + offset) % len(arms)] for i in (0, 1, 3, 2))
+                       for offset in range(len(arms)))
+    else:
+        orders = tuple(permutations(arms))
     for i, request in enumerate(requests):
         results.append({method: evaluate(request["text"], method, reader, embedding, index, sources, verifier)
                         for method in orders[i % len(orders)]})
@@ -174,11 +180,13 @@ def run(queries, corpus, models, output):
                             source_depth=SOURCE_DEPTH, source_chars=SOURCE_CHARS, criterion_chars=CRITERION_CHARS,
                             index_seconds=index_seconds, hardware=torch.cuda.get_device_name(),
                             torch_version=str(torch.__version__), slurm_job_id=os.environ["SLURM_JOB_ID"],
-                            arms=summarize(results)))
+                            arms=summarize(results, arms)))
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     for key in ("queries", "corpus", "models", "output"):
         parser.add_argument(f"--{key}", type=Path, required=True)
+    parser.add_argument("--qualification-guard", action="store_true",
+                        help="Also recheck cached blocks near the qualification boundary.")
     run(**vars(parser.parse_args()))

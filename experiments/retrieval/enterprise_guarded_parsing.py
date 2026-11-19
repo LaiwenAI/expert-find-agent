@@ -18,6 +18,17 @@ from experiments.retrieval.enterprise_isolated_parsing import IsolatedReader, RO
 ARMS = ("independent", "cache", "margin_recheck", "hash_recheck")
 CUTOFFS = (.125, .25, .5, 1., 2., 4.)
 SALT = "clause-fixed-recheck-v1"
+QUALIFICATION = ROLES.index("prior_qualification")
+
+
+def recheck_margin(logits, method):
+    scores = logits.float()
+    if method == "qualification_recheck":
+        other_roles = [i for i in range(scores.size(1)) if i != QUALIFICATION]
+        other_best = scores[:, other_roles].amax(dim=1)
+        return float((scores[:, QUALIFICATION] - other_best).abs().min().item())
+    strongest = scores.topk(2, dim=1).values
+    return float((strongest[:, 0] - strongest[:, 1]).min().item())
 
 
 def choose_cutoff(controls):
@@ -60,10 +71,9 @@ class GuardedReader(IsolatedReader):
                 logits, size = self.independent(front, suffix_batch)
             else:
                 logits, size = self.cached(front, suffix_batch, prefix_cache)
-                if method in ("margin_recheck", "calibration"):
-                    values = logits.float().topk(2, dim=1).values
-                    margin = float((values[:, 0] - values[:, 1]).min().item())
-                selected = ((method == "margin_recheck" and margin <= cutoff)
+                if method in ("margin_recheck", "qualification_recheck", "calibration"):
+                    margin = recheck_margin(logits, method)
+                selected = ((method in ("margin_recheck", "qualification_recheck") and margin <= cutoff)
                             or (method == "hash_recheck" and hash_recheck(identity, blocks_seen, rate)))
                 if selected:
                     logits, checked_size = self.independent(front, suffix_batch)
