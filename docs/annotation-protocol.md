@@ -65,3 +65,19 @@ After two independently completed joint-pool reviews, validate and reconcile the
 For a manageable comparison-focused pilot, `experiments.retrieval.sample_joint_review` samples one dense-only and one lexical-only top-five candidate per development query from the frozen joint pool, hiding method and selection weights from the form. The current 160-case sample covers 80 needs; it is not representative of all candidate views. A private design file records within-query stratum sizes and inclusion probabilities. Two independent copies can be checked and reconciled using the same joint-review tools. Source text may disclose identities, and uncertain or missing judgments remain unknown. No population quality estimate follows from the sample without an appropriate design-based analysis and treatment of nonresponse and grouped dependence.
 
 For a reconciled subsample, `experiments.retrieval.overlay_joint_sample <parent-packet> <sample-packet> <reconciled-directory> --output <new-directory>` verifies the sample's parent lineage and exact fixed views before applying definite labels to the parent comparison. Unsampled, missing, uncertain and unresolved fields stay unknown. Its output is an identification bound, not a design-weighted point estimate or confidence interval; the private design file is not used to impute unreviewed cells.
+
+## Comparing fixed first-query outputs
+
+After reconciling two independent reviews, compare frozen methods against the same request frame and exact-view packet:
+
+```sh
+PYTHONPATH=src:. python -m experiments.retrieval.score_enterprise_evidence_gate \
+  FRAME PRIMARY_PROTOCOL PRIMARY_OUTPUTS PRIMARY_EXECUTION PACKET RECONCILIATION \
+  --compare REFERENCE_PROTOCOL REFERENCE_OUTPUTS REFERENCE_EXECUTION
+```
+
+The packet binds a review case to the original request, the expert and exact source spans. Use all three review fields for strict supported hit rate: method fit, joint hard-constraint support and personal contribution. To support the joint constraint field, every applicable hard constraint must have explicit support. An unresolved predicate leaves that field unresolved unless another applicable constraint is adjudicated unsupported. A hard constraint must come from the frozen interpretation of the request. Future project targets count only if explicitly required as prior qualifications. Record source and predicate decisions in the reviewer rationale.
+
+The lower hit rate divides confirmed hits by all frozen Top-K slots. The upper value additionally credits unresolved returned views. Empty positions, abstentions and execution failures contribute no hits. The paired difference shares a judgment only for the same exact review case; different citation spans for the same expert are distinct views. Pairing also bounds the absolute change in groups with any adverse recommendation over the entire frozen cohort. The existing absolute risk gate continues to use risk conditional on issued groups with unresolved groups counted as adverse. The paired finite-panel bounds describe ambiguity from missing labels and require separate group-level sampling inference for population claims.
+
+In a development wiring check, the existing dense and lexical outputs each filled 400 slots across 80 requests, with zero identical reviewed views and no human labels. Both hit and adverse-group rate differences were bounded by −100 to +100 percentage points. Comparing the dense run to itself shared all 400 views and produced differences of zero regardless of the missing labels. This control verifies the paired evaluation logic; it supplies no data on absolute recommendation quality. The sealed panel was not opened for this check.
