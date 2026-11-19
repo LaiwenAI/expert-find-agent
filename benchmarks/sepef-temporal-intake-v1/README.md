@@ -21,7 +21,20 @@ The full-history community prior is a strong text-free control and loses access 
 
 ## Text retrieval
 
-The stream builder reads only required ZIP members from the official archive, checks member CRCs and validates question timestamps and label agreement. It hash-samples 256 validation and 512 test questions whose labeled experts have historical profiles. It retains eight recent source answers per expert, writes local text assets, and records source hashes. The subsequent GPU harness compares BM25, exact dense over the full collection, exact dense and centroid scoring within community, and a community hybrid. Each returns an owned historical answer. Timing includes query text cleanup, encoding where needed, ranking and serialization. The GPU harness has passed a synthetic smoke test. Official text-retrieval results are pending the stream build.
+The stream builder reads only required ZIP members from the official archive, checks member CRCs and validates question timestamps and label agreement. It hash-samples 256 validation and 512 test questions whose labeled experts have historical profiles. It retains eight recent source answers per expert, writes local text assets, and records source hashes. The subsequent GPU harness compares BM25, exact dense over the full collection, exact dense and centroid scoring within community, and a community hybrid. Each returns an owned historical answer. Results use one RTX 4090 and a single warm request at a time. Timing includes query cleanup, encoding where used, document and expert scoring, and serialization. It excludes network, queueing, initialization and offline index construction.
+
+| Test route | Hit@5 | MRR@10 | P95 (ms) |
+| --- | ---: | ---: | ---: |
+| BM25, global | 7.81% | 0.0480 | 16.56 |
+| Exact dense, global | 7.03% | 0.0428 | 14.93 |
+| Exact dense, community | 8.59% | 0.0513 | 14.48 |
+| Expert centroid, community | 11.52% | 0.0648 | 14.76 |
+| Dense plus BM25, community | 11.91% | 0.0719 | 26.15 |
+| [Full-history community prior](../sepef-matched-prior-v1/README.md), matched queries | 38.09% | 0.2413 | — |
+
+The strongest text-only arm trailed the full-history community prior by 26.17 percentage points in Hit@5. A labeled expert had selected source text in the query's community on 87.5% of test queries, so losses from community membership account for at most 12.5 percentage points against a perfect unrestricted ranking. The prior uses more historical records per expert, with counts only. These controls compare complete retrieval routes under their stated inputs and do not isolate the effect of text or the answer cap. The SE-PEF authors' baselines aggregate answer scores by summation after BM25 filtering and use asker history in the personalized variant. This panel instead evaluates ranking with query text, known community and historical answer evidence. [Author baseline](https://github.com/pkasela/SE-PEF#to-create-the-baseline)
+
+[Aggregate GPU results](text-results.json) · [Verified panel manifest](text-panel-manifest.json)
 
 ## Reproduce
 
