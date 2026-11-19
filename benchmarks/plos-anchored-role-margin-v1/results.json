@@ -1,0 +1,268 @@
+{
+  "job": "42855",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "calibration": 30,
+  "old_capture_sha256": "f3a26e4350238038d4c0d835775d60475b630a53ea2cbf0e342014f99aac4f28",
+  "external_capture_sha256": "01b02c2e4d718e343a623faa954622eadb35bedfef75fac2f6d8ff43a70f0fd2",
+  "code_sha256": "aba1dacb2d06520172dec59a8ac0aa79a40411f800883a8249c3daa5202031a9",
+  "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "reranker_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+  "panels": {
+    "test": {
+      "papers": 20,
+      "arms": {
+        "scope_reranker": {
+          "threshold": -0.25000000000000006,
+          "valid": 11,
+          "wrong_papers": 1,
+          "clean": 11,
+          "p95_ms": 9.102586098015308,
+          "clean_delta_vs_scoped": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 20,
+            "clusters": 20,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "embedding_cosine": {
+          "threshold": 0.65487003326416,
+          "valid": 6,
+          "wrong_papers": 0,
+          "clean": 6,
+          "p95_ms": 7.382892072200775,
+          "unfiltered_role_matches": 20,
+          "clean_delta_vs_scoped": {
+            "mean": -0.25,
+            "percentile_95": [
+              -0.45,
+              -0.1
+            ],
+            "queries": 20,
+            "clusters": 20,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "embedding_margin": {
+          "threshold": 0.049757838249206536,
+          "valid": 6,
+          "wrong_papers": 0,
+          "clean": 6,
+          "p95_ms": 7.29471780359745,
+          "unfiltered_role_matches": 20,
+          "clean_delta_vs_scoped": {
+            "mean": -0.25,
+            "percentile_95": [
+              -0.45,
+              -0.1
+            ],
+            "queries": 20,
+            "clusters": 20,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        }
+      }
+    },
+    "transfer": {
+      "papers": 45,
+      "arms": {
+        "scope_reranker": {
+          "threshold": -0.25000000000000006,
+          "valid": 22,
+          "wrong_papers": 3,
+          "clean": 22,
+          "p95_ms": 8.971361070871353,
+          "clean_delta_vs_scoped": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 45,
+            "clusters": 44,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "embedding_cosine": {
+          "threshold": 0.65487003326416,
+          "valid": 12,
+          "wrong_papers": 0,
+          "clean": 12,
+          "p95_ms": 7.302994653582573,
+          "unfiltered_role_matches": 45,
+          "clean_delta_vs_scoped": {
+            "mean": -0.2222222222222222,
+            "percentile_95": [
+              -0.34782608695652173,
+              -0.1111111111111111
+            ],
+            "queries": 45,
+            "clusters": 44,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "embedding_margin": {
+          "threshold": 0.049757838249206536,
+          "valid": 12,
+          "wrong_papers": 0,
+          "clean": 12,
+          "p95_ms": 7.271594554185867,
+          "unfiltered_role_matches": 45,
+          "clean_delta_vs_scoped": {
+            "mean": -0.2222222222222222,
+            "percentile_95": [
+              -0.34782608695652173,
+              -0.1111111111111111
+            ],
+            "queries": 45,
+            "clusters": 44,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        }
+      }
+    },
+    "transfer_new_paraphrase": {
+      "papers": 45,
+      "arms": {
+        "scope_reranker": {
+          "threshold": -0.25000000000000006,
+          "valid": 1,
+          "wrong_papers": 0,
+          "clean": 1,
+          "p95_ms": 8.987519145011902,
+          "clean_delta_vs_scoped": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 45,
+            "clusters": 44,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "embedding_cosine": {
+          "threshold": 0.65487003326416,
+          "valid": 6,
+          "wrong_papers": 0,
+          "clean": 6,
+          "p95_ms": 7.283404842019081,
+          "unfiltered_role_matches": 34,
+          "clean_delta_vs_scoped": {
+            "mean": 0.1111111111111111,
+            "percentile_95": [
+              0.0,
+              0.22727272727272727
+            ],
+            "queries": 45,
+            "clusters": 44,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "embedding_margin": {
+          "threshold": 0.049757838249206536,
+          "valid": 12,
+          "wrong_papers": 0,
+          "clean": 12,
+          "p95_ms": 7.326006889343262,
+          "unfiltered_role_matches": 34,
+          "clean_delta_vs_scoped": {
+            "mean": 0.24444444444444444,
+            "percentile_95": [
+              0.1111111111111111,
+              0.38636363636363635
+            ],
+            "queries": 45,
+            "clusters": 44,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        }
+      }
+    },
+    "transfer_outside_inventory": {
+      "papers": 45,
+      "arms": {
+        "scope_reranker": {
+          "threshold": -0.25000000000000006,
+          "valid": 0,
+          "wrong_papers": 0,
+          "clean": 0,
+          "p95_ms": 8.908189088106155,
+          "clean_delta_vs_scoped": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 45,
+            "clusters": 44,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "embedding_cosine": {
+          "threshold": 0.65487003326416,
+          "valid": 0,
+          "wrong_papers": 0,
+          "clean": 0,
+          "p95_ms": 7.274378091096878,
+          "unfiltered_role_matches": 0,
+          "clean_delta_vs_scoped": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 45,
+            "clusters": 44,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "embedding_margin": {
+          "threshold": 0.049757838249206536,
+          "valid": 0,
+          "wrong_papers": 10,
+          "clean": 0,
+          "p95_ms": 7.26349763572216,
+          "unfiltered_role_matches": 0,
+          "clean_delta_vs_scoped": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 45,
+            "clusters": 44,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        }
+      }
+    }
+  }
+}
