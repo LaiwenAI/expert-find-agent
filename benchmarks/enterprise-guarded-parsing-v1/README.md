@@ -29,3 +29,5 @@ PYTHONPATH=src:. OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 \
 ```
 
 The aggregate includes stable hashes and no request texts. The timed public controls were also used to select the band. Private-development agreement measures model execution stability, with human assessment of qualification decisions still pending. This is parser-stage timing.
+
+The [compact-recheck follow-up](../enterprise-compact-rechecks-v1/README.md) tests whether smaller recheck batches retain this agreement.
