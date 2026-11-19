@@ -53,7 +53,7 @@ candidates. Issued coverage is 37 per 80 requests in both arms.
 
 The automatic route executes 380,257 verifier tokens per 80
 requests, versus 421,158 for guarded batching, a 9.7% reduction.
-Service P95 falls by 6.8% to 7.1% across these traces. Client
+Service P95 falls by 6.8% to 7.0% across these traces. Client
 P95 falls by 2.4% to 5.6%. Completed throughput including drain
 changes by at most 0.01 requests/s.
 
