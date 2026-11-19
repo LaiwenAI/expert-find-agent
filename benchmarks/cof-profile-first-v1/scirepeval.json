@@ -1,0 +1,227 @@
+{
+  "dataset": "SciRepEval",
+  "job": "42765",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "experts": 665,
+  "sources": 73257,
+  "queries": 59,
+  "index_seconds": 0.25679738260805607,
+  "cohort_sha256": "faad2fb6a0b8f2f2a9a80a9df2dff092518464e6c3c4d989e8819c0fe090efed",
+  "known_positives": 153,
+  "code_sha256": "f24427283d6299e4a90a39adb44aa1a4055e903c071bf11c0fe5c014d31a152d",
+  "vector_protocol_sha256": "d119d82622581f208c155e5531de54be2ee086531c8cace1432008d4a4dd20db",
+  "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "reranker_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+  "arms": {
+    "full_blend": {
+      "known_positive_recall_at_10": 0.5359477124183006,
+      "known_positive_p5_delta": {
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 59,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "partial_label_p5_delta_bounds": [
+        0.0,
+        0.0
+      ],
+      "known_positives_added_at_10": 0,
+      "known_positives_lost_at_10": 0,
+      "p5": 0.17627118644067796,
+      "judged": 0.41355932203389834,
+      "cited_p5": 0.0711864406779661,
+      "citation_coverage": 0.288135593220339,
+      "calls": 3.830508474576271,
+      "retrieval_ms": [
+        8.564872667193413,
+        9.081667102873324
+      ],
+      "complete_ms": [
+        83.15696567296982,
+        120.94589732587333
+      ],
+      "exact_expert_and_source_matches": 59,
+      "exact_citation_matches": 59,
+      "mean_scored_sources": 73257.0
+    },
+    "centroid32": {
+      "known_positive_recall_at_10": 0.43137254901960786,
+      "known_positive_p5_delta": {
+        "mean": -0.01694915254237288,
+        "percentile_95": [
+          -0.03389830508474576,
+          0.0
+        ],
+        "queries": 59,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "partial_label_p5_delta_bounds": [
+        -0.07796610169491526,
+        0.06779661016949153
+      ],
+      "known_positives_added_at_10": 3,
+      "known_positives_lost_at_10": 19,
+      "p5": 0.1593220338983051,
+      "judged": 0.3898305084745763,
+      "cited_p5": 0.0711864406779661,
+      "citation_coverage": 0.28135593220338984,
+      "calls": 3.7796610169491527,
+      "retrieval_ms": [
+        8.49924422800541,
+        9.45010669529438
+      ],
+      "complete_ms": [
+        84.49088409543037,
+        116.09054245054715
+      ],
+      "exact_expert_and_source_matches": 19,
+      "exact_citation_matches": 38,
+      "mean_scored_sources": 3997.508474576271
+    },
+    "two_centers32": {
+      "known_positive_recall_at_10": 0.47058823529411764,
+      "known_positive_p5_delta": {
+        "mean": -0.01016949152542373,
+        "percentile_95": [
+          -0.023728813559322035,
+          0.0033898305084745766
+        ],
+        "queries": 59,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "partial_label_p5_delta_bounds": [
+        -0.09491525423728814,
+        0.08474576271186442
+      ],
+      "known_positives_added_at_10": 3,
+      "known_positives_lost_at_10": 13,
+      "p5": 0.16610169491525426,
+      "judged": 0.4033898305084746,
+      "cited_p5": 0.0711864406779661,
+      "citation_coverage": 0.2847457627118644,
+      "calls": 3.830508474576271,
+      "retrieval_ms": [
+        8.774487301707268,
+        9.65623538941145
+      ],
+      "complete_ms": [
+        84.49879847466946,
+        127.539936825633
+      ],
+      "exact_expert_and_source_matches": 13,
+      "exact_citation_matches": 35,
+      "mean_scored_sources": 4716.067796610169
+    },
+    "union16": {
+      "known_positive_recall_at_10": 0.3660130718954248,
+      "known_positive_p5_delta": {
+        "mean": -0.023728813559322035,
+        "percentile_95": [
+          -0.04745762711864408,
+          -0.0033898305084745783
+        ],
+        "queries": 59,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "partial_label_p5_delta_bounds": [
+        -0.17627118644067796,
+        0.13220338983050847
+      ],
+      "known_positives_added_at_10": 3,
+      "known_positives_lost_at_10": 29,
+      "p5": 0.15254237288135594,
+      "judged": 0.41016949152542376,
+      "cited_p5": 0.06440677966101695,
+      "citation_coverage": 0.2711864406779661,
+      "calls": 3.7288135593220337,
+      "retrieval_ms": [
+        8.469115942716599,
+        9.162317775189877
+      ],
+      "complete_ms": [
+        84.729278460145,
+        127.32161581516263
+      ],
+      "exact_expert_and_source_matches": 1,
+      "exact_citation_matches": 17,
+      "mean_scored_sources": 1993.6271186440679
+    },
+    "union32": {
+      "known_positive_recall_at_10": 0.45751633986928103,
+      "known_positive_p5_delta": {
+        "mean": -0.013559322033898306,
+        "percentile_95": [
+          -0.030508474576271188,
+          0.0
+        ],
+        "queries": 59,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "partial_label_p5_delta_bounds": [
+        -0.08474576271186442,
+        0.0711864406779661
+      ],
+      "known_positives_added_at_10": 3,
+      "known_positives_lost_at_10": 15,
+      "p5": 0.16271186440677968,
+      "judged": 0.4,
+      "cited_p5": 0.0711864406779661,
+      "citation_coverage": 0.28135593220338984,
+      "calls": 3.7966101694915255,
+      "retrieval_ms": [
+        8.789431303739548,
+        9.454929269850254
+      ],
+      "complete_ms": [
+        84.76350083947182,
+        116.27162117511027
+      ],
+      "exact_expert_and_source_matches": 19,
+      "exact_citation_matches": 39,
+      "mean_scored_sources": 4186.220338983051
+    },
+    "union64": {
+      "known_positive_recall_at_10": 0.5163398692810458,
+      "known_positive_p5_delta": {
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 59,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000
+      },
+      "partial_label_p5_delta_bounds": [
+        -0.027118644067796613,
+        0.027118644067796613
+      ],
+      "known_positives_added_at_10": 1,
+      "known_positives_lost_at_10": 4,
+      "p5": 0.17627118644067796,
+      "judged": 0.41355932203389834,
+      "cited_p5": 0.0711864406779661,
+      "citation_coverage": 0.2847457627118644,
+      "calls": 3.7796610169491527,
+      "retrieval_ms": [
+        9.462030604481697,
+        10.680199787020683
+      ],
+      "complete_ms": [
+        84.10895802080631,
+        123.0704480782151
+      ],
+      "exact_expert_and_source_matches": 38,
+      "exact_citation_matches": 52,
+      "mean_scored_sources": 8680.813559322034
+    }
+  }
+}
