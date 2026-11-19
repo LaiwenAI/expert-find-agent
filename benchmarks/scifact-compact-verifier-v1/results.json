@@ -1,0 +1,321 @@
+{
+  "job": "41303",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "archive_sha256": "11c621288d41ac144d29b13b0f8503b3820b7d6e8b1f6ff24dff335c196d76be",
+  "script_sha256": "46d95374d6e2d1d047c62e15e1c1ddff65aaa8c94ee3ec419bb04b44d8dd40d7",
+  "models": {
+    "short": "8adb042d524ecd5c26d3e3ba0e3fbcf7e2d0864c",
+    "strong": "cdbee75f17c01a7cc42f958dc650907174af0554"
+  },
+  "calibration_cases": 309,
+  "test_cases": 226,
+  "test_labels": {
+    "support": 97,
+    "unknown": 82,
+    "contradict": 47
+  },
+  "calibration_false_support_cap": 0.05,
+  "calibration_fallback_cap": 0.5,
+  "cutoffs": {
+    "full": 1.0,
+    "lead_three": -4.75,
+    "lexical_three": -5.75,
+    "two_lexical_windows": -3.75
+  },
+  "gates": {
+    "selective_full": {
+      "reject": -3.79375,
+      "accept": 2.9565429687500018,
+      "calibration_report": {
+        "support": {
+          "cases": 140,
+          "predicted_support": 75
+        },
+        "contradict": {
+          "cases": 47,
+          "predicted_support": 0
+        },
+        "unknown": {
+          "cases": 122,
+          "predicted_support": 3
+        }
+      },
+      "calibration_fallbacks": 154
+    },
+    "selective_three": {
+      "reject": -3.79375,
+      "accept": 2.9565429687500018,
+      "calibration_report": {
+        "support": {
+          "cases": 140,
+          "predicted_support": 69
+        },
+        "contradict": {
+          "cases": 47,
+          "predicted_support": 2
+        },
+        "unknown": {
+          "cases": 122,
+          "predicted_support": 2
+        }
+      },
+      "calibration_fallbacks": 154
+    }
+  },
+  "batch": {
+    "full": {
+      "labels": {
+        "support": {
+          "cases": 97,
+          "predicted_support": 48
+        },
+        "contradict": {
+          "cases": 47,
+          "predicted_support": 4
+        },
+        "unknown": {
+          "cases": 82,
+          "predicted_support": 2
+        }
+      },
+      "full_model_inputs": 226,
+      "p50_p95_ms": [
+        628.5151727497578,
+        800.1320704817772
+      ]
+    },
+    "lead_three": {
+      "labels": {
+        "support": {
+          "cases": 97,
+          "predicted_support": 23
+        },
+        "contradict": {
+          "cases": 47,
+          "predicted_support": 2
+        },
+        "unknown": {
+          "cases": 82,
+          "predicted_support": 1
+        }
+      },
+      "full_model_inputs": 226,
+      "p50_p95_ms": [
+        251.372542232275,
+        344.89075560122717
+      ]
+    },
+    "lexical_three": {
+      "labels": {
+        "support": {
+          "cases": 97,
+          "predicted_support": 45
+        },
+        "contradict": {
+          "cases": 47,
+          "predicted_support": 5
+        },
+        "unknown": {
+          "cases": 82,
+          "predicted_support": 5
+        }
+      },
+      "full_model_inputs": 226,
+      "p50_p95_ms": [
+        273.8653812557459,
+        352.47569140046824
+      ]
+    },
+    "two_lexical_windows": {
+      "labels": {
+        "support": {
+          "cases": 97,
+          "predicted_support": 49
+        },
+        "contradict": {
+          "cases": 47,
+          "predicted_support": 5
+        },
+        "unknown": {
+          "cases": 82,
+          "predicted_support": 1
+        }
+      },
+      "full_model_inputs": 226,
+      "p50_p95_ms": [
+        388.1578352302313,
+        576.4598241075873
+      ]
+    },
+    "selective_full": {
+      "labels": {
+        "support": {
+          "cases": 97,
+          "predicted_support": 39
+        },
+        "contradict": {
+          "cases": 47,
+          "predicted_support": 2
+        },
+        "unknown": {
+          "cases": 82,
+          "predicted_support": 2
+        }
+      },
+      "full_model_inputs": 101,
+      "p50_p95_ms": [
+        252.60796770453453,
+        427.65234503895044
+      ]
+    },
+    "selective_three": {
+      "labels": {
+        "support": {
+          "cases": 97,
+          "predicted_support": 42
+        },
+        "contradict": {
+          "cases": 47,
+          "predicted_support": 3
+        },
+        "unknown": {
+          "cases": 82,
+          "predicted_support": 2
+        }
+      },
+      "full_model_inputs": 101,
+      "p50_p95_ms": [
+        123.16924706101418,
+        216.4077591150999
+      ]
+    }
+  },
+  "serial": {
+    "full": {
+      "labels": {
+        "support": {
+          "cases": 97,
+          "predicted_support": 49
+        },
+        "contradict": {
+          "cases": 47,
+          "predicted_support": 4
+        },
+        "unknown": {
+          "cases": 82,
+          "predicted_support": 2
+        }
+      },
+      "full_model_inputs": 226,
+      "p50_p95_ms": [
+        27.21501886844635,
+        39.34762580320239
+      ]
+    },
+    "lead_three": {
+      "labels": {
+        "support": {
+          "cases": 97,
+          "predicted_support": 23
+        },
+        "contradict": {
+          "cases": 47,
+          "predicted_support": 2
+        },
+        "unknown": {
+          "cases": 82,
+          "predicted_support": 1
+        }
+      },
+      "full_model_inputs": 226,
+      "p50_p95_ms": [
+        16.436620615422726,
+        20.946196746081114
+      ]
+    },
+    "lexical_three": {
+      "labels": {
+        "support": {
+          "cases": 97,
+          "predicted_support": 46
+        },
+        "contradict": {
+          "cases": 47,
+          "predicted_support": 5
+        },
+        "unknown": {
+          "cases": 82,
+          "predicted_support": 5
+        }
+      },
+      "full_model_inputs": 226,
+      "p50_p95_ms": [
+        16.676057130098343,
+        24.12468520924449
+      ]
+    },
+    "two_lexical_windows": {
+      "labels": {
+        "support": {
+          "cases": 97,
+          "predicted_support": 49
+        },
+        "contradict": {
+          "cases": 47,
+          "predicted_support": 5
+        },
+        "unknown": {
+          "cases": 82,
+          "predicted_support": 1
+        }
+      },
+      "full_model_inputs": 226,
+      "p50_p95_ms": [
+        20.818140357732773,
+        28.19557674229145
+      ]
+    },
+    "selective_full": {
+      "labels": {
+        "support": {
+          "cases": 97,
+          "predicted_support": 39
+        },
+        "contradict": {
+          "cases": 47,
+          "predicted_support": 2
+        },
+        "unknown": {
+          "cases": 82,
+          "predicted_support": 2
+        }
+      },
+      "full_model_inputs": 103,
+      "p50_p95_ms": [
+        5.045846104621887,
+        40.99257104098797
+      ]
+    },
+    "selective_three": {
+      "labels": {
+        "support": {
+          "cases": 97,
+          "predicted_support": 43
+        },
+        "contradict": {
+          "cases": 47,
+          "predicted_support": 3
+        },
+        "unknown": {
+          "cases": 82,
+          "predicted_support": 2
+        }
+      },
+      "full_model_inputs": 103,
+      "p50_p95_ms": [
+        4.8458147794008255,
+        25.8648912422359
+      ]
+    }
+  }
+}
