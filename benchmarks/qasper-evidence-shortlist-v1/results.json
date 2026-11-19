@@ -1,0 +1,518 @@
+{
+  "pilot": {
+    "calibration": {
+      "coverage": {
+        "evaluable": 61,
+        "grid": {
+          "0.1": 0.819672131147541,
+          "0.25": 0.819672131147541,
+          "0.5": 0.8032786885245902,
+          "0.75": 0.8032786885245902
+        },
+        "selected": 0.1
+      },
+      "mmr": {
+        "evaluable": 61,
+        "grid": {
+          "0.1": 0.8360655737704918,
+          "0.25": 0.8360655737704918,
+          "0.5": 0.8360655737704918,
+          "0.75": 0.8524590163934426
+        },
+        "selected": 0.75
+      }
+    },
+    "config": {
+      "anchors": 8,
+      "budget": 16,
+      "pool": 32,
+      "weights": [
+        0.1,
+        0.25,
+        0.5,
+        0.75
+      ]
+    },
+    "data_assets": {
+      "qasper-dev-v0.3.json": "2ae7ee62a65b1c4225791c70de80c2aad4e8998cf1fd4f09a53103db4f21af93",
+      "qasper-test-v0.3.json": "6e29ad410e6e39aa1936017fb965b30a20eb2e7751997f55b97c9d281aa884e5"
+    },
+    "depth_script_sha256": "1eeb2fe5b1fff57d4af13c4d2ea4018813cdb58a870b0e15914ce02d42fdc56e",
+    "embedding": {
+      "files": {
+        "config.json": "b5bf1f51fc45be473a54718cef92448d90a1be001bf9b9a44b8c7f10a19feaa9",
+        "model.safetensors": "0437e45c94563b09e13cb7a64478fc406947a93cb34a7e05870fc8dcd48e23fd",
+        "tokenizer.json": "def76fb086971c7867b829c23a26261e38d9d74e02139253b38aeb9df8b4b50a",
+        "tokenizer_config.json": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0"
+      },
+      "policy": "Official frozen BF16 weights; no own training or quantization.",
+      "repository": "Qwen/Qwen3-Embedding-0.6B",
+      "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3"
+    },
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "job": "40727",
+    "offline": {
+      "development": {
+        "counting_seconds": 0.15205547586083412,
+        "encoding_seconds": 10.323429625481367,
+        "lexical_index_seconds": 0.04315477982163429,
+        "paragraphs": 3579
+      },
+      "test": {
+        "counting_seconds": 0.20782925561070442,
+        "encoding_seconds": 14.455255951732397,
+        "lexical_index_seconds": 0.05808432400226593,
+        "paragraphs": 5054
+      }
+    },
+    "post_run_audit": {
+      "changes_vs_dense": {
+        "coverage": {
+          "lost_complete_return": 0,
+          "lost_complete_shortlist": 0,
+          "newly_complete_return": 1,
+          "newly_complete_shortlist": 3,
+          "returns_changed": 4,
+          "shortlists_changed": 51
+        },
+        "dense": {
+          "lost_complete_return": 0,
+          "lost_complete_shortlist": 0,
+          "newly_complete_return": 0,
+          "newly_complete_shortlist": 0,
+          "returns_changed": 0,
+          "shortlists_changed": 0
+        },
+        "mmr": {
+          "lost_complete_return": 0,
+          "lost_complete_shortlist": 3,
+          "newly_complete_return": 0,
+          "newly_complete_shortlist": 0,
+          "returns_changed": 10,
+          "shortlists_changed": 80
+        },
+        "sections": {
+          "lost_complete_return": 1,
+          "lost_complete_shortlist": 7,
+          "newly_complete_return": 0,
+          "newly_complete_shortlist": 1,
+          "returns_changed": 17,
+          "shortlists_changed": 85
+        }
+      },
+      "dense_fixed16_order_matches_previous_run": 96
+    },
+    "ranker_script_sha256": "92f43e6a0b950f41f70f4fa94fdd06a29cd22f087fbb4dbcffcbf3f332332b86",
+    "raw_file_sha256": "f463ec204139d4b065b3e487ee3edc28b7d6704e6dc12be5a706d60e85635c4b",
+    "report": {
+      "evaluable": 83,
+      "policies": {
+        "coverage": {
+          "evidence_f1": 0.3206852930061554,
+          "mean_rerank_checks": 15.927083333333334,
+          "p95_ms": 78.37309082970023,
+          "returned_complete": 0.6987951807228916,
+          "returned_delta": {
+            "bootstrap_repeats": 10000,
+            "clusters": 83,
+            "mean": 0.012048192771084338,
+            "percentile_95": [
+              0.0,
+              0.03614457831325301
+            ],
+            "queries": 83,
+            "sampling_unit": "whole source paper; query-weighted mean",
+            "seed": 20261116
+          },
+          "shortlist_complete": 0.9156626506024096,
+          "shortlist_delta": {
+            "bootstrap_repeats": 10000,
+            "clusters": 83,
+            "mean": 0.03614457831325301,
+            "percentile_95": [
+              0.0,
+              0.08433734939759036
+            ],
+            "queries": 83,
+            "sampling_unit": "whole source paper; query-weighted mean",
+            "seed": 20261116
+          }
+        },
+        "dense": {
+          "evidence_f1": 0.317242952214417,
+          "mean_rerank_checks": 15.927083333333334,
+          "p95_ms": 76.07019133865833,
+          "returned_complete": 0.6867469879518072,
+          "returned_delta": {
+            "bootstrap_repeats": 10000,
+            "clusters": 83,
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 83,
+            "sampling_unit": "whole source paper; query-weighted mean",
+            "seed": 20261116
+          },
+          "shortlist_complete": 0.8795180722891566,
+          "shortlist_delta": {
+            "bootstrap_repeats": 10000,
+            "clusters": 83,
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 83,
+            "sampling_unit": "whole source paper; query-weighted mean",
+            "seed": 20261116
+          }
+        },
+        "mmr": {
+          "evidence_f1": 0.317242952214417,
+          "mean_rerank_checks": 15.927083333333334,
+          "p95_ms": 72.98065070062876,
+          "returned_complete": 0.6867469879518072,
+          "returned_delta": {
+            "bootstrap_repeats": 10000,
+            "clusters": 83,
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 83,
+            "sampling_unit": "whole source paper; query-weighted mean",
+            "seed": 20261116
+          },
+          "shortlist_complete": 0.8433734939759037,
+          "shortlist_delta": {
+            "bootstrap_repeats": 10000,
+            "clusters": 83,
+            "mean": -0.03614457831325301,
+            "percentile_95": [
+              -0.08433734939759036,
+              0.0
+            ],
+            "queries": 83,
+            "sampling_unit": "whole source paper; query-weighted mean",
+            "seed": 20261116
+          }
+        },
+        "sections": {
+          "evidence_f1": 0.3152349200859029,
+          "mean_rerank_checks": 15.927083333333334,
+          "p95_ms": 76.67226530611515,
+          "returned_complete": 0.6746987951807228,
+          "returned_delta": {
+            "bootstrap_repeats": 10000,
+            "clusters": 83,
+            "mean": -0.012048192771084338,
+            "percentile_95": [
+              -0.03614457831325301,
+              0.0
+            ],
+            "queries": 83,
+            "sampling_unit": "whole source paper; query-weighted mean",
+            "seed": 20261116
+          },
+          "shortlist_complete": 0.8072289156626506,
+          "shortlist_delta": {
+            "bootstrap_repeats": 10000,
+            "clusters": 83,
+            "mean": -0.07228915662650602,
+            "percentile_95": [
+              -0.14457831325301204,
+              -0.012048192771084338
+            ],
+            "queries": 83,
+            "sampling_unit": "whole source paper; query-weighted mean",
+            "seed": 20261116
+          }
+        }
+      },
+      "requests": 96
+    },
+    "reranker": {
+      "files": {
+        "config.json": "d479c427a9ca5295218063d4f9aca4f297ab4ac27487cca7af42c84643d51ef0",
+        "expected-large-files.json": "cd9940a651fcf3d97ffc28f0242a9a620c0da5b9acad1861ef14faf5ee784f0e",
+        "generation_config.json": "81051cd3f6e77013827148d0b8a6ead93f8ac390d5ab805f849199f0af6a08db",
+        "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+        "model.safetensors": "27cd75a405b9c1b46b59abfd88aaa209e6fed2a1972cde9b70e7659537c5e65b",
+        "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+        "tokenizer_config.json": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      },
+      "policy": "Official frozen BF16 checkpoint; no own training or quantization. Revision recorded before downloading weights.",
+      "repository": "Qwen/Qwen3-Reranker-0.6B",
+      "revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473"
+    },
+    "script_sha256": "4a503f361e28b055190dbdc4b24ee436c31b7778175aef25649dddea4df406fc"
+  },
+  "replication": {
+    "calibration": {
+      "coverage": {
+        "evaluable": 61,
+        "grid": {
+          "0.1": 0.819672131147541,
+          "0.25": 0.819672131147541,
+          "0.5": 0.8032786885245902,
+          "0.75": 0.8032786885245902
+        },
+        "selected": 0.1
+      },
+      "mmr": {
+        "evaluable": 61,
+        "grid": {
+          "0.1": 0.8360655737704918,
+          "0.25": 0.8360655737704918,
+          "0.5": 0.8360655737704918,
+          "0.75": 0.8524590163934426
+        },
+        "selected": 0.75
+      }
+    },
+    "config": {
+      "anchors": 8,
+      "budget": 16,
+      "pool": 32,
+      "sample_salt": "qasper-evidence-shortlist-replication-v1",
+      "weights": [
+        0.1,
+        0.25,
+        0.5,
+        0.75
+      ]
+    },
+    "data_assets": {
+      "qasper-dev-v0.3.json": "2ae7ee62a65b1c4225791c70de80c2aad4e8998cf1fd4f09a53103db4f21af93",
+      "qasper-test-v0.3.json": "6e29ad410e6e39aa1936017fb965b30a20eb2e7751997f55b97c9d281aa884e5"
+    },
+    "depth_script_sha256": "1eeb2fe5b1fff57d4af13c4d2ea4018813cdb58a870b0e15914ce02d42fdc56e",
+    "embedding": {
+      "files": {
+        "config.json": "b5bf1f51fc45be473a54718cef92448d90a1be001bf9b9a44b8c7f10a19feaa9",
+        "model.safetensors": "0437e45c94563b09e13cb7a64478fc406947a93cb34a7e05870fc8dcd48e23fd",
+        "tokenizer.json": "def76fb086971c7867b829c23a26261e38d9d74e02139253b38aeb9df8b4b50a",
+        "tokenizer_config.json": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0"
+      },
+      "policy": "Official frozen BF16 weights; no own training or quantization.",
+      "repository": "Qwen/Qwen3-Embedding-0.6B",
+      "revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3"
+    },
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "job": "40732",
+    "offline": {
+      "development": {
+        "counting_seconds": 0.15206418186426163,
+        "encoding_seconds": 10.318231401965022,
+        "lexical_index_seconds": 0.04264223948121071,
+        "paragraphs": 3579
+      },
+      "test": {
+        "counting_seconds": 0.2647880483418703,
+        "encoding_seconds": 18.426504956558347,
+        "lexical_index_seconds": 0.07568914256989956,
+        "paragraphs": 6314
+      }
+    },
+    "post_run_audit": {
+      "coverage_gains_vs_fixed32": 1,
+      "coverage_losses_vs_fixed32": 0,
+      "coverage_minus_fixed32": {
+        "bootstrap_repeats": 10000,
+        "clusters": 127,
+        "mean": 0.007874015748031496,
+        "percentile_95": [
+          0.0,
+          0.023622047244094488
+        ],
+        "queries": 127,
+        "sampling_unit": "whole source paper; query-weighted mean",
+        "seed": 20261116
+      },
+      "disjoint_from_pilot": true
+    },
+    "ranker_script_sha256": "92f43e6a0b950f41f70f4fa94fdd06a29cd22f087fbb4dbcffcbf3f332332b86",
+    "raw_file_sha256": "d2f208f00642a589d867758982946840e5d6aa38ef32d58e35301f31f4813f0e",
+    "report": {
+      "evaluable": 127,
+      "policies": {
+        "coverage": {
+          "evidence_f1": 0.3079120791719217,
+          "mean_rerank_checks": 15.729166666666666,
+          "p95_ms": 78.86886456981301,
+          "returned_complete": 0.7165354330708661,
+          "returned_delta": {
+            "bootstrap_repeats": 10000,
+            "clusters": 127,
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 127,
+            "sampling_unit": "whole source paper; query-weighted mean",
+            "seed": 20261116
+          },
+          "shortlist_complete": 0.8346456692913385,
+          "shortlist_delta": {
+            "bootstrap_repeats": 10000,
+            "clusters": 127,
+            "mean": 0.0,
+            "percentile_95": [
+              -0.023622047244094488,
+              0.023622047244094488
+            ],
+            "queries": 127,
+            "sampling_unit": "whole source paper; query-weighted mean",
+            "seed": 20261116
+          }
+        },
+        "dense": {
+          "evidence_f1": 0.3079120791719217,
+          "mean_rerank_checks": 15.729166666666666,
+          "p95_ms": 78.62422317266464,
+          "returned_complete": 0.7165354330708661,
+          "returned_delta": {
+            "bootstrap_repeats": 10000,
+            "clusters": 127,
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 127,
+            "sampling_unit": "whole source paper; query-weighted mean",
+            "seed": 20261116
+          },
+          "shortlist_complete": 0.8346456692913385,
+          "shortlist_delta": {
+            "bootstrap_repeats": 10000,
+            "clusters": 127,
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 127,
+            "sampling_unit": "whole source paper; query-weighted mean",
+            "seed": 20261116
+          }
+        },
+        "fixed32": {
+          "evidence_f1": 0.30753712604106304,
+          "mean_rerank_checks": 29.09722222222222,
+          "p95_ms": 131.90985983237624,
+          "returned_complete": 0.7086614173228346,
+          "returned_delta": {
+            "bootstrap_repeats": 10000,
+            "clusters": 127,
+            "mean": -0.007874015748031496,
+            "percentile_95": [
+              -0.023622047244094488,
+              0.0
+            ],
+            "queries": 127,
+            "sampling_unit": "whole source paper; query-weighted mean",
+            "seed": 20261116
+          },
+          "shortlist_complete": 0.937007874015748,
+          "shortlist_delta": {
+            "bootstrap_repeats": 10000,
+            "clusters": 127,
+            "mean": 0.10236220472440945,
+            "percentile_95": [
+              0.05511811023622047,
+              0.15748031496062992
+            ],
+            "queries": 127,
+            "sampling_unit": "whole source paper; query-weighted mean",
+            "seed": 20261116
+          }
+        },
+        "mmr": {
+          "evidence_f1": 0.3079120791719217,
+          "mean_rerank_checks": 15.729166666666666,
+          "p95_ms": 78.06639252230525,
+          "returned_complete": 0.7165354330708661,
+          "returned_delta": {
+            "bootstrap_repeats": 10000,
+            "clusters": 127,
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 127,
+            "sampling_unit": "whole source paper; query-weighted mean",
+            "seed": 20261116
+          },
+          "shortlist_complete": 0.8267716535433071,
+          "shortlist_delta": {
+            "bootstrap_repeats": 10000,
+            "clusters": 127,
+            "mean": -0.007874015748031496,
+            "percentile_95": [
+              -0.03937007874015748,
+              0.023622047244094488
+            ],
+            "queries": 127,
+            "sampling_unit": "whole source paper; query-weighted mean",
+            "seed": 20261116
+          }
+        },
+        "sections": {
+          "evidence_f1": 0.31016179795707355,
+          "mean_rerank_checks": 15.729166666666666,
+          "p95_ms": 78.61157916486263,
+          "returned_complete": 0.7165354330708661,
+          "returned_delta": {
+            "bootstrap_repeats": 10000,
+            "clusters": 127,
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 127,
+            "sampling_unit": "whole source paper; query-weighted mean",
+            "seed": 20261116
+          },
+          "shortlist_complete": 0.8188976377952756,
+          "shortlist_delta": {
+            "bootstrap_repeats": 10000,
+            "clusters": 127,
+            "mean": -0.015748031496062992,
+            "percentile_95": [
+              -0.05511811023622047,
+              0.023622047244094488
+            ],
+            "queries": 127,
+            "sampling_unit": "whole source paper; query-weighted mean",
+            "seed": 20261116
+          }
+        }
+      },
+      "requests": 144
+    },
+    "reranker": {
+      "files": {
+        "config.json": "d479c427a9ca5295218063d4f9aca4f297ab4ac27487cca7af42c84643d51ef0",
+        "expected-large-files.json": "cd9940a651fcf3d97ffc28f0242a9a620c0da5b9acad1861ef14faf5ee784f0e",
+        "generation_config.json": "81051cd3f6e77013827148d0b8a6ead93f8ac390d5ab805f849199f0af6a08db",
+        "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+        "model.safetensors": "27cd75a405b9c1b46b59abfd88aaa209e6fed2a1972cde9b70e7659537c5e65b",
+        "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+        "tokenizer_config.json": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0",
+        "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+      },
+      "policy": "Official frozen BF16 checkpoint; no own training or quantization. Revision recorded before downloading weights.",
+      "repository": "Qwen/Qwen3-Reranker-0.6B",
+      "revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473"
+    },
+    "script_sha256": "f4da48f00e99040ce3af9e1b4b8105a418ab563072f5d7d81b7a13839e55af97"
+  }
+}
