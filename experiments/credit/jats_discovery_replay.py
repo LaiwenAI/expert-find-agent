@@ -20,6 +20,7 @@ from experiments.followir.core17_reranking import digest, write_json
 
 
 ARMS = ("top4", "expanded", "absolute_text", "cheap_gate", "oracle_source")
+REVIEW_ARMS = ("selective_pair", "selective_weak", "selective_early_exit")
 
 
 def prepare(projection, raw_directory, output):
@@ -32,6 +33,14 @@ def prepare(projection, raw_directory, output):
     ))
 
 
+def timed_score(reader, pairs):
+    begin = perf_counter()
+    margins, clipped = reader.score_pairs(pairs, task=source.TASK)
+    if clipped or not np.isfinite(margins).all():
+        raise ValueError("Invalid source confirmation score")
+    return tuple(float(score) for score in margins), (perf_counter() - begin) * 1000
+
+
 class ClueIndex(source.Search):
     def __init__(self, payload, encoder, directory):
         super().__init__(payload,encoder,directory)
@@ -39,7 +48,7 @@ class ClueIndex(source.Search):
         frequency = Counter(t for doc in self.terms for t in doc)
         self.idf = {word:math.log1p(len(self.terms)/(1+count)) for word,count in frequency.items()}
 
-    def observe(self, clues, removed, documents, reader):
+    def observe(self, clues, removed, documents, reader, selective_review=False):
         begin = perf_counter()
         vectors = self.encoder.encode([f"Instruct: {DENSE_TASK}\nQuery: {clue}" for clue in clues])
         cosines = [self.vectors @ query for query in vectors]
@@ -75,20 +84,21 @@ class ClueIndex(source.Search):
                                  -math.log1p(dense[i].index(candidate))])
             vector = np.column_stack((np.min(per_side,axis=0),np.max(per_side,axis=0))).ravel()
         base_ms = (perf_counter()-begin)*1000
-        text_score, text_ms = None,0.
-        if broad:
-            begin = perf_counter()
-            margins, clipped = reader.score_pairs(
-                [(clue,documents[doi]["index"]) for clue,doi in zip(clues,broad,strict=True)],task=source.TASK)
-            if clipped or not np.isfinite(margins).all():
-                raise ValueError("Invalid source confirmation score")
-            text_score = min(margins)
-            text_ms = (perf_counter()-begin)*1000
-        return dict(top4=narrow,expanded=broad,features=vector,text_score=text_score,
-                    source_ms=base_ms,text_ms=text_ms)
+        observed = dict(top4=narrow, expanded=broad, features=vector, text_score=None,
+                        source_ms=base_ms, text_ms=0.)
+        if not broad:
+            return observed
+        pairs = [(clue, documents[doi]["index"]) for clue, doi in zip(clues, broad, strict=True)]
+        margins, observed["text_ms"] = timed_score(reader, pairs)
+        observed["text_score"] = min(margins)
+        if selective_review and narrow is None:
+            weak = max(range(2), key=lambda side: fused[side].index(self.ids[broad[side]]))
+            (observed["weak_score"],), observed["weak_ms"] = timed_score(reader, [pairs[weak]])
+            (observed["other_score"],), observed["other_ms"] = timed_score(reader, [pairs[1 - weak]])
+        return observed
 
 
-def frame(data, inventory, index, reader):
+def frame(data, inventory, index, reader, selective_review=False):
     result = {}
     for left,right,component in inventory["pairs"]:
         pair = left,right
@@ -96,7 +106,7 @@ def frame(data, inventory, index, reader):
             clue = [inventory["clues"][doi][view] for doi in pair]
             for status in source.MISSING:
                 removed = () if status=="present" else ((left,) if status=="missing_left" else (right,))
-                observed = index.observe(clue,removed,data,reader)
+                observed = index.observe(clue, removed, data, reader, selective_review)
                 result[pair,view,status] = observed | dict(component=component,truth=pair if not removed else None)
     return result
 
@@ -129,6 +139,55 @@ def proposal(observed, model, arm):
     return observed["expanded"] if confidence>cheap_cutoff else None
 
 
+def selective_cutoffs(training):
+    false_expansions = [row for row in training
+                        if row["top4"] is None and row["expanded"] and row["expanded"] != row["truth"]]
+    return {
+        "selective_pair": max((r["text_score"] for r in false_expansions), default=float("inf")),
+        "selective_weak": max((r["weak_score"] for r in false_expansions), default=float("inf")),
+        "selective_early_exit": max((min(r["weak_score"], r["other_score"])
+                                     for r in false_expansions), default=float("inf")),
+    }
+
+
+def review(observed, arm, cutoff):
+    if observed["top4"] or not observed["expanded"]:
+        return observed["top4"], 0., 0, 0
+    if arm == "selective_pair":
+        accept = observed["text_score"] > cutoff
+        extra_ms, calls, pairs = observed["text_ms"], 1, 2
+    else:
+        accept = observed["weak_score"] > cutoff
+        extra_ms, calls, pairs = observed["weak_ms"], 1, 1
+        if arm == "selective_early_exit" and accept:
+            extra_ms += observed["other_ms"]
+            calls += 1
+            pairs += 1
+            accept = observed["other_score"] > cutoff
+    return observed["expanded"] if accept else None, extra_ms, calls, pairs
+
+
+def source_review_report(records, models, cutoffs):
+    counts = defaultdict(Counter)
+    for (_, view, status), row in records.items():
+        group = row["component"]
+        for arm in ("top4", "expanded", "absolute_text", *REVIEW_ARMS):
+            if arm in REVIEW_ARMS:
+                selected, _, calls, pairs = review(row, arm, cutoffs[group][arm])
+            else:
+                selected = proposal(row, models[group], arm)
+                calls = int(arm == "absolute_text" and row["expanded"] is not None)
+                pairs = 2 * calls
+            tally = counts[f"{view}/{status}/{arm}"]
+            tally["cases"] += 1
+            tally["exact"] += selected is not None and selected == row["truth"]
+            tally["wrong"] += selected is not None and selected != row["truth"]
+            tally["unresolved"] += selected is None
+            tally["forwards"] += calls
+            tally["pairs"] += pairs
+    return dict(counts)
+
+
 def register(projection_path, postings_path):
     payload = json.loads(postings_path.read_bytes())
     if payload["projection_sha256"]!=digest(projection_path):
@@ -137,7 +196,7 @@ def register(projection_path, postings_path):
             for doi,(ids,posting) in payload["rows"].items()}
 
 
-def run(projection_path, cases_path, postings_path, glossary_path, training_path, embedding, reranker, output):
+def run(projection_path, cases_path, postings_path, glossary_path, training_path, embedding, reranker, output, selective_review=False):
     import torch
     from experiments.credit import linked_witness_dispatch as witness
     from experiments.followir.core17_verifier import Reranker
@@ -173,9 +232,12 @@ def run(projection_path, cases_path, postings_path, glossary_path, training_path
     role_cutoff = float(quantiles[int(np.ceil(.90*len(calibration)))-1])
     with TemporaryDirectory() as work:
         index = ClueIndex(payload,encoder,Path(work))
-        records = frame(docs,cases,index,reader)
+        records = frame(docs, cases, index, reader, selective_review)
     grouping = {r["component"] for r in records.values()}
-    models = {group:fit_gate([r for r in records.values() if r["component"]!=group]) for group in grouping}
+    training = {group: [r for r in records.values() if r["component"] != group] for group in grouping}
+    models = {group: fit_gate(rows) for group, rows in training.items()}
+    cutoffs = {group: selective_cutoffs(rows) for group, rows in training.items()} if selective_review else {}
+    arms = ARMS + REVIEW_ARMS if selective_review else ARMS
     result = defaultdict(Counter)
     timings = defaultdict(list)
     for pair,family,variant,requested,truth in queries:
@@ -187,14 +249,24 @@ def run(projection_path, cases_path, postings_path, glossary_path, training_path
         for view in source.VIEWS:
             for status in source.MISSING:
                 observed = records[pair,view,status]
-                for arm in ARMS:
+                for arm in arms:
                     begin = perf_counter()
-                    selected = proposal(observed,models[observed["component"]],arm)
+                    group = observed["component"]
+                    extra_ms, calls, pairs = 0., 0, 0
+                    if arm in REVIEW_ARMS:
+                        selected, extra_ms, calls, pairs = review(observed, arm, cutoffs[group][arm])
+                    else:
+                        selected = proposal(observed, models[group], arm)
+                        if arm == "absolute_text" and observed["expanded"]:
+                            extra_ms, calls, pairs = observed["text_ms"], 1, 2
                     found,decided,plans = roles.predict(registry,selected,scopes,scores,role_cutoff) if selected else (set(),False,set())
                     exact_source = status=="present" and selected==pair
                     expected = truth if status=="present" else set()
                     report = result[view,status,arm]
                     report["requests"] += 1
+                    if selective_review:
+                        report["review_forwards"] += calls
+                        report["review_pairs"] += pairs
                     report["positive_requests"] += bool(expected)
                     report["exact_source"] += exact_source
                     report["wrong_source_accept"] += selected is not None and not exact_source
@@ -206,18 +278,18 @@ def run(projection_path, cases_path, postings_path, glossary_path, training_path
                     report["unsupported_recommendation"] += bool(found and (not exact_source or found-expected))
                     report["exact_decision"] += exact_source and decided and found==expected
                     route_ms = observed["source_ms"] if arm!="oracle_source" else 0.
-                    if arm=="absolute_text":
-                        route_ms += observed["text_ms"]
+                    route_ms += extra_ms
                     # Skip role processing after a source abstention.
                     timings[view,status,arm].append(route_ms + ((perf_counter()-begin)*1000 + role_ms if selected else 0.))
     reports = {f"{view}/{status}":{arm:dict(result[view,status,arm],
-                    factored_p95_ms=float(np.quantile(timings[view,status,arm],.95))) for arm in ARMS}
+                    factored_p95_ms=float(np.quantile(timings[view,status,arm],.95))) for arm in arms}
                for view in source.VIEWS for status in source.MISSING}
+    extra = {"source_review": source_review_report(records, models, cutoffs)} if selective_review else {}
     write_json(output,dict(job=os.environ["SLURM_JOB_ID"],gpu=torch.cuda.get_device_name(),
         script_sha256=digest(Path(__file__)),projection_sha256=digest(projection_path),registry_sha256=digest(postings_path),
         cases_sha256=digest(cases_path),training_sha256=digest(training_path),embedding_revision=info["revision"],
         reranker_revision=reader.provenance["revision"],role_cutoff=role_cutoff,
-        source_calibration_rows=len(records),source_components=len(grouping),requests=len(queries),reports=reports))
+        source_calibration_rows=len(records),source_components=len(grouping),requests=len(queries),reports=reports,**extra))
 
 
 if __name__=="__main__":
@@ -230,6 +302,7 @@ if __name__=="__main__":
     replay = sub.add_parser("run")
     for name in ("projection_path","cases_path","postings_path","glossary_path","training_path","embedding","reranker","output"):
         replay.add_argument(name,type=Path)
+    replay.add_argument("--selective-review", action="store_true")
     replay.set_defaults(action=run)
     args = vars(parser.parse_args())
     args.pop("action")(**args)
