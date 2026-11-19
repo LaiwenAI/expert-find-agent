@@ -19,6 +19,7 @@ from experiments.credit import legacy_open_attribution as source
 from experiments.credit import open_role_applicability as base
 from experiments.credit import role_applicability_gate as gate
 from experiments.credit import role_vector_student as vector_student
+from experiments.credit.role_clause_scope import affirmative_clause
 from experiments.followir.core17_reranking import digest, write_json
 from experiments.followir.core17_verifier import Reranker
 from experiments.litsearch.dense_cache import verify_checkpoint
@@ -31,6 +32,8 @@ METHOD = "definition_contrast"
 BASELINE_SHA256 = "a5325a3b1bb0e7c21019726f740c77b5cbf0cf7580c2fbce3afd3cc79dca2f5e"
 ARMS = ("baseline", "single_head", "rival_heads")
 SHORTLIST_ARMS = (*ARMS, "two_head_veto", "two_head_repair")
+VECTOR_SHA256 = "1719839081dc099cc89beb24484338372231e539b6727f7dc7a1000a719b5528"
+EXTERNAL_PHRASE_SHA256 = "34f9163daaf4c321c8fe398c493fed5f982adc3e2200cb61ee1881bb2fa9851c"
 STRESS_SHA256 = "ac6c615d89b868292ab05b1e43a2dee5bef23dc6b11b799754e9d27398c46ee7"
 SHORTLIST_SHA256 = "0c991314386b634837fc0877180b1672489d64a5ea7ebb70fb5356c0aafb408d"
 VERIFIER_SHA256 = "b84cfa9ca6f9cd3088ec2747a26ebb52d4c2c49d2729aa6afa3ae09200b74543"
@@ -204,7 +207,8 @@ def matched_coverage(rows, report):
     return controls
 
 def run(old, first, fresh, niso, role_results, source_results, body_results, baseline_results,
-        embedding, reranker, output, shortlist_reference=None, student_training=None, repair_reference=None, stress_phrases=None):
+        embedding, reranker, output, shortlist_reference=None, student_training=None, repair_reference=None,
+        stress_phrases=None, scope_reference=None, external_phrases=None):
     if output.exists() or not os.environ.get("SLURM_JOB_ID") or not torch.cuda.is_available():
         raise ValueError("Require a fresh output and Slurm CUDA")
     for path, expected in (
@@ -255,7 +259,13 @@ def run(old, first, fresh, niso, role_results, source_results, body_results, bas
     if stress_phrases is not None and (student_training is None or digest(stress_phrases) != STRESS_SHA256):
         raise ValueError("Stress wording requires a student and the pinned phrase bank")
     stress = json.loads(stress_phrases.read_bytes()) if stress_phrases is not None else {}
-    stress_text = [phrase for phrases in stress.values() for phrase in phrases]
+    if scope_reference is not None and (not stress or digest(scope_reference) != VECTOR_SHA256):
+        raise ValueError("Scope diagnosis requires the pinned vector results and stress wording")
+    prior_vector = json.loads(scope_reference.read_bytes()) if scope_reference is not None else None
+    if external_phrases is not None and (prior_vector is None or digest(external_phrases) != EXTERNAL_PHRASE_SHA256):
+        raise ValueError("External wording requires the pinned independent phrase bank and scope diagnosis")
+    external = json.loads(external_phrases.read_bytes()) if external_phrases is not None else {}
+    stress_text = [phrase for phrase_bank in (stress, external) for phrases in phrase_bank.values() for phrase in phrases]
     student = None
     if student_training is not None:
         student = vector_student.DutyStudent(
@@ -265,13 +275,23 @@ def run(old, first, fresh, niso, role_results, source_results, body_results, bas
         arms = (*arms, *vector_student.NAMES, "student_then_repair")
 
     panels = {}
-    forms = [(form, False) for form in source.FORMS]
+    variants = ["original"]
     if stress:
-        forms.extend((form, True) for form in source.FORMS)
-    for form, stress_mode in forms:
+        variants.append("stress")
+    if prior_vector is not None:
+        variants.extend(("projected", "stress_projected", "stress_no_role_gate"))
+    if external:
+        variants.extend(("external", "external_projected"))
+    for variant, form in ((variant, form) for variant in variants for form in source.FORMS):
+        phrase_bank = stress if variant.startswith("stress") else external if variant.startswith("external") else {}
+        project = variant.endswith("projected")
+        bypass = variant.endswith("no_role_gate")
         cuts = source_policy["thresholds"][form], body_policy["thresholds"][form]["lexical_body"]["threshold"]
         observations = {(state, kind): [] for state in ("present", "withheld")
                         for kind in ("supported", "unsupported")}
+        scope_audit = {key: dict.fromkeys(("changed_phrase", "source_pass", "correct_source_pass",
+                                          "role_pass", "both_gates_pass", "gold_in_shortlist_on_correct_source",
+                                          "gold_in_shortlist_after_gates"), 0) for key in observations}
         for position, ((doi, duties), group) in enumerate(zip(queries, groups, strict=True)):
             _, _, distractor = legacy.choose_case(doi, notes[doi].memberships)
             initial, = (role for role in duties if distractor in notes[doi].memberships[role])
@@ -287,17 +307,22 @@ def run(old, first, fresh, niso, role_results, source_results, body_results, bas
                 source_pass, gate_ms = base.alternate(clue, nominated, index, bodies, dense, *cuts)
                 for kind, example, expected in (("supported", good, target), ("unsupported", bad, None)):
                     phrase = example["text"]
-                    if stress_mode:
-                        phrases = stress[example["role"]]
-                        phrase = min(phrases, key=lambda text: legacy.stable("stress", doi, text))
+                    if phrase_bank:
+                        phrases = phrase_bank[example["role"]]
+                        bank_name = "stress" if phrase_bank is stress else "external"
+                        phrase = min(phrases, key=lambda text: legacy.stable(bank_name, doi, text))
+                    start = perf_counter()
+                    activity = affirmative_clause(phrase) if project else phrase
+                    scope_ms = (perf_counter() - start) * 1000
                     proposed, signals, role_ms, definition_scores, vector = gate.score_with_definitions(
-                        phrase, encoder, bank, definitions, excluded,
+                        activity, encoder, bank, definitions, excluded,
                     )
                     chosen = proposed[METHOD]
                     start = perf_counter()
-                    accepted = source_pass and signals[METHOD] > controller["thresholds"][METHOD]
+                    role_pass = signals[METHOD] > controller["thresholds"][METHOD]
+                    accepted = source_pass and (role_pass or bypass)
                     control = base.outcome(index, nominated, goal, initial, expected, chosen, accepted)
-                    shared_ms = retrieval_ms + gate_ms + role_ms + (perf_counter() - start) * 1000
+                    shared_ms = retrieval_ms + gate_ms + role_ms + scope_ms + (perf_counter() - start) * 1000
                     records = {"baseline": dict(control, ms=shared_ms, verify_ms=None,
                                                 proposal_score=signals[METHOD])}
                     verification_order = ARMS[1:] if position % 2 == 0 else tuple(reversed(ARMS[1:]))
@@ -340,26 +365,47 @@ def run(old, first, fresh, niso, role_results, source_results, body_results, bas
                                 record.update(dict.fromkeys(METRICS, 0))
                             record.update(ms=shared_ms + verify_ms, verify_ms=verify_ms)
                         records[arm] = record
+                    if prior_vector is not None:
+                        audit = scope_audit[state, kind]
+                        correct_source = bool(source_pass and nominated == goal)
+                        gold_available = correct_source and expected in shortlist(definition_scores)
+                        for key, flag in (
+                            ("changed_phrase", activity != phrase),
+                            ("source_pass", source_pass),
+                            ("correct_source_pass", correct_source),
+                            ("role_pass", role_pass),
+                            ("both_gates_pass", accepted),
+                            ("gold_in_shortlist_on_correct_source", gold_available),
+                            ("gold_in_shortlist_after_gates", gold_available and accepted),
+                        ):
+                            audit[key] += int(flag)
                     observations[state, kind].append((group, records))
 
-        panel_key = f"stress_{form}" if stress_mode else form
+        panel_key = form if variant == "original" else f"{variant}_{form}"
         panels[panel_key] = {}
         for (state, kind), rows in observations.items():
             panel = f"{state}/{kind}"
             values = summarize(rows, arms)
             expected = baseline["results"][form]["panels"][panel]["definition_contrast/body"]
-            if not stress_mode and any(values["baseline"][k] != expected[k] for k in METRICS):
+            if variant == "original" and any(values["baseline"][k] != expected[k] for k in METRICS):
                 raise AssertionError(f"Baseline replay diverged in {form}/{panel}")
-            if not stress_mode and prior is not None:
+            if variant == "original" and prior is not None:
                 for arm in ARMS:
                     previous = prior["panels"][form][panel][arm]
                     if any(values[arm][k] != previous[k] for k in METRICS):
                         raise AssertionError(f"Verifier replay diverged in {form}/{panel}/{arm}")
-            if not stress_mode and prior_repair is not None:
+            if variant == "original" and prior_repair is not None:
                 for arm in ("two_head_veto", "two_head_repair"):
                     previous = prior_repair["panels"][form][panel][arm]
                     if any(values[arm][k] != previous[k] for k in METRICS):
                         raise AssertionError(f"Two-head replay diverged in {form}/{panel}/{arm}")
+            if prior_vector is not None:
+                if variant in ("original", "stress"):
+                    reference = prior_vector["panels"][panel_key][panel]
+                    for arm in arms:
+                        if any(values[arm][k] != reference[arm][k] for k in (*METRICS, "verification_calls")):
+                            raise AssertionError(f"Vector replay diverged in {panel_key}/{panel}/{arm}")
+                values["stage_counts"] = scope_audit[state, kind]
             values["proposal_at_matched_coverage"] = matched_coverage(rows, values)
             panels[panel_key][panel] = values
 
@@ -369,6 +415,8 @@ def run(old, first, fresh, niso, role_results, source_results, body_results, bas
         baseline_sha256=digest(baseline_results), code_sha256=digest(Path(__file__)),
         **({"verifier_reference_sha256": digest(shortlist_reference)} if prior is not None else {}),
         **({"stress_phrase_sha256": digest(stress_phrases)} if stress_phrases is not None else {}),
+        **({"scope_reference_sha256": digest(scope_reference)} if prior_vector is not None else {}),
+        **({"external_phrase_sha256": digest(external_phrases)} if external else {}),
         **({"student": student.metadata, "repair_reference_sha256": digest(repair_reference),
             "student_code_sha256": digest(Path(vector_student.__file__))} if student is not None else {}),
         embedding_revision=provenance["revision"], reranker_revision=reader.provenance["revision"], panels=panels,
@@ -381,6 +429,8 @@ if __name__ == "__main__":
     parser.add_argument("--student-training", type=Path)
     parser.add_argument("--repair-reference", type=Path)
     parser.add_argument("--stress-phrases", type=Path)
+    parser.add_argument("--scope-reference", type=Path)
+    parser.add_argument("--external-phrases", type=Path)
     for key in ("old", "first", "fresh", "niso", "role_results", "source_results", "body_results",
                 "baseline_results", "embedding", "reranker", "output"):
         parser.add_argument(key, type=Path)
