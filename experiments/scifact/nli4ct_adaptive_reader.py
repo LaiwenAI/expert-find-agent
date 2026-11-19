@@ -52,13 +52,14 @@ def choice(key, statement, sources, controller, cutoff, arm):
     return select(task, controller, depth, cutoff if arm == "adaptive" else None)
 
 
-def label_scores(tokenizer, reader, digits, statement, section, sources, selected, *, prompt=PROMPT):
+def label_scores(tokenizer, reader, digits, statement, section, sources, selected, *, prompt=PROMPT,
+                 headings=("Primary trial", "Secondary trial")):
     import torch
 
     blocks = []
     for side, ((_, lines), indices) in enumerate(zip(sources, selected, strict=True)):
         lines_read = "\n".join(lines[index] for index in sorted(indices))
-        blocks.append(f"{('Primary', 'Secondary')[side]} trial, {section}:\n{lines_read}")
+        blocks.append(f"{headings[side]}, {section}:\n{lines_read}")
     messages = [
         {"role": "system", "content": prompt},
         {"role": "user", "content": "\n\n".join(blocks) + f"\n\nStatement: {statement}"},

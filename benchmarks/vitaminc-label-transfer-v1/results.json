@@ -1,0 +1,226 @@
+{
+  "job": "42053",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "reader_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+  "dataset_revision": "be6febb761b0b2807687e61e0b5282e459df2fa0",
+  "input_sha256": "7ad1808dbc30c62e0a1427a53022d0dfaff668a1fde3c4b612a2d266edd753ad",
+  "script_sha256": "943af16b6f1ec1825979d2b1d055774473012950b3eba6a3de31aa573adda022",
+  "pairs": 300,
+  "queries": 600,
+  "labels": [
+    "SUPPORTS",
+    "REFUTES",
+    "NOT ENOUGH INFO"
+  ],
+  "panel_sha256": "4132c9e871d5157263df3319a144c408c7f1360b0a1c54edbb071759762ba157",
+  "report": {
+    "original": {
+      "correct": 382,
+      "macro_f1": 0.6126784963282444,
+      "confusion": [
+        [
+          194,
+          74,
+          32
+        ],
+        [
+          18,
+          121,
+          11
+        ],
+        [
+          22,
+          61,
+          67
+        ]
+      ],
+      "changed_vs_original": 0,
+      "full_pairs_correct": 106,
+      "support_refute_pairs_correct": 63,
+      "support_unknown_pairs_correct": 43,
+      "false_support_from_refutes": 18,
+      "false_support_from_unknown": 22,
+      "paired_accuracy_delta": {
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 300,
+        "clusters": 300,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000,
+        "sampling_unit": "one complete contrast pair per Wikipedia page"
+      },
+      "paired_both_correct_delta": {
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 300,
+        "clusters": 300,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000,
+        "sampling_unit": "one complete contrast pair per Wikipedia page"
+      },
+      "p95_ms": 14.806635119020939
+    },
+    "swap_tokens": {
+      "correct": 396,
+      "macro_f1": 0.6319022384016516,
+      "confusion": [
+        [
+          209,
+          50,
+          41
+        ],
+        [
+          20,
+          116,
+          14
+        ],
+        [
+          24,
+          55,
+          71
+        ]
+      ],
+      "changed_vs_original": 59,
+      "full_pairs_correct": 122,
+      "support_refute_pairs_correct": 71,
+      "support_unknown_pairs_correct": 51,
+      "false_support_from_refutes": 20,
+      "false_support_from_unknown": 24,
+      "paired_accuracy_delta": {
+        "mean": 0.023333333333333334,
+        "percentile_95": [
+          0.0033333333333333335,
+          0.045
+        ],
+        "queries": 300,
+        "clusters": 300,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000,
+        "sampling_unit": "one complete contrast pair per Wikipedia page"
+      },
+      "paired_both_correct_delta": {
+        "mean": 0.05333333333333334,
+        "percentile_95": [
+          0.02,
+          0.09
+        ],
+        "queries": 300,
+        "clusters": 300,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000,
+        "sampling_unit": "one complete contrast pair per Wikipedia page"
+      },
+      "p95_ms": 14.778256881982088
+    },
+    "swap_order": {
+      "correct": 402,
+      "macro_f1": 0.6493453004212938,
+      "confusion": [
+        [
+          213,
+          29,
+          58
+        ],
+        [
+          25,
+          90,
+          35
+        ],
+        [
+          28,
+          23,
+          99
+        ]
+      ],
+      "changed_vs_original": 125,
+      "full_pairs_correct": 126,
+      "support_refute_pairs_correct": 58,
+      "support_unknown_pairs_correct": 68,
+      "false_support_from_refutes": 25,
+      "false_support_from_unknown": 28,
+      "paired_accuracy_delta": {
+        "mean": 0.03333333333333333,
+        "percentile_95": [
+          0.0033333333333333335,
+          0.065
+        ],
+        "queries": 300,
+        "clusters": 300,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000,
+        "sampling_unit": "one complete contrast pair per Wikipedia page"
+      },
+      "paired_both_correct_delta": {
+        "mean": 0.06666666666666667,
+        "percentile_95": [
+          0.02,
+          0.11333333333333333
+        ],
+        "queries": 300,
+        "clusters": 300,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000,
+        "sampling_unit": "one complete contrast pair per Wikipedia page"
+      },
+      "p95_ms": 14.814560674130917
+    },
+    "swap_both": {
+      "correct": 413,
+      "macro_f1": 0.6685934177022039,
+      "confusion": [
+        [
+          217,
+          25,
+          58
+        ],
+        [
+          23,
+          93,
+          34
+        ],
+        [
+          24,
+          23,
+          103
+        ]
+      ],
+      "changed_vs_original": 125,
+      "full_pairs_correct": 132,
+      "support_refute_pairs_correct": 64,
+      "support_unknown_pairs_correct": 68,
+      "false_support_from_refutes": 23,
+      "false_support_from_unknown": 24,
+      "paired_accuracy_delta": {
+        "mean": 0.051666666666666666,
+        "percentile_95": [
+          0.021666666666666667,
+          0.08333333333333333
+        ],
+        "queries": 300,
+        "clusters": 300,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000,
+        "sampling_unit": "one complete contrast pair per Wikipedia page"
+      },
+      "paired_both_correct_delta": {
+        "mean": 0.08666666666666667,
+        "percentile_95": [
+          0.04,
+          0.13333333333333333
+        ],
+        "queries": 300,
+        "clusters": 300,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000,
+        "sampling_unit": "one complete contrast pair per Wikipedia page"
+      },
+      "p95_ms": 14.779927488416433
+    }
+  }
+}
