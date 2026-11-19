@@ -1,0 +1,149 @@
+{
+  "job": "43013",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "queries_sha256": "30661871ac08a61e7e74d67d75491878c7e4194f217483b60d06426c4b36e4c5",
+  "corpus_sha256": "c9e8d6e13bb05900427ab1d785d6024256f61e8bb34f220c3816fb79d1921780",
+  "script_sha256": "e14846efbfe4e9108f2a27896f19b41c2411a1eb1720ea87e9211afe3e6224a3",
+  "sources": 52667,
+  "experts": 4154,
+  "index_seconds": 296.9265280421823,
+  "requests": 80,
+  "metrics": {
+    "whole": {
+      "issued": 34,
+      "model_supported_slots": 70,
+      "checks": 1280,
+      "clipped": 0,
+      "withheld": 0,
+      "p50_p95_ms": [
+        194.43597830832005,
+        1181.7501943558448
+      ],
+      "changed_ranked_lists": 0
+    },
+    "criterion_rrf": {
+      "issued": 34,
+      "model_supported_slots": 71,
+      "checks": 1280,
+      "clipped": 0,
+      "withheld": 0,
+      "p50_p95_ms": [
+        197.7347396314144,
+        1270.7099663093682
+      ],
+      "changed_ranked_lists": 24
+    },
+    "criterion_cover": {
+      "issued": 34,
+      "model_supported_slots": 71,
+      "checks": 1280,
+      "clipped": 0,
+      "withheld": 0,
+      "p50_p95_ms": [
+        197.9356063529849,
+        1272.369716316461
+      ],
+      "changed_ranked_lists": 24
+    }
+  },
+  "models": {
+    "encoder": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+    "parser": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "verifier": "e61197ed45024b0ed8a2d74b80b4d909f1255473"
+  },
+  "shared_exact_views": 71,
+  "same_expert_distinct_views": 0,
+  "recommendation_slots": {
+    "whole": 70,
+    "criterion_rrf": 71,
+    "criterion_cover": 71
+  },
+  "review_cases": 71,
+  "human_judgments": 0,
+  "request_status_counts": {
+    "whole": {
+      "issued": 34,
+      "abstained": 46
+    },
+    "criterion_rrf": {
+      "issued": 34,
+      "abstained": 46
+    },
+    "criterion_cover": {
+      "issued": 34,
+      "abstained": 46
+    }
+  },
+  "ungraded_paired_bounds_vs_whole": {
+    "criterion_rrf": {
+      "shared_views": 70,
+      "hit_delta": {
+        "lower": 0.0,
+        "upper": 0.0025
+      },
+      "adverse_group_rate_delta": {
+        "lower": 0.0,
+        "upper": 0.0125
+      }
+    },
+    "criterion_cover": {
+      "shared_views": 70,
+      "hit_delta": {
+        "lower": 0.0,
+        "upper": 0.0025
+      },
+      "adverse_group_rate_delta": {
+        "lower": 0.0,
+        "upper": 0.0125
+      }
+    }
+  },
+  "person_evidence_audit": {
+    "prefix_characters": 800,
+    "development_catalog": {
+      "paper": {
+        "sources": 33320,
+        "name_in_prefix": 8,
+        "name_in_full": 10,
+        "role_header_in_prefix": 0,
+        "role_header_in_full": 0
+      },
+      "profile": {
+        "sources": 19347,
+        "name_in_prefix": 2174,
+        "name_in_full": 2465,
+        "role_header_in_prefix": 0,
+        "role_header_in_full": 0
+      }
+    },
+    "review_packet": {
+      "cases": {
+        "cases": 71,
+        "any_name": 1,
+        "all_name": 1
+      },
+      "source_view_occurrences": {
+        "paper": {
+          "view_occurrences": 21,
+          "name_in_view": 0,
+          "role_header_in_view": 0
+        },
+        "profile": {
+          "view_occurrences": 51,
+          "name_in_view": 1,
+          "role_header_in_view": 0
+        }
+      }
+    },
+    "development_paper_metadata": {
+      "paper_sources": 33320,
+      "linked_sources": 33320,
+      "distinct_dois": 5106,
+      "with_doi": 5257,
+      "with_author_list": 32938,
+      "with_doi_and_author_list": 5237,
+      "with_verified_role": 0
+    }
+  },
+  "review_packet_sha256": "3ad28204bd5fec8913769a8214a13aed2f10e3cc06c553df0469eda68031eebb"
+}
