@@ -1,0 +1,274 @@
+{
+  "job": "41459",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "development_sha256": "30661871ac08a61e7e74d67d75491878c7e4194f217483b60d06426c4b36e4c5",
+  "controls_sha256": "ca96d57855c1acb463a3bbce8bb21e3578d5c8465c340958fd74fe209cea5000",
+  "script_sha256": "dd0c072c1abd35a1524a402f488522f5fe00e6ea3d423fd9421574432441c1a5",
+  "model_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+  "trigger_margins": {
+    "wide": 2.0,
+    "narrow": 0.5
+  },
+  "results": {
+    "controls": {
+      "requests": 72,
+      "arms": {
+        "bf16_independent": {
+          "clauses": 504,
+          "role_changes": 0,
+          "qualification_requests_changed": 0,
+          "qualifications_added": 0,
+          "qualifications_removed": 0,
+          "targets": 72,
+          "targets_correct": 60,
+          "false_qualification_targets": 2,
+          "missed_qualification_targets": 10,
+          "rechecked": 0,
+          "original_slots": 135139,
+          "fallback_slots": 0,
+          "fp16_prefixes": 0,
+          "fp16_block_checks": 0,
+          "fp16_slots": 0,
+          "disagreeing_blocks": 0,
+          "uncertain_fp16_blocks": 0,
+          "p50_p95_ms": [
+            100.67209415137768,
+            160.19115364179015
+          ],
+          "guard_over_arm_p95_ci95": [
+            0.33832072578099376,
+            0.3429388909721168
+          ]
+        },
+        "bf16_guard": {
+          "clauses": 504,
+          "role_changes": 2,
+          "qualification_requests_changed": 0,
+          "qualifications_added": 0,
+          "qualifications_removed": 0,
+          "targets": 72,
+          "targets_correct": 60,
+          "false_qualification_targets": 2,
+          "missed_qualification_targets": 10,
+          "rechecked": 1,
+          "original_slots": 33133,
+          "fallback_slots": 1827,
+          "fp16_prefixes": 0,
+          "fp16_block_checks": 0,
+          "fp16_slots": 0,
+          "disagreeing_blocks": 0,
+          "uncertain_fp16_blocks": 0,
+          "p50_p95_ms": [
+            36.17648966610432,
+            54.57197893410921
+          ],
+          "guard_over_arm_p95_ci95": [
+            1.0,
+            1.0
+          ]
+        },
+        "fp16_guard": {
+          "clauses": 504,
+          "role_changes": 4,
+          "qualification_requests_changed": 1,
+          "qualifications_added": 1,
+          "qualifications_removed": 0,
+          "targets": 72,
+          "targets_correct": 60,
+          "false_qualification_targets": 2,
+          "missed_qualification_targets": 10,
+          "rechecked": 0,
+          "original_slots": 33133,
+          "fallback_slots": 0,
+          "fp16_prefixes": 0,
+          "fp16_block_checks": 0,
+          "fp16_slots": 0,
+          "disagreeing_blocks": 0,
+          "uncertain_fp16_blocks": 0,
+          "p50_p95_ms": [
+            36.371804773807526,
+            54.46355817839503
+          ],
+          "guard_over_arm_p95_ci95": [
+            0.9949596689585396,
+            1.0064452623233282
+          ]
+        },
+        "bf16_narrow": {
+          "clauses": 504,
+          "role_changes": 2,
+          "qualification_requests_changed": 0,
+          "qualifications_added": 0,
+          "qualifications_removed": 0,
+          "targets": 72,
+          "targets_correct": 60,
+          "false_qualification_targets": 2,
+          "missed_qualification_targets": 10,
+          "rechecked": 1,
+          "original_slots": 33133,
+          "fallback_slots": 1827,
+          "fp16_prefixes": 0,
+          "fp16_block_checks": 0,
+          "fp16_slots": 0,
+          "disagreeing_blocks": 0,
+          "uncertain_fp16_blocks": 0,
+          "p50_p95_ms": [
+            35.93702148646116,
+            54.178485833108425
+          ],
+          "guard_over_arm_p95_ci95": [
+            1.0009734218988553,
+            1.0115881571880707
+          ]
+        },
+        "consensus": {
+          "clauses": 504,
+          "role_changes": 2,
+          "qualification_requests_changed": 0,
+          "qualifications_added": 0,
+          "qualifications_removed": 0,
+          "targets": 72,
+          "targets_correct": 60,
+          "false_qualification_targets": 2,
+          "missed_qualification_targets": 10,
+          "rechecked": 1,
+          "original_slots": 33133,
+          "fallback_slots": 1827,
+          "fp16_prefixes": 1,
+          "fp16_block_checks": 1,
+          "fp16_slots": 459,
+          "disagreeing_blocks": 1,
+          "uncertain_fp16_blocks": 0,
+          "p50_p95_ms": [
+            35.92342883348465,
+            54.016943741589785
+          ],
+          "guard_over_arm_p95_ci95": [
+            1.0045115113652732,
+            1.0123650592183886
+          ]
+        }
+      }
+    },
+    "development": {
+      "requests": 80,
+      "arms": {
+        "bf16_independent": {
+          "clauses": 1452,
+          "role_changes": 0,
+          "qualification_requests_changed": 0,
+          "qualifications_added": 0,
+          "qualifications_removed": 0,
+          "rechecked": 0,
+          "original_slots": 1763694,
+          "fallback_slots": 0,
+          "fp16_prefixes": 0,
+          "fp16_block_checks": 0,
+          "fp16_slots": 0,
+          "disagreeing_blocks": 0,
+          "uncertain_fp16_blocks": 0,
+          "p50_p95_ms": [
+            502.269902266562,
+            5258.810445293779
+          ],
+          "guard_over_arm_p95_ci95": [
+            0.14666171962598867,
+            0.5471964665700518
+          ]
+        },
+        "bf16_guard": {
+          "clauses": 1452,
+          "role_changes": 10,
+          "qualification_requests_changed": 0,
+          "qualifications_added": 0,
+          "qualifications_removed": 0,
+          "rechecked": 25,
+          "original_slots": 166929,
+          "fallback_slots": 278199,
+          "fp16_prefixes": 0,
+          "fp16_block_checks": 0,
+          "fp16_slots": 0,
+          "disagreeing_blocks": 0,
+          "uncertain_fp16_blocks": 0,
+          "p50_p95_ms": [
+            122.10822943598032,
+            1848.5881562344728
+          ],
+          "guard_over_arm_p95_ci95": [
+            1.0,
+            1.0
+          ]
+        },
+        "fp16_guard": {
+          "clauses": 1452,
+          "role_changes": 12,
+          "qualification_requests_changed": 1,
+          "qualifications_added": 0,
+          "qualifications_removed": 1,
+          "rechecked": 7,
+          "original_slots": 166929,
+          "fallback_slots": 82824,
+          "fp16_prefixes": 0,
+          "fp16_block_checks": 0,
+          "fp16_slots": 0,
+          "disagreeing_blocks": 0,
+          "uncertain_fp16_blocks": 0,
+          "p50_p95_ms": [
+            120.8809083327651,
+            1013.5590961202975
+          ],
+          "guard_over_arm_p95_ci95": [
+            1.013311245607218,
+            3.7309218913068096
+          ]
+        },
+        "bf16_narrow": {
+          "clauses": 1452,
+          "role_changes": 14,
+          "qualification_requests_changed": 2,
+          "qualifications_added": 2,
+          "qualifications_removed": 0,
+          "rechecked": 10,
+          "original_slots": 166929,
+          "fallback_slots": 107072,
+          "fp16_prefixes": 0,
+          "fp16_block_checks": 0,
+          "fp16_slots": 0,
+          "disagreeing_blocks": 0,
+          "uncertain_fp16_blocks": 0,
+          "p50_p95_ms": [
+            118.93670074641705,
+            943.1433481164275
+          ],
+          "guard_over_arm_p95_ci95": [
+            1.0008177507320077,
+            2.6047558505789725
+          ]
+        },
+        "consensus": {
+          "clauses": 1452,
+          "role_changes": 12,
+          "qualification_requests_changed": 0,
+          "qualifications_added": 0,
+          "qualifications_removed": 0,
+          "rechecked": 7,
+          "original_slots": 166929,
+          "fallback_slots": 74680,
+          "fp16_prefixes": 15,
+          "fp16_block_checks": 25,
+          "fp16_slots": 31792,
+          "disagreeing_blocks": 4,
+          "uncertain_fp16_blocks": 6,
+          "p50_p95_ms": [
+            122.0078794285655,
+            998.7400632351635
+          ],
+          "guard_over_arm_p95_ci95": [
+            1.072380924150301,
+            2.9593625800726735
+          ]
+        }
+      }
+    }
+  }
+}
