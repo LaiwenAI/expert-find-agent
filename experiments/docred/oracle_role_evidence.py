@@ -36,7 +36,7 @@ def matched_window(case, count):
     return max(combinations(range(len(words)), count), key=key)
 
 
-def reader_scorer(tokenizer, reader):
+def reader_scorer(tokenizer, reader, *, system=SYSTEM):
     ids = [tokenizer.encode(value, add_special_tokens=False) for value in ("1", "0")]
     if any(len(label) != 1 for label in ids) or ids[0] == ids[1]:
         raise ValueError("Expected distinct single-token decisions")
@@ -45,7 +45,7 @@ def reader_scorer(tokenizer, reader):
     @torch.inference_mode()
     def score(pairs):
         prompts = [tokenizer.apply_chat_template(
-            [{"role": "system", "content": SYSTEM},
+            [{"role": "system", "content": system},
              {"role": "user", "content": f"Source:\n{doc}\n\nQuestion: {query}"}],
             tokenize=True, add_generation_prompt=True, return_dict=False,
         ) for query, doc in pairs]
