@@ -1,0 +1,152 @@
+{
+  "job": "43148",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "code_sha256": "63801768f3de1b775c0cd88c9d59b2611856adb81a3bc6588ca3dbbeb664a884",
+  "vectors_sha256": "403fd19c50177eb4dd59a5f6fc07f5fe6ab49da223f5e1f4d172ec6cebeff2da",
+  "queries_sha256": "30661871ac08a61e7e74d67d75491878c7e4194f217483b60d06426c4b36e4c5",
+  "role_windows_sha256": "a96c36183cefa019156a296c7698c195ff25b5d687971b08328357111eb86382",
+  "models": {
+    "encoder": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+    "parser": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "verifier": "e61197ed45024b0ed8a2d74b80b4d909f1255473"
+  },
+  "requests": 80,
+  "token_ratio": 0.8,
+  "sign_margin": 0.125,
+  "metrics": {
+    "padded_whole": {
+      "primary": {
+        "logical_pairs": 1280,
+        "logical_tokens": 298626,
+        "padded_batches": 115,
+        "executed_tokens": 544236
+      },
+      "fallback": {},
+      "issued": 34,
+      "extra": 0,
+      "clipped": 0,
+      "p50_p95_ms": [
+        186.74839194864035,
+        1126.3696865178638
+      ],
+      "paired_p95_ms_delta_vs_padded_rescue": [
+        -61.67143955826759,
+        -14.075260981917268
+      ],
+      "primary_verifier_p95_ms": 179.46659270673985,
+      "changed": {
+        "initial": 0,
+        "extra": 3,
+        "ranked": 0,
+        "decisions": 0,
+        "qualifications": 0,
+        "invoked": 46
+      }
+    },
+    "padded_rescue": {
+      "primary": {
+        "logical_pairs": 1280,
+        "logical_tokens": 298626,
+        "padded_batches": 115,
+        "executed_tokens": 544236
+      },
+      "fallback": {
+        "logical_pairs": 184,
+        "logical_tokens": 33562,
+        "padded_batches": 46,
+        "executed_tokens": 41454
+      },
+      "issued": 37,
+      "extra": 3,
+      "clipped": 0,
+      "p50_p95_ms": [
+        194.63153183460236,
+        1155.2903302945188
+      ],
+      "paired_p95_ms_delta_vs_padded_rescue": [
+        0.0,
+        0.0
+      ],
+      "primary_verifier_p95_ms": 179.2459451593458,
+      "changed": {
+        "initial": 0,
+        "extra": 0,
+        "ranked": 0,
+        "decisions": 0,
+        "qualifications": 0,
+        "invoked": 0
+      }
+    },
+    "packed_rescue": {
+      "primary": {
+        "logical_pairs": 1280,
+        "logical_tokens": 298626,
+        "packed_batches": 115,
+        "executed_tokens": 298626
+      },
+      "fallback": {
+        "logical_pairs": 182,
+        "logical_tokens": 33019,
+        "packed_batches": 45,
+        "executed_tokens": 33019
+      },
+      "issued": 38,
+      "extra": 3,
+      "clipped": 0,
+      "p50_p95_ms": [
+        161.39519307762384,
+        1071.863928250968
+      ],
+      "paired_p95_ms_delta_vs_padded_rescue": [
+        -250.1979861408472,
+        -53.32869105041027
+      ],
+      "primary_verifier_p95_ms": 96.6156824491918,
+      "changed": {
+        "initial": 5,
+        "extra": 0,
+        "ranked": 0,
+        "decisions": 6,
+        "qualifications": 0,
+        "invoked": 1
+      }
+    },
+    "guarded_rescue": {
+      "primary": {
+        "logical_pairs": 1280,
+        "logical_tokens": 298626,
+        "packed_batches": 97,
+        "executed_tokens": 385612,
+        "padded_batches": 34,
+        "guard_rechecks": 16
+      },
+      "fallback": {
+        "logical_pairs": 184,
+        "logical_tokens": 33562,
+        "padded_batches": 32,
+        "executed_tokens": 35546,
+        "packed_batches": 14
+      },
+      "issued": 37,
+      "extra": 3,
+      "clipped": 0,
+      "p50_p95_ms": [
+        178.41335106641054,
+        1076.464177947491
+      ],
+      "paired_p95_ms_delta_vs_padded_rescue": [
+        -248.86063858866692,
+        -0.9522661566734314
+      ],
+      "primary_verifier_p95_ms": 115.0042594410479,
+      "changed": {
+        "initial": 0,
+        "extra": 0,
+        "ranked": 0,
+        "decisions": 0,
+        "qualifications": 0,
+        "invoked": 0
+      }
+    }
+  }
+}
