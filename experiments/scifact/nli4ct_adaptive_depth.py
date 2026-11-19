@@ -40,6 +40,19 @@ class Task:
     weights: dict
 
 
+def make_task(key, statement, sources, gold):
+    query = set(tokens(statement))
+    trials = []
+    for (paper, lines), positions in zip(sources, gold, strict=True):
+        _, initial = choose_windows(statement, lines)
+        terms = tuple(frozenset(tokens(line)) & query for line in lines)
+        trials.append(Trial(paper, len(lines), terms, positions, frozenset(initial)))
+    all_lines = [terms for trial in trials for terms in trial.terms]
+    weights = {term: math.log1p(len(all_lines) / (1 + sum(term in terms for terms in all_lines)))
+               for term in sorted(query)}
+    return Task(key, tuple(trials), weights)
+
+
 def read_splits(archive):
     with ZipFile(archive) as source:
         trial_cache = {}
@@ -48,25 +61,20 @@ def read_splits(archive):
             raw = json.loads(source.read(f"Complete_dataset/{split}.json"))
             tasks = []
             for key, row in sorted(raw.items()):
-                query = set(tokens(row["Statement"]))
-                trials = []
+                sources = []
+                gold = []
                 for side in ("Primary", "Secondary"):
                     paper = row.get(f"{side}_id")
                     if not paper:
                         continue
                     if paper not in trial_cache:
                         trial_cache[paper] = json.loads(source.read(f"Complete_dataset/CT json/{paper}.json"))
-                    lines = trial_cache[paper][row["Section_id"]]
-                    gold = frozenset(row[f"{side}_evidence_index"])
-                    if not gold or not 0 <= min(gold) <= max(gold) < len(lines):
+                    sources.append((paper, trial_cache[paper][row["Section_id"]]))
+                    positions = frozenset(row[f"{side}_evidence_index"])
+                    if not positions or not 0 <= min(positions) <= max(positions) < len(sources[-1][1]):
                         raise ValueError("Unexpected annotation")
-                    _, initial = choose_windows(row["Statement"], lines)
-                    terms = tuple(frozenset(tokens(line)) & query for line in lines)
-                    trials.append(Trial(paper, len(lines), terms, gold, frozenset(initial)))
-                all_lines = [terms for trial in trials for terms in trial.terms]
-                weights = {term: math.log1p(len(all_lines) / (1 + sum(term in terms for terms in all_lines)))
-                           for term in sorted(query)}
-                tasks.append(Task(key, tuple(trials), weights))
+                    gold.append(positions)
+                tasks.append(make_task(key, row["Statement"], sources, gold))
             splits[split] = tasks
     held_trials = {trial.paper for split in ("dev", "Gold_test") for task in splits[split] for trial in task.trials}
     splits["train"] = [task for task in splits["train"] if all(t.paper not in held_trials for t in task.trials)]
@@ -135,26 +143,42 @@ def fit(tasks):
     return weights, float(y.mean() - weights @ mean), len(y)
 
 
+def next_action(task, state, model, mode):
+    options = list(actions(task, state))
+    if not options:
+        return None, None
+    if mode == "learned":
+        weights, bias, _ = model
+        values = np.asarray([option[2] for option in options]) @ weights + bias
+        choice = int(np.argmax(values))
+        return options[choice], float(values[choice])
+    choice = max(options, key=lambda option: option[3])
+    new, overlap, proximity, _, _ = choice[3]
+    return choice, new * .5 + overlap * .5 + .001 * proximity
+
+
+def select(task, model, depth, cutoff=None):
+    state = initial(task)
+    for _ in range(depth):
+        choice, score = next_action(task, state, model, "learned")
+        if choice is None or (cutoff is not None and score < cutoff):
+            break
+        state = update(state, choice)
+    return state
+
+
 def build_paths(task, model):
-    weights, bias, _ = model
     routes = {}
     for mode in CONTROLLERS:
         started = perf_counter()
         state = initial(task)
         states, scores = [state], []
         for _ in range(MAX_ROUNDS):
-            options = list(actions(task, state))
-            if not options:
+            choice, score = next_action(task, state, model, mode)
+            if choice is None:
                 break
-            if mode == "learned":
-                values = np.asarray([option[2] for option in options]) @ weights + bias
-                choice = int(np.argmax(values))
-                scores.append(float(values[choice]))
-            else:
-                choice = max(range(len(options)), key=lambda i: options[i][3])
-                new, overlap, proximity, _, _ = options[choice][3]
-                scores.append(new * .5 + overlap * .5 + .001 * proximity)
-            state = update(state, options[choice])
+            scores.append(score)
+            state = update(state, choice)
             states.append(state)
         elapsed = (perf_counter() - started) * 1000
         # Gold enters only after the complete annotation-free trajectory has been generated.
