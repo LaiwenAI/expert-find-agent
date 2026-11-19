@@ -1,0 +1,109 @@
+{
+  "job": "43368",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "code_sha256": "2569a67d5bf8ebe6dbf201e0b48c0db9ee583f018f0dc60384105f7e8a53c65e",
+  "models": {
+    "encoder": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+    "reranker": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+    "parser": "cdbee75f17c01a7cc42f958dc650907174af0554"
+  },
+  "char_budget": 320,
+  "metrics": {
+    "reference": {
+      "queries": 80,
+      "issued_queries": 37,
+      "changed_people_or_order": 0,
+      "gained_queries": 0,
+      "lost_queries": 0,
+      "gained_people": 0,
+      "lost_people": 0,
+      "changed_primary_sources": 0,
+      "changed_primary_spans": 0,
+      "rescue_changed": 0,
+      "rescue_invoked": 46,
+      "clipped": 0,
+      "withheld": 0,
+      "primary": {
+        "logical_pairs": 1280,
+        "logical_tokens": 298626,
+        "packed_batches": 97,
+        "executed_tokens": 385612,
+        "padded_batches": 34,
+        "guard_rechecks": 16
+      },
+      "rescue": {
+        "logical_pairs": 184,
+        "logical_tokens": 33562,
+        "padded_batches": 32,
+        "executed_tokens": 35546,
+        "packed_batches": 14
+      },
+      "primary_p95_ms": 114.4885204732418,
+      "live_p95_ms": 1068.9670610241587
+    },
+    "lead": {
+      "queries": 80,
+      "issued_queries": 37,
+      "changed_people_or_order": 7,
+      "gained_queries": 0,
+      "lost_queries": 0,
+      "gained_people": 4,
+      "lost_people": 4,
+      "changed_primary_sources": 13,
+      "changed_primary_spans": 18,
+      "rescue_changed": 0,
+      "rescue_invoked": 46,
+      "clipped": 0,
+      "withheld": 0,
+      "primary": {
+        "logical_pairs": 1280,
+        "logical_tokens": 227880,
+        "packed_batches": 93,
+        "executed_tokens": 291104,
+        "guard_rechecks": 17,
+        "padded_batches": 39
+      },
+      "rescue": {
+        "logical_pairs": 184,
+        "logical_tokens": 33562,
+        "padded_batches": 32,
+        "executed_tokens": 35546,
+        "packed_batches": 14
+      },
+      "primary_p95_ms": 95.18795162439345,
+      "live_p95_ms": 1051.9516830332573
+    },
+    "criterion": {
+      "queries": 80,
+      "issued_queries": 37,
+      "changed_people_or_order": 7,
+      "gained_queries": 0,
+      "lost_queries": 0,
+      "gained_people": 4,
+      "lost_people": 4,
+      "changed_primary_sources": 14,
+      "changed_primary_spans": 18,
+      "rescue_changed": 0,
+      "rescue_invoked": 46,
+      "clipped": 0,
+      "withheld": 0,
+      "primary": {
+        "logical_pairs": 1280,
+        "logical_tokens": 228266,
+        "packed_batches": 93,
+        "executed_tokens": 291434,
+        "guard_rechecks": 17,
+        "padded_batches": 39
+      },
+      "rescue": {
+        "logical_pairs": 184,
+        "logical_tokens": 33562,
+        "padded_batches": 32,
+        "executed_tokens": 35546,
+        "packed_batches": 14
+      },
+      "primary_p95_ms": 98.14373413100839,
+      "live_p95_ms": 1056.9618442095812
+    }
+  }
+}
