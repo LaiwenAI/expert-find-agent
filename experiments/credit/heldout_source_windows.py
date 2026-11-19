@@ -13,11 +13,14 @@ import numpy as np
 from experiments.credit import compound_contributor_search as base
 from experiments.credit.factored_compound_search import ABSTRACT_SENTENCE, SOURCE_SYSTEM
 from experiments.followir.core17_reranking import digest, write_json
+from expert_search.statistics import paired_interval
 
 
 ARMS = ("lead", "directed")
 DEPTH = 4
 WORD_BUDGET = 80
+GATES = ("absolute", "lead_over_rival", "lead_with_lexical_agreement")
+CALIBRATION_ERROR_BUDGETS = (0, 1, 3)
 
 
 def prepare(articles, fixture):
@@ -69,9 +72,11 @@ def observe(index, windows, weights, row, state, arm, read):
         raise ValueError("Invalid source reader scores")
     ranks = sorted(range(len(scores)), key=lambda i: (-scores[i], i))
     best = ranks[0] if ranks else None
+    lead_over_rival = float(scores[ranks[0]] - scores[ranks[1]]) if len(ranks) > 1 else None
     return dict(nominated=row["doi"] in sources, retrieved=sources[0] if sources else None,
                 proposed=sources[best] if best is not None else None,
                 score=float(scores[best]) if best is not None else None,
+                lead_over_rival=lead_over_rival,
                 calls=len(prompts), ms=(perf_counter() - started) * 1000)
 
 
@@ -96,6 +101,52 @@ def summarize(records, cutoff):
         counts["accepted_correct_owner_links" if correct else "accepted_wrong_owner_links"] += owner_links
     counts["p95_ms"] = float(np.quantile([item["ms"] for _, item, _ in records], .95))
     return counts
+
+
+def gate_score(observation, rule):
+    if rule == "absolute":
+        return observation["score"]
+    if rule == "lead_with_lexical_agreement" and observation["retrieved"] != observation["proposed"]:
+        return None
+    return observation["lead_over_rival"]
+
+
+def accepts(observation, rule, cutoff):
+    score = gate_score(observation, rule)
+    return score is not None and (cutoff is None or score > cutoff)
+
+
+def gate_sweep(calibration, test, arm):
+    development = [record for state in calibration.values() for record in state[arm]]
+    wrong = [observation for row, observation, _ in development
+             if observation["proposed"] not in (row["doi"], None)]
+    sweep = {}
+    for budget in CALIBRATION_ERROR_BUDGETS:
+        rules = sweep[str(budget)] = {}
+        for rule in GATES:
+            errors = sorted((s for item in wrong if (s := gate_score(item, rule)) is not None), reverse=True)
+            cutoff = errors[budget] if budget < len(errors) else None
+            record = rules[rule] = dict(cutoff=cutoff, calibration_wrong=sum(
+                accepts(item, rule, cutoff) for item in wrong), test={})
+            for state, arms in test.items():
+                counts = record["test"][state] = dict(correct=0, wrong=0, supported_links=0,
+                                                       wrong_source_links=0)
+                paired_correct = []
+                paired_wrong = []
+                for row, item, articles in arms[arm]:
+                    correct = item["proposed"] == row["doi"]
+                    keep = accepts(item, rule, cutoff)
+                    reference = accepts(item, "absolute", rules["absolute"]["cutoff"])
+                    paired_correct.append(int(correct) * (int(keep) - int(reference)))
+                    paired_wrong.append(int(not correct) * (int(keep) - int(reference)))
+                    if keep:
+                        required = set(row["roles"])
+                        links = sum(required <= roles for roles in articles[item["proposed"]].roles)
+                        counts["correct" if correct else "wrong"] += 1
+                        counts["supported_links" if correct else "wrong_source_links"] += links
+                counts["correct_delta_vs_absolute"] = paired_interval(paired_correct)
+                counts["wrong_delta_vs_absolute"] = paired_interval(paired_wrong)
+    return sweep
 
 
 def run(fixture, checkpoint, output, folders):
@@ -130,7 +181,8 @@ def run(fixture, checkpoint, output, folders):
         code_sha256=digest(Path(__file__)), checkpoint=info["revision"], articles=len(articles), targets=len(rows),
         source_depth=DEPTH, window_word_budget=WORD_BUDGET, cutoffs=cutoffs,
         panels={phase: {state: {arm: summarize(records, cutoffs[arm]) for arm, records in panel.items()}
-                        for state, panel in group.items()} for phase, group in panels.items()}))
+                        for state, panel in group.items()} for phase, group in panels.items()},
+        acceptance_gates={arm: gate_sweep(panels["calibration"], panels["test"], arm) for arm in ARMS}))
 
 
 if __name__ == "__main__":
