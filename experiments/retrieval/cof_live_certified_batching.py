@@ -234,9 +234,7 @@ def summarize(rows, methods):
     return report
 
 
-def run(args):
-    if args.output.exists():
-        raise FileExistsError(args.output)
+def prepare_runner(args):
     if not os.environ.get("SLURM_JOB_ID") or not torch.cuda.is_available():
         raise RuntimeError("A Slurm CUDA allocation is required")
     provenance = verify_checkpoint(args.embedding)
@@ -288,9 +286,8 @@ def run(args):
     texts = {pid: (paper.get("title", "") + "\n" + paper.get("abstract", "")).strip()
              for pid, paper in papers.items()}
 
-    def measure(qid, count, method):
+    def measure(query, count, method):
         start = perf_counter()
-        query = texts[qid]
         hits = index.search_vector(encoder.encode([query], query=True)[0], k=POOL)["hits"]
         ordered = [(row["id"], [w["id"] for w in row["evidence"]]) for row in hits]
         if len(ordered) != POOL or any(e not in ownership[d] for e, docs in ordered for d in docs):
@@ -321,6 +318,13 @@ def run(args):
         result["truncated"] = reader.truncated
         return ordered, result
 
+    return measure, ids, texts, hard_labels, inputs, provenance, reranker.provenance
+
+
+def run(args):
+    if args.output.exists():
+        raise FileExistsError(args.output)
+    measure, ids, texts, hard_labels, inputs, provenance, reranker_provenance = prepare_runner(args)
     methods = METHODS
     if args.prefix_control:
         methods = PREFIX_CONTROL
@@ -336,7 +340,7 @@ def run(args):
         methods = BUCKET_METHODS
     for count in SUPPORT:
         for method in methods:
-            measure(ids[0], count, method)
+            measure(texts[ids[0]], count, method)
     rows = []
     for i, qid in enumerate(ids):
         by_count = {}
@@ -345,7 +349,7 @@ def run(args):
             ordered = None
             arms = {}
             for method in methods[offset:] + methods[:offset]:
-                pool, arm = measure(qid, count, method)
+                pool, arm = measure(texts[qid], count, method)
                 if ordered is not None and pool != ordered:
                     raise ValueError("Candidate inventory drift")
                 ordered = pool
@@ -371,7 +375,7 @@ def run(args):
         bucket_batch=BUCKET_BATCH if args.compare_buckets else None,
         script_sha256=digest(Path(__file__)), input_sha256=inputs,
         deferred_code_sha256=digest(Path(defer_and_rank.__code__.co_filename)),
-        embedding=provenance, reranker=reranker.provenance, report=summarize(rows, methods), rows=rows,
+        embedding=provenance, reranker=reranker_provenance, report=summarize(rows, methods), rows=rows,
     ))
 
 
