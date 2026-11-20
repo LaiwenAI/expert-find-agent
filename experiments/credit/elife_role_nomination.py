@@ -145,7 +145,7 @@ def prepare(xml_dir, manifest, output):
         raise ValueError("Rebuilt projection differs")
 
 
-def evaluate_panel(catalog, topics):
+def evaluate_panel(catalog, topics, witnesses=None):
     from time import perf_counter
 
     queries = list(pilot.query_panel(catalog, topics))
@@ -163,6 +163,15 @@ def evaluate_panel(catalog, topics):
                 measured = nomination.measure(catalog, topic, pair, ranked, pct, arm,
                                               (holdout.CUTOFF,), rank_ms)
                 results[pct][arm].append(measured[holdout.CUTOFF])
+    if witnesses is not None:
+        witnesses.update({
+            pct: {arm: [
+                dict(topic=row["topic"], citations=[catalog.articles[source]["doi"]
+                                                   for _, source in row["witnesses"]])
+                for row in rows
+            ] for arm, rows in estimates.items()}
+            for pct, estimates in results.items()
+        })
     return dict(
         queries=len(queries), topics=len({topic for topic, _, _ in queries}),
         masks={pct: {arm: {base: holdout.analyze(rows, estimates[base])
@@ -171,13 +180,14 @@ def evaluate_panel(catalog, topics):
     )
 
 
-def run(projection, manifest, embedding, reranker, reference, output):
+def run(projection, manifest, embedding, reranker, reference, output, witness_output=None):
     import torch
 
     from expert_search.qwen_embedding_torch import QwenTorchEmbedding
     from experiments.followir.core17_verifier import Reranker
 
-    if output.exists() or not os.environ.get("SLURM_JOB_ID") or not torch.cuda.is_available():
+    if (output.exists() or (witness_output is not None and witness_output.exists())
+            or not os.environ.get("SLURM_JOB_ID") or not torch.cuda.is_available()):
         raise ValueError("Require fresh output and Slurm CUDA")
     frozen = json.loads(manifest.read_bytes())
     if pilot.digest(projection) != frozen["projection_sha256"]:
@@ -195,12 +205,14 @@ def run(projection, manifest, embedding, reranker, reference, output):
     catalog.visible = {pct: ids & complete for pct, ids in catalog.visible.items()}
     headings = sorted(topic for topic, ids in catalog.topics.items() if len(ids) >= 8)
     catalog.verify(headings[0], catalog.rank(headings[0])[:8])
-    heading = evaluate_panel(catalog, headings)
+    witnesses = dict(headings={}, keywords={}) if witness_output is not None else None
+    heading = evaluate_panel(catalog, headings, None if witnesses is None else witnesses["headings"])
     catalog.topics.clear()
     for index, article in enumerate(articles):
         for topic in article["keywords"]:
             catalog.topics[topic].add(index)
-    keyword = evaluate_panel(catalog, sorted(t for t, ids in catalog.topics.items() if len(ids) >= 4))
+    keywords = sorted(t for t, ids in catalog.topics.items() if len(ids) >= 4)
+    keyword = evaluate_panel(catalog, keywords, None if witnesses is None else witnesses["keywords"])
     pilot.write_json(output, dict(
         job=os.environ["SLURM_JOB_ID"], gpu=torch.cuda.get_device_name(),
         script_sha256=pilot.digest(Path(__file__)), manifest_sha256=pilot.digest(manifest),
@@ -210,6 +222,11 @@ def run(projection, manifest, embedding, reranker, reference, output):
         exclusions=dict(Counter(row["exclusion"] for row in frozen["source_inventory"] if row["exclusion"])),
         headings=heading, keywords=keyword,
     ))
+    if witnesses is not None:
+        pilot.write_json(witness_output, dict(
+            projection_sha256=pilot.digest(projection), replay_sha256=pilot.digest(output),
+            witnesses=witnesses,
+        ))
 
 
 if __name__ == "__main__":
@@ -226,5 +243,7 @@ if __name__ == "__main__":
             parser.add_argument(name, type=Path)
         if command == "freeze":
             parser.add_argument("--prior-folders", nargs="+", type=Path, required=True)
+        if command == "run":
+            parser.add_argument("--witness-output", type=Path)
     args = vars(cli.parse_args())
     commands[args.pop("command")](**args)
