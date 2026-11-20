@@ -1,0 +1,124 @@
+"""Execute topic-local verifier routing one revision at a time."""
+
+import argparse
+from collections import Counter, defaultdict
+import json
+import os
+from pathlib import Path
+from time import perf_counter
+
+import numpy as np
+import torch
+
+from experiments.followir import same_passage_routing as study
+from experiments.followir.core17_reranking import digest, write_json
+from experiments.followir.evaluate_same_passage_routing import cutoff
+
+
+ARMS = ("all_0.6b", "all_4b", "quarter_boundary")
+
+
+def batch_score(reader, prompt, documents, *, compact):
+    result = []
+    for cursor in range(0, len(documents), 8):
+        batch = documents[cursor:cursor + 8]
+        if compact:
+            scores, clipped = reader.score_pairs([(prompt, body) for body in batch])
+        else:
+            scores, clipped = reader.score(prompt, batch)
+        if clipped or not np.isfinite(scores).all():
+            raise ValueError("Unexpected live verifier output")
+        result.extend(scores)
+    return result
+
+
+def execute(arm, small, large, rows, thresholds, choice_keys):
+    _, _, _, query, (_, instruction), _ = rows[0]
+    prompt = f"{query}\nRelevance criteria: {instruction}"
+    documents = [item[5] for item in rows]
+    began = perf_counter()
+    if arm == "all_4b":
+        scored = batch_score(large, prompt, documents, compact=False)
+        approved = [value > thresholds[1] for value in scored]
+        return approved, list(range(len(scored))), (perf_counter() - began) * 1000
+
+    scored = batch_score(small, prompt, documents, compact=True)
+    approved = [value > thresholds[0] for value in scored]
+    selected = []
+    if arm == "quarter_boundary":
+        selected = sorted(range(len(scored)), key=lambda i: (
+            abs(scored[i] - thresholds[0]), choice_keys[i],
+        ))[:len(scored) // 4]
+        upgrades = batch_score(large, prompt, [documents[i] for i in selected], compact=False)
+        for index, value in zip(selected, upgrades, strict=True):
+            approved[index] = value > thresholds[1]
+    return approved, selected, (perf_counter() - began) * 1000
+
+
+def run(args):
+    from hashlib import sha256
+
+    if args.output.exists() or not os.environ.get("SLURM_JOB_ID") or not torch.cuda.is_available():
+        raise ValueError("Require new output and a Slurm GPU")
+    torch.backends.cuda.matmul.allow_tf32 = False
+    source = json.loads(args.scores.read_bytes())
+    if source["source_sha256"] != study.gate.SNAPSHOT_HASHES:
+        raise ValueError("Score replay has different inputs")
+    panels = {key: val["rows"] for key, val in source["panels"].items()}
+    dev = {key: panels[key] for key in ("core", "news")}
+    thresholds = tuple(cutoff(dev, name) for name in ("cheap", "costly"))
+    sample = study.samples(args)["robust"]
+    by_topic = defaultdict(list)
+    for row, record in zip(sample, panels["robust"], strict=True):
+        if (row[0], row[1], row[2]) != (record["topic"], record["label"], record["key"]):
+            raise ValueError("Live row did not match calibration projection")
+        by_topic[row[0]].append((row, record))
+
+    small = study.Reranker(args.reranker)
+    large = study.InstructionReader(args.chat)
+    if small.provenance["revision"] != source["compact_revision"] or large.revision != source["strong_revision"]:
+        raise ValueError("Live checkpoints differ")
+    totals = {arm: Counter() for arm in ARMS}
+    times = defaultdict(list)
+
+    def measure(topic_rows, index, warm=False):
+        rows, recorded = zip(*topic_rows)
+        keys = [sha256(f"same-passage-v1:{row[0]}:{row[2]}".encode()).digest() for row in rows]
+        nearest = sorted(range(len(rows)), key=lambda i: (
+            abs(recorded[i]["cheap"] - thresholds[0]), keys[i],
+        ))[:len(rows) // 4]
+        arms = ARMS[index % len(ARMS):] + ARMS[:index % len(ARMS)]
+        for arm in arms:
+            approved, selected, latency = execute(arm, small, large, rows, thresholds, keys)
+            if warm:
+                continue
+            times[arm].append(latency)
+            expected_chosen = (list(range(len(rows))) if arm == "all_4b" else
+                               nearest if arm == "quarter_boundary" else [])
+            chosen_set = set(expected_chosen)
+            expected = [r["costly"] > thresholds[1] if i in chosen_set else r["cheap"] > thresholds[0]
+                        for i, r in enumerate(recorded)]
+            totals[arm].update(upgrades=len(selected), decisions_changed=sum(a != b for a, b in zip(approved, expected)),
+                               topic_routes_changed=int(set(selected) != chosen_set))
+            for r, accepts in zip(rows, approved, strict=True):
+                totals[arm][r[1]] += accepts
+
+    first = next(iter(by_topic.values()))
+    measure(first, 0, warm=True)
+    sequence = list(by_topic.values())[::(-1 if args.order_offset else 1)]
+    for i, group in enumerate(sequence):
+        measure(group, i + args.order_offset)
+    write_json(args.output, dict(
+        arms={name: dict(totals[name], mean_ms=float(np.mean(times[name])),
+                         p95_ms=float(np.quantile(times[name], 0.95))) for name in ARMS},
+        topics=len(by_topic), cutoffs=thresholds, gpu=torch.cuda.get_device_name(),
+        score_sha256=digest(args.scores), code_sha256=digest(Path(__file__)), order_offset=args.order_offset,
+    ))
+
+
+if __name__ == "__main__":
+    cli = argparse.ArgumentParser(description=__doc__)
+    for name in ("core", "news", "robust", "reranker", "chat", "scores", "output"):
+        cli.add_argument(name, type=Path)
+    cli.add_argument("--order-offset", type=int, choices=(0, 1), default=0)
+    run(cli.parse_args())

@@ -1,0 +1,1106 @@
+{
+  "result": {
+    "zero_cutoffs": {
+      "cutoffs": [
+        0,
+        0
+      ],
+      "baseline": {
+        "all_0.6b": {
+          "disposition": {
+            "stable_positive": {
+              "rows": 194,
+              "accepted": 39,
+              "admitted": 0,
+              "removed": 0
+            },
+            "invalidated": {
+              "rows": 181,
+              "accepted": 19,
+              "admitted": 0,
+              "removed": 0
+            },
+            "stable_negative": {
+              "rows": 200,
+              "accepted": 3,
+              "admitted": 0,
+              "removed": 0
+            }
+          },
+          "routed": 0,
+          "weighted_gain": 0,
+          "gain_per_topic": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 50,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000
+          }
+        },
+        "all_4b": {
+          "disposition": {
+            "stable_positive": {
+              "rows": 194,
+              "accepted": 76,
+              "admitted": 45,
+              "removed": 8
+            },
+            "invalidated": {
+              "rows": 181,
+              "accepted": 51,
+              "admitted": 37,
+              "removed": 5
+            },
+            "stable_negative": {
+              "rows": 200,
+              "accepted": 7,
+              "admitted": 7,
+              "removed": 3
+            }
+          },
+          "routed": 575,
+          "weighted_gain": -31,
+          "gain_per_topic": {
+            "mean": -0.62,
+            "percentile_95": [
+              -1.26,
+              -0.019500000000007275
+            ],
+            "queries": 50,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000
+          }
+        }
+      },
+      "budgets": {
+        "1/4": {
+          "hash": {
+            "disposition": {
+              "stable_positive": {
+                "rows": 194,
+                "accepted": 52,
+                "admitted": 13,
+                "removed": 0
+              },
+              "invalidated": {
+                "rows": 181,
+                "accepted": 24,
+                "admitted": 7,
+                "removed": 2
+              },
+              "stable_negative": {
+                "rows": 200,
+                "accepted": 6,
+                "admitted": 3,
+                "removed": 0
+              }
+            },
+            "routed": 140,
+            "weighted_gain": 0,
+            "gain_per_topic": {
+              "mean": 0.0,
+              "percentile_95": [
+                -0.24049999999999955,
+                0.24
+              ],
+              "queries": 50,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000
+            }
+          },
+          "boundary": {
+            "disposition": {
+              "stable_positive": {
+                "rows": 194,
+                "accepted": 57,
+                "admitted": 22,
+                "removed": 4
+              },
+              "invalidated": {
+                "rows": 181,
+                "accepted": 31,
+                "admitted": 15,
+                "removed": 3
+              },
+              "stable_negative": {
+                "rows": 200,
+                "accepted": 1,
+                "admitted": 1,
+                "removed": 3
+              }
+            },
+            "routed": 140,
+            "weighted_gain": -4,
+            "gain_per_topic": {
+              "mean": -0.08,
+              "percentile_95": [
+                -0.54,
+                0.34
+              ],
+              "queries": 50,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000
+            }
+          },
+          "reject_first": {
+            "disposition": {
+              "stable_positive": {
+                "rows": 194,
+                "accepted": 69,
+                "admitted": 30,
+                "removed": 0
+              },
+              "invalidated": {
+                "rows": 181,
+                "accepted": 41,
+                "admitted": 22,
+                "removed": 0
+              },
+              "stable_negative": {
+                "rows": 200,
+                "accepted": 5,
+                "admitted": 2,
+                "removed": 0
+              }
+            },
+            "routed": 140,
+            "weighted_gain": -16,
+            "gain_per_topic": {
+              "mean": -0.32,
+              "percentile_95": [
+                -0.8,
+                0.14
+              ],
+              "queries": 50,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000
+            }
+          },
+          "accept_first": {
+            "disposition": {
+              "stable_positive": {
+                "rows": 194,
+                "accepted": 47,
+                "admitted": 16,
+                "removed": 8
+              },
+              "invalidated": {
+                "rows": 181,
+                "accepted": 28,
+                "admitted": 13,
+                "removed": 4
+              },
+              "stable_negative": {
+                "rows": 200,
+                "accepted": 1,
+                "admitted": 1,
+                "removed": 3
+              }
+            },
+            "routed": 140,
+            "weighted_gain": -8,
+            "gain_per_topic": {
+              "mean": -0.16,
+              "percentile_95": [
+                -0.62,
+                0.24
+              ],
+              "queries": 50,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000
+            }
+          },
+          "learned": {
+            "disposition": {
+              "stable_positive": {
+                "rows": 194,
+                "accepted": 34,
+                "admitted": 2,
+                "removed": 7
+              },
+              "invalidated": {
+                "rows": 181,
+                "accepted": 18,
+                "admitted": 3,
+                "removed": 4
+              },
+              "stable_negative": {
+                "rows": 200,
+                "accepted": 0,
+                "admitted": 0,
+                "removed": 3
+              }
+            },
+            "routed": 140,
+            "weighted_gain": 0,
+            "gain_per_topic": {
+              "mean": 0.0,
+              "percentile_95": [
+                -0.24,
+                0.26
+              ],
+              "queries": 50,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000
+            }
+          },
+          "oracle": {
+            "disposition": {
+              "stable_positive": {
+                "rows": 194,
+                "accepted": 79,
+                "admitted": 40,
+                "removed": 0
+              },
+              "invalidated": {
+                "rows": 181,
+                "accepted": 14,
+                "admitted": 0,
+                "removed": 5
+              },
+              "stable_negative": {
+                "rows": 200,
+                "accepted": 0,
+                "admitted": 0,
+                "removed": 3
+              }
+            },
+            "routed": 48,
+            "weighted_gain": 53,
+            "gain_per_topic": {
+              "mean": 1.06,
+              "percentile_95": [
+                0.74,
+                1.4
+              ],
+              "queries": 50,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000
+            }
+          }
+        },
+        "1/2": {
+          "hash": {
+            "disposition": {
+              "stable_positive": {
+                "rows": 194,
+                "accepted": 67,
+                "admitted": 31,
+                "removed": 3
+              },
+              "invalidated": {
+                "rows": 181,
+                "accepted": 37,
+                "admitted": 20,
+                "removed": 2
+              },
+              "stable_negative": {
+                "rows": 200,
+                "accepted": 5,
+                "admitted": 4,
+                "removed": 2
+              }
+            },
+            "routed": 285,
+            "weighted_gain": -10,
+            "gain_per_topic": {
+              "mean": -0.2,
+              "percentile_95": [
+                -0.64,
+                0.22
+              ],
+              "queries": 50,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000
+            }
+          },
+          "boundary": {
+            "disposition": {
+              "stable_positive": {
+                "rows": 194,
+                "accepted": 73,
+                "admitted": 41,
+                "removed": 7
+              },
+              "invalidated": {
+                "rows": 181,
+                "accepted": 43,
+                "admitted": 28,
+                "removed": 4
+              },
+              "stable_negative": {
+                "rows": 200,
+                "accepted": 2,
+                "admitted": 2,
+                "removed": 3
+              }
+            },
+            "routed": 285,
+            "weighted_gain": -13,
+            "gain_per_topic": {
+              "mean": -0.26,
+              "percentile_95": [
+                -0.82,
+                0.26
+              ],
+              "queries": 50,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000
+            }
+          },
+          "reject_first": {
+            "disposition": {
+              "stable_positive": {
+                "rows": 194,
+                "accepted": 81,
+                "admitted": 42,
+                "removed": 0
+              },
+              "invalidated": {
+                "rows": 181,
+                "accepted": 51,
+                "admitted": 32,
+                "removed": 0
+              },
+              "stable_negative": {
+                "rows": 200,
+                "accepted": 6,
+                "admitted": 3,
+                "removed": 0
+              }
+            },
+            "routed": 285,
+            "weighted_gain": -25,
+            "gain_per_topic": {
+              "mean": -0.5,
+              "percentile_95": [
+                -1.1,
+                0.04
+              ],
+              "queries": 50,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000
+            }
+          },
+          "accept_first": {
+            "disposition": {
+              "stable_positive": {
+                "rows": 194,
+                "accepted": 71,
+                "admitted": 40,
+                "removed": 8
+              },
+              "invalidated": {
+                "rows": 181,
+                "accepted": 41,
+                "admitted": 27,
+                "removed": 5
+              },
+              "stable_negative": {
+                "rows": 200,
+                "accepted": 2,
+                "admitted": 2,
+                "removed": 3
+              }
+            },
+            "routed": 285,
+            "weighted_gain": -11,
+            "gain_per_topic": {
+              "mean": -0.22,
+              "percentile_95": [
+                -0.8,
+                0.34
+              ],
+              "queries": 50,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000
+            }
+          },
+          "learned": {
+            "disposition": {
+              "stable_positive": {
+                "rows": 194,
+                "accepted": 39,
+                "admitted": 8,
+                "removed": 8
+              },
+              "invalidated": {
+                "rows": 181,
+                "accepted": 24,
+                "admitted": 9,
+                "removed": 4
+              },
+              "stable_negative": {
+                "rows": 200,
+                "accepted": 3,
+                "admitted": 3,
+                "removed": 3
+              }
+            },
+            "routed": 285,
+            "weighted_gain": -10,
+            "gain_per_topic": {
+              "mean": -0.2,
+              "percentile_95": [
+                -0.58,
+                0.18
+              ],
+              "queries": 50,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000
+            }
+          },
+          "oracle": {
+            "disposition": {
+              "stable_positive": {
+                "rows": 194,
+                "accepted": 84,
+                "admitted": 45,
+                "removed": 0
+              },
+              "invalidated": {
+                "rows": 181,
+                "accepted": 14,
+                "admitted": 0,
+                "removed": 5
+              },
+              "stable_negative": {
+                "rows": 200,
+                "accepted": 0,
+                "admitted": 0,
+                "removed": 3
+              }
+            },
+            "routed": 53,
+            "weighted_gain": 58,
+            "gain_per_topic": {
+              "mean": 1.16,
+              "percentile_95": [
+                0.78,
+                1.58
+              ],
+              "queries": 50,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000
+            }
+          }
+        }
+      },
+      "ridge_coefficients": [
+        -0.06719528428956577,
+        -0.037833696558058856,
+        0.1627665753167777,
+        0.049990572480795005,
+        -0.029418500906023312,
+        0.0362888601881176,
+        -0.049107170907560616
+      ],
+      "topics": 50
+    },
+    "transferred_risk_cutoffs": {
+      "cutoffs": [
+        3.375,
+        23.0
+      ],
+      "baseline": {
+        "all_0.6b": {
+          "disposition": {
+            "stable_positive": {
+              "rows": 194,
+              "accepted": 5,
+              "admitted": 0,
+              "removed": 0
+            },
+            "invalidated": {
+              "rows": 181,
+              "accepted": 3,
+              "admitted": 0,
+              "removed": 0
+            },
+            "stable_negative": {
+              "rows": 200,
+              "accepted": 0,
+              "admitted": 0,
+              "removed": 0
+            }
+          },
+          "routed": 0,
+          "weighted_gain": 0,
+          "gain_per_topic": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 50,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000
+          }
+        },
+        "all_4b": {
+          "disposition": {
+            "stable_positive": {
+              "rows": 194,
+              "accepted": 20,
+              "admitted": 17,
+              "removed": 2
+            },
+            "invalidated": {
+              "rows": 181,
+              "accepted": 9,
+              "admitted": 9,
+              "removed": 3
+            },
+            "stable_negative": {
+              "rows": 200,
+              "accepted": 0,
+              "admitted": 0,
+              "removed": 0
+            }
+          },
+          "routed": 575,
+          "weighted_gain": 3,
+          "gain_per_topic": {
+            "mean": 0.06,
+            "percentile_95": [
+              -0.24,
+              0.36
+            ],
+            "queries": 50,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000
+          }
+        }
+      },
+      "budgets": {
+        "1/4": {
+          "hash": {
+            "disposition": {
+              "stable_positive": {
+                "rows": 194,
+                "accepted": 9,
+                "admitted": 4,
+                "removed": 0
+              },
+              "invalidated": {
+                "rows": 181,
+                "accepted": 4,
+                "admitted": 1,
+                "removed": 0
+              },
+              "stable_negative": {
+                "rows": 200,
+                "accepted": 0,
+                "admitted": 0,
+                "removed": 0
+              }
+            },
+            "routed": 140,
+            "weighted_gain": 2,
+            "gain_per_topic": {
+              "mean": 0.04,
+              "percentile_95": [
+                -0.04,
+                0.12
+              ],
+              "queries": 50,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000
+            }
+          },
+          "boundary": {
+            "disposition": {
+              "stable_positive": {
+                "rows": 194,
+                "accepted": 15,
+                "admitted": 11,
+                "removed": 1
+              },
+              "invalidated": {
+                "rows": 181,
+                "accepted": 5,
+                "admitted": 5,
+                "removed": 3
+              },
+              "stable_negative": {
+                "rows": 200,
+                "accepted": 0,
+                "admitted": 0,
+                "removed": 0
+              }
+            },
+            "routed": 140,
+            "weighted_gain": 6,
+            "gain_per_topic": {
+              "mean": 0.12,
+              "percentile_95": [
+                -0.14,
+                0.4
+              ],
+              "queries": 50,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000
+            }
+          },
+          "reject_first": {
+            "disposition": {
+              "stable_positive": {
+                "rows": 194,
+                "accepted": 16,
+                "admitted": 11,
+                "removed": 0
+              },
+              "invalidated": {
+                "rows": 181,
+                "accepted": 8,
+                "admitted": 5,
+                "removed": 0
+              },
+              "stable_negative": {
+                "rows": 200,
+                "accepted": 0,
+                "admitted": 0,
+                "removed": 0
+              }
+            },
+            "routed": 140,
+            "weighted_gain": 1,
+            "gain_per_topic": {
+              "mean": 0.02,
+              "percentile_95": [
+                -0.2,
+                0.26
+              ],
+              "queries": 50,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000
+            }
+          },
+          "accept_first": {
+            "disposition": {
+              "stable_positive": {
+                "rows": 194,
+                "accepted": 14,
+                "admitted": 11,
+                "removed": 2
+              },
+              "invalidated": {
+                "rows": 181,
+                "accepted": 5,
+                "admitted": 5,
+                "removed": 3
+              },
+              "stable_negative": {
+                "rows": 200,
+                "accepted": 0,
+                "admitted": 0,
+                "removed": 0
+              }
+            },
+            "routed": 140,
+            "weighted_gain": 5,
+            "gain_per_topic": {
+              "mean": 0.1,
+              "percentile_95": [
+                -0.18,
+                0.38
+              ],
+              "queries": 50,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000
+            }
+          },
+          "learned": {
+            "disposition": {
+              "stable_positive": {
+                "rows": 194,
+                "accepted": 5,
+                "admitted": 2,
+                "removed": 2
+              },
+              "invalidated": {
+                "rows": 181,
+                "accepted": 0,
+                "admitted": 0,
+                "removed": 3
+              },
+              "stable_negative": {
+                "rows": 200,
+                "accepted": 0,
+                "admitted": 0,
+                "removed": 0
+              }
+            },
+            "routed": 140,
+            "weighted_gain": 6,
+            "gain_per_topic": {
+              "mean": 0.12,
+              "percentile_95": [
+                -0.04,
+                0.28
+              ],
+              "queries": 50,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000
+            }
+          },
+          "oracle": {
+            "disposition": {
+              "stable_positive": {
+                "rows": 194,
+                "accepted": 22,
+                "admitted": 17,
+                "removed": 0
+              },
+              "invalidated": {
+                "rows": 181,
+                "accepted": 0,
+                "admitted": 0,
+                "removed": 3
+              },
+              "stable_negative": {
+                "rows": 200,
+                "accepted": 0,
+                "admitted": 0,
+                "removed": 0
+              }
+            },
+            "routed": 20,
+            "weighted_gain": 23,
+            "gain_per_topic": {
+              "mean": 0.46,
+              "percentile_95": [
+                0.26,
+                0.7
+              ],
+              "queries": 50,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000
+            }
+          }
+        },
+        "1/2": {
+          "hash": {
+            "disposition": {
+              "stable_positive": {
+                "rows": 194,
+                "accepted": 17,
+                "admitted": 12,
+                "removed": 0
+              },
+              "invalidated": {
+                "rows": 181,
+                "accepted": 5,
+                "admitted": 3,
+                "removed": 1
+              },
+              "stable_negative": {
+                "rows": 200,
+                "accepted": 0,
+                "admitted": 0,
+                "removed": 0
+              }
+            },
+            "routed": 285,
+            "weighted_gain": 8,
+            "gain_per_topic": {
+              "mean": 0.16,
+              "percentile_95": [
+                -0.06,
+                0.38
+              ],
+              "queries": 50,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000
+            }
+          },
+          "boundary": {
+            "disposition": {
+              "stable_positive": {
+                "rows": 194,
+                "accepted": 19,
+                "admitted": 16,
+                "removed": 2
+              },
+              "invalidated": {
+                "rows": 181,
+                "accepted": 9,
+                "admitted": 9,
+                "removed": 3
+              },
+              "stable_negative": {
+                "rows": 200,
+                "accepted": 0,
+                "admitted": 0,
+                "removed": 0
+              }
+            },
+            "routed": 285,
+            "weighted_gain": 2,
+            "gain_per_topic": {
+              "mean": 0.04,
+              "percentile_95": [
+                -0.26,
+                0.34
+              ],
+              "queries": 50,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000
+            }
+          },
+          "reject_first": {
+            "disposition": {
+              "stable_positive": {
+                "rows": 194,
+                "accepted": 21,
+                "admitted": 16,
+                "removed": 0
+              },
+              "invalidated": {
+                "rows": 181,
+                "accepted": 12,
+                "admitted": 9,
+                "removed": 0
+              },
+              "stable_negative": {
+                "rows": 200,
+                "accepted": 0,
+                "admitted": 0,
+                "removed": 0
+              }
+            },
+            "routed": 285,
+            "weighted_gain": -2,
+            "gain_per_topic": {
+              "mean": -0.04,
+              "percentile_95": [
+                -0.3,
+                0.20049999999999274
+              ],
+              "queries": 50,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000
+            }
+          },
+          "accept_first": {
+            "disposition": {
+              "stable_positive": {
+                "rows": 194,
+                "accepted": 19,
+                "admitted": 16,
+                "removed": 2
+              },
+              "invalidated": {
+                "rows": 181,
+                "accepted": 9,
+                "admitted": 9,
+                "removed": 3
+              },
+              "stable_negative": {
+                "rows": 200,
+                "accepted": 0,
+                "admitted": 0,
+                "removed": 0
+              }
+            },
+            "routed": 285,
+            "weighted_gain": 2,
+            "gain_per_topic": {
+              "mean": 0.04,
+              "percentile_95": [
+                -0.26,
+                0.34
+              ],
+              "queries": 50,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000
+            }
+          },
+          "learned": {
+            "disposition": {
+              "stable_positive": {
+                "rows": 194,
+                "accepted": 6,
+                "admitted": 3,
+                "removed": 2
+              },
+              "invalidated": {
+                "rows": 181,
+                "accepted": 3,
+                "admitted": 3,
+                "removed": 3
+              },
+              "stable_negative": {
+                "rows": 200,
+                "accepted": 0,
+                "admitted": 0,
+                "removed": 0
+              }
+            },
+            "routed": 285,
+            "weighted_gain": 1,
+            "gain_per_topic": {
+              "mean": 0.02,
+              "percentile_95": [
+                -0.2,
+                0.24
+              ],
+              "queries": 50,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000
+            }
+          },
+          "oracle": {
+            "disposition": {
+              "stable_positive": {
+                "rows": 194,
+                "accepted": 22,
+                "admitted": 17,
+                "removed": 0
+              },
+              "invalidated": {
+                "rows": 181,
+                "accepted": 0,
+                "admitted": 0,
+                "removed": 3
+              },
+              "stable_negative": {
+                "rows": 200,
+                "accepted": 0,
+                "admitted": 0,
+                "removed": 0
+              }
+            },
+            "routed": 20,
+            "weighted_gain": 23,
+            "gain_per_topic": {
+              "mean": 0.46,
+              "percentile_95": [
+                0.26,
+                0.7
+              ],
+              "queries": 50,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000
+            }
+          }
+        }
+      },
+      "ridge_coefficients": [
+        0.0824574862365446,
+        0.06897153770412448,
+        0.0726577114796202,
+        0.015967673745180065,
+        -0.03083603622039023,
+        0.03897860071921262,
+        -0.035348657682431193
+      ],
+      "topics": 50
+    }
+  },
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "source_sha256": {
+    "core": "9a70b11bc1e87b9ca91843b4222cd7fca4a405596ce30c0fd97fffbd4dd6e219",
+    "news": "fd0f3d1b85234d5e72a7bbeb6b95125cbe90d5bfd526b32f30b7ccc8106bcec4",
+    "robust": "bc8891378219d39d3ee850a5f5c06ffabace9a921ac5243b7bfd0da7c1a5926f"
+  },
+  "compact_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+  "strong_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+  "score_script_sha256": "cee7ef86cb74a643b7a1e82be165f237dadfb32fbdf20c17517c0033b4e53430",
+  "replicated_collection_offsets": [
+    0,
+    1
+  ],
+  "live_verification": [
+    {
+      "arms": {
+        "all_0.6b": {
+          "upgrades": 0,
+          "decisions_changed": 0,
+          "topic_routes_changed": 0,
+          "stable_positive": 5,
+          "invalidated": 3,
+          "stable_negative": 0,
+          "mean_ms": 75.63675413839519,
+          "p95_ms": 84.19024929753505
+        },
+        "all_4b": {
+          "upgrades": 575,
+          "decisions_changed": 0,
+          "topic_routes_changed": 0,
+          "stable_positive": 20,
+          "invalidated": 9,
+          "stable_negative": 0,
+          "mean_ms": 366.9184590619989,
+          "p95_ms": 415.65232480643317
+        },
+        "quarter_boundary": {
+          "upgrades": 140,
+          "decisions_changed": 2,
+          "topic_routes_changed": 1,
+          "stable_positive": 16,
+          "invalidated": 4,
+          "stable_negative": 0,
+          "mean_ms": 160.00433159060776,
+          "p95_ms": 185.30737614491954
+        }
+      },
+      "topics": 50,
+      "cutoffs": [
+        3.375,
+        23.0
+      ],
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "score_sha256": "3e1b294090402fe3e2db5cdba0d941632e2952bd6a035c290969f29d8eea73fa",
+      "code_sha256": "50d9142de665b606140300b70de858276732f4cd79c920eb038733081861bc5b",
+      "order_offset": 0
+    },
+    {
+      "arms": {
+        "all_0.6b": {
+          "upgrades": 0,
+          "decisions_changed": 0,
+          "topic_routes_changed": 0,
+          "stable_positive": 5,
+          "invalidated": 3,
+          "stable_negative": 0,
+          "mean_ms": 75.63300041016191,
+          "p95_ms": 83.35831428994425
+        },
+        "all_4b": {
+          "upgrades": 575,
+          "decisions_changed": 0,
+          "topic_routes_changed": 0,
+          "stable_positive": 20,
+          "invalidated": 9,
+          "stable_negative": 0,
+          "mean_ms": 366.9105357537046,
+          "p95_ms": 414.7630576102529
+        },
+        "quarter_boundary": {
+          "upgrades": 140,
+          "decisions_changed": 2,
+          "topic_routes_changed": 1,
+          "stable_positive": 16,
+          "invalidated": 4,
+          "stable_negative": 0,
+          "mean_ms": 160.02760991686955,
+          "p95_ms": 185.30408960068598
+        }
+      },
+      "topics": 50,
+      "cutoffs": [
+        3.375,
+        23.0
+      ],
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "score_sha256": "3e1b294090402fe3e2db5cdba0d941632e2952bd6a035c290969f29d8eea73fa",
+      "code_sha256": "50d9142de665b606140300b70de858276732f4cd79c920eb038733081861bc5b",
+      "order_offset": 1
+    }
+  ],
+  "analysis_script_sha256": "d364dab15117b544f824bb06db63010bdd2a020dff05c9003577981ceca4b776"
+}
