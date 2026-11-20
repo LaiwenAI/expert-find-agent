@@ -3,6 +3,7 @@
 import argparse
 from concurrent.futures import ThreadPoolExecutor
 from contextlib import closing, contextmanager
+from hashlib import sha256
 from http.client import HTTPConnection
 from http.server import BaseHTTPRequestHandler
 from itertools import combinations
@@ -17,6 +18,7 @@ from time import perf_counter, sleep
 import numpy as np
 
 from experiments.credit import role_column_index as columns
+from experiments.credit.role_index_read_waves import frontier_rank
 from experiments.credit.budgeted_declaration_index import FOLDS, cold_workload, state
 from experiments.credit.declaration_index_publisher_transfer import inventory
 from experiments.credit.plos_role_inventory import ROLES
@@ -26,6 +28,7 @@ from experiments.retrieval.cof_loopback_http import Server
 
 ARMS = ("whole_author", "whole_cold", "column_smoothed")
 PROFILES = ((1, 0), (4, 0), (4, 2))
+WAVES = {"owner_serial": 0, "frontier_1": 1, "frontier_2": 2, "frontier_4": 4}
 
 
 def receive(conn, method, path, body=None):
@@ -67,10 +70,14 @@ class SourceHandler(Handler):
 class SearchHandler(Handler):
     def setup(self):
         super().setup()
-        self.source = HTTPConnection("127.0.0.1", self.server.source_port, timeout=10)
+        self.sources = [HTTPConnection("127.0.0.1", self.server.source_port, timeout=10)]
+        self.pool = None
 
     def finish(self):
-        self.source.close()
+        if self.pool is not None:
+            self.pool.shutdown()
+        for connection in self.sources:
+            connection.close()
         super().finish()
 
     def do_POST(self):
@@ -93,17 +100,45 @@ class SearchHandler(Handler):
             self.send_error(400)
             return
 
-        bytes_read = 0
+        sizes = {}
+        arm = self.path.rsplit("/", 1)[-1]
+        width = self.server.widths.get(arm, 0)
+
+        def fetch(connection, doc):
+            payload, _ = receive(connection, "GET", self.server.source_urls[doc])
+            return json.loads(payload), len(payload)
 
         def load(doc):
-            nonlocal bytes_read
-            payload, _ = receive(self.source, "GET", self.server.source_urls[doc])
-            bytes_read += len(payload)
-            return json.loads(payload)
+            value, sizes[doc] = fetch(self.sources[0], doc)
+            return value
 
-        matches, reads = columns.partial_rank(self.server.owners, self.server.caps, plan, ask, load)
+        def load_many(docs):
+            if len(docs) == 1:
+                return {docs[0]: load(docs[0])}
+            if self.pool is None:
+                self.pool = ThreadPoolExecutor(max_workers=width)
+            while len(self.sources) < len(docs):
+                self.sources.append(HTTPConnection("127.0.0.1", self.server.source_port, timeout=10))
+            fetched = self.pool.map(fetch, self.sources[:len(docs)], docs)
+            declarations = {}
+            for doc, (value, size) in zip(docs, fetched, strict=True):
+                declarations[doc] = value
+                sizes[doc] = size
+            return declarations
+
+        if width:
+            matches, reads, rounds = frontier_rank(
+                self.server.owners, self.server.caps, plan, ask, load_many, width,
+            )
+        else:
+            matches, reads = columns.partial_rank(self.server.owners, self.server.caps, plan, ask, load)
+            rounds = reads
         payload = json.dumps({"matches": matches}, separators=(",", ":")).encode()
-        self.respond(payload, {"X-Source-Reads": reads, "X-Source-Bytes": bytes_read})
+        headers = {"X-Source-Reads": reads, "X-Source-Bytes": sum(sizes.values())}
+        if self.server.widths:
+            source_set = json.dumps(sorted(sizes), separators=(",", ":")).encode()
+            headers.update({"X-Source-Rounds": rounds, "X-Source-Set": sha256(source_set).hexdigest()})
+        self.respond(payload, headers)
 
 
 @contextmanager
@@ -128,7 +163,7 @@ def bodies(roles, held, reference, fold):
     ]
 
 
-def execute(port, requests, arm, clients):
+def execute(port, requests, arm, clients, *, inspect_waves=False):
     def replay(batch):
         scores = []
         with closing(HTTPConnection("127.0.0.1", port, timeout=10)) as conn:
@@ -143,21 +178,31 @@ def execute(port, requests, arm, clients):
                 elapsed = (perf_counter() - start) * 1000
                 if content != expected:
                     raise AssertionError("HTTP changed the expert ranking or exact citations")
-                scores.append((elapsed, int(headers["X-Source-Reads"]), int(headers["X-Source-Bytes"])))
+                row = (elapsed, int(headers["X-Source-Reads"]), int(headers["X-Source-Bytes"]))
+                if inspect_waves:
+                    row += (int(headers["X-Source-Rounds"]), headers["X-Source-Set"])
+                scores.append(row)
         return scores
 
     with ThreadPoolExecutor(max_workers=clients) as pool:
         rows = [item for stream in pool.map(replay, [requests[i::clients] for i in range(clients)])
                 for item in stream]
-    return dict(
+    report = dict(
         requests=len(rows), exact_responses=len(rows),
         source_reads=sum(r[1] for r in rows), source_payload_bytes=sum(r[2] for r in rows),
         response_p50_ms=float(np.quantile([r[0] for r in rows], .50)),
         response_p95_ms=float(np.quantile([r[0] for r in rows], .95)),
     )
+    if inspect_waves:
+        report.update(
+            source_rounds=sum(row[3] for row in rows),
+            p95_source_rounds=float(np.quantile([row[3] for row in rows], .95)),
+            source_sets_sha256=sha256("".join(row[4] for row in rows).encode()).hexdigest(),
+        )
+    return report
 
 
-def run(corpus, manifest, prior, scratch, output, publisher, order_offset):
+def run(corpus, manifest, prior, scratch, output, publisher, order_offset, waves=None):
     if output.exists() or not os.environ.get("SLURM_JOB_ID"):
         raise ValueError("Use a fresh output on a Slurm compute node")
     anchor = json.loads(prior.read_bytes())["publishers"][publisher]
@@ -167,6 +212,12 @@ def run(corpus, manifest, prior, scratch, output, publisher, order_offset):
         raise ValueError("Unexpected publisher projection")
     if digest(Path(columns.__file__)) != anchor["script_sha256"]:
         raise ValueError("Index planner changed since the warm replay")
+    wave_reference = json.loads(waves.read_bytes())[publisher] if waves else None
+    placement = "whole_cold" if publisher == "plos" else "column_smoothed"
+    if waves and (wave_reference["fixture_sha256"] != expected or wave_reference["prior_sha256"] != digest(prior)):
+        raise ValueError("Changed parallel-read inputs")
+    arms = tuple(WAVES) if waves else ARMS
+    placements = (placement,) if waves else ARMS
     roles = {name: 1 << i for i, name in enumerate(sorted(ROLES))}
     asks = [sum(group) for group in combinations(roles.values(), 3)]
     results = {}
@@ -195,34 +246,46 @@ def run(corpus, manifest, prior, scratch, output, publisher, order_offset):
             train = [ask for ask in asks if not ask & mask]
             held = [ask for ask in asks if ask & mask]
             for arm, selected in columns.designs(owners, caps, widths, costs, train, traces, budget).items():
-                if arm in ARMS:
+                if arm in placements:
                     payload = columns.encode(ids, authors, labels, selected)
                     if len(payload) != anchor["folds"][str(fold)]["25"][arm]["payload_bytes"]:
                         raise ValueError("Changed packed index contents")
-                    plans[f"/{fold}/{arm}"] = columns.decode(payload, docs, authors, caps)
+                    compiled = columns.decode(payload, docs, authors, caps)
+                    for route in (arms if waves else (arm,)):
+                        plans[f"/{fold}/{route}"] = compiled
             requests.extend(bodies(roles, held, reference, fold))
 
         Random(20261121).shuffle(requests)
-        arm_order = ARMS[order_offset:] + ARMS[:order_offset]
+        arm_order = (arms[::-1] if order_offset else arms) if waves else arms[order_offset:] + arms[:order_offset]
         for clients, delay in PROFILES:
             profile = {}
             with serve(SourceHandler, files=docs_by_url, delay=delay / 1000) as source:
                 with serve(SearchHandler, source_port=source, plans=plans, roles=roles,
-                           owners=owners, caps=caps, source_urls=urls) as search:
+                           owners=owners, caps=caps, source_urls=urls, widths=WAVES if waves else {}) as search:
                     for arm in arm_order:
-                        report = execute(search, requests, arm, clients)
-                        expected_reads = sum(anchor["folds"][str(fold)]["25"][arm]["file_reads"] for fold in FOLDS)
-                        expected_bytes = sum(anchor["folds"][str(fold)]["25"][arm]["decoded_bytes"] for fold in FOLDS)
+                        report = execute(search, requests, arm, clients, inspect_waves=bool(waves))
+                        allocation = placement if waves else arm
+                        expected_reads = sum(anchor["folds"][str(fold)]["25"][allocation]["file_reads"] for fold in FOLDS)
+                        expected_bytes = sum(anchor["folds"][str(fold)]["25"][allocation]["decoded_bytes"] for fold in FOLDS)
                         if (report["source_reads"], report["source_payload_bytes"]) != (expected_reads, expected_bytes):
                             raise AssertionError("HTTP fetch volume did not reproduce the warmed local path")
+                        if waves:
+                            reference_rounds = wave_reference["results"][placement][arm]["source_rounds"]
+                            if report["source_rounds"] != reference_rounds:
+                                raise AssertionError("HTTP changed the number of source read waves")
                         profile[arm] = report
+                    if waves and len({row["source_sets_sha256"] for row in profile.values()}) != 1:
+                        raise AssertionError("HTTP changed the source set for an individual request")
             results[f"{clients}_clients_{delay}_ms"] = profile
             print(f"{publisher}: measured {clients} clients, {delay} ms added source delay", flush=True)
 
-    write_json(output, dict(
+    result = dict(
         publisher=publisher, profiles=results, byte_cap=budget, order_offset=order_offset,
         fixture_sha256=digest(corpus), prior_sha256=digest(prior), script_sha256=digest(Path(__file__)),
-    ))
+    )
+    if waves:
+        result.update(placement=placement, waves_sha256=digest(waves))
+    write_json(output, result)
 
 
 if __name__ == "__main__":
@@ -231,4 +294,5 @@ if __name__ == "__main__":
         parser.add_argument(name, type=Path)
     parser.add_argument("--publisher", choices=("plos", "elife"), required=True)
     parser.add_argument("--order-offset", type=int, default=0, choices=(0, 1))
+    parser.add_argument("--waves", type=Path, help="Use exact-source read wave counts as a reference")
     run(**vars(parser.parse_args()))
