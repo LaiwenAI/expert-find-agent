@@ -18,6 +18,7 @@ from experiments.credit import topic_role_postings as pilot
 
 EUTILS = "https://eutils.ncbi.nlm.nih.gov/entrez/eutils/"
 SNAPSHOTS = "https://www.nlm.nih.gov/mesh/meshhome.html"
+ROUTINE_DESCRIPTORS = {"D006801", "D051379", "D051381", "D005260", "D008297", "D000818"}
 
 
 def request(endpoint, **parameters):
@@ -121,8 +122,8 @@ def audit_keywords(snapshot, packet, review_summary, output):
     ))
 
 
-def assign_topics(catalog, mesh, excluded):
-    """Only major descriptors in explicitly MEDLINE-indexed records are positives."""
+def assign_topics(catalog, mesh, excluded, *, major_only=True):
+    """Use descriptor assignments from explicitly MEDLINE-indexed records."""
     catalog.topics.clear()
     label_by_ui = {}
     index_coverage = Counter()
@@ -135,7 +136,7 @@ def assign_topics(catalog, mesh, excluded):
         if record["status"] != "MEDLINE":
             continue
         for term in record["headings"]:
-            if term["major"] and term["ui"] not in excluded:
+            if (term["major"] or not major_only) and term["ui"] not in excluded:
                 if label_by_ui.setdefault(term["ui"], term["label"]) != term["label"]:
                     raise ValueError(f"Descriptor labels differ for {term['ui']}")
                 catalog.topics[term["label"]].add(index)
@@ -171,8 +172,7 @@ def run(projection, snapshot, reference, gate_reference, embedding, reranker, ou
     complete = {i for i, a in enumerate(articles) if a["declaration_complete"]}
     catalog.visible = {pct: ids & complete for pct, ids in catalog.visible.items()}
     # Exclude routine study-population descriptors even if marked major.
-    excluded = {"D006801", "D051379", "D051381", "D005260", "D008297", "D000818"}
-    coverage = assign_topics(catalog, frozen["records"], excluded)
+    coverage = assign_topics(catalog, frozen["records"], ROUTINE_DESCRIPTORS)
     topics = sorted(t for t, ids in catalog.topics.items() if 4 <= len(ids) <= 40)
     if not topics:
         raise ValueError("No eligible MeSH topics in the pinned snapshot")
