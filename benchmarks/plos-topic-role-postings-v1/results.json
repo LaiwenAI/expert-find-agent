@@ -1,0 +1,825 @@
+{
+  "job": "43465",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "code_sha256": "f1e7641a7a04fd3367b385858c6a93fb755cd5fdd468566e1862e3888997e95b",
+  "fixture": "74168d853ad21c795269c904fb7f8081cdf5a3e91ce7385ef8683495fd2ca7d5",
+  "projection": "cd36c0732fb03e2ca283c5d673e217b29e7b9116f2363c31c7b988e93b942cfb",
+  "embedding": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "reranker": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+  "sources": 147,
+  "excluded_missing_text": [
+    "10.1371/journal.pone.0301149",
+    "10.1371/journal.pone.0302620",
+    "10.1371/journal.pone.0305645",
+    "10.1371/journal.pone.0307783",
+    "10.1371/journal.pone.0321329"
+  ],
+  "sources_without_topics": 2,
+  "indexed": {
+    "50": 76,
+    "100": 146
+  },
+  "encode_seconds": 0.9516524896025658,
+  "calibration": {
+    "cutoff": -2.0625,
+    "off_label": 93,
+    "on_label": 59,
+    "accepted_off_label": 9,
+    "accepted_on_label": 27,
+    "topics": 19
+  },
+  "test_topics": 40,
+  "test_queries": 80,
+  "results": {
+    "50": {
+      "2": {
+        "topic_first": {
+          "reads": 160,
+          "reachable": 31,
+          "scoped_sources_in_pool": 39,
+          "issued": 46,
+          "grounded": 24,
+          "cited_off_label": 22,
+          "p95_ms": 21.377426758408546,
+          "queries": 80,
+          "grounded_p5_difference": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 80,
+            "clusters": 40,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole topic"
+          },
+          "subsets": {
+            "rare": {
+              "reads": 80,
+              "issued": 7,
+              "grounded": 4,
+              "reachable": 5,
+              "scoped_sources_in_pool": 5,
+              "cited_off_label": 3
+            },
+            "frequent": {
+              "reads": 80,
+              "reachable": 26,
+              "scoped_sources_in_pool": 34,
+              "issued": 39,
+              "grounded": 20,
+              "cited_off_label": 19
+            }
+          }
+        },
+        "role_union": {
+          "reads": 160,
+          "reachable": 32,
+          "scoped_sources_in_pool": 41,
+          "issued": 48,
+          "grounded": 26,
+          "cited_off_label": 22,
+          "p95_ms": 21.3969468139112,
+          "queries": 80,
+          "grounded_p5_difference": {
+            "mean": 0.005,
+            "percentile_95": [
+              0.0,
+              0.0125
+            ],
+            "queries": 80,
+            "clusters": 40,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole topic"
+          },
+          "subsets": {
+            "rare": {
+              "reads": 80,
+              "issued": 7,
+              "grounded": 4,
+              "reachable": 5,
+              "scoped_sources_in_pool": 5,
+              "cited_off_label": 3
+            },
+            "frequent": {
+              "reads": 80,
+              "reachable": 27,
+              "scoped_sources_in_pool": 36,
+              "issued": 41,
+              "grounded": 22,
+              "cited_off_label": 19
+            }
+          }
+        },
+        "person_postings": {
+          "reads": 160,
+          "reachable": 35,
+          "scoped_sources_in_pool": 45,
+          "issued": 52,
+          "grounded": 29,
+          "cited_off_label": 23,
+          "p95_ms": 21.49964375421405,
+          "queries": 80,
+          "grounded_p5_difference": {
+            "mean": 0.0125,
+            "percentile_95": [
+              0.0025,
+              0.027500000000000004
+            ],
+            "queries": 80,
+            "clusters": 40,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole topic"
+          },
+          "subsets": {
+            "rare": {
+              "reads": 80,
+              "issued": 9,
+              "grounded": 5,
+              "reachable": 7,
+              "scoped_sources_in_pool": 7,
+              "cited_off_label": 4
+            },
+            "frequent": {
+              "reads": 80,
+              "reachable": 28,
+              "scoped_sources_in_pool": 38,
+              "issued": 43,
+              "grounded": 24,
+              "cited_off_label": 19
+            }
+          }
+        }
+      },
+      "4": {
+        "topic_first": {
+          "reads": 320,
+          "reachable": 40,
+          "scoped_sources_in_pool": 70,
+          "issued": 88,
+          "grounded": 63,
+          "cited_off_label": 25,
+          "p95_ms": 32.84037271514535,
+          "queries": 80,
+          "grounded_p5_difference": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 80,
+            "clusters": 40,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole topic"
+          },
+          "subsets": {
+            "rare": {
+              "reads": 160,
+              "issued": 14,
+              "grounded": 10,
+              "reachable": 7,
+              "scoped_sources_in_pool": 7,
+              "cited_off_label": 4
+            },
+            "frequent": {
+              "reads": 160,
+              "reachable": 33,
+              "scoped_sources_in_pool": 63,
+              "issued": 74,
+              "grounded": 53,
+              "cited_off_label": 21
+            }
+          }
+        },
+        "role_union": {
+          "reads": 320,
+          "reachable": 46,
+          "scoped_sources_in_pool": 79,
+          "issued": 94,
+          "grounded": 65,
+          "cited_off_label": 29,
+          "p95_ms": 33.41941041871905,
+          "queries": 80,
+          "grounded_p5_difference": {
+            "mean": 0.005,
+            "percentile_95": [
+              0.0,
+              0.015000000000000003
+            ],
+            "queries": 80,
+            "clusters": 40,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole topic"
+          },
+          "subsets": {
+            "rare": {
+              "reads": 160,
+              "reachable": 12,
+              "scoped_sources_in_pool": 12,
+              "issued": 15,
+              "grounded": 10,
+              "cited_off_label": 5
+            },
+            "frequent": {
+              "reads": 160,
+              "reachable": 34,
+              "scoped_sources_in_pool": 67,
+              "issued": 79,
+              "grounded": 55,
+              "cited_off_label": 24
+            }
+          }
+        },
+        "person_postings": {
+          "reads": 320,
+          "reachable": 50,
+          "scoped_sources_in_pool": 86,
+          "issued": 98,
+          "grounded": 69,
+          "cited_off_label": 29,
+          "p95_ms": 44.280396960675716,
+          "queries": 80,
+          "grounded_p5_difference": {
+            "mean": 0.015,
+            "percentile_95": [
+              0.0025,
+              0.032499999999999994
+            ],
+            "queries": 80,
+            "clusters": 40,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole topic"
+          },
+          "subsets": {
+            "rare": {
+              "reads": 160,
+              "reachable": 16,
+              "scoped_sources_in_pool": 16,
+              "issued": 18,
+              "grounded": 13,
+              "cited_off_label": 5
+            },
+            "frequent": {
+              "reads": 160,
+              "reachable": 34,
+              "scoped_sources_in_pool": 70,
+              "issued": 80,
+              "grounded": 56,
+              "cited_off_label": 24
+            }
+          }
+        }
+      },
+      "8": {
+        "topic_first": {
+          "reads": 640,
+          "reachable": 54,
+          "scoped_sources_in_pool": 122,
+          "issued": 113,
+          "grounded": 83,
+          "cited_off_label": 30,
+          "p95_ms": 81.61691427230835,
+          "queries": 80,
+          "grounded_p5_difference": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 80,
+            "clusters": 40,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole topic"
+          },
+          "subsets": {
+            "rare": {
+              "reads": 320,
+              "reachable": 16,
+              "scoped_sources_in_pool": 17,
+              "issued": 19,
+              "grounded": 14,
+              "cited_off_label": 5
+            },
+            "frequent": {
+              "reads": 320,
+              "reachable": 38,
+              "scoped_sources_in_pool": 105,
+              "issued": 94,
+              "grounded": 69,
+              "cited_off_label": 25
+            }
+          }
+        },
+        "role_union": {
+          "reads": 640,
+          "reachable": 61,
+          "scoped_sources_in_pool": 142,
+          "issued": 123,
+          "grounded": 93,
+          "cited_off_label": 30,
+          "p95_ms": 81.47305957973003,
+          "queries": 80,
+          "grounded_p5_difference": {
+            "mean": 0.025,
+            "percentile_95": [
+              0.0075000000000000015,
+              0.0475
+            ],
+            "queries": 80,
+            "clusters": 40,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole topic"
+          },
+          "subsets": {
+            "rare": {
+              "reads": 320,
+              "reachable": 23,
+              "scoped_sources_in_pool": 25,
+              "issued": 23,
+              "grounded": 18,
+              "cited_off_label": 5
+            },
+            "frequent": {
+              "reads": 320,
+              "reachable": 38,
+              "scoped_sources_in_pool": 117,
+              "issued": 100,
+              "grounded": 75,
+              "cited_off_label": 25
+            }
+          }
+        },
+        "person_postings": {
+          "reads": 640,
+          "reachable": 65,
+          "scoped_sources_in_pool": 150,
+          "issued": 127,
+          "grounded": 96,
+          "cited_off_label": 31,
+          "p95_ms": 81.84478683397174,
+          "queries": 80,
+          "grounded_p5_difference": {
+            "mean": 0.0325,
+            "percentile_95": [
+              0.0125,
+              0.05500000000000001
+            ],
+            "queries": 80,
+            "clusters": 40,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole topic"
+          },
+          "subsets": {
+            "rare": {
+              "reads": 320,
+              "reachable": 27,
+              "scoped_sources_in_pool": 29,
+              "issued": 26,
+              "grounded": 20,
+              "cited_off_label": 6
+            },
+            "frequent": {
+              "reads": 320,
+              "reachable": 38,
+              "scoped_sources_in_pool": 121,
+              "issued": 101,
+              "grounded": 76,
+              "cited_off_label": 25
+            }
+          }
+        }
+      }
+    },
+    "100": {
+      "2": {
+        "topic_first": {
+          "reads": 160,
+          "reachable": 31,
+          "scoped_sources_in_pool": 39,
+          "issued": 46,
+          "grounded": 24,
+          "cited_off_label": 22,
+          "p95_ms": 21.383279096335173,
+          "queries": 80,
+          "grounded_p5_difference": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 80,
+            "clusters": 40,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole topic"
+          },
+          "subsets": {
+            "rare": {
+              "reads": 80,
+              "issued": 7,
+              "grounded": 4,
+              "reachable": 5,
+              "scoped_sources_in_pool": 5,
+              "cited_off_label": 3
+            },
+            "frequent": {
+              "reads": 80,
+              "reachable": 26,
+              "scoped_sources_in_pool": 34,
+              "issued": 39,
+              "grounded": 20,
+              "cited_off_label": 19
+            }
+          }
+        },
+        "role_union": {
+          "reads": 160,
+          "reachable": 35,
+          "scoped_sources_in_pool": 44,
+          "issued": 53,
+          "grounded": 28,
+          "cited_off_label": 25,
+          "p95_ms": 21.344304736703634,
+          "queries": 80,
+          "grounded_p5_difference": {
+            "mean": 0.01,
+            "percentile_95": [
+              0.0,
+              0.022500000000000003
+            ],
+            "queries": 80,
+            "clusters": 40,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole topic"
+          },
+          "subsets": {
+            "rare": {
+              "reads": 80,
+              "issued": 9,
+              "grounded": 4,
+              "reachable": 6,
+              "scoped_sources_in_pool": 6,
+              "cited_off_label": 5
+            },
+            "frequent": {
+              "reads": 80,
+              "reachable": 29,
+              "scoped_sources_in_pool": 38,
+              "issued": 44,
+              "grounded": 24,
+              "cited_off_label": 20
+            }
+          }
+        },
+        "person_postings": {
+          "reads": 160,
+          "reachable": 51,
+          "scoped_sources_in_pool": 64,
+          "issued": 73,
+          "grounded": 46,
+          "cited_off_label": 27,
+          "p95_ms": 29.074665997177362,
+          "queries": 80,
+          "grounded_p5_difference": {
+            "mean": 0.05500000000000001,
+            "percentile_95": [
+              0.025,
+              0.09
+            ],
+            "queries": 80,
+            "clusters": 40,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole topic"
+          },
+          "subsets": {
+            "rare": {
+              "reads": 80,
+              "issued": 22,
+              "grounded": 17,
+              "reachable": 20,
+              "scoped_sources_in_pool": 22,
+              "cited_off_label": 5
+            },
+            "frequent": {
+              "reads": 80,
+              "reachable": 31,
+              "scoped_sources_in_pool": 42,
+              "issued": 51,
+              "grounded": 29,
+              "cited_off_label": 22
+            }
+          }
+        }
+      },
+      "4": {
+        "topic_first": {
+          "reads": 320,
+          "reachable": 40,
+          "scoped_sources_in_pool": 70,
+          "issued": 88,
+          "grounded": 63,
+          "cited_off_label": 25,
+          "p95_ms": 33.20195311680436,
+          "queries": 80,
+          "grounded_p5_difference": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 80,
+            "clusters": 40,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole topic"
+          },
+          "subsets": {
+            "rare": {
+              "reads": 160,
+              "issued": 14,
+              "grounded": 10,
+              "reachable": 7,
+              "scoped_sources_in_pool": 7,
+              "cited_off_label": 4
+            },
+            "frequent": {
+              "reads": 160,
+              "reachable": 33,
+              "scoped_sources_in_pool": 63,
+              "issued": 74,
+              "grounded": 53,
+              "cited_off_label": 21
+            }
+          }
+        },
+        "role_union": {
+          "reads": 320,
+          "reachable": 53,
+          "scoped_sources_in_pool": 91,
+          "issued": 100,
+          "grounded": 70,
+          "cited_off_label": 30,
+          "p95_ms": 45.0253208167851,
+          "queries": 80,
+          "grounded_p5_difference": {
+            "mean": 0.017499999999999998,
+            "percentile_95": [
+              0.0025,
+              0.0425
+            ],
+            "queries": 80,
+            "clusters": 40,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole topic"
+          },
+          "subsets": {
+            "rare": {
+              "reads": 160,
+              "reachable": 17,
+              "scoped_sources_in_pool": 17,
+              "issued": 17,
+              "grounded": 11,
+              "cited_off_label": 6
+            },
+            "frequent": {
+              "reads": 160,
+              "reachable": 36,
+              "scoped_sources_in_pool": 74,
+              "issued": 83,
+              "grounded": 59,
+              "cited_off_label": 24
+            }
+          }
+        },
+        "person_postings": {
+          "reads": 320,
+          "reachable": 64,
+          "scoped_sources_in_pool": 114,
+          "issued": 115,
+          "grounded": 84,
+          "cited_off_label": 31,
+          "p95_ms": 45.215521194040775,
+          "queries": 80,
+          "grounded_p5_difference": {
+            "mean": 0.052500000000000005,
+            "percentile_95": [
+              0.027500000000000004,
+              0.0825
+            ],
+            "queries": 80,
+            "clusters": 40,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole topic"
+          },
+          "subsets": {
+            "rare": {
+              "reads": 160,
+              "reachable": 28,
+              "scoped_sources_in_pool": 33,
+              "issued": 28,
+              "grounded": 21,
+              "cited_off_label": 7
+            },
+            "frequent": {
+              "reads": 160,
+              "reachable": 36,
+              "scoped_sources_in_pool": 81,
+              "issued": 87,
+              "grounded": 63,
+              "cited_off_label": 24
+            }
+          }
+        }
+      },
+      "8": {
+        "topic_first": {
+          "reads": 640,
+          "reachable": 54,
+          "scoped_sources_in_pool": 122,
+          "issued": 113,
+          "grounded": 83,
+          "cited_off_label": 30,
+          "p95_ms": 81.24345755204558,
+          "queries": 80,
+          "grounded_p5_difference": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 80,
+            "clusters": 40,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole topic"
+          },
+          "subsets": {
+            "rare": {
+              "reads": 320,
+              "reachable": 16,
+              "scoped_sources_in_pool": 17,
+              "issued": 19,
+              "grounded": 14,
+              "cited_off_label": 5
+            },
+            "frequent": {
+              "reads": 320,
+              "reachable": 38,
+              "scoped_sources_in_pool": 105,
+              "issued": 94,
+              "grounded": 69,
+              "cited_off_label": 25
+            }
+          }
+        },
+        "role_union": {
+          "reads": 640,
+          "reachable": 65,
+          "scoped_sources_in_pool": 152,
+          "issued": 126,
+          "grounded": 96,
+          "cited_off_label": 30,
+          "p95_ms": 81.68423706665635,
+          "queries": 80,
+          "grounded_p5_difference": {
+            "mean": 0.0325,
+            "percentile_95": [
+              0.0125,
+              0.05500000000000001
+            ],
+            "queries": 80,
+            "clusters": 40,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole topic"
+          },
+          "subsets": {
+            "rare": {
+              "reads": 320,
+              "reachable": 27,
+              "scoped_sources_in_pool": 29,
+              "issued": 25,
+              "grounded": 20,
+              "cited_off_label": 5
+            },
+            "frequent": {
+              "reads": 320,
+              "reachable": 38,
+              "scoped_sources_in_pool": 123,
+              "issued": 101,
+              "grounded": 76,
+              "cited_off_label": 25
+            }
+          }
+        },
+        "person_postings": {
+          "reads": 640,
+          "reachable": 69,
+          "scoped_sources_in_pool": 172,
+          "issued": 133,
+          "grounded": 99,
+          "cited_off_label": 34,
+          "p95_ms": 81.84226294979453,
+          "queries": 80,
+          "grounded_p5_difference": {
+            "mean": 0.04,
+            "percentile_95": [
+              0.02,
+              0.065
+            ],
+            "queries": 80,
+            "clusters": 40,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole topic"
+          },
+          "subsets": {
+            "rare": {
+              "reads": 320,
+              "reachable": 31,
+              "scoped_sources_in_pool": 43,
+              "issued": 32,
+              "grounded": 23,
+              "cited_off_label": 9
+            },
+            "frequent": {
+              "reads": 320,
+              "reachable": 38,
+              "scoped_sources_in_pool": 129,
+              "issued": 101,
+              "grounded": 76,
+              "cited_off_label": 25
+            }
+          }
+        }
+      }
+    }
+  },
+  "exploratory_person_four_vs_topic_eight": {
+    "50": {
+      "grounded": {
+        "mean": -0.035,
+        "percentile_95": [
+          -0.05750000000000001,
+          -0.015000000000000003
+        ],
+        "queries": 80,
+        "clusters": 40,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000,
+        "sampling_unit": "whole topic"
+      },
+      "cited_off_label": {
+        "mean": -0.0025,
+        "percentile_95": [
+          -0.015000000000000003,
+          0.0075000000000000015
+        ],
+        "queries": 80,
+        "clusters": 40,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000,
+        "sampling_unit": "whole topic"
+      }
+    },
+    "100": {
+      "grounded": {
+        "mean": 0.0025,
+        "percentile_95": [
+          -0.0175,
+          0.025
+        ],
+        "queries": 80,
+        "clusters": 40,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000,
+        "sampling_unit": "whole topic"
+      },
+      "cited_off_label": {
+        "mean": 0.002500000000000001,
+        "percentile_95": [
+          -0.0125,
+          0.015000000000000003
+        ],
+        "queries": 80,
+        "clusters": 40,
+        "seed": 20261116,
+        "bootstrap_repeats": 10000,
+        "sampling_unit": "whole topic"
+      }
+    }
+  }
+}
