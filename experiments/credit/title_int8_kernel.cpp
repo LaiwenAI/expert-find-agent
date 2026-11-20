@@ -86,3 +86,46 @@ extern "C" int title_top_int8(
     }
     return retained;
 }
+
+// Return all rows whose upper bound can reach the second-largest lower bound.
+extern "C" int title_top_two_guard(
+        const std::int8_t* codes, const float* scales, const std::int32_t* row_sums,
+        const float* residuals, const std::int8_t* query, const std::uint8_t* shifted_query,
+        float query_scale, double query_norm, double common_error, int rows, int dim,
+        double* upper, int* selected) {
+    if (rows < 2 || dim < 1 || dim > 16384) {
+        return -1;
+    }
+    const bool vectorized = dim % 64 == 0 && title_vnni_available();
+    double first_lower = -std::numeric_limits<double>::infinity();
+    double second_lower = first_lower;
+    for (int source = 0; source < rows; ++source) {
+        const std::int8_t* row = codes + static_cast<std::int64_t>(source) * dim;
+        std::int32_t integer_score;
+#if TITLE_HAS_X86
+        if (vectorized) {
+            integer_score = dot_vnni(row, shifted_query, dim, row_sums[source]);
+        } else
+#endif
+        {
+            integer_score = dot_scalar(row, query, dim);
+        }
+        const double score = static_cast<double>(integer_score) * scales[source] * query_scale;
+        const double error = residuals[source] * query_norm + common_error;
+        upper[source] = score + error;
+        const double lower = score - error;
+        if (lower > first_lower) {
+            second_lower = first_lower;
+            first_lower = lower;
+        } else if (lower > second_lower) {
+            second_lower = lower;
+        }
+    }
+    int retained = 0;
+    for (int source = 0; source < rows; ++source) {
+        if (upper[source] >= second_lower) {
+            selected[retained++] = source;
+        }
+    }
+    return retained;
+}
