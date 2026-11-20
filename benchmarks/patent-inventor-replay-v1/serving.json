@@ -1,0 +1,1372 @@
+{
+  "development": {
+    "total_queries": 415,
+    "reference_slots": 233,
+    "packed_index_bytes": {
+      "sketch12": 117011,
+      "partial_exact": 117010,
+      "mixed": 117011,
+      "exact_full": 137284,
+      "unindexed": 56264
+    },
+    "panels": {
+      "40pct_4reads": {
+        "sketch12": {
+          "exact": 364,
+          "hits": 118,
+          "reads": 937,
+          "rounds": [
+            {
+              "requests": 415,
+              "p50_ms": 0.2182,
+              "p95_ms": 1.2417
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.2172,
+              "p95_ms": 1.2395
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.2103,
+              "p95_ms": 1.2049
+            }
+          ]
+        },
+        "partial_exact": {
+          "exact": 403,
+          "hits": 215,
+          "reads": 270,
+          "rounds": [
+            {
+              "requests": 415,
+              "p50_ms": 0.1918,
+              "p95_ms": 1.164
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.1898,
+              "p95_ms": 1.1277
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.1938,
+              "p95_ms": 1.1468
+            }
+          ]
+        },
+        "mixed": {
+          "exact": 392,
+          "hits": 176,
+          "reads": 484,
+          "rounds": [
+            {
+              "requests": 415,
+              "p50_ms": 0.2091,
+              "p95_ms": 1.1625
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.2062,
+              "p95_ms": 1.1321
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.2072,
+              "p95_ms": 1.1397
+            }
+          ]
+        },
+        "exact_full": {
+          "exact": 409,
+          "hits": 225,
+          "reads": 156,
+          "rounds": [
+            {
+              "requests": 415,
+              "p50_ms": 0.2001,
+              "p95_ms": 1.2444
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.1989,
+              "p95_ms": 1.1356
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.2021,
+              "p95_ms": 1.1857
+            }
+          ]
+        },
+        "unindexed": {
+          "exact": 341,
+          "hits": 61,
+          "reads": 1660,
+          "rounds": [
+            {
+              "requests": 415,
+              "p50_ms": 0.136,
+              "p95_ms": 0.4337
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.1308,
+              "p95_ms": 0.4001
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.133,
+              "p95_ms": 0.4101
+            }
+          ]
+        }
+      },
+      "40pct_12reads": {
+        "sketch12": {
+          "exact": 385,
+          "hits": 160,
+          "reads": 1783,
+          "rounds": [
+            {
+              "requests": 415,
+              "p50_ms": 0.2217,
+              "p95_ms": 1.2962
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.2246,
+              "p95_ms": 1.2858
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.2256,
+              "p95_ms": 1.2827
+            }
+          ]
+        },
+        "partial_exact": {
+          "exact": 410,
+          "hits": 224,
+          "reads": 529,
+          "rounds": [
+            {
+              "requests": 415,
+              "p50_ms": 0.1972,
+              "p95_ms": 1.1565
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.1953,
+              "p95_ms": 1.1283
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.1981,
+              "p95_ms": 1.1729
+            }
+          ]
+        },
+        "mixed": {
+          "exact": 402,
+          "hits": 189,
+          "reads": 1080,
+          "rounds": [
+            {
+              "requests": 415,
+              "p50_ms": 0.2242,
+              "p95_ms": 1.2096
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.2234,
+              "p95_ms": 1.1931
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.2189,
+              "p95_ms": 1.1431
+            }
+          ]
+        },
+        "exact_full": {
+          "exact": 415,
+          "hits": 233,
+          "reads": 170,
+          "rounds": [
+            {
+              "requests": 415,
+              "p50_ms": 0.204,
+              "p95_ms": 1.2305
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.2013,
+              "p95_ms": 1.1971
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.1939,
+              "p95_ms": 1.1104
+            }
+          ]
+        },
+        "unindexed": {
+          "exact": 345,
+          "hits": 90,
+          "reads": 4977,
+          "rounds": [
+            {
+              "requests": 415,
+              "p50_ms": 0.1616,
+              "p95_ms": 0.4426
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.1656,
+              "p95_ms": 0.4592
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.1666,
+              "p95_ms": 0.4622
+            }
+          ]
+        }
+      },
+      "70pct_4reads": {
+        "sketch12": {
+          "exact": 389,
+          "hits": 175,
+          "reads": 714,
+          "rounds": [
+            {
+              "requests": 415,
+              "p50_ms": 0.2159,
+              "p95_ms": 1.2828
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.2165,
+              "p95_ms": 1.2748
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.2191,
+              "p95_ms": 1.3156
+            }
+          ]
+        },
+        "partial_exact": {
+          "exact": 412,
+          "hits": 227,
+          "reads": 210,
+          "rounds": [
+            {
+              "requests": 415,
+              "p50_ms": 0.1973,
+              "p95_ms": 1.2181
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.1979,
+              "p95_ms": 1.1996
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.2062,
+              "p95_ms": 1.2648
+            }
+          ]
+        },
+        "mixed": {
+          "exact": 406,
+          "hits": 208,
+          "reads": 408,
+          "rounds": [
+            {
+              "requests": 415,
+              "p50_ms": 0.2253,
+              "p95_ms": 1.2821
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.2236,
+              "p95_ms": 1.22
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.2152,
+              "p95_ms": 1.1926
+            }
+          ]
+        },
+        "exact_full": {
+          "exact": 415,
+          "hits": 233,
+          "reads": 87,
+          "rounds": [
+            {
+              "requests": 415,
+              "p50_ms": 0.2014,
+              "p95_ms": 1.2186
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.2023,
+              "p95_ms": 1.1884
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.1985,
+              "p95_ms": 1.2084
+            }
+          ]
+        },
+        "unindexed": {
+          "exact": 370,
+          "hits": 140,
+          "reads": 1660,
+          "rounds": [
+            {
+              "requests": 415,
+              "p50_ms": 0.1457,
+              "p95_ms": 0.512
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.1444,
+              "p95_ms": 0.5219
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.145,
+              "p95_ms": 0.5208
+            }
+          ]
+        }
+      },
+      "70pct_12reads": {
+        "sketch12": {
+          "exact": 402,
+          "hits": 201,
+          "reads": 1237,
+          "rounds": [
+            {
+              "requests": 415,
+              "p50_ms": 0.2196,
+              "p95_ms": 1.362
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.2161,
+              "p95_ms": 1.3704
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.2175,
+              "p95_ms": 1.4835
+            }
+          ]
+        },
+        "partial_exact": {
+          "exact": 414,
+          "hits": 230,
+          "reads": 396,
+          "rounds": [
+            {
+              "requests": 415,
+              "p50_ms": 0.1958,
+              "p95_ms": 1.1889
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.2152,
+              "p95_ms": 1.3148
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.214,
+              "p95_ms": 1.344
+            }
+          ]
+        },
+        "mixed": {
+          "exact": 409,
+          "hits": 215,
+          "reads": 850,
+          "rounds": [
+            {
+              "requests": 415,
+              "p50_ms": 0.2213,
+              "p95_ms": 1.2009
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.2212,
+              "p95_ms": 1.1965
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.2207,
+              "p95_ms": 1.2055
+            }
+          ]
+        },
+        "exact_full": {
+          "exact": 415,
+          "hits": 233,
+          "reads": 87,
+          "rounds": [
+            {
+              "requests": 415,
+              "p50_ms": 0.2009,
+              "p95_ms": 1.2152
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.1997,
+              "p95_ms": 1.2074
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.2005,
+              "p95_ms": 1.1956
+            }
+          ]
+        },
+        "unindexed": {
+          "exact": 383,
+          "hits": 166,
+          "reads": 4856,
+          "rounds": [
+            {
+              "requests": 415,
+              "p50_ms": 0.1818,
+              "p95_ms": 0.5762
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.1806,
+              "p95_ms": 0.5689
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.1831,
+              "p95_ms": 0.6059
+            }
+          ]
+        }
+      },
+      "90pct_4reads": {
+        "sketch12": {
+          "exact": 404,
+          "hits": 212,
+          "reads": 388,
+          "rounds": [
+            {
+              "requests": 415,
+              "p50_ms": 0.2094,
+              "p95_ms": 1.3802
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.2127,
+              "p95_ms": 1.3652
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.2111,
+              "p95_ms": 1.3787
+            }
+          ]
+        },
+        "partial_exact": {
+          "exact": 415,
+          "hits": 233,
+          "reads": 141,
+          "rounds": [
+            {
+              "requests": 415,
+              "p50_ms": 0.2016,
+              "p95_ms": 1.2395
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.199,
+              "p95_ms": 1.2203
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.1997,
+              "p95_ms": 1.2209
+            }
+          ]
+        },
+        "mixed": {
+          "exact": 410,
+          "hits": 220,
+          "reads": 289,
+          "rounds": [
+            {
+              "requests": 415,
+              "p50_ms": 0.2178,
+              "p95_ms": 1.2406
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.215,
+              "p95_ms": 1.2348
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.2163,
+              "p95_ms": 1.2285
+            }
+          ]
+        },
+        "exact_full": {
+          "exact": 415,
+          "hits": 233,
+          "reads": 40,
+          "rounds": [
+            {
+              "requests": 415,
+              "p50_ms": 0.2087,
+              "p95_ms": 1.299
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.2066,
+              "p95_ms": 1.3257
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.2066,
+              "p95_ms": 1.2517
+            }
+          ]
+        },
+        "unindexed": {
+          "exact": 396,
+          "hits": 197,
+          "reads": 1555,
+          "rounds": [
+            {
+              "requests": 415,
+              "p50_ms": 0.1543,
+              "p95_ms": 0.6021
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.1578,
+              "p95_ms": 0.6038
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.158,
+              "p95_ms": 0.6152
+            }
+          ]
+        }
+      },
+      "90pct_12reads": {
+        "sketch12": {
+          "exact": 412,
+          "hits": 227,
+          "reads": 655,
+          "rounds": [
+            {
+              "requests": 415,
+              "p50_ms": 0.2041,
+              "p95_ms": 1.3508
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.2092,
+              "p95_ms": 1.4048
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.2072,
+              "p95_ms": 1.4786
+            }
+          ]
+        },
+        "partial_exact": {
+          "exact": 415,
+          "hits": 233,
+          "reads": 253,
+          "rounds": [
+            {
+              "requests": 415,
+              "p50_ms": 0.2013,
+              "p95_ms": 1.2012
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.1993,
+              "p95_ms": 1.2162
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.1991,
+              "p95_ms": 1.2246
+            }
+          ]
+        },
+        "mixed": {
+          "exact": 412,
+          "hits": 227,
+          "reads": 484,
+          "rounds": [
+            {
+              "requests": 415,
+              "p50_ms": 0.2165,
+              "p95_ms": 1.2383
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.216,
+              "p95_ms": 1.212
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.2169,
+              "p95_ms": 1.2178
+            }
+          ]
+        },
+        "exact_full": {
+          "exact": 415,
+          "hits": 233,
+          "reads": 40,
+          "rounds": [
+            {
+              "requests": 415,
+              "p50_ms": 0.1976,
+              "p95_ms": 1.2286
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.2025,
+              "p95_ms": 1.2445
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.2094,
+              "p95_ms": 1.2815
+            }
+          ]
+        },
+        "unindexed": {
+          "exact": 403,
+          "hits": 212,
+          "reads": 3286,
+          "rounds": [
+            {
+              "requests": 415,
+              "p50_ms": 0.181,
+              "p95_ms": 0.674
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.1782,
+              "p95_ms": 0.6527
+            },
+            {
+              "requests": 415,
+              "p50_ms": 0.1792,
+              "p95_ms": 0.6548
+            }
+          ]
+        }
+      }
+    }
+  },
+  "held_out": {
+    "total_queries": 103,
+    "reference_slots": 54,
+    "packed_index_bytes": {
+      "sketch12": 45457,
+      "partial_exact": 45456,
+      "mixed": 45456,
+      "exact_full": 53430,
+      "unindexed": 21584
+    },
+    "panels": {
+      "40pct_4reads": {
+        "sketch12": {
+          "exact": 89,
+          "hits": 21,
+          "reads": 256,
+          "rounds": [
+            {
+              "requests": 103,
+              "p50_ms": 0.2673,
+              "p95_ms": 0.7204
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2615,
+              "p95_ms": 0.7075
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2614,
+              "p95_ms": 0.717
+            }
+          ]
+        },
+        "partial_exact": {
+          "exact": 102,
+          "hits": 53,
+          "reads": 46,
+          "rounds": [
+            {
+              "requests": 103,
+              "p50_ms": 0.231,
+              "p95_ms": 0.6727
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2192,
+              "p95_ms": 0.6522
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2218,
+              "p95_ms": 0.6829
+            }
+          ]
+        },
+        "mixed": {
+          "exact": 99,
+          "hits": 50,
+          "reads": 124,
+          "rounds": [
+            {
+              "requests": 103,
+              "p50_ms": 0.2446,
+              "p95_ms": 0.6826
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2309,
+              "p95_ms": 0.6759
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2463,
+              "p95_ms": 0.6807
+            }
+          ]
+        },
+        "exact_full": {
+          "exact": 102,
+          "hits": 53,
+          "reads": 46,
+          "rounds": [
+            {
+              "requests": 103,
+              "p50_ms": 0.2337,
+              "p95_ms": 0.6782
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2269,
+              "p95_ms": 0.6704
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2294,
+              "p95_ms": 0.6879
+            }
+          ]
+        },
+        "unindexed": {
+          "exact": 83,
+          "hits": 12,
+          "reads": 412,
+          "rounds": [
+            {
+              "requests": 103,
+              "p50_ms": 0.1443,
+              "p95_ms": 0.2659
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.1447,
+              "p95_ms": 0.267
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.1453,
+              "p95_ms": 0.2745
+            }
+          ]
+        }
+      },
+      "40pct_12reads": {
+        "sketch12": {
+          "exact": 96,
+          "hits": 31,
+          "reads": 510,
+          "rounds": [
+            {
+              "requests": 103,
+              "p50_ms": 0.2716,
+              "p95_ms": 0.7708
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2611,
+              "p95_ms": 0.7593
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2709,
+              "p95_ms": 0.7554
+            }
+          ]
+        },
+        "partial_exact": {
+          "exact": 103,
+          "hits": 54,
+          "reads": 48,
+          "rounds": [
+            {
+              "requests": 103,
+              "p50_ms": 0.2314,
+              "p95_ms": 0.6855
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2266,
+              "p95_ms": 0.6792
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2304,
+              "p95_ms": 0.6921
+            }
+          ]
+        },
+        "mixed": {
+          "exact": 101,
+          "hits": 52,
+          "reads": 252,
+          "rounds": [
+            {
+              "requests": 103,
+              "p50_ms": 0.2439,
+              "p95_ms": 0.6973
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2546,
+              "p95_ms": 0.6857
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2525,
+              "p95_ms": 0.7012
+            }
+          ]
+        },
+        "exact_full": {
+          "exact": 103,
+          "hits": 54,
+          "reads": 48,
+          "rounds": [
+            {
+              "requests": 103,
+              "p50_ms": 0.2374,
+              "p95_ms": 0.6796
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2257,
+              "p95_ms": 0.6704
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2289,
+              "p95_ms": 0.7001
+            }
+          ]
+        },
+        "unindexed": {
+          "exact": 86,
+          "hits": 16,
+          "reads": 1236,
+          "rounds": [
+            {
+              "requests": 103,
+              "p50_ms": 0.1757,
+              "p95_ms": 0.3115
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.1726,
+              "p95_ms": 0.3155
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.1759,
+              "p95_ms": 0.3054
+            }
+          ]
+        }
+      },
+      "70pct_4reads": {
+        "sketch12": {
+          "exact": 95,
+          "hits": 35,
+          "reads": 203,
+          "rounds": [
+            {
+              "requests": 103,
+              "p50_ms": 0.2559,
+              "p95_ms": 0.7509
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2497,
+              "p95_ms": 0.7355
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2567,
+              "p95_ms": 0.7604
+            }
+          ]
+        },
+        "partial_exact": {
+          "exact": 103,
+          "hits": 54,
+          "reads": 26,
+          "rounds": [
+            {
+              "requests": 103,
+              "p50_ms": 0.2398,
+              "p95_ms": 0.652
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2292,
+              "p95_ms": 0.6593
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2415,
+              "p95_ms": 0.6831
+            }
+          ]
+        },
+        "mixed": {
+          "exact": 101,
+          "hits": 52,
+          "reads": 100,
+          "rounds": [
+            {
+              "requests": 103,
+              "p50_ms": 0.2533,
+              "p95_ms": 0.6659
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2448,
+              "p95_ms": 0.6694
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.26,
+              "p95_ms": 0.6675
+            }
+          ]
+        },
+        "exact_full": {
+          "exact": 103,
+          "hits": 54,
+          "reads": 26,
+          "rounds": [
+            {
+              "requests": 103,
+              "p50_ms": 0.2461,
+              "p95_ms": 0.6638
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2275,
+              "p95_ms": 0.6589
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.229,
+              "p95_ms": 0.6701
+            }
+          ]
+        },
+        "unindexed": {
+          "exact": 88,
+          "hits": 24,
+          "reads": 412,
+          "rounds": [
+            {
+              "requests": 103,
+              "p50_ms": 0.1523,
+              "p95_ms": 0.3163
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.1555,
+              "p95_ms": 0.314
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.1578,
+              "p95_ms": 0.3239
+            }
+          ]
+        }
+      },
+      "70pct_12reads": {
+        "sketch12": {
+          "exact": 99,
+          "hits": 46,
+          "reads": 354,
+          "rounds": [
+            {
+              "requests": 103,
+              "p50_ms": 0.2543,
+              "p95_ms": 0.7873
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2507,
+              "p95_ms": 0.8032
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2594,
+              "p95_ms": 0.8262
+            }
+          ]
+        },
+        "partial_exact": {
+          "exact": 103,
+          "hits": 54,
+          "reads": 26,
+          "rounds": [
+            {
+              "requests": 103,
+              "p50_ms": 0.242,
+              "p95_ms": 0.6646
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2328,
+              "p95_ms": 0.6548
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2429,
+              "p95_ms": 0.6738
+            }
+          ]
+        },
+        "mixed": {
+          "exact": 102,
+          "hits": 53,
+          "reads": 197,
+          "rounds": [
+            {
+              "requests": 103,
+              "p50_ms": 0.2663,
+              "p95_ms": 0.7183
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2636,
+              "p95_ms": 0.6819
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2588,
+              "p95_ms": 0.6767
+            }
+          ]
+        },
+        "exact_full": {
+          "exact": 103,
+          "hits": 54,
+          "reads": 26,
+          "rounds": [
+            {
+              "requests": 103,
+              "p50_ms": 0.2535,
+              "p95_ms": 0.7157
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2306,
+              "p95_ms": 0.6566
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.232,
+              "p95_ms": 0.697
+            }
+          ]
+        },
+        "unindexed": {
+          "exact": 95,
+          "hits": 34,
+          "reads": 1176,
+          "rounds": [
+            {
+              "requests": 103,
+              "p50_ms": 0.1893,
+              "p95_ms": 0.3782
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.1898,
+              "p95_ms": 0.3828
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.1978,
+              "p95_ms": 0.3874
+            }
+          ]
+        }
+      },
+      "90pct_4reads": {
+        "sketch12": {
+          "exact": 99,
+          "hits": 50,
+          "reads": 126,
+          "rounds": [
+            {
+              "requests": 103,
+              "p50_ms": 0.2614,
+              "p95_ms": 0.7966
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2511,
+              "p95_ms": 0.7762
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2564,
+              "p95_ms": 0.7941
+            }
+          ]
+        },
+        "partial_exact": {
+          "exact": 103,
+          "hits": 54,
+          "reads": 17,
+          "rounds": [
+            {
+              "requests": 103,
+              "p50_ms": 0.2549,
+              "p95_ms": 0.7052
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2399,
+              "p95_ms": 0.6984
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.246,
+              "p95_ms": 0.6967
+            }
+          ]
+        },
+        "mixed": {
+          "exact": 102,
+          "hits": 53,
+          "reads": 71,
+          "rounds": [
+            {
+              "requests": 103,
+              "p50_ms": 0.2735,
+              "p95_ms": 0.7107
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2531,
+              "p95_ms": 0.6946
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2596,
+              "p95_ms": 0.6889
+            }
+          ]
+        },
+        "exact_full": {
+          "exact": 103,
+          "hits": 54,
+          "reads": 17,
+          "rounds": [
+            {
+              "requests": 103,
+              "p50_ms": 0.2313,
+              "p95_ms": 0.6717
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2239,
+              "p95_ms": 0.6513
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2459,
+              "p95_ms": 0.7094
+            }
+          ]
+        },
+        "unindexed": {
+          "exact": 96,
+          "hits": 42,
+          "reads": 388,
+          "rounds": [
+            {
+              "requests": 103,
+              "p50_ms": 0.1805,
+              "p95_ms": 0.3911
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.1725,
+              "p95_ms": 0.3563
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.1756,
+              "p95_ms": 0.3633
+            }
+          ]
+        }
+      },
+      "90pct_12reads": {
+        "sketch12": {
+          "exact": 102,
+          "hits": 53,
+          "reads": 185,
+          "rounds": [
+            {
+              "requests": 103,
+              "p50_ms": 0.2571,
+              "p95_ms": 0.8385
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2553,
+              "p95_ms": 0.8545
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2588,
+              "p95_ms": 0.8871
+            }
+          ]
+        },
+        "partial_exact": {
+          "exact": 103,
+          "hits": 54,
+          "reads": 17,
+          "rounds": [
+            {
+              "requests": 103,
+              "p50_ms": 0.2671,
+              "p95_ms": 0.8169
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2521,
+              "p95_ms": 0.6986
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2433,
+              "p95_ms": 0.7118
+            }
+          ]
+        },
+        "mixed": {
+          "exact": 102,
+          "hits": 53,
+          "reads": 109,
+          "rounds": [
+            {
+              "requests": 103,
+              "p50_ms": 0.2502,
+              "p95_ms": 0.6675
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2366,
+              "p95_ms": 0.6676
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2525,
+              "p95_ms": 0.693
+            }
+          ]
+        },
+        "exact_full": {
+          "exact": 103,
+          "hits": 54,
+          "reads": 17,
+          "rounds": [
+            {
+              "requests": 103,
+              "p50_ms": 0.2325,
+              "p95_ms": 0.6749
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2283,
+              "p95_ms": 0.6839
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.2361,
+              "p95_ms": 0.701
+            }
+          ]
+        },
+        "unindexed": {
+          "exact": 99,
+          "hits": 48,
+          "reads": 879,
+          "rounds": [
+            {
+              "requests": 103,
+              "p50_ms": 0.2022,
+              "p95_ms": 0.4325
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.1966,
+              "p95_ms": 0.4224
+            },
+            {
+              "requests": 103,
+              "p50_ms": 0.1997,
+              "p95_ms": 0.4328
+            }
+          ]
+        }
+      }
+    }
+  }
+}

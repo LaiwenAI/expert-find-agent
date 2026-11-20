@@ -90,6 +90,8 @@ ordered witnesses on both periods. These are roster reads under simulated
 availability. End-to-end latency, complete index sizes, and real missingness
 remain unmeasured.
 
+[The follow-up compares equal-size role indexes and measures client latency](SERVING.md).
+
 ## Reproduce
 
 Run with Python 3.10 or newer. PyArrow is used to read the HUPD Feather file.
