@@ -50,7 +50,7 @@ def load_submission(path, originals):
     return next(iter(judges), None), labels
 
 
-def score(packet, review_a, review_b, adjudication=None):
+def score(packet, review_a, review_b, adjudication=None, categories=CATEGORIES):
     meta = json.loads((packet / "packet.json").read_text())
     for name in ("blind.jsonl", "mapping.jsonl"):
         observed = sha256((packet / name).read_bytes()).hexdigest()
@@ -69,7 +69,7 @@ def score(packet, review_a, review_b, adjudication=None):
     totals = defaultdict(Counter)
     for key, row in mapping.items():
         category = row["category"]
-        if category not in CATEGORIES:
+        if category not in categories:
             raise ValueError("Unrecognized frozen sampling category")
         counts = totals[category]
         counts["cases"] += 1
@@ -91,7 +91,7 @@ def score(packet, review_a, review_b, adjudication=None):
             "possible_supported_count": [
                 totals[name]["supported"], totals[name]["cases"] - totals[name]["not_supported_by_excerpt"]
             ]
-        } for name in CATEGORIES
+        } for name in categories
     }
 
 
@@ -100,4 +100,8 @@ if __name__ == "__main__":
     for name in ("packet", "review_a", "review_b"):
         parser.add_argument(name, type=Path)
     parser.add_argument("--adjudication", type=Path)
-    print(json.dumps(score(**vars(parser.parse_args())), indent=2))
+    parser.add_argument("--category", dest="categories", action="append", default=None,
+                        help="Expected private sampling category (repeat for each category)")
+    args = parser.parse_args()
+    print(json.dumps(score(args.packet, args.review_a, args.review_b, args.adjudication,
+                           args.categories or CATEGORIES), indent=2))

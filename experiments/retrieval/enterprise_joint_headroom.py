@@ -145,6 +145,11 @@ def run(args):
     windows, _ = roles.load_role_index(args.role_windows, SOURCE_INVENTORY, sources)
     owned = prepare_owned(windows)
 
+    topic_recheck = None
+    if args.topic_recheck:
+        from experiments.retrieval.enterprise_topic_recheck import TopicRecheck
+
+        topic_recheck = TopicRecheck(args.topic_recheck)
     results = {}
     totals = defaultdict(Counter)
     crossed = defaultdict(lambda: defaultdict(Counter))
@@ -205,6 +210,9 @@ def run(args):
             if private["top5_two"]:
                 raise ValueError("Original abstention did not reproduce")
             results[key] = dict(arms=private)
+            if topic_recheck is not None:
+                results[key]["topic_recheck"] = topic_recheck.inspect(
+                    expanded, criteria[0], sources, verifier, bank)
             if n % 5 == 0:
                 print(f"Completed {n} multi-condition diagnostics", flush=True)
     if scope is not None:
@@ -216,6 +224,13 @@ def run(args):
     write(args.private, results)
     diagnostic = ({"crossed": crossed, "scope_aggregate_sha256": digest(scope_aggregate)}
                   if scope is not None else {})
+    if topic_recheck is not None:
+        from experiments.retrieval import enterprise_topic_recheck
+
+        diagnostic["topic_recheck"] = dict(
+            counts=topic_recheck.total, revision=topic_recheck.revision,
+            script_sha256=digest(Path(enterprise_topic_recheck.__file__)),
+        )
     write(args.output, dict(
         arms=totals, **diagnostic, multi_condition=len(fixed), max_people=WIDE_PEOPLE, max_excerpts=WIDE_EXCERPTS,
         reference_sha256=digest(args.reference), private_sha256=digest(args.private),
@@ -230,4 +245,5 @@ if __name__ == "__main__":
         parser.add_argument(name, type=Path)
     parser.add_argument("--order-offset", type=int, choices=(0, 1), default=0)
     parser.add_argument("--scope", type=Path, nargs=2, metavar=("SCOPE_TRACE", "SCOPE_AGGREGATE"))
+    parser.add_argument("--topic-recheck", type=Path, metavar="CHECKPOINT")
     run(parser.parse_args())
