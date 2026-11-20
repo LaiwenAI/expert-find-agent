@@ -58,6 +58,8 @@ records would resolve or how many unreturned candidates actually
 qualify. The existing full-text path retains candidates with missing
 registry evidence.
 
+[The offline follow-up checks current publication identities and historical inventor rosters](CN-OFFLINE.md).
+
 ## Reproduce
 
 The preparation step binds the existing restricted source-cue
