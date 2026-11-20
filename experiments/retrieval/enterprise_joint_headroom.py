@@ -145,6 +145,11 @@ def run(args):
     windows, _ = roles.load_role_index(args.role_windows, SOURCE_INVENTORY, sources)
     owned = prepare_owned(windows)
 
+    linkability = None
+    if args.linkability:
+        from experiments.retrieval.enterprise_source_linkability import Linkability
+
+        linkability = Linkability(args.linkability, args.corpus, sources)
     topic_recheck = None
     if args.topic_recheck:
         from experiments.retrieval.enterprise_topic_recheck import TopicRecheck
@@ -205,6 +210,8 @@ def run(args):
                                    queries_with_topic=int(bool(stats["positives_topic"])),
                                    queries_with_all_qualifications=int(bool(stats["positives_all_qualifications"])))
                 private[arm] = issued
+                if linkability is not None:
+                    linkability.audit(arm, people, excerpts, bank, issued)
                 if scope is not None:
                     count_interpretations(crossed[arm], people, excerpts, scope_bank, axes)
             if private["top5_two"]:
@@ -224,6 +231,8 @@ def run(args):
     write(args.private, results)
     diagnostic = ({"crossed": crossed, "scope_aggregate_sha256": digest(scope_aggregate)}
                   if scope is not None else {})
+    if linkability is not None:
+        diagnostic["linkability"] = linkability.aggregate()
     if topic_recheck is not None:
         from experiments.retrieval import enterprise_topic_recheck
 
@@ -246,4 +255,5 @@ if __name__ == "__main__":
     parser.add_argument("--order-offset", type=int, choices=(0, 1), default=0)
     parser.add_argument("--scope", type=Path, nargs=2, metavar=("SCOPE_TRACE", "SCOPE_AGGREGATE"))
     parser.add_argument("--topic-recheck", type=Path, metavar="CHECKPOINT")
+    parser.add_argument("--linkability", type=Path, metavar="PRIVATE_PROJECTION")
     run(parser.parse_args())
