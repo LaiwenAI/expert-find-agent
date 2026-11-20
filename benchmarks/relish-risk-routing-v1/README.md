@@ -86,6 +86,9 @@ paper-relevance results.
 For a qualification requiring direct support, partial relevance
 needs its own risk endpoint.
 
+For a stricter definition that also counts grade-1 issuance, see the
+[fixed-risk follow-up](../relish-strict-risk-v1).
+
 [Aggregate results](results.json) · [Frozen membership](relish-panel-manifest.json).
 
 ## Reproduce
