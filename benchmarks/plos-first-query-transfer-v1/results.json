@@ -1,0 +1,855 @@
+{
+  "hardware": "Apple M4",
+  "full_run": {
+    "script_sha256": "e339b0b482b4d273f716c9b7e1296eea7f8918238dd090cbcf3750d023d12655",
+    "policy_runner_sha256": "b68e034d28243f62cd801cc892131b14cd6ff61c4e0173bd6dd315afecf5ca17",
+    "source_count": 78,
+    "projection_sha256": "5491e3456ff751df14f172100e341eb23ec2567e93f94ad0c8b05715d1331744",
+    "manifest_sha256": "f1f46d43a1095302a7485010b05e619ada2c84146f6eedbf6b7bec1f8b4303c6",
+    "reference_sha256": "ca20eafbd524dce84a8b4cb85de83d6071941c0d003504ad3b8409ad51aa8ea9",
+    "cutoff": 0.14092062413692474,
+    "order_offset": 0,
+    "masks": {
+      "50": {
+        "indexed": 42,
+        "all": {
+          "queries": 46,
+          "topics": 23,
+          "arms": {
+            "topic_adaptive": {
+              "grounded": 48,
+              "off_label": 12,
+              "issued": 60,
+              "first_grounded": 41,
+              "reads": 264,
+              "skipped_when_full": 4,
+              "missing_compatible": 8,
+              "padded": 0,
+              "outside_pool": 0,
+              "serial_p95_ms": 471.16646825
+            },
+            "person_adaptive": {
+              "grounded": 53,
+              "off_label": 12,
+              "issued": 65,
+              "first_grounded": 45,
+              "reads": 234,
+              "skipped_when_full": 6,
+              "missing_compatible": 36,
+              "padded": 0,
+              "outside_pool": 0,
+              "serial_p95_ms": 475.78890624999997
+            },
+            "topic_fixed": {
+              "grounded": 48,
+              "off_label": 12,
+              "issued": 60,
+              "first_grounded": 41,
+              "reads": 276,
+              "skipped_when_full": 0,
+              "missing_compatible": 8,
+              "padded": 8,
+              "outside_pool": 0,
+              "serial_p95_ms": 475.5306355
+            },
+            "person_fixed": {
+              "grounded": 53,
+              "off_label": 12,
+              "issued": 65,
+              "first_grounded": 45,
+              "reads": 276,
+              "skipped_when_full": 0,
+              "missing_compatible": 36,
+              "padded": 36,
+              "outside_pool": 0,
+              "serial_p95_ms": 479.28036425
+            },
+            "person_global_fixed": {
+              "grounded": 54,
+              "off_label": 14,
+              "issued": 68,
+              "first_grounded": 45,
+              "reads": 276,
+              "skipped_when_full": 0,
+              "missing_compatible": 0,
+              "padded": 0,
+              "outside_pool": 36,
+              "serial_p95_ms": 476.25541675
+            }
+          },
+          "contrasts": {
+            "person_fixed_vs_topic_fixed": {
+              "grounded": {
+                "mean": 0.021739130434782608,
+                "percentile_95": [
+                  0.004347826086956522,
+                  0.043478260869565216
+                ],
+                "queries": 46,
+                "clusters": 23,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole topic; query-weighted mean"
+              },
+              "off_label": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 46,
+                "clusters": 23,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole topic; query-weighted mean"
+              }
+            },
+            "person_adaptive_vs_topic_adaptive": {
+              "grounded": {
+                "mean": 0.021739130434782608,
+                "percentile_95": [
+                  0.004347826086956522,
+                  0.043478260869565216
+                ],
+                "queries": 46,
+                "clusters": 23,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole topic; query-weighted mean"
+              },
+              "off_label": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 46,
+                "clusters": 23,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole topic; query-weighted mean"
+              }
+            },
+            "person_global_fixed_vs_person_fixed": {
+              "grounded": {
+                "mean": 0.004347826086956522,
+                "percentile_95": [
+                  0.0,
+                  0.013043478260869568
+                ],
+                "queries": 46,
+                "clusters": 23,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole topic; query-weighted mean"
+              },
+              "off_label": {
+                "mean": 0.008695652173913044,
+                "percentile_95": [
+                  0.0,
+                  0.026086956521739136
+                ],
+                "queries": 46,
+                "clusters": 23,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole topic; query-weighted mean"
+              }
+            }
+          }
+        },
+        "novel": {
+          "queries": 24,
+          "topics": 12,
+          "arms": {
+            "topic_adaptive": {
+              "grounded": 29,
+              "off_label": 7,
+              "issued": 36,
+              "first_grounded": 25,
+              "reads": 137,
+              "skipped_when_full": 4,
+              "missing_compatible": 3,
+              "padded": 0,
+              "outside_pool": 0,
+              "serial_p95_ms": 479.87547225
+            },
+            "person_adaptive": {
+              "grounded": 30,
+              "off_label": 7,
+              "issued": 37,
+              "first_grounded": 26,
+              "reads": 124,
+              "skipped_when_full": 6,
+              "missing_compatible": 14,
+              "padded": 0,
+              "outside_pool": 0,
+              "serial_p95_ms": 476.98618749999997
+            },
+            "topic_fixed": {
+              "grounded": 29,
+              "off_label": 7,
+              "issued": 36,
+              "first_grounded": 25,
+              "reads": 144,
+              "skipped_when_full": 0,
+              "missing_compatible": 3,
+              "padded": 3,
+              "outside_pool": 0,
+              "serial_p95_ms": 479.10675625
+            },
+            "person_fixed": {
+              "grounded": 30,
+              "off_label": 7,
+              "issued": 37,
+              "first_grounded": 26,
+              "reads": 144,
+              "skipped_when_full": 0,
+              "missing_compatible": 14,
+              "padded": 14,
+              "outside_pool": 0,
+              "serial_p95_ms": 479.52880175
+            },
+            "person_global_fixed": {
+              "grounded": 31,
+              "off_label": 7,
+              "issued": 38,
+              "first_grounded": 26,
+              "reads": 144,
+              "skipped_when_full": 0,
+              "missing_compatible": 0,
+              "padded": 0,
+              "outside_pool": 14,
+              "serial_p95_ms": 477.01230445000004
+            }
+          },
+          "contrasts": {
+            "person_fixed_vs_topic_fixed": {
+              "grounded": {
+                "mean": 0.008333333333333333,
+                "percentile_95": [
+                  0.0,
+                  0.025000000000000005
+                ],
+                "queries": 24,
+                "clusters": 12,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole topic; query-weighted mean"
+              },
+              "off_label": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 24,
+                "clusters": 12,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole topic; query-weighted mean"
+              }
+            },
+            "person_adaptive_vs_topic_adaptive": {
+              "grounded": {
+                "mean": 0.008333333333333333,
+                "percentile_95": [
+                  0.0,
+                  0.025000000000000005
+                ],
+                "queries": 24,
+                "clusters": 12,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole topic; query-weighted mean"
+              },
+              "off_label": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 24,
+                "clusters": 12,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole topic; query-weighted mean"
+              }
+            },
+            "person_global_fixed_vs_person_fixed": {
+              "grounded": {
+                "mean": 0.008333333333333333,
+                "percentile_95": [
+                  0.0,
+                  0.025000000000000005
+                ],
+                "queries": 24,
+                "clusters": 12,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole topic; query-weighted mean"
+              },
+              "off_label": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 24,
+                "clusters": 12,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole topic; query-weighted mean"
+              }
+            }
+          }
+        }
+      },
+      "100": {
+        "indexed": 78,
+        "all": {
+          "queries": 46,
+          "topics": 23,
+          "arms": {
+            "topic_adaptive": {
+              "grounded": 51,
+              "off_label": 12,
+              "issued": 63,
+              "first_grounded": 41,
+              "reads": 240,
+              "skipped_when_full": 4,
+              "missing_compatible": 32,
+              "padded": 0,
+              "outside_pool": 0,
+              "serial_p95_ms": 463.607469
+            },
+            "person_adaptive": {
+              "grounded": 55,
+              "off_label": 18,
+              "issued": 73,
+              "first_grounded": 47,
+              "reads": 216,
+              "skipped_when_full": 6,
+              "missing_compatible": 54,
+              "padded": 0,
+              "outside_pool": 0,
+              "serial_p95_ms": 475.91826025
+            },
+            "topic_fixed": {
+              "grounded": 51,
+              "off_label": 12,
+              "issued": 63,
+              "first_grounded": 41,
+              "reads": 276,
+              "skipped_when_full": 0,
+              "missing_compatible": 32,
+              "padded": 32,
+              "outside_pool": 0,
+              "serial_p95_ms": 480.9275835
+            },
+            "person_fixed": {
+              "grounded": 55,
+              "off_label": 18,
+              "issued": 73,
+              "first_grounded": 47,
+              "reads": 276,
+              "skipped_when_full": 0,
+              "missing_compatible": 57,
+              "padded": 57,
+              "outside_pool": 0,
+              "serial_p95_ms": 496.659542
+            },
+            "person_global_fixed": {
+              "grounded": 56,
+              "off_label": 19,
+              "issued": 75,
+              "first_grounded": 47,
+              "reads": 276,
+              "skipped_when_full": 0,
+              "missing_compatible": 0,
+              "padded": 0,
+              "outside_pool": 57,
+              "serial_p95_ms": 499.22866625
+            }
+          },
+          "contrasts": {
+            "person_fixed_vs_topic_fixed": {
+              "grounded": {
+                "mean": 0.017391304347826087,
+                "percentile_95": [
+                  0.0,
+                  0.0391304347826087
+                ],
+                "queries": 46,
+                "clusters": 23,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole topic; query-weighted mean"
+              },
+              "off_label": {
+                "mean": 0.026086956521739136,
+                "percentile_95": [
+                  0.004347826086956522,
+                  0.05217391304347827
+                ],
+                "queries": 46,
+                "clusters": 23,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole topic; query-weighted mean"
+              }
+            },
+            "person_adaptive_vs_topic_adaptive": {
+              "grounded": {
+                "mean": 0.017391304347826087,
+                "percentile_95": [
+                  0.0,
+                  0.0391304347826087
+                ],
+                "queries": 46,
+                "clusters": 23,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole topic; query-weighted mean"
+              },
+              "off_label": {
+                "mean": 0.026086956521739136,
+                "percentile_95": [
+                  0.004347826086956522,
+                  0.05217391304347827
+                ],
+                "queries": 46,
+                "clusters": 23,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole topic; query-weighted mean"
+              }
+            },
+            "person_global_fixed_vs_person_fixed": {
+              "grounded": {
+                "mean": 0.004347826086956522,
+                "percentile_95": [
+                  0.0,
+                  0.013043478260869568
+                ],
+                "queries": 46,
+                "clusters": 23,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole topic; query-weighted mean"
+              },
+              "off_label": {
+                "mean": 0.004347826086956522,
+                "percentile_95": [
+                  0.0,
+                  0.013043478260869568
+                ],
+                "queries": 46,
+                "clusters": 23,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole topic; query-weighted mean"
+              }
+            }
+          }
+        },
+        "novel": {
+          "queries": 24,
+          "topics": 12,
+          "arms": {
+            "topic_adaptive": {
+              "grounded": 30,
+              "off_label": 7,
+              "issued": 37,
+              "first_grounded": 25,
+              "reads": 124,
+              "skipped_when_full": 4,
+              "missing_compatible": 16,
+              "padded": 0,
+              "outside_pool": 0,
+              "serial_p95_ms": 472.82847325
+            },
+            "person_adaptive": {
+              "grounded": 31,
+              "off_label": 10,
+              "issued": 41,
+              "first_grounded": 27,
+              "reads": 110,
+              "skipped_when_full": 6,
+              "missing_compatible": 28,
+              "padded": 0,
+              "outside_pool": 0,
+              "serial_p95_ms": 482.7344911
+            },
+            "topic_fixed": {
+              "grounded": 30,
+              "off_label": 7,
+              "issued": 37,
+              "first_grounded": 25,
+              "reads": 144,
+              "skipped_when_full": 0,
+              "missing_compatible": 16,
+              "padded": 16,
+              "outside_pool": 0,
+              "serial_p95_ms": 484.89108934999996
+            },
+            "person_fixed": {
+              "grounded": 31,
+              "off_label": 10,
+              "issued": 41,
+              "first_grounded": 27,
+              "reads": 144,
+              "skipped_when_full": 0,
+              "missing_compatible": 31,
+              "padded": 31,
+              "outside_pool": 0,
+              "serial_p95_ms": 500.71433575
+            },
+            "person_global_fixed": {
+              "grounded": 31,
+              "off_label": 10,
+              "issued": 41,
+              "first_grounded": 27,
+              "reads": 144,
+              "skipped_when_full": 0,
+              "missing_compatible": 0,
+              "padded": 0,
+              "outside_pool": 31,
+              "serial_p95_ms": 499.15756865
+            }
+          },
+          "contrasts": {
+            "person_fixed_vs_topic_fixed": {
+              "grounded": {
+                "mean": 0.008333333333333333,
+                "percentile_95": [
+                  0.0,
+                  0.025000000000000005
+                ],
+                "queries": 24,
+                "clusters": 12,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole topic; query-weighted mean"
+              },
+              "off_label": {
+                "mean": 0.025000000000000005,
+                "percentile_95": [
+                  0.0,
+                  0.06666666666666667
+                ],
+                "queries": 24,
+                "clusters": 12,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole topic; query-weighted mean"
+              }
+            },
+            "person_adaptive_vs_topic_adaptive": {
+              "grounded": {
+                "mean": 0.008333333333333333,
+                "percentile_95": [
+                  0.0,
+                  0.025000000000000005
+                ],
+                "queries": 24,
+                "clusters": 12,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole topic; query-weighted mean"
+              },
+              "off_label": {
+                "mean": 0.025000000000000005,
+                "percentile_95": [
+                  0.0,
+                  0.06666666666666667
+                ],
+                "queries": 24,
+                "clusters": 12,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole topic; query-weighted mean"
+              }
+            },
+            "person_global_fixed_vs_person_fixed": {
+              "grounded": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 24,
+                "clusters": 12,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole topic; query-weighted mean"
+              },
+              "off_label": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 24,
+                "clusters": 12,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole topic; query-weighted mean"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "primary_replay": {
+    "script_sha256": "e339b0b482b4d273f716c9b7e1296eea7f8918238dd090cbcf3750d023d12655",
+    "policy_runner_sha256": "b68e034d28243f62cd801cc892131b14cd6ff61c4e0173bd6dd315afecf5ca17",
+    "source_count": 78,
+    "projection_sha256": "5491e3456ff751df14f172100e341eb23ec2567e93f94ad0c8b05715d1331744",
+    "manifest_sha256": "f1f46d43a1095302a7485010b05e619ada2c84146f6eedbf6b7bec1f8b4303c6",
+    "reference_sha256": "ca20eafbd524dce84a8b4cb85de83d6071941c0d003504ad3b8409ad51aa8ea9",
+    "cutoff": 0.14092062413692474,
+    "order_offset": 1,
+    "masks": {
+      "50": {
+        "indexed": 42,
+        "all": {
+          "queries": 46,
+          "topics": 23,
+          "arms": {
+            "topic_fixed": {
+              "grounded": 48,
+              "off_label": 12,
+              "issued": 60,
+              "first_grounded": 41,
+              "reads": 276,
+              "skipped_when_full": 0,
+              "missing_compatible": 8,
+              "padded": 8,
+              "outside_pool": 0,
+              "serial_p95_ms": 483.44460475
+            },
+            "person_fixed": {
+              "grounded": 53,
+              "off_label": 12,
+              "issued": 65,
+              "first_grounded": 45,
+              "reads": 276,
+              "skipped_when_full": 0,
+              "missing_compatible": 36,
+              "padded": 36,
+              "outside_pool": 0,
+              "serial_p95_ms": 486.46013525
+            }
+          },
+          "contrasts": {
+            "person_fixed_vs_topic_fixed": {
+              "grounded": {
+                "mean": 0.021739130434782608,
+                "percentile_95": [
+                  0.004347826086956522,
+                  0.043478260869565216
+                ],
+                "queries": 46,
+                "clusters": 23,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole topic; query-weighted mean"
+              },
+              "off_label": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 46,
+                "clusters": 23,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole topic; query-weighted mean"
+              }
+            }
+          }
+        },
+        "novel": {
+          "queries": 24,
+          "topics": 12,
+          "arms": {
+            "topic_fixed": {
+              "grounded": 29,
+              "off_label": 7,
+              "issued": 36,
+              "first_grounded": 25,
+              "reads": 144,
+              "skipped_when_full": 0,
+              "missing_compatible": 3,
+              "padded": 3,
+              "outside_pool": 0,
+              "serial_p95_ms": 486.6123019
+            },
+            "person_fixed": {
+              "grounded": 30,
+              "off_label": 7,
+              "issued": 37,
+              "first_grounded": 26,
+              "reads": 144,
+              "skipped_when_full": 0,
+              "missing_compatible": 14,
+              "padded": 14,
+              "outside_pool": 0,
+              "serial_p95_ms": 486.52018115
+            }
+          },
+          "contrasts": {
+            "person_fixed_vs_topic_fixed": {
+              "grounded": {
+                "mean": 0.008333333333333333,
+                "percentile_95": [
+                  0.0,
+                  0.025000000000000005
+                ],
+                "queries": 24,
+                "clusters": 12,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole topic; query-weighted mean"
+              },
+              "off_label": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 24,
+                "clusters": 12,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole topic; query-weighted mean"
+              }
+            }
+          }
+        }
+      },
+      "100": {
+        "indexed": 78,
+        "all": {
+          "queries": 46,
+          "topics": 23,
+          "arms": {
+            "topic_fixed": {
+              "grounded": 51,
+              "off_label": 12,
+              "issued": 63,
+              "first_grounded": 41,
+              "reads": 276,
+              "skipped_when_full": 0,
+              "missing_compatible": 32,
+              "padded": 32,
+              "outside_pool": 0,
+              "serial_p95_ms": 480.97810375
+            },
+            "person_fixed": {
+              "grounded": 55,
+              "off_label": 18,
+              "issued": 73,
+              "first_grounded": 47,
+              "reads": 276,
+              "skipped_when_full": 0,
+              "missing_compatible": 57,
+              "padded": 57,
+              "outside_pool": 0,
+              "serial_p95_ms": 503.83885425
+            }
+          },
+          "contrasts": {
+            "person_fixed_vs_topic_fixed": {
+              "grounded": {
+                "mean": 0.017391304347826087,
+                "percentile_95": [
+                  0.0,
+                  0.0391304347826087
+                ],
+                "queries": 46,
+                "clusters": 23,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole topic; query-weighted mean"
+              },
+              "off_label": {
+                "mean": 0.026086956521739136,
+                "percentile_95": [
+                  0.004347826086956522,
+                  0.05217391304347827
+                ],
+                "queries": 46,
+                "clusters": 23,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole topic; query-weighted mean"
+              }
+            }
+          }
+        },
+        "novel": {
+          "queries": 24,
+          "topics": 12,
+          "arms": {
+            "topic_fixed": {
+              "grounded": 30,
+              "off_label": 7,
+              "issued": 37,
+              "first_grounded": 25,
+              "reads": 144,
+              "skipped_when_full": 0,
+              "missing_compatible": 16,
+              "padded": 16,
+              "outside_pool": 0,
+              "serial_p95_ms": 489.3508963
+            },
+            "person_fixed": {
+              "grounded": 31,
+              "off_label": 10,
+              "issued": 41,
+              "first_grounded": 27,
+              "reads": 144,
+              "skipped_when_full": 0,
+              "missing_compatible": 31,
+              "padded": 31,
+              "outside_pool": 0,
+              "serial_p95_ms": 503.89211255
+            }
+          },
+          "contrasts": {
+            "person_fixed_vs_topic_fixed": {
+              "grounded": {
+                "mean": 0.008333333333333333,
+                "percentile_95": [
+                  0.0,
+                  0.025000000000000005
+                ],
+                "queries": 24,
+                "clusters": 12,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole topic; query-weighted mean"
+              },
+              "off_label": {
+                "mean": 0.025000000000000005,
+                "percentile_95": [
+                  0.0,
+                  0.06666666666666667
+                ],
+                "queries": 24,
+                "clusters": 12,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole topic; query-weighted mean"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
