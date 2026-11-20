@@ -24,8 +24,9 @@ class GpuOwnedVectorIndex:
         self.vectors=torch.tensor(reference.vectors,device=self.device,dtype=torch.float32)
         torch.cuda.synchronize(self.device)
 
-    def search_vector(self,query,k=5,eligible=None):
+    def search_vector(self,query,k=5,eligible=None,*,evidence_limit=3):
         if self.torch.backends.cuda.matmul.allow_tf32:raise ValueError('TF32 was enabled after initialization')
+        if type(evidence_limit) is not int or evidence_limit < 1:raise ValueError('Invalid source evidence limit')
         q=np.asarray(query,dtype=np.float32)
         if q.shape!=(self.reference.vectors.shape[1],) or not np.isfinite(q).all() or type(k) is not int or not 1<=k<=500:raise ValueError('Invalid query vector or result budget')
         start=time.perf_counter()
@@ -47,7 +48,7 @@ class GpuOwnedVectorIndex:
             lookup={i:float(score) for i,score in zip(selected,scores)};hits=[]
             for eid in candidates:
                 ordered=sorted(self.reference.owners[eid],key=lambda i:(-lookup[i],self.reference.source_ids[i]))
-                hits.append(dict(id=eid,score=lookup[ordered[0]],evidence=[dict(id=self.reference.source_ids[i],score=lookup[i]) for i in ordered[:3]]))
+                hits.append(dict(id=eid,score=lookup[ordered[0]],evidence=[dict(id=self.reference.source_ids[i],score=lookup[i]) for i in ordered[:evidence_limit]]))
             hits.sort(key=lambda hit:(-hit['score'],hit['id']))
             return {'hits':hits[:k],'branch':'gpu_selected','source_rows':len(selected),'candidate_experts':len(candidates),
                     'depths':[],'unavailable_experts':unavailable,'seconds':time.perf_counter()-start,
@@ -61,7 +62,7 @@ class GpuOwnedVectorIndex:
         for position in positions:
             eid=self.reference.owner_ids[position]
             ordered=sorted(self.reference.owners[eid],key=lambda i:(-float(scores[i]),self.reference.source_ids[i]))
-            hits.append(dict(id=eid,score=float(maxima[position]),evidence=[dict(id=self.reference.source_ids[i],score=float(scores[i])) for i in ordered[:3]]))
+            hits.append(dict(id=eid,score=float(maxima[position]),evidence=[dict(id=self.reference.source_ids[i],score=float(scores[i])) for i in ordered[:evidence_limit]]))
         return {'hits':hits,'branch':'gpu_full','source_rows':len(self.reference.vectors),'candidate_experts':len(self.reference.owner_ids),
                 'depths':[],'unavailable_experts':[],'seconds':time.perf_counter()-start,
                 'notice':'Full FP32 GPU scoring with CPU ownership aggregation; results can differ from CPU reductions. Not semantic expertise accuracy.'}

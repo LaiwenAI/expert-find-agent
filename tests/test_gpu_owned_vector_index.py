@@ -32,6 +32,20 @@ class GpuOwnedVectorIndexTest(unittest.TestCase):
                 self.assertEqual([r['id'] for r in a['hits']],[r['id'] for r in b['hits']])
                 self.assertEqual(a['unavailable_experts'],b['unavailable_experts'])
                 self.assertEqual([[e['id'] for e in r['evidence']] for r in a['hits']],[[e['id'] for e in r['evidence']] for r in b['hits']])
+            extended = ExactOwnedVectorIndex(
+                [[1, 0], [.9, .1], [.8, .2], [.7, .3], [0, 1]],
+                ["a", "b", "c", "d", "e"],
+                [["first"], ["first"], ["first"], ["first"], ["second"]],
+            )
+            extended_gpu = GpuOwnedVectorIndex(extended)
+            for eligible in (None, ["first"]):
+                default = extended_gpu.search_vector([1, 0], eligible=eligible)["hits"]
+                wide = extended_gpu.search_vector([1, 0], eligible=eligible, evidence_limit=4)["hits"]
+                self.assertEqual([hit["id"] for hit in default], [hit["id"] for hit in wide])
+                self.assertEqual(default[0]["evidence"], wide[0]["evidence"][:3])
+                self.assertEqual([row["id"] for row in wide[0]["evidence"]], ["a", "b", "c", "d"])
+            with self.assertRaises(ValueError):
+                extended_gpu.search_vector([1, 0], evidence_limit=0)
             with self.assertRaises(ValueError):gpu.search_vector([1,0],eligible=[1])
             with self.assertRaises(ValueError):gpu.search_vector([np.nan,0])
             torch.backends.cuda.matmul.allow_tf32=True
