@@ -1,0 +1,155 @@
+{
+  "job": "43757",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "script_sha256": "2222aae615ad3fd5eae7af4ceb94a45e20335a0affec2418ecbe7da21e7c7998",
+  "manifest_sha256": "f1f46d43a1095302a7485010b05e619ada2c84146f6eedbf6b7bec1f8b4303c6",
+  "reference_sha256": "e2cb8a85f4f36a0c3de171e17e8b88f96e3f196518520d81ccdcfadf73b7b1e1",
+  "embedding": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "reranker": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+  "sqlite": "3.51.0",
+  "index_bytes": 151552,
+  "posting_rows": 2781,
+  "repeats": 5,
+  "results": {
+    "50": {
+      "indexed": 42,
+      "requests_per_arm": 230,
+      "arms": {
+        "resident": {
+          "counts": {
+            "sql_calls": 0,
+            "ids_probed": 0,
+            "rows_returned": 0,
+            "prefix_considered": 1425,
+            "grounded": 205,
+            "cited_off_label": 35,
+            "issued": 240,
+            "reads": 920
+          },
+          "selection_p50_us": 14.066696166992188,
+          "selection_p95_us": 15.435367822647095,
+          "request_p50_ms": 29.630977660417557,
+          "request_p95_ms": 36.07592321932316
+        },
+        "sqlite_postings": {
+          "counts": {
+            "sql_calls": 230,
+            "ids_probed": 0,
+            "rows_returned": 8485,
+            "prefix_considered": 1425,
+            "grounded": 205,
+            "cited_off_label": 35,
+            "issued": 240,
+            "reads": 920
+          },
+          "selection_p50_us": 39.052218198776245,
+          "selection_p95_us": 46.3457778096199,
+          "request_p50_ms": 29.71043437719345,
+          "request_p95_ms": 36.10815992578864
+        },
+        "sqlite_wave4": {
+          "counts": {
+            "sql_calls": 420,
+            "ids_probed": 985,
+            "rows_returned": 385,
+            "prefix_considered": 1760,
+            "grounded": 205,
+            "cited_off_label": 35,
+            "issued": 240,
+            "reads": 920
+          },
+          "selection_p50_us": 46.26624286174774,
+          "selection_p95_us": 59.21693518757819,
+          "request_p50_ms": 29.707849957048893,
+          "request_p95_ms": 36.108297389000654
+        },
+        "sqlite_wave8": {
+          "counts": {
+            "sql_calls": 260,
+            "ids_probed": 1165,
+            "rows_returned": 470,
+            "prefix_considered": 2080,
+            "grounded": 205,
+            "cited_off_label": 35,
+            "issued": 240,
+            "reads": 920
+          },
+          "selection_p50_us": 40.52557051181793,
+          "selection_p95_us": 52.85432562232017,
+          "request_p50_ms": 29.68358900398016,
+          "request_p95_ms": 36.11364420503378
+        }
+      }
+    },
+    "100": {
+      "indexed": 78,
+      "requests_per_arm": 230,
+      "arms": {
+        "resident": {
+          "counts": {
+            "sql_calls": 0,
+            "ids_probed": 0,
+            "rows_returned": 0,
+            "prefix_considered": 2975,
+            "grounded": 260,
+            "cited_off_label": 80,
+            "issued": 340,
+            "reads": 920
+          },
+          "selection_p50_us": 14.868564903736115,
+          "selection_p95_us": 17.713196575641625,
+          "request_p50_ms": 30.2200336009264,
+          "request_p95_ms": 36.28053180873394
+        },
+        "sqlite_postings": {
+          "counts": {
+            "sql_calls": 230,
+            "ids_probed": 0,
+            "rows_returned": 8485,
+            "prefix_considered": 2975,
+            "grounded": 260,
+            "cited_off_label": 80,
+            "issued": 340,
+            "reads": 920
+          },
+          "selection_p50_us": 39.128586649894714,
+          "selection_p95_us": 43.9641997218132,
+          "request_p50_ms": 30.091593973338604,
+          "request_p95_ms": 36.29777794703841
+        },
+        "sqlite_wave4": {
+          "counts": {
+            "sql_calls": 840,
+            "ids_probed": 3360,
+            "rows_returned": 1085,
+            "prefix_considered": 3360,
+            "grounded": 260,
+            "cited_off_label": 80,
+            "issued": 340,
+            "reads": 920
+          },
+          "selection_p50_us": 50.591304898262024,
+          "selection_p95_us": 85.4860059916973,
+          "request_p50_ms": 30.079016461968422,
+          "request_p95_ms": 36.33689256384969
+        },
+        "sqlite_wave8": {
+          "counts": {
+            "sql_calls": 460,
+            "ids_probed": 3680,
+            "rows_returned": 1205,
+            "prefix_considered": 3680,
+            "grounded": 260,
+            "cited_off_label": 80,
+            "issued": 340,
+            "reads": 920
+          },
+          "selection_p50_us": 46.205706894397736,
+          "selection_p95_us": 69.45962086319922,
+          "request_p50_ms": 30.15412576496601,
+          "request_p95_ms": 36.33639784529805
+        }
+      }
+    }
+  }
+}
