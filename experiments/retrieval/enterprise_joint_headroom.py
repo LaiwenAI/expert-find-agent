@@ -157,6 +157,12 @@ def run(args):
         topic_recheck = TopicRecheck(args.topic_recheck)
     results = {}
     totals = defaultdict(Counter)
+    actions = None
+    if args.action_audit:
+        if scope is None:
+            raise ValueError("The action audit requires frozen scope alternatives")
+        from experiments.retrieval import enterprise_action_order
+        actions = defaultdict(Counter)
     crossed = defaultdict(lambda: defaultdict(Counter))
     with TemporaryDirectory(dir=args.scratch) as root:
         lexical = lexical_index([r["text"] for r in sources.values()], Path(root))
@@ -196,6 +202,8 @@ def run(args):
                     (owner, ref, len(criteria) + i): margin
                     for (owner, ref, i), margin in verify_all(expanded, additions, sources, verifier).items()
                 }
+            if actions is not None:
+                enterprise_action_order.examine(actions, order, initial, expanded, scope_bank, axes)
             private = {}
             for arm, people, excerpts in (
                 ("top5_two", order[:5], initial),
@@ -231,6 +239,8 @@ def run(args):
     write(args.private, results)
     diagnostic = ({"crossed": crossed, "scope_aggregate_sha256": digest(scope_aggregate)}
                   if scope is not None else {})
+    if actions is not None:
+        diagnostic["action_audit"] = actions
     if linkability is not None:
         diagnostic["linkability"] = linkability.aggregate()
     if topic_recheck is not None:
@@ -255,5 +265,6 @@ if __name__ == "__main__":
     parser.add_argument("--order-offset", type=int, choices=(0, 1), default=0)
     parser.add_argument("--scope", type=Path, nargs=2, metavar=("SCOPE_TRACE", "SCOPE_AGGREGATE"))
     parser.add_argument("--topic-recheck", type=Path, metavar="CHECKPOINT")
+    parser.add_argument("--action-audit", action="store_true")
     parser.add_argument("--linkability", type=Path, metavar="PRIVATE_PROJECTION")
     run(parser.parse_args())
