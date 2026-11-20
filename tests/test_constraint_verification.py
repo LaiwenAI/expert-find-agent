@@ -1,7 +1,8 @@
 import random
 import unittest
 
-from expert_search.constraint_verification import resolve_constraints
+from expert_search.constraint_verification import resolve_constraints, verify_request
+from expert_search.requirement_packets import clauses
 
 
 class ConstraintVerificationTest(unittest.TestCase):
@@ -44,3 +45,27 @@ class ConstraintVerificationTest(unittest.TestCase):
                     return resolve_constraints(pool, observe, top=top, strategy=strategy), calls
 
                 self.assertEqual(traced("local_certificate"), traced("certificate"))
+
+    def test_request_requires_role_and_verbatim_residual(self):
+        text = "The candidate conducted trials. They must have verified the result. Optional: a reference."
+        role, residual, optional = clauses(text)
+        owners = [
+            ("a", {role: ("paper",), optional: ("reference",)}),
+            ("b", {role: ("paper",), residual: ("report",)}),
+            ("c", {role: ("paper",), residual: ("report",)}),
+        ]
+        evidence = {
+            ("a", "paper"): {role: True},
+            ("b", "paper"): {role: True}, ("b", "report"): {residual: None},
+            ("c", "paper"): {role: True}, ("c", "report"): {residual: True},
+        }
+        for strategy in ("exhaustive", "shortest_first", "certificate", "refutation_first"):
+            result = verify_request(text, role, owners, lambda e, s: evidence[e, s],
+                                    top=1, strategy=strategy)
+            self.assertEqual(result["ranking"], [("c", ((role, "paper"), (residual, "report")))])
+            self.assertEqual(result["packet"].optional, (optional,))
+
+    def test_request_without_a_required_clause_abstains(self):
+        result = verify_request("Optional: a reference.", None, [("a", {})],
+                                lambda *_: self.fail("Unexpected read"), top=1)
+        self.assertEqual(result["ranking"], [])

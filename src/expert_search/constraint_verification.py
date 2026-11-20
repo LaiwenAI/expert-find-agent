@@ -2,6 +2,8 @@
 
 from collections import Counter
 
+from .requirement_packets import form_packet
+
 
 def _rank(owners, observed, top, optimistic):
     result = []
@@ -141,3 +143,30 @@ def resolve_constraints(owners, read, *, top, strategy="certificate"):
             else:
                 raise AssertionError("Unequal bounds with no unresolved witness")
     return dict(ranking=_rank(owners, observed, top, False), reads=len(observed), checks=checks)
+
+
+def verify_request(text, interpreted_role, owners, read, *, top, strategy="certificate"):
+    """Resolve a fixed pool using the original request offsets as criterion keys.
+
+    Each ordered owner supplies a mapping from required spans to ordered witnesses.
+    An omitted span has no known witness. The interpreted role still needs evidence
+    from the candidate. Only an explicit optional clause is excluded from proof.
+    The reader provides stable, source-scoped judgments keyed by those same spans.
+    """
+    packet = form_packet(text, interpreted_role)
+    role = (packet.role,) if packet.role is not None else ()
+    required = tuple(sorted((*role, *packet.unresolved), key=lambda span: span.start))
+    eligible = [(expert, tuple(inventory.get(span, ()) for span in required))
+                for expert, inventory in owners] if required else []
+
+    def read_ordinals(expert, source):
+        evidence = read(expert, source)
+        return {i: evidence.get(span) for i, span in enumerate(required)}
+
+    result = resolve_constraints(eligible, read_ordinals, top=top, strategy=strategy)
+    result["ranking"] = [
+        (expert, tuple(zip(required, witnesses, strict=True)))
+        for expert, witnesses in result["ranking"]
+    ]
+    result["packet"] = packet
+    return result
