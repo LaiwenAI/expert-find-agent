@@ -103,13 +103,13 @@ def build_scores(queries, documents, embed, root):
     return ranked
 
 
-def score_pairs(reader, queries, documents, pairs, cache):
+def score_pairs(reader, queries, documents, pairs, cache, *, window=WINDOW_CHARS):
     missing = sorted(set(pairs) - cache.keys())
     clipped = 0
     for offset in range(0, len(missing), VERIFIER_BATCH):
         batch = missing[offset:offset + VERIFIER_BATCH]
         scores, truncated = reader.score_pairs(
-            [(queries[q]["text"], documents[d]["answer"][:WINDOW_CHARS]) for q, d in batch],
+            [(queries[q]["text"], documents[d]["answer"][:window]) for q, d in batch],
             task=TASK,
         )
         if len(scores) != len(batch) or not np.isfinite(scores).all():
@@ -152,7 +152,7 @@ def choose(pair, ranks, proposals, scores):
     return (best, float(weak)) if weak > 0 else (None, None)
 
 
-def evaluate(folder, canonical, encoder, reader, root, offset):
+def evaluate(folder, canonical, encoder, reader, root, offset, *, observe=None):
     raw_queries, documents, signature = load_snapshot(folder)
     queries, cases, independent, organizing = freeze_cases(raw_queries, documents, canonical)
     rankings = build_scores(queries, documents, encoder, root)
@@ -176,6 +176,9 @@ def evaluate(folder, canonical, encoder, reader, root, offset):
         needed.update((qid, staged[-1]) for qid in pair)
         plans.append(dict(topical=topical, joint=joint, staged=staged))
     clipped += score_pairs(reader, queries, documents, needed, margins)
+
+    if observe is not None:
+        observe(queries, documents, owners, requests, plans, margins)
 
     result = {arm: Counter() for arm in ARMS}
     disjoint = {arm: Counter() for arm in ARMS}
