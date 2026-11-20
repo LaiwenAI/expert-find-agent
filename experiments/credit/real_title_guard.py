@@ -56,7 +56,7 @@ class TitleGuard:
     def payload_bytes(self):
         return sum(arr.nbytes for arr in (self.codes, self.scales, self.sums, self.residuals))
 
-    def select(self, query):
+    def recheck_band(self, query):
         codes, scale = compression.quantize(query)
         shifted = (codes.astype(np.int16) + 128).astype(np.uint8)
         fp64_query = query.astype(np.float64)
@@ -75,8 +75,13 @@ class TitleGuard:
         # Check both response order and membership against any FP32 evaluation of these rows.
         within_band_error = fp32_error + gamma(len(query), np.float64) * self.max_source_norm * query_norm
         fallback = bool(np.min(scores[best[:-1]] - scores[best[1:]]) <= 2 * within_band_error + numeric_slack)
-        selected = native.fp32_top(self.exact, query, self.eligible, 2) if fallback else indices[best[:2]].tolist()
-        return selected, band, fallback
+        return indices, indices[best[:2]].tolist(), fallback
+
+    def select(self, query):
+        indices, selected, fallback = self.recheck_band(query)
+        if fallback:
+            selected = native.fp32_top(self.exact, query, self.eligible, 2)
+        return selected, len(indices), fallback
 
 
 def run(embedding, kernel, output, prior_results):
