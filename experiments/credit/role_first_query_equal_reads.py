@@ -18,7 +18,7 @@ ARMS = ("topic_adaptive", "person_adaptive", "topic_fixed", "person_fixed", "per
 FIRST, POOL, EXTRA = 4, 8, 2
 
 
-def replay(catalog, topic, pair, visible, cutoff, arm):
+def replay(catalog, topic, pair, visible, cutoff, arm, *, include_witnesses=False):
     started = perf_counter_ns()
     ranked = catalog.rank(topic)
     original = ranked[:POOL]
@@ -33,7 +33,7 @@ def replay(catalog, topic, pair, visible, cutoff, arm):
     early_stop = adaptive and initial["issued"] == pilot.TOP
     if early_stop:
         extra = []
-    elif arm == "person_global_fixed":
+    elif arm.endswith("_global_fixed"):
         extra = [i for i in compatible if i not in seen][:EXTRA]
     else:
         extra = local[:EXTRA]
@@ -51,7 +51,7 @@ def replay(catalog, topic, pair, visible, cutoff, arm):
         catalog, topic, pair, first + extra, list(initial_scores) + list(extra_scores), cutoff,
     )
     elapsed_ms = (perf_counter_ns() - started) / 1e6
-    return dict(
+    result = dict(
         grounded=final["grounded"], off_label=final["cited_off_label"], issued=final["issued"],
         first_grounded=initial["grounded"], reads=len(first + extra),
         skipped_when_full=EXTRA if early_stop else 0,
@@ -60,6 +60,9 @@ def replay(catalog, topic, pair, visible, cutoff, arm):
         outside_pool=len(set(extra) - set(original)),
         elapsed_ms=elapsed_ms,
     )
+    if include_witnesses:
+        result.update(first_witnesses=initial["witnesses"], witnesses=final["witnesses"])
+    return result
 
 
 def summarize(all_rows):
