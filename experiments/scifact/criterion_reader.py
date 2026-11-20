@@ -13,7 +13,6 @@ import torch
 
 from experiments.followir.core17_reranking import digest, write_json
 from experiments.qasper.paired_reader import load_reader
-from experiments.scifact.criterion_verifier_calibration import ARCHIVE, LABELS, calibrate, counts, prepare, read_jsonl
 
 
 SYSTEM = (
@@ -54,6 +53,8 @@ def measure(tokenizer, reader, rows):
 
 
 def run(archive_path, checkpoint, output, private_input=None, private_output=None):
+    from experiments.scifact.criterion_verifier_calibration import ARCHIVE, LABELS, calibrate, counts, prepare, read_jsonl
+
     if (output.exists() or not os.environ.get("SLURM_JOB_ID") or not torch.cuda.is_available()
             or (private_input is None) != (private_output is None)
             or (private_output is not None and private_output.exists())):

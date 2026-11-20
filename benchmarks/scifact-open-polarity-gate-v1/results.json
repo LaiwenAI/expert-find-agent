@@ -1,0 +1,246 @@
+{
+  "reports": {
+    "separate_binary": {
+      "cutoff": [
+        6.0625,
+        4.1875
+      ],
+      "calibrated": {
+        "calibration": {
+          "support": {
+            "total": 145,
+            "correct": 12,
+            "opposite": 14
+          },
+          "contradict": {
+            "total": 118,
+            "correct": 12,
+            "opposite": 11
+          },
+          "both": 21,
+          "neither": 235,
+          "only_correct": 3,
+          "only_opposite": 4
+        },
+        "test": {
+          "support": {
+            "total": 102,
+            "correct": 34,
+            "opposite": 39
+          },
+          "contradict": {
+            "total": 93,
+            "correct": 30,
+            "opposite": 25
+          },
+          "both": 59,
+          "neither": 126,
+          "only_correct": 5,
+          "only_opposite": 5
+        }
+      },
+      "zero": {
+        "calibration": {
+          "support": {
+            "total": 145,
+            "correct": 108,
+            "opposite": 88
+          },
+          "contradict": {
+            "total": 118,
+            "correct": 78,
+            "opposite": 88
+          },
+          "both": 166,
+          "neither": 67,
+          "only_correct": 20,
+          "only_opposite": 10
+        },
+        "test": {
+          "support": {
+            "total": 102,
+            "correct": 83,
+            "opposite": 77
+          },
+          "contradict": {
+            "total": 93,
+            "correct": 80,
+            "opposite": 87
+          },
+          "both": 157,
+          "neither": 25,
+          "only_correct": 6,
+          "only_opposite": 7
+        }
+      }
+    },
+    "contrastive_binary": {
+      "cutoff": [
+        1.5,
+        0
+      ],
+      "calibrated": {
+        "calibration": {
+          "support": {
+            "total": 145,
+            "correct": 26,
+            "opposite": 1
+          },
+          "contradict": {
+            "total": 118,
+            "correct": 3,
+            "opposite": 11
+          },
+          "both": 0,
+          "neither": 222,
+          "only_correct": 29,
+          "only_opposite": 12
+        },
+        "test": {
+          "support": {
+            "total": 102,
+            "correct": 28,
+            "opposite": 1
+          },
+          "contradict": {
+            "total": 93,
+            "correct": 4,
+            "opposite": 23
+          },
+          "both": 0,
+          "neither": 139,
+          "only_correct": 32,
+          "only_opposite": 24
+        }
+      },
+      "zero": {
+        "calibration": {
+          "support": {
+            "total": 145,
+            "correct": 142,
+            "opposite": 1
+          },
+          "contradict": {
+            "total": 118,
+            "correct": 3,
+            "opposite": 115
+          },
+          "both": 0,
+          "neither": 2,
+          "only_correct": 145,
+          "only_opposite": 116
+        },
+        "test": {
+          "support": {
+            "total": 102,
+            "correct": 100,
+            "opposite": 1
+          },
+          "contradict": {
+            "total": 93,
+            "correct": 4,
+            "opposite": 88
+          },
+          "both": 0,
+          "neither": 2,
+          "only_correct": 104,
+          "only_opposite": 89
+        }
+      }
+    },
+    "ternary_reader": {
+      "cutoff": [
+        0,
+        6.25
+      ],
+      "calibrated": {
+        "calibration": {
+          "support": {
+            "total": 145,
+            "correct": 87,
+            "opposite": 11
+          },
+          "contradict": {
+            "total": 118,
+            "correct": 92,
+            "opposite": 6
+          },
+          "both": 0,
+          "neither": 67,
+          "only_correct": 179,
+          "only_opposite": 17
+        },
+        "test": {
+          "support": {
+            "total": 102,
+            "correct": 44,
+            "opposite": 16
+          },
+          "contradict": {
+            "total": 93,
+            "correct": 55,
+            "opposite": 7
+          },
+          "both": 0,
+          "neither": 73,
+          "only_correct": 99,
+          "only_opposite": 23
+        }
+      },
+      "zero": {
+        "calibration": {
+          "support": {
+            "total": 145,
+            "correct": 87,
+            "opposite": 42
+          },
+          "contradict": {
+            "total": 118,
+            "correct": 106,
+            "opposite": 6
+          },
+          "both": 0,
+          "neither": 22,
+          "only_correct": 193,
+          "only_opposite": 48
+        },
+        "test": {
+          "support": {
+            "total": 102,
+            "correct": 44,
+            "opposite": 37
+          },
+          "contradict": {
+            "total": 93,
+            "correct": 73,
+            "opposite": 7
+          },
+          "both": 0,
+          "neither": 34,
+          "only_correct": 117,
+          "only_opposite": 44
+        }
+      }
+    }
+  },
+  "binary_clipped": {
+    "calibration": 0,
+    "test": 0
+  },
+  "claim_counts": {
+    "calibration": 45,
+    "test": 160
+  },
+  "excluded_shared_doc_pairs": 2,
+  "projection_sha256": "ae101d0c72063f62267ea41b64dd9533714eef4d12beec7119e636a6e891decb",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "reranker_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+  "chat_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+  "script_sha256": "29f0cfdb6c8d9d7e8d6f0f9c3ff9e4a45dbb6e399e126d7063b0fc10599b3db4",
+  "slurm_array": 44728,
+  "node": "ws5",
+  "order_offsets": [
+    0,
+    1
+  ]
+}
