@@ -1,0 +1,320 @@
+{
+  "routing": {
+    "0.25": {
+      "hash_control": {
+        "expensive_items": 48,
+        "measurements": {
+          "support": {
+            "total": 102,
+            "correct": 35,
+            "opposite": 6
+          },
+          "contradict": {
+            "total": 93,
+            "correct": 17,
+            "opposite": 19
+          },
+          "both": 0,
+          "neither": 118,
+          "only_correct": 52,
+          "only_opposite": 25
+        }
+      },
+      "uncertainty": {
+        "expensive_items": 48,
+        "measurements": {
+          "support": {
+            "total": 102,
+            "correct": 34,
+            "opposite": 6
+          },
+          "contradict": {
+            "total": 93,
+            "correct": 16,
+            "opposite": 24
+          },
+          "both": 0,
+          "neither": 115,
+          "only_correct": 50,
+          "only_opposite": 30
+        }
+      },
+      "dual_confidence": {
+        "expensive_items": 48,
+        "measurements": {
+          "support": {
+            "total": 102,
+            "correct": 31,
+            "opposite": 5
+          },
+          "contradict": {
+            "total": 93,
+            "correct": 19,
+            "opposite": 17
+          },
+          "both": 0,
+          "neither": 123,
+          "only_correct": 50,
+          "only_opposite": 22
+        }
+      },
+      "learned_value": {
+        "expensive_items": 48,
+        "measurements": {
+          "support": {
+            "total": 102,
+            "correct": 34,
+            "opposite": 6
+          },
+          "contradict": {
+            "total": 93,
+            "correct": 13,
+            "opposite": 23
+          },
+          "both": 0,
+          "neither": 119,
+          "only_correct": 47,
+          "only_opposite": 29
+        }
+      }
+    },
+    "0.5": {
+      "hash_control": {
+        "expensive_items": 97,
+        "measurements": {
+          "support": {
+            "total": 102,
+            "correct": 37,
+            "opposite": 10
+          },
+          "contradict": {
+            "total": 93,
+            "correct": 29,
+            "opposite": 17
+          },
+          "both": 0,
+          "neither": 102,
+          "only_correct": 66,
+          "only_opposite": 27
+        }
+      },
+      "uncertainty": {
+        "expensive_items": 97,
+        "measurements": {
+          "support": {
+            "total": 102,
+            "correct": 41,
+            "opposite": 10
+          },
+          "contradict": {
+            "total": 93,
+            "correct": 27,
+            "opposite": 25
+          },
+          "both": 0,
+          "neither": 92,
+          "only_correct": 68,
+          "only_opposite": 35
+        }
+      },
+      "dual_confidence": {
+        "expensive_items": 97,
+        "measurements": {
+          "support": {
+            "total": 102,
+            "correct": 31,
+            "opposite": 7
+          },
+          "contradict": {
+            "total": 93,
+            "correct": 36,
+            "opposite": 8
+          },
+          "both": 0,
+          "neither": 113,
+          "only_correct": 67,
+          "only_opposite": 15
+        }
+      },
+      "learned_value": {
+        "expensive_items": 97,
+        "measurements": {
+          "support": {
+            "total": 102,
+            "correct": 40,
+            "opposite": 11
+          },
+          "contradict": {
+            "total": 93,
+            "correct": 27,
+            "opposite": 25
+          },
+          "both": 0,
+          "neither": 92,
+          "only_correct": 67,
+          "only_opposite": 36
+        }
+      }
+    }
+  },
+  "live": {
+    "all_small": {
+      "calls": 0,
+      "decisions": {
+        "support": {
+          "total": 102,
+          "correct": 28,
+          "opposite": 1
+        },
+        "contradict": {
+          "total": 93,
+          "correct": 4,
+          "opposite": 23
+        },
+        "both": 0,
+        "neither": 139,
+        "only_correct": 32,
+        "only_opposite": 24
+      },
+      "changed_rows": 0
+    },
+    "all_large": {
+      "calls": 195,
+      "decisions": {
+        "support": {
+          "total": 102,
+          "correct": 44,
+          "opposite": 16
+        },
+        "contradict": {
+          "total": 93,
+          "correct": 55,
+          "opposite": 7
+        },
+        "both": 0,
+        "neither": 73,
+        "only_correct": 99,
+        "only_opposite": 23
+      },
+      "changed_rows": 0
+    },
+    "uncertainty": {
+      "calls": 97,
+      "decisions": {
+        "support": {
+          "total": 102,
+          "correct": 41,
+          "opposite": 10
+        },
+        "contradict": {
+          "total": 93,
+          "correct": 27,
+          "opposite": 25
+        },
+        "both": 0,
+        "neither": 92,
+        "only_correct": 68,
+        "only_opposite": 35
+      },
+      "changed_rows": 0
+    },
+    "learned_value": {
+      "calls": 97,
+      "decisions": {
+        "support": {
+          "total": 102,
+          "correct": 40,
+          "opposite": 11
+        },
+        "contradict": {
+          "total": 93,
+          "correct": 27,
+          "opposite": 25
+        },
+        "both": 0,
+        "neither": 92,
+        "only_correct": 67,
+        "only_opposite": 36
+      },
+      "changed_rows": 0
+    },
+    "dual_confidence": {
+      "calls": 97,
+      "decisions": {
+        "support": {
+          "total": 102,
+          "correct": 29,
+          "opposite": 7
+        },
+        "contradict": {
+          "total": 93,
+          "correct": 36,
+          "opposite": 8
+        },
+        "both": 0,
+        "neither": 115,
+        "only_correct": 65,
+        "only_opposite": 15
+      },
+      "changed_rows": 2
+    }
+  },
+  "batch_size": 16,
+  "ridge": 0.1,
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "provenance_sha256": "627582936a218a2cedc5e180956fdce71f3b68bbd181317d8af934fc81a51de0",
+  "script_sha256": "a7606c1aa682d419712daf8ed231886b1d4be63c550583d6d28955ff53f27f49",
+  "projection_sha256": "ae101d0c72063f62267ea41b64dd9533714eef4d12beec7119e636a6e891decb",
+  "slurm_array": 44739,
+  "node": "ws5",
+  "replicates": [
+    {
+      "all_small": {
+        "batch_p95_ms": 196.01385667920113,
+        "batch_median_ms": 176.87747441232204
+      },
+      "all_large": {
+        "batch_p95_ms": 655.2838884294033,
+        "batch_median_ms": 552.923396229744
+      },
+      "uncertainty": {
+        "batch_p95_ms": 502.40823663771147,
+        "batch_median_ms": 442.96850450336933
+      },
+      "learned_value": {
+        "batch_p95_ms": 502.53973789513105,
+        "batch_median_ms": 434.14164893329144
+      },
+      "dual_confidence": {
+        "batch_p95_ms": 474.1269737482071,
+        "batch_median_ms": 427.0860180258751
+      }
+    },
+    {
+      "dual_confidence": {
+        "batch_p95_ms": 473.1001541018486,
+        "batch_median_ms": 426.1703994125128
+      },
+      "learned_value": {
+        "batch_p95_ms": 502.6691704988479,
+        "batch_median_ms": 433.4563594311476
+      },
+      "uncertainty": {
+        "batch_p95_ms": 502.46924050152296,
+        "batch_median_ms": 443.2947188615799
+      },
+      "all_large": {
+        "batch_p95_ms": 656.1083316802979,
+        "batch_median_ms": 553.2600376754999
+      },
+      "all_small": {
+        "batch_p95_ms": 196.40308283269405,
+        "batch_median_ms": 177.47440934181213
+      }
+    }
+  ],
+  "order_offsets": [
+    0,
+    1
+  ]
+}
