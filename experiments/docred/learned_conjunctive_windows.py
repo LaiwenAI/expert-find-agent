@@ -25,11 +25,29 @@ ASSIGNMENTS = np.array([
 CLAIMS = np.arange(4)
 
 
+def role_at(case, claim):
+    return case["roles"][claim] if "roles" in case else case["role"]
+
+
+def lexical_features(case):
+    if "roles" not in case:
+        return base.features(case)
+    parts = {role: base.features(dict(case, role=role)) for role in dict.fromkeys(case["roles"])}
+    group = np.column_stack((
+        parts[case["roles"][0]][0][:, :-1],
+        *(part[0][:, -1] / len(parts) for part in parts.values()),
+    ))
+    scope = np.column_stack([parts[role][1][:, i] for i, role in enumerate(case["roles"])])
+    return group, scope
+
+
 def pair_features(case):
     words, _, idf = names.profile(case["sentences"])
     left, right = np.triu_indices(len(words), 1)
-    role = names.tokens(names.ROLE_CUES[case["role"]])
-    cue = np.array([names.coverage(role, row, idf) for row in words])
+    roles = {role_at(case, i) for i in CLAIMS}
+    tokens_by_role = {role: names.tokens(names.ROLE_CUES[role]) for role in roles}
+    cues = {role: np.array([names.coverage(tokens, row, idf) for row in words])
+            for role, tokens in tokens_by_role.items()}
     entities = {}
     for name in dict.fromkeys(name for pair in case["names"] for name in pair):
         tokens = tuple(names.tokens(name))
@@ -39,6 +57,7 @@ def pair_features(case):
         ])
     features = []
     for i, (work, owner) in enumerate(case["names"]):
+        cue = cues[role_at(case, i)]
         other_owner = case["names"][i ^ 1][1]
         other_work = case["names"][i ^ 2][0]
         a, b = entities[work], entities[owner]
@@ -58,7 +77,7 @@ def pair_features(case):
     return left, right, np.stack(features, axis=-1)
 
 
-def fit(release, panels):
+def fit(release, panels, case_builder=base.cases):
     blocked = {row["doc"] for rows in panels.values() for row in rows}
     train = json.loads((release / "train_revised.json").read_bytes())
     for split in ("dev", "test"):
@@ -67,9 +86,9 @@ def fit(release, panels):
     target = None
     used = set()
     examples = 0
-    for case in base.cases(row for row in train if row["title"] not in blocked):
+    for case in case_builder(row for row in train if row["title"] not in blocked):
         left, right, inputs = pair_features(case)
-        _, scope = base.features(case)
+        _, scope = lexical_features(case)
         lexical = np.maximum(scope[left], scope[right])
         for claim, gold in enumerate(case["annotated"]):
             if not 0 < len(gold) <= 2:
@@ -122,7 +141,7 @@ def choose(scores, left, right, reference, conjunction):
 
 
 def candidate_windows(case, weights, arm):
-    group, scope = base.features(case)
+    group, scope = lexical_features(case)
     reference = base.choose_windows(group, scope, "global_names")
     if arm == "global_names":
         return base.assign_windows(scope, reference)
@@ -135,12 +154,12 @@ def candidate_windows(case, weights, arm):
     return choose(scores, left, right, reference, arm == "learned_conjunction")
 
 
-def collect(panel, weights, read, offset):
+def collect(panel, weights, read, offset, *, arms=ARMS):
     outcomes = []
     for i, case in enumerate(panel):
         rows = {}
-        shift = (offset + i) % len(ARMS)
-        for arm in ARMS[shift:] + ARMS[:shift]:
+        shift = (offset + i) % len(arms)
+        for arm in arms[shift:] + arms[:shift]:
             start = perf_counter()
             selected = candidate_windows(case, weights, arm)
             selection_ms = (perf_counter() - start) * 1000
@@ -155,9 +174,9 @@ def collect(panel, weights, read, offset):
             if read is not None:
                 start = perf_counter()
                 scores, clipped = read([
-                    (f"Does the source explicitly say that {person} had the role of {names.ROLES[case['role']]} "
+                    (f"Does the source explicitly say that {person} had the role of {names.ROLES[role_at(case, claim)]} "
                      f"on the work {work}?", text)
-                    for (work, person), text in zip(case["names"], snippets, strict=True)
+                    for claim, ((work, person), text) in enumerate(zip(case["names"], snippets, strict=True))
                 ])
                 if clipped or not np.isfinite(scores).all():
                     raise ValueError("Invalid reader result")
