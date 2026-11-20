@@ -1,0 +1,2301 @@
+{
+  "qrels": {
+    "ent06.qrels.expert": "b9a0fe026b2fb06273d8f30e6a5cc77a4fef8ed68babe8dc7f3e3a91a192b12d",
+    "ent06.qrels.expert-docs": "a31c82f786475dc17e88dcf2af8cad4528400a9bbbf5710f6ad2724000ac6e29"
+  },
+  "code_sha256": "0822be957838367b8689f54a7f3ef9255a5e4b4b62bc1557275aeefaada8f9f2",
+  "trials_per_topic": 32,
+  "scopes": [
+    5,
+    10,
+    20
+  ],
+  "caps": [
+    2,
+    4
+  ],
+  "verifiers": {
+    "exact": [
+      1,
+      0,
+      false
+    ],
+    "independent": [
+      0.9,
+      0.05,
+      false
+    ],
+    "shared_document": [
+      0.9,
+      0.05,
+      true
+    ]
+  },
+  "report": {
+    "prior": {
+      "exact": {
+        "topics": 49,
+        "trials": 1568,
+        "initial": {
+          "issued": 628,
+          "grounded": 559,
+          "adverse": 69,
+          "outside_grounded": 0,
+          "checked": 7040,
+          "documents": 6544
+        },
+        "abstentions": 1167,
+        "per_cap": {
+          "2": {
+            "5": {
+              "issued": 47,
+              "grounded": 15,
+              "adverse": 32,
+              "outside_grounded": 0,
+              "checked": 2142,
+              "documents": 2046,
+              "rescued_requests": 47,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 1071,
+              "matched_grounded_totals": [
+                15,
+                15
+              ],
+              "mean_checks_per_abstention": 1.8354755784061696
+            },
+            "10": {
+              "issued": 119,
+              "grounded": 119,
+              "adverse": 0,
+              "outside_grounded": 111,
+              "checked": 2142,
+              "documents": 2078,
+              "rescued_requests": 79,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.013265306122448983,
+                  "percentile_95": [
+                    0.0,
+                    0.0336734693877551
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": -0.004081632653061225,
+                  "percentile_95": [
+                    -0.012244897959183675,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 1071,
+              "matched_grounded_totals": [
+                119,
+                15
+              ],
+              "mean_checks_per_abstention": 1.8354755784061696
+            },
+            "20": {
+              "issued": 184,
+              "grounded": 184,
+              "adverse": 0,
+              "outside_grounded": 179,
+              "checked": 2270,
+              "documents": 2142,
+              "rescued_requests": 175,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.021556122448979594,
+                  "percentile_95": [
+                    0.005229591836734694,
+                    0.03903061224489796
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": -0.004081632653061225,
+                  "percentile_95": [
+                    -0.012244897959183675,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 1071,
+              "matched_grounded_totals": [
+                120,
+                15
+              ],
+              "mean_checks_per_abstention": 1.9451585261353899
+            }
+          },
+          "4": {
+            "5": {
+              "issued": 47,
+              "grounded": 15,
+              "adverse": 32,
+              "outside_grounded": 0,
+              "checked": 4284,
+              "documents": 3964,
+              "rescued_requests": 47,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 1071,
+              "matched_grounded_totals": [
+                15,
+                15
+              ],
+              "mean_checks_per_abstention": 3.670951156812339
+            },
+            "10": {
+              "issued": 190,
+              "grounded": 158,
+              "adverse": 32,
+              "outside_grounded": 143,
+              "checked": 4284,
+              "documents": 3955,
+              "rescued_requests": 111,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.018239795918367347,
+                  "percentile_95": [
+                    0.001913265306122449,
+                    0.04056122448979592
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 1071,
+              "matched_grounded_totals": [
+                158,
+                15
+              ],
+              "mean_checks_per_abstention": 3.670951156812339
+            },
+            "20": {
+              "issued": 244,
+              "grounded": 244,
+              "adverse": 0,
+              "outside_grounded": 231,
+              "checked": 4540,
+              "documents": 4080,
+              "rescued_requests": 175,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.02920918367346939,
+                  "percentile_95": [
+                    0.00816326530612245,
+                    0.056377551020408166
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": -0.004081632653061225,
+                  "percentile_95": [
+                    -0.012244897959183675,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 1071,
+              "matched_grounded_totals": [
+                180,
+                15
+              ],
+              "mean_checks_per_abstention": 3.8903170522707797
+            }
+          }
+        },
+        "rescue_opportunity": {
+          "5": 623,
+          "10": 847,
+          "20": 1071
+        },
+        "additional_scope_opportunity": {
+          "5": 0,
+          "10": 224,
+          "20": 448
+        }
+      },
+      "independent": {
+        "topics": 49,
+        "trials": 1568,
+        "initial": {
+          "issued": 907,
+          "grounded": 512,
+          "adverse": 395,
+          "outside_grounded": 0,
+          "checked": 7040,
+          "documents": 6544
+        },
+        "abstentions": 931,
+        "per_cap": {
+          "2": {
+            "5": {
+              "issued": 120,
+              "grounded": 18,
+              "adverse": 102,
+              "outside_grounded": 0,
+              "checked": 1672,
+              "documents": 1597,
+              "rescued_requests": 118,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 836,
+              "matched_grounded_totals": [
+                18,
+                18
+              ],
+              "mean_checks_per_abstention": 1.7959183673469388
+            },
+            "10": {
+              "issued": 176,
+              "grounded": 87,
+              "adverse": 89,
+              "outside_grounded": 78,
+              "checked": 1672,
+              "documents": 1622,
+              "rescued_requests": 144,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.008801020408163267,
+                  "percentile_95": [
+                    0.00012755102040816328,
+                    0.022704081632653063
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": -0.001658163265306122,
+                  "percentile_95": [
+                    -0.008290816326530613,
+                    0.0034438775510204083
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 836,
+              "matched_grounded_totals": [
+                87,
+                18
+              ],
+              "mean_checks_per_abstention": 1.7959183673469388
+            },
+            "20": {
+              "issued": 232,
+              "grounded": 153,
+              "adverse": 79,
+              "outside_grounded": 148,
+              "checked": 1798,
+              "documents": 1692,
+              "rescued_requests": 221,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.01721938775510204,
+                  "percentile_95": [
+                    0.004464285714285715,
+                    0.03201530612244898
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": -0.002933673469387756,
+                  "percentile_95": [
+                    -0.009183673469387756,
+                    0.001913265306122449
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 836,
+              "matched_grounded_totals": [
+                90,
+                18
+              ],
+              "mean_checks_per_abstention": 1.9312567132116005
+            }
+          },
+          "4": {
+            "5": {
+              "issued": 189,
+              "grounded": 20,
+              "adverse": 169,
+              "outside_grounded": 0,
+              "checked": 3344,
+              "documents": 3099,
+              "rescued_requests": 182,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 836,
+              "matched_grounded_totals": [
+                20,
+                20
+              ],
+              "mean_checks_per_abstention": 3.5918367346938775
+            },
+            "10": {
+              "issued": 299,
+              "grounded": 116,
+              "adverse": 183,
+              "outside_grounded": 99,
+              "checked": 3344,
+              "documents": 3096,
+              "rescued_requests": 238,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.012244897959183675,
+                  "percentile_95": [
+                    0.0016581632653061228,
+                    0.026785714285714284
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": 0.0017857142857142857,
+                  "percentile_95": [
+                    -0.0029336734693877547,
+                    0.00625
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 836,
+              "matched_grounded_totals": [
+                116,
+                20
+              ],
+              "mean_checks_per_abstention": 3.5918367346938775
+            },
+            "20": {
+              "issued": 372,
+              "grounded": 206,
+              "adverse": 166,
+              "outside_grounded": 191,
+              "checked": 3596,
+              "documents": 3226,
+              "rescued_requests": 292,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.02372448979591837,
+                  "percentile_95": [
+                    0.006501913265306125,
+                    0.04502551020408163
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": -0.00038265306122448983,
+                  "percentile_95": [
+                    -0.0068877551020408165,
+                    0.005357142857142857
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 836,
+              "matched_grounded_totals": [
+                143,
+                20
+              ],
+              "mean_checks_per_abstention": 3.862513426423201
+            }
+          }
+        },
+        "rescue_opportunity": {
+          "5": 488,
+          "10": 668,
+          "20": 852
+        },
+        "additional_scope_opportunity": {
+          "5": 0,
+          "10": 180,
+          "20": 364
+        }
+      },
+      "shared_document": {
+        "topics": 49,
+        "trials": 1568,
+        "initial": {
+          "issued": 892,
+          "grounded": 512,
+          "adverse": 380,
+          "outside_grounded": 0,
+          "checked": 7040,
+          "documents": 6544
+        },
+        "abstentions": 970,
+        "per_cap": {
+          "2": {
+            "5": {
+              "issued": 126,
+              "grounded": 19,
+              "adverse": 107,
+              "outside_grounded": 0,
+              "checked": 1754,
+              "documents": 1668,
+              "rescued_requests": 120,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 877,
+              "matched_grounded_totals": [
+                19,
+                19
+              ],
+              "mean_checks_per_abstention": 1.8082474226804124
+            },
+            "10": {
+              "issued": 193,
+              "grounded": 105,
+              "adverse": 88,
+              "outside_grounded": 97,
+              "checked": 1754,
+              "documents": 1694,
+              "rescued_requests": 156,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.01096938775510204,
+                  "percentile_95": [
+                    -0.00012755102040816328,
+                    0.027551020408163266
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": -0.0024234693877551025,
+                  "percentile_95": [
+                    -0.009438775510204084,
+                    0.002295918367346939
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 877,
+              "matched_grounded_totals": [
+                105,
+                19
+              ],
+              "mean_checks_per_abstention": 1.8082474226804124
+            },
+            "20": {
+              "issued": 214,
+              "grounded": 161,
+              "adverse": 53,
+              "outside_grounded": 156,
+              "checked": 1876,
+              "documents": 1762,
+              "rescued_requests": 200,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.018112244897959186,
+                  "percentile_95": [
+                    0.004464285714285714,
+                    0.03354591836734694
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": -0.0068877551020408165,
+                  "percentile_95": [
+                    -0.013778698979591837,
+                    -0.0016581632653061228
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 877,
+              "matched_grounded_totals": [
+                103,
+                19
+              ],
+              "mean_checks_per_abstention": 1.934020618556701
+            }
+          },
+          "4": {
+            "5": {
+              "issued": 208,
+              "grounded": 21,
+              "adverse": 187,
+              "outside_grounded": 0,
+              "checked": 3508,
+              "documents": 3240,
+              "rescued_requests": 185,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 877,
+              "matched_grounded_totals": [
+                21,
+                21
+              ],
+              "mean_checks_per_abstention": 3.6164948453608248
+            },
+            "10": {
+              "issued": 313,
+              "grounded": 139,
+              "adverse": 174,
+              "outside_grounded": 121,
+              "checked": 3508,
+              "documents": 3225,
+              "rescued_requests": 235,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.015051020408163265,
+                  "percentile_95": [
+                    0.0020408163265306124,
+                    0.03252869897959179
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": -0.0016581632653061226,
+                  "percentile_95": [
+                    -0.00510204081632653,
+                    0.0017857142857142859
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 877,
+              "matched_grounded_totals": [
+                139,
+                21
+              ],
+              "mean_checks_per_abstention": 3.6164948453608248
+            },
+            "20": {
+              "issued": 346,
+              "grounded": 218,
+              "adverse": 128,
+              "outside_grounded": 203,
+              "checked": 3752,
+              "documents": 3362,
+              "rescued_requests": 258,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.025127551020408163,
+                  "percentile_95": [
+                    0.007270408163265307,
+                    0.04706632653061224
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": -0.007525510204081634,
+                  "percentile_95": [
+                    -0.014795918367346941,
+                    -0.002168367346938776
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 877,
+              "matched_grounded_totals": [
+                157,
+                21
+              ],
+              "mean_checks_per_abstention": 3.868041237113402
+            }
+          }
+        },
+        "rescue_opportunity": {
+          "5": 523,
+          "10": 702,
+          "20": 886
+        },
+        "additional_scope_opportunity": {
+          "5": 0,
+          "10": 179,
+          "20": 363
+        }
+      }
+    },
+    "prior_distinct": {
+      "exact": {
+        "topics": 49,
+        "trials": 1568,
+        "initial": {
+          "issued": 628,
+          "grounded": 559,
+          "adverse": 69,
+          "outside_grounded": 0,
+          "checked": 7040,
+          "documents": 6544
+        },
+        "abstentions": 1167,
+        "per_cap": {
+          "2": {
+            "5": {
+              "issued": 32,
+              "grounded": 32,
+              "adverse": 0,
+              "outside_grounded": 0,
+              "checked": 2142,
+              "documents": 2046,
+              "rescued_requests": 32,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 1071,
+              "matched_grounded_totals": [
+                32,
+                32
+              ],
+              "mean_checks_per_abstention": 1.8354755784061696
+            },
+            "10": {
+              "issued": 151,
+              "grounded": 151,
+              "adverse": 0,
+              "outside_grounded": 143,
+              "checked": 2142,
+              "documents": 2078,
+              "rescued_requests": 111,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.015178571428571432,
+                  "percentile_95": [
+                    -0.002168367346938776,
+                    0.037500000000000006
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 1071,
+              "matched_grounded_totals": [
+                151,
+                32
+              ],
+              "mean_checks_per_abstention": 1.8354755784061696
+            },
+            "20": {
+              "issued": 184,
+              "grounded": 184,
+              "adverse": 0,
+              "outside_grounded": 179,
+              "checked": 2270,
+              "documents": 2142,
+              "rescued_requests": 175,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.019387755102040816,
+                  "percentile_95": [
+                    0.003061224489795918,
+                    0.03788265306122449
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 1071,
+              "matched_grounded_totals": [
+                120,
+                32
+              ],
+              "mean_checks_per_abstention": 1.9451585261353899
+            }
+          },
+          "4": {
+            "5": {
+              "issued": 64,
+              "grounded": 32,
+              "adverse": 32,
+              "outside_grounded": 0,
+              "checked": 4284,
+              "documents": 4124,
+              "rescued_requests": 64,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 1071,
+              "matched_grounded_totals": [
+                32,
+                32
+              ],
+              "mean_checks_per_abstention": 3.670951156812339
+            },
+            "10": {
+              "issued": 222,
+              "grounded": 222,
+              "adverse": 0,
+              "outside_grounded": 207,
+              "checked": 4284,
+              "documents": 4075,
+              "rescued_requests": 143,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.024234693877551026,
+                  "percentile_95": [
+                    0.0016581632653061222,
+                    0.05089285714285715
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": -0.004081632653061225,
+                  "percentile_95": [
+                    -0.012244897959183675,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 1071,
+              "matched_grounded_totals": [
+                222,
+                32
+              ],
+              "mean_checks_per_abstention": 3.670951156812339
+            },
+            "20": {
+              "issued": 304,
+              "grounded": 304,
+              "adverse": 0,
+              "outside_grounded": 296,
+              "checked": 4540,
+              "documents": 4089,
+              "rescued_requests": 207,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.034693877551020415,
+                  "percentile_95": [
+                    0.00816326530612245,
+                    0.0673469387755102
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": -0.004081632653061225,
+                  "percentile_95": [
+                    -0.012244897959183675,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 1071,
+              "matched_grounded_totals": [
+                240,
+                32
+              ],
+              "mean_checks_per_abstention": 3.8903170522707797
+            }
+          }
+        },
+        "rescue_opportunity": {
+          "5": 623,
+          "10": 847,
+          "20": 1071
+        },
+        "additional_scope_opportunity": {
+          "5": 0,
+          "10": 224,
+          "20": 448
+        }
+      },
+      "independent": {
+        "topics": 49,
+        "trials": 1568,
+        "initial": {
+          "issued": 907,
+          "grounded": 512,
+          "adverse": 395,
+          "outside_grounded": 0,
+          "checked": 7040,
+          "documents": 6544
+        },
+        "abstentions": 931,
+        "per_cap": {
+          "2": {
+            "5": {
+              "issued": 115,
+              "grounded": 29,
+              "adverse": 86,
+              "outside_grounded": 0,
+              "checked": 1672,
+              "documents": 1597,
+              "rescued_requests": 112,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 836,
+              "matched_grounded_totals": [
+                29,
+                29
+              ],
+              "mean_checks_per_abstention": 1.7959183673469388
+            },
+            "10": {
+              "issued": 198,
+              "grounded": 106,
+              "adverse": 92,
+              "outside_grounded": 97,
+              "checked": 1672,
+              "documents": 1622,
+              "rescued_requests": 165,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.009821428571428573,
+                  "percentile_95": [
+                    -0.0010204081632653062,
+                    0.024620535714285668
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": 0.0007653061224489794,
+                  "percentile_95": [
+                    -0.0026785714285714286,
+                    0.004081632653061225
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 836,
+              "matched_grounded_totals": [
+                106,
+                29
+              ],
+              "mean_checks_per_abstention": 1.7959183673469388
+            },
+            "20": {
+              "issued": 237,
+              "grounded": 153,
+              "adverse": 84,
+              "outside_grounded": 148,
+              "checked": 1798,
+              "documents": 1692,
+              "rescued_requests": 225,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.015816326530612244,
+                  "percentile_95": [
+                    0.0026785714285714286,
+                    0.030867346938775513
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": -0.0002551020408163266,
+                  "percentile_95": [
+                    -0.003954081632653061,
+                    0.0033163265306122456
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 836,
+              "matched_grounded_totals": [
+                90,
+                29
+              ],
+              "mean_checks_per_abstention": 1.9312567132116005
+            }
+          },
+          "4": {
+            "5": {
+              "issued": 216,
+              "grounded": 32,
+              "adverse": 184,
+              "outside_grounded": 0,
+              "checked": 3344,
+              "documents": 3222,
+              "rescued_requests": 198,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 836,
+              "matched_grounded_totals": [
+                32,
+                32
+              ],
+              "mean_checks_per_abstention": 3.5918367346938775
+            },
+            "10": {
+              "issued": 331,
+              "grounded": 165,
+              "adverse": 166,
+              "outside_grounded": 147,
+              "checked": 3344,
+              "documents": 3188,
+              "rescued_requests": 255,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.016964285714285713,
+                  "percentile_95": [
+                    0.001403061224489796,
+                    0.03609693877551021
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": -0.0022959183673469385,
+                  "percentile_95": [
+                    -0.009693877551020408,
+                    0.0035714285714285718
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 836,
+              "matched_grounded_totals": [
+                165,
+                32
+              ],
+              "mean_checks_per_abstention": 3.5918367346938775
+            },
+            "20": {
+              "issued": 416,
+              "grounded": 245,
+              "adverse": 171,
+              "outside_grounded": 236,
+              "checked": 3596,
+              "documents": 3240,
+              "rescued_requests": 324,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.027168367346938775,
+                  "percentile_95": [
+                    0.007270408163265307,
+                    0.05127551020408164
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": -0.0016581632653061226,
+                  "percentile_95": [
+                    -0.008673469387755102,
+                    0.003954081632653062
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 836,
+              "matched_grounded_totals": [
+                182,
+                32
+              ],
+              "mean_checks_per_abstention": 3.862513426423201
+            }
+          }
+        },
+        "rescue_opportunity": {
+          "5": 488,
+          "10": 668,
+          "20": 852
+        },
+        "additional_scope_opportunity": {
+          "5": 0,
+          "10": 180,
+          "20": 364
+        }
+      },
+      "shared_document": {
+        "topics": 49,
+        "trials": 1568,
+        "initial": {
+          "issued": 892,
+          "grounded": 512,
+          "adverse": 380,
+          "outside_grounded": 0,
+          "checked": 7040,
+          "documents": 6544
+        },
+        "abstentions": 970,
+        "per_cap": {
+          "2": {
+            "5": {
+              "issued": 110,
+              "grounded": 28,
+              "adverse": 82,
+              "outside_grounded": 0,
+              "checked": 1754,
+              "documents": 1668,
+              "rescued_requests": 104,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 877,
+              "matched_grounded_totals": [
+                28,
+                28
+              ],
+              "mean_checks_per_abstention": 1.8082474226804124
+            },
+            "10": {
+              "issued": 215,
+              "grounded": 129,
+              "adverse": 86,
+              "outside_grounded": 120,
+              "checked": 1754,
+              "documents": 1694,
+              "rescued_requests": 175,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.012882653061224492,
+                  "percentile_95": [
+                    -0.0002551020408163266,
+                    0.030484693877551018
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": 0.0005102040816326532,
+                  "percentile_95": [
+                    -0.0021683673469387755,
+                    0.003188775510204082
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 877,
+              "matched_grounded_totals": [
+                129,
+                28
+              ],
+              "mean_checks_per_abstention": 1.8082474226804124
+            },
+            "20": {
+              "issued": 223,
+              "grounded": 161,
+              "adverse": 62,
+              "outside_grounded": 156,
+              "checked": 1876,
+              "documents": 1762,
+              "rescued_requests": 208,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.016964285714285716,
+                  "percentile_95": [
+                    0.003188775510204082,
+                    0.0326530612244898
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": -0.002551020408163265,
+                  "percentile_95": [
+                    -0.005739795918367347,
+                    0.00038265306122448983
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 877,
+              "matched_grounded_totals": [
+                103,
+                28
+              ],
+              "mean_checks_per_abstention": 1.934020618556701
+            }
+          },
+          "4": {
+            "5": {
+              "issued": 223,
+              "grounded": 31,
+              "adverse": 192,
+              "outside_grounded": 0,
+              "checked": 3508,
+              "documents": 3364,
+              "rescued_requests": 201,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 877,
+              "matched_grounded_totals": [
+                31,
+                31
+              ],
+              "mean_checks_per_abstention": 3.6164948453608248
+            },
+            "10": {
+              "issued": 347,
+              "grounded": 185,
+              "adverse": 162,
+              "outside_grounded": 166,
+              "checked": 3508,
+              "documents": 3318,
+              "rescued_requests": 265,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.019642857142857142,
+                  "percentile_95": [
+                    0.002551020408163266,
+                    0.04069196428571425
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": -0.003826530612244899,
+                  "percentile_95": [
+                    -0.012372448979591838,
+                    0.002551020408163265
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 877,
+              "matched_grounded_totals": [
+                185,
+                31
+              ],
+              "mean_checks_per_abstention": 3.6164948453608248
+            },
+            "20": {
+              "issued": 415,
+              "grounded": 262,
+              "adverse": 153,
+              "outside_grounded": 250,
+              "checked": 3752,
+              "documents": 3373,
+              "rescued_requests": 302,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.02946428571428572,
+                  "percentile_95": [
+                    0.008673469387755104,
+                    0.05433992346938771
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": -0.004974489795918368,
+                  "percentile_95": [
+                    -0.012627551020408165,
+                    0.0010204081632653064
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 877,
+              "matched_grounded_totals": [
+                201,
+                31
+              ],
+              "mean_checks_per_abstention": 3.868041237113402
+            }
+          }
+        },
+        "rescue_opportunity": {
+          "5": 523,
+          "10": 702,
+          "20": 886
+        },
+        "additional_scope_opportunity": {
+          "5": 0,
+          "10": 179,
+          "20": 363
+        }
+      }
+    },
+    "random": {
+      "exact": {
+        "topics": 49,
+        "trials": 1568,
+        "initial": {
+          "issued": 713,
+          "grounded": 650,
+          "adverse": 63,
+          "outside_grounded": 0,
+          "checked": 7040,
+          "documents": 7018
+        },
+        "abstentions": 1106,
+        "per_cap": {
+          "2": {
+            "5": {
+              "issued": 107,
+              "grounded": 89,
+              "adverse": 18,
+              "outside_grounded": 0,
+              "checked": 2020,
+              "documents": 2020,
+              "rescued_requests": 101,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 1010,
+              "matched_grounded_totals": [
+                89,
+                89
+              ],
+              "mean_checks_per_abstention": 1.8264014466546112
+            },
+            "10": {
+              "issued": 137,
+              "grounded": 129,
+              "adverse": 8,
+              "outside_grounded": 101,
+              "checked": 2020,
+              "documents": 2020,
+              "rescued_requests": 129,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.00510204081632653,
+                  "percentile_95": [
+                    -0.00012755102040816325,
+                    0.010462372448979546
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": -0.0012755102040816326,
+                  "percentile_95": [
+                    -0.002551020408163265,
+                    -0.00025510204081632655
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 1010,
+              "matched_grounded_totals": [
+                129,
+                89
+              ],
+              "mean_checks_per_abstention": 1.8264014466546112
+            },
+            "20": {
+              "issued": 184,
+              "grounded": 180,
+              "adverse": 4,
+              "outside_grounded": 173,
+              "checked": 2148,
+              "documents": 2145,
+              "rescued_requests": 179,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.011607142857142858,
+                  "percentile_95": [
+                    0.0001275510204081645,
+                    0.025127551020408163
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": -0.0017857142857142857,
+                  "percentile_95": [
+                    -0.0036989795918367352,
+                    -0.0002551020408163265
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 1010,
+              "matched_grounded_totals": [
+                116,
+                89
+              ],
+              "mean_checks_per_abstention": 1.942133815551537
+            }
+          },
+          "4": {
+            "5": {
+              "issued": 195,
+              "grounded": 164,
+              "adverse": 31,
+              "outside_grounded": 0,
+              "checked": 4040,
+              "documents": 4034,
+              "rescued_requests": 177,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 1010,
+              "matched_grounded_totals": [
+                164,
+                164
+              ],
+              "mean_checks_per_abstention": 3.6528028933092225
+            },
+            "10": {
+              "issued": 244,
+              "grounded": 226,
+              "adverse": 18,
+              "outside_grounded": 173,
+              "checked": 4040,
+              "documents": 4034,
+              "rescued_requests": 207,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.007908163265306124,
+                  "percentile_95": [
+                    -0.0007653061224489794,
+                    0.016964285714285716
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": -0.0016581632653061226,
+                  "percentile_95": [
+                    -0.003826530612244898,
+                    0.00012755102040816352
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 1010,
+              "matched_grounded_totals": [
+                226,
+                164
+              ],
+              "mean_checks_per_abstention": 3.6528028933092225
+            },
+            "20": {
+              "issued": 329,
+              "grounded": 310,
+              "adverse": 19,
+              "outside_grounded": 285,
+              "checked": 4296,
+              "documents": 4275,
+              "rescued_requests": 282,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.018622448979591838,
+                  "percentile_95": [
+                    0.003954081632653062,
+                    0.03482142857142857
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": -0.0015306122448979593,
+                  "percentile_95": [
+                    -0.0038265306122448987,
+                    0.0003826530612244898
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 1010,
+              "matched_grounded_totals": [
+                246,
+                164
+              ],
+              "mean_checks_per_abstention": 3.884267631103074
+            }
+          }
+        },
+        "rescue_opportunity": {
+          "5": 541,
+          "10": 786,
+          "20": 1010
+        },
+        "additional_scope_opportunity": {
+          "5": 0,
+          "10": 245,
+          "20": 469
+        }
+      },
+      "independent": {
+        "topics": 49,
+        "trials": 1568,
+        "initial": {
+          "issued": 983,
+          "grounded": 583,
+          "adverse": 400,
+          "outside_grounded": 0,
+          "checked": 7040,
+          "documents": 7018
+        },
+        "abstentions": 900,
+        "per_cap": {
+          "2": {
+            "5": {
+              "issued": 150,
+              "grounded": 68,
+              "adverse": 82,
+              "outside_grounded": 0,
+              "checked": 1610,
+              "documents": 1610,
+              "rescued_requests": 145,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 805,
+              "matched_grounded_totals": [
+                68,
+                68
+              ],
+              "mean_checks_per_abstention": 1.788888888888889
+            },
+            "10": {
+              "issued": 170,
+              "grounded": 94,
+              "adverse": 76,
+              "outside_grounded": 74,
+              "checked": 1610,
+              "documents": 1610,
+              "rescued_requests": 160,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.0033163265306122443,
+                  "percentile_95": [
+                    -0.0007653061224489797,
+                    0.007525510204081633
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": -0.0007653061224489797,
+                  "percentile_95": [
+                    -0.003061224489795918,
+                    0.001403061224489796
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 805,
+              "matched_grounded_totals": [
+                94,
+                68
+              ],
+              "mean_checks_per_abstention": 1.788888888888889
+            },
+            "20": {
+              "issued": 222,
+              "grounded": 144,
+              "adverse": 78,
+              "outside_grounded": 138,
+              "checked": 1736,
+              "documents": 1731,
+              "rescued_requests": 215,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.009693877551020408,
+                  "percentile_95": [
+                    -0.0007653061224489792,
+                    0.022704081632653056
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": -0.0005102040816326531,
+                  "percentile_95": [
+                    -0.0031887755102040817,
+                    0.0021683673469387755
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 805,
+              "matched_grounded_totals": [
+                81,
+                68
+              ],
+              "mean_checks_per_abstention": 1.9288888888888889
+            }
+          },
+          "4": {
+            "5": {
+              "issued": 285,
+              "grounded": 131,
+              "adverse": 154,
+              "outside_grounded": 0,
+              "checked": 3220,
+              "documents": 3216,
+              "rescued_requests": 263,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 805,
+              "matched_grounded_totals": [
+                131,
+                131
+              ],
+              "mean_checks_per_abstention": 3.577777777777778
+            },
+            "10": {
+              "issued": 316,
+              "grounded": 169,
+              "adverse": 147,
+              "outside_grounded": 124,
+              "checked": 3220,
+              "documents": 3215,
+              "rescued_requests": 265,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.004846938775510204,
+                  "percentile_95": [
+                    -0.0020408163265306124,
+                    0.011989795918367347
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": -0.0008928571428571434,
+                  "percentile_95": [
+                    -0.004719387755102041,
+                    0.002551020408163265
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 805,
+              "matched_grounded_totals": [
+                169,
+                131
+              ],
+              "mean_checks_per_abstention": 3.577777777777778
+            },
+            "20": {
+              "issued": 389,
+              "grounded": 247,
+              "adverse": 142,
+              "outside_grounded": 227,
+              "checked": 3472,
+              "documents": 3449,
+              "rescued_requests": 329,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.014795918367346941,
+                  "percentile_95": [
+                    0.002295918367346939,
+                    0.029081632653061226
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": -0.0015306122448979593,
+                  "percentile_95": [
+                    -0.005229591836734694,
+                    0.001913265306122449
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 805,
+              "matched_grounded_totals": [
+                184,
+                131
+              ],
+              "mean_checks_per_abstention": 3.8577777777777778
+            }
+          }
+        },
+        "rescue_opportunity": {
+          "5": 450,
+          "10": 641,
+          "20": 819
+        },
+        "additional_scope_opportunity": {
+          "5": 0,
+          "10": 191,
+          "20": 369
+        }
+      },
+      "shared_document": {
+        "topics": 49,
+        "trials": 1568,
+        "initial": {
+          "issued": 959,
+          "grounded": 579,
+          "adverse": 380,
+          "outside_grounded": 0,
+          "checked": 7040,
+          "documents": 7018
+        },
+        "abstentions": 906,
+        "per_cap": {
+          "2": {
+            "5": {
+              "issued": 168,
+              "grounded": 77,
+              "adverse": 91,
+              "outside_grounded": 0,
+              "checked": 1626,
+              "documents": 1626,
+              "rescued_requests": 158,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 813,
+              "matched_grounded_totals": [
+                77,
+                77
+              ],
+              "mean_checks_per_abstention": 1.794701986754967
+            },
+            "10": {
+              "issued": 164,
+              "grounded": 105,
+              "adverse": 59,
+              "outside_grounded": 81,
+              "checked": 1626,
+              "documents": 1625,
+              "rescued_requests": 158,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.003571428571428572,
+                  "percentile_95": [
+                    -0.000637755102040816,
+                    0.007780612244897959
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": -0.004081632653061225,
+                  "percentile_95": [
+                    -0.006887755102040818,
+                    -0.0012755102040816326
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 813,
+              "matched_grounded_totals": [
+                105,
+                77
+              ],
+              "mean_checks_per_abstention": 1.794701986754967
+            },
+            "20": {
+              "issued": 222,
+              "grounded": 155,
+              "adverse": 67,
+              "outside_grounded": 148,
+              "checked": 1748,
+              "documents": 1745,
+              "rescued_requests": 211,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.009948979591836736,
+                  "percentile_95": [
+                    0.0,
+                    0.022324617346938733
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": -0.0030612244897959186,
+                  "percentile_95": [
+                    -0.0065051020408163265,
+                    0.00038265306122448956
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 813,
+              "matched_grounded_totals": [
+                94,
+                77
+              ],
+              "mean_checks_per_abstention": 1.9293598233995586
+            }
+          },
+          "4": {
+            "5": {
+              "issued": 306,
+              "grounded": 140,
+              "adverse": 166,
+              "outside_grounded": 0,
+              "checked": 3252,
+              "documents": 3247,
+              "rescued_requests": 268,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": 0.0,
+                  "percentile_95": [
+                    0.0,
+                    0.0
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 813,
+              "matched_grounded_totals": [
+                140,
+                140
+              ],
+              "mean_checks_per_abstention": 3.589403973509934
+            },
+            "10": {
+              "issued": 330,
+              "grounded": 193,
+              "adverse": 137,
+              "outside_grounded": 142,
+              "checked": 3252,
+              "documents": 3248,
+              "rescued_requests": 269,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.006760204081632654,
+                  "percentile_95": [
+                    0.00012755102040816344,
+                    0.01364795918367347
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": -0.0036989795918367344,
+                  "percentile_95": [
+                    -0.007270408163265307,
+                    -0.0003826530612244897
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 813,
+              "matched_grounded_totals": [
+                193,
+                140
+              ],
+              "mean_checks_per_abstention": 3.589403973509934
+            },
+            "20": {
+              "issued": 405,
+              "grounded": 267,
+              "adverse": 138,
+              "outside_grounded": 247,
+              "checked": 3496,
+              "documents": 3478,
+              "rescued_requests": 345,
+              "contrast_by_all_request_slots": {
+                "grounded": {
+                  "mean": 0.016198979591836735,
+                  "percentile_95": [
+                    0.003695790816326533,
+                    0.030232780612244856
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                },
+                "adverse": {
+                  "mean": -0.0035714285714285704,
+                  "percentile_95": [
+                    -0.007653061224489796,
+                    0.0005102040816326528
+                  ],
+                  "queries": 49,
+                  "seed": 20261116,
+                  "bootstrap_repeats": 10000
+                }
+              },
+              "matched_cap_trials": 813,
+              "matched_grounded_totals": [
+                206,
+                140
+              ],
+              "mean_checks_per_abstention": 3.858719646799117
+            }
+          }
+        },
+        "rescue_opportunity": {
+          "5": 442,
+          "10": 640,
+          "20": 820
+        },
+        "additional_scope_opportunity": {
+          "5": 0,
+          "10": 198,
+          "20": 378
+        }
+      }
+    }
+  }
+}
