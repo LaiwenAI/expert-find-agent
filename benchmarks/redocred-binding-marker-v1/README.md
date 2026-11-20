@@ -52,7 +52,11 @@ Slurm array 45840 runs on ws3 RTX 5090. Both tasks reproduce all
 non-timing fields, and no reader inputs are clipped. The held
 set has 166 labeled links and 82 unjudged ones. Only 60 labeled
 links have all originally annotated sentence text in the supplied
-window. Results below use the 5% calibration cap.
+window. A [follow-up reference audit](../redocred-reference-window-v1)
+found usable sentence annotations for only 63 links. Window
+coverage is 60/63 among those; the remaining 103 cannot be
+classified as window misses by this check. Results below use the
+5% calibration cap.
 
 | Method | Labeled accepted / 166 | Unjudged accepted / 82 | Accepted with all reference sentences / 60 | Warm local P95 (ms) |
 | --- | ---: | ---: | ---: | ---: |
