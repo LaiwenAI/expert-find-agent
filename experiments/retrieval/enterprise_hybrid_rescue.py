@@ -167,20 +167,31 @@ def run(queries, corpus, role_windows, vectors, vector_meta, models, scratch, ou
     write(output, dict(metadata, **summary(observations)))
 
 
-def packet(dataset, trace, output):
-    from experiments.retrieval.enterprise_gap_verification import DEVELOPMENT, SOURCE_INVENTORY
-
+def packet(dataset, trace, aggregate, queries_projection, corpus_projection, output):
     private = json.loads(trace.read_bytes())
     metadata = private["metadata"]
-    if (metadata["code_sha256"], metadata["queries_sha256"], metadata["corpus_sha256"]) != (
-            digest(Path(__file__)), DEVELOPMENT, SOURCE_INVENTORY):
+    reference = json.loads(aggregate.read_bytes())
+    if any(reference.get(key) != value for key, value in metadata.items()) or (
+            digest(queries_projection), digest(corpus_projection)) != (
+                metadata["queries_sha256"], metadata["corpus_sha256"]):
         raise ValueError("Trace provenance differs")
+    # Timings, counts and run settings bind the private trace to the aggregate.
+    for key, value in summary(private["observations"]).items():
+        if reference[key] != value:
+            raise ValueError("Trace differs from the archived execution")
     manifest = json.loads((dataset / "manifest.json").read_bytes())
     queries, experts, corpus = (profile.profile_subset(dataset, key, manifest)
                                 for key in ("queries","experts","corpus"))
     observed = review.index(private["observations"], lambda row: row["id"])
-    if observed.keys() != queries.keys():
+    projected_queries = review.index(rows(queries_projection), lambda row: row["id"])
+    projected_corpus = review.index(rows(corpus_projection), lambda row: row["id"])
+    if observed.keys() != queries.keys() or projected_queries.keys() != queries.keys() or any(
+            row["text"] != queries[key]["text"] for key, row in projected_queries.items()):
         raise ValueError("Unexpected development query inventory")
+    if projected_corpus.keys() != corpus.keys() or any(
+            (row["expert_id"], row["text"]) != (corpus[key]["expert_id"], corpus[key]["text"])
+            for key, row in projected_corpus.items()):
+        raise ValueError("Citations do not match the executed corpus projection")
     methods = {arm: {} for arm in ARMS}
     for qid, record in observed.items():
         if set(record["arms"]) != set(ARMS):
@@ -218,7 +229,7 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     commands = parser.add_subparsers(dest="command", required=True)
     for handler, names in ((run, ("queries","corpus","role_windows","vectors","vector_meta","models","scratch","output","trace")),
-                           (packet, ("dataset","trace","output"))):
+                           (packet, ("dataset","trace","aggregate","queries_projection","corpus_projection","output"))):
         sub = commands.add_parser(handler.__name__)
         for name in names:
             sub.add_argument(name,type=Path)

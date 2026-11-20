@@ -1,0 +1,89 @@
+{
+  "job": "43546",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "code_sha256": "4b64ebd507aacd4b3814e02b5f9525db08ee712bf393b0d0721db0433791659e",
+  "queries_sha256": "30661871ac08a61e7e74d67d75491878c7e4194f217483b60d06426c4b36e4c5",
+  "corpus_sha256": "c9e8d6e13bb05900427ab1d785d6024256f61e8bb34f220c3816fb79d1921780",
+  "vectors_sha256": "403fd19c50177eb4dd59a5f6fc07f5fe6ab49da223f5e1f4d172ec6cebeff2da",
+  "role_index_sha256": "a96c36183cefa019156a296c7698c195ff25b5d687971b08328357111eb86382",
+  "lexical_build_seconds": 19.040451887995005,
+  "lexical_postings_bytes": 61006980,
+  "sources": 52667,
+  "k": 5,
+  "source_depth": 2,
+  "fusion_depth": 50,
+  "rescue_cap": 2,
+  "models": {
+    "embedding": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+    "parser": "cdbee75f17c01a7cc42f958dc650907174af0554",
+    "verifier": "e61197ed45024b0ed8a2d74b80b4d909f1255473"
+  },
+  "arms": {
+    "dense": {
+      "queries": 80,
+      "issued": 34,
+      "slots": 70,
+      "added": 0,
+      "outside_initial": 0,
+      "rescue_pairs": 0,
+      "primary_pairs": 1280,
+      "changed_ranked": 80,
+      "p95_ms": 1117.2187963500612,
+      "paired_p95_vs_hybrid_ci95_ms": [
+        -233.2706619054079,
+        70.97786851227283
+      ]
+    },
+    "hybrid": {
+      "queries": 80,
+      "issued": 25,
+      "slots": 51,
+      "added": 0,
+      "outside_initial": 0,
+      "rescue_pairs": 0,
+      "primary_pairs": 1279,
+      "changed_ranked": 0,
+      "p95_ms": 1152.8214745223518,
+      "paired_p95_vs_hybrid_ci95_ms": [
+        0.0,
+        0.0
+      ]
+    },
+    "deeper_on_abstain": {
+      "queries": 80,
+      "issued": 27,
+      "slots": 53,
+      "added": 2,
+      "outside_initial": 0,
+      "rescue_pairs": 128,
+      "primary_pairs": 1279,
+      "changed_ranked": 0,
+      "p95_ms": 1151.5601878054435,
+      "paired_p95_vs_hybrid_ci95_ms": [
+        -2.770567312836647,
+        23.103022947907448
+      ]
+    },
+    "global_on_abstain": {
+      "queries": 80,
+      "issued": 30,
+      "slots": 56,
+      "added": 5,
+      "outside_initial": 4,
+      "rescue_pairs": 206,
+      "primary_pairs": 1279,
+      "changed_ranked": 0,
+      "p95_ms": 1190.6410765834148,
+      "paired_p95_vs_hybrid_ci95_ms": [
+        14.769323170185089,
+        99.11354836076521
+      ]
+    }
+  },
+  "matched_nonzero_budget": {
+    "requests": 36,
+    "pairs": 120,
+    "global_issued": 4,
+    "deeper_issued": 2
+  }
+}
