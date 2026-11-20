@@ -12,6 +12,9 @@ from experiments.retrieval import enterprise_hybrid_rescue as hybrid
 from experiments.retrieval import enterprise_role_first_query as roles
 from experiments.retrieval.enterprise_joint_first_round import prepare_owned, prefixes
 from experiments.retrieval.enterprise_project_role_rescue import terms
+from experiments.retrieval.enterprise_qualification_replay import (
+    interpretations, load_scope, score_profile, support,
+)
 from experiments.retrieval.enterprise_routed_review import digest, rows, write
 
 WIDE_PEOPLE = 20
@@ -76,6 +79,25 @@ def evidence_summary(ordered, candidates, bank, conditions):
     return dict(cases), issued
 
 
+def scope_axes(spans, votes):
+    original = [tuple(span) for span in spans]
+    if sorted(original) != sorted(span for span, (selected, _) in votes.items() if selected):
+        raise ValueError("Scope comparison does not match the original qualifications")
+    alternative = [span for span, (_, positive) in votes.items() if positive]
+    added = sorted(set(alternative) - set(original))
+    index = {span: i for i, span in enumerate(original + added, start=1)}
+    return added, interpretations([index[span] for span in original],
+                                  [index[span] for span in alternative])
+
+
+def count_interpretations(table, people, excerpts, bank, axes):
+    profiles = [score_profile(owner, excerpts[owner], bank, 1 + len(axes["union"]))
+                for owner in people]
+    for name, conditions in axes.items():
+        accepted = sum(support(profile, conditions) for profile in profiles)
+        table[name].update(query_has_result=int(bool(accepted)), provisional_people=accepted)
+
+
 def run(args):
     import torch
 
@@ -94,10 +116,16 @@ def run(args):
             or digest(args.corpus) != SOURCE_INVENTORY):
         raise ValueError("Changed pinned development inputs")
     requests = {r["id"]: r["text"] for r in rows(args.queries)}
+    scope = None
+    if args.scope:
+        scope_trace, scope_aggregate = args.scope
+        scope = load_scope(anchor, json.loads(scope_aggregate.read_bytes()), scope_trace, requests)
     original = json.loads(args.trace.read_bytes())["observations"]
     fixed = [r for r in original if r["arms"]["hybrid_prefixes"]["qualifications"]]
     if len(fixed) != anchor["multi_condition"] or any(r["arms"]["hybrid_prefixes"]["issued"] for r in fixed):
         raise ValueError("Changed fixed multi-condition panel")
+    if scope is not None and set(scope) != {row["id"] for row in fixed}:
+        raise ValueError("Scope comparison and headroom use different requests")
     torch.backends.cuda.matmul.allow_tf32 = False
     sources = {r["id"]: r for r in rows(args.corpus)}
     ids = list(sources)
@@ -119,6 +147,7 @@ def run(args):
 
     results = {}
     totals = defaultdict(Counter)
+    crossed = defaultdict(lambda: defaultdict(Counter))
     with TemporaryDirectory(dir=args.scratch) as root:
         lexical = lexical_index([r["text"] for r in sources.values()], Path(root))
         for n, request in enumerate(fixed[::(-1 if args.order_offset else 1)], 1):
@@ -148,6 +177,15 @@ def run(args):
             extra = {owner: tuple(ref for ref in refs if ref not in first.get(owner, ()))
                      for owner, refs in expanded.items()}
             bank = original_bank | verify_all(extra, criteria, sources, verifier)
+            if scope is not None:
+                added, axes = scope_axes(baseline["qualifications"], scope[key])
+                additions = tuple(text[a:b] for a, b in added)
+                if any(len(q) > CRITERION_CHARS for q in additions):
+                    raise ValueError("Unexpected overlength alternate condition")
+                scope_bank = bank | {
+                    (owner, ref, len(criteria) + i): margin
+                    for (owner, ref, i), margin in verify_all(expanded, additions, sources, verifier).items()
+                }
             private = {}
             for arm, people, excerpts in (
                 ("top5_two", order[:5], initial),
@@ -162,14 +200,24 @@ def run(args):
                                    queries_with_topic=int(bool(stats["positives_topic"])),
                                    queries_with_all_qualifications=int(bool(stats["positives_all_qualifications"])))
                 private[arm] = issued
+                if scope is not None:
+                    count_interpretations(crossed[arm], people, excerpts, scope_bank, axes)
             if private["top5_two"]:
                 raise ValueError("Original abstention did not reproduce")
             results[key] = dict(arms=private)
             if n % 5 == 0:
                 print(f"Completed {n} multi-condition diagnostics", flush=True)
+    if scope is not None:
+        for arm, summary in crossed.items():
+            original = summary["original"]
+            if (original["query_has_result"] != totals[arm]["queries_with_provisional"]
+                    or original["provisional_people"] != totals[arm]["positives_all_conditions"]):
+                raise ValueError("Crossed original interpretation does not reproduce headroom")
     write(args.private, results)
+    diagnostic = ({"crossed": crossed, "scope_aggregate_sha256": digest(scope_aggregate)}
+                  if scope is not None else {})
     write(args.output, dict(
-        arms=totals, multi_condition=len(fixed), max_people=WIDE_PEOPLE, max_excerpts=WIDE_EXCERPTS,
+        arms=totals, **diagnostic, multi_condition=len(fixed), max_people=WIDE_PEOPLE, max_excerpts=WIDE_EXCERPTS,
         reference_sha256=digest(args.reference), private_sha256=digest(args.private),
         script_sha256=digest(Path(__file__)), gpu=torch.cuda.get_device_name(), order_offset=args.order_offset,
     ))
@@ -181,4 +229,5 @@ if __name__ == "__main__":
                  "trace", "reference", "output", "private"):
         parser.add_argument(name, type=Path)
     parser.add_argument("--order-offset", type=int, choices=(0, 1), default=0)
+    parser.add_argument("--scope", type=Path, nargs=2, metavar=("SCOPE_TRACE", "SCOPE_AGGREGATE"))
     run(parser.parse_args())

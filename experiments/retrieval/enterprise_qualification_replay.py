@@ -6,7 +6,6 @@ import json
 from pathlib import Path
 
 from experiments.retrieval import enterprise_role_first_query as roles
-from experiments.retrieval.enterprise_joint_headroom import verify_all
 from experiments.retrieval.enterprise_routed_review import digest, rows, write
 
 ARMS = ("original", "in_both", "direct_gate", "union", "topic_only")
@@ -27,27 +26,12 @@ def support(profile, indices):
     return profile[0] and all(profile[i] for i in indices)
 
 
-def run(args):
-    import torch
-
-    from experiments.followir.core17_verifier import Reranker
-    from experiments.retrieval.enterprise_first_query import CRITERION_CHARS
-
-    roles.require_cuda(args.output)
-    baseline = json.loads(args.baseline.read_bytes())
-    direct = json.loads(args.scope_aggregate.read_bytes())
-    for expected, path in ((baseline["trace_sha256"], args.trace),
-                           (baseline["queries_sha256"], args.queries),
-                           (baseline["source_sha256"], args.corpus),
-                           (direct["private_sha256"], args.scope_trace)):
-        if digest(path) != expected:
-            raise ValueError("Changed frozen diagnostics")
+def load_scope(baseline, direct, scope_trace, origin):
+    if digest(scope_trace) != direct["private_sha256"]:
+        raise ValueError("Changed scope decision trace")
     if direct["trace_sha256"] != baseline["trace_sha256"] or direct["source_sha256"] != baseline["queries_sha256"]:
         raise ValueError("Scope comparison used another request population")
-    origin = {r["id"]: r["text"] for r in rows(args.queries)}
-    corpus = {r["id"]: r for r in rows(args.corpus)}
-    traced = json.loads(args.trace.read_bytes())["observations"]
-    audit = json.loads(args.scope_trace.read_bytes())
+    audit = json.loads(scope_trace.read_bytes())
     by_query = defaultdict(dict)
     for row, outcome in zip(audit["cases"], audit["new_gate"], strict=True):
         start, end = row["start"], row["end"]
@@ -58,6 +42,28 @@ def run(args):
         if key in by_query[row["id"]]:
             raise ValueError("Duplicate scope comparison excerpt")
         by_query[row["id"]][key] = row["chosen"], outcome
+    return by_query
+
+
+def run(args):
+    import torch
+
+    from experiments.followir.core17_verifier import Reranker
+    from experiments.retrieval.enterprise_first_query import CRITERION_CHARS
+    from experiments.retrieval.enterprise_joint_headroom import verify_all
+
+    roles.require_cuda(args.output)
+    baseline = json.loads(args.baseline.read_bytes())
+    direct = json.loads(args.scope_aggregate.read_bytes())
+    for expected, path in ((baseline["trace_sha256"], args.trace),
+                           (baseline["queries_sha256"], args.queries),
+                           (baseline["source_sha256"], args.corpus)):
+        if digest(path) != expected:
+            raise ValueError("Changed frozen diagnostics")
+    origin = {r["id"]: r["text"] for r in rows(args.queries)}
+    corpus = {r["id"]: r for r in rows(args.corpus)}
+    traced = json.loads(args.trace.read_bytes())["observations"]
+    by_query = load_scope(baseline, direct, args.scope_trace, origin)
 
     reader = Reranker(args.reranker)
     if reader.provenance["revision"] != baseline["models"]["verifier"]:
