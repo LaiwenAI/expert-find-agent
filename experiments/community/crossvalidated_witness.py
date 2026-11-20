@@ -67,12 +67,13 @@ def write(path, value):
         stream.write("\n")
 
 
-def capture(folder, year=2024, duplicate_pages=DUPLICATE_PAGES, site="stats", end_year=None):
+def capture(folder, year=2024, duplicate_pages=DUPLICATE_PAGES, site="stats", end_year=None,
+            *, background_pages=BACKGROUND_PAGES):
     end_year = year if end_year is None else end_year
     if year < 2023 or end_year < year:
         raise ValueError("Queries must follow the 2023 evidence cutoff")
-    if not 1 <= duplicate_pages <= 25:
-        raise ValueError("Expected 1 to 25 duplicate pages")
+    if not 1 <= duplicate_pages <= 25 or not 1 <= background_pages <= 25:
+        raise ValueError("Expected 1 to 25 pages per capture stream")
     folder.mkdir(parents=True, exist_ok=True)
     duplicate_rows = [
         row
@@ -87,7 +88,7 @@ def capture(folder, year=2024, duplicate_pages=DUPLICATE_PAGES, site="stats", en
     cutoff = timestamp(2023)
     background = {
         row["question_id"]: row
-        for i in range(1, BACKGROUND_PAGES + 1)
+        for i in range(1, background_pages + 1)
         for row in fetch(folder, "search/advanced", site=site, accepted="true", sort="votes", page=i, todate=cutoff-1)
     }
     canonical = lookup(folder, "questions", set().union(*links.values()), "question_id", site)
@@ -149,7 +150,9 @@ if __name__ == "__main__":
     parser.add_argument("folder", type=Path)
     parser.add_argument("--year", type=int, default=2024)
     parser.add_argument("--duplicate-pages", type=int, default=DUPLICATE_PAGES)
-    parser.add_argument("--site", choices=("stats", "mathoverflow"), default="stats")
+    parser.add_argument("--background-pages", type=int, default=BACKGROUND_PAGES)
+    parser.add_argument("--site", choices=("stats", "mathoverflow", "unix"), default="stats")
     parser.add_argument("--end-year", type=int)
     args = parser.parse_args()
-    capture(args.folder, args.year, args.duplicate_pages, args.site, args.end_year)
+    capture(args.folder, args.year, args.duplicate_pages, args.site, args.end_year,
+            background_pages=args.background_pages)

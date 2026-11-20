@@ -1,0 +1,616 @@
+{
+  "slurm_array": 45682,
+  "node": "ws3",
+  "runs": [
+    {
+      "queries": 195,
+      "clusters": 181,
+      "rank_tiers": {
+        "absent": 50,
+        "top3": 118,
+        "rank6to10": 15,
+        "rank4to5": 12
+      },
+      "queries_with_known_issued": {
+        "dense3": 87,
+        "dense4": 90,
+        "dense5": 92,
+        "dense10": 95,
+        "adaptive": 92
+      },
+      "arms": {
+        "dense4": {
+          "pairs": 780,
+          "known_available": 131,
+          "known_issued": 95,
+          "issued": 274,
+          "clipped": 0,
+          "p50_p95_ms": [
+            31.11264097969979,
+            38.767600525170565
+          ],
+          "versus_dense4": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 195,
+            "clusters": 181,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "versus_dense4_matched_issuance": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 195,
+            "clusters": 181,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "versus_dense5": {
+            "mean": -0.0041025641025641026,
+            "percentile_95": [
+              -0.008422166527429683,
+              -0.001
+            ],
+            "queries": 195,
+            "clusters": 181,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "dense5": {
+          "pairs": 975,
+          "known_available": 139,
+          "known_issued": 99,
+          "issued": 297,
+          "clipped": 0,
+          "p50_p95_ms": [
+            34.48704490438104,
+            47.1385016804561
+          ],
+          "versus_dense4": {
+            "mean": 0.0041025641025641026,
+            "percentile_95": [
+              0.001,
+              0.00842216652742967
+            ],
+            "queries": 195,
+            "clusters": 181,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "versus_dense4_matched_issuance": {
+            "mean": -0.0020512820512820513,
+            "percentile_95": [
+              -0.006250000000000001,
+              0.0020304568527918783
+            ],
+            "queries": 195,
+            "clusters": 181,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "versus_dense5": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 195,
+            "clusters": 181,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "dense10": {
+          "pairs": 1950,
+          "known_available": 157,
+          "known_issued": 104,
+          "issued": 349,
+          "clipped": 0,
+          "p50_p95_ms": [
+            59.440869954414666,
+            83.23424337431788
+          ],
+          "versus_dense4": {
+            "mean": 0.009230769230769232,
+            "percentile_95": [
+              0.004081632653061225,
+              0.015463917525773196
+            ],
+            "queries": 195,
+            "clusters": 181,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "versus_dense4_matched_issuance": {
+            "mean": -0.005128205128205128,
+            "percentile_95": [
+              -0.012121212121212121,
+              0.0010416666666666667
+            ],
+            "queries": 195,
+            "clusters": 181,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "versus_dense5": {
+            "mean": 0.005128205128205128,
+            "percentile_95": [
+              0.0,
+              0.010471204188481676
+            ],
+            "queries": 195,
+            "clusters": 181,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "adaptive": {
+          "pairs": 935,
+          "known_available": 136,
+          "known_issued": 99,
+          "issued": 296,
+          "clipped": 0,
+          "p50_p95_ms": [
+            33.843403100036085,
+            47.232611372601234
+          ],
+          "versus_dense4": {
+            "mean": 0.0041025641025641026,
+            "percentile_95": [
+              0.001,
+              0.00842216652742967
+            ],
+            "queries": 195,
+            "clusters": 181,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "versus_dense4_matched_issuance": {
+            "mean": -0.0020512820512820513,
+            "percentile_95": [
+              -0.006250000000000001,
+              0.0020304568527918783
+            ],
+            "queries": 195,
+            "clusters": 181,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "versus_dense5": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 195,
+            "clusters": 181,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "dense3": {
+          "pairs": 585,
+          "known_available": 124,
+          "known_issued": 91,
+          "issued": 237,
+          "clipped": 0,
+          "p50_p95_ms": [
+            27.22659008577466,
+            33.84839704958722
+          ],
+          "versus_dense4": {
+            "mean": -0.0041025641025641026,
+            "percentile_95": [
+              -0.008333333333333333,
+              -0.0010050251256281408
+            ],
+            "queries": 195,
+            "clusters": 181,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "versus_dense4_matched_issuance": {
+            "mean": 0.0020512820512820513,
+            "percentile_95": [
+              -0.0030456852791878176,
+              0.007216494845360824
+            ],
+            "queries": 195,
+            "clusters": 181,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "versus_dense5": {
+            "mean": -0.008205128205128205,
+            "percentile_95": [
+              -0.014285714285714287,
+              -0.0030927835051546395
+            ],
+            "queries": 195,
+            "clusters": 181,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        }
+      },
+      "adaptive_five_reads": 175,
+      "randomized_budget_replay": {
+        "known_mean": 98.177,
+        "empirical_95": [
+          96.0,
+          99.0
+        ]
+      },
+      "retained_catalog_sources": 1412,
+      "catalog_accounts": 614,
+      "cross_site_exclusions": 0,
+      "training": {
+        "queries": 68,
+        "teacher_pairs": 680,
+        "fitted_tail_rows": 544,
+        "weights": [
+          -5.617589613970568,
+          1.0435780785673092,
+          0.06191966637530492,
+          -0.1529757375132608,
+          0.6881133539736516,
+          -0.15269046499977265,
+          -0.8321706691379074
+        ],
+        "center": [
+          0.4795245110769482,
+          0.17862103174603197,
+          0.25503915020271417,
+          0.12168599691253255,
+          0.2229988556165973,
+          4.3600229772117345
+        ],
+        "scale": [
+          0.05659137302163317,
+          0.0746022346434791,
+          0.07193669150301013,
+          0.049931071861637394,
+          0.07132073608833991,
+          0.2847862618690298
+        ],
+        "clipped": 0,
+        "fit_and_label_ms": 4750.441982992925
+      },
+      "threshold": -4.838488740185461,
+      "dev_snapshot_sha256": "499aab068fb7acb41e9f6c12b68ec88389eda4e421287146f65f2276dde16ef6",
+      "held_snapshot_sha256": "1c77a8ab4a2eccffe3f48bf824c9c40abe528c3ad25bc506c9a30e97d2b71322",
+      "script_sha256": "6f25e8fffb59603cc42b6dd0eb07a779d57d0d25b76b42aa10b9b8628615559b",
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "reranker_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "order_offset": 0
+    },
+    {
+      "queries": 195,
+      "clusters": 181,
+      "rank_tiers": {
+        "absent": 50,
+        "top3": 118,
+        "rank6to10": 15,
+        "rank4to5": 12
+      },
+      "queries_with_known_issued": {
+        "dense3": 87,
+        "dense4": 90,
+        "dense5": 92,
+        "dense10": 95,
+        "adaptive": 92
+      },
+      "arms": {
+        "dense5": {
+          "pairs": 975,
+          "known_available": 139,
+          "known_issued": 99,
+          "issued": 297,
+          "clipped": 0,
+          "p50_p95_ms": [
+            34.391099005006254,
+            47.272591653745614
+          ],
+          "versus_dense4": {
+            "mean": 0.0041025641025641026,
+            "percentile_95": [
+              0.001,
+              0.00842216652742967
+            ],
+            "queries": 195,
+            "clusters": 181,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "versus_dense4_matched_issuance": {
+            "mean": -0.0020512820512820513,
+            "percentile_95": [
+              -0.006250000000000001,
+              0.0020304568527918783
+            ],
+            "queries": 195,
+            "clusters": 181,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "versus_dense5": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 195,
+            "clusters": 181,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "dense10": {
+          "pairs": 1950,
+          "known_available": 157,
+          "known_issued": 104,
+          "issued": 349,
+          "clipped": 0,
+          "p50_p95_ms": [
+            59.390597976744175,
+            83.16195205552502
+          ],
+          "versus_dense4": {
+            "mean": 0.009230769230769232,
+            "percentile_95": [
+              0.004081632653061225,
+              0.015463917525773196
+            ],
+            "queries": 195,
+            "clusters": 181,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "versus_dense4_matched_issuance": {
+            "mean": -0.005128205128205128,
+            "percentile_95": [
+              -0.012121212121212121,
+              0.0010416666666666667
+            ],
+            "queries": 195,
+            "clusters": 181,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "versus_dense5": {
+            "mean": 0.005128205128205128,
+            "percentile_95": [
+              0.0,
+              0.010471204188481676
+            ],
+            "queries": 195,
+            "clusters": 181,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "adaptive": {
+          "pairs": 935,
+          "known_available": 136,
+          "known_issued": 99,
+          "issued": 296,
+          "clipped": 0,
+          "p50_p95_ms": [
+            33.861213945783675,
+            47.498204838484526
+          ],
+          "versus_dense4": {
+            "mean": 0.0041025641025641026,
+            "percentile_95": [
+              0.001,
+              0.00842216652742967
+            ],
+            "queries": 195,
+            "clusters": 181,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "versus_dense4_matched_issuance": {
+            "mean": -0.0020512820512820513,
+            "percentile_95": [
+              -0.006250000000000001,
+              0.0020304568527918783
+            ],
+            "queries": 195,
+            "clusters": 181,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "versus_dense5": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 195,
+            "clusters": 181,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "dense3": {
+          "pairs": 585,
+          "known_available": 124,
+          "known_issued": 91,
+          "issued": 237,
+          "clipped": 0,
+          "p50_p95_ms": [
+            27.16673305258155,
+            33.94384121056646
+          ],
+          "versus_dense4": {
+            "mean": -0.0041025641025641026,
+            "percentile_95": [
+              -0.008333333333333333,
+              -0.0010050251256281408
+            ],
+            "queries": 195,
+            "clusters": 181,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "versus_dense4_matched_issuance": {
+            "mean": 0.0020512820512820513,
+            "percentile_95": [
+              -0.0030456852791878176,
+              0.007216494845360824
+            ],
+            "queries": 195,
+            "clusters": 181,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "versus_dense5": {
+            "mean": -0.008205128205128205,
+            "percentile_95": [
+              -0.014285714285714287,
+              -0.0030927835051546395
+            ],
+            "queries": 195,
+            "clusters": 181,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "dense4": {
+          "pairs": 780,
+          "known_available": 131,
+          "known_issued": 95,
+          "issued": 274,
+          "clipped": 0,
+          "p50_p95_ms": [
+            31.16875293198973,
+            38.87742656515911
+          ],
+          "versus_dense4": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 195,
+            "clusters": 181,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "versus_dense4_matched_issuance": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 195,
+            "clusters": 181,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          },
+          "versus_dense5": {
+            "mean": -0.0041025641025641026,
+            "percentile_95": [
+              -0.008422166527429683,
+              -0.001
+            ],
+            "queries": 195,
+            "clusters": 181,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        }
+      },
+      "adaptive_five_reads": 175,
+      "randomized_budget_replay": {
+        "known_mean": 98.177,
+        "empirical_95": [
+          96.0,
+          99.0
+        ]
+      },
+      "retained_catalog_sources": 1412,
+      "catalog_accounts": 614,
+      "cross_site_exclusions": 0,
+      "training": {
+        "queries": 68,
+        "teacher_pairs": 680,
+        "fitted_tail_rows": 544,
+        "weights": [
+          -5.617589613970568,
+          1.0435780785673092,
+          0.06191966637530492,
+          -0.1529757375132608,
+          0.6881133539736516,
+          -0.15269046499977265,
+          -0.8321706691379074
+        ],
+        "center": [
+          0.4795245110769482,
+          0.17862103174603197,
+          0.25503915020271417,
+          0.12168599691253255,
+          0.2229988556165973,
+          4.3600229772117345
+        ],
+        "scale": [
+          0.05659137302163317,
+          0.0746022346434791,
+          0.07193669150301013,
+          0.049931071861637394,
+          0.07132073608833991,
+          0.2847862618690298
+        ],
+        "clipped": 0,
+        "fit_and_label_ms": 4796.242492971942
+      },
+      "threshold": -4.838488740185461,
+      "dev_snapshot_sha256": "499aab068fb7acb41e9f6c12b68ec88389eda4e421287146f65f2276dde16ef6",
+      "held_snapshot_sha256": "1c77a8ab4a2eccffe3f48bf824c9c40abe528c3ad25bc506c9a30e97d2b71322",
+      "script_sha256": "6f25e8fffb59603cc42b6dd0eb07a779d57d0d25b76b42aa10b9b8628615559b",
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "reranker_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "order_offset": 1
+    }
+  ]
+}
