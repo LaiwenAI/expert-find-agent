@@ -18,7 +18,6 @@ from experiments.credit.plos_role_inventory import ROLES
 from experiments.followir.core17_reranking import digest, write_json
 
 TRAINING = ("single_clause", "other_role_swap", "near_role_swap", "near_cross_entropy", "near_rank_loss")
-ARMS = ("reader", *TRAINING)
 ROLE_ID = {role: i for i, role in enumerate(ROLES)}
 
 
@@ -89,12 +88,12 @@ def normalized_names(cases):
     return {" ".join(legacy.NAME_PARTS.findall(name)).casefold() for case in cases for name in case["names"]}
 
 
-def observe(cases, bank, encoder, weights, reader):
+def observe(cases, bank, encoder, weights, reader, training=TRAINING):
     import torch
     from experiments.credit.train_role_decision import encode
 
-    measured = {mode: [] for mode in ARMS}
-    stacked = torch.stack([weights[mode] for mode in TRAINING])
+    measured = {mode: [] for mode in ("reader", *training)}
+    stacked = torch.stack([weights[mode] for mode in training])
     for i, item in enumerate(cases):
         role, foe = item["payloads"][0][1], item["payloads"][1][1]
         phrase = min(bank[role], key=lambda text: legacy.stable(item["doi"], role, text))
@@ -112,7 +111,7 @@ def observe(cases, bank, encoder, weights, reader):
                     # One query embedding and a shared forward across all experimental heads.
                     scores = (stacked @ vector)[:, [ROLE_ID[role], ROLE_ID[foe]]].cpu().tolist()
                 elapsed = (perf_counter() - started) * 1000
-                for arm, values in zip(TRAINING, scores, strict=True):
+                for arm, values in zip(training, scores, strict=True):
                     measured[arm].append((values, elapsed))
     return measured
 
@@ -129,7 +128,7 @@ def calibrate(scores):
     return max(options)[-1]
 
 
-def report(measured, thresholds, cases, clusters):
+def report(measured, thresholds, cases, clusters, references=None):
     labels, result = {}, {}
     for arm, samples in measured.items():
         scores = np.asarray([row[0] for row in samples])
@@ -141,15 +140,19 @@ def report(measured, thresholds, cases, clusters):
             p95_ms=float(np.quantile([row[1] for row in samples], .95)),
         )
     groups = [clusters[case["paper"]] for case in cases]
-    for arm in ARMS:
-        ref = "near_cross_entropy" if arm == "near_rank_loss" else ("single_clause" if arm in TRAINING else "reader")
+    if references is None:
+        references = dict.fromkeys(TRAINING, "single_clause")
+        references.update(reader="reader", near_rank_loss="near_cross_entropy")
+    for arm in measured:
+        ref = references[arm]
         result[arm]["clean_difference"] = clustered_paired_interval(
             labels[arm].astype(int) - labels[ref].astype(int), groups,
         )
     return result
 
 
-def run(old, legacy_transfer, dev_xml, test_xml, data, examples, embedding, reranker, output):
+def run(old, legacy_transfer, dev_xml, test_xml, data, examples, embedding, reranker, output, *,
+        fit_heads=fit, training=TRAINING, summarize=report, script_path=Path(__file__)):
     import torch
     from expert_search.qwen_embedding_torch import QwenTorchEmbedding
     from experiments.credit.role_prototypes import normalized
@@ -183,22 +186,22 @@ def run(old, legacy_transfer, dev_xml, test_xml, data, examples, embedding, rera
     embed_info = verify_checkpoint(embedding)
     encoder = QwenTorchEmbedding(embedding)
     reader = Reranker(reranker)
-    weights, fit_summary = fit(encoder, train_path)
-    observe(calibration[:4], calibration_bank, encoder, weights, reader)
-    measured_dev = observe(calibration, calibration_bank, encoder, weights, reader)
+    weights, fit_summary = fit_heads(encoder, train_path)
+    observe(calibration[:4], calibration_bank, encoder, weights, reader, training)
+    measured_dev = observe(calibration, calibration_bank, encoder, weights, reader, training)
     thresholds = {arm: calibrate(rows) for arm, rows in measured_dev.items()}
-    results = {view: report(observe(test, bank, encoder, weights, reader), thresholds, test, test_groups)
+    results = {view: summarize(observe(test, bank, encoder, weights, reader, training), thresholds, test, test_groups)
                for view, bank in banks.items()}
     write_json(output, dict(
         job=os.environ["SLURM_JOB_ID"], gpu=torch.cuda.get_device_name(),
-        code_sha256=digest(Path(__file__)), developer_source_sha256=digest(dev_manifest),
+        code_sha256=digest(script_path), developer_source_sha256=digest(dev_manifest),
         test_source_sha256=digest(test_manifest), training_sha256=digest(train_path), calibration_bank_sha256=digest(examples),
         wording_sha256={view: digest(path) for view, path in test_banks.items()},
         checkpoints=dict(embedding=embed_info["revision"], reader=reader.provenance["revision"]),
         thresholds=thresholds, training=fit_summary, dev_excluded=dev_excluded, test_excluded=test_excluded,
         dev_excluded_for_test_overlap=before - len(calibration),
         calibration_papers=len({case["doi"] for case in calibration}), test_papers=len(test_groups),
-        calibration=report(measured_dev, thresholds, calibration, dev_groups), panels=results,
+        calibration=summarize(measured_dev, thresholds, calibration, dev_groups), panels=results,
     ))
 
 
