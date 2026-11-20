@@ -52,3 +52,21 @@ two independent review forms. Reviewers may flag incorrect or missing
 parsed qualifications. Adjudicate divergence with a third reviewer.
 Keep the demand text, arm outcomes and reviewer records private. Share
 aggregate findings after the blind review is reconciled.
+
+## Score reconciled reviews
+
+Run the existing joint-review reconciler on the two private forms and,
+when necessary, an independent adjudication file. Then apply the paired
+scorer. It rejects missing reviews and outstanding disagreements.
+Explicitly uncertain judgments remain unresolved and enter the interval
+bounds. Distinct reviewer files and identifiers are integrity checks;
+reviewer qualifications and independence must be established by the
+study team.
+
+```sh
+PYTHONPATH=src:. python -m experiments.retrieval.reconcile_joint_review \
+  PRIVATE_PACKET REVIEW_A REVIEW_B --adjudication REVIEW_C --output PRIVATE_RECONCILIATION
+PYTHONPATH=src:. python -m experiments.retrieval.score_sealed_first_query \
+  PROTOCOL LOCK FRAME PRIVATE_PACKET PRIVATE_RECONCILIATION PRIVATE_AGGREGATE \
+  PRIVATE_TRACE NEW_AGGREGATE_REPORT
+```
