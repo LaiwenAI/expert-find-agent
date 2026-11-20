@@ -19,12 +19,12 @@ FIRST, RESCUE, LOCAL = 4, 2, 24
 ARMS = ("flat_six", "depth_on_abstention", "constraint_local", "constraint_full_pool", "constraint_flat_six")
 
 
-def load(path, cache_path, provenance):
+def load(path, cache_path, provenance, *, additional_sources=None):
     import torch
 
     dataset = json.loads(path.read_bytes())
-    if dataset["upstream_sha256"] != {followir.REVISION: followir.FILES,
-                                        NEWS_REVISION: NEWS_FILES}.get(dataset["revision"]):
+    allowed = {**(additional_sources or {}), followir.REVISION: followir.FILES, NEWS_REVISION: NEWS_FILES}
+    if dataset["revision"] not in allowed or dataset["upstream_sha256"] != allowed[dataset["revision"]]:
         raise ValueError("Unexpected FollowIR fixture")
     with np.load(cache_path, allow_pickle=False) as cache:
         ids = cache["doc_ids"].tolist()
