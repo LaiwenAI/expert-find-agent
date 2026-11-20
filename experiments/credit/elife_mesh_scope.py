@@ -6,6 +6,7 @@ import os
 from pathlib import Path
 
 from experiments.credit import elife_mesh as mesh
+from experiments.credit import mesh_stage_diagnostic as diagnostic
 from experiments.credit import role_score_gate as gate
 from experiments.credit import topic_role_holdout as holdout
 from experiments.credit import topic_role_postings as pilot
@@ -51,7 +52,8 @@ def summarize(measurements, major, topics):
     return results
 
 
-def run(projection, snapshot, mesh_reference, gate_reference, embedding, reranker, output):
+def run(projection, snapshot, mesh_reference, gate_reference, embedding, reranker, output,
+        diagnostic_reference=None, diagnostic_output=None):
     import torch
 
     from expert_search.qwen_embedding_torch import QwenTorchEmbedding
@@ -59,6 +61,10 @@ def run(projection, snapshot, mesh_reference, gate_reference, embedding, reranke
 
     if output.exists() or not os.environ.get("SLURM_JOB_ID") or not torch.cuda.is_available():
         raise ValueError("Require fresh output and Slurm CUDA")
+    if (diagnostic_reference is None) != (diagnostic_output is None):
+        raise ValueError("Supply both diagnostic reference and output paths")
+    if diagnostic_output is not None and diagnostic_output.exists():
+        raise ValueError("Provide a new diagnostic output path")
     frozen = json.loads(snapshot.read_bytes())
     prior = json.loads(mesh_reference.read_bytes())["run"]
     calibrated = json.loads(gate_reference.read_bytes())["expanded_grid"]
@@ -99,8 +105,9 @@ def run(projection, snapshot, mesh_reference, gate_reference, embedding, reranke
                       for term in article[field]}
     novel = {name for name in topics if name.casefold() not in previous_terms}
     controls = tuple((arm, None) for arm in gate.CONTROL)
-    rows = gate.collect(catalog, MINIMUM_SUPPORT, (*controls, ("gated_four", margin)), cache_scores=False)
-    pilot.write_json(output, dict(
+    rows = gate.collect(catalog, MINIMUM_SUPPORT, (*controls, ("gated_four", margin)), cache_scores=False,
+                        trace_selection=diagnostic_output is not None)
+    result = dict(
         job=os.environ["SLURM_JOB_ID"], gpu=torch.cuda.get_device_name(),
         script_sha256=pilot.digest(Path(__file__)), snapshot_sha256=pilot.digest(snapshot),
         projection_sha256=pilot.digest(projection), mesh_reference_sha256=pilot.digest(mesh_reference),
@@ -111,11 +118,17 @@ def run(projection, snapshot, mesh_reference, gate_reference, embedding, reranke
         declaration_indexed={pct: len(ids) for pct, ids in catalog.visible.items()},
         all_requests=summarize(rows, major, topics),
         terms_absent_from_publisher_metadata=summarize(rows, major, novel),
-    ))
+    )
+    if diagnostic_output is not None:
+        diagnostic.write(diagnostic_output, diagnostic.summarize(rows, catalog, major),
+                         result, diagnostic_reference)
+    pilot.write_json(output, result)
 
 
 if __name__ == "__main__":
     cli = argparse.ArgumentParser(description=__doc__)
     for name in ("projection", "snapshot", "mesh_reference", "gate_reference", "embedding", "reranker", "output"):
         cli.add_argument(name, type=Path)
+    cli.add_argument("--diagnostic-reference", type=Path)
+    cli.add_argument("--diagnostic-output", type=Path)
     run(**vars(cli.parse_args()))

@@ -42,7 +42,7 @@ def choose_sources(catalog, ranked, scores, pair, pct, arm, margin=None):
     return [i for i in ranked if i in selected]
 
 
-def collect(catalog, minimum_topic_size, arms, cache_scores):
+def collect(catalog, minimum_topic_size, arms, cache_scores, *, trace_selection=False):
     topics = sorted(topic for topic, ids in catalog.topics.items() if len(ids) >= minimum_topic_size)
     queries = list(pilot.query_panel(catalog, topics))
     result = {pct: {arm: [] for arm, _ in arms} for pct in pilot.CACHE}
@@ -65,11 +65,18 @@ def collect(catalog, minimum_topic_size, arms, cache_scores):
                         verified[selected] = catalog.verify(topic, selected)
                     values = verified[selected]
                 evaluated = nomination.evaluate(catalog, topic, pair, selected, values, holdout.CUTOFF)
-                result[pct][arm].append(dict(
+                row = dict(
                     evaluated, topic=topic, reads=len(selected), injected=len(set(selected) - set(ranked[:4])),
                     ms=rank_ms + (perf_counter() - start) * 1000,
                     characters=sum(len(catalog.texts[i]) for i in selected),
-                ))
+                )
+                if trace_selection:
+                    row.update(
+                        role_pair=pair, topic_order=ranked, selected_sources=selected,
+                        passing_sources=tuple(i for i, score in zip(selected, values, strict=True)
+                                              if score > holdout.CUTOFF),
+                    )
+                result[pct][arm].append(row)
     return result
 
 
