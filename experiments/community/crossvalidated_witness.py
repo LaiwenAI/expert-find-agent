@@ -67,18 +67,20 @@ def write(path, value):
         stream.write("\n")
 
 
-def capture(folder):
+def capture(folder, year=2024, duplicate_pages=DUPLICATE_PAGES):
+    if not 1 <= duplicate_pages <= 25:
+        raise ValueError("Expected 1 to 25 duplicate pages")
     folder.mkdir(parents=True, exist_ok=True)
-    q2024 = [
+    duplicate_rows = [
         row
-        for i in range(1, DUPLICATE_PAGES + 1)
+        for i in range(1, duplicate_pages + 1)
         for row in fetch(folder, "search/advanced", closed="true", sort="creation", page=i,
-                         fromdate=timestamp(2024), todate=timestamp(2025)-1)
+                         fromdate=timestamp(year), todate=timestamp(year+1)-1)
         if row.get("closed_reason", "").casefold() == "duplicate"
     ]
     links = {row["question_id"]: {
         x["question_id"] for x in row.get("closed_details", {}).get("original_questions", [])
-    } for row in q2024}
+    } for row in duplicate_rows}
     cutoff = timestamp(2023)
     background = {
         row["question_id"]: row
@@ -106,11 +108,11 @@ def capture(folder):
                               question_text=Text(post["body"]).plain(), answer=body)
     by_question = {row["qid"]: aid for aid, row in documents.items()}
     queries = []
-    for post in sorted(q2024, key=lambda row: row["question_id"]):
+    for post in sorted(duplicate_rows, key=lambda row: row["question_id"]):
         qid = post["question_id"]
         relevant = sorted(by_question[target] for target in links[qid] if target in by_question)
         title = unescape(post["title"])
-        if not relevant or not post.get("body") or post["creation_date"] < timestamp(2024):
+        if not relevant or not post.get("body") or post["creation_date"] < timestamp(year):
             continue
         source_link = any(re.search(rf"/(?:questions|q)/{documents[aid]['qid']}(?:[/?#\"']|$)", post["body"])
                           for aid in relevant)
@@ -123,7 +125,7 @@ def capture(folder):
     if not queries:
         raise ValueError("No eligible duplicate questions")
     text = folder / "snapshot.json"
-    write(text, dict(queries=queries, documents=documents, background=len(background), duplicates=len(q2024),
+    write(text, dict(queries=queries, documents=documents, background=len(background), duplicates=len(duplicate_rows),
                      before=cutoff, metadata_source=ENDPOINT))
     manifest = dict(
         snapshot_sha256=sha256(text.read_bytes()).hexdigest(),
@@ -139,4 +141,7 @@ def capture(folder):
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("folder", type=Path)
-    capture(parser.parse_args().folder)
+    parser.add_argument("--year", type=int, default=2024)
+    parser.add_argument("--duplicate-pages", type=int, default=DUPLICATE_PAGES)
+    args = parser.parse_args()
+    capture(args.folder, args.year, args.duplicate_pages)
