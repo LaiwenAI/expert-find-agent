@@ -1,0 +1,842 @@
+{
+  "job": "43997",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "script_sha256": "692f6fd05344caa42b52a267e90dfd877ad26e94534b76824a57476ce0c8f0e9",
+  "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "cached_encoder_sha256": "e2b1e9dd238ba49d343b3a3a0e6f441b225062a1012219bad33c0d9e691fb9d9",
+  "known_exploratory_panel": "SciRepEval",
+  "excluded_panels": {
+    "SIGIR": {
+      "source_rows": 0,
+      "profile_sources": 1740,
+      "excluded_reason": "no_source_titles"
+    }
+  },
+  "panel_results": {
+    "NIPS": {
+      "source_rows": 14913,
+      "queries_before_cross_corpus_filter": 34,
+      "vectors_sha256": "c14489a4797590c0d6caf4ade10e0631d2a5bfc61b99caf1d289c6e5d940c17b",
+      "manifest_sha256": "2ec8098f8e8f837b19dd548b6e9e0d3c6f8581729d66f9629f57619fb72575ef",
+      "queries": 2,
+      "training_queries": 229,
+      "changed_source_sets": 1,
+      "fitting": {
+        "utility_cutoff": 0.02811478101034709,
+        "margin_cutoff": 0.0030325651168823242,
+        "weights": [
+          -0.0008946464587151767,
+          0.0016160756261146578,
+          0.006894283246921762,
+          0.01422786982695049
+        ]
+      },
+      "reviewer_proxy": {
+        "soft": {
+          "never": {
+            "scans": 0,
+            "known_positive_queries": 0,
+            "judged_pairs": 1,
+            "returned_pairs": 3,
+            "gained": 0,
+            "lost": 0,
+            "net": 0,
+            "random_same_scan_count_expected_net": 0.0,
+            "paired_percentile_interval": [
+              0.0,
+              0.0
+            ]
+          },
+          "always": {
+            "scans": 2,
+            "known_positive_queries": 0,
+            "judged_pairs": 2,
+            "returned_pairs": 3,
+            "gained": 0,
+            "lost": 0,
+            "net": 0,
+            "random_same_scan_count_expected_net": 0.0,
+            "paired_percentile_interval": [
+              0.0,
+              0.0
+            ]
+          },
+          "low_margin": {
+            "scans": 1,
+            "known_positive_queries": 0,
+            "judged_pairs": 2,
+            "returned_pairs": 3,
+            "gained": 0,
+            "lost": 0,
+            "net": 0,
+            "random_same_scan_count_expected_net": 0.0,
+            "paired_percentile_interval": [
+              0.0,
+              0.0
+            ]
+          },
+          "learned_gain": {
+            "scans": 0,
+            "known_positive_queries": 0,
+            "judged_pairs": 1,
+            "returned_pairs": 3,
+            "gained": 0,
+            "lost": 0,
+            "net": 0,
+            "random_same_scan_count_expected_net": 0.0,
+            "paired_percentile_interval": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "hard": {
+          "never": {
+            "scans": 0,
+            "known_positive_queries": 0,
+            "judged_pairs": 1,
+            "returned_pairs": 3,
+            "gained": 0,
+            "lost": 0,
+            "net": 0,
+            "random_same_scan_count_expected_net": 0.0,
+            "paired_percentile_interval": [
+              0.0,
+              0.0
+            ]
+          },
+          "always": {
+            "scans": 2,
+            "known_positive_queries": 0,
+            "judged_pairs": 2,
+            "returned_pairs": 3,
+            "gained": 0,
+            "lost": 0,
+            "net": 0,
+            "random_same_scan_count_expected_net": 0.0,
+            "paired_percentile_interval": [
+              0.0,
+              0.0
+            ]
+          },
+          "low_margin": {
+            "scans": 1,
+            "known_positive_queries": 0,
+            "judged_pairs": 2,
+            "returned_pairs": 3,
+            "gained": 0,
+            "lost": 0,
+            "net": 0,
+            "random_same_scan_count_expected_net": 0.0,
+            "paired_percentile_interval": [
+              0.0,
+              0.0
+            ]
+          },
+          "learned_gain": {
+            "scans": 0,
+            "known_positive_queries": 0,
+            "judged_pairs": 1,
+            "returned_pairs": 3,
+            "gained": 0,
+            "lost": 0,
+            "net": 0,
+            "random_same_scan_count_expected_net": 0.0,
+            "paired_percentile_interval": [
+              0.0,
+              0.0
+            ]
+          }
+        }
+      }
+    },
+    "SciRepEval": {
+      "source_rows": 73257,
+      "queries_before_cross_corpus_filter": 91,
+      "vectors_sha256": "ad7c660bce0b3d086d5747e4c7aeb1082ff1d4ccbfa9f7fadcc3901eb8f875cf",
+      "manifest_sha256": "d90baaca66f383f34ef3ce663fe34b16e66dc38e7af3b972bd771589f19e540a",
+      "queries": 59,
+      "training_queries": 172,
+      "changed_source_sets": 49,
+      "fitting": {
+        "utility_cutoff": 0.03791757470693657,
+        "margin_cutoff": 0.0017651766538619995,
+        "weights": [
+          -0.0005119881103600103,
+          0.0030647549213342075,
+          -0.0013683744796146244,
+          0.008260600508795547
+        ]
+      },
+      "reviewer_proxy": {
+        "soft": {
+          "never": {
+            "scans": 0,
+            "known_positive_queries": 33,
+            "judged_pairs": 55,
+            "returned_pairs": 125,
+            "gained": 0,
+            "lost": 0,
+            "net": 0,
+            "random_same_scan_count_expected_net": -0.0,
+            "paired_percentile_interval": [
+              0.0,
+              0.0
+            ]
+          },
+          "always": {
+            "scans": 59,
+            "known_positive_queries": 29,
+            "judged_pairs": 52,
+            "returned_pairs": 132,
+            "gained": 2,
+            "lost": 6,
+            "net": -4,
+            "random_same_scan_count_expected_net": -4.0,
+            "paired_percentile_interval": [
+              -0.1694915254237288,
+              0.01694915254237288
+            ]
+          },
+          "low_margin": {
+            "scans": 6,
+            "known_positive_queries": 32,
+            "judged_pairs": 54,
+            "returned_pairs": 125,
+            "gained": 0,
+            "lost": 1,
+            "net": -1,
+            "random_same_scan_count_expected_net": -0.4067796610169492,
+            "paired_percentile_interval": [
+              -0.05084745762711865,
+              0.0
+            ]
+          },
+          "learned_gain": {
+            "scans": 1,
+            "known_positive_queries": 33,
+            "judged_pairs": 55,
+            "returned_pairs": 125,
+            "gained": 0,
+            "lost": 0,
+            "net": 0,
+            "random_same_scan_count_expected_net": -0.06779661016949153,
+            "paired_percentile_interval": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "hard": {
+          "never": {
+            "scans": 0,
+            "known_positive_queries": 18,
+            "judged_pairs": 55,
+            "returned_pairs": 125,
+            "gained": 0,
+            "lost": 0,
+            "net": 0,
+            "random_same_scan_count_expected_net": 0.0,
+            "paired_percentile_interval": [
+              0.0,
+              0.0
+            ]
+          },
+          "always": {
+            "scans": 59,
+            "known_positive_queries": 19,
+            "judged_pairs": 52,
+            "returned_pairs": 132,
+            "gained": 3,
+            "lost": 2,
+            "net": 1,
+            "random_same_scan_count_expected_net": 1.0,
+            "paired_percentile_interval": [
+              -0.05084745762711865,
+              0.0847457627118644
+            ]
+          },
+          "low_margin": {
+            "scans": 6,
+            "known_positive_queries": 18,
+            "judged_pairs": 54,
+            "returned_pairs": 125,
+            "gained": 0,
+            "lost": 0,
+            "net": 0,
+            "random_same_scan_count_expected_net": 0.1016949152542373,
+            "paired_percentile_interval": [
+              0.0,
+              0.0
+            ]
+          },
+          "learned_gain": {
+            "scans": 1,
+            "known_positive_queries": 18,
+            "judged_pairs": 55,
+            "returned_pairs": 125,
+            "gained": 0,
+            "lost": 0,
+            "net": 0,
+            "random_same_scan_count_expected_net": 0.01694915254237288,
+            "paired_percentile_interval": [
+              0.0,
+              0.0
+            ]
+          }
+        }
+      }
+    },
+    "KDD": {
+      "source_rows": 99594,
+      "queries_before_cross_corpus_filter": 170,
+      "vectors_sha256": "e68c3b1cc12f2701967d0530370a33592bd965aff50ad6eeb5cce67990b8667b",
+      "manifest_sha256": "d3879bdbfc3d7f7f433b38a23f847ced0dfbd33b86a718e2a836f206d8e9d16e",
+      "queries": 170,
+      "training_queries": 61,
+      "changed_source_sets": 142,
+      "fitting": {
+        "utility_cutoff": 0.0,
+        "margin_cutoff": 0.006078779697418213,
+        "weights": [
+          0.0060980632826876,
+          -0.009381712634302637,
+          0.0341066427307913,
+          -0.003628394941778552
+        ]
+      },
+      "reviewer_proxy": {
+        "soft": {
+          "never": {
+            "scans": 0,
+            "known_positive_queries": 28,
+            "judged_pairs": 60,
+            "returned_pairs": 462,
+            "gained": 0,
+            "lost": 0,
+            "net": 0,
+            "random_same_scan_count_expected_net": 0.0,
+            "paired_percentile_interval": [
+              0.0,
+              0.0
+            ]
+          },
+          "always": {
+            "scans": 170,
+            "known_positive_queries": 35,
+            "judged_pairs": 73,
+            "returned_pairs": 511,
+            "gained": 9,
+            "lost": 2,
+            "net": 7,
+            "random_same_scan_count_expected_net": 7.0,
+            "paired_percentile_interval": [
+              0.0058823529411764705,
+              0.08235294117647059
+            ]
+          },
+          "low_margin": {
+            "scans": 75,
+            "known_positive_queries": 29,
+            "judged_pairs": 65,
+            "returned_pairs": 498,
+            "gained": 2,
+            "lost": 1,
+            "net": 1,
+            "random_same_scan_count_expected_net": 3.088235294117647,
+            "paired_percentile_interval": [
+              -0.011764705882352941,
+              0.023529411764705882
+            ]
+          },
+          "learned_gain": {
+            "scans": 43,
+            "known_positive_queries": 29,
+            "judged_pairs": 62,
+            "returned_pairs": 486,
+            "gained": 1,
+            "lost": 0,
+            "net": 1,
+            "random_same_scan_count_expected_net": 1.7705882352941176,
+            "paired_percentile_interval": [
+              0.0,
+              0.01764705882352941
+            ]
+          }
+        },
+        "hard": {
+          "never": {
+            "scans": 0,
+            "known_positive_queries": 11,
+            "judged_pairs": 60,
+            "returned_pairs": 462,
+            "gained": 0,
+            "lost": 0,
+            "net": 0,
+            "random_same_scan_count_expected_net": 0.0,
+            "paired_percentile_interval": [
+              0.0,
+              0.0
+            ]
+          },
+          "always": {
+            "scans": 170,
+            "known_positive_queries": 15,
+            "judged_pairs": 73,
+            "returned_pairs": 511,
+            "gained": 6,
+            "lost": 2,
+            "net": 4,
+            "random_same_scan_count_expected_net": 4.0,
+            "paired_percentile_interval": [
+              -0.0058823529411764705,
+              0.058823529411764705
+            ]
+          },
+          "low_margin": {
+            "scans": 75,
+            "known_positive_queries": 11,
+            "judged_pairs": 65,
+            "returned_pairs": 498,
+            "gained": 1,
+            "lost": 1,
+            "net": 0,
+            "random_same_scan_count_expected_net": 1.7647058823529411,
+            "paired_percentile_interval": [
+              -0.01764705882352941,
+              0.01764705882352941
+            ]
+          },
+          "learned_gain": {
+            "scans": 43,
+            "known_positive_queries": 12,
+            "judged_pairs": 62,
+            "returned_pairs": 486,
+            "gained": 1,
+            "lost": 0,
+            "net": 1,
+            "random_same_scan_count_expected_net": 1.011764705882353,
+            "paired_percentile_interval": [
+              0.0,
+              0.01764705882352941
+            ]
+          }
+        }
+      }
+    }
+  },
+  "training_only_overlap_filter": {
+    "NIPS": {
+      "source_rows": 14913,
+      "queries_before_cross_corpus_filter": 34,
+      "vectors_sha256": "c14489a4797590c0d6caf4ade10e0631d2a5bfc61b99caf1d289c6e5d940c17b",
+      "manifest_sha256": "2ec8098f8e8f837b19dd548b6e9e0d3c6f8581729d66f9629f57619fb72575ef",
+      "queries": 34,
+      "training_queries": 229,
+      "changed_source_sets": 10,
+      "fitting": {
+        "utility_cutoff": 0.02811478101034709,
+        "margin_cutoff": 0.0030325651168823242,
+        "weights": [
+          -0.0008946464587151767,
+          0.0016160756261146578,
+          0.006894283246921762,
+          0.01422786982695049
+        ]
+      },
+      "reviewer_proxy": {
+        "soft": {
+          "never": {
+            "scans": 0,
+            "known_positive_queries": 19,
+            "judged_pairs": 40,
+            "returned_pairs": 59,
+            "gained": 0,
+            "lost": 0,
+            "net": 0,
+            "random_same_scan_count_expected_net": 0.0,
+            "paired_percentile_interval": [
+              0.0,
+              0.0
+            ]
+          },
+          "always": {
+            "scans": 34,
+            "known_positive_queries": 20,
+            "judged_pairs": 43,
+            "returned_pairs": 60,
+            "gained": 1,
+            "lost": 0,
+            "net": 1,
+            "random_same_scan_count_expected_net": 1.0,
+            "paired_percentile_interval": [
+              0.0,
+              0.08823529411764706
+            ]
+          },
+          "low_margin": {
+            "scans": 13,
+            "known_positive_queries": 19,
+            "judged_pairs": 40,
+            "returned_pairs": 58,
+            "gained": 0,
+            "lost": 0,
+            "net": 0,
+            "random_same_scan_count_expected_net": 0.38235294117647056,
+            "paired_percentile_interval": [
+              0.0,
+              0.0
+            ]
+          },
+          "learned_gain": {
+            "scans": 2,
+            "known_positive_queries": 19,
+            "judged_pairs": 40,
+            "returned_pairs": 59,
+            "gained": 0,
+            "lost": 0,
+            "net": 0,
+            "random_same_scan_count_expected_net": 0.058823529411764705,
+            "paired_percentile_interval": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "hard": {
+          "never": {
+            "scans": 0,
+            "known_positive_queries": 12,
+            "judged_pairs": 40,
+            "returned_pairs": 59,
+            "gained": 0,
+            "lost": 0,
+            "net": 0,
+            "random_same_scan_count_expected_net": 0.0,
+            "paired_percentile_interval": [
+              0.0,
+              0.0
+            ]
+          },
+          "always": {
+            "scans": 34,
+            "known_positive_queries": 12,
+            "judged_pairs": 43,
+            "returned_pairs": 60,
+            "gained": 0,
+            "lost": 0,
+            "net": 0,
+            "random_same_scan_count_expected_net": 0.0,
+            "paired_percentile_interval": [
+              0.0,
+              0.0
+            ]
+          },
+          "low_margin": {
+            "scans": 13,
+            "known_positive_queries": 12,
+            "judged_pairs": 40,
+            "returned_pairs": 58,
+            "gained": 0,
+            "lost": 0,
+            "net": 0,
+            "random_same_scan_count_expected_net": 0.0,
+            "paired_percentile_interval": [
+              0.0,
+              0.0
+            ]
+          },
+          "learned_gain": {
+            "scans": 2,
+            "known_positive_queries": 12,
+            "judged_pairs": 40,
+            "returned_pairs": 59,
+            "gained": 0,
+            "lost": 0,
+            "net": 0,
+            "random_same_scan_count_expected_net": 0.0,
+            "paired_percentile_interval": [
+              0.0,
+              0.0
+            ]
+          }
+        }
+      }
+    },
+    "SciRepEval": {
+      "source_rows": 73257,
+      "queries_before_cross_corpus_filter": 91,
+      "vectors_sha256": "ad7c660bce0b3d086d5747e4c7aeb1082ff1d4ccbfa9f7fadcc3901eb8f875cf",
+      "manifest_sha256": "d90baaca66f383f34ef3ce663fe34b16e66dc38e7af3b972bd771589f19e540a",
+      "queries": 91,
+      "training_queries": 172,
+      "changed_source_sets": 75,
+      "fitting": {
+        "utility_cutoff": 0.03791757470693657,
+        "margin_cutoff": 0.0017651766538619995,
+        "weights": [
+          -0.0005119881103600103,
+          0.0030647549213342075,
+          -0.0013683744796146244,
+          0.008260600508795547
+        ]
+      },
+      "reviewer_proxy": {
+        "soft": {
+          "never": {
+            "scans": 0,
+            "known_positive_queries": 52,
+            "judged_pairs": 105,
+            "returned_pairs": 202,
+            "gained": 0,
+            "lost": 0,
+            "net": 0,
+            "random_same_scan_count_expected_net": -0.0,
+            "paired_percentile_interval": [
+              0.0,
+              0.0
+            ]
+          },
+          "always": {
+            "scans": 91,
+            "known_positive_queries": 48,
+            "judged_pairs": 105,
+            "returned_pairs": 217,
+            "gained": 2,
+            "lost": 6,
+            "net": -4,
+            "random_same_scan_count_expected_net": -4.0,
+            "paired_percentile_interval": [
+              -0.10989010989010989,
+              0.01098901098901099
+            ]
+          },
+          "low_margin": {
+            "scans": 8,
+            "known_positive_queries": 51,
+            "judged_pairs": 104,
+            "returned_pairs": 202,
+            "gained": 0,
+            "lost": 1,
+            "net": -1,
+            "random_same_scan_count_expected_net": -0.3516483516483517,
+            "paired_percentile_interval": [
+              -0.03296703296703297,
+              0.0
+            ]
+          },
+          "learned_gain": {
+            "scans": 2,
+            "known_positive_queries": 52,
+            "judged_pairs": 105,
+            "returned_pairs": 202,
+            "gained": 0,
+            "lost": 0,
+            "net": 0,
+            "random_same_scan_count_expected_net": -0.08791208791208792,
+            "paired_percentile_interval": [
+              0.0,
+              0.0
+            ]
+          }
+        },
+        "hard": {
+          "never": {
+            "scans": 0,
+            "known_positive_queries": 32,
+            "judged_pairs": 105,
+            "returned_pairs": 202,
+            "gained": 0,
+            "lost": 0,
+            "net": 0,
+            "random_same_scan_count_expected_net": 0.0,
+            "paired_percentile_interval": [
+              0.0,
+              0.0
+            ]
+          },
+          "always": {
+            "scans": 91,
+            "known_positive_queries": 32,
+            "judged_pairs": 105,
+            "returned_pairs": 217,
+            "gained": 3,
+            "lost": 3,
+            "net": 0,
+            "random_same_scan_count_expected_net": 0.0,
+            "paired_percentile_interval": [
+              -0.054945054945054944,
+              0.054945054945054944
+            ]
+          },
+          "low_margin": {
+            "scans": 8,
+            "known_positive_queries": 32,
+            "judged_pairs": 104,
+            "returned_pairs": 202,
+            "gained": 0,
+            "lost": 0,
+            "net": 0,
+            "random_same_scan_count_expected_net": 0.0,
+            "paired_percentile_interval": [
+              0.0,
+              0.0
+            ]
+          },
+          "learned_gain": {
+            "scans": 2,
+            "known_positive_queries": 32,
+            "judged_pairs": 105,
+            "returned_pairs": 202,
+            "gained": 0,
+            "lost": 0,
+            "net": 0,
+            "random_same_scan_count_expected_net": 0.0,
+            "paired_percentile_interval": [
+              0.0,
+              0.0
+            ]
+          }
+        }
+      }
+    },
+    "KDD": {
+      "source_rows": 99594,
+      "queries_before_cross_corpus_filter": 170,
+      "vectors_sha256": "e68c3b1cc12f2701967d0530370a33592bd965aff50ad6eeb5cce67990b8667b",
+      "manifest_sha256": "d3879bdbfc3d7f7f433b38a23f847ced0dfbd33b86a718e2a836f206d8e9d16e",
+      "queries": 170,
+      "training_queries": 125,
+      "changed_source_sets": 142,
+      "fitting": {
+        "utility_cutoff": 0.0,
+        "margin_cutoff": 0.004163801670074463,
+        "weights": [
+          0.005133016227298246,
+          0.005698979353844664,
+          0.010247737258314,
+          -0.00024842259427228946
+        ]
+      },
+      "reviewer_proxy": {
+        "soft": {
+          "never": {
+            "scans": 0,
+            "known_positive_queries": 28,
+            "judged_pairs": 60,
+            "returned_pairs": 462,
+            "gained": 0,
+            "lost": 0,
+            "net": 0,
+            "random_same_scan_count_expected_net": 0.0,
+            "paired_percentile_interval": [
+              0.0,
+              0.0
+            ]
+          },
+          "always": {
+            "scans": 170,
+            "known_positive_queries": 35,
+            "judged_pairs": 73,
+            "returned_pairs": 511,
+            "gained": 9,
+            "lost": 2,
+            "net": 7,
+            "random_same_scan_count_expected_net": 7.0,
+            "paired_percentile_interval": [
+              0.0058823529411764705,
+              0.08235294117647059
+            ]
+          },
+          "low_margin": {
+            "scans": 57,
+            "known_positive_queries": 30,
+            "judged_pairs": 65,
+            "returned_pairs": 491,
+            "gained": 2,
+            "lost": 0,
+            "net": 2,
+            "random_same_scan_count_expected_net": 2.347058823529412,
+            "paired_percentile_interval": [
+              0.0,
+              0.029411764705882353
+            ]
+          },
+          "learned_gain": {
+            "scans": 34,
+            "known_positive_queries": 28,
+            "judged_pairs": 61,
+            "returned_pairs": 473,
+            "gained": 1,
+            "lost": 1,
+            "net": 0,
+            "random_same_scan_count_expected_net": 1.4,
+            "paired_percentile_interval": [
+              -0.01764705882352941,
+              0.01764705882352941
+            ]
+          }
+        },
+        "hard": {
+          "never": {
+            "scans": 0,
+            "known_positive_queries": 11,
+            "judged_pairs": 60,
+            "returned_pairs": 462,
+            "gained": 0,
+            "lost": 0,
+            "net": 0,
+            "random_same_scan_count_expected_net": 0.0,
+            "paired_percentile_interval": [
+              0.0,
+              0.0
+            ]
+          },
+          "always": {
+            "scans": 170,
+            "known_positive_queries": 15,
+            "judged_pairs": 73,
+            "returned_pairs": 511,
+            "gained": 6,
+            "lost": 2,
+            "net": 4,
+            "random_same_scan_count_expected_net": 4.0,
+            "paired_percentile_interval": [
+              -0.0058823529411764705,
+              0.058823529411764705
+            ]
+          },
+          "low_margin": {
+            "scans": 57,
+            "known_positive_queries": 12,
+            "judged_pairs": 65,
+            "returned_pairs": 491,
+            "gained": 1,
+            "lost": 0,
+            "net": 1,
+            "random_same_scan_count_expected_net": 1.3411764705882352,
+            "paired_percentile_interval": [
+              0.0,
+              0.01764705882352941
+            ]
+          },
+          "learned_gain": {
+            "scans": 34,
+            "known_positive_queries": 11,
+            "judged_pairs": 61,
+            "returned_pairs": 473,
+            "gained": 1,
+            "lost": 1,
+            "net": 0,
+            "random_same_scan_count_expected_net": 0.8,
+            "paired_percentile_interval": [
+              -0.01764705882352941,
+              0.01764705882352941
+            ]
+          }
+        }
+      }
+    }
+  },
+  "primary_reproduced_job": "43989"
+}
