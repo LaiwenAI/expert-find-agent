@@ -1,0 +1,25 @@
+{
+  "study": "enterprise-sealed-first-query-v1",
+  "groups": 123,
+  "requests_per_group": 1,
+  "primary": "dense_global_on_abstain",
+  "primary_comparator": "dense_deeper_on_abstain",
+  "arms": [
+    "dense",
+    "dense_deeper_on_abstain",
+    "dense_global_on_abstain",
+    "hybrid",
+    "deeper_on_abstain",
+    "global_on_abstain"
+  ],
+  "top_k": 5,
+  "required_fields": ["method_fit", "constraint_support", "personal_contribution"],
+  "minimum_grounded_p5_gain": 0.02,
+  "quality_noninferiority_margin": 0.01,
+  "coverage_floor": 0.6,
+  "conditional_risk_ceiling": 0.05,
+  "confidence": 0.95,
+  "bootstrap_seed": 20261120,
+  "bootstrap_draws": 4000,
+  "analysis_release": "After independent evidence reviews and adjudication, release arm-level quality and latency only in aggregate."
+}

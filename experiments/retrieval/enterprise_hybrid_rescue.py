@@ -46,8 +46,12 @@ def hybrid_hits(text, vector, index, lexical, owners, source_ids, k, source_dept
     return result
 
 
-def summary(observations):
-    all_rows = {arm: [item["arms"][arm] for item in observations] for arm in ARMS}
+SEALED_ARMS = ("dense", "dense_deeper_on_abstain", "dense_global_on_abstain",
+               "hybrid", "deeper_on_abstain", "global_on_abstain")
+
+
+def summary(observations, arms=ARMS):
+    all_rows = {arm: [item["arms"][arm] for item in observations] for arm in arms}
     base = all_rows["hybrid"]
     draws = np.random.default_rng(20261120).integers(len(base), size=(4000, len(base)))
     base_p95 = np.quantile(np.asarray([row["ms"] for row in base])[draws], .95, axis=1)
@@ -75,7 +79,7 @@ def summary(observations):
     ))
 
 
-def run(queries, corpus, role_windows, vectors, vector_meta, models, scratch, output, trace):
+def run(queries, corpus, role_windows, vectors, vector_meta, models, scratch, output, trace, panel_lock=None):
     import torch
 
     from expert_search.gpu_owned_vector_index import GpuOwnedVectorIndex
@@ -91,8 +95,19 @@ def run(queries, corpus, role_windows, vectors, vector_meta, models, scratch, ou
     from experiments.retrieval.sepef_first_query import lexical_index
 
     role.require_cuda(output, trace)
-    if (digest(queries), digest(corpus)) != (DEVELOPMENT, SOURCE_INVENTORY):
-        raise ValueError("Require the unchanged development projections")
+    query_hash = digest(queries)
+    requests = rows(queries)
+    if digest(corpus) != SOURCE_INVENTORY:
+        raise ValueError("Require the unchanged corpus projection")
+    if panel_lock is None:
+        if query_hash != DEVELOPMENT:
+            raise ValueError("Require the unchanged development requests")
+        arms = ARMS
+    else:
+        from experiments.retrieval.enterprise_sealed_first_query import validate_execution
+
+        validate_execution(panel_lock, queries, requests, corpus, role_windows, vectors, vector_meta, models)
+        arms = SEALED_ARMS
     torch.backends.cuda.matmul.allow_tf32 = False
     sources = review.index(rows(corpus), lambda row: row["id"])
     ids = list(sources)
@@ -123,48 +138,53 @@ def run(queries, corpus, role_windows, vectors, vector_meta, models, scratch, ou
                 clauses, parsed["labels"], strict=True) if ROLES[int(label)] == "prior_qualification"]
             criteria = [text.strip().splitlines()[0][:CRITERION_CHARS], *(text[a:b] for a,b in qualification)]
             vector = embedding.encode([f"Instruct: {EMBED_TASK}\nQuery: {text}"])[0]
-            hits = (index.search_vector(vector, k=K)["hits"] if arm == "dense"
+            use_dense = arm.startswith("dense")
+            hits = (index.search_vector(vector, k=K)["hits"] if use_dense
                     else hybrid_hits(text, vector, index, lexical, owners, ids, K, SOURCE_DEPTH))
             decisions, pairs, clipped, withheld = verify_candidates(hits, sources, criteria, verifier)
             initial = [dict(expert=eid, citations=[list(c) for c in dict.fromkeys(citations)])
                        for eid, accepted, citations in decisions if accepted]
             ranked = [item[0] for item in decisions]
             extra, rescue_pairs, invoked, rescue_clipped = ([], 0, False, 0)
-            if arm in ("deeper_on_abstain", "global_on_abstain") and all(
+            rescue = arm.removeprefix("dense_")
+            if rescue in ("deeper_on_abstain", "global_on_abstain") and all(
                     len(criterion) <= CRITERION_CHARS for criterion in criteria):
                 extra, rescue_pairs, invoked, rescue_clipped = role.recover(
                     criteria, ranked, {item["expert"] for item in initial}, window_index,
-                    verifier, arm, TASK, K - len(initial),
+                    verifier, rescue, TASK, K - len(initial),
                 )
             return dict(initial=initial, extra=extra, ranked=ranked, qualifications=qualification,
                         primary_pairs=pairs, primary_clipped=clipped, primary_withheld=withheld,
                         rescue_pairs=rescue_pairs, rescue_clipped=rescue_clipped, invoked=invoked,
                         ms=(perf_counter()-begin)*1000)
 
-        for arm in ARMS:
+        for arm in arms:
             one("Find an expert in optical inspection with prior polymer film testing work.", arm)
         observations = []
-        for count, request in enumerate(rows(queries)):
-            shift = count % len(ARMS)
-            compared = {arm: one(request["text"], arm) for arm in ARMS[shift:] + ARMS[:shift]}
+        for count, request in enumerate(requests):
+            shift = count % len(arms)
+            compared = {arm: one(request["text"], arm) for arm in arms[shift:] + arms[:shift]}
             for arm, data in compared.items():
                 if data["qualifications"] != compared["hybrid"]["qualifications"]:
                     raise ValueError("Parsing changed across retrieval methods")
-                if arm != "dense" and any(data[key] != compared["hybrid"][key] for key in ("ranked","initial")):
-                    raise ValueError("Hybrid primary search changed across rescue arms")
+                primary = compared["dense" if arm.startswith("dense") else "hybrid"]
+                if any(data[key] != primary[key] for key in ("ranked", "initial")):
+                    raise ValueError("Primary search changed across rescue arms")
             observations.append(dict(id=request["id"], arms=compared))
             if (count+1) % 20 == 0:
-                print(f"Measured {count+1} development queries", flush=True)
+                print(f"Measured {count+1} queries", flush=True)
     metadata = dict(job=os.environ["SLURM_JOB_ID"], gpu=torch.cuda.get_device_name(),
-                    code_sha256=digest(Path(__file__)), queries_sha256=DEVELOPMENT,
+                    code_sha256=digest(Path(__file__)), queries_sha256=query_hash,
                     corpus_sha256=SOURCE_INVENTORY, vectors_sha256=cache["vectors_sha256"],
                     role_index_sha256=digest(role_windows), lexical_build_seconds=build_seconds,
                     lexical_postings_bytes=lexical.array_bytes, sources=len(sources), k=K,
                     source_depth=SOURCE_DEPTH, fusion_depth=DEPTH, rescue_cap=role.ROLE_READS,
                     models=dict(embedding=revision, parser=parser.readers["bf16"].provenance["revision"],
                                 verifier=verifier.provenance["revision"]))
+    if panel_lock is not None:
+        metadata["panel_lock_sha256"] = digest(panel_lock)
     write(trace, dict(metadata=metadata, observations=observations))
-    write(output, dict(metadata, **summary(observations)))
+    write(output, dict(metadata, **summary(observations, arms)))
 
 
 def packet(dataset, trace, aggregate, queries_projection, corpus_projection, output):
@@ -233,6 +253,8 @@ if __name__ == "__main__":
         sub = commands.add_parser(handler.__name__)
         for name in names:
             sub.add_argument(name,type=Path)
+        if handler is run:
+            sub.add_argument("--panel-lock", type=Path)
     args = vars(parser.parse_args())
     handler = {"run":run,"packet":packet}[args.pop("command")]
     handler(**args)
