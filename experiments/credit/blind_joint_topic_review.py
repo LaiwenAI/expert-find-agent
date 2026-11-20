@@ -166,13 +166,14 @@ def score(args):
     judgments = {case: verdict(case, list(reviews.values())) for case in case_ids}
     result = {}
     for name, panel in panels.items():
+        baseline = panel.get("baseline", "full")
         arms = {}
         for mode in panel["rows"][0]["outputs"]:
             issued = [row["outputs"][mode] for row in panel["rows"] if row["outputs"][mode] is not None]
             known = sum(judgments[case] is True for case in issued)
             unresolved = sum(judgments[case] is None for case in issued)
             weights = Counter(issued)
-            weights.subtract(row["outputs"]["full"] for row in panel["rows"] if row["outputs"]["full"] is not None)
+            weights.subtract(row["outputs"][baseline] for row in panel["rows"] if row["outputs"][baseline] is not None)
             lower = upper = 0
             for case, weight in weights.items():
                 if judgments[case] is True:
@@ -183,7 +184,7 @@ def score(args):
                     upper += max(weight, 0)
             arms[mode] = dict(issued=len(issued), supported=known, unresolved=unresolved,
                              supported_bounds=[known, known+unresolved],
-                             supported_delta_vs_full_bounds=[lower, upper])
+                             **{f"supported_delta_vs_{baseline}_bounds": [lower, upper]})
         result[name] = dict(queries=panel["queries"], arms=arms)
     write_json(args.output, dict(packet_id=key["packet_id"], reviewers=len(reviews),
                                   conclusive_cases=sum(value is not None for value in judgments.values()),
