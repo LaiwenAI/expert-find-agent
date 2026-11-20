@@ -1,0 +1,243 @@
+{
+  "initial": {
+    "job": "43848",
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "script_sha256": "c010bc2a8501ec568f99d45dded2cd0748af2486e0682115d6798ee2ea39b1cc",
+    "kernel_source_sha256": "610a6cf8b7deb968fd5b9d5e3e22406db9cf215914b12bad89e1314c775268eb",
+    "source_manifest_sha256": "d90baaca66f383f34ef3ce663fe34b16e66dc38e7af3b972bd771589f19e540a",
+    "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+    "titles": 73257,
+    "normalized_distinct_titles": 72272,
+    "queries": 91,
+    "title_encoding_seconds": 24.40294162184,
+    "fp32_bytes": 300060672,
+    "int8_bytes": 75601224,
+    "agreement": {
+      "cached": {
+        "requests": 273,
+        "equal_first": 270,
+        "equal_source_set": 270,
+        "equal_response": 267
+      },
+      "online": {
+        "requests": 273,
+        "equal_first": 270,
+        "equal_source_set": 270,
+        "equal_response": 267
+      }
+    },
+    "reviewer_proxy": {
+      "fp32_bounded": {
+        "soft": {
+          "has_known_positive": 40,
+          "known_positive": 58,
+          "judged": 86,
+          "total": 206
+        },
+        "hard": {
+          "has_known_positive": 29,
+          "known_positive": 39,
+          "judged": 86,
+          "total": 206
+        }
+      },
+      "int8_vnni": {
+        "soft": {
+          "has_known_positive": 40,
+          "known_positive": 58,
+          "judged": 86,
+          "total": 206
+        },
+        "hard": {
+          "has_known_positive": 29,
+          "known_positive": 39,
+          "judged": 86,
+          "total": 206
+        }
+      }
+    },
+    "timings_ms": {
+      "cached": {
+        "fp32_bounded": {
+          "p50": 5.793588235974312,
+          "p95": 6.221891567111015
+        },
+        "int8_vnni": {
+          "p50": 1.649998128414154,
+          "p95": 1.739644631743431
+        }
+      },
+      "online": {
+        "fp32_bounded": {
+          "p50": 13.684697449207306,
+          "p95": 14.086740091443062
+        },
+        "int8_vnni": {
+          "p50": 9.95393842458725,
+          "p95": 10.803647339344025
+        }
+      }
+    }
+  },
+  "repeat": {
+    "job": "43850",
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "script_sha256": "b5a4a6256bb886d8573ffa95611d1275da0ebc043abe2ce10519ce5df8f499b8",
+    "kernel_source_sha256": "610a6cf8b7deb968fd5b9d5e3e22406db9cf215914b12bad89e1314c775268eb",
+    "source_manifest_sha256": "d90baaca66f383f34ef3ce663fe34b16e66dc38e7af3b972bd771589f19e540a",
+    "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+    "titles": 73257,
+    "normalized_distinct_titles": 72272,
+    "queries": 91,
+    "title_encoding_seconds": 24.48801484145224,
+    "fp32_bytes": 300060672,
+    "int8_bytes": 75601224,
+    "agreement": {
+      "cached": {
+        "requests": 273,
+        "equal_first": 270,
+        "equal_source_set": 270,
+        "equal_response": 267
+      },
+      "online": {
+        "requests": 273,
+        "equal_first": 270,
+        "equal_source_set": 270,
+        "equal_response": 267
+      }
+    },
+    "reviewer_proxy": {
+      "fp32_bounded": {
+        "soft": {
+          "has_known_positive": 40,
+          "known_positive": 58,
+          "judged": 86,
+          "total": 206
+        },
+        "hard": {
+          "has_known_positive": 29,
+          "known_positive": 39,
+          "judged": 86,
+          "total": 206
+        }
+      },
+      "int8_vnni": {
+        "soft": {
+          "has_known_positive": 40,
+          "known_positive": 58,
+          "judged": 86,
+          "total": 206
+        },
+        "hard": {
+          "has_known_positive": 29,
+          "known_positive": 39,
+          "judged": 86,
+          "total": 206
+        }
+      }
+    },
+    "timings_ms": {
+      "cached": {
+        "fp32_bounded": {
+          "p50": 5.813635885715485,
+          "p95": 6.269252300262451
+        },
+        "int8_vnni": {
+          "p50": 1.6183704137802124,
+          "p95": 1.726527139544487
+        }
+      },
+      "online": {
+        "fp32_bounded": {
+          "p50": 13.629145920276642,
+          "p95": 14.208503067493437
+        },
+        "int8_vnni": {
+          "p50": 10.03052107989788,
+          "p95": 10.767551138997078
+        }
+      }
+    }
+  },
+  "determinism_check": {
+    "job": "43852",
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "script_sha256": "b5a4a6256bb886d8573ffa95611d1275da0ebc043abe2ce10519ce5df8f499b8",
+    "kernel_source_sha256": "610a6cf8b7deb968fd5b9d5e3e22406db9cf215914b12bad89e1314c775268eb",
+    "source_manifest_sha256": "d90baaca66f383f34ef3ce663fe34b16e66dc38e7af3b972bd771589f19e540a",
+    "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+    "titles": 73257,
+    "normalized_distinct_titles": 72272,
+    "queries": 91,
+    "title_encoding_seconds": 24.584954606369138,
+    "fp32_bytes": 300060672,
+    "int8_bytes": 75601224,
+    "agreement": {
+      "cached": {
+        "requests": 273,
+        "equal_first": 270,
+        "equal_source_set": 270,
+        "equal_response": 267
+      },
+      "online": {
+        "requests": 273,
+        "equal_first": 270,
+        "equal_source_set": 270,
+        "equal_response": 267
+      }
+    },
+    "unique_queries_with_changed_response": 2,
+    "reviewer_proxy": {
+      "fp32_bounded": {
+        "soft": {
+          "has_known_positive": 40,
+          "known_positive": 58,
+          "judged": 86,
+          "total": 206
+        },
+        "hard": {
+          "has_known_positive": 29,
+          "known_positive": 39,
+          "judged": 86,
+          "total": 206
+        }
+      },
+      "int8_vnni": {
+        "soft": {
+          "has_known_positive": 40,
+          "known_positive": 58,
+          "judged": 86,
+          "total": 206
+        },
+        "hard": {
+          "has_known_positive": 29,
+          "known_positive": 39,
+          "judged": 86,
+          "total": 206
+        }
+      }
+    },
+    "timings_ms": {
+      "cached": {
+        "fp32_bounded": {
+          "p50": 5.7914648205041885,
+          "p95": 6.172696873545647
+        },
+        "int8_vnni": {
+          "p50": 1.6262009739875793,
+          "p95": 1.7030593007802963
+        }
+      },
+      "online": {
+        "fp32_bounded": {
+          "p50": 13.620147481560707,
+          "p95": 13.947821408510208
+        },
+        "int8_vnni": {
+          "p50": 10.065995156764984,
+          "p95": 10.861368849873543
+        }
+      }
+    }
+  }
+}
