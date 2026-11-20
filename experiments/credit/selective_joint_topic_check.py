@@ -61,7 +61,7 @@ def assess(index, reader, payload, mode):
     return result, (perf_counter() - start) * 1000, checks
 
 
-def collect(index, reader, subjects, cases, offset):
+def collect(index, reader, subjects, cases, offset, *, audit_rows=None):
     for mode in MODES:
         assess(index, reader, live.request(cases[0]), mode)
     output = []
@@ -70,14 +70,19 @@ def collect(index, reader, subjects, cases, offset):
         payload = live.request(atoms)
         position = (number + offset) % len(MODES)
         results = {}
+        candidates = {} if audit_rows is not None else None
         for mode in MODES[position:] + MODES[:position]:
             encoded, latency, checks = assess(index, reader, payload, mode)
             item = json.loads(encoded)
             match = item["candidate"]
+            if candidates is not None:
+                candidates[mode] = match
             reference = bool(match) and all(atoms[i][0] in subjects[match[i+1]] for i in range(2))
             results[mode] = dict(known=reference, checks=checks, latency_ms=latency,
                                  confidence=item["confidence"])
         output.append((key, results))
+        if audit_rows is not None:
+            audit_rows.append((atoms, candidates))
     return output
 
 

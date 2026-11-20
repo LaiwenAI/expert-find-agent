@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cross-publication evidence review</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;color:#192735;background:#f3f6f9;font:15px/1.55 system-ui,sans-serif}
+main{width:min(1100px,calc(100% - 32px));margin:28px auto}
+h1{font-size:clamp(24px,4vw,34px);line-height:1.2}
+h2{font-size:19px;margin-top:0}
+h3{font-size:15px;margin-top:0}
+.controls,.card{padding:15px;background:white;border:1px solid #d2dce4;border-radius:8px;margin:16px 0}
+.controls{position:sticky;top:0;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.sources{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px}
+.source{padding:14px;border:1px solid #d2dce4;border-radius:6px;overflow-wrap:anywhere}
+.selectors{display:flex;gap:12px;flex-wrap:wrap}
+label{font-weight:600}
+label select{display:block;margin:3px 0 8px}
+input,select,button{padding:6px 8px;color:inherit;background:white;border:1px solid #8fa0af;border-radius:4px;font:inherit}
+button{background:#174261;color:white;cursor:pointer}
+a{color:#185679}
+.identity{margin-top:12px}
+@media(max-width:700px){.sources{grid-template-columns:1fr}.controls{position:static}}
+@media print{.controls{position:static}body{background:white}.card{break-before:page}}
+</style>
+<main>
+<h1>Cross-publication evidence review</h1>
+<p>Judge each paper independently, then assess whether both papers identify the same contributor.
+Open the original source if the title, abstract or contribution excerpt leaves a condition unclear.</p>
+<p><strong>Supported</strong> means the source establishes the condition. <strong>Contradicted</strong> means
+it establishes a conflicting condition. <strong>Unclear</strong> covers missing or inconclusive evidence.
+Enter your reviewer ID to start or resume a private draft. Review independently.
+Export retains only complete cases.</p>
+<div class="controls">
+  <label for="reviewer">Reviewer</label><input id="reviewer" autocomplete="off" placeholder="Reviewer ID">
+  <button id="download" type="button">Export judgments</button><span id="progress" role="status"></span>
+</div>
+<div id="cases"></div><footer id="packet-id"></footer>
+</main>
+<script id="packet" type="application/json">__REVIEW_PACKET__</script>
+<script>
+const packet = JSON.parse(document.getElementById("packet").textContent);
+const storageKey = "expert-review-" + packet.packet_id;
+let activeId = "";
+const reviewer = document.getElementById("reviewer");
+const selects = new Map();
+const options = [["", "Choose a judgment"], ["supported", "Supported"],
+  ["contradicted", "Contradicted"], ["unclear", "Unclear"]];
+function node(tag, text, className) {
+  const item = document.createElement(tag);
+  if (text) item.textContent = text;
+  if (className) item.className = className;
+  return item;
+}
+function field(caseId, dimension, labelText) {
+  const label = node("label", labelText);
+  const select = node("select");
+  select.setAttribute("aria-label", labelText);
+  for (const [value, text] of options) {
+    const opt = node("option", text);
+    opt.value = value;
+    select.append(opt);
+  }
+  select.disabled = true;
+  select.addEventListener("change", refresh);
+  selects.get(caseId).set(dimension, select);
+  label.append(select);
+  return label;
+}
+for (const [index, item] of packet.cards.entries()) {
+  const card = node("article", "", "card");
+  card.append(node("h2", "Case " + (index + 1)));
+  const grid = node("div", "", "sources");
+  selects.set(item.case_id, new Map());
+  for (const [i, source] of item.sources.entries()) {
+    const suffix = i === 0 ? "a" : "b";
+    const condition = suffix.toUpperCase();
+    const requirement = item.requirements[i];
+    const box = node("section", "", "source");
+    box.append(node("h3", "Condition " + condition + " · " + requirement.topic + " · " + requirement.role));
+    box.append(node("p", source.title));
+    const link = node("a", source.doi);
+    link.href = "https://doi.org/" + source.doi;
+    link.target = "_blank";
+    link.rel = "noopener";
+    const sourceLine = node("p");
+    sourceLine.append(link);
+    box.append(sourceLine);
+    box.append(node("p", "Author " + source.author_position + ": " + (source.author || "see original byline")));
+    box.append(node("p", "Publisher ORCID: " + source.publisher_orcid));
+    box.append(node("p", "Contribution excerpt: " + source.original_credit.join("; ")));
+    box.append(node("p", source.abstract));
+    const controls = node("div", "", "selectors");
+    controls.append(field(item.case_id, "topic_" + suffix, "Topic " + condition),
+      field(item.case_id, "role_" + suffix, "Role " + condition));
+    box.append(controls);
+    grid.append(box);
+  }
+  card.append(grid);
+  const identity = node("div", "", "identity");
+  identity.append(field(item.case_id, "same_person", "Same contributor across both papers"));
+  card.append(identity);
+  document.getElementById("cases").append(card);
+}
+function draft() {
+  return Object.fromEntries([...selects].map(([id, values]) =>
+    [id, Object.fromEntries([...values].map(([dimension, select]) => [dimension, select.value]))]));
+}
+function complete(state) {
+  return Object.fromEntries(Object.entries(state).filter(([, labels]) =>
+    packet.dimensions.every(dimension => labels[dimension])));
+}
+function refresh() {
+  const state = draft();
+  const reviewed = Object.keys(complete(state)).length;
+  document.getElementById("progress").textContent = reviewed + " of " + packet.cards.length + " cases complete";
+  if (activeId) {
+    try { localStorage.setItem(storageKey + "-" + activeId, JSON.stringify(state)); } catch {}
+  }
+}
+reviewer.addEventListener("change", () => {
+  const id = reviewer.value.trim();
+  if (activeId === id) return;
+  activeId = id;
+  let state = {};
+  if (activeId) {
+    try { state = JSON.parse(localStorage.getItem(storageKey + "-" + activeId) || "{}") || {}; } catch {}
+  }
+  for (const [caseId, fields] of selects) {
+    for (const [dimension, select] of fields) {
+      select.value = state[caseId]?.[dimension] || "";
+      select.disabled = !activeId;
+    }
+  }
+  refresh();
+});
+document.getElementById("download").addEventListener("click", () => {
+  const id = reviewer.value.trim();
+  if (!id || id !== activeId) { reviewer.focus(); return; }
+  const labels = complete(draft());
+  if (!Object.keys(labels).length) { document.querySelector("select").focus(); return; }
+  const response = {packet_id:packet.packet_id, reviewer:id, labels};
+  const url = URL.createObjectURL(new Blob([JSON.stringify(response, null, 2)], {type:"application/json"}));
+  const link = node("a");
+  link.href = url;
+  link.download = "blind-review-judgments.json";
+  link.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+});
+document.getElementById("packet-id").textContent = "Packet " + packet.packet_id;
+refresh();
+</script>
