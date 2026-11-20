@@ -1,0 +1,658 @@
+{
+  "run": {
+    "job": "44028",
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "script_sha256": "b273d797e18f9ebeb7c678821f014f6a604ac23ae392fcd189a6a462446f946b",
+    "gap_reference_sha256": "715d7c26929850482a018439ddc68f2cd43e1296aafbe5d7feef2eda5d6abbab",
+    "calibration_reference_sha256": "47902fe8b427c130fcf7355a50e0e1de9792c1502d61d5b6f8a460501b47513b",
+    "plos_projection_sha256": "5491e3456ff751df14f172100e341eb23ec2567e93f94ad0c8b05715d1331744",
+    "elife_projection_sha256": "4ce67b1ff52d869f133bd5318bad2573502d12aae065c75c9407c14754171c89",
+    "tolerance": 0.4375,
+    "reports": {
+      "plos": {
+        "50": {
+          "padded": {
+            "exact_responses": 46,
+            "executed_token_slots": 90160,
+            "requests": 46,
+            "p50_p95_p99_ms": [
+              29.52111791819334,
+              36.12923854961991,
+              36.230780463665724
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              -0.03578700125217438,
+              0.005368143320083618
+            ]
+          },
+          "fixed_width": {
+            "exact_responses": 46,
+            "executed_token_slots": 90160,
+            "requests": 46,
+            "p50_p95_p99_ms": [
+              29.52815778553486,
+              36.13322461023927,
+              36.26426961272955
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              0.0,
+              0.0
+            ]
+          },
+          "packed": {
+            "exact_responses": 45,
+            "executed_token_slots": 71882,
+            "requests": 46,
+            "p50_p95_p99_ms": [
+              23.424187675118446,
+              25.549850892275572,
+              25.84939245134592
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              -11.43394666723907,
+              -7.594283204525709
+            ]
+          },
+          "full_recheck": {
+            "exact_responses": 46,
+            "executed_token_slots": 106486,
+            "full_rechecks": 18,
+            "requests_rechecked": 18,
+            "rows_rechecked": 72,
+            "requests": 46,
+            "p50_p95_p99_ms": [
+              24.519389495253563,
+              47.04805137589574,
+              48.11936253681779
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              8.477798197418451,
+              15.052238944917917
+            ]
+          },
+          "selective_recheck": {
+            "exact_responses": 45,
+            "executed_token_slots": 88183,
+            "requests_rechecked": 18,
+            "rows_rechecked": 34,
+            "changed_recheck_scores": 14,
+            "requests": 46,
+            "p50_p95_p99_ms": [
+              24.51004646718502,
+              40.366997476667166,
+              42.399096302688115
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              -0.5966974422335625,
+              8.755576144903904
+            ]
+          }
+        },
+        "100": {
+          "padded": {
+            "exact_responses": 46,
+            "executed_token_slots": 90676,
+            "requests": 46,
+            "p50_p95_p99_ms": [
+              29.64507881551981,
+              35.341157112270594,
+              36.185791436582804
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              -0.04484318196773529,
+              0.051116570830345154
+            ]
+          },
+          "fixed_width": {
+            "exact_responses": 46,
+            "executed_token_slots": 90676,
+            "requests": 46,
+            "p50_p95_p99_ms": [
+              29.686816036701202,
+              35.33958736807108,
+              36.23023200780153
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              0.0,
+              0.0
+            ]
+          },
+          "packed": {
+            "exact_responses": 43,
+            "executed_token_slots": 72993,
+            "requests": 46,
+            "p50_p95_p99_ms": [
+              23.255757056176662,
+              25.628231931477785,
+              26.036896277219057
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              -11.022572871297598,
+              -7.204867899417877
+            ]
+          },
+          "full_recheck": {
+            "exact_responses": 46,
+            "executed_token_slots": 111637,
+            "full_rechecks": 20,
+            "requests_rechecked": 20,
+            "rows_rechecked": 80,
+            "requests": 46,
+            "p50_p95_p99_ms": [
+              25.5572572350502,
+              47.996367793530226,
+              48.43811830505729
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              8.665472269058228,
+              15.418184455484152
+            ]
+          },
+          "selective_recheck": {
+            "exact_responses": 43,
+            "executed_token_slots": 92794,
+            "requests_rechecked": 20,
+            "rows_rechecked": 41,
+            "changed_recheck_scores": 21,
+            "requests": 46,
+            "p50_p95_p99_ms": [
+              25.54879244416952,
+              41.32884507998824,
+              43.57487326487899
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              1.6162628307938576,
+              10.55843522772193
+            ]
+          }
+        }
+      },
+      "elife": {
+        "50": {
+          "padded": {
+            "exact_responses": 110,
+            "executed_token_slots": 152268,
+            "requests": 110,
+            "p50_p95_p99_ms": [
+              23.862332105636597,
+              28.194304741919034,
+              29.656463358551264
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              -0.05734339356422424,
+              0.04841014742851257
+            ]
+          },
+          "fixed_width": {
+            "exact_responses": 110,
+            "executed_token_slots": 152268,
+            "requests": 110,
+            "p50_p95_p99_ms": [
+              23.847938515245914,
+              28.18500800058245,
+              29.65938076376915
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              0.0,
+              0.0
+            ]
+          },
+          "packed": {
+            "exact_responses": 108,
+            "executed_token_slots": 133834,
+            "requests": 110,
+            "p50_p95_p99_ms": [
+              19.78560071438551,
+              21.507992688566443,
+              23.029834888875484
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              -7.90128577500581,
+              -4.813450472429397
+            ]
+          },
+          "full_recheck": {
+            "exact_responses": 110,
+            "executed_token_slots": 190974,
+            "full_rechecks": 42,
+            "requests_rechecked": 42,
+            "rows_rechecked": 168,
+            "requests": 110,
+            "p50_p95_p99_ms": [
+              20.131035707890987,
+              36.931844148784876,
+              38.003217335790396
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              7.128357233013958,
+              11.255139065906405
+            ]
+          },
+          "selective_recheck": {
+            "exact_responses": 108,
+            "executed_token_slots": 162181,
+            "requests_rechecked": 42,
+            "rows_rechecked": 84,
+            "changed_recheck_scores": 31,
+            "requests": 110,
+            "p50_p95_p99_ms": [
+              20.082158967852592,
+              32.9577948898077,
+              36.39996953308582
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              2.4528064765036106,
+              9.817291845101863
+            ]
+          }
+        },
+        "100": {
+          "padded": {
+            "exact_responses": 110,
+            "executed_token_slots": 152112,
+            "requests": 110,
+            "p50_p95_p99_ms": [
+              23.87268003076315,
+              29.38158819451928,
+              29.44850116968155
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              -0.02553686499595642,
+              0.022511929273605347
+            ]
+          },
+          "fixed_width": {
+            "exact_responses": 110,
+            "executed_token_slots": 152112,
+            "requests": 110,
+            "p50_p95_p99_ms": [
+              23.89937825500965,
+              29.390701092779636,
+              29.44832969456911
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              0.0,
+              0.0
+            ]
+          },
+          "packed": {
+            "exact_responses": 108,
+            "executed_token_slots": 133142,
+            "requests": 110,
+            "p50_p95_p99_ms": [
+              19.738078117370605,
+              22.49377379193902,
+              22.72057941183448
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              -7.815965567715473,
+              -4.08587861340493
+            ]
+          },
+          "full_recheck": {
+            "exact_responses": 110,
+            "executed_token_slots": 195198,
+            "full_rechecks": 46,
+            "requests_rechecked": 46,
+            "rows_rechecked": 184,
+            "requests": 110,
+            "p50_p95_p99_ms": [
+              20.2316427603364,
+              36.82368267327547,
+              37.959737833589315
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              7.1790037653408945,
+              11.112027522176504
+            ]
+          },
+          "selective_recheck": {
+            "exact_responses": 108,
+            "executed_token_slots": 164372,
+            "requests_rechecked": 46,
+            "rows_rechecked": 93,
+            "changed_recheck_scores": 34,
+            "requests": 110,
+            "p50_p95_p99_ms": [
+              20.332295447587967,
+              33.563508838415146,
+              36.63426188752055
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              2.6178392581641674,
+              10.014552623033524
+            ]
+          }
+        }
+      }
+    }
+  },
+  "repeat": {
+    "job": "44031",
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "script_sha256": "b273d797e18f9ebeb7c678821f014f6a604ac23ae392fcd189a6a462446f946b",
+    "gap_reference_sha256": "715d7c26929850482a018439ddc68f2cd43e1296aafbe5d7feef2eda5d6abbab",
+    "calibration_reference_sha256": "47902fe8b427c130fcf7355a50e0e1de9792c1502d61d5b6f8a460501b47513b",
+    "plos_projection_sha256": "5491e3456ff751df14f172100e341eb23ec2567e93f94ad0c8b05715d1331744",
+    "elife_projection_sha256": "4ce67b1ff52d869f133bd5318bad2573502d12aae065c75c9407c14754171c89",
+    "tolerance": 0.4375,
+    "reports": {
+      "plos": {
+        "50": {
+          "padded": {
+            "exact_responses": 46,
+            "executed_token_slots": 90160,
+            "requests": 46,
+            "p50_p95_p99_ms": [
+              29.55996710807085,
+              36.200037226080894,
+              36.95947946980595
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              -0.04439428448677063,
+              0.007703900337219238
+            ]
+          },
+          "fixed_width": {
+            "exact_responses": 46,
+            "executed_token_slots": 90160,
+            "requests": 46,
+            "p50_p95_p99_ms": [
+              29.569239355623722,
+              36.21512185782194,
+              36.98108671233057
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              0.0,
+              0.0
+            ]
+          },
+          "packed": {
+            "exact_responses": 45,
+            "executed_token_slots": 71882,
+            "requests": 46,
+            "p50_p95_p99_ms": [
+              23.480908945202827,
+              25.771015789359808,
+              25.9294961579144
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              -11.329231318086386,
+              -7.499297149479389
+            ]
+          },
+          "full_recheck": {
+            "exact_responses": 46,
+            "executed_token_slots": 106486,
+            "full_rechecks": 18,
+            "requests_rechecked": 18,
+            "rows_rechecked": 72,
+            "requests": 46,
+            "p50_p95_p99_ms": [
+              25.019575841724873,
+              47.21221514046192,
+              48.22419760748744
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              7.7207968570292,
+              15.096012502908707
+            ]
+          },
+          "selective_recheck": {
+            "exact_responses": 45,
+            "executed_token_slots": 88183,
+            "requests_rechecked": 18,
+            "rows_rechecked": 34,
+            "changed_recheck_scores": 14,
+            "requests": 46,
+            "p50_p95_p99_ms": [
+              25.03280434757471,
+              40.455845184624195,
+              42.48248813673853
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              -0.7575890165753661,
+              8.759395149536433
+            ]
+          }
+        },
+        "100": {
+          "padded": {
+            "exact_responses": 46,
+            "executed_token_slots": 90676,
+            "requests": 46,
+            "p50_p95_p99_ms": [
+              29.729065485298634,
+              35.45446740463376,
+              36.67629240080714
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              -0.033194199204444885,
+              0.2772621810436249
+            ]
+          },
+          "fixed_width": {
+            "exact_responses": 46,
+            "executed_token_slots": 90676,
+            "requests": 46,
+            "p50_p95_p99_ms": [
+              29.745730571448803,
+              35.4643608443439,
+              36.55274352058768
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              0.0,
+              0.0
+            ]
+          },
+          "packed": {
+            "exact_responses": 43,
+            "executed_token_slots": 72993,
+            "requests": 46,
+            "p50_p95_p99_ms": [
+              23.205764591693878,
+              25.68946871906519,
+              26.0532908141613
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              -11.222143296618015,
+              -7.244303822517395
+            ]
+          },
+          "full_recheck": {
+            "exact_responses": 46,
+            "executed_token_slots": 111637,
+            "full_rechecks": 20,
+            "requests_rechecked": 20,
+            "rows_rechecked": 80,
+            "requests": 46,
+            "p50_p95_p99_ms": [
+              25.60331393033266,
+              48.089863266795874,
+              48.57644233852625
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              8.682154584676027,
+              15.397794544696808
+            ]
+          },
+          "selective_recheck": {
+            "exact_responses": 43,
+            "executed_token_slots": 92794,
+            "requests_rechecked": 20,
+            "rows_rechecked": 41,
+            "changed_recheck_scores": 21,
+            "requests": 46,
+            "p50_p95_p99_ms": [
+              25.616170838475227,
+              41.52604239061475,
+              43.681374937295914
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              1.276231836527586,
+              10.461671277880669
+            ]
+          }
+        }
+      },
+      "elife": {
+        "50": {
+          "padded": {
+            "exact_responses": 110,
+            "executed_token_slots": 152268,
+            "requests": 110,
+            "p50_p95_p99_ms": [
+              23.930439725518227,
+              28.254877496510737,
+              29.60307575762272
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              -0.03186054527759552,
+              0.031068921089172363
+            ]
+          },
+          "fixed_width": {
+            "exact_responses": 110,
+            "executed_token_slots": 152268,
+            "requests": 110,
+            "p50_p95_p99_ms": [
+              23.933113552629948,
+              28.264264762401574,
+              29.59471832960844
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              0.0,
+              0.0
+            ]
+          },
+          "packed": {
+            "exact_responses": 108,
+            "executed_token_slots": 133834,
+            "requests": 110,
+            "p50_p95_p99_ms": [
+              19.79998219758272,
+              21.45219957455992,
+              22.808695044368505
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              -7.976610306650407,
+              -4.914662055671222
+            ]
+          },
+          "full_recheck": {
+            "exact_responses": 110,
+            "executed_token_slots": 190974,
+            "full_rechecks": 42,
+            "requests_rechecked": 42,
+            "rows_rechecked": 168,
+            "requests": 110,
+            "p50_p95_p99_ms": [
+              20.15263307839632,
+              37.003167159855366,
+              38.19967143237591
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              7.159487251192331,
+              11.335854232311249
+            ]
+          },
+          "selective_recheck": {
+            "exact_responses": 108,
+            "executed_token_slots": 162181,
+            "requests_rechecked": 42,
+            "rows_rechecked": 84,
+            "changed_recheck_scores": 31,
+            "requests": 110,
+            "p50_p95_p99_ms": [
+              20.12761775404215,
+              33.01702784374356,
+              36.50474136695266
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              2.5471415370702744,
+              9.850066341459751
+            ]
+          }
+        },
+        "100": {
+          "padded": {
+            "exact_responses": 110,
+            "executed_token_slots": 152112,
+            "requests": 110,
+            "p50_p95_p99_ms": [
+              23.933982476592064,
+              29.507492389529943,
+              29.555539842694998
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              -0.006951391696929932,
+              0.022454187273979187
+            ]
+          },
+          "fixed_width": {
+            "exact_responses": 110,
+            "executed_token_slots": 152112,
+            "requests": 110,
+            "p50_p95_p99_ms": [
+              23.915020748972893,
+              29.506633337587118,
+              29.557036571204662
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              0.0,
+              0.0
+            ]
+          },
+          "packed": {
+            "exact_responses": 108,
+            "executed_token_slots": 133142,
+            "requests": 110,
+            "p50_p95_p99_ms": [
+              19.7838693857193,
+              22.640162333846092,
+              22.83184679225087
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              -7.823908282443888,
+              -4.023056756705046
+            ]
+          },
+          "full_recheck": {
+            "exact_responses": 110,
+            "executed_token_slots": 195198,
+            "full_rechecks": 46,
+            "requests_rechecked": 46,
+            "rows_rechecked": 184,
+            "requests": 110,
+            "p50_p95_p99_ms": [
+              20.297127775847912,
+              36.93515881896019,
+              38.108723722398274
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              7.155148866586387,
+              11.097392626106739
+            ]
+          },
+          "selective_recheck": {
+            "exact_responses": 108,
+            "executed_token_slots": 164372,
+            "requests_rechecked": 46,
+            "rows_rechecked": 93,
+            "changed_recheck_scores": 34,
+            "requests": 110,
+            "p50_p95_p99_ms": [
+              20.331778563559055,
+              33.70976569131017,
+              36.76824485883117
+            ],
+            "paired_p95_vs_fixed_width_ci95_ms": [
+              2.5658207945525646,
+              9.985078778117895
+            ]
+          }
+        }
+      }
+    }
+  }
+}
