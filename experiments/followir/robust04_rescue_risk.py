@@ -89,14 +89,44 @@ def report(calibration, test, initial_negative, topics, cap):
     return dict(policies=result, retrospective_score_ceiling=holdout_diagnostic(test, cap))
 
 
+def development_thresholds(dev, encoder, reader):
+    from experiments.followir.rescue_threshold_transfer import negatives, topical_scores
+
+    topic_scores = {name: topical_scores(fixture, encoder, reader) for name, fixture in dev.items()}
+    source_negatives = {
+        name: [negatives([scores], [pair]) for scores, pair in zip(topic_scores[name], data["pairs"], strict=True)]
+        for name, (data, _, _) in dev.items()
+    }
+    negative = [score for collection in source_negatives.values() for topic in collection for score in topic]
+    thresholds = {}
+    for name, groups in source_negatives.items():
+        other = [score for key, rows in source_negatives.items() if key != name for row in rows for score in row]
+        thresholds[name] = [
+            source_cutoff(other + [score for j, row in enumerate(groups) if j != i for score in row], 10)
+            for i in range(len(groups))
+        ]
+    return negative, thresholds
+
+
+def independent_topics(dev, test):
+    from experiments.followir.conditional_decision import overlaps, shingles, words
+
+    prior = [pair for collection, _, _ in dev.values() for pair in collection["pairs"]]
+    terms = [set(words(pair["query"])) for pair in prior]
+    narratives = [shingles(text, 5) for pair in prior for text in pair["instructions"]]
+    return [pair for pair in test["pairs"]
+                if not any(overlaps(set(words(pair["query"])), seen, .75) for seen in terms)
+                and not any(overlaps(shingles(text, 5), seen, .70)
+                            for text in pair["instructions"] for seen in narratives)]
+
+
 def run(args):
     import torch
 
     from expert_search.qwen_embedding_torch import QwenTorchEmbedding
     from experiments.followir import constraint_rescue_scope as rescue
-    from experiments.followir.conditional_decision import overlaps, shingles, words
     from experiments.followir.core17_verifier import Reranker
-    from experiments.followir.rescue_threshold_transfer import negatives, route, topical_scores
+    from experiments.followir.rescue_threshold_transfer import route
     from experiments.litsearch.dense_cache import verify_checkpoint
 
     if args.output.exists() or not torch.cuda.is_available() or not os.environ.get("SLURM_JOB_ID"):
@@ -120,33 +150,15 @@ def run(args):
     for name, (data, _, _) in dev.items():
         if len(data["pairs"]) == 0:
             raise ValueError(f"Missing {name} topics")
-    topic_scores = {name: topical_scores(fixture, encoder, reader) for name, fixture in dev.items()}
-    source_negatives = {
-        name: [negatives([scores], [pair]) for scores, pair in zip(topic_scores[name], data["pairs"], strict=True)]
-        for name, (data, _, _) in dev.items()
-    }
-    negative = [score for collection in source_negatives.values() for topic in collection for score in topic]
-    calibration = {}
-    for name, groups in source_negatives.items():
-        other = [score for key, rows in source_negatives.items() if key != name for row in rows for score in row]
-        cutoffs = [
-            source_cutoff(other + [score for j, row in enumerate(groups) if j != i for score in row], 10)
-            for i in range(len(groups))
-        ]
-        calibration[name] = route(dev[name], encoder, reader, cutoffs)
-
+    negative, thresholds = development_thresholds(dev, encoder, reader)
+    calibration = {name: route(fixture, encoder, reader, thresholds[name])
+                   for name, fixture in dev.items()}
     frozen_first = source_cutoff(negative, 10)
     robust = rescue.load(args.robust, args.robust_cache, provenance, additional_sources={REVISION: FILES})
     if robust[0]["revision"] != REVISION:
         raise ValueError("Unexpected holdout collection")
-    prior = [pair for collection, _, _ in dev.values() for pair in collection["pairs"]]
-    terms = [set(words(pair["query"])) for pair in prior]
-    narratives = [shingles(text, 5) for pair in prior for text in pair["instructions"]]
     robust_data, matrix, positions = robust
-    eligible = [pair for pair in robust_data["pairs"]
-                if not any(overlaps(set(words(pair["query"])), seen, .75) for seen in terms)
-                and not any(overlaps(shingles(text, 5), seen, .70)
-                            for text in pair["instructions"] for seen in narratives)]
+    eligible = independent_topics(dev, robust_data)
     topical_count = len(eligible)
     final = route((dict(robust_data, pairs=eligible), matrix, positions),
                   encoder, reader, [frozen_first] * topical_count)
