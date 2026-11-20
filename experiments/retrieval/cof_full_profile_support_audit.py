@@ -2,6 +2,7 @@
 
 import argparse
 from collections import Counter
+from functools import partial
 from hashlib import sha256
 import os
 from pathlib import Path
@@ -35,7 +36,7 @@ def summarize_profile(ordered, verdicts):
     })
 
 
-def audit_query(index, verifier, texts, vector, query, truth):
+def audit_query(index, verifier, texts, vector, query, truth, observe=None):
     reference = index.reference
     device_query = torch.as_tensor(vector, dtype=torch.float32, device="cuda")
     scores = torch.mv(index.vectors, device_query).cpu().numpy()
@@ -64,11 +65,13 @@ def audit_query(index, verifier, texts, vector, query, truth):
     for rank, owner in positions:
         name = "ranks_1_to_5" if rank < TOP else "ranks_6_to_10"
         results[name].update(summarize_profile(profiles[owner], accepted))
+        if observe is not None and rank < TOP:
+            observe(owner, profiles[owner], accepted)
     return results, len(distinct), reader.truncated
 
 
 @torch.inference_mode()
-def run(args):
+def run(args, *, observer=None):
     if args.output.exists() or not os.environ.get("SLURM_JOB_ID") or not torch.cuda.is_available():
         raise ValueError("Use a fresh output on Slurm CUDA")
     start = perf_counter()
@@ -86,7 +89,8 @@ def run(args):
     for i, qid in enumerate(tested, 1):
         query = texts[qid]
         vector = encoder.encode([query], query=True)[0]
-        counts, scored, cut = audit_query(index, verifier, texts, vector, query, labels[qid])
+        observe = None if observer is None else partial(observer, qid, texts)
+        counts, scored, cut = audit_query(index, verifier, texts, vector, query, labels[qid], observe)
         pairs += scored
         truncated += cut
         for name, values in counts.items():

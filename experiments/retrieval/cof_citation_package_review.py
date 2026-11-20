@@ -157,18 +157,18 @@ def read_form(path):
     return result
 
 
-def checked(template, form):
+def checked(template, form, *, editable=EDITABLE):
     rows = read_form(form)
     if rows.keys() != template.keys():
         raise ValueError("Case inventory changed")
     identities = set()
     for case, row in rows.items():
         original = template[case]
-        if row.keys() != original.keys() or any(row[k] != original[k] for k in original.keys() - EDITABLE):
+        if row.keys() != original.keys() or any(row[k] != original[k] for k in original.keys() - editable):
             raise ValueError("Changed case content")
         values = [row[axis] for axis in RELATIONS]
         if all(value is None for value in values):
-            if any(row[k] is not None for k in EDITABLE):
+            if any(row[k] is not None for k in editable):
                 raise ValueError("Keep incomplete rows empty")
             continue
         if (any(row[axis] not in labels for axis, labels in RELATIONS.items())
