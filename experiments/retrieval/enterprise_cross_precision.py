@@ -41,7 +41,7 @@ def disagreements(first, second):
     return bool((a != b).any().item())
 
 
-def evaluate(text, clauses, readers, arm, *, prefill=prefix_cache):
+def evaluate(text, clauses, readers, arm, *, prefill=prefix_cache, recheck=None):
     if arm not in ("bf16_narrow", "consensus"):
         return baseline(text, clauses, readers, arm)
     started = perf_counter()
@@ -57,6 +57,7 @@ def evaluate(text, clauses, readers, arm, *, prefill=prefix_cache):
         scores, slots = bf16.cached(front, items, cache)
         original_slots += slots
         needs_fallback = qualification_gap(scores) <= (WIDE if arm == "consensus" else NARROW)
+        alt = None
         if needs_fallback and arm == "consensus":
             if secondary is None:
                 secondary = prefill(fp16, front)
@@ -71,7 +72,10 @@ def evaluate(text, clauses, readers, arm, *, prefill=prefix_cache):
             extra["uncertain_fp16_blocks"] += ambiguous
             needs_fallback = diverges or ambiguous
         if needs_fallback:
-            scores, slots = bf16.independent(front, items)
+            if recheck is None:
+                scores, slots = bf16.independent(front, items)
+            else:
+                scores, slots = recheck(bf16, front, items, scores, alt)
             extra["rechecked"] += 1
             extra["fallback_slots"] += slots
         indices.extend(coordinates)
