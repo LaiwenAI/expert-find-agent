@@ -81,11 +81,11 @@ def observations(samples):
             for name, ms in samples.items()}
 
 
-def public_run(index, encoder, panels, offset):
-    ranking = RankFusion(index.valid, index.catalogue.lexical)
+def public_run(index, encoder, panels, offset, *, fusion_type=RankFusion, arms=ARMS):
+    ranking = fusion_type(index.valid, index.catalogue.lexical)
     role_view, _ = stress.project(postings.RolePostings(index.catalogue), index.catalogue, 100, 0, "")
-    elapsed = {name: [] for name in ARMS}
-    rank_region = {name: [] for name in ARMS}
+    elapsed = {name: [] for name in arms}
+    rank_region = {name: [] for name in arms}
     issued = Counter()
     known = Counter()
     total = 0
@@ -94,8 +94,8 @@ def public_run(index, encoder, panels, offset):
             payload = live.request(conditions)
             topics = [topic for topic, _ in conditions]
             found = {}
-            shift = (total + offset) % len(ARMS)
-            for arm in ARMS[shift:] + ARMS[:shift]:
+            shift = (total + offset) % len(arms)
+            for arm in arms[shift:] + arms[:shift]:
                 start = perf_counter_ns()
                 request = json.loads(payload)
                 atoms = tuple((item["topic"], item["role"]) for item in request["requirements"])
@@ -109,13 +109,13 @@ def public_run(index, encoder, panels, offset):
                 wire = json.dumps({"matches": [proof] if proof else []}, separators=(",", ":"))
                 elapsed[arm].append((perf_counter_ns() - start)/1e6)
                 found[arm] = orders, wire
-            if any(found[arm] != found["python"] for arm in ARMS):
+            if any(found[arm] != found[arms[0]] for arm in arms):
                 raise AssertionError("Public ranking, expert identity or byte output changed")
             # Also keep the reference aligned with the original live entry point.
             original = index.rank(topics, depth=DEPTH)
-            if [list(facet) for facet in original] != [[index.ids[i] for i in side] for side in found["python"][0]]:
-                raise AssertionError("Scalar benchmark does not reproduce the original ranker")
-            proof = json.loads(found["python"][1])["matches"]
+            if [list(facet) for facet in original] != [[index.ids[i] for i in side] for side in found[arms[0]][0]]:
+                raise AssertionError("Benchmark reference does not reproduce the original ranker")
+            proof = json.loads(found[arms[0]][1])["matches"]
             issued[panel] += bool(proof)
             known[panel] += bool(proof) and all(
                 topic in subjects.get(doc, ()) for topic, doc in zip(topics, proof[0][1:], strict=True)
@@ -125,7 +125,7 @@ def public_run(index, encoder, panels, offset):
                 bm25_order_and_fusion=observations(rank_region), request=observations(elapsed))
 
 
-def litsearch_run(projection, cache, encoder, revision, scratch, offset):
+def litsearch_run(projection, cache, encoder, revision, scratch, offset, *, fusion_type=RankFusion, arms=ARMS):
     with gzip.open(projection, "rb") as stream:
         dataset = json.load(stream)
     documents = dataset["papers"]
@@ -145,17 +145,17 @@ def litsearch_run(projection, cache, encoder, revision, scratch, offset):
             raise ValueError("Changed LitSearch vector cache or model")
         dense = torch.from_numpy(frozen["vectors"]).to("cuda")
     vectors = encoder.encode(queries, query=True)
-    fusion = RankFusion(range(len(documents)), lexical)
-    elapsed = {name: [] for name in ARMS}
+    fusion = fusion_type(range(len(documents)), lexical)
+    elapsed = {name: [] for name in arms}
     for i, (text, query) in enumerate(zip(queries, vectors, strict=True)):
         scores = (dense @ torch.from_numpy(query).to("cuda")).cpu().numpy()
-        shift = (i + offset) % len(ARMS)
+        shift = (i + offset) % len(arms)
         answers = {}
-        for arm in ARMS[shift:] + ARMS[:shift]:
+        for arm in arms[shift:] + arms[:shift]:
             start = perf_counter_ns()
             answers[arm] = fusion.rank(scores, text, arm)
             elapsed[arm].append((perf_counter_ns() - start)/1e6)
-        if any(answers[arm] != answers["python"] for arm in ARMS):
+        if any(answers[arm] != answers[arms[0]] for arm in arms):
             raise AssertionError("LitSearch exact fused order changed")
     return dict(queries=len(queries), sources=len(documents), ordered_matches=len(queries),
                 bm25_order_and_fusion=observations(elapsed),

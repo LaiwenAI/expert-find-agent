@@ -1,0 +1,181 @@
+{
+  "slurm_array": 44650,
+  "runs": [
+    {
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "embedding_checkpoint": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "order_offset": 0,
+      "publisher_articles": 452,
+      "depth": 128,
+      "dense_prefix": 512,
+      "script_sha256": "ad5ec1856c0a981995ecd8fb93a4533e84df82059bccf605daa966c18e466afd",
+      "previous_ranker_sha256": "5e5647db9c0df5363c27fc6ee0dde944a087f9910e6c10e309751f1afdce8fba",
+      "publisher": {
+        "queries": 211,
+        "exact_rank_and_response": 211,
+        "known": {
+          "plos": 85,
+          "elife": 46
+        },
+        "issued": {
+          "plos": 143,
+          "elife": 49
+        },
+        "bm25_order_and_fusion": {
+          "array_part": {
+            "p50_ms": 0.117127,
+            "p95_ms": 0.1560745
+          },
+          "packed_full": {
+            "p50_ms": 0.125253,
+            "p95_ms": 0.1649615
+          },
+          "bounded": {
+            "p50_ms": 0.130513,
+            "p95_ms": 0.17002099999999998
+          }
+        },
+        "request": {
+          "array_part": {
+            "p50_ms": 9.851834,
+            "p95_ms": 10.600679
+          },
+          "packed_full": {
+            "p50_ms": 9.857053,
+            "p95_ms": 10.6989765
+          },
+          "bounded": {
+            "p50_ms": 9.85559,
+            "p95_ms": 10.472040499999999
+          }
+        }
+      },
+      "litsearch": {
+        "queries": 246,
+        "sources": 64183,
+        "ordered_matches": 246,
+        "bm25_order_and_fusion": {
+          "array_part": {
+            "p50_ms": 7.1407435,
+            "p95_ms": 7.71169225
+          },
+          "packed_full": {
+            "p50_ms": 4.9155385,
+            "p95_ms": 5.435795000000001
+          },
+          "bounded": {
+            "p50_ms": 4.489082,
+            "p95_ms": 5.03317275
+          }
+        },
+        "projection_sha256": "9b8d8e70881449dfe0fad5ec4b270af71533c2058a193d38ea2092394f451b7a",
+        "cache_sha256": "1cd7226c51658fc086b200319911be77463c503d3a29ded8849747a4931470c6",
+        "bounded_work": {
+          "sparse_active": {
+            "p50": 56820.0,
+            "p95": 57240.25,
+            "maximum": 57348
+          },
+          "outside_exact_dense_ranks": {
+            "p50": 68.0,
+            "p95": 144.0,
+            "maximum": 202
+          },
+          "dense_prefix_sorted": {
+            "p50": 512.0,
+            "p95": 512.0,
+            "maximum": 512
+          }
+        }
+      }
+    },
+    {
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "embedding_checkpoint": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "order_offset": 1,
+      "publisher_articles": 452,
+      "depth": 128,
+      "dense_prefix": 512,
+      "script_sha256": "ad5ec1856c0a981995ecd8fb93a4533e84df82059bccf605daa966c18e466afd",
+      "previous_ranker_sha256": "5e5647db9c0df5363c27fc6ee0dde944a087f9910e6c10e309751f1afdce8fba",
+      "publisher": {
+        "queries": 211,
+        "exact_rank_and_response": 211,
+        "known": {
+          "plos": 85,
+          "elife": 46
+        },
+        "issued": {
+          "plos": 143,
+          "elife": 49
+        },
+        "bm25_order_and_fusion": {
+          "array_part": {
+            "p50_ms": 0.117658,
+            "p95_ms": 0.153646
+          },
+          "packed_full": {
+            "p50_ms": 0.127056,
+            "p95_ms": 0.1650365
+          },
+          "bounded": {
+            "p50_ms": 0.132556,
+            "p95_ms": 0.1698805
+          }
+        },
+        "request": {
+          "array_part": {
+            "p50_ms": 9.92925,
+            "p95_ms": 10.494066
+          },
+          "packed_full": {
+            "p50_ms": 9.936885,
+            "p95_ms": 10.592488500000002
+          },
+          "bounded": {
+            "p50_ms": 9.954037,
+            "p95_ms": 10.569636
+          }
+        }
+      },
+      "litsearch": {
+        "queries": 246,
+        "sources": 64183,
+        "ordered_matches": 246,
+        "bm25_order_and_fusion": {
+          "array_part": {
+            "p50_ms": 7.3109775,
+            "p95_ms": 7.8321535
+          },
+          "packed_full": {
+            "p50_ms": 4.998430000000001,
+            "p95_ms": 5.5281765
+          },
+          "bounded": {
+            "p50_ms": 4.573926,
+            "p95_ms": 5.0729805
+          }
+        },
+        "projection_sha256": "9b8d8e70881449dfe0fad5ec4b270af71533c2058a193d38ea2092394f451b7a",
+        "cache_sha256": "1cd7226c51658fc086b200319911be77463c503d3a29ded8849747a4931470c6",
+        "bounded_work": {
+          "sparse_active": {
+            "p50": 56820.0,
+            "p95": 57240.25,
+            "maximum": 57348
+          },
+          "outside_exact_dense_ranks": {
+            "p50": 68.0,
+            "p95": 144.0,
+            "maximum": 202
+          },
+          "dense_prefix_sorted": {
+            "p50": 512.0,
+            "p95": 512.0,
+            "maximum": 512
+          }
+        }
+      }
+    }
+  ]
+}
