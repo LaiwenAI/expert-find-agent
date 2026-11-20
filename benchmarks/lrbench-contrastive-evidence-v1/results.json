@@ -1,0 +1,903 @@
+{
+  "runs": [
+    {
+      "assets": {
+        "RATE_pc.json": "351f1487d314ee7732730d85d129cab8dd2935369c904666b512a9983fbfe3c5",
+        "RATE_rc.json": "320eae613fd1fe0682939cb16a3111e0df6af6f9c13133691cdb43de4a643d1e",
+        "evaluations_pc.json": "07c9bb8bc4e64b35277a632ed84f2604d8d84ade4eee7da89a9e6e86eba9942a",
+        "evaluations_rc.json": "39d54eade077be62aa03553172aa30cdcc15fd63a2c5d2cabb95f34959109d54",
+        "keywords.json": "480409a808b06977e2786689d5225a9d1b3856bb21ca63632f701fb650dedfe3",
+        "rate-RATE.py": "0c64e9532de5102a4e610b7a236c127cbf3951d776d99be417c248562476ffb8",
+        "rate-evaluation_script.py": "ffe9aa9a8f6a4c67cc6f0843439499d6b04b2585926130d5154ea47101f2b85d"
+      },
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "indexed_documents": 1277,
+      "job": "44255",
+      "order_offset": 0,
+      "pairwise_provenance_sha256": "afe957088656024b36dbcbfa800c7bbf87676d80c3c115d0b4cf6280fb864bcc",
+      "pointwise_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+      "profile_revision": "3afb29314108e4fdf834e48a7b5b30fa64d9afe7",
+      "results": {
+        "anchors": 150,
+        "comparisons": 212,
+        "metrics": {
+          "agree_fallback_25": {
+            "accuracy": {
+              "accuracy": 0.7641509433962265,
+              "correct": 162,
+              "skipped": 0,
+              "total": 212
+            },
+            "accuracy_delta_vs_compact": {
+              "bootstrap_repeats": 10000,
+              "clusters": 150,
+              "mean": 0.009433962264150943,
+              "percentile_95": [
+                0.0,
+                0.024875621890547265
+              ],
+              "queries": 212,
+              "sampling_unit": "whole source paper; query-weighted mean",
+              "seed": 20261116
+            },
+            "accuracy_delta_vs_rate": {
+              "bootstrap_repeats": 10000,
+              "clusters": 150,
+              "mean": -0.0047169811320754715,
+              "percentile_95": [
+                -0.04716981132075472,
+                0.03809979494190014
+              ],
+              "queries": 212,
+              "sampling_unit": "paper anchor",
+              "seed": 20261116
+            },
+            "acquired": 49,
+            "decisive": 13,
+            "gain": 2,
+            "judge_token_slots": 135206,
+            "loss": 0,
+            "p95_ms": 168.56039194390175,
+            "source_abstracts": 194,
+            "ties": 1,
+            "weighted_kendall_loss": {
+              "loss": 0.1848404255319149,
+              "max_loss": 376.0,
+              "raw_loss": 69.5,
+              "skipped": 0,
+              "used": 212
+            }
+          },
+          "agree_fallback_50": {
+            "accuracy": {
+              "accuracy": 0.7924528301886793,
+              "correct": 168,
+              "skipped": 0,
+              "total": 212
+            },
+            "accuracy_delta_vs_compact": {
+              "bootstrap_repeats": 10000,
+              "clusters": 150,
+              "mean": 0.03773584905660377,
+              "percentile_95": [
+                0.00975609756097561,
+                0.0707070707070707
+              ],
+              "queries": 212,
+              "sampling_unit": "whole source paper; query-weighted mean",
+              "seed": 20261116
+            },
+            "accuracy_delta_vs_rate": {
+              "bootstrap_repeats": 10000,
+              "clusters": 150,
+              "mean": 0.02358490566037736,
+              "percentile_95": [
+                -0.02024497218656397,
+                0.06896551724137931
+              ],
+              "queries": 212,
+              "sampling_unit": "paper anchor",
+              "seed": 20261116
+            },
+            "acquired": 102,
+            "decisive": 31,
+            "gain": 9,
+            "judge_token_slots": 279888,
+            "loss": 1,
+            "p95_ms": 174.466472864151,
+            "source_abstracts": 404,
+            "ties": 1,
+            "weighted_kendall_loss": {
+              "loss": 0.15558510638297873,
+              "max_loss": 376.0,
+              "raw_loss": 58.5,
+              "skipped": 0,
+              "used": 212
+            }
+          },
+          "agree_fallback_all": {
+            "accuracy": {
+              "accuracy": 0.7924528301886793,
+              "correct": 168,
+              "skipped": 0,
+              "total": 212
+            },
+            "accuracy_delta_vs_compact": {
+              "bootstrap_repeats": 10000,
+              "clusters": 150,
+              "mean": 0.03773584905660377,
+              "percentile_95": [
+                0.00975609756097561,
+                0.0707070707070707
+              ],
+              "queries": 212,
+              "sampling_unit": "whole source paper; query-weighted mean",
+              "seed": 20261116
+            },
+            "accuracy_delta_vs_rate": {
+              "bootstrap_repeats": 10000,
+              "clusters": 150,
+              "mean": 0.02358490566037736,
+              "percentile_95": [
+                -0.02024497218656397,
+                0.06896551724137931
+              ],
+              "queries": 212,
+              "sampling_unit": "paper anchor",
+              "seed": 20261116
+            },
+            "acquired": 212,
+            "decisive": 87,
+            "gain": 9,
+            "judge_token_slots": 576042,
+            "loss": 1,
+            "p95_ms": 176.9316834397614,
+            "source_abstracts": 839,
+            "ties": 1,
+            "weighted_kendall_loss": {
+              "loss": 0.15558510638297873,
+              "max_loss": 376.0,
+              "raw_loss": 58.5,
+              "skipped": 0,
+              "used": 212
+            }
+          },
+          "agree_only": {
+            "accuracy": {
+              "accuracy": 0.38207547169811323,
+              "correct": 81,
+              "skipped": 0,
+              "total": 212
+            },
+            "accuracy_delta_vs_compact": {
+              "bootstrap_repeats": 10000,
+              "clusters": 150,
+              "mean": -0.37264150943396224,
+              "percentile_95": [
+                -0.4549763033175355,
+                -0.28760785398230093
+              ],
+              "queries": 212,
+              "sampling_unit": "whole source paper; query-weighted mean",
+              "seed": 20261116
+            },
+            "accuracy_delta_vs_rate": {
+              "bootstrap_repeats": 10000,
+              "clusters": 150,
+              "mean": -0.3867924528301887,
+              "percentile_95": [
+                -0.4666666666666667,
+                -0.3030266608391609
+              ],
+              "queries": 212,
+              "sampling_unit": "paper anchor",
+              "seed": 20261116
+            },
+            "gain": 9,
+            "loss": 88,
+            "p95_ms": 176.9316834397614,
+            "ties": 125,
+            "weighted_kendall_loss": {
+              "loss": 0.29654255319148937,
+              "max_loss": 376.0,
+              "raw_loss": 111.5,
+              "skipped": 0,
+              "used": 212
+            }
+          },
+          "compact": {
+            "accuracy": {
+              "accuracy": 0.7547169811320755,
+              "correct": 160,
+              "skipped": 0,
+              "total": 212
+            },
+            "accuracy_delta_vs_compact": {
+              "bootstrap_repeats": 10000,
+              "clusters": 150,
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 212,
+              "sampling_unit": "whole source paper; query-weighted mean",
+              "seed": 20261116
+            },
+            "accuracy_delta_vs_rate": {
+              "bootstrap_repeats": 10000,
+              "clusters": 150,
+              "mean": -0.014150943396226415,
+              "percentile_95": [
+                -0.05701754385964912,
+                0.02778426791277249
+              ],
+              "queries": 212,
+              "sampling_unit": "paper anchor",
+              "seed": 20261116
+            },
+            "gain": 0,
+            "loss": 0,
+            "p95_ms": 8.080908749252558,
+            "ties": 1,
+            "weighted_kendall_loss": {
+              "loss": 0.19547872340425532,
+              "max_loss": 376.0,
+              "raw_loss": 73.5,
+              "skipped": 0,
+              "used": 212
+            }
+          },
+          "one_order": {
+            "accuracy": {
+              "accuracy": 0.6509433962264151,
+              "correct": 138,
+              "skipped": 0,
+              "total": 212
+            },
+            "accuracy_delta_vs_compact": {
+              "bootstrap_repeats": 10000,
+              "clusters": 150,
+              "mean": -0.10377358490566038,
+              "percentile_95": [
+                -0.18309859154929578,
+                -0.020100502512562814
+              ],
+              "queries": 212,
+              "sampling_unit": "whole source paper; query-weighted mean",
+              "seed": 20261116
+            },
+            "accuracy_delta_vs_rate": {
+              "bootstrap_repeats": 10000,
+              "clusters": 150,
+              "mean": -0.1179245283018868,
+              "percentile_95": [
+                -0.19491737288135594,
+                -0.03552850843459987
+              ],
+              "queries": 212,
+              "sampling_unit": "paper anchor",
+              "seed": 20261116
+            },
+            "gain": 26,
+            "loss": 48,
+            "p95_ms": 91.48625172674654,
+            "ties": 14,
+            "weighted_kendall_loss": {
+              "loss": 0.3045212765957447,
+              "max_loss": 376.0,
+              "raw_loss": 114.5,
+              "skipped": 0,
+              "used": 212
+            }
+          },
+          "pointwise": {
+            "accuracy": {
+              "accuracy": 0.6462264150943396,
+              "correct": 137,
+              "skipped": 0,
+              "total": 212
+            },
+            "accuracy_delta_vs_compact": {
+              "bootstrap_repeats": 10000,
+              "clusters": 150,
+              "mean": -0.10849056603773585,
+              "percentile_95": [
+                -0.1951219512195122,
+                -0.02336448598130841
+              ],
+              "queries": 212,
+              "sampling_unit": "whole source paper; query-weighted mean",
+              "seed": 20261116
+            },
+            "accuracy_delta_vs_rate": {
+              "bootstrap_repeats": 10000,
+              "clusters": 150,
+              "mean": -0.12264150943396226,
+              "percentile_95": [
+                -0.21256311889304216,
+                -0.03589686098654709
+              ],
+              "queries": 212,
+              "sampling_unit": "paper anchor",
+              "seed": 20261116
+            },
+            "gain": 23,
+            "loss": 46,
+            "p95_ms": 44.27735069766641,
+            "ties": 11,
+            "weighted_kendall_loss": {
+              "loss": 0.2925531914893617,
+              "max_loss": 376.0,
+              "raw_loss": 110.0,
+              "skipped": 0,
+              "used": 212
+            }
+          },
+          "rate": {
+            "accuracy": {
+              "accuracy": 0.7688679245283019,
+              "correct": 163,
+              "skipped": 0,
+              "total": 212
+            },
+            "ties": 1,
+            "weighted_kendall_loss": {
+              "loss": 0.17952127659574468,
+              "max_loss": 376.0,
+              "raw_loss": 67.5,
+              "skipped": 0,
+              "used": 212
+            }
+          },
+          "raw_top_three": {
+            "accuracy": {
+              "accuracy": 0.7028301886792453,
+              "correct": 149,
+              "skipped": 0,
+              "total": 212
+            },
+            "accuracy_delta_vs_compact": {
+              "bootstrap_repeats": 10000,
+              "clusters": 150,
+              "mean": -0.05188679245283019,
+              "percentile_95": [
+                -0.10762331838565023,
+                0.009133467387206218
+              ],
+              "queries": 212,
+              "sampling_unit": "whole source paper; query-weighted mean",
+              "seed": 20261116
+            },
+            "accuracy_delta_vs_rate": {
+              "bootstrap_repeats": 10000,
+              "clusters": 150,
+              "mean": -0.0660377358490566,
+              "percentile_95": [
+                -0.12962962962962962,
+                0.0
+              ],
+              "queries": 212,
+              "sampling_unit": "paper anchor",
+              "seed": 20261116
+            },
+            "gain": 14,
+            "loss": 25,
+            "p95_ms": 8.156766090542076,
+            "ties": 5,
+            "weighted_kendall_loss": {
+              "loss": 0.22872340425531915,
+              "max_loss": 376.0,
+              "raw_loss": 86.0,
+              "skipped": 0,
+              "used": 212
+            }
+          },
+          "symmetric_margin": {
+            "accuracy": {
+              "accuracy": 0.7358490566037735,
+              "correct": 156,
+              "skipped": 0,
+              "total": 212
+            },
+            "accuracy_delta_vs_compact": {
+              "bootstrap_repeats": 10000,
+              "clusters": 150,
+              "mean": -0.018867924528301886,
+              "percentile_95": [
+                -0.09090909090909091,
+                0.05405738250565832
+              ],
+              "queries": 212,
+              "sampling_unit": "whole source paper; query-weighted mean",
+              "seed": 20261116
+            },
+            "accuracy_delta_vs_rate": {
+              "bootstrap_repeats": 10000,
+              "clusters": 150,
+              "mean": -0.0330188679245283,
+              "percentile_95": [
+                -0.10152487852547572,
+                0.037209302325581395
+              ],
+              "queries": 212,
+              "sampling_unit": "paper anchor",
+              "seed": 20261116
+            },
+            "gain": 27,
+            "loss": 31,
+            "p95_ms": 176.9316834397614,
+            "ties": 8,
+            "weighted_kendall_loss": {
+              "loss": 0.21675531914893617,
+              "max_loss": 376.0,
+              "raw_loss": 81.5,
+              "skipped": 0,
+              "used": 212
+            }
+          }
+        },
+        "order_and_work": {
+          "both_unknown": 5,
+          "one_judge_slots": 288021,
+          "order_agreed": 87,
+          "order_conflict": 98,
+          "source_abstracts": 839,
+          "two_judge_slots": 576042
+        }
+      },
+      "script_sha256": "a44a2a008dd06abe85abea7c8cbb73101a469e1d57dffb5bf30f6efffbd79887",
+      "source_depth": 2
+    },
+    {
+      "assets": {
+        "RATE_pc.json": "351f1487d314ee7732730d85d129cab8dd2935369c904666b512a9983fbfe3c5",
+        "RATE_rc.json": "320eae613fd1fe0682939cb16a3111e0df6af6f9c13133691cdb43de4a643d1e",
+        "evaluations_pc.json": "07c9bb8bc4e64b35277a632ed84f2604d8d84ade4eee7da89a9e6e86eba9942a",
+        "evaluations_rc.json": "39d54eade077be62aa03553172aa30cdcc15fd63a2c5d2cabb95f34959109d54",
+        "keywords.json": "480409a808b06977e2786689d5225a9d1b3856bb21ca63632f701fb650dedfe3",
+        "rate-RATE.py": "0c64e9532de5102a4e610b7a236c127cbf3951d776d99be417c248562476ffb8",
+        "rate-evaluation_script.py": "ffe9aa9a8f6a4c67cc6f0843439499d6b04b2585926130d5154ea47101f2b85d"
+      },
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "indexed_documents": 1277,
+      "job": "44254",
+      "order_offset": 1,
+      "pairwise_provenance_sha256": "afe957088656024b36dbcbfa800c7bbf87676d80c3c115d0b4cf6280fb864bcc",
+      "pointwise_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+      "profile_revision": "3afb29314108e4fdf834e48a7b5b30fa64d9afe7",
+      "results": {
+        "anchors": 150,
+        "comparisons": 212,
+        "metrics": {
+          "agree_fallback_25": {
+            "accuracy": {
+              "accuracy": 0.7641509433962265,
+              "correct": 162,
+              "skipped": 0,
+              "total": 212
+            },
+            "accuracy_delta_vs_compact": {
+              "bootstrap_repeats": 10000,
+              "clusters": 150,
+              "mean": 0.009433962264150943,
+              "percentile_95": [
+                0.0,
+                0.024875621890547265
+              ],
+              "queries": 212,
+              "sampling_unit": "whole source paper; query-weighted mean",
+              "seed": 20261116
+            },
+            "accuracy_delta_vs_rate": {
+              "bootstrap_repeats": 10000,
+              "clusters": 150,
+              "mean": -0.0047169811320754715,
+              "percentile_95": [
+                -0.04716981132075472,
+                0.03809979494190014
+              ],
+              "queries": 212,
+              "sampling_unit": "paper anchor",
+              "seed": 20261116
+            },
+            "acquired": 49,
+            "decisive": 13,
+            "gain": 2,
+            "judge_token_slots": 135206,
+            "loss": 0,
+            "p95_ms": 171.60688834264874,
+            "source_abstracts": 194,
+            "ties": 1,
+            "weighted_kendall_loss": {
+              "loss": 0.1848404255319149,
+              "max_loss": 376.0,
+              "raw_loss": 69.5,
+              "skipped": 0,
+              "used": 212
+            }
+          },
+          "agree_fallback_50": {
+            "accuracy": {
+              "accuracy": 0.7924528301886793,
+              "correct": 168,
+              "skipped": 0,
+              "total": 212
+            },
+            "accuracy_delta_vs_compact": {
+              "bootstrap_repeats": 10000,
+              "clusters": 150,
+              "mean": 0.03773584905660377,
+              "percentile_95": [
+                0.00975609756097561,
+                0.0707070707070707
+              ],
+              "queries": 212,
+              "sampling_unit": "whole source paper; query-weighted mean",
+              "seed": 20261116
+            },
+            "accuracy_delta_vs_rate": {
+              "bootstrap_repeats": 10000,
+              "clusters": 150,
+              "mean": 0.02358490566037736,
+              "percentile_95": [
+                -0.02024497218656397,
+                0.06896551724137931
+              ],
+              "queries": 212,
+              "sampling_unit": "paper anchor",
+              "seed": 20261116
+            },
+            "acquired": 102,
+            "decisive": 31,
+            "gain": 9,
+            "judge_token_slots": 279888,
+            "loss": 1,
+            "p95_ms": 174.43614546209574,
+            "source_abstracts": 404,
+            "ties": 1,
+            "weighted_kendall_loss": {
+              "loss": 0.15558510638297873,
+              "max_loss": 376.0,
+              "raw_loss": 58.5,
+              "skipped": 0,
+              "used": 212
+            }
+          },
+          "agree_fallback_all": {
+            "accuracy": {
+              "accuracy": 0.7924528301886793,
+              "correct": 168,
+              "skipped": 0,
+              "total": 212
+            },
+            "accuracy_delta_vs_compact": {
+              "bootstrap_repeats": 10000,
+              "clusters": 150,
+              "mean": 0.03773584905660377,
+              "percentile_95": [
+                0.00975609756097561,
+                0.0707070707070707
+              ],
+              "queries": 212,
+              "sampling_unit": "whole source paper; query-weighted mean",
+              "seed": 20261116
+            },
+            "accuracy_delta_vs_rate": {
+              "bootstrap_repeats": 10000,
+              "clusters": 150,
+              "mean": 0.02358490566037736,
+              "percentile_95": [
+                -0.02024497218656397,
+                0.06896551724137931
+              ],
+              "queries": 212,
+              "sampling_unit": "paper anchor",
+              "seed": 20261116
+            },
+            "acquired": 212,
+            "decisive": 87,
+            "gain": 9,
+            "judge_token_slots": 576042,
+            "loss": 1,
+            "p95_ms": 178.66934416815636,
+            "source_abstracts": 839,
+            "ties": 1,
+            "weighted_kendall_loss": {
+              "loss": 0.15558510638297873,
+              "max_loss": 376.0,
+              "raw_loss": 58.5,
+              "skipped": 0,
+              "used": 212
+            }
+          },
+          "agree_only": {
+            "accuracy": {
+              "accuracy": 0.38207547169811323,
+              "correct": 81,
+              "skipped": 0,
+              "total": 212
+            },
+            "accuracy_delta_vs_compact": {
+              "bootstrap_repeats": 10000,
+              "clusters": 150,
+              "mean": -0.37264150943396224,
+              "percentile_95": [
+                -0.4549763033175355,
+                -0.28760785398230093
+              ],
+              "queries": 212,
+              "sampling_unit": "whole source paper; query-weighted mean",
+              "seed": 20261116
+            },
+            "accuracy_delta_vs_rate": {
+              "bootstrap_repeats": 10000,
+              "clusters": 150,
+              "mean": -0.3867924528301887,
+              "percentile_95": [
+                -0.4666666666666667,
+                -0.3030266608391609
+              ],
+              "queries": 212,
+              "sampling_unit": "paper anchor",
+              "seed": 20261116
+            },
+            "gain": 9,
+            "loss": 88,
+            "p95_ms": 178.66934416815636,
+            "ties": 125,
+            "weighted_kendall_loss": {
+              "loss": 0.29654255319148937,
+              "max_loss": 376.0,
+              "raw_loss": 111.5,
+              "skipped": 0,
+              "used": 212
+            }
+          },
+          "compact": {
+            "accuracy": {
+              "accuracy": 0.7547169811320755,
+              "correct": 160,
+              "skipped": 0,
+              "total": 212
+            },
+            "accuracy_delta_vs_compact": {
+              "bootstrap_repeats": 10000,
+              "clusters": 150,
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 212,
+              "sampling_unit": "whole source paper; query-weighted mean",
+              "seed": 20261116
+            },
+            "accuracy_delta_vs_rate": {
+              "bootstrap_repeats": 10000,
+              "clusters": 150,
+              "mean": -0.014150943396226415,
+              "percentile_95": [
+                -0.05701754385964912,
+                0.02778426791277249
+              ],
+              "queries": 212,
+              "sampling_unit": "paper anchor",
+              "seed": 20261116
+            },
+            "gain": 0,
+            "loss": 0,
+            "p95_ms": 7.913485448807478,
+            "ties": 1,
+            "weighted_kendall_loss": {
+              "loss": 0.19547872340425532,
+              "max_loss": 376.0,
+              "raw_loss": 73.5,
+              "skipped": 0,
+              "used": 212
+            }
+          },
+          "one_order": {
+            "accuracy": {
+              "accuracy": 0.6509433962264151,
+              "correct": 138,
+              "skipped": 0,
+              "total": 212
+            },
+            "accuracy_delta_vs_compact": {
+              "bootstrap_repeats": 10000,
+              "clusters": 150,
+              "mean": -0.10377358490566038,
+              "percentile_95": [
+                -0.18309859154929578,
+                -0.020100502512562814
+              ],
+              "queries": 212,
+              "sampling_unit": "whole source paper; query-weighted mean",
+              "seed": 20261116
+            },
+            "accuracy_delta_vs_rate": {
+              "bootstrap_repeats": 10000,
+              "clusters": 150,
+              "mean": -0.1179245283018868,
+              "percentile_95": [
+                -0.19491737288135594,
+                -0.03552850843459987
+              ],
+              "queries": 212,
+              "sampling_unit": "paper anchor",
+              "seed": 20261116
+            },
+            "gain": 26,
+            "loss": 48,
+            "p95_ms": 92.87979425862432,
+            "ties": 14,
+            "weighted_kendall_loss": {
+              "loss": 0.3045212765957447,
+              "max_loss": 376.0,
+              "raw_loss": 114.5,
+              "skipped": 0,
+              "used": 212
+            }
+          },
+          "pointwise": {
+            "accuracy": {
+              "accuracy": 0.6462264150943396,
+              "correct": 137,
+              "skipped": 0,
+              "total": 212
+            },
+            "accuracy_delta_vs_compact": {
+              "bootstrap_repeats": 10000,
+              "clusters": 150,
+              "mean": -0.10849056603773585,
+              "percentile_95": [
+                -0.1951219512195122,
+                -0.02336448598130841
+              ],
+              "queries": 212,
+              "sampling_unit": "whole source paper; query-weighted mean",
+              "seed": 20261116
+            },
+            "accuracy_delta_vs_rate": {
+              "bootstrap_repeats": 10000,
+              "clusters": 150,
+              "mean": -0.12264150943396226,
+              "percentile_95": [
+                -0.21256311889304216,
+                -0.03589686098654709
+              ],
+              "queries": 212,
+              "sampling_unit": "paper anchor",
+              "seed": 20261116
+            },
+            "gain": 23,
+            "loss": 46,
+            "p95_ms": 44.34042517095804,
+            "ties": 11,
+            "weighted_kendall_loss": {
+              "loss": 0.2925531914893617,
+              "max_loss": 376.0,
+              "raw_loss": 110.0,
+              "skipped": 0,
+              "used": 212
+            }
+          },
+          "rate": {
+            "accuracy": {
+              "accuracy": 0.7688679245283019,
+              "correct": 163,
+              "skipped": 0,
+              "total": 212
+            },
+            "ties": 1,
+            "weighted_kendall_loss": {
+              "loss": 0.17952127659574468,
+              "max_loss": 376.0,
+              "raw_loss": 67.5,
+              "skipped": 0,
+              "used": 212
+            }
+          },
+          "raw_top_three": {
+            "accuracy": {
+              "accuracy": 0.7028301886792453,
+              "correct": 149,
+              "skipped": 0,
+              "total": 212
+            },
+            "accuracy_delta_vs_compact": {
+              "bootstrap_repeats": 10000,
+              "clusters": 150,
+              "mean": -0.05188679245283019,
+              "percentile_95": [
+                -0.10762331838565023,
+                0.009133467387206218
+              ],
+              "queries": 212,
+              "sampling_unit": "whole source paper; query-weighted mean",
+              "seed": 20261116
+            },
+            "accuracy_delta_vs_rate": {
+              "bootstrap_repeats": 10000,
+              "clusters": 150,
+              "mean": -0.0660377358490566,
+              "percentile_95": [
+                -0.12962962962962962,
+                0.0
+              ],
+              "queries": 212,
+              "sampling_unit": "paper anchor",
+              "seed": 20261116
+            },
+            "gain": 14,
+            "loss": 25,
+            "p95_ms": 7.976081687957048,
+            "ties": 5,
+            "weighted_kendall_loss": {
+              "loss": 0.22872340425531915,
+              "max_loss": 376.0,
+              "raw_loss": 86.0,
+              "skipped": 0,
+              "used": 212
+            }
+          },
+          "symmetric_margin": {
+            "accuracy": {
+              "accuracy": 0.7358490566037735,
+              "correct": 156,
+              "skipped": 0,
+              "total": 212
+            },
+            "accuracy_delta_vs_compact": {
+              "bootstrap_repeats": 10000,
+              "clusters": 150,
+              "mean": -0.018867924528301886,
+              "percentile_95": [
+                -0.09090909090909091,
+                0.05405738250565832
+              ],
+              "queries": 212,
+              "sampling_unit": "whole source paper; query-weighted mean",
+              "seed": 20261116
+            },
+            "accuracy_delta_vs_rate": {
+              "bootstrap_repeats": 10000,
+              "clusters": 150,
+              "mean": -0.0330188679245283,
+              "percentile_95": [
+                -0.10152487852547572,
+                0.037209302325581395
+              ],
+              "queries": 212,
+              "sampling_unit": "paper anchor",
+              "seed": 20261116
+            },
+            "gain": 27,
+            "loss": 31,
+            "p95_ms": 178.66934416815636,
+            "ties": 8,
+            "weighted_kendall_loss": {
+              "loss": 0.21675531914893617,
+              "max_loss": 376.0,
+              "raw_loss": 81.5,
+              "skipped": 0,
+              "used": 212
+            }
+          }
+        },
+        "order_and_work": {
+          "both_unknown": 5,
+          "one_judge_slots": 288021,
+          "order_agreed": 87,
+          "order_conflict": 98,
+          "source_abstracts": 839,
+          "two_judge_slots": 576042
+        }
+      },
+      "script_sha256": "a44a2a008dd06abe85abea7c8cbb73101a469e1d57dffb5bf30f6efffbd79887",
+      "source_depth": 2
+    }
+  ],
+  "slurm_array": 44254
+}
