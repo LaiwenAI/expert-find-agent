@@ -1,0 +1,634 @@
+{
+  "slurm_array": 45707,
+  "node": "ws3",
+  "runs": [
+    {
+      "depth": 128,
+      "order_offset": 0,
+      "full_role_bytes": 6114,
+      "projections": {
+        "distinct_three": {
+          "eligible_sources": 9,
+          "projected_role_bytes": 68
+        },
+        "one_distinct_pair": {
+          "eligible_sources": 54,
+          "projected_role_bytes": 499
+        }
+      },
+      "panels": {
+        "plos": {
+          "distinct_three": {
+            "queries": 12,
+            "known_reachable": 9,
+            "facet_limits": [
+              3,
+              3,
+              3
+            ],
+            "metrics": {
+              "byline": {
+                "known": 7,
+                "issued": 7,
+                "reads": 36,
+                "enumerated": 1335,
+                "postings": 10526,
+                "plan_ms": [
+                  0.24235795717686415,
+                  0.7159923668950791
+                ],
+                "request_ms": [
+                  11.781806941144168,
+                  12.631227192468941
+                ]
+              },
+              "role_exhaustive": {
+                "known": 9,
+                "issued": 9,
+                "reads": 27,
+                "enumerated": 219,
+                "postings": 4663,
+                "plan_ms": [
+                  0.20093651255592704,
+                  0.21530506201088428
+                ],
+                "request_ms": [
+                  11.694206041283906,
+                  12.11739662103355
+                ]
+              },
+              "role_projected": {
+                "known": 9,
+                "issued": 9,
+                "reads": 27,
+                "enumerated": 69,
+                "postings": 73,
+                "plan_ms": [
+                  0.03940198803320527,
+                  0.06066448986530304
+                ],
+                "request_ms": [
+                  11.537211074028164,
+                  11.964938306482509
+                ]
+              },
+              "role_bounded": {
+                "known": 9,
+                "issued": 9,
+                "reads": 27,
+                "enumerated": 69,
+                "postings": 73,
+                "plan_ms": [
+                  0.026348046958446503,
+                  0.04977421485818922
+                ],
+                "request_ms": [
+                  11.504023510497063,
+                  11.925295082619414
+                ]
+              }
+            }
+          },
+          "one_distinct_pair": {
+            "queries": 12,
+            "known_reachable": 9,
+            "facet_limits": [
+              2,
+              2,
+              1
+            ],
+            "metrics": {
+              "byline": {
+                "known": 0,
+                "issued": 1,
+                "reads": 24,
+                "enumerated": 1115,
+                "postings": 10423,
+                "plan_ms": [
+                  0.24091702653095126,
+                  0.25893888669088483
+                ],
+                "request_ms": [
+                  11.532507953234017,
+                  11.617701285285875
+                ]
+              },
+              "role_exhaustive": {
+                "known": 2,
+                "issued": 10,
+                "reads": 21,
+                "enumerated": 219,
+                "postings": 4663,
+                "plan_ms": [
+                  0.1856144517660141,
+                  0.21022154251113534
+                ],
+                "request_ms": [
+                  11.463327042292804,
+                  11.569683789275587
+                ]
+              },
+              "role_projected": {
+                "known": 2,
+                "issued": 10,
+                "reads": 21,
+                "enumerated": 105,
+                "postings": 411,
+                "plan_ms": [
+                  0.052079500164836645,
+                  0.07323513273149729
+                ],
+                "request_ms": [
+                  11.32601808058098,
+                  11.417608306510374
+                ]
+              },
+              "role_bounded": {
+                "known": 2,
+                "issued": 10,
+                "reads": 21,
+                "enumerated": 53,
+                "postings": 374,
+                "plan_ms": [
+                  0.037663092371076345,
+                  0.06158949690870941
+                ],
+                "request_ms": [
+                  11.307611013762653,
+                  11.3995305262506
+                ]
+              }
+            }
+          }
+        },
+        "elife": {
+          "distinct_three": {
+            "queries": 12,
+            "known_reachable": 8,
+            "facet_limits": [
+              3,
+              3,
+              3
+            ],
+            "metrics": {
+              "byline": {
+                "known": 8,
+                "issued": 8,
+                "reads": 36,
+                "enumerated": 1572,
+                "postings": 15360,
+                "plan_ms": [
+                  0.3028890350833535,
+                  0.3143385809380561
+                ],
+                "request_ms": [
+                  11.661946482490748,
+                  11.728402401786298
+                ]
+              },
+              "role_exhaustive": {
+                "known": 8,
+                "issued": 8,
+                "reads": 24,
+                "enumerated": 250,
+                "postings": 7580,
+                "plan_ms": [
+                  0.24994247360154986,
+                  0.2778828202281147
+                ],
+                "request_ms": [
+                  11.578837526030838,
+                  11.664361890871078
+                ]
+              },
+              "role_projected": {
+                "known": 8,
+                "issued": 8,
+                "reads": 24,
+                "enumerated": 24,
+                "postings": 56,
+                "plan_ms": [
+                  0.04292355151847005,
+                  0.06306344293989241
+                ],
+                "request_ms": [
+                  11.370798572897911,
+                  11.42877412494272
+                ]
+              },
+              "role_bounded": {
+                "known": 8,
+                "issued": 8,
+                "reads": 24,
+                "enumerated": 24,
+                "postings": 56,
+                "plan_ms": [
+                  0.024304958060383797,
+                  0.04879185580648482
+                ],
+                "request_ms": [
+                  11.347485531587154,
+                  11.421745450934395
+                ]
+              }
+            }
+          },
+          "one_distinct_pair": {
+            "queries": 12,
+            "known_reachable": 8,
+            "facet_limits": [
+              2,
+              2,
+              1
+            ],
+            "metrics": {
+              "byline": {
+                "known": 8,
+                "issued": 8,
+                "reads": 36,
+                "enumerated": 1476,
+                "postings": 15300,
+                "plan_ms": [
+                  0.30617002630606294,
+                  0.3118455410003662
+                ],
+                "request_ms": [
+                  11.641494056675583,
+                  11.795532854739577
+                ]
+              },
+              "role_exhaustive": {
+                "known": 8,
+                "issued": 11,
+                "reads": 30,
+                "enumerated": 250,
+                "postings": 7580,
+                "plan_ms": [
+                  0.24587748339399695,
+                  0.2854434831533581
+                ],
+                "request_ms": [
+                  11.581223923712969,
+                  11.740695452317595
+                ]
+              },
+              "role_projected": {
+                "known": 8,
+                "issued": 11,
+                "reads": 30,
+                "enumerated": 48,
+                "postings": 260,
+                "plan_ms": [
+                  0.049364520236849785,
+                  0.07733420934528111
+                ],
+                "request_ms": [
+                  11.39252504799515,
+                  11.503430973971263
+                ]
+              },
+              "role_bounded": {
+                "known": 8,
+                "issued": 11,
+                "reads": 30,
+                "enumerated": 36,
+                "postings": 232,
+                "plan_ms": [
+                  0.03308948362246156,
+                  0.05957122193649411
+                ],
+                "request_ms": [
+                  11.362623481545597,
+                  11.510060430737212
+                ]
+              }
+            }
+          }
+        }
+      },
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "embedding_checkpoint": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "elife_projection_sha256": "4ce67b1ff52d869f133bd5318bad2573502d12aae065c75c9407c14754171c89",
+      "reference_sha256": "1cd6bb56521f3dc1c417e8d62e2cfcd5d5d931839e87a471a41f4efedab32d72",
+      "script_sha256": "a7446bc408c95e305f1f07da2da45747f5077e2b01b779dfa4d1c5bb2af91224",
+      "query_counts": {
+        "plos": 12,
+        "elife": 12
+      }
+    },
+    {
+      "depth": 128,
+      "order_offset": 1,
+      "full_role_bytes": 6114,
+      "projections": {
+        "distinct_three": {
+          "eligible_sources": 9,
+          "projected_role_bytes": 68
+        },
+        "one_distinct_pair": {
+          "eligible_sources": 54,
+          "projected_role_bytes": 499
+        }
+      },
+      "panels": {
+        "plos": {
+          "distinct_three": {
+            "queries": 12,
+            "known_reachable": 9,
+            "facet_limits": [
+              3,
+              3,
+              3
+            ],
+            "metrics": {
+              "byline": {
+                "known": 7,
+                "issued": 7,
+                "reads": 36,
+                "enumerated": 1335,
+                "postings": 10526,
+                "plan_ms": [
+                  0.23347302339971066,
+                  0.7687432749662542
+                ],
+                "request_ms": [
+                  11.687969556078315,
+                  12.73047646973282
+                ]
+              },
+              "role_exhaustive": {
+                "known": 9,
+                "issued": 9,
+                "reads": 27,
+                "enumerated": 219,
+                "postings": 4663,
+                "plan_ms": [
+                  0.1753555261529982,
+                  0.1889610313810408
+                ],
+                "request_ms": [
+                  11.599671503063291,
+                  12.211719894548878
+                ]
+              },
+              "role_projected": {
+                "known": 9,
+                "issued": 9,
+                "reads": 27,
+                "enumerated": 69,
+                "postings": 73,
+                "plan_ms": [
+                  0.03849348286166787,
+                  0.07615021895617244
+                ],
+                "request_ms": [
+                  11.45548588829115,
+                  12.112604343565181
+                ]
+              },
+              "role_bounded": {
+                "known": 9,
+                "issued": 9,
+                "reads": 27,
+                "enumerated": 69,
+                "postings": 73,
+                "plan_ms": [
+                  0.027272501029074192,
+                  0.049766694428399205
+                ],
+                "request_ms": [
+                  11.424013471696526,
+                  12.05491332220845
+                ]
+              }
+            }
+          },
+          "one_distinct_pair": {
+            "queries": 12,
+            "known_reachable": 9,
+            "facet_limits": [
+              2,
+              2,
+              1
+            ],
+            "metrics": {
+              "byline": {
+                "known": 0,
+                "issued": 1,
+                "reads": 24,
+                "enumerated": 1115,
+                "postings": 10423,
+                "plan_ms": [
+                  0.23303646594285965,
+                  0.2605813089758158
+                ],
+                "request_ms": [
+                  11.563284031581134,
+                  11.643299896968529
+                ]
+              },
+              "role_exhaustive": {
+                "known": 2,
+                "issued": 10,
+                "reads": 21,
+                "enumerated": 219,
+                "postings": 4663,
+                "plan_ms": [
+                  0.18011400243267417,
+                  0.19775195396505296
+                ],
+                "request_ms": [
+                  11.52941450709477,
+                  11.585924890823662
+                ]
+              },
+              "role_projected": {
+                "known": 2,
+                "issued": 10,
+                "reads": 21,
+                "enumerated": 105,
+                "postings": 411,
+                "plan_ms": [
+                  0.051626062486320734,
+                  0.07493149605579674
+                ],
+                "request_ms": [
+                  11.373955989256501,
+                  11.473211192060262
+                ]
+              },
+              "role_bounded": {
+                "known": 2,
+                "issued": 10,
+                "reads": 21,
+                "enumerated": 53,
+                "postings": 374,
+                "plan_ms": [
+                  0.03747700247913599,
+                  0.06080240127630532
+                ],
+                "request_ms": [
+                  11.36979745933786,
+                  11.432446289109066
+                ]
+              }
+            }
+          }
+        },
+        "elife": {
+          "distinct_three": {
+            "queries": 12,
+            "known_reachable": 8,
+            "facet_limits": [
+              3,
+              3,
+              3
+            ],
+            "metrics": {
+              "byline": {
+                "known": 8,
+                "issued": 8,
+                "reads": 36,
+                "enumerated": 1572,
+                "postings": 15360,
+                "plan_ms": [
+                  0.3003354649990797,
+                  0.3134914149995893
+                ],
+                "request_ms": [
+                  11.689333012327552,
+                  11.783344944706187
+                ]
+              },
+              "role_exhaustive": {
+                "known": 8,
+                "issued": 8,
+                "reads": 24,
+                "enumerated": 250,
+                "postings": 7580,
+                "plan_ms": [
+                  0.2523894654586911,
+                  0.2886307833250612
+                ],
+                "request_ms": [
+                  11.61550747929141,
+                  11.744443321367726
+                ]
+              },
+              "role_projected": {
+                "known": 8,
+                "issued": 8,
+                "reads": 24,
+                "enumerated": 24,
+                "postings": 56,
+                "plan_ms": [
+                  0.040941580664366484,
+                  0.0663445214740932
+                ],
+                "request_ms": [
+                  11.40672346809879,
+                  11.494386417325586
+                ]
+              },
+              "role_bounded": {
+                "known": 8,
+                "issued": 8,
+                "reads": 24,
+                "enumerated": 24,
+                "postings": 56,
+                "plan_ms": [
+                  0.024176493752747774,
+                  0.04965542466379702
+                ],
+                "request_ms": [
+                  11.383162112906575,
+                  11.475952959153801
+                ]
+              }
+            }
+          },
+          "one_distinct_pair": {
+            "queries": 12,
+            "known_reachable": 8,
+            "facet_limits": [
+              2,
+              2,
+              1
+            ],
+            "metrics": {
+              "byline": {
+                "known": 8,
+                "issued": 8,
+                "reads": 36,
+                "enumerated": 1476,
+                "postings": 15300,
+                "plan_ms": [
+                  0.30075450194999576,
+                  0.3172466123942286
+                ],
+                "request_ms": [
+                  11.665897502098233,
+                  11.764807713916525
+                ]
+              },
+              "role_exhaustive": {
+                "known": 8,
+                "issued": 11,
+                "reads": 30,
+                "enumerated": 250,
+                "postings": 7580,
+                "plan_ms": [
+                  0.24616305017843843,
+                  0.2644067513756454
+                ],
+                "request_ms": [
+                  11.610872985329479,
+                  11.714157089591026
+                ]
+              },
+              "role_projected": {
+                "known": 8,
+                "issued": 11,
+                "reads": 30,
+                "enumerated": 48,
+                "postings": 260,
+                "plan_ms": [
+                  0.04903605440631509,
+                  0.07353099645115435
+                ],
+                "request_ms": [
+                  11.413513508159667,
+                  11.494309239787981
+                ]
+              },
+              "role_bounded": {
+                "known": 8,
+                "issued": 11,
+                "reads": 30,
+                "enumerated": 36,
+                "postings": 232,
+                "plan_ms": [
+                  0.03165943780913949,
+                  0.054355390602722764
+                ],
+                "request_ms": [
+                  11.390921485144645,
+                  11.50241544819437
+                ]
+              }
+            }
+          }
+        }
+      },
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "embedding_checkpoint": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "elife_projection_sha256": "4ce67b1ff52d869f133bd5318bad2573502d12aae065c75c9407c14754171c89",
+      "reference_sha256": "1cd6bb56521f3dc1c417e8d62e2cfcd5d5d931839e87a471a41f4efedab32d72",
+      "script_sha256": "a7446bc408c95e305f1f07da2da45747f5077e2b01b779dfa4d1c5bb2af91224",
+      "query_counts": {
+        "plos": 12,
+        "elife": 12
+      }
+    }
+  ]
+}
