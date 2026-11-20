@@ -107,6 +107,9 @@ class Catalog:
 
     def rank(self, topic, *, return_dense_scores=False):
         vector = self.encoder.encode([f"Research about {topic}"], query=True)[0]
+        return self.rank_for_vector(topic, vector, return_dense_scores=return_dense_scores)
+
+    def rank_for_vector(self, topic, vector, *, return_dense_scores=False):
         scores = self.vectors @ vector
         dense = np.argsort(-scores, kind="stable").tolist()
         words = set(tokens(topic))
