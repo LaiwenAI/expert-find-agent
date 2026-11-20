@@ -1,0 +1,74 @@
+{
+  "job": "43381",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "code_sha256": "9009b6a8dc3e9ce70dfe0ac0aadec07cc75bec1980c2ac72f5e6d56e03429cef",
+  "static_prefix_tokens": 165,
+  "static_startup_ms": 195.38461044430733,
+  "static_resident_bytes": 48660480,
+  "metrics": {
+    "request_prefill": {
+      "queries": 80,
+      "issued": 37,
+      "parser_counts": {
+        "fp16_checks": 25,
+        "rechecked": 7
+      },
+      "parser_p50_p95_ms": [
+        115.51388259977102,
+        934.8955610767005
+      ],
+      "live_p50_p95_ms": [
+        175.83061289042234,
+        991.8478729203339
+      ],
+      "paired_live_p95_delta_ci95": [
+        0.0,
+        0.0
+      ],
+      "changes": {
+        "labels": 0,
+        "qualifications": 0,
+        "retrieved": 0,
+        "ranked": 0,
+        "decisions": 0,
+        "initial": 0,
+        "extra": 0,
+        "invoked": 0
+      },
+      "recheck_count_changes": 0
+    },
+    "static_prefix": {
+      "queries": 80,
+      "issued": 37,
+      "parser_counts": {
+        "prefix_hits": 95,
+        "prefix_tokens_avoided": 15675,
+        "fp16_checks": 26,
+        "rechecked": 9
+      },
+      "parser_p50_p95_ms": [
+        111.47857271134853,
+        1025.0890160910785
+      ],
+      "live_p50_p95_ms": [
+        170.96029873937368,
+        1134.5529980026186
+      ],
+      "paired_live_p95_delta_ci95": [
+        -9.246079251170158,
+        762.5893707387154
+      ],
+      "changes": {
+        "labels": 10,
+        "qualifications": 0,
+        "retrieved": 0,
+        "ranked": 0,
+        "decisions": 0,
+        "initial": 0,
+        "extra": 0,
+        "invoked": 0
+      },
+      "recheck_count_changes": 2
+    }
+  }
+}

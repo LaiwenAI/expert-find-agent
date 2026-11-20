@@ -41,13 +41,13 @@ def disagreements(first, second):
     return bool((a != b).any().item())
 
 
-def evaluate(text, clauses, readers, arm):
+def evaluate(text, clauses, readers, arm, *, prefill=prefix_cache):
     if arm not in ("bf16_narrow", "consensus"):
         return baseline(text, clauses, readers, arm)
     started = perf_counter()
     bf16, fp16 = readers["bf16"], readers["fp16"]
     front, suffixes = shared_prompt(bf16.tokenizer, text, clauses)
-    cache = prefix_cache(bf16, front)
+    cache = prefill(bf16, front)
     secondary = None
     extra = Counter()
     original_slots = len(front)
@@ -59,7 +59,7 @@ def evaluate(text, clauses, readers, arm):
         needs_fallback = qualification_gap(scores) <= (WIDE if arm == "consensus" else NARROW)
         if needs_fallback and arm == "consensus":
             if secondary is None:
-                secondary = prefix_cache(fp16, front)
+                secondary = prefill(fp16, front)
                 extra["fp16_prefixes"] += 1
                 extra["fp16_slots"] += len(front)
             alt, slots = fp16.cached(front, items, secondary)
