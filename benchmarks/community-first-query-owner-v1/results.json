@@ -1,0 +1,774 @@
+{
+  "slurm_array": 45666,
+  "node": "ws3",
+  "runs": [
+    {
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "script_sha256": "2c45259405abe4505a9c0a4938a764f6c2eded6a4cad1961e781bf206c5260ec",
+      "order_offset": 0,
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "reranker_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+      "exclusions": {
+        "stats2025": {
+          "shared_gold_source": 4
+        },
+        "mathoverflow": 0
+      },
+      "slots": 5,
+      "prefix": 512,
+      "block": 16,
+      "panels": {
+        "stats2024": {
+          "snapshot_sha256": "499aab068fb7acb41e9f6c12b68ec88389eda4e421287146f65f2276dde16ef6",
+          "queries": 68,
+          "source_groups": 67,
+          "docs": 364,
+          "owners": 207,
+          "index_build_ms": 2770.681838039309,
+          "metrics": {
+            "source_dense": {
+              "selected": 59,
+              "supported": 36,
+              "known_owners": 64,
+              "issued": 67,
+              "clipped": 0,
+              "score_rows": 24752,
+              "supported_p5_delta": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 68,
+                "clusters": 67,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole source paper; query-weighted mean"
+              },
+              "p50_p95_search_ms": [
+                0.07379893213510513,
+                0.08227379294112325
+              ],
+              "p50_p95_request_ms": [
+                37.81316301319748,
+                48.22413902147673
+              ]
+            },
+            "source_hybrid": {
+              "selected": 44,
+              "supported": 24,
+              "known_owners": 51,
+              "issued": 43,
+              "clipped": 0,
+              "score_rows": 24752,
+              "supported_p5_delta": {
+                "mean": -0.03529411764705883,
+                "percentile_95": [
+                  -0.05671641791044777,
+                  -0.014705882352941176
+                ],
+                "queries": 68,
+                "clusters": 67,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole source paper; query-weighted mean"
+              },
+              "p50_p95_search_ms": [
+                0.46567153185606003,
+                0.7679294736590235
+              ],
+              "p50_p95_request_ms": [
+                36.22855298453942,
+                48.65875013056211
+              ]
+            },
+            "source_bounded": {
+              "selected": 59,
+              "supported": 36,
+              "known_owners": 64,
+              "issued": 67,
+              "clipped": 0,
+              "score_rows": 24284,
+              "supported_p5_delta": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 68,
+                "clusters": 67,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole source paper; query-weighted mean"
+              },
+              "p50_p95_search_ms": [
+                0.42527500772848725,
+                0.44921054504811764
+              ],
+              "p50_p95_request_ms": [
+                38.2904534926638,
+                48.63769957446493
+              ]
+            },
+            "profile": {
+              "selected": 51,
+              "supported": 30,
+              "known_owners": 56,
+              "issued": 56,
+              "clipped": 0,
+              "score_rows": 2395,
+              "supported_p5_delta": {
+                "mean": -0.017647058823529415,
+                "percentile_95": [
+                  -0.03529411764705883,
+                  -0.0029850746268656717
+                ],
+                "queries": 68,
+                "clusters": 67,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole source paper; query-weighted mean"
+              },
+              "p50_p95_search_ms": [
+                0.09399000555276871,
+                0.11081661796197295
+              ],
+              "p50_p95_request_ms": [
+                37.77217847527936,
+                48.04066863725893
+              ]
+            }
+          }
+        },
+        "stats2025": {
+          "snapshot_sha256": "b0424d383f1296eb6e4a4ff2cce00e84e833212b7ff87765ed26af9580d07ce4",
+          "queries": 27,
+          "source_groups": 26,
+          "docs": 323,
+          "owners": 192,
+          "index_build_ms": 2216.7373769916594,
+          "metrics": {
+            "source_dense": {
+              "selected": 27,
+              "supported": 16,
+              "known_owners": 29,
+              "issued": 26,
+              "clipped": 0,
+              "score_rows": 8721,
+              "supported_p5_delta": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 27,
+                "clusters": 26,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole source paper; query-weighted mean"
+              },
+              "p50_p95_search_ms": [
+                0.06866606418043375,
+                0.0767624587751925
+              ],
+              "p50_p95_request_ms": [
+                37.18781308270991,
+                47.42701952345669
+              ]
+            },
+            "source_hybrid": {
+              "selected": 22,
+              "supported": 14,
+              "known_owners": 24,
+              "issued": 23,
+              "clipped": 0,
+              "score_rows": 8721,
+              "supported_p5_delta": {
+                "mean": -0.014814814814814815,
+                "percentile_95": [
+                  -0.038461538461538464,
+                  0.0
+                ],
+                "queries": 27,
+                "clusters": 26,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole source paper; query-weighted mean"
+              },
+              "p50_p95_search_ms": [
+                0.49243890680372715,
+                0.791722792200744
+              ],
+              "p50_p95_request_ms": [
+                35.714359022676945,
+                48.262837959919125
+              ]
+            },
+            "source_bounded": {
+              "selected": 27,
+              "supported": 16,
+              "known_owners": 29,
+              "issued": 26,
+              "clipped": 0,
+              "score_rows": 8680,
+              "supported_p5_delta": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 27,
+                "clusters": 26,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole source paper; query-weighted mean"
+              },
+              "p50_p95_search_ms": [
+                0.3647829871624708,
+                0.3853649948723614
+              ],
+              "p50_p95_request_ms": [
+                37.4850130174309,
+                47.64379425905645
+              ]
+            },
+            "profile": {
+              "selected": 25,
+              "supported": 15,
+              "known_owners": 27,
+              "issued": 23,
+              "clipped": 0,
+              "score_rows": 863,
+              "supported_p5_delta": {
+                "mean": -0.007407407407407408,
+                "percentile_95": [
+                  -0.02307692307692308,
+                  0.0
+                ],
+                "queries": 27,
+                "clusters": 26,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole source paper; query-weighted mean"
+              },
+              "p50_p95_search_ms": [
+                0.09349000174552202,
+                0.09905744809657335
+              ],
+              "p50_p95_request_ms": [
+                37.48640511184931,
+                47.68870183033869
+              ]
+            }
+          }
+        },
+        "mathoverflow": {
+          "snapshot_sha256": "7231037018b53448b4ea055737e3e29c2635f1eedd0975f374a0d5bb0f53f32d",
+          "queries": 20,
+          "source_groups": 20,
+          "docs": 328,
+          "owners": 226,
+          "index_build_ms": 2210.850580013357,
+          "metrics": {
+            "source_dense": {
+              "selected": 20,
+              "supported": 13,
+              "known_owners": 20,
+              "issued": 13,
+              "clipped": 0,
+              "score_rows": 6560,
+              "supported_p5_delta": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 20,
+                "clusters": 20,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole source paper; query-weighted mean"
+              },
+              "p50_p95_search_ms": [
+                0.0680789235047996,
+                0.07637169910594822
+              ],
+              "p50_p95_request_ms": [
+                39.29844405502081,
+                47.65257089165971
+              ]
+            },
+            "source_hybrid": {
+              "selected": 12,
+              "supported": 9,
+              "known_owners": 13,
+              "issued": 9,
+              "clipped": 0,
+              "score_rows": 6560,
+              "supported_p5_delta": {
+                "mean": -0.04,
+                "percentile_95": [
+                  -0.08,
+                  -0.01
+                ],
+                "queries": 20,
+                "clusters": 20,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole source paper; query-weighted mean"
+              },
+              "p50_p95_search_ms": [
+                0.3799910191446543,
+                0.7146458257921042
+              ],
+              "p50_p95_request_ms": [
+                42.39280050387606,
+                48.0977296771016
+              ]
+            },
+            "source_bounded": {
+              "selected": 20,
+              "supported": 13,
+              "known_owners": 20,
+              "issued": 13,
+              "clipped": 0,
+              "score_rows": 6552,
+              "supported_p5_delta": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 20,
+                "clusters": 20,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole source paper; query-weighted mean"
+              },
+              "p50_p95_search_ms": [
+                0.37646153941750526,
+                0.4008373187389225
+              ],
+              "p50_p95_request_ms": [
+                39.49089499656111,
+                48.110533464932814
+              ]
+            },
+            "profile": {
+              "selected": 20,
+              "supported": 13,
+              "known_owners": 20,
+              "issued": 13,
+              "clipped": 0,
+              "score_rows": 226,
+              "supported_p5_delta": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 20,
+                "clusters": 20,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole source paper; query-weighted mean"
+              },
+              "p50_p95_search_ms": [
+                0.09138445602729917,
+                0.0985723570920527
+              ],
+              "p50_p95_request_ms": [
+                41.709207522217184,
+                47.24715327611193
+              ]
+            }
+          }
+        }
+      }
+    },
+    {
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "script_sha256": "2c45259405abe4505a9c0a4938a764f6c2eded6a4cad1961e781bf206c5260ec",
+      "order_offset": 1,
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "reranker_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+      "exclusions": {
+        "stats2025": {
+          "shared_gold_source": 4
+        },
+        "mathoverflow": 0
+      },
+      "slots": 5,
+      "prefix": 512,
+      "block": 16,
+      "panels": {
+        "stats2024": {
+          "snapshot_sha256": "499aab068fb7acb41e9f6c12b68ec88389eda4e421287146f65f2276dde16ef6",
+          "queries": 68,
+          "source_groups": 67,
+          "docs": 364,
+          "owners": 207,
+          "index_build_ms": 2786.0196660039946,
+          "metrics": {
+            "source_hybrid": {
+              "selected": 44,
+              "supported": 24,
+              "known_owners": 51,
+              "issued": 43,
+              "clipped": 0,
+              "score_rows": 24752,
+              "supported_p5_delta": {
+                "mean": -0.03529411764705883,
+                "percentile_95": [
+                  -0.05671641791044777,
+                  -0.014705882352941176
+                ],
+                "queries": 68,
+                "clusters": 67,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole source paper; query-weighted mean"
+              },
+              "p50_p95_search_ms": [
+                0.4716509720310569,
+                0.7493974291719496
+              ],
+              "p50_p95_request_ms": [
+                35.606265475507826,
+                48.44795333920047
+              ]
+            },
+            "source_bounded": {
+              "selected": 59,
+              "supported": 36,
+              "known_owners": 64,
+              "issued": 67,
+              "clipped": 0,
+              "score_rows": 24284,
+              "supported_p5_delta": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 68,
+                "clusters": 67,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole source paper; query-weighted mean"
+              },
+              "p50_p95_search_ms": [
+                0.41567598236724734,
+                0.4490817489568144
+              ],
+              "p50_p95_request_ms": [
+                37.93152893194929,
+                48.70436285273172
+              ]
+            },
+            "profile": {
+              "selected": 51,
+              "supported": 30,
+              "known_owners": 56,
+              "issued": 56,
+              "clipped": 0,
+              "score_rows": 2395,
+              "supported_p5_delta": {
+                "mean": -0.017647058823529415,
+                "percentile_95": [
+                  -0.03529411764705883,
+                  -0.0029850746268656717
+                ],
+                "queries": 68,
+                "clusters": 67,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole source paper; query-weighted mean"
+              },
+              "p50_p95_search_ms": [
+                0.0956159783527255,
+                0.11010266607627273
+              ],
+              "p50_p95_request_ms": [
+                37.48113347683102,
+                48.279901285422966
+              ]
+            },
+            "source_dense": {
+              "selected": 59,
+              "supported": 36,
+              "known_owners": 64,
+              "issued": 67,
+              "clipped": 0,
+              "score_rows": 24752,
+              "supported_p5_delta": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 68,
+                "clusters": 67,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole source paper; query-weighted mean"
+              },
+              "p50_p95_search_ms": [
+                0.0722800032235682,
+                0.08012072648853064
+              ],
+              "p50_p95_request_ms": [
+                37.495382071938366,
+                48.045156069565564
+              ]
+            }
+          }
+        },
+        "stats2025": {
+          "snapshot_sha256": "b0424d383f1296eb6e4a4ff2cce00e84e833212b7ff87765ed26af9580d07ce4",
+          "queries": 27,
+          "source_groups": 26,
+          "docs": 323,
+          "owners": 192,
+          "index_build_ms": 2221.7470729956403,
+          "metrics": {
+            "source_hybrid": {
+              "selected": 22,
+              "supported": 14,
+              "known_owners": 24,
+              "issued": 23,
+              "clipped": 0,
+              "score_rows": 8721,
+              "supported_p5_delta": {
+                "mean": -0.014814814814814815,
+                "percentile_95": [
+                  -0.038461538461538464,
+                  0.0
+                ],
+                "queries": 27,
+                "clusters": 26,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole source paper; query-weighted mean"
+              },
+              "p50_p95_search_ms": [
+                0.48310996498912573,
+                0.7836491800844668
+              ],
+              "p50_p95_request_ms": [
+                35.30164493713528,
+                48.13863995950669
+              ]
+            },
+            "source_bounded": {
+              "selected": 27,
+              "supported": 16,
+              "known_owners": 29,
+              "issued": 26,
+              "clipped": 0,
+              "score_rows": 8680,
+              "supported_p5_delta": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 27,
+                "clusters": 26,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole source paper; query-weighted mean"
+              },
+              "p50_p95_search_ms": [
+                0.37181004881858826,
+                0.39819100638851523
+              ],
+              "p50_p95_request_ms": [
+                37.17522893566638,
+                47.53710716031492
+              ]
+            },
+            "profile": {
+              "selected": 25,
+              "supported": 15,
+              "known_owners": 27,
+              "issued": 23,
+              "clipped": 0,
+              "score_rows": 863,
+              "supported_p5_delta": {
+                "mean": -0.007407407407407408,
+                "percentile_95": [
+                  -0.02307692307692308,
+                  0.0
+                ],
+                "queries": 27,
+                "clusters": 26,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole source paper; query-weighted mean"
+              },
+              "p50_p95_search_ms": [
+                0.09422400034964085,
+                0.106592895463109
+              ],
+              "p50_p95_request_ms": [
+                36.861486034467816,
+                47.4159536533989
+              ]
+            },
+            "source_dense": {
+              "selected": 27,
+              "supported": 16,
+              "known_owners": 29,
+              "issued": 26,
+              "clipped": 0,
+              "score_rows": 8721,
+              "supported_p5_delta": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 27,
+                "clusters": 26,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole source paper; query-weighted mean"
+              },
+              "p50_p95_search_ms": [
+                0.06660493090748787,
+                0.07813283009454608
+              ],
+              "p50_p95_request_ms": [
+                37.23655908834189,
+                47.15472236275673
+              ]
+            }
+          }
+        },
+        "mathoverflow": {
+          "snapshot_sha256": "7231037018b53448b4ea055737e3e29c2635f1eedd0975f374a0d5bb0f53f32d",
+          "queries": 20,
+          "source_groups": 20,
+          "docs": 328,
+          "owners": 226,
+          "index_build_ms": 2215.7953979913145,
+          "metrics": {
+            "source_hybrid": {
+              "selected": 12,
+              "supported": 9,
+              "known_owners": 13,
+              "issued": 9,
+              "clipped": 0,
+              "score_rows": 6560,
+              "supported_p5_delta": {
+                "mean": -0.04,
+                "percentile_95": [
+                  -0.08,
+                  -0.01
+                ],
+                "queries": 20,
+                "clusters": 20,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole source paper; query-weighted mean"
+              },
+              "p50_p95_search_ms": [
+                0.3970254329033196,
+                0.6724468781612817
+              ],
+              "p50_p95_request_ms": [
+                42.20764501951635,
+                47.95368480263278
+              ]
+            },
+            "source_bounded": {
+              "selected": 20,
+              "supported": 13,
+              "known_owners": 20,
+              "issued": 13,
+              "clipped": 0,
+              "score_rows": 6552,
+              "supported_p5_delta": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 20,
+                "clusters": 20,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole source paper; query-weighted mean"
+              },
+              "p50_p95_search_ms": [
+                0.37510995753109455,
+                0.39179876912385225
+              ],
+              "p50_p95_request_ms": [
+                39.348221907857805,
+                48.04368754266761
+              ]
+            },
+            "profile": {
+              "selected": 20,
+              "supported": 13,
+              "known_owners": 20,
+              "issued": 13,
+              "clipped": 0,
+              "score_rows": 226,
+              "supported_p5_delta": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 20,
+                "clusters": 20,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole source paper; query-weighted mean"
+              },
+              "p50_p95_search_ms": [
+                0.08947495371103287,
+                0.09424560121260583
+              ],
+              "p50_p95_request_ms": [
+                41.502603504341096,
+                47.08132312516682
+              ]
+            },
+            "source_dense": {
+              "selected": 20,
+              "supported": 13,
+              "known_owners": 20,
+              "issued": 13,
+              "clipped": 0,
+              "score_rows": 6560,
+              "supported_p5_delta": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 20,
+                "clusters": 20,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "whole source paper; query-weighted mean"
+              },
+              "p50_p95_search_ms": [
+                0.06924202898517251,
+                0.07689073681831361
+              ],
+              "p50_p95_request_ms": [
+                39.13366101915017,
+                47.38619257113896
+              ]
+            }
+          }
+        }
+      }
+    }
+  ]
+}
