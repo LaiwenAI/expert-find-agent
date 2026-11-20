@@ -1,0 +1,227 @@
+{
+  "slurm_array": 44597,
+  "runs": [
+    {
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "fixed_pool_depth": 64,
+      "repeats": 2,
+      "source_workers": 6,
+      "added_source_delay_ms": 16.0,
+      "topology": {
+        "plos": {
+          "cases": 160,
+          "no_third_link": 127
+        },
+        "elife": {
+          "cases": 51,
+          "no_third_link": 51
+        }
+      },
+      "results": {
+        "60": {
+          "parallel_three": {
+            "requests": 422,
+            "equal_responses": 422,
+            "source_reads": 1266,
+            "source_payload_bytes": 942542,
+            "panel_reads": {
+              "plos": 960,
+              "elife": 306
+            },
+            "drained_rps": 59.998433698621454,
+            "p50_ms": 17.925922758877277,
+            "p95_ms": 18.630542140454054,
+            "three_read_p95_ms": 18.630542140454054
+          },
+          "eager_topology": {
+            "requests": 422,
+            "equal_responses": 422,
+            "source_reads": 910,
+            "source_payload_bytes": 691170,
+            "panel_reads": {
+              "plos": 706,
+              "elife": 204
+            },
+            "drained_rps": 59.99329905644028,
+            "p50_ms": 17.638993449509144,
+            "p95_ms": 18.231534771621227,
+            "three_read_p95_ms": 18.328880425542593
+          },
+          "certified_prefix": {
+            "requests": 422,
+            "equal_responses": 422,
+            "source_reads": 866,
+            "source_payload_bytes": 673542,
+            "panel_reads": {
+              "plos": 662,
+              "elife": 204
+            },
+            "drained_rps": 59.99373938065919,
+            "p50_ms": 17.4511494114995,
+            "p95_ms": 32.53123555332406,
+            "three_read_p95_ms": 35.28542695567012
+          }
+        },
+        "165": {
+          "parallel_three": {
+            "requests": 422,
+            "equal_responses": 422,
+            "source_reads": 1266,
+            "source_payload_bytes": 942542,
+            "panel_reads": {
+              "plos": 960,
+              "elife": 306
+            },
+            "drained_rps": 118.166439035412,
+            "p50_ms": 536.1805455759168,
+            "p95_ms": 976.2510957196355,
+            "three_read_p95_ms": 976.2510957196355
+          },
+          "eager_topology": {
+            "requests": 422,
+            "equal_responses": 422,
+            "source_reads": 910,
+            "source_payload_bytes": 691170,
+            "panel_reads": {
+              "plos": 706,
+              "elife": 204
+            },
+            "drained_rps": 164.1116011528053,
+            "p50_ms": 21.097960881888866,
+            "p95_ms": 24.68627756461501,
+            "three_read_p95_ms": 25.485991034656763
+          },
+          "certified_prefix": {
+            "requests": 422,
+            "equal_responses": 422,
+            "source_reads": 866,
+            "source_payload_bytes": 673542,
+            "panel_reads": {
+              "plos": 662,
+              "elife": 204
+            },
+            "drained_rps": 164.27988115764285,
+            "p50_ms": 17.951257526874542,
+            "p95_ms": 33.08544503524887,
+            "three_read_p95_ms": 40.21709933876991
+          }
+        }
+      },
+      "order_offset": 0,
+      "embedding_checkpoint": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "reference_sha256": "1cd6bb56521f3dc1c417e8d62e2cfcd5d5d931839e87a471a41f4efedab32d72",
+      "script_sha256": "d5f9ec0d8460220852687a65909ed7fecea2814294c5e47f094fb5e4862bab24"
+    },
+    {
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "fixed_pool_depth": 64,
+      "repeats": 2,
+      "source_workers": 6,
+      "added_source_delay_ms": 16.0,
+      "topology": {
+        "plos": {
+          "cases": 160,
+          "no_third_link": 127
+        },
+        "elife": {
+          "cases": 51,
+          "no_third_link": 51
+        }
+      },
+      "results": {
+        "60": {
+          "eager_topology": {
+            "requests": 422,
+            "equal_responses": 422,
+            "source_reads": 910,
+            "source_payload_bytes": 691170,
+            "panel_reads": {
+              "plos": 706,
+              "elife": 204
+            },
+            "drained_rps": 59.99326950790931,
+            "p50_ms": 17.520331777632236,
+            "p95_ms": 18.191952165216208,
+            "three_read_p95_ms": 18.22509942576289
+          },
+          "certified_prefix": {
+            "requests": 422,
+            "equal_responses": 422,
+            "source_reads": 866,
+            "source_payload_bytes": 673542,
+            "panel_reads": {
+              "plos": 662,
+              "elife": 204
+            },
+            "drained_rps": 59.99703238208803,
+            "p50_ms": 17.51120015978813,
+            "p95_ms": 32.55039397627099,
+            "three_read_p95_ms": 34.96327260509133
+          },
+          "parallel_three": {
+            "requests": 422,
+            "equal_responses": 422,
+            "source_reads": 1266,
+            "source_payload_bytes": 942542,
+            "panel_reads": {
+              "plos": 960,
+              "elife": 306
+            },
+            "drained_rps": 59.99469878463474,
+            "p50_ms": 17.925992608070374,
+            "p95_ms": 18.682827427983284,
+            "three_read_p95_ms": 18.682827427983284
+          }
+        },
+        "165": {
+          "eager_topology": {
+            "requests": 422,
+            "equal_responses": 422,
+            "source_reads": 910,
+            "source_payload_bytes": 691170,
+            "panel_reads": {
+              "plos": 706,
+              "elife": 204
+            },
+            "drained_rps": 164.07323356064168,
+            "p50_ms": 20.949216559529305,
+            "p95_ms": 24.66630097478628,
+            "three_read_p95_ms": 25.37674317136407
+          },
+          "certified_prefix": {
+            "requests": 422,
+            "equal_responses": 422,
+            "source_reads": 866,
+            "source_payload_bytes": 673542,
+            "panel_reads": {
+              "plos": 662,
+              "elife": 204
+            },
+            "drained_rps": 164.28349582902067,
+            "p50_ms": 17.953939735889435,
+            "p95_ms": 33.30072918906795,
+            "three_read_p95_ms": 40.01975990831852
+          },
+          "parallel_three": {
+            "requests": 422,
+            "equal_responses": 422,
+            "source_reads": 1266,
+            "source_payload_bytes": 942542,
+            "panel_reads": {
+              "plos": 960,
+              "elife": 306
+            },
+            "drained_rps": 118.66115168463733,
+            "p50_ms": 529.1042281314731,
+            "p95_ms": 961.424807086587,
+            "three_read_p95_ms": 961.424807086587
+          }
+        }
+      },
+      "order_offset": 1,
+      "embedding_checkpoint": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "reference_sha256": "1cd6bb56521f3dc1c417e8d62e2cfcd5d5d931839e87a471a41f4efedab32d72",
+      "script_sha256": "d5f9ec0d8460220852687a65909ed7fecea2814294c5e47f094fb5e4862bab24"
+    }
+  ]
+}
