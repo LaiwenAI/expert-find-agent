@@ -80,3 +80,23 @@ copy. To resume, load your exported copy. Export before closing the
 page. The interface reads only the selected file, shows no arm predictions,
 and makes no network requests. Run `check_joint_review` on the exports
 before reconciliation. Only the generic interface is tracked here.
+
+## Privately audit which gates the frozen outputs can reach
+
+The feasibility audit uses the frozen recommendation views.
+Shared views cancel in the primary contrast, since the same review
+applies to both arms. Assign support to every primary-only view and
+none to comparator-only views. This maximizes the gain in each
+prespecified paired bootstrap draw. Use the resulting lower limit
+as a ceiling on the lower limit obtainable from independent labels.
+For the absolute gate, treat all issued recommendations as supported
+and use the original coverage and risk bounds.
+
+This calculation checks feasibility and counts completed form fields.
+Its output belongs with the private packet. The audit cannot
+establish evidence support or replace either independent review.
+
+```sh
+PYTHONPATH=src:. python -m experiments.retrieval.audit_sealed_first_query \
+  PROTOCOL LOCK FRAME PRIVATE_PACKET NEW_PRIVATE_FEASIBILITY
+```
