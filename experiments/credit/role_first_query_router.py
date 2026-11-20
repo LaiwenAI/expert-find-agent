@@ -41,7 +41,7 @@ def choose(rule, row):
     return "topic_fixed"
 
 
-def collect(catalog, queries, visible, cutoff, rankings, score_cache):
+def collect(catalog, queries, visible, cutoff, rankings, score_cache, *, arms=ARMS):
     rows = []
     for topic, _, pair in queries:
         ranked = rankings[topic]
@@ -56,7 +56,7 @@ def collect(catalog, queries, visible, cutoff, rankings, score_cache):
                                 bindings=catalog.bindings, topics=catalog.topics)
         row = features(catalog, topic, pair, ranked, visible)
         row["topic"] = topic
-        for arm in ARMS:
+        for arm in arms:
             result = live.replay(proxy, topic, pair, visible, cutoff, arm)
             row[arm] = {key: result[key] for key in ("grounded", "off_label", "issued", "reads")}
         rows.append(row)
@@ -100,7 +100,7 @@ def panels(catalog, publisher):
     return {"leaf_topics": (catalog.topics, list(pilot.query_panel(catalog, selected)))}
 
 
-def run_panels(catalog, publisher, cutoff):
+def run_panels(catalog, publisher, cutoff, *, arms=ARMS):
     selected = panels(catalog, publisher)
     topic_names = {topic for _, queries in selected.values() for topic, _, _ in queries}
     rankings = {topic: catalog.rank(topic) for topic in sorted(topic_names)}
@@ -110,7 +110,7 @@ def run_panels(catalog, publisher, cutoff):
     for field, (lookup, queries) in selected.items():
         catalog.topics = lookup
         for mask, visible in catalog.visible.items():
-            rows = collect(catalog, queries, visible & complete, cutoff, rankings, cache)
+            rows = collect(catalog, queries, visible & complete, cutoff, rankings, cache, arms=arms)
             valid = []
             for row in rows:
                 if publisher == "elife" and int.from_bytes(
