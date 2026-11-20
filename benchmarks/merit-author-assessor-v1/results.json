@@ -1,0 +1,413 @@
+{
+  "generation": {
+    "dataset": {
+      "release": "5fad0ea06148c3c8817aac841de46c98a75eb40c",
+      "sha256": "cf35b8d91c55424dc1897c5a3492c383738a88f2911edf7fbbccbb82d6145d03",
+      "split": "merit-profile-disjoint-v1",
+      "held": 129
+    },
+    "checkpoint": {
+      "repository": "Luli3220/MERIT-4B-reviewer-assessor",
+      "revision": "75daec26184881f85fbc76f3ffb67bd218b74d26",
+      "weight_sha256": {
+        "model-00001-of-00002.safetensors": "65f8f4b6f84254c65b659c6a01e9ce793d7a4e85b68f47e45a9afd53108d081a",
+        "model-00002-of-00002.safetensors": "c1bf03b1d2beb14ed7d5729ff082fedc3d6be7ebfec6307816801e6568437a85"
+      }
+    },
+    "configuration": {
+      "batch_size": 8,
+      "prompt_sha256": "03376da1483a24b2f193d9c69528c04563fddb343ed9b62662451f9b8eed86ec",
+      "max_prompt": 5120,
+      "max_generation": 4096,
+      "seed": 42,
+      "dtype": "bfloat16",
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "torch": "2.15.0+cu132",
+      "transformers": "5.23.0"
+    },
+    "evaluated": 129,
+    "skipped_positive": 0,
+    "skipped_negative": 0,
+    "label_parse_paths": {
+      "final_field": 124,
+      "default_negative": 5
+    },
+    "generation_cap_without_eos": 5,
+    "author_protocol": {
+      "true_positives": 35,
+      "true_negatives": 55,
+      "false_positives": 29,
+      "false_negatives": 10,
+      "accuracy": 0.6976744186046512,
+      "balanced_accuracy": 0.7162698412698413,
+      "positive_f1": 0.6422018348623854
+    },
+    "all_held_with_skips_as_negative": {
+      "true_positives": 35,
+      "true_negatives": 55,
+      "false_positives": 29,
+      "false_negatives": 10,
+      "accuracy": 0.6976744186046512,
+      "balanced_accuracy": 0.7162698412698413,
+      "positive_f1": 0.6422018348623854
+    },
+    "batch_timing": {
+      "total_seconds": 1454.4530886767898,
+      "batches": 17,
+      "p95_batch_seconds": 158.14821939521934
+    }
+  },
+  "direct": {
+    "dataset_sha256": "cf35b8d91c55424dc1897c5a3492c383738a88f2911edf7fbbccbb82d6145d03",
+    "split": "merit-profile-disjoint-v1",
+    "counts": {
+      "calibration": 125,
+      "test": 129
+    },
+    "checkpoint": "Luli3220/MERIT-4B-reviewer-assessor",
+    "revision": "75daec26184881f85fbc76f3ffb67bd218b74d26",
+    "script_sha256": "828b2037a9226aeb34fac3eb7827469685f589580fb199ea74e98216b9a24600",
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "routes": {
+      "original_full_prefill": {
+        "thresholds": {
+          "unadjusted": 0.0,
+          "balanced": 5.125,
+          "retain_90pct": 4.5
+        },
+        "test": {
+          "unadjusted": {
+            "true_positives": 45,
+            "true_negatives": 0,
+            "false_positives": 84,
+            "false_negatives": 0,
+            "accuracy": 0.3488372093023256,
+            "balanced_accuracy": 0.5,
+            "positive_f1": 0.5172413793103449,
+            "matched_batch": {
+              "true_positives": 45,
+              "true_negatives": 0,
+              "false_positives": 84,
+              "false_negatives": 0,
+              "accuracy": 0.3488372093023256,
+              "balanced_accuracy": 0.5,
+              "positive_f1": 0.5172413793103449,
+              "different_from_serial": 0
+            },
+            "different_from_direct_full": 20,
+            "accuracy_delta_vs_direct_full": {
+              "mean": -0.10852713178294573,
+              "percentile_95": [
+                -0.16774193548387098,
+                -0.02702702702702703
+              ],
+              "queries": 129,
+              "clusters": 60,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "balanced": {
+            "true_positives": 35,
+            "true_negatives": 52,
+            "false_positives": 32,
+            "false_negatives": 10,
+            "accuracy": 0.6744186046511628,
+            "balanced_accuracy": 0.6984126984126984,
+            "positive_f1": 0.625,
+            "matched_batch": {
+              "true_positives": 36,
+              "true_negatives": 54,
+              "false_positives": 30,
+              "false_negatives": 9,
+              "accuracy": 0.6976744186046512,
+              "balanced_accuracy": 0.7214285714285715,
+              "positive_f1": 0.6486486486486487,
+              "different_from_serial": 5
+            },
+            "different_from_direct_full": 28,
+            "accuracy_delta_vs_direct_full": {
+              "mean": 0.07751937984496124,
+              "percentile_95": [
+                0.01904761904761905,
+                0.15625
+              ],
+              "queries": 129,
+              "clusters": 60,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "retain_90pct": {
+            "true_positives": 40,
+            "true_negatives": 33,
+            "false_positives": 51,
+            "false_negatives": 5,
+            "accuracy": 0.5658914728682171,
+            "balanced_accuracy": 0.6408730158730158,
+            "positive_f1": 0.5882352941176471,
+            "matched_batch": {
+              "true_positives": 40,
+              "true_negatives": 33,
+              "false_positives": 51,
+              "false_negatives": 5,
+              "accuracy": 0.5658914728682171,
+              "balanced_accuracy": 0.6408730158730158,
+              "positive_f1": 0.5882352941176471,
+              "different_from_serial": 2
+            },
+            "different_from_direct_full": 28,
+            "accuracy_delta_vs_direct_full": {
+              "mean": -0.046511627906976744,
+              "percentile_95": [
+                -0.11206896551724138,
+                0.014705882352941176
+              ],
+              "queries": 129,
+              "clusters": 60,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          }
+        },
+        "serial_p95_ms": 263.6710083577782,
+        "median_prompt_tokens": 3094.0,
+        "matched_batch": {
+          "size": 8,
+          "batches": 17,
+          "total_seconds": 46.413927324232645,
+          "p95_batch_seconds": 3.7662881006253883
+        }
+      },
+      "direct_full": {
+        "thresholds": {
+          "unadjusted": 0.0,
+          "balanced": 8.5625,
+          "retain_90pct": 8.75
+        },
+        "test": {
+          "unadjusted": {
+            "true_positives": 42,
+            "true_negatives": 17,
+            "false_positives": 67,
+            "false_negatives": 3,
+            "accuracy": 0.4573643410852713,
+            "balanced_accuracy": 0.5678571428571428,
+            "positive_f1": 0.5454545454545454,
+            "matched_batch": {
+              "true_positives": 42,
+              "true_negatives": 16,
+              "false_positives": 68,
+              "false_negatives": 3,
+              "accuracy": 0.4496124031007752,
+              "balanced_accuracy": 0.5619047619047619,
+              "positive_f1": 0.5419354838709678,
+              "different_from_serial": 1
+            },
+            "different_from_direct_full": 0,
+            "accuracy_delta_vs_direct_full": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 129,
+              "clusters": 60,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "balanced": {
+            "true_positives": 31,
+            "true_negatives": 46,
+            "false_positives": 38,
+            "false_negatives": 14,
+            "accuracy": 0.5968992248062015,
+            "balanced_accuracy": 0.6182539682539683,
+            "positive_f1": 0.543859649122807,
+            "matched_batch": {
+              "true_positives": 31,
+              "true_negatives": 47,
+              "false_positives": 37,
+              "false_negatives": 14,
+              "accuracy": 0.6046511627906976,
+              "balanced_accuracy": 0.6242063492063492,
+              "positive_f1": 0.5486725663716814,
+              "different_from_serial": 1
+            },
+            "different_from_direct_full": 0,
+            "accuracy_delta_vs_direct_full": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 129,
+              "clusters": 60,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "retain_90pct": {
+            "true_positives": 30,
+            "true_negatives": 49,
+            "false_positives": 35,
+            "false_negatives": 15,
+            "accuracy": 0.6124031007751938,
+            "balanced_accuracy": 0.625,
+            "positive_f1": 0.5454545454545454,
+            "matched_batch": {
+              "true_positives": 31,
+              "true_negatives": 50,
+              "false_positives": 34,
+              "false_negatives": 14,
+              "accuracy": 0.627906976744186,
+              "balanced_accuracy": 0.642063492063492,
+              "positive_f1": 0.5636363636363636,
+              "different_from_serial": 6
+            },
+            "different_from_direct_full": 0,
+            "accuracy_delta_vs_direct_full": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 129,
+              "clusters": 60,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          }
+        },
+        "serial_p95_ms": 235.13432219624517,
+        "median_prompt_tokens": 2667.0,
+        "matched_batch": {
+          "size": 8,
+          "batches": 17,
+          "total_seconds": 40.02074820292182,
+          "p95_batch_seconds": 3.3272754011908545
+        }
+      },
+      "direct_two": {
+        "thresholds": {
+          "unadjusted": 0.0,
+          "balanced": 9.3125,
+          "retain_90pct": 5.625
+        },
+        "test": {
+          "unadjusted": {
+            "true_positives": 42,
+            "true_negatives": 16,
+            "false_positives": 68,
+            "false_negatives": 3,
+            "accuracy": 0.4496124031007752,
+            "balanced_accuracy": 0.5619047619047619,
+            "positive_f1": 0.5419354838709678,
+            "matched_batch": {
+              "true_positives": 42,
+              "true_negatives": 16,
+              "false_positives": 68,
+              "false_negatives": 3,
+              "accuracy": 0.4496124031007752,
+              "balanced_accuracy": 0.5619047619047619,
+              "positive_f1": 0.5419354838709678,
+              "different_from_serial": 0
+            },
+            "different_from_direct_full": 11,
+            "accuracy_delta_vs_direct_full": {
+              "mean": -0.007751937984496124,
+              "percentile_95": [
+                -0.04032461713913327,
+                0.02912621359223301
+              ],
+              "queries": 129,
+              "clusters": 60,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "balanced": {
+            "true_positives": 22,
+            "true_negatives": 60,
+            "false_positives": 24,
+            "false_negatives": 23,
+            "accuracy": 0.6356589147286822,
+            "balanced_accuracy": 0.6015873015873016,
+            "positive_f1": 0.4835164835164835,
+            "matched_batch": {
+              "true_positives": 23,
+              "true_negatives": 61,
+              "false_positives": 23,
+              "false_negatives": 22,
+              "accuracy": 0.6511627906976745,
+              "balanced_accuracy": 0.6186507936507937,
+              "positive_f1": 0.5054945054945055,
+              "different_from_serial": 2
+            },
+            "different_from_direct_full": 33,
+            "accuracy_delta_vs_direct_full": {
+              "mean": 0.03875968992248062,
+              "percentile_95": [
+                -0.026599300261690748,
+                0.12698412698412698
+              ],
+              "queries": 129,
+              "clusters": 60,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          },
+          "retain_90pct": {
+            "true_positives": 40,
+            "true_negatives": 40,
+            "false_positives": 44,
+            "false_negatives": 5,
+            "accuracy": 0.6201550387596899,
+            "balanced_accuracy": 0.6825396825396826,
+            "positive_f1": 0.6201550387596899,
+            "matched_batch": {
+              "true_positives": 40,
+              "true_negatives": 39,
+              "false_positives": 45,
+              "false_negatives": 5,
+              "accuracy": 0.6124031007751938,
+              "balanced_accuracy": 0.6765873015873016,
+              "positive_f1": 0.6153846153846154,
+              "different_from_serial": 1
+            },
+            "different_from_direct_full": 25,
+            "accuracy_delta_vs_direct_full": {
+              "mean": 0.007751937984496124,
+              "percentile_95": [
+                -0.07339449541284404,
+                0.07526881720430108
+              ],
+              "queries": 129,
+              "clusters": 60,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "whole source paper; query-weighted mean"
+            }
+          }
+        },
+        "serial_p95_ms": 162.7790459431708,
+        "median_prompt_tokens": 1972.0,
+        "matched_batch": {
+          "size": 8,
+          "batches": 17,
+          "total_seconds": 26.541726969764568,
+          "p95_batch_seconds": 2.1134681463241574
+        }
+      }
+    }
+  }
+}
