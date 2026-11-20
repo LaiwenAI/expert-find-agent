@@ -18,7 +18,7 @@ ARMS = ("topic_adaptive", "person_adaptive", "topic_fixed", "person_fixed", "per
 FIRST, POOL, EXTRA = 4, 8, 2
 
 
-def replay(catalog, topic, pair, visible, cutoff, arm, *, include_witnesses=False):
+def replay(catalog, topic, pair, visible, cutoff, arm, *, include_witnesses=False, rescue_selector=None):
     started = perf_counter_ns()
     ranked = catalog.rank(topic)
     original = ranked[:POOL]
@@ -33,6 +33,11 @@ def replay(catalog, topic, pair, visible, cutoff, arm, *, include_witnesses=Fals
     early_stop = adaptive and initial["issued"] == pilot.TOP
     if early_stop:
         extra = []
+    elif rescue_selector is not None:
+        available = [i for i in compatible if i not in seen]
+        extra = list(rescue_selector(ranked, available, initial["witnesses"]))[:EXTRA]
+        if not set(extra).issubset(available):
+            raise ValueError("Rescue selected ineligible evidence")
     elif arm.endswith("_global_fixed"):
         extra = [i for i in compatible if i not in seen][:EXTRA]
     else:

@@ -50,12 +50,13 @@ def review_cards(packet, request, catalog, pair, witnesses):
     return ids
 
 
-def evaluate(catalog, publisher, cutoff, packet, scores_by_contrast):
+def evaluate(catalog, publisher, cutoff, packet, scores_by_contrast, *,
+             selector_factory=None, cached_scores=None):
     selected = router.panels(catalog, publisher)
     topics = {topic for _, queries in selected.values() for topic, _, _ in queries}
     orders = {topic: catalog.rank(topic) for topic in sorted(topics)}
     known = {i for i, row in enumerate(catalog.articles) if row.get("declaration_complete", True)}
-    score_cache = {}
+    score_cache = {} if cached_scores is None else cached_scores
 
     def score(topic, sources):
         key = topic, tuple(sources)
@@ -75,10 +76,11 @@ def evaluate(catalog, publisher, cutoff, packet, scores_by_contrast):
             for topic, rarity, pair in queries:
                 proxy = SimpleNamespace(rank=lambda query: orders[query], verify=score, person=catalog.person,
                                         bindings=catalog.bindings, topics=lookup)
-                local, extended = (
-                    live.replay(proxy, topic, pair, known & inventory, cutoff, arm,
-                                include_witnesses=True) for arm in ARMS
-                )
+                visible = known & inventory
+                selector = None if selector_factory is None else selector_factory(catalog, pair, visible)
+                local = live.replay(proxy, topic, pair, visible, cutoff, ARMS[0], include_witnesses=True)
+                extended = live.replay(proxy, topic, pair, visible, cutoff, ARMS[1],
+                                       include_witnesses=True, rescue_selector=selector)
                 if local["first_witnesses"] != extended["first_witnesses"]:
                     raise ValueError("Rescue arms must share the same first-stage evidence")
                 caps = (len(local["first_witnesses"]), min(local["issued"], extended["issued"]))
