@@ -1,0 +1,294 @@
+{
+  "model_revisions": {
+    "backbone": "1d8ad4ca9b3dd8059ad90a75d4983776a23d44af",
+    "adapter": "6ddce7e8fdfed417d9fd022124529a421560a3f0",
+    "compact": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3"
+  },
+  "release": "5fad0ea06148c3c8817aac841de46c98a75eb40c",
+  "data_sha256": {
+    "pc": "3eee77d4f387fbadd7bb54dc3792a9bbad16808d13f755ef9e6840459a5f90ab",
+    "rc": "a478b1eed63734b9d1862fbee41bd4d328af4e72b943296508fea490f045d70e"
+  },
+  "rendering_sha256": {
+    "prepare_topk_LR.py": "afeb4b05ea6bd055e5328484891d374cace0af4d930e5e6ed949202f31dc0cf1",
+    "eval_LR.py": "34097ccb517e6b0a49218e713bfa9b335a9a7ffa972f2cdf6c446be354ef000f"
+  },
+  "results": {
+    "pc": {
+      "pairs": 148,
+      "anchors": 110,
+      "metrics": {
+        "rate": {
+          "accuracy": 0.777027027027027,
+          "weighted_kendall_loss": 0.16221374045801526,
+          "correct": 115,
+          "ties": 1,
+          "paired_accuracy_vs_rate": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 148,
+            "clusters": 110,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "compact_top3": {
+          "accuracy": 0.668918918918919,
+          "weighted_kendall_loss": 0.24427480916030533,
+          "correct": 99,
+          "ties": 4,
+          "paired_accuracy_vs_rate": {
+            "mean": -0.10810810810810811,
+            "percentile_95": [
+              -0.19178762587317424,
+              -0.02
+            ],
+            "queries": 148,
+            "clusters": 110,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "base_8b_same_profile": {
+          "accuracy": 0.7162162162162162,
+          "weighted_kendall_loss": 0.20801526717557253,
+          "correct": 106,
+          "ties": 3,
+          "paired_accuracy_vs_rate": {
+            "mean": -0.060810810810810814,
+            "percentile_95": [
+              -0.14285714285714285,
+              0.01923387096774189
+            ],
+            "queries": 148,
+            "clusters": 110,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "author": {
+          "accuracy": 0.7567567567567568,
+          "weighted_kendall_loss": 0.16603053435114504,
+          "correct": 112,
+          "ties": 3,
+          "paired_accuracy_vs_rate": {
+            "mean": -0.02027027027027027,
+            "percentile_95": [
+              -0.096,
+              0.052980132450331126
+            ],
+            "queries": 148,
+            "clusters": 110,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "compact_prefilter": {
+          "accuracy": 0.7432432432432432,
+          "weighted_kendall_loss": 0.17748091603053434,
+          "correct": 110,
+          "ties": 3,
+          "paired_accuracy_vs_rate": {
+            "mean": -0.033783783783783786,
+            "percentile_95": [
+              -0.11029411764705882,
+              0.04
+            ],
+            "queries": 148,
+            "clusters": 110,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "first_three": {
+          "accuracy": 0.75,
+          "weighted_kendall_loss": 0.1965648854961832,
+          "correct": 111,
+          "ties": 1,
+          "paired_accuracy_vs_rate": {
+            "mean": -0.02702702702702703,
+            "percentile_95": [
+              -0.08609271523178808,
+              0.028368794326241134
+            ],
+            "queries": 148,
+            "clusters": 110,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        }
+      }
+    },
+    "rc": {
+      "pairs": 829,
+      "anchors": 169,
+      "metrics": {
+        "rate": {
+          "accuracy": 0.7551266586248492,
+          "weighted_kendall_loss": 0.1878698224852071,
+          "correct": 626,
+          "ties": 0,
+          "paired_accuracy_vs_rate": {
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 829,
+            "clusters": 169,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "compact_top3": {
+          "accuracy": 0.7599517490952955,
+          "weighted_kendall_loss": 0.1856508875739645,
+          "correct": 630,
+          "ties": 0,
+          "paired_accuracy_vs_rate": {
+            "mean": 0.0048250904704463205,
+            "percentile_95": [
+              -0.02843016069221261,
+              0.03841009813232034
+            ],
+            "queries": 829,
+            "clusters": 169,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "base_8b_same_profile": {
+          "accuracy": 0.7346200241254524,
+          "weighted_kendall_loss": 0.20488165680473372,
+          "correct": 609,
+          "ties": 0,
+          "paired_accuracy_vs_rate": {
+            "mean": -0.020506634499396863,
+            "percentile_95": [
+              -0.05251035034549009,
+              0.012723236004351933
+            ],
+            "queries": 829,
+            "clusters": 169,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "author": {
+          "accuracy": 0.7635705669481303,
+          "weighted_kendall_loss": 0.17899408284023668,
+          "correct": 633,
+          "ties": 0,
+          "paired_accuracy_vs_rate": {
+            "mean": 0.008443908323281062,
+            "percentile_95": [
+              -0.02433167646112419,
+              0.04146456511734927
+            ],
+            "queries": 829,
+            "clusters": 169,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "compact_prefilter": {
+          "accuracy": 0.7696019300361882,
+          "weighted_kendall_loss": 0.1752958579881657,
+          "correct": 638,
+          "ties": 0,
+          "paired_accuracy_vs_rate": {
+            "mean": 0.014475271411338963,
+            "percentile_95": [
+              -0.017222693300836006,
+              0.04721549636803874
+            ],
+            "queries": 829,
+            "clusters": 169,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        },
+        "first_three": {
+          "accuracy": 0.7394451145958987,
+          "weighted_kendall_loss": 0.20118343195266272,
+          "correct": 613,
+          "ties": 0,
+          "paired_accuracy_vs_rate": {
+            "mean": -0.015681544028950542,
+            "percentile_95": [
+              -0.049610184430659725,
+              0.017241379310344827
+            ],
+            "queries": 829,
+            "clusters": 169,
+            "seed": 20261116,
+            "bootstrap_repeats": 10000,
+            "sampling_unit": "whole source paper; query-weighted mean"
+          }
+        }
+      }
+    }
+  },
+  "component_timing": {
+    "compact": {
+      "texts": 2005,
+      "seconds": 9.669095007935539
+    },
+    "author_prefilter": {
+      "texts": 1599,
+      "batch_size": 8,
+      "seconds": 46.35271323192865,
+      "padded_tokens": 492833,
+      "truncated_texts": 0
+    },
+    "backbone_final": {
+      "author": {
+        "texts": 1453,
+        "batch_size": 8,
+        "seconds": 82.30048619001172,
+        "padded_tokens": 824163,
+        "truncated_texts": 0
+      }
+    },
+    "adapter": {
+      "author": {
+        "texts": 1453,
+        "batch_size": 8,
+        "seconds": 109.0030812259065,
+        "padded_tokens": 824163,
+        "truncated_texts": 0
+      },
+      "compact_prefilter": {
+        "texts": 1465,
+        "batch_size": 8,
+        "seconds": 109.69263887195848,
+        "padded_tokens": 830413,
+        "truncated_texts": 0
+      },
+      "first_three": {
+        "texts": 1103,
+        "batch_size": 8,
+        "seconds": 68.09253012400586,
+        "padded_tokens": 522243,
+        "truncated_texts": 0
+      }
+    }
+  },
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "pilot": null,
+  "script_sha256": "3665886ee8e0ce78cbc5038ad6f3a16143c7062b5c4ae55c6e0517335f6eb4ce"
+}
