@@ -1,0 +1,442 @@
+{
+  "run": {
+    "job": "44103",
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "fixture_sha256": "56e460b44ba4806658a7fbb6389865e3f0ba7345e7d045e27f636ef1e0d9f4cd",
+    "script_sha256": "185882bd7fae7a194c93f7bbf08626078454bcfe3d6c26fb5745aa1b91e4587f",
+    "model_provenance_sha256": "afe957088656024b36dbcbfa800c7bbf87676d80c3c115d0b4cf6280fb864bcc",
+    "cases": 480,
+    "results": {
+      "direct_4b": {
+        "by_edit": {
+          "intact": {
+            "cases": 96,
+            "correct": 51,
+            "false_eligibility": 27,
+            "unsupported_decisions": 0,
+            "supported_eligible": 0
+          },
+          "wrong_owner": {
+            "cases": 96,
+            "correct": 76,
+            "false_eligibility": 20,
+            "unsupported_decisions": 20,
+            "supported_eligible": 0
+          },
+          "wrong_project": {
+            "cases": 96,
+            "correct": 72,
+            "false_eligibility": 24,
+            "unsupported_decisions": 24,
+            "supported_eligible": 0
+          },
+          "wrong_role": {
+            "cases": 96,
+            "correct": 59,
+            "false_eligibility": 37,
+            "unsupported_decisions": 37,
+            "supported_eligible": 0
+          },
+          "planned_only": {
+            "cases": 96,
+            "correct": 91,
+            "false_eligibility": 5,
+            "unsupported_decisions": 5,
+            "supported_eligible": 0
+          }
+        },
+        "intact_pairs": 48,
+        "both_intact_correct": 5,
+        "warm_p95_ms": 24.630461260676384
+      },
+      "direct_4b_rotated": {
+        "by_edit": {
+          "intact": {
+            "cases": 96,
+            "correct": 55,
+            "false_eligibility": 39,
+            "unsupported_decisions": 0,
+            "supported_eligible": 0
+          },
+          "wrong_owner": {
+            "cases": 96,
+            "correct": 0,
+            "false_eligibility": 30,
+            "unsupported_decisions": 96,
+            "supported_eligible": 0
+          },
+          "wrong_project": {
+            "cases": 96,
+            "correct": 0,
+            "false_eligibility": 32,
+            "unsupported_decisions": 96,
+            "supported_eligible": 0
+          },
+          "wrong_role": {
+            "cases": 96,
+            "correct": 1,
+            "false_eligibility": 60,
+            "unsupported_decisions": 95,
+            "supported_eligible": 0
+          },
+          "planned_only": {
+            "cases": 96,
+            "correct": 8,
+            "false_eligibility": 8,
+            "unsupported_decisions": 88,
+            "supported_eligible": 0
+          }
+        },
+        "intact_pairs": 48,
+        "both_intact_correct": 8,
+        "warm_p95_ms": 24.609326291829348
+      },
+      "ignore_owner": {
+        "by_edit": {
+          "intact": {
+            "cases": 96,
+            "correct": 96,
+            "false_eligibility": 0,
+            "unsupported_decisions": 0,
+            "supported_eligible": 48
+          },
+          "wrong_owner": {
+            "cases": 96,
+            "correct": 0,
+            "false_eligibility": 48,
+            "unsupported_decisions": 96,
+            "supported_eligible": 0
+          },
+          "wrong_project": {
+            "cases": 96,
+            "correct": 96,
+            "false_eligibility": 0,
+            "unsupported_decisions": 0,
+            "supported_eligible": 0
+          },
+          "wrong_role": {
+            "cases": 96,
+            "correct": 96,
+            "false_eligibility": 0,
+            "unsupported_decisions": 0,
+            "supported_eligible": 0
+          },
+          "planned_only": {
+            "cases": 96,
+            "correct": 96,
+            "false_eligibility": 0,
+            "unsupported_decisions": 0,
+            "supported_eligible": 0
+          }
+        },
+        "intact_pairs": 48,
+        "both_intact_correct": 48,
+        "warm_p95_ms": 0.05027297884225845
+      },
+      "ignore_project": {
+        "by_edit": {
+          "intact": {
+            "cases": 96,
+            "correct": 96,
+            "false_eligibility": 0,
+            "unsupported_decisions": 0,
+            "supported_eligible": 48
+          },
+          "wrong_owner": {
+            "cases": 96,
+            "correct": 96,
+            "false_eligibility": 0,
+            "unsupported_decisions": 0,
+            "supported_eligible": 0
+          },
+          "wrong_project": {
+            "cases": 96,
+            "correct": 0,
+            "false_eligibility": 48,
+            "unsupported_decisions": 96,
+            "supported_eligible": 0
+          },
+          "wrong_role": {
+            "cases": 96,
+            "correct": 96,
+            "false_eligibility": 0,
+            "unsupported_decisions": 0,
+            "supported_eligible": 0
+          },
+          "planned_only": {
+            "cases": 96,
+            "correct": 96,
+            "false_eligibility": 0,
+            "unsupported_decisions": 0,
+            "supported_eligible": 0
+          }
+        },
+        "intact_pairs": 48,
+        "both_intact_correct": 48,
+        "warm_p95_ms": 0.032142363488674164
+      },
+      "joint": {
+        "by_edit": {
+          "intact": {
+            "cases": 96,
+            "correct": 96,
+            "false_eligibility": 0,
+            "unsupported_decisions": 0,
+            "supported_eligible": 48
+          },
+          "wrong_owner": {
+            "cases": 96,
+            "correct": 96,
+            "false_eligibility": 0,
+            "unsupported_decisions": 0,
+            "supported_eligible": 0
+          },
+          "wrong_project": {
+            "cases": 96,
+            "correct": 96,
+            "false_eligibility": 0,
+            "unsupported_decisions": 0,
+            "supported_eligible": 0
+          },
+          "wrong_role": {
+            "cases": 96,
+            "correct": 96,
+            "false_eligibility": 0,
+            "unsupported_decisions": 0,
+            "supported_eligible": 0
+          },
+          "planned_only": {
+            "cases": 96,
+            "correct": 96,
+            "false_eligibility": 0,
+            "unsupported_decisions": 0,
+            "supported_eligible": 0
+          }
+        },
+        "intact_pairs": 48,
+        "both_intact_correct": 48,
+        "warm_p95_ms": 0.02630408853292465
+      }
+    }
+  },
+  "repeat": {
+    "job": "44102",
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "fixture_sha256": "56e460b44ba4806658a7fbb6389865e3f0ba7345e7d045e27f636ef1e0d9f4cd",
+    "script_sha256": "185882bd7fae7a194c93f7bbf08626078454bcfe3d6c26fb5745aa1b91e4587f",
+    "model_provenance_sha256": "afe957088656024b36dbcbfa800c7bbf87676d80c3c115d0b4cf6280fb864bcc",
+    "cases": 480,
+    "results": {
+      "direct_4b": {
+        "by_edit": {
+          "intact": {
+            "cases": 96,
+            "correct": 51,
+            "false_eligibility": 27,
+            "unsupported_decisions": 0,
+            "supported_eligible": 0
+          },
+          "wrong_owner": {
+            "cases": 96,
+            "correct": 76,
+            "false_eligibility": 20,
+            "unsupported_decisions": 20,
+            "supported_eligible": 0
+          },
+          "wrong_project": {
+            "cases": 96,
+            "correct": 72,
+            "false_eligibility": 24,
+            "unsupported_decisions": 24,
+            "supported_eligible": 0
+          },
+          "wrong_role": {
+            "cases": 96,
+            "correct": 59,
+            "false_eligibility": 37,
+            "unsupported_decisions": 37,
+            "supported_eligible": 0
+          },
+          "planned_only": {
+            "cases": 96,
+            "correct": 91,
+            "false_eligibility": 5,
+            "unsupported_decisions": 5,
+            "supported_eligible": 0
+          }
+        },
+        "intact_pairs": 48,
+        "both_intact_correct": 5,
+        "warm_p95_ms": 24.782623536884785
+      },
+      "direct_4b_rotated": {
+        "by_edit": {
+          "intact": {
+            "cases": 96,
+            "correct": 55,
+            "false_eligibility": 39,
+            "unsupported_decisions": 0,
+            "supported_eligible": 0
+          },
+          "wrong_owner": {
+            "cases": 96,
+            "correct": 0,
+            "false_eligibility": 30,
+            "unsupported_decisions": 96,
+            "supported_eligible": 0
+          },
+          "wrong_project": {
+            "cases": 96,
+            "correct": 0,
+            "false_eligibility": 32,
+            "unsupported_decisions": 96,
+            "supported_eligible": 0
+          },
+          "wrong_role": {
+            "cases": 96,
+            "correct": 1,
+            "false_eligibility": 60,
+            "unsupported_decisions": 95,
+            "supported_eligible": 0
+          },
+          "planned_only": {
+            "cases": 96,
+            "correct": 8,
+            "false_eligibility": 8,
+            "unsupported_decisions": 88,
+            "supported_eligible": 0
+          }
+        },
+        "intact_pairs": 48,
+        "both_intact_correct": 8,
+        "warm_p95_ms": 24.759105406701565
+      },
+      "ignore_owner": {
+        "by_edit": {
+          "intact": {
+            "cases": 96,
+            "correct": 96,
+            "false_eligibility": 0,
+            "unsupported_decisions": 0,
+            "supported_eligible": 48
+          },
+          "wrong_owner": {
+            "cases": 96,
+            "correct": 0,
+            "false_eligibility": 48,
+            "unsupported_decisions": 96,
+            "supported_eligible": 0
+          },
+          "wrong_project": {
+            "cases": 96,
+            "correct": 96,
+            "false_eligibility": 0,
+            "unsupported_decisions": 0,
+            "supported_eligible": 0
+          },
+          "wrong_role": {
+            "cases": 96,
+            "correct": 96,
+            "false_eligibility": 0,
+            "unsupported_decisions": 0,
+            "supported_eligible": 0
+          },
+          "planned_only": {
+            "cases": 96,
+            "correct": 96,
+            "false_eligibility": 0,
+            "unsupported_decisions": 0,
+            "supported_eligible": 0
+          }
+        },
+        "intact_pairs": 48,
+        "both_intact_correct": 48,
+        "warm_p95_ms": 0.05253208801150321
+      },
+      "ignore_project": {
+        "by_edit": {
+          "intact": {
+            "cases": 96,
+            "correct": 96,
+            "false_eligibility": 0,
+            "unsupported_decisions": 0,
+            "supported_eligible": 48
+          },
+          "wrong_owner": {
+            "cases": 96,
+            "correct": 96,
+            "false_eligibility": 0,
+            "unsupported_decisions": 0,
+            "supported_eligible": 0
+          },
+          "wrong_project": {
+            "cases": 96,
+            "correct": 0,
+            "false_eligibility": 48,
+            "unsupported_decisions": 96,
+            "supported_eligible": 0
+          },
+          "wrong_role": {
+            "cases": 96,
+            "correct": 96,
+            "false_eligibility": 0,
+            "unsupported_decisions": 0,
+            "supported_eligible": 0
+          },
+          "planned_only": {
+            "cases": 96,
+            "correct": 96,
+            "false_eligibility": 0,
+            "unsupported_decisions": 0,
+            "supported_eligible": 0
+          }
+        },
+        "intact_pairs": 48,
+        "both_intact_correct": 48,
+        "warm_p95_ms": 0.031812768429517746
+      },
+      "joint": {
+        "by_edit": {
+          "intact": {
+            "cases": 96,
+            "correct": 96,
+            "false_eligibility": 0,
+            "unsupported_decisions": 0,
+            "supported_eligible": 48
+          },
+          "wrong_owner": {
+            "cases": 96,
+            "correct": 96,
+            "false_eligibility": 0,
+            "unsupported_decisions": 0,
+            "supported_eligible": 0
+          },
+          "wrong_project": {
+            "cases": 96,
+            "correct": 96,
+            "false_eligibility": 0,
+            "unsupported_decisions": 0,
+            "supported_eligible": 0
+          },
+          "wrong_role": {
+            "cases": 96,
+            "correct": 96,
+            "false_eligibility": 0,
+            "unsupported_decisions": 0,
+            "supported_eligible": 0
+          },
+          "planned_only": {
+            "cases": 96,
+            "correct": 96,
+            "false_eligibility": 0,
+            "unsupported_decisions": 0,
+            "supported_eligible": 0
+          }
+        },
+        "intact_pairs": 48,
+        "both_intact_correct": 48,
+        "warm_p95_ms": 0.024760793894529294
+      }
+    }
+  }
+}
