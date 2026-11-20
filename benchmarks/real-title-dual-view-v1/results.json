@@ -1,0 +1,150 @@
+{
+  "job": "43915",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "numpy": "2.5.5",
+  "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "source_manifest_sha256": "d90baaca66f383f34ef3ce663fe34b16e66dc38e7af3b972bd771589f19e540a",
+  "script_sha256": "fb3a1bdeb62ad47f86fd87c96f3a7601f1ef7a6089640d0ad32f42795160cda9",
+  "prior_sha256": "5e65b25df1b70a50ab9e8f2f70960f074255639f9bbc1b52a75f81d049d27f63",
+  "title_rows": 73257,
+  "queries": 91,
+  "citations_per_query": 2,
+  "exact_dual_responses": {
+    "cached": 273,
+    "online": 273
+  },
+  "title_encoding_seconds": 24.52797667682171,
+  "title_abstract_encoding_seconds": 299.6477754879743,
+  "title_fp32_bytes": 300060672,
+  "title_abstract_fp32_bytes": 300060672,
+  "title_guard_payload_bytes": 75894252,
+  "title_score_checks": {
+    "checked_band_values": 1323,
+    "different_values": 0,
+    "ambiguous_band_values": 98,
+    "ambiguous_different_values": 0
+  },
+  "dual_differs_from_title_abstract": 77,
+  "reviewer_proxy": {
+    "soft": {
+      "totals": {
+        "title": {
+          "has_known_positive": 40,
+          "known_positive": 58,
+          "judged": 86,
+          "total": 206
+        },
+        "title_abstract": {
+          "has_known_positive": 52,
+          "known_positive": 76,
+          "judged": 107,
+          "total": 203
+        },
+        "dual_fp32": {
+          "has_known_positive": 46,
+          "known_positive": 65,
+          "judged": 102,
+          "total": 217
+        },
+        "dual_guarded": {
+          "has_known_positive": 46,
+          "known_positive": 65,
+          "judged": 102,
+          "total": 217
+        }
+      },
+      "dual_minus_title_abstract": {
+        "gained_queries": 2,
+        "lost_queries": 8,
+        "proportion_delta": -0.06593406593406594,
+        "percentile_interval": [
+          -0.13186813186813187,
+          0.0
+        ]
+      }
+    },
+    "hard": {
+      "totals": {
+        "title": {
+          "has_known_positive": 29,
+          "known_positive": 39,
+          "judged": 86,
+          "total": 206
+        },
+        "title_abstract": {
+          "has_known_positive": 32,
+          "known_positive": 41,
+          "judged": 107,
+          "total": 203
+        },
+        "dual_fp32": {
+          "has_known_positive": 31,
+          "known_positive": 39,
+          "judged": 102,
+          "total": 217
+        },
+        "dual_guarded": {
+          "has_known_positive": 31,
+          "known_positive": 39,
+          "judged": 102,
+          "total": 217
+        }
+      },
+      "dual_minus_title_abstract": {
+        "gained_queries": 3,
+        "lost_queries": 4,
+        "proportion_delta": -0.01098901098901099,
+        "percentile_interval": [
+          -0.06593406593406594,
+          0.04395604395604396
+        ]
+      }
+    }
+  },
+  "timings_ms": {
+    "cached": {
+      "title": {
+        "p50": 5.690271034836769,
+        "p95": 6.219584494829178,
+        "p99": 6.538629457354546
+      },
+      "title_abstract": {
+        "p50": 5.583632737398148,
+        "p95": 5.980060622096062,
+        "p99": 6.275822818279266
+      },
+      "dual_fp32": {
+        "p50": 11.188250035047531,
+        "p95": 12.023715674877167,
+        "p99": 12.491709664463995
+      },
+      "dual_guarded": {
+        "p50": 7.403803989291191,
+        "p95": 7.897030562162399,
+        "p99": 8.214036375284193
+      }
+    },
+    "online": {
+      "title": {
+        "p50": 14.470629394054413,
+        "p95": 15.391147136688232,
+        "p99": 15.582898333668709
+      },
+      "title_abstract": {
+        "p50": 14.199351891875267,
+        "p95": 15.328207984566689,
+        "p99": 15.694432482123371
+      },
+      "dual_fp32": {
+        "p50": 19.869526848196983,
+        "p95": 21.117543056607246,
+        "p99": 21.878060325980186
+      },
+      "dual_guarded": {
+        "p50": 16.273245215415955,
+        "p95": 17.241477966308594,
+        "p99": 17.53457263112068
+      }
+    }
+  }
+}
