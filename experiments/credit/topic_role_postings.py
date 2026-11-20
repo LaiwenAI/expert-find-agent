@@ -105,16 +105,18 @@ class Catalog:
         self.vectors = encoder.encode(self.texts)
         self.encode_seconds = perf_counter() - started
 
-    def rank(self, topic):
+    def rank(self, topic, *, return_dense_scores=False):
         vector = self.encoder.encode([f"Research about {topic}"], query=True)[0]
-        dense = np.argsort(-(self.vectors @ vector), kind="stable").tolist()
+        scores = self.vectors @ vector
+        dense = np.argsort(-scores, kind="stable").tolist()
         words = set(tokens(topic))
         overlap = {i: sum(self.idf[w] for w in sorted(words & terms)) for i, terms in enumerate(self.terms)}
         lexical = sorted((i for i in dense if overlap[i]), key=lambda i: (-overlap[i], i))
         merged = {i: 1 / (60 + rank) for rank, i in enumerate(dense, 1)}
         for rank, i in enumerate(lexical, 1):
             merged[i] += 1 / (60 + rank)
-        return sorted(dense, key=lambda i: (-merged[i], i))
+        ranked = sorted(dense, key=lambda i: (-merged[i], i))
+        return (ranked, scores) if return_dense_scores else ranked
 
     def candidates(self, ranked, pair, arm, visibility, limit):
         if arm == "topic_first":
