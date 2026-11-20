@@ -69,6 +69,10 @@ def run(args):
                            requests_with_pass_on_any_retained_qualification=0) for key in ARMS}
     one_drop = Counter(recoverable_requests=0, recovered_people=0, requests_with_multiple_relaxations=0)
     pair_count = 0
+    if args.clarification:
+        from experiments.retrieval.enterprise_qualification_questions import examine
+
+        questions, cost = Counter(), defaultdict(float)
 
     for row in traced:
         key = row["id"]
@@ -103,6 +107,11 @@ def run(args):
         pair_count += len(bank)
         profiles = [score_profile(expert, refs, bank, len(first) + len(extra))
                     for expert, refs in options.items()]
+        if args.clarification:
+            observed, weights = examine(profiles, original_indices, compare_indices)
+            questions.update(observed)
+            for k, value in weights.items():
+                cost[k] += value
         for arm, indices in interpretations(original_indices, compare_indices).items():
             approved = [profile for profile in profiles if support(profile, indices)]
             if arm == "original" and approved:
@@ -127,8 +136,9 @@ def run(args):
 
     if len(by_query) != baseline["multi_condition"] or len(traced) != len(origin):
         raise ValueError("Changed replay panel")
+    clarification = {"clarification": dict(questions, **cost)} if args.clarification else {}
     write(args.output, dict(
-        arms=totals, single_disputed_clause_omission=one_drop, distinct_scored_pairs=pair_count,
+        arms=totals, **clarification, single_disputed_clause_omission=one_drop, distinct_scored_pairs=pair_count,
         fixed_requests=len(by_query), original_trace_sha256=digest(args.trace),
         scope_aggregate_sha256=digest(args.scope_aggregate), script_sha256=digest(Path(__file__)),
         gpu=torch.cuda.get_device_name(), checkpoint=reader.provenance["revision"],
@@ -139,4 +149,5 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ("queries", "corpus", "trace", "baseline", "scope_trace", "scope_aggregate", "reranker", "output"):
         parser.add_argument(name, type=Path)
+    parser.add_argument("--clarification", action="store_true")
     run(parser.parse_args())
