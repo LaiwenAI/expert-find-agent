@@ -46,7 +46,7 @@ class LocalIndex:
             path.write_text(json.dumps(catalogue.ownership[doi]["authors"], separators=(",", ":")))
             self.paths[doi] = path
 
-    def rank(self, topics):
+    def rank(self, topics, *, depth=DEPTH):
         dense = self.encoder.encode(topics, query=True) @ self.embeddings.T
         valid = set(self.valid)
         ranks = []
@@ -59,7 +59,7 @@ class LocalIndex:
             for order in (sparse, semantic):
                 for rank, key in enumerate(order, 1):
                     fusion[key] += 1 / (60 + rank)
-            sequence = sorted(fusion, key=lambda key: (-fusion[key], key))[:DEPTH]
+            sequence = sorted(fusion, key=lambda key: (-fusion[key], key))[:depth]
             ranks.append({self.ids[key]: j for j, key in enumerate(sequence, 1)})
         return tuple(ranks)
 
@@ -67,24 +67,24 @@ class LocalIndex:
         return {doi: {"authors": json.loads(self.paths[doi].read_bytes())} for doi in documents}
 
 
-def simple_order(ranks):
+def simple_order(ranks, *, depth=DEPTH):
     initial = list(dict.fromkeys(next(iter(facet)) for facet in ranks))
     if len(initial) == 1:
         initial.append(next(doi for doi in ranks[0] if doi != initial[0]))
     extras = sorted(set().union(*ranks) - set(initial), key=lambda doi: (
-        min(facet.get(doi, DEPTH + 1) for facet in ranks),
-        sum(facet.get(doi, DEPTH + 1) for facet in ranks), doi,
+        min(facet.get(doi, depth + 1) for facet in ranks),
+        sum(facet.get(doi, depth + 1) for facet in ranks), doi,
     ))
     if not extras:
         raise ValueError("Unexpected empty follow-up pool")
     return initial, extras
 
 
-def inspect(index, atoms, ranks, arm):
-    initial, extras = simple_order(ranks)
+def inspect(index, atoms, ranks, arm, *, depth=DEPTH):
+    initial, extras = simple_order(ranks, depth=depth)
     byline = index.catalogue.byline
     if arm == "joint":
-        plan = joint.posting_plan(byline, set().union(*ranks), ranks, [*initial, extras[0]], DEPTH)
+        plan = joint.posting_plan(byline, set().union(*ranks), ranks, [*initial, extras[0]], depth)
         return plan, index.open_sources(plan)
     if arm == "parallel_byline":
         def gain(doi):

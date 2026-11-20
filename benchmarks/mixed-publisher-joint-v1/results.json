@@ -1,0 +1,1038 @@
+{
+  "slurm_array": 44619,
+  "order_offsets": [
+    0,
+    1
+  ],
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "mixed_articles": 452,
+  "embedding_checkpoint": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "script_sha256": "3de2ac8ced6aadfca6f6121733602661a483ff1a8c709e97e874676584aa7f16",
+  "live_reference_sha256": "1cd6bb56521f3dc1c417e8d62e2cfcd5d5d931839e87a471a41f4efedab32d72",
+  "panels": {
+    "plos": {
+      "queries": 160,
+      "original_articles": 130,
+      "original64": {
+        "pool_headroom": 104,
+        "arms": {
+          "owner_gap": {
+            "known": 28,
+            "observable_proof_after_reads": 28,
+            "issued": 33,
+            "reads": 480,
+            "unjudged_other_publisher": 0
+          },
+          "joint": {
+            "known": 49,
+            "observable_proof_after_reads": 50,
+            "issued": 78,
+            "reads": 480,
+            "unjudged_other_publisher": 0
+          },
+          "personal_roles": {
+            "known": 82,
+            "observable_proof_after_reads": 86,
+            "issued": 131,
+            "reads": 480,
+            "unjudged_other_publisher": 0
+          }
+        }
+      },
+      "global64": {
+        "pool_headroom": 79,
+        "arms": {
+          "owner_gap": {
+            "known": 12,
+            "observable_proof_after_reads": 12,
+            "issued": 15,
+            "reads": 480,
+            "unjudged_other_publisher": 0
+          },
+          "joint": {
+            "known": 43,
+            "observable_proof_after_reads": 43,
+            "issued": 67,
+            "reads": 480,
+            "unjudged_other_publisher": 1
+          },
+          "personal_roles": {
+            "known": 68,
+            "observable_proof_after_reads": 70,
+            "issued": 104,
+            "reads": 480,
+            "unjudged_other_publisher": 1
+          }
+        }
+      },
+      "balanced64": {
+        "pool_headroom": 57,
+        "arms": {
+          "owner_gap": {
+            "known": 6,
+            "observable_proof_after_reads": 6,
+            "issued": 8,
+            "reads": 480,
+            "unjudged_other_publisher": 0
+          },
+          "joint": {
+            "known": 43,
+            "observable_proof_after_reads": 43,
+            "issued": 60,
+            "reads": 480,
+            "unjudged_other_publisher": 1
+          },
+          "personal_roles": {
+            "known": 56,
+            "observable_proof_after_reads": 56,
+            "issued": 78,
+            "reads": 480,
+            "unjudged_other_publisher": 2
+          }
+        }
+      },
+      "global128": {
+        "pool_headroom": 115,
+        "arms": {
+          "owner_gap": {
+            "known": 13,
+            "observable_proof_after_reads": 13,
+            "issued": 22,
+            "reads": 480,
+            "unjudged_other_publisher": 0
+          },
+          "joint": {
+            "known": 45,
+            "observable_proof_after_reads": 46,
+            "issued": 73,
+            "reads": 480,
+            "unjudged_other_publisher": 1
+          },
+          "personal_roles": {
+            "known": 85,
+            "observable_proof_after_reads": 89,
+            "issued": 143,
+            "reads": 480,
+            "unjudged_other_publisher": 6
+          }
+        }
+      },
+      "matched": {
+        "global64_vs_original64": {
+          "joint": {
+            "common": {
+              "control": {
+                "issued": 65,
+                "known": 41,
+                "tag_unresolved": 24
+              },
+              "proposed": {
+                "issued": 65,
+                "known": 41,
+                "tag_unresolved": 24
+              },
+              "common_requests": 65,
+              "overlap_changes": {
+                "same_response": 64,
+                "same_person_changed_sources": 0,
+                "different_person": 1,
+                "known_gain": 0,
+                "known_loss": 0
+              },
+              "paired_known_delta_per_request": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 160,
+                "clusters": 102,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "topic pair; query-weighted mean"
+              }
+            },
+            "quota": {
+              "control": {
+                "issued": 67,
+                "known": 46,
+                "tag_unresolved": 21
+              },
+              "proposed": {
+                "issued": 67,
+                "known": 43,
+                "tag_unresolved": 24
+              },
+              "common_requests": 57,
+              "overlap_changes": {
+                "same_response": 57,
+                "same_person_changed_sources": 0,
+                "different_person": 0,
+                "known_gain": 0,
+                "known_loss": 0
+              },
+              "paired_known_delta_per_request": {
+                "mean": -0.01875,
+                "percentile_95": [
+                  -0.05844155844155844,
+                  0.018404907975460124
+                ],
+                "queries": 160,
+                "clusters": 102,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "topic pair; query-weighted mean"
+              }
+            }
+          },
+          "personal_roles": {
+            "common": {
+              "control": {
+                "issued": 104,
+                "known": 67,
+                "tag_unresolved": 37
+              },
+              "proposed": {
+                "issued": 104,
+                "known": 68,
+                "tag_unresolved": 36
+              },
+              "common_requests": 104,
+              "overlap_changes": {
+                "same_response": 101,
+                "same_person_changed_sources": 0,
+                "different_person": 3,
+                "known_gain": 1,
+                "known_loss": 0
+              },
+              "paired_known_delta_per_request": {
+                "mean": 0.00625,
+                "percentile_95": [
+                  0.0,
+                  0.02097902097902098
+                ],
+                "queries": 160,
+                "clusters": 102,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "topic pair; query-weighted mean"
+              }
+            },
+            "quota": {
+              "control": {
+                "issued": 104,
+                "known": 66,
+                "tag_unresolved": 38
+              },
+              "proposed": {
+                "issued": 104,
+                "known": 68,
+                "tag_unresolved": 36
+              },
+              "common_requests": 95,
+              "overlap_changes": {
+                "same_response": 93,
+                "same_person_changed_sources": 0,
+                "different_person": 2,
+                "known_gain": 1,
+                "known_loss": 0
+              },
+              "paired_known_delta_per_request": {
+                "mean": 0.0125,
+                "percentile_95": [
+                  -0.044948044267973296,
+                  0.07547169811320754
+                ],
+                "queries": 160,
+                "clusters": 102,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "topic pair; query-weighted mean"
+              }
+            }
+          }
+        },
+        "balanced64_vs_global64": {
+          "joint": {
+            "common": {
+              "control": {
+                "issued": 59,
+                "known": 42,
+                "tag_unresolved": 17
+              },
+              "proposed": {
+                "issued": 59,
+                "known": 42,
+                "tag_unresolved": 17
+              },
+              "common_requests": 59,
+              "overlap_changes": {
+                "same_response": 59,
+                "same_person_changed_sources": 0,
+                "different_person": 0,
+                "known_gain": 0,
+                "known_loss": 0
+              },
+              "paired_known_delta_per_request": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 160,
+                "clusters": 102,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "topic pair; query-weighted mean"
+              }
+            },
+            "quota": {
+              "control": {
+                "issued": 60,
+                "known": 41,
+                "tag_unresolved": 19
+              },
+              "proposed": {
+                "issued": 60,
+                "known": 43,
+                "tag_unresolved": 17
+              },
+              "common_requests": 58,
+              "overlap_changes": {
+                "same_response": 58,
+                "same_person_changed_sources": 0,
+                "different_person": 0,
+                "known_gain": 0,
+                "known_loss": 0
+              },
+              "paired_known_delta_per_request": {
+                "mean": 0.0125,
+                "percentile_95": [
+                  0.0,
+                  0.03355704697986577
+                ],
+                "queries": 160,
+                "clusters": 102,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "topic pair; query-weighted mean"
+              }
+            }
+          },
+          "personal_roles": {
+            "common": {
+              "control": {
+                "issued": 76,
+                "known": 54,
+                "tag_unresolved": 22
+              },
+              "proposed": {
+                "issued": 76,
+                "known": 54,
+                "tag_unresolved": 22
+              },
+              "common_requests": 76,
+              "overlap_changes": {
+                "same_response": 75,
+                "same_person_changed_sources": 0,
+                "different_person": 1,
+                "known_gain": 0,
+                "known_loss": 0
+              },
+              "paired_known_delta_per_request": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 160,
+                "clusters": 102,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "topic pair; query-weighted mean"
+              }
+            },
+            "quota": {
+              "control": {
+                "issued": 78,
+                "known": 55,
+                "tag_unresolved": 23
+              },
+              "proposed": {
+                "issued": 78,
+                "known": 56,
+                "tag_unresolved": 22
+              },
+              "common_requests": 72,
+              "overlap_changes": {
+                "same_response": 72,
+                "same_person_changed_sources": 0,
+                "different_person": 0,
+                "known_gain": 0,
+                "known_loss": 0
+              },
+              "paired_known_delta_per_request": {
+                "mean": 0.00625,
+                "percentile_95": [
+                  -0.013513513513513514,
+                  0.028985507246376812
+                ],
+                "queries": 160,
+                "clusters": 102,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "topic pair; query-weighted mean"
+              }
+            }
+          }
+        },
+        "global128_vs_global64": {
+          "joint": {
+            "common": {
+              "control": {
+                "issued": 67,
+                "known": 43,
+                "tag_unresolved": 24
+              },
+              "proposed": {
+                "issued": 67,
+                "known": 43,
+                "tag_unresolved": 24
+              },
+              "common_requests": 67,
+              "overlap_changes": {
+                "same_response": 67,
+                "same_person_changed_sources": 0,
+                "different_person": 0,
+                "known_gain": 0,
+                "known_loss": 0
+              },
+              "paired_known_delta_per_request": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 160,
+                "clusters": 102,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "topic pair; query-weighted mean"
+              }
+            },
+            "quota": {
+              "control": {
+                "issued": 67,
+                "known": 43,
+                "tag_unresolved": 24
+              },
+              "proposed": {
+                "issued": 67,
+                "known": 43,
+                "tag_unresolved": 24
+              },
+              "common_requests": 67,
+              "overlap_changes": {
+                "same_response": 67,
+                "same_person_changed_sources": 0,
+                "different_person": 0,
+                "known_gain": 0,
+                "known_loss": 0
+              },
+              "paired_known_delta_per_request": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 160,
+                "clusters": 102,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "topic pair; query-weighted mean"
+              }
+            }
+          },
+          "personal_roles": {
+            "common": {
+              "control": {
+                "issued": 104,
+                "known": 68,
+                "tag_unresolved": 36
+              },
+              "proposed": {
+                "issued": 104,
+                "known": 68,
+                "tag_unresolved": 36
+              },
+              "common_requests": 104,
+              "overlap_changes": {
+                "same_response": 104,
+                "same_person_changed_sources": 0,
+                "different_person": 0,
+                "known_gain": 0,
+                "known_loss": 0
+              },
+              "paired_known_delta_per_request": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 160,
+                "clusters": 102,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "topic pair; query-weighted mean"
+              }
+            },
+            "quota": {
+              "control": {
+                "issued": 104,
+                "known": 68,
+                "tag_unresolved": 36
+              },
+              "proposed": {
+                "issued": 104,
+                "known": 68,
+                "tag_unresolved": 36
+              },
+              "common_requests": 104,
+              "overlap_changes": {
+                "same_response": 104,
+                "same_person_changed_sources": 0,
+                "different_person": 0,
+                "known_gain": 0,
+                "known_loss": 0
+              },
+              "paired_known_delta_per_request": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 160,
+                "clusters": 102,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "topic pair; query-weighted mean"
+              }
+            }
+          }
+        }
+      }
+    },
+    "elife": {
+      "queries": 51,
+      "original_articles": 322,
+      "original64": {
+        "pool_headroom": 29,
+        "arms": {
+          "owner_gap": {
+            "known": 0,
+            "observable_proof_after_reads": 0,
+            "issued": 0,
+            "reads": 153,
+            "unjudged_other_publisher": 0
+          },
+          "joint": {
+            "known": 14,
+            "observable_proof_after_reads": 14,
+            "issued": 16,
+            "reads": 153,
+            "unjudged_other_publisher": 0
+          },
+          "personal_roles": {
+            "known": 28,
+            "observable_proof_after_reads": 28,
+            "issued": 30,
+            "reads": 153,
+            "unjudged_other_publisher": 0
+          }
+        }
+      },
+      "global64": {
+        "pool_headroom": 17,
+        "arms": {
+          "owner_gap": {
+            "known": 0,
+            "observable_proof_after_reads": 0,
+            "issued": 0,
+            "reads": 153,
+            "unjudged_other_publisher": 0
+          },
+          "joint": {
+            "known": 14,
+            "observable_proof_after_reads": 14,
+            "issued": 15,
+            "reads": 153,
+            "unjudged_other_publisher": 1
+          },
+          "personal_roles": {
+            "known": 17,
+            "observable_proof_after_reads": 17,
+            "issued": 18,
+            "reads": 153,
+            "unjudged_other_publisher": 1
+          }
+        }
+      },
+      "balanced64": {
+        "pool_headroom": 15,
+        "arms": {
+          "owner_gap": {
+            "known": 0,
+            "observable_proof_after_reads": 0,
+            "issued": 0,
+            "reads": 153,
+            "unjudged_other_publisher": 0
+          },
+          "joint": {
+            "known": 12,
+            "observable_proof_after_reads": 12,
+            "issued": 17,
+            "reads": 153,
+            "unjudged_other_publisher": 5
+          },
+          "personal_roles": {
+            "known": 15,
+            "observable_proof_after_reads": 15,
+            "issued": 24,
+            "reads": 153,
+            "unjudged_other_publisher": 9
+          }
+        }
+      },
+      "global128": {
+        "pool_headroom": 49,
+        "arms": {
+          "owner_gap": {
+            "known": 0,
+            "observable_proof_after_reads": 0,
+            "issued": 0,
+            "reads": 153,
+            "unjudged_other_publisher": 0
+          },
+          "joint": {
+            "known": 14,
+            "observable_proof_after_reads": 14,
+            "issued": 16,
+            "reads": 153,
+            "unjudged_other_publisher": 1
+          },
+          "personal_roles": {
+            "known": 46,
+            "observable_proof_after_reads": 46,
+            "issued": 49,
+            "reads": 153,
+            "unjudged_other_publisher": 1
+          }
+        }
+      },
+      "matched": {
+        "global64_vs_original64": {
+          "joint": {
+            "common": {
+              "control": {
+                "issued": 15,
+                "known": 14,
+                "tag_unresolved": 1
+              },
+              "proposed": {
+                "issued": 15,
+                "known": 14,
+                "tag_unresolved": 1
+              },
+              "common_requests": 15,
+              "overlap_changes": {
+                "same_response": 14,
+                "same_person_changed_sources": 0,
+                "different_person": 1,
+                "known_gain": 0,
+                "known_loss": 0
+              },
+              "paired_known_delta_per_request": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 51,
+                "clusters": 8,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "topic pair; query-weighted mean"
+              }
+            },
+            "quota": {
+              "control": {
+                "issued": 15,
+                "known": 14,
+                "tag_unresolved": 1
+              },
+              "proposed": {
+                "issued": 15,
+                "known": 14,
+                "tag_unresolved": 1
+              },
+              "common_requests": 15,
+              "overlap_changes": {
+                "same_response": 14,
+                "same_person_changed_sources": 0,
+                "different_person": 1,
+                "known_gain": 0,
+                "known_loss": 0
+              },
+              "paired_known_delta_per_request": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 51,
+                "clusters": 8,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "topic pair; query-weighted mean"
+              }
+            }
+          },
+          "personal_roles": {
+            "common": {
+              "control": {
+                "issued": 18,
+                "known": 17,
+                "tag_unresolved": 1
+              },
+              "proposed": {
+                "issued": 18,
+                "known": 17,
+                "tag_unresolved": 1
+              },
+              "common_requests": 18,
+              "overlap_changes": {
+                "same_response": 17,
+                "same_person_changed_sources": 0,
+                "different_person": 1,
+                "known_gain": 0,
+                "known_loss": 0
+              },
+              "paired_known_delta_per_request": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 51,
+                "clusters": 8,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "topic pair; query-weighted mean"
+              }
+            },
+            "quota": {
+              "control": {
+                "issued": 18,
+                "known": 17,
+                "tag_unresolved": 1
+              },
+              "proposed": {
+                "issued": 18,
+                "known": 17,
+                "tag_unresolved": 1
+              },
+              "common_requests": 18,
+              "overlap_changes": {
+                "same_response": 17,
+                "same_person_changed_sources": 0,
+                "different_person": 1,
+                "known_gain": 0,
+                "known_loss": 0
+              },
+              "paired_known_delta_per_request": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 51,
+                "clusters": 8,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "topic pair; query-weighted mean"
+              }
+            }
+          }
+        },
+        "balanced64_vs_global64": {
+          "joint": {
+            "common": {
+              "control": {
+                "issued": 14,
+                "known": 13,
+                "tag_unresolved": 1
+              },
+              "proposed": {
+                "issued": 14,
+                "known": 12,
+                "tag_unresolved": 2
+              },
+              "common_requests": 14,
+              "overlap_changes": {
+                "same_response": 13,
+                "same_person_changed_sources": 0,
+                "different_person": 1,
+                "known_gain": 0,
+                "known_loss": 1
+              },
+              "paired_known_delta_per_request": {
+                "mean": -0.0196078431372549,
+                "percentile_95": [
+                  -0.1,
+                  0.0
+                ],
+                "queries": 51,
+                "clusters": 8,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "topic pair; query-weighted mean"
+              }
+            },
+            "quota": {
+              "control": {
+                "issued": 15,
+                "known": 14,
+                "tag_unresolved": 1
+              },
+              "proposed": {
+                "issued": 15,
+                "known": 12,
+                "tag_unresolved": 3
+              },
+              "common_requests": 13,
+              "overlap_changes": {
+                "same_response": 12,
+                "same_person_changed_sources": 0,
+                "different_person": 1,
+                "known_gain": 0,
+                "known_loss": 1
+              },
+              "paired_known_delta_per_request": {
+                "mean": -0.0392156862745098,
+                "percentile_95": [
+                  -0.2,
+                  0.0
+                ],
+                "queries": 51,
+                "clusters": 8,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "topic pair; query-weighted mean"
+              }
+            }
+          },
+          "personal_roles": {
+            "common": {
+              "control": {
+                "issued": 17,
+                "known": 16,
+                "tag_unresolved": 1
+              },
+              "proposed": {
+                "issued": 17,
+                "known": 15,
+                "tag_unresolved": 2
+              },
+              "common_requests": 17,
+              "overlap_changes": {
+                "same_response": 16,
+                "same_person_changed_sources": 0,
+                "different_person": 1,
+                "known_gain": 0,
+                "known_loss": 1
+              },
+              "paired_known_delta_per_request": {
+                "mean": -0.0196078431372549,
+                "percentile_95": [
+                  -0.1,
+                  0.0
+                ],
+                "queries": 51,
+                "clusters": 8,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "topic pair; query-weighted mean"
+              }
+            },
+            "quota": {
+              "control": {
+                "issued": 18,
+                "known": 17,
+                "tag_unresolved": 1
+              },
+              "proposed": {
+                "issued": 18,
+                "known": 15,
+                "tag_unresolved": 3
+              },
+              "common_requests": 16,
+              "overlap_changes": {
+                "same_response": 15,
+                "same_person_changed_sources": 0,
+                "different_person": 1,
+                "known_gain": 0,
+                "known_loss": 1
+              },
+              "paired_known_delta_per_request": {
+                "mean": -0.0392156862745098,
+                "percentile_95": [
+                  -0.2,
+                  0.0
+                ],
+                "queries": 51,
+                "clusters": 8,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "topic pair; query-weighted mean"
+              }
+            }
+          }
+        },
+        "global128_vs_global64": {
+          "joint": {
+            "common": {
+              "control": {
+                "issued": 15,
+                "known": 14,
+                "tag_unresolved": 1
+              },
+              "proposed": {
+                "issued": 15,
+                "known": 14,
+                "tag_unresolved": 1
+              },
+              "common_requests": 15,
+              "overlap_changes": {
+                "same_response": 15,
+                "same_person_changed_sources": 0,
+                "different_person": 0,
+                "known_gain": 0,
+                "known_loss": 0
+              },
+              "paired_known_delta_per_request": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 51,
+                "clusters": 8,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "topic pair; query-weighted mean"
+              }
+            },
+            "quota": {
+              "control": {
+                "issued": 15,
+                "known": 14,
+                "tag_unresolved": 1
+              },
+              "proposed": {
+                "issued": 15,
+                "known": 14,
+                "tag_unresolved": 1
+              },
+              "common_requests": 15,
+              "overlap_changes": {
+                "same_response": 15,
+                "same_person_changed_sources": 0,
+                "different_person": 0,
+                "known_gain": 0,
+                "known_loss": 0
+              },
+              "paired_known_delta_per_request": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 51,
+                "clusters": 8,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "topic pair; query-weighted mean"
+              }
+            }
+          },
+          "personal_roles": {
+            "common": {
+              "control": {
+                "issued": 18,
+                "known": 17,
+                "tag_unresolved": 1
+              },
+              "proposed": {
+                "issued": 18,
+                "known": 17,
+                "tag_unresolved": 1
+              },
+              "common_requests": 18,
+              "overlap_changes": {
+                "same_response": 18,
+                "same_person_changed_sources": 0,
+                "different_person": 0,
+                "known_gain": 0,
+                "known_loss": 0
+              },
+              "paired_known_delta_per_request": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 51,
+                "clusters": 8,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "topic pair; query-weighted mean"
+              }
+            },
+            "quota": {
+              "control": {
+                "issued": 18,
+                "known": 17,
+                "tag_unresolved": 1
+              },
+              "proposed": {
+                "issued": 18,
+                "known": 17,
+                "tag_unresolved": 1
+              },
+              "common_requests": 18,
+              "overlap_changes": {
+                "same_response": 18,
+                "same_person_changed_sources": 0,
+                "different_person": 0,
+                "known_gain": 0,
+                "known_loss": 0
+              },
+              "paired_known_delta_per_request": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 51,
+                "clusters": 8,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000,
+                "sampling_unit": "topic pair; query-weighted mean"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
