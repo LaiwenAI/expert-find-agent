@@ -22,8 +22,8 @@ def timestamp(year):
     return int(datetime(year, 1, 1, tzinfo=timezone.utc).timestamp())
 
 
-def fetch(folder, endpoint, **params):
-    url = f"{ENDPOINT}/{endpoint}?" + urlencode(dict(site="stats", pagesize=100, filter=FILTER, **params))
+def fetch(folder, endpoint, *, site="stats", **params):
+    url = f"{ENDPOINT}/{endpoint}?" + urlencode(dict(site=site, pagesize=100, filter=FILTER, **params))
     path = folder / f"{sha256(url.encode()).hexdigest()[:16]}.json"
     if not path.exists():
         with urlopen(url, timeout=25) as response:
@@ -37,12 +37,12 @@ def fetch(folder, endpoint, **params):
     return json.loads(path.read_bytes())["items"]
 
 
-def lookup(folder, endpoint, ids, field):
+def lookup(folder, endpoint, ids, field, site):
     ids = sorted(set(ids))
     values = {}
     for offset in range(0, len(ids), 100):
         batch = ";".join(map(str, ids[offset:offset + 100]))
-        values.update({row[field]: row for row in fetch(folder, f"{endpoint}/{batch}")})
+        values.update({row[field]: row for row in fetch(folder, f"{endpoint}/{batch}", site=site)})
     return values
 
 
@@ -67,15 +67,18 @@ def write(path, value):
         stream.write("\n")
 
 
-def capture(folder, year=2024, duplicate_pages=DUPLICATE_PAGES):
+def capture(folder, year=2024, duplicate_pages=DUPLICATE_PAGES, site="stats", end_year=None):
+    end_year = year if end_year is None else end_year
+    if year < 2023 or end_year < year:
+        raise ValueError("Queries must follow the 2023 evidence cutoff")
     if not 1 <= duplicate_pages <= 25:
         raise ValueError("Expected 1 to 25 duplicate pages")
     folder.mkdir(parents=True, exist_ok=True)
     duplicate_rows = [
         row
         for i in range(1, duplicate_pages + 1)
-        for row in fetch(folder, "search/advanced", closed="true", sort="creation", page=i,
-                         fromdate=timestamp(year), todate=timestamp(year+1)-1)
+        for row in fetch(folder, "search/advanced", site=site, closed="true", sort="creation", page=i,
+                         fromdate=timestamp(year), todate=timestamp(end_year+1)-1)
         if row.get("closed_reason", "").casefold() == "duplicate"
     ]
     links = {row["question_id"]: {
@@ -85,12 +88,12 @@ def capture(folder, year=2024, duplicate_pages=DUPLICATE_PAGES):
     background = {
         row["question_id"]: row
         for i in range(1, BACKGROUND_PAGES + 1)
-        for row in fetch(folder, "search/advanced", accepted="true", sort="votes", page=i, todate=cutoff-1)
+        for row in fetch(folder, "search/advanced", site=site, accepted="true", sort="votes", page=i, todate=cutoff-1)
     }
-    canonical = lookup(folder, "questions", set().union(*links.values()), "question_id")
+    canonical = lookup(folder, "questions", set().union(*links.values()), "question_id", site)
     questions = {**background, **canonical}
     answers = lookup(folder, "answers", (q["accepted_answer_id"] for q in questions.values()
-                                        if q.get("accepted_answer_id")), "answer_id")
+                                        if q.get("accepted_answer_id")), "answer_id", site)
     documents = {}
     for qid, post in questions.items():
         aid = post.get("accepted_answer_id")
@@ -114,8 +117,11 @@ def capture(folder, year=2024, duplicate_pages=DUPLICATE_PAGES):
         title = unescape(post["title"])
         if not relevant or not post.get("body") or post["creation_date"] < timestamp(year):
             continue
-        source_link = any(re.search(rf"/(?:questions|q)/{documents[aid]['qid']}(?:[/?#\"']|$)", post["body"])
-                          for aid in relevant)
+        source_link = any(
+            re.search(rf"/(?:questions|q)/{documents[aid]['qid']}(?:[/?#\"']|$)", post["body"])
+            or re.search(rf"/(?:a|answers)/{aid}(?:[/?#\"']|$)", post["body"])
+            for aid in relevant
+        )
         if source_link:
             continue
         if any(" ".join(title.casefold().split()) == " ".join(documents[aid]["question"].casefold().split())
@@ -143,5 +149,7 @@ if __name__ == "__main__":
     parser.add_argument("folder", type=Path)
     parser.add_argument("--year", type=int, default=2024)
     parser.add_argument("--duplicate-pages", type=int, default=DUPLICATE_PAGES)
+    parser.add_argument("--site", choices=("stats", "mathoverflow"), default="stats")
+    parser.add_argument("--end-year", type=int)
     args = parser.parse_args()
-    capture(args.folder, args.year, args.duplicate_pages)
+    capture(args.folder, args.year, args.duplicate_pages, args.site, args.end_year)
