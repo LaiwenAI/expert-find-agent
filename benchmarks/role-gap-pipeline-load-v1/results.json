@@ -1,0 +1,336 @@
+{
+  "run": {
+    "job": "44074",
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "script_sha256": "1b6c750087bf8e305b3989ce5dd70e3f30a0f157aef08aef5295947f397eccd4",
+    "reference_sha256": "715d7c26929850482a018439ddc68f2cd43e1296aafbe5d7feef2eda5d6abbab",
+    "projection_sha256": "4ce67b1ff52d869f133bd5318bad2573502d12aae065c75c9407c14754171c89",
+    "mesh_sha256": "49621552e2c055d5b8057d297486c77b27010ac4c2354692455f029e5dde055b",
+    "queries": 110,
+    "results": {
+      "18": {
+        "44071": {
+          "requests": 220,
+          "exact_responses": 220,
+          "routes": {
+            "serial": {
+              "p50_p95_p99_ms": [
+                25.9948698332515,
+                58.5804989199159,
+                76.24780763954062
+              ],
+              "p95_arrival_lag_ms": 0.06759937345302001,
+              "drain_ms": 30.162702940508268,
+              "offered_requests_per_second": 16.068170908408486,
+              "completed_requests_per_second": 16.105898282148303,
+              "gpu_lane_seconds": {
+                "encoding": 1.647742211818695,
+                "verification": 3.4320972561836243
+              },
+              "cpu_preparation_seconds": 0.2467243243008852
+            },
+            "pipeline": {
+              "p50_p95_p99_ms": [
+                27.48967890257625,
+                57.96262599307358,
+                79.6343380741015
+              ],
+              "p95_arrival_lag_ms": 0.0687596766066445,
+              "drain_ms": 30.68520470718994,
+              "offered_requests_per_second": 16.068170908408486,
+              "completed_requests_per_second": 16.105282228726523,
+              "gpu_lane_seconds": {
+                "encoding": 1.6505322363227606,
+                "verification": 3.481100097298622
+              },
+              "cpu_preparation_seconds": 0.31787195429205894
+            }
+          }
+        },
+        "44083": {
+          "requests": 220,
+          "exact_responses": 220,
+          "routes": {
+            "pipeline": {
+              "p50_p95_p99_ms": [
+                29.657013206500604,
+                83.45355795655195,
+                107.85020047490293
+              ],
+              "p95_arrival_lag_ms": 0.06965816461244054,
+              "drain_ms": 25.59746004180674,
+              "offered_requests_per_second": 17.332181872622645,
+              "completed_requests_per_second": 17.37612294144271,
+              "gpu_lane_seconds": {
+                "encoding": 1.6669610477983952,
+                "verification": 3.4683635346591473
+              },
+              "cpu_preparation_seconds": 0.30758778750896454
+            },
+            "serial": {
+              "p50_p95_p99_ms": [
+                26.390433440669213,
+                85.87817406804714,
+                110.51568625346464
+              ],
+              "p95_arrival_lag_ms": 0.0703854821164196,
+              "drain_ms": 25.82932210998301,
+              "offered_requests_per_second": 17.332181872622645,
+              "completed_requests_per_second": 17.375804738030247,
+              "gpu_lane_seconds": {
+                "encoding": 1.6484568901360035,
+                "verification": 3.436416843906045
+              },
+              "cpu_preparation_seconds": 0.2630061376839876
+            }
+          }
+        }
+      },
+      "36": {
+        "44071": {
+          "requests": 220,
+          "exact_responses": 220,
+          "routes": {
+            "serial": {
+              "p50_p95_p99_ms": [
+                63.90007160018238,
+                191.67302881321046,
+                244.59684292572425
+              ],
+              "p95_arrival_lag_ms": 0.0713724248207592,
+              "drain_ms": 60.95419343193598,
+              "offered_requests_per_second": 32.13634181681697,
+              "completed_requests_per_second": 31.996887050389812,
+              "gpu_lane_seconds": {
+                "encoding": 1.6077940240502357,
+                "verification": 3.4394844621419907
+              },
+              "cpu_preparation_seconds": 0.24872118793427944
+            },
+            "pipeline": {
+              "p50_p95_p99_ms": [
+                62.646519485224594,
+                185.0555908581461,
+                228.53552648021693
+              ],
+              "p95_arrival_lag_ms": 0.07190910043086696,
+              "drain_ms": 59.09253920992441,
+              "offered_requests_per_second": 32.13634181681697,
+              "completed_requests_per_second": 32.00555286513567,
+              "gpu_lane_seconds": {
+                "encoding": 1.6516900099813938,
+                "verification": 3.4814401380717754
+              },
+              "cpu_preparation_seconds": 0.32818244211375713
+            }
+          }
+        },
+        "44083": {
+          "requests": 220,
+          "exact_responses": 220,
+          "routes": {
+            "pipeline": {
+              "p50_p95_p99_ms": [
+                59.20472190413051,
+                280.39918772480723,
+                295.13772193595435
+              ],
+              "p95_arrival_lag_ms": 0.08062366689235431,
+              "drain_ms": 28.193888922714017,
+              "offered_requests_per_second": 34.66436374524529,
+              "completed_requests_per_second": 34.66793718683449,
+              "gpu_lane_seconds": {
+                "encoding": 1.6608579531311989,
+                "verification": 3.4881539698690176
+              },
+              "cpu_preparation_seconds": 0.3436132203787565
+            },
+            "serial": {
+              "p50_p95_p99_ms": [
+                62.7951139897085,
+                308.1542109041741,
+                331.4855366810791
+              ],
+              "p95_arrival_lag_ms": 0.08134730973623215,
+              "drain_ms": 28.560956676982663,
+              "offered_requests_per_second": 34.66436374524529,
+              "completed_requests_per_second": 34.66593200188702,
+              "gpu_lane_seconds": {
+                "encoding": 1.6245422661304474,
+                "verification": 3.441483125090599
+              },
+              "cpu_preparation_seconds": 0.2473749127238989
+            }
+          }
+        }
+      }
+    }
+  },
+  "repeat": {
+    "job": "44075",
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "script_sha256": "1b6c750087bf8e305b3989ce5dd70e3f30a0f157aef08aef5295947f397eccd4",
+    "reference_sha256": "715d7c26929850482a018439ddc68f2cd43e1296aafbe5d7feef2eda5d6abbab",
+    "projection_sha256": "4ce67b1ff52d869f133bd5318bad2573502d12aae065c75c9407c14754171c89",
+    "mesh_sha256": "49621552e2c055d5b8057d297486c77b27010ac4c2354692455f029e5dde055b",
+    "queries": 110,
+    "results": {
+      "18": {
+        "44071": {
+          "requests": 220,
+          "exact_responses": 220,
+          "routes": {
+            "serial": {
+              "p50_p95_p99_ms": [
+                26.09756157260712,
+                58.61231696812834,
+                76.49274963036318
+              ],
+              "p95_arrival_lag_ms": 0.06797287276913976,
+              "drain_ms": 29.798339746996305,
+              "offered_requests_per_second": 16.068170908408486,
+              "completed_requests_per_second": 16.106327910870405,
+              "gpu_lane_seconds": {
+                "encoding": 1.6428091935813427,
+                "verification": 3.4417854864150286
+              },
+              "cpu_preparation_seconds": 0.24748548679053783
+            },
+            "pipeline": {
+              "p50_p95_p99_ms": [
+                27.712664819938617,
+                58.009807034973626,
+                80.11453935570866
+              ],
+              "p95_arrival_lag_ms": 0.06893789057444977,
+              "drain_ms": 30.055105380817793,
+              "offered_requests_per_second": 16.068170908408486,
+              "completed_requests_per_second": 16.106025150432302,
+              "gpu_lane_seconds": {
+                "encoding": 1.6384073682129383,
+                "verification": 3.4886118937283754
+              },
+              "cpu_preparation_seconds": 0.3187192641198635
+            }
+          }
+        },
+        "44083": {
+          "requests": 220,
+          "exact_responses": 220,
+          "routes": {
+            "pipeline": {
+              "p50_p95_p99_ms": [
+                29.38921045737297,
+                82.89350897213816,
+                107.97974115089217
+              ],
+              "p95_arrival_lag_ms": 0.07046674709467736,
+              "drain_ms": 26.548480088875337,
+              "offered_requests_per_second": 17.332181872622645,
+              "completed_requests_per_second": 17.374817852434276,
+              "gpu_lane_seconds": {
+                "encoding": 1.6496284529566765,
+                "verification": 3.494930323213339
+              },
+              "cpu_preparation_seconds": 0.33258684910833836
+            },
+            "serial": {
+              "p50_p95_p99_ms": [
+                26.504564897156246,
+                85.22738184738698,
+                109.91090973530706
+              ],
+              "p95_arrival_lag_ms": 0.06772844236309083,
+              "drain_ms": 25.888621280953927,
+              "offered_requests_per_second": 17.332181872622645,
+              "completed_requests_per_second": 17.375723358765455,
+              "gpu_lane_seconds": {
+                "encoding": 1.6353217139840126,
+                "verification": 3.442836180329323
+              },
+              "cpu_preparation_seconds": 0.2636538799852133
+            }
+          }
+        }
+      },
+      "36": {
+        "44071": {
+          "requests": 220,
+          "exact_responses": 220,
+          "routes": {
+            "serial": {
+              "p50_p95_p99_ms": [
+                63.60077060173305,
+                192.23131291881103,
+                248.78963405984328
+              ],
+              "p95_arrival_lag_ms": 0.07117254892046174,
+              "drain_ms": 61.26582514127321,
+              "offered_requests_per_second": 32.13634181681697,
+              "completed_requests_per_second": 31.995436894355645,
+              "gpu_lane_seconds": {
+                "encoding": 1.618303133174777,
+                "verification": 3.444560408592224
+              },
+              "cpu_preparation_seconds": 0.246155496686697
+            },
+            "pipeline": {
+              "p50_p95_p99_ms": [
+                62.49524597021572,
+                187.17411702252164,
+                230.87878009502413
+              ],
+              "p95_arrival_lag_ms": 0.06868860376484373,
+              "drain_ms": 59.51587002357073,
+              "offered_requests_per_second": 32.13634181681697,
+              "completed_requests_per_second": 32.003581890106844,
+              "gpu_lane_seconds": {
+                "encoding": 1.6452866271138191,
+                "verification": 3.4851279072463512
+              },
+              "cpu_preparation_seconds": 0.32236885093152523
+            }
+          }
+        },
+        "44083": {
+          "requests": 220,
+          "exact_responses": 220,
+          "routes": {
+            "pipeline": {
+              "p50_p95_p99_ms": [
+                58.39761237380215,
+                265.82656570225873,
+                292.27260729550983
+              ],
+              "p95_arrival_lag_ms": 0.08092421171863592,
+              "drain_ms": 28.337055554174206,
+              "offered_requests_per_second": 34.66436374524529,
+              "completed_requests_per_second": 34.6671550813523,
+              "gpu_lane_seconds": {
+                "encoding": 1.6427527144551277,
+                "verification": 3.4876024406403303
+              },
+              "cpu_preparation_seconds": 0.31857709400355816
+            },
+            "serial": {
+              "p50_p95_p99_ms": [
+                63.92553319906913,
+                308.03000935309433,
+                331.2788754380874
+              ],
+              "p95_arrival_lag_ms": 0.07265292691369661,
+              "drain_ms": 28.838127588413975,
+              "offered_requests_per_second": 34.66436374524529,
+              "completed_requests_per_second": 34.66441805108093,
+              "gpu_lane_seconds": {
+                "encoding": 1.609371518716216,
+                "verification": 3.4502174593508244
+              },
+              "cpu_preparation_seconds": 0.25168553180992603
+            }
+          }
+        }
+      }
+    }
+  }
+}
