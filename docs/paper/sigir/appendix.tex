@@ -29,6 +29,60 @@ The live evaluation in \path{benchmarks/live-joint-source-request-v1} times from
 
 Loopback service traces appear in \path{benchmarks/joint-loopback-http-v1}. At 272.93 arrivals/s, serial drains at 99.02--100.59 requests/s and dynamic batching at 271.14--271.26. All 844 requests per arm complete in each trace. The high-rate difference is primarily backlog reduction, with end-to-end P95 of 5.06--5.19 s for serial versus 23.49--23.57 ms for dynamic batching. Dynamic batching changes up to five responses against serial at that load. The fixed-shape reference comparison checks byte-level response parity separately.
 
+\subsection{Mixed-catalog nomination and response-preserving execution}
+\path{benchmarks/joint-nomination-blind-review-v1} gives the same-issuance comparison of joint and sequential source planning. The blinded set contains 107 nonduplicated packages. Identical answers share judgments. Eight packages cover the four changes on the 24 PLOS requests answered by both systems. No completed independent labels are used here.
+
+\path{benchmarks/live-joint-role-postings-v1} compares author-bound postings with the article-wide role union. \path{benchmarks/robust-role-postings-v1} controls role exposure and within-article assignment errors. Rotating roles among named contributors preserves the article-level union. The rank-bounded guard reduces some losses at partial exposure but does not consistently improve the label proxy at equal issuance.
+
+\path{benchmarks/mixed-publisher-joint-v1} records aggregate proof availability, loaded support, chosen responses and paired issuance diagnostics in the 452-article catalog. It merges the pinned collections without shared author identifiers. For the quota diagnostic, ranks select the same number of outputs from each arm. The selected requests can differ. The joint byline and personal-role policies preserve every shared output when expanding from 64 to 128. Publication labels outside the original query panel remain unresolved.
+
+\path{benchmarks/joint-prefix-completion-v1} records the fixed-pool certificate. \path{benchmarks/adaptive-role-depth-v1} separates certificate accounting from live serial timing. Among clean full-role requests, starting at depth 64 stops after two reads on 99 of 160 PLOS and 18 of 51 eLife requests. The fallback reuses earlier reads and still opens at most three distinct sources. Both exact-output controls use the deep ranking.
+
+The source-only loopback replay is in \path{benchmarks/prefix-source-http-v1}. The live retrieval pass in \path{benchmarks/live-precheck-source-service-v1} shares a padded worker and source semaphore across policies. At 165 scheduled arrivals/s, the all-three baseline drains at about 118 requests/s and the byline precheck at about 162 requests/s. The controlled delay applies inside the six concurrent source slots. Each run covers two shuffles of 211 requests, rather than testing steady-state external service latency.
+
+\path{benchmarks/vector-hybrid-rrf-v1} checks score-array and final-selection changes on both publisher and LitSearch workloads. \path{benchmarks/bounded-dense-rrf-v1} keeps the first 512 dense positions plus any active sparse position whose upper bound reaches the current cutoff. At most 202 additional positions require exact dense ordinals on any tested LitSearch query. It preserves the full RRF order at depth 128 and times sorting and fusion after dense scoring.
+
+\subsection{Live reviewer verification}
+The separate reviewer replay uses 34 CoF NIPS queries and 59 SciRepEval queries after removing overlaps with reviewer profiles and between the two cohorts' query titles. A frozen Qwen3-Embedding-0.6B retrieves ten experts with up to three sources each from a resident exact index. A frozen Qwen3-Reranker-0.6B assesses methodological relevance. A request-local score can be shared across experts because it depends on the query and source. Ownership remains a separate check. Timing includes query encoding, retrieval, prompt preparation, verification and result assembly on an RTX 5090. Six NIPS candidate prompts across five queries reach the shared 1,024-token cap.
+
+\begin{table}[t]
+\caption{Warm reviewer-search P95 in ms. Immediate waves and length buckets are fixed-policy controls. Immediate and deferred waves share a request-local score cache.}
+\label{tab:live}
+\centering\small
+\begin{tabular}{@{}llrrr@{}}\toprule
+Cohort & Sources & Immediate & Bucketed & Deferred \\\midrule
+NIPS & 1 & 208.92 & 282.57 & 202.07 \\
+NIPS & 2 & 321.10 & 282.80 & 244.98 \\
+SciRepEval & 1 & 235.71 & 232.12 & 235.25 \\
+SciRepEval & 2 & 248.70 & 231.47 & 199.42 \\\bottomrule
+\end{tabular}
+\end{table}
+
+All routes reproduce the ordered experts and citations of exhaustive fixed-shape verification in both support settings. With two sources required, rechecking on the ranked frontier lowers P95 by 13.4\% on NIPS and 13.8\% on SciRepEval relative to the fastest fixed route (Table~\ref{tab:live}). Paired query resampling gives descriptive 95\% intervals of $[2.82,60.88]$ and $[-30.25,49.29]$ ms for the savings. With one source required, the latency advantage varies by cohort. An earlier 164-query comparison with immediate rechecking has the same mixed one-source pattern. Reviewer labels assess the ranked experts. They provide no independent check of individual citations or personal contribution.
+
+\paragraph{Queueing under offered load.}
+A loopback HTTP replay on the same 59-query SciRepEval panel assigns all policies one GPU worker and two sources per recommendation. Two open-loop traces per rate use identical arrival times and request order across policies. At four requests per second, P95 is 230 ms for length buckets and 201 ms for deferred waves, with all 118 responses per arm within 500 ms. At eight requests per second, immediate waves provide the fastest fixed control at 5.76 drained requests/s and 2.83 s P95. Deferred waves reach 6.47 requests/s and 1.76 s P95. Every reply matches the exhaustive ranking and citations. At this heavier load only 20 of 118 deferred requests finish within 500 ms, versus 14 for each fixed control. These finite traces share a resident model and serialize GPU execution across requests.
+
+On the structured workload served via loopback HTTP, at 58.49 arrivals/s dynamic batching lowers client P95 from 37.59--37.68 to 20.18--20.30 ms, with one response in 844 differing from serial in each run. Fixed-shape batching reproduces its own shape-matched reference, and four of 844 responses differ from serial. At higher rates serial accumulates a backlog. The supplement separates these finite traces from steady-state throughput and external service cost. The batching path is available to all compatible baselines.
+
+\subsection{Scope and personal attribution}
+The first study has 168 synthetic views with two sentences and varied measurement scope, conflicts and units. Independent sentence scope checks followed by exact comparison preserve all 36 valid approvals per language and abstain in all 12 conflicting views in each. Their four mistakes per language are unsupported approvals in the absence of a comparable measurement. The second study has 192 views with explicit actor statements. Separate scope and personal-execution checks select no other person's measurements and preserve all 36 valid approvals per language. Every remaining false approval credits the correct person but relies on a scope mismatch. Both studies use frozen Qwen3-4B-Instruct-2507. They illustrate why a stronger attribution condition costs time and cannot rescue an incorrect scope decision. The templates supply sentence boundaries and explicit roles.
+
+We then hold a bound fixed and change only the person, project, duty, or measurement status in 480 synthetic cases. Dropping either the person check or the project check causes 48 false approvals, although both ablations solve all 48 intact threshold pairs. Joint binding solves all cases with explicit provenance fields. Rendering the records as prose exposes the evidence selection bottleneck. The 4B selector finds the correct card on 52 of 96 intact requests in plain prose and on 31 with person and project distractors. In the distractor condition, selection followed by arithmetic solves 29 threshold pairs. At least 27 of the corresponding 58 correct decisions use a wrong card. With the correct card, every comparison succeeds. An extra model check leaves 111 false approvals among 384 distractor requests lacking matching evidence and raises local P95 from 24.85 to 39.66 ms. These controls require a separate score for evidence binding.
+
+\begin{table*}[t]
+\caption{Three-way accuracy and false approvals on bilingual numerical evidence controls. The two studies have different case sets.}
+\label{tab:controls}
+\centering\small
+\begin{tabular}{@{}llrrlr@{}}\toprule
+Controls & Verification & English correct & Chinese correct & False approvals (EN / ZH) & Chinese P95 \\\midrule
+Mixed measurements & Direct reader & 56/84 & 67/84 & 12 / 13 & 14.66 ms \\
+Mixed measurements & Independent sentence scope, exact comparison & 80/84 & 80/84 & 4 / 4 & 22.26 ms \\
+Personal execution & Direct reader & 37/96 & 43/96 & 17 / 32 & 16.46 ms \\
+Personal execution & Separate scope and personal execution & 84/96 & 84/96 & 12 / 12 & 51.45 ms \\\bottomrule
+\end{tabular}
+\end{table*}
+
 \subsection{Source selection under missing evidence}
 On 246 previously explored author-written LitSearch queries and a 64,183-paper index, dense-gap routing between one and two candidates reduces P95 from 24.93 to 19.79 ms at the 2\% calibration setting. It returns 30 known sources versus 23 for fixed two. When all known targets are removed, the adaptive and fixed routes return six and three unjudged alternatives, respectively. An alternative may still address the question. A blinded review packet has been prepared to adjudicate that distinction.
 
