@@ -66,14 +66,19 @@ def evaluate(checked, scores, owners, gold):
     )
 
 
-def query_once(query, corpus, windows, owners, index_for_id, encoder, verifier, offset):
-    text = f"{query['title']}\n{query['query']}"
-    start = perf_counter()
+def shortlist(text, corpus, owners, encoder):
     vector = encoder.encode([text], query=True)[0]
     order = rank(corpus @ vector)
     grouped = group_witnesses(order, owners)
     first = [docs[0] for _, docs in grouped[:FIRST]]
     budget = min(ADDITIONAL, sum(len(docs) > 1 for _, docs in grouped[:FIRST]))
+    return order, first, budget
+
+
+def query_once(query, corpus, windows, owners, index_for_id, encoder, verifier, offset):
+    text = f"{query['title']}\n{query['query']}"
+    start = perf_counter()
+    order, first, budget = shortlist(text, corpus, owners, encoder)
     verifier_query = text[:950]
     initial, clipped = verifier.score_pairs([(verifier_query, windows[doc]) for doc in first], task=TASK)
     common_ms = (perf_counter() - start) * 1000
