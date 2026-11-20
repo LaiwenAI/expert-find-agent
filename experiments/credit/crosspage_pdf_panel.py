@@ -78,7 +78,7 @@ def choose(root):
                                     for name in wanted}
 
 
-def materialize(doc_info, cache):
+def materialize(doc_info, cache, *, max_bytes=MAX_BYTES):
     doc, row = doc_info
     target = cache / f"{doc}.pdf"
     try:
@@ -86,7 +86,7 @@ def materialize(doc_info, cache):
             with TemporaryDirectory(prefix="crosspage-pdf-", dir=cache) as scratch:
                 temp = Path(scratch) / "download.pdf"
                 result = subprocess.run(
-                    ["curl", "-fsSL", "--max-time", "20", "--max-filesize", str(MAX_BYTES),
+                    ["curl", "-fsSL", "--max-time", "20", "--max-filesize", str(max_bytes),
                      row["pdf_url"], "-o", str(temp)],
                     stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL, check=False,
                 )
