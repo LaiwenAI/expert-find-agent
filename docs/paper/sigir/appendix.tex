@@ -4,6 +4,10 @@
 The repository results associated with the manuscript are enumerated here. The aggregate JSON files and corresponding READMEs identify the executable experiment, checkpoint provenance and operating points. The raw private development records are kept locally.
 
 \begin{itemize}
+\item Fixed-budget nomination and blind review: \path{benchmarks/role-gap-title-refill-v1/results.json} and \path{benchmarks/role-gap-review-v1/results.json}. The review scope is topical support in the title and abstract, with no completed judgments in this draft.
+\item Same-shape local queueing: \path{benchmarks/role-gap-pipeline-load-v1/results.json}. Two independent arrival sequences at each requested rate are reused in the replication.
+\item Owner, project, role and measurement controls: \path{benchmarks/owner-scope-counterfactual-v1/results.json} and \path{benchmarks/owner-scope-narrative-v1/results.json}. These controlled English views share the same underlying synthetic cases.
+
 \item Live reviewer verification: \path{benchmarks/cof-live-certified-batching/deferred-rechecks-v1.json}. An earlier comparison uses the immediate and deferred arms within job 40611. Both support counts use the same frozen candidate snapshot.
 \item Stronger reviewer-search controls use \path{benchmarks/cof-live-certified-batching/bucket-baselines-v1.json}. Job 40653 compares both support settings with a length-bucketed fixed schedule and an immediate rechecking schedule using the same request-local score cache. NIPS and SciRepEval share no normalized query titles in this comparison.
 \item Offered-load verification uses \path{benchmarks/cof-verification-http-v1/results.json}. Job 40663 times loopback HTTP on the same 59 SciRepEval queries, with two ordered traces per rate and a fresh exhaustive reference on the same GPU.
