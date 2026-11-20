@@ -14,7 +14,7 @@ from experiments.credit import role_column_index as columns
 from experiments.followir.core17_reranking import digest, write_json
 
 
-def frontier_rank(owners, caps, index, required, load_many, width):
+def frontier_rank(owners, caps, index, required, load_many, width, *, choose_width=None):
     """Hold the earliest possible experts until their canonical proofs settle."""
     loaded = {}
     rounds = 0
@@ -57,6 +57,11 @@ def frontier_rank(owners, caps, index, required, load_many, width):
         if not unresolved:
             return [(owner, proof) for owner, _, proof in active], len(loaded), rounds
         selected = sorted(unresolved, key=lambda doc: (-unresolved[doc], -upper_roles[doc].bit_count(), doc))[:width]
+        if choose_width is not None:
+            count = choose_width(selected)
+            if not 1 <= count <= len(selected):
+                raise ValueError("Invalid source wave size")
+            selected = selected[:count]
         declarations = load_many(selected)
         if set(declarations) != set(selected):
             raise ValueError("A source response is missing or unexpected")

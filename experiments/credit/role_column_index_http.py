@@ -29,6 +29,20 @@ from experiments.retrieval.cof_loopback_http import Server
 ARMS = ("whole_author", "whole_cold", "column_smoothed")
 PROFILES = ((1, 0), (4, 0), (4, 2))
 WAVES = {"owner_serial": 0, "frontier_1": 1, "frontier_2": 2, "frontier_4": 4}
+ADAPTIVE = "frontier_adaptive"
+WAVE_COST_MS = 0.75
+
+
+def choose_parallel_width(docs, delays):
+    expected = [delays[doc] for doc in docs]
+    overlappable = sum(expected) - max(expected)
+    return len(docs) if overlappable >= WAVE_COST_MS else 1
+
+
+def source_delays(docs, fraction, seed):
+    """Assign the experimental delay independently of query and proof results."""
+    slow = set(Random(seed).sample(docs, round(len(docs) * fraction)))
+    return {doc: (2.0 if doc in slow else 0.0) for doc in docs}
 
 
 def receive(conn, method, path, body=None):
@@ -62,8 +76,9 @@ class SourceHandler(Handler):
         if file is None:
             self.send_error(404)
             return
-        if self.server.delay:
-            sleep(self.server.delay)
+        seconds = self.server.delay_by_url.get(self.path, self.server.delay)
+        if seconds:
+            sleep(seconds)
         self.respond(file.read_bytes())
 
 
@@ -127,8 +142,13 @@ class SearchHandler(Handler):
             return declarations
 
         if width:
+            choose_width = None
+            if arm == ADAPTIVE:
+                def choose_width(docs):
+                    return choose_parallel_width(docs, self.server.expected_delays)
             matches, reads, rounds = frontier_rank(
                 self.server.owners, self.server.caps, plan, ask, load_many, width,
+                choose_width=choose_width,
             )
         else:
             matches, reads = columns.partial_rank(self.server.owners, self.server.caps, plan, ask, load)
@@ -202,7 +222,7 @@ def execute(port, requests, arm, clients, *, inspect_waves=False):
     return report
 
 
-def run(corpus, manifest, prior, scratch, output, publisher, order_offset, waves=None):
+def run(corpus, manifest, prior, scratch, output, publisher, order_offset, waves=None, mixed_delay=False):
     if output.exists() or not os.environ.get("SLURM_JOB_ID"):
         raise ValueError("Use a fresh output on a Slurm compute node")
     anchor = json.loads(prior.read_bytes())["publishers"][publisher]
@@ -216,7 +236,12 @@ def run(corpus, manifest, prior, scratch, output, publisher, order_offset, waves
     placement = "whole_cold" if publisher == "plos" else "column_smoothed"
     if waves and (wave_reference["fixture_sha256"] != expected or wave_reference["prior_sha256"] != digest(prior)):
         raise ValueError("Changed parallel-read inputs")
-    arms = tuple(WAVES) if waves else ARMS
+    if mixed_delay and not waves:
+        raise ValueError("Mixed-delay replay requires the reference wave benchmark")
+    wave_widths = dict(WAVES) if waves else {}
+    if mixed_delay:
+        wave_widths[ADAPTIVE] = 4
+    arms = tuple(wave_widths) if waves else ARMS
     placements = (placement,) if waves else ARMS
     roles = {name: 1 << i for i, name in enumerate(sorted(ROLES))}
     asks = [sum(group) for group in combinations(roles.values(), 3)]
@@ -257,11 +282,23 @@ def run(corpus, manifest, prior, scratch, output, publisher, order_offset, waves
 
         Random(20261121).shuffle(requests)
         arm_order = (arms[::-1] if order_offset else arms) if waves else arms[order_offset:] + arms[:order_offset]
-        for clients, delay in PROFILES:
+        profiles = [(f"{clients}_clients_{delay}_ms", clients, delay, {}, {}) for clients, delay in PROFILES]
+        if mixed_delay:
+            sparse = source_delays(docs, .25, 721)
+            dense = source_delays(docs, .75, 721)
+            shifted = source_delays(docs, .25, 953)
+            profiles = [
+                ("sparse_known", 4, 0, sparse, sparse),
+                ("dense_known", 4, 0, dense, dense),
+                ("shifted_known", 4, 0, shifted, shifted),
+                ("shifted_stale", 4, 0, shifted, sparse),
+            ]
+        for profile_name, clients, delay, actual, predicted in profiles:
             profile = {}
-            with serve(SourceHandler, files=docs_by_url, delay=delay / 1000) as source:
-                with serve(SearchHandler, source_port=source, plans=plans, roles=roles,
-                           owners=owners, caps=caps, source_urls=urls, widths=WAVES if waves else {}) as search:
+            delay_by_url = {urls[doc]: ms / 1000 for doc, ms in actual.items()}
+            with serve(SourceHandler, files=docs_by_url, delay=delay / 1000, delay_by_url=delay_by_url) as source:
+                with serve(SearchHandler, source_port=source, plans=plans, roles=roles, owners=owners,
+                           caps=caps, source_urls=urls, widths=wave_widths, expected_delays=predicted) as search:
                     for arm in arm_order:
                         report = execute(search, requests, arm, clients, inspect_waves=bool(waves))
                         allocation = placement if waves else arm
@@ -269,15 +306,15 @@ def run(corpus, manifest, prior, scratch, output, publisher, order_offset, waves
                         expected_bytes = sum(anchor["folds"][str(fold)]["25"][allocation]["decoded_bytes"] for fold in FOLDS)
                         if (report["source_reads"], report["source_payload_bytes"]) != (expected_reads, expected_bytes):
                             raise AssertionError("HTTP fetch volume did not reproduce the warmed local path")
-                        if waves:
+                        if waves and arm != ADAPTIVE:
                             reference_rounds = wave_reference["results"][placement][arm]["source_rounds"]
                             if report["source_rounds"] != reference_rounds:
                                 raise AssertionError("HTTP changed the number of source read waves")
                         profile[arm] = report
                     if waves and len({row["source_sets_sha256"] for row in profile.values()}) != 1:
                         raise AssertionError("HTTP changed the source set for an individual request")
-            results[f"{clients}_clients_{delay}_ms"] = profile
-            print(f"{publisher}: measured {clients} clients, {delay} ms added source delay", flush=True)
+            results[profile_name] = profile
+            print(f"{publisher}: measured {profile_name} with {clients} clients", flush=True)
 
     result = dict(
         publisher=publisher, profiles=results, byte_cap=budget, order_offset=order_offset,
@@ -285,6 +322,8 @@ def run(corpus, manifest, prior, scratch, output, publisher, order_offset, waves
     )
     if waves:
         result.update(placement=placement, waves_sha256=digest(waves))
+    if mixed_delay:
+        result["parallel_overhead_ms"] = WAVE_COST_MS
     write_json(output, result)
 
 
@@ -295,4 +334,5 @@ if __name__ == "__main__":
     parser.add_argument("--publisher", choices=("plos", "elife"), required=True)
     parser.add_argument("--order-offset", type=int, default=0, choices=(0, 1))
     parser.add_argument("--waves", type=Path, help="Use exact-source read wave counts as a reference")
+    parser.add_argument("--mixed-delay", action="store_true", help="Compare known and stale source-delay metadata")
     run(**vars(parser.parse_args()))
