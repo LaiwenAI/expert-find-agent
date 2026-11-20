@@ -1,0 +1,191 @@
+{
+  "slurm_array": 44604,
+  "runs": [
+    {
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "order_offset": 0,
+      "checkpoint": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "reads_with_topological_links": {
+        "plos": 33,
+        "elife": 0
+      },
+      "input_width": 64,
+      "maximum_batch_requests": 8,
+      "padded_batch_requests": 8,
+      "hold_ms": 2.0,
+      "source_workers": 6,
+      "source_delay_ms": 16.0,
+      "distinct_requests": 211,
+      "reference_sha256": "1cd6bb56521f3dc1c417e8d62e2cfcd5d5d931839e87a471a41f4efedab32d72",
+      "script_sha256": "ede74c419b889e96956e9eb117f82418801ba34051c4f97c447e63617e901967",
+      "results": {
+        "60": {
+          "parallel_three": {
+            "requests": 422,
+            "equal_responses": 422,
+            "source_reads": 1266,
+            "source_payload_bytes": 940382,
+            "achieved_rps": 59.869770989403555,
+            "batch_sizes": {
+              "1": 422
+            },
+            "p95_ms": {
+              "planner_queue": 3.021060023456812,
+              "gpu_and_retrieval": 12.982291914522648,
+              "source_and_match": 17.829708941280842,
+              "total": 33.167314529418945
+            }
+          },
+          "eager_topology": {
+            "requests": 422,
+            "equal_responses": 422,
+            "source_reads": 910,
+            "source_payload_bytes": 687906,
+            "achieved_rps": 59.86937822079469,
+            "batch_sizes": {
+              "1": 422
+            },
+            "p95_ms": {
+              "planner_queue": 3.0094881542026997,
+              "gpu_and_retrieval": 13.048433978110552,
+              "source_and_match": 17.747534345835447,
+              "total": 33.124383725225925
+            }
+          }
+        },
+        "165": {
+          "parallel_three": {
+            "requests": 422,
+            "equal_responses": 422,
+            "source_reads": 1266,
+            "source_payload_bytes": 940382,
+            "achieved_rps": 117.80141409642319,
+            "batch_sizes": {
+              "1": 2,
+              "2": 144,
+              "3": 42,
+              "6": 1
+            },
+            "p95_ms": {
+              "planner_queue": 13.750486355274916,
+              "gpu_and_retrieval": 14.380126353353262,
+              "source_and_match": 961.435910128057,
+              "total": 981.0877163894475
+            }
+          },
+          "eager_topology": {
+            "requests": 422,
+            "equal_responses": 422,
+            "source_reads": 910,
+            "source_payload_bytes": 687906,
+            "achieved_rps": 162.45876328443066,
+            "batch_sizes": {
+              "1": 2,
+              "2": 150,
+              "3": 40
+            },
+            "p95_ms": {
+              "planner_queue": 13.622992113232613,
+              "gpu_and_retrieval": 14.101974666118622,
+              "source_and_match": 34.14628645405173,
+              "total": 52.19576163217425
+            }
+          }
+        }
+      }
+    },
+    {
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "order_offset": 1,
+      "checkpoint": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "reads_with_topological_links": {
+        "plos": 33,
+        "elife": 0
+      },
+      "input_width": 64,
+      "maximum_batch_requests": 8,
+      "padded_batch_requests": 8,
+      "hold_ms": 2.0,
+      "source_workers": 6,
+      "source_delay_ms": 16.0,
+      "distinct_requests": 211,
+      "reference_sha256": "1cd6bb56521f3dc1c417e8d62e2cfcd5d5d931839e87a471a41f4efedab32d72",
+      "script_sha256": "ede74c419b889e96956e9eb117f82418801ba34051c4f97c447e63617e901967",
+      "results": {
+        "60": {
+          "eager_topology": {
+            "requests": 422,
+            "equal_responses": 422,
+            "source_reads": 910,
+            "source_payload_bytes": 687906,
+            "achieved_rps": 59.870978295486,
+            "batch_sizes": {
+              "1": 422
+            },
+            "p95_ms": {
+              "planner_queue": 3.0086887069046497,
+              "gpu_and_retrieval": 13.266017008572817,
+              "source_and_match": 17.639455292373896,
+              "total": 33.206875808537006
+            }
+          },
+          "parallel_three": {
+            "requests": 422,
+            "equal_responses": 422,
+            "source_reads": 1266,
+            "source_payload_bytes": 940382,
+            "achieved_rps": 59.8724532371382,
+            "batch_sizes": {
+              "1": 422
+            },
+            "p95_ms": {
+              "planner_queue": 3.0135855078697205,
+              "gpu_and_retrieval": 13.057865854352713,
+              "source_and_match": 17.807908821851015,
+              "total": 33.290212228894234
+            }
+          }
+        },
+        "165": {
+          "eager_topology": {
+            "requests": 422,
+            "equal_responses": 422,
+            "source_reads": 910,
+            "source_payload_bytes": 687906,
+            "achieved_rps": 162.38200152973684,
+            "batch_sizes": {
+              "1": 1,
+              "2": 155,
+              "3": 37
+            },
+            "p95_ms": {
+              "planner_queue": 13.536154571920633,
+              "gpu_and_retrieval": 13.933699578046799,
+              "source_and_match": 34.65797398239374,
+              "total": 53.01515441387892
+            }
+          },
+          "parallel_three": {
+            "requests": 422,
+            "equal_responses": 422,
+            "source_reads": 1266,
+            "source_payload_bytes": 940382,
+            "achieved_rps": 117.89463074197354,
+            "batch_sizes": {
+              "1": 2,
+              "2": 145,
+              "3": 42,
+              "4": 1
+            },
+            "p95_ms": {
+              "planner_queue": 13.707702700048685,
+              "gpu_and_retrieval": 14.287544414401054,
+              "source_and_match": 957.0887833833694,
+              "total": 977.3217742331326
+            }
+          }
+        }
+      }
+    }
+  ]
+}
