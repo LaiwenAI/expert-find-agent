@@ -1,0 +1,239 @@
+{
+  "heads_sha256": "5880f1de28de4ef5c7d34a43c87ab1f399fdec5af2cf1b1392a4dc75a14202f6",
+  "raw": {
+    "depths": {
+      "12": {
+        "adaptive_paired": {
+          "dense": {
+            "bootstrap_repeats": 10000,
+            "mean": 0.16666666666666666,
+            "percentile_95": [
+              0.13802083333333334,
+              0.1953125
+            ],
+            "queries": 768,
+            "seed": 20261116
+          },
+          "diffusion": {
+            "bootstrap_repeats": 10000,
+            "mean": -0.013020833333333334,
+            "percentile_95": [
+              -0.02734375,
+              0.0013020833333333333
+            ],
+            "queries": 768,
+            "seed": 20261116
+          },
+          "learned_static": {
+            "bootstrap_repeats": 10000,
+            "mean": 0.036458333333333336,
+            "percentile_95": [
+              0.022135416666666668,
+              0.052083333333333336
+            ],
+            "queries": 768,
+            "seed": 20261116
+          }
+        },
+        "complete": {
+          "dense": 582,
+          "diffusion": 720,
+          "hybrid": 640,
+          "learned_adaptive": 710,
+          "learned_static": 682,
+          "linked": 692,
+          "static_blend": 667
+        },
+        "complete_by_group": {
+          "bridge": {
+            "dense": 434,
+            "diffusion": 575,
+            "hybrid": 493,
+            "learned_adaptive": 562,
+            "learned_static": 534,
+            "linked": 545,
+            "static_blend": 519
+          },
+          "comparison": {
+            "dense": 148,
+            "diffusion": 145,
+            "hybrid": 147,
+            "learned_adaptive": 148,
+            "learned_static": 148,
+            "linked": 147,
+            "static_blend": 148
+          }
+        }
+      },
+      "4": {
+        "adaptive_paired": {
+          "dense": {
+            "bootstrap_repeats": 10000,
+            "mean": 0.25390625,
+            "percentile_95": [
+              0.22005208333333334,
+              0.2864583333333333
+            ],
+            "queries": 768,
+            "seed": 20261116
+          },
+          "diffusion": {
+            "bootstrap_repeats": 10000,
+            "mean": 0.06380208333333333,
+            "percentile_95": [
+              0.037760416666666664,
+              0.09114583333333333
+            ],
+            "queries": 768,
+            "seed": 20261116
+          },
+          "learned_static": {
+            "bootstrap_repeats": 10000,
+            "mean": 0.08984375,
+            "percentile_95": [
+              0.06640625,
+              0.11328125
+            ],
+            "queries": 768,
+            "seed": 20261116
+          }
+        },
+        "complete": {
+          "dense": 432,
+          "diffusion": 578,
+          "hybrid": 438,
+          "learned_adaptive": 627,
+          "learned_static": 558,
+          "linked": 555,
+          "static_blend": 487
+        },
+        "complete_by_group": {
+          "bridge": {
+            "dense": 292,
+            "diffusion": 456,
+            "hybrid": 307,
+            "learned_adaptive": 480,
+            "learned_static": 416,
+            "linked": 426,
+            "static_blend": 351
+          },
+          "comparison": {
+            "dense": 140,
+            "diffusion": 122,
+            "hybrid": 131,
+            "learned_adaptive": 147,
+            "learned_static": 142,
+            "linked": 129,
+            "static_blend": 136
+          }
+        }
+      },
+      "6": {
+        "adaptive_paired": {
+          "dense": {
+            "bootstrap_repeats": 10000,
+            "mean": 0.234375,
+            "percentile_95": [
+              0.203125,
+              0.265625
+            ],
+            "queries": 768,
+            "seed": 20261116
+          },
+          "diffusion": {
+            "bootstrap_repeats": 10000,
+            "mean": 0.016927083333333332,
+            "percentile_95": [
+              -0.0026041666666666665,
+              0.037760416666666664
+            ],
+            "queries": 768,
+            "seed": 20261116
+          },
+          "learned_static": {
+            "bootstrap_repeats": 10000,
+            "mean": 0.06380208333333333,
+            "percentile_95": [
+              0.044270833333333336,
+              0.08333333333333333
+            ],
+            "queries": 768,
+            "seed": 20261116
+          }
+        },
+        "complete": {
+          "dense": 488,
+          "diffusion": 655,
+          "hybrid": 525,
+          "learned_adaptive": 668,
+          "learned_static": 619,
+          "linked": 623,
+          "static_blend": 563
+        },
+        "complete_by_group": {
+          "bridge": {
+            "dense": 343,
+            "diffusion": 517,
+            "hybrid": 384,
+            "learned_adaptive": 520,
+            "learned_static": 473,
+            "linked": 485,
+            "static_blend": 418
+          },
+          "comparison": {
+            "dense": 145,
+            "diffusion": 138,
+            "hybrid": 141,
+            "learned_adaptive": 148,
+            "learned_static": 146,
+            "linked": 138,
+            "static_blend": 145
+          }
+        }
+      }
+    },
+    "docs": 7576,
+    "group_sizes": {
+      "bridge": 620,
+      "comparison": 148
+    },
+    "ids_sha256": "ac3a4251bd43f302ff422f7ce6d9de0f3208ec290de1600612177f9a5e8e2bbf",
+    "pool_reachable": 747,
+    "postranking_ms": {
+      "dense": {
+        "p50": 0.001,
+        "p95": 0.002
+      },
+      "diffusion": {
+        "p50": 0.0,
+        "p95": 0.002
+      },
+      "hybrid": {
+        "p50": 0.001,
+        "p95": 0.002
+      },
+      "learned_adaptive": {
+        "p50": 0.324,
+        "p95": 0.356
+      },
+      "learned_static": {
+        "p50": 0.087,
+        "p95": 0.097
+      },
+      "linked": {
+        "p50": 0.024,
+        "p95": 0.028
+      },
+      "static_blend": {
+        "p50": 0.001,
+        "p95": 0.002
+      }
+    },
+    "queries": 768,
+    "shared_ms": {
+      "p50": 10.693,
+      "p95": 10.981
+    }
+  },
+  "training_ids_sha256": "354b9aa85f5defb783e9433fe30f465ff9df330206d7531e3348da9ca7b07563"
+}

@@ -1,0 +1,794 @@
+{
+  "bound": {
+    "depths": {
+      "12": {
+        "adaptive_paired": {
+          "dense": {
+            "bootstrap_repeats": 10000,
+            "mean": -0.0859375,
+            "percentile_95": [
+              -0.15625,
+              -0.015625
+            ],
+            "queries": 128,
+            "seed": 20261116
+          },
+          "diffusion": {
+            "bootstrap_repeats": 10000,
+            "mean": -0.125,
+            "percentile_95": [
+              -0.1953125,
+              -0.0546875
+            ],
+            "queries": 128,
+            "seed": 20261116
+          },
+          "learned_static": {
+            "bootstrap_repeats": 10000,
+            "mean": 0.0390625,
+            "percentile_95": [
+              -0.0234375,
+              0.1015625
+            ],
+            "queries": 128,
+            "seed": 20261116
+          }
+        },
+        "complete": {
+          "dense": 51,
+          "diffusion": 56,
+          "hybrid": 56,
+          "learned_adaptive": 40,
+          "learned_static": 35,
+          "linked": 56,
+          "static_blend": 52
+        },
+        "complete_by_group": {
+          "2": {
+            "dense": 37,
+            "diffusion": 42,
+            "hybrid": 42,
+            "learned_adaptive": 30,
+            "learned_static": 26,
+            "linked": 42,
+            "static_blend": 39
+          },
+          "3": {
+            "dense": 11,
+            "diffusion": 12,
+            "hybrid": 12,
+            "learned_adaptive": 8,
+            "learned_static": 8,
+            "linked": 12,
+            "static_blend": 11
+          },
+          "4": {
+            "dense": 3,
+            "diffusion": 2,
+            "hybrid": 2,
+            "learned_adaptive": 2,
+            "learned_static": 1,
+            "linked": 2,
+            "static_blend": 2
+          }
+        }
+      },
+      "4": {
+        "adaptive_paired": {
+          "dense": {
+            "bootstrap_repeats": 10000,
+            "mean": -0.0625,
+            "percentile_95": [
+              -0.125,
+              0.0
+            ],
+            "queries": 128,
+            "seed": 20261116
+          },
+          "diffusion": {
+            "bootstrap_repeats": 10000,
+            "mean": -0.03125,
+            "percentile_95": [
+              -0.0625,
+              -0.0078125
+            ],
+            "queries": 128,
+            "seed": 20261116
+          },
+          "learned_static": {
+            "bootstrap_repeats": 10000,
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 128,
+            "seed": 20261116
+          }
+        },
+        "complete": {
+          "dense": 15,
+          "diffusion": 11,
+          "hybrid": 11,
+          "learned_adaptive": 7,
+          "learned_static": 7,
+          "linked": 11,
+          "static_blend": 13
+        },
+        "complete_by_group": {
+          "2": {
+            "dense": 11,
+            "diffusion": 10,
+            "hybrid": 10,
+            "learned_adaptive": 7,
+            "learned_static": 7,
+            "linked": 10,
+            "static_blend": 11
+          },
+          "3": {
+            "dense": 4,
+            "diffusion": 1,
+            "hybrid": 1,
+            "learned_adaptive": 0,
+            "learned_static": 0,
+            "linked": 1,
+            "static_blend": 2
+          },
+          "4": {
+            "dense": 0,
+            "diffusion": 0,
+            "hybrid": 0,
+            "learned_adaptive": 0,
+            "learned_static": 0,
+            "linked": 0,
+            "static_blend": 0
+          }
+        }
+      },
+      "6": {
+        "adaptive_paired": {
+          "dense": {
+            "bootstrap_repeats": 10000,
+            "mean": -0.0859375,
+            "percentile_95": [
+              -0.1484375,
+              -0.0234375
+            ],
+            "queries": 128,
+            "seed": 20261116
+          },
+          "diffusion": {
+            "bootstrap_repeats": 10000,
+            "mean": -0.046875,
+            "percentile_95": [
+              -0.1015625,
+              0.0078125
+            ],
+            "queries": 128,
+            "seed": 20261116
+          },
+          "learned_static": {
+            "bootstrap_repeats": 10000,
+            "mean": 0.0390625,
+            "percentile_95": [
+              0.0,
+              0.07832031249999716
+            ],
+            "queries": 128,
+            "seed": 20261116
+          }
+        },
+        "complete": {
+          "dense": 26,
+          "diffusion": 21,
+          "hybrid": 21,
+          "learned_adaptive": 15,
+          "learned_static": 10,
+          "linked": 21,
+          "static_blend": 25
+        },
+        "complete_by_group": {
+          "2": {
+            "dense": 20,
+            "diffusion": 17,
+            "hybrid": 17,
+            "learned_adaptive": 13,
+            "learned_static": 8,
+            "linked": 17,
+            "static_blend": 19
+          },
+          "3": {
+            "dense": 6,
+            "diffusion": 4,
+            "hybrid": 4,
+            "learned_adaptive": 2,
+            "learned_static": 2,
+            "linked": 4,
+            "static_blend": 5
+          },
+          "4": {
+            "dense": 0,
+            "diffusion": 0,
+            "hybrid": 0,
+            "learned_adaptive": 0,
+            "learned_static": 0,
+            "linked": 0,
+            "static_blend": 1
+          }
+        }
+      }
+    },
+    "docs": 19710,
+    "group_sizes": {
+      "2": 77,
+      "3": 31,
+      "4": 20
+    },
+    "ids_sha256": "b80699e07de62caf753d5fc4d281e8d427e6fae22aa70f23c17a2ef645c02e3f",
+    "pool_reachable": 115,
+    "postranking_ms": {
+      "dense": {
+        "p50": 0.001,
+        "p95": 0.001
+      },
+      "diffusion": {
+        "p50": 0.0,
+        "p95": 0.001
+      },
+      "hybrid": {
+        "p50": 0.0,
+        "p95": 0.001
+      },
+      "learned_adaptive": {
+        "p50": 0.295,
+        "p95": 0.323
+      },
+      "learned_static": {
+        "p50": 0.061,
+        "p95": 0.075
+      },
+      "linked": {
+        "p50": 0.021,
+        "p95": 0.022
+      },
+      "static_blend": {
+        "p50": 0.0,
+        "p95": 0.001
+      }
+    },
+    "queries": 128,
+    "shared_ms": {
+      "p50": 8.83,
+      "p95": 9.026
+    }
+  },
+  "cued": {
+    "depths": {
+      "12": {
+        "adaptive_paired": {
+          "dense": {
+            "bootstrap_repeats": 10000,
+            "mean": -0.09375,
+            "percentile_95": [
+              -0.1484375,
+              -0.0390625
+            ],
+            "queries": 128,
+            "seed": 20261116
+          },
+          "diffusion": {
+            "bootstrap_repeats": 10000,
+            "mean": -0.0859375,
+            "percentile_95": [
+              -0.1484375,
+              -0.03125
+            ],
+            "queries": 128,
+            "seed": 20261116
+          },
+          "learned_static": {
+            "bootstrap_repeats": 10000,
+            "mean": -0.0078125,
+            "percentile_95": [
+              -0.0546875,
+              0.0390625
+            ],
+            "queries": 128,
+            "seed": 20261116
+          }
+        },
+        "complete": {
+          "dense": 28,
+          "diffusion": 27,
+          "hybrid": 27,
+          "learned_adaptive": 16,
+          "learned_static": 17,
+          "linked": 27,
+          "static_blend": 22
+        },
+        "complete_by_group": {
+          "2": {
+            "dense": 22,
+            "diffusion": 15,
+            "hybrid": 15,
+            "learned_adaptive": 11,
+            "learned_static": 12,
+            "linked": 15,
+            "static_blend": 15
+          },
+          "3": {
+            "dense": 6,
+            "diffusion": 9,
+            "hybrid": 9,
+            "learned_adaptive": 5,
+            "learned_static": 5,
+            "linked": 9,
+            "static_blend": 6
+          },
+          "4": {
+            "dense": 0,
+            "diffusion": 3,
+            "hybrid": 3,
+            "learned_adaptive": 0,
+            "learned_static": 0,
+            "linked": 3,
+            "static_blend": 1
+          }
+        }
+      },
+      "4": {
+        "adaptive_paired": {
+          "dense": {
+            "bootstrap_repeats": 10000,
+            "mean": -0.015625,
+            "percentile_95": [
+              -0.0390625,
+              0.0
+            ],
+            "queries": 128,
+            "seed": 20261116
+          },
+          "diffusion": {
+            "bootstrap_repeats": 10000,
+            "mean": -0.0078125,
+            "percentile_95": [
+              -0.03125,
+              0.015625
+            ],
+            "queries": 128,
+            "seed": 20261116
+          },
+          "learned_static": {
+            "bootstrap_repeats": 10000,
+            "mean": 0.0078125,
+            "percentile_95": [
+              0.0,
+              0.0234375
+            ],
+            "queries": 128,
+            "seed": 20261116
+          }
+        },
+        "complete": {
+          "dense": 5,
+          "diffusion": 4,
+          "hybrid": 4,
+          "learned_adaptive": 3,
+          "learned_static": 2,
+          "linked": 4,
+          "static_blend": 3
+        },
+        "complete_by_group": {
+          "2": {
+            "dense": 5,
+            "diffusion": 3,
+            "hybrid": 3,
+            "learned_adaptive": 3,
+            "learned_static": 2,
+            "linked": 3,
+            "static_blend": 3
+          },
+          "3": {
+            "dense": 0,
+            "diffusion": 1,
+            "hybrid": 1,
+            "learned_adaptive": 0,
+            "learned_static": 0,
+            "linked": 1,
+            "static_blend": 0
+          },
+          "4": {
+            "dense": 0,
+            "diffusion": 0,
+            "hybrid": 0,
+            "learned_adaptive": 0,
+            "learned_static": 0,
+            "linked": 0,
+            "static_blend": 0
+          }
+        }
+      },
+      "6": {
+        "adaptive_paired": {
+          "dense": {
+            "bootstrap_repeats": 10000,
+            "mean": -0.015625,
+            "percentile_95": [
+              -0.046875,
+              0.015625
+            ],
+            "queries": 128,
+            "seed": 20261116
+          },
+          "diffusion": {
+            "bootstrap_repeats": 10000,
+            "mean": -0.015625,
+            "percentile_95": [
+              -0.0390625,
+              0.0
+            ],
+            "queries": 128,
+            "seed": 20261116
+          },
+          "learned_static": {
+            "bootstrap_repeats": 10000,
+            "mean": -0.015625,
+            "percentile_95": [
+              -0.046875,
+              0.015625
+            ],
+            "queries": 128,
+            "seed": 20261116
+          }
+        },
+        "complete": {
+          "dense": 8,
+          "diffusion": 8,
+          "hybrid": 8,
+          "learned_adaptive": 6,
+          "learned_static": 8,
+          "linked": 8,
+          "static_blend": 8
+        },
+        "complete_by_group": {
+          "2": {
+            "dense": 5,
+            "diffusion": 6,
+            "hybrid": 6,
+            "learned_adaptive": 5,
+            "learned_static": 5,
+            "linked": 6,
+            "static_blend": 6
+          },
+          "3": {
+            "dense": 3,
+            "diffusion": 2,
+            "hybrid": 2,
+            "learned_adaptive": 1,
+            "learned_static": 3,
+            "linked": 2,
+            "static_blend": 2
+          },
+          "4": {
+            "dense": 0,
+            "diffusion": 0,
+            "hybrid": 0,
+            "learned_adaptive": 0,
+            "learned_static": 0,
+            "linked": 0,
+            "static_blend": 0
+          }
+        }
+      }
+    },
+    "docs": 19710,
+    "group_sizes": {
+      "2": 77,
+      "3": 31,
+      "4": 20
+    },
+    "ids_sha256": "b80699e07de62caf753d5fc4d281e8d427e6fae22aa70f23c17a2ef645c02e3f",
+    "pool_reachable": 92,
+    "postranking_ms": {
+      "dense": {
+        "p50": 0.001,
+        "p95": 0.001
+      },
+      "diffusion": {
+        "p50": 0.0,
+        "p95": 0.002
+      },
+      "hybrid": {
+        "p50": 0.001,
+        "p95": 0.002
+      },
+      "learned_adaptive": {
+        "p50": 0.328,
+        "p95": 0.358
+      },
+      "learned_static": {
+        "p50": 0.071,
+        "p95": 0.082
+      },
+      "linked": {
+        "p50": 0.022,
+        "p95": 0.024
+      },
+      "static_blend": {
+        "p50": 0.0,
+        "p95": 0.002
+      }
+    },
+    "queries": 128,
+    "shared_ms": {
+      "p50": 12.847,
+      "p95": 13.139
+    }
+  },
+  "excluded_short_papers": 2,
+  "heads_sha256": "5880f1de28de4ef5c7d34a43c87ab1f399fdec5af2cf1b1392a4dc75a14202f6",
+  "raw": {
+    "depths": {
+      "12": {
+        "adaptive_paired": {
+          "dense": {
+            "bootstrap_repeats": 10000,
+            "mean": -0.0234375,
+            "percentile_95": [
+              -0.0546875,
+              0.0
+            ],
+            "queries": 128,
+            "seed": 20261116
+          },
+          "diffusion": {
+            "bootstrap_repeats": 10000,
+            "mean": -0.03125,
+            "percentile_95": [
+              -0.0625,
+              -0.0078125
+            ],
+            "queries": 128,
+            "seed": 20261116
+          },
+          "learned_static": {
+            "bootstrap_repeats": 10000,
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 128,
+            "seed": 20261116
+          }
+        },
+        "complete": {
+          "dense": 8,
+          "diffusion": 9,
+          "hybrid": 9,
+          "learned_adaptive": 5,
+          "learned_static": 5,
+          "linked": 9,
+          "static_blend": 8
+        },
+        "complete_by_group": {
+          "2": {
+            "dense": 6,
+            "diffusion": 6,
+            "hybrid": 6,
+            "learned_adaptive": 4,
+            "learned_static": 4,
+            "linked": 6,
+            "static_blend": 6
+          },
+          "3": {
+            "dense": 1,
+            "diffusion": 1,
+            "hybrid": 1,
+            "learned_adaptive": 0,
+            "learned_static": 0,
+            "linked": 1,
+            "static_blend": 0
+          },
+          "4": {
+            "dense": 1,
+            "diffusion": 2,
+            "hybrid": 2,
+            "learned_adaptive": 1,
+            "learned_static": 1,
+            "linked": 2,
+            "static_blend": 2
+          }
+        }
+      },
+      "4": {
+        "adaptive_paired": {
+          "dense": {
+            "bootstrap_repeats": 10000,
+            "mean": -0.0078125,
+            "percentile_95": [
+              -0.0234375,
+              0.0
+            ],
+            "queries": 128,
+            "seed": 20261116
+          },
+          "diffusion": {
+            "bootstrap_repeats": 10000,
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 128,
+            "seed": 20261116
+          },
+          "learned_static": {
+            "bootstrap_repeats": 10000,
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 128,
+            "seed": 20261116
+          }
+        },
+        "complete": {
+          "dense": 1,
+          "diffusion": 0,
+          "hybrid": 0,
+          "learned_adaptive": 0,
+          "learned_static": 0,
+          "linked": 0,
+          "static_blend": 0
+        },
+        "complete_by_group": {
+          "2": {
+            "dense": 1,
+            "diffusion": 0,
+            "hybrid": 0,
+            "learned_adaptive": 0,
+            "learned_static": 0,
+            "linked": 0,
+            "static_blend": 0
+          },
+          "3": {
+            "dense": 0,
+            "diffusion": 0,
+            "hybrid": 0,
+            "learned_adaptive": 0,
+            "learned_static": 0,
+            "linked": 0,
+            "static_blend": 0
+          },
+          "4": {
+            "dense": 0,
+            "diffusion": 0,
+            "hybrid": 0,
+            "learned_adaptive": 0,
+            "learned_static": 0,
+            "linked": 0,
+            "static_blend": 0
+          }
+        }
+      },
+      "6": {
+        "adaptive_paired": {
+          "dense": {
+            "bootstrap_repeats": 10000,
+            "mean": -0.015625,
+            "percentile_95": [
+              -0.0390625,
+              0.0
+            ],
+            "queries": 128,
+            "seed": 20261116
+          },
+          "diffusion": {
+            "bootstrap_repeats": 10000,
+            "mean": 0.0,
+            "percentile_95": [
+              -0.0234375,
+              0.0234375
+            ],
+            "queries": 128,
+            "seed": 20261116
+          },
+          "learned_static": {
+            "bootstrap_repeats": 10000,
+            "mean": 0.0,
+            "percentile_95": [
+              0.0,
+              0.0
+            ],
+            "queries": 128,
+            "seed": 20261116
+          }
+        },
+        "complete": {
+          "dense": 3,
+          "diffusion": 1,
+          "hybrid": 1,
+          "learned_adaptive": 1,
+          "learned_static": 1,
+          "linked": 1,
+          "static_blend": 2
+        },
+        "complete_by_group": {
+          "2": {
+            "dense": 3,
+            "diffusion": 1,
+            "hybrid": 1,
+            "learned_adaptive": 1,
+            "learned_static": 1,
+            "linked": 1,
+            "static_blend": 2
+          },
+          "3": {
+            "dense": 0,
+            "diffusion": 0,
+            "hybrid": 0,
+            "learned_adaptive": 0,
+            "learned_static": 0,
+            "linked": 0,
+            "static_blend": 0
+          },
+          "4": {
+            "dense": 0,
+            "diffusion": 0,
+            "hybrid": 0,
+            "learned_adaptive": 0,
+            "learned_static": 0,
+            "linked": 0,
+            "static_blend": 0
+          }
+        }
+      }
+    },
+    "docs": 19710,
+    "group_sizes": {
+      "2": 77,
+      "3": 31,
+      "4": 20
+    },
+    "ids_sha256": "b80699e07de62caf753d5fc4d281e8d427e6fae22aa70f23c17a2ef645c02e3f",
+    "pool_reachable": 23,
+    "postranking_ms": {
+      "dense": {
+        "p50": 0.001,
+        "p95": 0.002
+      },
+      "diffusion": {
+        "p50": 0.0,
+        "p95": 0.002
+      },
+      "hybrid": {
+        "p50": 0.001,
+        "p95": 0.002
+      },
+      "learned_adaptive": {
+        "p50": 0.333,
+        "p95": 0.378
+      },
+      "learned_static": {
+        "p50": 0.094,
+        "p95": 0.1
+      },
+      "linked": {
+        "p50": 0.022,
+        "p95": 0.025
+      },
+      "static_blend": {
+        "p50": 0.0,
+        "p95": 0.002
+      }
+    },
+    "queries": 128,
+    "shared_ms": {
+      "p50": 12.677,
+      "p95": 14.002
+    }
+  },
+  "training_ids_sha256": "354b9aa85f5defb783e9433fe30f465ff9df330206d7531e3348da9ca7b07563"
+}
