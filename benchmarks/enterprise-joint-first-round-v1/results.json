@@ -1,0 +1,142 @@
+{
+  "arms": {
+    "hybrid_prefixes": {
+      "requests": 80,
+      "issued_requests": 25,
+      "provisional_slots": 51,
+      "changed_requests": 0,
+      "changed_selection": 0,
+      "passages": 799,
+      "distinct_sources": 799,
+      "verification_pairs": 1279,
+      "clipped": 0,
+      "withheld": 0
+    },
+    "independent_windows": {
+      "requests": 80,
+      "issued_requests": 26,
+      "provisional_slots": 52,
+      "changed_requests": 1,
+      "changed_selection": 24,
+      "passages": 799,
+      "distinct_sources": 782,
+      "verification_pairs": 1279,
+      "clipped": 0,
+      "withheld": 0
+    },
+    "joint_windows": {
+      "requests": 80,
+      "issued_requests": 25,
+      "provisional_slots": 51,
+      "changed_requests": 0,
+      "changed_selection": 21,
+      "passages": 799,
+      "distinct_sources": 799,
+      "verification_pairs": 1279,
+      "clipped": 0,
+      "withheld": 0
+    }
+  },
+  "source_records": 52667,
+  "role_windows": 5734,
+  "multi_condition": 25,
+  "script_sha256": "280fdfb0032b0b33ca683abb473017bbbbbfc3e776a8d6afbbc673b2ac1308c6",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "queries_sha256": "30661871ac08a61e7e74d67d75491878c7e4194f217483b60d06426c4b36e4c5",
+  "source_sha256": "c9e8d6e13bb05900427ab1d785d6024256f61e8bb34f220c3816fb79d1921780",
+  "models": {
+    "embedding": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+    "verifier": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+    "parser": "cdbee75f17c01a7cc42f958dc650907174af0554"
+  },
+  "slurm_array": 44805,
+  "node": "ws5",
+  "order_offsets": [
+    0,
+    1
+  ],
+  "timing": [
+    {
+      "hybrid_prefixes": {
+        "p95_ms": 1095.017466973513,
+        "paired_p95_delta_ms": [
+          0.0,
+          0.0
+        ],
+        "planning_p95_ms": 0.0033585354685783386
+      },
+      "independent_windows": {
+        "p95_ms": 1094.7278897278006,
+        "paired_p95_delta_ms": [
+          -3.4473594278097153,
+          3.4648925065994263
+        ],
+        "planning_p95_ms": 0.4758290015161037
+      },
+      "joint_windows": {
+        "p95_ms": 1096.667725499719,
+        "paired_p95_delta_ms": [
+          -1.7603691667318344,
+          3.7750117480754852
+        ],
+        "planning_p95_ms": 0.5947755649685859
+      }
+    },
+    {
+      "hybrid_prefixes": {
+        "p95_ms": 1102.2344109602268,
+        "paired_p95_delta_ms": [
+          0.0,
+          0.0
+        ],
+        "planning_p95_ms": 0.0034771859645843506
+      },
+      "independent_windows": {
+        "p95_ms": 1094.7467322461303,
+        "paired_p95_delta_ms": [
+          -7.695971056818962,
+          0.9097792208194733
+        ],
+        "planning_p95_ms": 0.49986792728304863
+      },
+      "joint_windows": {
+        "p95_ms": 1096.810450777411,
+        "paired_p95_delta_ms": [
+          -5.494995042681694,
+          3.0243825167417526
+        ],
+        "planning_p95_ms": 0.5866951309144497
+      }
+    }
+  ],
+  "review": {
+    "shared_exact_views": 51,
+    "same_expert_distinct_views": 0,
+    "recommendation_slots": {
+      "hybrid_prefixes": 51,
+      "independent_windows": 52,
+      "joint_windows": 51
+    },
+    "queries": 80,
+    "distinct_review_cards": 52,
+    "judgments": 0,
+    "unjudged_p5_bounds_vs_prefixes": {
+      "independent_windows": {
+        "new_views": 1,
+        "removed_views": 0,
+        "possible_grounded_p5_delta": [
+          0.0,
+          0.0025
+        ]
+      },
+      "joint_windows": {
+        "new_views": 0,
+        "removed_views": 0,
+        "possible_grounded_p5_delta": [
+          0.0,
+          0.0
+        ]
+      }
+    }
+  }
+}
