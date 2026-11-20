@@ -1,0 +1,531 @@
+{
+  "runs": [
+    {
+      "calibration": {
+        "grid": [
+          {
+            "correct": 10,
+            "fallback_tasks": 0,
+            "threshold": 0.0
+          },
+          {
+            "correct": 10,
+            "fallback_tasks": 1,
+            "threshold": 0.04204152524471283
+          },
+          {
+            "correct": 10,
+            "fallback_tasks": 2,
+            "threshold": 0.04682430624961853
+          },
+          {
+            "correct": 10,
+            "fallback_tasks": 2,
+            "threshold": 0.05256234109401703
+          },
+          {
+            "correct": 11,
+            "fallback_tasks": 3,
+            "threshold": 0.08040088415145874
+          },
+          {
+            "correct": 11,
+            "fallback_tasks": 4,
+            "threshold": 0.10028683766722679
+          }
+        ],
+        "phrases": 14,
+        "winner": {
+          "correct": 11,
+          "fallback_tasks": 3,
+          "threshold": 0.08040088415145874
+        }
+      },
+      "embedding_checkpoint": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "glossary_sha256": "c107b4e780218e58aec4e2a13f2d7072533962a6a73b82d23e4273b43aafd528",
+      "order_offset": 0,
+      "projection_sha256": "4ce67b1ff52d869f133bd5318bad2573502d12aae065c75c9407c14754171c89",
+      "reader_checkpoint": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "results": {
+        "elife": {
+          "quoted": {
+            "fused_ridge": {
+              "aligned_roles": 34,
+              "aligned_topics": 51,
+              "issued": 15,
+              "known": 10,
+              "p95_ms": 10.93268021941185,
+              "reader_tasks": 0,
+              "topic_unresolved_with_correct_role": 4,
+              "wrong_declared_role": 1
+            },
+            "guarded": {
+              "aligned_roles": 33,
+              "aligned_topics": 51,
+              "issued": 13,
+              "known": 8,
+              "p95_ms": 44.617099687457085,
+              "reader_tasks": 11,
+              "topic_unresolved_with_correct_role": 4,
+              "wrong_declared_role": 1
+            },
+            "known_roles": {
+              "aligned_roles": 51,
+              "aligned_topics": 51,
+              "issued": 16,
+              "known": 14,
+              "p95_ms": 10.941422544419765,
+              "reader_tasks": 0,
+              "topic_unresolved_with_correct_role": 2,
+              "wrong_declared_role": 0
+            },
+            "reader": {
+              "aligned_roles": 20,
+              "aligned_topics": 51,
+              "issued": 15,
+              "known": 11,
+              "p95_ms": 58.5435563698411,
+              "reader_tasks": 102,
+              "topic_unresolved_with_correct_role": 3,
+              "wrong_declared_role": 1
+            },
+            "ridge": {
+              "aligned_roles": 34,
+              "aligned_topics": 51,
+              "issued": 14,
+              "known": 9,
+              "p95_ms": 20.691520534455776,
+              "reader_tasks": 0,
+              "topic_unresolved_with_correct_role": 4,
+              "wrong_declared_role": 1
+            }
+          },
+          "unquoted": {
+            "fused_ridge": {
+              "aligned_roles": 34,
+              "aligned_topics": 51,
+              "issued": 15,
+              "known": 10,
+              "p95_ms": 10.780194774270058,
+              "reader_tasks": 0,
+              "topic_unresolved_with_correct_role": 4,
+              "wrong_declared_role": 1
+            },
+            "guarded": {
+              "aligned_roles": 33,
+              "aligned_topics": 51,
+              "issued": 13,
+              "known": 8,
+              "p95_ms": 44.990424066782,
+              "reader_tasks": 11,
+              "topic_unresolved_with_correct_role": 4,
+              "wrong_declared_role": 1
+            },
+            "known_roles": {
+              "aligned_roles": 51,
+              "aligned_topics": 51,
+              "issued": 16,
+              "known": 14,
+              "p95_ms": 11.107614263892174,
+              "reader_tasks": 0,
+              "topic_unresolved_with_correct_role": 2,
+              "wrong_declared_role": 0
+            },
+            "reader": {
+              "aligned_roles": 20,
+              "aligned_topics": 51,
+              "issued": 15,
+              "known": 11,
+              "p95_ms": 58.87334514409304,
+              "reader_tasks": 102,
+              "topic_unresolved_with_correct_role": 3,
+              "wrong_declared_role": 1
+            },
+            "ridge": {
+              "aligned_roles": 34,
+              "aligned_topics": 51,
+              "issued": 14,
+              "known": 9,
+              "p95_ms": 20.516633056104183,
+              "reader_tasks": 0,
+              "topic_unresolved_with_correct_role": 4,
+              "wrong_declared_role": 1
+            }
+          }
+        },
+        "plos": {
+          "quoted": {
+            "fused_ridge": {
+              "aligned_roles": 110,
+              "aligned_topics": 160,
+              "issued": 70,
+              "known": 41,
+              "p95_ms": 10.021202638745308,
+              "reader_tasks": 0,
+              "topic_unresolved_with_correct_role": 24,
+              "wrong_declared_role": 5
+            },
+            "guarded": {
+              "aligned_roles": 101,
+              "aligned_topics": 160,
+              "issued": 69,
+              "known": 40,
+              "p95_ms": 44.58020608872173,
+              "reader_tasks": 50,
+              "topic_unresolved_with_correct_role": 24,
+              "wrong_declared_role": 5
+            },
+            "known_roles": {
+              "aligned_roles": 160,
+              "aligned_topics": 160,
+              "issued": 78,
+              "known": 49,
+              "p95_ms": 9.922141116112469,
+              "reader_tasks": 0,
+              "topic_unresolved_with_correct_role": 29,
+              "wrong_declared_role": 0
+            },
+            "reader": {
+              "aligned_roles": 57,
+              "aligned_topics": 160,
+              "issued": 59,
+              "known": 31,
+              "p95_ms": 57.79350996017456,
+              "reader_tasks": 320,
+              "topic_unresolved_with_correct_role": 23,
+              "wrong_declared_role": 5
+            },
+            "ridge": {
+              "aligned_roles": 110,
+              "aligned_topics": 160,
+              "issued": 70,
+              "known": 41,
+              "p95_ms": 19.672750588506457,
+              "reader_tasks": 0,
+              "topic_unresolved_with_correct_role": 24,
+              "wrong_declared_role": 5
+            }
+          },
+          "unquoted": {
+            "fused_ridge": {
+              "aligned_roles": 110,
+              "aligned_topics": 160,
+              "issued": 70,
+              "known": 41,
+              "p95_ms": 10.036540683358908,
+              "reader_tasks": 0,
+              "topic_unresolved_with_correct_role": 24,
+              "wrong_declared_role": 5
+            },
+            "guarded": {
+              "aligned_roles": 101,
+              "aligned_topics": 160,
+              "issued": 69,
+              "known": 40,
+              "p95_ms": 44.31298002600669,
+              "reader_tasks": 50,
+              "topic_unresolved_with_correct_role": 24,
+              "wrong_declared_role": 5
+            },
+            "known_roles": {
+              "aligned_roles": 160,
+              "aligned_topics": 160,
+              "issued": 78,
+              "known": 49,
+              "p95_ms": 10.042093880474567,
+              "reader_tasks": 0,
+              "topic_unresolved_with_correct_role": 29,
+              "wrong_declared_role": 0
+            },
+            "reader": {
+              "aligned_roles": 57,
+              "aligned_topics": 160,
+              "issued": 59,
+              "known": 31,
+              "p95_ms": 57.823819760233164,
+              "reader_tasks": 320,
+              "topic_unresolved_with_correct_role": 23,
+              "wrong_declared_role": 5
+            },
+            "ridge": {
+              "aligned_roles": 110,
+              "aligned_topics": 160,
+              "issued": 70,
+              "known": 41,
+              "p95_ms": 19.459982216358185,
+              "reader_tasks": 0,
+              "topic_unresolved_with_correct_role": 24,
+              "wrong_declared_role": 5
+            }
+          }
+        }
+      },
+      "script_sha256": "47e0e7c8a025c4bd9bddfb3a1a45646b64a474c1aa02620abb5e0423b830ebc3",
+      "training_sha256": "3365bdd2588d8dfff12de71cf7663808c25689f831a1ba42288a8bb8b53bfdc2"
+    },
+    {
+      "calibration": {
+        "grid": [
+          {
+            "correct": 10,
+            "fallback_tasks": 0,
+            "threshold": 0.0
+          },
+          {
+            "correct": 10,
+            "fallback_tasks": 1,
+            "threshold": 0.04204152524471283
+          },
+          {
+            "correct": 10,
+            "fallback_tasks": 2,
+            "threshold": 0.04682430624961853
+          },
+          {
+            "correct": 10,
+            "fallback_tasks": 2,
+            "threshold": 0.05256234109401703
+          },
+          {
+            "correct": 11,
+            "fallback_tasks": 3,
+            "threshold": 0.08040088415145874
+          },
+          {
+            "correct": 11,
+            "fallback_tasks": 4,
+            "threshold": 0.10028683766722679
+          }
+        ],
+        "phrases": 14,
+        "winner": {
+          "correct": 11,
+          "fallback_tasks": 3,
+          "threshold": 0.08040088415145874
+        }
+      },
+      "embedding_checkpoint": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "glossary_sha256": "c107b4e780218e58aec4e2a13f2d7072533962a6a73b82d23e4273b43aafd528",
+      "order_offset": 1,
+      "projection_sha256": "4ce67b1ff52d869f133bd5318bad2573502d12aae065c75c9407c14754171c89",
+      "reader_checkpoint": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "results": {
+        "elife": {
+          "quoted": {
+            "fused_ridge": {
+              "aligned_roles": 34,
+              "aligned_topics": 51,
+              "issued": 15,
+              "known": 10,
+              "p95_ms": 10.373523458838463,
+              "reader_tasks": 0,
+              "topic_unresolved_with_correct_role": 4,
+              "wrong_declared_role": 1
+            },
+            "guarded": {
+              "aligned_roles": 33,
+              "aligned_topics": 51,
+              "issued": 13,
+              "known": 8,
+              "p95_ms": 44.41526439040899,
+              "reader_tasks": 11,
+              "topic_unresolved_with_correct_role": 4,
+              "wrong_declared_role": 1
+            },
+            "known_roles": {
+              "aligned_roles": 51,
+              "aligned_topics": 51,
+              "issued": 16,
+              "known": 14,
+              "p95_ms": 10.145360603928566,
+              "reader_tasks": 0,
+              "topic_unresolved_with_correct_role": 2,
+              "wrong_declared_role": 0
+            },
+            "reader": {
+              "aligned_roles": 20,
+              "aligned_topics": 51,
+              "issued": 15,
+              "known": 11,
+              "p95_ms": 58.49774926900864,
+              "reader_tasks": 102,
+              "topic_unresolved_with_correct_role": 3,
+              "wrong_declared_role": 1
+            },
+            "ridge": {
+              "aligned_roles": 34,
+              "aligned_topics": 51,
+              "issued": 14,
+              "known": 9,
+              "p95_ms": 19.781917333602905,
+              "reader_tasks": 0,
+              "topic_unresolved_with_correct_role": 4,
+              "wrong_declared_role": 1
+            }
+          },
+          "unquoted": {
+            "fused_ridge": {
+              "aligned_roles": 34,
+              "aligned_topics": 51,
+              "issued": 15,
+              "known": 10,
+              "p95_ms": 10.324997827410698,
+              "reader_tasks": 0,
+              "topic_unresolved_with_correct_role": 4,
+              "wrong_declared_role": 1
+            },
+            "guarded": {
+              "aligned_roles": 33,
+              "aligned_topics": 51,
+              "issued": 13,
+              "known": 8,
+              "p95_ms": 44.38087064772844,
+              "reader_tasks": 11,
+              "topic_unresolved_with_correct_role": 4,
+              "wrong_declared_role": 1
+            },
+            "known_roles": {
+              "aligned_roles": 51,
+              "aligned_topics": 51,
+              "issued": 16,
+              "known": 14,
+              "p95_ms": 10.077345184981823,
+              "reader_tasks": 0,
+              "topic_unresolved_with_correct_role": 2,
+              "wrong_declared_role": 0
+            },
+            "reader": {
+              "aligned_roles": 20,
+              "aligned_topics": 51,
+              "issued": 15,
+              "known": 11,
+              "p95_ms": 58.332606218755245,
+              "reader_tasks": 102,
+              "topic_unresolved_with_correct_role": 3,
+              "wrong_declared_role": 1
+            },
+            "ridge": {
+              "aligned_roles": 34,
+              "aligned_topics": 51,
+              "issued": 14,
+              "known": 9,
+              "p95_ms": 19.645437598228455,
+              "reader_tasks": 0,
+              "topic_unresolved_with_correct_role": 4,
+              "wrong_declared_role": 1
+            }
+          }
+        },
+        "plos": {
+          "quoted": {
+            "fused_ridge": {
+              "aligned_roles": 110,
+              "aligned_topics": 160,
+              "issued": 70,
+              "known": 41,
+              "p95_ms": 9.905299358069897,
+              "reader_tasks": 0,
+              "topic_unresolved_with_correct_role": 24,
+              "wrong_declared_role": 5
+            },
+            "guarded": {
+              "aligned_roles": 101,
+              "aligned_topics": 160,
+              "issued": 69,
+              "known": 40,
+              "p95_ms": 44.183023273944855,
+              "reader_tasks": 50,
+              "topic_unresolved_with_correct_role": 24,
+              "wrong_declared_role": 5
+            },
+            "known_roles": {
+              "aligned_roles": 160,
+              "aligned_topics": 160,
+              "issued": 78,
+              "known": 49,
+              "p95_ms": 9.714060183614492,
+              "reader_tasks": 0,
+              "topic_unresolved_with_correct_role": 29,
+              "wrong_declared_role": 0
+            },
+            "reader": {
+              "aligned_roles": 57,
+              "aligned_topics": 160,
+              "issued": 59,
+              "known": 31,
+              "p95_ms": 57.54770217463374,
+              "reader_tasks": 320,
+              "topic_unresolved_with_correct_role": 23,
+              "wrong_declared_role": 5
+            },
+            "ridge": {
+              "aligned_roles": 110,
+              "aligned_topics": 160,
+              "issued": 70,
+              "known": 41,
+              "p95_ms": 19.061332289129496,
+              "reader_tasks": 0,
+              "topic_unresolved_with_correct_role": 24,
+              "wrong_declared_role": 5
+            }
+          },
+          "unquoted": {
+            "fused_ridge": {
+              "aligned_roles": 110,
+              "aligned_topics": 160,
+              "issued": 70,
+              "known": 41,
+              "p95_ms": 10.087085049599409,
+              "reader_tasks": 0,
+              "topic_unresolved_with_correct_role": 24,
+              "wrong_declared_role": 5
+            },
+            "guarded": {
+              "aligned_roles": 101,
+              "aligned_topics": 160,
+              "issued": 69,
+              "known": 40,
+              "p95_ms": 44.7554568760097,
+              "reader_tasks": 50,
+              "topic_unresolved_with_correct_role": 24,
+              "wrong_declared_role": 5
+            },
+            "known_roles": {
+              "aligned_roles": 160,
+              "aligned_topics": 160,
+              "issued": 78,
+              "known": 49,
+              "p95_ms": 10.144690703600643,
+              "reader_tasks": 0,
+              "topic_unresolved_with_correct_role": 29,
+              "wrong_declared_role": 0
+            },
+            "reader": {
+              "aligned_roles": 57,
+              "aligned_topics": 160,
+              "issued": 59,
+              "known": 31,
+              "p95_ms": 57.833763770759106,
+              "reader_tasks": 320,
+              "topic_unresolved_with_correct_role": 23,
+              "wrong_declared_role": 5
+            },
+            "ridge": {
+              "aligned_roles": 110,
+              "aligned_topics": 160,
+              "issued": 70,
+              "known": 41,
+              "p95_ms": 19.469559472054243,
+              "reader_tasks": 0,
+              "topic_unresolved_with_correct_role": 24,
+              "wrong_declared_role": 5
+            }
+          }
+        }
+      },
+      "script_sha256": "47e0e7c8a025c4bd9bddfb3a1a45646b64a474c1aa02620abb5e0423b830ebc3",
+      "training_sha256": "3365bdd2588d8dfff12de71cf7663808c25689f831a1ba42288a8bb8b53bfdc2"
+    }
+  ],
+  "slurm_array": 44534
+}
