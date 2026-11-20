@@ -2,8 +2,11 @@
 
 import argparse
 from collections import Counter, defaultdict
+from fractions import Fraction
 from hashlib import sha256
+from itertools import accumulate
 import json
+from math import ceil
 from pathlib import Path
 
 from experiments.credit import topic_role_postings as pilot
@@ -67,25 +70,24 @@ def freeze(projection, run, witness_file, original):
     return trace["witnesses"], dict(sorted(cases.items()))
 
 
-def contrast(candidate, comparator, labels):
-    counts = defaultdict(Counter)
+def paired_weights(candidate, comparator):
+    counts = Counter()
     for left, right in zip(candidate, comparator, strict=True):
         topic = left["topic"]
         if topic != right["topic"]:
             raise ValueError("Query topics differ")
-        counts[topic].update(case_id(topic, doi) for doi in left["citations"])
-        counts[topic].subtract(case_id(topic, doi) for doi in right["citations"])
+        counts.update(case_id(topic, doi) for doi in left["citations"])
+        counts.subtract(case_id(topic, doi) for doi in right["citations"])
 
-    observed, low, high = 0, 0, 0
-    changed_unknown = Counter()
-    for weights in counts.values():
-        for identifier, weight in weights.items():
-            if labels.get(identifier) == "relevant":
-                observed += weight
-            elif weight and identifier not in labels:
-                changed_unknown[identifier] = weight
-                low += min(0, weight)
-                high += max(0, weight)
+    return {identifier: weight for identifier, weight in counts.items() if weight}
+
+
+def contrast(candidate, comparator, labels):
+    weights = paired_weights(candidate, comparator)
+    observed = sum(weight for key, weight in weights.items() if labels.get(key) == "relevant")
+    changed_unknown = {key: weight for key, weight in weights.items() if key not in labels}
+    low = sum(min(0, weight) for weight in changed_unknown.values())
+    high = sum(max(0, weight) for weight in changed_unknown.values())
     slots = pilot.TOP * len(candidate)
     return dict(
         slots=slots, known_grounded_delta=observed / slots,
@@ -96,6 +98,69 @@ def contrast(candidate, comparator, labels):
         known_grounded_delta_slots=observed,
         possible_delta_slots=[observed + low, observed + high],
     )
+
+
+def minimum_changes(weights, required_swing):
+    if required_swing <= 0:
+        return 0
+    changes = accumulate(sorted(weights, reverse=True))
+    return next((count for count, swing in enumerate(changes, 1) if swing >= required_swing), None)
+
+
+def sensitivity(packet, reference, output):
+    if output.exists():
+        raise ValueError("Provide a fresh sensitivity output")
+    if pilot.digest(packet) != json.loads(reference.read_bytes())["packet_sha256"]:
+        raise ValueError("Packet differs from the published freeze")
+
+    data = json.loads(packet.read_bytes())
+    cases = data["cases"]
+    witnesses = data["witnesses"]
+    influential = set()
+    reports = {}
+    for coverage, arms in witnesses.items():
+        reports[coverage] = {}
+        for arm, base in CONTRASTS:
+            weights = paired_weights(arms[arm], arms[base])
+            influential.update(weights)
+            tagged = [weight for key, weight in weights.items() if cases[key]["publisher_topic"]]
+            untagged = [weight for key, weight in weights.items() if not cases[key]["publisher_topic"]]
+            observed = sum(tagged)
+            low = observed + sum(min(0, weight) for weight in untagged)
+            high = observed + sum(max(0, weight) for weight in untagged)
+            slots = pilot.TOP * len(arms[arm])
+            gates = {"at_least_one_more_slot": 1}
+            if base == "topic_four":
+                gates["gain_at_least_two_points"] = ceil(Fraction(2 * slots, 100))
+            if base == "topic_eight":
+                gates["loss_at_most_one_point"] = ceil(Fraction(-slots, 100))
+            reports[coverage][f"{arm}_vs_{base}"] = dict(
+                slots=slots,
+                influential_tagged_pairs=len(tagged),
+                influential_untagged_pairs=len(untagged),
+                publisher_tag_delta=observed,
+                delta_if_tags_all_relevant=[low, high],
+                delta_if_all_unjudged=[sum(min(0, w) for w in weights.values()),
+                                       sum(max(0, w) for w in weights.values())],
+                gates={
+                    name: dict(
+                        minimum_net_slots=minimum,
+                        tagged_reversals_to_make_failure_possible=minimum_changes(
+                            [w for w in tagged if w > 0], low - minimum + 1),
+                        tagged_reversals_to_make_success_possible=minimum_changes(
+                            [-w for w in tagged if w < 0], minimum - high),
+                    )
+                    for name, minimum in gates.items()
+                },
+            )
+    pilot.write_json(output, dict(
+        packet_sha256=pilot.digest(packet),
+        reference_sha256=pilot.digest(reference),
+        cases=len(cases),
+        influential_pairs=len(influential),
+        influential_tagged_pairs=sum(cases[key]["publisher_topic"] for key in influential),
+        comparisons=reports,
+    ))
 
 
 def render_reports(witnesses, labels):
@@ -194,6 +259,10 @@ if __name__ == "__main__":
     score = sub.add_parser("reconcile")
     for name in ("packet", "reviewer_a", "reviewer_b", "output"):
         score.add_argument(name, type=Path)
+    stress = sub.add_parser("sensitivity")
+    for name in ("packet", "reference", "output"):
+        stress.add_argument(name, type=Path)
     args = vars(cli.parse_args())
     command = args.pop("command")
-    (prepare if command == "prepare" else reconcile)(**args)
+    commands = {"prepare": prepare, "reconcile": reconcile, "sensitivity": sensitivity}
+    commands[command](**args)
