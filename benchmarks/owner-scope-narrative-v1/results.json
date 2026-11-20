@@ -1,0 +1,250 @@
+{
+  "run": {
+    "job": "44112",
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "script_sha256": "bf959350348650166dbac984c8a4cb4ba25fed15355edff9b23089fa1304b2a5",
+    "parent_sha256": "185882bd7fae7a194c93f7bbf08626078454bcfe3d6c26fb5745aa1b91e4587f",
+    "model_provenance_sha256": "afe957088656024b36dbcbfa800c7bbf87676d80c3c115d0b4cf6280fb864bcc",
+    "cases": 960,
+    "results": {
+      "plain": {
+        "queries": 480,
+        "card_selection": {
+          "selected_correct_card": 52,
+          "selected_wrong_card": 425,
+          "correctly_selected_none": 3,
+          "missed_valid_card": 0,
+          "wrong_card_rejected_by_check": 208
+        },
+        "decisions": {
+          "direct": {
+            "correct": 202,
+            "intact_correct": 53,
+            "false_eligibility_without_evidence": 235,
+            "unsupported_decision": 235,
+            "correct_available_eligible": 48,
+            "both_intact_correct": 5,
+            "cold_path_p95_ms": 24.673709738999605
+          },
+          "direct_rotated": {
+            "correct": 96,
+            "intact_correct": 56,
+            "false_eligibility_without_evidence": 264,
+            "unsupported_decision": 344,
+            "correct_available_eligible": 48,
+            "both_intact_correct": 8,
+            "cold_path_p95_ms": 24.64294219389558
+          },
+          "select_then_compare": {
+            "correct": 112,
+            "intact_correct": 83,
+            "false_eligibility_without_evidence": 182,
+            "unsupported_decision": 355,
+            "correct_available_eligible": 44,
+            "both_intact_correct": 36,
+            "cold_path_p95_ms": 21.20757196098566
+          },
+          "select_verify_compare": {
+            "correct": 284,
+            "intact_correct": 66,
+            "false_eligibility_without_evidence": 121,
+            "unsupported_decision": 166,
+            "correct_available_eligible": 38,
+            "both_intact_correct": 22,
+            "cold_path_p95_ms": 35.84658997133374
+          },
+          "gold_card": {
+            "correct": 480,
+            "intact_correct": 96,
+            "false_eligibility_without_evidence": 0,
+            "unsupported_decision": 0,
+            "correct_available_eligible": 48,
+            "both_intact_correct": 48,
+            "cold_path_p95_ms": 0.025056861340999582
+          }
+        }
+      },
+      "distractors": {
+        "queries": 480,
+        "card_selection": {
+          "selected_correct_card": 31,
+          "selected_wrong_card": 438,
+          "correctly_selected_none": 10,
+          "missed_valid_card": 1,
+          "wrong_card_rejected_by_check": 224
+        },
+        "decisions": {
+          "direct": {
+            "correct": 177,
+            "intact_correct": 45,
+            "false_eligibility_without_evidence": 252,
+            "unsupported_decision": 252,
+            "correct_available_eligible": 45,
+            "both_intact_correct": 0,
+            "cold_path_p95_ms": 28.829210437834263
+          },
+          "direct_rotated": {
+            "correct": 51,
+            "intact_correct": 49,
+            "false_eligibility_without_evidence": 320,
+            "unsupported_decision": 382,
+            "correct_available_eligible": 46,
+            "both_intact_correct": 3,
+            "cold_path_p95_ms": 28.85020561516285
+          },
+          "select_then_compare": {
+            "correct": 98,
+            "intact_correct": 74,
+            "false_eligibility_without_evidence": 165,
+            "unsupported_decision": 360,
+            "correct_available_eligible": 36,
+            "both_intact_correct": 29,
+            "cold_path_p95_ms": 24.846777599304914
+          },
+          "select_verify_compare": {
+            "correct": 268,
+            "intact_correct": 50,
+            "false_eligibility_without_evidence": 111,
+            "unsupported_decision": 166,
+            "correct_available_eligible": 33,
+            "both_intact_correct": 13,
+            "cold_path_p95_ms": 39.661350194364786
+          },
+          "gold_card": {
+            "correct": 480,
+            "intact_correct": 96,
+            "false_eligibility_without_evidence": 0,
+            "unsupported_decision": 0,
+            "correct_available_eligible": 48,
+            "both_intact_correct": 48,
+            "cold_path_p95_ms": 0.028432067483663503
+          }
+        }
+      }
+    }
+  },
+  "repeat": {
+    "job": "44111",
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "script_sha256": "bf959350348650166dbac984c8a4cb4ba25fed15355edff9b23089fa1304b2a5",
+    "parent_sha256": "185882bd7fae7a194c93f7bbf08626078454bcfe3d6c26fb5745aa1b91e4587f",
+    "model_provenance_sha256": "afe957088656024b36dbcbfa800c7bbf87676d80c3c115d0b4cf6280fb864bcc",
+    "cases": 960,
+    "results": {
+      "plain": {
+        "queries": 480,
+        "card_selection": {
+          "selected_correct_card": 52,
+          "selected_wrong_card": 425,
+          "correctly_selected_none": 3,
+          "missed_valid_card": 0,
+          "wrong_card_rejected_by_check": 208
+        },
+        "decisions": {
+          "direct": {
+            "correct": 202,
+            "intact_correct": 53,
+            "false_eligibility_without_evidence": 235,
+            "unsupported_decision": 235,
+            "correct_available_eligible": 48,
+            "both_intact_correct": 5,
+            "cold_path_p95_ms": 24.641333241015673
+          },
+          "direct_rotated": {
+            "correct": 96,
+            "intact_correct": 56,
+            "false_eligibility_without_evidence": 264,
+            "unsupported_decision": 344,
+            "correct_available_eligible": 48,
+            "both_intact_correct": 8,
+            "cold_path_p95_ms": 24.635870568454266
+          },
+          "select_then_compare": {
+            "correct": 112,
+            "intact_correct": 83,
+            "false_eligibility_without_evidence": 182,
+            "unsupported_decision": 355,
+            "correct_available_eligible": 44,
+            "both_intact_correct": 36,
+            "cold_path_p95_ms": 21.205820981413126
+          },
+          "select_verify_compare": {
+            "correct": 284,
+            "intact_correct": 66,
+            "false_eligibility_without_evidence": 121,
+            "unsupported_decision": 166,
+            "correct_available_eligible": 38,
+            "both_intact_correct": 22,
+            "cold_path_p95_ms": 35.89143641293049
+          },
+          "gold_card": {
+            "correct": 480,
+            "intact_correct": 96,
+            "false_eligibility_without_evidence": 0,
+            "unsupported_decision": 0,
+            "correct_available_eligible": 48,
+            "both_intact_correct": 48,
+            "cold_path_p95_ms": 0.02418318763375276
+          }
+        }
+      },
+      "distractors": {
+        "queries": 480,
+        "card_selection": {
+          "selected_correct_card": 31,
+          "selected_wrong_card": 438,
+          "correctly_selected_none": 10,
+          "missed_valid_card": 1,
+          "wrong_card_rejected_by_check": 224
+        },
+        "decisions": {
+          "direct": {
+            "correct": 177,
+            "intact_correct": 45,
+            "false_eligibility_without_evidence": 252,
+            "unsupported_decision": 252,
+            "correct_available_eligible": 45,
+            "both_intact_correct": 0,
+            "cold_path_p95_ms": 28.814385272562504
+          },
+          "direct_rotated": {
+            "correct": 51,
+            "intact_correct": 49,
+            "false_eligibility_without_evidence": 320,
+            "unsupported_decision": 382,
+            "correct_available_eligible": 46,
+            "both_intact_correct": 3,
+            "cold_path_p95_ms": 28.868655115365982
+          },
+          "select_then_compare": {
+            "correct": 98,
+            "intact_correct": 74,
+            "false_eligibility_without_evidence": 165,
+            "unsupported_decision": 360,
+            "correct_available_eligible": 36,
+            "both_intact_correct": 29,
+            "cold_path_p95_ms": 24.86278535798192
+          },
+          "select_verify_compare": {
+            "correct": 268,
+            "intact_correct": 50,
+            "false_eligibility_without_evidence": 111,
+            "unsupported_decision": 166,
+            "correct_available_eligible": 33,
+            "both_intact_correct": 13,
+            "cold_path_p95_ms": 39.67601889744401
+          },
+          "gold_card": {
+            "correct": 480,
+            "intact_correct": 96,
+            "false_eligibility_without_evidence": 0,
+            "unsupported_decision": 0,
+            "correct_available_eligible": 48,
+            "both_intact_correct": 48,
+            "cold_path_p95_ms": 0.02810973674058909
+          }
+        }
+      }
+    }
+  }
+}
