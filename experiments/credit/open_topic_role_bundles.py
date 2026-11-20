@@ -74,7 +74,7 @@ def query_panel(postings):
     return [selected[key] for key in sorted(selected)]
 
 
-def topic_rankings(catalogue, topics, checkpoint):
+def topic_rankings(catalogue, topics, checkpoint, width=TOP_K):
     eligible = {i for i, doi in enumerate(catalogue.ids) if catalogue.kinds[doi] is None}
     views = {"bm25": {}}
     dense_scores = None
@@ -94,14 +94,14 @@ def topic_rankings(catalogue, topics, checkpoint):
         scores = catalogue.lexical.document_scores(topic)
         lexical = sorted((int(i) for i in scores if int(i) in eligible),
                          key=lambda i: (-scores[str(i)], i))
-        views["bm25"][topic] = {catalogue.ids[i]: rank for rank, i in enumerate(lexical[:TOP_K], 1)}
+        views["bm25"][topic] = {catalogue.ids[i]: rank for rank, i in enumerate(lexical[:width], 1)}
         if dense_scores is not None:
             dense = sorted(eligible, key=lambda i: (-dense_scores[row, i], i))
             fused = Counter()
             for ranking in (lexical, dense):
                 for rank, i in enumerate(ranking, 1):
                     fused[i] += 1 / (60 + rank)
-            top = sorted(fused, key=lambda i: (-fused[i], i))[:TOP_K]
+            top = sorted(fused, key=lambda i: (-fused[i], i))[:width]
             views["hybrid"][topic] = {catalogue.ids[i]: rank for rank, i in enumerate(top, 1)}
     return views, provenance
 
@@ -130,7 +130,7 @@ def read_articles(catalogue, titles, atoms, ranks):
     return shown
 
 
-def joint_sources(pool, ranks, fallback, can_cover):
+def joint_sources(pool, ranks, fallback, can_cover, depth=TOP_K):
     candidates = [
         (a, b) for a, b in product(*ranks) if a != b and can_cover(a, b)
     ]
@@ -145,11 +145,12 @@ def joint_sources(pool, ranks, fallback, can_cover):
         return list(first)
     def gain(doi):
         return (sum(doi in pair and any(part in first for part in pair) for pair in candidates),
-                -min(ranks[0].get(doi, TOP_K+1), ranks[1].get(doi, TOP_K+1)))
+                -min(ranks[0].get(doi, depth+1), ranks[1].get(doi, depth+1)))
     return [*first, max(second, key=gain)]
 
 
-def evaluate(catalogue, subjects, atoms, gold, ranks_by_topic, role_union):
+def evaluate(catalogue, subjects, atoms, gold, ranks_by_topic, role_union, *, depth=TOP_K,
+             joint_nominator=None):
     ranks = tuple(ranks_by_topic[topic] for topic, _ in atoms)
     present = [facet for facet in ranks if facet]
     first = list(dict.fromkeys(next(iter(facet)) for facet in present))
@@ -159,7 +160,7 @@ def evaluate(catalogue, subjects, atoms, gold, ranks_by_topic, role_union):
     observed = read_articles(catalogue, first, atoms, ranks)
 
     def rank(doi, side):
-        return ranks[side].get(doi, TOP_K + 1)
+        return ranks[side].get(doi, depth + 1)
 
     def topical(doi):
         return (min(rank(doi, 0), rank(doi, 1)), rank(doi, 0) + rank(doi, 1), doi)
@@ -187,14 +188,17 @@ def evaluate(catalogue, subjects, atoms, gold, ranks_by_topic, role_union):
     proposals = {arm: [*first, min(extras, key=key)] if extras else first for arm, key in keys.items()}
     proposals["initial"] = first
     pool = set().union(*ranks)
-    proposals["joint_byline"] = joint_sources(
-        pool, ranks, proposals["parallel_topic"],
-        lambda a, b: bool(catalogue.byline[a] & catalogue.byline[b]),
-    )
+    if joint_nominator is None:
+        proposals["joint_byline"] = joint_sources(
+            pool, ranks, proposals["parallel_topic"],
+            lambda a, b: bool(catalogue.byline[a] & catalogue.byline[b]), depth,
+        )
+    else:
+        proposals["joint_byline"] = joint_nominator(pool, ranks, proposals["parallel_topic"], depth)
     proposals["joint_role_union"] = joint_sources(
         pool, ranks, proposals["joint_byline"],
         lambda a, b: (bool(catalogue.byline[a] & catalogue.byline[b])
-                      and atoms[0][1] in role_union[a] and atoms[1][1] in role_union[b]),
+                      and atoms[0][1] in role_union[a] and atoms[1][1] in role_union[b]), depth,
     )
     ref = {person: (gold[atoms[0]][person] & ranks[0].keys(), gold[atoms[1]][person] & ranks[1].keys())
            for person in gold[atoms[0]].keys() & gold[atoms[1]].keys()}
