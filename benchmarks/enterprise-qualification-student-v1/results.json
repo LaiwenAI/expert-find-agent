@@ -1,0 +1,87 @@
+{
+  "job": "43414",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "code_sha256": "1f53608cac4f36ae2f2e894a400f74bd9d968eb1e2d514b798d3a9ca13a89482",
+  "encoder": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "synthetic_sha256": "76f1df23d80b59968c2b78e89fd2516d9ae64b901e4f168a00a634c0d2460c45",
+  "teaching_cases": {
+    "training": 192,
+    "calibration": 96
+  },
+  "fitting_ms": 530.6623205542564,
+  "confidence": {
+    "target_only": 0.4177287817001343,
+    "scope": 0.521987795829773
+  },
+  "anchor_controls": {
+    "target_only": {
+      "calibration": {
+        "cases": 96,
+        "correct": 64,
+        "accepted": 0,
+        "accepted_errors": 0,
+        "accepted_positive": 0
+      },
+      "external": {
+        "cases": 72,
+        "correct": 36,
+        "accepted": 0,
+        "accepted_errors": 0,
+        "accepted_positive": 0
+      }
+    },
+    "scope": {
+      "calibration": {
+        "cases": 96,
+        "correct": 88,
+        "accepted": 75,
+        "accepted_errors": 0,
+        "accepted_positive": 21
+      },
+      "external": {
+        "cases": 72,
+        "correct": 67,
+        "accepted": 52,
+        "accepted_errors": 0,
+        "accepted_positive": 19
+      }
+    }
+  },
+  "private_raw_comparison": {
+    "requests": 80,
+    "clauses": 1452,
+    "reference_qualifications": 48,
+    "qualification_false_negatives": 39,
+    "qualification_false_positives": 154
+  },
+  "live": {
+    "requests": 80,
+    "bypassed": 11,
+    "issued_queries": {
+      "full_parser": 37,
+      "student_guard": 38
+    },
+    "p50_p95_ms": {
+      "full_parser": [
+        175.57642702013254,
+        991.0522813908751
+      ],
+      "student_guard": [
+        196.71460427343845,
+        1153.0612464062867
+      ]
+    },
+    "delta_p95_ci95": [
+      33.7147768586874,
+      167.35795326530933
+    ],
+    "changes": {
+      "qualifications": 2,
+      "initial": 2,
+      "extra": 0,
+      "invoked": 1,
+      "decisions": 2,
+      "retrieved": 0
+    }
+  }
+}
