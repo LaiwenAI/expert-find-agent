@@ -1,0 +1,2957 @@
+{
+  "slurm_array": 45005,
+  "runs": [
+    {
+      "fixture_sha256": "74168d853ad21c795269c904fb7f8081cdf5a3e91ce7385ef8683495fd2ca7d5",
+      "script_sha256": "93f65c466e64cac2cf41ea8ef673761cb4d97f7ea4819d369e984c4e198f16f2",
+      "source_measure_sha256": "3ce5ca4e03196f28e9a3d3bd71719aec10064a390757891a911e612bd8b9e1f1",
+      "roles": 14,
+      "sources": 152,
+      "owner_count": 580,
+      "bytes": 18721,
+      "budgets": {
+        "10": 1872,
+        "25": 4680,
+        "50": 9360
+      },
+      "folds": {
+        "0": {
+          "calibration_queries": 286,
+          "held_queries": 78,
+          "shifted_ranking_changed": 71,
+          "zero_cache_files_opened": 1747,
+          "shifted_zero_cache_files_opened": 1745,
+          "fixed_prior": {
+            "1872": {
+              "author_prior": {
+                "source_files": 16,
+                "stored_bytes": 1866,
+                "disk_reads": 1241,
+                "planning_and_decoding_p95_us": 171.64925
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 15,
+                "stored_bytes": 1857,
+                "disk_reads": 1131,
+                "planning_and_decoding_p95_us": 162.02984999999998
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 17,
+                "stored_bytes": 1855,
+                "disk_reads": 855,
+                "planning_and_decoding_p95_us": 132.75045
+              },
+              "hash_0": {
+                "source_files": 17,
+                "stored_bytes": 1866,
+                "disk_reads": 1656,
+                "planning_and_decoding_p95_us": 185.95875
+              },
+              "hash_1": {
+                "source_files": 15,
+                "stored_bytes": 1861,
+                "disk_reads": 1596,
+                "planning_and_decoding_p95_us": 178.7337
+              },
+              "hash_2": {
+                "source_files": 14,
+                "stored_bytes": 1862,
+                "disk_reads": 1536,
+                "planning_and_decoding_p95_us": 178.91574999999995
+              },
+              "hash_3": {
+                "source_files": 17,
+                "stored_bytes": 1860,
+                "disk_reads": 1673,
+                "planning_and_decoding_p95_us": 182.23689999999996
+              },
+              "hash_4": {
+                "source_files": 13,
+                "stored_bytes": 1855,
+                "disk_reads": 1599,
+                "planning_and_decoding_p95_us": 181.85394999999997
+              },
+              "hash_5": {
+                "source_files": 18,
+                "stored_bytes": 1861,
+                "disk_reads": 1452,
+                "planning_and_decoding_p95_us": 170.6915
+              }
+            },
+            "4680": {
+              "author_prior": {
+                "source_files": 35,
+                "stored_bytes": 4672,
+                "disk_reads": 547,
+                "planning_and_decoding_p95_us": 134.8842999999999
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 61,
+                "stored_bytes": 4634,
+                "disk_reads": 821,
+                "planning_and_decoding_p95_us": 140.01884999999993
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 34,
+                "stored_bytes": 4675,
+                "disk_reads": 243,
+                "planning_and_decoding_p95_us": 77.08519999999997
+              },
+              "hash_0": {
+                "source_files": 40,
+                "stored_bytes": 4671,
+                "disk_reads": 1435,
+                "planning_and_decoding_p95_us": 161.81594999999996
+              },
+              "hash_1": {
+                "source_files": 38,
+                "stored_bytes": 4669,
+                "disk_reads": 1298,
+                "planning_and_decoding_p95_us": 154.62004999999994
+              },
+              "hash_2": {
+                "source_files": 36,
+                "stored_bytes": 4665,
+                "disk_reads": 1345,
+                "planning_and_decoding_p95_us": 170.63824999999997
+              },
+              "hash_3": {
+                "source_files": 38,
+                "stored_bytes": 4663,
+                "disk_reads": 1479,
+                "planning_and_decoding_p95_us": 170.64194999999992
+              },
+              "hash_4": {
+                "source_files": 32,
+                "stored_bytes": 4666,
+                "disk_reads": 1366,
+                "planning_and_decoding_p95_us": 163.77679999999995
+              },
+              "hash_5": {
+                "source_files": 45,
+                "stored_bytes": 4663,
+                "disk_reads": 1323,
+                "planning_and_decoding_p95_us": 159.7639
+              }
+            },
+            "9360": {
+              "author_prior": {
+                "source_files": 69,
+                "stored_bytes": 9356,
+                "disk_reads": 43,
+                "planning_and_decoding_p95_us": 65.86644999999996
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 106,
+                "stored_bytes": 9323,
+                "disk_reads": 570,
+                "planning_and_decoding_p95_us": 110.01709999999997
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 72,
+                "stored_bytes": 9351,
+                "disk_reads": 13,
+                "planning_and_decoding_p95_us": 43.74715
+              },
+              "hash_0": {
+                "source_files": 77,
+                "stored_bytes": 9342,
+                "disk_reads": 1054,
+                "planning_and_decoding_p95_us": 139.45354999999998
+              },
+              "hash_1": {
+                "source_files": 76,
+                "stored_bytes": 9350,
+                "disk_reads": 889,
+                "planning_and_decoding_p95_us": 124.80704999999999
+              },
+              "hash_2": {
+                "source_files": 75,
+                "stored_bytes": 9354,
+                "disk_reads": 924,
+                "planning_and_decoding_p95_us": 137.45324999999997
+              },
+              "hash_3": {
+                "source_files": 80,
+                "stored_bytes": 9346,
+                "disk_reads": 918,
+                "planning_and_decoding_p95_us": 115.38824999999997
+              },
+              "hash_4": {
+                "source_files": 74,
+                "stored_bytes": 9342,
+                "disk_reads": 911,
+                "planning_and_decoding_p95_us": 127.14689999999999
+              },
+              "hash_5": {
+                "source_files": 85,
+                "stored_bytes": 9348,
+                "disk_reads": 806,
+                "planning_and_decoding_p95_us": 118.11119999999998
+              }
+            }
+          },
+          "criterion_prior": {
+            "1872": {
+              "author_prior": {
+                "source_files": 16,
+                "stored_bytes": 1866,
+                "disk_reads": 1377,
+                "planning_and_decoding_p95_us": 167.8108
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 15,
+                "stored_bytes": 1857,
+                "disk_reads": 1318,
+                "planning_and_decoding_p95_us": 161.42629999999988
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 17,
+                "stored_bytes": 1855,
+                "disk_reads": 955,
+                "planning_and_decoding_p95_us": 134.77149999999997
+              },
+              "hash_0": {
+                "source_files": 17,
+                "stored_bytes": 1866,
+                "disk_reads": 1574,
+                "planning_and_decoding_p95_us": 197.5618
+              },
+              "hash_1": {
+                "source_files": 15,
+                "stored_bytes": 1861,
+                "disk_reads": 1541,
+                "planning_and_decoding_p95_us": 191.32179999999997
+              },
+              "hash_2": {
+                "source_files": 14,
+                "stored_bytes": 1862,
+                "disk_reads": 1517,
+                "planning_and_decoding_p95_us": 187.19819999999996
+              },
+              "hash_3": {
+                "source_files": 17,
+                "stored_bytes": 1860,
+                "disk_reads": 1442,
+                "planning_and_decoding_p95_us": 180.58114999999995
+              },
+              "hash_4": {
+                "source_files": 13,
+                "stored_bytes": 1855,
+                "disk_reads": 1670,
+                "planning_and_decoding_p95_us": 197.13929999999996
+              },
+              "hash_5": {
+                "source_files": 18,
+                "stored_bytes": 1861,
+                "disk_reads": 1501,
+                "planning_and_decoding_p95_us": 177.72324999999992
+              },
+              "refit_read_frequency_per_byte": {
+                "source_files": 21,
+                "stored_bytes": 1856,
+                "disk_reads": 773,
+                "planning_and_decoding_p95_us": 124.25024999999997
+              }
+            },
+            "4680": {
+              "author_prior": {
+                "source_files": 35,
+                "stored_bytes": 4672,
+                "disk_reads": 924,
+                "planning_and_decoding_p95_us": 121.73864999999999
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 61,
+                "stored_bytes": 4634,
+                "disk_reads": 952,
+                "planning_and_decoding_p95_us": 132.91639999999998
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 34,
+                "stored_bytes": 4675,
+                "disk_reads": 475,
+                "planning_and_decoding_p95_us": 73.35945
+              },
+              "hash_0": {
+                "source_files": 40,
+                "stored_bytes": 4671,
+                "disk_reads": 1309,
+                "planning_and_decoding_p95_us": 165.68909999999994
+              },
+              "hash_1": {
+                "source_files": 38,
+                "stored_bytes": 4669,
+                "disk_reads": 1233,
+                "planning_and_decoding_p95_us": 161.0823
+              },
+              "hash_2": {
+                "source_files": 36,
+                "stored_bytes": 4665,
+                "disk_reads": 1316,
+                "planning_and_decoding_p95_us": 164.46854999999996
+              },
+              "hash_3": {
+                "source_files": 38,
+                "stored_bytes": 4663,
+                "disk_reads": 1293,
+                "planning_and_decoding_p95_us": 168.78005
+              },
+              "hash_4": {
+                "source_files": 32,
+                "stored_bytes": 4666,
+                "disk_reads": 1441,
+                "planning_and_decoding_p95_us": 175.4959499999999
+              },
+              "hash_5": {
+                "source_files": 45,
+                "stored_bytes": 4663,
+                "disk_reads": 1442,
+                "planning_and_decoding_p95_us": 166.99355
+              },
+              "refit_read_frequency_per_byte": {
+                "source_files": 41,
+                "stored_bytes": 4670,
+                "disk_reads": 195,
+                "planning_and_decoding_p95_us": 59.64439999999996
+              }
+            },
+            "9360": {
+              "author_prior": {
+                "source_files": 69,
+                "stored_bytes": 9356,
+                "disk_reads": 285,
+                "planning_and_decoding_p95_us": 53.796749999999996
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 106,
+                "stored_bytes": 9323,
+                "disk_reads": 461,
+                "planning_and_decoding_p95_us": 96.04429999999999
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 72,
+                "stored_bytes": 9351,
+                "disk_reads": 186,
+                "planning_and_decoding_p95_us": 42.648399999999995
+              },
+              "hash_0": {
+                "source_files": 77,
+                "stored_bytes": 9342,
+                "disk_reads": 895,
+                "planning_and_decoding_p95_us": 134.58805
+              },
+              "hash_1": {
+                "source_files": 76,
+                "stored_bytes": 9350,
+                "disk_reads": 736,
+                "planning_and_decoding_p95_us": 111.036
+              },
+              "hash_2": {
+                "source_files": 75,
+                "stored_bytes": 9354,
+                "disk_reads": 889,
+                "planning_and_decoding_p95_us": 129.7243
+              },
+              "hash_3": {
+                "source_files": 80,
+                "stored_bytes": 9346,
+                "disk_reads": 791,
+                "planning_and_decoding_p95_us": 114.83794999999996
+              },
+              "hash_4": {
+                "source_files": 74,
+                "stored_bytes": 9342,
+                "disk_reads": 878,
+                "planning_and_decoding_p95_us": 132.52044999999993
+              },
+              "hash_5": {
+                "source_files": 85,
+                "stored_bytes": 9348,
+                "disk_reads": 866,
+                "planning_and_decoding_p95_us": 118.87564999999996
+              },
+              "refit_read_frequency_per_byte": {
+                "source_files": 73,
+                "stored_bytes": 9353,
+                "disk_reads": 14,
+                "planning_and_decoding_p95_us": 29.869649999999993
+              }
+            }
+          }
+        },
+        "4": {
+          "calibration_queries": 286,
+          "held_queries": 78,
+          "shifted_ranking_changed": 62,
+          "zero_cache_files_opened": 2015,
+          "shifted_zero_cache_files_opened": 1985,
+          "fixed_prior": {
+            "1872": {
+              "author_prior": {
+                "source_files": 16,
+                "stored_bytes": 1866,
+                "disk_reads": 1556,
+                "planning_and_decoding_p95_us": 198.83424999999997
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 15,
+                "stored_bytes": 1857,
+                "disk_reads": 1453,
+                "planning_and_decoding_p95_us": 194.2116499999999
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 16,
+                "stored_bytes": 1871,
+                "disk_reads": 1094,
+                "planning_and_decoding_p95_us": 168.0872
+              },
+              "hash_0": {
+                "source_files": 17,
+                "stored_bytes": 1866,
+                "disk_reads": 1908,
+                "planning_and_decoding_p95_us": 223.3969
+              },
+              "hash_1": {
+                "source_files": 15,
+                "stored_bytes": 1861,
+                "disk_reads": 1770,
+                "planning_and_decoding_p95_us": 210.98534999999998
+              },
+              "hash_2": {
+                "source_files": 14,
+                "stored_bytes": 1862,
+                "disk_reads": 1801,
+                "planning_and_decoding_p95_us": 220.63145
+              },
+              "hash_3": {
+                "source_files": 17,
+                "stored_bytes": 1860,
+                "disk_reads": 1887,
+                "planning_and_decoding_p95_us": 213.78879999999998
+              },
+              "hash_4": {
+                "source_files": 13,
+                "stored_bytes": 1855,
+                "disk_reads": 1853,
+                "planning_and_decoding_p95_us": 211.6376999999999
+              },
+              "hash_5": {
+                "source_files": 18,
+                "stored_bytes": 1861,
+                "disk_reads": 1678,
+                "planning_and_decoding_p95_us": 197.88469999999998
+              }
+            },
+            "4680": {
+              "author_prior": {
+                "source_files": 35,
+                "stored_bytes": 4672,
+                "disk_reads": 1004,
+                "planning_and_decoding_p95_us": 161.6036
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 61,
+                "stored_bytes": 4634,
+                "disk_reads": 1197,
+                "planning_and_decoding_p95_us": 173.23069999999998
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 35,
+                "stored_bytes": 4677,
+                "disk_reads": 356,
+                "planning_and_decoding_p95_us": 108.28289999999998
+              },
+              "hash_0": {
+                "source_files": 40,
+                "stored_bytes": 4671,
+                "disk_reads": 1577,
+                "planning_and_decoding_p95_us": 187.29414999999995
+              },
+              "hash_1": {
+                "source_files": 38,
+                "stored_bytes": 4669,
+                "disk_reads": 1487,
+                "planning_and_decoding_p95_us": 180.48805
+              },
+              "hash_2": {
+                "source_files": 36,
+                "stored_bytes": 4665,
+                "disk_reads": 1628,
+                "planning_and_decoding_p95_us": 207.7995
+              },
+              "hash_3": {
+                "source_files": 38,
+                "stored_bytes": 4663,
+                "disk_reads": 1659,
+                "planning_and_decoding_p95_us": 191.6452
+              },
+              "hash_4": {
+                "source_files": 32,
+                "stored_bytes": 4666,
+                "disk_reads": 1595,
+                "planning_and_decoding_p95_us": 190.44764999999992
+              },
+              "hash_5": {
+                "source_files": 45,
+                "stored_bytes": 4663,
+                "disk_reads": 1538,
+                "planning_and_decoding_p95_us": 178.881
+              }
+            },
+            "9360": {
+              "author_prior": {
+                "source_files": 69,
+                "stored_bytes": 9356,
+                "disk_reads": 179,
+                "planning_and_decoding_p95_us": 83.70729999999998
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 106,
+                "stored_bytes": 9323,
+                "disk_reads": 854,
+                "planning_and_decoding_p95_us": 127.66674999999996
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 72,
+                "stored_bytes": 9348,
+                "disk_reads": 22,
+                "planning_and_decoding_p95_us": 47.805249999999965
+              },
+              "hash_0": {
+                "source_files": 77,
+                "stored_bytes": 9342,
+                "disk_reads": 1228,
+                "planning_and_decoding_p95_us": 161.79364999999999
+              },
+              "hash_1": {
+                "source_files": 76,
+                "stored_bytes": 9350,
+                "disk_reads": 990,
+                "planning_and_decoding_p95_us": 140.59754999999998
+              },
+              "hash_2": {
+                "source_files": 75,
+                "stored_bytes": 9354,
+                "disk_reads": 1198,
+                "planning_and_decoding_p95_us": 159.42694999999995
+              },
+              "hash_3": {
+                "source_files": 80,
+                "stored_bytes": 9346,
+                "disk_reads": 998,
+                "planning_and_decoding_p95_us": 126.74594999999998
+              },
+              "hash_4": {
+                "source_files": 74,
+                "stored_bytes": 9342,
+                "disk_reads": 1114,
+                "planning_and_decoding_p95_us": 149.92854999999992
+              },
+              "hash_5": {
+                "source_files": 85,
+                "stored_bytes": 9348,
+                "disk_reads": 1024,
+                "planning_and_decoding_p95_us": 139.5272999999999
+              }
+            }
+          },
+          "criterion_prior": {
+            "1872": {
+              "author_prior": {
+                "source_files": 16,
+                "stored_bytes": 1866,
+                "disk_reads": 1560,
+                "planning_and_decoding_p95_us": 175.1879999999998
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 15,
+                "stored_bytes": 1857,
+                "disk_reads": 1472,
+                "planning_and_decoding_p95_us": 170.8212999999998
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 16,
+                "stored_bytes": 1871,
+                "disk_reads": 1142,
+                "planning_and_decoding_p95_us": 141.70014999999987
+              },
+              "hash_0": {
+                "source_files": 17,
+                "stored_bytes": 1866,
+                "disk_reads": 1868,
+                "planning_and_decoding_p95_us": 201.48564999999994
+              },
+              "hash_1": {
+                "source_files": 15,
+                "stored_bytes": 1861,
+                "disk_reads": 1705,
+                "planning_and_decoding_p95_us": 192.54844999999995
+              },
+              "hash_2": {
+                "source_files": 14,
+                "stored_bytes": 1862,
+                "disk_reads": 1767,
+                "planning_and_decoding_p95_us": 193.23409999999996
+              },
+              "hash_3": {
+                "source_files": 17,
+                "stored_bytes": 1860,
+                "disk_reads": 1657,
+                "planning_and_decoding_p95_us": 188.18269999999993
+              },
+              "hash_4": {
+                "source_files": 13,
+                "stored_bytes": 1855,
+                "disk_reads": 1881,
+                "planning_and_decoding_p95_us": 196.79144999999997
+              },
+              "hash_5": {
+                "source_files": 18,
+                "stored_bytes": 1861,
+                "disk_reads": 1695,
+                "planning_and_decoding_p95_us": 184.93389999999997
+              },
+              "refit_read_frequency_per_byte": {
+                "source_files": 19,
+                "stored_bytes": 1856,
+                "disk_reads": 1017,
+                "planning_and_decoding_p95_us": 143.20929999999984
+              }
+            },
+            "4680": {
+              "author_prior": {
+                "source_files": 35,
+                "stored_bytes": 4672,
+                "disk_reads": 1096,
+                "planning_and_decoding_p95_us": 145.41204999999988
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 61,
+                "stored_bytes": 4634,
+                "disk_reads": 1133,
+                "planning_and_decoding_p95_us": 146.53064999999995
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 35,
+                "stored_bytes": 4677,
+                "disk_reads": 440,
+                "planning_and_decoding_p95_us": 86.5479499999999
+              },
+              "hash_0": {
+                "source_files": 40,
+                "stored_bytes": 4671,
+                "disk_reads": 1527,
+                "planning_and_decoding_p95_us": 170.17794999999995
+              },
+              "hash_1": {
+                "source_files": 38,
+                "stored_bytes": 4669,
+                "disk_reads": 1400,
+                "planning_and_decoding_p95_us": 167.70694999999995
+              },
+              "hash_2": {
+                "source_files": 36,
+                "stored_bytes": 4665,
+                "disk_reads": 1557,
+                "planning_and_decoding_p95_us": 178.12674999999996
+              },
+              "hash_3": {
+                "source_files": 38,
+                "stored_bytes": 4663,
+                "disk_reads": 1452,
+                "planning_and_decoding_p95_us": 168.0161999999999
+              },
+              "hash_4": {
+                "source_files": 32,
+                "stored_bytes": 4666,
+                "disk_reads": 1626,
+                "planning_and_decoding_p95_us": 173.60364999999996
+              },
+              "hash_5": {
+                "source_files": 45,
+                "stored_bytes": 4663,
+                "disk_reads": 1597,
+                "planning_and_decoding_p95_us": 175.27065
+              },
+              "refit_read_frequency_per_byte": {
+                "source_files": 40,
+                "stored_bytes": 4668,
+                "disk_reads": 368,
+                "planning_and_decoding_p95_us": 88.99954999999991
+              }
+            },
+            "9360": {
+              "author_prior": {
+                "source_files": 69,
+                "stored_bytes": 9356,
+                "disk_reads": 306,
+                "planning_and_decoding_p95_us": 74.03715
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 106,
+                "stored_bytes": 9323,
+                "disk_reads": 707,
+                "planning_and_decoding_p95_us": 109.87444999999998
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 72,
+                "stored_bytes": 9348,
+                "disk_reads": 107,
+                "planning_and_decoding_p95_us": 42.012799999999984
+              },
+              "hash_0": {
+                "source_files": 77,
+                "stored_bytes": 9342,
+                "disk_reads": 1143,
+                "planning_and_decoding_p95_us": 138.28924999999995
+              },
+              "hash_1": {
+                "source_files": 76,
+                "stored_bytes": 9350,
+                "disk_reads": 920,
+                "planning_and_decoding_p95_us": 128.40075
+              },
+              "hash_2": {
+                "source_files": 75,
+                "stored_bytes": 9354,
+                "disk_reads": 1151,
+                "planning_and_decoding_p95_us": 138.90694999999997
+              },
+              "hash_3": {
+                "source_files": 80,
+                "stored_bytes": 9346,
+                "disk_reads": 868,
+                "planning_and_decoding_p95_us": 114.41349999999994
+              },
+              "hash_4": {
+                "source_files": 74,
+                "stored_bytes": 9342,
+                "disk_reads": 1071,
+                "planning_and_decoding_p95_us": 138.00605
+              },
+              "hash_5": {
+                "source_files": 85,
+                "stored_bytes": 9348,
+                "disk_reads": 1050,
+                "planning_and_decoding_p95_us": 129.22214999999997
+              },
+              "refit_read_frequency_per_byte": {
+                "source_files": 73,
+                "stored_bytes": 9356,
+                "disk_reads": 14,
+                "planning_and_decoding_p95_us": 34.91599999999998
+              }
+            }
+          }
+        },
+        "8": {
+          "calibration_queries": 286,
+          "held_queries": 78,
+          "shifted_ranking_changed": 41,
+          "zero_cache_files_opened": 1758,
+          "shifted_zero_cache_files_opened": 2269,
+          "fixed_prior": {
+            "1872": {
+              "author_prior": {
+                "source_files": 16,
+                "stored_bytes": 1866,
+                "disk_reads": 1309,
+                "planning_and_decoding_p95_us": 202.6455999999999
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 15,
+                "stored_bytes": 1857,
+                "disk_reads": 1269,
+                "planning_and_decoding_p95_us": 200.01309999999984
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 17,
+                "stored_bytes": 1853,
+                "disk_reads": 851,
+                "planning_and_decoding_p95_us": 156.27244999999982
+              },
+              "hash_0": {
+                "source_files": 17,
+                "stored_bytes": 1866,
+                "disk_reads": 1691,
+                "planning_and_decoding_p95_us": 230.39204999999984
+              },
+              "hash_1": {
+                "source_files": 15,
+                "stored_bytes": 1861,
+                "disk_reads": 1580,
+                "planning_and_decoding_p95_us": 214.06049999999988
+              },
+              "hash_2": {
+                "source_files": 14,
+                "stored_bytes": 1862,
+                "disk_reads": 1583,
+                "planning_and_decoding_p95_us": 216.81079999999986
+              },
+              "hash_3": {
+                "source_files": 17,
+                "stored_bytes": 1860,
+                "disk_reads": 1655,
+                "planning_and_decoding_p95_us": 225.00949999999997
+              },
+              "hash_4": {
+                "source_files": 13,
+                "stored_bytes": 1855,
+                "disk_reads": 1658,
+                "planning_and_decoding_p95_us": 228.67529999999982
+              },
+              "hash_5": {
+                "source_files": 18,
+                "stored_bytes": 1861,
+                "disk_reads": 1470,
+                "planning_and_decoding_p95_us": 200.5121999999998
+              }
+            },
+            "4680": {
+              "author_prior": {
+                "source_files": 35,
+                "stored_bytes": 4672,
+                "disk_reads": 717,
+                "planning_and_decoding_p95_us": 158.94484999999986
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 61,
+                "stored_bytes": 4634,
+                "disk_reads": 951,
+                "planning_and_decoding_p95_us": 180.00344999999996
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 36,
+                "stored_bytes": 4676,
+                "disk_reads": 290,
+                "planning_and_decoding_p95_us": 102.04624999999987
+              },
+              "hash_0": {
+                "source_files": 40,
+                "stored_bytes": 4671,
+                "disk_reads": 1420,
+                "planning_and_decoding_p95_us": 198.33254999999986
+              },
+              "hash_1": {
+                "source_files": 38,
+                "stored_bytes": 4669,
+                "disk_reads": 1262,
+                "planning_and_decoding_p95_us": 182.66514999999987
+              },
+              "hash_2": {
+                "source_files": 36,
+                "stored_bytes": 4665,
+                "disk_reads": 1382,
+                "planning_and_decoding_p95_us": 199.23909999999984
+              },
+              "hash_3": {
+                "source_files": 38,
+                "stored_bytes": 4663,
+                "disk_reads": 1468,
+                "planning_and_decoding_p95_us": 205.23629999999994
+              },
+              "hash_4": {
+                "source_files": 32,
+                "stored_bytes": 4666,
+                "disk_reads": 1410,
+                "planning_and_decoding_p95_us": 207.23999999999987
+              },
+              "hash_5": {
+                "source_files": 45,
+                "stored_bytes": 4663,
+                "disk_reads": 1323,
+                "planning_and_decoding_p95_us": 181.38914999999994
+              }
+            },
+            "9360": {
+              "author_prior": {
+                "source_files": 69,
+                "stored_bytes": 9356,
+                "disk_reads": 93,
+                "planning_and_decoding_p95_us": 81.05714999999996
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 106,
+                "stored_bytes": 9323,
+                "disk_reads": 649,
+                "planning_and_decoding_p95_us": 127.6749
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 74,
+                "stored_bytes": 9354,
+                "disk_reads": 20,
+                "planning_and_decoding_p95_us": 53.313399999999994
+              },
+              "hash_0": {
+                "source_files": 77,
+                "stored_bytes": 9342,
+                "disk_reads": 1058,
+                "planning_and_decoding_p95_us": 166.55989999999983
+              },
+              "hash_1": {
+                "source_files": 76,
+                "stored_bytes": 9350,
+                "disk_reads": 809,
+                "planning_and_decoding_p95_us": 142.90689999999992
+              },
+              "hash_2": {
+                "source_files": 75,
+                "stored_bytes": 9354,
+                "disk_reads": 956,
+                "planning_and_decoding_p95_us": 156.90254999999996
+              },
+              "hash_3": {
+                "source_files": 80,
+                "stored_bytes": 9346,
+                "disk_reads": 911,
+                "planning_and_decoding_p95_us": 145.07594999999998
+              },
+              "hash_4": {
+                "source_files": 74,
+                "stored_bytes": 9342,
+                "disk_reads": 969,
+                "planning_and_decoding_p95_us": 153.59214999999986
+              },
+              "hash_5": {
+                "source_files": 85,
+                "stored_bytes": 9348,
+                "disk_reads": 894,
+                "planning_and_decoding_p95_us": 150.81789999999998
+              }
+            }
+          },
+          "criterion_prior": {
+            "1872": {
+              "author_prior": {
+                "source_files": 16,
+                "stored_bytes": 1866,
+                "disk_reads": 1778,
+                "planning_and_decoding_p95_us": 215.09024999999988
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 15,
+                "stored_bytes": 1857,
+                "disk_reads": 1745,
+                "planning_and_decoding_p95_us": 214.16359999999997
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 17,
+                "stored_bytes": 1853,
+                "disk_reads": 1225,
+                "planning_and_decoding_p95_us": 174.32975
+              },
+              "hash_0": {
+                "source_files": 17,
+                "stored_bytes": 1866,
+                "disk_reads": 2088,
+                "planning_and_decoding_p95_us": 234.96104999999994
+              },
+              "hash_1": {
+                "source_files": 15,
+                "stored_bytes": 1861,
+                "disk_reads": 1995,
+                "planning_and_decoding_p95_us": 224.9312999999999
+              },
+              "hash_2": {
+                "source_files": 14,
+                "stored_bytes": 1862,
+                "disk_reads": 2014,
+                "planning_and_decoding_p95_us": 221.93659999999994
+              },
+              "hash_3": {
+                "source_files": 17,
+                "stored_bytes": 1860,
+                "disk_reads": 1913,
+                "planning_and_decoding_p95_us": 224.95544999999998
+              },
+              "hash_4": {
+                "source_files": 13,
+                "stored_bytes": 1855,
+                "disk_reads": 2177,
+                "planning_and_decoding_p95_us": 237.80904999999996
+              },
+              "hash_5": {
+                "source_files": 18,
+                "stored_bytes": 1861,
+                "disk_reads": 1899,
+                "planning_and_decoding_p95_us": 215.45809999999997
+              },
+              "refit_read_frequency_per_byte": {
+                "source_files": 20,
+                "stored_bytes": 1856,
+                "disk_reads": 1143,
+                "planning_and_decoding_p95_us": 173.06799999999987
+              }
+            },
+            "4680": {
+              "author_prior": {
+                "source_files": 35,
+                "stored_bytes": 4672,
+                "disk_reads": 1192,
+                "planning_and_decoding_p95_us": 168.46614999999986
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 61,
+                "stored_bytes": 4634,
+                "disk_reads": 1297,
+                "planning_and_decoding_p95_us": 177.62829999999994
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 36,
+                "stored_bytes": 4676,
+                "disk_reads": 577,
+                "planning_and_decoding_p95_us": 109.88109999999992
+              },
+              "hash_0": {
+                "source_files": 40,
+                "stored_bytes": 4671,
+                "disk_reads": 1734,
+                "planning_and_decoding_p95_us": 198.03879999999987
+              },
+              "hash_1": {
+                "source_files": 38,
+                "stored_bytes": 4669,
+                "disk_reads": 1616,
+                "planning_and_decoding_p95_us": 191.64959999999996
+              },
+              "hash_2": {
+                "source_files": 36,
+                "stored_bytes": 4665,
+                "disk_reads": 1745,
+                "planning_and_decoding_p95_us": 199.48624999999998
+              },
+              "hash_3": {
+                "source_files": 38,
+                "stored_bytes": 4663,
+                "disk_reads": 1720,
+                "planning_and_decoding_p95_us": 206.06184999999996
+              },
+              "hash_4": {
+                "source_files": 32,
+                "stored_bytes": 4666,
+                "disk_reads": 1897,
+                "planning_and_decoding_p95_us": 212.61644999999987
+              },
+              "hash_5": {
+                "source_files": 45,
+                "stored_bytes": 4663,
+                "disk_reads": 1768,
+                "planning_and_decoding_p95_us": 195.18625
+              },
+              "refit_read_frequency_per_byte": {
+                "source_files": 39,
+                "stored_bytes": 4679,
+                "disk_reads": 395,
+                "planning_and_decoding_p95_us": 108.02814999999998
+              }
+            },
+            "9360": {
+              "author_prior": {
+                "source_files": 69,
+                "stored_bytes": 9356,
+                "disk_reads": 367,
+                "planning_and_decoding_p95_us": 79.2357
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 106,
+                "stored_bytes": 9323,
+                "disk_reads": 716,
+                "planning_and_decoding_p95_us": 118.30724999999995
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 74,
+                "stored_bytes": 9354,
+                "disk_reads": 105,
+                "planning_and_decoding_p95_us": 45.61234999999999
+              },
+              "hash_0": {
+                "source_files": 77,
+                "stored_bytes": 9342,
+                "disk_reads": 1287,
+                "planning_and_decoding_p95_us": 160.01459999999997
+              },
+              "hash_1": {
+                "source_files": 76,
+                "stored_bytes": 9350,
+                "disk_reads": 970,
+                "planning_and_decoding_p95_us": 137.90304999999998
+              },
+              "hash_2": {
+                "source_files": 75,
+                "stored_bytes": 9354,
+                "disk_reads": 1186,
+                "planning_and_decoding_p95_us": 149.96129999999997
+              },
+              "hash_3": {
+                "source_files": 80,
+                "stored_bytes": 9346,
+                "disk_reads": 1033,
+                "planning_and_decoding_p95_us": 140.55509999999998
+              },
+              "hash_4": {
+                "source_files": 74,
+                "stored_bytes": 9342,
+                "disk_reads": 1284,
+                "planning_and_decoding_p95_us": 158.2164999999999
+              },
+              "hash_5": {
+                "source_files": 85,
+                "stored_bytes": 9348,
+                "disk_reads": 1171,
+                "planning_and_decoding_p95_us": 149.7965
+              },
+              "refit_read_frequency_per_byte": {
+                "source_files": 75,
+                "stored_bytes": 9360,
+                "disk_reads": 41,
+                "planning_and_decoding_p95_us": 41.152999999999956
+              }
+            }
+          }
+        },
+        "12": {
+          "calibration_queries": 286,
+          "held_queries": 78,
+          "shifted_ranking_changed": 71,
+          "zero_cache_files_opened": 1617,
+          "shifted_zero_cache_files_opened": 1638,
+          "fixed_prior": {
+            "1872": {
+              "author_prior": {
+                "source_files": 16,
+                "stored_bytes": 1866,
+                "disk_reads": 1089,
+                "planning_and_decoding_p95_us": 184.97224999999992
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 15,
+                "stored_bytes": 1854,
+                "disk_reads": 956,
+                "planning_and_decoding_p95_us": 176.39764999999994
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 17,
+                "stored_bytes": 1855,
+                "disk_reads": 807,
+                "planning_and_decoding_p95_us": 149.1287499999999
+              },
+              "hash_0": {
+                "source_files": 17,
+                "stored_bytes": 1866,
+                "disk_reads": 1499,
+                "planning_and_decoding_p95_us": 201.83194999999998
+              },
+              "hash_1": {
+                "source_files": 15,
+                "stored_bytes": 1861,
+                "disk_reads": 1460,
+                "planning_and_decoding_p95_us": 193.43824999999995
+              },
+              "hash_2": {
+                "source_files": 14,
+                "stored_bytes": 1862,
+                "disk_reads": 1408,
+                "planning_and_decoding_p95_us": 192.4166999999999
+              },
+              "hash_3": {
+                "source_files": 17,
+                "stored_bytes": 1860,
+                "disk_reads": 1581,
+                "planning_and_decoding_p95_us": 207.22179999999994
+              },
+              "hash_4": {
+                "source_files": 13,
+                "stored_bytes": 1855,
+                "disk_reads": 1498,
+                "planning_and_decoding_p95_us": 203.84154999999998
+              },
+              "hash_5": {
+                "source_files": 18,
+                "stored_bytes": 1861,
+                "disk_reads": 1335,
+                "planning_and_decoding_p95_us": 189.81535
+              }
+            },
+            "4680": {
+              "author_prior": {
+                "source_files": 35,
+                "stored_bytes": 4672,
+                "disk_reads": 463,
+                "planning_and_decoding_p95_us": 147.06435000000002
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 61,
+                "stored_bytes": 4634,
+                "disk_reads": 697,
+                "planning_and_decoding_p95_us": 152.2943499999999
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 34,
+                "stored_bytes": 4676,
+                "disk_reads": 226,
+                "planning_and_decoding_p95_us": 83.43359999999993
+              },
+              "hash_0": {
+                "source_files": 40,
+                "stored_bytes": 4671,
+                "disk_reads": 1309,
+                "planning_and_decoding_p95_us": 175.7901999999999
+              },
+              "hash_1": {
+                "source_files": 38,
+                "stored_bytes": 4669,
+                "disk_reads": 1207,
+                "planning_and_decoding_p95_us": 167.7458999999999
+              },
+              "hash_2": {
+                "source_files": 36,
+                "stored_bytes": 4665,
+                "disk_reads": 1269,
+                "planning_and_decoding_p95_us": 176.1639999999999
+              },
+              "hash_3": {
+                "source_files": 38,
+                "stored_bytes": 4663,
+                "disk_reads": 1366,
+                "planning_and_decoding_p95_us": 194.7766
+              },
+              "hash_4": {
+                "source_files": 32,
+                "stored_bytes": 4666,
+                "disk_reads": 1295,
+                "planning_and_decoding_p95_us": 184.4528
+              },
+              "hash_5": {
+                "source_files": 45,
+                "stored_bytes": 4663,
+                "disk_reads": 1225,
+                "planning_and_decoding_p95_us": 173.31175
+              }
+            },
+            "9360": {
+              "author_prior": {
+                "source_files": 69,
+                "stored_bytes": 9356,
+                "disk_reads": 38,
+                "planning_and_decoding_p95_us": 67.64285
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 106,
+                "stored_bytes": 9323,
+                "disk_reads": 475,
+                "planning_and_decoding_p95_us": 119.4463
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 72,
+                "stored_bytes": 9349,
+                "disk_reads": 4,
+                "planning_and_decoding_p95_us": 45.27665
+              },
+              "hash_0": {
+                "source_files": 77,
+                "stored_bytes": 9342,
+                "disk_reads": 949,
+                "planning_and_decoding_p95_us": 148.7306
+              },
+              "hash_1": {
+                "source_files": 76,
+                "stored_bytes": 9350,
+                "disk_reads": 795,
+                "planning_and_decoding_p95_us": 136.86569999999998
+              },
+              "hash_2": {
+                "source_files": 75,
+                "stored_bytes": 9354,
+                "disk_reads": 851,
+                "planning_and_decoding_p95_us": 142.8425499999999
+              },
+              "hash_3": {
+                "source_files": 80,
+                "stored_bytes": 9346,
+                "disk_reads": 844,
+                "planning_and_decoding_p95_us": 130.08804999999992
+              },
+              "hash_4": {
+                "source_files": 74,
+                "stored_bytes": 9342,
+                "disk_reads": 879,
+                "planning_and_decoding_p95_us": 139.6521
+              },
+              "hash_5": {
+                "source_files": 85,
+                "stored_bytes": 9348,
+                "disk_reads": 750,
+                "planning_and_decoding_p95_us": 131.29675
+              }
+            }
+          },
+          "criterion_prior": {
+            "1872": {
+              "author_prior": {
+                "source_files": 16,
+                "stored_bytes": 1866,
+                "disk_reads": 1285,
+                "planning_and_decoding_p95_us": 164.57199999999997
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 15,
+                "stored_bytes": 1854,
+                "disk_reads": 1200,
+                "planning_and_decoding_p95_us": 151.3482
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 17,
+                "stored_bytes": 1855,
+                "disk_reads": 910,
+                "planning_and_decoding_p95_us": 133.19524999999996
+              },
+              "hash_0": {
+                "source_files": 17,
+                "stored_bytes": 1866,
+                "disk_reads": 1439,
+                "planning_and_decoding_p95_us": 178.36315
+              },
+              "hash_1": {
+                "source_files": 15,
+                "stored_bytes": 1861,
+                "disk_reads": 1425,
+                "planning_and_decoding_p95_us": 179.74914999999996
+              },
+              "hash_2": {
+                "source_files": 14,
+                "stored_bytes": 1862,
+                "disk_reads": 1409,
+                "planning_and_decoding_p95_us": 176.60949999999997
+              },
+              "hash_3": {
+                "source_files": 17,
+                "stored_bytes": 1860,
+                "disk_reads": 1376,
+                "planning_and_decoding_p95_us": 181.21879999999993
+              },
+              "hash_4": {
+                "source_files": 13,
+                "stored_bytes": 1855,
+                "disk_reads": 1580,
+                "planning_and_decoding_p95_us": 193.0134
+              },
+              "hash_5": {
+                "source_files": 18,
+                "stored_bytes": 1861,
+                "disk_reads": 1406,
+                "planning_and_decoding_p95_us": 175.26434999999995
+              },
+              "refit_read_frequency_per_byte": {
+                "source_files": 21,
+                "stored_bytes": 1856,
+                "disk_reads": 707,
+                "planning_and_decoding_p95_us": 123.55549999999992
+              }
+            },
+            "4680": {
+              "author_prior": {
+                "source_files": 35,
+                "stored_bytes": 4672,
+                "disk_reads": 897,
+                "planning_and_decoding_p95_us": 122.90619999999988
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 61,
+                "stored_bytes": 4634,
+                "disk_reads": 871,
+                "planning_and_decoding_p95_us": 129.60649999999995
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 34,
+                "stored_bytes": 4676,
+                "disk_reads": 450,
+                "planning_and_decoding_p95_us": 75.45924999999997
+              },
+              "hash_0": {
+                "source_files": 40,
+                "stored_bytes": 4671,
+                "disk_reads": 1212,
+                "planning_and_decoding_p95_us": 156.8464499999999
+              },
+              "hash_1": {
+                "source_files": 38,
+                "stored_bytes": 4669,
+                "disk_reads": 1157,
+                "planning_and_decoding_p95_us": 161.2747
+              },
+              "hash_2": {
+                "source_files": 36,
+                "stored_bytes": 4665,
+                "disk_reads": 1253,
+                "planning_and_decoding_p95_us": 162.3601
+              },
+              "hash_3": {
+                "source_files": 38,
+                "stored_bytes": 4663,
+                "disk_reads": 1228,
+                "planning_and_decoding_p95_us": 170.11309999999997
+              },
+              "hash_4": {
+                "source_files": 32,
+                "stored_bytes": 4666,
+                "disk_reads": 1391,
+                "planning_and_decoding_p95_us": 174.31269999999992
+              },
+              "hash_5": {
+                "source_files": 45,
+                "stored_bytes": 4663,
+                "disk_reads": 1356,
+                "planning_and_decoding_p95_us": 166.40859999999995
+              },
+              "refit_read_frequency_per_byte": {
+                "source_files": 38,
+                "stored_bytes": 4661,
+                "disk_reads": 162,
+                "planning_and_decoding_p95_us": 69.1849
+              }
+            },
+            "9360": {
+              "author_prior": {
+                "source_files": 69,
+                "stored_bytes": 9356,
+                "disk_reads": 304,
+                "planning_and_decoding_p95_us": 55.32045
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 106,
+                "stored_bytes": 9323,
+                "disk_reads": 365,
+                "planning_and_decoding_p95_us": 90.8435999999999
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 72,
+                "stored_bytes": 9349,
+                "disk_reads": 183,
+                "planning_and_decoding_p95_us": 42.48515
+              },
+              "hash_0": {
+                "source_files": 77,
+                "stored_bytes": 9342,
+                "disk_reads": 807,
+                "planning_and_decoding_p95_us": 130.58184999999997
+              },
+              "hash_1": {
+                "source_files": 76,
+                "stored_bytes": 9350,
+                "disk_reads": 677,
+                "planning_and_decoding_p95_us": 111.56524999999996
+              },
+              "hash_2": {
+                "source_files": 75,
+                "stored_bytes": 9354,
+                "disk_reads": 823,
+                "planning_and_decoding_p95_us": 131.48325
+              },
+              "hash_3": {
+                "source_files": 80,
+                "stored_bytes": 9346,
+                "disk_reads": 733,
+                "planning_and_decoding_p95_us": 115.95345
+              },
+              "hash_4": {
+                "source_files": 74,
+                "stored_bytes": 9342,
+                "disk_reads": 842,
+                "planning_and_decoding_p95_us": 131.55575
+              },
+              "hash_5": {
+                "source_files": 85,
+                "stored_bytes": 9348,
+                "disk_reads": 824,
+                "planning_and_decoding_p95_us": 119.73594999999992
+              },
+              "refit_read_frequency_per_byte": {
+                "source_files": 73,
+                "stored_bytes": 9357,
+                "disk_reads": 3,
+                "planning_and_decoding_p95_us": 26.958699999999993
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "fixture_sha256": "74168d853ad21c795269c904fb7f8081cdf5a3e91ce7385ef8683495fd2ca7d5",
+      "script_sha256": "93f65c466e64cac2cf41ea8ef673761cb4d97f7ea4819d369e984c4e198f16f2",
+      "source_measure_sha256": "3ce5ca4e03196f28e9a3d3bd71719aec10064a390757891a911e612bd8b9e1f1",
+      "roles": 14,
+      "sources": 152,
+      "owner_count": 580,
+      "bytes": 18721,
+      "budgets": {
+        "10": 1872,
+        "25": 4680,
+        "50": 9360
+      },
+      "folds": {
+        "0": {
+          "calibration_queries": 286,
+          "held_queries": 78,
+          "shifted_ranking_changed": 71,
+          "zero_cache_files_opened": 1747,
+          "shifted_zero_cache_files_opened": 1745,
+          "fixed_prior": {
+            "1872": {
+              "author_prior": {
+                "source_files": 16,
+                "stored_bytes": 1866,
+                "disk_reads": 1241,
+                "planning_and_decoding_p95_us": 172.38994999999997
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 15,
+                "stored_bytes": 1857,
+                "disk_reads": 1131,
+                "planning_and_decoding_p95_us": 161.62104999999997
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 17,
+                "stored_bytes": 1855,
+                "disk_reads": 855,
+                "planning_and_decoding_p95_us": 133.90124999999998
+              },
+              "hash_0": {
+                "source_files": 17,
+                "stored_bytes": 1866,
+                "disk_reads": 1656,
+                "planning_and_decoding_p95_us": 189.929
+              },
+              "hash_1": {
+                "source_files": 15,
+                "stored_bytes": 1861,
+                "disk_reads": 1596,
+                "planning_and_decoding_p95_us": 177.75874999999996
+              },
+              "hash_2": {
+                "source_files": 14,
+                "stored_bytes": 1862,
+                "disk_reads": 1536,
+                "planning_and_decoding_p95_us": 180.96804999999995
+              },
+              "hash_3": {
+                "source_files": 17,
+                "stored_bytes": 1860,
+                "disk_reads": 1673,
+                "planning_and_decoding_p95_us": 183.7301999999999
+              },
+              "hash_4": {
+                "source_files": 13,
+                "stored_bytes": 1855,
+                "disk_reads": 1599,
+                "planning_and_decoding_p95_us": 184.74005
+              },
+              "hash_5": {
+                "source_files": 18,
+                "stored_bytes": 1861,
+                "disk_reads": 1452,
+                "planning_and_decoding_p95_us": 171.52715
+              }
+            },
+            "4680": {
+              "author_prior": {
+                "source_files": 35,
+                "stored_bytes": 4672,
+                "disk_reads": 547,
+                "planning_and_decoding_p95_us": 135.13894999999994
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 61,
+                "stored_bytes": 4634,
+                "disk_reads": 821,
+                "planning_and_decoding_p95_us": 139.97834999999995
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 34,
+                "stored_bytes": 4675,
+                "disk_reads": 243,
+                "planning_and_decoding_p95_us": 77.53644999999999
+              },
+              "hash_0": {
+                "source_files": 40,
+                "stored_bytes": 4671,
+                "disk_reads": 1435,
+                "planning_and_decoding_p95_us": 164.67455
+              },
+              "hash_1": {
+                "source_files": 38,
+                "stored_bytes": 4669,
+                "disk_reads": 1298,
+                "planning_and_decoding_p95_us": 157.0394
+              },
+              "hash_2": {
+                "source_files": 36,
+                "stored_bytes": 4665,
+                "disk_reads": 1345,
+                "planning_and_decoding_p95_us": 168.72614999999996
+              },
+              "hash_3": {
+                "source_files": 38,
+                "stored_bytes": 4663,
+                "disk_reads": 1479,
+                "planning_and_decoding_p95_us": 176.26504999999997
+              },
+              "hash_4": {
+                "source_files": 32,
+                "stored_bytes": 4666,
+                "disk_reads": 1366,
+                "planning_and_decoding_p95_us": 164.06864999999993
+              },
+              "hash_5": {
+                "source_files": 45,
+                "stored_bytes": 4663,
+                "disk_reads": 1323,
+                "planning_and_decoding_p95_us": 159.67849999999999
+              }
+            },
+            "9360": {
+              "author_prior": {
+                "source_files": 69,
+                "stored_bytes": 9356,
+                "disk_reads": 43,
+                "planning_and_decoding_p95_us": 66.99804999999999
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 106,
+                "stored_bytes": 9323,
+                "disk_reads": 570,
+                "planning_and_decoding_p95_us": 110.57059999999998
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 72,
+                "stored_bytes": 9351,
+                "disk_reads": 13,
+                "planning_and_decoding_p95_us": 43.85805
+              },
+              "hash_0": {
+                "source_files": 77,
+                "stored_bytes": 9342,
+                "disk_reads": 1054,
+                "planning_and_decoding_p95_us": 139.48119999999994
+              },
+              "hash_1": {
+                "source_files": 76,
+                "stored_bytes": 9350,
+                "disk_reads": 889,
+                "planning_and_decoding_p95_us": 124.62964999999998
+              },
+              "hash_2": {
+                "source_files": 75,
+                "stored_bytes": 9354,
+                "disk_reads": 924,
+                "planning_and_decoding_p95_us": 140.50815
+              },
+              "hash_3": {
+                "source_files": 80,
+                "stored_bytes": 9346,
+                "disk_reads": 918,
+                "planning_and_decoding_p95_us": 115.96644999999998
+              },
+              "hash_4": {
+                "source_files": 74,
+                "stored_bytes": 9342,
+                "disk_reads": 911,
+                "planning_and_decoding_p95_us": 128.2601
+              },
+              "hash_5": {
+                "source_files": 85,
+                "stored_bytes": 9348,
+                "disk_reads": 806,
+                "planning_and_decoding_p95_us": 119.70195
+              }
+            }
+          },
+          "criterion_prior": {
+            "1872": {
+              "author_prior": {
+                "source_files": 16,
+                "stored_bytes": 1866,
+                "disk_reads": 1377,
+                "planning_and_decoding_p95_us": 167.487
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 15,
+                "stored_bytes": 1857,
+                "disk_reads": 1318,
+                "planning_and_decoding_p95_us": 163.14454999999992
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 17,
+                "stored_bytes": 1855,
+                "disk_reads": 955,
+                "planning_and_decoding_p95_us": 134.40029999999996
+              },
+              "hash_0": {
+                "source_files": 17,
+                "stored_bytes": 1866,
+                "disk_reads": 1574,
+                "planning_and_decoding_p95_us": 197.7048
+              },
+              "hash_1": {
+                "source_files": 15,
+                "stored_bytes": 1861,
+                "disk_reads": 1541,
+                "planning_and_decoding_p95_us": 194.41724999999997
+              },
+              "hash_2": {
+                "source_files": 14,
+                "stored_bytes": 1862,
+                "disk_reads": 1517,
+                "planning_and_decoding_p95_us": 187.23559999999995
+              },
+              "hash_3": {
+                "source_files": 17,
+                "stored_bytes": 1860,
+                "disk_reads": 1442,
+                "planning_and_decoding_p95_us": 180.38449999999997
+              },
+              "hash_4": {
+                "source_files": 13,
+                "stored_bytes": 1855,
+                "disk_reads": 1670,
+                "planning_and_decoding_p95_us": 201.68595
+              },
+              "hash_5": {
+                "source_files": 18,
+                "stored_bytes": 1861,
+                "disk_reads": 1501,
+                "planning_and_decoding_p95_us": 178.56329999999994
+              },
+              "refit_read_frequency_per_byte": {
+                "source_files": 21,
+                "stored_bytes": 1856,
+                "disk_reads": 773,
+                "planning_and_decoding_p95_us": 126.25634999999998
+              }
+            },
+            "4680": {
+              "author_prior": {
+                "source_files": 35,
+                "stored_bytes": 4672,
+                "disk_reads": 924,
+                "planning_and_decoding_p95_us": 122.75794999999998
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 61,
+                "stored_bytes": 4634,
+                "disk_reads": 952,
+                "planning_and_decoding_p95_us": 136.10104999999996
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 34,
+                "stored_bytes": 4675,
+                "disk_reads": 475,
+                "planning_and_decoding_p95_us": 75.56755
+              },
+              "hash_0": {
+                "source_files": 40,
+                "stored_bytes": 4671,
+                "disk_reads": 1309,
+                "planning_and_decoding_p95_us": 170.47779999999997
+              },
+              "hash_1": {
+                "source_files": 38,
+                "stored_bytes": 4669,
+                "disk_reads": 1233,
+                "planning_and_decoding_p95_us": 164.60575
+              },
+              "hash_2": {
+                "source_files": 36,
+                "stored_bytes": 4665,
+                "disk_reads": 1316,
+                "planning_and_decoding_p95_us": 163.64444999999995
+              },
+              "hash_3": {
+                "source_files": 38,
+                "stored_bytes": 4663,
+                "disk_reads": 1293,
+                "planning_and_decoding_p95_us": 172.02935
+              },
+              "hash_4": {
+                "source_files": 32,
+                "stored_bytes": 4666,
+                "disk_reads": 1441,
+                "planning_and_decoding_p95_us": 177.1571499999999
+              },
+              "hash_5": {
+                "source_files": 45,
+                "stored_bytes": 4663,
+                "disk_reads": 1442,
+                "planning_and_decoding_p95_us": 168.09955
+              },
+              "refit_read_frequency_per_byte": {
+                "source_files": 41,
+                "stored_bytes": 4670,
+                "disk_reads": 195,
+                "planning_and_decoding_p95_us": 59.18004999999995
+              }
+            },
+            "9360": {
+              "author_prior": {
+                "source_files": 69,
+                "stored_bytes": 9356,
+                "disk_reads": 285,
+                "planning_and_decoding_p95_us": 55.074099999999994
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 106,
+                "stored_bytes": 9323,
+                "disk_reads": 461,
+                "planning_and_decoding_p95_us": 96.64104999999999
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 72,
+                "stored_bytes": 9351,
+                "disk_reads": 186,
+                "planning_and_decoding_p95_us": 43.453799999999994
+              },
+              "hash_0": {
+                "source_files": 77,
+                "stored_bytes": 9342,
+                "disk_reads": 895,
+                "planning_and_decoding_p95_us": 134.35254999999998
+              },
+              "hash_1": {
+                "source_files": 76,
+                "stored_bytes": 9350,
+                "disk_reads": 736,
+                "planning_and_decoding_p95_us": 111.6119
+              },
+              "hash_2": {
+                "source_files": 75,
+                "stored_bytes": 9354,
+                "disk_reads": 889,
+                "planning_and_decoding_p95_us": 130.19039999999998
+              },
+              "hash_3": {
+                "source_files": 80,
+                "stored_bytes": 9346,
+                "disk_reads": 791,
+                "planning_and_decoding_p95_us": 115.61684999999999
+              },
+              "hash_4": {
+                "source_files": 74,
+                "stored_bytes": 9342,
+                "disk_reads": 878,
+                "planning_and_decoding_p95_us": 134.70349999999993
+              },
+              "hash_5": {
+                "source_files": 85,
+                "stored_bytes": 9348,
+                "disk_reads": 866,
+                "planning_and_decoding_p95_us": 119.72789999999998
+              },
+              "refit_read_frequency_per_byte": {
+                "source_files": 73,
+                "stored_bytes": 9353,
+                "disk_reads": 14,
+                "planning_and_decoding_p95_us": 29.422399999999996
+              }
+            }
+          }
+        },
+        "4": {
+          "calibration_queries": 286,
+          "held_queries": 78,
+          "shifted_ranking_changed": 62,
+          "zero_cache_files_opened": 2015,
+          "shifted_zero_cache_files_opened": 1985,
+          "fixed_prior": {
+            "1872": {
+              "author_prior": {
+                "source_files": 16,
+                "stored_bytes": 1866,
+                "disk_reads": 1556,
+                "planning_and_decoding_p95_us": 202.4598
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 15,
+                "stored_bytes": 1857,
+                "disk_reads": 1453,
+                "planning_and_decoding_p95_us": 195.46704999999994
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 16,
+                "stored_bytes": 1871,
+                "disk_reads": 1094,
+                "planning_and_decoding_p95_us": 167.77569999999997
+              },
+              "hash_0": {
+                "source_files": 17,
+                "stored_bytes": 1866,
+                "disk_reads": 1908,
+                "planning_and_decoding_p95_us": 224.19564999999997
+              },
+              "hash_1": {
+                "source_files": 15,
+                "stored_bytes": 1861,
+                "disk_reads": 1770,
+                "planning_and_decoding_p95_us": 211.82994999999997
+              },
+              "hash_2": {
+                "source_files": 14,
+                "stored_bytes": 1862,
+                "disk_reads": 1801,
+                "planning_and_decoding_p95_us": 221.45065
+              },
+              "hash_3": {
+                "source_files": 17,
+                "stored_bytes": 1860,
+                "disk_reads": 1887,
+                "planning_and_decoding_p95_us": 214.27644999999998
+              },
+              "hash_4": {
+                "source_files": 13,
+                "stored_bytes": 1855,
+                "disk_reads": 1853,
+                "planning_and_decoding_p95_us": 213.74194999999992
+              },
+              "hash_5": {
+                "source_files": 18,
+                "stored_bytes": 1861,
+                "disk_reads": 1678,
+                "planning_and_decoding_p95_us": 197.29534999999996
+              }
+            },
+            "4680": {
+              "author_prior": {
+                "source_files": 35,
+                "stored_bytes": 4672,
+                "disk_reads": 1004,
+                "planning_and_decoding_p95_us": 161.9026
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 61,
+                "stored_bytes": 4634,
+                "disk_reads": 1197,
+                "planning_and_decoding_p95_us": 175.41119999999998
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 35,
+                "stored_bytes": 4677,
+                "disk_reads": 356,
+                "planning_and_decoding_p95_us": 109.12149999999998
+              },
+              "hash_0": {
+                "source_files": 40,
+                "stored_bytes": 4671,
+                "disk_reads": 1577,
+                "planning_and_decoding_p95_us": 189.92395
+              },
+              "hash_1": {
+                "source_files": 38,
+                "stored_bytes": 4669,
+                "disk_reads": 1487,
+                "planning_and_decoding_p95_us": 183.10235
+              },
+              "hash_2": {
+                "source_files": 36,
+                "stored_bytes": 4665,
+                "disk_reads": 1628,
+                "planning_and_decoding_p95_us": 206.76614999999998
+              },
+              "hash_3": {
+                "source_files": 38,
+                "stored_bytes": 4663,
+                "disk_reads": 1659,
+                "planning_and_decoding_p95_us": 191.41054999999994
+              },
+              "hash_4": {
+                "source_files": 32,
+                "stored_bytes": 4666,
+                "disk_reads": 1595,
+                "planning_and_decoding_p95_us": 192.95129999999997
+              },
+              "hash_5": {
+                "source_files": 45,
+                "stored_bytes": 4663,
+                "disk_reads": 1538,
+                "planning_and_decoding_p95_us": 178.34344999999996
+              }
+            },
+            "9360": {
+              "author_prior": {
+                "source_files": 69,
+                "stored_bytes": 9356,
+                "disk_reads": 179,
+                "planning_and_decoding_p95_us": 82.73359999999998
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 106,
+                "stored_bytes": 9323,
+                "disk_reads": 854,
+                "planning_and_decoding_p95_us": 126.34689999999996
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 72,
+                "stored_bytes": 9348,
+                "disk_reads": 22,
+                "planning_and_decoding_p95_us": 48.51499999999996
+              },
+              "hash_0": {
+                "source_files": 77,
+                "stored_bytes": 9342,
+                "disk_reads": 1228,
+                "planning_and_decoding_p95_us": 159.27154999999996
+              },
+              "hash_1": {
+                "source_files": 76,
+                "stored_bytes": 9350,
+                "disk_reads": 990,
+                "planning_and_decoding_p95_us": 141.22135
+              },
+              "hash_2": {
+                "source_files": 75,
+                "stored_bytes": 9354,
+                "disk_reads": 1198,
+                "planning_and_decoding_p95_us": 158.80389999999994
+              },
+              "hash_3": {
+                "source_files": 80,
+                "stored_bytes": 9346,
+                "disk_reads": 998,
+                "planning_and_decoding_p95_us": 127.25979999999998
+              },
+              "hash_4": {
+                "source_files": 74,
+                "stored_bytes": 9342,
+                "disk_reads": 1114,
+                "planning_and_decoding_p95_us": 149.49599999999992
+              },
+              "hash_5": {
+                "source_files": 85,
+                "stored_bytes": 9348,
+                "disk_reads": 1024,
+                "planning_and_decoding_p95_us": 140.32154999999995
+              }
+            }
+          },
+          "criterion_prior": {
+            "1872": {
+              "author_prior": {
+                "source_files": 16,
+                "stored_bytes": 1866,
+                "disk_reads": 1560,
+                "planning_and_decoding_p95_us": 176.81364999999983
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 15,
+                "stored_bytes": 1857,
+                "disk_reads": 1472,
+                "planning_and_decoding_p95_us": 170.7410499999998
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 16,
+                "stored_bytes": 1871,
+                "disk_reads": 1142,
+                "planning_and_decoding_p95_us": 144.70219999999986
+              },
+              "hash_0": {
+                "source_files": 17,
+                "stored_bytes": 1866,
+                "disk_reads": 1868,
+                "planning_and_decoding_p95_us": 201.55139999999994
+              },
+              "hash_1": {
+                "source_files": 15,
+                "stored_bytes": 1861,
+                "disk_reads": 1705,
+                "planning_and_decoding_p95_us": 191.62319999999994
+              },
+              "hash_2": {
+                "source_files": 14,
+                "stored_bytes": 1862,
+                "disk_reads": 1767,
+                "planning_and_decoding_p95_us": 194.34729999999996
+              },
+              "hash_3": {
+                "source_files": 17,
+                "stored_bytes": 1860,
+                "disk_reads": 1657,
+                "planning_and_decoding_p95_us": 187.8454999999999
+              },
+              "hash_4": {
+                "source_files": 13,
+                "stored_bytes": 1855,
+                "disk_reads": 1881,
+                "planning_and_decoding_p95_us": 200.3968
+              },
+              "hash_5": {
+                "source_files": 18,
+                "stored_bytes": 1861,
+                "disk_reads": 1695,
+                "planning_and_decoding_p95_us": 185.8419499999999
+              },
+              "refit_read_frequency_per_byte": {
+                "source_files": 19,
+                "stored_bytes": 1856,
+                "disk_reads": 1017,
+                "planning_and_decoding_p95_us": 143.0225499999998
+              }
+            },
+            "4680": {
+              "author_prior": {
+                "source_files": 35,
+                "stored_bytes": 4672,
+                "disk_reads": 1096,
+                "planning_and_decoding_p95_us": 146.29479999999984
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 61,
+                "stored_bytes": 4634,
+                "disk_reads": 1133,
+                "planning_and_decoding_p95_us": 146.48289999999997
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 35,
+                "stored_bytes": 4677,
+                "disk_reads": 440,
+                "planning_and_decoding_p95_us": 88.43239999999989
+              },
+              "hash_0": {
+                "source_files": 40,
+                "stored_bytes": 4671,
+                "disk_reads": 1527,
+                "planning_and_decoding_p95_us": 169.44034999999994
+              },
+              "hash_1": {
+                "source_files": 38,
+                "stored_bytes": 4669,
+                "disk_reads": 1400,
+                "planning_and_decoding_p95_us": 167.48069999999993
+              },
+              "hash_2": {
+                "source_files": 36,
+                "stored_bytes": 4665,
+                "disk_reads": 1557,
+                "planning_and_decoding_p95_us": 178.08019999999993
+              },
+              "hash_3": {
+                "source_files": 38,
+                "stored_bytes": 4663,
+                "disk_reads": 1452,
+                "planning_and_decoding_p95_us": 169.4565499999999
+              },
+              "hash_4": {
+                "source_files": 32,
+                "stored_bytes": 4666,
+                "disk_reads": 1626,
+                "planning_and_decoding_p95_us": 173.57579999999996
+              },
+              "hash_5": {
+                "source_files": 45,
+                "stored_bytes": 4663,
+                "disk_reads": 1597,
+                "planning_and_decoding_p95_us": 176.72645
+              },
+              "refit_read_frequency_per_byte": {
+                "source_files": 40,
+                "stored_bytes": 4668,
+                "disk_reads": 368,
+                "planning_and_decoding_p95_us": 88.7286999999999
+              }
+            },
+            "9360": {
+              "author_prior": {
+                "source_files": 69,
+                "stored_bytes": 9356,
+                "disk_reads": 306,
+                "planning_and_decoding_p95_us": 75.34559999999999
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 106,
+                "stored_bytes": 9323,
+                "disk_reads": 707,
+                "planning_and_decoding_p95_us": 110.00824999999999
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 72,
+                "stored_bytes": 9348,
+                "disk_reads": 107,
+                "planning_and_decoding_p95_us": 41.61364999999998
+              },
+              "hash_0": {
+                "source_files": 77,
+                "stored_bytes": 9342,
+                "disk_reads": 1143,
+                "planning_and_decoding_p95_us": 138.18924999999993
+              },
+              "hash_1": {
+                "source_files": 76,
+                "stored_bytes": 9350,
+                "disk_reads": 920,
+                "planning_and_decoding_p95_us": 128.15159999999997
+              },
+              "hash_2": {
+                "source_files": 75,
+                "stored_bytes": 9354,
+                "disk_reads": 1151,
+                "planning_and_decoding_p95_us": 141.05214999999998
+              },
+              "hash_3": {
+                "source_files": 80,
+                "stored_bytes": 9346,
+                "disk_reads": 868,
+                "planning_and_decoding_p95_us": 115.59639999999996
+              },
+              "hash_4": {
+                "source_files": 74,
+                "stored_bytes": 9342,
+                "disk_reads": 1071,
+                "planning_and_decoding_p95_us": 138.00365
+              },
+              "hash_5": {
+                "source_files": 85,
+                "stored_bytes": 9348,
+                "disk_reads": 1050,
+                "planning_and_decoding_p95_us": 128.20264999999998
+              },
+              "refit_read_frequency_per_byte": {
+                "source_files": 73,
+                "stored_bytes": 9356,
+                "disk_reads": 14,
+                "planning_and_decoding_p95_us": 34.72614999999999
+              }
+            }
+          }
+        },
+        "8": {
+          "calibration_queries": 286,
+          "held_queries": 78,
+          "shifted_ranking_changed": 41,
+          "zero_cache_files_opened": 1758,
+          "shifted_zero_cache_files_opened": 2269,
+          "fixed_prior": {
+            "1872": {
+              "author_prior": {
+                "source_files": 16,
+                "stored_bytes": 1866,
+                "disk_reads": 1309,
+                "planning_and_decoding_p95_us": 202.05029999999988
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 15,
+                "stored_bytes": 1857,
+                "disk_reads": 1269,
+                "planning_and_decoding_p95_us": 198.82439999999983
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 17,
+                "stored_bytes": 1853,
+                "disk_reads": 851,
+                "planning_and_decoding_p95_us": 158.07884999999985
+              },
+              "hash_0": {
+                "source_files": 17,
+                "stored_bytes": 1866,
+                "disk_reads": 1691,
+                "planning_and_decoding_p95_us": 229.53904999999983
+              },
+              "hash_1": {
+                "source_files": 15,
+                "stored_bytes": 1861,
+                "disk_reads": 1580,
+                "planning_and_decoding_p95_us": 216.79604999999987
+              },
+              "hash_2": {
+                "source_files": 14,
+                "stored_bytes": 1862,
+                "disk_reads": 1583,
+                "planning_and_decoding_p95_us": 214.91339999999983
+              },
+              "hash_3": {
+                "source_files": 17,
+                "stored_bytes": 1860,
+                "disk_reads": 1655,
+                "planning_and_decoding_p95_us": 223.59299999999993
+              },
+              "hash_4": {
+                "source_files": 13,
+                "stored_bytes": 1855,
+                "disk_reads": 1658,
+                "planning_and_decoding_p95_us": 229.59399999999982
+              },
+              "hash_5": {
+                "source_files": 18,
+                "stored_bytes": 1861,
+                "disk_reads": 1470,
+                "planning_and_decoding_p95_us": 200.0075499999998
+              }
+            },
+            "4680": {
+              "author_prior": {
+                "source_files": 35,
+                "stored_bytes": 4672,
+                "disk_reads": 717,
+                "planning_and_decoding_p95_us": 159.1564499999999
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 61,
+                "stored_bytes": 4634,
+                "disk_reads": 951,
+                "planning_and_decoding_p95_us": 178.85079999999996
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 36,
+                "stored_bytes": 4676,
+                "disk_reads": 290,
+                "planning_and_decoding_p95_us": 99.50369999999988
+              },
+              "hash_0": {
+                "source_files": 40,
+                "stored_bytes": 4671,
+                "disk_reads": 1420,
+                "planning_and_decoding_p95_us": 196.82989999999984
+              },
+              "hash_1": {
+                "source_files": 38,
+                "stored_bytes": 4669,
+                "disk_reads": 1262,
+                "planning_and_decoding_p95_us": 183.5844499999999
+              },
+              "hash_2": {
+                "source_files": 36,
+                "stored_bytes": 4665,
+                "disk_reads": 1382,
+                "planning_and_decoding_p95_us": 196.72919999999985
+              },
+              "hash_3": {
+                "source_files": 38,
+                "stored_bytes": 4663,
+                "disk_reads": 1468,
+                "planning_and_decoding_p95_us": 205.94159999999997
+              },
+              "hash_4": {
+                "source_files": 32,
+                "stored_bytes": 4666,
+                "disk_reads": 1410,
+                "planning_and_decoding_p95_us": 202.99829999999986
+              },
+              "hash_5": {
+                "source_files": 45,
+                "stored_bytes": 4663,
+                "disk_reads": 1323,
+                "planning_and_decoding_p95_us": 179.7697499999999
+              }
+            },
+            "9360": {
+              "author_prior": {
+                "source_files": 69,
+                "stored_bytes": 9356,
+                "disk_reads": 93,
+                "planning_and_decoding_p95_us": 78.40904999999994
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 106,
+                "stored_bytes": 9323,
+                "disk_reads": 649,
+                "planning_and_decoding_p95_us": 127.73414999999997
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 74,
+                "stored_bytes": 9354,
+                "disk_reads": 20,
+                "planning_and_decoding_p95_us": 51.94875
+              },
+              "hash_0": {
+                "source_files": 77,
+                "stored_bytes": 9342,
+                "disk_reads": 1058,
+                "planning_and_decoding_p95_us": 167.82009999999988
+              },
+              "hash_1": {
+                "source_files": 76,
+                "stored_bytes": 9350,
+                "disk_reads": 809,
+                "planning_and_decoding_p95_us": 139.99859999999993
+              },
+              "hash_2": {
+                "source_files": 75,
+                "stored_bytes": 9354,
+                "disk_reads": 956,
+                "planning_and_decoding_p95_us": 155.4623
+              },
+              "hash_3": {
+                "source_files": 80,
+                "stored_bytes": 9346,
+                "disk_reads": 911,
+                "planning_and_decoding_p95_us": 144.88384999999997
+              },
+              "hash_4": {
+                "source_files": 74,
+                "stored_bytes": 9342,
+                "disk_reads": 969,
+                "planning_and_decoding_p95_us": 153.1241999999999
+              },
+              "hash_5": {
+                "source_files": 85,
+                "stored_bytes": 9348,
+                "disk_reads": 894,
+                "planning_and_decoding_p95_us": 146.06489999999997
+              }
+            }
+          },
+          "criterion_prior": {
+            "1872": {
+              "author_prior": {
+                "source_files": 16,
+                "stored_bytes": 1866,
+                "disk_reads": 1778,
+                "planning_and_decoding_p95_us": 216.20079999999993
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 15,
+                "stored_bytes": 1857,
+                "disk_reads": 1745,
+                "planning_and_decoding_p95_us": 211.63729999999993
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 17,
+                "stored_bytes": 1853,
+                "disk_reads": 1225,
+                "planning_and_decoding_p95_us": 174.12289999999996
+              },
+              "hash_0": {
+                "source_files": 17,
+                "stored_bytes": 1866,
+                "disk_reads": 2088,
+                "planning_and_decoding_p95_us": 234.57944999999995
+              },
+              "hash_1": {
+                "source_files": 15,
+                "stored_bytes": 1861,
+                "disk_reads": 1995,
+                "planning_and_decoding_p95_us": 225.58729999999994
+              },
+              "hash_2": {
+                "source_files": 14,
+                "stored_bytes": 1862,
+                "disk_reads": 2014,
+                "planning_and_decoding_p95_us": 222.22519999999997
+              },
+              "hash_3": {
+                "source_files": 17,
+                "stored_bytes": 1860,
+                "disk_reads": 1913,
+                "planning_and_decoding_p95_us": 224.57569999999998
+              },
+              "hash_4": {
+                "source_files": 13,
+                "stored_bytes": 1855,
+                "disk_reads": 2177,
+                "planning_and_decoding_p95_us": 238.31054999999998
+              },
+              "hash_5": {
+                "source_files": 18,
+                "stored_bytes": 1861,
+                "disk_reads": 1899,
+                "planning_and_decoding_p95_us": 219.07665
+              },
+              "refit_read_frequency_per_byte": {
+                "source_files": 20,
+                "stored_bytes": 1856,
+                "disk_reads": 1143,
+                "planning_and_decoding_p95_us": 173.7879499999999
+              }
+            },
+            "4680": {
+              "author_prior": {
+                "source_files": 35,
+                "stored_bytes": 4672,
+                "disk_reads": 1192,
+                "planning_and_decoding_p95_us": 169.3547999999998
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 61,
+                "stored_bytes": 4634,
+                "disk_reads": 1297,
+                "planning_and_decoding_p95_us": 177.8838499999999
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 36,
+                "stored_bytes": 4676,
+                "disk_reads": 577,
+                "planning_and_decoding_p95_us": 109.73829999999992
+              },
+              "hash_0": {
+                "source_files": 40,
+                "stored_bytes": 4671,
+                "disk_reads": 1734,
+                "planning_and_decoding_p95_us": 201.73639999999992
+              },
+              "hash_1": {
+                "source_files": 38,
+                "stored_bytes": 4669,
+                "disk_reads": 1616,
+                "planning_and_decoding_p95_us": 193.00495
+              },
+              "hash_2": {
+                "source_files": 36,
+                "stored_bytes": 4665,
+                "disk_reads": 1745,
+                "planning_and_decoding_p95_us": 198.87369999999999
+              },
+              "hash_3": {
+                "source_files": 38,
+                "stored_bytes": 4663,
+                "disk_reads": 1720,
+                "planning_and_decoding_p95_us": 208.29949999999997
+              },
+              "hash_4": {
+                "source_files": 32,
+                "stored_bytes": 4666,
+                "disk_reads": 1897,
+                "planning_and_decoding_p95_us": 214.66194999999993
+              },
+              "hash_5": {
+                "source_files": 45,
+                "stored_bytes": 4663,
+                "disk_reads": 1768,
+                "planning_and_decoding_p95_us": 193.40265000000002
+              },
+              "refit_read_frequency_per_byte": {
+                "source_files": 39,
+                "stored_bytes": 4679,
+                "disk_reads": 395,
+                "planning_and_decoding_p95_us": 106.91159999999999
+              }
+            },
+            "9360": {
+              "author_prior": {
+                "source_files": 69,
+                "stored_bytes": 9356,
+                "disk_reads": 367,
+                "planning_and_decoding_p95_us": 78.92214999999997
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 106,
+                "stored_bytes": 9323,
+                "disk_reads": 716,
+                "planning_and_decoding_p95_us": 116.24139999999996
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 74,
+                "stored_bytes": 9354,
+                "disk_reads": 105,
+                "planning_and_decoding_p95_us": 43.59015
+              },
+              "hash_0": {
+                "source_files": 77,
+                "stored_bytes": 9342,
+                "disk_reads": 1287,
+                "planning_and_decoding_p95_us": 159.06009999999998
+              },
+              "hash_1": {
+                "source_files": 76,
+                "stored_bytes": 9350,
+                "disk_reads": 970,
+                "planning_and_decoding_p95_us": 137.08935
+              },
+              "hash_2": {
+                "source_files": 75,
+                "stored_bytes": 9354,
+                "disk_reads": 1186,
+                "planning_and_decoding_p95_us": 150.02204999999998
+              },
+              "hash_3": {
+                "source_files": 80,
+                "stored_bytes": 9346,
+                "disk_reads": 1033,
+                "planning_and_decoding_p95_us": 141.84089999999998
+              },
+              "hash_4": {
+                "source_files": 74,
+                "stored_bytes": 9342,
+                "disk_reads": 1284,
+                "planning_and_decoding_p95_us": 157.56139999999988
+              },
+              "hash_5": {
+                "source_files": 85,
+                "stored_bytes": 9348,
+                "disk_reads": 1171,
+                "planning_and_decoding_p95_us": 148.12285
+              },
+              "refit_read_frequency_per_byte": {
+                "source_files": 75,
+                "stored_bytes": 9360,
+                "disk_reads": 41,
+                "planning_and_decoding_p95_us": 40.303949999999965
+              }
+            }
+          }
+        },
+        "12": {
+          "calibration_queries": 286,
+          "held_queries": 78,
+          "shifted_ranking_changed": 71,
+          "zero_cache_files_opened": 1617,
+          "shifted_zero_cache_files_opened": 1638,
+          "fixed_prior": {
+            "1872": {
+              "author_prior": {
+                "source_files": 16,
+                "stored_bytes": 1866,
+                "disk_reads": 1089,
+                "planning_and_decoding_p95_us": 184.54104999999993
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 15,
+                "stored_bytes": 1854,
+                "disk_reads": 956,
+                "planning_and_decoding_p95_us": 173.64639999999991
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 17,
+                "stored_bytes": 1855,
+                "disk_reads": 807,
+                "planning_and_decoding_p95_us": 147.81304999999992
+              },
+              "hash_0": {
+                "source_files": 17,
+                "stored_bytes": 1866,
+                "disk_reads": 1499,
+                "planning_and_decoding_p95_us": 204.77125
+              },
+              "hash_1": {
+                "source_files": 15,
+                "stored_bytes": 1861,
+                "disk_reads": 1460,
+                "planning_and_decoding_p95_us": 194.80545
+              },
+              "hash_2": {
+                "source_files": 14,
+                "stored_bytes": 1862,
+                "disk_reads": 1408,
+                "planning_and_decoding_p95_us": 192.72524999999996
+              },
+              "hash_3": {
+                "source_files": 17,
+                "stored_bytes": 1860,
+                "disk_reads": 1581,
+                "planning_and_decoding_p95_us": 208.63245
+              },
+              "hash_4": {
+                "source_files": 13,
+                "stored_bytes": 1855,
+                "disk_reads": 1498,
+                "planning_and_decoding_p95_us": 204.30114999999998
+              },
+              "hash_5": {
+                "source_files": 18,
+                "stored_bytes": 1861,
+                "disk_reads": 1335,
+                "planning_and_decoding_p95_us": 189.74709999999996
+              }
+            },
+            "4680": {
+              "author_prior": {
+                "source_files": 35,
+                "stored_bytes": 4672,
+                "disk_reads": 463,
+                "planning_and_decoding_p95_us": 146.28255000000001
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 61,
+                "stored_bytes": 4634,
+                "disk_reads": 697,
+                "planning_and_decoding_p95_us": 152.22944999999993
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 34,
+                "stored_bytes": 4676,
+                "disk_reads": 226,
+                "planning_and_decoding_p95_us": 82.83829999999993
+              },
+              "hash_0": {
+                "source_files": 40,
+                "stored_bytes": 4671,
+                "disk_reads": 1309,
+                "planning_and_decoding_p95_us": 174.91879999999992
+              },
+              "hash_1": {
+                "source_files": 38,
+                "stored_bytes": 4669,
+                "disk_reads": 1207,
+                "planning_and_decoding_p95_us": 167.87449999999993
+              },
+              "hash_2": {
+                "source_files": 36,
+                "stored_bytes": 4665,
+                "disk_reads": 1269,
+                "planning_and_decoding_p95_us": 174.58889999999994
+              },
+              "hash_3": {
+                "source_files": 38,
+                "stored_bytes": 4663,
+                "disk_reads": 1366,
+                "planning_and_decoding_p95_us": 192.94434999999996
+              },
+              "hash_4": {
+                "source_files": 32,
+                "stored_bytes": 4666,
+                "disk_reads": 1295,
+                "planning_and_decoding_p95_us": 181.20924999999994
+              },
+              "hash_5": {
+                "source_files": 45,
+                "stored_bytes": 4663,
+                "disk_reads": 1225,
+                "planning_and_decoding_p95_us": 172.11375
+              }
+            },
+            "9360": {
+              "author_prior": {
+                "source_files": 69,
+                "stored_bytes": 9356,
+                "disk_reads": 38,
+                "planning_and_decoding_p95_us": 67.22635
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 106,
+                "stored_bytes": 9323,
+                "disk_reads": 475,
+                "planning_and_decoding_p95_us": 116.10254999999998
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 72,
+                "stored_bytes": 9349,
+                "disk_reads": 4,
+                "planning_and_decoding_p95_us": 44.771499999999996
+              },
+              "hash_0": {
+                "source_files": 77,
+                "stored_bytes": 9342,
+                "disk_reads": 949,
+                "planning_and_decoding_p95_us": 146.44175
+              },
+              "hash_1": {
+                "source_files": 76,
+                "stored_bytes": 9350,
+                "disk_reads": 795,
+                "planning_and_decoding_p95_us": 137.4141
+              },
+              "hash_2": {
+                "source_files": 75,
+                "stored_bytes": 9354,
+                "disk_reads": 851,
+                "planning_and_decoding_p95_us": 139.71759999999992
+              },
+              "hash_3": {
+                "source_files": 80,
+                "stored_bytes": 9346,
+                "disk_reads": 844,
+                "planning_and_decoding_p95_us": 128.47454999999994
+              },
+              "hash_4": {
+                "source_files": 74,
+                "stored_bytes": 9342,
+                "disk_reads": 879,
+                "planning_and_decoding_p95_us": 138.73255
+              },
+              "hash_5": {
+                "source_files": 85,
+                "stored_bytes": 9348,
+                "disk_reads": 750,
+                "planning_and_decoding_p95_us": 129.21444999999997
+              }
+            }
+          },
+          "criterion_prior": {
+            "1872": {
+              "author_prior": {
+                "source_files": 16,
+                "stored_bytes": 1866,
+                "disk_reads": 1285,
+                "planning_and_decoding_p95_us": 165.62669999999997
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 15,
+                "stored_bytes": 1854,
+                "disk_reads": 1200,
+                "planning_and_decoding_p95_us": 153.19969999999995
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 17,
+                "stored_bytes": 1855,
+                "disk_reads": 910,
+                "planning_and_decoding_p95_us": 133.13899999999995
+              },
+              "hash_0": {
+                "source_files": 17,
+                "stored_bytes": 1866,
+                "disk_reads": 1439,
+                "planning_and_decoding_p95_us": 180.91825
+              },
+              "hash_1": {
+                "source_files": 15,
+                "stored_bytes": 1861,
+                "disk_reads": 1425,
+                "planning_and_decoding_p95_us": 180.72859999999997
+              },
+              "hash_2": {
+                "source_files": 14,
+                "stored_bytes": 1862,
+                "disk_reads": 1409,
+                "planning_and_decoding_p95_us": 177.91974999999996
+              },
+              "hash_3": {
+                "source_files": 17,
+                "stored_bytes": 1860,
+                "disk_reads": 1376,
+                "planning_and_decoding_p95_us": 181.7391499999999
+              },
+              "hash_4": {
+                "source_files": 13,
+                "stored_bytes": 1855,
+                "disk_reads": 1580,
+                "planning_and_decoding_p95_us": 192.319
+              },
+              "hash_5": {
+                "source_files": 18,
+                "stored_bytes": 1861,
+                "disk_reads": 1406,
+                "planning_and_decoding_p95_us": 173.0762999999999
+              },
+              "refit_read_frequency_per_byte": {
+                "source_files": 21,
+                "stored_bytes": 1856,
+                "disk_reads": 707,
+                "planning_and_decoding_p95_us": 121.50754999999988
+              }
+            },
+            "4680": {
+              "author_prior": {
+                "source_files": 35,
+                "stored_bytes": 4672,
+                "disk_reads": 897,
+                "planning_and_decoding_p95_us": 122.25814999999987
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 61,
+                "stored_bytes": 4634,
+                "disk_reads": 871,
+                "planning_and_decoding_p95_us": 132.92874999999998
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 34,
+                "stored_bytes": 4676,
+                "disk_reads": 450,
+                "planning_and_decoding_p95_us": 77.87614999999998
+              },
+              "hash_0": {
+                "source_files": 40,
+                "stored_bytes": 4671,
+                "disk_reads": 1212,
+                "planning_and_decoding_p95_us": 158.89844999999994
+              },
+              "hash_1": {
+                "source_files": 38,
+                "stored_bytes": 4669,
+                "disk_reads": 1157,
+                "planning_and_decoding_p95_us": 162.97824999999997
+              },
+              "hash_2": {
+                "source_files": 36,
+                "stored_bytes": 4665,
+                "disk_reads": 1253,
+                "planning_and_decoding_p95_us": 162.21359999999999
+              },
+              "hash_3": {
+                "source_files": 38,
+                "stored_bytes": 4663,
+                "disk_reads": 1228,
+                "planning_and_decoding_p95_us": 168.21749999999997
+              },
+              "hash_4": {
+                "source_files": 32,
+                "stored_bytes": 4666,
+                "disk_reads": 1391,
+                "planning_and_decoding_p95_us": 176.17694999999995
+              },
+              "hash_5": {
+                "source_files": 45,
+                "stored_bytes": 4663,
+                "disk_reads": 1356,
+                "planning_and_decoding_p95_us": 169.30174999999994
+              },
+              "refit_read_frequency_per_byte": {
+                "source_files": 38,
+                "stored_bytes": 4661,
+                "disk_reads": 162,
+                "planning_and_decoding_p95_us": 68.4258
+              }
+            },
+            "9360": {
+              "author_prior": {
+                "source_files": 69,
+                "stored_bytes": 9356,
+                "disk_reads": 304,
+                "planning_and_decoding_p95_us": 55.16864999999999
+              },
+              "optimistic_proof_per_byte": {
+                "source_files": 106,
+                "stored_bytes": 9323,
+                "disk_reads": 365,
+                "planning_and_decoding_p95_us": 94.63859999999994
+              },
+              "training_read_frequency_per_byte": {
+                "source_files": 72,
+                "stored_bytes": 9349,
+                "disk_reads": 183,
+                "planning_and_decoding_p95_us": 42.70044999999999
+              },
+              "hash_0": {
+                "source_files": 77,
+                "stored_bytes": 9342,
+                "disk_reads": 807,
+                "planning_and_decoding_p95_us": 131.65059999999997
+              },
+              "hash_1": {
+                "source_files": 76,
+                "stored_bytes": 9350,
+                "disk_reads": 677,
+                "planning_and_decoding_p95_us": 115.13414999999999
+              },
+              "hash_2": {
+                "source_files": 75,
+                "stored_bytes": 9354,
+                "disk_reads": 823,
+                "planning_and_decoding_p95_us": 131.12915
+              },
+              "hash_3": {
+                "source_files": 80,
+                "stored_bytes": 9346,
+                "disk_reads": 733,
+                "planning_and_decoding_p95_us": 118.8449
+              },
+              "hash_4": {
+                "source_files": 74,
+                "stored_bytes": 9342,
+                "disk_reads": 842,
+                "planning_and_decoding_p95_us": 133.15804999999997
+              },
+              "hash_5": {
+                "source_files": 85,
+                "stored_bytes": 9348,
+                "disk_reads": 824,
+                "planning_and_decoding_p95_us": 122.14379999999989
+              },
+              "refit_read_frequency_per_byte": {
+                "source_files": 73,
+                "stored_bytes": 9357,
+                "disk_reads": 3,
+                "planning_and_decoding_p95_us": 27.605999999999998
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}
