@@ -1,0 +1,264 @@
+{
+  "run": {
+    "job": "43837",
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "architecture": "x86_64",
+    "vnni": true,
+    "numpy": "2.5.5",
+    "script_sha256": "78eeda12c66fa06574baca6f8607ce2378e624e867657afd8a637ba200e0df8f",
+    "kernel_sha256": "610a6cf8b7deb968fd5b9d5e3e22406db9cf215914b12bad89e1314c775268eb",
+    "snapshot_sha256": "49621552e2c055d5b8057d297486c77b27010ac4c2354692455f029e5dde055b",
+    "compression_reference_sha256": "90b26b76eb16323e83927968c35731aaf30a566e8d196414176a948087004362",
+    "real_title_candidates": {
+      "masks": {
+        "50": {
+          "requests": 110,
+          "equal_fp32": 110,
+          "equal_numpy": 110
+        },
+        "100": {
+          "requests": 110,
+          "equal_fp32": 110,
+          "equal_numpy": 110
+        }
+      },
+      "selection": {
+        "fp32_sort": {
+          "mean_us": 28.887907551093534,
+          "p95_us": 33.06949511170387
+        },
+        "fp32_bounded": {
+          "mean_us": 31.0085459866307,
+          "p95_us": 40.469691157341
+        },
+        "numpy_int8_sort": {
+          "mean_us": 152.6801169595935,
+          "p95_us": 167.07796603441238
+        },
+        "native_scalar": {
+          "mean_us": 54.80713126334277,
+          "p95_us": 75.7389701902866
+        },
+        "native_vnni": {
+          "mean_us": 30.72088584303856,
+          "p95_us": 57.91326984763145
+        }
+      },
+      "payload_bytes": 332304
+    },
+    "synthetic_title_lookup": {
+      "322": {
+        "requests": 48,
+        "selection": {
+          "fp32_sort": {
+            "mean_us": 25.83252110828956,
+            "p95_us": 26.44481137394905
+          },
+          "fp32_bounded": {
+            "mean_us": 18.382173342009384,
+            "p95_us": 19.48317512869835
+          },
+          "numpy_int8_sort": {
+            "mean_us": 140.020662608246,
+            "p95_us": 144.63244006037712
+          },
+          "native_scalar": {
+            "mean_us": 46.00081592798233,
+            "p95_us": 47.57288843393326
+          },
+          "native_vnni": {
+            "mean_us": 19.817341429491837,
+            "p95_us": 22.685714066028595
+          }
+        },
+        "fp32_bytes": 1318912,
+        "native_bytes": 332304
+      },
+      "5152": {
+        "requests": 48,
+        "selection": {
+          "fp32_sort": {
+            "mean_us": 356.2472217405836,
+            "p95_us": 369.6206957101822
+          },
+          "fp32_bounded": {
+            "mean_us": 203.52599676698446,
+            "p95_us": 217.7438698709011
+          },
+          "numpy_int8_sort": {
+            "mean_us": 2131.665862786273,
+            "p95_us": 2149.726077914238
+          },
+          "native_scalar": {
+            "mean_us": 472.87228517234325,
+            "p95_us": 478.8246937096119
+          },
+          "native_vnni": {
+            "mean_us": 82.28595834225416,
+            "p95_us": 84.80297401547432
+          }
+        },
+        "fp32_bytes": 21102592,
+        "native_bytes": 5316864
+      },
+      "41216": {
+        "requests": 48,
+        "selection": {
+          "fp32_sort": {
+            "mean_us": 5405.326839536428,
+            "p95_us": 6238.646991550922
+          },
+          "fp32_bounded": {
+            "mean_us": 3903.8189376393952,
+            "p95_us": 5354.358162730932
+          },
+          "numpy_int8_sort": {
+            "mean_us": 24518.106947652996,
+            "p95_us": 25598.392728716135
+          },
+          "native_scalar": {
+            "mean_us": 3801.967871064941,
+            "p95_us": 3853.992372751236
+          },
+          "native_vnni": {
+            "mean_us": 987.1514824529489,
+            "p95_us": 1180.0959706306458
+          }
+        },
+        "fp32_bytes": 168820736,
+        "native_bytes": 42534912
+      }
+    }
+  },
+  "repeat": {
+    "job": "43839",
+    "gpu": "NVIDIA GeForce RTX 5090",
+    "architecture": "x86_64",
+    "vnni": true,
+    "numpy": "2.5.5",
+    "script_sha256": "78eeda12c66fa06574baca6f8607ce2378e624e867657afd8a637ba200e0df8f",
+    "kernel_sha256": "610a6cf8b7deb968fd5b9d5e3e22406db9cf215914b12bad89e1314c775268eb",
+    "snapshot_sha256": "49621552e2c055d5b8057d297486c77b27010ac4c2354692455f029e5dde055b",
+    "compression_reference_sha256": "90b26b76eb16323e83927968c35731aaf30a566e8d196414176a948087004362",
+    "real_title_candidates": {
+      "masks": {
+        "50": {
+          "requests": 110,
+          "equal_fp32": 110,
+          "equal_numpy": 110
+        },
+        "100": {
+          "requests": 110,
+          "equal_fp32": 110,
+          "equal_numpy": 110
+        }
+      },
+      "selection": {
+        "fp32_sort": {
+          "mean_us": 28.077462180094287,
+          "p95_us": 31.92983567714691
+        },
+        "fp32_bounded": {
+          "mean_us": 30.017246238209985,
+          "p95_us": 39.57999870181083
+        },
+        "numpy_int8_sort": {
+          "mean_us": 153.87205745686185,
+          "p95_us": 167.18804836273193
+        },
+        "native_scalar": {
+          "mean_us": 54.48789928447116,
+          "p95_us": 77.58522406220433
+        },
+        "native_vnni": {
+          "mean_us": 30.3238799626177,
+          "p95_us": 57.988427579402924
+        }
+      },
+      "payload_bytes": 332304
+    },
+    "synthetic_title_lookup": {
+      "322": {
+        "requests": 48,
+        "selection": {
+          "fp32_sort": {
+            "mean_us": 24.742097593843937,
+            "p95_us": 26.233773678541183
+          },
+          "fp32_bounded": {
+            "mean_us": 17.19535794109106,
+            "p95_us": 18.85257661342621
+          },
+          "numpy_int8_sort": {
+            "mean_us": 142.3620075608293,
+            "p95_us": 145.19412070512772
+          },
+          "native_scalar": {
+            "mean_us": 46.178970175484814,
+            "p95_us": 47.51542583107948
+          },
+          "native_vnni": {
+            "mean_us": 19.592582248151302,
+            "p95_us": 20.853616297245026
+          }
+        },
+        "fp32_bytes": 1318912,
+        "native_bytes": 332304
+      },
+      "5152": {
+        "requests": 48,
+        "selection": {
+          "fp32_sort": {
+            "mean_us": 341.68824398269254,
+            "p95_us": 351.15713253617287
+          },
+          "fp32_bounded": {
+            "mean_us": 190.1796010012428,
+            "p95_us": 194.65405493974686
+          },
+          "numpy_int8_sort": {
+            "mean_us": 2151.916657264034,
+            "p95_us": 2161.356806755066
+          },
+          "native_scalar": {
+            "mean_us": 474.5345019424955,
+            "p95_us": 477.23306342959404
+          },
+          "native_vnni": {
+            "mean_us": 79.12004366517067,
+            "p95_us": 78.7021592259407
+          }
+        },
+        "fp32_bytes": 21102592,
+        "native_bytes": 5316864
+      },
+      "41216": {
+        "requests": 48,
+        "selection": {
+          "fp32_sort": {
+            "mean_us": 5321.326005893449,
+            "p95_us": 6181.024108082056
+          },
+          "fp32_bounded": {
+            "mean_us": 3807.6617444554963,
+            "p95_us": 5224.698688834906
+          },
+          "numpy_int8_sort": {
+            "mean_us": 24287.86359572162,
+            "p95_us": 25536.036398261786
+          },
+          "native_scalar": {
+            "mean_us": 3910.138077723483,
+            "p95_us": 3988.7399412691593
+          },
+          "native_vnni": {
+            "mean_us": 935.3649026403824,
+            "p95_us": 1136.2229473888874
+          }
+        },
+        "fp32_bytes": 168820736,
+        "native_bytes": 42534912
+      }
+    }
+  }
+}
