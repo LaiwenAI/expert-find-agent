@@ -69,6 +69,32 @@ def build_packet(excerpts, model_votes, expected_count, source_hash, output):
     ))
 
 
+def attach(packet, private, reference, output):
+    manifest = json.loads((packet / "manifest.json").read_bytes())
+    template, baseline_map = packet / "review.jsonl", packet / "private-method-map.jsonl"
+    provenance = json.loads(reference.read_bytes())
+    if (provenance["private_sha256"] != digest(private)
+            or manifest["original_form_sha256"] != digest(template)
+            or manifest["private_mapping_sha256"] != digest(baseline_map)):
+        raise ValueError("Changed model results or blind packet")
+    forms = load_forms(template)
+    mapping = load_forms(baseline_map)
+    audit = json.loads(private.read_bytes())
+    model = {}
+    for excerpt, predicted in zip(audit["cases"], audit["new_gate"], strict=True):
+        start, end = excerpt["start"], excerpt["end"]
+        case_id = sha256(f"{SALT}:{excerpt['id']}:{start}:{end}".encode()).hexdigest()[:24]
+        original = forms[case_id]
+        if (case_id in model or type(predicted) is not bool
+                or any(original[key] != excerpt[key] for key in ("start", "end", "target", "full_request"))
+                or mapping[case_id]["original_selected"] != excerpt["chosen"]):
+            raise ValueError("Model evaluation used a different source view")
+        model[case_id] = dict(original_selected=excerpt["chosen"], direct_gate=predicted)
+    if model.keys() != forms.keys() or model.keys() != mapping.keys():
+        raise ValueError("Missing model audit cases")
+    write(output, dict(packet_sha256=digest(template), aggregate_sha256=digest(reference), decisions=model))
+
+
 def validate(packet, first, second):
     manifest = json.loads((packet / "manifest.json").read_bytes())
     source = packet / "review.jsonl"
@@ -93,6 +119,7 @@ if __name__ == "__main__":
     commands = parser.add_subparsers(dest="mode", required=True)
     for command, args in ((freeze, ("queries", "trace", "reference", "controls", "old_controls", "output")),
                           (build, ("private", "reference", "output")),
+                          (attach, ("packet", "private", "reference", "output")),
                           (validate, ("packet", "first", "second"))):
         sub = commands.add_parser(command.__name__)
         for field in args:

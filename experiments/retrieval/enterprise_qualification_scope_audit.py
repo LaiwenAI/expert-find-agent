@@ -97,6 +97,23 @@ def classify(tokenizer, model, records):
     return votes
 
 
+def lexical_votes(records, include_heading=False):
+    from experiments.retrieval.enterprise_heading_roles import heading_offsets
+    from experiments.retrieval.enterprise_requirement_roles import APPLICANT
+
+    votes = []
+    for row in records:
+        parts = [row["target"]]
+        if include_heading:
+            text = row["full_request"]
+            ancestors = [(a, b) for a, b in heading_offsets(text) if b <= row["start"]]
+            if ancestors:
+                a, b = ancestors[-1]
+                parts.append(text[a:b])
+        votes.append(bool(APPLICANT.search("\n".join(parts))))
+    return votes
+
+
 def controlled_report(records, decisions):
     count = Counter()
     for row, predicts in zip(records, decisions, strict=True):
@@ -134,7 +151,15 @@ def run(args):
     write(args.private, dict(cases=development, new_gate=decided))
     write(args.output, dict(
         controls=dict(four_way_full=controlled_report(controlled, [r["chosen"] for r in controlled]),
+                      target_cue=controlled_report(controlled, lexical_votes(controlled)),
+                      heading_cue=controlled_report(controlled, lexical_votes(controlled, include_heading=True)),
                       direct_gate=controlled_report(controlled, controls)),
+        development_lexical={
+            name: dict(selected_with_cue=sum(row["chosen"] and vote for row, vote in zip(development, votes, strict=True)),
+                       comparison_with_cue=sum(not row["chosen"] and vote for row, vote in zip(development, votes, strict=True)))
+            for name, votes in (("target_cue", lexical_votes(development)),
+                                ("heading_cue", lexical_votes(development, include_heading=True)))
+        },
         sampled_development=dict(result, requests=len({r["id"] for r in development}),
                                  requests_with_disagreement=len(outcomes)),
         private_sha256=digest(args.private), source_sha256=digest(args.queries), trace_sha256=digest(args.trace),
