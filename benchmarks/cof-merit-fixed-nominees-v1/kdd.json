@@ -1,0 +1,170 @@
+{
+  "arms": {
+    "bundle_mixed": {
+      "calls": 3.6885245901639343,
+      "citation_coverage": 0.42295081967213116,
+      "cited_p5": 0.021311475409836068,
+      "complete_ms": [
+        143.07281200308353,
+        193.70258851558896
+      ],
+      "identical_source_lists_vs_dense": 0,
+      "judged": 0.14754098360655737,
+      "known_positive_p5_delta": {
+        "bootstrap_repeats": 10000,
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 122,
+        "seed": 20261116
+      },
+      "known_positive_recall_at_10": 0.13636363636363635,
+      "known_positives_added_at_10": 0,
+      "known_positives_lost_at_10": 0,
+      "p5": 0.03770491803278689,
+      "partial_label_p5_delta_bounds": [
+        0.0,
+        0.0
+      ],
+      "positive_and_cited_p5_delta_vs_dense": {
+        "bootstrap_repeats": 10000,
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 122,
+        "seed": 20261116
+      },
+      "retrieval_ms": [
+        48.653860518243164,
+        58.74426536029204
+      ],
+      "top5_exact_order_vs_dense": 122
+    },
+    "bundle_only": {
+      "calls": 3.1885245901639343,
+      "citation_coverage": 0.12786885245901639,
+      "cited_p5": 0.006557377049180328,
+      "complete_ms": [
+        129.23334952211007,
+        165.0609416712541
+      ],
+      "identical_source_lists_vs_dense": 0,
+      "judged": 0.14754098360655737,
+      "known_positive_p5_delta": {
+        "bootstrap_repeats": 10000,
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 122,
+        "seed": 20261116
+      },
+      "known_positive_recall_at_10": 0.13636363636363635,
+      "known_positives_added_at_10": 0,
+      "known_positives_lost_at_10": 0,
+      "p5": 0.03770491803278689,
+      "partial_label_p5_delta_bounds": [
+        0.0,
+        0.0
+      ],
+      "positive_and_cited_p5_delta_vs_dense": {
+        "bootstrap_repeats": 10000,
+        "mean": -0.014754098360655738,
+        "percentile_95": [
+          -0.02950819672131148,
+          -0.003278688524590164
+        ],
+        "queries": 122,
+        "seed": 20261116
+      },
+      "retrieval_ms": [
+        48.722131992690265,
+        58.14039773540571
+      ],
+      "top5_exact_order_vs_dense": 122
+    },
+    "dense": {
+      "calls": 3.1557377049180326,
+      "citation_coverage": 0.43278688524590164,
+      "cited_p5": 0.021311475409836068,
+      "complete_ms": [
+        89.06902151647955,
+        135.9924055286683
+      ],
+      "identical_source_lists_vs_dense": 122,
+      "judged": 0.14754098360655737,
+      "known_positive_p5_delta": {
+        "bootstrap_repeats": 10000,
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 122,
+        "seed": 20261116
+      },
+      "known_positive_recall_at_10": 0.13636363636363635,
+      "known_positives_added_at_10": 0,
+      "known_positives_lost_at_10": 0,
+      "p5": 0.03770491803278689,
+      "partial_label_p5_delta_bounds": [
+        0.0,
+        0.0
+      ],
+      "positive_and_cited_p5_delta_vs_dense": {
+        "bootstrap_repeats": 10000,
+        "mean": 0.0,
+        "percentile_95": [
+          0.0,
+          0.0
+        ],
+        "queries": 122,
+        "seed": 20261116
+      },
+      "retrieval_ms": [
+        10.984545457176864,
+        11.786876211408526
+      ],
+      "top5_exact_order_vs_dense": 122
+    }
+  },
+  "cohort_sha256": "e090a584e0a4f57fb0a405299386431bbff839ffacbccdbb9a11ea8d6a3229ac",
+  "dataset": "KDD",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "labels_sha256": "4bc5ec19077f96d700e6da0c09139c34a000b800c0536b64eb166874a381a2d6",
+  "maximum_query_tokens": 386,
+  "offline": {
+    "encoding": {
+      "batch_size": 8,
+      "census_seconds": 1.4059707159176469,
+      "long_texts": 0,
+      "maximum_tokens": 1658,
+      "padded_tokens": 1613218,
+      "seconds": 217.89073528896552,
+      "texts": 2867,
+      "truncated_texts": 0
+    },
+    "selection_seconds": 1.1316162679577246,
+    "vector_bytes": {
+      "merit_multi": 36126720,
+      "merit_one": 12075008
+    }
+  },
+  "positives": 242,
+  "queries": 122,
+  "reviewers": 737,
+  "revisions": {
+    "backbone": "1d8ad4ca9b3dd8059ad90a75d4983776a23d44af",
+    "embedding": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+    "merit": "6ddce7e8fdfed417d9fd022124529a421560a3f0",
+    "reranker": "e61197ed45024b0ed8a2d74b80b4d909f1255473"
+  },
+  "script_sha256": "1114bc6d83b1f9c2e91fc5ce888a4bac710d8b747d9120e6fd90be0a3335d3f9",
+  "shared_runner_sha256": "4a2bbbb54553d501fbc4d3e32313fecc0aeb21dc337912e6d39d781b76f5e2d9",
+  "sources": 99594
+}

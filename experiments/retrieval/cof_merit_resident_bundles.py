@@ -135,7 +135,7 @@ class ResidentIndex:
         return [(ref.owner_ids[i], list(documents[i])) for i in order]
 
 
-def run(args):
+def run(args, *, index_type=ResidentIndex, arms=ARMS, entrypoint=__file__):
     from peft import PeftModel
 
     settings(args)
@@ -155,7 +155,7 @@ def run(args):
         args.backbone, dtype=torch.bfloat16, local_files_only=True, trust_remote_code=False,
     ).to("cuda").eval()
     adapted = PeftModel.from_pretrained(base, args.adapter, is_trainable=False).eval()
-    index = ResidentIndex(reference, papers, adapted, tokenizer, template)
+    index = index_type(reference, papers, adapted, tokenizer, template)
     embedding = QwenTorchEmbedding(args.compact, batch_size=1)
     reranker = Reranker(args.reranker)
     warm = next(pid for pid in eligible if pid not in tested)
@@ -164,20 +164,20 @@ def run(args):
     if max(query_lengths) > LONG_CONTEXT:
         raise ValueError("A query exceeds the audited long-context budget")
     print(f"Built {index.encoding['texts']} bundles, including {index.encoding['long_texts']} long views.", flush=True)
-    for arm in ARMS:
+    for arm in arms:
         request(index, embedding, reranker, texts, texts[warm], labels[warm], arm)
     measurements = []
     for ordinal, qid in enumerate(tested):
-        shift = ordinal % len(ARMS)
+        shift = ordinal % len(arms)
         measurements.append({
             arm: request(index, embedding, reranker, texts, texts[qid], labels[qid], arm)
-            for arm in ARMS[shift:] + ARMS[:shift]
+            for arm in arms[shift:] + arms[:shift]
         })
         if (ordinal + 1) % 20 == 0:
             print(f"Evaluated {ordinal + 1} full-catalog queries.", flush=True)
 
-    metrics = summarize(measurements, [labels[q] for q in tested], arms=ARMS)
-    for mode in ARMS:
+    metrics = summarize(measurements, [labels[q] for q in tested], arms=arms)
+    for mode in arms:
         values = [entry[mode] for entry in measurements]
         metrics[mode]["positive_and_cited_p5_delta_vs_dense"] = paired_interval([
             r["cited_p5"] - row["dense"]["cited_p5"] for row, r in zip(measurements, values, strict=True)
@@ -187,6 +187,12 @@ def run(args):
             [person for person, _ in row["dense"]["ranked_sources"][:5]]
             for r, row in zip(values, measurements, strict=True)
         )
+    if index_type is not ResidentIndex:
+        for mode in arms:
+            metrics[mode]["identical_source_lists_vs_dense"] = sum(
+                row[mode]["ranked_sources"][:5] == row["dense"]["ranked_sources"][:5]
+                for row in measurements
+            )
     write_json(args.output, dict(
         dataset=args.dataset, queries=len(tested), reviewers=len(reference.owner_ids), sources=len(reference.source_ids),
         positives=sum(sum(v > 0 for v in labels[q].values()) for q in tested),
@@ -197,13 +203,17 @@ def run(args):
                        reranker=reranker.provenance["revision"]),
         offline=dict(selection_seconds=index.selection_seconds, encoding=index.encoding,
                      vector_bytes={name: matrix.numel() * matrix.element_size() for name, matrix in index.arrays.items()}),
-        arms=metrics, script_sha256=digest(Path(__file__)),
+        arms=metrics, script_sha256=digest(Path(entrypoint)), shared_runner_sha256=digest(Path(__file__)),
     ))
 
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description=__doc__)
+def arguments(description):
+    parser = argparse.ArgumentParser(description=description)
     parser.add_argument("dataset", choices=("KDD", "SciRepEval"))
     for name in ("upstream", "backbone", "adapter", "compact", "reranker", "output"):
         parser.add_argument(name, type=Path)
-    run(parser.parse_args())
+    return parser.parse_args()
+
+
+if __name__ == "__main__":
+    run(arguments(__doc__))
