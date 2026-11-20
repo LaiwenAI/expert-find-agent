@@ -18,7 +18,7 @@ SEEDS = (20261119, 20261120)
 RATE = 3.0
 
 
-def replay(arm, fixture, texts, offered_order, offsets):
+def replay(arm, fixture, texts, offered_order, offsets, *, timeline=False):
     # Keep one worker per device. This counter belongs to that worker.
     completed = 0
     work = {stage: Counter() for stage in ("primary", "fallback")}
@@ -43,7 +43,7 @@ def replay(arm, fixture, texts, offered_order, offsets):
 
     longest = set(sorted(range(len(texts)), key=lambda idx: (-len(texts[idx]), idx))[:len(texts) // 4])
     bodies, timings = workload(
-        texts, offered_order, offsets, search,
+        texts, offered_order, offsets, search, timeline=timeline,
         strata=dict(longest_quartile=longest, remainder=set(range(len(texts))) - longest),
     )
     if completed != len(texts) + 1 or timings["completed"] != len(texts):
@@ -60,18 +60,16 @@ def replay(arm, fixture, texts, offered_order, offsets):
     return bodies, timings
 
 
-def run(queries, corpus, roles, vectors, meta, models, serial, output):
+def init_fixture(queries, corpus, roles, vectors, meta, models, serial):
     import torch
     from expert_search.gpu_owned_vector_index import GpuOwnedVectorIndex
     from expert_search.owned_vector_index import ExactOwnedVectorIndex
     from expert_search.qwen_embedding_torch import QwenTorchEmbedding
     from experiments.followir.core17_verifier import Reranker
     from experiments.litsearch.dense_cache import verify_checkpoint
-    from experiments.retrieval.enterprise_cross_precision_load import trace
     from experiments.retrieval.enterprise_gap_verification import DEVELOPMENT, SOURCE_INVENTORY
     from experiments.retrieval.enterprise_prefix_fork import ComparisonParser
 
-    role_search.require_cuda(output)
     if (digest(queries), digest(corpus)) != (DEVELOPMENT, SOURCE_INVENTORY):
         raise ValueError("Use the pinned development inventory")
     frozen = json.loads(serial.read_bytes())
@@ -106,6 +104,16 @@ def run(queries, corpus, roles, vectors, meta, models, serial, output):
     reader = packed.Reader(canonical)
     fixture = (parser, embedding, index, sources, role_index, reader)
 
+    return texts, fixture, dict(gpu=torch.cuda.get_device_name(), requests=len(texts), sources=len(sources),
+        role_windows=len(role_index[0]), models=revisions, queries_sha256=DEVELOPMENT,
+        source_sha256=SOURCE_INVENTORY, vectors_sha256=verified, serial_sha256=digest(serial))
+
+
+def run(queries, corpus, roles, vectors, meta, models, serial, output):
+    from experiments.retrieval.enterprise_cross_precision_load import trace
+
+    role_search.require_cuda(output)
+    texts, fixture, fingerprint = init_fixture(queries, corpus, roles, vectors, meta, models, serial)
     traces = []
     for repetition, seed in enumerate(SEEDS):
         order, times = trace(len(texts), RATE, seed)
@@ -117,10 +125,8 @@ def run(queries, corpus, roles, vectors, meta, models, serial, output):
         changed = sum(a != b for a, b in zip(replies["guarded_rescue"], replies["padded_rescue"], strict=True))
         traces.append(dict(seed=seed, execution_order=arms, responses_changed_guarded_vs_padded=changed, arms=report))
     write(output, dict(
-        job=os.environ["SLURM_JOB_ID"], gpu=torch.cuda.get_device_name(), requests=len(texts), sources=len(sources),
-        role_windows=len(role_index[0]), nominal_rate=RATE, models=revisions, queries_sha256=DEVELOPMENT,
-        source_sha256=SOURCE_INVENTORY, vectors_sha256=verified, serial_sha256=digest(serial),
-        code_sha256=digest(Path(__file__)), traces=traces,
+        job=os.environ["SLURM_JOB_ID"], nominal_rate=RATE,
+        code_sha256=digest(Path(__file__)), traces=traces, **fingerprint,
     ))
 
 

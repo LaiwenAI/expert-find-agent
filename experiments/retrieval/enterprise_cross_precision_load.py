@@ -113,7 +113,7 @@ async def send_trace(port, texts, indices, times):
     return await asyncio.gather(*(issue(i,t) for i,t in zip(indices,times,strict=True)))
 
 
-def workload(texts, indices, times, search, *, pending_factory=Queue, strata=None):
+def workload(texts, indices, times, search, *, pending_factory=Queue, strata=None, timeline=False):
     pending, ready = pending_factory(), Future()
     worker = Thread(target=serve, args=(pending,search,ready))
     with Server(("127.0.0.1",0), RequestHandler) as server:
@@ -152,6 +152,8 @@ def workload(texts, indices, times, search, *, pending_factory=Queue, strata=Non
                                  for name, members in strata.items())
             if subset
         }
+    if timeline:
+        report["timings"] = rows
     return bodies, report
 
 
