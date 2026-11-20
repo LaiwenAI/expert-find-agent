@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; form-action 'none'; base-uri 'none'">
+<title>Blind topical evidence review</title>
+<style>
+:root { color-scheme: light dark; font: 16px/1.55 system-ui, sans-serif; }
+body { margin: 0; background: light-dark(#f1f5f5, #141e21); color: light-dark(#18272d, #e4edf0); }
+main { max-width: 68rem; margin: auto; padding: 1.5rem clamp(1rem, 4vw, 2.5rem) 3rem; }
+h1 { font-size: clamp(1.55rem, 4vw, 2.35rem); margin: 0; }
+h2 { font-size: 1.05rem; margin: 0 0 .6rem; }
+p { margin: .3rem 0 .9rem; }
+.card { border: 1px solid light-dark(#c7d3d8, #425961); border-radius: .65rem; padding: 1rem; background: light-dark(white, #202d32); min-width: 0; }
+.controls, nav { display: flex; flex-wrap: wrap; gap: .6rem; align-items: end; justify-content: space-between; }
+.controls { margin: 1rem 0; }
+nav { margin-bottom: .85rem; justify-content: start; align-items: center; }
+#progress { margin-left: auto; font-variant-numeric: tabular-nums; }
+.columns { display: grid; grid-template-columns: 1.7fr 1fr; gap: 1rem; align-items: start; }
+label { display: block; font-weight: 600; }
+button,input,select,textarea { font: inherit; max-width: 100%; box-sizing: border-box; }
+button,select,textarea { border: 1px solid light-dark(#83999f, #8fa4ab); border-radius: .35rem; padding: .35rem .55rem; background: light-dark(white, #26363b); color: inherit; }
+button { cursor: pointer; }
+button:disabled { opacity: .5; cursor: default; }
+#download { background: #155d62; color: white; }
+#status { min-height: 1.55rem; }
+#status[data-error] { color: light-dark(#972729, #ffaeac); }
+#rationale, #decision { width: 100%; margin: .3rem 0 .8rem; }
+#rationale { resize: vertical; }
+#topic { font-size: 1.15rem; font-weight: 650; }
+#abstract { white-space: pre-wrap; overflow-wrap: anywhere; }
+.hint { font-size: .9rem; color: light-dark(#435861, #bacbd1); }
+:focus-visible { outline: 3px solid light-dark(#0a6873, #8cd3db); outline-offset: 2px; }
+[hidden] { display: none !important; }
+@media(max-width: 700px) { .columns { grid-template-columns: 1fr; } #progress { margin-left: 0; flex-basis: 100%; } }
+</style>
+</head>
+<body>
+<main>
+  <h1>Blind topical evidence review</h1>
+  <p>Judge whether the visible title and abstract directly address the requested topic. Export to save your work, and reload your export to resume.</p>
+  <div class="controls card">
+    <label>Assigned JSONL form <input id="file" type="file" accept=".jsonl,application/json,text/plain"></label>
+    <button id="download" type="button" disabled>Export review</button>
+  </div>
+  <p id="status" role="status"></p>
+  <section id="work" hidden>
+    <nav aria-label="Review cases">
+      <button id="previous" type="button">Previous</button>
+      <label for="case">Case</label><select id="case"></select>
+      <button id="next" type="button">Next</button>
+      <button id="unfinished" type="button">Next unfinished</button>
+      <span id="progress" role="status"></span>
+    </nav>
+    <div class="columns">
+      <section class="card" aria-labelledby="requested">
+        <h2 id="requested">Requested topic</h2>
+        <p id="topic"></p>
+        <h2 id="title"></h2>
+        <p id="abstract"></p>
+      </section>
+      <section class="card" aria-label="Case judgment">
+        <label for="decision">Topical support</label>
+        <select id="decision" aria-describedby="decision-hint">
+          <option value="">Unreviewed</option>
+          <option value="relevant">Relevant</option>
+          <option value="irrelevant">Irrelevant</option>
+          <option value="unclear">Unclear</option>
+        </select>
+        <p class="hint" id="decision-hint">Use Unclear when the visible text does not let you decide.</p>
+        <label for="rationale">Rationale</label>
+        <textarea id="rationale" rows="6" spellcheck="false" aria-describedby="reason-hint"></textarea>
+        <p class="hint" id="reason-hint">Point to the visible connection, mismatch, or ambiguity.</p>
+      </section>
+    </div>
+  </section>
+</main>
+<script>
+'use strict';
+const get = id => document.getElementById(id);
+const fields = ['case_id', 'topic', 'title', 'abstract', 'relevance', 'rationale'];
+const choices = new Set(['relevant', 'irrelevant', 'unclear', null]);
+let records = [], current = 0, dirty = false;
+
+function status(message, error = false) {
+  get('status').textContent = message;
+  get('status').toggleAttribute('data-error', error);
+}
+function parse(text) {
+  const rows = text.split(/\r?\n/).filter(line => line.trim()).map(line => JSON.parse(line));
+  const ids = new Set();
+  if (!rows.length) throw Error('The file has no cases.');
+  for (const row of rows) {
+    if (!row || Object.keys(row).length !== fields.length || !fields.every(field => Object.hasOwn(row, field)) ||
+        fields.slice(0, 4).some(field => typeof row[field] !== 'string') || !row.case_id ||
+        ids.has(row.case_id) || !choices.has(row.relevance) || !(row.rationale === null || typeof row.rationale === 'string')) {
+      throw Error('Expected an assigned JSONL review form or an exported review.');
+    }
+    ids.add(row.case_id);
+  }
+  return rows;
+}
+function done(row) {
+  return row.relevance !== null && Boolean(row.rationale?.trim());
+}
+function progress() {
+  const completed = records.filter(done).length;
+  get('progress').textContent = `${completed} / ${records.length} complete`;
+  get('previous').disabled = current === 0;
+  get('next').disabled = current === records.length - 1;
+  get('unfinished').disabled = completed === records.length;
+}
+function render(index) {
+  current = index;
+  const row = records[index];
+  get('case').value = index;
+  for (const field of ['topic', 'title', 'abstract']) get(field).textContent = row[field];
+  get('decision').value = row.relevance ?? '';
+  get('rationale').value = row.rationale ?? '';
+  progress();
+}
+
+get('file').addEventListener('change', async event => {
+  const input = event.currentTarget;
+  const file = input.files[0];
+  input.value = '';
+  if (!file || (dirty && !confirm('Discard unexported changes and open a different form?'))) return;
+  input.disabled = true;
+  try {
+    records = parse(await file.text());
+    get('case').replaceChildren(...records.map((_, index) => new Option(String(index + 1), index)));
+    get('work').hidden = false;
+    get('download').disabled = false;
+    dirty = false;
+    render(Math.max(0, records.findIndex(row => !done(row))));
+    status(`Loaded ${records.length} cases.`);
+  } catch (error) {
+    status(error instanceof SyntaxError ? 'Could not read this JSONL file.' : error.message, true);
+  } finally {
+    input.disabled = false;
+  }
+});
+for (const [id, key] of [['decision', 'relevance'], ['rationale', 'rationale']]) {
+  get(id).addEventListener('input', event => {
+    records[current][key] = event.target.value || null;
+    dirty = true;
+    progress();
+  });
+}
+get('case').addEventListener('change', event => render(Number(event.target.value)));
+get('previous').addEventListener('click', () => render(current - 1));
+get('next').addEventListener('click', () => render(current + 1));
+get('unfinished').addEventListener('click', () => {
+  for (let step = 1; step <= records.length; step++) {
+    const index = (current + step) % records.length;
+    if (!done(records[index])) { render(index); break; }
+  }
+});
+get('download').addEventListener('click', () => {
+  const missing = records.findIndex(row => row.relevance !== null && !row.rationale?.trim());
+  if (missing !== -1) {
+    render(missing);
+    get('rationale').focus();
+    status('Add a rationale for the selected judgment before exporting.', true);
+    return;
+  }
+  const file = new Blob([records.map(row => JSON.stringify(row)).join('\n') + '\n'], {type: 'application/json'});
+  const url = URL.createObjectURL(file);
+  const link = document.createElement('a');
+  link.href = url;
+  link.download = 'topical-review.jsonl';
+  link.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  dirty = false;
+  status('Review exported.');
+});
+window.addEventListener('beforeunload', event => {
+  if (dirty) { event.preventDefault(); event.returnValue = ''; }
+});
+</script>
+</body>
+</html>

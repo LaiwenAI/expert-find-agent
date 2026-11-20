@@ -72,3 +72,33 @@ PYTHONPATH=src:. python -m experiments.credit.role_gap_review prepare \
 PYTHONPATH=src:. python -m experiments.credit.role_gap_review reconcile \
   NEW_PRIVATE_REVIEW_DIR/packet.json REVIEW_A REVIEW_B NEW_RECONCILIATION
 ```
+
+## First review batch
+
+Create a focused assignment from the existing private review packet.
+For these frozen inputs, the first batch contains the 21 most
+influential cases for the eLife supported-slot contrast against
+role-eligible hybrid refill. If both reviewers provide decisive
+matching judgments for all 21, the remaining identification range
+has a width of 1.82 percentage points. The location of that interval
+depends on the judgments. All 173 unassigned cases remain unresolved.
+
+The two ZIPs contain separate blank forms, instructions, and a
+standalone offline review page. The review page displays the
+topic and exact title and abstract, accepts a rationale, and exports
+a JSONL file that can be reloaded to resume. It makes no network
+requests. The organizer retains `assignment.json` and the full
+packet. Neither is needed by a reviewer.
+
+```sh
+PYTHONPATH=src:. python -m experiments.credit.role_gap_review assign \
+  PRIVATE_REVIEW_DIR/packet.json benchmarks/role-gap-review-v1/offline-review.html NEW_BATCH_DIR
+PYTHONPATH=src:. python -m experiments.credit.role_gap_review reconcile \
+  PRIVATE_REVIEW_DIR/packet.json REVIEW_A_EXPORT REVIEW_B_EXPORT NEW_RECONCILIATION \
+  --assignment NEW_BATCH_DIR/assignment.json
+```
+
+The reconciliation checks the packet fingerprint, requires the
+exact case set, and checks every exported view against the frozen
+text. The organizer must establish reviewer independence. A partial
+export is valid when the untouched cases remain present in the form.
