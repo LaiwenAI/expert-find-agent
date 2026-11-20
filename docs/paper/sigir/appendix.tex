@@ -20,10 +20,44 @@ The repository results associated with the manuscript are enumerated here. The a
 \item Numerical scope and personal execution: \path{benchmarks/bilingual-numeric-passages-v1/results.json} and \path{benchmarks/bilingual-numeric-attribution-v1/results.json}. The two tests have distinct denominators.
 \end{itemize}
 
-\subsection{Reusable role interpretation and source-bound checking}
-The live eLife replay in \path{benchmarks/elife-normalized-search-v1} compares once-per-source and once-per-request normalization with the same ranking, scoring, and author-field checks. The request-level implementation combines both roles and both answer encodings into a single batch, evaluated separately in \path{benchmarks/plos-study-role-normalization-batch-v1}. Queue traces are in \path{benchmarks/elife-normalized-search-load-v1}. Both arms keep the same ordered recommendations and document citations on every recorded trace. The nominal 7-request/s trace reduces queue P95 from 1.93--2.15 s to 106--112 ms, while service P95 falls from 309--311 ms to 84--85 ms. These finite traces use one GPU worker and do not establish steady-state capacity.
+\subsection{Joint first-round nomination}
+The executable source planner and timings are in \path{benchmarks/plos-joint-byline-depth-v1}. Both repeated runs compare the full ordered read plan against exhaustive pair enumeration at four pool depths, with 1,000 additional seeded equivalence checks. At depth 64, 104 of 160 requests contain a known proof in the union of both pools. Keeping the initial two topical choices fixed and adding one source permits a proof in only 29 requests. The implemented joint policy attains 49 known results under this budget.
 
-The early-nomination ablation in \path{benchmarks/elife-normalized-nomination-v1} holds the single normalization fixed. A partial index of 144 complete declarations yields 59 tag-backed recommendations versus 58 in the topic baseline. At full available coverage the values are 60 and 58. Equal-issuance prefixes show no gain in either mask. Ordinary global rescue rarely changes a fixed-count output. The exploratory distinct-person rescue in \path{benchmarks/first-query-new-person-rescue-v1} obtains more replacements without a stable publisher-tag gain. Independent judgments of the changed witnesses are pending.
+The live evaluation in \path{benchmarks/live-joint-source-request-v1} times from request parsing through response serialization with three actual local declaration reads. It includes the query execution audit that explains the eLife cached-to-live difference. Holding the document index fixed, changing the encoding layout changes 71 of 102 eLife source sets at depth 64, 16 of 51 reading plans, and 13 of 51 responses. The fixed-shape encoding audit isolates batch-neighbor dependence on these inputs. \path{benchmarks/selective-joint-topic-check-v1} records equal-issuance comparisons and separates missing topics from demonstrated mistakes. \path{benchmarks/blind-joint-topic-review-v1} documents the pending independent audit.
+
+\path{benchmarks/prose-joint-source-request-v1} tracks known-role, separate, fused, 4B, and guarded interpreter arms for two controlled prose forms. On PLOS, the guard recovers 40 known matches with the same five wrong-role returns as fused interpretation. The eLife guard recovers eight rather than the fused path's ten. The role-gap abstention diagnostic shows that lowering coverage can reduce but does not eliminate wrong-role returns. These experiments hold topic segmentation fixed by grammar.
+
+Loopback service traces appear in \path{benchmarks/joint-loopback-http-v1}. At 272.93 arrivals/s, serial drains at 99.02--100.59 requests/s and dynamic batching at 271.14--271.26. All 844 requests per arm complete in each trace. The high-rate difference is primarily backlog reduction, with end-to-end P95 of 5.06--5.19 s for serial versus 23.49--23.57 ms for dynamic batching. Dynamic batching changes up to five responses against serial at that load. The fixed-shape reference comparison checks byte-level response parity separately.
+
+\subsection{Source selection under missing evidence}
+On 246 previously explored author-written LitSearch queries and a 64,183-paper index, dense-gap routing between one and two candidates reduces P95 from 24.93 to 19.79 ms at the 2\% calibration setting. It returns 30 known sources versus 23 for fixed two. When all known targets are removed, the adaptive and fixed routes return six and three unjudged alternatives, respectively. An alternative may still address the question. A blinded review packet has been prepared to adjudicate that distinction.
+
+Across 50 query--facet views in CSFCube's judged pools, the 10\% calibration setting returns 15 strong matches for both gap routing and fixed six. P95 is 23.23 versus 53.90 ms. After stronger candidates are removed, the router returns two grade-zero and four grade-one papers versus two and three for fixed six. At the 20\% setting it returns four fewer strong matches than fixed six. These outcomes compare preset candidate pools, and a shared calibration ceiling does not enforce equal realized error rates.
+
+\subsection{Shared normalization and conditional nomination}
+The eLife catalog contains 280 reports with complete role declarations. The 72 structured requests combine topics with previously authored duty paraphrases; 36 are outside the five-role contract. Both arms use the same hybrid topic ranking, eight-source budget, and exact author-role binding. They differ in whether the same agreement normalizer runs for every source passing the topical filter or once for the request. The two implementations preserve all ordered experts and citations, including 96 slots with role support and 58 also matching a publisher topic tag. They issue no recommendations on the authored outside-schema requests.
+
+\begin{table}[t]
+\caption{Structured eLife replay. Lower is better. The arrival measurements are P95 from scheduled local arrival to worker completion. Ranges show two GPU runs.}
+\label{tab:normalization}
+\centering\small
+\begin{tabular}{@{}lrr@{}}\toprule
+P95 (ms) & Per source & Per request \\\midrule
+Serial, in-schema & 267--270 & 85--86 \\
+2 requests/s & 410--489 & 116--132 \\
+7 requests/s & 2,116--2,311 & 186--189 \\
+11 requests/s & 4,926--4,994 & 352--376 \\\bottomrule
+\end{tabular}
+\end{table}
+
+On an RTX 5090, batching the four normalization prompts lowers query-interpretation P95 from 58 to 39 ms and matches all 472 serial menu choices in both PLOS replays. Sharing the batched result across eLife sources reduces the normalization forwards per 72-request trace from 239 to 68. All 432 response pairs across two arrival sequences and three offered rates are byte-identical (Table~\ref{tab:normalization}). The driver uses a single local worker and excludes network, unstructured input parsing, and remote sources.
+
+When all 322 eLife reports are searchable, including 42 with incomplete declarations, a shared-normalization topic baseline returns 58 tag-backed slots. Role-aware nomination restricted to the top 16 sources or allowed to search globally returns 60 when all 280 complete declarations are indexed. Both routes have zero tag-backed gain after equalizing issuance per query. The bounded route makes 89 source substitutions versus 106 for global nomination, with all warm P95 values between 82 and 85 ms. The index leaves unknown declarations eligible. These measurements support filling vacant positions on the tested workload. Independent evidence quality at matched issuance remains open.
+
+Earlier four-source eLife and PLOS replays compare title-based and hybrid role refill. The eLife major-topic witness counts are 10 for hybrid role refill, 12 for title refill, and 13 for fixed dual-view retrieval. The corresponding evidence-support difference against hybrid refill remains within $[-34,+24]$ slots pending adjudication. The supplement reports the narrower candidate-stage and fixed-shape scheduling comparisons.
+
+\paragraph{Automatic role anchors in free text.}
+In 36 authored requests with a mandatory condition embedded in the role clause, agreeing model choices bypass the residual proof check on 12 requests. A lexical guard blocks all 36 on this test, but leaves only 83 of 108 annotated obligations in the unresolved list on separate bilingual controls. An additional semantic guard retains all 108 and rejects all 18 straightforward role-only controls on the fast path. The observed error rate and coverage are insufficient to certify free-text shortcuts. Query normalization can still provide a retrieval signal.
 
 \paragraph{Additional proof obligations.}
 In \path{benchmarks/credit-taxonomy-transfer-v1}, the full contribution menu maps all 42 covered requests with an optional distractor; only one of 14 hard scope requests is declined. \path{benchmarks/credit-role-proof-gate-v1} measures the cost of separately judging whether a role is sufficient. Agreement between two proof-type encodings blocks all 18 mandatory controls, while retaining 5 of 18 standalone requests and 2 of 18 with optional conditions. \path{benchmarks/credit-residual-packets-v1} preserves all 144 annotated spans when no trusted role anchor has discharged them. \path{benchmarks/credit-automatic-role-anchors-v1} tests automatic role quotation separately from semantic sufficiency and observes missed conditions even among verbatim citations.
