@@ -93,12 +93,13 @@ def calibrate(development):
     return chosen, ceilings, frontier
 
 
-def run(pilot_projection, projection, manifest, embedding, reranking, output):
+def run(pilot_projection, projection, manifest, embedding, reranking, output, witness_output=None):
     import torch
     from expert_search.qwen_embedding_torch import QwenTorchEmbedding
     from experiments.followir.core17_verifier import Reranker
 
-    if output.exists() or not torch.cuda.is_available() or not os.environ.get("SLURM_JOB_ID"):
+    if (output.exists() or (witness_output is not None and witness_output.exists())
+            or not torch.cuda.is_available() or not os.environ.get("SLURM_JOB_ID")):
         raise ValueError("Require fresh output and Slurm CUDA")
     frozen = json.loads(manifest.read_bytes())
     if (pilot.digest(pilot_projection), pilot.digest(projection)) != (
@@ -109,7 +110,8 @@ def run(pilot_projection, projection, manifest, embedding, reranking, output):
     encoder.model.config.use_cache = False
     reranker = Reranker(reranking)
     development = pilot.Catalog(json.loads(pilot_projection.read_bytes())["sources"], encoder, reranker)
-    target = pilot.Catalog(json.loads(projection.read_bytes())["sources"], encoder, reranker)
+    articles = json.loads(projection.read_bytes())["sources"]
+    target = pilot.Catalog(articles, encoder, reranker)
     initial = {arm: CUTOFFS if arm in ROLE_ARMS else (holdout.CUTOFF,)
                for arm in ARMS}
     topic, _, _ = batches.queries(development)[0]
@@ -118,12 +120,19 @@ def run(pilot_projection, projection, manifest, embedding, reranking, output):
     frozen_cutoffs = {arm: sorted({holdout.CUTOFF, chosen.get(arm, holdout.CUTOFF)}) for arm in ARMS}
     tested = collect(target, frozen_cutoffs)
     result = {}
+    witnesses = {}
     for cover, arms in tested.items():
         result[cover] = {}
+        witnesses[cover] = {}
         for arm, by_cutoff in arms.items():
             for cutoff, rows in by_cutoff.items():
                 name = arm if cutoff == holdout.CUTOFF else f"{arm}_pilot_calibrated"
                 result[cover][name] = dict(cutoff=cutoff, beyond_eight=sum(r["beyond_eight"] for r in rows))
+                if witness_output is not None:
+                    witnesses[cover][name] = [
+                        dict(topic=row["topic"], citations=[articles[source]["doi"] for _, source in row["witnesses"]])
+                        for row in rows
+                    ]
                 for baseline in ("topic_four", "topic_eight"):
                     result[cover][name][f"vs_{baseline}"] = holdout.analyze(rows, arms[baseline][holdout.CUTOFF])
                 if arm in ("person_four", "bounded_four"):
@@ -135,10 +144,14 @@ def run(pilot_projection, projection, manifest, embedding, reranking, output):
                                  embedding=encoder_info["revision"], reranker=reranker.provenance["revision"],
                                  pilot_off_label_ceilings=ceilings, pilot_thresholds=chosen,
                                  pilot_frontier=frontier, holdout=result))
+    if witness_output is not None:
+        pilot.write_json(witness_output, dict(projection_sha256=pilot.digest(projection),
+                                             results_sha256=pilot.digest(output), witnesses=witnesses))
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     for name in ("pilot_projection", "projection", "manifest", "embedding", "reranking", "output"):
         parser.add_argument(name, type=Path)
+    parser.add_argument("--witness-output", type=Path)
     run(**vars(parser.parse_args()))
