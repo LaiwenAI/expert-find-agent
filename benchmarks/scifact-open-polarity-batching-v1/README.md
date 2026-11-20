@@ -45,8 +45,7 @@ windows. It changes three evidence decisions, including one
 additional opposite-stance acceptance, while the count of correct
 acceptances stays at 99. The guard width of 1.75 logit points
 replays 10 original batches, reproduces every FIFO decision on
-this panel, and costs more tokens and time than FIFO. Numerical
-margin parity is weaker than decision parity: 20 items still
+this panel, and costs more tokens and time than FIFO. Decision parity does not imply identical scores. Twenty items still
 have a different guarded margin. This makes the guarded route
 unsuitable as a drop-in acceleration here, although the workload
 shows useful padding headroom for alternative execution designs.
