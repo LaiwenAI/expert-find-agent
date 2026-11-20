@@ -113,6 +113,18 @@ def summarize(measurements, catalog, major=None):
     return dict(metrics=score, major_stage=diagnostic.summarize(measurements, catalog, major) if major else None)
 
 
+def citation_trace(rows, catalog):
+    return {
+        mask: {
+            arm: [dict(topic=row["topic"],
+                       citations=[catalog.articles[i]["doi"] for _, i in row["witnesses"]])
+                  for row in measured]
+            for arm, measured in arms.items()
+        }
+        for mask, arms in rows.items()
+    }
+
+
 def verify_mixed(rows, frozen):
     for pct, arms in rows.items():
         target = frozen[str(pct)]["role_title_four"]["compared"]["topic_four"]
@@ -122,12 +134,12 @@ def verify_mixed(rows, frozen):
 
 
 def run(plos, plos_manifest, plos_reference, elife, mesh_snapshot, mesh_reference,
-        mixed_reference, embedding, reranker, output):
+        mixed_reference, embedding, reranker, output, witness_output=None):
     import torch
     from expert_search.qwen_embedding_torch import QwenTorchEmbedding
     from experiments.followir.core17_verifier import Reranker
 
-    if output.exists() or not os.environ.get("SLURM_JOB_ID") or not torch.cuda.is_available():
+    if output.exists() or (witness_output is not None and witness_output.exists()) or not os.environ.get("SLURM_JOB_ID") or not torch.cuda.is_available():
         raise ValueError("Require fresh output and Slurm CUDA")
     plos_spec = json.loads(plos_manifest.read_bytes())
     mesh_data = json.loads(mesh_snapshot.read_bytes())
@@ -154,6 +166,8 @@ def run(plos, plos_manifest, plos_reference, elife, mesh_snapshot, mesh_referenc
     field.verify_baselines(plos_rows, plos_prior, "plos_topics")
     verify_mixed(plos_rows, mixed_prior["run"]["plos_results"])
     plos_results = summarize(plos_rows, catalog)
+    if witness_output is not None:
+        plos_witnesses = citation_trace(plos_rows, catalog)
 
     catalog, titles, elife_index = field.data_model(elife, encoder, reader)
     complete = {i for i, article in enumerate(catalog.articles) if article["declaration_complete"]}
@@ -174,6 +188,13 @@ def run(plos, plos_manifest, plos_reference, elife, mesh_snapshot, mesh_referenc
         reranker=reader.provenance["revision"], plos_index=plos_index, elife_index=elife_index,
         plos=plos_results, elife=summarize(elife_rows, catalog, major),
     ))
+    if witness_output is not None:
+        pilot.write_json(witness_output, dict(
+            replay_sha256=pilot.digest(output),
+            projections={"plos": pilot.digest(plos), "elife": pilot.digest(elife)},
+            witnesses={"plos": plos_witnesses, "elife": citation_trace(elife_rows, catalog)},
+        ))
+
 
 
 if __name__ == "__main__":
@@ -181,4 +202,5 @@ if __name__ == "__main__":
     for name in ("plos", "plos_manifest", "plos_reference", "elife", "mesh_snapshot", "mesh_reference",
                  "mixed_reference", "embedding", "reranker", "output"):
         cli.add_argument(name, type=Path)
+    cli.add_argument("--witness-output", type=Path)
     run(**vars(cli.parse_args()))
