@@ -70,3 +70,13 @@ PYTHONPATH=src:. python -m experiments.retrieval.score_sealed_first_query \
   PROTOCOL LOCK FRAME PRIVATE_PACKET PRIVATE_RECONCILIATION PRIVATE_AGGREGATE \
   PRIVATE_TRACE NEW_AGGREGATE_REPORT
 ```
+
+## Offline reviewer interface
+
+Open [offline-review.html](offline-review.html) locally in a browser.
+Load one assigned reviewer JSONL form, enter your reviewer ID, complete
+the three judgments and rationale for each case, and export an annotated
+copy. To resume, load your exported copy. Export before closing the
+page. The interface reads only the selected file, shows no arm predictions,
+and makes no network requests. Run `check_joint_review` on the exports
+before reconciliation. Only the generic interface is tracked here.

@@ -1,0 +1,297 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; connect-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; form-action 'none'; base-uri 'none'">
+<title>Blind evidence review</title>
+<style>
+  :root { color-scheme: light dark; font: 16px/1.55 system-ui, sans-serif; }
+  body { margin: 0; background: light-dark(#f3f6fa, #141a20); color: light-dark(#182638, #e8edf3); }
+  main { max-width: 70rem; padding: 1.3rem clamp(1rem, 4vw, 2.5rem) 3rem; margin: auto; }
+  h1 { font-size: clamp(1.65rem, 5vw, 2.3rem); margin: 0; }
+  h2 { font-size: 1.15rem; margin: 0 0 .7rem; }
+  h3 { font-size: 1rem; margin: .8rem 0 .3rem; }
+  p { margin: .35rem 0 .8rem; }
+  .card { border: 1px solid light-dark(#cfdae7, #42515f); border-radius: .7rem; padding: 1rem; background: light-dark(#fff, #202831); min-width: 0; }
+  .toolbar { margin: 1rem 0; display: flex; flex-wrap: wrap; gap: .7rem 1.2rem; align-items: end; }
+  .toolbar label { display: grid; min-width: 0; max-width: 100%; gap: .25rem; }
+  label { font-weight: 600; }
+  input, button, select, textarea { font: inherit; max-width: 100%; box-sizing: border-box; }
+  input[type=text], select, textarea { border: 1px solid light-dark(#8397ab, #8293a7); border-radius: .35rem; padding: .45rem; background: light-dark(#fff, #171f27); }
+  button { border-radius: .35rem; border: 1px solid light-dark(#879bae, #8fa2b5); padding: .42rem .75rem; cursor: pointer; background: light-dark(#fff, #25313c); }
+  button:disabled { opacity: .48; cursor: default; }
+  #download { color: white; background: #215a8d; border-color: #215a8d; }
+  .navigation { display: flex; align-items: center; flex-wrap: wrap; gap: .5rem; margin: 0 0 .9rem; }
+  #progress { margin-left: auto; }
+  .columns { display: grid; grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr); gap: 1rem; align-items: start; }
+  .left { display: grid; gap: 1rem; min-width: 0; }
+  .verbatim { white-space: pre-wrap; overflow-wrap: anywhere; }
+  .excerpt { border-left: 3px solid light-dark(#8dadcb, #7aa0bd); margin-left: 0; padding-left: .8rem; }
+  .criterion { display: grid; gap: .25rem; margin-bottom: .7rem; }
+  .hint { font-size: .9rem; color: light-dark(#405467, #a9bdce); }
+  #rationale { width: 100%; resize: vertical; }
+  #status { min-height: 1.55em; }
+  #status[data-error] { color: light-dark(#a01d2b, #ffaaa9); }
+  :focus-visible { outline: 3px solid light-dark(#1262a0, #8dc4f2); outline-offset: 2px; }
+  [hidden] { display: none !important; }
+  @media (max-width: 760px) {
+    .columns { grid-template-columns: 1fr; }
+    #progress { margin-left: 0; flex-basis: 100%; }
+  }
+</style>
+</head>
+<body>
+<main>
+  <h1>Blind evidence review</h1>
+  <p>Open your assigned JSONL form. Review work stays in memory until you export. Reload an exported copy to resume.</p>
+  <div class="toolbar card">
+    <label>Review form <input id="file" type="file" accept=".jsonl,.ndjson,application/json,text/plain"></label>
+    <label>Reviewer ID <input id="reviewer" type="text" autocomplete="off" disabled></label>
+    <button id="download" type="button" disabled>Export review</button>
+  </div>
+  <p id="status" role="status" aria-live="polite"></p>
+
+  <section id="review" hidden>
+    <nav class="navigation" aria-label="Review cases">
+      <button id="previous" type="button">Previous</button>
+      <label for="case">Case</label>
+      <select id="case"></select>
+      <button id="next" type="button">Next</button>
+      <button id="unfinished" type="button">Next unfinished</button>
+      <span id="progress" role="status"></span>
+    </nav>
+    <div class="columns">
+      <div class="left">
+        <section class="card" aria-labelledby="request-heading">
+          <h2 id="request-heading">Original request</h2>
+          <p id="need" class="verbatim"></p>
+          <div id="qualification-panel" hidden>
+            <h3>Parsed prior qualifications</h3>
+            <ul id="qualifications"></ul>
+            <p class="hint">Check these against the original request. Flag omissions or incorrect classifications in your rationale.</p>
+          </div>
+        </section>
+        <section class="card" aria-labelledby="evidence-heading">
+          <h2 id="evidence-heading">Candidate and quoted evidence</h2>
+          <p id="candidate"></p>
+          <div id="sources"></div>
+        </section>
+      </div>
+      <section class="card" aria-labelledby="judgments-heading">
+        <h2 id="judgments-heading">Judgments</h2>
+        <div class="criterion">
+          <label for="method_fit">Method fit</label>
+          <span class="hint" id="method-hint">Does the evidence show a relevant method or capability?</span>
+          <select id="method_fit" aria-describedby="method-hint"></select>
+        </div>
+        <div class="criterion">
+          <label for="constraint_support">Constraint support</label>
+          <span class="hint" id="constraint-hint">Does the evidence support every applicable prior qualification?</span>
+          <select id="constraint_support" aria-describedby="constraint-hint"></select>
+        </div>
+        <div class="criterion">
+          <label for="personal_contribution">Personal contribution</label>
+          <span class="hint" id="contribution-hint">Do the quotations establish the named candidate’s own relevant contribution?</span>
+          <select id="personal_contribution" aria-describedby="contribution-hint"></select>
+        </div>
+        <label for="rationale">Rationale</label>
+        <textarea id="rationale" rows="7" spellcheck="false" aria-describedby="rationale-hint"></textarea>
+        <p class="hint" id="rationale-hint">Cite a visible source alias when possible. Explain missing evidence or uncertainty.</p>
+      </section>
+    </div>
+  </section>
+</main>
+<script>
+  'use strict';
+
+  const fields = ['method_fit', 'constraint_support', 'personal_contribution'];
+  const labels = new Map([
+    ['', 'Unreviewed'],
+    ['supported', 'Supported'],
+    ['not_supported_by_view', 'Unsupported by this evidence'],
+    ['uncertain', 'Uncertain'],
+  ]);
+  const required = ['case_id', 'need', 'candidate', 'sources', 'reviewer_id', 'rationale', ...fields];
+  const allowed = new Set([...required, 'prior_qualifications']);
+  const get = id => document.getElementById(id);
+  const fileInput = get('file');
+  const reviewer = get('reviewer');
+  const casePicker = get('case');
+  const rationale = get('rationale');
+  let records = [];
+  let current = 0;
+  let filename = '';
+  let dirty = false;
+  let loading = false;
+
+  function status(message, error = false) {
+    get('status').textContent = message;
+    get('status').toggleAttribute('data-error', error);
+  }
+
+  function judgmentStarted(row) {
+    return fields.some(field => row[field] !== null);
+  }
+
+  function complete(row) {
+    return fields.every(field => row[field] !== null) && Boolean(row.rationale?.trim());
+  }
+
+  function parse(text) {
+    const rows = text.split(/\r?\n/).filter(line => line.trim()).map(line => JSON.parse(line));
+    if (!rows.length) throw new Error('The file has no cases.');
+    const ids = new Set();
+    for (const row of rows) {
+      if (!row || !required.every(key => Object.hasOwn(row, key)) ||
+          Object.keys(row).some(key => !allowed.has(key)) ||
+          typeof row.case_id !== 'string' || !row.case_id ||
+          ids.has(row.case_id) || typeof row.need !== 'string' ||
+          !row.candidate || Object.keys(row.candidate).some(key => !['name', 'institution', 'college'].includes(key)) ||
+          typeof row.candidate.name !== 'string' ||
+          !Array.isArray(row.sources) || !row.sources.length ||
+          row.sources.some(source => !source || Object.keys(source).some(key => !['id', 'kind', 'text'].includes(key)) ||
+              typeof source.id !== 'string' || typeof source.text !== 'string' || typeof source.kind !== 'string') ||
+          (Object.hasOwn(row, 'prior_qualifications') && (!Array.isArray(row.prior_qualifications) ||
+              row.prior_qualifications.some(item => typeof item !== 'string'))) ||
+          fields.some(field => row[field] !== null && (!row[field] || !labels.has(row[field]))) ||
+          [row.rationale, row.reviewer_id].some(value => value !== null && typeof value !== 'string')) {
+        throw new Error('Expected the blinded reviewer form with unique cases and valid fields.');
+      }
+      ids.add(row.case_id);
+    }
+    return rows;
+  }
+
+  function appendText(parent, tag, content, className = '') {
+    const node = document.createElement(tag);
+    node.className = className;
+    node.textContent = content;
+    parent.append(node);
+  }
+
+  function progress() {
+    const reviewed = records.filter(complete).length;
+    get('progress').textContent = `${reviewed} / ${records.length} complete`;
+    get('previous').disabled = current === 0;
+    get('next').disabled = current === records.length - 1;
+    get('unfinished').disabled = reviewed === records.length;
+  }
+
+  function render(index) {
+    current = index;
+    casePicker.value = String(index);
+    const row = records[index];
+    get('need').textContent = row.need;
+    get('candidate').textContent = [row.candidate.name, row.candidate.institution, row.candidate.college]
+      .filter(part => typeof part === 'string' && part.trim()).join(' • ');
+    const qualifications = get('qualifications');
+    qualifications.replaceChildren();
+    for (const item of row.prior_qualifications ?? []) {
+      appendText(qualifications, 'li', item, 'verbatim');
+    }
+    get('qualification-panel').hidden = !qualifications.childElementCount;
+    const sources = get('sources');
+    sources.replaceChildren();
+    for (const source of row.sources) {
+      appendText(sources, 'h3', [source.id, source.kind].filter(Boolean).join(' • '));
+      appendText(sources, 'blockquote', source.text, 'verbatim excerpt');
+    }
+    for (const field of fields) get(field).value = row[field] ?? '';
+    rationale.value = row.rationale ?? '';
+    progress();
+  }
+
+  fileInput.addEventListener('change', async () => {
+    const file = fileInput.files[0];
+    if (!file || loading) return;
+    fileInput.value = '';
+    if (dirty && !window.confirm('Replace the current review and discard unexported edits?')) return;
+    loading = true;
+    fileInput.disabled = true;
+    try {
+      const incoming = parse(await file.text());
+      const knownIds = new Set(incoming.map(row => row.reviewer_id?.trim()).filter(Boolean));
+      if (knownIds.size > 1) throw new Error('The form contains multiple reviewer IDs. Use your individual form.');
+      records = incoming;
+      filename = file.name;
+      reviewer.value = knownIds.values().next().value ?? '';
+      reviewer.readOnly = knownIds.size === 1;
+      reviewer.disabled = false;
+      get('download').disabled = false;
+      casePicker.replaceChildren(...records.map((row, index) => new Option(`${index + 1} · ${row.case_id}`, index)));
+      get('review').hidden = false;
+      dirty = false;
+      render(Math.max(0, records.findIndex(row => !complete(row))));
+      status(`Loaded ${records.length} cases.`);
+    } catch (error) {
+      status(error instanceof SyntaxError ? 'Could not read this JSONL file.' : error.message, true);
+    } finally {
+      loading = false;
+      fileInput.disabled = false;
+    }
+  });
+
+  for (const field of fields) {
+    const select = get(field);
+    for (const [value, label] of labels) select.add(new Option(label, value));
+    select.addEventListener('change', () => {
+      records[current][field] = select.value || null;
+      dirty = true;
+      progress();
+    });
+  }
+  rationale.addEventListener('input', () => {
+    records[current].rationale = rationale.value || null;
+    dirty = true;
+    progress();
+  });
+  reviewer.addEventListener('input', () => { dirty = true; });
+  casePicker.addEventListener('change', () => render(Number(casePicker.value)));
+  get('previous').addEventListener('click', () => render(current - 1));
+  get('next').addEventListener('click', () => render(current + 1));
+  get('unfinished').addEventListener('click', () => {
+    const pending = records.findIndex((row, index) => index > current && !complete(row));
+    render(pending === -1 ? records.findIndex(row => !complete(row)) : pending);
+  });
+
+  get('download').addEventListener('click', () => {
+    const hasLabels = records.some(judgmentStarted);
+    const reviewerId = reviewer.value.trim();
+    if (hasLabels && !reviewerId) {
+      status('Enter a reviewer ID before exporting judgments.', true);
+      reviewer.focus();
+      return;
+    }
+    const invalid = records.findIndex(row => judgmentStarted(row) && !row.rationale?.trim());
+    if (invalid >= 0) {
+      render(invalid);
+      status('Add a rationale to any case with a judgment before exporting.', true);
+      rationale.focus();
+      return;
+    }
+    const lines = records.map(row => JSON.stringify({
+      ...row, reviewer_id: judgmentStarted(row) ? reviewerId : row.reviewer_id,
+    }));
+    const blob = new Blob([lines.join('\n'), '\n'], { type: 'application/x-ndjson;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename.replace(/(?:-reviewed)?\.[^.]+$/, '') + '-reviewed.jsonl';
+    document.body.append(link);
+    link.click();
+    link.remove();
+    setTimeout(() => URL.revokeObjectURL(url), 1000);
+    if (hasLabels) reviewer.readOnly = true;
+    dirty = false;
+    status(`Exported ${records.filter(complete).length} complete cases. Keep the file in the private workspace.`);
+  });
+  window.addEventListener('beforeunload', event => {
+    if (dirty) {
+      event.preventDefault();
+      event.returnValue = '';
+    }
+  });
+</script>
+</body>
+</html>
