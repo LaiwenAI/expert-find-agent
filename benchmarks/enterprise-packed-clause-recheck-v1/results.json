@@ -1,0 +1,135 @@
+{
+  "job": "43394",
+  "gpu": "NVIDIA GeForce RTX 5090",
+  "code_sha256": "26bf5399a67af0f7bf583fe142b1b62b8c116314bd65b3066e69f71cab023ba3",
+  "controls": {
+    "whole_block": {
+      "queries": 72,
+      "requests_with_role_changes": 0,
+      "changed_qualification_membership": 0,
+      "target_correct": 60,
+      "false_qualification": 2,
+      "missed_qualification": 10
+    },
+    "packed_block": {
+      "queries": 72,
+      "requests_with_role_changes": 1,
+      "changed_qualification_membership": 1,
+      "target_correct": 60,
+      "false_qualification": 2,
+      "missed_qualification": 10
+    },
+    "packed_guard": {
+      "queries": 72,
+      "requests_with_role_changes": 0,
+      "changed_qualification_membership": 0,
+      "target_correct": 60,
+      "false_qualification": 2,
+      "missed_qualification": 10
+    }
+  },
+  "live": {
+    "whole_block": {
+      "queries": 80,
+      "requests_with_role_changes": 0,
+      "changed_qualification_membership": 0,
+      "issued": 37,
+      "parser_counts": {
+        "fallback_rows": 56,
+        "original_block_rows": 56,
+        "fallback_slots": 74680,
+        "rechecked_blocks": 7
+      },
+      "parser_p50_p95_ms": [
+        116.45215563476086,
+        939.2813835293052
+      ],
+      "live_p50_p95_ms": [
+        177.0946765318513,
+        996.4662441052492
+      ],
+      "paired_live_p95_delta_ci95": [
+        0.0,
+        0.0
+      ],
+      "changes": {
+        "qualifications": 0,
+        "retrieved": 0,
+        "ranked": 0,
+        "decisions": 0,
+        "initial": 0,
+        "extra": 0,
+        "invoked": 0
+      }
+    },
+    "packed_block": {
+      "queries": 80,
+      "requests_with_role_changes": 2,
+      "changed_qualification_membership": 2,
+      "issued": 37,
+      "parser_counts": {
+        "fallback_rows": 56,
+        "original_block_rows": 56,
+        "fallback_slots": 12018,
+        "packed_rechecks": 7,
+        "rechecked_blocks": 7
+      },
+      "parser_p50_p95_ms": [
+        116.57303757965565,
+        636.3829023204744
+      ],
+      "live_p50_p95_ms": [
+        177.28640884160995,
+        712.6519362442192
+      ],
+      "paired_live_p95_delta_ci95": [
+        -823.241445235908,
+        1.2670256197457093
+      ],
+      "changes": {
+        "qualifications": 2,
+        "retrieved": 0,
+        "ranked": 0,
+        "decisions": 2,
+        "initial": 0,
+        "extra": 0,
+        "invoked": 0
+      }
+    },
+    "packed_guard": {
+      "queries": 80,
+      "requests_with_role_changes": 0,
+      "changed_qualification_membership": 0,
+      "issued": 37,
+      "parser_counts": {
+        "fallback_rows": 56,
+        "original_block_rows": 56,
+        "fallback_slots": 86698,
+        "packed_rechecks": 7,
+        "canonical_rechecks": 7,
+        "rechecked_blocks": 7
+      },
+      "parser_p50_p95_ms": [
+        117.46448464691639,
+        946.3933307677502
+      ],
+      "live_p50_p95_ms": [
+        176.77115369588137,
+        1005.867274384945
+      ],
+      "paired_live_p95_delta_ci95": [
+        -0.8747246116399765,
+        200.3607340157032
+      ],
+      "changes": {
+        "qualifications": 0,
+        "retrieved": 0,
+        "ranked": 0,
+        "decisions": 0,
+        "initial": 0,
+        "extra": 0,
+        "invoked": 0
+      }
+    }
+  }
+}

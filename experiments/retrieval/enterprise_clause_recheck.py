@@ -90,11 +90,11 @@ def control(row, parser, arm):
                 missed_qualification=predicted != QUALIFICATION and gold == QUALIFICATION)
 
 
-def compare(observations, controls=False):
+def compare(observations, controls=False, arms=ARMS):
     earlier = [r["whole_block"] for r in observations]
     draws = np.random.default_rng(20261124).integers(len(earlier), size=(6000, len(earlier)))
     result = {}
-    for arm in ARMS:
+    for arm in arms:
         current = [r[arm] for r in observations]
         matched = list(zip(earlier, current, strict=True))
         report = result[arm] = dict(
@@ -121,7 +121,8 @@ def compare(observations, controls=False):
     return result
 
 
-def run(queries, corpus, roles, vectors, metadata, models, control_file, output):
+def run(queries, corpus, roles, vectors, metadata, models, control_file, output, *,
+        parser_class=ClauseParser, arms=ARMS, script_path=None):
     search.role.require_cuda(output)
     if (digest(queries), digest(corpus), digest(control_file)) != (DEVELOPMENT, SOURCE_INVENTORY, CONTROLS):
         raise ValueError("Unexpected private or public inputs")
@@ -135,22 +136,22 @@ def run(queries, corpus, roles, vectors, metadata, models, control_file, output)
         raise ValueError("Vector index provenance differs")
     index = GpuOwnedVectorIndex(ExactOwnedVectorIndex(
         np.load(vectors, allow_pickle=False), list(sources), [[r["expert_id"]] for r in sources.values()]))
-    parser = ClauseParser(models / "qwen3-4b-instruct-2507")
+    parser = parser_class(models / "qwen3-4b-instruct-2507")
     verifier = search.EncodedReader(Reranker(models / "qwen3-reranker-0.6b"))
     fixture = (parser, QwenTorchEmbedding(enc), index, sources,
                search.role.load_role_index(roles, SOURCE_INVENTORY, sources), verifier)
-    for arm in ARMS:
+    for arm in arms:
         request("Find an expert in sensor calibration. Prior testing on optical components is required.", arm, fixture)
     observed = []
     for i, row in enumerate(rows(queries)):
-        offset = i % len(ARMS)
-        observed.append({arm: request(row["text"], arm, fixture) for arm in ARMS[offset:] + ARMS[:offset]})
+        offset = i % len(arms)
+        observed.append({arm: request(row["text"], arm, fixture) for arm in arms[offset:] + arms[:offset]})
         if (i + 1) % 20 == 0:
             print(f"Completed {i+1} private development requests", flush=True)
-    public = [{arm: control(row, parser, arm) for arm in ARMS} for row in json.loads(control_file.read_bytes())]
+    public = [{arm: control(row, parser, arm) for arm in arms} for row in json.loads(control_file.read_bytes())]
     write(output, dict(job=os.environ["SLURM_JOB_ID"], gpu=torch.cuda.get_device_name(),
-                       code_sha256=digest(Path(__file__)), controls=compare(public, True),
-                       live=compare(observed)))
+                       code_sha256=digest(script_path or Path(__file__)), controls=compare(public, True, arms),
+                       live=compare(observed, arms=arms)))
 
 
 if __name__ == "__main__":
