@@ -20,6 +20,14 @@ The repository results associated with the manuscript are enumerated here. The a
 \item Numerical scope and personal execution: \path{benchmarks/bilingual-numeric-passages-v1/results.json} and \path{benchmarks/bilingual-numeric-attribution-v1/results.json}. The two tests have distinct denominators.
 \end{itemize}
 
+\subsection{Reusable role interpretation and source-bound checking}
+The live eLife replay in \path{benchmarks/elife-normalized-search-v1} compares once-per-source and once-per-request normalization with the same ranking, scoring, and author-field checks. The request-level implementation combines both roles and both answer encodings into a single batch, evaluated separately in \path{benchmarks/plos-study-role-normalization-batch-v1}. Queue traces are in \path{benchmarks/elife-normalized-search-load-v1}. Both arms keep the same ordered recommendations and document citations on every recorded trace. The nominal 7-request/s trace reduces queue P95 from 1.93--2.15 s to 106--112 ms, while service P95 falls from 309--311 ms to 84--85 ms. These finite traces use one GPU worker and do not establish steady-state capacity.
+
+The early-nomination ablation in \path{benchmarks/elife-normalized-nomination-v1} holds the single normalization fixed. A partial index of 144 complete declarations yields 59 tag-backed recommendations versus 58 in the topic baseline. At full available coverage the values are 60 and 58. Equal-issuance prefixes show no gain in either mask. Ordinary global rescue rarely changes a fixed-count output. The exploratory distinct-person rescue in \path{benchmarks/first-query-new-person-rescue-v1} obtains more replacements without a stable publisher-tag gain. Independent judgments of the changed witnesses are pending.
+
+\paragraph{Additional proof obligations.}
+In \path{benchmarks/credit-taxonomy-transfer-v1}, the full contribution menu maps all 42 covered requests with an optional distractor; only one of 14 hard scope requests is declined. \path{benchmarks/credit-role-proof-gate-v1} measures the cost of separately judging whether a role is sufficient. Agreement between two proof-type encodings blocks all 18 mandatory controls, while retaining 5 of 18 standalone requests and 2 of 18 with optional conditions. \path{benchmarks/credit-residual-packets-v1} preserves all 144 annotated spans when no trusted role anchor has discharged them. \path{benchmarks/credit-automatic-role-anchors-v1} tests automatic role quotation separately from semantic sufficiency and observes missed conditions even among verbatim citations.
+
 The sections below document earlier development experiments and related infrastructure.
 
 \label{app:protocols}
@@ -283,8 +291,3 @@ On all 73 previously explored reviewer queries, placing candidates that pass lex
 Thirty overlapping random splits of the same 73 previously explored queries replay the simulated correction memory. On new folds, the mean soft P@5 difference from dense averages $+0.011$; 21 split means are positive, eight negative and one zero. Splits are dependent, the threshold was chosen previously, and reviewer ratings simulate corrections. Old and new folds have the same sampling role, so this does not evaluate temporal retention, actual user feedback or agent cost.
 \paragraph{Open-weight decision pilot.}
 On the first 20 previously explored MERIT reviewer-rating pairs, frozen Qwen3-4B-Instruct-2507 selects between single-token labels by next-token score. All 20 inputs fit the 8,192-token cap; 12 decisions match the binary reviewer rating, including eight false positives and no false negatives. The unconstrained greedy first token is a valid digit in all 20 and has the same accuracy. Mean GPU forward time is 0.169 seconds, excluding tokenization, initialization, retrieval and serving. This small nonrandom pilot is neither an enterprise-quality benchmark nor a complete-agent comparison; normalized two-label scores are not calibrated probabilities.
-
-
-
-
-

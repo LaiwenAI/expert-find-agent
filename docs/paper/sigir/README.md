@@ -1,6 +1,6 @@
 # SIGIR manuscript
 
-`main.tex` is the canonical editable English manuscript; `supplement.tex` builds the separate supplementary PDF from `appendix.tex`, containing artifact pointers and earlier development comparisons. The main draft studies low-cost first-query search through fixed-budget nomination, output-sensitive verification, and controlled attribution. It reports public evidence and the outstanding enterprise adjudication. Obsolete Markdown manuscripts have been removed. The main file uses ACM `acmart` with `sigconf,natbib=true,anonymous=true,pbalance=true`, following the official SIGIR2027 full-paper guidance:
+`main.tex` is the canonical editable English manuscript; `supplement.tex` builds the separate supplementary PDF from `appendix.tex`, containing artifact pointers and earlier development comparisons. The main draft studies low-cost first-query search through reusable query interpretation, fixed-budget nomination, output-sensitive verification, and controlled attribution. It reports public evidence and the outstanding enterprise adjudication. Obsolete Markdown manuscripts have been removed. The main file uses ACM `acmart` with `sigconf,natbib=true,anonymous=true,pbalance=true`, following the official SIGIR2027 full-paper guidance:
 https://sigir2027.org/pages/submit-full.html
 
 Build from repository root:
