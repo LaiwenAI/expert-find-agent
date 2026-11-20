@@ -75,7 +75,7 @@ class RolePostings:
         }
 
 
-def source_plan(ranks, facets, fallback, depth):
+def first_pair(ranks, facets):
     owners = defaultdict(lambda: ([], []))
     for side, sources in enumerate(facets):
         for doi, (matched, unknown) in sources.items():
@@ -87,11 +87,15 @@ def source_plan(ranks, facets, fallback, depth):
         (u, a, d), (v, b, e) = pair
         return u + v, max(a, b), a + b, d, e
 
-    first = min(
+    return min(
         (pair for left, right in owners.values() for pair in product(sorted(left)[:2], sorted(right)[:2])
          if pair[0][2] != pair[1][2]),
         key=pair_key, default=None,
     )
+
+
+def source_plan(ranks, facets, fallback, depth):
+    first = first_pair(ranks, facets)
     if first is None:
         return fallback
     anchors = [entry[2] for entry in first]
