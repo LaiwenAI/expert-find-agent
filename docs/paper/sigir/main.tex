@@ -30,12 +30,12 @@ Expert search must find people whose own contributions satisfy a request. When t
 \section{Introduction}
 An enterprise looking for help with industrial inspection may need a person who has worked under a specified line condition and can document a measured operating result. A paper about the same equipment supplies a retrieval lead. A source stating a design target or citing someone else's experiment supplies different evidence. Expert search must retain those distinctions while finding useful candidates within a practical time budget.
 
-Consider three available reads and two conditions, designing the inspection method and validating it on a production line. The first paper for each condition may describe a different contributor. A third paper can match the topic and still leave both contributors unconfirmed. Returning either person would misattribute at least one condition. More reading also wastes work if the available declarations rule out a common contributor. The agent joins the two ranked pools by contributor before opening evidence (Figure~\ref{fig:plan}). It then uses verified declarations to choose whether to read another source, recheck an uncertain role, or stop.
+Consider three available reads and two conditions, designing the inspection method and validating it on a production line. The first paper for each condition may describe a different contributor. A third paper can match the topic and still leave both contributors unconfirmed. Returning either person would misattribute at least one condition. More reading also wastes work if the available declarations rule out a common contributor. The agent joins both ranked pools by contributor before reading (Figure~\ref{fig:plan}). Its default path verifies the planned declarations and uses an exact bound where the task permits skipping a read.
 
 \begin{figure*}[t]
 \centering
 \input{figures/first-query-agent}
-\caption{First-query expert search. Indexed contributor roles pair evidence before the first read. Original declarations resolve per-condition proof obligations. The dashed transition marks optional source repair.}
+\caption{Default first-query route. The packed contributor-role index allocates a fixed read budget. An exact bound may skip a read when its outcome cannot change the witness package. Verified declarations determine whether the agent issues or abstains.}
 \label{fig:plan}
 \end{figure*}
 
@@ -78,16 +78,6 @@ D^{+}=\{d : \exists e\in B(d),\ |D_e|\ge 2\}.
 \end{equation}
 Any compatible pair shares a contributor and consists of distinct sources, so both sources lie in $D^{+}$. A source outside $D^{+}$ has zero additional pair gain with either anchor. Keeping its original topical rank preserves fallback choices. Thus dropping its role row, or skipping it during role lookup, leaves the ordered read plan and its verified output invariant. The result assumes stable person identifiers in a fixed inventory. Requests that can be answered with one source use their own path.
 
-\paragraph{Repair using observed contributor roles.}
-Let $O_i^t(e)$ contain the opened sources that confirm role $i$ for contributor $e$ after $t$ reads. If the current proof is incomplete and the scheduled next source is incompatible with every confirmed anchor, consider replacing it. A second policy also replaces an opaque scheduled source when a known compatible witness is available. For each candidate $d$ and missing condition $j$, let $u_j(e,d)$ be zero when the role is indexed and one when its entry is opaque. Exclude incompatible rows and already opened sources. Then choose the minimum key
-\begin{equation}
-\bigl(u_j(e,d),\;
-\max\{r_{3-j}(a),r_j(d)\},\;
-r_{3-j}(a)+r_j(d),d\bigr)
-\label{eq:repair}
-\end{equation}
-over confirmed anchors $a\in O^t_{3-j}(e)$ and compatible $d$. Keep the original action if there is no eligible replacement. This policy spends the same three reads as static nomination. A split static control holds the plan fixed and isolates the timing cost of waiting for declarations. We evaluate repair after two reads and after both one and two reads.
-
 \paragraph{Prune before parallel reads.}
 For the fixed three-source byline plan, an unopened third source can only contribute a proof if it can pair with one of the two other sources. Skip it when it has no common indexed author on a compatible orientation of the two ranked lists. Parallelism is retained. This precheck assumes complete author identifiers for the reference scope and verifies every other proposed witness.
 
@@ -129,7 +119,7 @@ For a numerical criterion, the verifier selects sentences reporting the same obj
 
 \section{Experimental setup}
 \label{sec:data}
-We ask three questions. RQ1 tests whether contributor-aware planning recovers more complete proofs with the same reading budget. RQ2 tests which reads and model calls can be removed with the same outputs, and how that changes latency. RQ3 tests how these gains transfer to independently judged expert and source relevance.
+The evaluation separates evidence recovered at a fixed reading budget from computation saved at fixed output quality. The publisher tasks isolate same-contributor proof assembly. Reviewer search and TREC Enterprise test transfer to independent relevance and citation judgments.
 \subsection{Tasks and datasets}
 \paragraph{Enterprise evaluation.}
 The private pool contains 100 complete requests and 700 preselected expert views. The 80 development and 20 sealed requests have disjoint groups by expert and source identifiers in the frozen snapshot. Each request receives five dense and two random candidates, with up to three papers and one profile per expert. This pool can measure judgments conditional on a common inventory. It cannot estimate full-corpus expert recall. The main enterprise replay here uses eight development requests and leaves the sealed partition untouched. The 48-case review packet deliberately oversamples diagnostic source views and awaits independent judgments.
@@ -152,11 +142,11 @@ z_i=L(q,e_i)\min_{r\in H_q}\;\max_{d\in D_{ir}}
 \end{equation}
 A missing witness contributes zero; the minimum is one when no hard criterion applies. An empty expert slot also contributes zero. Evidence for different requirements may come from different sources, but attribution always uses the same expert $e_i$. With $w_i=1/\log_2(i+1)$ the rank-weighted score is $\sum_i w_i z_i/\sum_i w_i$. Supported P@5 averages the five $z_i$ without rank weights. The stricter citation measure also requires each additional citation to substantiate the claim to which it is attached.
 
-Give each unresolved judgment bounds $[0,1]$ and propagate them through Eq.~\ref{eq:witness-support}. In paired contrasts, cancel identical query--expert--witness packages at the same weight before bounding the rest. Estimate sampling intervals separately by company, parent query or paper group. Report relevance, attribution, and individual requirement judgments as diagnostics. Compare client P95 and cost per independently verified success under comparable coverage and adverse risk, including fallback and amortized index costs.
+We propagate $[0,1]$ for unresolved judgments through Eq.~\ref{eq:witness-support}. Identical query--expert--witness packages at equal weights cancel in paired contrasts. Sampling intervals account separately for clusters of companies, parent queries, or papers. We retain relevance, attribution, and each requirement judgment as diagnostics. The cost endpoint comprises client P95 and cost per verified success at comparable coverage and risk, with fallbacks and amortized index costs counted.
 
 \section{Results and analysis}
 \label{sec:results}
-\subsection{RQ1: Coverage at equal reading cost}
+\subsection{Coverage under a fixed reading budget}
 All routes open three local declarations after live 0.6B query encoding and hybrid ranking. The sequential control reads one result per condition before choosing a third source using the observed role gap. Joint nomination recovers more known matches at comparable warm serial latency but also makes more unresolved returns (Table~\ref{tab:joint}). Cached batch embeddings yield 26 eLife matches; the live handler yields 14 with unchanged downstream rules. We use the live count in comparisons. At depth 64, owner postings reproduce the exhaustive plans while lowering planning P95 from 323.29--326.09 to 109.55--110.54~$\mu$s. At depth eight, the exhaustive scan is faster.
 
 \begin{table*}[t]
@@ -198,15 +188,8 @@ eLife (51) & 64 & 17 & 0 / 0 & 14 / 15 & 17 / 18 \\
 \paragraph{Open-topic control with the same role metadata.}
 With three declaration reads and a common personal-role index, joint planning produces 85/140 known/issued PLOS proofs, compared with 30/45 for sequential repair. It produces 46/49 on eLife, compared with 0/3. On the 45 PLOS requests both answer, each proves 30 by the observed tags. Matching the panel-wide issuance quota at 45 gives 36 versus 30. The paired difference is $+3.75$ points over the 160 requests (95\% topic-pair interval $[-6.90,14.37]$). Allowing untagged evidence to receive either judgment gives an identified difference of $[-7,13]$ proofs at that quota. The natural-issuance difference remains positive under the same bounds. Warm local P95 is about 18 ms for both routes. The demonstrated advantage is broader coverage. An advantage in candidate selection at the same issuance remains unresolved.
 
-\begin{figure}[t]
-\centering
-\input{figures/evidence-reach}
-\caption{Label-supported proof availability across the three-read planner. Percentages divide by all requests in each panel. Counts denote proof availability, which can differ from the returned proof.}
-\label{fig:reach}
-\end{figure}
-
 \paragraph{What limits the three-read plan.}
-Figure~\ref{fig:reach} localizes most PLOS losses to allocation. Enumerating sets containing every compatible pair makes all pool opportunities available to the planner. Rank-weighted selection still leaves fewer supported proofs reachable after the reads than the original joint planner on both complete indexes. Scoring up to six condition--source pairs before reading yields 87 versus 80 known proofs at 132 PLOS issuances (paired 95\% interval $[-2.58,11.77]$ percentage points over all requests). On eLife the count changes from 46 to 45 at 49 issuances. This reader raises warm local P95 from roughly 18 to 54--56 ms. Cross-fitted call routing gives no consistent gain across publishers, so the first-query method uses the original joint plan without additional neural scoring.
+Most PLOS losses occur during three-source allocation. Enumerating sets containing every compatible pair makes all pool opportunities available to the planner. Rank-weighted selection still leaves fewer supported proofs reachable after the reads than the original joint planner on both complete indexes. Scoring up to six condition--source pairs before reading yields 87 versus 80 known proofs at 132 PLOS issuances (paired 95\% interval $[-2.58,11.77]$ percentage points over all requests). On eLife the count changes from 46 to 45 at 49 issuances. This reader raises warm local P95 from roughly 18 to 54--56 ms. Cross-fitted call routing gives no consistent gain across publishers, so the first-query method uses the original joint plan without additional neural scoring.
 
 \paragraph{Can observed roles improve the remaining reads?}
 Table~\ref{tab:observed} compares six routes on the same mixed catalog, role fields, and three-read budget. The setup also masks role metadata to 50\% and 25\% while keeping every source available to read. In each masked PLOS setting, repair after the first read changes one choice. All adaptive routes return identical proofs and citations to static joint planning. On eLife the selected reads are identical. The sparse-index proof gap persists before final ranking. Reading a fallback in a later batch changes no result and adds a dependency if reads must go to a remote service.
@@ -234,8 +217,17 @@ Prefer indexed repairs & 85 / 140 & 46 / 49 & 33 & 34 & 22.6--23.2 & 21.8--23.3 
 \paragraph{Source-specific control with the same indexed roles.}
 On the frozen 13-group PLOS keyword panel, we supply the requested roles and compare joint source planning with sequential repair using the same personal-role metadata. Each route opens three distinct declarations. With both papers present, both identify all 39 exact proofs, but joint planning emits 54 proofs and sequential repair emits 43. On the 43 requests that both answer, each has 39 exact proofs. At an equal panel-wide quota of 43 by citation rank, joint planning retains 36 exact proofs. When a designated paper is removed, joint and sequential planning issue 50 and 8 wrong-source substitutes across 156 requests. Both routes take about 18 ms at warm local P95. When a request identifies publications through source-specific clues, compatible roles alone cannot establish source identity. Sequential repair already reaches the exact-proof ceiling on these groups.
 
-\subsection{RQ2: Output-preserving work and measured latency}
+\begin{figure*}[t]
+\centering
+\input{figures/linked-index-tradeoffs}
+\caption{Query-local filtering against the packed global role index on two independent eLife snapshots. Panel A separates role payload from extra link masks. Panels B and C share conditions. The endpoints in C give the filtered minus global planning P95 for each traversal order. Filled and open endpoints mark forward and reverse traversal, respectively. Negative values favor filtering. The connected subcatalogs retain only documents sharing a contributor with another source. All five arms preserve the read plan and final response.}
+\label{fig:linked-tradeoffs}
+\end{figure*}
+
+\subsection{Exact savings in indexing, reads, and verification}
 Under Eq.~\ref{eq:linked-index}, 55 of 452 sources carry role rows and the serialized role payload falls from 201,518 to 22,847 bytes. The 211 PLOS and eLife requests retain their ordered reads, experts, citations, and abstentions in two traversal orders. The compact lookup lowers warm paired P95 by 0.32--0.84 ms. The full rankings and bylines remain resident. The two catalogs each have 15 contributors linked across papers, so the reduction depends on graph sparsity.
+
+The extended and confirmation eLife snapshots, with disjoint verified contributors and DOIs, add 398 requests over 2,011 articles. All five role-index variants agree on every ordered plan and response at depths 32 and 128, including in linked-only stress catalogs. Compared with the packed global index, query-local filtering removes most role lookups on the original snapshots, but its adjacency masks cost more bytes than the packed role records. The planning gain on the original depth-128 workloads is about 0.02--0.03 ms and reverses on the connected depth-128 workloads (Figure~\ref{fig:linked-tradeoffs}). The packed global projection is the default in this implementation.
 
 At a 25\% nominal role-payload budget, contributor-degree and pair-cover placement also preserve all full-index responses in both catalogs. At tighter capacities, graph coverage alone does not consistently improve outcomes. At the 5\% eLife byte budget, pair cover completes 11 two-source contributor histories versus eight for contributor degree, yet has 31 instead of 38 label-supported returns. At the common quota of 35, the counts are 31 and 32.
 
@@ -265,7 +257,7 @@ Top-two feasibility & 10 / 0 & 0 / 1 & 13 & 0 & 56.3 & 17.3--17.5 \\\bottomrule
 
 One group accounts for the added proof. Exact feasibility reproduces every proof and abstention, removes 84 of 101 forwards, and cuts withdrawal P95 by over 75\%. On intact requests it leaves enough slow calls to dominate the tail. Top-two feasibility reduces intact P95 and retains the additional proof in this replay. A matched-call offline control that ranks requests by ridge confidence also keeps that proof at both budgets. The approximate filter therefore needs new evidence before it can support a quality claim. Each route retains the baseline's one wrong-source output under withdrawal.
 
-\subsection{RQ3: Transfer to separately judged experts and sources}
+\subsection{Transfer to judged experts and sources}
 TREC Enterprise supplies separate expert and supporting-document judgments. Under the historical-graph replay, the strongest fixed nomination and fitted dispatcher finds 10 supported recommendations. A wider joint planner finds 8 under the same per-topic read and check limits. To isolate nomination from source choice, we repeat the fixed baseline up to its final check, then either reallocate that check on the same document within the original 20 nominees or permit any of 60 eligible nominees. A leave-one-topic-out fit scores choices, and the final document and one-check budget are held fixed. All three policies use 80 document reads and 266 checks, and all return 10 supported slots out of 11 issued across 49 topics. Opening the final action reaches 14 new nominees without a support gain. Unjudged pairs are unconfirmed, and this replay uses historical source menus and no live document reading.
 
 A separate TREC citation diagnostic fixes the five returned experts and replaces only one citation in each of 50 packages. The at-least-one support measure credits all 50 both before and after the replacement. The all-citations support measure identifies every deliberate substitution. This demonstrates metric sensitivity within the judged pool. It does not estimate how often an operational expert finder would make that error.
@@ -283,7 +275,7 @@ The public first-query panels compose tasks from publisher metadata and use veri
 
 The fixed-budget evidence covers labeled contribution tasks. Enterprise expert search needs an independently judged comparison against sequential repair and hybrid ranking under a common interpretation, verification, and load protocol. The appropriate endpoints are supported P@5 under matched work and client latency and cost per supported success under comparable coverage and risk.
 
-Continual updates remain secondary. Compare them with a frozen initial agent on disjoint old and new tasks, including feedback and training costs.
+The reported comparisons use a frozen first-query policy. The effect of continual updates on new and old tasks remains unmeasured.
 
 \section{Conclusion}
 Contributor-constrained source nomination increases label-supported evidence coverage under a fixed reading budget in the mixed open-topic catalogs. When the task names source-specific cues and supplies exact roles, a strong sequential route already reaches every exact proof on the held panel and produces fewer source substitutes. Exact checks can skip source reads or role-model calls while retaining fixed-policy outcomes. Work reduction affects client latency when it eliminates the calls that dominate the tail. The results support a lightweight first query and motivate separate measurement of when any more expensive verification improves expert selection.

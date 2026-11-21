@@ -9,6 +9,7 @@ The repository results associated with the manuscript are enumerated here. The a
 \item Enterprise parser and sealed review protocols: \path{benchmarks/enterprise-scope-cross-fit-v1/}, \path{benchmarks/enterprise-scope-review-union-v1/}, and \path{benchmarks/enterprise-sealed-first-query-v1/}.
 \item Matched role metadata and three-read source allocation: \path{benchmarks/plos-matched-contributor-reads-v1/results.json}. The comparison reports exact proof coverage against sequential repair under both natural and matched issuance, and substitute risk under withdrawal.
 \item Frozen keyword role recheck: \path{benchmarks/plos-frozen-role-recheck-service-v1/manifest.json} and \path{benchmarks/plos-frozen-role-recheck-service-v1/results.json}. The 2024 paper groups are excluded from the development catalog and role recheck tuning. The follow-up \path{benchmarks/plos-recheck-feasibility-v1/results.json} reuses the groups to compare exact and top-two filtering, with request-level proof equality checks. One additional intact proof supports a descriptive comparison only.
+\item Independent source graph transfer and query-local role lookup: \path{benchmarks/linked-role-lane-index-v1/results.json}. Five index variants preserve every plan and response at both candidate depths. The result includes component and end-to-end P95 and packed payload.
 \item Linked-source index and byte-matched placement: \path{benchmarks/open-topic-index-placement-v1/results.json}. The exact replay checks ordered reads and responses against the full role index. The placement sweep reports both extraction-record and serialized role-payload budgets.
 \item Observed-role replanning at 100\%, 50\%, and 25\% role-index exposure: \path{benchmarks/open-topic-observed-repair-v1/results.json}. Forward and reverse runs reproduce the adaptive expert and citation decisions under exactly three reads.
 \item Fixed-budget nomination and blind review: \path{benchmarks/role-gap-title-refill-v1/results.json} and \path{benchmarks/role-gap-review-v1/results.json}. The review scope is topical support in the title and abstract, with no completed judgments in this draft.
@@ -148,6 +149,82 @@ In 36 authored requests with a mandatory condition embedded in the role clause, 
 In \path{benchmarks/credit-taxonomy-transfer-v1}, the full contribution menu maps all 42 covered requests with an optional distractor; only one of 14 hard scope requests is declined. \path{benchmarks/credit-role-proof-gate-v1} measures the cost of separately judging whether a role is sufficient. Agreement between two proof-type encodings blocks all 18 mandatory controls, while retaining 5 of 18 standalone requests and 2 of 18 with optional conditions. \path{benchmarks/credit-residual-packets-v1} preserves all 144 annotated spans when no trusted role anchor has discharged them. \path{benchmarks/credit-automatic-role-anchors-v1} tests automatic role quotation separately from semantic sufficiency and observes missed conditions even among verbatim citations.
 
 \subsection{Data splits, release, and pending judgments}
-The bilingual construction set groups the five query variants under each of 1,000 original needs. It retains all 5,000 pairs in the denominator. A frozen second screening pass retains 4,224 and leaves 776 without a retained screen pass. These are model-screened construction statuses. Expert-fit and independently reviewed semantic labels remain absent. Preserve parent provenance, original offsets, units and comparator direction, and keep real source text outside the public code and aggregate records.
+The bilingual construction set groups the five query variants under each of 1,000 original needs. It retains all 5,000 pairs in the denominator. A frozen second screening pass retains 4,224 and leaves 776 without a retained screen pass. These are model-screened construction statuses. Expert-fit and independently reviewed semantic labels remain absent. The private construction records retain parent provenance, offsets, units and comparator direction. The released aggregate records omit original source text.
 
 The enterprise scope diagnostic groups 80 development requests by company and lexical near-duplicates before cross-fitting the qualification parser. The resulting 71 groups stay intact. Each fold uses 48 training requests, 16 calibration requests and 16 test requests. The mixed-supervision route skips the 4B parser for 21 requests but changes the qualification set on five of those skips. This is a disagreement with a model reference. Separate freezes retain 154 qualification excerpts for independent judgment and 123 enterprise groups for the predeclared full-index versus shortlist-restricted rescue comparison. Neither review has completed.
+
+\subsection{Alternative actions tested at a fixed read budget}
+\paragraph{Filter role lookups within a query.}
+Let $N(d)$ be the other sources sharing a byline identifier with $d$.
+For a role on ranked list $L_i$, a source needs a role lookup only if
+$N(d)\cap L_{3-i}\ne\varnothing$. This predicate depends only on the
+two ranked lists and excludes self-pairs. We store $N(d)$ as a mask of
+linked source ordinals. The shortlist mask replaces the intersection
+with a bitwise operation. The planner retains all original ranks and
+fallback choices. The comparison uses the packed repeated-author
+projection, which already removes roles of single-source identities.
+
+\paragraph{Repair using observed contributor roles.}
+Let $O_i^t(e)$ contain the opened sources that confirm role $i$ for contributor $e$ after $t$ reads. If the current proof is incomplete and the scheduled next source is incompatible with every confirmed anchor, consider replacing it. A second policy also replaces an opaque scheduled source when a known compatible witness is available. For each candidate $d$ and missing condition $j$, let $u_j(e,d)$ be zero when the role is indexed and one when its entry is opaque. Exclude incompatible rows and already opened sources. Then choose the minimum key
+\begin{equation}
+\bigl(u_j(e,d),\;
+\max\{r_{3-j}(a),r_j(d)\},\;
+r_{3-j}(a)+r_j(d),d\bigr)
+\label{eq:repair}
+\end{equation}
+over confirmed anchors $a\in O^t_{3-j}(e)$ and compatible $d$. The original action remains when no eligible replacement exists. This policy spends the same three reads as static nomination. A split static control holds the plan fixed and isolates the timing cost of waiting for declarations. We evaluate repair after two reads and after both one and two reads.
+
+\subsection{Exact role lookup on two held-out snapshots}
+The five systems differ only in role representation and lookup.
+They share hybrid retrieval, three declaration reads and the final
+verifier. Table~\ref{tab:held-role-lookup} reports plan formation
+times for both orders. All systems returned the same plans and
+output within each row. The connected catalogs reuse the requests.
+
+\begin{table*}[t]
+\caption{Equal three-read comparisons on the independent extended and confirmation eLife snapshots. The five timing columns give planning P95 (ms) across both replay orders. Coverage is label-supported / issued. Connected catalogs restrict the article inventory to sources with a contributor link.}
+\label{tab:held-role-lookup}
+\small
+\centering
+\begin{tabular}{@{}llrrrrrrr@{}}
+\toprule
+Snapshot & Catalog & Depth & Coverage & Full roles & Global links & Query links & Packed global & Packed query \\
+\midrule
+Extended & Original & 32 & 8 / 12 & 0.184--0.283 & 0.081--0.096 & 0.070--0.075 & 0.072--0.077 & 0.068--0.072 \\
+Extended & Original & 128 & 59 / 119 & 0.870--0.876 & 0.325--0.333 & 0.261--0.270 & 0.286--0.295 & 0.254--0.268 \\
+Extended & Connected & 32 & 84 / 194 & 0.241--0.453 & 0.255--0.419 & 0.160--0.252 & 0.176--0.317 & 0.128--0.208 \\
+Extended & Connected & 128 & 86 / 205 & 0.763--0.789 & 0.768--0.798 & 0.783--0.808 & 0.508--0.516 & 0.546--0.556 \\
+\addlinespace
+Confirmation & Original & 32 & 24 / 32 & 0.234--0.240 & 0.104--0.107 & 0.081--0.086 & 0.087--0.092 & 0.072--0.077 \\
+Confirmation & Original & 128 & 80 / 141 & 1.016--1.694 & 0.321--0.568 & 0.256--0.471 & 0.277--0.497 & 0.244--0.476 \\
+Confirmation & Connected & 32 & 65 / 182 & 0.235--0.247 & 0.243--0.249 & 0.156--0.159 & 0.163--0.164 & 0.123--0.129 \\
+Confirmation & Connected & 128 & 66 / 193 & 0.725--0.740 & 0.717--0.740 & 0.797--0.815 & 0.462--0.472 & 0.510--0.523 \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\subsection{Expert nomination under a matched TREC budget}
+The historical replay masks each test topic before fitting and building
+source menus. All policies nominate 20 owners under the same read and
+check limits for each topic. Actual work can fall below those limits.
+
+\begin{table*}[t]
+\caption{Nine TREC Enterprise nomination and dispatch policies on 49 topics. Support requires a grade-2 expert and a grade-2 citation. The read oracle observes the judgments, so it serves as a ceiling.}
+\label{tab:trec-transfer}
+\small\centering
+\begin{tabular}{@{}lrrrr@{}}
+\toprule
+Policy & Reads & Checks & Supported / issued & Read oracle \\
+\midrule
+Reuse-first reference & 103 & 285 & 9 / 9 & 49 \\
+Fitted dispatch, original shortlist & 80 & 266 & 10 / 11 & 49 \\
+Wide fit, original shortlist & 78 & 282 & 10 / 12 & 49 \\
+Wide fit, expanded nominees & 75 & 277 & 5 / 6 & 52 \\
+Static plan, original shortlist & 85 & 282 & 10 / 12 & 49 \\
+Static joint nomination & 81 & 285 & 8 / 10 & 50 \\
+Joint nominees, open source menu & 77 & 285 & 8 / 10 & 50 \\
+Adaptive dispatch, original shortlist & 103 & 282 & 10 / 12 & 49 \\
+Adaptive dispatch, joint nominees & 102 & 285 & 7 / 9 & 50 \\
+\bottomrule
+\end{tabular}
+\end{table*}
