@@ -18,6 +18,16 @@ from experiments.followir.core17_reranking import digest, write_json
 ARMS = ("stock", "static_postings", "dense_singletons", "student_agreement")
 
 
+def dense_source_fallback(service, ranking, scores, clues):
+    required = [{pool[0]} for pool in alternative_roles(scores)]
+    pairs = pairs_for(service.index, ranking, required)
+    if not pairs:
+        return payload(service.index, None, required)
+    pair = pairs[0]
+    accepted = verify(service.source, service.index, clues, pair, (0, 1)) > service.cutoffs["source"]
+    return payload(service.index, pair if accepted else None, required, source_calls=1) | {"source_rows": 2}
+
+
 def required_by_policy(service, scores, vectors, heads, cutoff):
     pools = alternative_roles(scores)
     leaders = [pool[0] for pool in pools]

@@ -32,6 +32,7 @@ from experiments.litsearch.dense_cache import verify_checkpoint
 ARMS = ("baseline", "batch", "reserve_agreement")
 PRESCREEN_ARMS = ("baseline", "reserve_agreement", "reserve_prescreen")
 CASCADE_ARMS = ("baseline", "reserve_prescreen", "student_then_reranker", "student_then_teacher")
+JOINT_SERVICE_ARMS = ("baseline", "reserve_prescreen", "student_then_teacher", "dense_joint")
 RATES = (28, 60)
 FROZEN_SHA = "f3f24de1b725c529b6dc142a0eedfc6413129bc67643e9b74d0909df0b94c956"
 
@@ -66,6 +67,12 @@ def execute(service, request, arm, cutoff, lightweight=None):
     ranking = service.index.full_rank(vectors[:2], clues, None)
     state = plan(service, ranking, scores, clues, roles, None, "screened", run_role=False)
     pair, base, response = state["pair"], state["roles"], state["response"]
+    if arm == "dense_joint":
+        if not pair and not response["calls"]:
+            from experiments.credit.paired_role_joint_postings import dense_source_fallback
+
+            return json.dumps(dense_source_fallback(service, ranking, scores, clues))
+        arm = "student_then_teacher"
     if not pair or response["calls"] or response["owners"]:
         return json.dumps(response)
     if arm in ("reserve_agreement", "reserve_prescreen", *LIGHTWEIGHT_METHODS, *CASCADE_ARMS[2:]):
@@ -189,7 +196,10 @@ def run(args):
         heads, training_report, fit = fit_lightweight(args.plos, service, definitions, training)
         report = dict(training=training_report, calibration=fit, plos_sha256=digest(args.plos))
         lightweight = (heads, definitions, fit)
-        requested = CASCADE_ARMS if args.cascade else ("baseline", "reserve_prescreen", *LIGHTWEIGHT_METHODS)
+        if args.joint_postings_service:
+            requested = JOINT_SERVICE_ARMS
+        else:
+            requested = CASCADE_ARMS if args.cascade else ("baseline", "reserve_prescreen", *LIGHTWEIGHT_METHODS)
         print("Frozen lightweight routes", fit, flush=True)
     arms = requested[::-1] if args.reverse else requested
     for offset, rate in enumerate(RATES):
@@ -207,6 +217,8 @@ def run(args):
                 if response["role_calls"] + response["source_calls"] != response["calls"] or response["calls"] > 1:
                     raise ValueError("Shared verifier budget exceeded")
                 calls.update(role_forwards=response["role_calls"], source_forwards=response["source_calls"])
+                if args.joint_postings_service:
+                    calls.update(source_rows=response.get("source_rows", response["source_calls"]))
             detail["verification"] = dict(calls)
             if arm in by_arm and by_arm[arm] != responses:
                 raise ValueError("Traffic changed the emitted evidence")
@@ -233,6 +245,12 @@ def run(args):
             interval["sampling_unit"] = "connected paper/recorded-author groups"
             contrasts[arm][view] = dict(totals=dict(counts), positives=len(positives),
                                         requests=len(rows), paired_strict_change=interval)
+            if arm == "dense_joint":
+                extra = [int(metrics[arm][req]["strict"]) - int(metrics["student_then_teacher"][req]["strict"])
+                         for req in positives]
+                paired = clustered_paired_interval(extra, group_ids)
+                paired["sampling_unit"] = "connected paper/recorded-author groups"
+                contrasts[arm][view]["paired_strict_change_vs_cascade"] = paired
     signatures = {
         arm: sha256(json.dumps([proofs[req] for req in labels], ensure_ascii=False).encode()).hexdigest()
         for arm, proofs in by_arm.items()
@@ -244,6 +262,7 @@ def run(args):
         distinct_requests=len(labels), author_connected_groups=len(set(groups.values())),
         cutoffs=frozen["cutoffs"] | {"two_batched": cutoff}, results=results, quality=contrasts,
         response_signatures=signatures, lightweight=report, cascade=args.cascade, **revisions,
+        **({"joint_postings_service": True} if args.joint_postings_service else {}),
     ))
 
 
@@ -260,9 +279,12 @@ if __name__ == "__main__":
     diagnostics.add_argument("--stage-audit-reference", type=Path)
     diagnostics.add_argument("--source-postings-reference", type=Path)
     diagnostics.add_argument("--joint-postings-reference", type=Path)
+    diagnostics.add_argument("--joint-postings-service", action="store_true")
     args = parser.parse_args()
     if args.cascade and not args.plos:
         parser.error("--cascade requires --plos")
     if args.joint_postings_reference is not None and args.plos is None:
         parser.error("--joint-postings-reference requires --plos")
+    if args.joint_postings_service and args.plos is None:
+        parser.error("--joint-postings-service requires --plos")
     run(args)
