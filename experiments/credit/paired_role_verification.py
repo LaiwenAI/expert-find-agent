@@ -74,10 +74,10 @@ class PairedReader(RoleReader):
             gaps.append(float(row[best] - row[second]))
         return decisions, min(gaps), tokens
 
-    def format_batched(self, phrases, pools):
+    def format_batched(self, phrases, pools, *, order=keyed_order):
         prompts, choices = [], []
         for phrase, pool in zip(phrases, pools, strict=True):
-            options = keyed_order(phrase, pool)
+            options = order(phrase, pool)
             definitions = [self.definitions[SUPPORT[role]] for role in options]
             definitions.append("None of these roles describes the activity.")
             listing = "\n".join(f"{label}. {text}" for label, text in zip(SYMBOLS, definitions))

@@ -22,6 +22,7 @@ from experiments.credit.keyword_author_rescue import PostingCatalog
 from experiments.credit.paired_role_prospective_service import FROZEN_SHA, clusters
 from experiments.credit.paired_role_verification import PairedReader, alternative_roles
 from experiments.credit.plos_role_inventory import ROLES
+from experiments.credit.role_option_calibration import ARMS as CALIBRATION_ARMS, RoleOptionCalibration
 from experiments.followir.core17_reranking import digest, write_json
 from experiments.litsearch.dense_cache import verify_checkpoint
 
@@ -58,7 +59,7 @@ def judge(catalog, row, pair, labels):
     return bool(owners), strict
 
 
-def recognize(row, bank, embedder, role_model, glossary, cutoff, compact_reader):
+def recognize(row, bank, embedder, role_model, glossary, cutoff, compact_reader, calibration):
     phrases = [glossary[role][int(row["family"][:16],16) % len(glossary[role])] for role in row["roles"]]
     features = encode(embedder, phrases)
     scores = {name: features @ bank[name].T for name in ("ridge","prototype")}
@@ -73,16 +74,23 @@ def recognize(row, bank, embedder, role_model, glossary, cutoff, compact_reader)
     if compact_reader is not None:
         teacher_routes.update(recognize_menus(scores, pools, role_model, compact_reader))
     unfiltered = {}
+    if calibration is not None:
+        teacher_routes.pop("teacher_all_roles")
     for name, (reader, options) in teacher_routes.items():
         labels, margin, tokens = reader.batched(phrases, options)
         unfiltered[name] = labels
         outputs[name] = (labels if margin > cutoff and None not in labels else None, 1, tokens)
     reachable = {name: all(role in allowed for role, allowed in zip(row["roles"], options, strict=True))
                  for name, (_, options) in teacher_routes.items()}
+    if calibration is not None:
+        for name, (labels, margin, forwards, tokens) in calibration.predict(phrases).items():
+            unfiltered[name] = labels
+            outputs[name] = (labels if margin > cutoff and None not in labels else None, forwards, tokens)
+            reachable[name] = True
     return outputs, reachable, unfiltered
 
 
-def run(projection, manifest, embedding, role_checkpoint, definition_file, training, paired_reference, output, reverse, menu_ablation=False):
+def run(projection, manifest, embedding, role_checkpoint, definition_file, training, paired_reference, output, reverse, menu_ablation=False, calibrate_options=False):
     if output.exists() or not os.environ.get("SLURM_JOB_ID") or not torch.cuda.is_available():
         raise ValueError("Require Slurm CUDA and a fresh output")
     if digest(paired_reference) != FROZEN_SHA:
@@ -115,6 +123,9 @@ def run(projection, manifest, embedding, role_checkpoint, definition_file, train
         compact_reader = copy(model)
         compact_reader.definitions = [f"{role}: {COMPACT[role]}" for role in ROLES]
         arms += MENU_ARMS
+    calibration = RoleOptionCalibration(model) if calibrate_options else None
+    if calibration is not None:
+        arms += CALIBRATION_ARMS
     cutoff = reference["fit"]["two_batched"]["cutoff"]
     glossary = phrase_bank(wording)
     byline = {doc:set(r["roles"]) for doc,r in articles.items()}
@@ -134,7 +145,7 @@ def run(projection, manifest, embedding, role_checkpoint, definition_file, train
                 if pair and withheld in pair:
                     raise ValueError("Withheld document entered read pair")
                 if pair and decoded is None:
-                    decoded, reachable, unfiltered = recognize(row, banks, embedder, model, glossary, cutoff, compact_reader)
+                    decoded, reachable, unfiltered = recognize(row, banks, embedder, model, glossary, cutoff, compact_reader, calibration)
                 exact_view = bool(pair) and tuple(pair)==target
                 key = row["family"], row["variant"], view, mask
                 records[key] = {}
@@ -145,7 +156,7 @@ def run(projection, manifest, embedding, role_checkpoint, definition_file, train
                                  source_reads=2*bool(pair),forwards=forwards,tokens=tokens,
                                  exact_source_menu_pair=exact_view,role_correct=bool(pair) and tuple(predictions or ())==tuple(row["roles"]),
                                  top_three_slots_reachable=bool(pair) and reachable["teacher_top_three"])
-                    if menu_ablation:
+                    if menu_ablation or calibrate_options:
                         stats["exact_proof_reachable_in_menu"] = (
                             exact_view and row["variant"] == "present" and reachable.get(arm, True)
                         )
@@ -166,7 +177,12 @@ def run(projection, manifest, embedding, role_checkpoint, definition_file, train
             report[state][view][arm]["paired_delta_vs_ridge"] = clustered_paired_interval([
                 int(records[key][arm]["strict"]) - int(records[key]["ridge_top_one"]["strict"])
                 for key in keys], [groups[key[0]] for key in keys])
-    write_json(output, dict(report=report, gpu=torch.cuda.get_device_name(), reverse=reverse,
+            if calibration is not None:
+                report[state][view][arm]["paired_delta_vs_all_roles"] = clustered_paired_interval([
+                    int(records[key][arm]["strict"]) - int(records[key]["teacher_all_roles"]["strict"])
+                    for key in keys], [groups[key[0]] for key in keys])
+    provenance = {"calibration": calibration.provenance()} if calibration is not None else {}
+    write_json(output, dict(report=report, **provenance, gpu=torch.cuda.get_device_name(), reverse=reverse,
         authorship_groups=len(set(groups.values())),
         cases=len(selected), encoder=embed_rev, role_checkpoint=model.provenance["revision"],
         manifest_sha256=digest(manifest), projection_sha256=digest(projection),
@@ -181,4 +197,5 @@ if __name__ == "__main__":
         cli.add_argument(name, type=Path)
     cli.add_argument("--reverse", action="store_true")
     cli.add_argument("--menu-ablation", action="store_true")
+    cli.add_argument("--calibrate-options", action="store_true")
     run(**vars(cli.parse_args()))
