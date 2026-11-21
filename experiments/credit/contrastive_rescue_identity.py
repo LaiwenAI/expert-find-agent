@@ -106,12 +106,11 @@ def candidate_counts(rows, articles):
     return {arm: dict(result[arm]) for arm in route.METHODS}
 
 
-def run(args):
+def prepared(args):
     if args.output.exists() or not torch.cuda.is_available() or not os.environ.get("SLURM_JOB_ID"):
         raise ValueError("Require fresh output and Slurm GPU")
     original = role.read(args.elife_groups)["panels"]
     role_ref, policy_ref = role.read(args.role_archive), role.read(args.elife_policy)
-    expected = role.read(args.previous)["outcomes"]
     p_ref, panel = role.read(args.prospective_result), role.read(args.prospective_plos)
     meta = base.verify_checkpoint(args.embedding)
     if (p_ref["manifest_sha256"] != base.digest(args.prospective_plos)
@@ -137,7 +136,6 @@ def run(args):
     e_index, p_index = (route.PostingIndex(route.Catalog(articles, encoder)) for articles in (e_articles, p_articles))
     e_footprints, p_footprints = (route.nested.previous.Fingerprints(index.catalog) for index in (e_index, p_index))
     order = sorted(original["calibration"]["pairs"], key=lambda row: base.stable("open-proof", tuple(row["papers"])))
-    report = {}
     for entrance in ("excerpt", "keywords"):
         training = route.data(e_index, encoder, order[:18], e_plan[0], entrance, e_roles["ridge"],
                               cut, e_footprints, args.reverse, training=True)
@@ -146,8 +144,15 @@ def run(args):
         model, samples = route.fit(training)
         original_cut, adverse = route.calibrate(tuning, model, e_articles)
         prior.transfer.check_calibration(samples, original_cut, adverse, policy_ref["outcomes"][entrance])
+        yield entrance, p_articles, p_index, encoder, panel, p_plan, p_roles["ridge"], cut, p_footprints, model, original_cut
+
+
+def run(args):
+    expected = role.read(args.previous)["outcomes"]
+    report = {}
+    for entrance, p_articles, p_index, encoder, panel, p_plan, predicted, cut, p_footprints, model, original_cut in prepared(args):
         calibration, held = (gather(p_index, encoder, panel[part]["pairs"], p_plan[part],
-                                    entrance, p_roles["ridge"], cut, p_footprints, args.reverse)
+                                    entrance, predicted, cut, p_footprints, args.reverse)
                              for part in ("calibration", "test"))
         report[entrance] = {}
         for guard in GUARDS:
@@ -176,11 +181,15 @@ def run(args):
     ))
 
 
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser(description=__doc__)
+def command(description):
+    parser = argparse.ArgumentParser(description=description)
     for name in ("confirmation", "extended", "elife_groups", "elife_held", "role_archive", "elife_policy",
                  "base_plos_manifest", "base_plos_projection", "prospective_plos", "prospective_xml",
                  "prospective_result", "glossary", "training", "embedding", "previous", "output"):
         parser.add_argument(name, type=Path)
     parser.add_argument("--reverse", action="store_true")
-    run(parser.parse_args())
+    return parser
+
+
+if __name__ == "__main__":
+    run(command(__doc__).parse_args())
