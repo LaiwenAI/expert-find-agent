@@ -1,0 +1,1765 @@
+{
+  "slurm_array": 47503,
+  "node": "ws6",
+  "output_sha256": [
+    "0be354a3d14f71f37652598e9d983d7383702bfd43ead13727bf2fc983b9a682",
+    "19e65a1195c53f28bd1425cf5c830a9f06b63cc2c5dfde58d9362a6c20d43cd2"
+  ],
+  "csfcube_release": "7ffe012c1d92c470f185fc086086caf5b8e05ef3",
+  "public": {
+    "requests": 50,
+    "input_sha256": {
+      "abstracts-csfcube-preds.jsonl": "9d2d9414574b6e91d2487d3396d3256577149dad859e9f6eb231b95c2ba5577c",
+      "test-pid2anns-csfcube-background.json": "2015cbf965377374e020b0ec133351ec1feb731b9a9c40da0e446ef6eee4fa5e",
+      "test-pid2anns-csfcube-method.json": "4d9b48f4b6a7a4fc24a30e0c0e74d1cc53eb4214ec4b855e3cd98e86829323a2",
+      "test-pid2anns-csfcube-result.json": "5ed7a63bc20e3deb725f8ec82abfcb1c5d79673befc942509b48effceb3be031"
+    },
+    "known_strong_top1": {
+      "dense": 27,
+      "reader": 29
+    },
+    "paired_strong_top1_delta": {
+      "mean": 0.04,
+      "percentile_95": [
+        -0.0784313725490196,
+        0.16981132075471697
+      ],
+      "queries": 50,
+      "clusters": 34,
+      "seed": 20261116,
+      "bootstrap_repeats": 10000,
+      "sampling_unit": "whole source paper; query-weighted mean"
+    },
+    "grade_pairs": 297,
+    "correctly_ordered_grade_pairs": [
+      186.0,
+      197.5
+    ],
+    "clipped_pairs": 0,
+    "reranker_stage_p95_ms_by_run": [
+      64.77436104323715,
+      65.53010188508777
+    ]
+  },
+  "panels": {
+    "plos": {
+      "comparisons": {
+        "joint_to_all_edges": {
+          "natural": {
+            "arms": {
+              "joint": {
+                "issued": 140,
+                "known": 85,
+                "tag_unresolved": 55
+              },
+              "all_edges": {
+                "issued": 136,
+                "known": 82,
+                "tag_unresolved": 54
+              }
+            },
+            "both_issue": 136,
+            "overlap_changes": {
+              "same_response": 115,
+              "same_person_changed_sources": 0,
+              "different_person": 21,
+              "known_gain": 7,
+              "known_loss": 7
+            },
+            "issued_only": {
+              "joint": 4,
+              "all_edges": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": -0.01875,
+              "percentile_95": [
+                -0.08,
+                0.04411764705882353
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.0,
+              "percentile_95": [
+                -0.058394160583941604,
+                0.06349206349206349
+              ],
+              "queries": 136,
+              "clusters": 90,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -17,
+              10
+            ]
+          },
+          "common": {
+            "arms": {
+              "joint": {
+                "issued": 136,
+                "known": 82,
+                "tag_unresolved": 54
+              },
+              "all_edges": {
+                "issued": 136,
+                "known": 82,
+                "tag_unresolved": 54
+              }
+            },
+            "both_issue": 136,
+            "overlap_changes": {
+              "same_response": 115,
+              "same_person_changed_sources": 0,
+              "different_person": 21,
+              "known_gain": 7,
+              "known_loss": 7
+            },
+            "issued_only": {
+              "joint": 0,
+              "all_edges": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0,
+              "percentile_95": [
+                -0.04878380169671262,
+                0.05333333333333334
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.0,
+              "percentile_95": [
+                -0.058394160583941604,
+                0.06349206349206349
+              ],
+              "queries": 136,
+              "clusters": 90,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -13,
+              13
+            ]
+          },
+          "quota": {
+            "arms": {
+              "joint": {
+                "issued": 136,
+                "known": 82,
+                "tag_unresolved": 54
+              },
+              "all_edges": {
+                "issued": 136,
+                "known": 82,
+                "tag_unresolved": 54
+              }
+            },
+            "both_issue": 135,
+            "overlap_changes": {
+              "same_response": 114,
+              "same_person_changed_sources": 0,
+              "different_person": 21,
+              "known_gain": 7,
+              "known_loss": 7
+            },
+            "issued_only": {
+              "joint": 1,
+              "all_edges": 1
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0,
+              "percentile_95": [
+                -0.04878380169671262,
+                0.05333333333333334
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.0,
+              "percentile_95": [
+                -0.059322033898305086,
+                0.06452193084242275
+              ],
+              "queries": 135,
+              "clusters": 89,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -14,
+              14
+            ]
+          }
+        },
+        "joint_to_reader_six": {
+          "natural": {
+            "arms": {
+              "joint": {
+                "issued": 140,
+                "known": 85,
+                "tag_unresolved": 55
+              },
+              "reader_six": {
+                "issued": 132,
+                "known": 87,
+                "tag_unresolved": 45
+              }
+            },
+            "both_issue": 132,
+            "overlap_changes": {
+              "same_response": 100,
+              "same_person_changed_sources": 0,
+              "different_person": 32,
+              "known_gain": 12,
+              "known_loss": 6
+            },
+            "issued_only": {
+              "joint": 8,
+              "reader_six": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0125,
+              "percentile_95": [
+                -0.06215572033898305,
+                0.0880503144654088
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.045454545454545456,
+              "percentile_95": [
+                -0.03278688524590164,
+                0.12413905792201936
+              ],
+              "queries": 132,
+              "clusters": 87,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -27,
+              21
+            ]
+          },
+          "common": {
+            "arms": {
+              "joint": {
+                "issued": 132,
+                "known": 81,
+                "tag_unresolved": 51
+              },
+              "reader_six": {
+                "issued": 132,
+                "known": 87,
+                "tag_unresolved": 45
+              }
+            },
+            "both_issue": 132,
+            "overlap_changes": {
+              "same_response": 100,
+              "same_person_changed_sources": 0,
+              "different_person": 32,
+              "known_gain": 12,
+              "known_loss": 6
+            },
+            "issued_only": {
+              "joint": 0,
+              "reader_six": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0375,
+              "percentile_95": [
+                -0.02538313556856025,
+                0.10273972602739725
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.045454545454545456,
+              "percentile_95": [
+                -0.03278688524590164,
+                0.12413905792201936
+              ],
+              "queries": 132,
+              "clusters": 87,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -19,
+              25
+            ]
+          },
+          "quota": {
+            "arms": {
+              "joint": {
+                "issued": 132,
+                "known": 80,
+                "tag_unresolved": 52
+              },
+              "reader_six": {
+                "issued": 132,
+                "known": 87,
+                "tag_unresolved": 45
+              }
+            },
+            "both_issue": 127,
+            "overlap_changes": {
+              "same_response": 95,
+              "same_person_changed_sources": 0,
+              "different_person": 32,
+              "known_gain": 12,
+              "known_loss": 6
+            },
+            "issued_only": {
+              "joint": 5,
+              "reader_six": 5
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.04375,
+              "percentile_95": [
+                -0.02581064097193129,
+                0.11765460030165902
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.047244094488188976,
+              "percentile_95": [
+                -0.0308677863910422,
+                0.13513513513513514
+              ],
+              "queries": 127,
+              "clusters": 83,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -22,
+              29
+            ]
+          }
+        },
+        "joint_to_reader_full": {
+          "natural": {
+            "arms": {
+              "joint": {
+                "issued": 140,
+                "known": 85,
+                "tag_unresolved": 55
+              },
+              "reader_full": {
+                "issued": 132,
+                "known": 87,
+                "tag_unresolved": 45
+              }
+            },
+            "both_issue": 132,
+            "overlap_changes": {
+              "same_response": 99,
+              "same_person_changed_sources": 0,
+              "different_person": 33,
+              "known_gain": 13,
+              "known_loss": 7
+            },
+            "issued_only": {
+              "joint": 8,
+              "reader_full": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0125,
+              "percentile_95": [
+                -0.06250892857142856,
+                0.09090909090909091
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.045454545454545456,
+              "percentile_95": [
+                -0.034482758620689655,
+                0.12800512820512813
+              ],
+              "queries": 132,
+              "clusters": 87,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -27,
+              21
+            ]
+          },
+          "common": {
+            "arms": {
+              "joint": {
+                "issued": 132,
+                "known": 81,
+                "tag_unresolved": 51
+              },
+              "reader_full": {
+                "issued": 132,
+                "known": 87,
+                "tag_unresolved": 45
+              }
+            },
+            "both_issue": 132,
+            "overlap_changes": {
+              "same_response": 99,
+              "same_person_changed_sources": 0,
+              "different_person": 33,
+              "known_gain": 13,
+              "known_loss": 7
+            },
+            "issued_only": {
+              "joint": 0,
+              "reader_full": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0375,
+              "percentile_95": [
+                -0.027475369458128077,
+                0.10489618406285071
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.045454545454545456,
+              "percentile_95": [
+                -0.034482758620689655,
+                0.12800512820512813
+              ],
+              "queries": 132,
+              "clusters": 87,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -19,
+              25
+            ]
+          },
+          "quota": {
+            "arms": {
+              "joint": {
+                "issued": 132,
+                "known": 80,
+                "tag_unresolved": 52
+              },
+              "reader_full": {
+                "issued": 132,
+                "known": 87,
+                "tag_unresolved": 45
+              }
+            },
+            "both_issue": 127,
+            "overlap_changes": {
+              "same_response": 94,
+              "same_person_changed_sources": 0,
+              "different_person": 33,
+              "known_gain": 13,
+              "known_loss": 7
+            },
+            "issued_only": {
+              "joint": 5,
+              "reader_full": 5
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.04375,
+              "percentile_95": [
+                -0.028409090909090908,
+                0.12101910828025478
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.047244094488188976,
+              "percentile_95": [
+                -0.033617703838292066,
+                0.13636363636363635
+              ],
+              "queries": 127,
+              "clusters": 83,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -22,
+              29
+            ]
+          }
+        },
+        "all_edges_to_reader_full": {
+          "natural": {
+            "arms": {
+              "all_edges": {
+                "issued": 136,
+                "known": 82,
+                "tag_unresolved": 54
+              },
+              "reader_full": {
+                "issued": 132,
+                "known": 87,
+                "tag_unresolved": 45
+              }
+            },
+            "both_issue": 132,
+            "overlap_changes": {
+              "same_response": 103,
+              "same_person_changed_sources": 0,
+              "different_person": 29,
+              "known_gain": 12,
+              "known_loss": 6
+            },
+            "issued_only": {
+              "all_edges": 4,
+              "reader_full": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.03125,
+              "percentile_95": [
+                -0.030120481927710843,
+                0.09316770186335403
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.045454545454545456,
+              "percentile_95": [
+                -0.026791747104247098,
+                0.1186499940737228
+              ],
+              "queries": 132,
+              "clusters": 87,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -21,
+              22
+            ]
+          },
+          "common": {
+            "arms": {
+              "all_edges": {
+                "issued": 132,
+                "known": 81,
+                "tag_unresolved": 51
+              },
+              "reader_full": {
+                "issued": 132,
+                "known": 87,
+                "tag_unresolved": 45
+              }
+            },
+            "both_issue": 132,
+            "overlap_changes": {
+              "same_response": 103,
+              "same_person_changed_sources": 0,
+              "different_person": 29,
+              "known_gain": 12,
+              "known_loss": 6
+            },
+            "issued_only": {
+              "all_edges": 0,
+              "reader_full": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0375,
+              "percentile_95": [
+                -0.02040816326530612,
+                0.09868421052631579
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.045454545454545456,
+              "percentile_95": [
+                -0.026791747104247098,
+                0.1186499940737228
+              ],
+              "queries": 132,
+              "clusters": 87,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -17,
+              23
+            ]
+          },
+          "quota": {
+            "arms": {
+              "all_edges": {
+                "issued": 132,
+                "known": 81,
+                "tag_unresolved": 51
+              },
+              "reader_full": {
+                "issued": 132,
+                "known": 87,
+                "tag_unresolved": 45
+              }
+            },
+            "both_issue": 128,
+            "overlap_changes": {
+              "same_response": 100,
+              "same_person_changed_sources": 0,
+              "different_person": 28,
+              "known_gain": 12,
+              "known_loss": 6
+            },
+            "issued_only": {
+              "all_edges": 4,
+              "reader_full": 4
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0375,
+              "percentile_95": [
+                -0.024691358024691357,
+                0.10135135135135136
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.046875,
+              "percentile_95": [
+                -0.026669642857142857,
+                0.12502185314685282
+              ],
+              "queries": 128,
+              "clusters": 84,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -19,
+              25
+            ]
+          }
+        },
+        "reader_six_to_reader_full": {
+          "natural": {
+            "arms": {
+              "reader_six": {
+                "issued": 132,
+                "known": 87,
+                "tag_unresolved": 45
+              },
+              "reader_full": {
+                "issued": 132,
+                "known": 87,
+                "tag_unresolved": 45
+              }
+            },
+            "both_issue": 132,
+            "overlap_changes": {
+              "same_response": 127,
+              "same_person_changed_sources": 0,
+              "different_person": 5,
+              "known_gain": 1,
+              "known_loss": 1
+            },
+            "issued_only": {
+              "reader_six": 0,
+              "reader_full": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0,
+              "percentile_95": [
+                -0.018292682926829267,
+                0.018518518518518517
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.0,
+              "percentile_95": [
+                -0.022556390977443608,
+                0.022388059701492536
+              ],
+              "queries": 132,
+              "clusters": 87,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -4,
+              4
+            ]
+          },
+          "common": {
+            "arms": {
+              "reader_six": {
+                "issued": 132,
+                "known": 87,
+                "tag_unresolved": 45
+              },
+              "reader_full": {
+                "issued": 132,
+                "known": 87,
+                "tag_unresolved": 45
+              }
+            },
+            "both_issue": 132,
+            "overlap_changes": {
+              "same_response": 127,
+              "same_person_changed_sources": 0,
+              "different_person": 5,
+              "known_gain": 1,
+              "known_loss": 1
+            },
+            "issued_only": {
+              "reader_six": 0,
+              "reader_full": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0,
+              "percentile_95": [
+                -0.018292682926829267,
+                0.018518518518518517
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.0,
+              "percentile_95": [
+                -0.022556390977443608,
+                0.022388059701492536
+              ],
+              "queries": 132,
+              "clusters": 87,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -4,
+              4
+            ]
+          },
+          "quota": {
+            "arms": {
+              "reader_six": {
+                "issued": 132,
+                "known": 87,
+                "tag_unresolved": 45
+              },
+              "reader_full": {
+                "issued": 132,
+                "known": 87,
+                "tag_unresolved": 45
+              }
+            },
+            "both_issue": 132,
+            "overlap_changes": {
+              "same_response": 127,
+              "same_person_changed_sources": 0,
+              "different_person": 5,
+              "known_gain": 1,
+              "known_loss": 1
+            },
+            "issued_only": {
+              "reader_six": 0,
+              "reader_full": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0,
+              "percentile_95": [
+                -0.018292682926829267,
+                0.018518518518518517
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.0,
+              "percentile_95": [
+                -0.022556390977443608,
+                0.022388059701492536
+              ],
+              "queries": 132,
+              "clusters": 87,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -4,
+              4
+            ]
+          }
+        }
+      },
+      "signature": "35c0a3f3be72e3bd891098d6d5018e8384074cfa56652f99c80f62ecf0ed88bb",
+      "reachable_after_reads": {
+        "joint": 89,
+        "all_edges": 86,
+        "reader_six": 91,
+        "reader_full": 91
+      },
+      "reader_work": {
+        "joint": {},
+        "all_edges": {},
+        "reader_six": {
+          "model_calls": 105,
+          "pairs": 566
+        },
+        "reader_full": {
+          "model_calls": 112,
+          "pairs": 759
+        }
+      },
+      "p95_ms_by_run": [
+        {
+          "joint": 17.8623661166057,
+          "all_edges": 17.96207760926336,
+          "reader_six": 55.14368345029652,
+          "reader_full": 95.51802347414194
+        },
+        {
+          "joint": 17.71377536933869,
+          "all_edges": 17.931140982545912,
+          "reader_six": 55.88786050211638,
+          "reader_full": 95.00500767026092
+        }
+      ]
+    },
+    "elife": {
+      "comparisons": {
+        "joint_to_all_edges": {
+          "natural": {
+            "arms": {
+              "joint": {
+                "issued": 49,
+                "known": 46,
+                "tag_unresolved": 3
+              },
+              "all_edges": {
+                "issued": 40,
+                "known": 36,
+                "tag_unresolved": 4
+              }
+            },
+            "both_issue": 40,
+            "overlap_changes": {
+              "same_response": 34,
+              "same_person_changed_sources": 0,
+              "different_person": 6,
+              "known_gain": 2,
+              "known_loss": 3
+            },
+            "issued_only": {
+              "joint": 9,
+              "all_edges": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": -0.19607843137254902,
+              "percentile_95": [
+                -0.4606957649092481,
+                0.125
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": -0.025,
+              "percentile_95": [
+                -0.13333333333333333,
+                0.14285714285714285
+              ],
+              "queries": 40,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -13,
+              -6
+            ]
+          },
+          "common": {
+            "arms": {
+              "joint": {
+                "issued": 40,
+                "known": 37,
+                "tag_unresolved": 3
+              },
+              "all_edges": {
+                "issued": 40,
+                "known": 36,
+                "tag_unresolved": 4
+              }
+            },
+            "both_issue": 40,
+            "overlap_changes": {
+              "same_response": 34,
+              "same_person_changed_sources": 0,
+              "different_person": 6,
+              "known_gain": 2,
+              "known_loss": 3
+            },
+            "issued_only": {
+              "joint": 0,
+              "all_edges": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": -0.0196078431372549,
+              "percentile_95": [
+                -0.09836065573770492,
+                0.125
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": -0.025,
+              "percentile_95": [
+                -0.13333333333333333,
+                0.14285714285714285
+              ],
+              "queries": 40,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -4,
+              3
+            ]
+          },
+          "quota": {
+            "arms": {
+              "joint": {
+                "issued": 40,
+                "known": 37,
+                "tag_unresolved": 3
+              },
+              "all_edges": {
+                "issued": 40,
+                "known": 36,
+                "tag_unresolved": 4
+              }
+            },
+            "both_issue": 36,
+            "overlap_changes": {
+              "same_response": 30,
+              "same_person_changed_sources": 0,
+              "different_person": 6,
+              "known_gain": 2,
+              "known_loss": 3
+            },
+            "issued_only": {
+              "joint": 4,
+              "all_edges": 4
+            },
+            "paired_known_delta_per_query": {
+              "mean": -0.0196078431372549,
+              "percentile_95": [
+                -0.16470588235294117,
+                0.2777777777777778
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": -0.027777777777777776,
+              "percentile_95": [
+                -0.14893617021276595,
+                0.17647058823529413
+              ],
+              "queries": 36,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -4,
+              3
+            ]
+          }
+        },
+        "joint_to_reader_six": {
+          "natural": {
+            "arms": {
+              "joint": {
+                "issued": 49,
+                "known": 46,
+                "tag_unresolved": 3
+              },
+              "reader_six": {
+                "issued": 49,
+                "known": 45,
+                "tag_unresolved": 4
+              }
+            },
+            "both_issue": 49,
+            "overlap_changes": {
+              "same_response": 46,
+              "same_person_changed_sources": 0,
+              "different_person": 3,
+              "known_gain": 1,
+              "known_loss": 2
+            },
+            "issued_only": {
+              "joint": 0,
+              "reader_six": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": -0.0196078431372549,
+              "percentile_95": [
+                -0.10204081632653061,
+                0.07142857142857142
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": -0.02040816326530612,
+              "percentile_95": [
+                -0.1038961038961039,
+                0.07409722222222188
+              ],
+              "queries": 49,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -2,
+              1
+            ]
+          },
+          "common": {
+            "arms": {
+              "joint": {
+                "issued": 49,
+                "known": 46,
+                "tag_unresolved": 3
+              },
+              "reader_six": {
+                "issued": 49,
+                "known": 45,
+                "tag_unresolved": 4
+              }
+            },
+            "both_issue": 49,
+            "overlap_changes": {
+              "same_response": 46,
+              "same_person_changed_sources": 0,
+              "different_person": 3,
+              "known_gain": 1,
+              "known_loss": 2
+            },
+            "issued_only": {
+              "joint": 0,
+              "reader_six": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": -0.0196078431372549,
+              "percentile_95": [
+                -0.10204081632653061,
+                0.07142857142857142
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": -0.02040816326530612,
+              "percentile_95": [
+                -0.1038961038961039,
+                0.07409722222222188
+              ],
+              "queries": 49,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -2,
+              1
+            ]
+          },
+          "quota": {
+            "arms": {
+              "joint": {
+                "issued": 49,
+                "known": 46,
+                "tag_unresolved": 3
+              },
+              "reader_six": {
+                "issued": 49,
+                "known": 45,
+                "tag_unresolved": 4
+              }
+            },
+            "both_issue": 49,
+            "overlap_changes": {
+              "same_response": 46,
+              "same_person_changed_sources": 0,
+              "different_person": 3,
+              "known_gain": 1,
+              "known_loss": 2
+            },
+            "issued_only": {
+              "joint": 0,
+              "reader_six": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": -0.0196078431372549,
+              "percentile_95": [
+                -0.10204081632653061,
+                0.07142857142857142
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": -0.02040816326530612,
+              "percentile_95": [
+                -0.1038961038961039,
+                0.07409722222222188
+              ],
+              "queries": 49,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -2,
+              1
+            ]
+          }
+        },
+        "joint_to_reader_full": {
+          "natural": {
+            "arms": {
+              "joint": {
+                "issued": 49,
+                "known": 46,
+                "tag_unresolved": 3
+              },
+              "reader_full": {
+                "issued": 49,
+                "known": 45,
+                "tag_unresolved": 4
+              }
+            },
+            "both_issue": 49,
+            "overlap_changes": {
+              "same_response": 45,
+              "same_person_changed_sources": 0,
+              "different_person": 4,
+              "known_gain": 1,
+              "known_loss": 2
+            },
+            "issued_only": {
+              "joint": 0,
+              "reader_full": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": -0.0196078431372549,
+              "percentile_95": [
+                -0.10204081632653061,
+                0.07142857142857142
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": -0.02040816326530612,
+              "percentile_95": [
+                -0.1038961038961039,
+                0.07409722222222188
+              ],
+              "queries": 49,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -3,
+              2
+            ]
+          },
+          "common": {
+            "arms": {
+              "joint": {
+                "issued": 49,
+                "known": 46,
+                "tag_unresolved": 3
+              },
+              "reader_full": {
+                "issued": 49,
+                "known": 45,
+                "tag_unresolved": 4
+              }
+            },
+            "both_issue": 49,
+            "overlap_changes": {
+              "same_response": 45,
+              "same_person_changed_sources": 0,
+              "different_person": 4,
+              "known_gain": 1,
+              "known_loss": 2
+            },
+            "issued_only": {
+              "joint": 0,
+              "reader_full": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": -0.0196078431372549,
+              "percentile_95": [
+                -0.10204081632653061,
+                0.07142857142857142
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": -0.02040816326530612,
+              "percentile_95": [
+                -0.1038961038961039,
+                0.07409722222222188
+              ],
+              "queries": 49,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -3,
+              2
+            ]
+          },
+          "quota": {
+            "arms": {
+              "joint": {
+                "issued": 49,
+                "known": 46,
+                "tag_unresolved": 3
+              },
+              "reader_full": {
+                "issued": 49,
+                "known": 45,
+                "tag_unresolved": 4
+              }
+            },
+            "both_issue": 49,
+            "overlap_changes": {
+              "same_response": 45,
+              "same_person_changed_sources": 0,
+              "different_person": 4,
+              "known_gain": 1,
+              "known_loss": 2
+            },
+            "issued_only": {
+              "joint": 0,
+              "reader_full": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": -0.0196078431372549,
+              "percentile_95": [
+                -0.10204081632653061,
+                0.07142857142857142
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": -0.02040816326530612,
+              "percentile_95": [
+                -0.1038961038961039,
+                0.07409722222222188
+              ],
+              "queries": 49,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -3,
+              2
+            ]
+          }
+        },
+        "all_edges_to_reader_full": {
+          "natural": {
+            "arms": {
+              "all_edges": {
+                "issued": 40,
+                "known": 36,
+                "tag_unresolved": 4
+              },
+              "reader_full": {
+                "issued": 49,
+                "known": 45,
+                "tag_unresolved": 4
+              }
+            },
+            "both_issue": 40,
+            "overlap_changes": {
+              "same_response": 38,
+              "same_person_changed_sources": 0,
+              "different_person": 2,
+              "known_gain": 1,
+              "known_loss": 1
+            },
+            "issued_only": {
+              "all_edges": 0,
+              "reader_full": 9
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.17647058823529413,
+              "percentile_95": [
+                -0.08108108108108109,
+                0.4576271186440678
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.0,
+              "percentile_95": [
+                -0.09523809523809523,
+                0.08333333333333333
+              ],
+              "queries": 40,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              8,
+              10
+            ]
+          },
+          "common": {
+            "arms": {
+              "all_edges": {
+                "issued": 40,
+                "known": 36,
+                "tag_unresolved": 4
+              },
+              "reader_full": {
+                "issued": 40,
+                "known": 36,
+                "tag_unresolved": 4
+              }
+            },
+            "both_issue": 40,
+            "overlap_changes": {
+              "same_response": 38,
+              "same_person_changed_sources": 0,
+              "different_person": 2,
+              "known_gain": 1,
+              "known_loss": 1
+            },
+            "issued_only": {
+              "all_edges": 0,
+              "reader_full": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0,
+              "percentile_95": [
+                -0.08333333333333333,
+                0.04054054054054054
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.0,
+              "percentile_95": [
+                -0.09523809523809523,
+                0.08333333333333333
+              ],
+              "queries": 40,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -1,
+              1
+            ]
+          },
+          "quota": {
+            "arms": {
+              "all_edges": {
+                "issued": 40,
+                "known": 36,
+                "tag_unresolved": 4
+              },
+              "reader_full": {
+                "issued": 40,
+                "known": 37,
+                "tag_unresolved": 3
+              }
+            },
+            "both_issue": 36,
+            "overlap_changes": {
+              "same_response": 34,
+              "same_person_changed_sources": 0,
+              "different_person": 2,
+              "known_gain": 1,
+              "known_loss": 1
+            },
+            "issued_only": {
+              "all_edges": 4,
+              "reader_full": 4
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0196078431372549,
+              "percentile_95": [
+                -0.24489795918367346,
+                0.16251913265306095
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.0,
+              "percentile_95": [
+                -0.125,
+                0.1
+              ],
+              "queries": 36,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -1,
+              2
+            ]
+          }
+        },
+        "reader_six_to_reader_full": {
+          "natural": {
+            "arms": {
+              "reader_six": {
+                "issued": 49,
+                "known": 45,
+                "tag_unresolved": 4
+              },
+              "reader_full": {
+                "issued": 49,
+                "known": 45,
+                "tag_unresolved": 4
+              }
+            },
+            "both_issue": 49,
+            "overlap_changes": {
+              "same_response": 48,
+              "same_person_changed_sources": 0,
+              "different_person": 1,
+              "known_gain": 0,
+              "known_loss": 0
+            },
+            "issued_only": {
+              "reader_six": 0,
+              "reader_full": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 49,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -1,
+              1
+            ]
+          },
+          "common": {
+            "arms": {
+              "reader_six": {
+                "issued": 49,
+                "known": 45,
+                "tag_unresolved": 4
+              },
+              "reader_full": {
+                "issued": 49,
+                "known": 45,
+                "tag_unresolved": 4
+              }
+            },
+            "both_issue": 49,
+            "overlap_changes": {
+              "same_response": 48,
+              "same_person_changed_sources": 0,
+              "different_person": 1,
+              "known_gain": 0,
+              "known_loss": 0
+            },
+            "issued_only": {
+              "reader_six": 0,
+              "reader_full": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 49,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -1,
+              1
+            ]
+          },
+          "quota": {
+            "arms": {
+              "reader_six": {
+                "issued": 49,
+                "known": 45,
+                "tag_unresolved": 4
+              },
+              "reader_full": {
+                "issued": 49,
+                "known": 45,
+                "tag_unresolved": 4
+              }
+            },
+            "both_issue": 49,
+            "overlap_changes": {
+              "same_response": 48,
+              "same_person_changed_sources": 0,
+              "different_person": 1,
+              "known_gain": 0,
+              "known_loss": 0
+            },
+            "issued_only": {
+              "reader_six": 0,
+              "reader_full": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 49,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -1,
+              1
+            ]
+          }
+        }
+      },
+      "signature": "37936d2ae1f6df5bf44f882322111ef074ff02c9a3f419d2a0695bf5f803dfdc",
+      "reachable_after_reads": {
+        "joint": 46,
+        "all_edges": 36,
+        "reader_six": 45,
+        "reader_full": 45
+      },
+      "reader_work": {
+        "joint": {},
+        "all_edges": {},
+        "reader_six": {
+          "model_calls": 38,
+          "pairs": 209
+        },
+        "reader_full": {
+          "model_calls": 39,
+          "pairs": 261
+        }
+      },
+      "p95_ms_by_run": [
+        {
+          "joint": 18.46907753497362,
+          "all_edges": 18.67358456365764,
+          "reader_six": 54.195325123146176,
+          "reader_full": 78.08401808142662
+        },
+        {
+          "joint": 18.09575641527772,
+          "all_edges": 18.520565703511238,
+          "reader_six": 54.67612063512206,
+          "reader_full": 78.36253847926855
+        }
+      ]
+    }
+  },
+  "embedding": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "reranker": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "archive_sha256": "f2d8ac6dcbc2c00cf6ce1295ff6f409e4e1ea4015b6f7f8dbd6e138f4ac057e9",
+  "script_sha256": "8ace36dd7e6fb6e53c566a12319a66fac7079b0ba2e705f17d13ecb8f7fa02f0"
+}
