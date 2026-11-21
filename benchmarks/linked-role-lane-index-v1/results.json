@@ -1,0 +1,646 @@
+{
+  "runs": [
+    {
+      "panels": {
+        "extended": {
+          "sources": 1057,
+          "query_count": 205,
+          "index": {
+            "full": {
+              "documents": 1057,
+              "role_bytes": 558450,
+              "role_postings": 21109
+            },
+            "linked_only": {
+              "documents": 140,
+              "role_bytes": 82284,
+              "role_postings": 3130
+            },
+            "degree_histogram": {
+              "1": 3338,
+              "2": 99,
+              "3": 9
+            }
+          },
+          "adjacency_payload_bytes": 1934,
+          "packed_projected_payload_bytes": 1657,
+          "depths": {
+            "32": {
+              "issued": 12,
+              "tagged": 8,
+              "verified_exact": 205,
+              "reads_per_arm": 615,
+              "planning_rows_mean": {
+                "full": 64.0,
+                "global_links": 9.034146341463414,
+                "lane_links": 0.5365853658536586,
+                "packed_links": 9.034146341463414,
+                "packed_lane": 0.5365853658536586
+              },
+              "p95_ms": {
+                "full": 34.814874082803726,
+                "full_plan": 0.28261132538318634,
+                "global_links": 34.61312921717763,
+                "global_links_plan": 0.09587574750185013,
+                "lane_links": 34.58485929295421,
+                "lane_links_plan": 0.07482441142201408,
+                "packed_links": 34.615059196949005,
+                "packed_links_plan": 0.07682880386710164,
+                "packed_lane": 34.61987730115652,
+                "packed_lane_plan": 0.06819134578108783
+              },
+              "decision_sha256": "49a87df643e931e41c9dafbaa9cd9d4dccbf20c6f03c3e42b35c1dfde1d24526"
+            },
+            "128": {
+              "issued": 119,
+              "tagged": 59,
+              "verified_exact": 205,
+              "reads_per_arm": 615,
+              "planning_rows_mean": {
+                "full": 256.0,
+                "global_links": 33.94146341463415,
+                "lane_links": 4.829268292682927,
+                "packed_links": 33.94146341463415,
+                "packed_lane": 4.829268292682927
+              },
+              "p95_ms": {
+                "full": 20.72072047740221,
+                "full_plan": 0.8699257858097551,
+                "global_links": 20.276656467467546,
+                "global_links_plan": 0.33336915075778956,
+                "lane_links": 20.209350530058146,
+                "lane_links_plan": 0.26082424446940417,
+                "packed_links": 20.21368695423007,
+                "packed_links_plan": 0.2864616923034191,
+                "packed_lane": 20.188101939857006,
+                "packed_lane_plan": 0.2537714317440986
+              },
+              "decision_sha256": "c6da0ac5cf94c1f4ecafaeeb6e29e29b9c499a16a864135c05f72e1dbd111055"
+            }
+          }
+        },
+        "extended_connected": {
+          "sources": 140,
+          "query_count": 205,
+          "index": {
+            "full": {
+              "documents": 140,
+              "role_bytes": 82284,
+              "role_postings": 3130
+            },
+            "linked_only": {
+              "documents": 140,
+              "role_bytes": 82284,
+              "role_postings": 3130
+            },
+            "degree_histogram": {
+              "2": 99,
+              "1": 308,
+              "3": 9
+            }
+          },
+          "adjacency_payload_bytes": 1934,
+          "packed_projected_payload_bytes": 1657,
+          "depths": {
+            "32": {
+              "issued": 194,
+              "tagged": 84,
+              "verified_exact": 205,
+              "reads_per_arm": 615,
+              "planning_rows_mean": {
+                "full": 64.0,
+                "global_links": 64.0,
+                "lane_links": 18.746341463414634,
+                "packed_links": 64.0,
+                "packed_lane": 18.746341463414634
+              },
+              "p95_ms": {
+                "full": 35.13354491442442,
+                "full_plan": 0.45295776799321164,
+                "global_links": 35.084396693855524,
+                "global_links_plan": 0.4189148545265198,
+                "lane_links": 34.99151710420847,
+                "lane_links_plan": 0.2519159577786922,
+                "packed_links": 35.054247081279755,
+                "packed_links_plan": 0.3169560804963112,
+                "packed_lane": 34.96667938306928,
+                "packed_lane_plan": 0.20777480676770205
+              },
+              "decision_sha256": "9cc1668b6f69fd863636ebb9f36dd436374e4623cbfc00d6fa9a4bb5ee55208f"
+            },
+            "128": {
+              "issued": 205,
+              "tagged": 86,
+              "verified_exact": 205,
+              "reads_per_arm": 615,
+              "planning_rows_mean": {
+                "full": 256.0,
+                "global_links": 256.0,
+                "lane_links": 238.86829268292684,
+                "packed_links": 256.0,
+                "packed_lane": 238.86829268292684
+              },
+              "p95_ms": {
+                "full": 17.258319444954395,
+                "full_plan": 0.7891781628131866,
+                "global_links": 17.24361376836896,
+                "global_links_plan": 0.7683309726417065,
+                "lane_links": 17.2739596106112,
+                "lane_links_plan": 0.7826087065041065,
+                "packed_links": 17.04447641968727,
+                "packed_links_plan": 0.5164993926882744,
+                "packed_lane": 17.091580666601658,
+                "packed_lane_plan": 0.5456531420350075
+              },
+              "decision_sha256": "1731cc430578f912884e5c6c798e10aa5b29e501069d220c37664665c931e49b"
+            }
+          }
+        },
+        "confirmation": {
+          "sources": 954,
+          "query_count": 193,
+          "index": {
+            "full": {
+              "documents": 954,
+              "role_bytes": 518431,
+              "role_postings": 19918
+            },
+            "linked_only": {
+              "documents": 124,
+              "role_bytes": 68362,
+              "role_postings": 2594
+            },
+            "degree_histogram": {
+              "1": 3041,
+              "2": 69,
+              "3": 6
+            }
+          },
+          "adjacency_payload_bytes": 1575,
+          "packed_projected_payload_bytes": 1417,
+          "depths": {
+            "32": {
+              "issued": 32,
+              "tagged": 24,
+              "verified_exact": 193,
+              "reads_per_arm": 579,
+              "planning_rows_mean": {
+                "full": 64.0,
+                "global_links": 8.787564766839377,
+                "lane_links": 0.5699481865284974,
+                "packed_links": 8.787564766839377,
+                "packed_lane": 0.5699481865284974
+              },
+              "p95_ms": {
+                "full": 20.12825226411223,
+                "full_plan": 0.23405998945236203,
+                "global_links": 20.023946557193995,
+                "global_links_plan": 0.10364511981606471,
+                "lane_links": 19.95768416672945,
+                "lane_links_plan": 0.0812229700386524,
+                "packed_links": 19.959255307912827,
+                "packed_links_plan": 0.09175986051559445,
+                "packed_lane": 19.953453447669744,
+                "packed_lane_plan": 0.07244311273097989
+              },
+              "decision_sha256": "2ed267ab7a27a11e367fe7aef6c8a8668a6a2a7cfa45d4e1c58047533890a431"
+            },
+            "128": {
+              "issued": 141,
+              "tagged": 80,
+              "verified_exact": 193,
+              "reads_per_arm": 579,
+              "planning_rows_mean": {
+                "full": 256.0,
+                "global_links": 34.04663212435233,
+                "lane_links": 6.005181347150259,
+                "packed_links": 34.04663212435233,
+                "packed_lane": 6.005181347150259
+              },
+              "p95_ms": {
+                "full": 21.010505501180887,
+                "full_plan": 1.0156101547181604,
+                "global_links": 20.352654438465834,
+                "global_links_plan": 0.32083112746477127,
+                "lane_links": 20.240848883986473,
+                "lane_links_plan": 0.2562631852924824,
+                "packed_links": 20.252769719809294,
+                "packed_links_plan": 0.2765548415482044,
+                "packed_lane": 20.266464911401272,
+                "packed_lane_plan": 0.24389149621129036
+              },
+              "decision_sha256": "ffc21588dacba95c4637c205a5700255e0ecf09cddf1cf6ee5e89ed8a7e5ed33"
+            }
+          }
+        },
+        "confirmation_connected": {
+          "sources": 124,
+          "query_count": 193,
+          "index": {
+            "full": {
+              "documents": 124,
+              "role_bytes": 68362,
+              "role_postings": 2594
+            },
+            "linked_only": {
+              "documents": 124,
+              "role_bytes": 68362,
+              "role_postings": 2594
+            },
+            "degree_histogram": {
+              "1": 270,
+              "2": 69,
+              "3": 6
+            }
+          },
+          "adjacency_payload_bytes": 1575,
+          "packed_projected_payload_bytes": 1417,
+          "depths": {
+            "32": {
+              "issued": 182,
+              "tagged": 65,
+              "verified_exact": 193,
+              "reads_per_arm": 579,
+              "planning_rows_mean": {
+                "full": 64.0,
+                "global_links": 64.0,
+                "lane_links": 20.082901554404145,
+                "packed_links": 64.0,
+                "packed_lane": 20.082901554404145
+              },
+              "p95_ms": {
+                "full": 17.27226683869958,
+                "full_plan": 0.24672718718647949,
+                "global_links": 17.220456898212433,
+                "global_links_plan": 0.24263104423880577,
+                "lane_links": 17.139068711549044,
+                "lane_links_plan": 0.15570269897580144,
+                "packed_links": 17.195266112685204,
+                "packed_links_plan": 0.16387701034545898,
+                "packed_lane": 17.145247012376785,
+                "packed_lane_plan": 0.12913476675748825
+              },
+              "decision_sha256": "fa1ebd98573b2f25c9e8136d9f8b7c564956038368dc7e001846bf9b6729d3ae"
+            },
+            "128": {
+              "issued": 193,
+              "tagged": 66,
+              "verified_exact": 193,
+              "reads_per_arm": 579,
+              "planning_rows_mean": {
+                "full": 248.0,
+                "global_links": 248.0,
+                "lane_links": 248.0,
+                "packed_links": 248.0,
+                "packed_lane": 248.0
+              },
+              "p95_ms": {
+                "full": 17.75295166298747,
+                "full_plan": 0.7396125234663486,
+                "global_links": 17.763869743794203,
+                "global_links_plan": 0.7173854857683182,
+                "lane_links": 17.80500328168273,
+                "lane_links_plan": 0.7972643710672855,
+                "packed_links": 17.509604711085558,
+                "packed_links_plan": 0.471645500510931,
+                "packed_lane": 17.567522451281548,
+                "packed_lane_plan": 0.5103734321892262
+              },
+              "decision_sha256": "dd35fc87fd77105b0db2615b8fd34ce71e3cd89790b6f879e11af0372ecf537b"
+            }
+          }
+        }
+      },
+      "embedding": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "script_sha256": "be297c73993d4650a78e2f2ae14ba1b377aedeb839bac1692dd62a4416a829c1",
+      "reverse": false,
+      "projection_sha256": {
+        "extended": "8ab52c04301c4b3583ed294d0d62f2aacd652a6d44bd51f1a47286b0d2516fa2",
+        "confirmation": "ee6715866d53d973a437d13c679f8ef2efa8a995d721782843c5b1944859f2a3"
+      },
+      "job": "47558",
+      "gpu": "NVIDIA GeForce RTX 4090"
+    },
+    {
+      "panels": {
+        "extended": {
+          "sources": 1057,
+          "query_count": 205,
+          "index": {
+            "full": {
+              "documents": 1057,
+              "role_bytes": 558450,
+              "role_postings": 21109
+            },
+            "linked_only": {
+              "documents": 140,
+              "role_bytes": 82284,
+              "role_postings": 3130
+            },
+            "degree_histogram": {
+              "1": 3338,
+              "2": 99,
+              "3": 9
+            }
+          },
+          "adjacency_payload_bytes": 1934,
+          "packed_projected_payload_bytes": 1657,
+          "depths": {
+            "128": {
+              "issued": 119,
+              "tagged": 59,
+              "verified_exact": 205,
+              "reads_per_arm": 615,
+              "planning_rows_mean": {
+                "full": 256.0,
+                "global_links": 33.94146341463415,
+                "lane_links": 4.829268292682927,
+                "packed_links": 33.94146341463415,
+                "packed_lane": 4.829268292682927
+              },
+              "p95_ms": {
+                "packed_lane": 20.497390255331993,
+                "packed_lane_plan": 0.26808166876435274,
+                "packed_links": 20.503592304885387,
+                "packed_links_plan": 0.29470957815647125,
+                "lane_links": 20.52603717893362,
+                "lane_links_plan": 0.2704058773815632,
+                "global_links": 20.603216718882322,
+                "global_links_plan": 0.3253495320677757,
+                "full": 21.075256541371346,
+                "full_plan": 0.8763010613620281
+              },
+              "decision_sha256": "c6da0ac5cf94c1f4ecafaeeb6e29e29b9c499a16a864135c05f72e1dbd111055"
+            },
+            "32": {
+              "issued": 12,
+              "tagged": 8,
+              "verified_exact": 205,
+              "reads_per_arm": 615,
+              "planning_rows_mean": {
+                "full": 64.0,
+                "global_links": 9.034146341463414,
+                "lane_links": 0.5365853658536586,
+                "packed_links": 9.034146341463414,
+                "packed_lane": 0.5365853658536586
+              },
+              "p95_ms": {
+                "packed_lane": 19.94833340868354,
+                "packed_lane_plan": 0.07168054580688472,
+                "packed_links": 19.945899676531553,
+                "packed_links_plan": 0.07235230877995485,
+                "lane_links": 19.953712169080973,
+                "lane_links_plan": 0.06984760984778397,
+                "global_links": 19.977486971765757,
+                "global_links_plan": 0.08090529590845107,
+                "full": 20.05750611424446,
+                "full_plan": 0.18408223986625666
+              },
+              "decision_sha256": "49a87df643e931e41c9dafbaa9cd9d4dccbf20c6f03c3e42b35c1dfde1d24526"
+            }
+          }
+        },
+        "extended_connected": {
+          "sources": 140,
+          "query_count": 205,
+          "index": {
+            "full": {
+              "documents": 140,
+              "role_bytes": 82284,
+              "role_postings": 3130
+            },
+            "linked_only": {
+              "documents": 140,
+              "role_bytes": 82284,
+              "role_postings": 3130
+            },
+            "degree_histogram": {
+              "1": 308,
+              "2": 99,
+              "3": 9
+            }
+          },
+          "adjacency_payload_bytes": 1934,
+          "packed_projected_payload_bytes": 1657,
+          "depths": {
+            "128": {
+              "issued": 205,
+              "tagged": 86,
+              "verified_exact": 205,
+              "reads_per_arm": 615,
+              "planning_rows_mean": {
+                "full": 256.0,
+                "global_links": 256.0,
+                "lane_links": 238.86829268292684,
+                "packed_links": 256.0,
+                "packed_lane": 238.86829268292684
+              },
+              "p95_ms": {
+                "packed_lane": 17.318782955408096,
+                "packed_lane_plan": 0.5559097044169903,
+                "packed_links": 17.283467575907707,
+                "packed_links_plan": 0.507955439388752,
+                "lane_links": 17.568357661366463,
+                "lane_links_plan": 0.8080389350652695,
+                "global_links": 17.550143413245678,
+                "global_links_plan": 0.7984525524079799,
+                "full": 17.48620318248868,
+                "full_plan": 0.7629379630088806
+              },
+              "decision_sha256": "1731cc430578f912884e5c6c798e10aa5b29e501069d220c37664665c931e49b"
+            },
+            "32": {
+              "issued": 194,
+              "tagged": 84,
+              "verified_exact": 205,
+              "reads_per_arm": 615,
+              "planning_rows_mean": {
+                "full": 64.0,
+                "global_links": 64.0,
+                "lane_links": 18.746341463414634,
+                "packed_links": 64.0,
+                "packed_lane": 18.746341463414634
+              },
+              "p95_ms": {
+                "packed_lane": 16.951453126966953,
+                "packed_lane_plan": 0.12836651876568794,
+                "packed_links": 16.989600751549006,
+                "packed_links_plan": 0.17584478482604027,
+                "lane_links": 16.955832485109568,
+                "lane_links_plan": 0.1601274125277996,
+                "global_links": 17.0552771538496,
+                "global_links_plan": 0.2554420381784439,
+                "full": 17.07389075309038,
+                "full_plan": 0.24111531674861908
+              },
+              "decision_sha256": "9cc1668b6f69fd863636ebb9f36dd436374e4623cbfc00d6fa9a4bb5ee55208f"
+            }
+          }
+        },
+        "confirmation": {
+          "sources": 954,
+          "query_count": 193,
+          "index": {
+            "full": {
+              "documents": 954,
+              "role_bytes": 518431,
+              "role_postings": 19918
+            },
+            "linked_only": {
+              "documents": 124,
+              "role_bytes": 68362,
+              "role_postings": 2594
+            },
+            "degree_histogram": {
+              "1": 3041,
+              "2": 69,
+              "3": 6
+            }
+          },
+          "adjacency_payload_bytes": 1575,
+          "packed_projected_payload_bytes": 1417,
+          "depths": {
+            "128": {
+              "issued": 141,
+              "tagged": 80,
+              "verified_exact": 193,
+              "reads_per_arm": 579,
+              "planning_rows_mean": {
+                "full": 256.0,
+                "global_links": 34.04663212435233,
+                "lane_links": 6.005181347150259,
+                "packed_links": 34.04663212435233,
+                "packed_lane": 6.005181347150259
+              },
+              "p95_ms": {
+                "packed_lane": 40.00933887436986,
+                "packed_lane_plan": 0.4757276736199856,
+                "packed_links": 40.08050300180912,
+                "packed_links_plan": 0.49679195508360857,
+                "lane_links": 40.16611408442259,
+                "lane_links_plan": 0.47086803242564185,
+                "global_links": 40.11159501969814,
+                "global_links_plan": 0.5680930800735949,
+                "full": 41.32976122200489,
+                "full_plan": 1.693770661950111
+              },
+              "decision_sha256": "ffc21588dacba95c4637c205a5700255e0ecf09cddf1cf6ee5e89ed8a7e5ed33"
+            },
+            "32": {
+              "issued": 32,
+              "tagged": 24,
+              "verified_exact": 193,
+              "reads_per_arm": 579,
+              "planning_rows_mean": {
+                "full": 64.0,
+                "global_links": 8.787564766839377,
+                "lane_links": 0.5699481865284974,
+                "packed_links": 8.787564766839377,
+                "packed_lane": 0.5699481865284974
+              },
+              "p95_ms": {
+                "packed_lane": 19.21482346951961,
+                "packed_lane_plan": 0.07723616436123845,
+                "packed_links": 19.204635731875896,
+                "packed_links_plan": 0.08738543838262555,
+                "lane_links": 19.17136032134294,
+                "lane_links_plan": 0.08619325235486029,
+                "global_links": 19.180447515100237,
+                "global_links_plan": 0.10699005797505377,
+                "full": 19.332865346223116,
+                "full_plan": 0.24003293365240091
+              },
+              "decision_sha256": "2ed267ab7a27a11e367fe7aef6c8a8668a6a2a7cfa45d4e1c58047533890a431"
+            }
+          }
+        },
+        "confirmation_connected": {
+          "sources": 124,
+          "query_count": 193,
+          "index": {
+            "full": {
+              "documents": 124,
+              "role_bytes": 68362,
+              "role_postings": 2594
+            },
+            "linked_only": {
+              "documents": 124,
+              "role_bytes": 68362,
+              "role_postings": 2594
+            },
+            "degree_histogram": {
+              "3": 6,
+              "1": 270,
+              "2": 69
+            }
+          },
+          "adjacency_payload_bytes": 1575,
+          "packed_projected_payload_bytes": 1417,
+          "depths": {
+            "128": {
+              "issued": 193,
+              "tagged": 66,
+              "verified_exact": 193,
+              "reads_per_arm": 579,
+              "planning_rows_mean": {
+                "full": 248.0,
+                "global_links": 248.0,
+                "lane_links": 248.0,
+                "packed_links": 248.0,
+                "packed_lane": 248.0
+              },
+              "p95_ms": {
+                "packed_lane": 17.696184758096933,
+                "packed_lane_plan": 0.5229525268077849,
+                "packed_links": 17.621123138815165,
+                "packed_links_plan": 0.46204645186662663,
+                "lane_links": 17.920147441327572,
+                "lane_links_plan": 0.8146828971803187,
+                "global_links": 17.804985586553812,
+                "global_links_plan": 0.7395251654088495,
+                "full": 17.825491353869438,
+                "full_plan": 0.7254276424646376
+              },
+              "decision_sha256": "dd35fc87fd77105b0db2615b8fd34ce71e3cd89790b6f879e11af0372ecf537b"
+            },
+            "32": {
+              "issued": 182,
+              "tagged": 65,
+              "verified_exact": 193,
+              "reads_per_arm": 579,
+              "planning_rows_mean": {
+                "full": 64.0,
+                "global_links": 64.0,
+                "lane_links": 20.082901554404145,
+                "packed_links": 64.0,
+                "packed_lane": 20.082901554404145
+              },
+              "p95_ms": {
+                "packed_lane": 17.009860556572676,
+                "packed_lane_plan": 0.12259064242243767,
+                "packed_links": 17.044936772435904,
+                "packed_links_plan": 0.16339272260665894,
+                "lane_links": 17.04831961542368,
+                "lane_links_plan": 0.15872586518526077,
+                "global_links": 17.108764499425888,
+                "global_links_plan": 0.24874070659279823,
+                "full": 17.14490531012416,
+                "full_plan": 0.23548640310764307
+              },
+              "decision_sha256": "fa1ebd98573b2f25c9e8136d9f8b7c564956038368dc7e001846bf9b6729d3ae"
+            }
+          }
+        }
+      },
+      "embedding": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "script_sha256": "be297c73993d4650a78e2f2ae14ba1b377aedeb839bac1692dd62a4416a829c1",
+      "reverse": true,
+      "projection_sha256": {
+        "extended": "8ab52c04301c4b3583ed294d0d62f2aacd652a6d44bd51f1a47286b0d2516fa2",
+        "confirmation": "ee6715866d53d973a437d13c679f8ef2efa8a995d721782843c5b1944859f2a3"
+      },
+      "job": "47558",
+      "gpu": "NVIDIA GeForce RTX 4090"
+    }
+  ]
+}
