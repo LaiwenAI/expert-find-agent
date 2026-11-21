@@ -30,15 +30,25 @@ def normalized(text):
     return "".join(c for c in unicodedata.normalize("NFKC", text).casefold() if c.isalnum())
 
 
-def entry_identity(text, roles, first_role):
+def project_columns(role_text):
+    columns = [part.strip() for part in profile.COLUMNS.split(ORDINAL.sub("", role_text)) if part.strip()]
+    labels = [i for i, part in enumerate(columns) if part.casefold() in profile.LEAD | profile.PARTICIPATE]
+    return columns[:labels[0]] if len(labels) == 1 else []
+
+
+def entry_identity(text, roles, first_role, specificity):
     if roles & PROJECT_ROLES:
-        columns = [part.strip() for part in profile.COLUMNS.split(ORDINAL.sub("", first_role)) if part.strip()]
-        labels = [i for i, part in enumerate(columns) if part.casefold() in profile.LEAD | profile.PARTICIPATE]
-        if len(labels) != 1 or labels[0] == 0 or sum(c.isalpha() for c in columns[0]) < 6:
-            return None
-        # A title key is local to the owner. It can collapse variants and never
-        # implies that a similarly titled record belongs to someone else.
-        return "project", normalized(columns[0])
+        columns = project_columns(first_role)
+        if specificity is None:
+            return ("project", normalized(columns[0])) if columns and sum(c.isalpha() for c in columns[0]) >= 6 else None
+        ids = {normalized(text[a:b]) for a, b in link.locators("project", text)}
+        if len(ids) == 1:
+            return "project", "locator:" + next(iter(ids))
+        titles = {normalized(column) for column in columns if sum(c.isalpha() for c in column) >= 6}
+        titles = {title for title in titles if specificity[title] < 16}
+        if titles:
+            return "project", max(titles, key=lambda title: (len(title), -specificity[title], title))
+        return None
     if roles == {"profile_listed_inventor"}:
         numbers = {normalized(text[a:b]) for a, b in link.locators("patent", text)}
         if len(numbers) == 1:
@@ -47,7 +57,14 @@ def entry_identity(text, roles, first_role):
     return None
 
 
-def compile_entries(windows, sources):
+def compile_entries(windows, sources, title_key="first_column"):
+    specificity = None
+    if title_key == "specific":
+        specificity = Counter()
+        for item in windows:
+            view = item["view"]
+            if set(view["roles"]) & PROJECT_ROLES:
+                specificity.update({normalized(column) for column in project_columns(view["text"])})
     lines = defaultdict(list)
     for item in windows:
         view = item["view"]
@@ -79,7 +96,7 @@ def compile_entries(windows, sources):
         if not begin <= role_begin < role_stop <= stop or "\n" in stripped:
             counts["ambiguous_or_long_lines"] += 1
             continue
-        key = entry_identity(stripped, set(role["roles"]), role["text"])
+        key = entry_identity(stripped, set(role["roles"]), role["text"], specificity)
         if key is None or profile.NEGATION.search(stripped):
             counts["unidentified_lines"] += 1
             continue
@@ -190,14 +207,14 @@ def act(text, arm, fixture, windows, entries):
                 work=dict(reader.counts), clipped=initial["clipped_pairs"] + clipped)
 
 
-def run(queries, corpus, roles, vectors, vector_meta, models, serial, output, private, reverse):
+def run(queries, corpus, roles, vectors, vector_meta, models, serial, output, private, reverse, title_key):
     from experiments.retrieval.enterprise_guarded_evidence_bundle import BundleIndex
 
     require_cuda(output, private)
     texts, fixture, fingerprint = init_fixture(queries, corpus, roles, vectors, vector_meta, models, serial)
     source_windows, _ = fixture[4]
     encoder, sources = fixture[1], fixture[3]
-    indexed, audit = compile_entries(source_windows, sources)
+    indexed, audit = compile_entries(source_windows, sources, title_key=title_key)
     if not indexed:
         raise ValueError("The original inventory has no role-bearing entries")
     started = perf_counter()
@@ -243,7 +260,7 @@ def run(queries, corpus, roles, vectors, vector_meta, models, serial, output, pr
             serial_p95_ms=float(np.quantile([r["ms"] for r in records], .95)),
             selection_p95_ms=float(np.quantile(selected_ms,.95)) if selected_ms else None,
         )
-    write(output, dict(slurm_job=os.environ["SLURM_JOB_ID"], reverse=reverse, proposal_depth=DEPTH,
+    write(output, dict(slurm_job=os.environ["SLURM_JOB_ID"], reverse=reverse, proposal_depth=DEPTH, title_key=title_key,
                        runner_sha256=digest(Path(__file__)), private_sha256=digest(private),
                        compile_audit=audit, window_index_ms=window_index_ms, entry_index_ms=entry_index_ms,
                        arms=totals, **fingerprint))
@@ -254,4 +271,5 @@ if __name__ == "__main__":
     for name in ("queries", "corpus", "roles", "vectors", "vector_meta", "models", "serial", "output", "private"):
         cli.add_argument(name, type=Path)
     cli.add_argument("--reverse", action="store_true")
+    cli.add_argument("--title-key", choices=("first_column", "specific"), default="first_column")
     run(**vars(cli.parse_args()))
