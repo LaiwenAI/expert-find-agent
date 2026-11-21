@@ -1,0 +1,1986 @@
+{
+  "slurm_array": 45931,
+  "node": "ws3",
+  "runs": [
+    {
+      "projection_sha256": "4ce67b1ff52d869f133bd5318bad2573502d12aae065c75c9407c14754171c89",
+      "script_sha256": "9f0311a05cd7e512e6fbe11f60fcd95ce59869faf5d0ac2b42f09ed848afad3a",
+      "panel": {
+        "admitted": 280,
+        "dropped": {
+          "incomplete_declaration": 42
+        },
+        "links": 12,
+        "paper_pairs": 10,
+        "independent_people": 10,
+        "variants": {
+          "present": 51,
+          "swap": 51
+        }
+      },
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "reader_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "reverse": false,
+      "bands": {
+        "prototype": 0.02919971942901611,
+        "ridge": 0.34417891502380366
+      },
+      "cutoff": 0.0,
+      "prior_bands_sha256": "0e936678ef2e49944e0a6394257d1edb79dc216facaeb77aaa49db829ef5c3da",
+      "cutoff_source_sha256": "e332709fbb1b1371253fede037758a2d027b68f389ee42ae221352f7d7bffde0",
+      "results": {
+        "excerpt|all|anchored|left": {
+          "totals": {
+            "issued": 34,
+            "exact": 32,
+            "exact_proof": 31,
+            "adverse": 3,
+            "requests": 102,
+            "source_pair_correct": 102,
+            "substitutions": 0,
+            "swap_issued": 1,
+            "calls": 77,
+            "tokens": 14828
+          },
+          "mean_ms": 23.11946272703947,
+          "p95_ms": 38.07909360621124
+        },
+        "excerpt|all|anchored|proof_aware": {
+          "totals": {
+            "issued": 35,
+            "exact": 33,
+            "exact_proof": 32,
+            "adverse": 3,
+            "requests": 102,
+            "source_pair_correct": 102,
+            "substitutions": 0,
+            "swap_issued": 1,
+            "calls": 77,
+            "tokens": 15671
+          },
+          "mean_ms": 23.468927007771153,
+          "p95_ms": 38.39327786699869
+        },
+        "excerpt|all|anchored|proof_aware_gated": {
+          "totals": {
+            "issued": 35,
+            "exact": 33,
+            "exact_proof": 32,
+            "adverse": 3,
+            "requests": 102,
+            "source_pair_correct": 102,
+            "substitutions": 0,
+            "swap_issued": 1,
+            "calls": 33,
+            "tokens": 6558
+          },
+          "mean_ms": 16.805903984955055,
+          "p95_ms": 34.484877676004544
+        },
+        "excerpt|all|anchored|prototype_band": {
+          "totals": {
+            "issued": 23,
+            "exact": 23,
+            "exact_proof": 23,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 102,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 11.924823472166763,
+          "p95_ms": 12.92498250841163
+        },
+        "excerpt|all|anchored|ridge_band": {
+          "totals": {
+            "issued": 13,
+            "exact": 13,
+            "exact_proof": 13,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 102,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 11.929263028672294,
+          "p95_ms": 12.929302267730234
+        },
+        "excerpt|all|oracle_sources|left": {
+          "totals": {
+            "issued": 34,
+            "exact": 32,
+            "exact_proof": 31,
+            "adverse": 3,
+            "requests": 102,
+            "source_pair_correct": 102,
+            "substitutions": 0,
+            "swap_issued": 1,
+            "calls": 77,
+            "tokens": 14828
+          },
+          "mean_ms": 21.044211441596204,
+          "p95_ms": 36.0326919646468
+        },
+        "excerpt|all|oracle_sources|proof_aware": {
+          "totals": {
+            "issued": 35,
+            "exact": 33,
+            "exact_proof": 32,
+            "adverse": 3,
+            "requests": 102,
+            "source_pair_correct": 102,
+            "substitutions": 0,
+            "swap_issued": 1,
+            "calls": 77,
+            "tokens": 15671
+          },
+          "mean_ms": 21.398281581544627,
+          "p95_ms": 36.130899481941015
+        },
+        "excerpt|all|oracle_sources|proof_aware_gated": {
+          "totals": {
+            "issued": 35,
+            "exact": 33,
+            "exact_proof": 32,
+            "adverse": 3,
+            "requests": 102,
+            "source_pair_correct": 102,
+            "substitutions": 0,
+            "swap_issued": 1,
+            "calls": 33,
+            "tokens": 6558
+          },
+          "mean_ms": 14.737667352664193,
+          "p95_ms": 32.399620255455375
+        },
+        "excerpt|all|oracle_sources|prototype_band": {
+          "totals": {
+            "issued": 23,
+            "exact": 23,
+            "exact_proof": 23,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 102,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.853746587931013,
+          "p95_ms": 10.52001389907673
+        },
+        "excerpt|all|oracle_sources|ridge_band": {
+          "totals": {
+            "issued": 13,
+            "exact": 13,
+            "exact_proof": 13,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 102,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.856319724919969,
+          "p95_ms": 10.52318902220577
+        },
+        "excerpt|left_missing|anchored|left": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 11.885462994185076,
+          "p95_ms": 12.886643421370536
+        },
+        "excerpt|left_missing|anchored|proof_aware": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 11.885323166828968,
+          "p95_ms": 12.886761414119974
+        },
+        "excerpt|left_missing|anchored|proof_aware_gated": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 11.885037755264955,
+          "p95_ms": 12.886514933779836
+        },
+        "excerpt|left_missing|anchored|prototype_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 11.885250577310503,
+          "p95_ms": 12.88640025886707
+        },
+        "excerpt|left_missing|anchored|ridge_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 11.888748991266624,
+          "p95_ms": 12.890194013016298
+        },
+        "excerpt|left_missing|oracle_sources|left": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.833194566525373,
+          "p95_ms": 10.497756995027885
+        },
+        "excerpt|left_missing|oracle_sources|proof_aware": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.833179256769226,
+          "p95_ms": 10.497845686040819
+        },
+        "excerpt|left_missing|oracle_sources|proof_aware_gated": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.833141172980415,
+          "p95_ms": 10.497695091180503
+        },
+        "excerpt|left_missing|oracle_sources|prototype_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.832881571378048,
+          "p95_ms": 10.497423523338512
+        },
+        "excerpt|left_missing|oracle_sources|ridge_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.833221859070381,
+          "p95_ms": 10.49767829827033
+        },
+        "excerpt|right_missing|anchored|left": {
+          "totals": {
+            "issued": 2,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 2,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 2,
+            "swap_issued": 1,
+            "calls": 12,
+            "tokens": 2028
+          },
+          "mean_ms": 13.444232432555188,
+          "p95_ms": 23.35071184206754
+        },
+        "excerpt|right_missing|anchored|proof_aware": {
+          "totals": {
+            "issued": 2,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 2,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 2,
+            "swap_issued": 1,
+            "calls": 12,
+            "tokens": 2330
+          },
+          "mean_ms": 13.591337228860414,
+          "p95_ms": 23.351473454385996
+        },
+        "excerpt|right_missing|anchored|proof_aware_gated": {
+          "totals": {
+            "issued": 2,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 2,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 2,
+            "swap_issued": 1,
+            "calls": 4,
+            "tokens": 651
+          },
+          "mean_ms": 12.35165161208487,
+          "p95_ms": 12.897350848652422
+        },
+        "excerpt|right_missing|anchored|prototype_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 11.831552398564549,
+          "p95_ms": 12.79307049117051
+        },
+        "excerpt|right_missing|anchored|ridge_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 11.834693251990293,
+          "p95_ms": 12.796474841888994
+        },
+        "excerpt|right_missing|oracle_sources|left": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.833103758009042,
+          "p95_ms": 10.497353062964976
+        },
+        "excerpt|right_missing|oracle_sources|proof_aware": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.833111824906048,
+          "p95_ms": 10.497332242084667
+        },
+        "excerpt|right_missing|oracle_sources|proof_aware_gated": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.833083889794116,
+          "p95_ms": 10.497394733829424
+        },
+        "excerpt|right_missing|oracle_sources|prototype_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.832778484469243,
+          "p95_ms": 10.497275542002171
+        },
+        "excerpt|right_missing|oracle_sources|ridge_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.833071367157732,
+          "p95_ms": 10.497278399998322
+        },
+        "keywords|all|anchored|left": {
+          "totals": {
+            "issued": 27,
+            "exact": 25,
+            "exact_proof": 24,
+            "adverse": 3,
+            "requests": 102,
+            "source_pair_correct": 72,
+            "substitutions": 0,
+            "swap_issued": 1,
+            "calls": 55,
+            "tokens": 10540
+          },
+          "mean_ms": 18.32458323698637,
+          "p95_ms": 36.000640399288386
+        },
+        "keywords|all|anchored|proof_aware": {
+          "totals": {
+            "issued": 28,
+            "exact": 26,
+            "exact_proof": 25,
+            "adverse": 3,
+            "requests": 102,
+            "source_pair_correct": 72,
+            "substitutions": 0,
+            "swap_issued": 1,
+            "calls": 55,
+            "tokens": 11605
+          },
+          "mean_ms": 18.84180947558443,
+          "p95_ms": 36.06769117759541
+        },
+        "keywords|all|anchored|proof_aware_gated": {
+          "totals": {
+            "issued": 28,
+            "exact": 26,
+            "exact_proof": 25,
+            "adverse": 3,
+            "requests": 102,
+            "source_pair_correct": 72,
+            "substitutions": 0,
+            "swap_issued": 1,
+            "calls": 25,
+            "tokens": 5031
+          },
+          "mean_ms": 14.0733402268048,
+          "p95_ms": 30.499368062010028
+        },
+        "keywords|all|anchored|prototype_band": {
+          "totals": {
+            "issued": 16,
+            "exact": 16,
+            "exact_proof": 16,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 72,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 10.343883482182362,
+          "p95_ms": 10.778517031576484
+        },
+        "keywords|all|anchored|ridge_band": {
+          "totals": {
+            "issued": 9,
+            "exact": 9,
+            "exact_proof": 9,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 72,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 10.348090726206554,
+          "p95_ms": 10.781869839411229
+        },
+        "keywords|all|oracle_sources|left": {
+          "totals": {
+            "issued": 34,
+            "exact": 32,
+            "exact_proof": 31,
+            "adverse": 3,
+            "requests": 102,
+            "source_pair_correct": 102,
+            "substitutions": 0,
+            "swap_issued": 1,
+            "calls": 77,
+            "tokens": 14813
+          },
+          "mean_ms": 20.74125537069003,
+          "p95_ms": 35.244761826470494
+        },
+        "keywords|all|oracle_sources|proof_aware": {
+          "totals": {
+            "issued": 35,
+            "exact": 33,
+            "exact_proof": 32,
+            "adverse": 3,
+            "requests": 102,
+            "source_pair_correct": 102,
+            "substitutions": 0,
+            "swap_issued": 1,
+            "calls": 77,
+            "tokens": 15671
+          },
+          "mean_ms": 21.112722457687862,
+          "p95_ms": 35.31560079427436
+        },
+        "keywords|all|oracle_sources|proof_aware_gated": {
+          "totals": {
+            "issued": 35,
+            "exact": 33,
+            "exact_proof": 32,
+            "adverse": 3,
+            "requests": 102,
+            "source_pair_correct": 102,
+            "substitutions": 0,
+            "swap_issued": 1,
+            "calls": 33,
+            "tokens": 6558
+          },
+          "mean_ms": 14.464968704737212,
+          "p95_ms": 32.25351328146644
+        },
+        "keywords|all|oracle_sources|prototype_band": {
+          "totals": {
+            "issued": 23,
+            "exact": 23,
+            "exact_proof": 23,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 102,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.590633059440947,
+          "p95_ms": 10.023338522296399
+        },
+        "keywords|all|oracle_sources|ridge_band": {
+          "totals": {
+            "issued": 13,
+            "exact": 13,
+            "exact_proof": 13,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 102,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.593036945671866,
+          "p95_ms": 10.02646088018082
+        },
+        "keywords|left_missing|anchored|left": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 10.316994972527027,
+          "p95_ms": 10.756417870288715
+        },
+        "keywords|left_missing|anchored|proof_aware": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 10.316964714815292,
+          "p95_ms": 10.756372043397278
+        },
+        "keywords|left_missing|anchored|proof_aware_gated": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 10.316667984714549,
+          "p95_ms": 10.756233998108655
+        },
+        "keywords|left_missing|anchored|prototype_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 10.316665920054577,
+          "p95_ms": 10.75617895112373
+        },
+        "keywords|left_missing|anchored|ridge_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 10.319772155900651,
+          "p95_ms": 10.759278241312131
+        },
+        "keywords|left_missing|oracle_sources|left": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.570852122908713,
+          "p95_ms": 10.000526276417077
+        },
+        "keywords|left_missing|oracle_sources|proof_aware": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.570827769279918,
+          "p95_ms": 10.000585461966693
+        },
+        "keywords|left_missing|oracle_sources|proof_aware_gated": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.570835766555996,
+          "p95_ms": 10.000557702733204
+        },
+        "keywords|left_missing|oracle_sources|prototype_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.570529738066755,
+          "p95_ms": 10.000270121963695
+        },
+        "keywords|left_missing|oracle_sources|ridge_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.57083843726044,
+          "p95_ms": 10.00065160333179
+        },
+        "keywords|right_missing|anchored|left": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 10.280150537808225,
+          "p95_ms": 10.717581096105278
+        },
+        "keywords|right_missing|anchored|proof_aware": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 10.280066192624908,
+          "p95_ms": 10.717533552087843
+        },
+        "keywords|right_missing|anchored|proof_aware_gated": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 10.279895614503937,
+          "p95_ms": 10.717265168204904
+        },
+        "keywords|right_missing|anchored|prototype_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 10.28025796175843,
+          "p95_ms": 10.717933921841905
+        },
+        "keywords|right_missing|anchored|ridge_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 10.282961527278244,
+          "p95_ms": 10.720814176602289
+        },
+        "keywords|right_missing|oracle_sources|left": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.5706525185675,
+          "p95_ms": 10.000208590645343
+        },
+        "keywords|right_missing|oracle_sources|proof_aware": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.570615084193573,
+          "p95_ms": 10.000191221479326
+        },
+        "keywords|right_missing|oracle_sources|proof_aware_gated": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.570585576333471,
+          "p95_ms": 10.000249283621088
+        },
+        "keywords|right_missing|oracle_sources|prototype_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.570367495054562,
+          "p95_ms": 9.999970794888213
+        },
+        "keywords|right_missing|oracle_sources|ridge_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.570640887307258,
+          "p95_ms": 10.00041212537326
+        }
+      }
+    },
+    {
+      "projection_sha256": "4ce67b1ff52d869f133bd5318bad2573502d12aae065c75c9407c14754171c89",
+      "script_sha256": "9f0311a05cd7e512e6fbe11f60fcd95ce59869faf5d0ac2b42f09ed848afad3a",
+      "panel": {
+        "admitted": 280,
+        "dropped": {
+          "incomplete_declaration": 42
+        },
+        "links": 12,
+        "paper_pairs": 10,
+        "independent_people": 10,
+        "variants": {
+          "present": 51,
+          "swap": 51
+        }
+      },
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "reader_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "reverse": true,
+      "bands": {
+        "prototype": 0.02919971942901611,
+        "ridge": 0.34417891502380366
+      },
+      "cutoff": 0.0,
+      "prior_bands_sha256": "0e936678ef2e49944e0a6394257d1edb79dc216facaeb77aaa49db829ef5c3da",
+      "cutoff_source_sha256": "e332709fbb1b1371253fede037758a2d027b68f389ee42ae221352f7d7bffde0",
+      "results": {
+        "excerpt|all|anchored|left": {
+          "totals": {
+            "issued": 34,
+            "exact": 32,
+            "exact_proof": 31,
+            "adverse": 3,
+            "requests": 102,
+            "source_pair_correct": 102,
+            "substitutions": 0,
+            "swap_issued": 1,
+            "calls": 77,
+            "tokens": 14828
+          },
+          "mean_ms": 23.13220275419892,
+          "p95_ms": 37.94317977735773
+        },
+        "excerpt|all|anchored|proof_aware": {
+          "totals": {
+            "issued": 35,
+            "exact": 33,
+            "exact_proof": 32,
+            "adverse": 3,
+            "requests": 102,
+            "source_pair_correct": 102,
+            "substitutions": 0,
+            "swap_issued": 1,
+            "calls": 77,
+            "tokens": 15671
+          },
+          "mean_ms": 23.497728870578985,
+          "p95_ms": 38.62113654613494
+        },
+        "excerpt|all|anchored|proof_aware_gated": {
+          "totals": {
+            "issued": 35,
+            "exact": 33,
+            "exact_proof": 32,
+            "adverse": 3,
+            "requests": 102,
+            "source_pair_correct": 102,
+            "substitutions": 0,
+            "swap_issued": 1,
+            "calls": 33,
+            "tokens": 6558
+          },
+          "mean_ms": 16.793351920604632,
+          "p95_ms": 34.69629018800333
+        },
+        "excerpt|all|anchored|prototype_band": {
+          "totals": {
+            "issued": 23,
+            "exact": 23,
+            "exact_proof": 23,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 102,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 11.915349683441296,
+          "p95_ms": 12.93372317450121
+        },
+        "excerpt|all|anchored|ridge_band": {
+          "totals": {
+            "issued": 13,
+            "exact": 13,
+            "exact_proof": 13,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 102,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 11.91961301111744,
+          "p95_ms": 12.936938548227772
+        },
+        "excerpt|all|oracle_sources|left": {
+          "totals": {
+            "issued": 34,
+            "exact": 32,
+            "exact_proof": 31,
+            "adverse": 3,
+            "requests": 102,
+            "source_pair_correct": 102,
+            "substitutions": 0,
+            "swap_issued": 1,
+            "calls": 77,
+            "tokens": 14828
+          },
+          "mean_ms": 21.060506093050993,
+          "p95_ms": 36.04886358953081
+        },
+        "excerpt|all|oracle_sources|proof_aware": {
+          "totals": {
+            "issued": 35,
+            "exact": 33,
+            "exact_proof": 32,
+            "adverse": 3,
+            "requests": 102,
+            "source_pair_correct": 102,
+            "substitutions": 0,
+            "swap_issued": 1,
+            "calls": 77,
+            "tokens": 15671
+          },
+          "mean_ms": 21.430461648075532,
+          "p95_ms": 36.290944542270154
+        },
+        "excerpt|all|oracle_sources|proof_aware_gated": {
+          "totals": {
+            "issued": 35,
+            "exact": 33,
+            "exact_proof": 32,
+            "adverse": 3,
+            "requests": 102,
+            "source_pair_correct": 102,
+            "substitutions": 0,
+            "swap_issued": 1,
+            "calls": 33,
+            "tokens": 6558
+          },
+          "mean_ms": 14.728687783502334,
+          "p95_ms": 32.54890755051747
+        },
+        "excerpt|all|oracle_sources|prototype_band": {
+          "totals": {
+            "issued": 23,
+            "exact": 23,
+            "exact_proof": 23,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 102,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.84781574430492,
+          "p95_ms": 10.556096176151186
+        },
+        "excerpt|all|oracle_sources|ridge_band": {
+          "totals": {
+            "issued": 13,
+            "exact": 13,
+            "exact_proof": 13,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 102,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.850030223948552,
+          "p95_ms": 10.558458772720769
+        },
+        "excerpt|left_missing|anchored|left": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 11.8710974062446,
+          "p95_ms": 12.908514961600304
+        },
+        "excerpt|left_missing|anchored|proof_aware": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 11.870879912748933,
+          "p95_ms": 12.908389273798093
+        },
+        "excerpt|left_missing|anchored|proof_aware_gated": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 11.870623186148483,
+          "p95_ms": 12.909033754840493
+        },
+        "excerpt|left_missing|anchored|prototype_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 11.870868109148361,
+          "p95_ms": 12.90821933071129
+        },
+        "excerpt|left_missing|anchored|ridge_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 11.874333220333153,
+          "p95_ms": 12.912128429161385
+        },
+        "excerpt|left_missing|oracle_sources|left": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.826809059435904,
+          "p95_ms": 10.532643186161295
+        },
+        "excerpt|left_missing|oracle_sources|proof_aware": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.826763010328161,
+          "p95_ms": 10.53251102566719
+        },
+        "excerpt|left_missing|oracle_sources|proof_aware_gated": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.826752547786443,
+          "p95_ms": 10.532483656425029
+        },
+        "excerpt|left_missing|oracle_sources|prototype_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.8263801728357,
+          "p95_ms": 10.532250691903755
+        },
+        "excerpt|left_missing|oracle_sources|ridge_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.826706820532825,
+          "p95_ms": 10.532557393889874
+        },
+        "excerpt|right_missing|anchored|left": {
+          "totals": {
+            "issued": 2,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 2,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 2,
+            "swap_issued": 1,
+            "calls": 12,
+            "tokens": 2028
+          },
+          "mean_ms": 13.433473880914057,
+          "p95_ms": 23.240980127593502
+        },
+        "excerpt|right_missing|anchored|proof_aware": {
+          "totals": {
+            "issued": 2,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 2,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 2,
+            "swap_issued": 1,
+            "calls": 12,
+            "tokens": 2330
+          },
+          "mean_ms": 13.577124736198753,
+          "p95_ms": 23.2790042005945
+        },
+        "excerpt|right_missing|anchored|proof_aware_gated": {
+          "totals": {
+            "issued": 2,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 2,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 2,
+            "swap_issued": 1,
+            "calls": 4,
+            "tokens": 651
+          },
+          "mean_ms": 12.33825625682834,
+          "p95_ms": 12.945119623327628
+        },
+        "excerpt|right_missing|anchored|prototype_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 11.81980973570699,
+          "p95_ms": 12.844022479839623
+        },
+        "excerpt|right_missing|anchored|ridge_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 11.822995787952095,
+          "p95_ms": 12.847294774837792
+        },
+        "excerpt|right_missing|oracle_sources|left": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.826645565529665,
+          "p95_ms": 10.532519884873182
+        },
+        "excerpt|right_missing|oracle_sources|proof_aware": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.826610744793845,
+          "p95_ms": 10.532520798733458
+        },
+        "excerpt|right_missing|oracle_sources|proof_aware_gated": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.826576758367832,
+          "p95_ms": 10.532497632084414
+        },
+        "excerpt|right_missing|oracle_sources|prototype_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.826330296859583,
+          "p95_ms": 10.532094957306981
+        },
+        "excerpt|right_missing|oracle_sources|ridge_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.826641933828155,
+          "p95_ms": 10.532534483354539
+        },
+        "keywords|all|anchored|left": {
+          "totals": {
+            "issued": 27,
+            "exact": 25,
+            "exact_proof": 24,
+            "adverse": 3,
+            "requests": 102,
+            "source_pair_correct": 72,
+            "substitutions": 0,
+            "swap_issued": 1,
+            "calls": 55,
+            "tokens": 10540
+          },
+          "mean_ms": 18.285885833285967,
+          "p95_ms": 35.97092120908201
+        },
+        "keywords|all|anchored|proof_aware": {
+          "totals": {
+            "issued": 28,
+            "exact": 26,
+            "exact_proof": 25,
+            "adverse": 3,
+            "requests": 102,
+            "source_pair_correct": 72,
+            "substitutions": 0,
+            "swap_issued": 1,
+            "calls": 55,
+            "tokens": 11605
+          },
+          "mean_ms": 18.80521589419896,
+          "p95_ms": 36.057675478514284
+        },
+        "keywords|all|anchored|proof_aware_gated": {
+          "totals": {
+            "issued": 28,
+            "exact": 26,
+            "exact_proof": 25,
+            "adverse": 3,
+            "requests": 102,
+            "source_pair_correct": 72,
+            "substitutions": 0,
+            "swap_issued": 1,
+            "calls": 25,
+            "tokens": 5031
+          },
+          "mean_ms": 14.027758050646048,
+          "p95_ms": 30.153328087180853
+        },
+        "keywords|all|anchored|prototype_band": {
+          "totals": {
+            "issued": 16,
+            "exact": 16,
+            "exact_proof": 16,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 72,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 10.298481182533079,
+          "p95_ms": 10.635548911523074
+        },
+        "keywords|all|anchored|ridge_band": {
+          "totals": {
+            "issued": 9,
+            "exact": 9,
+            "exact_proof": 9,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 72,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 10.302959877413278,
+          "p95_ms": 10.640155989676714
+        },
+        "keywords|all|oracle_sources|left": {
+          "totals": {
+            "issued": 34,
+            "exact": 32,
+            "exact_proof": 31,
+            "adverse": 3,
+            "requests": 102,
+            "source_pair_correct": 102,
+            "substitutions": 0,
+            "swap_issued": 1,
+            "calls": 77,
+            "tokens": 14813
+          },
+          "mean_ms": 20.70758624604958,
+          "p95_ms": 35.244398354552686
+        },
+        "keywords|all|oracle_sources|proof_aware": {
+          "totals": {
+            "issued": 35,
+            "exact": 33,
+            "exact_proof": 32,
+            "adverse": 3,
+            "requests": 102,
+            "source_pair_correct": 102,
+            "substitutions": 0,
+            "swap_issued": 1,
+            "calls": 77,
+            "tokens": 15671
+          },
+          "mean_ms": 21.0797619884925,
+          "p95_ms": 35.320462263189256
+        },
+        "keywords|all|oracle_sources|proof_aware_gated": {
+          "totals": {
+            "issued": 35,
+            "exact": 33,
+            "exact_proof": 32,
+            "adverse": 3,
+            "requests": 102,
+            "source_pair_correct": 102,
+            "substitutions": 0,
+            "swap_issued": 1,
+            "calls": 33,
+            "tokens": 6558
+          },
+          "mean_ms": 14.415324926969832,
+          "p95_ms": 32.20084302010946
+        },
+        "keywords|all|oracle_sources|prototype_band": {
+          "totals": {
+            "issued": 23,
+            "exact": 23,
+            "exact_proof": 23,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 102,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.540802985201498,
+          "p95_ms": 9.873432613676414
+        },
+        "keywords|all|oracle_sources|ridge_band": {
+          "totals": {
+            "issued": 13,
+            "exact": 13,
+            "exact_proof": 13,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 102,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.54290954327649,
+          "p95_ms": 9.875765850301832
+        },
+        "keywords|left_missing|anchored|left": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 10.260001135369142,
+          "p95_ms": 10.59865330462344
+        },
+        "keywords|left_missing|anchored|proof_aware": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 10.259849375442547,
+          "p95_ms": 10.598468472016975
+        },
+        "keywords|left_missing|anchored|proof_aware_gated": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 10.259631831728507,
+          "p95_ms": 10.598330775974318
+        },
+        "keywords|left_missing|anchored|prototype_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 10.259671569299684,
+          "p95_ms": 10.598306765314192
+        },
+        "keywords|left_missing|anchored|ridge_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 10.26283832969984,
+          "p95_ms": 10.60163964284584
+        },
+        "keywords|left_missing|oracle_sources|left": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.520495482766087,
+          "p95_ms": 9.855922270799056
+        },
+        "keywords|left_missing|oracle_sources|proof_aware": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.520446202562502,
+          "p95_ms": 9.855893027270213
+        },
+        "keywords|left_missing|oracle_sources|proof_aware_gated": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.520457013208857,
+          "p95_ms": 9.85590626951307
+        },
+        "keywords|left_missing|oracle_sources|prototype_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.520270641409226,
+          "p95_ms": 9.855586534831673
+        },
+        "keywords|left_missing|oracle_sources|ridge_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.520513216700113,
+          "p95_ms": 9.856267349096015
+        },
+        "keywords|right_missing|anchored|left": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 10.223401757185439,
+          "p95_ms": 10.558518103789538
+        },
+        "keywords|right_missing|anchored|proof_aware": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 10.22324838798822,
+          "p95_ms": 10.558143607340753
+        },
+        "keywords|right_missing|anchored|proof_aware_gated": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 10.222983043229974,
+          "p95_ms": 10.557996027637273
+        },
+        "keywords|right_missing|anchored|prototype_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 10.223369297854529,
+          "p95_ms": 10.558441770263016
+        },
+        "keywords|right_missing|anchored|ridge_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 10.22603376837009,
+          "p95_ms": 10.561125469394028
+        },
+        "keywords|right_missing|oracle_sources|left": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.52028286730067,
+          "p95_ms": 9.855882334522903
+        },
+        "keywords|right_missing|oracle_sources|proof_aware": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.520237377443005,
+          "p95_ms": 9.855684981448576
+        },
+        "keywords|right_missing|oracle_sources|proof_aware_gated": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.520220119442206,
+          "p95_ms": 9.855660784523934
+        },
+        "keywords|right_missing|oracle_sources|prototype_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.51999113849346,
+          "p95_ms": 9.855478123063222
+        },
+        "keywords|right_missing|oracle_sources|ridge_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "requests": 102,
+            "source_pair_correct": 0,
+            "substitutions": 0,
+            "swap_issued": 0,
+            "calls": 0,
+            "tokens": 0
+          },
+          "mean_ms": 9.520237853376232,
+          "p95_ms": 9.855711762793362
+        }
+      }
+    }
+  ]
+}
