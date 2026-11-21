@@ -2,10 +2,12 @@
 
 import argparse
 from collections import Counter
+from dataclasses import dataclass
 from hashlib import sha256
 import json
 import os
 from pathlib import Path
+from typing import Callable
 
 import torch
 
@@ -56,23 +58,79 @@ def workload(index, cases, wording):
     return labels
 
 
-def execute(service, request, arm, cutoff, lightweight=None, resident=None):
-    if arm == "baseline":
-        return service.search(request, "screened_one_call")
+def request_inputs(request):
     requirements = json.loads(request.payload)["requirements"]
     clues = [item["topic"] for item in requirements]
     roles = [item["role"] for item in requirements]
-    vectors = service.encoder.encode([f"Instruct: {TOPIC_TASK}\nQuery:{clue}" for clue in clues] +
-                                     [f"Instruct: {TASK}\nQuery:{role}" for role in roles])
+    prompts = [f"Instruct: {TOPIC_TASK}\nQuery:{clue}" for clue in clues]
+    prompts.extend(f"Instruct: {TASK}\nQuery:{role}" for role in roles)
+    return clues, roles, prompts
+
+
+@dataclass
+class PairedRoleCheck:
+    phrases: list
+    pools: list
+    finish: Callable
+
+
+def finish_role(service, result):
+    if isinstance(result, PairedRoleCheck):
+        return result.finish(service.role.batched(result.phrases, result.pools))
+    return result
+
+
+def execute(service, request, arm, cutoff, lightweight=None, resident=None):
+    if arm == "baseline":
+        return service.search(request, "screened_one_call")
+    clues, roles, prompts = request_inputs(request)
+    result = resolve(service, arm, cutoff, lightweight, resident, clues, roles, service.encoder.encode(prompts))
+    return finish_role(service, result)
+
+
+def execute_group(service, requests, arm, cutoff, lightweight, resident, stage):
+    inputs = [request_inputs(request) for request in requests]
+    if stage == "embedding":
+        flat = service.encoder.encode([prompt for _, _, prompts in inputs for prompt in prompts], group_size=4)
+        return [finish_role(service, resolve(service, arm, cutoff, lightweight, resident,
+                                             clues, roles, flat[4*i:4*i + 4]))
+                for i, (clues, roles, _) in enumerate(inputs)]
+
+    results = [resolve(service, arm, cutoff, lightweight, resident, clues, roles, service.encoder.encode(prompts))
+               for clues, roles, prompts in inputs]
+    deferred = [(i, result) for i, result in enumerate(results) if isinstance(result, PairedRoleCheck)]
+    if len(deferred) < 2:
+        return [finish_role(service, result) for result in results]
+    verified = service.role.batched_requests([(task.phrases, task.pools) for _, task in deferred])
+    for j, ((i, task), outcome) in enumerate(zip(deferred, verified, strict=True)):
+        result = json.loads(task.finish(outcome))
+        result["role_model_forwards"] = int(j == 0)
+        results[i] = json.dumps(result)
+    return results
+
+
+def resolve(service, arm, cutoff, lightweight, resident, clues, roles, vectors):
     scores = {name: vectors[2:] @ service.banks[name].T for name in service.bands}
     ranking = service.index.full_rank(vectors[:2], clues, None)
     state = plan(service, ranking, scores, clues, roles, None, "screened", run_role=False)
     pair, base, response = state["pair"], state["roles"], state["response"]
     if arm == "matched_resident":
         if not pair and not response["calls"]:
-            from experiments.credit.paired_role_resident_source import matched_source_fallback
+            from experiments.credit.paired_role_resident_source import matched_source_proposal
 
-            return json.dumps(matched_source_fallback(service, ranking, scores, clues, roles, cutoff, resident))
+            proposal = matched_source_proposal(service, ranking, scores, clues, resident)
+            if not proposal:
+                return json.dumps(payload(service.index, None, []))
+            candidate, pools = proposal
+
+            def finish(outcome):
+                choices, gap, tokens = outcome
+                accepted = cutoff is not None and gap > cutoff and None not in choices
+                selected = [{role} for role in choices] if accepted else []
+                return json.dumps(payload(service.index, candidate if accepted else None,
+                                          selected, role_calls=1, tokens=tokens))
+
+            return PairedRoleCheck(roles, pools, finish)
         arm = "student_then_teacher"
     if arm == "dense_joint":
         if not pair and not response["calls"]:
@@ -105,9 +163,12 @@ def execute(service, request, arm, cutoff, lightweight=None, resident=None):
         # that pair, the role reader cannot change what gets issued.
         if cutoff is None or not candidates(service.index, pair, [{role} for role in eligible]):
             return json.dumps(response)
-        choice, margin, tokens = service.role.batched(roles, pools)
-        observation = dict(choice=choice if choice == eligible else None, margin=margin, forwards=1, tokens=tokens)
-        return json.dumps(apply(service.index, pair, base, observation, cutoff))
+        def finish(outcome):
+            choice, margin, tokens = outcome
+            observation = dict(choice=choice if choice == eligible else None, margin=margin, forwards=1, tokens=tokens)
+            return json.dumps(apply(service.index, pair, base, observation, cutoff))
+
+        return PairedRoleCheck(roles, pools, finish)
     methods = ("two_batched", "top_one") if arm == "reserve_agreement" else ("two_batched",)
     observations = proposals(service.index, pair, base, roles, scores, service.role, methods)
     batch = observations["two_batched"]
@@ -265,18 +326,32 @@ def run(args):
             matched_serving = dict(calibration=matched_fit, observed_view_agreement=agreement,
                                    component_sha256=digest(args.matched_source_service_reference))
             requested = MATCHED_SERVICE_ARMS
+            if args.embedding_batch_capacity or args.role_batch_capacity:
+                if args.embedding_batch_capacity and 4 * args.embedding_batch_capacity > service.encoder.batch_size:
+                    raise ValueError("An embedding group must fit in a single encoder forward")
+                requested = ("student_then_teacher", "matched_resident",
+                             "student_then_teacher_batched", "matched_resident_batched")
         elif args.joint_postings_service:
             requested = JOINT_SERVICE_ARMS
         else:
             requested = CASCADE_ARMS if args.cascade else ("baseline", "reserve_prescreen", *LIGHTWEIGHT_METHODS)
         print("Frozen lightweight routes", fit, flush=True)
+    batch_capacity = args.embedding_batch_capacity or args.role_batch_capacity
+    batch_stage = "embedding" if args.embedding_batch_capacity else "paired_role"
     arms = requested[::-1] if args.reverse else requested
     for offset, rate in enumerate(RATES):
         trace, arrivals = arrivals_for(labels, rate, args.repeats)
         results[rate] = {}
         for arm in arms[offset:] + arms[:offset]:
-            records, elapsed = replay(lambda request: execute(service, request, arm, cutoff, lightweight, resident),
-                                      trace, arrivals, trace[:24])
+            policy = arm.removesuffix("_batched")
+            capacity = batch_capacity if policy != arm else 1
+            group = None
+            if capacity > 1:
+                def group(requests):
+                    return execute_group(service, requests, policy, cutoff, lightweight, resident, batch_stage)
+
+            records, elapsed = replay(lambda request: execute(service, request, policy, cutoff, lightweight, resident),
+                                      trace, arrivals, trace[:24], execute_group=group, capacity=capacity)
             detail, responses = summarize(trace, arrivals, records, elapsed, labels, args.repeats)
             if detail["failures"] or len(responses) != len(labels):
                 raise ValueError(f"Incomplete replay for {arm} at {rate}: {detail['failures']}")
@@ -286,9 +361,18 @@ def run(args):
                 if response["role_calls"] + response["source_calls"] != response["calls"] or response["calls"] > 1:
                     raise ValueError("Shared verifier budget exceeded")
                 calls.update(role_forwards=response["role_calls"], source_forwards=response["source_calls"])
+                if args.role_batch_capacity:
+                    calls.update(role_model_forwards=response.get("role_model_forwards", response["role_calls"]))
                 if args.joint_postings_service or matched_serving is not None:
                     calls.update(source_rows=response.get("source_rows", response["source_calls"]))
             detail["verification"] = dict(calls)
+            if batch_capacity:
+                served = Counter(record["batch"] for record in records)
+                if any(count % width for width, count in served.items()):
+                    raise ValueError("Incomplete embedding group accounting")
+                detail["request_groups"] = {width: count // width for width, count in served.items()}
+                detail["embedding_forwards"] = (sum(detail["request_groups"].values())
+                                                if batch_stage == "embedding" else len(records))
             if arm in by_arm and by_arm[arm] != responses:
                 raise ValueError("Traffic changed the emitted evidence")
             by_arm[arm] = responses
@@ -297,6 +381,7 @@ def run(args):
     if args.prescreen and not args.plos and by_arm["reserve_agreement"] != by_arm["reserve_prescreen"]:
         changed = sum(by_arm["reserve_agreement"][req] != by_arm["reserve_prescreen"][req] for req in labels)
         raise ValueError(f"Agreement prescreen changed {changed} evidence payloads")
+    baseline = "student_then_teacher" if batch_capacity else "baseline"
     groups = clusters(selected, articles)
     metrics = {arm: summarize_proofs(proofs, labels) for arm, proofs in by_arm.items()}
     contrasts = {}
@@ -309,12 +394,12 @@ def run(args):
             counts = Counter()
             for req in rows:
                 counts.update(metrics[arm][req])
-            delta = [int(metrics[arm][req]["strict"]) - int(metrics["baseline"][req]["strict"]) for req in positives]
+            delta = [int(metrics[arm][req]["strict"]) - int(metrics[baseline][req]["strict"]) for req in positives]
             interval = clustered_paired_interval(delta, group_ids)
             interval["sampling_unit"] = "connected paper/recorded-author groups"
             contrasts[arm][view] = dict(totals=dict(counts), positives=len(positives),
                                         requests=len(rows), paired_strict_change=interval)
-            if arm in ("dense_joint", "matched_resident"):
+            if arm in ("dense_joint", "matched_resident", "matched_resident_batched"):
                 extra = [int(metrics[arm][req]["strict"]) - int(metrics["student_then_teacher"][req]["strict"])
                          for req in positives]
                 paired = clustered_paired_interval(extra, group_ids)
@@ -326,9 +411,13 @@ def run(args):
     }
     if matched_serving is not None:
         expected_signatures = expected["signatures"]
-        for arm, reference_arm in (("student_then_teacher", "cascade"), ("dense_joint", "dense_joint"),
-                                   ("matched_resident", "gold_matched")):
-            if signatures[arm] != expected_signatures[reference_arm]:
+        reference_arms = {"student_then_teacher": "cascade", "dense_joint": "dense_joint",
+                          "matched_resident": "gold_matched"}
+        for arm in requested:
+            policy = arm.removesuffix("_batched")
+            if policy not in reference_arms:
+                continue
+            if signatures[arm] != expected_signatures[reference_arms[policy]]:
                 raise ValueError(f"Service evidence differs from the component result for {arm}")
     write_json(args.output, dict(
         script_sha256=digest(Path(__file__)), projection_sha256=digest(args.projection),
@@ -339,6 +428,7 @@ def run(args):
         response_signatures=signatures, lightweight=report, cascade=args.cascade, **revisions,
         **({"joint_postings_service": True} if args.joint_postings_service else {}),
         **({"matched_source_service": matched_serving} if matched_serving is not None else {}),
+        **({"batch_capacity": batch_capacity, "batch_stage": batch_stage} if batch_capacity else {}),
     ))
 
 
@@ -351,6 +441,9 @@ if __name__ == "__main__":
     parser.add_argument("--plos", type=Path)
     parser.add_argument("--cascade", action="store_true")
     parser.add_argument("--repeats", type=int, default=2)
+    batching = parser.add_mutually_exclusive_group()
+    batching.add_argument("--embedding-batch-capacity", type=int, choices=range(2, 9))
+    batching.add_argument("--role-batch-capacity", type=int, choices=range(2, 9))
     parser.add_argument("--matched-source-projection", type=Path)
     parser.add_argument("--matched-source-manifest", type=Path)
     parser.add_argument("--matched-source-supplement", type=Path)
@@ -368,6 +461,8 @@ if __name__ == "__main__":
     diagnostics.add_argument("--resident-source-reference", type=Path)
     diagnostics.add_argument("--matched-source-service-reference", type=Path)
     args = parser.parse_args()
+    if (args.embedding_batch_capacity or args.role_batch_capacity) and args.matched_source_service_reference is None:
+        parser.error("Batching requires --matched-source-service-reference")
     if args.repeats < 1:
         parser.error("--repeats must be positive")
     if args.cascade and not args.plos:

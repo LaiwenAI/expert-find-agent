@@ -8,7 +8,7 @@ from copy import copy
 import json
 import os
 from pathlib import Path
-from queue import Queue
+from queue import Empty, Queue
 from random import Random
 from threading import Thread
 from time import perf_counter
@@ -93,30 +93,50 @@ def search(request, catalog, encoder, banks, reader, bands, cutoff):
     return json.dumps(dict(papers=pair, owners=owners, roles=roles, calls=calls, tokens=tokens))
 
 
-def worker(pending, execute, warm, ready):
+def worker(pending, execute, warm, ready, execute_group, capacity):
     try:
-        for request in warm:
-            execute(request)
+        if execute_group is None:
+            for request in warm:
+                execute(request)
+        else:
+            for width in range(1, capacity + 1):
+                execute_group(warm[:width])
         ready.set_result(True)
     except Exception as exc:
         ready.set_exception(exc)
         return
-    while (item := pending.get()) is not None:
-        request, arrived, future = item
+    while (first := pending.get()) is not None:
+        batch = [first]
+        while len(batch) < capacity:
+            try:
+                item = pending.get_nowait()
+            except Empty:
+                break
+            if item is None:
+                pending.put(None)
+                break
+            batch.append(item)
         started = perf_counter()
         try:
-            content = execute(request)
-            future.set_result((content, 1, (started - arrived) * 1000, (perf_counter() - started) * 1000))
+            if execute_group is None:
+                responses = [execute(first[0])]
+            else:
+                responses = execute_group([request for request, _, _ in batch])
+            compute_ms = (perf_counter() - started) * 1000
+            for (_, arrived, future), content in zip(batch, responses, strict=True):
+                future.set_result((content, len(batch), (started - arrived) * 1000, compute_ms))
         except Exception as exc:
-            future.set_exception(exc)
+            for _, _, future in batch:
+                if not future.done():
+                    future.set_exception(exc)
 
 
-def replay(execute, trace, arrivals, warm):
+def replay(execute, trace, arrivals, warm, *, execute_group=None, capacity=1):
     with Server(("127.0.0.1", 0), Handler) as server:
         server.pending = Queue()
         server.panels = {"elife"}
         ready = Future()
-        gpu = Thread(target=worker, args=(server.pending, execute, warm, ready))
+        gpu = Thread(target=worker, args=(server.pending, execute, warm, ready, execute_group, capacity))
         gpu.start()
         try:
             ready.result(timeout=60)

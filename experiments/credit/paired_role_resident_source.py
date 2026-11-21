@@ -94,11 +94,15 @@ def calibrate(service, plos):
     return gates, report
 
 
-def resident_checks(service, pair, pools, clues, phrases, ranking, cutoff, models):
+def source_margins(service, pair, clues, ranking, models):
     values = [features(service.index, side, clue, doc)
               for side, clue, doc in zip(ranking, clues, pair, strict=True)]
-    margins = {name: min(float(score(model, x)) for x in values) - threshold
-               for name, (model, threshold) in models.items()}
+    return {name: min(float(score(model, x)) for x in values) - threshold
+            for name, (model, threshold) in models.items()}
+
+
+def resident_checks(service, pair, pools, clues, phrases, ranking, cutoff, models):
+    margins = source_margins(service, pair, clues, ranking, models)
     passes = {name: margin > 0. for name, margin in margins.items()}
     if not any(passes.values()):
         return {name: payload(service.index, None, []) for name in passes}, passes, margins
@@ -116,15 +120,16 @@ def clue_view(clues):
     return "excerpt"
 
 
-def matched_source_fallback(service, ranking, scores, clues, phrases, cutoff, models):
+def matched_source_proposal(service, ranking, scores, clues, models):
     pools = alternative_roles(scores)
     candidates = pairs_for(service.index, ranking, [{pool[0]} for pool in pools])
-    if not candidates:
-        return payload(service.index, None, [])
-    name = "gold_matched"
-    outputs, _, _ = resident_checks(service, candidates[0], pools, clues, phrases, ranking, cutoff,
-                                    {name: models[clue_view(clues)][name]})
-    return outputs[name]
+    if candidates:
+        name = "gold_matched"
+        candidate = candidates[0]
+        gate = {name: models[clue_view(clues)][name]}
+        if source_margins(service, candidate, clues, ranking, gate)[name] > 0.:
+            return candidate, pools
+    return None
 
 
 def run_resident(service, labels, cutoff, lightweight, plos, reference, output, reverse, *, matched=None):

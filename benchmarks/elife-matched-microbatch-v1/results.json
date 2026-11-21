@@ -1,0 +1,2808 @@
+{
+  "slurm_array": 46362,
+  "compute_node": "ws3",
+  "task_panels": [
+    "holdout",
+    "holdout",
+    "development",
+    "development"
+  ],
+  "same_evidence_as_archived_serial": true,
+  "runs": [
+    {
+      "script_sha256": "c432849b5a294fb1ec6de339a21302f078101716c0fb9b45e0e187be9febb8ea",
+      "projection_sha256": "1f265b34b43e6d769c8e6b2ccc4a0d821b87bd495fa1fefc83a3f05bd05ec5fc",
+      "manifest_sha256": "dd2a72c697f1d696531cdb8f5a694ec20729e10e041a6c5ca2f9a1436bf703f5",
+      "paired_results_sha256": "f3f24de1b725c529b6dc142a0eedfc6413129bc67643e9b74d0909df0b94c956",
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "reverse": false,
+      "prescreen": false,
+      "census": {
+        "admitted": 619,
+        "dropped": {
+          "incomplete_or_ambiguous": 29
+        },
+        "links": 20,
+        "paper_pairs": 12,
+        "linked_papers": 24,
+        "contributors": 16,
+        "variants": {
+          "present": 71,
+          "swap": 71
+        }
+      },
+      "distinct_requests": 48,
+      "author_connected_groups": 12,
+      "cutoffs": {
+        "source": -5.125,
+        "role": 0.0,
+        "two_batched": 0.0
+      },
+      "results": {
+        "28": {
+          "student_then_teacher": {
+            "counts": {
+              "exact": 176,
+              "adverse": 0,
+              "issued": 176,
+              "positives": 192,
+              "calls": 136,
+              "tokens": 14552
+            },
+            "requests": 384,
+            "expected_repeats": 8,
+            "offered_rps": 31.03284246137025,
+            "achieved_rps": 31.070751049608603,
+            "failures": {},
+            "makespan_seconds": 12.35889017896261,
+            "drain_seconds": 0.017126756009679056,
+            "p95_ms": {
+              "total_ms": 86.93090352462603,
+              "client_queue_ms": 2.3756253242026975,
+              "server_queue_ms": 63.68412625,
+              "compute_ms": 32.514130349999995
+            },
+            "verification": {
+              "role_forwards": 128,
+              "source_forwards": 8,
+              "role_model_forwards": 128,
+              "source_rows": 8
+            },
+            "request_groups": {
+              "1": 384
+            },
+            "embedding_forwards": 384
+          },
+          "matched_resident": {
+            "counts": {
+              "exact": 184,
+              "adverse": 0,
+              "issued": 184,
+              "positives": 192,
+              "calls": 152,
+              "tokens": 16992
+            },
+            "requests": 384,
+            "expected_repeats": 8,
+            "offered_rps": 31.03284246137025,
+            "achieved_rps": 31.07125520080327,
+            "failures": {},
+            "makespan_seconds": 12.358689647982828,
+            "drain_seconds": 0.016926225029896713,
+            "p95_ms": {
+              "total_ms": 88.17541218013501,
+              "client_queue_ms": 2.635735133662813,
+              "server_queue_ms": 64.4764857,
+              "compute_ms": 32.846662599999995
+            },
+            "verification": {
+              "role_forwards": 144,
+              "source_forwards": 8,
+              "role_model_forwards": 144,
+              "source_rows": 8
+            },
+            "request_groups": {
+              "1": 384
+            },
+            "embedding_forwards": 384
+          },
+          "student_then_teacher_batched": {
+            "counts": {
+              "exact": 176,
+              "adverse": 0,
+              "issued": 176,
+              "positives": 192,
+              "calls": 136,
+              "tokens": 14552
+            },
+            "requests": 384,
+            "expected_repeats": 8,
+            "offered_rps": 31.03284246137025,
+            "achieved_rps": 31.074630265846857,
+            "failures": {},
+            "makespan_seconds": 12.35734735103324,
+            "drain_seconds": 0.01558392808030895,
+            "p95_ms": {
+              "total_ms": 116.56076518702315,
+              "client_queue_ms": 3.421685646753757,
+              "server_queue_ms": 46.04014339999998,
+              "compute_ms": 73.000288
+            },
+            "verification": {
+              "role_forwards": 128,
+              "source_forwards": 8,
+              "role_model_forwards": 128,
+              "source_rows": 8
+            },
+            "request_groups": {
+              "1": 247,
+              "2": 33,
+              "4": 8,
+              "3": 13
+            },
+            "embedding_forwards": 384
+          },
+          "matched_resident_batched": {
+            "counts": {
+              "exact": 184,
+              "adverse": 0,
+              "issued": 184,
+              "positives": 192,
+              "calls": 152,
+              "tokens": 16992
+            },
+            "requests": 384,
+            "expected_repeats": 8,
+            "offered_rps": 31.03284246137025,
+            "achieved_rps": 31.07579035586712,
+            "failures": {},
+            "makespan_seconds": 12.356886039022356,
+            "drain_seconds": 0.015122616069424666,
+            "p95_ms": {
+              "total_ms": 100.18196076853195,
+              "client_queue_ms": 2.7288619137834726,
+              "server_queue_ms": 41.921927549999985,
+              "compute_ms": 67.152096
+            },
+            "verification": {
+              "role_forwards": 144,
+              "source_forwards": 8,
+              "role_model_forwards": 144,
+              "source_rows": 8
+            },
+            "request_groups": {
+              "1": 250,
+              "2": 32,
+              "3": 14,
+              "4": 7
+            },
+            "embedding_forwards": 384
+          }
+        },
+        "60": {
+          "matched_resident": {
+            "counts": {
+              "exact": 184,
+              "adverse": 0,
+              "issued": 184,
+              "positives": 192,
+              "calls": 152,
+              "tokens": 16992
+            },
+            "requests": 384,
+            "expected_repeats": 8,
+            "offered_rps": 66.49894813150769,
+            "achieved_rps": 50.567834396152186,
+            "failures": {},
+            "makespan_seconds": 7.593760037096217,
+            "drain_seconds": 1.8342704397181828,
+            "p95_ms": {
+              "total_ms": 1754.2866625008169,
+              "client_queue_ms": 515.6870147679001,
+              "server_queue_ms": 1252.0272377,
+              "compute_ms": 31.585921499999998
+            },
+            "verification": {
+              "role_forwards": 144,
+              "source_forwards": 8,
+              "role_model_forwards": 144,
+              "source_rows": 8
+            },
+            "request_groups": {
+              "1": 384
+            },
+            "embedding_forwards": 384
+          },
+          "student_then_teacher_batched": {
+            "counts": {
+              "exact": 176,
+              "adverse": 0,
+              "issued": 176,
+              "positives": 192,
+              "calls": 136,
+              "tokens": 14552
+            },
+            "requests": 384,
+            "expected_repeats": 8,
+            "offered_rps": 66.49894813150769,
+            "achieved_rps": 52.59462878409665,
+            "failures": {},
+            "makespan_seconds": 7.301125778001733,
+            "drain_seconds": 1.5416361806236987,
+            "p95_ms": {
+              "total_ms": 1523.3982292120343,
+              "client_queue_ms": 281.77799059194507,
+              "server_queue_ms": 1178.3368318999999,
+              "compute_ms": 96.88928835
+            },
+            "verification": {
+              "role_forwards": 128,
+              "source_forwards": 8,
+              "role_model_forwards": 128,
+              "source_rows": 8
+            },
+            "request_groups": {
+              "1": 3,
+              "3": 1,
+              "4": 94,
+              "2": 1
+            },
+            "embedding_forwards": 384
+          },
+          "matched_resident_batched": {
+            "counts": {
+              "exact": 184,
+              "adverse": 0,
+              "issued": 184,
+              "positives": 192,
+              "calls": 152,
+              "tokens": 16992
+            },
+            "requests": 384,
+            "expected_repeats": 8,
+            "offered_rps": 66.49894813150769,
+            "achieved_rps": 51.399931464394335,
+            "failures": {},
+            "makespan_seconds": 7.470827082055621,
+            "drain_seconds": 1.7113374846775864,
+            "p95_ms": {
+              "total_ms": 1680.0217925105244,
+              "client_queue_ms": 451.0740944126153,
+              "server_queue_ms": 1183.9834276499998,
+              "compute_ms": 99.6300122
+            },
+            "verification": {
+              "role_forwards": 144,
+              "source_forwards": 8,
+              "role_model_forwards": 140,
+              "source_rows": 8
+            },
+            "request_groups": {
+              "1": 2,
+              "3": 2,
+              "4": 94
+            },
+            "embedding_forwards": 384
+          },
+          "student_then_teacher": {
+            "counts": {
+              "exact": 176,
+              "adverse": 0,
+              "issued": 176,
+              "positives": 192,
+              "calls": 136,
+              "tokens": 14552
+            },
+            "requests": 384,
+            "expected_repeats": 8,
+            "offered_rps": 66.49894813150769,
+            "achieved_rps": 52.8475926270657,
+            "failures": {},
+            "makespan_seconds": 7.266177718061954,
+            "drain_seconds": 1.5066881206839193,
+            "p95_ms": {
+              "total_ms": 1461.427898169495,
+              "client_queue_ms": 244.35660818708118,
+              "server_queue_ms": 1210.0503256999998,
+              "compute_ms": 31.328522099999997
+            },
+            "verification": {
+              "role_forwards": 128,
+              "source_forwards": 8,
+              "role_model_forwards": 128,
+              "source_rows": 8
+            },
+            "request_groups": {
+              "1": 384
+            },
+            "embedding_forwards": 384
+          }
+        }
+      },
+      "quality": {
+        "student_then_teacher": {
+          "keywords": {
+            "totals": {
+              "strict": 10,
+              "issued": 10,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 12,
+            "requests": 24,
+            "paired_strict_change": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 12,
+              "clusters": 12,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          },
+          "excerpt": {
+            "totals": {
+              "strict": 12,
+              "issued": 12,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 12,
+            "requests": 24,
+            "paired_strict_change": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 12,
+              "clusters": 12,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          }
+        },
+        "matched_resident": {
+          "keywords": {
+            "totals": {
+              "strict": 11,
+              "issued": 11,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 12,
+            "requests": 24,
+            "paired_strict_change": {
+              "mean": 0.08333333333333333,
+              "percentile_95": [
+                0.0,
+                0.25
+              ],
+              "queries": 12,
+              "clusters": 12,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            },
+            "paired_strict_change_vs_cascade": {
+              "mean": 0.08333333333333333,
+              "percentile_95": [
+                0.0,
+                0.25
+              ],
+              "queries": 12,
+              "clusters": 12,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          },
+          "excerpt": {
+            "totals": {
+              "strict": 12,
+              "issued": 12,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 12,
+            "requests": 24,
+            "paired_strict_change": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 12,
+              "clusters": 12,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            },
+            "paired_strict_change_vs_cascade": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 12,
+              "clusters": 12,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          }
+        },
+        "student_then_teacher_batched": {
+          "keywords": {
+            "totals": {
+              "strict": 10,
+              "issued": 10,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 12,
+            "requests": 24,
+            "paired_strict_change": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 12,
+              "clusters": 12,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          },
+          "excerpt": {
+            "totals": {
+              "strict": 12,
+              "issued": 12,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 12,
+            "requests": 24,
+            "paired_strict_change": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 12,
+              "clusters": 12,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          }
+        },
+        "matched_resident_batched": {
+          "keywords": {
+            "totals": {
+              "strict": 11,
+              "issued": 11,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 12,
+            "requests": 24,
+            "paired_strict_change": {
+              "mean": 0.08333333333333333,
+              "percentile_95": [
+                0.0,
+                0.25
+              ],
+              "queries": 12,
+              "clusters": 12,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            },
+            "paired_strict_change_vs_cascade": {
+              "mean": 0.08333333333333333,
+              "percentile_95": [
+                0.0,
+                0.25
+              ],
+              "queries": 12,
+              "clusters": 12,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          },
+          "excerpt": {
+            "totals": {
+              "strict": 12,
+              "issued": 12,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 12,
+            "requests": 24,
+            "paired_strict_change": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 12,
+              "clusters": 12,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            },
+            "paired_strict_change_vs_cascade": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 12,
+              "clusters": 12,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          }
+        }
+      },
+      "response_signatures": {
+        "student_then_teacher": "668b7662fe63b8b01a30222d0ee73ed4532881930ce116442e5ac8decc645161",
+        "matched_resident": "d40f72f3dde3b8d3efbe68ba48a57f354ae074dd98353d99c9aa0cadc0fca1ec",
+        "student_then_teacher_batched": "668b7662fe63b8b01a30222d0ee73ed4532881930ce116442e5ac8decc645161",
+        "matched_resident_batched": "d40f72f3dde3b8d3efbe68ba48a57f354ae074dd98353d99c9aa0cadc0fca1ec"
+      },
+      "lightweight": {
+        "training": {
+          "examples": 252,
+          "teacher_matches_gold": 173,
+          "training": {
+            "label_head": {
+              "train_loss": 0.023638112470507622,
+              "parameters": 15375
+            },
+            "distilled_head": {
+              "train_loss": 0.24580806493759155,
+              "parameters": 15375
+            }
+          }
+        },
+        "calibration": {
+          "reserve_student": {
+            "cutoff": 0.0,
+            "counts": {
+              "issued": 24,
+              "strict": 24,
+              "adverse": 0,
+              "wrong_source": 0,
+              "requests": 48,
+              "positives": 24,
+              "search_calls": 13,
+              "source_calls": 0,
+              "role_calls": 13
+            }
+          },
+          "reserve_reranker": {
+            "cutoff": 0.0,
+            "counts": {
+              "issued": 24,
+              "strict": 24,
+              "adverse": 0,
+              "wrong_source": 0,
+              "requests": 48,
+              "positives": 24,
+              "search_calls": 13,
+              "source_calls": 0,
+              "role_calls": 13
+            }
+          }
+        },
+        "plos_sha256": "1b9d9b1fae5397b790be93df66b42d8295105f4a57ade1ca3618e6ee40d2c322"
+      },
+      "cascade": false,
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "source_reader_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+      "role_reader_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "matched_source_service": {
+        "calibration": {
+          "views": {
+            "keywords": {
+              "gold_matched": {
+                "cutoff": 0.007235105819340865,
+                "old_cutoff": 1.0999580360840442,
+                "correct_pairs": 21,
+                "wrong_pairs": 3,
+                "missing_target_pairs": 2,
+                "recalibrated": true,
+                "correct_pass": 20,
+                "old_correct_pass": 0,
+                "wrong_pass": 0
+              },
+              "distilled_matched": {
+                "cutoff": 0.2256569824094028,
+                "old_cutoff": 1.0017431072755172,
+                "correct_pairs": 21,
+                "wrong_pairs": 3,
+                "missing_target_pairs": 2,
+                "recalibrated": true,
+                "correct_pass": 21,
+                "old_correct_pass": 2,
+                "wrong_pass": 0
+              }
+            },
+            "excerpt": {
+              "gold_matched": {
+                "cutoff": 0.4315407241359166,
+                "old_cutoff": 0.9846829622114875,
+                "correct_pairs": 23,
+                "wrong_pairs": 13,
+                "missing_target_pairs": 6,
+                "recalibrated": true,
+                "correct_pass": 22,
+                "old_correct_pass": 16,
+                "wrong_pass": 0
+              },
+              "distilled_matched": {
+                "cutoff": 0.4573596246822648,
+                "old_cutoff": 0.9770282345464563,
+                "correct_pairs": 23,
+                "wrong_pairs": 13,
+                "missing_target_pairs": 6,
+                "recalibrated": true,
+                "correct_pass": 23,
+                "old_correct_pass": 14,
+                "wrong_pass": 0
+              }
+            }
+          },
+          "panels": [
+            {
+              "admitted": 393,
+              "dropped": {
+                "incomplete_or_ambiguous": 28
+              },
+              "links": 16,
+              "paper_pairs": 13,
+              "linked_papers": 25,
+              "contributors": 14,
+              "variants": {
+                "present": 66,
+                "swap": 66
+              }
+            },
+            {
+              "admitted": 280,
+              "dropped": {
+                "incomplete_or_ambiguous": 42
+              },
+              "links": 12,
+              "paper_pairs": 10,
+              "linked_papers": 17,
+              "contributors": 9,
+              "variants": {
+                "present": 51,
+                "swap": 51
+              }
+            }
+          ],
+          "requests": 92,
+          "projection_sha256": "38bc5e6bd42e3b2f427a42a552cae11bc0813e50f2e601ee9e10a298fe47925f",
+          "manifest_sha256": "064b9d0a579e58911c1986a17e4eb169dcfd3ab57e4e4640d31a1a62143a753a",
+          "supplement_sha256": "4ce67b1ff52d869f133bd5318bad2573502d12aae065c75c9407c14754171c89",
+          "supplement_manifest_sha256": "77b44ff60a0c335be3d7a6233b18af17c55a453ec0e40f799561203241c838d4"
+        },
+        "observed_view_agreement": {
+          "keywords": 24,
+          "excerpt": 24
+        },
+        "component_sha256": "7283b177fdfa16f1d101d173ae810f8718e9e89fd01ebda727b1ae56072a0d1b"
+      },
+      "batch_capacity": 4,
+      "batch_stage": "paired_role"
+    },
+    {
+      "script_sha256": "c432849b5a294fb1ec6de339a21302f078101716c0fb9b45e0e187be9febb8ea",
+      "projection_sha256": "1f265b34b43e6d769c8e6b2ccc4a0d821b87bd495fa1fefc83a3f05bd05ec5fc",
+      "manifest_sha256": "dd2a72c697f1d696531cdb8f5a694ec20729e10e041a6c5ca2f9a1436bf703f5",
+      "paired_results_sha256": "f3f24de1b725c529b6dc142a0eedfc6413129bc67643e9b74d0909df0b94c956",
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "reverse": true,
+      "prescreen": false,
+      "census": {
+        "admitted": 619,
+        "dropped": {
+          "incomplete_or_ambiguous": 29
+        },
+        "links": 20,
+        "paper_pairs": 12,
+        "linked_papers": 24,
+        "contributors": 16,
+        "variants": {
+          "present": 71,
+          "swap": 71
+        }
+      },
+      "distinct_requests": 48,
+      "author_connected_groups": 12,
+      "cutoffs": {
+        "source": -5.125,
+        "role": 0.0,
+        "two_batched": 0.0
+      },
+      "results": {
+        "28": {
+          "matched_resident_batched": {
+            "counts": {
+              "exact": 184,
+              "adverse": 0,
+              "issued": 184,
+              "positives": 192,
+              "calls": 152,
+              "tokens": 16992
+            },
+            "requests": 384,
+            "expected_repeats": 8,
+            "offered_rps": 31.03284246137025,
+            "achieved_rps": 31.068830707664734,
+            "failures": {},
+            "makespan_seconds": 12.359654073021375,
+            "drain_seconds": 0.017890650068443037,
+            "p95_ms": {
+              "total_ms": 104.46108551695939,
+              "client_queue_ms": 2.7531932224519498,
+              "server_queue_ms": 47.66143969999991,
+              "compute_ms": 72.850582
+            },
+            "verification": {
+              "role_forwards": 144,
+              "source_forwards": 8,
+              "role_model_forwards": 144,
+              "source_rows": 8
+            },
+            "request_groups": {
+              "1": 247,
+              "2": 35,
+              "3": 13,
+              "4": 7
+            },
+            "embedding_forwards": 384
+          },
+          "student_then_teacher_batched": {
+            "counts": {
+              "exact": 176,
+              "adverse": 0,
+              "issued": 176,
+              "positives": 192,
+              "calls": 136,
+              "tokens": 14552
+            },
+            "requests": 384,
+            "expected_repeats": 8,
+            "offered_rps": 31.03284246137025,
+            "achieved_rps": 31.0725643063937,
+            "failures": {},
+            "makespan_seconds": 12.358168969047256,
+            "drain_seconds": 0.016405546094324208,
+            "p95_ms": {
+              "total_ms": 107.59867853485044,
+              "client_queue_ms": 3.2669387001078416,
+              "server_queue_ms": 44.64096344999998,
+              "compute_ms": 72.784137
+            },
+            "verification": {
+              "role_forwards": 128,
+              "source_forwards": 8,
+              "role_model_forwards": 128,
+              "source_rows": 8
+            },
+            "request_groups": {
+              "1": 251,
+              "2": 31,
+              "4": 8,
+              "3": 13
+            },
+            "embedding_forwards": 384
+          },
+          "matched_resident": {
+            "counts": {
+              "exact": 184,
+              "adverse": 0,
+              "issued": 184,
+              "positives": 192,
+              "calls": 152,
+              "tokens": 16992
+            },
+            "requests": 384,
+            "expected_repeats": 8,
+            "offered_rps": 31.03284246137025,
+            "achieved_rps": 31.07219969697686,
+            "failures": {},
+            "makespan_seconds": 12.358313983073458,
+            "drain_seconds": 0.01655056012052647,
+            "p95_ms": {
+              "total_ms": 82.72658397909254,
+              "client_queue_ms": 3.364410949870943,
+              "server_queue_ms": 62.640787449999934,
+              "compute_ms": 32.40564035
+            },
+            "verification": {
+              "role_forwards": 144,
+              "source_forwards": 8,
+              "role_model_forwards": 144,
+              "source_rows": 8
+            },
+            "request_groups": {
+              "1": 384
+            },
+            "embedding_forwards": 384
+          },
+          "student_then_teacher": {
+            "counts": {
+              "exact": 176,
+              "adverse": 0,
+              "issued": 176,
+              "positives": 192,
+              "calls": 136,
+              "tokens": 14552
+            },
+            "requests": 384,
+            "expected_repeats": 8,
+            "offered_rps": 31.03284246137025,
+            "achieved_rps": 31.073511794477177,
+            "failures": {},
+            "makespan_seconds": 12.357792145921849,
+            "drain_seconds": 0.01602872296891711,
+            "p95_ms": {
+              "total_ms": 77.56336175953035,
+              "client_queue_ms": 3.8070214563049354,
+              "server_queue_ms": 55.370145249999965,
+              "compute_ms": 31.35706235
+            },
+            "verification": {
+              "role_forwards": 128,
+              "source_forwards": 8,
+              "role_model_forwards": 128,
+              "source_rows": 8
+            },
+            "request_groups": {
+              "1": 384
+            },
+            "embedding_forwards": 384
+          }
+        },
+        "60": {
+          "student_then_teacher_batched": {
+            "counts": {
+              "exact": 176,
+              "adverse": 0,
+              "issued": 176,
+              "positives": 192,
+              "calls": 136,
+              "tokens": 14552
+            },
+            "requests": 384,
+            "expected_repeats": 8,
+            "offered_rps": 66.49894813150769,
+            "achieved_rps": 53.48454918874275,
+            "failures": {},
+            "makespan_seconds": 7.179643576033413,
+            "drain_seconds": 1.420153978655379,
+            "p95_ms": {
+              "total_ms": 1419.6078183187637,
+              "client_queue_ms": 229.6494719572365,
+              "server_queue_ms": 1132.35552695,
+              "compute_ms": 102.69562139999998
+            },
+            "verification": {
+              "role_forwards": 128,
+              "source_forwards": 8,
+              "role_model_forwards": 128,
+              "source_rows": 8
+            },
+            "request_groups": {
+              "1": 2,
+              "3": 2,
+              "4": 93,
+              "2": 2
+            },
+            "embedding_forwards": 384
+          },
+          "matched_resident": {
+            "counts": {
+              "exact": 184,
+              "adverse": 0,
+              "issued": 184,
+              "positives": 192,
+              "calls": 152,
+              "tokens": 16992
+            },
+            "requests": 384,
+            "expected_repeats": 8,
+            "offered_rps": 66.49894813150769,
+            "achieved_rps": 51.51423282975996,
+            "failures": {},
+            "makespan_seconds": 7.4542505809804425,
+            "drain_seconds": 1.694760983602408,
+            "p95_ms": {
+              "total_ms": 1621.8401485937645,
+              "client_queue_ms": 402.1682883845638,
+              "server_queue_ms": 1248.9577651,
+              "compute_ms": 31.936940549999996
+            },
+            "verification": {
+              "role_forwards": 144,
+              "source_forwards": 8,
+              "role_model_forwards": 144,
+              "source_rows": 8
+            },
+            "request_groups": {
+              "1": 384
+            },
+            "embedding_forwards": 384
+          },
+          "student_then_teacher": {
+            "counts": {
+              "exact": 176,
+              "adverse": 0,
+              "issued": 176,
+              "positives": 192,
+              "calls": 136,
+              "tokens": 14552
+            },
+            "requests": 384,
+            "expected_repeats": 8,
+            "offered_rps": 66.49894813150769,
+            "achieved_rps": 53.78850651198238,
+            "failures": {},
+            "makespan_seconds": 7.1390716140158474,
+            "drain_seconds": 1.379582016637813,
+            "p95_ms": {
+              "total_ms": 1334.3176662747278,
+              "client_queue_ms": 142.87104014656495,
+              "server_queue_ms": 1199.8771397,
+              "compute_ms": 31.574642349999998
+            },
+            "verification": {
+              "role_forwards": 128,
+              "source_forwards": 8,
+              "role_model_forwards": 128,
+              "source_rows": 8
+            },
+            "request_groups": {
+              "1": 384
+            },
+            "embedding_forwards": 384
+          },
+          "matched_resident_batched": {
+            "counts": {
+              "exact": 184,
+              "adverse": 0,
+              "issued": 184,
+              "positives": 192,
+              "calls": 152,
+              "tokens": 16992
+            },
+            "requests": 384,
+            "expected_repeats": 8,
+            "offered_rps": 66.49894813150769,
+            "achieved_rps": 51.79935949022616,
+            "failures": {},
+            "makespan_seconds": 7.413219077978283,
+            "drain_seconds": 1.6537294806002487,
+            "p95_ms": {
+              "total_ms": 1597.9846055153757,
+              "client_queue_ms": 395.0941069750115,
+              "server_queue_ms": 1193.90140475,
+              "compute_ms": 97.42253729999997
+            },
+            "verification": {
+              "role_forwards": 144,
+              "source_forwards": 8,
+              "role_model_forwards": 141,
+              "source_rows": 8
+            },
+            "request_groups": {
+              "1": 3,
+              "3": 1,
+              "4": 94,
+              "2": 1
+            },
+            "embedding_forwards": 384
+          }
+        }
+      },
+      "quality": {
+        "student_then_teacher": {
+          "keywords": {
+            "totals": {
+              "strict": 10,
+              "issued": 10,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 12,
+            "requests": 24,
+            "paired_strict_change": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 12,
+              "clusters": 12,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          },
+          "excerpt": {
+            "totals": {
+              "strict": 12,
+              "issued": 12,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 12,
+            "requests": 24,
+            "paired_strict_change": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 12,
+              "clusters": 12,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          }
+        },
+        "matched_resident": {
+          "keywords": {
+            "totals": {
+              "strict": 11,
+              "issued": 11,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 12,
+            "requests": 24,
+            "paired_strict_change": {
+              "mean": 0.08333333333333333,
+              "percentile_95": [
+                0.0,
+                0.25
+              ],
+              "queries": 12,
+              "clusters": 12,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            },
+            "paired_strict_change_vs_cascade": {
+              "mean": 0.08333333333333333,
+              "percentile_95": [
+                0.0,
+                0.25
+              ],
+              "queries": 12,
+              "clusters": 12,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          },
+          "excerpt": {
+            "totals": {
+              "strict": 12,
+              "issued": 12,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 12,
+            "requests": 24,
+            "paired_strict_change": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 12,
+              "clusters": 12,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            },
+            "paired_strict_change_vs_cascade": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 12,
+              "clusters": 12,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          }
+        },
+        "student_then_teacher_batched": {
+          "keywords": {
+            "totals": {
+              "strict": 10,
+              "issued": 10,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 12,
+            "requests": 24,
+            "paired_strict_change": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 12,
+              "clusters": 12,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          },
+          "excerpt": {
+            "totals": {
+              "strict": 12,
+              "issued": 12,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 12,
+            "requests": 24,
+            "paired_strict_change": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 12,
+              "clusters": 12,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          }
+        },
+        "matched_resident_batched": {
+          "keywords": {
+            "totals": {
+              "strict": 11,
+              "issued": 11,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 12,
+            "requests": 24,
+            "paired_strict_change": {
+              "mean": 0.08333333333333333,
+              "percentile_95": [
+                0.0,
+                0.25
+              ],
+              "queries": 12,
+              "clusters": 12,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            },
+            "paired_strict_change_vs_cascade": {
+              "mean": 0.08333333333333333,
+              "percentile_95": [
+                0.0,
+                0.25
+              ],
+              "queries": 12,
+              "clusters": 12,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          },
+          "excerpt": {
+            "totals": {
+              "strict": 12,
+              "issued": 12,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 12,
+            "requests": 24,
+            "paired_strict_change": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 12,
+              "clusters": 12,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            },
+            "paired_strict_change_vs_cascade": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 12,
+              "clusters": 12,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          }
+        }
+      },
+      "response_signatures": {
+        "matched_resident_batched": "d40f72f3dde3b8d3efbe68ba48a57f354ae074dd98353d99c9aa0cadc0fca1ec",
+        "student_then_teacher_batched": "668b7662fe63b8b01a30222d0ee73ed4532881930ce116442e5ac8decc645161",
+        "matched_resident": "d40f72f3dde3b8d3efbe68ba48a57f354ae074dd98353d99c9aa0cadc0fca1ec",
+        "student_then_teacher": "668b7662fe63b8b01a30222d0ee73ed4532881930ce116442e5ac8decc645161"
+      },
+      "lightweight": {
+        "training": {
+          "examples": 252,
+          "teacher_matches_gold": 173,
+          "training": {
+            "label_head": {
+              "train_loss": 0.023638112470507622,
+              "parameters": 15375
+            },
+            "distilled_head": {
+              "train_loss": 0.24580806493759155,
+              "parameters": 15375
+            }
+          }
+        },
+        "calibration": {
+          "reserve_student": {
+            "cutoff": 0.0,
+            "counts": {
+              "issued": 24,
+              "strict": 24,
+              "adverse": 0,
+              "wrong_source": 0,
+              "requests": 48,
+              "positives": 24,
+              "search_calls": 13,
+              "source_calls": 0,
+              "role_calls": 13
+            }
+          },
+          "reserve_reranker": {
+            "cutoff": 0.0,
+            "counts": {
+              "issued": 24,
+              "strict": 24,
+              "adverse": 0,
+              "wrong_source": 0,
+              "requests": 48,
+              "positives": 24,
+              "search_calls": 13,
+              "source_calls": 0,
+              "role_calls": 13
+            }
+          }
+        },
+        "plos_sha256": "1b9d9b1fae5397b790be93df66b42d8295105f4a57ade1ca3618e6ee40d2c322"
+      },
+      "cascade": false,
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "source_reader_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+      "role_reader_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "matched_source_service": {
+        "calibration": {
+          "views": {
+            "keywords": {
+              "gold_matched": {
+                "cutoff": 0.007235105819340865,
+                "old_cutoff": 1.0999580360840442,
+                "correct_pairs": 21,
+                "wrong_pairs": 3,
+                "missing_target_pairs": 2,
+                "recalibrated": true,
+                "correct_pass": 20,
+                "old_correct_pass": 0,
+                "wrong_pass": 0
+              },
+              "distilled_matched": {
+                "cutoff": 0.2256569824094028,
+                "old_cutoff": 1.0017431072755172,
+                "correct_pairs": 21,
+                "wrong_pairs": 3,
+                "missing_target_pairs": 2,
+                "recalibrated": true,
+                "correct_pass": 21,
+                "old_correct_pass": 2,
+                "wrong_pass": 0
+              }
+            },
+            "excerpt": {
+              "gold_matched": {
+                "cutoff": 0.4315407241359166,
+                "old_cutoff": 0.9846829622114875,
+                "correct_pairs": 23,
+                "wrong_pairs": 13,
+                "missing_target_pairs": 6,
+                "recalibrated": true,
+                "correct_pass": 22,
+                "old_correct_pass": 16,
+                "wrong_pass": 0
+              },
+              "distilled_matched": {
+                "cutoff": 0.4573596246822648,
+                "old_cutoff": 0.9770282345464563,
+                "correct_pairs": 23,
+                "wrong_pairs": 13,
+                "missing_target_pairs": 6,
+                "recalibrated": true,
+                "correct_pass": 23,
+                "old_correct_pass": 14,
+                "wrong_pass": 0
+              }
+            }
+          },
+          "panels": [
+            {
+              "admitted": 393,
+              "dropped": {
+                "incomplete_or_ambiguous": 28
+              },
+              "links": 16,
+              "paper_pairs": 13,
+              "linked_papers": 25,
+              "contributors": 14,
+              "variants": {
+                "present": 66,
+                "swap": 66
+              }
+            },
+            {
+              "admitted": 280,
+              "dropped": {
+                "incomplete_or_ambiguous": 42
+              },
+              "links": 12,
+              "paper_pairs": 10,
+              "linked_papers": 17,
+              "contributors": 9,
+              "variants": {
+                "present": 51,
+                "swap": 51
+              }
+            }
+          ],
+          "requests": 92,
+          "projection_sha256": "38bc5e6bd42e3b2f427a42a552cae11bc0813e50f2e601ee9e10a298fe47925f",
+          "manifest_sha256": "064b9d0a579e58911c1986a17e4eb169dcfd3ab57e4e4640d31a1a62143a753a",
+          "supplement_sha256": "4ce67b1ff52d869f133bd5318bad2573502d12aae065c75c9407c14754171c89",
+          "supplement_manifest_sha256": "77b44ff60a0c335be3d7a6233b18af17c55a453ec0e40f799561203241c838d4"
+        },
+        "observed_view_agreement": {
+          "keywords": 24,
+          "excerpt": 24
+        },
+        "component_sha256": "7283b177fdfa16f1d101d173ae810f8718e9e89fd01ebda727b1ae56072a0d1b"
+      },
+      "batch_capacity": 4,
+      "batch_stage": "paired_role"
+    },
+    {
+      "script_sha256": "c432849b5a294fb1ec6de339a21302f078101716c0fb9b45e0e187be9febb8ea",
+      "projection_sha256": "e325293f021c6116a15808ba0666c50267fd14fcd64d26eb8a3c8f8126a5149e",
+      "manifest_sha256": "62917298cdb17c293598026a9ad7c938bc2e4a539e8741ccf6e61858ed541b08",
+      "paired_results_sha256": "f3f24de1b725c529b6dc142a0eedfc6413129bc67643e9b74d0909df0b94c956",
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "reverse": false,
+      "prescreen": false,
+      "census": {
+        "admitted": 652,
+        "dropped": {
+          "incomplete_or_ambiguous": 24
+        },
+        "links": 33,
+        "paper_pairs": 27,
+        "linked_papers": 48,
+        "contributors": 27,
+        "variants": {
+          "present": 132,
+          "swap": 132
+        }
+      },
+      "distinct_requests": 108,
+      "author_connected_groups": 22,
+      "cutoffs": {
+        "source": -5.125,
+        "role": 0.0,
+        "two_batched": 0.0
+      },
+      "results": {
+        "28": {
+          "student_then_teacher": {
+            "counts": {
+              "exact": 240,
+              "adverse": 0,
+              "issued": 240,
+              "positives": 432,
+              "calls": 176,
+              "tokens": 16528
+            },
+            "requests": 864,
+            "expected_repeats": 8,
+            "offered_rps": 29.79388944948771,
+            "achieved_rps": 29.79691803125764,
+            "failures": {},
+            "makespan_seconds": 28.99628743797075,
+            "drain_seconds": 0.030616424687227806,
+            "p95_ms": {
+              "total_ms": 61.87925762496884,
+              "client_queue_ms": 3.1158572703134264,
+              "server_queue_ms": 42.24202749999999,
+              "compute_ms": 31.02918825
+            },
+            "verification": {
+              "role_forwards": 144,
+              "source_forwards": 32,
+              "role_model_forwards": 144,
+              "source_rows": 32
+            },
+            "request_groups": {
+              "1": 864
+            },
+            "embedding_forwards": 864
+          },
+          "matched_resident": {
+            "counts": {
+              "exact": 256,
+              "adverse": 0,
+              "issued": 256,
+              "positives": 432,
+              "calls": 200,
+              "tokens": 20080
+            },
+            "requests": 864,
+            "expected_repeats": 8,
+            "offered_rps": 29.79388944948771,
+            "achieved_rps": 29.79588234578418,
+            "failures": {},
+            "makespan_seconds": 28.997295330045745,
+            "drain_seconds": 0.03162431676222255,
+            "p95_ms": {
+              "total_ms": 63.07039029779844,
+              "client_queue_ms": 2.597671304829408,
+              "server_queue_ms": 43.731577399999985,
+              "compute_ms": 30.85587539999999
+            },
+            "verification": {
+              "role_forwards": 168,
+              "source_forwards": 32,
+              "role_model_forwards": 168,
+              "source_rows": 32
+            },
+            "request_groups": {
+              "1": 864
+            },
+            "embedding_forwards": 864
+          },
+          "student_then_teacher_batched": {
+            "counts": {
+              "exact": 240,
+              "adverse": 0,
+              "issued": 240,
+              "positives": 432,
+              "calls": 176,
+              "tokens": 16528
+            },
+            "requests": 864,
+            "expected_repeats": 8,
+            "offered_rps": 29.79388944948771,
+            "achieved_rps": 29.79432418034507,
+            "failures": {},
+            "makespan_seconds": 28.998811812954955,
+            "drain_seconds": 0.033140799671432575,
+            "p95_ms": {
+              "total_ms": 76.22695880127138,
+              "client_queue_ms": 2.5560344045516077,
+              "server_queue_ms": 31.090153399999938,
+              "compute_ms": 55.00889064999991
+            },
+            "verification": {
+              "role_forwards": 144,
+              "source_forwards": 32,
+              "role_model_forwards": 144,
+              "source_rows": 32
+            },
+            "request_groups": {
+              "1": 623,
+              "2": 70,
+              "3": 27,
+              "4": 5
+            },
+            "embedding_forwards": 864
+          },
+          "matched_resident_batched": {
+            "counts": {
+              "exact": 256,
+              "adverse": 0,
+              "issued": 256,
+              "positives": 432,
+              "calls": 200,
+              "tokens": 20080
+            },
+            "requests": 864,
+            "expected_repeats": 8,
+            "offered_rps": 29.79388944948771,
+            "achieved_rps": 29.795628572329367,
+            "failures": {},
+            "makespan_seconds": 28.997542303986847,
+            "drain_seconds": 0.03187129070332517,
+            "p95_ms": {
+              "total_ms": 79.35922031756483,
+              "client_queue_ms": 2.914883894845842,
+              "server_queue_ms": 32.82929864999996,
+              "compute_ms": 59.232119
+            },
+            "verification": {
+              "role_forwards": 168,
+              "source_forwards": 32,
+              "role_model_forwards": 168,
+              "source_rows": 32
+            },
+            "request_groups": {
+              "1": 599,
+              "2": 90,
+              "3": 19,
+              "4": 7
+            },
+            "embedding_forwards": 864
+          }
+        },
+        "60": {
+          "matched_resident": {
+            "counts": {
+              "exact": 256,
+              "adverse": 0,
+              "issued": 256,
+              "positives": 432,
+              "calls": 200,
+              "tokens": 20080
+            },
+            "requests": 864,
+            "expected_repeats": 8,
+            "offered_rps": 63.84404882033089,
+            "achieved_rps": 58.03141642448982,
+            "failures": {},
+            "makespan_seconds": 14.88848718907684,
+            "drain_seconds": 1.3711740495445461,
+            "p95_ms": {
+              "total_ms": 1363.5467502404929,
+              "client_queue_ms": 257.304503279738,
+              "server_queue_ms": 1095.9370061999998,
+              "compute_ms": 30.45757124999999
+            },
+            "verification": {
+              "role_forwards": 168,
+              "source_forwards": 32,
+              "role_model_forwards": 168,
+              "source_rows": 32
+            },
+            "request_groups": {
+              "1": 864
+            },
+            "embedding_forwards": 864
+          },
+          "student_then_teacher_batched": {
+            "counts": {
+              "exact": 240,
+              "adverse": 0,
+              "issued": 240,
+              "positives": 432,
+              "calls": 176,
+              "tokens": 16528
+            },
+            "requests": 864,
+            "expected_repeats": 8,
+            "offered_rps": 63.84404882033089,
+            "achieved_rps": 59.29788212540914,
+            "failures": {},
+            "makespan_seconds": 14.570503516006283,
+            "drain_seconds": 1.0531903764739887,
+            "p95_ms": {
+              "total_ms": 1088.879665080458,
+              "client_queue_ms": 5.866987467743451,
+              "server_queue_ms": 1014.68906505,
+              "compute_ms": 84.65566234999997
+            },
+            "verification": {
+              "role_forwards": 144,
+              "source_forwards": 32,
+              "role_model_forwards": 142,
+              "source_rows": 32
+            },
+            "request_groups": {
+              "1": 17,
+              "3": 11,
+              "2": 13,
+              "4": 197
+            },
+            "embedding_forwards": 864
+          },
+          "matched_resident_batched": {
+            "counts": {
+              "exact": 256,
+              "adverse": 0,
+              "issued": 256,
+              "positives": 432,
+              "calls": 200,
+              "tokens": 20080
+            },
+            "requests": 864,
+            "expected_repeats": 8,
+            "offered_rps": 63.84404882033089,
+            "achieved_rps": 58.32330370245637,
+            "failures": {},
+            "makespan_seconds": 14.813975634984672,
+            "drain_seconds": 1.2966624954523773,
+            "p95_ms": {
+              "total_ms": 1333.5619013349058,
+              "client_queue_ms": 234.67478129314233,
+              "server_queue_ms": 1033.8904192,
+              "compute_ms": 87.69197759999989
+            },
+            "verification": {
+              "role_forwards": 168,
+              "source_forwards": 32,
+              "role_model_forwards": 163,
+              "source_rows": 32
+            },
+            "request_groups": {
+              "2": 10,
+              "3": 9,
+              "1": 9,
+              "4": 202
+            },
+            "embedding_forwards": 864
+          },
+          "student_then_teacher": {
+            "counts": {
+              "exact": 240,
+              "adverse": 0,
+              "issued": 240,
+              "positives": 432,
+              "calls": 176,
+              "tokens": 16528
+            },
+            "requests": 864,
+            "expected_repeats": 8,
+            "offered_rps": 63.84404882033089,
+            "achieved_rps": 58.89000149698723,
+            "failures": {},
+            "makespan_seconds": 14.671420920989476,
+            "drain_seconds": 1.1541077814571814,
+            "p95_ms": {
+              "total_ms": 1173.204385797726,
+              "client_queue_ms": 85.59048288152545,
+              "server_queue_ms": 1075.0976497999998,
+              "compute_ms": 30.382913199999983
+            },
+            "verification": {
+              "role_forwards": 144,
+              "source_forwards": 32,
+              "role_model_forwards": 144,
+              "source_rows": 32
+            },
+            "request_groups": {
+              "1": 864
+            },
+            "embedding_forwards": 864
+          }
+        }
+      },
+      "quality": {
+        "student_then_teacher": {
+          "keywords": {
+            "totals": {
+              "strict": 12,
+              "issued": 12,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 27,
+            "requests": 54,
+            "paired_strict_change": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 27,
+              "clusters": 22,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          },
+          "excerpt": {
+            "totals": {
+              "strict": 18,
+              "issued": 18,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 27,
+            "requests": 54,
+            "paired_strict_change": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 27,
+              "clusters": 22,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          }
+        },
+        "matched_resident": {
+          "keywords": {
+            "totals": {
+              "strict": 14,
+              "issued": 14,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 27,
+            "requests": 54,
+            "paired_strict_change": {
+              "mean": 0.07407407407407407,
+              "percentile_95": [
+                0.0,
+                0.16129032258064516
+              ],
+              "queries": 27,
+              "clusters": 22,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            },
+            "paired_strict_change_vs_cascade": {
+              "mean": 0.07407407407407407,
+              "percentile_95": [
+                0.0,
+                0.16129032258064516
+              ],
+              "queries": 27,
+              "clusters": 22,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          },
+          "excerpt": {
+            "totals": {
+              "strict": 18,
+              "issued": 18,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 27,
+            "requests": 54,
+            "paired_strict_change": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 27,
+              "clusters": 22,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            },
+            "paired_strict_change_vs_cascade": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 27,
+              "clusters": 22,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          }
+        },
+        "student_then_teacher_batched": {
+          "keywords": {
+            "totals": {
+              "strict": 12,
+              "issued": 12,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 27,
+            "requests": 54,
+            "paired_strict_change": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 27,
+              "clusters": 22,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          },
+          "excerpt": {
+            "totals": {
+              "strict": 18,
+              "issued": 18,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 27,
+            "requests": 54,
+            "paired_strict_change": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 27,
+              "clusters": 22,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          }
+        },
+        "matched_resident_batched": {
+          "keywords": {
+            "totals": {
+              "strict": 14,
+              "issued": 14,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 27,
+            "requests": 54,
+            "paired_strict_change": {
+              "mean": 0.07407407407407407,
+              "percentile_95": [
+                0.0,
+                0.16129032258064516
+              ],
+              "queries": 27,
+              "clusters": 22,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            },
+            "paired_strict_change_vs_cascade": {
+              "mean": 0.07407407407407407,
+              "percentile_95": [
+                0.0,
+                0.16129032258064516
+              ],
+              "queries": 27,
+              "clusters": 22,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          },
+          "excerpt": {
+            "totals": {
+              "strict": 18,
+              "issued": 18,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 27,
+            "requests": 54,
+            "paired_strict_change": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 27,
+              "clusters": 22,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            },
+            "paired_strict_change_vs_cascade": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 27,
+              "clusters": 22,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          }
+        }
+      },
+      "response_signatures": {
+        "student_then_teacher": "48c465c15cda03ce97e6d582f80337ad1ebaf711b6b4ee7e408b07be8273e5a4",
+        "matched_resident": "8c0c2fc0743f1c09432eb095412b5b24f0ce0e818c164b262561d560decc9d95",
+        "student_then_teacher_batched": "48c465c15cda03ce97e6d582f80337ad1ebaf711b6b4ee7e408b07be8273e5a4",
+        "matched_resident_batched": "8c0c2fc0743f1c09432eb095412b5b24f0ce0e818c164b262561d560decc9d95"
+      },
+      "lightweight": {
+        "training": {
+          "examples": 252,
+          "teacher_matches_gold": 173,
+          "training": {
+            "label_head": {
+              "train_loss": 0.023638112470507622,
+              "parameters": 15375
+            },
+            "distilled_head": {
+              "train_loss": 0.24580806493759155,
+              "parameters": 15375
+            }
+          }
+        },
+        "calibration": {
+          "reserve_student": {
+            "cutoff": 0.0,
+            "counts": {
+              "issued": 24,
+              "strict": 24,
+              "adverse": 0,
+              "wrong_source": 0,
+              "requests": 48,
+              "positives": 24,
+              "search_calls": 13,
+              "source_calls": 0,
+              "role_calls": 13
+            }
+          },
+          "reserve_reranker": {
+            "cutoff": 0.0,
+            "counts": {
+              "issued": 24,
+              "strict": 24,
+              "adverse": 0,
+              "wrong_source": 0,
+              "requests": 48,
+              "positives": 24,
+              "search_calls": 13,
+              "source_calls": 0,
+              "role_calls": 13
+            }
+          }
+        },
+        "plos_sha256": "1b9d9b1fae5397b790be93df66b42d8295105f4a57ade1ca3618e6ee40d2c322"
+      },
+      "cascade": false,
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "source_reader_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+      "role_reader_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "matched_source_service": {
+        "calibration": {
+          "views": {
+            "keywords": {
+              "gold_matched": {
+                "cutoff": 0.007235105819340865,
+                "old_cutoff": 1.0999580360840442,
+                "correct_pairs": 21,
+                "wrong_pairs": 3,
+                "missing_target_pairs": 2,
+                "recalibrated": true,
+                "correct_pass": 20,
+                "old_correct_pass": 0,
+                "wrong_pass": 0
+              },
+              "distilled_matched": {
+                "cutoff": 0.2256569824094028,
+                "old_cutoff": 1.0017431072755172,
+                "correct_pairs": 21,
+                "wrong_pairs": 3,
+                "missing_target_pairs": 2,
+                "recalibrated": true,
+                "correct_pass": 21,
+                "old_correct_pass": 2,
+                "wrong_pass": 0
+              }
+            },
+            "excerpt": {
+              "gold_matched": {
+                "cutoff": 0.4315407241359166,
+                "old_cutoff": 0.9846829622114875,
+                "correct_pairs": 23,
+                "wrong_pairs": 13,
+                "missing_target_pairs": 6,
+                "recalibrated": true,
+                "correct_pass": 22,
+                "old_correct_pass": 16,
+                "wrong_pass": 0
+              },
+              "distilled_matched": {
+                "cutoff": 0.4573596246822648,
+                "old_cutoff": 0.9770282345464563,
+                "correct_pairs": 23,
+                "wrong_pairs": 13,
+                "missing_target_pairs": 6,
+                "recalibrated": true,
+                "correct_pass": 23,
+                "old_correct_pass": 14,
+                "wrong_pass": 0
+              }
+            }
+          },
+          "panels": [
+            {
+              "admitted": 393,
+              "dropped": {
+                "incomplete_or_ambiguous": 28
+              },
+              "links": 16,
+              "paper_pairs": 13,
+              "linked_papers": 25,
+              "contributors": 14,
+              "variants": {
+                "present": 66,
+                "swap": 66
+              }
+            },
+            {
+              "admitted": 280,
+              "dropped": {
+                "incomplete_or_ambiguous": 42
+              },
+              "links": 12,
+              "paper_pairs": 10,
+              "linked_papers": 17,
+              "contributors": 9,
+              "variants": {
+                "present": 51,
+                "swap": 51
+              }
+            }
+          ],
+          "requests": 92,
+          "projection_sha256": "38bc5e6bd42e3b2f427a42a552cae11bc0813e50f2e601ee9e10a298fe47925f",
+          "manifest_sha256": "064b9d0a579e58911c1986a17e4eb169dcfd3ab57e4e4640d31a1a62143a753a",
+          "supplement_sha256": "4ce67b1ff52d869f133bd5318bad2573502d12aae065c75c9407c14754171c89",
+          "supplement_manifest_sha256": "77b44ff60a0c335be3d7a6233b18af17c55a453ec0e40f799561203241c838d4"
+        },
+        "observed_view_agreement": {
+          "keywords": 54,
+          "excerpt": 54
+        },
+        "component_sha256": "7fbb965579ef3bdb64a1fe970b127242fc7059d3b7d1738d42b5f6579a7c4596"
+      },
+      "batch_capacity": 4,
+      "batch_stage": "paired_role"
+    },
+    {
+      "script_sha256": "c432849b5a294fb1ec6de339a21302f078101716c0fb9b45e0e187be9febb8ea",
+      "projection_sha256": "e325293f021c6116a15808ba0666c50267fd14fcd64d26eb8a3c8f8126a5149e",
+      "manifest_sha256": "62917298cdb17c293598026a9ad7c938bc2e4a539e8741ccf6e61858ed541b08",
+      "paired_results_sha256": "f3f24de1b725c529b6dc142a0eedfc6413129bc67643e9b74d0909df0b94c956",
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "reverse": true,
+      "prescreen": false,
+      "census": {
+        "admitted": 652,
+        "dropped": {
+          "incomplete_or_ambiguous": 24
+        },
+        "links": 33,
+        "paper_pairs": 27,
+        "linked_papers": 48,
+        "contributors": 27,
+        "variants": {
+          "present": 132,
+          "swap": 132
+        }
+      },
+      "distinct_requests": 108,
+      "author_connected_groups": 22,
+      "cutoffs": {
+        "source": -5.125,
+        "role": 0.0,
+        "two_batched": 0.0
+      },
+      "results": {
+        "28": {
+          "matched_resident_batched": {
+            "counts": {
+              "exact": 256,
+              "adverse": 0,
+              "issued": 256,
+              "positives": 432,
+              "calls": 200,
+              "tokens": 20080
+            },
+            "requests": 864,
+            "expected_repeats": 8,
+            "offered_rps": 29.79388944948771,
+            "achieved_rps": 29.79474882213551,
+            "failures": {},
+            "makespan_seconds": 28.998398515046574,
+            "drain_seconds": 0.03272750176305195,
+            "p95_ms": {
+              "total_ms": 78.95048668142405,
+              "client_queue_ms": 2.2297724673990147,
+              "server_queue_ms": 30.23579204999997,
+              "compute_ms": 58.35304884999987
+            },
+            "verification": {
+              "role_forwards": 168,
+              "source_forwards": 32,
+              "role_model_forwards": 168,
+              "source_rows": 32
+            },
+            "request_groups": {
+              "1": 614,
+              "2": 73,
+              "3": 28,
+              "4": 5
+            },
+            "embedding_forwards": 864
+          },
+          "student_then_teacher_batched": {
+            "counts": {
+              "exact": 240,
+              "adverse": 0,
+              "issued": 240,
+              "positives": 432,
+              "calls": 176,
+              "tokens": 16528
+            },
+            "requests": 864,
+            "expected_repeats": 8,
+            "offered_rps": 29.79388944948771,
+            "achieved_rps": 29.794740768880448,
+            "failures": {},
+            "makespan_seconds": 28.998406353057362,
+            "drain_seconds": 0.03273533977383991,
+            "p95_ms": {
+              "total_ms": 71.66811434435658,
+              "client_queue_ms": 2.3067814239766404,
+              "server_queue_ms": 26.99175809999999,
+              "compute_ms": 52.8995905499999
+            },
+            "verification": {
+              "role_forwards": 144,
+              "source_forwards": 32,
+              "role_model_forwards": 144,
+              "source_rows": 32
+            },
+            "request_groups": {
+              "1": 637,
+              "2": 72,
+              "3": 21,
+              "4": 5
+            },
+            "embedding_forwards": 864
+          },
+          "matched_resident": {
+            "counts": {
+              "exact": 256,
+              "adverse": 0,
+              "issued": 256,
+              "positives": 432,
+              "calls": 200,
+              "tokens": 20080
+            },
+            "requests": 864,
+            "expected_repeats": 8,
+            "offered_rps": 29.79388944948771,
+            "achieved_rps": 29.79580292336349,
+            "failures": {},
+            "makespan_seconds": 28.99737262399867,
+            "drain_seconds": 0.03170161071514954,
+            "p95_ms": {
+              "total_ms": 66.73129586852151,
+              "client_queue_ms": 3.1155601842328897,
+              "server_queue_ms": 46.33376014999997,
+              "compute_ms": 31.34042529999998
+            },
+            "verification": {
+              "role_forwards": 168,
+              "source_forwards": 32,
+              "role_model_forwards": 168,
+              "source_rows": 32
+            },
+            "request_groups": {
+              "1": 864
+            },
+            "embedding_forwards": 864
+          },
+          "student_then_teacher": {
+            "counts": {
+              "exact": 240,
+              "adverse": 0,
+              "issued": 240,
+              "positives": 432,
+              "calls": 176,
+              "tokens": 16528
+            },
+            "requests": 864,
+            "expected_repeats": 8,
+            "offered_rps": 29.79388944948771,
+            "achieved_rps": 29.795490917867284,
+            "failures": {},
+            "makespan_seconds": 28.997676271945238,
+            "drain_seconds": 0.032005258661715885,
+            "p95_ms": {
+              "total_ms": 62.73651142837478,
+              "client_queue_ms": 2.8943245066329832,
+              "server_queue_ms": 42.117111349999966,
+              "compute_ms": 31.2064777
+            },
+            "verification": {
+              "role_forwards": 144,
+              "source_forwards": 32,
+              "role_model_forwards": 144,
+              "source_rows": 32
+            },
+            "request_groups": {
+              "1": 864
+            },
+            "embedding_forwards": 864
+          }
+        },
+        "60": {
+          "student_then_teacher_batched": {
+            "counts": {
+              "exact": 240,
+              "adverse": 0,
+              "issued": 240,
+              "positives": 432,
+              "calls": 176,
+              "tokens": 16528
+            },
+            "requests": 864,
+            "expected_repeats": 8,
+            "offered_rps": 63.84404882033089,
+            "achieved_rps": 60.092093449168004,
+            "failures": {},
+            "makespan_seconds": 14.377931445022114,
+            "drain_seconds": 0.8606183054898189,
+            "p95_ms": {
+              "total_ms": 936.4013469312338,
+              "client_queue_ms": 4.024402017239481,
+              "server_queue_ms": 853.2039034499999,
+              "compute_ms": 84.26764594999997
+            },
+            "verification": {
+              "role_forwards": 144,
+              "source_forwards": 32,
+              "role_model_forwards": 142,
+              "source_rows": 32
+            },
+            "request_groups": {
+              "1": 16,
+              "3": 10,
+              "2": 11,
+              "4": 199
+            },
+            "embedding_forwards": 864
+          },
+          "matched_resident": {
+            "counts": {
+              "exact": 256,
+              "adverse": 0,
+              "issued": 256,
+              "positives": 432,
+              "calls": 200,
+              "tokens": 20080
+            },
+            "requests": 864,
+            "expected_repeats": 8,
+            "offered_rps": 63.84404882033089,
+            "achieved_rps": 59.440836431553564,
+            "failures": {},
+            "makespan_seconds": 14.535461677005515,
+            "drain_seconds": 1.0181485374732198,
+            "p95_ms": {
+              "total_ms": 1039.3173089483753,
+              "client_queue_ms": 4.5074455556459725,
+              "server_queue_ms": 1018.2312431499995,
+              "compute_ms": 29.639162849999988
+            },
+            "verification": {
+              "role_forwards": 168,
+              "source_forwards": 32,
+              "role_model_forwards": 168,
+              "source_rows": 32
+            },
+            "request_groups": {
+              "1": 864
+            },
+            "embedding_forwards": 864
+          },
+          "student_then_teacher": {
+            "counts": {
+              "exact": 240,
+              "adverse": 0,
+              "issued": 240,
+              "positives": 432,
+              "calls": 176,
+              "tokens": 16528
+            },
+            "requests": 864,
+            "expected_repeats": 8,
+            "offered_rps": 63.84404882033089,
+            "achieved_rps": 60.56713484409234,
+            "failures": {},
+            "makespan_seconds": 14.265162158058956,
+            "drain_seconds": 0.7478490185266615,
+            "p95_ms": {
+              "total_ms": 770.8553301868959,
+              "client_queue_ms": 3.10281759011559,
+              "server_queue_ms": 752.7494361999998,
+              "compute_ms": 29.685143849999992
+            },
+            "verification": {
+              "role_forwards": 144,
+              "source_forwards": 32,
+              "role_model_forwards": 144,
+              "source_rows": 32
+            },
+            "request_groups": {
+              "1": 864
+            },
+            "embedding_forwards": 864
+          },
+          "matched_resident_batched": {
+            "counts": {
+              "exact": 256,
+              "adverse": 0,
+              "issued": 256,
+              "positives": 432,
+              "calls": 200,
+              "tokens": 20080
+            },
+            "requests": 864,
+            "expected_repeats": 8,
+            "offered_rps": 63.84404882033089,
+            "achieved_rps": 59.7011967212368,
+            "failures": {},
+            "makespan_seconds": 14.47207170794718,
+            "drain_seconds": 0.9547585684148849,
+            "p95_ms": {
+              "total_ms": 988.2462894893249,
+              "client_queue_ms": 3.438569919671861,
+              "server_queue_ms": 923.8143883499995,
+              "compute_ms": 84.01683909999994
+            },
+            "verification": {
+              "role_forwards": 168,
+              "source_forwards": 32,
+              "role_model_forwards": 161,
+              "source_rows": 32
+            },
+            "request_groups": {
+              "2": 10,
+              "3": 9,
+              "1": 9,
+              "4": 202
+            },
+            "embedding_forwards": 864
+          }
+        }
+      },
+      "quality": {
+        "student_then_teacher": {
+          "keywords": {
+            "totals": {
+              "strict": 12,
+              "issued": 12,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 27,
+            "requests": 54,
+            "paired_strict_change": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 27,
+              "clusters": 22,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          },
+          "excerpt": {
+            "totals": {
+              "strict": 18,
+              "issued": 18,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 27,
+            "requests": 54,
+            "paired_strict_change": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 27,
+              "clusters": 22,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          }
+        },
+        "matched_resident": {
+          "keywords": {
+            "totals": {
+              "strict": 14,
+              "issued": 14,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 27,
+            "requests": 54,
+            "paired_strict_change": {
+              "mean": 0.07407407407407407,
+              "percentile_95": [
+                0.0,
+                0.16129032258064516
+              ],
+              "queries": 27,
+              "clusters": 22,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            },
+            "paired_strict_change_vs_cascade": {
+              "mean": 0.07407407407407407,
+              "percentile_95": [
+                0.0,
+                0.16129032258064516
+              ],
+              "queries": 27,
+              "clusters": 22,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          },
+          "excerpt": {
+            "totals": {
+              "strict": 18,
+              "issued": 18,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 27,
+            "requests": 54,
+            "paired_strict_change": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 27,
+              "clusters": 22,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            },
+            "paired_strict_change_vs_cascade": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 27,
+              "clusters": 22,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          }
+        },
+        "student_then_teacher_batched": {
+          "keywords": {
+            "totals": {
+              "strict": 12,
+              "issued": 12,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 27,
+            "requests": 54,
+            "paired_strict_change": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 27,
+              "clusters": 22,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          },
+          "excerpt": {
+            "totals": {
+              "strict": 18,
+              "issued": 18,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 27,
+            "requests": 54,
+            "paired_strict_change": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 27,
+              "clusters": 22,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          }
+        },
+        "matched_resident_batched": {
+          "keywords": {
+            "totals": {
+              "strict": 14,
+              "issued": 14,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 27,
+            "requests": 54,
+            "paired_strict_change": {
+              "mean": 0.07407407407407407,
+              "percentile_95": [
+                0.0,
+                0.16129032258064516
+              ],
+              "queries": 27,
+              "clusters": 22,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            },
+            "paired_strict_change_vs_cascade": {
+              "mean": 0.07407407407407407,
+              "percentile_95": [
+                0.0,
+                0.16129032258064516
+              ],
+              "queries": 27,
+              "clusters": 22,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          },
+          "excerpt": {
+            "totals": {
+              "strict": 18,
+              "issued": 18,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 27,
+            "requests": 54,
+            "paired_strict_change": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 27,
+              "clusters": 22,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            },
+            "paired_strict_change_vs_cascade": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 27,
+              "clusters": 22,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          }
+        }
+      },
+      "response_signatures": {
+        "matched_resident_batched": "8c0c2fc0743f1c09432eb095412b5b24f0ce0e818c164b262561d560decc9d95",
+        "student_then_teacher_batched": "48c465c15cda03ce97e6d582f80337ad1ebaf711b6b4ee7e408b07be8273e5a4",
+        "matched_resident": "8c0c2fc0743f1c09432eb095412b5b24f0ce0e818c164b262561d560decc9d95",
+        "student_then_teacher": "48c465c15cda03ce97e6d582f80337ad1ebaf711b6b4ee7e408b07be8273e5a4"
+      },
+      "lightweight": {
+        "training": {
+          "examples": 252,
+          "teacher_matches_gold": 173,
+          "training": {
+            "label_head": {
+              "train_loss": 0.023638112470507622,
+              "parameters": 15375
+            },
+            "distilled_head": {
+              "train_loss": 0.24580806493759155,
+              "parameters": 15375
+            }
+          }
+        },
+        "calibration": {
+          "reserve_student": {
+            "cutoff": 0.0,
+            "counts": {
+              "issued": 24,
+              "strict": 24,
+              "adverse": 0,
+              "wrong_source": 0,
+              "requests": 48,
+              "positives": 24,
+              "search_calls": 13,
+              "source_calls": 0,
+              "role_calls": 13
+            }
+          },
+          "reserve_reranker": {
+            "cutoff": 0.0,
+            "counts": {
+              "issued": 24,
+              "strict": 24,
+              "adverse": 0,
+              "wrong_source": 0,
+              "requests": 48,
+              "positives": 24,
+              "search_calls": 13,
+              "source_calls": 0,
+              "role_calls": 13
+            }
+          }
+        },
+        "plos_sha256": "1b9d9b1fae5397b790be93df66b42d8295105f4a57ade1ca3618e6ee40d2c322"
+      },
+      "cascade": false,
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "source_reader_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+      "role_reader_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "matched_source_service": {
+        "calibration": {
+          "views": {
+            "keywords": {
+              "gold_matched": {
+                "cutoff": 0.007235105819340865,
+                "old_cutoff": 1.0999580360840442,
+                "correct_pairs": 21,
+                "wrong_pairs": 3,
+                "missing_target_pairs": 2,
+                "recalibrated": true,
+                "correct_pass": 20,
+                "old_correct_pass": 0,
+                "wrong_pass": 0
+              },
+              "distilled_matched": {
+                "cutoff": 0.2256569824094028,
+                "old_cutoff": 1.0017431072755172,
+                "correct_pairs": 21,
+                "wrong_pairs": 3,
+                "missing_target_pairs": 2,
+                "recalibrated": true,
+                "correct_pass": 21,
+                "old_correct_pass": 2,
+                "wrong_pass": 0
+              }
+            },
+            "excerpt": {
+              "gold_matched": {
+                "cutoff": 0.4315407241359166,
+                "old_cutoff": 0.9846829622114875,
+                "correct_pairs": 23,
+                "wrong_pairs": 13,
+                "missing_target_pairs": 6,
+                "recalibrated": true,
+                "correct_pass": 22,
+                "old_correct_pass": 16,
+                "wrong_pass": 0
+              },
+              "distilled_matched": {
+                "cutoff": 0.4573596246822648,
+                "old_cutoff": 0.9770282345464563,
+                "correct_pairs": 23,
+                "wrong_pairs": 13,
+                "missing_target_pairs": 6,
+                "recalibrated": true,
+                "correct_pass": 23,
+                "old_correct_pass": 14,
+                "wrong_pass": 0
+              }
+            }
+          },
+          "panels": [
+            {
+              "admitted": 393,
+              "dropped": {
+                "incomplete_or_ambiguous": 28
+              },
+              "links": 16,
+              "paper_pairs": 13,
+              "linked_papers": 25,
+              "contributors": 14,
+              "variants": {
+                "present": 66,
+                "swap": 66
+              }
+            },
+            {
+              "admitted": 280,
+              "dropped": {
+                "incomplete_or_ambiguous": 42
+              },
+              "links": 12,
+              "paper_pairs": 10,
+              "linked_papers": 17,
+              "contributors": 9,
+              "variants": {
+                "present": 51,
+                "swap": 51
+              }
+            }
+          ],
+          "requests": 92,
+          "projection_sha256": "38bc5e6bd42e3b2f427a42a552cae11bc0813e50f2e601ee9e10a298fe47925f",
+          "manifest_sha256": "064b9d0a579e58911c1986a17e4eb169dcfd3ab57e4e4640d31a1a62143a753a",
+          "supplement_sha256": "4ce67b1ff52d869f133bd5318bad2573502d12aae065c75c9407c14754171c89",
+          "supplement_manifest_sha256": "77b44ff60a0c335be3d7a6233b18af17c55a453ec0e40f799561203241c838d4"
+        },
+        "observed_view_agreement": {
+          "keywords": 54,
+          "excerpt": 54
+        },
+        "component_sha256": "7fbb965579ef3bdb64a1fe970b127242fc7059d3b7d1738d42b5f6579a7c4596"
+      },
+      "batch_capacity": 4,
+      "batch_stage": "paired_role"
+    }
+  ]
+}

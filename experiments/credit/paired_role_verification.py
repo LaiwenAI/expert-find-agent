@@ -43,7 +43,7 @@ def keyed_order(phrase, roles):
 
 class PairedReader(RoleReader):
     @torch.inference_mode()
-    def option_logits(self, prompts):
+    def option_logits(self, prompts, *, per_row=False):
         tokenizer = self.tokenizer
         rendered = [tokenizer.apply_chat_template([
             dict(role="system", content=system), dict(role="user", content=user),
@@ -57,11 +57,16 @@ class PairedReader(RoleReader):
         positions = (inputs["attention_mask"].cumsum(1) - 1).clamp(min=0)
         logits = self.model(**inputs, position_ids=positions, use_cache=False, logits_to_keep=1).logits
         scores = logits[:, -1, self.digits].float().cpu().numpy()
-        tokens = int(inputs["attention_mask"].sum().item())
-        return scores, tokens
+        mask = inputs["attention_mask"]
+        counts = mask.sum(dim=1).tolist() if per_row else int(mask.sum().item())
+        return scores, counts
 
     def read_options(self, prompts, choices):
         scores, tokens = self.option_logits(prompts)
+        return self.decode_options(scores, choices, tokens)
+
+    @staticmethod
+    def decode_options(scores, choices, tokens):
         decisions, gaps = [], []
         for row, options in zip(scores, choices, strict=True):
             best, second = np.argsort(-row[:len(options)], kind="stable")[:2]
@@ -84,6 +89,16 @@ class PairedReader(RoleReader):
     def batched(self, phrases, pools):
         prompts, choices = self.format_batched(phrases, pools)
         return self.read_options(prompts, choices)
+
+    def batched_requests(self, requests):
+        prompts, choices = [], []
+        for phrases, pools in requests:
+            rows, options = self.format_batched(phrases, pools)
+            prompts.extend(rows)
+            choices.extend(options)
+        scores, counts = self.option_logits(prompts, per_row=True)
+        return [self.decode_options(scores[i:i + 2], choices[i:i + 2], sum(counts[i:i + 2]))
+                for i in range(0, len(prompts), 2)]
 
     def packed(self, phrases, pools):
         glossary = sorted(set(pools[0]) | set(pools[1]))
