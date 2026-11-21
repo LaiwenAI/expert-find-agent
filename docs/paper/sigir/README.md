@@ -34,6 +34,15 @@ controls and reproduction commands are in the
 [benchmark](../../../benchmarks/open-topic-observed-repair-v1).
 The figure and equation sources are editable LaTeX.
 
+## Main figures and comparison tables
+
+The main paper has four figures and four tables. The figures cover the
+agent architecture, issuance and quality uncertainty, the cost of
+query-local filtering, and exact source-read savings. The
+[pre-read benchmark](../../../benchmarks/pre-read-proof-bound-v1)
+compares against both fixed-two dispatch and post-read certification
+on the same ranked plans, using the two frozen eLife projections.
+
 ## Scope of the supplement
 
 The supplement contains the protocols and ablations that support this

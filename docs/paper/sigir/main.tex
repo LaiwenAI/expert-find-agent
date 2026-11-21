@@ -81,6 +81,13 @@ Any compatible pair shares a contributor and consists of distinct sources, so bo
 \paragraph{Prune before parallel reads.}
 For the fixed three-source byline plan, an unopened third source can only contribute a proof if it can pair with one of the two other sources. Skip it when it has no common indexed author on a compatible orientation of the two ranked lists. Parallelism is retained. This precheck assumes complete author identifiers for the reference scope and verifies every other proposed witness.
 
+\paragraph{Certify a fixed plan before opening declarations.}
+Let $S$ be the three planned sources. For condition $i$ and source $d$, let $K_i(d)$ denote contributor identities with an indexed matching role and $U_i(d)$ denote identities for which the role is unavailable. The frozen source and its index must agree on identities and known roles. Let $P(S,X)$ be the set of distinct-source proofs formed from identity sets $X_i(d)$, with every proof ordered by the verifier's rank key. Then
+\[
+P(S,K)\subseteq P_{\mathrm{verified}}(S)\subseteq P(S,K\cup U).
+\]
+If the optimistic set is empty, the reference abstains. If both endpoint sets have the same best proof, fetch just its two sources together and verify the original declarations. If the endpoints disagree, open all three in parallel. If the two fetched declarations fail to confirm the predicted proof, complete the reference reads. The certificate concerns a fixed plan under an identity- and version-matched structured index. Untrusted or stale role data require the ordinary verifier.
+
 \paragraph{Certify shallow role planning.}
 Let the shallow lists be prefixes of the fixed deep lists. The selected shallow pair remains the deep anchor pair when both roles are indexed. It already attains the minimum number of unknown roles, and every pair involving a position outside a required shallow prefix has a worse minimax rank. Read the two anchors and consider all possible completions through one extra shallow source using its byline. Grant every shared contributor the needed role optimistically. If a verified prefix proof outranks every such completion, and therefore also every proof using a rank beyond the prefix, return it. Otherwise finish deep planning and reuse any already-open declaration. This certificate preserves the selected expert and both citations for the same indexed reference. It saves role processing and reads while the benchmark computes the full deep ranking for both routes.
 
@@ -186,10 +193,17 @@ eLife (51) & 64 & 17 & 0 / 0 & 14 / 15 & 17 / 18 \\
 \end{table*}
 
 \paragraph{Open-topic control with the same role metadata.}
-With three declaration reads and a common personal-role index, joint planning produces 85/140 known/issued PLOS proofs, compared with 30/45 for sequential repair. It produces 46/49 on eLife, compared with 0/3. On the 45 PLOS requests both answer, each proves 30 by the observed tags. Matching the panel-wide issuance quota at 45 gives 36 versus 30. The paired difference is $+3.75$ points over the 160 requests (95\% topic-pair interval $[-6.90,14.37]$). Allowing untagged evidence to receive either judgment gives an identified difference of $[-7,13]$ proofs at that quota. The natural-issuance difference remains positive under the same bounds. Warm local P95 is about 18 ms for both routes. The demonstrated advantage is broader coverage. An advantage in candidate selection at the same issuance remains unresolved.
+With three declaration reads and a common personal-role index, joint planning produces 85/140 known/issued PLOS proofs, compared with 30/45 for sequential repair. It produces 46/49 on eLife, compared with 0/3. On the 45 PLOS requests both answer, each proves 30 by the observed tags. Matching the panel-wide issuance quota at 45 gives 36 versus 30. The paired difference is $+3.75$ points over the 160 requests (95\% topic-pair interval $[-6.90,14.37]$). Allowing untagged evidence to receive either judgment gives an identified difference of $[-7,13]$ proofs at that quota. The natural-issuance difference remains positive under the same bounds (Figure~\ref{fig:matched-coverage}). Warm local P95 is about 18 ms for both routes. The demonstrated advantage is broader coverage. An advantage in candidate selection at the same issuance remains unresolved.
 
 \paragraph{What limits the three-read plan.}
 Most PLOS losses occur during three-source allocation. Enumerating sets containing every compatible pair makes all pool opportunities available to the planner. Rank-weighted selection still leaves fewer supported proofs reachable after the reads than the original joint planner on both complete indexes. Scoring up to six condition--source pairs before reading yields 87 versus 80 known proofs at 132 PLOS issuances (paired 95\% interval $[-2.58,11.77]$ percentage points over all requests). On eLife the count changes from 46 to 45 at 49 issuances. This reader raises warm local P95 from roughly 18 to 54--56 ms. Cross-fitted call routing gives no consistent gain across publishers, so the first-query method uses the original joint plan without additional neural scoring.
+
+\begin{figure*}[t]
+\centering
+\input{figures/matched-coverage}
+\caption{Source allocation with the same personal-role index and three reads. Natural issuance shows the number of labeled proofs and unresolved outputs. Matching the number of returns reduces the observed PLOS difference. The sampling interval clusters by ordered topic pair. The missing-label interval assigns possible outcomes to otherwise unresolved responses and expresses the resulting count range as a percentage of all 160 requests.}
+\label{fig:matched-coverage}
+\end{figure*}
 
 \paragraph{Can observed roles improve the remaining reads?}
 Table~\ref{tab:observed} compares six routes on the same mixed catalog, role fields, and three-read budget. The setup also masks role metadata to 50\% and 25\% while keeping every source available to read. In each masked PLOS setting, repair after the first read changes one choice. All adaptive routes return identical proofs and citations to static joint planning. On eLife the selected reads are identical. The sparse-index proof gap persists before final ranking. Reading a fallback in a later batch changes no result and adds a dependency if reads must go to a remote service.
@@ -228,6 +242,16 @@ On the frozen 13-group PLOS keyword panel, we supply the requested roles and com
 Under Eq.~\ref{eq:linked-index}, 55 of 452 sources carry role rows and the serialized role payload falls from 201,518 to 22,847 bytes. The 211 PLOS and eLife requests retain their ordered reads, experts, citations, and abstentions in two traversal orders. The compact lookup lowers warm paired P95 by 0.32--0.84 ms. The full rankings and bylines remain resident. The two catalogs each have 15 contributors linked across papers, so the reduction depends on graph sparsity.
 
 The extended and confirmation eLife snapshots, with disjoint verified contributors and DOIs, add 398 requests over 2,011 articles. All five role-index variants agree on every ordered plan and response at depths 32 and 128, including in linked-only stress catalogs. Compared with the packed global index, query-local filtering removes most role lookups on the original snapshots, but its adjacency masks cost more bytes than the packed role records. The planning gain on the original depth-128 workloads is about 0.02--0.03 ms and reverses on the connected depth-128 workloads (Figure~\ref{fig:linked-tradeoffs}). The packed global projection is the default in this implementation.
+
+\begin{figure*}[t]
+\centering
+\input{figures/pre-read-proof}
+\caption{Pre-read proof certification on the two independent eLife snapshots. Rows identify candidate depth and indexed role visibility. Panels A and B pool the 398 requests at each operating point. Panel C shows the range of P95 differences across snapshots and repeat orders. The interval shows measured extrema. Three-read, post-read and pre-read routes agree on the output for each request.}
+\label{fig:pre-read}
+\end{figure*}
+
+\paragraph{Pre-read proof certification.}
+On the same two eLife snapshots, the fixed plan's exact pre-read certificate reduces 1,194 declaration reads to 88 at depth 32 and 526 at depth 128 when all parsed roles are visible (Figure~\ref{fig:pre-read}). Withholding half the role rows by source hash raises those counts to 128 and 791. The pre-read route uses at most one fetch wave in the replay. A fixed two-read control also reproduces the reference responses on these samples and needs 796 reads. At depth 128 with half the roles withheld, the new certificate saves only five reads relative to that control on the pooled snapshots. The warm local P95 difference against the three-read reference ranges from $-0.106$ to $+0.017$ ms across all conditions. The certificate removes data access under an exact structured reference. Client-side latency under finite source capacity requires a separate test.
 
 At a 25\% nominal role-payload budget, contributor-degree and pair-cover placement also preserve all full-index responses in both catalogs. At tighter capacities, graph coverage alone does not consistently improve outcomes. At the 5\% eLife byte budget, pair cover completes 11 two-source contributor histories versus eight for contributor degree, yet has 31 instead of 38 label-supported returns. At the common quota of 35, the counts are 31 and 32.
 
