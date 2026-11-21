@@ -1,0 +1,249 @@
+{
+  "identical_decisions": true,
+  "node": "ws6",
+  "output_sha256": [
+    "eaeb9ffba328a864052c36ca9707b8fad95f508d5e5b25f14d2fb125ebf5e330",
+    "cfd67ec25b4331a9dedb8c2dc818b971d0bc1924f74d1f2966be64b595000efc"
+  ],
+  "runs": [
+    {
+      "frozen_reference": "7ee0997e56a8d58dc227ccd6a3b0e41ee0478856c0e94fc9d5df8d779c68d2c9",
+      "gpu": "NVIDIA GeForce RTX 4090",
+      "holdout": "51b1e398250a54b8c121e59abaea8a65f1e280176af688598e7062bdfa0d3415",
+      "outcomes": {
+        "present": {
+          "arms": {
+            "baseline": {
+              "calls": 0,
+              "correct": 9,
+              "n": 78,
+              "p50_ms": 16.465629218146205,
+              "p95_ms": 17.103267344646156,
+              "tokens": 0,
+              "wrong": 0
+            },
+            "exact_feasibility": {
+              "calls": 17,
+              "correct": 10,
+              "n": 78,
+              "p50_ms": 16.92948304116726,
+              "p95_ms": 78.82007893640548,
+              "tokens": 9436,
+              "wrong": 0
+            },
+            "frozen_source_score_4b": {
+              "calls": 47,
+              "correct": 10,
+              "n": 78,
+              "p50_ms": 50.09475420229137,
+              "p95_ms": 79.75555507000536,
+              "tokens": 24496,
+              "wrong": 0
+            },
+            "top2_feasibility": {
+              "calls": 13,
+              "correct": 10,
+              "n": 78,
+              "p50_ms": 16.810294473543763,
+              "p95_ms": 56.33349104318746,
+              "tokens": 7295,
+              "wrong": 0
+            }
+          },
+          "score_matched": {
+            "exact_feasibility": {
+              "calls": 17,
+              "correct": 10,
+              "tokens": 7746,
+              "wrong": 0
+            },
+            "top2_feasibility": {
+              "calls": 13,
+              "correct": 10,
+              "tokens": 5600,
+              "wrong": 0
+            }
+          }
+        },
+        "withdrawn": {
+          "arms": {
+            "baseline": {
+              "calls": 0,
+              "correct": 0,
+              "n": 156,
+              "p50_ms": 16.442807391285896,
+              "p95_ms": 17.024092143401504,
+              "tokens": 0,
+              "wrong": 1
+            },
+            "exact_feasibility": {
+              "calls": 0,
+              "correct": 0,
+              "n": 156,
+              "p50_ms": 16.69716159813106,
+              "p95_ms": 17.148615675978363,
+              "tokens": 0,
+              "wrong": 1
+            },
+            "frozen_source_score_4b": {
+              "calls": 54,
+              "correct": 0,
+              "n": 156,
+              "p50_ms": 16.87686238437891,
+              "p95_ms": 75.7685344433412,
+              "tokens": 27522,
+              "wrong": 1
+            },
+            "top2_feasibility": {
+              "calls": 0,
+              "correct": 0,
+              "n": 156,
+              "p50_ms": 16.73068548552692,
+              "p95_ms": 17.31815212406218,
+              "tokens": 0,
+              "wrong": 1
+            }
+          },
+          "score_matched": {
+            "exact_feasibility": {
+              "calls": 0,
+              "correct": 0,
+              "tokens": 0,
+              "wrong": 1
+            },
+            "top2_feasibility": {
+              "calls": 0,
+              "correct": 0,
+              "tokens": 0,
+              "wrong": 1
+            }
+          }
+        }
+      },
+      "reverse": false,
+      "script_sha256": "6864f523bc59180d3a26c91de25416da7c044141e9eab4d6873acf06af226b4b",
+      "service_sha256": "64774337267453b5c26d7dbef52aacee2aeb00f2692e7728127e7a592bef8335",
+      "signature": "af29c98a0b0f9a37592cdb2ad526006efed50eacd46ff2aa1d6632902c5fc4e3"
+    },
+    {
+      "frozen_reference": "7ee0997e56a8d58dc227ccd6a3b0e41ee0478856c0e94fc9d5df8d779c68d2c9",
+      "gpu": "NVIDIA GeForce RTX 4090",
+      "holdout": "51b1e398250a54b8c121e59abaea8a65f1e280176af688598e7062bdfa0d3415",
+      "outcomes": {
+        "present": {
+          "arms": {
+            "baseline": {
+              "calls": 0,
+              "correct": 9,
+              "n": 78,
+              "p50_ms": 16.885098535567522,
+              "p95_ms": 17.277904273942113,
+              "tokens": 0,
+              "wrong": 0
+            },
+            "exact_feasibility": {
+              "calls": 17,
+              "correct": 10,
+              "n": 78,
+              "p50_ms": 17.08833547309041,
+              "p95_ms": 78.87243314180522,
+              "tokens": 9436,
+              "wrong": 0
+            },
+            "frozen_source_score_4b": {
+              "calls": 47,
+              "correct": 10,
+              "n": 78,
+              "p50_ms": 51.16179818287492,
+              "p95_ms": 80.07485412526876,
+              "tokens": 24496,
+              "wrong": 0
+            },
+            "top2_feasibility": {
+              "calls": 13,
+              "correct": 10,
+              "n": 78,
+              "p50_ms": 17.15001161210239,
+              "p95_ms": 56.259637326001894,
+              "tokens": 7295,
+              "wrong": 0
+            }
+          },
+          "score_matched": {
+            "exact_feasibility": {
+              "calls": 17,
+              "correct": 10,
+              "tokens": 7746,
+              "wrong": 0
+            },
+            "top2_feasibility": {
+              "calls": 13,
+              "correct": 10,
+              "tokens": 5600,
+              "wrong": 0
+            }
+          }
+        },
+        "withdrawn": {
+          "arms": {
+            "baseline": {
+              "calls": 0,
+              "correct": 0,
+              "n": 156,
+              "p50_ms": 16.75724540837109,
+              "p95_ms": 17.20178744290024,
+              "tokens": 0,
+              "wrong": 1
+            },
+            "exact_feasibility": {
+              "calls": 0,
+              "correct": 0,
+              "n": 156,
+              "p50_ms": 17.0522085390985,
+              "p95_ms": 17.533631878905,
+              "tokens": 0,
+              "wrong": 1
+            },
+            "frozen_source_score_4b": {
+              "calls": 54,
+              "correct": 0,
+              "n": 156,
+              "p50_ms": 17.114975256845355,
+              "p95_ms": 78.6774466978386,
+              "tokens": 27522,
+              "wrong": 1
+            },
+            "top2_feasibility": {
+              "calls": 0,
+              "correct": 0,
+              "n": 156,
+              "p50_ms": 17.024672124534845,
+              "p95_ms": 17.46714999899268,
+              "tokens": 0,
+              "wrong": 1
+            }
+          },
+          "score_matched": {
+            "exact_feasibility": {
+              "calls": 0,
+              "correct": 0,
+              "tokens": 0,
+              "wrong": 1
+            },
+            "top2_feasibility": {
+              "calls": 0,
+              "correct": 0,
+              "tokens": 0,
+              "wrong": 1
+            }
+          }
+        }
+      },
+      "reverse": true,
+      "script_sha256": "6864f523bc59180d3a26c91de25416da7c044141e9eab4d6873acf06af226b4b",
+      "service_sha256": "64774337267453b5c26d7dbef52aacee2aeb00f2692e7728127e7a592bef8335",
+      "signature": "af29c98a0b0f9a37592cdb2ad526006efed50eacd46ff2aa1d6632902c5fc4e3"
+    }
+  ],
+  "slurm_array": 47368
+}

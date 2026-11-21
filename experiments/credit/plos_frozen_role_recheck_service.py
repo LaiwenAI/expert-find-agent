@@ -35,6 +35,9 @@ class Engine(resident.Engine):
         self.current = (topic, labels, margins)
         return topic, labels, min(margins)
 
+    def should_recheck(self, pair, labels, uncertain, request):
+        return True
+
     def execute(self, request):
         result = super().execute(request | {"arm": "vectorized_author_role"})
         result.update(role_calls=0, role_tokens=0)
@@ -49,6 +52,8 @@ class Engine(resident.Engine):
             )
             if verified:
                 uncertain = [i for i, margin in enumerate(margins) if margin <= self.role_cut]
+                if not self.should_recheck(pair, labels, uncertain, request):
+                    return result
                 roles, margin, tokens, ms = policy.measured_recheck(self.reader, duties, labels, uncertain)
                 result.update(role_calls=1, role_tokens=tokens, recheck_ms=ms)
                 if margin > ROLE_MARGIN and None not in roles:
@@ -134,7 +139,7 @@ def exercise(engine, rows, reverse):
     return reports, signature
 
 
-def run(args):
+def prepare(args, engine_type):
     if base.digest(args.lock) != REFERENCE:
         raise ValueError("Changed frozen role policy")
     locked = shared.role.read(args.lock)["runs"][0]
@@ -158,17 +163,29 @@ def run(args):
         catalog = route.Catalog(articles | fresh_with_base, encoder)
         banks, _ = shared.role.train(encoder, definitions, phrases)
         plan = shared.prior.transfer.plos_requests(catalog.articles, new["test"], wording)
-        engine = Engine(route.PostingIndex(catalog), encoder, banks, role_cut, model, source_cutoff, reader)
-        results, signature = exercise(engine, list(requests(catalog.articles, catalog, plan, args.reverse)), args.reverse)
-        base.write_json(args.output, dict(
-            holdout=base.digest(args.fresh_manifest), frozen_reference=REFERENCE,
-            reader=reader.provenance["revision"], statements=len(catalog.ids), outcomes=results, signature=signature,
-            reverse=args.reverse, script_sha256=base.digest(Path(__file__)), gpu=policy.torch.cuda.get_device_name(),
-        ))
+        return engine_type(route.PostingIndex(catalog), encoder, banks, role_cut, model, source_cutoff, reader), list(
+            requests(catalog.articles, catalog, plan, args.reverse)
+        )
+    raise ValueError("Keyword policy missing")
+
+
+def run(args):
+    engine, rows = prepare(args, Engine)
+    results, signature = exercise(engine, rows, args.reverse)
+    base.write_json(args.output, dict(
+        holdout=base.digest(args.fresh_manifest), frozen_reference=REFERENCE,
+        reader=engine.reader.provenance["revision"], statements=len(engine.index.catalog.ids),
+        outcomes=results, signature=signature,
+        reverse=args.reverse, script_sha256=base.digest(Path(__file__)), gpu=policy.torch.cuda.get_device_name(),
+    ))
+
+
+def command(description):
+    parser = shared.command(description)
+    for name in ("fresh-manifest", "fresh-xml", "lock", "reader"):
+        parser.add_argument("--" + name, type=Path, required=True)
+    return parser
 
 
 if __name__ == "__main__":
-    parser = shared.command(__doc__)
-    for name in ("fresh-manifest", "fresh-xml", "lock", "reader"):
-        parser.add_argument("--" + name, type=Path, required=True)
-    run(parser.parse_args())
+    run(command(__doc__).parse_args())
