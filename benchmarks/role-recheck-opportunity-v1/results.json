@@ -1,0 +1,468 @@
+{
+  "slurm_array": 45992,
+  "node": "ws3",
+  "runs": [
+    {
+      "script_sha256": "6b0242658d5e865f5f55527c9a00054f9a83171d272cc51b99f46af1157c2d96",
+      "dev_sha256": "4ce67b1ff52d869f133bd5318bad2573502d12aae065c75c9407c14754171c89",
+      "holdout_sha256": "38bc5e6bd42e3b2f427a42a552cae11bc0813e50f2e601ee9e10a298fe47925f",
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "reader_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "reverse": false,
+      "results": {
+        "development": {
+          "opportunities": {
+            "excerpt": {
+              "positive": 51,
+              "source_pair": 51,
+              "initial": 13,
+              "pair_choice_oracle": 30,
+              "chosen_slot_oracle": 31,
+              "any_slot_oracle": 31,
+              "expanded_one_oracle": 38,
+              "both_roles_oracle": 51
+            },
+            "keywords": {
+              "positive": 51,
+              "source_pair": 36,
+              "initial": 9,
+              "pair_choice_oracle": 22,
+              "chosen_slot_oracle": 23,
+              "any_slot_oracle": 23,
+              "expanded_one_oracle": 28,
+              "both_roles_oracle": 36
+            }
+          },
+          "outcomes": {
+            "excerpt|agreement_first": {
+              "totals": {
+                "issued": 30,
+                "proof": 29,
+                "adverse": 1,
+                "swap_issued": 1,
+                "substitute": 0,
+                "calls": 22,
+                "tokens": 1999,
+                "changed_slots": 0,
+                "requests": 102
+              },
+              "p95_ms": 24.014733120566234
+            },
+            "excerpt|original": {
+              "totals": {
+                "issued": 30,
+                "proof": 29,
+                "adverse": 1,
+                "swap_issued": 1,
+                "substitute": 0,
+                "calls": 22,
+                "tokens": 1999,
+                "changed_slots": 0,
+                "requests": 102
+              },
+              "p95_ms": 24.025445303414017
+            },
+            "excerpt|weighted_agreement": {
+              "totals": {
+                "issued": 30,
+                "proof": 29,
+                "adverse": 1,
+                "swap_issued": 1,
+                "substitute": 0,
+                "calls": 22,
+                "tokens": 1999,
+                "changed_slots": 0,
+                "requests": 102
+              },
+              "p95_ms": 24.079656408866867
+            },
+            "keywords|agreement_first": {
+              "totals": {
+                "issued": 24,
+                "proof": 23,
+                "adverse": 1,
+                "swap_issued": 1,
+                "substitute": 0,
+                "calls": 17,
+                "tokens": 1600,
+                "changed_slots": 0,
+                "requests": 102
+              },
+              "p95_ms": 21.104516769992188
+            },
+            "keywords|original": {
+              "totals": {
+                "issued": 24,
+                "proof": 23,
+                "adverse": 1,
+                "swap_issued": 1,
+                "substitute": 0,
+                "calls": 17,
+                "tokens": 1600,
+                "changed_slots": 0,
+                "requests": 102
+              },
+              "p95_ms": 21.1151625670027
+            },
+            "keywords|weighted_agreement": {
+              "totals": {
+                "issued": 24,
+                "proof": 23,
+                "adverse": 1,
+                "swap_issued": 1,
+                "substitute": 0,
+                "calls": 17,
+                "tokens": 1600,
+                "changed_slots": 0,
+                "requests": 102
+              },
+              "p95_ms": 21.162458590697497
+            }
+          }
+        },
+        "held": {
+          "opportunities": {
+            "excerpt": {
+              "positive": 66,
+              "source_pair": 66,
+              "initial": 22,
+              "pair_choice_oracle": 44,
+              "chosen_slot_oracle": 45,
+              "any_slot_oracle": 45,
+              "expanded_one_oracle": 55,
+              "both_roles_oracle": 66
+            },
+            "keywords": {
+              "positive": 66,
+              "source_pair": 48,
+              "initial": 18,
+              "pair_choice_oracle": 34,
+              "chosen_slot_oracle": 34,
+              "any_slot_oracle": 34,
+              "expanded_one_oracle": 40,
+              "both_roles_oracle": 48
+            }
+          },
+          "outcomes": {
+            "excerpt|agreement_first": {
+              "totals": {
+                "issued": 48,
+                "proof": 42,
+                "adverse": 6,
+                "swap_issued": 1,
+                "substitute": 0,
+                "calls": 32,
+                "tokens": 3074,
+                "changed_slots": 0,
+                "requests": 132
+              },
+              "p95_ms": 26.406921533634886
+            },
+            "excerpt|original": {
+              "totals": {
+                "issued": 48,
+                "proof": 42,
+                "adverse": 6,
+                "swap_issued": 1,
+                "substitute": 0,
+                "calls": 32,
+                "tokens": 3074,
+                "changed_slots": 0,
+                "requests": 132
+              },
+              "p95_ms": 26.420982147101313
+            },
+            "excerpt|weighted_agreement": {
+              "totals": {
+                "issued": 48,
+                "proof": 42,
+                "adverse": 6,
+                "swap_issued": 1,
+                "substitute": 0,
+                "calls": 32,
+                "tokens": 3074,
+                "changed_slots": 0,
+                "requests": 132
+              },
+              "p95_ms": 26.48806454380974
+            },
+            "keywords|agreement_first": {
+              "totals": {
+                "issued": 34,
+                "proof": 33,
+                "adverse": 1,
+                "swap_issued": 0,
+                "substitute": 0,
+                "calls": 19,
+                "tokens": 1834,
+                "changed_slots": 0,
+                "requests": 132
+              },
+              "p95_ms": 21.612304367590696
+            },
+            "keywords|original": {
+              "totals": {
+                "issued": 34,
+                "proof": 33,
+                "adverse": 1,
+                "swap_issued": 0,
+                "substitute": 0,
+                "calls": 19,
+                "tokens": 1834,
+                "changed_slots": 0,
+                "requests": 132
+              },
+              "p95_ms": 21.623956959228963
+            },
+            "keywords|weighted_agreement": {
+              "totals": {
+                "issued": 34,
+                "proof": 33,
+                "adverse": 1,
+                "swap_issued": 0,
+                "substitute": 0,
+                "calls": 19,
+                "tokens": 1834,
+                "changed_slots": 0,
+                "requests": 132
+              },
+              "p95_ms": 21.67741252342239
+            }
+          }
+        }
+      }
+    },
+    {
+      "script_sha256": "6b0242658d5e865f5f55527c9a00054f9a83171d272cc51b99f46af1157c2d96",
+      "dev_sha256": "4ce67b1ff52d869f133bd5318bad2573502d12aae065c75c9407c14754171c89",
+      "holdout_sha256": "38bc5e6bd42e3b2f427a42a552cae11bc0813e50f2e601ee9e10a298fe47925f",
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "reader_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "reverse": true,
+      "results": {
+        "development": {
+          "opportunities": {
+            "excerpt": {
+              "positive": 51,
+              "source_pair": 51,
+              "initial": 13,
+              "pair_choice_oracle": 30,
+              "chosen_slot_oracle": 31,
+              "any_slot_oracle": 31,
+              "expanded_one_oracle": 38,
+              "both_roles_oracle": 51
+            },
+            "keywords": {
+              "positive": 51,
+              "source_pair": 36,
+              "initial": 9,
+              "pair_choice_oracle": 22,
+              "chosen_slot_oracle": 23,
+              "any_slot_oracle": 23,
+              "expanded_one_oracle": 28,
+              "both_roles_oracle": 36
+            }
+          },
+          "outcomes": {
+            "excerpt|agreement_first": {
+              "totals": {
+                "issued": 30,
+                "proof": 29,
+                "adverse": 1,
+                "swap_issued": 1,
+                "substitute": 0,
+                "calls": 22,
+                "tokens": 1999,
+                "changed_slots": 0,
+                "requests": 102
+              },
+              "p95_ms": 24.239926115842533
+            },
+            "excerpt|original": {
+              "totals": {
+                "issued": 30,
+                "proof": 29,
+                "adverse": 1,
+                "swap_issued": 1,
+                "substitute": 0,
+                "calls": 22,
+                "tokens": 1999,
+                "changed_slots": 0,
+                "requests": 102
+              },
+              "p95_ms": 24.25089809694327
+            },
+            "excerpt|weighted_agreement": {
+              "totals": {
+                "issued": 30,
+                "proof": 29,
+                "adverse": 1,
+                "swap_issued": 1,
+                "substitute": 0,
+                "calls": 22,
+                "tokens": 1999,
+                "changed_slots": 0,
+                "requests": 102
+              },
+              "p95_ms": 24.3193598173093
+            },
+            "keywords|agreement_first": {
+              "totals": {
+                "issued": 24,
+                "proof": 23,
+                "adverse": 1,
+                "swap_issued": 1,
+                "substitute": 0,
+                "calls": 17,
+                "tokens": 1600,
+                "changed_slots": 0,
+                "requests": 102
+              },
+              "p95_ms": 21.322686679195613
+            },
+            "keywords|original": {
+              "totals": {
+                "issued": 24,
+                "proof": 23,
+                "adverse": 1,
+                "swap_issued": 1,
+                "substitute": 0,
+                "calls": 17,
+                "tokens": 1600,
+                "changed_slots": 0,
+                "requests": 102
+              },
+              "p95_ms": 21.33343062014319
+            },
+            "keywords|weighted_agreement": {
+              "totals": {
+                "issued": 24,
+                "proof": 23,
+                "adverse": 1,
+                "swap_issued": 1,
+                "substitute": 0,
+                "calls": 17,
+                "tokens": 1600,
+                "changed_slots": 0,
+                "requests": 102
+              },
+              "p95_ms": 21.396100515266877
+            }
+          }
+        },
+        "held": {
+          "opportunities": {
+            "excerpt": {
+              "positive": 66,
+              "source_pair": 66,
+              "initial": 22,
+              "pair_choice_oracle": 44,
+              "chosen_slot_oracle": 45,
+              "any_slot_oracle": 45,
+              "expanded_one_oracle": 55,
+              "both_roles_oracle": 66
+            },
+            "keywords": {
+              "positive": 66,
+              "source_pair": 48,
+              "initial": 18,
+              "pair_choice_oracle": 34,
+              "chosen_slot_oracle": 34,
+              "any_slot_oracle": 34,
+              "expanded_one_oracle": 40,
+              "both_roles_oracle": 48
+            }
+          },
+          "outcomes": {
+            "excerpt|agreement_first": {
+              "totals": {
+                "issued": 48,
+                "proof": 42,
+                "adverse": 6,
+                "swap_issued": 1,
+                "substitute": 0,
+                "calls": 32,
+                "tokens": 3074,
+                "changed_slots": 0,
+                "requests": 132
+              },
+              "p95_ms": 26.494766835821792
+            },
+            "excerpt|original": {
+              "totals": {
+                "issued": 48,
+                "proof": 42,
+                "adverse": 6,
+                "swap_issued": 1,
+                "substitute": 0,
+                "calls": 32,
+                "tokens": 3074,
+                "changed_slots": 0,
+                "requests": 132
+              },
+              "p95_ms": 26.507313665933907
+            },
+            "excerpt|weighted_agreement": {
+              "totals": {
+                "issued": 48,
+                "proof": 42,
+                "adverse": 6,
+                "swap_issued": 1,
+                "substitute": 0,
+                "calls": 32,
+                "tokens": 3074,
+                "changed_slots": 0,
+                "requests": 132
+              },
+              "p95_ms": 26.579992764163762
+            },
+            "keywords|agreement_first": {
+              "totals": {
+                "issued": 34,
+                "proof": 33,
+                "adverse": 1,
+                "swap_issued": 0,
+                "substitute": 0,
+                "calls": 19,
+                "tokens": 1834,
+                "changed_slots": 0,
+                "requests": 132
+              },
+              "p95_ms": 21.904663008172065
+            },
+            "keywords|original": {
+              "totals": {
+                "issued": 34,
+                "proof": 33,
+                "adverse": 1,
+                "swap_issued": 0,
+                "substitute": 0,
+                "calls": 19,
+                "tokens": 1834,
+                "changed_slots": 0,
+                "requests": 132
+              },
+              "p95_ms": 21.916456520557404
+            },
+            "keywords|weighted_agreement": {
+              "totals": {
+                "issued": 34,
+                "proof": 33,
+                "adverse": 1,
+                "swap_issued": 0,
+                "substitute": 0,
+                "calls": 19,
+                "tokens": 1834,
+                "changed_slots": 0,
+                "requests": 132
+              },
+              "p95_ms": 21.973107405938208
+            }
+          }
+        }
+      }
+    }
+  ]
+}
