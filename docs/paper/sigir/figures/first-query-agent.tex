@@ -18,8 +18,8 @@
   \node[anchor=west,micro] at (.19,2.70) {Two topic--role clauses};
   \draw[pane] (.20,2.04) rectangle (2.31,2.49);
   \draw[pane] (.20,1.46) rectangle (2.31,1.91);
-  \node[micro,anchor=west] at (.31,2.26) {Design the method};
-  \node[micro,anchor=west] at (.31,1.69) {Validate on the line};
+  \node[micro,anchor=west] at (.31,2.26) {Imaging: methods};
+  \node[micro,anchor=west] at (.31,1.69) {Sensor validation};
 
   \draw[pane,fill=searchlight] (2.86,.55) rectangle (6.00,3.99);
   \node[label] at (3.00,3.73) {Owned-source index};
@@ -34,27 +34,27 @@
   \foreach \x/\doc in {3.33/A,4.23/B,5.14/C} {
     \node[micro,draw=searchline,fill=white,circle,inner sep=2.4pt] at (\x,1.98) {\doc};
   }
-  \node[micro,fill=searchsoft,rounded corners=2pt] at (3.94,1.23) {Expert 1};
-  \node[micro,fill=white,rounded corners=2pt] at (5.31,1.23) {Expert 2};
+  \node[micro,fill=searchsoft,rounded corners=2pt] at (3.94,1.23) {Contributor 1};
+  \node[micro,fill=white,rounded corners=2pt] at (5.31,1.23) {Contributor 2};
   \node[micro,anchor=west] at (3.00,.80) {Solid: known; dashed: opaque};
 
   \draw[pane,fill=searchsoft] (6.45,.20) rectangle (14.30,4.36);
   \node[label] at (6.63,4.08) {First-query agent};
   \draw[pane] (6.66,1.97) rectangle (10.02,3.78);
   \node[label] at (6.79,3.52) {Allocate reads};
-  \node[micro,anchor=west] at (6.79,3.15) {Join ranked lists on one expert};
+  \node[micro,anchor=west] at (6.79,3.15) {Topical A + B credits two people};
   \draw[exact] (7.12,2.68) -- (8.09,2.68);
   \node[micro,draw=searchedge,fill=searchsoft,rounded corners=2pt] at (7.12,2.68) {A};
   \node[micro,draw=searchedge,fill=searchsoft,rounded corners=2pt] at (8.09,2.68) {C};
   \node[micro,anchor=west] at (8.53,2.68) {same person};
-  \node[micro,anchor=west] at (6.79,2.26) {Schedule up to three distinct reads};
+  \node[micro,anchor=west] at (6.79,2.26) {A + C shares a contributor};
   \draw[pane] (10.49,1.97) rectangle (14.09,3.78);
   \node[label] at (10.64,3.52) {Verify and update};
   \node[micro,anchor=west] at (10.64,3.15) {Read original declarations};
   \draw[rounded corners=2pt,fill=searchsoft,draw=searchedge!70] (10.67,2.44) rectangle (12.20,2.87);
   \draw[rounded corners=2pt,fill=searchgap,draw=searchline] (12.34,2.44) rectangle (13.90,2.87);
-  \node[micro] at (11.44,2.65) {Design: verified};
-  \node[micro] at (13.12,2.65) {Validation: open};
+  \node[micro] at (11.44,2.65) {Methodology: read};
+  \node[micro] at (13.12,2.65) {Validation: read};
   \node[micro,anchor=west] at (10.64,2.19) {Retain source and span provenance};
   \draw[pane] (6.66,.41) rectangle (14.09,1.52);
   \node[label] at (6.79,1.27) {Evidence decision};
@@ -68,7 +68,7 @@
   \draw[pane,fill=searchlight] (14.76,1.06) rectangle (17.59,3.40);
   \node[label] at (14.89,3.14) {Response};
   \draw[pane] (14.90,2.20) rectangle (17.43,2.78);
-  \node[micro,anchor=west] at (15.00,2.48) {Expert with linked citations};
+  \node[micro,anchor=west] at (15.00,2.48) {Contributor and citations};
   \draw[pane] (14.90,1.45) rectangle (17.43,2.04);
   \node[micro,anchor=west] at (15.00,1.74) {Or unresolved conditions};
   \draw[flow] (2.46,2.88) -- (2.86,2.88);

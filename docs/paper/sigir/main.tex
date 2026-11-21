@@ -15,12 +15,12 @@
 \acmConference[Research draft]{Research draft}{November 2026}{}
 \acmYear{2026}
 \renewcommand\footnotetextcopyrightpermission[1]{}
-\title[Three Reads, One Expert]{Three Reads, One Expert: Contributor-Constrained Evidence Planning for First-Query Search}
+\title[Three Reads, One Contributor]{Three Reads, One Contributor: Contributor-Constrained Evidence Planning for First-Query Search}
 \author{Anonymous Authors}
 \begin{document}
 
 \begin{abstract}
-Expert search must find people whose own contributions satisfy a request. When the evidence spans publications, reading the highest-ranked sources independently can exhaust the budget before establishing a single person's eligibility. We study a first-query agent that joins ranked source pools by contributor identity, uses indexed roles to nominate complementary sources, and verifies the original declarations. On a mixed catalog of 452 articles, joint planning with three reads recovers 85 of 160 PLOS and 46 of 51 eLife label-supported matches. Sequential repair with the same role metadata recovers 30 and 0, respectively. The PLOS advantage remains uncertain when issuance is held equal. A linked-source index reduces the serialized role payload by 88.7\% and preserves every selected read, expert, and citation. A separate certificate reduces declaration reads from 633 to 516 with complete role fields. On 13 later PLOS groups, a same-contributor feasibility test removes 84 of 101 calls to a frozen 4B role verifier while preserving every returned proof. Its intact-catalog P95 remains about 79 ms, compared with 17 ms for the lightweight baseline, for one additional correct proof. These results establish coverage at a fixed reading budget and show when structural pruning saves work. They leave the quality of enterprise expert rankings and the cost of obtaining it open.
+A search for published contributions may require two sources that document different roles for the same person. Independently reading the highest-ranked sources can spend the budget on different contributors. We study single-contributor recommendation under a three-declaration read budget. Our planner joins two ranked source lists by contributor and declared role, then verifies the original records. On 160 PLOS and 51 eLife queries over a mixed catalog, joint planning recovers 85 and 46 tag-supported results, compared with 30 and zero for sequential repair with access to the same role index. On the 45 PLOS queries both methods answer, each recovers 30. Equalizing the PLOS return count leaves the advantage uncertain. A source-read bound preserves the returned contributor, citations, and abstention of the fixed reference plan when identity and role metadata are trusted. These results establish broader coverage of published evidence under a fixed read budget. Technical qualification and expert ranking require separate independent judgments.
 \end{abstract}
 \ccsdesc[500]{Information systems~Information retrieval}
 \ccsdesc[300]{Information systems~Retrieval models and ranking}
@@ -28,9 +28,9 @@ Expert search must find people whose own contributions satisfy a request. When t
 \maketitle
 
 \section{Introduction}
-An enterprise looking for help with industrial inspection may need a person who has worked under a specified line condition and can document a measured operating result. A paper about the same equipment supplies a retrieval lead. A source stating a design target or citing someone else's experiment supplies different evidence. Expert search must retain those distinctions while finding useful candidates within a practical time budget.
+Evidence-based expert search has to connect a person's contributions to the requested work. For example, a request might name one research topic for developing a method and another for validating results. The highest-ranked paper for each topic can credit a different person, whereas a lower-ranked publication could supply the second role for the contributor credited on the first. With three declaration reads, that distinction matters before any declaration is opened.
 
-Consider three available reads and two conditions, designing the inspection method and validating it on a production line. The first paper for each condition may describe a different contributor. A third paper can match the topic and still leave both contributors unconfirmed. Returning either person would misattribute at least one condition. More reading also wastes work if the available declarations rule out a common contributor. The agent joins both ranked pools by contributor before reading (Figure~\ref{fig:plan}). Its default path verifies the planned declarations and uses an exact bound where the task permits skipping a read.
+We study this allocation problem on structured publisher records. A query contains two topic--role clauses. A response contains one verified contributor and two distinct publications, or it abstains. Published topic tags indicate topical coverage. The declaration binds a broad role to a contributor on the paper. CRediT's Methodology role spans method design and model creation, and Validation covers several kinds of verification~\cite{niso_credit_methodology,niso_credit_validation}. These fields leave open which operation the person performed, under what conditions, and whether the person meets an industrial criterion. Those judgments belong to a separate expert-search task.
 
 \begin{figure*}[t]
 \centering
@@ -39,23 +39,27 @@ Consider three available reads and two conditions, designing the inspection meth
 \label{fig:plan}
 \end{figure*}
 
-We make three contributions. First, we present a fixed-budget source allocation method that uses contributor identity and role information to select complementary evidence before reading. Second, we derive conditions that skip reads, deeper planning, or a role recheck while preserving a specified reference output. Third, we evaluate how source reachability, attributed support, and computation change under a common reading budget, matched issuance, and a source withdrawal intervention. We separate publisher-declared proof from reviewer relevance and enterprise eligibility. Continual learning remains a follow-up to the frozen first-query agent.
+We make three contributions. First, we combine ranked contributor joins with a third-read heuristic under a common declaration budget. Second, we derive a source frontier that can omit files without changing the winner of that fixed plan. Third, we evaluate coverage, matched issuance, and source withdrawal separately, including settings where the joint planner loses to a sequential or fixed-slate control.
 
 \section{Related Work}
-Classical expert search aggregates document relevance into a ranking of people~\cite{balog2006formal}. We retain that aggregation for candidate generation and use contributor declarations to guide nomination and verification. CoF evaluates reviewer--paper relevance~\cite{zhang2025cof}. MERIT distinguishes core expertise from incidental overlap~\cite{yang2026merit}. Neither signal supplies ground truth for a person's contribution to a cited work in our enterprise setting.
+Classical expert search aggregates document relevance into a ranking of people~\cite{balog2006formal}. We retrieve sources and join them through contributor declarations before verification. CoF evaluates reviewer--paper relevance~\cite{zhang2025cof}. MERIT distinguishes core expertise from incidental overlap~\cite{yang2026merit}. Neither signal supplies ground truth for a person's contribution to a cited work in our enterprise setting.
 
 Rank joins exploit input ordering to produce high-scoring joins~\cite{ilyas2003rankjoin}. Reciprocal-rank fusion combines the topical ranks from lexical and dense retrieval~\cite{cormack2009rrf}. We use a specialized join to allocate reads before retrieving declarations. SetR selects passages that jointly meet information requirements~\cite{lee2025setr}. Our comparison imposes an identity constraint across distinct sources and verifies support at the expert level. RATE learns reviewer profiles for expertise ranking~\cite{liu2026rate}. It provides a separate comparison for reviewer fit. S2G-RAG predicts evidence gaps and translates them into follow-up queries~\cite{li2026s2g}. We test whether using contributor links before the first read improves what the same source budget can recover.
 
 Threshold algorithms use monotone bounds to avoid access when unseen values cannot change a top-$K$ answer~\cite{fagin2001aggregation,broder2003wand}. Our fixed-inventory variant also requires stability of the supporting citations. Adaptive-RAG routes retrieval by predicted query complexity~\cite{jeong2024adaptive}, and ranking cascades allocate expensive scoring to promising items~\cite{wang2011cascade,hofstatter2021intradocument}. SIM-RAG learns whether its retrieved context is sufficient to answer a question~\cite{yang2025simrag}. Here the continuation test depends on a stated proof obligation: the system needs evidence that binds all requested responsibilities to the same person. An impossible or stable proof outcome can be detected from the inventory under explicit completeness assumptions.
 
-LitSearch provides author-written scientific search questions~\cite{ajith2024litsearch}. CSFCube provides expert grades within candidate pools for specified paper facets~\cite{mysore2021csfcube}. We use them to distinguish source acceptance from expert ranking. eRAG connects document evaluation to downstream utility~\cite{salemi2024erag}. We separately measure whether an available publication enters the plan, whether its statement satisfies a requested role, and whether the returned person's evidence is complete. Source-grounded synthesis and citation evaluation distinguish coverage from citation correctness~\cite{lin2025scirgen,gao2023alce,xu2025citeeval}. TREC Enterprise already judges support at the topic--expert--document level and credits a relevant expert if any returned source supports the match~\cite{soboroff2006enterprise}. Our citation intervention keeps that criterion as a comparator and tests whether the full set of citations supports the claims about the nominated person.
+LitSearch provides author-written scientific search questions~\cite{ajith2024litsearch}. CSFCube provides expert grades within candidate pools for specified paper facets~\cite{mysore2021csfcube}. We use them to distinguish source acceptance from expert ranking. eRAG connects document evaluation to downstream utility~\cite{salemi2024erag}. We separately measure whether an available publication enters the plan, whether its statement satisfies a requested role, and whether the returned person's evidence is complete. Source-grounded synthesis and citation evaluation distinguish coverage from citation correctness~\cite{lin2025scirgen,gao2023alce,xu2025citeeval}. TREC Enterprise already judges support at the topic--expert--document level and credits a relevant expert if any returned source supports the match~\cite{soboroff2006enterprise}. Our citation intervention tests the sensitivity of that criterion to one incorrect citation.
 
 \section{Method}
 \label{sec:method}
-\subsection{Task and inference overview}
-A request $q$ identifies a target operation, context, and any hard requirements. The initial agent retrieves owned source records using a frozen index and aggregates them into a deterministic expert prior. The initial route needs no user feedback. It keeps candidates with incomplete declarations eligible for reading (Figure~\ref{fig:plan}). For each expert $e$ and requirement $r$, the index supplies an ordered list $W_{er}$ of candidate passages. The evidence state stores confirmed support, rejection, unread evidence, or an observed result that still needs rechecking. An unavailable source cannot be a returned witness. We preserve query spans, source hashes, ownership and passage offsets so that the returned decision can be audited.
-
-
+\subsection{Task and default algorithm}
+Each clause $(t_i,r_i)$ consists of a topic and a requested contribution role. A feasible proof is a tuple $(e,a,b)$ assigning both clauses to the same identified contributor $e$ on distinct sources $a,b$. The system chooses up to one proof from the declarations it opens. The reference pipeline is:
+\begin{enumerate}
+\item Retrieve two title--abstract lists with hybrid ranking, one per topic.
+\item Join compatible indexed contributors across the lists. Select the best ordered anchor pair, then add one source using the heuristic below.
+\item When the index has trusted version and identity information, restrict reads to the source frontier. Otherwise verify the fixed plan without this pruning.
+\item Check the original declarations and return the highest-ranked verified tuple, or abstain.
+\end{enumerate}
 
 \subsection{Joint nomination before reading}
 \label{sec:nomination}
@@ -65,10 +69,12 @@ For each of two topic--role conditions, hybrid retrieval ranks title and abstrac
 \]
 over eligible pairs, using stable identifiers for ties. To find that pair, retain the first two sources per contributor and list. For one contributor, distinct first choices give the minimum. If both are the same source, any distinct pair must replace at least one first choice. Replacing just that choice with its second source is at least as good as any later substitution. Comparing these minima across contributors gives the scan solution.
 
-A third read maximizes the number of additional directed eligible pairs with the first two sources. Its ties favor better topical rank, then a stable identifier. When no eligible pair exists, use the top distinct topical sources. Only the resulting sources are opened. A recommendation requires the original declarations to support both requested roles for the same verified person. Publisher topic tags are reserved for evaluation. The exact solution applies to two lists. Incomplete author metadata can reduce coverage.
+The third source is a heuristic extension. For each anchor, count each feasible orientation of the anchor--candidate pair once if any contributor can satisfy it. Several contributors on one orientation still count as one. Its ties favor better topical rank, then a stable identifier. When no eligible pair exists, use the top distinct topical sources. Only the resulting sources are opened. A recommendation requires the original declarations to support both requested roles for the same verified person. Publisher topic tags are reserved for evaluation. The exact solution applies to two lists. Incomplete author metadata can reduce coverage.
 
 \subsection{Indexed roles and exact source execution}
-An author--source role posting is compatible with a condition if it lists the requested role or has unavailable role information. For an indexed author with a nonempty known role set, a different role excludes that match during nomination. The role-aware route minimizes the number of unknown roles before applying the topical pair key. For each contributor and list, the best two compatible rows in this order suffice for the distinct-source constraint. The third source maximizes fully indexed pairs with the anchors, then possible pairs. Uncertain or incorrect roles in the index can alter what gets read. Verification still tests the original declarations.
+A role row has one of three visibility states: complete and trusted, partially observed, or unknown. Only a complete, version-matched row can rule out an unlisted role. A positively indexed role is known if it comes from the trusted source. All other roles on partial or unknown rows remain possible. The evaluated complete-field implementation treats a present nonempty source role list as complete, and the whole-row masking experiment treats hidden lists as unknown. Silent omissions in a nonempty list violate this assumption. When completeness cannot be certified, retain the omitted roles as possible and require original verification.
+
+Before applying the anchor rank key, minimize the number of unavailable roles. The top two compatible rows on each side still suffice per contributor. The third source prefers known pairs, then possible pairs. After reading, the verifier orders verified proofs by worst topical rank, rank sum, contributor ID, and ordered source IDs. This post-read rank key is independent of label visibility. Exact anchor selection solves that named pair subproblem. Selecting the third source does not optimize recommendation quality or the full three-read set objective.
 
 \paragraph{Materialize roles only for linked sources.}
 Let $D_e$ be the sources listing contributor $e$ and $B(d)$ the complete byline of source $d$. The role index for two-source proofs needs only
@@ -77,9 +83,6 @@ D^{+}=\{d : \exists e\in B(d),\ |D_e|\ge 2\}.
 \label{eq:linked-index}
 \end{equation}
 Any compatible pair shares a contributor and consists of distinct sources, so both sources lie in $D^{+}$. A source outside $D^{+}$ has zero additional pair gain with either anchor. Keeping its original topical rank preserves fallback choices. Thus dropping its role row, or skipping it during role lookup, leaves the ordered read plan and its verified output invariant. The result assumes stable person identifiers in a fixed inventory. Requests that can be answered with one source use their own path.
-
-\paragraph{Prune before parallel reads.}
-For the fixed three-source byline plan, an unopened third source can only contribute a proof if it can pair with one of the two other sources. Skip it when it has no common indexed author on a compatible orientation of the two ranked lists. Parallelism is retained. This precheck assumes complete author identifiers for the reference scope and verifies every other proposed witness.
 
 \paragraph{Certify a fixed plan before opening declarations.}
 Let $S$ be the three planned sources. For condition $i$ and source $d$, let $K_i(d)$ denote contributor identities with an indexed matching role and $U_i(d)$ denote identities for which the role is unavailable. The frozen source and its index must agree on identities and known roles. Let $P(S,X)$ be the set of distinct-source proofs formed from identity sets $X_i(d)$, with every proof ordered by the verifier's rank key. Then
@@ -95,107 +98,69 @@ S^{\star}=\bigcup_{\substack{a,b\in S,\ a\ne b\\
 \]
 If a verified proof wins, its pair is feasible under the optimistic roles and its key cannot exceed the known incumbent. Both files must therefore be in $S^{\star}$. Verifying only the frontier preserves the exact winner and citations. If there is no possible pair, it also preserves abstention.
 
-\paragraph{Certify shallow role planning.}
-Let the shallow lists be prefixes of the fixed deep lists. The selected shallow pair remains the deep anchor pair when both roles are indexed. It already attains the minimum number of unknown roles, and every pair involving a position outside a required shallow prefix has a worse minimax rank. Read the two anchors and consider all possible completions through one extra shallow source using its byline. Grant every shared contributor the needed role optimistically. If a verified prefix proof outranks every such completion, and therefore also every proof using a rank beyond the prefix, return it. Otherwise finish deep planning and reuse any already-open declaration. This certificate preserves the selected expert and both citations for the same indexed reference. It saves role processing and reads while the benchmark computes the full deep ranking for both routes.
-
-\subsection{Request-level interpretation and residual proof}
-A structured request specifies topical content and two contribution duties independently. Interpret each duty against the available declaration fields before binding it to a source. We run two answer encodings and accept a field only on agreement. A single GPU batch executes the four prompts for a two-duty query. The resulting fields are reused across candidate sources. Every binding still uses the particular report and its author declaration. Field comparison can replace repeated interpretation when the relevant declarations are complete.
-
-For free text, a role proposal can influence nomination while the complete, unverified requirement spans remain available to the verifier. The system needs evidence before it can discharge a requirement, including one that appears in the same sentence as a role. Exact span offsets establish quotation identity. Conditions such as operating scale, test date and exclusive responsibility need separate support, even when the role is well understood. Our structured timing excludes free-text proof. A separate controlled prose replay encodes two topic spans and two role phrases in one forward through a frozen 0.6B encoder, with a ridge role head trained on 84 task descriptions absent from the held-out phrase inventory by exact match. The templates fix span boundaries. We compare separate forwards and open 4B interpretation while holding the downstream evidence route fixed.
-
-\paragraph{Feasibility before role recheck.}
-For a fixed pair $(a,b)$ with complete declarations, let $A_a(e)$ and $A_b(e)$ be the declared roles of contributor $e$ on each paper. For a confident role, let $U_i$ contain just the retained label. For an uncertain role, let $U_i$ be the full taxonomy. Issuance after rechecking requires some linked contributor to satisfy
-\[
-(A_a(e)\cap U_1\ne\varnothing)\;\land\;(A_b(e)\cap U_2\ne\varnothing).
-\]
-If none does, a recheck cannot emit a proof on that pair. The test is exact for the fixed source pair, contributor records, and retained confident labels. A cheaper approximate policy substitutes the two highest-scoring ridge labels for the full taxonomy in this test. Both policies still give the recheck model the full taxonomy whenever they call it. The exact test requires complete declarations and does not preclude looking for alternative sources when the application permits it.
-
-\subsection{Certificates for ranked citations}
-For the hard-constraint variant, an expert is confirmed when each required $r$ has at least one positive witness. A separate configuration confirms an expert after a fixed number of distinct positive sources. In both cases the prior orders confirmed experts, and required witness citations follow the published order in $W_{er}$. For the reviewer configuration, unconfirmed positions can be filled by the same fixed prior with empty citations. The hard-constraint configuration returns confirmed candidates only.
-
-Let $z$ denote the vector of trusted binary witness decisions and $U$ the unread or tentative decisions. To obtain $R^{-}$, assign failure to every member of $U$. For $R^{+}$ assign support to every member of $U$. Both outputs use the same ranking and citation conventions. Under these rules,
-\begin{equation}
-R^{-}=R^{+}\quad\Longrightarrow\quad R(z,u)=R^{-}
-\qquad\text{for every admissible }u.
-\label{eq:certificate}
-\end{equation}
-For the proof, promotion is monotone in witness support. If a potentially promoted expert could displace a returned expert in any completion, that displacement would also change the confirmed order or citation status in the upper completion. The first positive witness for a requirement can only move earlier as support is added. The first $c$ positive sources for a fixed support count have the same componentwise property. Equality of the two endpoint witness lists fixes each selected citation in between. The argument uses a fixed candidate prior and monotone confirmation. It does not cover a score that penalizes a candidate when a new conflicting source appears.
-
-At each step, the agent can read the first unseen source for an expert that remains eligible for promotion. It can also resolve an ambiguity that affects an optimistic citation. A source-bundled action reads one expert--publication declaration and obtains the corresponding role decisions for all applicable criteria. If the endpoints agree, further reads cannot change the certified output. Our reference implementations use deterministic action order. A learned action policy would be a separate comparison.
-
-\subsection{Deferred numerical rechecks}
-The live reviewer experiment uses the logit difference from an open cross-encoder. Dynamic tensor shapes reduce padding but can change numerical scores. Immediate rechecking recomputes every tentative pair with a fixed shape before taking another action. Deferred rechecking keeps those pairs unresolved and resolves only tentative witnesses in a reachable output. All methods use the same 0.25 logit band, checkpoint, candidate inventory and output rule within the comparison. The certificate assumes that trusted decisions outside the band have the same sign as the reference. The band is an empirical guard on the measured workload.
-
-\subsection{Grounding and conditional transfer}
-A return should distinguish a historical source fact, a candidate's role, and a proposed bridge to a target operation. A bridge identifies what input, operation and output can carry over, and which changes in equipment or context still require validation. Future project thresholds remain obligations unless a comparable prior test is documented.
-
-For a numerical criterion, the verifier selects sentences reporting the same object, metric and conditions. It checks personal execution separately when that role is required. Exact decimal comparison converts compatible units and applies strict or inclusive inequalities to an original measurement. A design target or a colleague's result cannot establish the candidate's own performance. Conflicting comparable measurements and missing scope both yield unresolved output in this verifier. This reading stage precedes the monotone support decision in Eq.~\ref{eq:certificate}.
-
-\section{Experimental setup}
-\label{sec:data}
-The evaluation separates evidence recovered at a fixed reading budget from computation saved at fixed output quality. The publisher tasks isolate same-contributor proof assembly. Reviewer search and TREC Enterprise test transfer to independent relevance and citation judgments.
-\subsection{Tasks and datasets}
-\paragraph{Enterprise evaluation.}
-The private pool contains 100 complete requests and 700 preselected expert views. The 80 development and 20 sealed requests have disjoint groups by expert and source identifiers in the frozen snapshot. Each request receives five dense and two random candidates, with up to three papers and one profile per expert. This pool can measure judgments conditional on a common inventory. It cannot estimate full-corpus expert recall. The main enterprise replay here uses eight development requests and leaves the sealed partition untouched. The 48-case review packet deliberately oversamples diagnostic source views and awaits independent judgments.
-
-\paragraph{Synthesis and controlled evidence.}
-The separate construction corpus contains 1,000 parent needs and 5,000 Chinese--English query pairs. Pairs remain grouped by parent and require independent semantic review before being treated as parallel ground truth. The public numerical controls hold most evidence text fixed while changing a number, a unit, an operating condition, a measurement status, or the person credited. Paired sentence-order reversals measure robustness to presentation. Publisher-statement controls join the same person across two PLOS records using fixture-local tokens for validated identifiers and vary individual CRediT requirements. These controls identify specific false-confirmation mechanisms on known inputs.
-
-\paragraph{Public first-query panels.}
-The joint nomination benchmark uses 160 PLOS requests and 51 eLife heading requests. It composes two topic--role conditions from publisher metadata. A request supplies no author or title. Each verified response contains at most one person and two citations. A known match has both intended role statements and both publisher topic labels. Missing labels leave topical support unresolved. Paired diagnostics account for repeated topic pairs. We separately replay controlled prose using held-out role descriptions. The two templates reuse the base requests and do not constitute independent replications.
-
-\subsection{Baselines and implementation}
-The topical control reads the highest-ranked sources independently. Sequential repair first reads one source for each condition and then spends the remaining read on the observed role gap. The joint byline control shares the same lexical and dense rankings, source budget, and verifier with role-aware nomination. Exhaustive reading and fixed-depth planning provide reference outputs for exact pruning. For role recheck, use the same ranker, frozen 4B model and issuance threshold in all arms, and compare the exact filter with top-two feasibility and confidence alone at matched call counts. On TREC use the strongest earlier fitted fixed-slate scheduler as the paired control. All live comparisons use the same device within a run. The archived results distinguish local declaration reads, the controlled source service, and client loopback timing.
-
-\subsection{Quality and cost measures}
-For a query $q$, let $H_q$ be its mandatory requirements and let $D_{ir}$ be the returned witnesses for requirement $r$ of expert $e_i$. Denote independent relevance, personal attribution, and criterion support by $L(q,e_i)$, $A(e_i,r,d)$, and $S(q,r,d)$. The attribution judgment binds the contribution for requirement $r$ to expert $e_i$. Coauthorship on the same source is insufficient:
-\begin{equation}
-z_i=L(q,e_i)\min_{r\in H_q}\;\max_{d\in D_{ir}}
-       \bigl[A(e_i,r,d) S(q,r,d)\bigr].
-\label{eq:witness-support}
-\end{equation}
-A missing witness contributes zero; the minimum is one when no hard criterion applies. An empty expert slot also contributes zero. Evidence for different requirements may come from different sources, but attribution always uses the same expert $e_i$. With $w_i=1/\log_2(i+1)$ the rank-weighted score is $\sum_i w_i z_i/\sum_i w_i$. Supported P@5 averages the five $z_i$ without rank weights. The stricter citation measure also requires each additional citation to substantiate the claim to which it is attached.
-
-We propagate $[0,1]$ for unresolved judgments through Eq.~\ref{eq:witness-support}. Identical query--expert--witness packages at equal weights cancel in paired contrasts. Sampling intervals account separately for clusters of companies, parent queries, or papers. We retain relevance, attribution, and each requirement judgment as diagnostics. The cost endpoint comprises client P95 and cost per verified success at comparable coverage and risk, with fallbacks and amortized index costs counted.
-
-\section{Results and analysis}
-\label{sec:results}
-\subsection{Coverage under a fixed reading budget}
-All routes open three local declarations after live 0.6B query encoding and hybrid ranking. The sequential control reads one result per condition before choosing a third source using the observed role gap. Joint nomination recovers more known matches at comparable warm serial latency but also makes more unresolved returns (Table~\ref{tab:joint}). Cached batch embeddings yield 26 eLife matches; the live handler yields 14 with unchanged downstream rules. We use the live count in comparisons. At depth 64, owner postings reproduce the exhaustive plans while lowering planning P95 from 323.29--326.09 to 109.55--110.54~$\mu$s. At depth eight, the exhaustive scan is faster.
-
 \begin{table*}[t]
-\caption{Live local search on publisher-declaration benchmarks. Each route reads three declarations and returns at most one expert per request. Known matches satisfy both topic tags and both declared roles. Unresolved refers to incomplete topic labels. P95 includes live encoding, retrieval, file reads, and serialization on one RTX 5090.}
-\label{tab:joint}
 \centering\small
-\begin{tabular}{@{}llrrr@{}}\toprule
-Panel & First-round allocation & Known matches & Unresolved returns & P95 (ms) \\\midrule
-PLOS, 160 requests & Topical order & 1 & 0 & 9.68--9.76 \\
- & Sequential role-gap repair & 28 & 5 & 9.79--9.85 \\
- & Joint by contributor & 49 & 29 & 9.79--10.10 \\\midrule
-eLife, 51 requests & Topical order & 0 & 0 & 10.04--10.50 \\
- & Sequential role-gap repair & 0 & 0 & 10.21--10.43 \\
- & Joint by contributor & 14 & 2 & 10.23--10.61 \\
+\caption{What each guarantee preserves. The reference verifier can make the same mistakes in both executions.}
+\label{tab:guarantees}
+\begin{tabular}{@{}p{.16\textwidth}p{.27\textwidth}p{.25\textwidth}p{.26\textwidth}@{}}
+\toprule
+Mechanism & Reference & Conditions & Scope and fallback \\\midrule
+Anchor join & Exhaustive compatible-pair ordering & Two lists, distinct sources, fixed rank key & Exact first pair. Third source uses a separate heuristic. \\
+Linked roles & Same planner with all role rows & Complete contributor links, fixed inventory & Same ordered plan. Use full postings if identity links are uncertain. \\
+Source frontier & Verify every file in the fixed plan & Trusted known roles; optimistic view covers unknowns; fixed winning order & Same person, ordered citations and abstention. Read the full plan if version or completeness cannot support a bound. \\
 \bottomrule
 \end{tabular}
 \end{table*}
 
-A matched-issuance diagnostic within joint nomination compares rank confidence with a full topic reader. At 32 PLOS returns, the two yield 29 and 25 known matches, respectively. The paired 95\% interval for the difference per request spans $-6.54$ to $+14.12$ percentage points. Local P95 is about 10 versus 41 ms. Locked PLOS cutoffs transfer to 12 known returns for each route on eLife, while the PLOS held-out folds exceed the development target for missing topic labels. This diagnostic compares verification rules, and the quality advantage of joint nomination over sequential repair at equal issuance awaits blind review.
+These guarantees apply to an unchanged proof rule. A verifier that can retract support when new conflicting evidence arrives requires a separate treatment of conflicts and a new bound. The separate 0.25-logit guard studied in the appendix is an empirical rule for numerical rechecks.
 
-\paragraph{Candidate reach and matched issuance.}
-In the isolated PLOS replay, sequential repair and joint byline nomination both issue on 24 requests. They recover 21 and 19 known matches, respectively. Twenty outputs are identical and four change the expert. Equalizing the panel-wide count at 33 gives 28 versus 27 known matches. eLife has no shared issuing requests for this comparator. These diagnostics separate finding evidence on new queries from replacing an expert already recommended. The changed PLOS outputs have been frozen for independent audit.
-
-Combine both catalogs without duplicate titles, DOIs or shared verified identifiers, then rerun the original 211 requests against the 452-article collection. Both publishers provide distractors to either panel. Cross-publisher results have no aligned topic annotations. Table~\ref{tab:mixed} decomposes the effect of enlarging the candidate pools. At depth 128, PLOS has 115 requests with a complete known proof in the pools. The role-aware three-read plan retains at least one such proof on 89 requests and returns one on 85. In eLife the corresponding counts are 49, 46 and 46. The deeper route yields the same expert and citations on requests both widths answer. At the shallower issuance quotas the deeper role route yields the same known counts. A fixed 32-per-publisher quota reduces proof availability in both panels.
+\section{Experimental setup}
+\label{sec:data}
+The primary task uses 160 PLOS and 51 eLife heading-based queries on 452 publications. Queries are derived from publisher topics and contribution roles, without providing a particular person's name or source title. Each method may read three structured declarations for one recommendation. We separately test source-specific requests with the designated source withheld, and run a historical-graph comparison on TREC Enterprise. The enterprise study remains a development diagnostic.
 
 \begin{table*}[t]
-\caption{Mixed publisher retrieval with exactly three declaration reads. The method columns show known matches / issued recommendations. Reachable counts requests with at least one labeled proof available in the candidate pools.}
-\label{tab:mixed}
-\small\centering
-\begin{tabular}{@{}llrrrr@{}}\toprule
-Panel & Depth per condition & Reachable & Sequential repair & Joint byline & Joint personal roles \\\midrule
-PLOS (160) & 64 & 79 & 12 / 15 & 43 / 67 & 68 / 104 \\
-           & 128 & 115 & 13 / 22 & 45 / 73 & 85 / 143 \\
-eLife (51) & 64 & 17 & 0 / 0 & 14 / 15 & 17 / 18 \\
-           & 128 & 49 & 0 / 0 & 14 / 16 & 46 / 49 \\\bottomrule
+\centering\small
+\caption{Information visible in the primary task. The three-read budget covers declaration fetches. All main comparison arms have the same index.}
+\label{tab:visibility}
+\begin{tabular}{@{}p{.14\textwidth}p{.31\textwidth}p{.48\textwidth}@{}}
+\toprule
+Stage & Accessible fields & What these fields support \\\midrule
+Index and plan & Title, abstract, validated contributor ID, personal role postings and visibility & BM25 and dense candidates; role-compatible joins. No passage-level technical or qualification judgments. \\
+Read & Original author-role records from up to three sources & Resolves roles withheld in the index and checks the indexed role against its source. A complete matching snapshot adds no new role label. \\
+Verify & Loaded declarations, fixed proof ordering & Binds each declared role to the same person and source. It does not establish a process, operating condition or personal performance. \\
+Evaluate & Publisher topic tags withheld from the planner & Counts tag-supported output. Independent expert relevance, attribution and hard-condition support are separate judgments. \\
+\bottomrule
+\end{tabular}
+\end{table*}
+
+\paragraph{Effective proof space.}
+PLOS has 180 verified contributor IDs over 130 articles, and eLife has 1,066 over 322. Each has 15 contributors linked across articles. The byline graph has 17 and 16 distinct linked paper pairs in 13 and 12 nontrivial components. The constructed requests cover 102 and eight ordered topic pairs, and use 15 and seven distinct tag-supported witness pairs. Individual eligible contributors occur in 12--19 PLOS queries and 2--14 eLife queries. These counts quantify repeated proof structure behind the article totals.
+
+\paragraph{Configurations.}
+Configuration A is the mixed-catalog role-matched replay: Qwen3-Embedding-0.6B (revision \texttt{97b0c614}), per-request two-clause encoding, left padding, BF16 SDPA, a 512-token cap, and reciprocal-rank fusion with constant 60 at depth 128. The same-index sequential control picks role-compatible anchors before reading, then repairs the remaining gap. Rank-set selection scores feasible three-source sets by the best compatible pair and half the second pair's weight. The reader control scores up to six compatible topic--source inputs with Qwen3-Reranker-0.6B (revision \texttt{e61197ed}) before the same three declaration reads. It sees the same titles and abstracts, and its separate model work is timed. A direct pair join with the paper's pair key is the exact anchor reference in Table~\ref{tab:guarantees}. A full-corpus Hybrid plus strong reranker is required for an independently judged expert-ranking comparison.
+
+Configuration B replays the two independent eLife source graphs at depths 32 and 128, with local CUDA encoding or frozen plans in the separately labeled source-service test. Configuration C uses supplied roles on the PLOS source-withdrawal panel. The optional Qwen3-4B-Instruct-2507 role recheck (revision \texttt{cdbee75f}, logit margin 26.125) belongs to a separate replay. The configuration map in the technical appendix pins full checkpoint revisions, devices, and timing boundaries.
+
+\paragraph{Measured outcomes.}
+The unit is a request. We report tag-supported single recommendations per request, and issuance (any response per request). Then we compare the intersection of answered requests and a retrospective equal quota selected by citation ranks without test labels. The quota diagnostic does not fix a deployable threshold. Missing-tag sensitivity allows unjudged outputs to take either label, sharing labels for identical packages. Paired sampling intervals cluster by ordered topic pair. Shared documents and contributors can induce further dependence, so the intervals describe these panels. For a future multi-result enterprise study, a supported slot must independently pass expert relevance, personal attribution, and every applicable hard requirement. Supported P@5 divides the supported slot count by five, including unfilled slots. No independent enterprise P@5 is reported here.
+
+\section{Results and analysis}
+\label{sec:results}
+\subsection{Coverage under a fixed reading budget}
+The shared top-128 pools contain a tag-supported proof on 115 PLOS and 49 eLife queries. With the role-aware joint plan, a tagged proof survives the three reads on 89 and 46, and the verifier returns one on 85 and 46. On PLOS the known gap is thus 26 queries at allocation and four at final selection. This is an oracle ceiling based on observed tags and the frozen candidate pool, with any pair allowed in a three-source set. It leaves untagged support unresolved.
+
+\begin{table*}[t]
+\centering\small
+\caption{Same-index allocation controls under three declaration reads. Cells show tag-supported outputs / issued. The reader replay includes additional model work.}
+\label{tab:matched-methods}
+\begin{tabular}{@{}lrrrrl@{}}
+\toprule
+Method & PLOS & eLife & PLOS at 132 returns & eLife at 49 returns & Timing evidence (P95) \\\midrule
+Sequential repair & 30/45 & 0/3 & --- & --- & Approximately 18 ms \\
+Role joint & 85/140 & 46/49 & 80/132 & 46/49 & 17.7--18.5 ms \\
+All-edge rank set & 82/136 & 36/40 & --- & --- & 17.9--18.7 ms \\
+Six-input reader & 87/132 & 45/49 & 87/132 & 45/49 & 54.2--55.9 ms \\
+\bottomrule
 \end{tabular}
 \end{table*}
 
@@ -212,31 +177,14 @@ Most PLOS losses occur during three-source allocation. Enumerating sets containi
 \label{fig:matched-coverage}
 \end{figure*}
 
-\paragraph{Can observed roles improve the remaining reads?}
-Table~\ref{tab:observed} compares six routes on the same mixed catalog, role fields, and three-read budget. The setup also masks role metadata to 50\% and 25\% while keeping every source available to read. In each masked PLOS setting, repair after the first read changes one choice. All adaptive routes return identical proofs and citations to static joint planning. On eLife the selected reads are identical. The sparse-index proof gap persists before final ranking. Reading a fallback in a later batch changes no result and adds a dependency if reads must go to a remote service.
+\paragraph{Scope and execution checks.}
+Observed-role repair produced no changed final proofs or citations under the three-read budget in the tested whole-row masks. The earlier depth sweep used a byline-based role-gap sequential arm and raw-depth role-joint replay (PLOS 13/22 and 85/143 at depth 128). The subsequent RTX 4090 matched-information replay uses role-aware sequential anchors (30/45 and 85/140). The earlier depth sweep ran on RTX 5090. The comparison does not isolate the source of the three additional unjudged joint returns. For eLife cached versus live, holding the document index and verifier fixed while changing embedding batch layout moved 71 of 102 candidate sets, 16 of 51 plans and 13 serialized responses. The cached panel produced 26 known answers versus 14 with per-request inference in that byline experiment. Same-width position-controlled encoding removed batch-neighbor dependence in that audit but did not recover the cached count. These counts are configuration-specific.
 
-\begin{table*}[t]
-\caption{Observed-role repair under an identical three-read budget. Fully indexed output is label-supported / issued. Sparse reach counts requests with a labeled proof among the three sources at 25\% role-index exposure. P95 includes live encoding and local reads. Ranges span both request orders on one RTX 4090.}
-\label{tab:observed}
-\small\centering
-\begin{tabular}{@{}lrrrrrr@{}}
-\toprule
- & \multicolumn{2}{c}{Fully indexed output} & \multicolumn{2}{c}{Sparse reach} & \multicolumn{2}{c}{Fully indexed P95 (ms)} \\
-\cmidrule(lr){2-3}\cmidrule(lr){4-5}\cmidrule(lr){6-7}
-Route & PLOS & eLife & PLOS & eLife & PLOS & eLife \\
-\midrule
-Sequential repair & 30 / 45 & 0 / 3 & 2 & 0 & 22.7--22.9 & 21.7--23.3 \\
-Static personal-role joint & 85 / 140 & 46 / 49 & 33 & 34 & 22.5--23.1 & 21.8--23.9 \\
-Same joint plan, split reads & 85 / 140 & 46 / 49 & 33 & 34 & 22.5--23.0 & 21.7--23.7 \\
-Repair third read & 85 / 140 & 46 / 49 & 33 & 34 & 22.6--23.1 & 21.8--23.4 \\
-Repair second and third & 85 / 140 & 46 / 49 & 33 & 34 & 22.7--23.1 & 21.8--23.2 \\
-Prefer indexed repairs & 85 / 140 & 46 / 49 & 33 & 34 & 22.6--23.2 & 21.8--23.3 \\
-\bottomrule
-\end{tabular}
-\end{table*}
+\paragraph{Partial role rows.}
+Removing one role from a deterministic half of the multirole rows leaves them nonempty. When these rows are treated as complete, all original tag-supported pairs become ineligible for 35 of 160 PLOS and six of 51 eLife requests even over the entire original publisher catalog. Marking the rows partial keeps all original pairs eligible. This is a candidate-feasibility stress test with no ranking or read cap. It measures the failure from silent within-row omissions and the conservative policy's eligibility ceiling.
 
 \paragraph{Source-specific control with the same indexed roles.}
-On the frozen 13-group PLOS keyword panel, we supply the requested roles and compare joint source planning with sequential repair using the same personal-role metadata. Each route opens three distinct declarations. With both papers present, both identify all 39 exact proofs, but joint planning emits 54 proofs and sequential repair emits 43. On the 43 requests that both answer, each has 39 exact proofs. At an equal panel-wide quota of 43 by citation rank, joint planning retains 36 exact proofs. When a designated paper is removed, joint and sequential planning issue 50 and 8 wrong-source substitutes across 156 requests. Both routes take about 18 ms at warm local P95. When a request identifies publications through source-specific clues, compatible roles alone cannot establish source identity. Sequential repair already reaches the exact-proof ceiling on these groups.
+On the frozen 13-group PLOS keyword panel, we supply the requested roles and compare joint source planning with sequential repair using the same personal-role metadata. Each route opens three distinct declarations. With both papers present, both identify all 39 exact proofs, but joint planning emits 54 proofs and sequential repair emits 43. On the 43 requests that both answer, each has 39 exact proofs. At an equal panel-wide quota of 43 by citation rank, joint planning retains 36 exact proofs. When a designated paper is removed, joint and sequential planning issue 50 and 8 wrong-source substitutes across 156 requests. Both routes take about 18 ms at warm local P95. When a request identifies publications through source-specific clues, compatible roles alone cannot establish source identity. Sequential repair already reaches the exact-proof ceiling on these groups (Table~\ref{tab:failure}).
 
 \begin{figure*}[t]
 \centering
@@ -260,10 +208,6 @@ The extended and confirmation eLife snapshots, with disjoint verified contributo
 \paragraph{Pre-read proof certification.}
 On the same two eLife snapshots, the fixed plan's exact pre-read certificate reduces 1,194 declaration reads to 88 at depth 32 and 526 at depth 128 when all parsed roles are visible (Figure~\ref{fig:pre-read}). Withholding half the role rows by source hash raises those counts to 128 and 791. The pre-read route uses at most one fetch wave in the replay. A fixed two-read control also reproduces the reference responses on these samples and needs 796 reads. At depth 128 with half the roles withheld, the new certificate saves only five reads relative to that control on the pooled snapshots. The warm local P95 difference against the three-read reference ranges from $-0.106$ to $+0.017$ ms across all conditions. The 50\% condition gives a sharper distinction between uncertain experts and uncertain source files. Keeping only pairs that can beat the best fully indexed proof reduces 791 reads to 604 without changing a response. At full visibility this refinement saves just one additional read. Both routes preserve the fixed plan reference.
 
-At a 25\% nominal role-payload budget, contributor-degree and pair-cover placement also preserve all full-index responses in both catalogs. At tighter capacities, graph coverage alone does not consistently improve outcomes. At the 5\% eLife byte budget, pair cover completes 11 two-source contributor histories versus eight for contributor degree, yet has 31 instead of 38 label-supported returns. At the common quota of 35, the counts are 31 and 32.
-
-With complete publisher role fields, planning from depth 64 and certifying where possible returns the fixed depth-128 outcomes while reducing total reads from 633 to 516. The same response parity holds after masking or rotating indexed roles, although fewer requests qualify for early stopping. In the three 50\% exposure masks with role rotation, 15--50 PLOS and 1--4 eLife requests stop at depth 64. Warm request latency remains similar because both arms perform the deep retrieval.
-
 \paragraph{When fewer reads reduce tail latency.}
 In a depth-128 replay over the two eLife snapshots, each policy sees the same 398 scheduled arrivals per load setting and verifies actual source bytes against the fixed-plan reference. The loopback HTTP source service has six slots and adds 16 ms per read. At 165 requests per second, the fixed-two control is already near the one-wave latency floor. With half the role rows withheld, the endpoint policy can bunch three reads on individual queries and queue despite similar total work. The source frontier reduces that tail to 22--23 ms. At 205 requests per second, its 604 reads lower P95 to 35--37 ms, compared with 303--324 ms for fixed two. With all parsed role rows present, the simpler endpoint bound suffices to reduce P95 to 24--25 ms at the higher rate. These are finite source-service traces with the encoder, candidate retrieval, and planning outside the timer (Table~\ref{tab:source-capacity}).
 
@@ -283,29 +227,7 @@ Roles & Arrivals/s & Fixed two & Endpoint & Frontier \\
 \end{tabular}
 \end{table}
 
-In the live request control with the same padded GPU planner, byline precheck reduces reads from 1,266 to 910 per 422 requests while returning identical bytes. The source service uses six loopback read slots with 16 ms of inserted delay. At 60 scheduled arrivals/s, both policies have P95 near 33 ms. At 165 arrivals/s, all-three parallel reading backs up and yields 977--981 ms P95. The precheck yields 52--53 ms as source traffic falls. These are finite, controlled service traces. A separate source-only test finds that waiting for two declarations before issuing the third increases low-load P95 from about 18 to 33 ms versus the eager precheck.
-
-We also compare exact reciprocal-rank fusion implementations. On the 452-article catalog, direct score arrays and vectorized fusion reduce full warm P95 by about 0.52 ms and retain every ordered list and serialized response. On 64,183 LitSearch articles, packed dense keys and a score bound preserve all 246 ordered top-128 lists. A prior vectorized partial selector takes 7.71--7.83 ms P95, packed full ordering takes 5.44--5.53 ms, and the bounded version takes 5.03--5.07 ms. This component starts after dense scoring and still calculates dense scores for all eligible documents.
-
-\paragraph{Role recheck and source withdrawal.}
-\label{sec:role-recheck}
-We lock the source score and 4B role margin before constructing 13 PLOS paper groups disjoint from the development papers and recorded contributors. The 440-source catalog includes the original distractors and the 26 new papers. We score 78 intact keyword requests with paired role contrasts and 156 requests with one designated paper withheld. The baseline and each variant use the same exact ranker. Rechecks operate on independently nominated sources, hold confident roles fixed, and retain previous outputs. Both RTX 4090 runs use a resident serial loopback service and encode each request afresh. The P95 includes client transport and decoding.
-
-\begin{table*}[t]
-\caption{Keyword role rechecks. Correct and wrong counts use the requested sources and exact roles. The proof is emitted only if a single contributor is declared in both roles. Timing ranges span both request orders.}
-\label{tab:role-recheck}
-\small\centering
-\begin{tabular}{@{}lrr@{\qquad}rr@{\qquad}rr@{}}\toprule
- & \multicolumn{2}{c}{Correct / wrong} & \multicolumn{2}{c}{4B calls} & \multicolumn{2}{c}{Client P95 (ms)} \\
-Policy & Intact & Withheld & Intact & Withheld & Intact & Withheld \\\midrule
-Lightweight baseline & 9 / 0 & 0 / 1 & 0 & 0 & 17.1--17.3 & 17.0--17.2 \\
-Frozen 4B recheck & 10 / 0 & 0 / 1 & 47 & 54 & 79.8--80.1 & 75.8--78.7 \\
-Exact feasibility & 10 / 0 & 0 / 1 & 17 & 0 & 78.8--78.9 & 17.2--17.5 \\
-Top-two feasibility & 10 / 0 & 0 / 1 & 13 & 0 & 56.3 & 17.3--17.5 \\\bottomrule
-\end{tabular}
-\end{table*}
-
-One group accounts for the added proof. Exact feasibility reproduces every proof and abstention, removes 84 of 101 forwards, and cuts withdrawal P95 by over 75\%. On intact requests it leaves enough slow calls to dominate the tail. Top-two feasibility reduces intact P95 and retains the additional proof in this replay. A matched-call offline control that ranks requests by ridge confidence also keeps that proof at both budgets. The approximate filter therefore needs new evidence before it can support a quality claim. Each route retains the baseline's one wrong-source output under withdrawal.
+The delay-only capacity is roughly $6/0.016=375$ reads/s. At 205 requests/s fixed two offers about 410 reads/s, versus 311 for the frontier at 50\% role visibility. Their different queueing regimes explain why the local read savings become visible as a tail-latency reduction at the higher load. Bookkeeping for all offline role extraction, integrity checks, maintenance and complete resident memory has not been measured. The role-payload compression figure covers serialized role bytes only.
 
 \subsection{Transfer to judged experts and sources}
 TREC Enterprise supplies separate expert and supporting-document judgments. Under the historical-graph replay, the strongest fixed nomination and fitted dispatcher finds 10 supported recommendations. A wider joint planner finds 8 under the same per-topic read and check limits. To isolate nomination from source choice, we repeat the fixed baseline up to its final check, then either reallocate that check on the same document within the original 20 nominees or permit any of 60 eligible nominees. A leave-one-topic-out fit scores choices, and the final document and one-check budget are held fixed. All three policies use 80 document reads and 266 checks, and all return 10 supported slots out of 11 issued across 49 topics. Opening the final action reaches 14 new nominees without a support gain. Unjudged pairs are unconfirmed, and this replay uses historical source menus and no live document reading.
@@ -314,21 +236,28 @@ A separate TREC citation diagnostic fixes the five returned experts and replaces
 
 On reviewer search, deferred numerical verification preserves the fixed-inventory output and lowers P95 by 13.4\% on 34 CoF NIPS requests and by 13.8\% on 59 SciRepEval requests against the fastest fixed control. The SciRepEval paired interval includes zero. The reviewer labels establish topic relevance, with no independent labels for inferred personal contributions.
 
-\paragraph{Enterprise development.}
-An eight-request replay of two verbatim hard requirements per query yields one confirmed condition in 112 candidate--requirement slots at the 0.90 model threshold. No candidate clears both. At 0.50, a single candidate clears both, and adaptive and fixed schedules each require 26 reads per request. These are model judgments. The low coverage may reflect missing evidence or verifier errors. The supplement reports controlled attribution, numerical scope, and multiconstraint experiments.
+\begin{table}[t]
+\centering\small
+\caption{Task-specific failures under each panel's shared budget. The rows use separate output and support definitions.}
+\label{tab:failure}
+\begin{tabular}{@{}p{.23\columnwidth}p{.23\columnwidth}rr@{}}
+\toprule
+Panel & Outcome & Control & Joint \\\midrule
+PLOS specified & Correct at 43 returns & 39 & 36 \\
+PLOS withdrawn & Wrong source, 156 queries & 8 & 50 \\
+TREC archive & Supported slots, 49 topics & 10 & 8 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
-\paragraph{Interpreting the requested roles.}
-With controlled prose, fused and separate encoding each recover 41 PLOS matches versus 49 with supplied roles. The fused path recovers both roles for 110 of 160 requests and issues five returns whose declarations lack an intended role. Warm P95 falls from 19.06--19.67 to 9.91--10.09 ms. An open 4B interpreter recovers 31 matches at 57.55--57.83 ms. Live eLife gives 10 fused matches versus 14 with supplied roles, with one fused return lacking an intended role.
+\paragraph{Enterprise development.}
+The enterprise inventory has 100 requests and 700 preselected views, with 80 development and 20 sealed. Eight development requests contribute the model-only replay. At a 0.90 threshold the verifier confirms one of 112 candidate--condition slots and no complete two-condition candidate. At 0.50 one candidate passes both, and both schedules read 26 records per request. The 48-case diagnostic packet and the sealed comparison lack completed independent judgments. The current manuscript supports claims about the structured reading task.
 
 \section{Limitations}
-The public first-query panels compose tasks from publisher metadata and use verified author identifiers. Publisher topic labels are incomplete and roles may omit real contributions. Structured and templated requests leave open segmentation, personal identity under missing identifiers, enterprise qualifications, and transfer of expertise. Independent judgments of the changed public recommendations are pending. The separate sealed enterprise protocol estimates full-index versus shortlist-restricted rescue after abstention. Joint first-round nomination requires its own independent enterprise comparison. The certificate applies only to fixed inventories with monotone decisions. Public records may occur in model pretraining, and loopback HTTP leaves production network and storage costs unmeasured.
-
-The fixed-budget evidence covers labeled contribution tasks. Enterprise expert search needs an independently judged comparison against sequential repair and hybrid ranking under a common interpretation, verification, and load protocol. The appropriate endpoints are supported P@5 under matched work and client latency and cost per supported success under comparable coverage and risk.
-
-The reported comparisons use a frozen first-query policy. The effect of continual updates on new and old tasks remains unmeasured.
+Publisher tags have gaps and broad roles do not locate a particular technical contribution. Independent review of changed recommendations is pending. The source-withdrawal comparison isolates an identity failure: a role-compatible paper can replace a missing designated source unless the request's source constraint is enforced. On TREC the wider planner loses supported slots against the fixed-slate baseline; the fixed-document final-check intervention finds no recovery from adding nominees. Historical menus and unjudged pairs prevent attributing the full loss to a particular live retrieval or verification stage. Transport measurements capture the controlled source service and cannot establish enterprise client latency. Enterprise quality claims require an independently labeled shared-index comparison at matched cost, coverage and risk.
 
 \section{Conclusion}
-Contributor-constrained source nomination increases label-supported evidence coverage under a fixed reading budget in the mixed open-topic catalogs. When the task names source-specific cues and supplies exact roles, a strong sequential route already reaches every exact proof on the held panel and produces fewer source substitutes. Exact checks can skip source reads or role-model calls while retaining fixed-policy outcomes. Work reduction affects client latency when it eliminates the calls that dominate the tail. The results support a lightweight first query and motivate separate measurement of when any more expensive verification improves expert selection.
+Joint planning over same-contributor source pairs increases the number of tag-supported proofs recovered within three reads. At matched issuance the observed PLOS advantage remains uncertain, and designated-source requests benefit from explicit source constraints. Under trusted index assumptions, the source frontier reduces reads while preserving a fixed verifier output. These results establish an evidence allocation and execution mechanism for structured records.
 
 \bibliographystyle{template/ACM-Reference-Format}
 \bibliography{../references}

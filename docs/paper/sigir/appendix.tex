@@ -1,5 +1,13 @@
 \section{Protocols, Metadata, and Reproducibility}
 
+
+\subsection{Configuration map}
+Configuration A compares three declaration fetches over the same mixed depth-128 title--abstract pools and personal-role postings. The encoder is Qwen3-Embedding-0.6B at revision \texttt{97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3}. It uses left padding, BF16 SDPA, a maximum of 512 tokens, and per-request query pairs. The fixed index and rank-then-verify runs use RTX 4090. The same-information reader is Qwen3-Reranker-0.6B at \texttt{e61197ed45024b0ed8a2d74b80b4d909f1255473}, with at most six inputs per request. The earlier RTX 5090 depth sweep is \path{benchmarks/mixed-publisher-joint-v1/}; its sequential route uses byline repair. The role-aware control is \path{benchmarks/open-topic-role-matched-v1/}. The archived replays differ in execution as well as in the sequential comparator. They do not isolate the cause of the three unresolved joint returns that differ in aggregate.
+
+Configuration B uses the same embedding revision. The eLife exactness and pre-read runs, on RTX 4090, are listed in \path{benchmarks/linked-role-lane-index-v1/}, \path{benchmarks/pre-read-proof-bound-v1/}, \path{benchmarks/pre-read-proof-http-v1/}, and \path{benchmarks/proof-source-frontier-v1/}. The loopback timer starts at scheduled arrival after ranks and plans are frozen. Configuration C uses the supplied-role withdrawal replay on RTX 4090 at \path{benchmarks/plos-matched-contributor-reads-v1/}. The distinct recheck experiment uses Qwen3-4B-Instruct-2507 at \texttt{cdbee75f17c01a7cc42f958dc650907174af0554} and a fixed logit margin of 26.125. It is stored in \path{benchmarks/plos-frozen-role-recheck-service-v1/}.
+
+The structural counts and nonempty missing-role perturbation are in \path{benchmarks/declared-role-evidence-audit-v1/}. For each multi-role author--source row selected by a stable hash, the perturbation deletes one role. The oracle records whether any original tagged proof is still eligible before ranking. Its optimistic alternative retains every missing role as possible; final precision must still be judged after original verification.
+
 \subsection{Artifacts for the current main draft}
 The repository results associated with the manuscript are enumerated here. The aggregate JSON files and corresponding READMEs identify the executable experiment, checkpoint provenance and operating points. The raw private development records are kept locally.
 

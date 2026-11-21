@@ -1,7 +1,7 @@
-# Three Reads, One Expert
+# Three Reads, One Contributor
 
 `main.tex` is the single editable English manuscript. The draft studies
-contributor-constrained first-query search with a fixed read budget.
+single-contributor evidence allocation with a fixed declaration-read budget.
 The standalone appendix source preserves protocols and development
 comparisons for reference.
 
