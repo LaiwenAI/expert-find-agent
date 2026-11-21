@@ -20,10 +20,6 @@ from experiments.credit.source_role_factorial_diagnosis import payload
 from experiments.followir.core17_reranking import digest, write_json
 
 
-HEADS = ("gold_features", "distilled_features")
-ARMS = ("cascade", "dense_joint", *HEADS)
-
-
 def observations(service, catalog, clues, view):
     records = []
     ordered = sorted(clues)
@@ -113,8 +109,17 @@ def resident_checks(service, pair, pools, clues, phrases, ranking, cutoff, model
             for name, allowed in passes.items()}, passes, margins
 
 
-def run_resident(service, labels, cutoff, lightweight, plos, reference, output, reverse):
+def run_resident(service, labels, cutoff, lightweight, plos, reference, output, reverse, *, matched=None):
     models, fitted = calibrate(service, plos)
+    matched_report = None
+    if matched is not None:
+        from experiments.credit.paired_role_matched_source import calibrate_pairs
+
+        extra, matched_report = calibrate_pairs(service, models, *matched)
+        for view, heads in extra.items():
+            models[view].update(heads)
+    names = tuple(models["keywords"])
+    arms = ("cascade", "dense_joint", *names)
     requests = list(labels)
     counts = defaultdict(lambda: defaultdict(Counter))
     diagnostics = defaultdict(lambda: defaultdict(Counter))
@@ -125,7 +130,7 @@ def run_resident(service, labels, cutoff, lightweight, plos, reference, output, 
         label = labels[request]
         view = label["view"]
         cascade, plan = availability(service, request, cutoff, lightweight)
-        response = dict.fromkeys(ARMS, cascade)
+        response = dict.fromkeys(arms, cascade)
         if plan is not None:
             pair, pools, required, clues, phrases, _, ranking = plan
             allowed = verify(service.source, service.index, clues, pair, (0, 1)) > service.cutoffs["source"]
@@ -145,7 +150,7 @@ def run_resident(service, labels, cutoff, lightweight, plos, reference, output, 
             recorded[name][request] = out
         for withheld in label["papers"]:
             state, ranking, scores, clues, phrases = query_state(service, request, withheld)
-            for name in HEADS:
+            for name in names:
                 missing[view][name].update(requests=1)
             if state["pair"] is not None or state["response"]["calls"]:
                 continue
@@ -170,4 +175,5 @@ def run_resident(service, labels, cutoff, lightweight, plos, reference, output, 
                             diagnostic_margins={view: {name: sorted(items) for name, items in by_arm.items()}
                                                 for view, by_arm in diagnostic_margins.items()},
                             signatures=proof, requests=len(requests), reverse=reverse,
-                            reference_sha256=digest(reference), script_sha256=digest(Path(__file__))))
+                            reference_sha256=digest(reference), script_sha256=digest(Path(__file__)),
+                            **({"matched_calibration": matched_report} if matched is not None else {})))

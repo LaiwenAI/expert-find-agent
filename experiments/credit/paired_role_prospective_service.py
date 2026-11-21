@@ -223,8 +223,11 @@ def run(args):
         if digest(args.plos) != frozen["inputs"]["plos"]:
             raise ValueError("Changed PLOS calibration projection")
         heads, _, fit = fit_lightweight(args.plos, service, definitions, training)
+        matched = (args.matched_source_projection, args.matched_source_manifest,
+                   args.matched_source_supplement, args.matched_source_supplement_manifest, wording)
         run_resident(service, labels, cutoff, (heads, definitions, fit), args.plos,
-                     args.resident_source_reference, args.output, args.reverse)
+                     args.resident_source_reference, args.output, args.reverse,
+                     matched=matched if args.matched_source_projection is not None else None)
         return
     by_arm, results = {}, {}
     lightweight = report = None
@@ -313,6 +316,10 @@ if __name__ == "__main__":
     parser.add_argument("--prescreen", action="store_true")
     parser.add_argument("--plos", type=Path)
     parser.add_argument("--cascade", action="store_true")
+    parser.add_argument("--matched-source-projection", type=Path)
+    parser.add_argument("--matched-source-manifest", type=Path)
+    parser.add_argument("--matched-source-supplement", type=Path)
+    parser.add_argument("--matched-source-supplement-manifest", type=Path)
     parser.add_argument("--reverse", action="store_true")
     diagnostics = parser.add_mutually_exclusive_group()
     diagnostics.add_argument("--stage-audit-reference", type=Path)
@@ -341,4 +348,9 @@ if __name__ == "__main__":
         parser.error("--fused-4b-reference requires --plos")
     if args.resident_source_reference is not None and args.plos is None:
         parser.error("--resident-source-reference requires --plos")
+    matched_inputs = (args.matched_source_projection, args.matched_source_manifest,
+                      args.matched_source_supplement, args.matched_source_supplement_manifest)
+    if any(value is not None for value in matched_inputs):
+        if args.resident_source_reference is None or any(value is None for value in matched_inputs):
+            parser.error("Matched source calibration requires the resident reference and both complete snapshots")
     run(args)

@@ -1,0 +1,709 @@
+{
+  "slurm_array": 46330,
+  "compute_node": "ws3",
+  "reference_proofs_match": true,
+  "repeat_identical": true,
+  "matched_script_sha256": "0efe81cd3c0de5564d30946a605fe9b72f968d3e99a43d36c2d734f5675f8d3c",
+  "panels": {
+    "holdout": {
+      "counts": {
+        "keywords": {
+          "cascade": {
+            "issued": 10,
+            "strict": 10,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 24,
+            "positives": 12,
+            "search_calls": 7,
+            "source_calls": 1,
+            "role_calls": 6
+          },
+          "dense_joint": {
+            "issued": 12,
+            "strict": 11,
+            "adverse": 1,
+            "wrong_source": 0,
+            "requests": 24,
+            "positives": 12,
+            "search_calls": 9,
+            "source_calls": 3,
+            "role_calls": 6
+          },
+          "gold_features": {
+            "issued": 10,
+            "strict": 10,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 24,
+            "positives": 12,
+            "search_calls": 7,
+            "source_calls": 1,
+            "role_calls": 6
+          },
+          "distilled_features": {
+            "issued": 10,
+            "strict": 10,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 24,
+            "positives": 12,
+            "search_calls": 7,
+            "source_calls": 1,
+            "role_calls": 6
+          },
+          "gold_matched": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 24,
+            "positives": 12,
+            "search_calls": 9,
+            "source_calls": 1,
+            "role_calls": 8
+          },
+          "distilled_matched": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 24,
+            "positives": 12,
+            "search_calls": 9,
+            "source_calls": 1,
+            "role_calls": 8
+          }
+        },
+        "excerpt": {
+          "cascade": {
+            "issued": 12,
+            "strict": 12,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 24,
+            "positives": 12,
+            "search_calls": 10,
+            "source_calls": 0,
+            "role_calls": 10
+          },
+          "dense_joint": {
+            "issued": 12,
+            "strict": 12,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 24,
+            "positives": 12,
+            "search_calls": 10,
+            "source_calls": 0,
+            "role_calls": 10
+          },
+          "gold_features": {
+            "issued": 12,
+            "strict": 12,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 24,
+            "positives": 12,
+            "search_calls": 10,
+            "source_calls": 0,
+            "role_calls": 10
+          },
+          "distilled_features": {
+            "issued": 12,
+            "strict": 12,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 24,
+            "positives": 12,
+            "search_calls": 10,
+            "source_calls": 0,
+            "role_calls": 10
+          },
+          "gold_matched": {
+            "issued": 12,
+            "strict": 12,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 24,
+            "positives": 12,
+            "search_calls": 10,
+            "source_calls": 0,
+            "role_calls": 10
+          },
+          "distilled_matched": {
+            "issued": 12,
+            "strict": 12,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 24,
+            "positives": 12,
+            "search_calls": 10,
+            "source_calls": 0,
+            "role_calls": 10
+          }
+        }
+      },
+      "calibration": {
+        "keywords": {
+          "gold_features": {
+            "cutoff": 1.0999580360840442,
+            "target_rows": 19,
+            "missing_source_rows": 576,
+            "target_pass": 3,
+            "missing_pass": 0,
+            "wrong_source_present_pass": 0,
+            "training_rows": 1152
+          },
+          "distilled_features": {
+            "cutoff": 1.0017431072755172,
+            "target_rows": 19,
+            "missing_source_rows": 576,
+            "target_pass": 2,
+            "missing_pass": 0,
+            "wrong_source_present_pass": 0,
+            "training_rows": 1152
+          }
+        },
+        "excerpt": {
+          "gold_features": {
+            "cutoff": 0.9846829622114875,
+            "target_rows": 24,
+            "missing_source_rows": 576,
+            "target_pass": 8,
+            "missing_pass": 0,
+            "wrong_source_present_pass": 0,
+            "training_rows": 1152
+          },
+          "distilled_features": {
+            "cutoff": 0.9770282345464563,
+            "target_rows": 24,
+            "missing_source_rows": 576,
+            "target_pass": 7,
+            "missing_pass": 0,
+            "wrong_source_present_pass": 0,
+            "training_rows": 1152
+          }
+        }
+      },
+      "fallback": {
+        "keywords": {
+          "gold_features": {
+            "fallbacks": 2,
+            "source_accepted": 0,
+            "intended_pair": 0
+          },
+          "distilled_features": {
+            "fallbacks": 2,
+            "source_accepted": 0,
+            "intended_pair": 0
+          },
+          "gold_matched": {
+            "fallbacks": 2,
+            "source_accepted": 2,
+            "intended_pair": 2
+          },
+          "distilled_matched": {
+            "fallbacks": 2,
+            "source_accepted": 2,
+            "intended_pair": 2
+          }
+        }
+      },
+      "missing_source": {
+        "keywords": {
+          "gold_features": {
+            "requests": 48
+          },
+          "distilled_features": {
+            "requests": 48
+          },
+          "gold_matched": {
+            "requests": 48
+          },
+          "distilled_matched": {
+            "requests": 48
+          }
+        },
+        "excerpt": {
+          "gold_features": {
+            "requests": 48
+          },
+          "distilled_features": {
+            "requests": 48
+          },
+          "gold_matched": {
+            "requests": 48
+          },
+          "distilled_matched": {
+            "requests": 48
+          }
+        }
+      },
+      "signatures": {
+        "cascade": "668b7662fe63b8b01a30222d0ee73ed4532881930ce116442e5ac8decc645161",
+        "dense_joint": "a604fcc492c773e1458649b4d123de05fdf8255f37cc9221877f8212b014aea6",
+        "gold_features": "668b7662fe63b8b01a30222d0ee73ed4532881930ce116442e5ac8decc645161",
+        "distilled_features": "668b7662fe63b8b01a30222d0ee73ed4532881930ce116442e5ac8decc645161",
+        "gold_matched": "d40f72f3dde3b8d3efbe68ba48a57f354ae074dd98353d99c9aa0cadc0fca1ec",
+        "distilled_matched": "d40f72f3dde3b8d3efbe68ba48a57f354ae074dd98353d99c9aa0cadc0fca1ec"
+      },
+      "requests": 48,
+      "reference_sha256": "c3fca40006675e01376ae9482c808f0466851462ad0f50c7ba73bc34473d7a83",
+      "script_sha256": "dd33a1fb20db57de1cc4d60644bb5778e675ef95d8f49cba266b04b8ba29f3d7",
+      "matched_calibration": {
+        "views": {
+          "keywords": {
+            "gold_matched": {
+              "cutoff": 0.007235105819340865,
+              "old_cutoff": 1.0999580360840442,
+              "correct_pairs": 21,
+              "wrong_pairs": 3,
+              "missing_target_pairs": 2,
+              "recalibrated": true,
+              "correct_pass": 20,
+              "old_correct_pass": 0,
+              "wrong_pass": 0
+            },
+            "distilled_matched": {
+              "cutoff": 0.2256569824094028,
+              "old_cutoff": 1.0017431072755172,
+              "correct_pairs": 21,
+              "wrong_pairs": 3,
+              "missing_target_pairs": 2,
+              "recalibrated": true,
+              "correct_pass": 21,
+              "old_correct_pass": 2,
+              "wrong_pass": 0
+            }
+          },
+          "excerpt": {
+            "gold_matched": {
+              "cutoff": 0.4315407241359166,
+              "old_cutoff": 0.9846829622114875,
+              "correct_pairs": 23,
+              "wrong_pairs": 13,
+              "missing_target_pairs": 6,
+              "recalibrated": true,
+              "correct_pass": 22,
+              "old_correct_pass": 16,
+              "wrong_pass": 0
+            },
+            "distilled_matched": {
+              "cutoff": 0.4573596246822648,
+              "old_cutoff": 0.9770282345464563,
+              "correct_pairs": 23,
+              "wrong_pairs": 13,
+              "missing_target_pairs": 6,
+              "recalibrated": true,
+              "correct_pass": 23,
+              "old_correct_pass": 14,
+              "wrong_pass": 0
+            }
+          }
+        },
+        "panels": [
+          {
+            "admitted": 393,
+            "dropped": {
+              "incomplete_or_ambiguous": 28
+            },
+            "links": 16,
+            "paper_pairs": 13,
+            "linked_papers": 25,
+            "contributors": 14,
+            "variants": {
+              "present": 66,
+              "swap": 66
+            }
+          },
+          {
+            "admitted": 280,
+            "dropped": {
+              "incomplete_or_ambiguous": 42
+            },
+            "links": 12,
+            "paper_pairs": 10,
+            "linked_papers": 17,
+            "contributors": 9,
+            "variants": {
+              "present": 51,
+              "swap": 51
+            }
+          }
+        ],
+        "requests": 92,
+        "projection_sha256": "38bc5e6bd42e3b2f427a42a552cae11bc0813e50f2e601ee9e10a298fe47925f",
+        "manifest_sha256": "064b9d0a579e58911c1986a17e4eb169dcfd3ab57e4e4640d31a1a62143a753a",
+        "supplement_sha256": "4ce67b1ff52d869f133bd5318bad2573502d12aae065c75c9407c14754171c89",
+        "supplement_manifest_sha256": "77b44ff60a0c335be3d7a6233b18af17c55a453ec0e40f799561203241c838d4"
+      }
+    },
+    "development": {
+      "counts": {
+        "keywords": {
+          "cascade": {
+            "issued": 12,
+            "strict": 12,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 54,
+            "positives": 27,
+            "search_calls": 9,
+            "source_calls": 4,
+            "role_calls": 5
+          },
+          "dense_joint": {
+            "issued": 15,
+            "strict": 15,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 54,
+            "positives": 27,
+            "search_calls": 13,
+            "source_calls": 8,
+            "role_calls": 5
+          },
+          "gold_features": {
+            "issued": 12,
+            "strict": 12,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 54,
+            "positives": 27,
+            "search_calls": 9,
+            "source_calls": 4,
+            "role_calls": 5
+          },
+          "distilled_features": {
+            "issued": 12,
+            "strict": 12,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 54,
+            "positives": 27,
+            "search_calls": 9,
+            "source_calls": 4,
+            "role_calls": 5
+          },
+          "gold_matched": {
+            "issued": 14,
+            "strict": 14,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 54,
+            "positives": 27,
+            "search_calls": 12,
+            "source_calls": 4,
+            "role_calls": 8
+          },
+          "distilled_matched": {
+            "issued": 14,
+            "strict": 14,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 54,
+            "positives": 27,
+            "search_calls": 12,
+            "source_calls": 4,
+            "role_calls": 8
+          }
+        },
+        "excerpt": {
+          "cascade": {
+            "issued": 18,
+            "strict": 18,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 54,
+            "positives": 27,
+            "search_calls": 13,
+            "source_calls": 0,
+            "role_calls": 13
+          },
+          "dense_joint": {
+            "issued": 18,
+            "strict": 18,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 54,
+            "positives": 27,
+            "search_calls": 13,
+            "source_calls": 0,
+            "role_calls": 13
+          },
+          "gold_features": {
+            "issued": 18,
+            "strict": 18,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 54,
+            "positives": 27,
+            "search_calls": 13,
+            "source_calls": 0,
+            "role_calls": 13
+          },
+          "distilled_features": {
+            "issued": 18,
+            "strict": 18,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 54,
+            "positives": 27,
+            "search_calls": 13,
+            "source_calls": 0,
+            "role_calls": 13
+          },
+          "gold_matched": {
+            "issued": 18,
+            "strict": 18,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 54,
+            "positives": 27,
+            "search_calls": 13,
+            "source_calls": 0,
+            "role_calls": 13
+          },
+          "distilled_matched": {
+            "issued": 18,
+            "strict": 18,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 54,
+            "positives": 27,
+            "search_calls": 13,
+            "source_calls": 0,
+            "role_calls": 13
+          }
+        }
+      },
+      "calibration": {
+        "keywords": {
+          "gold_features": {
+            "cutoff": 1.0999580360840442,
+            "target_rows": 19,
+            "missing_source_rows": 576,
+            "target_pass": 3,
+            "missing_pass": 0,
+            "wrong_source_present_pass": 0,
+            "training_rows": 1152
+          },
+          "distilled_features": {
+            "cutoff": 1.0017431072755172,
+            "target_rows": 19,
+            "missing_source_rows": 576,
+            "target_pass": 2,
+            "missing_pass": 0,
+            "wrong_source_present_pass": 0,
+            "training_rows": 1152
+          }
+        },
+        "excerpt": {
+          "gold_features": {
+            "cutoff": 0.9846829622114875,
+            "target_rows": 24,
+            "missing_source_rows": 576,
+            "target_pass": 8,
+            "missing_pass": 0,
+            "wrong_source_present_pass": 0,
+            "training_rows": 1152
+          },
+          "distilled_features": {
+            "cutoff": 0.9770282345464563,
+            "target_rows": 24,
+            "missing_source_rows": 576,
+            "target_pass": 7,
+            "missing_pass": 0,
+            "wrong_source_present_pass": 0,
+            "training_rows": 1152
+          }
+        }
+      },
+      "fallback": {
+        "keywords": {
+          "gold_features": {
+            "fallbacks": 4,
+            "source_accepted": 0,
+            "intended_pair": 0
+          },
+          "distilled_features": {
+            "fallbacks": 4,
+            "source_accepted": 0,
+            "intended_pair": 0
+          },
+          "gold_matched": {
+            "fallbacks": 4,
+            "source_accepted": 3,
+            "intended_pair": 3
+          },
+          "distilled_matched": {
+            "fallbacks": 4,
+            "source_accepted": 3,
+            "intended_pair": 3
+          }
+        }
+      },
+      "missing_source": {
+        "keywords": {
+          "gold_features": {
+            "requests": 108,
+            "fallbacks": 2,
+            "source_accepted": 0,
+            "substitutes": 0,
+            "role_calls": 0
+          },
+          "distilled_features": {
+            "requests": 108,
+            "fallbacks": 2,
+            "source_accepted": 0,
+            "substitutes": 0,
+            "role_calls": 0
+          },
+          "gold_matched": {
+            "requests": 108,
+            "fallbacks": 2,
+            "source_accepted": 0,
+            "substitutes": 0,
+            "role_calls": 0
+          },
+          "distilled_matched": {
+            "requests": 108,
+            "fallbacks": 2,
+            "source_accepted": 0,
+            "substitutes": 0,
+            "role_calls": 0
+          }
+        },
+        "excerpt": {
+          "gold_features": {
+            "requests": 108,
+            "fallbacks": 6,
+            "source_accepted": 0,
+            "substitutes": 0,
+            "role_calls": 0
+          },
+          "distilled_features": {
+            "requests": 108,
+            "fallbacks": 6,
+            "source_accepted": 0,
+            "substitutes": 0,
+            "role_calls": 0
+          },
+          "gold_matched": {
+            "requests": 108,
+            "fallbacks": 6,
+            "source_accepted": 0,
+            "substitutes": 0,
+            "role_calls": 0
+          },
+          "distilled_matched": {
+            "requests": 108,
+            "fallbacks": 6,
+            "source_accepted": 0,
+            "substitutes": 0,
+            "role_calls": 0
+          }
+        }
+      },
+      "signatures": {
+        "cascade": "48c465c15cda03ce97e6d582f80337ad1ebaf711b6b4ee7e408b07be8273e5a4",
+        "dense_joint": "5aa55880fe13a0c4fc9390a286866b90199719d2abc2d196909a373963bdbe09",
+        "gold_features": "48c465c15cda03ce97e6d582f80337ad1ebaf711b6b4ee7e408b07be8273e5a4",
+        "distilled_features": "48c465c15cda03ce97e6d582f80337ad1ebaf711b6b4ee7e408b07be8273e5a4",
+        "gold_matched": "8c0c2fc0743f1c09432eb095412b5b24f0ce0e818c164b262561d560decc9d95",
+        "distilled_matched": "8c0c2fc0743f1c09432eb095412b5b24f0ce0e818c164b262561d560decc9d95"
+      },
+      "requests": 108,
+      "reference_sha256": "9a6570b4367907497d540d32d944c23cba68f0d078d223b8497c8cdf038908bd",
+      "script_sha256": "dd33a1fb20db57de1cc4d60644bb5778e675ef95d8f49cba266b04b8ba29f3d7",
+      "matched_calibration": {
+        "views": {
+          "keywords": {
+            "gold_matched": {
+              "cutoff": 0.007235105819340865,
+              "old_cutoff": 1.0999580360840442,
+              "correct_pairs": 21,
+              "wrong_pairs": 3,
+              "missing_target_pairs": 2,
+              "recalibrated": true,
+              "correct_pass": 20,
+              "old_correct_pass": 0,
+              "wrong_pass": 0
+            },
+            "distilled_matched": {
+              "cutoff": 0.2256569824094028,
+              "old_cutoff": 1.0017431072755172,
+              "correct_pairs": 21,
+              "wrong_pairs": 3,
+              "missing_target_pairs": 2,
+              "recalibrated": true,
+              "correct_pass": 21,
+              "old_correct_pass": 2,
+              "wrong_pass": 0
+            }
+          },
+          "excerpt": {
+            "gold_matched": {
+              "cutoff": 0.4315407241359166,
+              "old_cutoff": 0.9846829622114875,
+              "correct_pairs": 23,
+              "wrong_pairs": 13,
+              "missing_target_pairs": 6,
+              "recalibrated": true,
+              "correct_pass": 22,
+              "old_correct_pass": 16,
+              "wrong_pass": 0
+            },
+            "distilled_matched": {
+              "cutoff": 0.4573596246822648,
+              "old_cutoff": 0.9770282345464563,
+              "correct_pairs": 23,
+              "wrong_pairs": 13,
+              "missing_target_pairs": 6,
+              "recalibrated": true,
+              "correct_pass": 23,
+              "old_correct_pass": 14,
+              "wrong_pass": 0
+            }
+          }
+        },
+        "panels": [
+          {
+            "admitted": 393,
+            "dropped": {
+              "incomplete_or_ambiguous": 28
+            },
+            "links": 16,
+            "paper_pairs": 13,
+            "linked_papers": 25,
+            "contributors": 14,
+            "variants": {
+              "present": 66,
+              "swap": 66
+            }
+          },
+          {
+            "admitted": 280,
+            "dropped": {
+              "incomplete_or_ambiguous": 42
+            },
+            "links": 12,
+            "paper_pairs": 10,
+            "linked_papers": 17,
+            "contributors": 9,
+            "variants": {
+              "present": 51,
+              "swap": 51
+            }
+          }
+        ],
+        "requests": 92,
+        "projection_sha256": "38bc5e6bd42e3b2f427a42a552cae11bc0813e50f2e601ee9e10a298fe47925f",
+        "manifest_sha256": "064b9d0a579e58911c1986a17e4eb169dcfd3ab57e4e4640d31a1a62143a753a",
+        "supplement_sha256": "4ce67b1ff52d869f133bd5318bad2573502d12aae065c75c9407c14754171c89",
+        "supplement_manifest_sha256": "77b44ff60a0c335be3d7a6233b18af17c55a453ec0e40f799561203241c838d4"
+      }
+    }
+  }
+}
