@@ -171,6 +171,15 @@ def run(args):
 
         run_postings(service, labels, cutoff, args.source_postings_reference, args.output, args.reverse)
         return
+    if args.joint_postings_reference is not None:
+        from experiments.credit.paired_role_joint_postings import run_joint
+
+        if digest(args.plos) != frozen["inputs"]["plos"]:
+            raise ValueError("Changed PLOS calibration projection")
+        heads, _, fit = fit_lightweight(args.plos, service, definitions, training)
+        run_joint(service, labels, cutoff, heads, fit["reserve_student"]["cutoff"],
+                  args.joint_postings_reference, args.output, args.reverse)
+        return
     by_arm, results = {}, {}
     lightweight = report = None
     requested = PRESCREEN_ARMS if args.prescreen else ARMS
@@ -250,7 +259,10 @@ if __name__ == "__main__":
     diagnostics = parser.add_mutually_exclusive_group()
     diagnostics.add_argument("--stage-audit-reference", type=Path)
     diagnostics.add_argument("--source-postings-reference", type=Path)
+    diagnostics.add_argument("--joint-postings-reference", type=Path)
     args = parser.parse_args()
     if args.cascade and not args.plos:
         parser.error("--cascade requires --plos")
+    if args.joint_postings_reference is not None and args.plos is None:
+        parser.error("--joint-postings-reference requires --plos")
     run(args)

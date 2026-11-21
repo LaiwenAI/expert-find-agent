@@ -29,7 +29,7 @@ def query_state(service, request, withheld=None):
     index = service.index
     ranking = index.full_rank(vectors[:2], clues, withheld)
     state = plan(service, ranking, scores, clues, phrases, withheld, "screened", run_role=False)
-    return state, ranking, scores, clues, phrases
+    return state | {"role_vectors": vectors[2:]}, ranking, scores, clues, phrases
 
 
 def evaluate(service, request, cutoff):
