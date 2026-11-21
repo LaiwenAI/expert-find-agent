@@ -1,0 +1,444 @@
+{
+  "slurm_array": 47430,
+  "node": "ws6",
+  "output_sha256": [
+    "d53477d9dfdbe35bf2a5a62709b02bd678bd12d0efab0ef179459f2c715887d5",
+    "4a42647588a021beec9414b608ba2c4a6adb4917f0d6e7792b7a9036d6f8fabc"
+  ],
+  "runs": [
+    {
+      "arms": {
+        "bidirectional_head": {
+          "fit": {
+            "trainable_parameters": 1025,
+            "loss": [
+              1.0183625295758247,
+              0.9649146770437559,
+              0.9317136729756991,
+              0.9044220497210821,
+              0.8907677878936132,
+              0.8743426725268364
+            ],
+            "seconds": 3.1225082110613585
+          },
+          "cutoff": 1.3587511777877808,
+          "public": {
+            "mixed_held": {
+              "qualifications": 72,
+              "correct": 217,
+              "true_positive": 21,
+              "false_positive": 20,
+              "cases": 288,
+              "documents": 96,
+              "exact_documents": 36,
+              "accepted": 0,
+              "accepted_errors": 0,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 3
+            },
+            "heading": {
+              "qualifications": 36,
+              "correct": 36,
+              "true_positive": 1,
+              "false_positive": 1,
+              "cases": 72,
+              "documents": 72,
+              "exact_documents": 36,
+              "accepted": 0,
+              "accepted_errors": 0,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 1
+            }
+          },
+          "development": {
+            "qualifications": 51,
+            "correct": 1401,
+            "true_positive": 0,
+            "false_positive": 0,
+            "cases": 1452,
+            "requests": 80,
+            "changed_requests": 25,
+            "skipped": 0,
+            "changed_skips": 0
+          },
+          "latency": {
+            "student": [
+              14.990615658462048,
+              29.24215954262761
+            ],
+            "guard": [
+              162.7055045682937,
+              1309.0497145894915
+            ]
+          }
+        },
+        "causal_lora": {
+          "fit": {
+            "trainable_parameters": 123905,
+            "loss": [
+              0.7128270442287127,
+              0.04890129492074872,
+              0.0032489865649646768,
+              0.0020241737559748194,
+              0.001584595229360275,
+              0.0012968873682742317
+            ],
+            "seconds": 3.9220932400785387
+          },
+          "cutoff": 7.169260501861572,
+          "public": {
+            "mixed_held": {
+              "qualifications": 72,
+              "correct": 193,
+              "true_positive": 27,
+              "false_positive": 50,
+              "cases": 288,
+              "documents": 96,
+              "exact_documents": 34,
+              "accepted": 0,
+              "accepted_errors": 0,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 4
+            },
+            "heading": {
+              "qualifications": 36,
+              "correct": 47,
+              "true_positive": 19,
+              "false_positive": 8,
+              "cases": 72,
+              "documents": 72,
+              "exact_documents": 47,
+              "accepted": 0,
+              "accepted_errors": 0,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 11
+            }
+          },
+          "development": {
+            "qualifications": 51,
+            "correct": 1395,
+            "true_positive": 2,
+            "false_positive": 8,
+            "cases": 1452,
+            "requests": 80,
+            "changed_requests": 25,
+            "skipped": 0,
+            "changed_skips": 0
+          },
+          "latency": {
+            "student": [
+              13.605438638478518,
+              24.266603705473234
+            ],
+            "guard": [
+              161.63732577115297,
+              1306.9098442327231
+            ]
+          }
+        },
+        "bidirectional_lora": {
+          "fit": {
+            "trainable_parameters": 123905,
+            "loss": [
+              0.9954091608524323,
+              0.7331610172986984,
+              0.2087129739423593,
+              0.01591108541470021,
+              0.009449848720881468,
+              0.003020601080303701
+            ],
+            "seconds": 3.958323831204325
+          },
+          "cutoff": 6.494602203369141,
+          "public": {
+            "mixed_held": {
+              "qualifications": 72,
+              "correct": 205,
+              "true_positive": 15,
+              "false_positive": 26,
+              "cases": 288,
+              "documents": 96,
+              "exact_documents": 31,
+              "accepted": 63,
+              "accepted_errors": 16,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 0
+            },
+            "heading": {
+              "qualifications": 36,
+              "correct": 38,
+              "true_positive": 2,
+              "false_positive": 0,
+              "cases": 72,
+              "documents": 72,
+              "exact_documents": 38,
+              "accepted": 28,
+              "accepted_errors": 14,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 2
+            }
+          },
+          "development": {
+            "qualifications": 51,
+            "correct": 1401,
+            "true_positive": 0,
+            "false_positive": 0,
+            "cases": 1452,
+            "requests": 80,
+            "changed_requests": 25,
+            "skipped": 0,
+            "changed_skips": 0
+          },
+          "latency": {
+            "student": [
+              15.019945800304413,
+              28.612786484882218
+            ],
+            "guard": [
+              162.83056535758078,
+              1308.9238672051579
+            ]
+          }
+        }
+      },
+      "reference_ms": [
+        147.7983829099685,
+        1289.8629224626347
+      ],
+      "attention_probe": {
+        "causal_difference": 0.0,
+        "full_difference": 0.13965922594070435
+      },
+      "training_documents": 192,
+      "training_anchors": 576,
+      "inputs": {
+        "development": "30661871ac08a61e7e74d67d75491878c7e4194f217483b60d06426c4b36e4c5",
+        "heading": "ca96d57855c1acb463a3bbce8bb21e3578d5c8465c340958fd74fe209cea5000",
+        "scope": "e9384206c99723ec766dcc627c0980f0a17ceaa8ba67186f6110a2e69d87e08a"
+      },
+      "script_sha256": "53d895db5c71154807c619d27dfd02928a1fb68ccfdccf5656b53bd0337b8263",
+      "embedding": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "reader": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "gpu": "NVIDIA GeForce RTX 4090",
+      "job": "47431",
+      "reverse": false
+    },
+    {
+      "arms": {
+        "bidirectional_lora": {
+          "fit": {
+            "trainable_parameters": 123905,
+            "loss": [
+              0.9954091608524323,
+              0.7331610172986984,
+              0.2087129739423593,
+              0.01591108541470021,
+              0.009449848720881468,
+              0.003020601080303701
+            ],
+            "seconds": 4.729210935067385
+          },
+          "cutoff": 6.494602203369141,
+          "public": {
+            "mixed_held": {
+              "qualifications": 72,
+              "correct": 205,
+              "true_positive": 15,
+              "false_positive": 26,
+              "cases": 288,
+              "documents": 96,
+              "exact_documents": 31,
+              "accepted": 63,
+              "accepted_errors": 16,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 0
+            },
+            "heading": {
+              "qualifications": 36,
+              "correct": 38,
+              "true_positive": 2,
+              "false_positive": 0,
+              "cases": 72,
+              "documents": 72,
+              "exact_documents": 38,
+              "accepted": 28,
+              "accepted_errors": 14,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 2
+            }
+          },
+          "development": {
+            "qualifications": 51,
+            "correct": 1401,
+            "true_positive": 0,
+            "false_positive": 0,
+            "cases": 1452,
+            "requests": 80,
+            "changed_requests": 25,
+            "skipped": 0,
+            "changed_skips": 0
+          },
+          "latency": {
+            "student": [
+              15.433311462402344,
+              29.529403103515488
+            ],
+            "guard": [
+              163.23673096485436,
+              1312.974999868311
+            ]
+          }
+        },
+        "causal_lora": {
+          "fit": {
+            "trainable_parameters": 123905,
+            "loss": [
+              0.7128270442287127,
+              0.04890129492074872,
+              0.0032489865649646768,
+              0.0020241737559748194,
+              0.001584595229360275,
+              0.0012968873682742317
+            ],
+            "seconds": 3.1999014508910477
+          },
+          "cutoff": 7.169260501861572,
+          "public": {
+            "mixed_held": {
+              "qualifications": 72,
+              "correct": 193,
+              "true_positive": 27,
+              "false_positive": 50,
+              "cases": 288,
+              "documents": 96,
+              "exact_documents": 34,
+              "accepted": 0,
+              "accepted_errors": 0,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 4
+            },
+            "heading": {
+              "qualifications": 36,
+              "correct": 47,
+              "true_positive": 19,
+              "false_positive": 8,
+              "cases": 72,
+              "documents": 72,
+              "exact_documents": 47,
+              "accepted": 0,
+              "accepted_errors": 0,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 11
+            }
+          },
+          "development": {
+            "qualifications": 51,
+            "correct": 1395,
+            "true_positive": 2,
+            "false_positive": 8,
+            "cases": 1452,
+            "requests": 80,
+            "changed_requests": 25,
+            "skipped": 0,
+            "changed_skips": 0
+          },
+          "latency": {
+            "student": [
+              13.516070321202278,
+              24.048814876005043
+            ],
+            "guard": [
+              161.14198113791645,
+              1310.3227318963036
+            ]
+          }
+        },
+        "bidirectional_head": {
+          "fit": {
+            "trainable_parameters": 1025,
+            "loss": [
+              1.0183625295758247,
+              0.9649146770437559,
+              0.9317136729756991,
+              0.9044220497210821,
+              0.8907677878936132,
+              0.8743426725268364
+            ],
+            "seconds": 2.4878408419899642
+          },
+          "cutoff": 1.3587511777877808,
+          "public": {
+            "mixed_held": {
+              "qualifications": 72,
+              "correct": 217,
+              "true_positive": 21,
+              "false_positive": 20,
+              "cases": 288,
+              "documents": 96,
+              "exact_documents": 36,
+              "accepted": 0,
+              "accepted_errors": 0,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 3
+            },
+            "heading": {
+              "qualifications": 36,
+              "correct": 36,
+              "true_positive": 1,
+              "false_positive": 1,
+              "cases": 72,
+              "documents": 72,
+              "exact_documents": 36,
+              "accepted": 0,
+              "accepted_errors": 0,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 1
+            }
+          },
+          "development": {
+            "qualifications": 51,
+            "correct": 1401,
+            "true_positive": 0,
+            "false_positive": 0,
+            "cases": 1452,
+            "requests": 80,
+            "changed_requests": 25,
+            "skipped": 0,
+            "changed_skips": 0
+          },
+          "latency": {
+            "student": [
+              14.664504677057266,
+              28.342764056287688
+            ],
+            "guard": [
+              162.26393496617675,
+              1311.926605203189
+            ]
+          }
+        }
+      },
+      "reference_ms": [
+        147.75096089579165,
+        1293.5910482658073
+      ],
+      "attention_probe": {
+        "causal_difference": 0.0,
+        "full_difference": 0.13965922594070435
+      },
+      "training_documents": 192,
+      "training_anchors": 576,
+      "inputs": {
+        "development": "30661871ac08a61e7e74d67d75491878c7e4194f217483b60d06426c4b36e4c5",
+        "heading": "ca96d57855c1acb463a3bbce8bb21e3578d5c8465c340958fd74fe209cea5000",
+        "scope": "e9384206c99723ec766dcc627c0980f0a17ceaa8ba67186f6110a2e69d87e08a"
+      },
+      "script_sha256": "53d895db5c71154807c619d27dfd02928a1fb68ccfdccf5656b53bd0337b8263",
+      "embedding": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "reader": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "gpu": "NVIDIA GeForce RTX 4090",
+      "job": "47430",
+      "reverse": true
+    }
+  ]
+}
