@@ -36,7 +36,7 @@ class Entity:
     kind: str
 
 
-def load_ads(path):
+def load_ads(path, minimum_links=2):
     if digest(path) != ARCHIVE:
         raise ValueError("Expected the pinned anonymized GOJA release")
     seen = set()
@@ -68,7 +68,7 @@ def load_ads(path):
                     for anchor, other in ((a, b), (b, a)):
                         if anchor.kind == "Erfahrungsniveau" and other.kind in TARGET:
                             linked[anchor].add(other)
-            if len(linked) >= 2:
+            if len(linked) >= minimum_links:
                 yield sha256(normalized.encode()).hexdigest(), text, linked
 
 
