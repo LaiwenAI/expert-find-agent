@@ -53,10 +53,10 @@ def workload(catalog, rows, wording):
     return lookup
 
 
-def arrivals_for(requests, rate):
+def arrivals_for(requests, rate, repeats=REPEATS):
     random = Random(20261121)
     trace = []
-    for _ in range(REPEATS):
+    for _ in range(repeats):
         queries = list(requests)
         random.shuffle(queries)
         trace.extend(queries)

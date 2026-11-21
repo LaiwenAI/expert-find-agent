@@ -88,41 +88,6 @@ PYTHONPATH=src:. OMP_NUM_THREADS=1 OPENBLAS_NUM_THREADS=1 MKL_NUM_THREADS=1 \
 python -m experiments.credit.paired_role_prospective_service \
   NEW_PROJECTION NEW_MANIFEST benchmarks/paired-role-verification-v1/results.json \
   NISO_EXAMPLES ROLE_TRAINING SCORE_BANDS SOURCE_FROZEN ROLE_FROZEN \
-  QWEN_EMBEDDING QWEN_RERANKER QWEN_4B NEW_The two publisher-data builds produce byte-identical outputs.
-The new sample excludes 135 non-research articles and 417 records
-with prior author overlap. Another 29 fail the declaration or
-abstract requirements. The 619 admitted documents yield 12 linked
-paper pairs, forming 12 connected paper/recorded-author groups.
-There are 48 unique requests, 12 positives and 12 role swaps per view.
-The entity screen covers recorded ORCIDs and normalized names.
-
-Four loopback runs from Slurm arrays 46251 and 46255 complete on
-ws3 RTX 5090. All runs agree on every emitted evidence response.
-The measured offered rates are 25.65 and 54.96 requests per second.
-
-| Policy | Keyword strict / adverse | Excerpt strict / adverse | Source forwards / rows per 96 requests | Role forwards per 96 requests | Client P95 at 54.96 req/s (ms) |
-| --- | ---: | ---: | ---: | ---: | ---: |
-| Single-slot baseline | 8 / 0 | 10 / 0 | 2 / 2 | 28 | 127-134 |
-| Exact-agreement 4B role route | 10 / 0 | 12 / 0 | 2 / 2 | 36 | 184-206 |
-| Student then 4B | 10 / 0 | 12 / 0 | 2 / 2 | 32 | 144-161 |
-| Cascade plus joint source fallback | 11 / 1 | 12 / 0 | 6 / 10 | 32 | 170-245 |
-
-The student-first cascade reproduces the exact-agreement evidence
-for all 48 requests. Its paired P95 reduction relative to that route
-is 20%-25% across the four high-load replays. The single-slot baseline
-remains faster and returns four fewer strict proofs across both views.
-
-The additional source fallback gains one exact keyword proof and
-introduces one adverse issuance with the correct source pair. Its
-descriptive grouped interval for keyword improvement spans 0 to
-25 percentage points relative to the student-first cascade. P95
-increases in every high-load replay compared with that cascade.
-The new panel supports the role cascade as the lower-cost route
-at identical observed quality. It supports a narrower claim for joint
-source recovery. Exact proof can improve, with additional verification,
-tail latency and adverse outcomes observed in this workload. The
-held structured sample remains small and measures a single-worker
-loopback service. See the [frozen manifest](manifest.json) and
-[all matched runs](results.json). \
+  QWEN_EMBEDDING QWEN_RERANKER QWEN_4B NEW_RESULTS \
   --joint-postings-service --plos PLOS_PROJECTION
 ```

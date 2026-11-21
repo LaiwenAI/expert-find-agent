@@ -33,6 +33,7 @@ ARMS = ("baseline", "batch", "reserve_agreement")
 PRESCREEN_ARMS = ("baseline", "reserve_agreement", "reserve_prescreen")
 CASCADE_ARMS = ("baseline", "reserve_prescreen", "student_then_reranker", "student_then_teacher")
 JOINT_SERVICE_ARMS = ("baseline", "reserve_prescreen", "student_then_teacher", "dense_joint")
+MATCHED_SERVICE_ARMS = ("baseline", "student_then_teacher", "dense_joint", "matched_resident")
 RATES = (28, 60)
 FROZEN_SHA = "f3f24de1b725c529b6dc142a0eedfc6413129bc67643e9b74d0909df0b94c956"
 
@@ -55,7 +56,7 @@ def workload(index, cases, wording):
     return labels
 
 
-def execute(service, request, arm, cutoff, lightweight=None):
+def execute(service, request, arm, cutoff, lightweight=None, resident=None):
     if arm == "baseline":
         return service.search(request, "screened_one_call")
     requirements = json.loads(request.payload)["requirements"]
@@ -67,6 +68,12 @@ def execute(service, request, arm, cutoff, lightweight=None):
     ranking = service.index.full_rank(vectors[:2], clues, None)
     state = plan(service, ranking, scores, clues, roles, None, "screened", run_role=False)
     pair, base, response = state["pair"], state["roles"], state["response"]
+    if arm == "matched_resident":
+        if not pair and not response["calls"]:
+            from experiments.credit.paired_role_resident_source import matched_source_fallback
+
+            return json.dumps(matched_source_fallback(service, ranking, scores, clues, roles, cutoff, resident))
+        arm = "student_then_teacher"
     if arm == "dense_joint":
         if not pair and not response["calls"]:
             from experiments.credit.paired_role_joint_postings import dense_source_fallback
@@ -230,6 +237,7 @@ def run(args):
                      matched=matched if args.matched_source_projection is not None else None)
         return
     by_arm, results = {}, {}
+    resident = matched_serving = None
     lightweight = report = None
     requested = PRESCREEN_ARMS if args.prescreen else ARMS
     if args.plos:
@@ -238,19 +246,38 @@ def run(args):
         heads, training_report, fit = fit_lightweight(args.plos, service, definitions, training)
         report = dict(training=training_report, calibration=fit, plos_sha256=digest(args.plos))
         lightweight = (heads, definitions, fit)
-        if args.joint_postings_service:
+        if args.matched_source_service_reference is not None:
+            from experiments.credit.paired_role_matched_source import calibrate_pairs
+            from experiments.credit.paired_role_resident_source import calibrate, clue_view
+
+            resident, _ = calibrate(service, args.plos)
+            resident, matched_fit = calibrate_pairs(
+                service, resident, args.matched_source_projection, args.matched_source_manifest,
+                args.matched_source_supplement, args.matched_source_supplement_manifest, wording,
+            )
+            expected = json.loads(args.matched_source_service_reference.read_bytes())
+            if matched_fit != expected["matched_calibration"]:
+                raise ValueError("Service calibration differs from the frozen component test")
+            agreement = Counter()
+            for request, label in labels.items():
+                clues = [part["topic"] for part in json.loads(request.payload)["requirements"]]
+                agreement[label["view"]] += clue_view(clues) == label["view"]
+            matched_serving = dict(calibration=matched_fit, observed_view_agreement=agreement,
+                                   component_sha256=digest(args.matched_source_service_reference))
+            requested = MATCHED_SERVICE_ARMS
+        elif args.joint_postings_service:
             requested = JOINT_SERVICE_ARMS
         else:
             requested = CASCADE_ARMS if args.cascade else ("baseline", "reserve_prescreen", *LIGHTWEIGHT_METHODS)
         print("Frozen lightweight routes", fit, flush=True)
     arms = requested[::-1] if args.reverse else requested
     for offset, rate in enumerate(RATES):
-        trace, arrivals = arrivals_for(labels, rate)
+        trace, arrivals = arrivals_for(labels, rate, args.repeats)
         results[rate] = {}
         for arm in arms[offset:] + arms[:offset]:
-            records, elapsed = replay(lambda request: execute(service, request, arm, cutoff, lightweight),
+            records, elapsed = replay(lambda request: execute(service, request, arm, cutoff, lightweight, resident),
                                       trace, arrivals, trace[:24])
-            detail, responses = summarize(trace, arrivals, records, elapsed, labels, 2)
+            detail, responses = summarize(trace, arrivals, records, elapsed, labels, args.repeats)
             if detail["failures"] or len(responses) != len(labels):
                 raise ValueError(f"Incomplete replay for {arm} at {rate}: {detail['failures']}")
             calls = Counter(role_forwards=0, source_forwards=0)
@@ -259,7 +286,7 @@ def run(args):
                 if response["role_calls"] + response["source_calls"] != response["calls"] or response["calls"] > 1:
                     raise ValueError("Shared verifier budget exceeded")
                 calls.update(role_forwards=response["role_calls"], source_forwards=response["source_calls"])
-                if args.joint_postings_service:
+                if args.joint_postings_service or matched_serving is not None:
                     calls.update(source_rows=response.get("source_rows", response["source_calls"]))
             detail["verification"] = dict(calls)
             if arm in by_arm and by_arm[arm] != responses:
@@ -287,7 +314,7 @@ def run(args):
             interval["sampling_unit"] = "connected paper/recorded-author groups"
             contrasts[arm][view] = dict(totals=dict(counts), positives=len(positives),
                                         requests=len(rows), paired_strict_change=interval)
-            if arm == "dense_joint":
+            if arm in ("dense_joint", "matched_resident"):
                 extra = [int(metrics[arm][req]["strict"]) - int(metrics["student_then_teacher"][req]["strict"])
                          for req in positives]
                 paired = clustered_paired_interval(extra, group_ids)
@@ -297,6 +324,12 @@ def run(args):
         arm: sha256(json.dumps([proofs[req] for req in labels], ensure_ascii=False).encode()).hexdigest()
         for arm, proofs in by_arm.items()
     }
+    if matched_serving is not None:
+        expected_signatures = expected["signatures"]
+        for arm, reference_arm in (("student_then_teacher", "cascade"), ("dense_joint", "dense_joint"),
+                                   ("matched_resident", "gold_matched")):
+            if signatures[arm] != expected_signatures[reference_arm]:
+                raise ValueError(f"Service evidence differs from the component result for {arm}")
     write_json(args.output, dict(
         script_sha256=digest(Path(__file__)), projection_sha256=digest(args.projection),
         manifest_sha256=digest(args.manifest), paired_results_sha256=digest(args.paired_frozen),
@@ -305,6 +338,7 @@ def run(args):
         cutoffs=frozen["cutoffs"] | {"two_batched": cutoff}, results=results, quality=contrasts,
         response_signatures=signatures, lightweight=report, cascade=args.cascade, **revisions,
         **({"joint_postings_service": True} if args.joint_postings_service else {}),
+        **({"matched_source_service": matched_serving} if matched_serving is not None else {}),
     ))
 
 
@@ -316,6 +350,7 @@ if __name__ == "__main__":
     parser.add_argument("--prescreen", action="store_true")
     parser.add_argument("--plos", type=Path)
     parser.add_argument("--cascade", action="store_true")
+    parser.add_argument("--repeats", type=int, default=2)
     parser.add_argument("--matched-source-projection", type=Path)
     parser.add_argument("--matched-source-manifest", type=Path)
     parser.add_argument("--matched-source-supplement", type=Path)
@@ -331,7 +366,10 @@ if __name__ == "__main__":
     diagnostics.add_argument("--soft-role-reference", type=Path)
     diagnostics.add_argument("--fused-4b-reference", type=Path)
     diagnostics.add_argument("--resident-source-reference", type=Path)
+    diagnostics.add_argument("--matched-source-service-reference", type=Path)
     args = parser.parse_args()
+    if args.repeats < 1:
+        parser.error("--repeats must be positive")
     if args.cascade and not args.plos:
         parser.error("--cascade requires --plos")
     if args.joint_postings_reference is not None and args.plos is None:
@@ -350,7 +388,8 @@ if __name__ == "__main__":
         parser.error("--resident-source-reference requires --plos")
     matched_inputs = (args.matched_source_projection, args.matched_source_manifest,
                       args.matched_source_supplement, args.matched_source_supplement_manifest)
-    if any(value is not None for value in matched_inputs):
-        if args.resident_source_reference is None or any(value is None for value in matched_inputs):
+    if any(value is not None for value in matched_inputs) or args.matched_source_service_reference is not None:
+        if ((args.resident_source_reference is None and args.matched_source_service_reference is None)
+                or any(value is None for value in matched_inputs) or args.plos is None):
             parser.error("Matched source calibration requires the resident reference and both complete snapshots")
     run(args)

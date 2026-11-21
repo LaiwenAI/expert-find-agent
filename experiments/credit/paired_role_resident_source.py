@@ -8,6 +8,7 @@ from pathlib import Path
 import numpy as np
 
 from experiments.credit.engineering_joint_calibration import features, open_calibration, topic_prompts
+from experiments.credit.engineering_contribution_panel import normalize
 from experiments.credit.independent_source_confirmation import VERIFY
 from experiments.credit.keyword_author_rescue import PostingCatalog
 from experiments.credit.paired_role_mixed_verifier import availability
@@ -107,6 +108,23 @@ def resident_checks(service, pair, pools, clues, phrases, ranking, cutoff, model
     return {name: payload(service.index, pair if allowed and role_ok else None, selected,
                           role_calls=int(allowed), tokens=tokens if allowed else 0)
             for name, allowed in passes.items()}, passes, margins
+
+
+def clue_view(clues):
+    if all(clue == normalize(clue) and len(clue.split()) <= 8 for clue in clues):
+        return "keywords"
+    return "excerpt"
+
+
+def matched_source_fallback(service, ranking, scores, clues, phrases, cutoff, models):
+    pools = alternative_roles(scores)
+    candidates = pairs_for(service.index, ranking, [{pool[0]} for pool in pools])
+    if not candidates:
+        return payload(service.index, None, [])
+    name = "gold_matched"
+    outputs, _, _ = resident_checks(service, candidates[0], pools, clues, phrases, ranking, cutoff,
+                                    {name: models[clue_view(clues)][name]})
+    return outputs[name]
 
 
 def run_resident(service, labels, cutoff, lightweight, plos, reference, output, reverse, *, matched=None):
