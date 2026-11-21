@@ -91,15 +91,18 @@ def recover(criteria, ranked, issued, role_index, verifier, arm, task, maximum):
     return score_steps(recovery_steps(criteria, ranked, issued, role_index, arm, task, maximum), verifier)
 
 
-def recovery_steps(criteria, ranked, issued, role_index, arm, task, maximum):
-    if arm == "whole" or (issued and arm != "global_always") or not maximum:
-        return [], 0, False, 0
+def recovery_options(criteria, ranked, issued, role_index, arm):
     windows, postings = role_index
     shortlist = {eid: rank for rank, eid in enumerate(ranked)}
     hits = {i for term in role.terms(criteria[0]) for i in postings.get(term, ())}
     eligible = (windows[i] for i in sorted(hits) if windows[i]["expert"] not in issued
                 and (arm != "deeper_on_abstain" or windows[i]["expert"] in shortlist))
-    options = expanded.select(eligible, criteria, shortlist)[:ROLE_READS]
+    return expanded.select(eligible, criteria, shortlist)[:ROLE_READS]
+
+def recovery_steps(criteria, ranked, issued, role_index, arm, task, maximum):
+    if arm == "whole" or (issued and arm != "global_always") or not maximum:
+        return [], 0, False, 0
+    options = recovery_options(criteria, ranked, issued, role_index, arm)
     if not options:
         return [], 0, True, 0
     inputs = [(criterion, item["view"]["text"]) for item in options for criterion in criteria]
