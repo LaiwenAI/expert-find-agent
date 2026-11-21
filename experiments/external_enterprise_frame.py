@@ -58,12 +58,16 @@ def attachments(path):
                 yield member, check_output(["bsdtar", "-xOf", str(path), "--", member])
 
 
-def parse_detail(data):
+def detail_rows(data):
     with ZipFile(BytesIO(data)) as document:
         root = ElementTree.fromstring(document.read("word/document.xml"))
-    rows = [["\n".join("".join(t.text or "" for t in p.findall(".//w:t", NS))
+    return [["\n".join("".join(t.text or "" for t in p.findall(".//w:t", NS))
                       for p in cell.findall("./w:p", NS)).strip()
              for cell in row.findall("./w:tc", NS)] for row in root.findall(".//w:tr", NS)]
+
+
+def parse_detail(data):
+    rows = detail_rows(data)
     names = [row[-1] for row in rows if len(row) > 1 and row[0] == ORG]
     start = next((i for i, row in enumerate(rows) if row and row[0] == TECHNICAL), None)
     stop = next((i for i, row in enumerate(rows) if row and row[0] == COOPERATION), None)

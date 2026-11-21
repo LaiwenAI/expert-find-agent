@@ -184,8 +184,9 @@ def run(args):
     if args.overlap_review and args.projection is None:
         raise ValueError("Reproduce the semantic projection before building an overlap packet")
     destinations = [path for path in (args.output, args.private, args.projection) if path is not None]
-    if args.overlap_review:
-        destinations.append(args.overlap_review[1])
+    for option in (args.overlap_review, args.eligibility_pilot):
+        if option:
+            destinations.append(option[1])
     if len(set(destinations)) != len(destinations) or any(path.exists() for path in destinations):
         raise FileExistsError("Require fresh output paths")
     if any(digest_file(getattr(args, name)) != fingerprint
@@ -206,6 +207,12 @@ def run(args):
     spec = json.loads(args.protocol.read_bytes())
     write(args.private, dict(combined=combined, disjoint=disjoint,
                              prior_index_sha256=digest_file(args.previous_index)))
+    if args.eligibility_pilot:
+        from experiments.enterprise_eligibility_pilot import freeze
+
+        protocol, output = args.eligibility_pilot
+        freeze(args.private, combined, {r["id"]: r for r in prior + new}, protocol,
+               output, lambda value: CONTACT.sub("[contact]", value), (args.earlier, args.municipal))
     if args.projection is not None:
         representatives = selected + disjoint
         if ({r["id"]: r for r in representatives} != {r["id"]: r for r in combined}
@@ -265,4 +272,6 @@ if __name__ == "__main__":
     parser.add_argument("--projection", type=Path)
     parser.add_argument("--overlap-review", nargs=2, type=Path,
                         metavar=("SEMANTIC_SCREEN", "NEW_REVIEW_DIRECTORY"))
+    parser.add_argument("--eligibility-pilot", nargs=2, type=Path,
+                        metavar=("PILOT_PROTOCOL", "NEW_PILOT_DIRECTORY"))
     run(parser.parse_args())

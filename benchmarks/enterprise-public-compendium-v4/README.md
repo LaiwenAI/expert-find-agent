@@ -51,6 +51,11 @@ estimate the number of missed duplicates.
 
 [Frame counts, pinned source digests, and semantic-screen counts](results.json)
 
+The [eligibility pilot](../enterprise-eligibility-pilot-v1) freezes
+65 groups for an independent original-source audit. Those groups
+are reserved for the pilot and excluded from the later locked test.
+
+
 ## Reproduce
 
 Use the four public snapshot groups and historical workbook referenced
