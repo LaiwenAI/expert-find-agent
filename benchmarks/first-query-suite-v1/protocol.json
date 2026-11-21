@@ -1,0 +1,105 @@
+{
+  "suite": "first-query-suite-v1",
+  "public_tracks": {
+    "open_topic": {
+      "archive": "benchmarks/open-topic-role-matched-v1/results.json",
+      "archive_sha256": "affd946406775de8f3627f1d92c84d69fc8342bfe270c9496a9b2f78ef71adbb",
+      "runner": "experiments.credit.open_topic_role_matched",
+      "input_count": 7,
+      "pins": {
+        "embedding": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+        "reference_sha256": "639c1d28a62a6d4020d512802ce10dafbc6c1e3fc9c5d3abec7f02e9e536b32a"
+      },
+      "frozen_controls": [
+        "owner_gap"
+      ],
+      "panels": {
+        "plos": {
+          "queries": 160,
+          "issued_quota": 45
+        },
+        "elife": {
+          "queries": 51,
+          "issued_quota": 3
+        }
+      }
+    },
+    "linked_role": {
+      "archive": "benchmarks/linked-role-lane-index-v1/results.json",
+      "archive_sha256": "ad58d42a93608434d4ead6a1f6d494dab798a8b5338f045219bfa0c0651d0677",
+      "runner": "experiments.credit.linked_role_lane_index",
+      "input_count": 5,
+      "pins": {
+        "embedding": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+        "projection_sha256": {
+          "extended": "8ab52c04301c4b3583ed294d0d62f2aacd652a6d44bd51f1a47286b0d2516fa2",
+          "confirmation": "ee6715866d53d973a437d13c679f8ef2efa8a995d721782843c5b1944859f2a3"
+        }
+      },
+      "frozen_controls": [
+        "full"
+      ],
+      "panels": {
+        "extended": 205,
+        "confirmation": 193,
+        "extended_connected": 205,
+        "confirmation_connected": 193
+      },
+      "depths": [
+        32,
+        128
+      ]
+    },
+    "trec": {
+      "archive": "benchmarks/trec-joint-owner-source-plan-v1/results.json",
+      "archive_sha256": "be1583f3587b7267f98782702d026f27db9f08258020d0f1c3d241dfee6b09f8",
+      "runner": "experiments.trec_enterprise.joint_owner_source_plan",
+      "input_count": 1,
+      "pins": {
+        "inputs": {
+          "ent06.qrels.expert": "b9a0fe026b2fb06273d8f30e6a5cc77a4fef8ed68babe8dc7f3e3a91a192b12d",
+          "ent06.qrels.expert-docs": "a31c82f786475dc17e88dcf2af8cad4528400a9bbbf5710f6ad2724000ac6e29",
+          "ent06.expert.topics": "103841c11f51744fb33595edfca193540322410425c60e3250f7060d837a4b60"
+        },
+        "nomination_universe": 60
+      },
+      "frozen_controls": [
+        "reuse_reference",
+        "fitted_legacy",
+        "planned_fixed"
+      ],
+      "queries": 49
+    },
+    "cof": {
+      "archive": "benchmarks/cof-relevance-weighted-routing-v1/results.json",
+      "archive_sha256": "f59dff0953c85343bd405fabff63cd3e0ac298ad8c8599ff207cf9156ab0909c",
+      "runner": "experiments.retrieval.cof_relevance_weighted_routing",
+      "input_count": 3,
+      "pins": {
+        "inputs": {
+          "KDD": "a618b603caaaa456defb1551aaa30e4ba3f38f4c16fbe73eb432229e577ee1fe",
+          "SciRepEval": "822b33f66a45e8aaa4a4bc4193ad63f612af5fda595d61ec275cf33c14f6c836"
+        }
+      },
+      "frozen_controls": [
+        "dense_state"
+      ],
+      "panels": {
+        "KDD": {
+          "queries": 122,
+          "cited_quota": 288
+        },
+        "SciRepEval": {
+          "queries": 59,
+          "cited_quota": 99
+        }
+      }
+    }
+  },
+  "enterprise": {
+    "protocol": "benchmarks/enterprise-sealed-first-query-v1/protocol.json",
+    "protocol_sha256": "dea5e5ac8f27a7dac39c300290b85a9612f23184dc3831659320578df9ad30d1",
+    "groups": 123,
+    "scope": "Sealed rescue diagnostic; prospective enterprise acceptance is a separate cohort"
+  }
+}
