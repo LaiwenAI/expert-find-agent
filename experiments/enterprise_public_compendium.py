@@ -181,7 +181,11 @@ def old_rows(earlier, municipal, regional, workbook, protocol, report, index, mu
 
 
 def run(args):
-    destinations = (args.output, args.private) if args.projection is None else (args.output, args.private, args.projection)
+    if args.overlap_review and args.projection is None:
+        raise ValueError("Reproduce the semantic projection before building an overlap packet")
+    destinations = [path for path in (args.output, args.private, args.projection) if path is not None]
+    if args.overlap_review:
+        destinations.append(args.overlap_review[1])
     if len(set(destinations)) != len(destinations) or any(path.exists() for path in destinations):
         raise FileExistsError("Require fresh output paths")
     if any(digest_file(getattr(args, name)) != fingerprint
@@ -208,12 +212,27 @@ def run(args):
                 or len(representatives) != len(combined)):
             raise ValueError("Combined exposure groups must match the disjoint frame")
         rows = {r["id"]: r for r in prior + new + history}
-        texts = [rows[r["id"]]["zh"] for r in representatives] + [r["zh"] for r in history]
+        external = [rows[r["id"]] for r in representatives]
+        texts = [r["zh"] for r in external + history]
         views = [windows(CONTACT.sub("[contact]", value)) for value in texts]
         write_private(args.projection, [dict(
             frame_sha256=digest_file(args.private), external=len(combined), earlier=len(selected),
             focus=list(range(len(selected), len(combined))), views=views,
         )])
+        if args.overlap_review:
+            from experiments.external_enterprise_overlap import build_packet
+
+            screen_path, review_directory = args.overlap_review
+            semantic = json.loads(screen_path.read_bytes())
+            if (semantic["frame_sha256"] != digest_file(args.private)
+                    or semantic["projection_sha256"] != digest_file(args.projection)
+                    or semantic["earlier_groups"] != len(selected)):
+                raise ValueError("Semantic screen does not bind the reproduced frame and projection")
+            external_masked = [r | {"zh": CONTACT.sub("[contact]", r["zh"])} for r in external]
+            historical_masked = [r | {"zh": CONTACT.sub("[contact]", r["zh"])} for r in history]
+            build_packet(external_masked, historical_masked, range(len(selected), len(combined)),
+                         semantic, review_directory, earlier=len(selected),
+                         salt="enterprise-public-compendium-v4")
     with args.output.open("x", encoding="utf-8") as stream:
         json.dump(dict(
             sources={
@@ -243,5 +262,7 @@ if __name__ == "__main__":
     for field in ("earlier", "municipal", "regional", "workbook", "protocol", "previous",
                   "previous_index", "municipal_report", "yangzhou", "fujian", "output", "private"):
         parser.add_argument(field, type=Path)
-    parser.add_argument('--projection', type=Path)
+    parser.add_argument("--projection", type=Path)
+    parser.add_argument("--overlap-review", nargs=2, type=Path,
+                        metavar=("SEMANTIC_SCREEN", "NEW_REVIEW_DIRECTORY"))
     run(parser.parse_args())

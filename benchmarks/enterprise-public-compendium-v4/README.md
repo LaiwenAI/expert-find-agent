@@ -41,7 +41,13 @@ results in both orders. At cosine 0.85, one added group surfaced
 against the historical corpus and none against the earlier frame
 or the other added groups. No added group reached 0.90 in these
 comparisons. The window projection and similarity scores are tools
-for triage. Manual issuer and semantic review remains open.
+for triage. A separate issuer-string comparison surfaces two focal
+groups at 0.85 among the additions and zero at 0.90. The strongest
+below-floor pairs form a 48-case packet across the three exposure
+strata, shared by two blinded reviewer copies. Two parser and packet
+replays reproduce the files byte for byte. The packet contains no
+completed human judgments. It does not certify independence or
+estimate the number of missed duplicates.
 
 [Frame counts, pinned source digests, and semantic-screen counts](results.json)
 
@@ -74,3 +80,17 @@ PYTHONPATH=src:. python -m experiments.external_enterprise_overlap gpu \
 
 The semantic replay runs inside a Slurm GPU allocation and repeats
 with order offset 1.
+
+For the review packet, rerun the compendium command with fresh
+aggregate, frame, and projection paths, adding
+`--overlap-review PRIVATE_SEMANTIC_SCREEN NEW_PRIVATE_REVIEW_DIR`.
+The screen must match both the reconstructed frame and the text
+projection hashes. The review copies omit channel, score, and
+exposure status. Review intent and organizational linkage
+independently; explicit uncertainty remains pending. Use the registered
+checker after both reviewers return their copies.
+
+```sh
+PYTHONPATH=src:. python -m experiments.check_enterprise_panel_review \
+  PRIVATE_REVIEW_DIR REVIEWER_A_JSONL REVIEWER_B_JSONL
+```
