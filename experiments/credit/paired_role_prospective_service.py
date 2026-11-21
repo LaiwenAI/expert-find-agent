@@ -19,7 +19,7 @@ from experiments.credit.engineering_cross_source_search import TOPIC_TASK, candi
 from experiments.credit.engineering_role_banks import TASK, projections, queries
 from experiments.credit.joint_request_queue import Request
 from experiments.credit.keyword_author_rescue import PostingCatalog
-from experiments.credit.paired_role_verification import PairedReader, apply, proposals
+from experiments.credit.paired_role_verification import PairedReader, alternative_roles, apply, proposals
 from experiments.credit.plos_role_inventory import ROLES
 from experiments.credit.prose_budgeted_source_role import evidence
 from experiments.credit.source_role_factorial_diagnosis import payload, plan
@@ -29,6 +29,7 @@ from experiments.litsearch.dense_cache import verify_checkpoint
 
 
 ARMS = ("baseline", "batch", "reserve_agreement")
+PRESCREEN_ARMS = ("baseline", "reserve_agreement", "reserve_prescreen")
 RATES = (28, 60)
 FROZEN_SHA = "f3f24de1b725c529b6dc142a0eedfc6413129bc67643e9b74d0909df0b94c956"
 
@@ -65,11 +66,21 @@ def execute(service, request, arm, cutoff):
     pair, base, response = state["pair"], state["roles"], state["response"]
     if not pair or response["calls"] or response["owners"]:
         return json.dumps(response)
-    if arm == "reserve_agreement":
+    if arm in ("reserve_agreement", "reserve_prescreen"):
         checked, forwards, tokens, _ = role_check(service.index, pair, scores, service.bands,
                                                   service.role, roles, service.cutoffs["role"])
         if forwards or candidates(service.index, pair, checked):
             return json.dumps(payload(service.index, pair, checked, role_calls=forwards, tokens=tokens))
+    if arm == "reserve_prescreen":
+        pools = alternative_roles(scores)
+        eligible = [pool[0] for pool in pools]
+        # Dense agreement admits only this label pair. With no owner for
+        # that pair, the role reader cannot change what gets issued.
+        if cutoff is None or not candidates(service.index, pair, [{role} for role in eligible]):
+            return json.dumps(response)
+        choice, margin, tokens = service.role.batched(roles, pools)
+        observation = dict(choice=choice if choice == eligible else None, margin=margin, forwards=1, tokens=tokens)
+        return json.dumps(apply(service.index, pair, base, observation, cutoff))
     methods = ("two_batched", "top_one") if arm == "reserve_agreement" else ("two_batched",)
     observations = proposals(service.index, pair, base, roles, scores, service.role, methods)
     batch = observations["two_batched"]
@@ -138,7 +149,8 @@ def run(args):
     service = Service(index, encoder, banks, bands, source, reader, frozen["cutoffs"])
     labels = workload(index, selected, wording)
     by_arm, results = {}, {}
-    arms = ARMS[::-1] if args.reverse else ARMS
+    requested = PRESCREEN_ARMS if args.prescreen else ARMS
+    arms = requested[::-1] if args.reverse else requested
     for offset, rate in enumerate(RATES):
         trace, arrivals = arrivals_for(labels, rate)
         results[rate] = {}
@@ -160,10 +172,13 @@ def run(args):
             by_arm[arm] = responses
             results[rate][arm] = detail
             print(rate, arm, detail["counts"], round(detail["p95_ms"]["total_ms"], 2), flush=True)
+    if args.prescreen and by_arm["reserve_agreement"] != by_arm["reserve_prescreen"]:
+        changed = sum(by_arm["reserve_agreement"][req] != by_arm["reserve_prescreen"][req] for req in labels)
+        raise ValueError(f"Agreement prescreen changed {changed} evidence payloads")
     groups = clusters(selected, articles)
     metrics = {arm: summarize_proofs(proofs, labels) for arm, proofs in by_arm.items()}
     contrasts = {}
-    for arm in ARMS:
+    for arm in requested:
         contrasts[arm] = {}
         for view in ("keywords", "excerpt"):
             rows = [req for req, label in labels.items() if label["view"] == view]
@@ -184,7 +199,7 @@ def run(args):
     write_json(args.output, dict(
         script_sha256=digest(Path(__file__)), projection_sha256=digest(args.projection),
         manifest_sha256=digest(args.manifest), paired_results_sha256=digest(args.paired_frozen),
-        gpu=torch.cuda.get_device_name(), reverse=args.reverse, census=census,
+        gpu=torch.cuda.get_device_name(), reverse=args.reverse, prescreen=args.prescreen, census=census,
         distinct_requests=len(labels), author_connected_groups=len(set(groups.values())),
         cutoffs=frozen["cutoffs"] | {"two_batched": cutoff}, results=results, quality=contrasts,
         response_signatures=signatures, **revisions,
@@ -196,5 +211,6 @@ if __name__ == "__main__":
     for name in ("projection", "manifest", "paired_frozen", "niso", "training", "bands",
                  "source_frozen", "role_frozen", "embedding", "source_reader", "role_reader", "output"):
         parser.add_argument(name, type=Path)
+    parser.add_argument("--prescreen", action="store_true")
     parser.add_argument("--reverse", action="store_true")
     run(parser.parse_args())
