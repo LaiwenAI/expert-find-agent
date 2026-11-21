@@ -14,9 +14,17 @@ from experiments.credit.prose_budgeted_source_role import evidence
 from experiments.followir.core17_reranking import digest, write_json
 
 
-def evaluate(service, labels, cutoff, lightweight, resident, groups, output, reverse, metadata):
+def top_three_directional(candidate, ranking):
+    """Both lower-rank positions and cross-clue direction are label-free."""
+    return all(side["rank"][own] < 3 and side["cosine"][own] > side["cosine"][other]
+               for side, own, other in zip(ranking, candidate, reversed(candidate), strict=True))
+
+
+def evaluate(service, labels, cutoff, lightweight, resident, groups, output, reverse, metadata, *, guarded=False):
     requests = list(labels)
-    arms = MATCHED_SERVICE_ARMS[::-1] if reverse else MATCHED_SERVICE_ARMS
+    arms = (*MATCHED_SERVICE_ARMS, "guarded_resident") if guarded else MATCHED_SERVICE_ARMS
+    if reverse:
+        arms = arms[::-1]
     results = defaultdict(lambda: defaultdict(Counter))
     timings = defaultdict(lambda: defaultdict(list))
     issued_groups = defaultdict(set)
@@ -34,8 +42,11 @@ def evaluate(service, labels, cutoff, lightweight, resident, groups, output, rev
             for arm in ordered:
                 if missing is not None and arm == "baseline":
                     continue
+                active = arm == "guarded_resident"
+                policy = "matched_resident" if active else arm
+                guard = top_three_directional if active else None
                 start = perf_counter()
-                raw = execute(service, req, arm, cutoff, lightweight, resident, withheld=missing)
+                raw = execute(service, req, policy, cutoff, lightweight, resident, withheld=missing, source_guard=guard)
                 elapsed = (perf_counter() - start) * 1000
                 response = json.loads(raw)
                 if response["calls"] > 1 or sum(response[k] for k in ("role_calls", "source_calls")) != response["calls"]:
@@ -68,7 +79,8 @@ def evaluate(service, labels, cutoff, lightweight, resident, groups, output, rev
         positive = [req for req in requests if labels[req]["gold"] and labels[req]["view"] == view]
         group_ids = [groups[labels[req]["family"]] for req in positive]
         report["both_present"][view]["positives"] = len(positive)
-        for policy in ("dense_joint", "matched_resident"):
+        comparisons = ("dense_joint", "matched_resident", "guarded_resident") if guarded else ("dense_joint", "matched_resident")
+        for policy in comparisons:
             contrast = [int(exact[policy][req]) - int(exact["student_then_teacher"][req]) for req in positive]
             report["both_present"][view][policy]["paired_strict_delta_vs_cascade"] = clustered_paired_interval(
                 contrast, group_ids,

@@ -84,14 +84,14 @@ def finish_role(service, result):
     return result
 
 
-def execute(service, request, arm, cutoff, lightweight=None, resident=None, *, withheld=None):
+def execute(service, request, arm, cutoff, lightweight=None, resident=None, *, withheld=None, inspect_source=None, source_guard=None):
     if arm == "baseline":
         if withheld is not None:
             raise ValueError("The original single-slot arm does not support corpus masking")
         return service.search(request, "screened_one_call")
     clues, roles, prompts = request_inputs(request)
     result = resolve(service, arm, cutoff, lightweight, resident, clues, roles, service.encoder.encode(prompts),
-                     withheld=withheld)
+                     withheld=withheld, inspect_source=inspect_source, source_guard=source_guard)
     return finish_role(service, result)
 
 
@@ -131,7 +131,7 @@ def execute_group(service, requests, arm, cutoff, lightweight, resident, stage):
     yield from completed
 
 
-def resolve(service, arm, cutoff, lightweight, resident, clues, roles, vectors, *, withheld=None):
+def resolve(service, arm, cutoff, lightweight, resident, clues, roles, vectors, *, withheld=None, inspect_source=None, source_guard=None):
     scores = {name: vectors[2:] @ service.banks[name].T for name in service.bands}
     ranking = service.index.full_rank(vectors[:2], clues, withheld)
     state = plan(service, ranking, scores, clues, roles, withheld, "screened", run_role=False)
@@ -144,6 +144,10 @@ def resolve(service, arm, cutoff, lightweight, resident, clues, roles, vectors, 
             if not proposal:
                 return json.dumps(payload(service.index, None, []))
             candidate, pools = proposal
+            if inspect_source is not None:
+                inspect_source(candidate, clues, ranking)
+            if source_guard is not None and not source_guard(candidate, ranking):
+                return json.dumps(payload(service.index, None, []))
 
             def finish(outcome):
                 choices, gap, tokens = outcome
@@ -362,12 +366,16 @@ def run(args):
 
                 if manifest.get("sampling_salt") != SALT:
                     raise ValueError("Expected the fixed extended eLife holdout")
+                if args.source_audit is not None:
+                    from experiments.credit.elife_source_identity_audit import evaluate
                 evaluate(service, labels, cutoff, lightweight, resident, clusters(selected, articles),
                          args.output, args.reverse, dict(manifest_sha256=digest(args.manifest),
                                                        projection_sha256=digest(args.projection),
                                                        calibration=matched_serving, panel=census,
                                                        lightweight=report, gpu=torch.cuda.get_device_name(),
-                                                       **revisions))
+                                                       **revisions),
+                         **({"prior": args.source_audit} if args.source_audit is not None else
+                            {"guarded": True} if args.guarded_source_replay else {}))
                 return
             requested = MATCHED_SERVICE_ARMS
             if args.embedding_batch_capacity or args.role_batch_capacity or args.mixed_role_batch_capacity:
@@ -501,6 +509,9 @@ if __name__ == "__main__":
     parser.add_argument("--matched-source-supplement", type=Path)
     parser.add_argument("--matched-source-supplement-manifest", type=Path)
     parser.add_argument("--reverse", action="store_true")
+    source_diagnostics = parser.add_mutually_exclusive_group()
+    source_diagnostics.add_argument("--source-audit", type=Path)
+    source_diagnostics.add_argument("--guarded-source-replay", action="store_true")
     diagnostics = parser.add_mutually_exclusive_group()
     diagnostics.add_argument("--stage-audit-reference", type=Path)
     diagnostics.add_argument("--source-postings-reference", type=Path)
@@ -516,6 +527,8 @@ if __name__ == "__main__":
     args = parser.parse_args()
     if (args.embedding_batch_capacity or args.role_batch_capacity or args.mixed_role_batch_capacity) and args.matched_source_service_reference is None:
         parser.error("Batching requires --matched-source-service-reference")
+    if (args.source_audit is not None or args.guarded_source_replay) and args.fresh_source_reference is None:
+        parser.error("Source diagnostics require --fresh-source-reference")
     if args.repeats < 1:
         parser.error("--repeats must be positive")
     if args.cascade and not args.plos:
