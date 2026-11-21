@@ -1,0 +1,294 @@
+{
+  "slurm_array": 46289,
+  "compute_node": "ws3",
+  "reference_proofs_match": true,
+  "repeat_identical": true,
+  "panels": {
+    "holdout": {
+      "requests": 48,
+      "counts": {
+        "keywords": {
+          "cascade": {
+            "issued": 10,
+            "strict": 10,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 24,
+            "positives": 12,
+            "search_calls": 7,
+            "source_calls": 1,
+            "role_calls": 6
+          },
+          "dense_joint": {
+            "issued": 12,
+            "strict": 11,
+            "adverse": 1,
+            "wrong_source": 0,
+            "requests": 24,
+            "positives": 12,
+            "search_calls": 9,
+            "source_calls": 3,
+            "role_calls": 6
+          },
+          "hard": {
+            "issued": 10,
+            "strict": 10,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 24,
+            "positives": 12,
+            "search_calls": 7,
+            "source_calls": 1,
+            "role_calls": 6
+          },
+          "soft": {
+            "issued": 10,
+            "strict": 10,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 24,
+            "positives": 12,
+            "search_calls": 7,
+            "source_calls": 1,
+            "role_calls": 6
+          }
+        },
+        "excerpt": {
+          "cascade": {
+            "issued": 12,
+            "strict": 12,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 24,
+            "positives": 12,
+            "search_calls": 10,
+            "source_calls": 0,
+            "role_calls": 10
+          },
+          "dense_joint": {
+            "issued": 12,
+            "strict": 12,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 24,
+            "positives": 12,
+            "search_calls": 10,
+            "source_calls": 0,
+            "role_calls": 10
+          },
+          "hard": {
+            "issued": 12,
+            "strict": 12,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 24,
+            "positives": 12,
+            "search_calls": 10,
+            "source_calls": 0,
+            "role_calls": 10
+          },
+          "soft": {
+            "issued": 12,
+            "strict": 12,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 24,
+            "positives": 12,
+            "search_calls": 10,
+            "source_calls": 0,
+            "role_calls": 10
+          }
+        }
+      },
+      "signatures": {
+        "cascade": "668b7662fe63b8b01a30222d0ee73ed4532881930ce116442e5ac8decc645161",
+        "dense_joint": "a604fcc492c773e1458649b4d123de05fdf8255f37cc9221877f8212b014aea6",
+        "hard": "668b7662fe63b8b01a30222d0ee73ed4532881930ce116442e5ac8decc645161",
+        "soft": "668b7662fe63b8b01a30222d0ee73ed4532881930ce116442e5ac8decc645161"
+      },
+      "calibration": {
+        "hard": {
+          "strict": 24,
+          "adverse": 0,
+          "cutoff": 0.0,
+          "requests": 48
+        },
+        "soft": {
+          "strict": 24,
+          "adverse": 0,
+          "cutoff": 0.0,
+          "requests": 48
+        }
+      },
+      "training": {
+        "phrases": 84,
+        "masked_examples": 299,
+        "teacher_correct": 220,
+        "loss": {
+          "hard": 0.21003344655036926,
+          "soft": 0.22394457459449768
+        },
+        "training_device": "NVIDIA GeForce RTX 5090"
+      },
+      "fallback_diagnostics": {
+        "keywords": {
+          "hard": {
+            "evaluated": 2,
+            "role_prediction": 1,
+            "source_called": 0
+          },
+          "soft": {
+            "evaluated": 2,
+            "role_prediction": 1,
+            "source_called": 0
+          }
+        }
+      },
+      "reference_sha256": "c3fca40006675e01376ae9482c808f0466851462ad0f50c7ba73bc34473d7a83",
+      "script_sha256": "fde67eb66b80d057d68cc0bb393e0c81536f92f1e23e5871e90078707bfb2717"
+    },
+    "development": {
+      "requests": 108,
+      "counts": {
+        "keywords": {
+          "cascade": {
+            "issued": 12,
+            "strict": 12,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 54,
+            "positives": 27,
+            "search_calls": 9,
+            "source_calls": 4,
+            "role_calls": 5
+          },
+          "dense_joint": {
+            "issued": 15,
+            "strict": 15,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 54,
+            "positives": 27,
+            "search_calls": 13,
+            "source_calls": 8,
+            "role_calls": 5
+          },
+          "hard": {
+            "issued": 13,
+            "strict": 13,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 54,
+            "positives": 27,
+            "search_calls": 11,
+            "source_calls": 6,
+            "role_calls": 5
+          },
+          "soft": {
+            "issued": 13,
+            "strict": 13,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 54,
+            "positives": 27,
+            "search_calls": 11,
+            "source_calls": 6,
+            "role_calls": 5
+          }
+        },
+        "excerpt": {
+          "cascade": {
+            "issued": 18,
+            "strict": 18,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 54,
+            "positives": 27,
+            "search_calls": 13,
+            "source_calls": 0,
+            "role_calls": 13
+          },
+          "dense_joint": {
+            "issued": 18,
+            "strict": 18,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 54,
+            "positives": 27,
+            "search_calls": 13,
+            "source_calls": 0,
+            "role_calls": 13
+          },
+          "hard": {
+            "issued": 18,
+            "strict": 18,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 54,
+            "positives": 27,
+            "search_calls": 13,
+            "source_calls": 0,
+            "role_calls": 13
+          },
+          "soft": {
+            "issued": 18,
+            "strict": 18,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 54,
+            "positives": 27,
+            "search_calls": 13,
+            "source_calls": 0,
+            "role_calls": 13
+          }
+        }
+      },
+      "signatures": {
+        "cascade": "48c465c15cda03ce97e6d582f80337ad1ebaf711b6b4ee7e408b07be8273e5a4",
+        "dense_joint": "5aa55880fe13a0c4fc9390a286866b90199719d2abc2d196909a373963bdbe09",
+        "hard": "73b7ed359fc4f1822eb6ad0759456845ad4585100c5e8d1ccb55060daf926b6e",
+        "soft": "73b7ed359fc4f1822eb6ad0759456845ad4585100c5e8d1ccb55060daf926b6e"
+      },
+      "calibration": {
+        "hard": {
+          "strict": 24,
+          "adverse": 0,
+          "cutoff": 0.0,
+          "requests": 48
+        },
+        "soft": {
+          "strict": 24,
+          "adverse": 0,
+          "cutoff": 0.0,
+          "requests": 48
+        }
+      },
+      "training": {
+        "phrases": 84,
+        "masked_examples": 299,
+        "teacher_correct": 220,
+        "loss": {
+          "hard": 0.21003344655036926,
+          "soft": 0.22394457459449768
+        },
+        "training_device": "NVIDIA GeForce RTX 5090"
+      },
+      "fallback_diagnostics": {
+        "keywords": {
+          "hard": {
+            "evaluated": 4,
+            "role_prediction": 3,
+            "source_called": 2
+          },
+          "soft": {
+            "evaluated": 4,
+            "role_prediction": 3,
+            "source_called": 2
+          }
+        }
+      },
+      "reference_sha256": "9a6570b4367907497d540d32d944c23cba68f0d078d223b8497c8cdf038908bd",
+      "script_sha256": "fde67eb66b80d057d68cc0bb393e0c81536f92f1e23e5871e90078707bfb2717"
+    }
+  }
+}

@@ -43,7 +43,7 @@ def keyed_order(phrase, roles):
 
 class PairedReader(RoleReader):
     @torch.inference_mode()
-    def read_options(self, prompts, choices):
+    def option_logits(self, prompts):
         tokenizer = self.tokenizer
         rendered = [tokenizer.apply_chat_template([
             dict(role="system", content=system), dict(role="user", content=user),
@@ -58,6 +58,10 @@ class PairedReader(RoleReader):
         logits = self.model(**inputs, position_ids=positions, use_cache=False, logits_to_keep=1).logits
         scores = logits[:, -1, self.digits].float().cpu().numpy()
         tokens = int(inputs["attention_mask"].sum().item())
+        return scores, tokens
+
+    def read_options(self, prompts, choices):
+        scores, tokens = self.option_logits(prompts)
         decisions, gaps = [], []
         for row, options in zip(scores, choices, strict=True):
             best, second = np.argsort(-row[:len(options)], kind="stable")[:2]
@@ -65,7 +69,7 @@ class PairedReader(RoleReader):
             gaps.append(float(row[best] - row[second]))
         return decisions, min(gaps), tokens
 
-    def batched(self, phrases, pools):
+    def format_batched(self, phrases, pools):
         prompts, choices = [], []
         for phrase, pool in zip(phrases, pools, strict=True):
             options = keyed_order(phrase, pool)
@@ -75,6 +79,10 @@ class PairedReader(RoleReader):
             prompts.append(("Classify a research activity under CRediT. Return exactly one option letter.",
                             f"Which role best matches this activity?\n{phrase}\n\n{listing}"))
             choices.append(options + [None])
+        return prompts, choices
+
+    def batched(self, phrases, pools):
+        prompts, choices = self.format_batched(phrases, pools)
         return self.read_options(prompts, choices)
 
     def packed(self, phrases, pools):

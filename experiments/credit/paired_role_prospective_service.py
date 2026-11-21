@@ -199,6 +199,15 @@ def run(args):
             run_joint(service, labels, cutoff, heads, fit["reserve_student"]["cutoff"],
                       args.joint_postings_reference, args.output, args.reverse)
         return
+    if args.soft_role_reference is not None:
+        from experiments.credit.paired_role_soft_distillation import run_distillation
+
+        if digest(args.plos) != frozen["inputs"]["plos"]:
+            raise ValueError("Changed PLOS calibration projection")
+        heads, _, fit = fit_lightweight(args.plos, service, definitions, training)
+        run_distillation(service, labels, cutoff, (heads, definitions, fit), training, args.plos,
+                         args.soft_role_reference, args.output, args.reverse)
+        return
     by_arm, results = {}, {}
     lightweight = report = None
     requested = PRESCREEN_ARMS if args.prescreen else ARMS
@@ -294,6 +303,7 @@ if __name__ == "__main__":
     diagnostics.add_argument("--joint-postings-service", action="store_true")
     diagnostics.add_argument("--joint-guard-reference", type=Path)
     diagnostics.add_argument("--mixed-role-reference", type=Path)
+    diagnostics.add_argument("--soft-role-reference", type=Path)
     args = parser.parse_args()
     if args.cascade and not args.plos:
         parser.error("--cascade requires --plos")
@@ -305,4 +315,6 @@ if __name__ == "__main__":
         parser.error("--joint-guard-reference requires --plos")
     if args.mixed_role_reference is not None and args.plos is None:
         parser.error("--mixed-role-reference requires --plos")
+    if args.soft_role_reference is not None and args.plos is None:
+        parser.error("--soft-role-reference requires --plos")
     run(args)
