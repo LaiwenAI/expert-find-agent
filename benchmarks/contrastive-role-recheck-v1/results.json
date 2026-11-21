@@ -1,0 +1,1430 @@
+{
+  "slurm_array": 45987,
+  "node": "ws3",
+  "runs": [
+    {
+      "script_sha256": "20ee96b9847f85d9107fc2efbcec63a56043b24c32b88f7c9d9a1498174daed2",
+      "dev_sha256": "4ce67b1ff52d869f133bd5318bad2573502d12aae065c75c9407c14754171c89",
+      "holdout_sha256": "38bc5e6bd42e3b2f427a42a552cae11bc0813e50f2e601ee9e10a298fe47925f",
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "reader_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "reverse": false,
+      "fit": {
+        "names": {
+          "cutoff": 0.0
+        },
+        "pair_names_raw": {
+          "cutoff": 0.0
+        },
+        "names_calibrated": {
+          "cutoff": 0.0,
+          "totals": {
+            "issued": 54,
+            "proof": 52,
+            "adverse": 2,
+            "swap_issued": 2,
+            "substitute": 0
+          }
+        },
+        "pair_names": {
+          "cutoff": 3.5,
+          "totals": {
+            "issued": 52,
+            "proof": 50,
+            "adverse": 2,
+            "swap_issued": 2,
+            "substitute": 0
+          }
+        },
+        "pair_contrast": {
+          "cutoff": 8.5,
+          "totals": {
+            "issued": 43,
+            "proof": 41,
+            "adverse": 2,
+            "swap_issued": 2,
+            "substitute": 0
+          }
+        },
+        "pair_stable": {
+          "cutoff": 0.0,
+          "totals": {
+            "issued": 41,
+            "proof": 41,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0
+          }
+        }
+      },
+      "dev": {
+        "admitted": 280,
+        "dropped": {
+          "incomplete_declaration": 42
+        },
+        "links": 12,
+        "paper_pairs": 10,
+        "independent_people": 10,
+        "variants": {
+          "present": 51,
+          "swap": 51
+        }
+      },
+      "holdout": {
+        "admitted": 393,
+        "dropped": {
+          "incomplete_or_ambiguous": 28
+        },
+        "links": 16,
+        "paper_pairs": 13,
+        "linked_papers": 25,
+        "contributors": 14,
+        "variants": {
+          "present": 66,
+          "swap": 66
+        }
+      },
+      "development": {
+        "excerpt|all|names": {
+          "totals": {
+            "issued": 30,
+            "proof": 29,
+            "adverse": 1,
+            "swap_issued": 1,
+            "substitute": 0,
+            "calls": 22,
+            "tokens": 1999,
+            "requests": 102
+          },
+          "p95_ms": 24.17091162060387
+        },
+        "excerpt|all|names_calibrated": {
+          "totals": {
+            "issued": 30,
+            "proof": 29,
+            "adverse": 1,
+            "swap_issued": 1,
+            "substitute": 0,
+            "calls": 22,
+            "tokens": 1999,
+            "requests": 102
+          },
+          "p95_ms": 24.164738063700494
+        },
+        "excerpt|all|pair_contrast": {
+          "totals": {
+            "issued": 24,
+            "proof": 23,
+            "adverse": 1,
+            "swap_issued": 1,
+            "substitute": 0,
+            "calls": 22,
+            "tokens": 2186,
+            "requests": 102
+          },
+          "p95_ms": 23.364643764216453
+        },
+        "excerpt|all|pair_names": {
+          "totals": {
+            "issued": 29,
+            "proof": 28,
+            "adverse": 1,
+            "swap_issued": 1,
+            "substitute": 0,
+            "calls": 22,
+            "tokens": 1604,
+            "requests": 102
+          },
+          "p95_ms": 23.615277541102834
+        },
+        "excerpt|all|pair_names_raw": {
+          "totals": {
+            "issued": 31,
+            "proof": 28,
+            "adverse": 3,
+            "swap_issued": 2,
+            "substitute": 0,
+            "calls": 22,
+            "tokens": 1604,
+            "requests": 102
+          },
+          "p95_ms": 23.61533291405066
+        },
+        "excerpt|all|pair_stable": {
+          "totals": {
+            "issued": 23,
+            "proof": 23,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 22,
+            "tokens": 4372,
+            "requests": 102
+          },
+          "p95_ms": 27.61032546404749
+        },
+        "keywords|all|names": {
+          "totals": {
+            "issued": 24,
+            "proof": 23,
+            "adverse": 1,
+            "swap_issued": 1,
+            "substitute": 0,
+            "calls": 17,
+            "tokens": 1600,
+            "requests": 102
+          },
+          "p95_ms": 21.367021300829947
+        },
+        "keywords|all|names_calibrated": {
+          "totals": {
+            "issued": 24,
+            "proof": 23,
+            "adverse": 1,
+            "swap_issued": 1,
+            "substitute": 0,
+            "calls": 17,
+            "tokens": 1600,
+            "requests": 102
+          },
+          "p95_ms": 21.360803412972018
+        },
+        "keywords|all|pair_contrast": {
+          "totals": {
+            "issued": 19,
+            "proof": 18,
+            "adverse": 1,
+            "swap_issued": 1,
+            "substitute": 0,
+            "calls": 17,
+            "tokens": 1699,
+            "requests": 102
+          },
+          "p95_ms": 21.445826586568728
+        },
+        "keywords|all|pair_names": {
+          "totals": {
+            "issued": 23,
+            "proof": 22,
+            "adverse": 1,
+            "swap_issued": 1,
+            "substitute": 0,
+            "calls": 17,
+            "tokens": 1257,
+            "requests": 102
+          },
+          "p95_ms": 21.31877342471853
+        },
+        "keywords|all|pair_names_raw": {
+          "totals": {
+            "issued": 25,
+            "proof": 22,
+            "adverse": 3,
+            "swap_issued": 2,
+            "substitute": 0,
+            "calls": 17,
+            "tokens": 1257,
+            "requests": 102
+          },
+          "p95_ms": 21.31913846824318
+        },
+        "keywords|all|pair_stable": {
+          "totals": {
+            "issued": 18,
+            "proof": 18,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 17,
+            "tokens": 3398,
+            "requests": 102
+          },
+          "p95_ms": 25.70913180243224
+        }
+      },
+      "results": {
+        "excerpt|all|names": {
+          "totals": {
+            "issued": 48,
+            "proof": 42,
+            "adverse": 6,
+            "swap_issued": 1,
+            "substitute": 0,
+            "calls": 32,
+            "tokens": 3074,
+            "requests": 132
+          },
+          "p95_ms": 26.438158995006233
+        },
+        "excerpt|all|names_calibrated": {
+          "totals": {
+            "issued": 48,
+            "proof": 42,
+            "adverse": 6,
+            "swap_issued": 1,
+            "substitute": 0,
+            "calls": 32,
+            "tokens": 3074,
+            "requests": 132
+          },
+          "p95_ms": 26.43778584897518
+        },
+        "excerpt|all|pair_contrast": {
+          "totals": {
+            "issued": 41,
+            "proof": 36,
+            "adverse": 5,
+            "swap_issued": 1,
+            "substitute": 0,
+            "calls": 32,
+            "tokens": 3112,
+            "requests": 132
+          },
+          "p95_ms": 25.866304762894277
+        },
+        "excerpt|all|pair_names": {
+          "totals": {
+            "issued": 45,
+            "proof": 41,
+            "adverse": 4,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 32,
+            "tokens": 2260,
+            "requests": 132
+          },
+          "p95_ms": 25.851368188159533
+        },
+        "excerpt|all|pair_names_raw": {
+          "totals": {
+            "issued": 49,
+            "proof": 41,
+            "adverse": 8,
+            "swap_issued": 2,
+            "substitute": 0,
+            "calls": 32,
+            "tokens": 2260,
+            "requests": 132
+          },
+          "p95_ms": 25.85154911503195
+        },
+        "excerpt|all|pair_stable": {
+          "totals": {
+            "issued": 38,
+            "proof": 35,
+            "adverse": 3,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 32,
+            "tokens": 6224,
+            "requests": 132
+          },
+          "p95_ms": 29.699865169823163
+        },
+        "excerpt|left_missing|names": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 15.503384376643226
+        },
+        "excerpt|left_missing|names_calibrated": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 15.503250260371715
+        },
+        "excerpt|left_missing|pair_contrast": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 15.503218217054382
+        },
+        "excerpt|left_missing|pair_names": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 15.503211616305634
+        },
+        "excerpt|left_missing|pair_names_raw": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 15.503235580399632
+        },
+        "excerpt|left_missing|pair_stable": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 15.503221860853955
+        },
+        "excerpt|right_missing|names": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 15.432651684386656
+        },
+        "excerpt|right_missing|names_calibrated": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 15.432539721950889
+        },
+        "excerpt|right_missing|pair_contrast": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 15.432509471429512
+        },
+        "excerpt|right_missing|pair_names": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 15.432500030146912
+        },
+        "excerpt|right_missing|pair_names_raw": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 15.432513057021424
+        },
+        "excerpt|right_missing|pair_stable": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 15.432519459864125
+        },
+        "keywords|all|names": {
+          "totals": {
+            "issued": 34,
+            "proof": 33,
+            "adverse": 1,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 19,
+            "tokens": 1834,
+            "requests": 132
+          },
+          "p95_ms": 21.7834519862663
+        },
+        "keywords|all|names_calibrated": {
+          "totals": {
+            "issued": 34,
+            "proof": 33,
+            "adverse": 1,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 19,
+            "tokens": 1834,
+            "requests": 132
+          },
+          "p95_ms": 21.7791969247628
+        },
+        "keywords|all|pair_contrast": {
+          "totals": {
+            "issued": 30,
+            "proof": 29,
+            "adverse": 1,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 19,
+            "tokens": 1863,
+            "requests": 132
+          },
+          "p95_ms": 21.617977833375335
+        },
+        "keywords|all|pair_names": {
+          "totals": {
+            "issued": 34,
+            "proof": 33,
+            "adverse": 1,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 19,
+            "tokens": 1356,
+            "requests": 132
+          },
+          "p95_ms": 21.487447008257732
+        },
+        "keywords|all|pair_names_raw": {
+          "totals": {
+            "issued": 34,
+            "proof": 33,
+            "adverse": 1,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 19,
+            "tokens": 1356,
+            "requests": 132
+          },
+          "p95_ms": 21.48745156591758
+        },
+        "keywords|all|pair_stable": {
+          "totals": {
+            "issued": 29,
+            "proof": 28,
+            "adverse": 1,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 19,
+            "tokens": 3726,
+            "requests": 132
+          },
+          "p95_ms": 25.835320935584605
+        },
+        "keywords|left_missing|names": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 10.951302532339469
+        },
+        "keywords|left_missing|names_calibrated": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 10.951226920587942
+        },
+        "keywords|left_missing|pair_contrast": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 10.951192071661353
+        },
+        "keywords|left_missing|pair_names": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 10.951184190344065
+        },
+        "keywords|left_missing|pair_names_raw": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 10.951202549040318
+        },
+        "keywords|left_missing|pair_stable": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 10.9511834976729
+        },
+        "keywords|right_missing|names": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 10.903066460741682
+        },
+        "keywords|right_missing|names_calibrated": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 10.902999254176391
+        },
+        "keywords|right_missing|pair_contrast": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 10.902968904701991
+        },
+        "keywords|right_missing|pair_names": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 10.902979382080956
+        },
+        "keywords|right_missing|pair_names_raw": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 10.902977129444478
+        },
+        "keywords|right_missing|pair_stable": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 10.902978054946287
+        }
+      }
+    },
+    {
+      "script_sha256": "20ee96b9847f85d9107fc2efbcec63a56043b24c32b88f7c9d9a1498174daed2",
+      "dev_sha256": "4ce67b1ff52d869f133bd5318bad2573502d12aae065c75c9407c14754171c89",
+      "holdout_sha256": "38bc5e6bd42e3b2f427a42a552cae11bc0813e50f2e601ee9e10a298fe47925f",
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "reader_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "reverse": true,
+      "fit": {
+        "names": {
+          "cutoff": 0.0
+        },
+        "pair_names_raw": {
+          "cutoff": 0.0
+        },
+        "names_calibrated": {
+          "cutoff": 0.0,
+          "totals": {
+            "issued": 54,
+            "proof": 52,
+            "adverse": 2,
+            "swap_issued": 2,
+            "substitute": 0
+          }
+        },
+        "pair_names": {
+          "cutoff": 3.5,
+          "totals": {
+            "issued": 52,
+            "proof": 50,
+            "adverse": 2,
+            "swap_issued": 2,
+            "substitute": 0
+          }
+        },
+        "pair_contrast": {
+          "cutoff": 8.5,
+          "totals": {
+            "issued": 43,
+            "proof": 41,
+            "adverse": 2,
+            "swap_issued": 2,
+            "substitute": 0
+          }
+        },
+        "pair_stable": {
+          "cutoff": 0.0,
+          "totals": {
+            "issued": 41,
+            "proof": 41,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0
+          }
+        }
+      },
+      "dev": {
+        "admitted": 280,
+        "dropped": {
+          "incomplete_declaration": 42
+        },
+        "links": 12,
+        "paper_pairs": 10,
+        "independent_people": 10,
+        "variants": {
+          "present": 51,
+          "swap": 51
+        }
+      },
+      "holdout": {
+        "admitted": 393,
+        "dropped": {
+          "incomplete_or_ambiguous": 28
+        },
+        "links": 16,
+        "paper_pairs": 13,
+        "linked_papers": 25,
+        "contributors": 14,
+        "variants": {
+          "present": 66,
+          "swap": 66
+        }
+      },
+      "development": {
+        "excerpt|all|names": {
+          "totals": {
+            "issued": 30,
+            "proof": 29,
+            "adverse": 1,
+            "swap_issued": 1,
+            "substitute": 0,
+            "calls": 22,
+            "tokens": 1999,
+            "requests": 102
+          },
+          "p95_ms": 24.542166833998632
+        },
+        "excerpt|all|names_calibrated": {
+          "totals": {
+            "issued": 30,
+            "proof": 29,
+            "adverse": 1,
+            "swap_issued": 1,
+            "substitute": 0,
+            "calls": 22,
+            "tokens": 1999,
+            "requests": 102
+          },
+          "p95_ms": 24.54165485105477
+        },
+        "excerpt|all|pair_contrast": {
+          "totals": {
+            "issued": 24,
+            "proof": 23,
+            "adverse": 1,
+            "swap_issued": 1,
+            "substitute": 0,
+            "calls": 22,
+            "tokens": 2186,
+            "requests": 102
+          },
+          "p95_ms": 23.505603440571576
+        },
+        "excerpt|all|pair_names": {
+          "totals": {
+            "issued": 29,
+            "proof": 28,
+            "adverse": 1,
+            "swap_issued": 1,
+            "substitute": 0,
+            "calls": 22,
+            "tokens": 1604,
+            "requests": 102
+          },
+          "p95_ms": 23.40459317783825
+        },
+        "excerpt|all|pair_names_raw": {
+          "totals": {
+            "issued": 31,
+            "proof": 28,
+            "adverse": 3,
+            "swap_issued": 2,
+            "substitute": 0,
+            "calls": 22,
+            "tokens": 1604,
+            "requests": 102
+          },
+          "p95_ms": 23.404451843816787
+        },
+        "excerpt|all|pair_stable": {
+          "totals": {
+            "issued": 23,
+            "proof": 23,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 22,
+            "tokens": 4372,
+            "requests": 102
+          },
+          "p95_ms": 27.99262313637882
+        },
+        "keywords|all|names": {
+          "totals": {
+            "issued": 24,
+            "proof": 23,
+            "adverse": 1,
+            "swap_issued": 1,
+            "substitute": 0,
+            "calls": 17,
+            "tokens": 1600,
+            "requests": 102
+          },
+          "p95_ms": 21.987038297811523
+        },
+        "keywords|all|names_calibrated": {
+          "totals": {
+            "issued": 24,
+            "proof": 23,
+            "adverse": 1,
+            "swap_issued": 1,
+            "substitute": 0,
+            "calls": 17,
+            "tokens": 1600,
+            "requests": 102
+          },
+          "p95_ms": 21.98197971447371
+        },
+        "keywords|all|pair_contrast": {
+          "totals": {
+            "issued": 19,
+            "proof": 18,
+            "adverse": 1,
+            "swap_issued": 1,
+            "substitute": 0,
+            "calls": 17,
+            "tokens": 1699,
+            "requests": 102
+          },
+          "p95_ms": 21.84841239941306
+        },
+        "keywords|all|pair_names": {
+          "totals": {
+            "issued": 23,
+            "proof": 22,
+            "adverse": 1,
+            "swap_issued": 1,
+            "substitute": 0,
+            "calls": 17,
+            "tokens": 1257,
+            "requests": 102
+          },
+          "p95_ms": 21.68410808662884
+        },
+        "keywords|all|pair_names_raw": {
+          "totals": {
+            "issued": 25,
+            "proof": 22,
+            "adverse": 3,
+            "swap_issued": 2,
+            "substitute": 0,
+            "calls": 17,
+            "tokens": 1257,
+            "requests": 102
+          },
+          "p95_ms": 21.684420079691336
+        },
+        "keywords|all|pair_stable": {
+          "totals": {
+            "issued": 18,
+            "proof": 18,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 17,
+            "tokens": 3398,
+            "requests": 102
+          },
+          "p95_ms": 26.06611818773672
+        }
+      },
+      "results": {
+        "excerpt|all|names": {
+          "totals": {
+            "issued": 48,
+            "proof": 42,
+            "adverse": 6,
+            "swap_issued": 1,
+            "substitute": 0,
+            "calls": 32,
+            "tokens": 3074,
+            "requests": 132
+          },
+          "p95_ms": 26.544858136912808
+        },
+        "excerpt|all|names_calibrated": {
+          "totals": {
+            "issued": 48,
+            "proof": 42,
+            "adverse": 6,
+            "swap_issued": 1,
+            "substitute": 0,
+            "calls": 32,
+            "tokens": 3074,
+            "requests": 132
+          },
+          "p95_ms": 26.538961799815297
+        },
+        "excerpt|all|pair_contrast": {
+          "totals": {
+            "issued": 41,
+            "proof": 36,
+            "adverse": 5,
+            "swap_issued": 1,
+            "substitute": 0,
+            "calls": 32,
+            "tokens": 3112,
+            "requests": 132
+          },
+          "p95_ms": 25.41676744585856
+        },
+        "excerpt|all|pair_names": {
+          "totals": {
+            "issued": 45,
+            "proof": 41,
+            "adverse": 4,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 32,
+            "tokens": 2260,
+            "requests": 132
+          },
+          "p95_ms": 25.462692743167274
+        },
+        "excerpt|all|pair_names_raw": {
+          "totals": {
+            "issued": 49,
+            "proof": 41,
+            "adverse": 8,
+            "swap_issued": 2,
+            "substitute": 0,
+            "calls": 32,
+            "tokens": 2260,
+            "requests": 132
+          },
+          "p95_ms": 25.463021366158493
+        },
+        "excerpt|all|pair_stable": {
+          "totals": {
+            "issued": 38,
+            "proof": 35,
+            "adverse": 3,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 32,
+            "tokens": 6224,
+            "requests": 132
+          },
+          "p95_ms": 29.711843066615977
+        },
+        "excerpt|left_missing|names": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 15.591282286914065
+        },
+        "excerpt|left_missing|names_calibrated": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 15.591175988083705
+        },
+        "excerpt|left_missing|pair_contrast": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 15.591117198346183
+        },
+        "excerpt|left_missing|pair_names": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 15.591116045834497
+        },
+        "excerpt|left_missing|pair_names_raw": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 15.591138391755521
+        },
+        "excerpt|left_missing|pair_stable": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 15.591128659434617
+        },
+        "excerpt|right_missing|names": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 15.504827263066545
+        },
+        "excerpt|right_missing|names_calibrated": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 15.504733409034088
+        },
+        "excerpt|right_missing|pair_contrast": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 15.504695568233728
+        },
+        "excerpt|right_missing|pair_names": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 15.504687506472692
+        },
+        "excerpt|right_missing|pair_names_raw": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 15.504695038544014
+        },
+        "excerpt|right_missing|pair_stable": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 15.504694264382124
+        },
+        "keywords|all|names": {
+          "totals": {
+            "issued": 34,
+            "proof": 33,
+            "adverse": 1,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 19,
+            "tokens": 1834,
+            "requests": 132
+          },
+          "p95_ms": 21.86289217788726
+        },
+        "keywords|all|names_calibrated": {
+          "totals": {
+            "issued": 34,
+            "proof": 33,
+            "adverse": 1,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 19,
+            "tokens": 1834,
+            "requests": 132
+          },
+          "p95_ms": 21.857145853573456
+        },
+        "keywords|all|pair_contrast": {
+          "totals": {
+            "issued": 30,
+            "proof": 29,
+            "adverse": 1,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 19,
+            "tokens": 1863,
+            "requests": 132
+          },
+          "p95_ms": 21.790488937404007
+        },
+        "keywords|all|pair_names": {
+          "totals": {
+            "issued": 34,
+            "proof": 33,
+            "adverse": 1,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 19,
+            "tokens": 1356,
+            "requests": 132
+          },
+          "p95_ms": 21.699918020749465
+        },
+        "keywords|all|pair_names_raw": {
+          "totals": {
+            "issued": 34,
+            "proof": 33,
+            "adverse": 1,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 19,
+            "tokens": 1356,
+            "requests": 132
+          },
+          "p95_ms": 21.700292907189578
+        },
+        "keywords|all|pair_stable": {
+          "totals": {
+            "issued": 29,
+            "proof": 28,
+            "adverse": 1,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 19,
+            "tokens": 3726,
+            "requests": 132
+          },
+          "p95_ms": 26.035595720168203
+        },
+        "keywords|left_missing|names": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 11.15591359557584
+        },
+        "keywords|left_missing|names_calibrated": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 11.155800934648141
+        },
+        "keywords|left_missing|pair_contrast": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 11.155765264993533
+        },
+        "keywords|left_missing|pair_names": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 11.155774479266256
+        },
+        "keywords|left_missing|pair_names_raw": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 11.155778623651713
+        },
+        "keywords|left_missing|pair_stable": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 11.155761865666136
+        },
+        "keywords|right_missing|names": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 11.10786332283169
+        },
+        "keywords|right_missing|names_calibrated": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 11.107791145332158
+        },
+        "keywords|right_missing|pair_contrast": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 11.107759061269462
+        },
+        "keywords|right_missing|pair_names": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 11.10776843270287
+        },
+        "keywords|right_missing|pair_names_raw": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 11.107771744718775
+        },
+        "keywords|right_missing|pair_stable": {
+          "totals": {
+            "issued": 0,
+            "proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "substitute": 0,
+            "calls": 0,
+            "tokens": 0,
+            "requests": 132
+          },
+          "p95_ms": 11.107767018256709
+        }
+      }
+    }
+  ]
+}
