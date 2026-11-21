@@ -1,0 +1,1926 @@
+{
+  "slurm_array": 46032,
+  "node": "ws3",
+  "runs": [
+    {
+      "script_sha256": "2e847ad89da17ea8e371e35929d6af945dd649289ec6ddb9ebbddd1c4917a55f",
+      "dev_sha256": "4ce67b1ff52d869f133bd5318bad2573502d12aae065c75c9407c14754171c89",
+      "holdout_sha256": "38bc5e6bd42e3b2f427a42a552cae11bc0813e50f2e601ee9e10a298fe47925f",
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "verifier": {
+        "repository": "Qwen/Qwen3-Reranker-0.6B",
+        "revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+        "policy": "Official frozen BF16 checkpoint; no own training or quantization. Revision recorded before downloading weights.",
+        "files": {
+          "config.json": "d479c427a9ca5295218063d4f9aca4f297ab4ac27487cca7af42c84643d51ef0",
+          "expected-large-files.json": "cd9940a651fcf3d97ffc28f0242a9a620c0da5b9acad1861ef14faf5ee784f0e",
+          "generation_config.json": "81051cd3f6e77013827148d0b8a6ead93f8ac390d5ab805f849199f0af6a08db",
+          "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+          "model.safetensors": "27cd75a405b9c1b46b59abfd88aaa209e6fed2a1972cde9b70e7659537c5e65b",
+          "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+          "tokenizer_config.json": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0",
+          "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        }
+      },
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "reverse": false,
+      "development_panel": {
+        "admitted": 280,
+        "dropped": {
+          "incomplete_declaration": 42
+        },
+        "links": 12,
+        "paper_pairs": 10,
+        "independent_people": 10,
+        "variants": {
+          "present": 51,
+          "swap": 51
+        }
+      },
+      "held_panel": {
+        "admitted": 393,
+        "dropped": {
+          "incomplete_or_ambiguous": 28
+        },
+        "links": 16,
+        "paper_pairs": 13,
+        "linked_papers": 25,
+        "contributors": 14,
+        "variants": {
+          "present": 66,
+          "swap": 66
+        }
+      },
+      "thresholds": {
+        "keywords": {
+          "weakest": {
+            "cutoff": -5.125,
+            "positive": 7,
+            "adverse": 3,
+            "positive_pass": 7
+          },
+          "absolute": {
+            "cutoff": -5.1875,
+            "positive": 7,
+            "adverse": 3,
+            "positive_pass": 7
+          },
+          "relative": {
+            "cutoff": -2.8125,
+            "positive": 7,
+            "adverse": 3,
+            "positive_pass": 7
+          }
+        },
+        "excerpt": {
+          "weakest": {
+            "cutoff": -6.6875,
+            "positive": 10,
+            "adverse": 4,
+            "positive_pass": 10
+          },
+          "absolute": {
+            "cutoff": -6.65625,
+            "positive": 10,
+            "adverse": 4,
+            "positive_pass": 10
+          },
+          "relative": {
+            "cutoff": 0.19140625,
+            "positive": 10,
+            "adverse": 4,
+            "positive_pass": 9
+          }
+        }
+      },
+      "development": {
+        "excerpt|all": {
+          "baseline": {
+            "counts": {
+              "correct_pair": 102,
+              "pair_emitted": 102,
+              "oracle_proof": 51,
+              "oracle_substitute": 0,
+              "static_proof": 23,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 102
+            },
+            "p95_ms": 12.354912678711116
+          },
+          "ungated": {
+            "counts": {
+              "correct_pair": 102,
+              "pair_emitted": 102,
+              "oracle_proof": 51,
+              "oracle_substitute": 0,
+              "static_proof": 23,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 102
+            },
+            "p95_ms": 12.355043116258457
+          },
+          "weakest": {
+            "counts": {
+              "correct_pair": 102,
+              "pair_emitted": 102,
+              "oracle_proof": 51,
+              "oracle_substitute": 0,
+              "static_proof": 23,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 102
+            },
+            "p95_ms": 12.355043116258457
+          },
+          "absolute": {
+            "counts": {
+              "correct_pair": 102,
+              "pair_emitted": 102,
+              "oracle_proof": 51,
+              "oracle_substitute": 0,
+              "static_proof": 23,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 102
+            },
+            "p95_ms": 12.355043116258457
+          },
+          "relative": {
+            "counts": {
+              "correct_pair": 102,
+              "pair_emitted": 102,
+              "oracle_proof": 51,
+              "oracle_substitute": 0,
+              "static_proof": 23,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 102
+            },
+            "p95_ms": 12.355043116258457
+          }
+        },
+        "excerpt|left_missing": {
+          "baseline": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 102
+            },
+            "p95_ms": 12.368534551933408
+          },
+          "ungated": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 12,
+              "oracle_proof": 0,
+              "oracle_substitute": 4,
+              "static_proof": 0,
+              "static_adverse": 1,
+              "static_substitute": 1,
+              "verified": 0,
+              "requests": 102
+            },
+            "p95_ms": 12.37762578530237
+          },
+          "weakest": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 12,
+              "requests": 102
+            },
+            "p95_ms": 20.45913244364783
+          },
+          "absolute": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 12,
+              "requests": 102
+            },
+            "p95_ms": 23.16618612385355
+          },
+          "relative": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 12,
+              "requests": 102
+            },
+            "p95_ms": 30.379561887821183
+          }
+        },
+        "excerpt|right_missing": {
+          "baseline": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 12,
+              "oracle_proof": 0,
+              "oracle_substitute": 1,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 102
+            },
+            "p95_ms": 12.25332910544239
+          },
+          "ungated": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 32,
+              "oracle_proof": 0,
+              "oracle_substitute": 7,
+              "static_proof": 0,
+              "static_adverse": 4,
+              "static_substitute": 4,
+              "verified": 0,
+              "requests": 102
+            },
+            "p95_ms": 12.260424782289192
+          },
+          "weakest": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 12,
+              "oracle_proof": 0,
+              "oracle_substitute": 1,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 20,
+              "requests": 102
+            },
+            "p95_ms": 20.188884064555168
+          },
+          "absolute": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 12,
+              "oracle_proof": 0,
+              "oracle_substitute": 1,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 20,
+              "requests": 102
+            },
+            "p95_ms": 23.11594647471793
+          },
+          "relative": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 12,
+              "oracle_proof": 0,
+              "oracle_substitute": 1,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 20,
+              "requests": 102
+            },
+            "p95_ms": 30.15402186429128
+          }
+        },
+        "keywords|all": {
+          "baseline": {
+            "counts": {
+              "correct_pair": 72,
+              "pair_emitted": 72,
+              "oracle_proof": 36,
+              "oracle_substitute": 0,
+              "static_proof": 16,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 102
+            },
+            "p95_ms": 10.733672796050087
+          },
+          "ungated": {
+            "counts": {
+              "correct_pair": 72,
+              "pair_emitted": 72,
+              "oracle_proof": 36,
+              "oracle_substitute": 0,
+              "static_proof": 16,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 102
+            },
+            "p95_ms": 10.743305284995586
+          },
+          "weakest": {
+            "counts": {
+              "correct_pair": 72,
+              "pair_emitted": 72,
+              "oracle_proof": 36,
+              "oracle_substitute": 0,
+              "static_proof": 16,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 102
+            },
+            "p95_ms": 10.743305284995586
+          },
+          "absolute": {
+            "counts": {
+              "correct_pair": 72,
+              "pair_emitted": 72,
+              "oracle_proof": 36,
+              "oracle_substitute": 0,
+              "static_proof": 16,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 102
+            },
+            "p95_ms": 10.743305284995586
+          },
+          "relative": {
+            "counts": {
+              "correct_pair": 72,
+              "pair_emitted": 72,
+              "oracle_proof": 36,
+              "oracle_substitute": 0,
+              "static_proof": 16,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 102
+            },
+            "p95_ms": 10.743305284995586
+          }
+        },
+        "keywords|left_missing": {
+          "baseline": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 102
+            },
+            "p95_ms": 10.736639465903863
+          },
+          "ungated": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 12,
+              "oracle_proof": 0,
+              "oracle_substitute": 4,
+              "static_proof": 0,
+              "static_adverse": 1,
+              "static_substitute": 1,
+              "verified": 0,
+              "requests": 102
+            },
+            "p95_ms": 10.744955902919173
+          },
+          "weakest": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 12,
+              "requests": 102
+            },
+            "p95_ms": 19.157173536950722
+          },
+          "absolute": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 12,
+              "requests": 102
+            },
+            "p95_ms": 20.426549948751926
+          },
+          "relative": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 12,
+              "requests": 102
+            },
+            "p95_ms": 23.638519912492484
+          }
+        },
+        "keywords|right_missing": {
+          "baseline": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 102
+            },
+            "p95_ms": 10.687390045495704
+          },
+          "ungated": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 22,
+              "oracle_proof": 0,
+              "oracle_substitute": 1,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 102
+            },
+            "p95_ms": 10.696588485734537
+          },
+          "weakest": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 22,
+              "requests": 102
+            },
+            "p95_ms": 19.216973742004484
+          },
+          "absolute": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 22,
+              "requests": 102
+            },
+            "p95_ms": 20.434034836944193
+          },
+          "relative": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 22,
+              "requests": 102
+            },
+            "p95_ms": 23.7269360688515
+          }
+        }
+      },
+      "results": {
+        "excerpt|all": {
+          "baseline": {
+            "counts": {
+              "correct_pair": 132,
+              "pair_emitted": 132,
+              "oracle_proof": 66,
+              "oracle_substitute": 0,
+              "static_proof": 35,
+              "static_adverse": 4,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 14.408859115792438
+          },
+          "ungated": {
+            "counts": {
+              "correct_pair": 132,
+              "pair_emitted": 132,
+              "oracle_proof": 66,
+              "oracle_substitute": 0,
+              "static_proof": 35,
+              "static_adverse": 4,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 14.408994588302448
+          },
+          "weakest": {
+            "counts": {
+              "correct_pair": 132,
+              "pair_emitted": 132,
+              "oracle_proof": 66,
+              "oracle_substitute": 0,
+              "static_proof": 35,
+              "static_adverse": 4,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 14.408994588302448
+          },
+          "absolute": {
+            "counts": {
+              "correct_pair": 132,
+              "pair_emitted": 132,
+              "oracle_proof": 66,
+              "oracle_substitute": 0,
+              "static_proof": 35,
+              "static_adverse": 4,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 14.408994588302448
+          },
+          "relative": {
+            "counts": {
+              "correct_pair": 132,
+              "pair_emitted": 132,
+              "oracle_proof": 66,
+              "oracle_substitute": 0,
+              "static_proof": 35,
+              "static_adverse": 4,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 14.408994588302448
+          }
+        },
+        "excerpt|left_missing": {
+          "baseline": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 14.333223341964185
+          },
+          "ungated": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 14.341286360286176
+          },
+          "weakest": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 14.341286360286176
+          },
+          "absolute": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 14.341286360286176
+          },
+          "relative": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 14.341286360286176
+          }
+        },
+        "excerpt|right_missing": {
+          "baseline": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 14.254076237557456
+          },
+          "ungated": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 14.260912459576502
+          },
+          "weakest": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 14.260912459576502
+          },
+          "absolute": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 14.260912459576502
+          },
+          "relative": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 14.260912459576502
+          }
+        },
+        "keywords|all": {
+          "baseline": {
+            "counts": {
+              "correct_pair": 96,
+              "pair_emitted": 96,
+              "oracle_proof": 48,
+              "oracle_substitute": 0,
+              "static_proof": 26,
+              "static_adverse": 1,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 10.843661311082542
+          },
+          "ungated": {
+            "counts": {
+              "correct_pair": 122,
+              "pair_emitted": 122,
+              "oracle_proof": 61,
+              "oracle_substitute": 0,
+              "static_proof": 33,
+              "static_adverse": 2,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 10.843815054977313
+          },
+          "weakest": {
+            "counts": {
+              "correct_pair": 106,
+              "pair_emitted": 106,
+              "oracle_proof": 53,
+              "oracle_substitute": 0,
+              "static_proof": 29,
+              "static_adverse": 1,
+              "static_substitute": 0,
+              "verified": 26,
+              "requests": 132
+            },
+            "p95_ms": 19.228765193838626
+          },
+          "absolute": {
+            "counts": {
+              "correct_pair": 106,
+              "pair_emitted": 106,
+              "oracle_proof": 53,
+              "oracle_substitute": 0,
+              "static_proof": 29,
+              "static_adverse": 1,
+              "static_substitute": 0,
+              "verified": 26,
+              "requests": 132
+            },
+            "p95_ms": 20.283023797674105
+          },
+          "relative": {
+            "counts": {
+              "correct_pair": 106,
+              "pair_emitted": 106,
+              "oracle_proof": 53,
+              "oracle_substitute": 0,
+              "static_proof": 29,
+              "static_adverse": 1,
+              "static_substitute": 0,
+              "verified": 26,
+              "requests": 132
+            },
+            "p95_ms": 24.62553406949155
+          }
+        },
+        "keywords|left_missing": {
+          "baseline": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 10.794441355392337
+          },
+          "ungated": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 10.805225936928764
+          },
+          "weakest": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 10.805225936928764
+          },
+          "absolute": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 10.805225936928764
+          },
+          "relative": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 10.805225936928764
+          }
+        },
+        "keywords|right_missing": {
+          "baseline": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 10.753254569135606
+          },
+          "ungated": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 10.760446533095092
+          },
+          "weakest": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 10.760446533095092
+          },
+          "absolute": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 10.760446533095092
+          },
+          "relative": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 10.760446533095092
+          }
+        }
+      }
+    },
+    {
+      "script_sha256": "2e847ad89da17ea8e371e35929d6af945dd649289ec6ddb9ebbddd1c4917a55f",
+      "dev_sha256": "4ce67b1ff52d869f133bd5318bad2573502d12aae065c75c9407c14754171c89",
+      "holdout_sha256": "38bc5e6bd42e3b2f427a42a552cae11bc0813e50f2e601ee9e10a298fe47925f",
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "verifier": {
+        "repository": "Qwen/Qwen3-Reranker-0.6B",
+        "revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+        "policy": "Official frozen BF16 checkpoint; no own training or quantization. Revision recorded before downloading weights.",
+        "files": {
+          "config.json": "d479c427a9ca5295218063d4f9aca4f297ab4ac27487cca7af42c84643d51ef0",
+          "expected-large-files.json": "cd9940a651fcf3d97ffc28f0242a9a620c0da5b9acad1861ef14faf5ee784f0e",
+          "generation_config.json": "81051cd3f6e77013827148d0b8a6ead93f8ac390d5ab805f849199f0af6a08db",
+          "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+          "model.safetensors": "27cd75a405b9c1b46b59abfd88aaa209e6fed2a1972cde9b70e7659537c5e65b",
+          "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+          "tokenizer_config.json": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0",
+          "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        }
+      },
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "reverse": true,
+      "development_panel": {
+        "admitted": 280,
+        "dropped": {
+          "incomplete_declaration": 42
+        },
+        "links": 12,
+        "paper_pairs": 10,
+        "independent_people": 10,
+        "variants": {
+          "present": 51,
+          "swap": 51
+        }
+      },
+      "held_panel": {
+        "admitted": 393,
+        "dropped": {
+          "incomplete_or_ambiguous": 28
+        },
+        "links": 16,
+        "paper_pairs": 13,
+        "linked_papers": 25,
+        "contributors": 14,
+        "variants": {
+          "present": 66,
+          "swap": 66
+        }
+      },
+      "thresholds": {
+        "keywords": {
+          "weakest": {
+            "cutoff": -5.125,
+            "positive": 7,
+            "adverse": 3,
+            "positive_pass": 7
+          },
+          "absolute": {
+            "cutoff": -5.1875,
+            "positive": 7,
+            "adverse": 3,
+            "positive_pass": 7
+          },
+          "relative": {
+            "cutoff": -2.8125,
+            "positive": 7,
+            "adverse": 3,
+            "positive_pass": 7
+          }
+        },
+        "excerpt": {
+          "weakest": {
+            "cutoff": -6.6875,
+            "positive": 10,
+            "adverse": 4,
+            "positive_pass": 10
+          },
+          "absolute": {
+            "cutoff": -6.65625,
+            "positive": 10,
+            "adverse": 4,
+            "positive_pass": 10
+          },
+          "relative": {
+            "cutoff": 0.19140625,
+            "positive": 10,
+            "adverse": 4,
+            "positive_pass": 9
+          }
+        }
+      },
+      "development": {
+        "excerpt|all": {
+          "baseline": {
+            "counts": {
+              "correct_pair": 102,
+              "pair_emitted": 102,
+              "oracle_proof": 51,
+              "oracle_substitute": 0,
+              "static_proof": 23,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 102
+            },
+            "p95_ms": 12.344082264462486
+          },
+          "ungated": {
+            "counts": {
+              "correct_pair": 102,
+              "pair_emitted": 102,
+              "oracle_proof": 51,
+              "oracle_substitute": 0,
+              "static_proof": 23,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 102
+            },
+            "p95_ms": 12.344219285296276
+          },
+          "weakest": {
+            "counts": {
+              "correct_pair": 102,
+              "pair_emitted": 102,
+              "oracle_proof": 51,
+              "oracle_substitute": 0,
+              "static_proof": 23,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 102
+            },
+            "p95_ms": 12.344219285296276
+          },
+          "absolute": {
+            "counts": {
+              "correct_pair": 102,
+              "pair_emitted": 102,
+              "oracle_proof": 51,
+              "oracle_substitute": 0,
+              "static_proof": 23,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 102
+            },
+            "p95_ms": 12.344219285296276
+          },
+          "relative": {
+            "counts": {
+              "correct_pair": 102,
+              "pair_emitted": 102,
+              "oracle_proof": 51,
+              "oracle_substitute": 0,
+              "static_proof": 23,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 102
+            },
+            "p95_ms": 12.344219285296276
+          }
+        },
+        "excerpt|left_missing": {
+          "baseline": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 102
+            },
+            "p95_ms": 12.334458710392937
+          },
+          "ungated": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 12,
+              "oracle_proof": 0,
+              "oracle_substitute": 4,
+              "static_proof": 0,
+              "static_adverse": 1,
+              "static_substitute": 1,
+              "verified": 0,
+              "requests": 102
+            },
+            "p95_ms": 12.34461265266873
+          },
+          "weakest": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 12,
+              "requests": 102
+            },
+            "p95_ms": 20.100810535950586
+          },
+          "absolute": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 12,
+              "requests": 102
+            },
+            "p95_ms": 22.923580108908936
+          },
+          "relative": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 12,
+              "requests": 102
+            },
+            "p95_ms": 30.144542222842574
+          }
+        },
+        "excerpt|right_missing": {
+          "baseline": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 12,
+              "oracle_proof": 0,
+              "oracle_substitute": 1,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 102
+            },
+            "p95_ms": 12.180392700247467
+          },
+          "ungated": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 32,
+              "oracle_proof": 0,
+              "oracle_substitute": 7,
+              "static_proof": 0,
+              "static_adverse": 4,
+              "static_substitute": 4,
+              "verified": 0,
+              "requests": 102
+            },
+            "p95_ms": 12.187074101530015
+          },
+          "weakest": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 12,
+              "oracle_proof": 0,
+              "oracle_substitute": 1,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 20,
+              "requests": 102
+            },
+            "p95_ms": 19.99993540230207
+          },
+          "absolute": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 12,
+              "oracle_proof": 0,
+              "oracle_substitute": 1,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 20,
+              "requests": 102
+            },
+            "p95_ms": 23.005522025050595
+          },
+          "relative": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 12,
+              "oracle_proof": 0,
+              "oracle_substitute": 1,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 20,
+              "requests": 102
+            },
+            "p95_ms": 30.02946373890154
+          }
+        },
+        "keywords|all": {
+          "baseline": {
+            "counts": {
+              "correct_pair": 72,
+              "pair_emitted": 72,
+              "oracle_proof": 36,
+              "oracle_substitute": 0,
+              "static_proof": 16,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 102
+            },
+            "p95_ms": 10.772426333278418
+          },
+          "ungated": {
+            "counts": {
+              "correct_pair": 72,
+              "pair_emitted": 72,
+              "oracle_proof": 36,
+              "oracle_substitute": 0,
+              "static_proof": 16,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 102
+            },
+            "p95_ms": 10.772944276686758
+          },
+          "weakest": {
+            "counts": {
+              "correct_pair": 72,
+              "pair_emitted": 72,
+              "oracle_proof": 36,
+              "oracle_substitute": 0,
+              "static_proof": 16,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 102
+            },
+            "p95_ms": 10.772944276686758
+          },
+          "absolute": {
+            "counts": {
+              "correct_pair": 72,
+              "pair_emitted": 72,
+              "oracle_proof": 36,
+              "oracle_substitute": 0,
+              "static_proof": 16,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 102
+            },
+            "p95_ms": 10.772944276686758
+          },
+          "relative": {
+            "counts": {
+              "correct_pair": 72,
+              "pair_emitted": 72,
+              "oracle_proof": 36,
+              "oracle_substitute": 0,
+              "static_proof": 16,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 102
+            },
+            "p95_ms": 10.772944276686758
+          }
+        },
+        "keywords|left_missing": {
+          "baseline": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 102
+            },
+            "p95_ms": 10.795247368514538
+          },
+          "ungated": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 12,
+              "oracle_proof": 0,
+              "oracle_substitute": 4,
+              "static_proof": 0,
+              "static_adverse": 1,
+              "static_substitute": 1,
+              "verified": 0,
+              "requests": 102
+            },
+            "p95_ms": 10.804651444777846
+          },
+          "weakest": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 12,
+              "requests": 102
+            },
+            "p95_ms": 18.896843009861186
+          },
+          "absolute": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 12,
+              "requests": 102
+            },
+            "p95_ms": 20.002066355664283
+          },
+          "relative": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 12,
+              "requests": 102
+            },
+            "p95_ms": 23.34407758899033
+          }
+        },
+        "keywords|right_missing": {
+          "baseline": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 102
+            },
+            "p95_ms": 10.745746735483408
+          },
+          "ungated": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 22,
+              "oracle_proof": 0,
+              "oracle_substitute": 1,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 102
+            },
+            "p95_ms": 10.751134267775342
+          },
+          "weakest": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 22,
+              "requests": 102
+            },
+            "p95_ms": 19.04773919377476
+          },
+          "absolute": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 22,
+              "requests": 102
+            },
+            "p95_ms": 20.394020958337933
+          },
+          "relative": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 22,
+              "requests": 102
+            },
+            "p95_ms": 23.603666992858052
+          }
+        }
+      },
+      "results": {
+        "excerpt|all": {
+          "baseline": {
+            "counts": {
+              "correct_pair": 132,
+              "pair_emitted": 132,
+              "oracle_proof": 66,
+              "oracle_substitute": 0,
+              "static_proof": 35,
+              "static_adverse": 4,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 14.503223862266168
+          },
+          "ungated": {
+            "counts": {
+              "correct_pair": 132,
+              "pair_emitted": 132,
+              "oracle_proof": 66,
+              "oracle_substitute": 0,
+              "static_proof": 35,
+              "static_adverse": 4,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 14.503362460527569
+          },
+          "weakest": {
+            "counts": {
+              "correct_pair": 132,
+              "pair_emitted": 132,
+              "oracle_proof": 66,
+              "oracle_substitute": 0,
+              "static_proof": 35,
+              "static_adverse": 4,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 14.503362460527569
+          },
+          "absolute": {
+            "counts": {
+              "correct_pair": 132,
+              "pair_emitted": 132,
+              "oracle_proof": 66,
+              "oracle_substitute": 0,
+              "static_proof": 35,
+              "static_adverse": 4,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 14.503362460527569
+          },
+          "relative": {
+            "counts": {
+              "correct_pair": 132,
+              "pair_emitted": 132,
+              "oracle_proof": 66,
+              "oracle_substitute": 0,
+              "static_proof": 35,
+              "static_adverse": 4,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 14.503362460527569
+          }
+        },
+        "excerpt|left_missing": {
+          "baseline": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 14.37063497141935
+          },
+          "ungated": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 14.378893026150763
+          },
+          "weakest": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 14.378893026150763
+          },
+          "absolute": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 14.378893026150763
+          },
+          "relative": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 14.378893026150763
+          }
+        },
+        "excerpt|right_missing": {
+          "baseline": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 14.29796747979708
+          },
+          "ungated": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 14.305977162439376
+          },
+          "weakest": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 14.305977162439376
+          },
+          "absolute": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 14.305977162439376
+          },
+          "relative": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 14.305977162439376
+          }
+        },
+        "keywords|all": {
+          "baseline": {
+            "counts": {
+              "correct_pair": 96,
+              "pair_emitted": 96,
+              "oracle_proof": 48,
+              "oracle_substitute": 0,
+              "static_proof": 26,
+              "static_adverse": 1,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 10.956909350352362
+          },
+          "ungated": {
+            "counts": {
+              "correct_pair": 122,
+              "pair_emitted": 122,
+              "oracle_proof": 61,
+              "oracle_substitute": 0,
+              "static_proof": 33,
+              "static_adverse": 2,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 10.957052826415747
+          },
+          "weakest": {
+            "counts": {
+              "correct_pair": 106,
+              "pair_emitted": 106,
+              "oracle_proof": 53,
+              "oracle_substitute": 0,
+              "static_proof": 29,
+              "static_adverse": 1,
+              "static_substitute": 0,
+              "verified": 26,
+              "requests": 132
+            },
+            "p95_ms": 19.35789210256189
+          },
+          "absolute": {
+            "counts": {
+              "correct_pair": 106,
+              "pair_emitted": 106,
+              "oracle_proof": 53,
+              "oracle_substitute": 0,
+              "static_proof": 29,
+              "static_adverse": 1,
+              "static_substitute": 0,
+              "verified": 26,
+              "requests": 132
+            },
+            "p95_ms": 20.375442248769104
+          },
+          "relative": {
+            "counts": {
+              "correct_pair": 106,
+              "pair_emitted": 106,
+              "oracle_proof": 53,
+              "oracle_substitute": 0,
+              "static_proof": 29,
+              "static_adverse": 1,
+              "static_substitute": 0,
+              "verified": 26,
+              "requests": 132
+            },
+            "p95_ms": 24.682515807216987
+          }
+        },
+        "keywords|left_missing": {
+          "baseline": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 10.916557518066838
+          },
+          "ungated": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 10.925745469285175
+          },
+          "weakest": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 10.925745469285175
+          },
+          "absolute": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 10.925745469285175
+          },
+          "relative": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 10.925745469285175
+          }
+        },
+        "keywords|right_missing": {
+          "baseline": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 10.903965512989089
+          },
+          "ungated": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 10.912178037688136
+          },
+          "weakest": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 10.912178037688136
+          },
+          "absolute": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 10.912178037688136
+          },
+          "relative": {
+            "counts": {
+              "correct_pair": 0,
+              "pair_emitted": 0,
+              "oracle_proof": 0,
+              "oracle_substitute": 0,
+              "static_proof": 0,
+              "static_adverse": 0,
+              "static_substitute": 0,
+              "verified": 0,
+              "requests": 132
+            },
+            "p95_ms": 10.912178037688136
+          }
+        }
+      }
+    }
+  ]
+}
