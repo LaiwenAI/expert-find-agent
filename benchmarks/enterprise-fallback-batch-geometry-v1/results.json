@@ -1,0 +1,611 @@
+{
+  "node": "ws6",
+  "output_sha256": [
+    "b9bfc23a40a040673f5b8563e2968eaef56ad33364610364378d69b2efe5b301",
+    "ee6810f1bcc24137a917b230032384a85add83ec792124ccaefbcd0234d2acb8"
+  ],
+  "preceding_slab_array": "47260",
+  "runs": [
+    {
+      "controls_sha256": "ca96d57855c1acb463a3bbce8bb21e3578d5c8465c340958fd74fe209cea5000",
+      "gpu": "NVIDIA GeForce RTX 4090",
+      "job": "47269",
+      "model": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "outcomes": {
+        "development": {
+          "first_layer_probes": {
+            "input_layernorm": {
+              "changed_rows_any_token": 0,
+              "changed_rows_last_token": 0
+            },
+            "mlp.down_proj": {
+              "changed_rows_any_token": 3,
+              "changed_rows_last_token": 3
+            },
+            "mlp.down_proj.input": {
+              "changed_rows_any_token": 3,
+              "changed_rows_last_token": 3
+            },
+            "mlp.gate_proj": {
+              "changed_rows_any_token": 3,
+              "changed_rows_last_token": 3
+            },
+            "mlp.up_proj": {
+              "changed_rows_any_token": 3,
+              "changed_rows_last_token": 3
+            },
+            "post_attention_layernorm": {
+              "changed_rows_any_token": 3,
+              "changed_rows_last_token": 3
+            },
+            "self_attn.k_norm": {
+              "changed_rows_any_token": 3,
+              "changed_rows_last_token": 3
+            },
+            "self_attn.k_proj": {
+              "changed_rows_any_token": 3,
+              "changed_rows_last_token": 3
+            },
+            "self_attn.o_proj": {
+              "changed_rows_any_token": 3,
+              "changed_rows_last_token": 3
+            },
+            "self_attn.o_proj.input": {
+              "changed_rows_any_token": 3,
+              "changed_rows_last_token": 3
+            },
+            "self_attn.q_norm": {
+              "changed_rows_any_token": 1,
+              "changed_rows_last_token": 1
+            },
+            "self_attn.q_proj": {
+              "changed_rows_any_token": 1,
+              "changed_rows_last_token": 1
+            },
+            "self_attn.v_proj": {
+              "changed_rows_any_token": 3,
+              "changed_rows_last_token": 3
+            }
+          },
+          "first_nonmatching_last_token_layer": {
+            "1": 3
+          },
+          "max_compact_logit_drift": 1.25,
+          "mechanism": {
+            "candidate_rows": 72,
+            "compact_hidden_changes": 9,
+            "full_prefix_fallback": 4,
+            "head_shape_changes_with_full_backbone": 0,
+            "native_compact_decision_changes": 3,
+            "selected": 9
+          },
+          "output_counts": {
+            "compact": {
+              "qualification_changes": 2,
+              "qualifications": 50,
+              "requests": 80,
+              "role_changes": 6
+            },
+            "eight_rows": {
+              "qualification_changes": 0,
+              "qualifications": 51,
+              "requests": 80,
+              "role_changes": 2
+            },
+            "four_rows": {
+              "qualification_changes": 2,
+              "qualifications": 49,
+              "requests": 80,
+              "role_changes": 4
+            },
+            "full": {
+              "qualification_changes": 0,
+              "qualifications": 51,
+              "requests": 80,
+              "role_changes": 0
+            },
+            "guarded_head_shape": {
+              "qualification_changes": 2,
+              "qualifications": 50,
+              "requests": 80,
+              "role_changes": 3
+            },
+            "head_shape": {
+              "qualification_changes": 2,
+              "qualifications": 50,
+              "requests": 80,
+              "role_changes": 6
+            }
+          },
+          "rechecked_blocks": 9,
+          "variants": {
+            "compact": {
+              "omitted_drift": 0,
+              "recheck_p50_p95_ms": [
+                86.9201016612351,
+                202.5125467218458
+              ],
+              "selected_drift": 3,
+              "selected_score_drift": 9,
+              "tensor_slots": 11879
+            },
+            "eight_rows": {
+              "omitted_drift": 0,
+              "recheck_p50_p95_ms": [
+                724.0271219052374,
+                1718.857266195118
+              ],
+              "selected_drift": 0,
+              "selected_score_drift": 0,
+              "tensor_slots": 95032
+            },
+            "four_rows": {
+              "omitted_drift": 0,
+              "recheck_p50_p95_ms": [
+                357.16975992545485,
+                852.6628791354594
+              ],
+              "selected_drift": 2,
+              "selected_score_drift": 8,
+              "tensor_slots": 47516
+            },
+            "full": {
+              "omitted_drift": 0,
+              "recheck_p50_p95_ms": [
+                722.2612840123475,
+                1717.5902849994595
+              ],
+              "selected_drift": 0,
+              "selected_score_drift": 0,
+              "tensor_slots": 95032
+            },
+            "guarded_head_shape": {
+              "omitted_drift": 0,
+              "recheck_p50_p95_ms": [
+                261.81669207289815,
+                806.3842574134469
+              ],
+              "selected_drift": 3,
+              "selected_score_drift": 5,
+              "tensor_slots": 42391
+            },
+            "head_shape": {
+              "omitted_drift": 0,
+              "recheck_p50_p95_ms": [
+                87.60038996115327,
+                203.24764801189298
+              ],
+              "selected_drift": 3,
+              "selected_score_drift": 9,
+              "tensor_slots": 11879
+            }
+          }
+        },
+        "public": {
+          "first_layer_probes": {},
+          "first_nonmatching_last_token_layer": {},
+          "max_compact_logit_drift": 0.0,
+          "mechanism": {
+            "candidate_rows": 0,
+            "compact_hidden_changes": 0,
+            "full_prefix_fallback": 0,
+            "head_shape_changes_with_full_backbone": 0,
+            "native_compact_decision_changes": 0,
+            "selected": 0
+          },
+          "output_counts": {
+            "compact": {
+              "false_qualification": 2,
+              "missed_qualification": 9,
+              "qualification_changes": 0,
+              "qualifications": 39,
+              "requests": 72,
+              "role_changes": 0,
+              "target_correct": 61,
+              "targets": 72
+            },
+            "eight_rows": {
+              "false_qualification": 2,
+              "missed_qualification": 9,
+              "qualification_changes": 0,
+              "qualifications": 39,
+              "requests": 72,
+              "role_changes": 0,
+              "target_correct": 61,
+              "targets": 72
+            },
+            "four_rows": {
+              "false_qualification": 2,
+              "missed_qualification": 9,
+              "qualification_changes": 0,
+              "qualifications": 39,
+              "requests": 72,
+              "role_changes": 0,
+              "target_correct": 61,
+              "targets": 72
+            },
+            "full": {
+              "false_qualification": 2,
+              "missed_qualification": 9,
+              "qualification_changes": 0,
+              "qualifications": 39,
+              "requests": 72,
+              "role_changes": 0,
+              "target_correct": 61,
+              "targets": 72
+            },
+            "guarded_head_shape": {
+              "false_qualification": 2,
+              "missed_qualification": 9,
+              "qualification_changes": 0,
+              "qualifications": 39,
+              "requests": 72,
+              "role_changes": 0,
+              "target_correct": 61,
+              "targets": 72
+            },
+            "head_shape": {
+              "false_qualification": 2,
+              "missed_qualification": 9,
+              "qualification_changes": 0,
+              "qualifications": 39,
+              "requests": 72,
+              "role_changes": 0,
+              "target_correct": 61,
+              "targets": 72
+            }
+          },
+          "rechecked_blocks": 0,
+          "variants": {
+            "compact": {
+              "omitted_drift": 0,
+              "recheck_p50_p95_ms": [],
+              "selected_drift": 0,
+              "selected_score_drift": 0,
+              "tensor_slots": 0
+            },
+            "eight_rows": {
+              "omitted_drift": 0,
+              "recheck_p50_p95_ms": [],
+              "selected_drift": 0,
+              "selected_score_drift": 0,
+              "tensor_slots": 0
+            },
+            "four_rows": {
+              "omitted_drift": 0,
+              "recheck_p50_p95_ms": [],
+              "selected_drift": 0,
+              "selected_score_drift": 0,
+              "tensor_slots": 0
+            },
+            "full": {
+              "omitted_drift": 0,
+              "recheck_p50_p95_ms": [],
+              "selected_drift": 0,
+              "selected_score_drift": 0,
+              "tensor_slots": 0
+            },
+            "guarded_head_shape": {
+              "omitted_drift": 0,
+              "recheck_p50_p95_ms": [],
+              "selected_drift": 0,
+              "selected_score_drift": 0,
+              "tensor_slots": 0
+            },
+            "head_shape": {
+              "omitted_drift": 0,
+              "recheck_p50_p95_ms": [],
+              "selected_drift": 0,
+              "selected_score_drift": 0,
+              "tensor_slots": 0
+            }
+          }
+        }
+      },
+      "queries_sha256": "30661871ac08a61e7e74d67d75491878c7e4194f217483b60d06426c4b36e4c5",
+      "reverse": false,
+      "script_sha256": "a91cc5b6e6d1544d66ace0bddf0d6529b8c3e48efadfb171cbd401dcdf0b9a98"
+    },
+    {
+      "controls_sha256": "ca96d57855c1acb463a3bbce8bb21e3578d5c8465c340958fd74fe209cea5000",
+      "gpu": "NVIDIA GeForce RTX 4090",
+      "job": "47267",
+      "model": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "outcomes": {
+        "development": {
+          "first_layer_probes": {
+            "input_layernorm": {
+              "changed_rows_any_token": 0,
+              "changed_rows_last_token": 0
+            },
+            "mlp.down_proj": {
+              "changed_rows_any_token": 3,
+              "changed_rows_last_token": 3
+            },
+            "mlp.down_proj.input": {
+              "changed_rows_any_token": 3,
+              "changed_rows_last_token": 3
+            },
+            "mlp.gate_proj": {
+              "changed_rows_any_token": 3,
+              "changed_rows_last_token": 3
+            },
+            "mlp.up_proj": {
+              "changed_rows_any_token": 3,
+              "changed_rows_last_token": 3
+            },
+            "post_attention_layernorm": {
+              "changed_rows_any_token": 3,
+              "changed_rows_last_token": 3
+            },
+            "self_attn.k_norm": {
+              "changed_rows_any_token": 3,
+              "changed_rows_last_token": 3
+            },
+            "self_attn.k_proj": {
+              "changed_rows_any_token": 3,
+              "changed_rows_last_token": 3
+            },
+            "self_attn.o_proj": {
+              "changed_rows_any_token": 3,
+              "changed_rows_last_token": 3
+            },
+            "self_attn.o_proj.input": {
+              "changed_rows_any_token": 3,
+              "changed_rows_last_token": 3
+            },
+            "self_attn.q_norm": {
+              "changed_rows_any_token": 1,
+              "changed_rows_last_token": 1
+            },
+            "self_attn.q_proj": {
+              "changed_rows_any_token": 1,
+              "changed_rows_last_token": 1
+            },
+            "self_attn.v_proj": {
+              "changed_rows_any_token": 3,
+              "changed_rows_last_token": 3
+            }
+          },
+          "first_nonmatching_last_token_layer": {
+            "1": 3
+          },
+          "max_compact_logit_drift": 1.25,
+          "mechanism": {
+            "candidate_rows": 72,
+            "compact_hidden_changes": 9,
+            "full_prefix_fallback": 4,
+            "head_shape_changes_with_full_backbone": 0,
+            "native_compact_decision_changes": 3,
+            "selected": 9
+          },
+          "output_counts": {
+            "compact": {
+              "qualification_changes": 2,
+              "qualifications": 50,
+              "requests": 80,
+              "role_changes": 6
+            },
+            "eight_rows": {
+              "qualification_changes": 0,
+              "qualifications": 51,
+              "requests": 80,
+              "role_changes": 2
+            },
+            "four_rows": {
+              "qualification_changes": 2,
+              "qualifications": 49,
+              "requests": 80,
+              "role_changes": 4
+            },
+            "full": {
+              "qualification_changes": 0,
+              "qualifications": 51,
+              "requests": 80,
+              "role_changes": 0
+            },
+            "guarded_head_shape": {
+              "qualification_changes": 2,
+              "qualifications": 50,
+              "requests": 80,
+              "role_changes": 3
+            },
+            "head_shape": {
+              "qualification_changes": 2,
+              "qualifications": 50,
+              "requests": 80,
+              "role_changes": 6
+            }
+          },
+          "rechecked_blocks": 9,
+          "variants": {
+            "compact": {
+              "omitted_drift": 0,
+              "recheck_p50_p95_ms": [
+                87.98547135666013,
+                201.89057365059847
+              ],
+              "selected_drift": 3,
+              "selected_score_drift": 9,
+              "tensor_slots": 11879
+            },
+            "eight_rows": {
+              "omitted_drift": 0,
+              "recheck_p50_p95_ms": [
+                740.8510078676045,
+                1705.0793718546624
+              ],
+              "selected_drift": 0,
+              "selected_score_drift": 0,
+              "tensor_slots": 95032
+            },
+            "four_rows": {
+              "omitted_drift": 0,
+              "recheck_p50_p95_ms": [
+                359.74978003650904,
+                846.2322283536193
+              ],
+              "selected_drift": 2,
+              "selected_score_drift": 8,
+              "tensor_slots": 47516
+            },
+            "full": {
+              "omitted_drift": 0,
+              "recheck_p50_p95_ms": [
+                739.4264722242951,
+                1706.1463929712768
+              ],
+              "selected_drift": 0,
+              "selected_score_drift": 0,
+              "tensor_slots": 95032
+            },
+            "guarded_head_shape": {
+              "omitted_drift": 0,
+              "recheck_p50_p95_ms": [
+                259.5934187993407,
+                810.639635939151
+              ],
+              "selected_drift": 3,
+              "selected_score_drift": 5,
+              "tensor_slots": 42391
+            },
+            "head_shape": {
+              "omitted_drift": 0,
+              "recheck_p50_p95_ms": [
+                88.57790101319551,
+                200.40294341742987
+              ],
+              "selected_drift": 3,
+              "selected_score_drift": 9,
+              "tensor_slots": 11879
+            }
+          }
+        },
+        "public": {
+          "first_layer_probes": {},
+          "first_nonmatching_last_token_layer": {},
+          "max_compact_logit_drift": 0.0,
+          "mechanism": {
+            "candidate_rows": 0,
+            "compact_hidden_changes": 0,
+            "full_prefix_fallback": 0,
+            "head_shape_changes_with_full_backbone": 0,
+            "native_compact_decision_changes": 0,
+            "selected": 0
+          },
+          "output_counts": {
+            "compact": {
+              "false_qualification": 2,
+              "missed_qualification": 9,
+              "qualification_changes": 0,
+              "qualifications": 39,
+              "requests": 72,
+              "role_changes": 0,
+              "target_correct": 61,
+              "targets": 72
+            },
+            "eight_rows": {
+              "false_qualification": 2,
+              "missed_qualification": 9,
+              "qualification_changes": 0,
+              "qualifications": 39,
+              "requests": 72,
+              "role_changes": 0,
+              "target_correct": 61,
+              "targets": 72
+            },
+            "four_rows": {
+              "false_qualification": 2,
+              "missed_qualification": 9,
+              "qualification_changes": 0,
+              "qualifications": 39,
+              "requests": 72,
+              "role_changes": 0,
+              "target_correct": 61,
+              "targets": 72
+            },
+            "full": {
+              "false_qualification": 2,
+              "missed_qualification": 9,
+              "qualification_changes": 0,
+              "qualifications": 39,
+              "requests": 72,
+              "role_changes": 0,
+              "target_correct": 61,
+              "targets": 72
+            },
+            "guarded_head_shape": {
+              "false_qualification": 2,
+              "missed_qualification": 9,
+              "qualification_changes": 0,
+              "qualifications": 39,
+              "requests": 72,
+              "role_changes": 0,
+              "target_correct": 61,
+              "targets": 72
+            },
+            "head_shape": {
+              "false_qualification": 2,
+              "missed_qualification": 9,
+              "qualification_changes": 0,
+              "qualifications": 39,
+              "requests": 72,
+              "role_changes": 0,
+              "target_correct": 61,
+              "targets": 72
+            }
+          },
+          "rechecked_blocks": 0,
+          "variants": {
+            "compact": {
+              "omitted_drift": 0,
+              "recheck_p50_p95_ms": [],
+              "selected_drift": 0,
+              "selected_score_drift": 0,
+              "tensor_slots": 0
+            },
+            "eight_rows": {
+              "omitted_drift": 0,
+              "recheck_p50_p95_ms": [],
+              "selected_drift": 0,
+              "selected_score_drift": 0,
+              "tensor_slots": 0
+            },
+            "four_rows": {
+              "omitted_drift": 0,
+              "recheck_p50_p95_ms": [],
+              "selected_drift": 0,
+              "selected_score_drift": 0,
+              "tensor_slots": 0
+            },
+            "full": {
+              "omitted_drift": 0,
+              "recheck_p50_p95_ms": [],
+              "selected_drift": 0,
+              "selected_score_drift": 0,
+              "tensor_slots": 0
+            },
+            "guarded_head_shape": {
+              "omitted_drift": 0,
+              "recheck_p50_p95_ms": [],
+              "selected_drift": 0,
+              "selected_score_drift": 0,
+              "tensor_slots": 0
+            },
+            "head_shape": {
+              "omitted_drift": 0,
+              "recheck_p50_p95_ms": [],
+              "selected_drift": 0,
+              "selected_score_drift": 0,
+              "tensor_slots": 0
+            }
+          }
+        }
+      },
+      "queries_sha256": "30661871ac08a61e7e74d67d75491878c7e4194f217483b60d06426c4b36e4c5",
+      "reverse": true,
+      "script_sha256": "a91cc5b6e6d1544d66ace0bddf0d6529b8c3e48efadfb171cbd401dcdf0b9a98"
+    }
+  ],
+  "slurm_array": "47267"
+}
