@@ -1,0 +1,416 @@
+{
+  "slurm_array": 46316,
+  "compute_node": "ws3",
+  "reference_proofs_match": true,
+  "repeat_identical": true,
+  "hindsight_score_order": {
+    "keywords": {
+      "gold_features": {
+        "correct": 5,
+        "wrong": 3,
+        "min_correct": -0.7664244433605273,
+        "max_wrong": -1.1234785079290284,
+        "correct_above_all_wrong": 5
+      },
+      "distilled_features": {
+        "correct": 5,
+        "wrong": 3,
+        "min_correct": -0.5645976787410962,
+        "max_wrong": -0.8033789413498317,
+        "correct_above_all_wrong": 5
+      }
+    },
+    "excerpt": {
+      "gold_features": {
+        "correct": 0,
+        "wrong": 6,
+        "min_correct": null,
+        "max_wrong": -0.7420409159051293,
+        "correct_above_all_wrong": 0
+      },
+      "distilled_features": {
+        "correct": 0,
+        "wrong": 6,
+        "min_correct": null,
+        "max_wrong": -0.6740735526382265,
+        "correct_above_all_wrong": 0
+      }
+    }
+  },
+  "panels": {
+    "holdout": {
+      "counts": {
+        "keywords": {
+          "cascade": {
+            "issued": 10,
+            "strict": 10,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 24,
+            "positives": 12,
+            "search_calls": 7,
+            "source_calls": 1,
+            "role_calls": 6
+          },
+          "dense_joint": {
+            "issued": 12,
+            "strict": 11,
+            "adverse": 1,
+            "wrong_source": 0,
+            "requests": 24,
+            "positives": 12,
+            "search_calls": 9,
+            "source_calls": 3,
+            "role_calls": 6
+          },
+          "gold_features": {
+            "issued": 10,
+            "strict": 10,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 24,
+            "positives": 12,
+            "search_calls": 7,
+            "source_calls": 1,
+            "role_calls": 6
+          },
+          "distilled_features": {
+            "issued": 10,
+            "strict": 10,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 24,
+            "positives": 12,
+            "search_calls": 7,
+            "source_calls": 1,
+            "role_calls": 6
+          }
+        },
+        "excerpt": {
+          "cascade": {
+            "issued": 12,
+            "strict": 12,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 24,
+            "positives": 12,
+            "search_calls": 10,
+            "source_calls": 0,
+            "role_calls": 10
+          },
+          "dense_joint": {
+            "issued": 12,
+            "strict": 12,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 24,
+            "positives": 12,
+            "search_calls": 10,
+            "source_calls": 0,
+            "role_calls": 10
+          },
+          "gold_features": {
+            "issued": 12,
+            "strict": 12,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 24,
+            "positives": 12,
+            "search_calls": 10,
+            "source_calls": 0,
+            "role_calls": 10
+          },
+          "distilled_features": {
+            "issued": 12,
+            "strict": 12,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 24,
+            "positives": 12,
+            "search_calls": 10,
+            "source_calls": 0,
+            "role_calls": 10
+          }
+        }
+      },
+      "calibration": {
+        "keywords": {
+          "gold_features": {
+            "cutoff": 1.0999580360840442,
+            "target_rows": 19,
+            "missing_source_rows": 576,
+            "target_pass": 3,
+            "missing_pass": 0,
+            "wrong_source_present_pass": 0,
+            "training_rows": 1152
+          },
+          "distilled_features": {
+            "cutoff": 1.0017431072755172,
+            "target_rows": 19,
+            "missing_source_rows": 576,
+            "target_pass": 2,
+            "missing_pass": 0,
+            "wrong_source_present_pass": 0,
+            "training_rows": 1152
+          }
+        },
+        "excerpt": {
+          "gold_features": {
+            "cutoff": 0.9846829622114875,
+            "target_rows": 24,
+            "missing_source_rows": 576,
+            "target_pass": 8,
+            "missing_pass": 0,
+            "wrong_source_present_pass": 0,
+            "training_rows": 1152
+          },
+          "distilled_features": {
+            "cutoff": 0.9770282345464563,
+            "target_rows": 24,
+            "missing_source_rows": 576,
+            "target_pass": 7,
+            "missing_pass": 0,
+            "wrong_source_present_pass": 0,
+            "training_rows": 1152
+          }
+        }
+      },
+      "fallback": {
+        "keywords": {
+          "gold_features": {
+            "fallbacks": 2,
+            "source_accepted": 0,
+            "intended_pair": 0
+          },
+          "distilled_features": {
+            "fallbacks": 2,
+            "source_accepted": 0,
+            "intended_pair": 0
+          }
+        }
+      },
+      "missing_source": {
+        "keywords": {
+          "gold_features": {
+            "requests": 48
+          },
+          "distilled_features": {
+            "requests": 48
+          }
+        },
+        "excerpt": {
+          "gold_features": {
+            "requests": 48
+          },
+          "distilled_features": {
+            "requests": 48
+          }
+        }
+      },
+      "signatures": {
+        "cascade": "668b7662fe63b8b01a30222d0ee73ed4532881930ce116442e5ac8decc645161",
+        "dense_joint": "a604fcc492c773e1458649b4d123de05fdf8255f37cc9221877f8212b014aea6",
+        "gold_features": "668b7662fe63b8b01a30222d0ee73ed4532881930ce116442e5ac8decc645161",
+        "distilled_features": "668b7662fe63b8b01a30222d0ee73ed4532881930ce116442e5ac8decc645161"
+      },
+      "requests": 48,
+      "reference_sha256": "c3fca40006675e01376ae9482c808f0466851462ad0f50c7ba73bc34473d7a83",
+      "script_sha256": "890e1abed46eb935bcb3efefe32a4b5dc94a67d7602aee2cda50d85556951b46"
+    },
+    "development": {
+      "counts": {
+        "keywords": {
+          "cascade": {
+            "issued": 12,
+            "strict": 12,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 54,
+            "positives": 27,
+            "search_calls": 9,
+            "source_calls": 4,
+            "role_calls": 5
+          },
+          "dense_joint": {
+            "issued": 15,
+            "strict": 15,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 54,
+            "positives": 27,
+            "search_calls": 13,
+            "source_calls": 8,
+            "role_calls": 5
+          },
+          "gold_features": {
+            "issued": 12,
+            "strict": 12,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 54,
+            "positives": 27,
+            "search_calls": 9,
+            "source_calls": 4,
+            "role_calls": 5
+          },
+          "distilled_features": {
+            "issued": 12,
+            "strict": 12,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 54,
+            "positives": 27,
+            "search_calls": 9,
+            "source_calls": 4,
+            "role_calls": 5
+          }
+        },
+        "excerpt": {
+          "cascade": {
+            "issued": 18,
+            "strict": 18,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 54,
+            "positives": 27,
+            "search_calls": 13,
+            "source_calls": 0,
+            "role_calls": 13
+          },
+          "dense_joint": {
+            "issued": 18,
+            "strict": 18,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 54,
+            "positives": 27,
+            "search_calls": 13,
+            "source_calls": 0,
+            "role_calls": 13
+          },
+          "gold_features": {
+            "issued": 18,
+            "strict": 18,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 54,
+            "positives": 27,
+            "search_calls": 13,
+            "source_calls": 0,
+            "role_calls": 13
+          },
+          "distilled_features": {
+            "issued": 18,
+            "strict": 18,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 54,
+            "positives": 27,
+            "search_calls": 13,
+            "source_calls": 0,
+            "role_calls": 13
+          }
+        }
+      },
+      "calibration": {
+        "keywords": {
+          "gold_features": {
+            "cutoff": 1.0999580360840442,
+            "target_rows": 19,
+            "missing_source_rows": 576,
+            "target_pass": 3,
+            "missing_pass": 0,
+            "wrong_source_present_pass": 0,
+            "training_rows": 1152
+          },
+          "distilled_features": {
+            "cutoff": 1.0017431072755172,
+            "target_rows": 19,
+            "missing_source_rows": 576,
+            "target_pass": 2,
+            "missing_pass": 0,
+            "wrong_source_present_pass": 0,
+            "training_rows": 1152
+          }
+        },
+        "excerpt": {
+          "gold_features": {
+            "cutoff": 0.9846829622114875,
+            "target_rows": 24,
+            "missing_source_rows": 576,
+            "target_pass": 8,
+            "missing_pass": 0,
+            "wrong_source_present_pass": 0,
+            "training_rows": 1152
+          },
+          "distilled_features": {
+            "cutoff": 0.9770282345464563,
+            "target_rows": 24,
+            "missing_source_rows": 576,
+            "target_pass": 7,
+            "missing_pass": 0,
+            "wrong_source_present_pass": 0,
+            "training_rows": 1152
+          }
+        }
+      },
+      "fallback": {
+        "keywords": {
+          "gold_features": {
+            "fallbacks": 4,
+            "source_accepted": 0,
+            "intended_pair": 0
+          },
+          "distilled_features": {
+            "fallbacks": 4,
+            "source_accepted": 0,
+            "intended_pair": 0
+          }
+        }
+      },
+      "missing_source": {
+        "keywords": {
+          "gold_features": {
+            "requests": 108,
+            "fallbacks": 2,
+            "source_accepted": 0,
+            "substitutes": 0,
+            "role_calls": 0
+          },
+          "distilled_features": {
+            "requests": 108,
+            "fallbacks": 2,
+            "source_accepted": 0,
+            "substitutes": 0,
+            "role_calls": 0
+          }
+        },
+        "excerpt": {
+          "gold_features": {
+            "requests": 108,
+            "fallbacks": 6,
+            "source_accepted": 0,
+            "substitutes": 0,
+            "role_calls": 0
+          },
+          "distilled_features": {
+            "requests": 108,
+            "fallbacks": 6,
+            "source_accepted": 0,
+            "substitutes": 0,
+            "role_calls": 0
+          }
+        }
+      },
+      "signatures": {
+        "cascade": "48c465c15cda03ce97e6d582f80337ad1ebaf711b6b4ee7e408b07be8273e5a4",
+        "dense_joint": "5aa55880fe13a0c4fc9390a286866b90199719d2abc2d196909a373963bdbe09",
+        "gold_features": "48c465c15cda03ce97e6d582f80337ad1ebaf711b6b4ee7e408b07be8273e5a4",
+        "distilled_features": "48c465c15cda03ce97e6d582f80337ad1ebaf711b6b4ee7e408b07be8273e5a4"
+      },
+      "requests": 108,
+      "reference_sha256": "9a6570b4367907497d540d32d944c23cba68f0d078d223b8497c8cdf038908bd",
+      "script_sha256": "890e1abed46eb935bcb3efefe32a4b5dc94a67d7602aee2cda50d85556951b46"
+    }
+  }
+}

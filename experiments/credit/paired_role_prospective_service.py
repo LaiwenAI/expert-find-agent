@@ -217,6 +217,15 @@ def run(args):
         run_fusion(service, labels, cutoff, (heads, definitions, fit), args.plos,
                    args.fused_4b_reference, args.output, args.reverse)
         return
+    if args.resident_source_reference is not None:
+        from experiments.credit.paired_role_resident_source import run_resident
+
+        if digest(args.plos) != frozen["inputs"]["plos"]:
+            raise ValueError("Changed PLOS calibration projection")
+        heads, _, fit = fit_lightweight(args.plos, service, definitions, training)
+        run_resident(service, labels, cutoff, (heads, definitions, fit), args.plos,
+                     args.resident_source_reference, args.output, args.reverse)
+        return
     by_arm, results = {}, {}
     lightweight = report = None
     requested = PRESCREEN_ARMS if args.prescreen else ARMS
@@ -314,6 +323,7 @@ if __name__ == "__main__":
     diagnostics.add_argument("--mixed-role-reference", type=Path)
     diagnostics.add_argument("--soft-role-reference", type=Path)
     diagnostics.add_argument("--fused-4b-reference", type=Path)
+    diagnostics.add_argument("--resident-source-reference", type=Path)
     args = parser.parse_args()
     if args.cascade and not args.plos:
         parser.error("--cascade requires --plos")
@@ -329,4 +339,6 @@ if __name__ == "__main__":
         parser.error("--soft-role-reference requires --plos")
     if args.fused_4b_reference is not None and args.plos is None:
         parser.error("--fused-4b-reference requires --plos")
+    if args.resident_source_reference is not None and args.plos is None:
+        parser.error("--resident-source-reference requires --plos")
     run(args)
