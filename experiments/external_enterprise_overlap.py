@@ -73,13 +73,19 @@ def restrict_rows(values, focus):
     values[~keep] = -np.inf
 
 
-def pairs_for(values, n):
-    return {"within_frame": (0, values[:, :n]), "historical": (n, values[:, n:])}
-
-
-def signal(values, n):
+def signal(values, n, earlier=None):
+    if earlier is None:
+        destinations = {"within_frame": (0, values[:, :n])}
+    else:
+        if not 0 < earlier < n:
+            raise ValueError("Expected nonempty earlier and newly added groups")
+        destinations = {
+            "earlier_frame": (0, values[:, :earlier]),
+            "new_groups": (earlier, values[:, earlier:n]),
+        }
+    destinations["historical"] = (n, values[:, n:])
     pairs, counts = {}, {}
-    for scope, (offset, scores) in pairs_for(values, n).items():
+    for scope, (offset, scores) in destinations.items():
         unique = {}
         for i, j in np.argwhere(scores >= FLOOR):
             other = j + offset
@@ -128,46 +134,58 @@ def gpu(args):
     np.fill_diagonal(scores[:, :n], -np.inf)
     if "focus" in data:
         restrict_rows(scores, data["focus"])
-    counts, pairs = signal(scores, n)
+    earlier = data.get("earlier")
+    counts, pairs = signal(scores, n, earlier)
     write_json(args.output, dict(counts=counts, pairs=pairs, gpu=torch.cuda.get_device_name(),
                                  frame_sha256=data["frame_sha256"], projection_sha256=digest(args.inputs),
                                  encoder_revision=checkpoint["revision"], order_offset=args.order_offset,
-                                 focal_groups=len(data["focus"]) if "focus" in data else n))
+                                 focal_groups=len(data["focus"]) if "focus" in data else n)
+               | ({"earlier_groups": earlier} if earlier is not None else {}))
     args.output.chmod(0o600)
 
 
 def packet(args):
-    from experiments.audit_enterprise_issuer_aliases import close
-    from experiments.audit_enterprise_panel_neighbors import write_private
-    from experiments.freeze_enterprise_panel import issuer_key
-
     frame_hash = digest(args.frame)
     semantic = json.loads(args.semantic.read_bytes())
     if semantic["frame_sha256"] != frame_hash:
         raise ValueError("Semantic screen is for a different private frame")
     external, historical_rows = records(args.snapshot, args.workbook, args.frame, args.first_batch)
+    focus = ([i for i, row in enumerate(external) if row["batch"] == "first"]
+             if args.first_batch else list(range(len(external))))
+    build_packet(external, historical_rows, focus, semantic, args.output)
+
+
+def build_packet(external, historical_rows, focus, semantic, output, earlier=None, salt=SALT):
+    from experiments.audit_enterprise_issuer_aliases import close
+    from experiments.audit_enterprise_panel_neighbors import write_private
+    from experiments.freeze_enterprise_panel import issuer_key
+
     rows = external + historical_rows
     n = len(external)
     names = [issuer_key(row["company"]) for row in rows]
-    focus = [i for i, row in enumerate(external) if row["batch"] == "first"] if args.first_batch else list(range(n))
     if semantic.get("focal_groups", n) != len(focus):
         raise ValueError("Semantic screen used a different focal set")
     org = np.full((n, len(names)), -np.inf, dtype=np.float64)
     for i in focus:
         org[i] = [close(names[i], right) for right in names]
     np.fill_diagonal(org[:, :n], -np.inf)
-    org_counts, org_pairs = signal(org, n)
+    org_counts, org_pairs = signal(org, n, earlier)
     mapping = {}
     for method, scopes in (("semantic", semantic["pairs"]), ("organization", org_pairs)):
         for scope, pairs in scopes.items():
             for left, right in pairs:
                 if not 0 <= left < n or not left < right < len(rows):
                     raise ValueError("Unexpected private pair position")
+                if (earlier is not None and (
+                        (scope == "earlier_frame" and not left < earlier <= right < n)
+                        or (scope == "new_groups" and not earlier <= left < right < n)
+                        or (scope == "historical" and not earlier <= left < n <= right))):
+                    raise ValueError("Pair does not match the declared exposure stratum")
                 mapping.setdefault((left, right), []).append(f"{method}/{scope}")
     visible, private = [], []
     for (i, j), reasons in mapping.items():
         a, b = rows[i], rows[j]
-        identity = sha256(f"{SALT}:{a['id']}:{b['id']}".encode()).hexdigest()[:24]
+        identity = sha256(f"{salt}:{a['id']}:{b['id']}".encode()).hexdigest()[:24]
         if int(identity, 16) % 2:
             a, b = b, a
         visible.append(dict(case_id=identity, left={"issuer": a["company"], "request": a["zh"]},
@@ -175,12 +193,12 @@ def packet(args):
                             intent=None, organizational_link=None, reviewer=None, rationale=None))
         private.append(dict(case_id=identity, left_id=a["id"], right_id=b["id"], candidate_reasons=reasons))
     visible.sort(key=lambda item: item["case_id"])
-    args.output.mkdir(mode=0o700)
-    form = args.output / "blind-review.jsonl"
+    output.mkdir(mode=0o700)
+    form = output / "blind-review.jsonl"
     for name in ("blind-review.jsonl", "reviewer-a.jsonl", "reviewer-b.jsonl"):
-        write_private(args.output / name, visible)
-    write_private(args.output / "private-mapping.jsonl", private)
-    write_json(args.output / "summary.json", dict(
+        write_private(output / name, visible)
+    write_private(output / "private-mapping.jsonl", private)
+    write_json(output / "summary.json", dict(
         blind_form_sha256=digest(form), blind_review_rows=len(visible),
         selected_external_groups=n, focal_groups=len(focus), historical_requests=len(historical_rows),
         semantic=semantic["counts"], organization=org_counts, human_reviews=0,
