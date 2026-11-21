@@ -84,11 +84,14 @@ def finish_role(service, result):
     return result
 
 
-def execute(service, request, arm, cutoff, lightweight=None, resident=None):
+def execute(service, request, arm, cutoff, lightweight=None, resident=None, *, withheld=None):
     if arm == "baseline":
+        if withheld is not None:
+            raise ValueError("The original single-slot arm does not support corpus masking")
         return service.search(request, "screened_one_call")
     clues, roles, prompts = request_inputs(request)
-    result = resolve(service, arm, cutoff, lightweight, resident, clues, roles, service.encoder.encode(prompts))
+    result = resolve(service, arm, cutoff, lightweight, resident, clues, roles, service.encoder.encode(prompts),
+                     withheld=withheld)
     return finish_role(service, result)
 
 
@@ -128,10 +131,10 @@ def execute_group(service, requests, arm, cutoff, lightweight, resident, stage):
     yield from completed
 
 
-def resolve(service, arm, cutoff, lightweight, resident, clues, roles, vectors):
+def resolve(service, arm, cutoff, lightweight, resident, clues, roles, vectors, *, withheld=None):
     scores = {name: vectors[2:] @ service.banks[name].T for name in service.bands}
-    ranking = service.index.full_rank(vectors[:2], clues, None)
-    state = plan(service, ranking, scores, clues, roles, None, "screened", run_role=False)
+    ranking = service.index.full_rank(vectors[:2], clues, withheld)
+    state = plan(service, ranking, scores, clues, roles, withheld, "screened", run_role=False)
     pair, base, response = state["pair"], state["roles"], state["response"]
     if arm == "matched_resident":
         if not pair and not response["calls"]:
@@ -334,7 +337,8 @@ def run(args):
         heads, training_report, fit = fit_lightweight(args.plos, service, definitions, training)
         report = dict(training=training_report, calibration=fit, plos_sha256=digest(args.plos))
         lightweight = (heads, definitions, fit)
-        if args.matched_source_service_reference is not None:
+        matched_reference = args.matched_source_service_reference or args.fresh_source_reference
+        if matched_reference is not None:
             from experiments.credit.paired_role_matched_source import calibrate_pairs
             from experiments.credit.paired_role_resident_source import calibrate, clue_view
 
@@ -343,7 +347,7 @@ def run(args):
                 service, resident, args.matched_source_projection, args.matched_source_manifest,
                 args.matched_source_supplement, args.matched_source_supplement_manifest, wording,
             )
-            expected = json.loads(args.matched_source_service_reference.read_bytes())
+            expected = json.loads(matched_reference.read_bytes())
             if matched_fit != expected["matched_calibration"]:
                 raise ValueError("Service calibration differs from the frozen component test")
             agreement = Counter()
@@ -351,7 +355,20 @@ def run(args):
                 clues = [part["topic"] for part in json.loads(request.payload)["requirements"]]
                 agreement[label["view"]] += clue_view(clues) == label["view"]
             matched_serving = dict(calibration=matched_fit, observed_view_agreement=agreement,
-                                   component_sha256=digest(args.matched_source_service_reference))
+                                   component_sha256=digest(matched_reference))
+            if args.fresh_source_reference is not None:
+                from experiments.credit.elife_fresh_source_evaluation import evaluate
+                from experiments.credit.elife_extended_role_holdout import SALT
+
+                if manifest.get("sampling_salt") != SALT:
+                    raise ValueError("Expected the fixed extended eLife holdout")
+                evaluate(service, labels, cutoff, lightweight, resident, clusters(selected, articles),
+                         args.output, args.reverse, dict(manifest_sha256=digest(args.manifest),
+                                                       projection_sha256=digest(args.projection),
+                                                       calibration=matched_serving, panel=census,
+                                                       lightweight=report, gpu=torch.cuda.get_device_name(),
+                                                       **revisions))
+                return
             requested = MATCHED_SERVICE_ARMS
             if args.embedding_batch_capacity or args.role_batch_capacity or args.mixed_role_batch_capacity:
                 if args.embedding_batch_capacity and 4 * args.embedding_batch_capacity > service.encoder.batch_size:
@@ -495,6 +512,7 @@ if __name__ == "__main__":
     diagnostics.add_argument("--fused-4b-reference", type=Path)
     diagnostics.add_argument("--resident-source-reference", type=Path)
     diagnostics.add_argument("--matched-source-service-reference", type=Path)
+    diagnostics.add_argument("--fresh-source-reference", type=Path)
     args = parser.parse_args()
     if (args.embedding_batch_capacity or args.role_batch_capacity or args.mixed_role_batch_capacity) and args.matched_source_service_reference is None:
         parser.error("Batching requires --matched-source-service-reference")
@@ -518,8 +536,9 @@ if __name__ == "__main__":
         parser.error("--resident-source-reference requires --plos")
     matched_inputs = (args.matched_source_projection, args.matched_source_manifest,
                       args.matched_source_supplement, args.matched_source_supplement_manifest)
-    if any(value is not None for value in matched_inputs) or args.matched_source_service_reference is not None:
-        if ((args.resident_source_reference is None and args.matched_source_service_reference is None)
+    reference = args.resident_source_reference or args.matched_source_service_reference or args.fresh_source_reference
+    if any(value is not None for value in matched_inputs) or args.matched_source_service_reference or args.fresh_source_reference:
+        if (reference is None
                 or any(value is None for value in matched_inputs) or args.plos is None):
             parser.error("Matched source calibration requires the resident reference and both complete snapshots")
     run(args)
