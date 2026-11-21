@@ -1,0 +1,338 @@
+{
+  "runs": [
+    {
+      "reports": {
+        "extended": {
+          "100": {
+            "counts": {
+              "requests": 205,
+              "reference_reads": 615,
+              "fixed_two_reads": 410,
+              "prior_reads": 238,
+              "frontier_reads": 238,
+              "additionally_pruned": 0,
+              "zero_read_requests": 86,
+              "issued": 119
+            },
+            "dispatch_p95_us": {
+              "pre_read": 5.9521999999999995,
+              "frontier": 6.597599999999998
+            },
+            "decision_sha256": "ba2302c1d56d8b48710d9771258f227c9257a60179d4cf93a12569ba4896ecc9"
+          },
+          "50": {
+            "counts": {
+              "requests": 205,
+              "reference_reads": 615,
+              "fixed_two_reads": 410,
+              "prior_reads": 355,
+              "frontier_reads": 283,
+              "additionally_pruned": 72,
+              "zero_read_requests": 67,
+              "issued": 105
+            },
+            "dispatch_p95_us": {
+              "pre_read": 5.9208,
+              "frontier": 6.0592
+            },
+            "decision_sha256": "416a3529a91589acea7ec3c063aae52d5c246776b7538a914f6d8bf6e6d60230"
+          }
+        },
+        "confirmation": {
+          "100": {
+            "counts": {
+              "requests": 193,
+              "reference_reads": 579,
+              "fixed_two_reads": 386,
+              "prior_reads": 288,
+              "frontier_reads": 287,
+              "additionally_pruned": 1,
+              "zero_read_requests": 50,
+              "issued": 141
+            },
+            "dispatch_p95_us": {
+              "pre_read": 13.051199999999998,
+              "frontier": 13.775399999999998
+            },
+            "decision_sha256": "3b0bed80a7ed6c0862f895498473cd53bac571fbb7c50935d9cf2752fd93557f"
+          },
+          "50": {
+            "counts": {
+              "requests": 193,
+              "reference_reads": 579,
+              "fixed_two_reads": 386,
+              "prior_reads": 436,
+              "frontier_reads": 321,
+              "additionally_pruned": 115,
+              "zero_read_requests": 33,
+              "issued": 116
+            },
+            "dispatch_p95_us": {
+              "pre_read": 12.387799999999997,
+              "frontier": 12.102199999999996
+            },
+            "decision_sha256": "5cfbbfe78a16f9cada319c65e64dd3e0a3ab76e6c6d4ed24a7570a129bf03539"
+          }
+        }
+      },
+      "http": {
+        "165": {
+          "two_only": {
+            "matched_responses": 398,
+            "reads": 796,
+            "waves": 398,
+            "payload_bytes": 858244,
+            "zero_read_requests": 0,
+            "drained_rps": 164.12869807616488,
+            "p50_ms": 19.402556121349335,
+            "p95_ms": 20.697177317924798,
+            "p95_when_reading_ms": 20.697177317924798,
+            "release_lag_p95_ms": 1.1196965584531422,
+            "final_drain_ms": 18.865714961606272
+          },
+          "pre_read": {
+            "matched_responses": 398,
+            "reads": 791,
+            "waves": 298,
+            "payload_bytes": 771135,
+            "zero_read_requests": 100,
+            "drained_rps": 162.5463971873144,
+            "p50_ms": 23.46317283809185,
+            "p95_ms": 64.46019355207679,
+            "p95_when_reading_ms": 67.54753845743835,
+            "release_lag_p95_ms": 1.0571559658274052,
+            "final_drain_ms": 42.47105558769704
+          },
+          "frontier": {
+            "matched_responses": 398,
+            "reads": 604,
+            "waves": 298,
+            "payload_bytes": 599245,
+            "zero_read_requests": 100,
+            "drained_rps": 163.71371616155614,
+            "p50_ms": 19.48658819310367,
+            "p95_ms": 22.825772361829873,
+            "p95_when_reading_ms": 23.56396066024899,
+            "release_lag_p95_ms": 1.1383096687495708,
+            "final_drain_ms": 25.012423930633076
+          }
+        },
+        "205": {
+          "two_only": {
+            "matched_responses": 398,
+            "reads": 796,
+            "waves": 398,
+            "payload_bytes": 858244,
+            "zero_read_requests": 0,
+            "drained_rps": 174.38967129080035,
+            "p50_ms": 177.75746644474566,
+            "p95_ms": 324.4536398211494,
+            "p95_when_reading_ms": 324.4536398211494,
+            "release_lag_p95_ms": 1.121968450024724,
+            "final_drain_ms": 345.6598901530592
+          },
+          "pre_read": {
+            "matched_responses": 398,
+            "reads": 791,
+            "waves": 298,
+            "payload_bytes": 771135,
+            "zero_read_requests": 100,
+            "drained_rps": 176.9549394950357,
+            "p50_ms": 86.0679717734456,
+            "p95_ms": 300.6778536597267,
+            "p95_when_reading_ms": 304.9514123238623,
+            "release_lag_p95_ms": 1.0477912379428744,
+            "final_drain_ms": 312.5747939912467
+          },
+          "frontier": {
+            "matched_responses": 398,
+            "reads": 604,
+            "waves": 298,
+            "payload_bytes": 599245,
+            "zero_read_requests": 100,
+            "drained_rps": 202.76606488035964,
+            "p50_ms": 18.480564234778285,
+            "p95_ms": 35.48083503264934,
+            "p95_when_reading_ms": 36.732503259554505,
+            "release_lag_p95_ms": 1.0265767108649015,
+            "final_drain_ms": 26.267738953777986
+          }
+        }
+      },
+      "depth": 128,
+      "reverse": false,
+      "embedding": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "job": "47570",
+      "gpu": "NVIDIA GeForce RTX 4090",
+      "script_sha256": "8edfb5679340f9b084f6fd35f05146b59fadc576bd5bee158399ec32f180ee67",
+      "reference_sha256": "d808270c981cc9cd91789acce1f3ef082d97b477beb162569b7594cfd27abe9f"
+    },
+    {
+      "reports": {
+        "extended": {
+          "100": {
+            "counts": {
+              "requests": 205,
+              "reference_reads": 615,
+              "fixed_two_reads": 410,
+              "prior_reads": 238,
+              "frontier_reads": 238,
+              "additionally_pruned": 0,
+              "zero_read_requests": 86,
+              "issued": 119
+            },
+            "dispatch_p95_us": {
+              "pre_read": 6.577799999999998,
+              "frontier": 7.093999999999999
+            },
+            "decision_sha256": "ba2302c1d56d8b48710d9771258f227c9257a60179d4cf93a12569ba4896ecc9"
+          },
+          "50": {
+            "counts": {
+              "requests": 205,
+              "reference_reads": 615,
+              "fixed_two_reads": 410,
+              "prior_reads": 355,
+              "frontier_reads": 283,
+              "additionally_pruned": 72,
+              "zero_read_requests": 67,
+              "issued": 105
+            },
+            "dispatch_p95_us": {
+              "pre_read": 6.168799999999999,
+              "frontier": 6.3262
+            },
+            "decision_sha256": "416a3529a91589acea7ec3c063aae52d5c246776b7538a914f6d8bf6e6d60230"
+          }
+        },
+        "confirmation": {
+          "100": {
+            "counts": {
+              "requests": 193,
+              "reference_reads": 579,
+              "fixed_two_reads": 386,
+              "prior_reads": 288,
+              "frontier_reads": 287,
+              "additionally_pruned": 1,
+              "zero_read_requests": 50,
+              "issued": 141
+            },
+            "dispatch_p95_us": {
+              "pre_read": 6.412799999999995,
+              "frontier": 6.872799999999998
+            },
+            "decision_sha256": "3b0bed80a7ed6c0862f895498473cd53bac571fbb7c50935d9cf2752fd93557f"
+          },
+          "50": {
+            "counts": {
+              "requests": 193,
+              "reference_reads": 579,
+              "fixed_two_reads": 386,
+              "prior_reads": 436,
+              "frontier_reads": 321,
+              "additionally_pruned": 115,
+              "zero_read_requests": 33,
+              "issued": 116
+            },
+            "dispatch_p95_us": {
+              "pre_read": 6.147999999999997,
+              "frontier": 5.719799999999999
+            },
+            "decision_sha256": "5cfbbfe78a16f9cada319c65e64dd3e0a3ab76e6c6d4ed24a7570a129bf03539"
+          }
+        }
+      },
+      "http": {
+        "205": {
+          "frontier": {
+            "matched_responses": 398,
+            "reads": 604,
+            "waves": 298,
+            "payload_bytes": 599245,
+            "zero_read_requests": 100,
+            "drained_rps": 203.99284195181798,
+            "p50_ms": 18.644761759787798,
+            "p95_ms": 36.63206202909349,
+            "p95_when_reading_ms": 37.80286647379396,
+            "release_lag_p95_ms": 1.0305454954504967,
+            "final_drain_ms": 14.4634856251864
+          },
+          "pre_read": {
+            "matched_responses": 398,
+            "reads": 791,
+            "waves": 298,
+            "payload_bytes": 771135,
+            "zero_read_requests": 100,
+            "drained_rps": 174.7629639044698,
+            "p50_ms": 165.10416590608656,
+            "p95_ms": 317.3490415327251,
+            "p95_when_reading_ms": 321.5358097571879,
+            "release_lag_p95_ms": 1.0876081185415387,
+            "final_drain_ms": 340.7850283538787
+          },
+          "two_only": {
+            "matched_responses": 398,
+            "reads": 796,
+            "waves": 398,
+            "payload_bytes": 858244,
+            "zero_read_requests": 0,
+            "drained_rps": 176.42646690156718,
+            "p50_ms": 160.18404602073133,
+            "p95_ms": 302.98796922434116,
+            "p95_when_reading_ms": 302.98796922434116,
+            "release_lag_p95_ms": 1.0636954801157117,
+            "final_drain_ms": 319.31198894659565
+          }
+        },
+        "165": {
+          "frontier": {
+            "matched_responses": 398,
+            "reads": 604,
+            "waves": 298,
+            "payload_bytes": 599245,
+            "zero_read_requests": 100,
+            "drained_rps": 164.51415818648212,
+            "p50_ms": 18.053673207759857,
+            "p95_ms": 21.806325390934944,
+            "p95_when_reading_ms": 22.058772295713425,
+            "release_lag_p95_ms": 1.0373054770752788,
+            "final_drain_ms": 13.184061920213708
+          },
+          "pre_read": {
+            "matched_responses": 398,
+            "reads": 791,
+            "waves": 298,
+            "payload_bytes": 771135,
+            "zero_read_requests": 100,
+            "drained_rps": 164.34374852470484,
+            "p50_ms": 23.83273420855403,
+            "p95_ms": 49.38595024868845,
+            "p95_when_reading_ms": 51.55354565940796,
+            "release_lag_p95_ms": 1.069468632340431,
+            "final_drain_ms": 15.692600695359715
+          },
+          "two_only": {
+            "matched_responses": 398,
+            "reads": 796,
+            "waves": 398,
+            "payload_bytes": 858244,
+            "zero_read_requests": 0,
+            "drained_rps": 164.05438332439203,
+            "p50_ms": 18.04844429716468,
+            "p95_ms": 19.50300196185708,
+            "p95_when_reading_ms": 19.50300196185708,
+            "release_lag_p95_ms": 1.027322793379426,
+            "final_drain_ms": 19.96417873905898
+          }
+        }
+      },
+      "depth": 128,
+      "reverse": true,
+      "embedding": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "job": "47570",
+      "gpu": "NVIDIA GeForce RTX 4090",
+      "script_sha256": "8edfb5679340f9b084f6fd35f05146b59fadc576bd5bee158399ec32f180ee67",
+      "reference_sha256": "d808270c981cc9cd91789acce1f3ef082d97b477beb162569b7594cfd27abe9f"
+    }
+  ]
+}

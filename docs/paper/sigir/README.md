@@ -1,15 +1,26 @@
 # Three Reads, One Expert
 
-`main.tex` is the canonical editable English manuscript; `supplement.tex` builds the separate supplementary PDF from `appendix.tex`, containing artifact pointers and earlier development comparisons. The main draft studies contributor-constrained first-round evidence allocation under a fixed reading budget. It reports coverage against fixed and sequential controls, exact execution checks, and a shared-corpus feasibility ablation for 4B role rechecks. The supplement identifies the reproducible runs and separates label-supported coverage from human evidence judgments. The current paper scope is the structured publication benchmark and fixed-inventory verification. The complete enterprise quality claim still requires independent adjudication and an end-to-end comparison at matched risk and cost. The main file uses ACM `acmart` with `sigconf,natbib=true,anonymous=true,pbalance=true`, following the official SIGIR2027 full-paper guidance:
-https://sigir2027.org/pages/submit-full.html
+`main.tex` is the single editable English manuscript. The draft studies
+contributor-constrained first-query search with a fixed read budget.
+The standalone appendix source preserves protocols and development
+comparisons for reference.
 
-Build from repository root:
+## Build the signed draft
+
+Keep the ACM author and affiliation statements in the local
+`artifacts/sigir-author-copy/authors.tex` file. Build with Tectonic
+from the checkout that contains the source:
 
 ```bash
-python3 experiments/paper/build_sigir.py
+python3 experiments/paper/build_sigir.py --frozen-results
 ```
 
-Outputs: `output/pdf/expert-search-sigir-draft.pdf` and `output/pdf/expert-search-sigir-supplement.pdf`. Every build refreshes artifact-backed result macros and a hashed synthesis-count snapshot in `generated/`; it does not make API calls or generate labels. Tectonic is required. A public source-only checkout can use `python3 experiments/paper/build_sigir.py --frozen-results` to compile the committed snapshot without private experimental artifacts; default builds refresh from local artifacts and fail if inputs are unavailable. The unmodified current ACM class is generated from the included original CTAN `acmart.dtx`/`acmart.ins`; its LPPL terms are retained separately from repository MIT. The class-supported `pbalance` option balances columns; no fonts/margins were edited. `template-provenance.json` records the source and checksums. This is a research draft, not a submitted or accepted paper.
+The command replaces `output/pdf/expert-search-sigir-author-draft.pdf`
+after compilation succeeds. Set `--authors` or `--output` when the
+metadata or shared manuscript lives outside the source checkout.
+Omit `--frozen-results` to refresh the tables from local experiment
+artifacts. The build stages temporary inputs and removes them on exit.
+The original ACM template and its license are kept under `template/`.
 
 ## Writing references
 
@@ -36,7 +47,7 @@ The figure and equation sources are editable LaTeX.
 
 ## Main figures and comparison tables
 
-The main paper has four figures and four tables. The figures cover the
+The main paper has four figures and five tables. The figures cover the
 agent architecture, issuance and quality uncertainty, the cost of
 query-local filtering, and exact source-read savings. The
 [pre-read benchmark](../../../benchmarks/pre-read-proof-bound-v1)

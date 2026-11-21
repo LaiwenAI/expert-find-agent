@@ -2,7 +2,7 @@
 \makeatletter
 \def\input@path{{template/}}
 \makeatother
-\documentclass[sigconf,natbib=true,anonymous=true,pbalance=true]{acmart}
+\documentclass[sigconf,natbib=true,anonymous=false,pbalance=true]{acmart}
 \usepackage{booktabs}
 \usepackage{amsmath}
 \usepackage{xurl}
@@ -16,7 +16,7 @@
 \acmYear{2026}
 \renewcommand\footnotetextcopyrightpermission[1]{}
 \title[Three Reads, One Expert]{Three Reads, One Expert: Contributor-Constrained Evidence Planning for First-Query Search}
-\author{Anonymous Authors}
+\input{authors}
 \begin{document}
 
 \begin{abstract}
@@ -87,6 +87,13 @@ Let $S$ be the three planned sources. For condition $i$ and source $d$, let $K_i
 P(S,K)\subseteq P_{\mathrm{verified}}(S)\subseteq P(S,K\cup U).
 \]
 If the optimistic set is empty, the reference abstains. If both endpoint sets have the same best proof, fetch just its two sources together and verify the original declarations. If the endpoints disagree, open all three in parallel. If the two fetched declarations fail to confirm the predicted proof, complete the reference reads. The certificate concerns a fixed plan under an identity- and version-matched structured index. Untrusted or stale role data require the ordinary verifier.
+
+An uncertain winning person may still require only two source files. Let $k_0$ be the best fully indexed proof's rank key, or $+\infty$ when no such proof exists. For each oriented source pair $(a,b)$ let $k^{+}(a,b)$ be its best possible key under $K\cup U$. The source frontier fetches
+\[
+S^{\star}=\bigcup_{\substack{a,b\in S,\ a\ne b\\
+ k^{+}(a,b)\,\mathrm{exists},\ k^{+}(a,b)\le k_0}}\{a,b\}.
+\]
+If a verified proof wins, its pair is feasible under the optimistic roles and its key cannot exceed the known incumbent. Both files must therefore be in $S^{\star}$. Verifying only the frontier preserves the exact winner and citations. If there is no possible pair, it also preserves abstention.
 
 \paragraph{Certify shallow role planning.}
 Let the shallow lists be prefixes of the fixed deep lists. The selected shallow pair remains the deep anchor pair when both roles are indexed. It already attains the minimum number of unknown roles, and every pair involving a position outside a required shallow prefix has a worse minimax rank. Read the two anchors and consider all possible completions through one extra shallow source using its byline. Grant every shared contributor the needed role optimistically. If a verified prefix proof outranks every such completion, and therefore also every proof using a rank beyond the prefix, return it. Otherwise finish deep planning and reuse any already-open declaration. This certificate preserves the selected expert and both citations for the same indexed reference. It saves role processing and reads while the benchmark computes the full deep ranking for both routes.
@@ -251,11 +258,30 @@ The extended and confirmation eLife snapshots, with disjoint verified contributo
 \end{figure*}
 
 \paragraph{Pre-read proof certification.}
-On the same two eLife snapshots, the fixed plan's exact pre-read certificate reduces 1,194 declaration reads to 88 at depth 32 and 526 at depth 128 when all parsed roles are visible (Figure~\ref{fig:pre-read}). Withholding half the role rows by source hash raises those counts to 128 and 791. The pre-read route uses at most one fetch wave in the replay. A fixed two-read control also reproduces the reference responses on these samples and needs 796 reads. At depth 128 with half the roles withheld, the new certificate saves only five reads relative to that control on the pooled snapshots. The warm local P95 difference against the three-read reference ranges from $-0.106$ to $+0.017$ ms across all conditions. The certificate removes data access under an exact structured reference. Client-side latency under finite source capacity requires a separate test.
+On the same two eLife snapshots, the fixed plan's exact pre-read certificate reduces 1,194 declaration reads to 88 at depth 32 and 526 at depth 128 when all parsed roles are visible (Figure~\ref{fig:pre-read}). Withholding half the role rows by source hash raises those counts to 128 and 791. The pre-read route uses at most one fetch wave in the replay. A fixed two-read control also reproduces the reference responses on these samples and needs 796 reads. At depth 128 with half the roles withheld, the new certificate saves only five reads relative to that control on the pooled snapshots. The warm local P95 difference against the three-read reference ranges from $-0.106$ to $+0.017$ ms across all conditions. The 50\% condition gives a sharper distinction between uncertain experts and uncertain source files. Keeping only pairs that can beat the best fully indexed proof reduces 791 reads to 604 without changing a response. At full visibility this refinement saves just one additional read. Both routes preserve the fixed plan reference.
 
 At a 25\% nominal role-payload budget, contributor-degree and pair-cover placement also preserve all full-index responses in both catalogs. At tighter capacities, graph coverage alone does not consistently improve outcomes. At the 5\% eLife byte budget, pair cover completes 11 two-source contributor histories versus eight for contributor degree, yet has 31 instead of 38 label-supported returns. At the common quota of 35, the counts are 31 and 32.
 
 With complete publisher role fields, planning from depth 64 and certifying where possible returns the fixed depth-128 outcomes while reducing total reads from 633 to 516. The same response parity holds after masking or rotating indexed roles, although fewer requests qualify for early stopping. In the three 50\% exposure masks with role rotation, 15--50 PLOS and 1--4 eLife requests stop at depth 64. Warm request latency remains similar because both arms perform the deep retrieval.
+
+\paragraph{When fewer reads reduce tail latency.}
+In a depth-128 replay over the two eLife snapshots, each policy sees the same 398 scheduled arrivals per load setting and verifies actual source bytes against the fixed-plan reference. The loopback HTTP source service has six slots and adds 16 ms per read. At 165 requests per second, the fixed-two control is already near the one-wave latency floor. With half the role rows withheld, the endpoint policy can bunch three reads on individual queries and queue despite similar total work. The source frontier reduces that tail to 22--23 ms. At 205 requests per second, its 604 reads lower P95 to 35--37 ms, compared with 303--324 ms for fixed two. With all parsed role rows present, the simpler endpoint bound suffices to reduce P95 to 24--25 ms at the higher rate. These are finite source-service traces with the encoder, candidate retrieval, and planning outside the timer (Table~\ref{tab:source-capacity}).
+
+\begin{table}[t]
+\caption{Loopback client P95 in ms across two traversal orders. Each replay returns all 398 fixed-plan responses byte-for-byte. The source frontier is timed in a separate, otherwise matched experiment at 50\% role visibility.}
+\label{tab:source-capacity}
+\centering\small
+\begin{tabular}{@{}llrrr@{}}
+\toprule
+Roles & Arrivals/s & Fixed two & Endpoint & Frontier \\
+\midrule
+100\% & 165 & 19.3--19.8 & 19.4--21.0 & --- \\
+100\% & 205 & 297--302 & 23.6--24.7 & --- \\
+50\% & 165 & 19.5--20.7 & 49.4--64.5 & 21.8--22.8 \\
+50\% & 205 & 303--324 & 301--317 & 35.5--36.6 \\
+\bottomrule
+\end{tabular}
+\end{table}
 
 In the live request control with the same padded GPU planner, byline precheck reduces reads from 1,266 to 910 per 422 requests while returning identical bytes. The source service uses six loopback read slots with 16 ms of inserted delay. At 60 scheduled arrivals/s, both policies have P95 near 33 ms. At 165 arrivals/s, all-three parallel reading backs up and yields 977--981 ms P95. The precheck yields 52--53 ms as source traffic falls. These are finite, controlled service traces. A separate source-only test finds that waiting for two declarations before issuing the third increases low-load P95 from about 18 to 33 ms versus the eager precheck.
 

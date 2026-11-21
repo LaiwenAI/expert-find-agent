@@ -592,7 +592,7 @@ Current maintenance entry points are grouped by use:
 
 - `experiments/bilingual/`: construction in Chinese and English from enterprise-grouped raw requirements, 1000 real parent requirements, and 5000 synthetic intents. Run `PYTHONPATH=src python -m experiments.bilingual.prepare_cohort` and `PYTHONPATH=src python -m experiments.bilingual.generate_queries --prepare-only`; omitting preparation parameters from the latter calls the paid API.
 - `experiments/metadata/`: publication-date ranges, citation counts, and unknown-contribution states; `PYTHONPATH=src python -m experiments.metadata.audit_papers`.
-- `experiments/paper/build_sigir.py`: compile the English LaTeX main text/appendix and output `output/pdf/expert-search-sigir-draft.pdf`. Requires Tectonic; template source and license are retained in `docs/paper/sigir/template`.
+- `experiments/paper/build_sigir.py`: build the single signed LaTeX manuscript at `output/pdf/expert-search-sigir-author-draft.pdf`. Requires Tectonic and local ACM author statements. See [build instructions](paper/sigir/README.md).
 
 The old Markdown draft has been deleted and is no longer maintained in parallel. Fixed paths for historical experiment source code are temporarily retained for protocol reproduction; new modules are grouped by use. Temporary previews and bytecode are regenerable and are not included in the source release package.
 

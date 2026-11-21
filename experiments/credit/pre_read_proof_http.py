@@ -98,14 +98,14 @@ async def resolve(port, case, arm):
     return serialize(match), len(loaded), 2
 
 
-async def trial(paths, trace, rate, arm):
+async def trial(paths, trace, rate, arm, resolver=resolve):
     service = SourceService(paths)
     server = await asyncio.start_server(service.handle, "127.0.0.1", 0, backlog=512)
     port = server.sockets[0].getsockname()[1]
     loop = asyncio.get_running_loop()
 
     async def checked(case):
-        answer, reads, waves = await asyncio.wait_for(resolve(port, case, arm), REQUEST_TIMEOUT_SECONDS)
+        answer, reads, waves = await asyncio.wait_for(resolver(port, case, arm), REQUEST_TIMEOUT_SECONDS)
         if answer != case["reference"]:
             raise AssertionError(f"{arm} changed a fixed-plan response")
         return reads, waves
@@ -160,12 +160,17 @@ async def replay(paths, cases, expected, reverse):
     return out
 
 
-def run(args):
-    if not os.environ.get("SLURM_JOB_ID") or not torch.cuda.is_available() or args.output.exists():
-        raise ValueError("Require a fresh output on a Slurm GPU allocation")
+def raise_file_descriptor_limit():
     soft, hard = resource.getrlimit(resource.RLIMIT_NOFILE)
     if soft < 8192:
         resource.setrlimit(resource.RLIMIT_NOFILE, (8192, hard))
+    return resource.getrlimit(resource.RLIMIT_NOFILE)[0]
+
+
+def run(args):
+    if not os.environ.get("SLURM_JOB_ID") or not torch.cuda.is_available() or args.output.exists():
+        raise ValueError("Require a fresh output on a Slurm GPU allocation")
+    raise_file_descriptor_limit()
     linked = bound.linked
     reference = json.loads(args.reference.read_bytes())["runs"][0]
     checkpoint = linked.previous.live.verify_embedding(args.embedding)

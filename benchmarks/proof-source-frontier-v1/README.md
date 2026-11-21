@@ -38,7 +38,30 @@ visibility the frontier avoids 187 of 791 endpoint reads (23.6%).
 This measures local declaration access. Dispatch CPU time is included
 separately in the receipt; no service latency is inferred.
 
-[Replayed measurements](results.json)
+[Local replay receipts](results.json)
+
+## Source-service comparison at 50% visibility
+
+Slurm job 47570 repeats the exact comparison over the six-slot
+[loopback source service](../pre-read-proof-http-v1), with its fixed
+16 ms source delay. Time starts at scheduled arrival with ranks and
+plans frozen. Both orders reproduce every response byte, declaration
+count, and transfer size. Each cell is P95 in milliseconds.
+
+| Scheduled arrivals/s | Fixed two | Endpoint bound | Source frontier |
+| ---: | ---: | ---: | ---: |
+| 165 | 19.50–20.70 | 49.39–64.46 | 21.81–22.83 |
+| 205 | 302.99–324.45 | 300.68–317.35 | 35.48–36.63 |
+
+At 165/s the frontier trims the endpoint policy's tail, with fixed
+two still a little faster. At 205/s both controls repeatedly queue
+at the source bottleneck. Reducing the read count from 796 or 791
+to 604 lowers offered source traffic enough for the frontier to
+largely keep up. These are finite source-service traces. They
+exclude parsing, live retrieval and external storage. Repeat the
+reproduction command with `--http` to include both load settings.
+
+[Source-service receipts](http-results.json)
 
 ## Reproduce
 
