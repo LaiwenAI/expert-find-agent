@@ -47,7 +47,7 @@ class Catalog:
         available = [word for word in words if word not in KEYWORD_STOP and len(word) > 2 and word in self.idf]
         return " ".join(sorted(available, key=lambda token: -self.idf[token])[:8])
 
-    def rank(self, vectors, texts, withheld):
+    def rank(self, vectors, texts, withheld, *, depth=DEPTH):
         dense = vectors @ self.vectors.T
         kept = [i for i, doc in enumerate(self.ids) if doc != withheld]
         topic = []
@@ -59,7 +59,7 @@ class Catalog:
             a = {j: i for i, j in enumerate(d)}
             b = {j: i for i, j in enumerate(s)}
             fusion = sorted(kept, key=lambda j: (-(1 / (61 + a[j]) + 1 / (61 + b[j])), self.ids[j]))
-            topic.append(dict(dense=[self.ids[i] for i in d[:DEPTH]], fused=[self.ids[i] for i in fusion[:DEPTH]],
+            topic.append(dict(dense=[self.ids[i] for i in d[:depth]], fused=[self.ids[i] for i in fusion[:depth]],
                               cosine={self.ids[i]: float(scores[i]) for i in kept}, best=float(scores[d[0]])))
         return topic
 
