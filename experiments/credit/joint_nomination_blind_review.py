@@ -101,10 +101,12 @@ def summarize(rows, masks):
 
 def bind_cards(panel, rows, policies, catalogue, paths, cards):
     views = []
-    for row in rows:
+    for i, row in enumerate(rows):
         atoms = row["atoms"]
         views.append({})
         for arm in ARMS:
+            if not any(i in masks[arm] for masks in policies.values()):
+                continue
             match = row["arms"][arm]["match"]
             if not match:
                 continue

@@ -79,3 +79,41 @@ PYTHONPATH=src:. OPENBLAS_NUM_THREADS=1 OMP_NUM_THREADS=1 \
   benchmarks/mixed-publisher-joint-v1/results.json \
   benchmarks/live-joint-source-request-v1/results.json NEW_RESULTS
 ```
+
+## Independent review at matched issuance
+
+The primary review compares the equal-issuance quota on each panel.
+The common requests answered by both routes give a secondary estimate
+on that specific subset. Freeze selections before review. Show reviewers
+only the requested topics and roles, original paper title and abstract,
+publisher DOI and byline identity, and original contribution excerpts.
+The source DOI gives access to the full article. Share only `review.html`
+with reviewers. Keep the case-to-method key and the reviewers' records local.
+Ask two reviewers to assess each topic, each role, and contributor identity
+independently. An unsupported package requires a shared contradiction on
+at least one dimension. Disagreement and inconclusive evidence remain
+unresolved in the conservative difference bounds. An identical evidence
+package receives the same judgment in both arms.
+
+| Panel and selection | Issued per method | Identical evidence packages in both arms | Distinct review cards |
+| --- | ---: | ---: | ---: |
+| PLOS equal quota | 45 | 17 | 73 |
+| PLOS common issuing requests | 45 | 33 | 57 |
+| eLife equal quota | 3 | 0 | 6 |
+| eLife common issuing requests | 3 | 0 | 6 |
+
+The union contains 90 cards. Slurm array 47414 on ws6 regenerated the
+original two decision signatures and produced byte-identical cards and
+keys under reversed traversal. The reviewed outcome remains pending.
+The eLife matched comparison is descriptive given its three issuances
+per method.
+
+To rebuild, append `--blind-review benchmarks/open-topic-role-matched-v1/results.json NEW_PRIVATE_DIRECTORY`
+to the command above. The export checks both archived decision signatures
+before producing the reviewer page. With two independent exports, score
+using the existing scorer:
+
+```sh
+PYTHONPATH=src:. python -m experiments.credit.blind_joint_topic_review score \
+  PRIVATE_DIRECTORY/key.json NEW_SCORE REVIEWER_1.json REVIEWER_2.json
+```

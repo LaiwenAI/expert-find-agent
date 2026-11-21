@@ -83,7 +83,7 @@ def missing_bounds(rows, masks):
             fixed + sum(max(0, value) for value in unknown.values())]
 
 
-def experiment(index, postings, queries, subjects, expected, reverse):
+def experiment(index, postings, queries, subjects, expected, reverse, trace=None):
     tagged = lambda atoms, proof: all(topic in subjects.get(doc, ())
                                       for (topic, _), doc in zip(atoms, proof[1:], strict=True))
     rows = []
@@ -107,6 +107,8 @@ def experiment(index, postings, queries, subjects, expected, reverse):
             reachable_after_reads[arm] += any(tagged(atoms, proof) for proof in proofs)
         rows.append((number, row))
     rows = [row for _, row in sorted(rows)]
+    if trace is not None:
+        trace.extend(rows)
     cases = {}
     for name, selected in audit.select(rows).items():
         cases[name] = audit.summarize(rows, selected) | {"joint_minus_sequential_missing_bounds":
@@ -117,6 +119,37 @@ def experiment(index, postings, queries, subjects, expected, reverse):
                 matched_reads_per_arm=3 * len(rows), reachable_after_reads=reachable_after_reads,
                 p95_ms={key: float(np.quantile(value, .95)) for key, value in latency.items()},
                 decision_signature=sha256(json.dumps(rows, sort_keys=True).encode()).hexdigest())
+
+
+def freeze_blind_review(archive, directory, panels, traces, catalogue, args, checkpoint):
+    review = audit.review
+    archived = json.loads(archive.read_bytes())["runs"]
+    signatures = {name: panel["decision_signature"] for name, panel in panels.items()}
+    reference_hash = digest(args.reference)
+    for run in archived:
+        if (run["embedding"] != checkpoint
+                or run["reference_sha256"] != reference_hash
+                or {name: panel["decision_signature"] for name, panel in run["panels"].items()} != signatures):
+            raise ValueError("Cannot freeze review: archived decisions changed")
+    if not archived:
+        raise ValueError("Cannot freeze review from an empty archive")
+
+    paths = review.source_paths(args.plos) | review.source_paths(args.elife)
+    cards, key = {}, {}
+    for name, rows in traces.items():
+        selections = audit.select(rows)
+        policies = {policy: selections[policy] for policy in ("quota", "common")}
+        key.update(audit.bind_cards(name, rows, policies, catalogue, paths, cards))
+    blinded = sorted(cards.values(), key=lambda card: card["case_id"])
+    packet = dict(packet_id=review.stable_id(blinded), dimensions=review.DIMENSIONS, cards=blinded)
+    directory.mkdir(mode=0o700)
+    write_json(directory / "packet.json", packet)
+    write_json(directory / "key.json", dict(
+        packet_id=packet["packet_id"], reference_sha256=digest(archive),
+        decision_signatures=signatures, panels=key,
+    ))
+    review.render(SimpleNamespace(packet=directory / "packet.json", output=directory / "review.html"))
+    print(f"Frozen {len(blinded)} distinct evidence cards")
 
 
 def run(args):
@@ -143,12 +176,16 @@ def run(args):
     catalogue = mixed.merge(plos, elife)
     if len(catalogue.ids) != 452 or {key: len(panel[0]) for key, panel in cases.items()} != {"plos": 160, "elife": 51}:
         raise ValueError("Unexpected mixed catalog or query counts")
+    traces = {name: [] for name in cases} if args.blind_review else {}
     with TemporaryDirectory(dir=args.output.parent) as scratch:
         index = live.LocalIndex(catalogue, mixed.QwenTorchEmbedding(args.embedding), Path(scratch) / "reads")
         postings = typed.RolePostings(catalogue)
         panels = {key: experiment(index, postings, questions, tags,
-                                  expected["panels"][key]["global128"]["arms"]["personal_roles"], args.reverse)
+                                  expected["panels"][key]["global128"]["arms"]["personal_roles"], args.reverse, traces.get(key))
                   for key, (questions, tags) in cases.items()}
+    if args.blind_review:
+        archive, directory = args.blind_review
+        freeze_blind_review(archive, directory, panels, traces, catalogue, args, checkpoint)
     write_json(args.output, dict(
         panels=panels, reference_sha256=digest(args.reference), script_sha256=digest(Path(__file__)),
         embedding=checkpoint, reverse=args.reverse, gpu=torch.cuda.get_device_name(),
@@ -160,4 +197,5 @@ if __name__ == "__main__":
     for field in ("plos", "fixture", "elife", "elife_manifest", "embedding", "reference", "live_reference", "output"):
         parser.add_argument(field, type=Path)
     parser.add_argument("--reverse", action="store_true")
+    parser.add_argument("--blind-review", nargs=2, type=Path, metavar=("ARCHIVE", "NEW_DIRECTORY"))
     run(parser.parse_args())
