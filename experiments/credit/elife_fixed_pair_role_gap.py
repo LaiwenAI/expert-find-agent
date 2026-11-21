@@ -22,6 +22,7 @@ from experiments.credit.keyword_author_rescue import PostingCatalog
 from experiments.credit.paired_role_prospective_service import FROZEN_SHA, clusters
 from experiments.credit.paired_role_verification import PairedReader, alternative_roles
 from experiments.credit.plos_role_inventory import ROLES
+from experiments.credit.role_contrast_head import ARMS as STUDENT_ARMS, RoleContrastHeads
 from experiments.credit.role_option_calibration import ARMS as CALIBRATION_ARMS, RoleOptionCalibration
 from experiments.followir.core17_reranking import digest, write_json
 from experiments.litsearch.dense_cache import verify_checkpoint
@@ -59,7 +60,7 @@ def judge(catalog, row, pair, labels):
     return bool(owners), strict
 
 
-def recognize(row, bank, embedder, role_model, glossary, cutoff, compact_reader, calibration):
+def recognize(row, bank, embedder, role_model, glossary, cutoff, compact_reader, calibration, students):
     phrases = [glossary[role][int(row["family"][:16],16) % len(glossary[role])] for role in row["roles"]]
     features = encode(embedder, phrases)
     scores = {name: features @ bank[name].T for name in ("ridge","prototype")}
@@ -87,10 +88,12 @@ def recognize(row, bank, embedder, role_model, glossary, cutoff, compact_reader,
             unfiltered[name] = labels
             outputs[name] = (labels if margin > cutoff and None not in labels else None, forwards, tokens)
             reachable[name] = True
+    if students is not None:
+        outputs.update({arm: (labels, 0, 0) for arm, labels in students.predict(features).items()})
     return outputs, reachable, unfiltered
 
 
-def run(projection, manifest, embedding, role_checkpoint, definition_file, training, paired_reference, output, reverse, menu_ablation=False, calibrate_options=False):
+def run(projection, manifest, embedding, role_checkpoint, definition_file, training, paired_reference, output, reverse, menu_ablation=False, calibrate_options=False, contrast_training=None):
     if output.exists() or not os.environ.get("SLURM_JOB_ID") or not torch.cuda.is_available():
         raise ValueError("Require Slurm CUDA and a fresh output")
     if digest(paired_reference) != FROZEN_SHA:
@@ -126,6 +129,9 @@ def run(projection, manifest, embedding, role_checkpoint, definition_file, train
     calibration = RoleOptionCalibration(model) if calibrate_options else None
     if calibration is not None:
         arms += CALIBRATION_ARMS
+    students = RoleContrastHeads(contrast_training, embedder, phrases, wording) if contrast_training else None
+    if students is not None:
+        arms += STUDENT_ARMS
     cutoff = reference["fit"]["two_batched"]["cutoff"]
     glossary = phrase_bank(wording)
     byline = {doc:set(r["roles"]) for doc,r in articles.items()}
@@ -145,7 +151,7 @@ def run(projection, manifest, embedding, role_checkpoint, definition_file, train
                 if pair and withheld in pair:
                     raise ValueError("Withheld document entered read pair")
                 if pair and decoded is None:
-                    decoded, reachable, unfiltered = recognize(row, banks, embedder, model, glossary, cutoff, compact_reader, calibration)
+                    decoded, reachable, unfiltered = recognize(row, banks, embedder, model, glossary, cutoff, compact_reader, calibration, students)
                 exact_view = bool(pair) and tuple(pair)==target
                 key = row["family"], row["variant"], view, mask
                 records[key] = {}
@@ -156,7 +162,7 @@ def run(projection, manifest, embedding, role_checkpoint, definition_file, train
                                  source_reads=2*bool(pair),forwards=forwards,tokens=tokens,
                                  exact_source_menu_pair=exact_view,role_correct=bool(pair) and tuple(predictions or ())==tuple(row["roles"]),
                                  top_three_slots_reachable=bool(pair) and reachable["teacher_top_three"])
-                    if menu_ablation or calibrate_options:
+                    if menu_ablation or calibrate_options or students is not None:
                         stats["exact_proof_reachable_in_menu"] = (
                             exact_view and row["variant"] == "present" and reachable.get(arm, True)
                         )
@@ -181,7 +187,14 @@ def run(projection, manifest, embedding, role_checkpoint, definition_file, train
                 report[state][view][arm]["paired_delta_vs_all_roles"] = clustered_paired_interval([
                     int(records[key][arm]["strict"]) - int(records[key]["teacher_all_roles"]["strict"])
                     for key in keys], [groups[key[0]] for key in keys])
+            if students is not None:
+                for reference_arm in ("teacher_all_roles", "augmented_ce", "shuffled_pair_ce"):
+                    report[state][view][arm][f"paired_delta_vs_{reference_arm}"] = clustered_paired_interval([
+                        int(records[key][arm]["strict"]) - int(records[key][reference_arm]["strict"])
+                        for key in keys], [groups[key[0]] for key in keys])
     provenance = {"calibration": calibration.provenance()} if calibration is not None else {}
+    if students is not None:
+        provenance["student_training"] = students.provenance
     write_json(output, dict(report=report, **provenance, gpu=torch.cuda.get_device_name(), reverse=reverse,
         authorship_groups=len(set(groups.values())),
         cases=len(selected), encoder=embed_rev, role_checkpoint=model.provenance["revision"],
@@ -198,4 +211,5 @@ if __name__ == "__main__":
     cli.add_argument("--reverse", action="store_true")
     cli.add_argument("--menu-ablation", action="store_true")
     cli.add_argument("--calibrate-options", action="store_true")
+    cli.add_argument("--contrast-training", type=Path)
     run(**vars(cli.parse_args()))
