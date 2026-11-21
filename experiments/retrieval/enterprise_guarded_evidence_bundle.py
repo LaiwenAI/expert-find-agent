@@ -23,16 +23,17 @@ GUARD_DEPTH = 3
 
 
 class BundleIndex:
-    def __init__(self, windows, encoder):
+    def __init__(self, windows, encoder, depth):
         self.windows = windows
         self.encoder = encoder
+        self.depth = depth
         self.vectors = torch.from_numpy(encoder.encode([item["view"]["text"] for item in windows])).to("cuda")
 
     def select(self, criteria):
         prompts = [f"Instruct: {EMBED_TASK}\nQuery: {criterion}" for criterion in criteria]
         queries = torch.from_numpy(self.encoder.encode(prompts)).to("cuda")
         similarity = (queries @ self.vectors.T).cpu().numpy()
-        hot = np.argsort(-similarity, axis=1, kind="stable")[:, :DEPTH]
+        hot = np.argsort(-similarity, axis=1, kind="stable")[:, :self.depth]
         ranks = [{int(i): rank + 1 for rank, i in enumerate(row)} for row in hot]
         owned = defaultdict(list)
         for i in sorted(set(int(x) for row in hot for x in row)):
@@ -42,15 +43,15 @@ class BundleIndex:
             for a, b in combinations(candidates, 2):
                 if self.windows[a]["view"]["id"] == self.windows[b]["view"]["id"]:
                     continue
-                covered = [min(r.get(a, DEPTH + 1), r.get(b, DEPTH + 1)) for r in ranks]
-                if max(covered) > DEPTH:
+                covered = [min(r.get(a, self.depth + 1), r.get(b, self.depth + 1)) for r in ranks]
+                if max(covered) > self.depth:
                     continue
                 proposals.append((max(covered), sum(covered), a, b))
         if not proposals:
             return None
         _, _, a, b = min(proposals)
         best = tuple(self.windows[i] for i in (a, b))
-        guaranteed_candidates = [[r.get(i, DEPTH + 1) <= GUARD_DEPTH for i in (a, b)] for r in ranks]
+        guaranteed_candidates = [[r.get(i, self.depth + 1) <= GUARD_DEPTH for i in (a, b)] for r in ranks]
         return best, guaranteed_candidates
 
 
@@ -94,7 +95,7 @@ def act(text, arm, fixture, bundles):
     issued = {row["expert"] for row in primary}
     ranked = [decision[0] for decision in initial["decisions"]]
     reader.counts.clear()
-    added, clipped, allocated, attempted = [], 0, False, False
+    added, clipped, allocated, attempted, top_three_complete = [], 0, False, False, False
     if not issued and all(len(c) <= CRITERION_CHARS for c in criteria):
         if arm != "global_on_abstain" and len(criteria) >= 2:
             original = recovery_options(criteria, ranked, issued, role_index, "global_on_abstain")
@@ -103,6 +104,7 @@ def act(text, arm, fixture, bundles):
                 if proposal is not None:
                     allocated = attempted = True
                     options, prior_ranks = proposal
+                    top_three_complete = all(map(any, prior_ranks))
                     added, clipped = verify_bundle(options, prior_ranks, criteria, reader,
                                                    guarded=arm == "guarded_bundle")
         if not allocated:
@@ -110,15 +112,16 @@ def act(text, arm, fixture, bundles):
                                                     "global_on_abstain", TASK, K-len(primary))
     return dict(qualifications=initial["qualifications"], ranked=initial["retrieved"],
                 primary=primary, added=added, attempted=attempted, allocated=allocated, work=dict(reader.counts),
+                top_three_complete=top_three_complete,
                 clipped=initial["clipped_pairs"] + clipped, ms=(perf_counter()-started)*1000)
 
 
-def run(queries, corpus, roles, vectors, meta, models, serial, output, private, reverse):
+def run(queries, corpus, roles, vectors, meta, models, serial, output, private, reverse, proposal_depth):
     require_cuda(output, private)
     texts, fixture, fingerprint = init_fixture(queries, corpus, roles, vectors, meta, models, serial)
     windows, _ = fixture[4]
     start = perf_counter()
-    bundles = BundleIndex(windows, fixture[1])
+    bundles = BundleIndex(windows, fixture[1], proposal_depth)
     index_ms = (perf_counter()-start)*1000
     arms = ARMS[::-1] if reverse else ARMS
     observations = []
@@ -145,6 +148,7 @@ def run(queries, corpus, roles, vectors, meta, models, serial, output, private, 
         reference = [r[ARMS[0]] for r in observations]
         totals[name] = dict(
             allocated=sum(x["allocated"] for x in current),
+            top_three_complete=sum(x["top_three_complete"] for x in current),
             issued=sum(bool(x["primary"] or x["added"]) for x in current),
             added_slots=sum(len(x["added"]) for x in current),
             multi_source_additions=sum(len({c[0] for c in item["citations"]})>1
@@ -154,7 +158,8 @@ def run(queries, corpus, roles, vectors, meta, models, serial, output, private, 
             serial_p95_ms=float(np.quantile([r["ms"] for r in current], .95)),
         )
     write(output, dict(slurm_job=os.environ["SLURM_JOB_ID"], runner_sha256=digest(Path(__file__)),
-                       index_ms=index_ms, reverse=reverse, arms=totals, **fingerprint))
+                       index_ms=index_ms, reverse=reverse, proposal_depth=proposal_depth,
+                       arms=totals, **fingerprint))
 
 
 if __name__ == "__main__":
@@ -162,4 +167,5 @@ if __name__ == "__main__":
     for name in ("queries", "corpus", "roles", "vectors", "meta", "models", "serial", "output", "private"):
         cli.add_argument(name, type=Path)
     cli.add_argument("--reverse", action="store_true")
+    cli.add_argument("--proposal-depth", type=int, default=DEPTH, choices=(DEPTH, 256))
     run(**vars(cli.parse_args()))
