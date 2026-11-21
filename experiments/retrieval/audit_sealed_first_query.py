@@ -42,30 +42,15 @@ def run(protocol, lock, frame, packet, output):
             raise ValueError("Arm predictions do not match the frozen packet")
         arms[arm], _ = validated_views(groups, rows(path), mapping, unknown, spec["required_fields"], spec["top_k"])
 
-    primary = arms[spec["primary"]]
-    comparator = arms[spec["primary_comparator"]]
-    primary_only, comparator_only = [], []
-    shared_count = 0
-    for row in groups:
-        key = row["id"]
-        a, b = primary[key].keys(), comparator[key].keys()
-        shared_count += len(a & b)
-        primary_only.append(len(a - b))
-        comparator_only.append(len(b - a))
-
-    # The same best or worst assignment is valid in every bootstrap draw.
-    # Empty and shared slots cancel; only arm-specific views can change P@5.
     k = spec["top_k"]
-    best = {key: dict.fromkeys(a.keys() - comparator[key].keys(), LEVEL["supported"])
-            for key, a in primary.items()}
-    empty = {key: {} for key in primary}
+    primary, comparator = spec["primary"], spec["primary_comparator"]
+    empty = {row["id"]: {} for row in groups}
     draws = np.random.default_rng(spec["bootstrap_seed"]).integers(
         n, size=(spec["bootstrap_draws"], n),
     )
-    best_lower, _ = interval(groups, best, empty, k, draws)
     gates = [spec[key] for key in ("coverage_floor", "conditional_risk_ceiling", "confidence")]
     output_arms = {}
-    for name in (spec["primary"], spec["primary_comparator"]):
+    for name in arms:
         issued = sum(bool(query) for query in arms[name].values())
         best_gate = assess(n, issued, 0, 0, *gates)
         output_arms[name] = {
@@ -74,16 +59,47 @@ def run(protocol, lock, frame, packet, output):
             "maximum_possible_supported_p5": sum(map(len, arms[name].values())) / (n * k),
             "all_supported_gate": best_gate,
         }
+    output_contrasts = {}
+    # Keep each base retrieval route matched. The secondary arms cannot
+    # be relabeled as the primary comparison after seeing the outputs.
+    for candidate, baseline in (
+        (primary, comparator),
+        ("global_on_abstain", "deeper_on_abstain"),
+    ):
+        candidate_views, baseline_views = arms[candidate], arms[baseline]
+        winning = {key: dict.fromkeys(views.keys() - baseline_views[key].keys(), LEVEL["supported"])
+                   for key, views in candidate_views.items()}
+        losing = {key: views.keys() - candidate_views[key].keys()
+                  for key, views in baseline_views.items()}
+        # Supporting all exclusive candidate views maximizes every paired
+        # draw. Shared views use the same label and cancel exactly.
+        lower, _ = interval(groups, winning, empty, k, draws)
+        output_contrasts[f"{candidate}_vs_{baseline}"] = {
+            "shared_exact_views": sum(len(a.keys() & baseline_views[key].keys())
+                                      for key, a in candidate_views.items()),
+            "candidate_only_views": sum(map(len, winning.values())),
+            "baseline_only_views": sum(map(len, losing.values())),
+            "requests_with_distinct_views": sum(bool(winning[key] or losing[key]) for key in winning),
+            "maximum_possible_quality_gain": sum(map(len, winning.values())) / (n * k),
+            "maximum_bootstrap_lower_bound": lower,
+            "quality_gain_gate_possible": lower > spec["minimum_grounded_p5_gain"],
+            "both_absolute_gates_possible": all(
+                output_arms[name]["all_supported_gate"]["passes"] for name in (candidate, baseline)
+            ),
+        }
+    main = output_contrasts[f"{primary}_vs_{comparator}"]
     write(output, {
         "groups": n, "slots": n * k, "completed_fields_by_form": completed,
-        "pool_views": len(mapping), "shared_exact_views": shared_count,
-        "primary_only_views": sum(primary_only), "comparator_only_views": sum(comparator_only),
-        "requests_with_arm_specific_views": sum(a + b > 0 for a, b in zip(primary_only, comparator_only, strict=True)),
-        "observable_best_quality_gain": sum(primary_only) / (n * k),
-        "observable_worst_quality_gain": -sum(comparator_only) / (n * k),
-        "maximum_bootstrap_lower_bound": best_lower,
-        "quality_gain_gate_possible": best_lower > spec["minimum_grounded_p5_gain"],
-        "absolute_gate_plan": design(n, *gates), "primary_arms": output_arms,
+        "pool_views": len(mapping), "shared_exact_views": main["shared_exact_views"],
+        "primary_only_views": main["candidate_only_views"], "comparator_only_views": main["baseline_only_views"],
+        "requests_with_arm_specific_views": main["requests_with_distinct_views"],
+        "observable_best_quality_gain": main["maximum_possible_quality_gain"],
+        "observable_worst_quality_gain": -main["baseline_only_views"] / (n * k),
+        "maximum_bootstrap_lower_bound": main["maximum_bootstrap_lower_bound"],
+        "quality_gain_gate_possible": main["quality_gain_gate_possible"],
+        "absolute_gate_plan": design(n, *gates), "primary_arms": {name: output_arms[name] for name in (primary, comparator)},
+        "all_frozen_arms": output_arms,
+        "matched_rescue_contrasts": output_contrasts,
         "scope": "Output-only feasibility bounds. No evidence labels inform the estimates.",
     })
 

@@ -89,6 +89,8 @@ applies to both arms. Assign support to every primary-only view and
 none to comparator-only views. This maximizes the gain in each
 prespecified paired bootstrap draw. Use the resulting lower limit
 as a ceiling on the lower limit obtainable from independent labels.
+The report also checks the matched hybrid rescue contrast and all six
+frozen arms' absolute gates. The hybrid contrast remains secondary.
 For the absolute gate, treat all issued recommendations as supported
 and use the original coverage and risk bounds.
 
