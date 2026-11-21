@@ -1,0 +1,4758 @@
+{
+  "slurm_job": 46140,
+  "pilot_job": 46134,
+  "runs": [
+    {
+      "script_sha256": "969a26408086f16f9fb3a6d04114777bceba848370c79bec6d9392bc3beca50e",
+      "inputs": {
+        "current": "38bc5e6bd42e3b2f427a42a552cae11bc0813e50f2e601ee9e10a298fe47925f",
+        "current_manifest": "064b9d0a579e58911c1986a17e4eb169dcfd3ab57e4e4640d31a1a62143a753a",
+        "earlier": "4ce67b1ff52d869f133bd5318bad2573502d12aae065c75c9407c14754171c89",
+        "earlier_manifest": "77b44ff60a0c335be3d7a6233b18af17c55a453ec0e40f799561203241c838d4",
+        "engineering": "53f4cda52f54d2982ff748c0e9fbbff627cbc1c9eeef024cd35e8539422137fb",
+        "engineering_manifest": "1c7b7add7f8b7dc5a5ab1159170503d340581273d68b5fa320471da082167d28",
+        "plos": "1b9d9b1fae5397b790be93df66b42d8295105f4a57ade1ca3618e6ee40d2c322",
+        "niso": "c107b4e780218e58aec4e2a13f2d7072533962a6a73b82d23e4273b43aafd528",
+        "training": "3365bdd2588d8dfff12de71cf7663808c25689f831a1ba42288a8bb8b53bfdc2",
+        "bands": "0e936678ef2e49944e0a6394257d1edb79dc216facaeb77aaa49db829ef5c3da",
+        "source_frozen": "e393fe72c74c5f12748da43e8c245e224411633ed2c24eef22d34b4665aeb741",
+        "role_frozen": "e332709fbb1b1371253fede037758a2d027b68f389ee42ae221352f7d7bffde0"
+      },
+      "modules": {
+        "source_role_factorial_diagnosis": "93a8cd8247ba59df19b15ef6939812f78a55594f25d8f06f62e255b50f781182",
+        "budgeted_source_role_service": "f08297d20e88844e3d08ba0d580bd318da04d49a3677c3f3a83cefd4220d4ccb"
+      },
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "reverse": false,
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "source_reader_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+      "role_reader_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "cutoffs": {
+        "source": -5.125,
+        "role": 0.0
+      },
+      "fit": {
+        "top_one": {
+          "cutoff": 0.0,
+          "counts": {
+            "issued": 24,
+            "strict": 24,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 48,
+            "positives": 24,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0
+          }
+        },
+        "two_serial": {
+          "cutoff": 0.0,
+          "counts": {
+            "issued": 24,
+            "strict": 24,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 48,
+            "positives": 24,
+            "search_calls": 40,
+            "source_calls": 0,
+            "role_calls": 40
+          }
+        },
+        "two_batched": {
+          "cutoff": 0.0,
+          "counts": {
+            "issued": 24,
+            "strict": 24,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 48,
+            "positives": 24,
+            "search_calls": 20,
+            "source_calls": 0,
+            "role_calls": 20
+          }
+        },
+        "packed_pair": {
+          "cutoff": 6.125,
+          "counts": {
+            "issued": 14,
+            "strict": 14,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 48,
+            "positives": 24,
+            "search_calls": 20,
+            "source_calls": 0,
+            "role_calls": 20
+          }
+        }
+      },
+      "results": {
+        "elife_current": {
+          "pairs": 13,
+          "articles": 393,
+          "results": {
+            "excerpt|left_hidden|baseline": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 14.39011562615633
+            },
+            "excerpt|left_hidden|packed_pair": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 14.450163813307881
+            },
+            "excerpt|left_hidden|reserve_agreement": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 14.39011562615633
+            },
+            "excerpt|left_hidden|reserve_batch": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 14.39011562615633
+            },
+            "excerpt|left_hidden|top_one": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 14.451602008193731
+            },
+            "excerpt|left_hidden|two_batched": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 14.450164831941947
+            },
+            "excerpt|left_hidden|two_serial": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 14.450377901084721
+            },
+            "excerpt|present|baseline": {
+              "totals": {
+                "issued": 12,
+                "strict": 12,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 7,
+                "source_calls": 0,
+                "role_calls": 7,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 562,
+                "two_forwards": 0
+              },
+              "p95_ms": 25.4827672324609
+            },
+            "excerpt|present|packed_pair": {
+              "totals": {
+                "issued": 7,
+                "strict": 7,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 18,
+                "source_calls": 0,
+                "role_calls": 18,
+                "expression_gate": 18,
+                "exact_interpretation": 10,
+                "tokens": 3572,
+                "two_forwards": 0
+              },
+              "p95_ms": 29.753067414276302
+            },
+            "excerpt|present|reserve_agreement": {
+              "totals": {
+                "issued": 12,
+                "strict": 12,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 18,
+                "source_calls": 0,
+                "role_calls": 18,
+                "expression_gate": 11,
+                "exact_interpretation": 8,
+                "tokens": 2270,
+                "two_forwards": 0
+              },
+              "p95_ms": 29.39749968936667
+            },
+            "excerpt|present|reserve_batch": {
+              "totals": {
+                "issued": 13,
+                "strict": 12,
+                "adverse": 1,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 18,
+                "source_calls": 0,
+                "role_calls": 18,
+                "expression_gate": 11,
+                "exact_interpretation": 8,
+                "tokens": 2270,
+                "two_forwards": 0
+              },
+              "p95_ms": 29.39749968936667
+            },
+            "excerpt|present|top_one": {
+              "totals": {
+                "issued": 12,
+                "strict": 10,
+                "adverse": 2,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 18,
+                "exact_interpretation": 13,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 14.505120925605297
+            },
+            "excerpt|present|two_batched": {
+              "totals": {
+                "issued": 13,
+                "strict": 12,
+                "adverse": 1,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 18,
+                "source_calls": 0,
+                "role_calls": 18,
+                "expression_gate": 18,
+                "exact_interpretation": 15,
+                "tokens": 2799,
+                "two_forwards": 0
+              },
+              "p95_ms": 29.812527674948797
+            },
+            "excerpt|present|two_serial": {
+              "totals": {
+                "issued": 13,
+                "strict": 12,
+                "adverse": 1,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 36,
+                "source_calls": 0,
+                "role_calls": 36,
+                "expression_gate": 18,
+                "exact_interpretation": 15,
+                "tokens": 2799,
+                "two_forwards": 18
+              },
+              "p95_ms": 36.10715889954008
+            },
+            "excerpt|right_hidden|baseline": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 14.242788252886385
+            },
+            "excerpt|right_hidden|packed_pair": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 14.29115526843816
+            },
+            "excerpt|right_hidden|reserve_agreement": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 14.242788252886385
+            },
+            "excerpt|right_hidden|reserve_batch": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 14.242788252886385
+            },
+            "excerpt|right_hidden|top_one": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 14.292231790022925
+            },
+            "excerpt|right_hidden|two_batched": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 14.291138941189274
+            },
+            "excerpt|right_hidden|two_serial": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 14.291376865003258
+            },
+            "keywords|left_hidden|baseline": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 11.171345715411007
+            },
+            "keywords|left_hidden|packed_pair": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 11.233601748244837
+            },
+            "keywords|left_hidden|reserve_agreement": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 11.171345715411007
+            },
+            "keywords|left_hidden|reserve_batch": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 11.171345715411007
+            },
+            "keywords|left_hidden|top_one": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 11.235082056373358
+            },
+            "keywords|left_hidden|two_batched": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 11.233733646804467
+            },
+            "keywords|left_hidden|two_serial": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 11.23381094657816
+            },
+            "keywords|present|baseline": {
+              "totals": {
+                "issued": 11,
+                "strict": 11,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 8,
+                "source_calls": 2,
+                "role_calls": 6,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 491,
+                "two_forwards": 0
+              },
+              "p95_ms": 24.061078642262146
+            },
+            "keywords|present|packed_pair": {
+              "totals": {
+                "issued": 6,
+                "strict": 6,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 15,
+                "source_calls": 2,
+                "role_calls": 13,
+                "expression_gate": 13,
+                "exact_interpretation": 7,
+                "tokens": 2557,
+                "two_forwards": 0
+              },
+              "p95_ms": 26.156486972467974
+            },
+            "keywords|present|reserve_agreement": {
+              "totals": {
+                "issued": 11,
+                "strict": 11,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 15,
+                "source_calls": 2,
+                "role_calls": 13,
+                "expression_gate": 7,
+                "exact_interpretation": 6,
+                "tokens": 1587,
+                "two_forwards": 0
+              },
+              "p95_ms": 26.433686405653134
+            },
+            "keywords|present|reserve_batch": {
+              "totals": {
+                "issued": 12,
+                "strict": 11,
+                "adverse": 1,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 15,
+                "source_calls": 2,
+                "role_calls": 13,
+                "expression_gate": 7,
+                "exact_interpretation": 6,
+                "tokens": 1587,
+                "two_forwards": 0
+              },
+              "p95_ms": 26.433686405653134
+            },
+            "keywords|present|top_one": {
+              "totals": {
+                "issued": 11,
+                "strict": 9,
+                "adverse": 2,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 2,
+                "source_calls": 2,
+                "role_calls": 0,
+                "expression_gate": 13,
+                "exact_interpretation": 10,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 17.44661244447343
+            },
+            "keywords|present|two_batched": {
+              "totals": {
+                "issued": 12,
+                "strict": 11,
+                "adverse": 1,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 15,
+                "source_calls": 2,
+                "role_calls": 13,
+                "expression_gate": 13,
+                "exact_interpretation": 12,
+                "tokens": 2028,
+                "two_forwards": 0
+              },
+              "p95_ms": 26.359147421317175
+            },
+            "keywords|present|two_serial": {
+              "totals": {
+                "issued": 12,
+                "strict": 11,
+                "adverse": 1,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 28,
+                "source_calls": 2,
+                "role_calls": 26,
+                "expression_gate": 13,
+                "exact_interpretation": 12,
+                "tokens": 2028,
+                "two_forwards": 13
+              },
+              "p95_ms": 32.8905675560236
+            },
+            "keywords|right_hidden|baseline": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 11.000387487001717
+            },
+            "keywords|right_hidden|packed_pair": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 11.043027479900047
+            },
+            "keywords|right_hidden|reserve_agreement": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 11.000387487001717
+            },
+            "keywords|right_hidden|reserve_batch": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 11.000387487001717
+            },
+            "keywords|right_hidden|top_one": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 11.043859529308975
+            },
+            "keywords|right_hidden|two_batched": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 11.043004284147173
+            },
+            "keywords|right_hidden|two_serial": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 11.043205973692238
+            }
+          }
+        },
+        "elife_earlier": {
+          "pairs": 10,
+          "articles": 280,
+          "results": {
+            "excerpt|left_hidden|baseline": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 11.999149911571294
+            },
+            "excerpt|left_hidden|packed_pair": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 12.05490221036598
+            },
+            "excerpt|left_hidden|reserve_agreement": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 11.999149911571294
+            },
+            "excerpt|left_hidden|reserve_batch": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 11.999149911571294
+            },
+            "excerpt|left_hidden|top_one": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 12.055936473188922
+            },
+            "excerpt|left_hidden|two_batched": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 12.054982804693282
+            },
+            "excerpt|left_hidden|two_serial": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 12.055132194655016
+            },
+            "excerpt|present|baseline": {
+              "totals": {
+                "issued": 3,
+                "strict": 3,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 4,
+                "source_calls": 0,
+                "role_calls": 4,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 382,
+                "two_forwards": 0
+              },
+              "p95_ms": 22.54735492169857
+            },
+            "excerpt|present|packed_pair": {
+              "totals": {
+                "issued": 2,
+                "strict": 2,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 13,
+                "source_calls": 0,
+                "role_calls": 13,
+                "expression_gate": 13,
+                "exact_interpretation": 8,
+                "tokens": 2624,
+                "two_forwards": 0
+              },
+              "p95_ms": 27.485426294151694
+            },
+            "excerpt|present|reserve_agreement": {
+              "totals": {
+                "issued": 5,
+                "strict": 5,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 14,
+                "source_calls": 0,
+                "role_calls": 14,
+                "expression_gate": 10,
+                "exact_interpretation": 8,
+                "tokens": 1937,
+                "two_forwards": 0
+              },
+              "p95_ms": 27.429427189053968
+            },
+            "excerpt|present|reserve_batch": {
+              "totals": {
+                "issued": 7,
+                "strict": 7,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 14,
+                "source_calls": 0,
+                "role_calls": 14,
+                "expression_gate": 10,
+                "exact_interpretation": 8,
+                "tokens": 1937,
+                "two_forwards": 0
+              },
+              "p95_ms": 27.429427189053968
+            },
+            "excerpt|present|top_one": {
+              "totals": {
+                "issued": 6,
+                "strict": 5,
+                "adverse": 1,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 13,
+                "exact_interpretation": 6,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 12.220926425652578
+            },
+            "excerpt|present|two_batched": {
+              "totals": {
+                "issued": 8,
+                "strict": 8,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 13,
+                "source_calls": 0,
+                "role_calls": 13,
+                "expression_gate": 13,
+                "exact_interpretation": 11,
+                "tokens": 2025,
+                "two_forwards": 0
+              },
+              "p95_ms": 27.389078540727496
+            },
+            "excerpt|present|two_serial": {
+              "totals": {
+                "issued": 8,
+                "strict": 8,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 26,
+                "source_calls": 0,
+                "role_calls": 26,
+                "expression_gate": 13,
+                "exact_interpretation": 11,
+                "tokens": 2025,
+                "two_forwards": 13
+              },
+              "p95_ms": 33.722798113012686
+            },
+            "excerpt|right_hidden|baseline": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 11.972311441786587
+            },
+            "excerpt|right_hidden|packed_pair": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 1,
+                "source_calls": 0,
+                "role_calls": 1,
+                "expression_gate": 1,
+                "exact_interpretation": 0,
+                "tokens": 203,
+                "two_forwards": 0
+              },
+              "p95_ms": 12.78066880768166
+            },
+            "excerpt|right_hidden|reserve_agreement": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 1,
+                "source_calls": 0,
+                "role_calls": 1,
+                "expression_gate": 1,
+                "exact_interpretation": 1,
+                "tokens": 152,
+                "two_forwards": 0
+              },
+              "p95_ms": 12.730711768381308
+            },
+            "excerpt|right_hidden|reserve_batch": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 1,
+                "source_calls": 0,
+                "role_calls": 1,
+                "expression_gate": 1,
+                "exact_interpretation": 1,
+                "tokens": 152,
+                "two_forwards": 0
+              },
+              "p95_ms": 12.730711768381308
+            },
+            "excerpt|right_hidden|top_one": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 1,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 12.017966737039387
+            },
+            "excerpt|right_hidden|two_batched": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 1,
+                "source_calls": 0,
+                "role_calls": 1,
+                "expression_gate": 1,
+                "exact_interpretation": 1,
+                "tokens": 152,
+                "two_forwards": 0
+              },
+              "p95_ms": 12.770918069873016
+            },
+            "excerpt|right_hidden|two_serial": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 2,
+                "source_calls": 0,
+                "role_calls": 2,
+                "expression_gate": 1,
+                "exact_interpretation": 1,
+                "tokens": 152,
+                "two_forwards": 1
+              },
+              "p95_ms": 13.086679641855895
+            },
+            "keywords|left_hidden|baseline": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 10.480888281017542
+            },
+            "keywords|left_hidden|packed_pair": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 10.537025448866189
+            },
+            "keywords|left_hidden|reserve_agreement": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 10.480888281017542
+            },
+            "keywords|left_hidden|reserve_batch": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 10.480888281017542
+            },
+            "keywords|left_hidden|top_one": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 10.538003413239494
+            },
+            "keywords|left_hidden|two_batched": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 10.537027893587947
+            },
+            "keywords|left_hidden|two_serial": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 10.53724008379504
+            },
+            "keywords|present|baseline": {
+              "totals": {
+                "issued": 2,
+                "strict": 2,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 3,
+                "source_calls": 0,
+                "role_calls": 3,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 265,
+                "two_forwards": 0
+              },
+              "p95_ms": 21.170657826587558
+            },
+            "keywords|present|packed_pair": {
+              "totals": {
+                "issued": 1,
+                "strict": 1,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 11,
+                "source_calls": 0,
+                "role_calls": 11,
+                "expression_gate": 11,
+                "exact_interpretation": 6,
+                "tokens": 2202,
+                "two_forwards": 0
+              },
+              "p95_ms": 25.847865064861253
+            },
+            "keywords|present|reserve_agreement": {
+              "totals": {
+                "issued": 4,
+                "strict": 4,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 11,
+                "source_calls": 0,
+                "role_calls": 11,
+                "expression_gate": 8,
+                "exact_interpretation": 8,
+                "tokens": 1490,
+                "two_forwards": 0
+              },
+              "p95_ms": 25.858105288352817
+            },
+            "keywords|present|reserve_batch": {
+              "totals": {
+                "issued": 6,
+                "strict": 6,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 11,
+                "source_calls": 0,
+                "role_calls": 11,
+                "expression_gate": 8,
+                "exact_interpretation": 8,
+                "tokens": 1490,
+                "two_forwards": 0
+              },
+              "p95_ms": 25.858105288352817
+            },
+            "keywords|present|top_one": {
+              "totals": {
+                "issued": 5,
+                "strict": 4,
+                "adverse": 1,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 11,
+                "exact_interpretation": 6,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 10.591848415788263
+            },
+            "keywords|present|two_batched": {
+              "totals": {
+                "issued": 7,
+                "strict": 7,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 11,
+                "source_calls": 0,
+                "role_calls": 11,
+                "expression_gate": 11,
+                "exact_interpretation": 11,
+                "tokens": 1695,
+                "two_forwards": 0
+              },
+              "p95_ms": 25.8166590181645
+            },
+            "keywords|present|two_serial": {
+              "totals": {
+                "issued": 7,
+                "strict": 7,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 22,
+                "source_calls": 0,
+                "role_calls": 22,
+                "expression_gate": 11,
+                "exact_interpretation": 11,
+                "tokens": 1695,
+                "two_forwards": 11
+              },
+              "p95_ms": 32.20991939306259
+            },
+            "keywords|right_hidden|baseline": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 10.45138674089685
+            },
+            "keywords|right_hidden|packed_pair": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 10.492370883002877
+            },
+            "keywords|right_hidden|reserve_agreement": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 10.45138674089685
+            },
+            "keywords|right_hidden|reserve_batch": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 10.45138674089685
+            },
+            "keywords|right_hidden|top_one": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 10.493340814718977
+            },
+            "keywords|right_hidden|two_batched": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 10.49240735010244
+            },
+            "keywords|right_hidden|two_serial": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 10.49257320119068
+            }
+          }
+        },
+        "engineering": {
+          "pairs": 4,
+          "articles": 53,
+          "results": {
+            "excerpt|left_hidden|baseline": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 17.006564821349453
+            },
+            "excerpt|left_hidden|packed_pair": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 17.07368848728947
+            },
+            "excerpt|left_hidden|reserve_agreement": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 17.006564821349453
+            },
+            "excerpt|left_hidden|reserve_batch": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 17.006564821349453
+            },
+            "excerpt|left_hidden|top_one": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 17.07520261406898
+            },
+            "excerpt|left_hidden|two_batched": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 17.073694703867655
+            },
+            "excerpt|left_hidden|two_serial": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 17.073921998962756
+            },
+            "excerpt|present|baseline": {
+              "totals": {
+                "issued": 2,
+                "strict": 2,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 0,
+                "role_calls": 1,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 86,
+                "two_forwards": 0
+              },
+              "p95_ms": 18.47352559561841
+            },
+            "excerpt|present|packed_pair": {
+              "totals": {
+                "issued": 1,
+                "strict": 1,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 5,
+                "source_calls": 0,
+                "role_calls": 5,
+                "expression_gate": 5,
+                "exact_interpretation": 1,
+                "tokens": 1070,
+                "two_forwards": 0
+              },
+              "p95_ms": 27.50854842015542
+            },
+            "excerpt|present|reserve_agreement": {
+              "totals": {
+                "issued": 2,
+                "strict": 2,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 5,
+                "source_calls": 0,
+                "role_calls": 5,
+                "expression_gate": 4,
+                "exact_interpretation": 2,
+                "tokens": 730,
+                "two_forwards": 0
+              },
+              "p95_ms": 27.54901658045128
+            },
+            "excerpt|present|reserve_batch": {
+              "totals": {
+                "issued": 3,
+                "strict": 3,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 5,
+                "source_calls": 0,
+                "role_calls": 5,
+                "expression_gate": 4,
+                "exact_interpretation": 2,
+                "tokens": 730,
+                "two_forwards": 0
+              },
+              "p95_ms": 27.54901658045128
+            },
+            "excerpt|present|top_one": {
+              "totals": {
+                "issued": 2,
+                "strict": 2,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 5,
+                "exact_interpretation": 2,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 12.6707274466753
+            },
+            "excerpt|present|two_batched": {
+              "totals": {
+                "issued": 3,
+                "strict": 3,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 5,
+                "source_calls": 0,
+                "role_calls": 5,
+                "expression_gate": 5,
+                "exact_interpretation": 3,
+                "tokens": 828,
+                "two_forwards": 0
+              },
+              "p95_ms": 27.517155517125502
+            },
+            "excerpt|present|two_serial": {
+              "totals": {
+                "issued": 3,
+                "strict": 3,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 10,
+                "source_calls": 0,
+                "role_calls": 10,
+                "expression_gate": 5,
+                "exact_interpretation": 3,
+                "tokens": 828,
+                "two_forwards": 5
+              },
+              "p95_ms": 33.76380840782076
+            },
+            "excerpt|right_hidden|baseline": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 17.001282790442925
+            },
+            "excerpt|right_hidden|packed_pair": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 17.06332684261724
+            },
+            "excerpt|right_hidden|reserve_agreement": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 17.001282790442925
+            },
+            "excerpt|right_hidden|reserve_batch": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 17.001282790442925
+            },
+            "excerpt|right_hidden|top_one": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 17.064743494847786
+            },
+            "excerpt|right_hidden|two_batched": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 17.063325631897893
+            },
+            "excerpt|right_hidden|two_serial": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 17.06364173442125
+            },
+            "keywords|left_hidden|baseline": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 15.339700563345101
+            },
+            "keywords|left_hidden|packed_pair": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 15.407089964719484
+            },
+            "keywords|left_hidden|reserve_agreement": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 15.339700563345101
+            },
+            "keywords|left_hidden|reserve_batch": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 15.339700563345101
+            },
+            "keywords|left_hidden|top_one": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 15.408645378192881
+            },
+            "keywords|left_hidden|two_batched": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 15.407158288871864
+            },
+            "keywords|left_hidden|two_serial": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 15.407408558530728
+            },
+            "keywords|present|baseline": {
+              "totals": {
+                "issued": 2,
+                "strict": 2,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 0,
+                "role_calls": 1,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 86,
+                "two_forwards": 0
+              },
+              "p95_ms": 16.86304751201532
+            },
+            "keywords|present|packed_pair": {
+              "totals": {
+                "issued": 1,
+                "strict": 1,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 4,
+                "source_calls": 0,
+                "role_calls": 4,
+                "expression_gate": 4,
+                "exact_interpretation": 1,
+                "tokens": 868,
+                "two_forwards": 0
+              },
+              "p95_ms": 25.47705103061162
+            },
+            "keywords|present|reserve_agreement": {
+              "totals": {
+                "issued": 2,
+                "strict": 2,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 4,
+                "source_calls": 0,
+                "role_calls": 4,
+                "expression_gate": 3,
+                "exact_interpretation": 2,
+                "tokens": 579,
+                "two_forwards": 0
+              },
+              "p95_ms": 25.038344622589648
+            },
+            "keywords|present|reserve_batch": {
+              "totals": {
+                "issued": 3,
+                "strict": 3,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 4,
+                "source_calls": 0,
+                "role_calls": 4,
+                "expression_gate": 3,
+                "exact_interpretation": 2,
+                "tokens": 579,
+                "two_forwards": 0
+              },
+              "p95_ms": 25.038344622589648
+            },
+            "keywords|present|top_one": {
+              "totals": {
+                "issued": 2,
+                "strict": 2,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 4,
+                "exact_interpretation": 2,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 9.780320955906063
+            },
+            "keywords|present|two_batched": {
+              "totals": {
+                "issued": 3,
+                "strict": 3,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 4,
+                "source_calls": 0,
+                "role_calls": 4,
+                "expression_gate": 4,
+                "exact_interpretation": 3,
+                "tokens": 677,
+                "two_forwards": 0
+              },
+              "p95_ms": 25.057484535500407
+            },
+            "keywords|present|two_serial": {
+              "totals": {
+                "issued": 3,
+                "strict": 3,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 8,
+                "source_calls": 0,
+                "role_calls": 8,
+                "expression_gate": 4,
+                "exact_interpretation": 3,
+                "tokens": 677,
+                "two_forwards": 4
+              },
+              "p95_ms": 31.4316208998207
+            },
+            "keywords|right_hidden|baseline": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 15.126858570147302
+            },
+            "keywords|right_hidden|packed_pair": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 15.184055746067312
+            },
+            "keywords|right_hidden|reserve_agreement": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 15.126858570147302
+            },
+            "keywords|right_hidden|reserve_batch": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 15.126858570147302
+            },
+            "keywords|right_hidden|top_one": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 15.18518706434406
+            },
+            "keywords|right_hidden|two_batched": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 15.184082649648186
+            },
+            "keywords|right_hidden|two_serial": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 15.18431531731039
+            }
+          }
+        }
+      }
+    },
+    {
+      "script_sha256": "969a26408086f16f9fb3a6d04114777bceba848370c79bec6d9392bc3beca50e",
+      "inputs": {
+        "current": "38bc5e6bd42e3b2f427a42a552cae11bc0813e50f2e601ee9e10a298fe47925f",
+        "current_manifest": "064b9d0a579e58911c1986a17e4eb169dcfd3ab57e4e4640d31a1a62143a753a",
+        "earlier": "4ce67b1ff52d869f133bd5318bad2573502d12aae065c75c9407c14754171c89",
+        "earlier_manifest": "77b44ff60a0c335be3d7a6233b18af17c55a453ec0e40f799561203241c838d4",
+        "engineering": "53f4cda52f54d2982ff748c0e9fbbff627cbc1c9eeef024cd35e8539422137fb",
+        "engineering_manifest": "1c7b7add7f8b7dc5a5ab1159170503d340581273d68b5fa320471da082167d28",
+        "plos": "1b9d9b1fae5397b790be93df66b42d8295105f4a57ade1ca3618e6ee40d2c322",
+        "niso": "c107b4e780218e58aec4e2a13f2d7072533962a6a73b82d23e4273b43aafd528",
+        "training": "3365bdd2588d8dfff12de71cf7663808c25689f831a1ba42288a8bb8b53bfdc2",
+        "bands": "0e936678ef2e49944e0a6394257d1edb79dc216facaeb77aaa49db829ef5c3da",
+        "source_frozen": "e393fe72c74c5f12748da43e8c245e224411633ed2c24eef22d34b4665aeb741",
+        "role_frozen": "e332709fbb1b1371253fede037758a2d027b68f389ee42ae221352f7d7bffde0"
+      },
+      "modules": {
+        "source_role_factorial_diagnosis": "93a8cd8247ba59df19b15ef6939812f78a55594f25d8f06f62e255b50f781182",
+        "budgeted_source_role_service": "f08297d20e88844e3d08ba0d580bd318da04d49a3677c3f3a83cefd4220d4ccb"
+      },
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "reverse": true,
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "source_reader_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+      "role_reader_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "cutoffs": {
+        "source": -5.125,
+        "role": 0.0
+      },
+      "fit": {
+        "top_one": {
+          "cutoff": 0.0,
+          "counts": {
+            "issued": 24,
+            "strict": 24,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 48,
+            "positives": 24,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0
+          }
+        },
+        "two_serial": {
+          "cutoff": 0.0,
+          "counts": {
+            "issued": 24,
+            "strict": 24,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 48,
+            "positives": 24,
+            "search_calls": 40,
+            "source_calls": 0,
+            "role_calls": 40
+          }
+        },
+        "two_batched": {
+          "cutoff": 0.0,
+          "counts": {
+            "issued": 24,
+            "strict": 24,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 48,
+            "positives": 24,
+            "search_calls": 20,
+            "source_calls": 0,
+            "role_calls": 20
+          }
+        },
+        "packed_pair": {
+          "cutoff": 6.125,
+          "counts": {
+            "issued": 14,
+            "strict": 14,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 48,
+            "positives": 24,
+            "search_calls": 20,
+            "source_calls": 0,
+            "role_calls": 20
+          }
+        }
+      },
+      "results": {
+        "elife_current": {
+          "pairs": 13,
+          "articles": 393,
+          "results": {
+            "excerpt|left_hidden|baseline": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 14.54397599445656
+            },
+            "excerpt|left_hidden|packed_pair": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 14.600053138565272
+            },
+            "excerpt|left_hidden|reserve_agreement": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 14.54397599445656
+            },
+            "excerpt|left_hidden|reserve_batch": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 14.54397599445656
+            },
+            "excerpt|left_hidden|top_one": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 14.60119750117883
+            },
+            "excerpt|left_hidden|two_batched": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 14.600080758100376
+            },
+            "excerpt|left_hidden|two_serial": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 14.600249793147668
+            },
+            "excerpt|present|baseline": {
+              "totals": {
+                "issued": 12,
+                "strict": 12,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 7,
+                "source_calls": 0,
+                "role_calls": 7,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 562,
+                "two_forwards": 0
+              },
+              "p95_ms": 26.030302222352475
+            },
+            "excerpt|present|packed_pair": {
+              "totals": {
+                "issued": 7,
+                "strict": 7,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 18,
+                "source_calls": 0,
+                "role_calls": 18,
+                "expression_gate": 18,
+                "exact_interpretation": 10,
+                "tokens": 3572,
+                "two_forwards": 0
+              },
+              "p95_ms": 30.14482368598692
+            },
+            "excerpt|present|reserve_agreement": {
+              "totals": {
+                "issued": 12,
+                "strict": 12,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 18,
+                "source_calls": 0,
+                "role_calls": 18,
+                "expression_gate": 11,
+                "exact_interpretation": 8,
+                "tokens": 2270,
+                "two_forwards": 0
+              },
+              "p95_ms": 29.586005286546424
+            },
+            "excerpt|present|reserve_batch": {
+              "totals": {
+                "issued": 13,
+                "strict": 12,
+                "adverse": 1,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 18,
+                "source_calls": 0,
+                "role_calls": 18,
+                "expression_gate": 11,
+                "exact_interpretation": 8,
+                "tokens": 2270,
+                "two_forwards": 0
+              },
+              "p95_ms": 29.586005286546424
+            },
+            "excerpt|present|top_one": {
+              "totals": {
+                "issued": 12,
+                "strict": 10,
+                "adverse": 2,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 18,
+                "exact_interpretation": 13,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 14.84718409483321
+            },
+            "excerpt|present|two_batched": {
+              "totals": {
+                "issued": 13,
+                "strict": 12,
+                "adverse": 1,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 18,
+                "source_calls": 0,
+                "role_calls": 18,
+                "expression_gate": 18,
+                "exact_interpretation": 15,
+                "tokens": 2799,
+                "two_forwards": 0
+              },
+              "p95_ms": 30.131178122246638
+            },
+            "excerpt|present|two_serial": {
+              "totals": {
+                "issued": 13,
+                "strict": 12,
+                "adverse": 1,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 36,
+                "source_calls": 0,
+                "role_calls": 36,
+                "expression_gate": 18,
+                "exact_interpretation": 15,
+                "tokens": 2799,
+                "two_forwards": 18
+              },
+              "p95_ms": 36.925010790582746
+            },
+            "excerpt|right_hidden|baseline": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 14.43287602160126
+            },
+            "excerpt|right_hidden|packed_pair": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 14.481423801044002
+            },
+            "excerpt|right_hidden|reserve_agreement": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 14.43287602160126
+            },
+            "excerpt|right_hidden|reserve_batch": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 14.43287602160126
+            },
+            "excerpt|right_hidden|top_one": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 14.482513011898845
+            },
+            "excerpt|right_hidden|two_batched": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 14.481455786153674
+            },
+            "excerpt|right_hidden|two_serial": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 14.481660939054564
+            },
+            "keywords|left_hidden|baseline": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 11.358208692399785
+            },
+            "keywords|left_hidden|packed_pair": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 11.41826226375997
+            },
+            "keywords|left_hidden|reserve_agreement": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 11.358208692399785
+            },
+            "keywords|left_hidden|reserve_batch": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 11.358208692399785
+            },
+            "keywords|left_hidden|top_one": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 11.419522314099595
+            },
+            "keywords|left_hidden|two_batched": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 11.418397480156273
+            },
+            "keywords|left_hidden|two_serial": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 11.418474023230374
+            },
+            "keywords|present|baseline": {
+              "totals": {
+                "issued": 11,
+                "strict": 11,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 8,
+                "source_calls": 2,
+                "role_calls": 6,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 491,
+                "two_forwards": 0
+              },
+              "p95_ms": 24.375991866691038
+            },
+            "keywords|present|packed_pair": {
+              "totals": {
+                "issued": 6,
+                "strict": 6,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 15,
+                "source_calls": 2,
+                "role_calls": 13,
+                "expression_gate": 13,
+                "exact_interpretation": 7,
+                "tokens": 2557,
+                "two_forwards": 0
+              },
+              "p95_ms": 26.620326068950817
+            },
+            "keywords|present|reserve_agreement": {
+              "totals": {
+                "issued": 11,
+                "strict": 11,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 15,
+                "source_calls": 2,
+                "role_calls": 13,
+                "expression_gate": 7,
+                "exact_interpretation": 6,
+                "tokens": 1587,
+                "two_forwards": 0
+              },
+              "p95_ms": 26.929612242383882
+            },
+            "keywords|present|reserve_batch": {
+              "totals": {
+                "issued": 12,
+                "strict": 11,
+                "adverse": 1,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 15,
+                "source_calls": 2,
+                "role_calls": 13,
+                "expression_gate": 7,
+                "exact_interpretation": 6,
+                "tokens": 1587,
+                "two_forwards": 0
+              },
+              "p95_ms": 26.929612242383882
+            },
+            "keywords|present|top_one": {
+              "totals": {
+                "issued": 11,
+                "strict": 9,
+                "adverse": 2,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 2,
+                "source_calls": 2,
+                "role_calls": 0,
+                "expression_gate": 13,
+                "exact_interpretation": 10,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 18.03987959283404
+            },
+            "keywords|present|two_batched": {
+              "totals": {
+                "issued": 12,
+                "strict": 11,
+                "adverse": 1,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 15,
+                "source_calls": 2,
+                "role_calls": 13,
+                "expression_gate": 13,
+                "exact_interpretation": 12,
+                "tokens": 2028,
+                "two_forwards": 0
+              },
+              "p95_ms": 26.854556606849656
+            },
+            "keywords|present|two_serial": {
+              "totals": {
+                "issued": 12,
+                "strict": 11,
+                "adverse": 1,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 28,
+                "source_calls": 2,
+                "role_calls": 26,
+                "expression_gate": 13,
+                "exact_interpretation": 12,
+                "tokens": 2028,
+                "two_forwards": 13
+              },
+              "p95_ms": 33.62685997853987
+            },
+            "keywords|right_hidden|baseline": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 11.240271356655285
+            },
+            "keywords|right_hidden|packed_pair": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 11.287281900877133
+            },
+            "keywords|right_hidden|reserve_agreement": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 11.240271356655285
+            },
+            "keywords|right_hidden|reserve_batch": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 11.240271356655285
+            },
+            "keywords|right_hidden|top_one": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 11.288153065834194
+            },
+            "keywords|right_hidden|two_batched": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 11.287297413218766
+            },
+            "keywords|right_hidden|two_serial": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 26,
+                "positives": 13,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 11.287436936981976
+            }
+          }
+        },
+        "elife_earlier": {
+          "pairs": 10,
+          "articles": 280,
+          "results": {
+            "excerpt|left_hidden|baseline": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 12.288793630432338
+            },
+            "excerpt|left_hidden|packed_pair": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 12.34684637747705
+            },
+            "excerpt|left_hidden|reserve_agreement": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 12.288793630432338
+            },
+            "excerpt|left_hidden|reserve_batch": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 12.288793630432338
+            },
+            "excerpt|left_hidden|top_one": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 12.347976950695738
+            },
+            "excerpt|left_hidden|two_batched": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 12.346837250515819
+            },
+            "excerpt|left_hidden|two_serial": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 12.347121944185346
+            },
+            "excerpt|present|baseline": {
+              "totals": {
+                "issued": 3,
+                "strict": 3,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 4,
+                "source_calls": 0,
+                "role_calls": 4,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 382,
+                "two_forwards": 0
+              },
+              "p95_ms": 23.168428585631773
+            },
+            "excerpt|present|packed_pair": {
+              "totals": {
+                "issued": 2,
+                "strict": 2,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 13,
+                "source_calls": 0,
+                "role_calls": 13,
+                "expression_gate": 13,
+                "exact_interpretation": 8,
+                "tokens": 2624,
+                "two_forwards": 0
+              },
+              "p95_ms": 27.73864021874033
+            },
+            "excerpt|present|reserve_agreement": {
+              "totals": {
+                "issued": 5,
+                "strict": 5,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 14,
+                "source_calls": 0,
+                "role_calls": 14,
+                "expression_gate": 10,
+                "exact_interpretation": 8,
+                "tokens": 1937,
+                "two_forwards": 0
+              },
+              "p95_ms": 27.65548360766843
+            },
+            "excerpt|present|reserve_batch": {
+              "totals": {
+                "issued": 7,
+                "strict": 7,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 14,
+                "source_calls": 0,
+                "role_calls": 14,
+                "expression_gate": 10,
+                "exact_interpretation": 8,
+                "tokens": 1937,
+                "two_forwards": 0
+              },
+              "p95_ms": 27.65548360766843
+            },
+            "excerpt|present|top_one": {
+              "totals": {
+                "issued": 6,
+                "strict": 5,
+                "adverse": 1,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 13,
+                "exact_interpretation": 6,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 12.379647692432627
+            },
+            "excerpt|present|two_batched": {
+              "totals": {
+                "issued": 8,
+                "strict": 8,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 13,
+                "source_calls": 0,
+                "role_calls": 13,
+                "expression_gate": 13,
+                "exact_interpretation": 11,
+                "tokens": 2025,
+                "two_forwards": 0
+              },
+              "p95_ms": 27.61896579177119
+            },
+            "excerpt|present|two_serial": {
+              "totals": {
+                "issued": 8,
+                "strict": 8,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 26,
+                "source_calls": 0,
+                "role_calls": 26,
+                "expression_gate": 13,
+                "exact_interpretation": 11,
+                "tokens": 2025,
+                "two_forwards": 13
+              },
+              "p95_ms": 34.25110626267269
+            },
+            "excerpt|right_hidden|baseline": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 12.233008065959439
+            },
+            "excerpt|right_hidden|packed_pair": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 1,
+                "source_calls": 0,
+                "role_calls": 1,
+                "expression_gate": 1,
+                "exact_interpretation": 0,
+                "tokens": 203,
+                "two_forwards": 0
+              },
+              "p95_ms": 13.043739617569383
+            },
+            "excerpt|right_hidden|reserve_agreement": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 1,
+                "source_calls": 0,
+                "role_calls": 1,
+                "expression_gate": 1,
+                "exact_interpretation": 1,
+                "tokens": 152,
+                "two_forwards": 0
+              },
+              "p95_ms": 12.991964363027375
+            },
+            "excerpt|right_hidden|reserve_batch": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 1,
+                "source_calls": 0,
+                "role_calls": 1,
+                "expression_gate": 1,
+                "exact_interpretation": 1,
+                "tokens": 152,
+                "two_forwards": 0
+              },
+              "p95_ms": 12.991964363027375
+            },
+            "excerpt|right_hidden|top_one": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 1,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 12.27826161775738
+            },
+            "excerpt|right_hidden|two_batched": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 1,
+                "source_calls": 0,
+                "role_calls": 1,
+                "expression_gate": 1,
+                "exact_interpretation": 1,
+                "tokens": 152,
+                "two_forwards": 0
+              },
+              "p95_ms": 13.03574838093483
+            },
+            "excerpt|right_hidden|two_serial": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 2,
+                "source_calls": 0,
+                "role_calls": 2,
+                "expression_gate": 1,
+                "exact_interpretation": 1,
+                "tokens": 152,
+                "two_forwards": 1
+              },
+              "p95_ms": 13.357370754238232
+            },
+            "keywords|left_hidden|baseline": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 10.887671797536314
+            },
+            "keywords|left_hidden|packed_pair": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 10.94725274015218
+            },
+            "keywords|left_hidden|reserve_agreement": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 10.887671797536314
+            },
+            "keywords|left_hidden|reserve_batch": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 10.887671797536314
+            },
+            "keywords|left_hidden|top_one": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 10.948401188943535
+            },
+            "keywords|left_hidden|two_batched": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 10.947219951776788
+            },
+            "keywords|left_hidden|two_serial": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 10.947497235611081
+            },
+            "keywords|present|baseline": {
+              "totals": {
+                "issued": 2,
+                "strict": 2,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 3,
+                "source_calls": 0,
+                "role_calls": 3,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 265,
+                "two_forwards": 0
+              },
+              "p95_ms": 21.933071652892977
+            },
+            "keywords|present|packed_pair": {
+              "totals": {
+                "issued": 1,
+                "strict": 1,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 11,
+                "source_calls": 0,
+                "role_calls": 11,
+                "expression_gate": 11,
+                "exact_interpretation": 6,
+                "tokens": 2202,
+                "two_forwards": 0
+              },
+              "p95_ms": 26.233437936753035
+            },
+            "keywords|present|reserve_agreement": {
+              "totals": {
+                "issued": 4,
+                "strict": 4,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 11,
+                "source_calls": 0,
+                "role_calls": 11,
+                "expression_gate": 8,
+                "exact_interpretation": 8,
+                "tokens": 1490,
+                "two_forwards": 0
+              },
+              "p95_ms": 26.29545367672108
+            },
+            "keywords|present|reserve_batch": {
+              "totals": {
+                "issued": 6,
+                "strict": 6,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 11,
+                "source_calls": 0,
+                "role_calls": 11,
+                "expression_gate": 8,
+                "exact_interpretation": 8,
+                "tokens": 1490,
+                "two_forwards": 0
+              },
+              "p95_ms": 26.29545367672108
+            },
+            "keywords|present|top_one": {
+              "totals": {
+                "issued": 5,
+                "strict": 4,
+                "adverse": 1,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 11,
+                "exact_interpretation": 6,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 10.900542268063873
+            },
+            "keywords|present|two_batched": {
+              "totals": {
+                "issued": 7,
+                "strict": 7,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 11,
+                "source_calls": 0,
+                "role_calls": 11,
+                "expression_gate": 11,
+                "exact_interpretation": 11,
+                "tokens": 1695,
+                "two_forwards": 0
+              },
+              "p95_ms": 26.25838221865706
+            },
+            "keywords|present|two_serial": {
+              "totals": {
+                "issued": 7,
+                "strict": 7,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 22,
+                "source_calls": 0,
+                "role_calls": 22,
+                "expression_gate": 11,
+                "exact_interpretation": 11,
+                "tokens": 1695,
+                "two_forwards": 11
+              },
+              "p95_ms": 33.138607593718916
+            },
+            "keywords|right_hidden|baseline": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 10.786125645972788
+            },
+            "keywords|right_hidden|packed_pair": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 10.838520905235782
+            },
+            "keywords|right_hidden|reserve_agreement": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 10.786125645972788
+            },
+            "keywords|right_hidden|reserve_batch": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 10.786125645972788
+            },
+            "keywords|right_hidden|top_one": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 10.839369316818193
+            },
+            "keywords|right_hidden|two_batched": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 10.838530532782897
+            },
+            "keywords|right_hidden|two_serial": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 20,
+                "positives": 10,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 10.838689748197794
+            }
+          }
+        },
+        "engineering": {
+          "pairs": 4,
+          "articles": 53,
+          "results": {
+            "excerpt|left_hidden|baseline": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 17.650339164538305
+            },
+            "excerpt|left_hidden|packed_pair": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 17.72307929350063
+            },
+            "excerpt|left_hidden|reserve_agreement": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 17.650339164538305
+            },
+            "excerpt|left_hidden|reserve_batch": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 17.650339164538305
+            },
+            "excerpt|left_hidden|top_one": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 17.724517505848777
+            },
+            "excerpt|left_hidden|two_batched": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 17.72312466637231
+            },
+            "excerpt|left_hidden|two_serial": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 17.72339151939377
+            },
+            "excerpt|present|baseline": {
+              "totals": {
+                "issued": 2,
+                "strict": 2,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 0,
+                "role_calls": 1,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 86,
+                "two_forwards": 0
+              },
+              "p95_ms": 19.237187464023002
+            },
+            "excerpt|present|packed_pair": {
+              "totals": {
+                "issued": 1,
+                "strict": 1,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 5,
+                "source_calls": 0,
+                "role_calls": 5,
+                "expression_gate": 5,
+                "exact_interpretation": 1,
+                "tokens": 1070,
+                "two_forwards": 0
+              },
+              "p95_ms": 27.74311153916642
+            },
+            "excerpt|present|reserve_agreement": {
+              "totals": {
+                "issued": 2,
+                "strict": 2,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 5,
+                "source_calls": 0,
+                "role_calls": 5,
+                "expression_gate": 4,
+                "exact_interpretation": 2,
+                "tokens": 730,
+                "two_forwards": 0
+              },
+              "p95_ms": 27.764781843870878
+            },
+            "excerpt|present|reserve_batch": {
+              "totals": {
+                "issued": 3,
+                "strict": 3,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 5,
+                "source_calls": 0,
+                "role_calls": 5,
+                "expression_gate": 4,
+                "exact_interpretation": 2,
+                "tokens": 730,
+                "two_forwards": 0
+              },
+              "p95_ms": 27.764781843870878
+            },
+            "excerpt|present|top_one": {
+              "totals": {
+                "issued": 2,
+                "strict": 2,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 5,
+                "exact_interpretation": 2,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 12.672072421992198
+            },
+            "excerpt|present|two_batched": {
+              "totals": {
+                "issued": 3,
+                "strict": 3,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 5,
+                "source_calls": 0,
+                "role_calls": 5,
+                "expression_gate": 5,
+                "exact_interpretation": 3,
+                "tokens": 828,
+                "two_forwards": 0
+              },
+              "p95_ms": 27.732071717036888
+            },
+            "excerpt|present|two_serial": {
+              "totals": {
+                "issued": 3,
+                "strict": 3,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 10,
+                "source_calls": 0,
+                "role_calls": 10,
+                "expression_gate": 5,
+                "exact_interpretation": 3,
+                "tokens": 828,
+                "two_forwards": 5
+              },
+              "p95_ms": 34.24522163113579
+            },
+            "excerpt|right_hidden|baseline": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 17.49441816937178
+            },
+            "excerpt|right_hidden|packed_pair": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 17.555373033974316
+            },
+            "excerpt|right_hidden|reserve_agreement": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 17.49441816937178
+            },
+            "excerpt|right_hidden|reserve_batch": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 17.49441816937178
+            },
+            "excerpt|right_hidden|top_one": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 17.55638896138407
+            },
+            "excerpt|right_hidden|two_batched": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 17.555242835078385
+            },
+            "excerpt|right_hidden|two_serial": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 17.55556989810429
+            },
+            "keywords|left_hidden|baseline": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 16.421677381731566
+            },
+            "keywords|left_hidden|packed_pair": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 16.491947410395365
+            },
+            "keywords|left_hidden|reserve_agreement": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 16.421677381731566
+            },
+            "keywords|left_hidden|reserve_batch": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 16.421677381731566
+            },
+            "keywords|left_hidden|top_one": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 16.493372636614364
+            },
+            "keywords|left_hidden|two_batched": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 16.491871682228517
+            },
+            "keywords|left_hidden|two_serial": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 16.49220549734309
+            },
+            "keywords|present|baseline": {
+              "totals": {
+                "issued": 2,
+                "strict": 2,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 0,
+                "role_calls": 1,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 86,
+                "two_forwards": 0
+              },
+              "p95_ms": 17.718568368582048
+            },
+            "keywords|present|packed_pair": {
+              "totals": {
+                "issued": 1,
+                "strict": 1,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 4,
+                "source_calls": 0,
+                "role_calls": 4,
+                "expression_gate": 4,
+                "exact_interpretation": 1,
+                "tokens": 868,
+                "two_forwards": 0
+              },
+              "p95_ms": 26.322879770305008
+            },
+            "keywords|present|reserve_agreement": {
+              "totals": {
+                "issued": 2,
+                "strict": 2,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 4,
+                "source_calls": 0,
+                "role_calls": 4,
+                "expression_gate": 3,
+                "exact_interpretation": 2,
+                "tokens": 579,
+                "two_forwards": 0
+              },
+              "p95_ms": 25.768718420295045
+            },
+            "keywords|present|reserve_batch": {
+              "totals": {
+                "issued": 3,
+                "strict": 3,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 4,
+                "source_calls": 0,
+                "role_calls": 4,
+                "expression_gate": 3,
+                "exact_interpretation": 2,
+                "tokens": 579,
+                "two_forwards": 0
+              },
+              "p95_ms": 25.768718420295045
+            },
+            "keywords|present|top_one": {
+              "totals": {
+                "issued": 2,
+                "strict": 2,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 0,
+                "source_calls": 0,
+                "role_calls": 0,
+                "expression_gate": 4,
+                "exact_interpretation": 2,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 10.656150057911873
+            },
+            "keywords|present|two_batched": {
+              "totals": {
+                "issued": 3,
+                "strict": 3,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 4,
+                "source_calls": 0,
+                "role_calls": 4,
+                "expression_gate": 4,
+                "exact_interpretation": 3,
+                "tokens": 677,
+                "two_forwards": 0
+              },
+              "p95_ms": 26.074578298721462
+            },
+            "keywords|present|two_serial": {
+              "totals": {
+                "issued": 3,
+                "strict": 3,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 8,
+                "source_calls": 0,
+                "role_calls": 8,
+                "expression_gate": 4,
+                "exact_interpretation": 3,
+                "tokens": 677,
+                "two_forwards": 4
+              },
+              "p95_ms": 32.63720339164138
+            },
+            "keywords|right_hidden|baseline": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 16.266039072070267
+            },
+            "keywords|right_hidden|packed_pair": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 16.32531540235504
+            },
+            "keywords|right_hidden|reserve_agreement": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 16.266039072070267
+            },
+            "keywords|right_hidden|reserve_batch": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 16.266039072070267
+            },
+            "keywords|right_hidden|top_one": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 16.326377610675987
+            },
+            "keywords|right_hidden|two_batched": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 16.325370065169405
+            },
+            "keywords|right_hidden|two_serial": {
+              "totals": {
+                "issued": 0,
+                "strict": 0,
+                "adverse": 0,
+                "wrong_source": 0,
+                "requests": 8,
+                "positives": 4,
+                "search_calls": 1,
+                "source_calls": 1,
+                "role_calls": 0,
+                "expression_gate": 0,
+                "exact_interpretation": 0,
+                "tokens": 0,
+                "two_forwards": 0
+              },
+              "p95_ms": 16.32548103225417
+            }
+          }
+        }
+      }
+    }
+  ]
+}

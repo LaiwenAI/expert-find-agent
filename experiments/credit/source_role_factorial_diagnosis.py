@@ -38,7 +38,7 @@ def payload(index, pair, roles, source_calls=0, role_calls=0, tokens=0):
                 source_calls=source_calls, role_calls=role_calls, tokens=tokens)
 
 
-def plan(service, topic, scores, clues, phrases, hidden, route):
+def plan(service, topic, scores, clues, phrases, hidden, route, *, run_role=True):
     index = service.index
     shallow = [side | {"fused": side["fused"][:6]} for side in topic]
     pair, _ = select(index, shallow, {}, [set(), set()], "anchored", hidden)
@@ -56,8 +56,11 @@ def plan(service, topic, scores, clues, phrases, hidden, route):
         pair, _ = check_source(index, service.source, topic, proposal, clues, service.cutoffs["source"])
         source_calls = 1
     if pair and not source_calls:
-        role_sets, role_calls, tokens, _ = role_check(index, pair, scores, service.bands, service.role,
-                                                      phrases, service.cutoffs["role"])
+        if run_role:
+            role_sets, role_calls, tokens, _ = role_check(index, pair, scores, service.bands, service.role,
+                                                          phrases, service.cutoffs["role"])
+        else:
+            role_sets = required_roles({}, scores, "ridge_band", service.bands)
     assert source_calls + role_calls <= 1
     return dict(pair=pair, roles=role_sets, proposal=proposal, options={option[1] for option in options},
                 response=payload(index, pair, role_sets, source_calls, role_calls, tokens))
