@@ -22,13 +22,13 @@ READ_CAPS = (2, 3, 5)
 POLICIES = ("rank_first", "reuse_first")
 
 
-def allocate(order, sources, source_labels, expert_labels, read_cap, policy):
+def allocate(order, sources, source_labels, expert_labels, read_cap, policy, *, pair_cap=PAIR_CAP, trace=None):
     ranks = {owner: i for i, owner in enumerate(order, 1)}
     action_rank = {(owner, doc): rank for owner in order
                    for rank, (doc, _) in enumerate(sources[owner][:DEPTH], 1)}
     tested, opened, supported, attempted = set(), set(), set(), set()
     unknown = 0
-    while len(tested) < PAIR_CAP:
+    while len(tested) < pair_cap:
         remaining = [(owner, doc) for owner, doc in action_rank if owner not in supported
                      and (owner, doc) not in tested and (doc in opened or len(opened) < read_cap)]
         if not remaining:
@@ -55,6 +55,8 @@ def allocate(order, sources, source_labels, expert_labels, read_cap, policy):
         if mark == 2:
             supported.add(owner)
     issued = [owner for owner in order if owner in supported][:5]
+    if trace is not None:
+        trace["issued_owners"] = issued
     return dict(checks=len(tested), reads=len(opened), unknown=unknown, issued=len(issued),
                 supported=sum(expert_labels.get(owner) == 2 for owner in issued))
 
