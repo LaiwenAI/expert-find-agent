@@ -30,7 +30,18 @@ def terms(text, spans):
     return [" ".join(text[span.start:span.end].casefold().split()) for span in spans]
 
 
-def anchor_candidates(text, vocabulary):
+def anchor_features(text, span, tokens, marked, known):
+    beginning = text[max(0, span.start - 20):span.start]
+    following = TOKEN.findall(text[span.end:span.end + 20])
+    return [len(tokens), float(marked), float(known),
+            float(any(cue in tokens[-1] for cue in CUES)),
+            float(any(token.isdigit() for token in tokens)),
+            float(tokens[0] in LINK_WORDS), float(tokens[-1] in LINK_WORDS),
+            float(not beginning.split("\n")[-1].strip(" •*-\t")),
+            float(bool(following) and following[0].casefold() in LINK_WORDS)]
+
+
+def anchor_candidates(text, vocabulary, *, include_cue_free=False):
     words = list(TOKEN.finditer(text))
     for i, first in enumerate(words):
         marked = False
@@ -42,17 +53,9 @@ def anchor_candidates(text, vocabulary):
             tokens.append(last.group().casefold())
             marked |= any(cue in tokens[-1] for cue in CUES)
             known = " ".join(tokens) in vocabulary
-            if marked or known:
+            if marked or known or include_cue_free:
                 span = Entity(first.start(), last.end(), "candidate")
-                beginning = text[max(0, span.start - 20):span.start]
-                following = TOKEN.findall(text[span.end:span.end + 20])
-                features = [len(tokens), float(marked), float(known),
-                            float(any(cue in tokens[-1] for cue in CUES)),
-                            float(any(token.isdigit() for token in tokens)),
-                            float(tokens[0] in LINK_WORDS), float(tokens[-1] in LINK_WORDS),
-                            float(not beginning.split("\n")[-1].strip(" •*-\t")),
-                            float(bool(following) and following[0].casefold() in LINK_WORDS)]
-                yield span, tuple(tokens), features
+                yield span, tuple(tokens), anchor_features(text, span, tokens, marked, known)
 
 
 def feature_row(group, candidates, targets, anchor=None):
@@ -120,7 +123,7 @@ def measures(tp, predicted, gold):
                 recall=tp / max(1, gold), f1=2 * tp / max(1, predicted + gold))
 
 
-def evaluate(ads):
+def evaluate(ads, proposer=anchor_candidates, *, trace=None, anchor_limits=None):
     train_ads = [ad for ad in ads if group_bucket(ad[0]) < 4]
     anchor_forms = {group: Counter(terms(text, gold)) for group, text, gold in train_ads}
     scope_forms = {
@@ -135,7 +138,7 @@ def evaluate(ads):
         compounds.update(counter)
     anchor_training, scope_training = [], []
     for group, text, gold in train_ads:
-        candidates = list(anchor_candidates(text, vocab - anchor_forms[group]))
+        candidates = list(proposer(text, vocab - anchor_forms[group]))
         anchor_training.append(feature_row(group, candidates, {offsets(a) for a in gold}))
         other_terms = compounds - scope_forms[group]
         for anchor, targets in sorted(gold.items()):
@@ -151,7 +154,7 @@ def evaluate(ads):
         bucket = group_bucket(group)
         if bucket < 4:
             continue
-        row = feature_row(group, list(anchor_candidates(text, vocab)), set())
+        row = feature_row(group, list(proposer(text, vocab)), set())
         spans = row[1]
         scores = anchor_model(add_lexical(row, anchor_bank, False)) if spans else []
         ranked = nonoverlap(spans, scores)
@@ -202,6 +205,7 @@ def evaluate(ads):
     metrics = {name: Counter() for name in names}
     edge_outcomes, groups = {name: [] for name in names}, []
     true_anchors = true_edges = candidate_anchors = 0
+    learned_anchor_counts = {}
     for group, text, gold, scores, exact_forms, proposed in held:
         anchor_truth = set(map(offsets, gold))
         edges = all_truth(gold)
@@ -209,7 +213,10 @@ def evaluate(ads):
         true_edges += len(edges)
         candidate_anchors += len(set(map(offsets, proposed)) & anchor_truth)
         groups.extend([group] * len(edges))
-        learned = evaluate_candidates(group, text, [a for a, score in scores if score >= cutoff])
+        chosen = ([a for a, score in scores if score >= cutoff] if anchor_limits is None else
+                  [a for a, _ in scores[:anchor_limits[group]]])
+        learned_anchor_counts[group] = len(chosen)
+        learned = evaluate_candidates(group, text, chosen)
         routes = (
             ("gazetteer", evaluate_candidates(group, text, [a for a, _ in exact_forms]), 1, None),
             ("learned", learned, 1, None),
@@ -239,7 +246,10 @@ def evaluate(ads):
                              paired_recall_vs_gazetteer=clustered_paired_interval(
                                  [int(x)-int(y) for x,y in zip(edge_outcomes[name], edge_outcomes["gazetteer"], strict=True)],
                                  groups))
+    if trace is not None:
+        trace.update(groups=groups, edge_outcomes=edge_outcomes, learned_anchor_counts=learned_anchor_counts)
     return dict(fit_ads=len(train_ads), calibration_ads=len(development), test_ads=len(held),
+                test_anchor_proposals=sum(len(spans) for _, _, _, _, _, spans in held),
                 test_ads_without_linked_experience=sum(not gold for _, _, gold, *_ in held),
                 anchor_candidates_with_gold=candidate_anchors, calibration_cutoff=cutoff, calibrated_edge_cutoff=calibrated_edge_cutoff,
                 selected_fixed_width=width, dev_fixed_widths=fixed_options, rows=results,
