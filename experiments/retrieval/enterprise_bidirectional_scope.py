@@ -96,7 +96,7 @@ def infer(encoder, documents, head, bidirectional, batch_size=BATCH):
     return np.concatenate(samples)
 
 
-def train(encoder, training, arm, hooks):
+def train(encoder, training, arm, hooks, *, positive_weight=3.):
     torch.manual_seed(SEED)
     head = nn.Linear(encoder.model.config.hidden_size, 1, device="cuda")
     adapters = []
@@ -121,7 +121,7 @@ def train(encoder, training, arm, hooks):
             truth = torch.as_tensor(np.concatenate([doc[-1] for doc in documents]),
                                     dtype=torch.float32, device="cuda")
             decision = logits(encoder, *inputs, head, arm.startswith("bidirectional"))
-            loss = F.binary_cross_entropy_with_logits(decision, truth, pos_weight=decision.new_tensor(3.))
+            loss = F.binary_cross_entropy_with_logits(decision, truth, pos_weight=decision.new_tensor(positive_weight))
             optimizer.zero_grad(set_to_none=True)
             loss.backward()
             nn.utils.clip_grad_norm_(params, 1., error_if_nonfinite=True)

@@ -1,0 +1,1592 @@
+{
+  "slurm_array": 47442,
+  "node": "ws6",
+  "output_sha256": [
+    "bc2d36b205af6171b5e4d1de3d66e48b3b8f45e65882223f73c9839c834c2cfc",
+    "009cf2ece71c14593fa1c5d9d2574a49fb92ebc44e9ece7f6916b3c46da67779"
+  ],
+  "runs": [
+    {
+      "arms": {
+        "synthetic": {
+          "qualifications": 51,
+          "correct": 1401,
+          "true_positive": 0,
+          "false_positive": 0,
+          "cases": 1452,
+          "requests": 80,
+          "exact": 55,
+          "skipped": 17,
+          "changed_skips": 7,
+          "qualification_requests": 25,
+          "qualification_requests_skipped": 7,
+          "skipped_reference_ms_over_500": 2
+        },
+        "teacher": {
+          "qualifications": 51,
+          "correct": 1121,
+          "true_positive": 24,
+          "false_positive": 304,
+          "cases": 1452,
+          "requests": 80,
+          "exact": 43,
+          "skipped": 16,
+          "changed_skips": 4,
+          "qualification_requests": 25,
+          "qualification_requests_skipped": 4,
+          "skipped_reference_ms_over_500": 1
+        },
+        "mixed": {
+          "qualifications": 51,
+          "correct": 1245,
+          "true_positive": 5,
+          "false_positive": 161,
+          "cases": 1452,
+          "requests": 80,
+          "exact": 46,
+          "skipped": 21,
+          "changed_skips": 5,
+          "qualification_requests": 25,
+          "qualification_requests_skipped": 4,
+          "skipped_reference_ms_over_500": 1
+        }
+      },
+      "folds": {
+        "0": {
+          "synthetic": {
+            "fit": {
+              "trainable_parameters": 123905,
+              "loss": [
+                0.9954091608524323,
+                0.7331610172986984,
+                0.2087129739423593,
+                0.01591108541470021,
+                0.009449848720881468,
+                0.003020601080303701
+              ],
+              "seconds": 4.342002172023058
+            },
+            "positive_weight": 3.0,
+            "cutoff": 6.349064826965332,
+            "training_anchors": 576,
+            "calibration_skips": 1,
+            "heading": {
+              "qualifications": 36,
+              "correct": 38,
+              "true_positive": 2,
+              "false_positive": 0,
+              "cases": 72,
+              "documents": 72,
+              "exact_documents": 38,
+              "accepted": 38,
+              "accepted_errors": 19,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 2
+            },
+            "development": {
+              "qualifications": 12,
+              "correct": 360,
+              "true_positive": 0,
+              "false_positive": 0,
+              "cases": 372,
+              "requests": 16,
+              "exact": 10,
+              "skipped": 1,
+              "changed_skips": 1,
+              "qualification_requests": 6,
+              "qualification_requests_skipped": 1,
+              "skipped_reference_ms_over_500": 0
+            }
+          },
+          "teacher": {
+            "fit": {
+              "trainable_parameters": 123905,
+              "loss": [
+                1.2744846443335216,
+                1.0801372552911441,
+                0.9821574084150294,
+                0.8418209264054894,
+                0.7449441566132009,
+                0.6929844150630137
+              ],
+              "seconds": 56.64869233639911
+            },
+            "positive_weight": 25.53125,
+            "cutoff": 4.287002086639404,
+            "training_anchors": 3396,
+            "calibration_skips": 0,
+            "heading": {
+              "qualifications": 36,
+              "correct": 34,
+              "true_positive": 2,
+              "false_positive": 4,
+              "cases": 72,
+              "documents": 72,
+              "exact_documents": 34,
+              "accepted": 0,
+              "accepted_errors": 0,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 0
+            },
+            "development": {
+              "qualifications": 12,
+              "correct": 266,
+              "true_positive": 9,
+              "false_positive": 103,
+              "cases": 372,
+              "requests": 16,
+              "exact": 4,
+              "skipped": 0,
+              "changed_skips": 0,
+              "qualification_requests": 6,
+              "qualification_requests_skipped": 0,
+              "skipped_reference_ms_over_500": 0
+            }
+          },
+          "mixed": {
+            "fit": {
+              "trainable_parameters": 123905,
+              "loss": [
+                1.1814674784739811,
+                1.0557058043777943,
+                0.9138904983798662,
+                0.8892596500615279,
+                0.8315952833121022,
+                0.702632375061512
+              ],
+              "seconds": 38.17553378129378
+            },
+            "positive_weight": 12.985915492957746,
+            "cutoff": 3.4042038917541504,
+            "training_anchors": 1986,
+            "calibration_skips": 2,
+            "heading": {
+              "qualifications": 36,
+              "correct": 36,
+              "true_positive": 1,
+              "false_positive": 1,
+              "cases": 72,
+              "documents": 72,
+              "exact_documents": 36,
+              "accepted": 0,
+              "accepted_errors": 0,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 0
+            },
+            "development": {
+              "qualifications": 12,
+              "correct": 313,
+              "true_positive": 2,
+              "false_positive": 49,
+              "cases": 372,
+              "requests": 16,
+              "exact": 10,
+              "skipped": 0,
+              "changed_skips": 0,
+              "qualification_requests": 6,
+              "qualification_requests_skipped": 0,
+              "skipped_reference_ms_over_500": 0
+            }
+          }
+        },
+        "1": {
+          "synthetic": {
+            "fit": {
+              "trainable_parameters": 123905,
+              "loss": [
+                0.9954091608524323,
+                0.7331610172986984,
+                0.2087129739423593,
+                0.01591108541470021,
+                0.009449848720881468,
+                0.003020601080303701
+              ],
+              "seconds": 4.1389559376984835
+            },
+            "positive_weight": 3.0,
+            "cutoff": 6.005329132080078,
+            "training_anchors": 576,
+            "calibration_skips": 8,
+            "heading": {
+              "qualifications": 36,
+              "correct": 38,
+              "true_positive": 2,
+              "false_positive": 0,
+              "cases": 72,
+              "documents": 72,
+              "exact_documents": 38,
+              "accepted": 50,
+              "accepted_errors": 24,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 2
+            },
+            "development": {
+              "qualifications": 7,
+              "correct": 224,
+              "true_positive": 0,
+              "false_positive": 0,
+              "cases": 231,
+              "requests": 16,
+              "exact": 11,
+              "skipped": 11,
+              "changed_skips": 5,
+              "qualification_requests": 5,
+              "qualification_requests_skipped": 5,
+              "skipped_reference_ms_over_500": 2
+            }
+          },
+          "teacher": {
+            "fit": {
+              "trainable_parameters": 123905,
+              "loss": [
+                1.2724609201153119,
+                1.0746615305542946,
+                0.9508718028664589,
+                0.7562582491276165,
+                0.5573727742303163,
+                0.432217909488827
+              ],
+              "seconds": 43.36528654769063
+            },
+            "positive_weight": 26.685714285714287,
+            "cutoff": 3.420179605484009,
+            "training_anchors": 3876,
+            "calibration_skips": 5,
+            "heading": {
+              "qualifications": 36,
+              "correct": 36,
+              "true_positive": 0,
+              "false_positive": 0,
+              "cases": 72,
+              "documents": 72,
+              "exact_documents": 36,
+              "accepted": 62,
+              "accepted_errors": 31,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 0
+            },
+            "development": {
+              "qualifications": 7,
+              "correct": 220,
+              "true_positive": 0,
+              "false_positive": 4,
+              "cases": 231,
+              "requests": 16,
+              "exact": 10,
+              "skipped": 9,
+              "changed_skips": 1,
+              "qualification_requests": 5,
+              "qualification_requests_skipped": 1,
+              "skipped_reference_ms_over_500": 1
+            }
+          },
+          "mixed": {
+            "fit": {
+              "trainable_parameters": 123905,
+              "loss": [
+                1.2396650835871696,
+                1.0215409559508164,
+                0.9944832374652227,
+                0.9127100178351005,
+                0.8341076032569011,
+                0.654503608122468
+              ],
+              "seconds": 31.167262327857316
+            },
+            "positive_weight": 14.566433566433567,
+            "cutoff": 2.1615138053894043,
+            "training_anchors": 2226,
+            "calibration_skips": 3,
+            "heading": {
+              "qualifications": 36,
+              "correct": 37,
+              "true_positive": 1,
+              "false_positive": 0,
+              "cases": 72,
+              "documents": 72,
+              "exact_documents": 37,
+              "accepted": 55,
+              "accepted_errors": 27,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 1
+            },
+            "development": {
+              "qualifications": 7,
+              "correct": 222,
+              "true_positive": 0,
+              "false_positive": 2,
+              "cases": 231,
+              "requests": 16,
+              "exact": 10,
+              "skipped": 7,
+              "changed_skips": 2,
+              "qualification_requests": 5,
+              "qualification_requests_skipped": 2,
+              "skipped_reference_ms_over_500": 1
+            }
+          }
+        },
+        "2": {
+          "synthetic": {
+            "fit": {
+              "trainable_parameters": 123905,
+              "loss": [
+                0.9954091608524323,
+                0.7331610172986984,
+                0.2087129739423593,
+                0.01591108541470021,
+                0.009449848720881468,
+                0.003020601080303701
+              ],
+              "seconds": 4.1816918002441525
+            },
+            "positive_weight": 3.0,
+            "cutoff": 6.3220720291137695,
+            "training_anchors": 576,
+            "calibration_skips": 3,
+            "heading": {
+              "qualifications": 36,
+              "correct": 38,
+              "true_positive": 2,
+              "false_positive": 0,
+              "cases": 72,
+              "documents": 72,
+              "exact_documents": 38,
+              "accepted": 39,
+              "accepted_errors": 19,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 2
+            },
+            "development": {
+              "qualifications": 9,
+              "correct": 243,
+              "true_positive": 0,
+              "false_positive": 0,
+              "cases": 252,
+              "requests": 16,
+              "exact": 12,
+              "skipped": 4,
+              "changed_skips": 0,
+              "qualification_requests": 4,
+              "qualification_requests_skipped": 0,
+              "skipped_reference_ms_over_500": 0
+            }
+          },
+          "teacher": {
+            "fit": {
+              "trainable_parameters": 123905,
+              "loss": [
+                1.2105509390433629,
+                0.9865748050312201,
+                0.8285287877855202,
+                0.6396214754786342,
+                0.47301435804304975,
+                0.2161766430363059
+              ],
+              "seconds": 45.17672492098063
+            },
+            "positive_weight": 26.235294117647058,
+            "cutoff": 4.804149627685547,
+            "training_anchors": 3704,
+            "calibration_skips": 4,
+            "heading": {
+              "qualifications": 36,
+              "correct": 36,
+              "true_positive": 0,
+              "false_positive": 0,
+              "cases": 72,
+              "documents": 72,
+              "exact_documents": 36,
+              "accepted": 0,
+              "accepted_errors": 0,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 0
+            },
+            "development": {
+              "qualifications": 9,
+              "correct": 240,
+              "true_positive": 0,
+              "false_positive": 3,
+              "cases": 252,
+              "requests": 16,
+              "exact": 10,
+              "skipped": 2,
+              "changed_skips": 0,
+              "qualification_requests": 4,
+              "qualification_requests_skipped": 0,
+              "skipped_reference_ms_over_500": 0
+            }
+          },
+          "mixed": {
+            "fit": {
+              "trainable_parameters": 123905,
+              "loss": [
+                1.141173116862774,
+                1.0261936970055103,
+                0.981753759086132,
+                0.8930296674370766,
+                0.6378314650307099,
+                0.4601611780623595
+              ],
+              "seconds": 31.51853296533227
+            },
+            "positive_weight": 14.39568345323741,
+            "cutoff": 1.1391924619674683,
+            "training_anchors": 2140,
+            "calibration_skips": 4,
+            "heading": {
+              "qualifications": 36,
+              "correct": 36,
+              "true_positive": 6,
+              "false_positive": 6,
+              "cases": 72,
+              "documents": 72,
+              "exact_documents": 36,
+              "accepted": 45,
+              "accepted_errors": 22,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 2
+            },
+            "development": {
+              "qualifications": 9,
+              "correct": 205,
+              "true_positive": 0,
+              "false_positive": 38,
+              "cases": 252,
+              "requests": 16,
+              "exact": 5,
+              "skipped": 5,
+              "changed_skips": 1,
+              "qualification_requests": 4,
+              "qualification_requests_skipped": 0,
+              "skipped_reference_ms_over_500": 0
+            }
+          }
+        },
+        "3": {
+          "synthetic": {
+            "fit": {
+              "trainable_parameters": 123905,
+              "loss": [
+                0.9954091608524323,
+                0.7331610172986984,
+                0.2087129739423593,
+                0.01591108541470021,
+                0.009449848720881468,
+                0.003020601080303701
+              ],
+              "seconds": 4.159158278256655
+            },
+            "positive_weight": 3.0,
+            "cutoff": 6.489564895629883,
+            "training_anchors": 576,
+            "calibration_skips": 0,
+            "heading": {
+              "qualifications": 36,
+              "correct": 38,
+              "true_positive": 2,
+              "false_positive": 0,
+              "cases": 72,
+              "documents": 72,
+              "exact_documents": 38,
+              "accepted": 28,
+              "accepted_errors": 14,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 2
+            },
+            "development": {
+              "qualifications": 8,
+              "correct": 266,
+              "true_positive": 0,
+              "false_positive": 0,
+              "cases": 274,
+              "requests": 16,
+              "exact": 11,
+              "skipped": 0,
+              "changed_skips": 0,
+              "qualification_requests": 5,
+              "qualification_requests_skipped": 0,
+              "skipped_reference_ms_over_500": 0
+            }
+          },
+          "teacher": {
+            "fit": {
+              "trainable_parameters": 123905,
+              "loss": [
+                1.291456438601017,
+                1.1643708900858958,
+                0.9803987368941307,
+                0.8488444915662209,
+                0.7117796148328731,
+                0.6631591025895128
+              ],
+              "seconds": 48.26901704678312
+            },
+            "positive_weight": 29.535714285714285,
+            "cutoff": 4.184121131896973,
+            "training_anchors": 3420,
+            "calibration_skips": 3,
+            "heading": {
+              "qualifications": 36,
+              "correct": 35,
+              "true_positive": 0,
+              "false_positive": 1,
+              "cases": 72,
+              "documents": 72,
+              "exact_documents": 35,
+              "accepted": 0,
+              "accepted_errors": 0,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 0
+            },
+            "development": {
+              "qualifications": 8,
+              "correct": 208,
+              "true_positive": 3,
+              "false_positive": 61,
+              "cases": 274,
+              "requests": 16,
+              "exact": 8,
+              "skipped": 4,
+              "changed_skips": 2,
+              "qualification_requests": 5,
+              "qualification_requests_skipped": 2,
+              "skipped_reference_ms_over_500": 0
+            }
+          },
+          "mixed": {
+            "fit": {
+              "trainable_parameters": 123905,
+              "loss": [
+                1.1876571575800579,
+                1.0917422970136006,
+                0.9644973588486513,
+                0.9518051141252121,
+                0.9103987409422795,
+                0.7759005110710859
+              ],
+              "seconds": 32.65930995112285
+            },
+            "positive_weight": 13.91044776119403,
+            "cutoff": 1.323526382446289,
+            "training_anchors": 1998,
+            "calibration_skips": 4,
+            "heading": {
+              "qualifications": 36,
+              "correct": 35,
+              "true_positive": 24,
+              "false_positive": 25,
+              "cases": 72,
+              "documents": 72,
+              "exact_documents": 35,
+              "accepted": 4,
+              "accepted_errors": 2,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 1
+            },
+            "development": {
+              "qualifications": 8,
+              "correct": 197,
+              "true_positive": 3,
+              "false_positive": 72,
+              "cases": 274,
+              "requests": 16,
+              "exact": 10,
+              "skipped": 6,
+              "changed_skips": 2,
+              "qualification_requests": 5,
+              "qualification_requests_skipped": 2,
+              "skipped_reference_ms_over_500": 0
+            }
+          }
+        },
+        "4": {
+          "synthetic": {
+            "fit": {
+              "trainable_parameters": 123905,
+              "loss": [
+                0.9954091608524323,
+                0.7331610172986984,
+                0.2087129739423593,
+                0.01591108541470021,
+                0.009449848720881468,
+                0.003020601080303701
+              ],
+              "seconds": 4.039403572678566
+            },
+            "positive_weight": 3.0,
+            "cutoff": 6.403707504272461,
+            "training_anchors": 576,
+            "calibration_skips": 0,
+            "heading": {
+              "qualifications": 36,
+              "correct": 38,
+              "true_positive": 2,
+              "false_positive": 0,
+              "cases": 72,
+              "documents": 72,
+              "exact_documents": 38,
+              "accepted": 34,
+              "accepted_errors": 17,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 2
+            },
+            "development": {
+              "qualifications": 15,
+              "correct": 308,
+              "true_positive": 0,
+              "false_positive": 0,
+              "cases": 323,
+              "requests": 16,
+              "exact": 11,
+              "skipped": 1,
+              "changed_skips": 1,
+              "qualification_requests": 5,
+              "qualification_requests_skipped": 1,
+              "skipped_reference_ms_over_500": 0
+            }
+          },
+          "teacher": {
+            "fit": {
+              "trainable_parameters": 123905,
+              "loss": [
+                1.300561395784219,
+                1.1229229532182217,
+                0.9794573138157526,
+                0.8135412024954954,
+                0.7339960454652706,
+                0.6952894545005014
+              ],
+              "seconds": 44.9946010299027
+            },
+            "positive_weight": 30.0,
+            "cutoff": 4.983569145202637,
+            "training_anchors": 3028,
+            "calibration_skips": 1,
+            "heading": {
+              "qualifications": 36,
+              "correct": 36,
+              "true_positive": 0,
+              "false_positive": 0,
+              "cases": 72,
+              "documents": 72,
+              "exact_documents": 36,
+              "accepted": 0,
+              "accepted_errors": 0,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 0
+            },
+            "development": {
+              "qualifications": 15,
+              "correct": 187,
+              "true_positive": 12,
+              "false_positive": 133,
+              "cases": 323,
+              "requests": 16,
+              "exact": 11,
+              "skipped": 1,
+              "changed_skips": 1,
+              "qualification_requests": 5,
+              "qualification_requests_skipped": 1,
+              "skipped_reference_ms_over_500": 0
+            }
+          },
+          "mixed": {
+            "fit": {
+              "trainable_parameters": 123905,
+              "loss": [
+                1.3056997830669086,
+                1.09590928008159,
+                1.0943751856684685,
+                1.1345623681942623,
+                1.0435031453768413,
+                0.9468830016752084
+              ],
+              "seconds": 30.63545740628615
+            },
+            "positive_weight": 13.770491803278688,
+            "cutoff": 1.050890564918518,
+            "training_anchors": 1802,
+            "calibration_skips": 1,
+            "heading": {
+              "qualifications": 36,
+              "correct": 36,
+              "true_positive": 0,
+              "false_positive": 0,
+              "cases": 72,
+              "documents": 72,
+              "exact_documents": 36,
+              "accepted": 61,
+              "accepted_errors": 29,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 0
+            },
+            "development": {
+              "qualifications": 15,
+              "correct": 308,
+              "true_positive": 0,
+              "false_positive": 0,
+              "cases": 323,
+              "requests": 16,
+              "exact": 11,
+              "skipped": 3,
+              "changed_skips": 0,
+              "qualification_requests": 5,
+              "qualification_requests_skipped": 0,
+              "skipped_reference_ms_over_500": 0
+            }
+          }
+        }
+      },
+      "labeled_reference_sha256": "1d2772d3035538eb939dea089ede99ee8ce866c20be21de0f4ea301a55cbcd2c",
+      "all_negative_exact": 55,
+      "latency": {
+        "synthetic": {
+          "student": [
+            15.25818114168942,
+            28.76997774001209
+          ],
+          "guard": [
+            141.9154687318951,
+            1307.922271057032
+          ]
+        },
+        "teacher": {
+          "student": [
+            15.194064704701304,
+            28.78112623002378
+          ],
+          "guard": [
+            139.87033418379724,
+            1307.4219125322998
+          ]
+        },
+        "mixed": {
+          "student": [
+            15.218792716041207,
+            28.87614411301909
+          ],
+          "guard": [
+            139.85612359829247,
+            1307.650304888375
+          ]
+        }
+      },
+      "reference_ms": [
+        148.17736577242613,
+        1288.8365246821195
+      ],
+      "inputs": {
+        "development": "30661871ac08a61e7e74d67d75491878c7e4194f217483b60d06426c4b36e4c5",
+        "heading": "ca96d57855c1acb463a3bbce8bb21e3578d5c8465c340958fd74fe209cea5000",
+        "scope": "e9384206c99723ec766dcc627c0980f0a17ceaa8ba67186f6110a2e69d87e08a",
+        "folds": "05cc87aa94737b211311e3b70b8febdad0b1c41df1487606bd7726cc93b9e600"
+      },
+      "grouped_folds": [
+        14,
+        14,
+        14,
+        14,
+        15
+      ],
+      "script_sha256": "c0c87fd6c0fe6e298dd2a145bcb61d2c4aef6fe3e326a2a2125492eeba88d993",
+      "trainer_sha256": "62d8d0367be80c02bb2cead79a764eb26d541bdf6fa3d2a357f03b16be826e19",
+      "reader": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "embedding": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "gpu": "NVIDIA GeForce RTX 4090",
+      "job": "47443",
+      "reverse": false
+    },
+    {
+      "arms": {
+        "synthetic": {
+          "qualifications": 51,
+          "correct": 1401,
+          "true_positive": 0,
+          "false_positive": 0,
+          "cases": 1452,
+          "requests": 80,
+          "exact": 55,
+          "skipped": 17,
+          "changed_skips": 7,
+          "qualification_requests": 25,
+          "qualification_requests_skipped": 7,
+          "skipped_reference_ms_over_500": 2
+        },
+        "teacher": {
+          "qualifications": 51,
+          "correct": 1121,
+          "true_positive": 24,
+          "false_positive": 304,
+          "cases": 1452,
+          "requests": 80,
+          "exact": 43,
+          "skipped": 16,
+          "changed_skips": 4,
+          "qualification_requests": 25,
+          "qualification_requests_skipped": 4,
+          "skipped_reference_ms_over_500": 1
+        },
+        "mixed": {
+          "qualifications": 51,
+          "correct": 1245,
+          "true_positive": 5,
+          "false_positive": 161,
+          "cases": 1452,
+          "requests": 80,
+          "exact": 46,
+          "skipped": 21,
+          "changed_skips": 5,
+          "qualification_requests": 25,
+          "qualification_requests_skipped": 4,
+          "skipped_reference_ms_over_500": 1
+        }
+      },
+      "folds": {
+        "4": {
+          "mixed": {
+            "fit": {
+              "trainable_parameters": 123905,
+              "loss": [
+                1.3056997830669086,
+                1.09590928008159,
+                1.0943751856684685,
+                1.1345623681942623,
+                1.0435031453768413,
+                0.9468830016752084
+              ],
+              "seconds": 30.682663128245622
+            },
+            "positive_weight": 13.770491803278688,
+            "cutoff": 1.050890564918518,
+            "training_anchors": 1802,
+            "calibration_skips": 1,
+            "heading": {
+              "qualifications": 36,
+              "correct": 36,
+              "true_positive": 0,
+              "false_positive": 0,
+              "cases": 72,
+              "documents": 72,
+              "exact_documents": 36,
+              "accepted": 61,
+              "accepted_errors": 29,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 0
+            },
+            "development": {
+              "qualifications": 15,
+              "correct": 308,
+              "true_positive": 0,
+              "false_positive": 0,
+              "cases": 323,
+              "requests": 16,
+              "exact": 11,
+              "skipped": 3,
+              "changed_skips": 0,
+              "qualification_requests": 5,
+              "qualification_requests_skipped": 0,
+              "skipped_reference_ms_over_500": 0
+            }
+          },
+          "teacher": {
+            "fit": {
+              "trainable_parameters": 123905,
+              "loss": [
+                1.300561395784219,
+                1.1229229532182217,
+                0.9794573138157526,
+                0.8135412024954954,
+                0.7339960454652706,
+                0.6952894545005014
+              ],
+              "seconds": 44.852302965242416
+            },
+            "positive_weight": 30.0,
+            "cutoff": 4.983569145202637,
+            "training_anchors": 3028,
+            "calibration_skips": 1,
+            "heading": {
+              "qualifications": 36,
+              "correct": 36,
+              "true_positive": 0,
+              "false_positive": 0,
+              "cases": 72,
+              "documents": 72,
+              "exact_documents": 36,
+              "accepted": 0,
+              "accepted_errors": 0,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 0
+            },
+            "development": {
+              "qualifications": 15,
+              "correct": 187,
+              "true_positive": 12,
+              "false_positive": 133,
+              "cases": 323,
+              "requests": 16,
+              "exact": 11,
+              "skipped": 1,
+              "changed_skips": 1,
+              "qualification_requests": 5,
+              "qualification_requests_skipped": 1,
+              "skipped_reference_ms_over_500": 0
+            }
+          },
+          "synthetic": {
+            "fit": {
+              "trainable_parameters": 123905,
+              "loss": [
+                0.9954091608524323,
+                0.7331610172986984,
+                0.2087129739423593,
+                0.01591108541470021,
+                0.009449848720881468,
+                0.003020601080303701
+              ],
+              "seconds": 4.250898791011423
+            },
+            "positive_weight": 3.0,
+            "cutoff": 6.403707504272461,
+            "training_anchors": 576,
+            "calibration_skips": 0,
+            "heading": {
+              "qualifications": 36,
+              "correct": 38,
+              "true_positive": 2,
+              "false_positive": 0,
+              "cases": 72,
+              "documents": 72,
+              "exact_documents": 38,
+              "accepted": 34,
+              "accepted_errors": 17,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 2
+            },
+            "development": {
+              "qualifications": 15,
+              "correct": 308,
+              "true_positive": 0,
+              "false_positive": 0,
+              "cases": 323,
+              "requests": 16,
+              "exact": 11,
+              "skipped": 1,
+              "changed_skips": 1,
+              "qualification_requests": 5,
+              "qualification_requests_skipped": 1,
+              "skipped_reference_ms_over_500": 0
+            }
+          }
+        },
+        "3": {
+          "mixed": {
+            "fit": {
+              "trainable_parameters": 123905,
+              "loss": [
+                1.1876571575800579,
+                1.0917422970136006,
+                0.9644973588486513,
+                0.9518051141252121,
+                0.9103987409422795,
+                0.7759005110710859
+              ],
+              "seconds": 32.54784506279975
+            },
+            "positive_weight": 13.91044776119403,
+            "cutoff": 1.323526382446289,
+            "training_anchors": 1998,
+            "calibration_skips": 4,
+            "heading": {
+              "qualifications": 36,
+              "correct": 35,
+              "true_positive": 24,
+              "false_positive": 25,
+              "cases": 72,
+              "documents": 72,
+              "exact_documents": 35,
+              "accepted": 4,
+              "accepted_errors": 2,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 1
+            },
+            "development": {
+              "qualifications": 8,
+              "correct": 197,
+              "true_positive": 3,
+              "false_positive": 72,
+              "cases": 274,
+              "requests": 16,
+              "exact": 10,
+              "skipped": 6,
+              "changed_skips": 2,
+              "qualification_requests": 5,
+              "qualification_requests_skipped": 2,
+              "skipped_reference_ms_over_500": 0
+            }
+          },
+          "teacher": {
+            "fit": {
+              "trainable_parameters": 123905,
+              "loss": [
+                1.291456438601017,
+                1.1643708900858958,
+                0.9803987368941307,
+                0.8488444915662209,
+                0.7117796148328731,
+                0.6631591025895128
+              ],
+              "seconds": 48.21552011510357
+            },
+            "positive_weight": 29.535714285714285,
+            "cutoff": 4.184121131896973,
+            "training_anchors": 3420,
+            "calibration_skips": 3,
+            "heading": {
+              "qualifications": 36,
+              "correct": 35,
+              "true_positive": 0,
+              "false_positive": 1,
+              "cases": 72,
+              "documents": 72,
+              "exact_documents": 35,
+              "accepted": 0,
+              "accepted_errors": 0,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 0
+            },
+            "development": {
+              "qualifications": 8,
+              "correct": 208,
+              "true_positive": 3,
+              "false_positive": 61,
+              "cases": 274,
+              "requests": 16,
+              "exact": 8,
+              "skipped": 4,
+              "changed_skips": 2,
+              "qualification_requests": 5,
+              "qualification_requests_skipped": 2,
+              "skipped_reference_ms_over_500": 0
+            }
+          },
+          "synthetic": {
+            "fit": {
+              "trainable_parameters": 123905,
+              "loss": [
+                0.9954091608524323,
+                0.7331610172986984,
+                0.2087129739423593,
+                0.01591108541470021,
+                0.009449848720881468,
+                0.003020601080303701
+              ],
+              "seconds": 4.942085620947182
+            },
+            "positive_weight": 3.0,
+            "cutoff": 6.489564895629883,
+            "training_anchors": 576,
+            "calibration_skips": 0,
+            "heading": {
+              "qualifications": 36,
+              "correct": 38,
+              "true_positive": 2,
+              "false_positive": 0,
+              "cases": 72,
+              "documents": 72,
+              "exact_documents": 38,
+              "accepted": 28,
+              "accepted_errors": 14,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 2
+            },
+            "development": {
+              "qualifications": 8,
+              "correct": 266,
+              "true_positive": 0,
+              "false_positive": 0,
+              "cases": 274,
+              "requests": 16,
+              "exact": 11,
+              "skipped": 0,
+              "changed_skips": 0,
+              "qualification_requests": 5,
+              "qualification_requests_skipped": 0,
+              "skipped_reference_ms_over_500": 0
+            }
+          }
+        },
+        "2": {
+          "mixed": {
+            "fit": {
+              "trainable_parameters": 123905,
+              "loss": [
+                1.141173116862774,
+                1.0261936970055103,
+                0.981753759086132,
+                0.8930296674370766,
+                0.6378314650307099,
+                0.4601611780623595
+              ],
+              "seconds": 31.4209144548513
+            },
+            "positive_weight": 14.39568345323741,
+            "cutoff": 1.1391924619674683,
+            "training_anchors": 2140,
+            "calibration_skips": 4,
+            "heading": {
+              "qualifications": 36,
+              "correct": 36,
+              "true_positive": 6,
+              "false_positive": 6,
+              "cases": 72,
+              "documents": 72,
+              "exact_documents": 36,
+              "accepted": 45,
+              "accepted_errors": 22,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 2
+            },
+            "development": {
+              "qualifications": 9,
+              "correct": 205,
+              "true_positive": 0,
+              "false_positive": 38,
+              "cases": 252,
+              "requests": 16,
+              "exact": 5,
+              "skipped": 5,
+              "changed_skips": 1,
+              "qualification_requests": 4,
+              "qualification_requests_skipped": 0,
+              "skipped_reference_ms_over_500": 0
+            }
+          },
+          "teacher": {
+            "fit": {
+              "trainable_parameters": 123905,
+              "loss": [
+                1.2105509390433629,
+                0.9865748050312201,
+                0.8285287877855202,
+                0.6396214754786342,
+                0.47301435804304975,
+                0.2161766430363059
+              ],
+              "seconds": 45.16006876481697
+            },
+            "positive_weight": 26.235294117647058,
+            "cutoff": 4.804149627685547,
+            "training_anchors": 3704,
+            "calibration_skips": 4,
+            "heading": {
+              "qualifications": 36,
+              "correct": 36,
+              "true_positive": 0,
+              "false_positive": 0,
+              "cases": 72,
+              "documents": 72,
+              "exact_documents": 36,
+              "accepted": 0,
+              "accepted_errors": 0,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 0
+            },
+            "development": {
+              "qualifications": 9,
+              "correct": 240,
+              "true_positive": 0,
+              "false_positive": 3,
+              "cases": 252,
+              "requests": 16,
+              "exact": 10,
+              "skipped": 2,
+              "changed_skips": 0,
+              "qualification_requests": 4,
+              "qualification_requests_skipped": 0,
+              "skipped_reference_ms_over_500": 0
+            }
+          },
+          "synthetic": {
+            "fit": {
+              "trainable_parameters": 123905,
+              "loss": [
+                0.9954091608524323,
+                0.7331610172986984,
+                0.2087129739423593,
+                0.01591108541470021,
+                0.009449848720881468,
+                0.003020601080303701
+              ],
+              "seconds": 3.3842689231969416
+            },
+            "positive_weight": 3.0,
+            "cutoff": 6.3220720291137695,
+            "training_anchors": 576,
+            "calibration_skips": 3,
+            "heading": {
+              "qualifications": 36,
+              "correct": 38,
+              "true_positive": 2,
+              "false_positive": 0,
+              "cases": 72,
+              "documents": 72,
+              "exact_documents": 38,
+              "accepted": 39,
+              "accepted_errors": 19,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 2
+            },
+            "development": {
+              "qualifications": 9,
+              "correct": 243,
+              "true_positive": 0,
+              "false_positive": 0,
+              "cases": 252,
+              "requests": 16,
+              "exact": 12,
+              "skipped": 4,
+              "changed_skips": 0,
+              "qualification_requests": 4,
+              "qualification_requests_skipped": 0,
+              "skipped_reference_ms_over_500": 0
+            }
+          }
+        },
+        "1": {
+          "mixed": {
+            "fit": {
+              "trainable_parameters": 123905,
+              "loss": [
+                1.2396650835871696,
+                1.0215409559508164,
+                0.9944832374652227,
+                0.9127100178351005,
+                0.8341076032569011,
+                0.654503608122468
+              ],
+              "seconds": 31.056507302913815
+            },
+            "positive_weight": 14.566433566433567,
+            "cutoff": 2.1615138053894043,
+            "training_anchors": 2226,
+            "calibration_skips": 3,
+            "heading": {
+              "qualifications": 36,
+              "correct": 37,
+              "true_positive": 1,
+              "false_positive": 0,
+              "cases": 72,
+              "documents": 72,
+              "exact_documents": 37,
+              "accepted": 55,
+              "accepted_errors": 27,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 1
+            },
+            "development": {
+              "qualifications": 7,
+              "correct": 222,
+              "true_positive": 0,
+              "false_positive": 2,
+              "cases": 231,
+              "requests": 16,
+              "exact": 10,
+              "skipped": 7,
+              "changed_skips": 2,
+              "qualification_requests": 5,
+              "qualification_requests_skipped": 2,
+              "skipped_reference_ms_over_500": 1
+            }
+          },
+          "teacher": {
+            "fit": {
+              "trainable_parameters": 123905,
+              "loss": [
+                1.2724609201153119,
+                1.0746615305542946,
+                0.9508718028664589,
+                0.7562582491276165,
+                0.5573727742303163,
+                0.432217909488827
+              ],
+              "seconds": 43.315906362142414
+            },
+            "positive_weight": 26.685714285714287,
+            "cutoff": 3.420179605484009,
+            "training_anchors": 3876,
+            "calibration_skips": 5,
+            "heading": {
+              "qualifications": 36,
+              "correct": 36,
+              "true_positive": 0,
+              "false_positive": 0,
+              "cases": 72,
+              "documents": 72,
+              "exact_documents": 36,
+              "accepted": 62,
+              "accepted_errors": 31,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 0
+            },
+            "development": {
+              "qualifications": 7,
+              "correct": 220,
+              "true_positive": 0,
+              "false_positive": 4,
+              "cases": 231,
+              "requests": 16,
+              "exact": 10,
+              "skipped": 9,
+              "changed_skips": 1,
+              "qualification_requests": 5,
+              "qualification_requests_skipped": 1,
+              "skipped_reference_ms_over_500": 1
+            }
+          },
+          "synthetic": {
+            "fit": {
+              "trainable_parameters": 123905,
+              "loss": [
+                0.9954091608524323,
+                0.7331610172986984,
+                0.2087129739423593,
+                0.01591108541470021,
+                0.009449848720881468,
+                0.003020601080303701
+              ],
+              "seconds": 4.247393294703215
+            },
+            "positive_weight": 3.0,
+            "cutoff": 6.005329132080078,
+            "training_anchors": 576,
+            "calibration_skips": 8,
+            "heading": {
+              "qualifications": 36,
+              "correct": 38,
+              "true_positive": 2,
+              "false_positive": 0,
+              "cases": 72,
+              "documents": 72,
+              "exact_documents": 38,
+              "accepted": 50,
+              "accepted_errors": 24,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 2
+            },
+            "development": {
+              "qualifications": 7,
+              "correct": 224,
+              "true_positive": 0,
+              "false_positive": 0,
+              "cases": 231,
+              "requests": 16,
+              "exact": 11,
+              "skipped": 11,
+              "changed_skips": 5,
+              "qualification_requests": 5,
+              "qualification_requests_skipped": 5,
+              "skipped_reference_ms_over_500": 2
+            }
+          }
+        },
+        "0": {
+          "mixed": {
+            "fit": {
+              "trainable_parameters": 123905,
+              "loss": [
+                1.1814674784739811,
+                1.0557058043777943,
+                0.9138904983798662,
+                0.8892596500615279,
+                0.8315952833121022,
+                0.702632375061512
+              ],
+              "seconds": 38.26782997325063
+            },
+            "positive_weight": 12.985915492957746,
+            "cutoff": 3.4042038917541504,
+            "training_anchors": 1986,
+            "calibration_skips": 2,
+            "heading": {
+              "qualifications": 36,
+              "correct": 36,
+              "true_positive": 1,
+              "false_positive": 1,
+              "cases": 72,
+              "documents": 72,
+              "exact_documents": 36,
+              "accepted": 0,
+              "accepted_errors": 0,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 0
+            },
+            "development": {
+              "qualifications": 12,
+              "correct": 313,
+              "true_positive": 2,
+              "false_positive": 49,
+              "cases": 372,
+              "requests": 16,
+              "exact": 10,
+              "skipped": 0,
+              "changed_skips": 0,
+              "qualification_requests": 6,
+              "qualification_requests_skipped": 0,
+              "skipped_reference_ms_over_500": 0
+            }
+          },
+          "teacher": {
+            "fit": {
+              "trainable_parameters": 123905,
+              "loss": [
+                1.2744846443335216,
+                1.0801372552911441,
+                0.9821574084150294,
+                0.8418209264054894,
+                0.7449441566132009,
+                0.6929844150630137
+              ],
+              "seconds": 57.2864926289767
+            },
+            "positive_weight": 25.53125,
+            "cutoff": 4.287002086639404,
+            "training_anchors": 3396,
+            "calibration_skips": 0,
+            "heading": {
+              "qualifications": 36,
+              "correct": 34,
+              "true_positive": 2,
+              "false_positive": 4,
+              "cases": 72,
+              "documents": 72,
+              "exact_documents": 34,
+              "accepted": 0,
+              "accepted_errors": 0,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 0
+            },
+            "development": {
+              "qualifications": 12,
+              "correct": 266,
+              "true_positive": 9,
+              "false_positive": 103,
+              "cases": 372,
+              "requests": 16,
+              "exact": 4,
+              "skipped": 0,
+              "changed_skips": 0,
+              "qualification_requests": 6,
+              "qualification_requests_skipped": 0,
+              "skipped_reference_ms_over_500": 0
+            }
+          },
+          "synthetic": {
+            "fit": {
+              "trainable_parameters": 123905,
+              "loss": [
+                0.9954091608524323,
+                0.7331610172986984,
+                0.2087129739423593,
+                0.01591108541470021,
+                0.009449848720881468,
+                0.003020601080303701
+              ],
+              "seconds": 4.26771898008883
+            },
+            "positive_weight": 3.0,
+            "cutoff": 6.349064826965332,
+            "training_anchors": 576,
+            "calibration_skips": 1,
+            "heading": {
+              "qualifications": 36,
+              "correct": 38,
+              "true_positive": 2,
+              "false_positive": 0,
+              "cases": 72,
+              "documents": 72,
+              "exact_documents": 38,
+              "accepted": 38,
+              "accepted_errors": 19,
+              "eligible_counterfactual_anchors": 36,
+              "all_counterfactual_views_correct": 2
+            },
+            "development": {
+              "qualifications": 12,
+              "correct": 360,
+              "true_positive": 0,
+              "false_positive": 0,
+              "cases": 372,
+              "requests": 16,
+              "exact": 10,
+              "skipped": 1,
+              "changed_skips": 1,
+              "qualification_requests": 6,
+              "qualification_requests_skipped": 1,
+              "skipped_reference_ms_over_500": 0
+            }
+          }
+        }
+      },
+      "labeled_reference_sha256": "1d2772d3035538eb939dea089ede99ee8ce866c20be21de0f4ea301a55cbcd2c",
+      "all_negative_exact": 55,
+      "latency": {
+        "synthetic": {
+          "student": [
+            16.10364462248981,
+            35.45786135364324
+          ],
+          "guard": [
+            150.22508590482175,
+            1312.9837385145947
+          ]
+        },
+        "teacher": {
+          "student": [
+            15.608934685587883,
+            29.0842547547072
+          ],
+          "guard": [
+            141.57053851522505,
+            1313.07950115297
+          ]
+        },
+        "mixed": {
+          "student": [
+            15.71548799984157,
+            29.114947887137514
+          ],
+          "guard": [
+            141.6363965254277,
+            1313.0065558943897
+          ]
+        }
+      },
+      "reference_ms": [
+        154.21346109360456,
+        1294.3529160460457
+      ],
+      "inputs": {
+        "development": "30661871ac08a61e7e74d67d75491878c7e4194f217483b60d06426c4b36e4c5",
+        "heading": "ca96d57855c1acb463a3bbce8bb21e3578d5c8465c340958fd74fe209cea5000",
+        "scope": "e9384206c99723ec766dcc627c0980f0a17ceaa8ba67186f6110a2e69d87e08a",
+        "folds": "05cc87aa94737b211311e3b70b8febdad0b1c41df1487606bd7726cc93b9e600"
+      },
+      "grouped_folds": [
+        14,
+        14,
+        14,
+        14,
+        15
+      ],
+      "script_sha256": "c0c87fd6c0fe6e298dd2a145bcb61d2c4aef6fe3e326a2a2125492eeba88d993",
+      "trainer_sha256": "62d8d0367be80c02bb2cead79a764eb26d541bdf6fa3d2a357f03b16be826e19",
+      "reader": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "embedding": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "gpu": "NVIDIA GeForce RTX 4090",
+      "job": "47442",
+      "reverse": true
+    }
+  ]
+}
