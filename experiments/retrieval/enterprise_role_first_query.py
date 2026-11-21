@@ -86,6 +86,12 @@ def load_role_index(path, corpus_digest, sources):
 
 
 def recover(criteria, ranked, issued, role_index, verifier, arm, task, maximum):
+    from experiments.retrieval.enterprise_first_query import score_steps
+
+    return score_steps(recovery_steps(criteria, ranked, issued, role_index, arm, task, maximum), verifier)
+
+
+def recovery_steps(criteria, ranked, issued, role_index, arm, task, maximum):
     if arm == "whole" or (issued and arm != "global_always") or not maximum:
         return [], 0, False, 0
     windows, postings = role_index
@@ -97,7 +103,7 @@ def recover(criteria, ranked, issued, role_index, verifier, arm, task, maximum):
     if not options:
         return [], 0, True, 0
     inputs = [(criterion, item["view"]["text"]) for item in options for criterion in criteria]
-    margins, clipped = verifier.score_pairs(inputs, task=task)
+    margins, clipped = yield inputs, task
     if not np.isfinite(margins).all():
         raise ValueError("Nonfinite rescue margin")
     if clipped:

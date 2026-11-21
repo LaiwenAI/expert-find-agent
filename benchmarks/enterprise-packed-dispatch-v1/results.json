@@ -1,0 +1,447 @@
+{
+  "slurm_array": 46398,
+  "compute_node": "ws3",
+  "runs": [
+    {
+      "slurm_job": "46399",
+      "script_sha256": "f87c565e7e956ec7654a834d6917f1792cebc14c437906511217c48fb1f65721",
+      "seed": 20261119,
+      "changed_responses_from_affinity": null,
+      "results": [
+        {
+          "nominal_rate": 2.2,
+          "execution_order": [
+            1,
+            4
+          ],
+          "runs": {
+            "1": {
+              "completed": 80,
+              "final_completion_seconds": 35.01349613198545,
+              "drain_seconds": 0.1577038273345508,
+              "observed_offered_rate": 2.266481258251554,
+              "completed_per_second": 2.2848332453987243,
+              "quantiles_ms": {
+                "total_ms": [
+                  565.8674542118147,
+                  4882.276988101015,
+                  5324.339771624343
+                ],
+                "queue_ms": [
+                  199.4704205,
+                  3988.6187179999974,
+                  4931.847348669998
+                ],
+                "service_ms": [
+                  172.5987725,
+                  1063.3344928999998,
+                  1925.3584304599908
+                ],
+                "release_lag_ms": [
+                  1.0408953753885952,
+                  2.0256531396226403,
+                  2.633924642168342
+                ]
+              },
+              "work": {
+                "request_group_1": 80,
+                "logical_batches": 161,
+                "logical_pairs": 1464,
+                "logical_tokens": 332188,
+                "packed_forwards": 111,
+                "packed_request_batches": 111,
+                "packed_tokens": 286782,
+                "shared_forwards": 0,
+                "guard_rechecks": 16,
+                "padded_forwards": 66,
+                "padded_tokens": 134376
+              },
+              "issued": 37,
+              "changed_responses": 0
+            },
+            "4": {
+              "completed": 80,
+              "final_completion_seconds": 35.01514742500149,
+              "drain_seconds": 0.15935512035058963,
+              "observed_offered_rate": 2.266481258251554,
+              "completed_per_second": 2.2847254940551376,
+              "quantiles_ms": {
+                "total_ms": [
+                  563.6194388987494,
+                  5126.545808966404,
+                  5817.072481296415
+                ],
+                "queue_ms": [
+                  132.592735,
+                  3121.68675485,
+                  4657.713296179999
+                ],
+                "service_ms": [
+                  376.78837250000004,
+                  1759.6953722999922,
+                  4619.14948062
+                ],
+                "release_lag_ms": [
+                  1.0865449711658925,
+                  2.2227561259326123,
+                  3.1999602384073698
+                ]
+              },
+              "work": {
+                "request_group_1": 39,
+                "logical_batches": 161,
+                "logical_pairs": 1464,
+                "logical_tokens": 332188,
+                "request_group_2": 8,
+                "packed_forwards": 85,
+                "packed_request_batches": 111,
+                "packed_tokens": 286782,
+                "shared_forwards": 15,
+                "guard_rechecks": 15,
+                "request_group_3": 3,
+                "request_group_4": 4,
+                "padded_forwards": 65,
+                "padded_tokens": 129976
+              },
+              "issued": 37,
+              "changed_responses": 0
+            }
+          }
+        },
+        {
+          "nominal_rate": 3.2,
+          "execution_order": [
+            4,
+            1
+          ],
+          "runs": {
+            "4": {
+              "completed": 80,
+              "final_completion_seconds": 28.507957711000927,
+              "drain_seconds": 4.54460050155344,
+              "observed_offered_rate": 3.296700012002261,
+              "completed_per_second": 2.8062339930134255,
+              "quantiles_ms": {
+                "total_ms": [
+                  1229.142986341989,
+                  6660.408558309486,
+                  7071.758589454707
+                ],
+                "queue_ms": [
+                  302.070594,
+                  4911.175651699999,
+                  6283.860525859998
+                ],
+                "service_ms": [
+                  681.8837635,
+                  2338.258322549992,
+                  5120.26448215
+                ],
+                "release_lag_ms": [
+                  0.846669952826673,
+                  1.6278077510474274,
+                  1.9021159454327918
+                ]
+              },
+              "work": {
+                "request_group_1": 18,
+                "logical_batches": 161,
+                "logical_pairs": 1464,
+                "logical_tokens": 332188,
+                "request_group_4": 10,
+                "packed_forwards": 66,
+                "packed_request_batches": 111,
+                "packed_tokens": 286782,
+                "shared_forwards": 23,
+                "request_group_2": 5,
+                "guard_rechecks": 16,
+                "request_group_3": 4,
+                "padded_forwards": 66,
+                "padded_tokens": 134376
+              },
+              "issued": 37,
+              "changed_responses": 0
+            },
+            "1": {
+              "completed": 80,
+              "final_completion_seconds": 28.524513428099453,
+              "drain_seconds": 4.561156218651966,
+              "observed_offered_rate": 3.296700012002261,
+              "completed_per_second": 2.8046052459984163,
+              "quantiles_ms": {
+                "total_ms": [
+                  940.1326383011846,
+                  6079.485603438764,
+                  6663.890861503251
+                ],
+                "queue_ms": [
+                  689.1777165,
+                  5778.965308149999,
+                  6370.951505109999
+                ],
+                "service_ms": [
+                  175.6019055,
+                  1067.7837364999998,
+                  1936.1309585899908
+                ],
+                "release_lag_ms": [
+                  0.986472076173528,
+                  2.2569750729697358,
+                  3.0464974170491197
+                ]
+              },
+              "work": {
+                "request_group_1": 80,
+                "logical_batches": 161,
+                "logical_pairs": 1464,
+                "logical_tokens": 332188,
+                "packed_forwards": 111,
+                "packed_request_batches": 111,
+                "packed_tokens": 286782,
+                "shared_forwards": 0,
+                "guard_rechecks": 16,
+                "padded_forwards": 66,
+                "padded_tokens": 134376
+              },
+              "issued": 37,
+              "changed_responses": 0
+            }
+          }
+        }
+      ],
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "requests": 80,
+      "sources": 52667,
+      "role_windows": 5734,
+      "models": {
+        "encoder": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+        "verifier": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+        "parser": "cdbee75f17c01a7cc42f958dc650907174af0554"
+      },
+      "queries_sha256": "30661871ac08a61e7e74d67d75491878c7e4194f217483b60d06426c4b36e4c5",
+      "source_sha256": "c9e8d6e13bb05900427ab1d785d6024256f61e8bb34f220c3816fb79d1921780",
+      "vectors_sha256": "403fd19c50177eb4dd59a5f6fc07f5fe6ab49da223f5e1f4d172ec6cebeff2da",
+      "serial_sha256": "52b9bab61da7230790b0dc8fc0028814aec768f77d8cda9cb8470e3277634868"
+    },
+    {
+      "slurm_job": "46398",
+      "script_sha256": "f87c565e7e956ec7654a834d6917f1792cebc14c437906511217c48fb1f65721",
+      "seed": 20261120,
+      "changed_responses_from_affinity": null,
+      "results": [
+        {
+          "nominal_rate": 2.2,
+          "execution_order": [
+            4,
+            1
+          ],
+          "runs": {
+            "4": {
+              "completed": 80,
+              "final_completion_seconds": 39.52395796193741,
+              "drain_seconds": 2.372278443735908,
+              "observed_offered_rate": 2.126417998445965,
+              "completed_per_second": 2.02408878374585,
+              "quantiles_ms": {
+                "total_ms": [
+                  1176.7049484930387,
+                  3590.644974973065,
+                  4702.354968892169
+                ],
+                "queue_ms": [
+                  169.9620985,
+                  2527.3069725499995,
+                  2951.4737431199997
+                ],
+                "service_ms": [
+                  633.8400435,
+                  2299.94474035,
+                  3167.7527129899995
+                ],
+                "release_lag_ms": [
+                  1.0553436365512425,
+                  1.8941256204353607,
+                  3.0476163387267063
+                ]
+              },
+              "work": {
+                "request_group_1": 36,
+                "logical_batches": 161,
+                "logical_pairs": 1464,
+                "logical_tokens": 332188,
+                "packed_forwards": 76,
+                "packed_request_batches": 111,
+                "packed_tokens": 286782,
+                "shared_forwards": 18,
+                "request_group_2": 4,
+                "guard_rechecks": 16,
+                "request_group_4": 9,
+                "padded_forwards": 66,
+                "padded_tokens": 134376
+              },
+              "issued": 37,
+              "changed_responses": 0
+            },
+            "1": {
+              "completed": 80,
+              "final_completion_seconds": 39.50324085599277,
+              "drain_seconds": 2.351561337791267,
+              "observed_offered_rate": 2.126417998445965,
+              "completed_per_second": 2.0251502982156904,
+              "quantiles_ms": {
+                "total_ms": [
+                  1074.2125856416037,
+                  3219.168782809697,
+                  4007.441893921926
+                ],
+                "queue_ms": [
+                  554.1877635,
+                  3057.72168295,
+                  3291.290842439996
+                ],
+                "service_ms": [
+                  176.4870665,
+                  1046.9718427499995,
+                  1917.181559819991
+                ],
+                "release_lag_ms": [
+                  1.036428941740386,
+                  2.0200803062957458,
+                  2.9398499656990476
+                ]
+              },
+              "work": {
+                "request_group_1": 80,
+                "logical_batches": 161,
+                "logical_pairs": 1464,
+                "logical_tokens": 332188,
+                "packed_forwards": 111,
+                "packed_request_batches": 111,
+                "packed_tokens": 286782,
+                "shared_forwards": 0,
+                "guard_rechecks": 16,
+                "padded_forwards": 66,
+                "padded_tokens": 134376
+              },
+              "issued": 37,
+              "changed_responses": 0
+            }
+          }
+        },
+        {
+          "nominal_rate": 3.2,
+          "execution_order": [
+            1,
+            4
+          ],
+          "runs": {
+            "1": {
+              "completed": 80,
+              "final_completion_seconds": 30.40643126296345,
+              "drain_seconds": 4.864651594199902,
+              "observed_offered_rate": 3.09297163410322,
+              "completed_per_second": 2.631022342218897,
+              "quantiles_ms": {
+                "total_ms": [
+                  1963.5055389913468,
+                  4623.340783087694,
+                  4949.335250417469
+                ],
+                "queue_ms": [
+                  1622.87049,
+                  3804.249249499999,
+                  4698.5499573199995
+                ],
+                "service_ms": [
+                  176.73887000000002,
+                  1061.2076904499997,
+                  1922.5255590299907
+                ],
+                "release_lag_ms": [
+                  0.9168510239625505,
+                  2.007593006410757,
+                  2.2650172593360143
+                ]
+              },
+              "work": {
+                "request_group_1": 80,
+                "logical_batches": 161,
+                "logical_pairs": 1464,
+                "logical_tokens": 332188,
+                "packed_forwards": 111,
+                "packed_request_batches": 111,
+                "packed_tokens": 286782,
+                "shared_forwards": 0,
+                "guard_rechecks": 16,
+                "padded_forwards": 66,
+                "padded_tokens": 134376
+              },
+              "issued": 37,
+              "changed_responses": 0
+            },
+            "4": {
+              "completed": 80,
+              "final_completion_seconds": 30.42564090504311,
+              "drain_seconds": 4.883861236279561,
+              "observed_offered_rate": 3.09297163410322,
+              "completed_per_second": 2.6293612104894013,
+              "quantiles_ms": {
+                "total_ms": [
+                  2198.713651057423,
+                  4709.484042387017,
+                  5615.521775289264
+                ],
+                "queue_ms": [
+                  981.3823130000001,
+                  3226.15487535,
+                  3737.82354276
+                ],
+                "service_ms": [
+                  786.9563800000001,
+                  2308.3669775,
+                  3182.5600561799997
+                ],
+                "release_lag_ms": [
+                  0.8137357524979905,
+                  1.7119121879804131,
+                  2.3494789823067825
+                ]
+              },
+              "work": {
+                "request_group_1": 20,
+                "logical_batches": 161,
+                "logical_pairs": 1464,
+                "logical_tokens": 332188,
+                "packed_forwards": 65,
+                "packed_request_batches": 111,
+                "packed_tokens": 286782,
+                "shared_forwards": 24,
+                "request_group_3": 2,
+                "guard_rechecks": 16,
+                "request_group_2": 3,
+                "request_group_4": 12,
+                "padded_forwards": 66,
+                "padded_tokens": 134376
+              },
+              "issued": 37,
+              "changed_responses": 0
+            }
+          }
+        }
+      ],
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "requests": 80,
+      "sources": 52667,
+      "role_windows": 5734,
+      "models": {
+        "encoder": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+        "verifier": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+        "parser": "cdbee75f17c01a7cc42f958dc650907174af0554"
+      },
+      "queries_sha256": "30661871ac08a61e7e74d67d75491878c7e4194f217483b60d06426c4b36e4c5",
+      "source_sha256": "c9e8d6e13bb05900427ab1d785d6024256f61e8bb34f220c3816fb79d1921780",
+      "vectors_sha256": "403fd19c50177eb4dd59a5f6fc07f5fe6ab49da223f5e1f4d172ec6cebeff2da",
+      "serial_sha256": "52b9bab61da7230790b0dc8fc0028814aec768f77d8cda9cb8470e3277634868"
+    }
+  ]
+}

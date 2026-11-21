@@ -39,7 +39,20 @@ def read_rows(path):
         return [json.loads(line) for line in stream]
 
 
+def score_steps(steps, reranker):
+    try:
+        pairs, task = next(steps)
+        while True:
+            pairs, task = steps.send(reranker.score_pairs(pairs, task=task))
+    except StopIteration as completed:
+        return completed.value
+
+
 def verify_candidates(hits, sources, criteria, reranker):
+    return score_steps(verification_steps(hits, sources, criteria), reranker)
+
+
+def verification_steps(hits, sources, criteria):
     pairs = []
     for hit in hits:
         for source in hit["evidence"][:SOURCE_DEPTH]:
@@ -55,7 +68,7 @@ def verify_candidates(hits, sources, criteria, reranker):
     clipped = withheld = 0
     for offset in range(0, len(pairs), VERIFY_BATCH):
         batch = pairs[offset:offset + VERIFY_BATCH]
-        margins, truncated = reranker.score_pairs([(row[2], row[3]) for row in batch], task=TASK)
+        margins, truncated = yield [(row[2], row[3]) for row in batch], TASK
         clipped += truncated
         if truncated:
             withheld += len(batch)
@@ -76,6 +89,10 @@ def verify_candidates(hits, sources, criteria, reranker):
 
 
 def evaluate(text, method, reader, embedding, index, sources, reranker):
+    return score_steps(evaluation_steps(text, method, reader, embedding, index, sources), reranker)
+
+
+def evaluation_steps(text, method, reader, embedding, index, sources):
     start = perf_counter()
     clauses = spans(text)
     parsed = reader.evaluate(text, clauses, method, cutoff=CUTOFF)
@@ -88,7 +105,7 @@ def evaluate(text, method, reader, embedding, index, sources, reranker):
     embedded_at = perf_counter()
     hits = index.search_vector(vector, k=K)["hits"]
     retrieved_at = perf_counter()
-    decisions, pairs, clipped, withheld = verify_candidates(hits, sources, criteria, reranker)
+    decisions, pairs, clipped, withheld = yield from verification_steps(hits, sources, criteria)
     finished = perf_counter()
     return dict(labels=parsed["labels"], qualifications=qualifications,
                 retrieved=tuple(hit["id"] for hit in hits), decisions=decisions,
