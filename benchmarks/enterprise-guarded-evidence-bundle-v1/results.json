@@ -1,0 +1,496 @@
+{
+  "scope": "Reused enterprise development requests with no independent human judgments",
+  "inventory": {
+    "indexed_owners": 1098,
+    "indexed_owners_with_two_source_ids": 4,
+    "indexed_owners_with_two_disjoint_spans_in_one_source": 964
+  },
+  "configurations": {
+    "source_fields_depth_24": {
+      "reports": [
+        {
+          "slurm_job": "46469",
+          "runner_sha256": "c9c02a82fc44ba59c70118948db51b04269b53fcb5c88d0c4289b35c1845cae8",
+          "index_ms": 4375.333935022354,
+          "reverse": false,
+          "arms": {
+            "global_on_abstain": {
+              "allocated": 0,
+              "issued": 37,
+              "added_slots": 3,
+              "multi_source_additions": 0,
+              "changed_additions": 0,
+              "verifier_work": {
+                "logical_pairs": 184,
+                "logical_tokens": 33562,
+                "padded_batches": 32,
+                "executed_tokens": 35546,
+                "packed_batches": 14
+              },
+              "serial_p95_ms": 1058.5592643183188
+            },
+            "owned_bundle": {
+              "allocated": 0,
+              "issued": 37,
+              "added_slots": 3,
+              "multi_source_additions": 0,
+              "changed_additions": 0,
+              "verifier_work": {
+                "logical_pairs": 184,
+                "logical_tokens": 33562,
+                "padded_batches": 32,
+                "executed_tokens": 35546,
+                "packed_batches": 14
+              },
+              "serial_p95_ms": 1077.213957754429
+            },
+            "guarded_bundle": {
+              "allocated": 0,
+              "issued": 37,
+              "added_slots": 3,
+              "multi_source_additions": 0,
+              "changed_additions": 0,
+              "verifier_work": {
+                "logical_pairs": 184,
+                "logical_tokens": 33562,
+                "padded_batches": 32,
+                "executed_tokens": 35546,
+                "packed_batches": 14
+              },
+              "serial_p95_ms": 1077.2841832134868
+            }
+          },
+          "gpu": "NVIDIA GeForce RTX 5090",
+          "requests": 80,
+          "sources": 52667,
+          "role_windows": 5734,
+          "models": {
+            "encoder": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+            "verifier": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+            "parser": "cdbee75f17c01a7cc42f958dc650907174af0554"
+          },
+          "queries_sha256": "30661871ac08a61e7e74d67d75491878c7e4194f217483b60d06426c4b36e4c5",
+          "source_sha256": "c9e8d6e13bb05900427ab1d785d6024256f61e8bb34f220c3816fb79d1921780",
+          "vectors_sha256": "403fd19c50177eb4dd59a5f6fc07f5fe6ab49da223f5e1f4d172ec6cebeff2da",
+          "serial_sha256": "52b9bab61da7230790b0dc8fc0028814aec768f77d8cda9cb8470e3277634868"
+        },
+        {
+          "slurm_job": "46468",
+          "runner_sha256": "c9c02a82fc44ba59c70118948db51b04269b53fcb5c88d0c4289b35c1845cae8",
+          "index_ms": 4390.415234025568,
+          "reverse": true,
+          "arms": {
+            "global_on_abstain": {
+              "allocated": 0,
+              "issued": 37,
+              "added_slots": 3,
+              "multi_source_additions": 0,
+              "changed_additions": 0,
+              "verifier_work": {
+                "logical_pairs": 184,
+                "logical_tokens": 33562,
+                "padded_batches": 32,
+                "executed_tokens": 35546,
+                "packed_batches": 14
+              },
+              "serial_p95_ms": 1062.5104660517532
+            },
+            "owned_bundle": {
+              "allocated": 0,
+              "issued": 37,
+              "added_slots": 3,
+              "multi_source_additions": 0,
+              "changed_additions": 0,
+              "verifier_work": {
+                "logical_pairs": 184,
+                "logical_tokens": 33562,
+                "padded_batches": 32,
+                "executed_tokens": 35546,
+                "packed_batches": 14
+              },
+              "serial_p95_ms": 1075.7929429295468
+            },
+            "guarded_bundle": {
+              "allocated": 0,
+              "issued": 37,
+              "added_slots": 3,
+              "multi_source_additions": 0,
+              "changed_additions": 0,
+              "verifier_work": {
+                "logical_pairs": 184,
+                "logical_tokens": 33562,
+                "padded_batches": 32,
+                "executed_tokens": 35546,
+                "packed_batches": 14
+              },
+              "serial_p95_ms": 1078.4278493025336
+            }
+          },
+          "gpu": "NVIDIA GeForce RTX 5090",
+          "requests": 80,
+          "sources": 52667,
+          "role_windows": 5734,
+          "models": {
+            "encoder": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+            "verifier": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+            "parser": "cdbee75f17c01a7cc42f958dc650907174af0554"
+          },
+          "queries_sha256": "30661871ac08a61e7e74d67d75491878c7e4194f217483b60d06426c4b36e4c5",
+          "source_sha256": "c9e8d6e13bb05900427ab1d785d6024256f61e8bb34f220c3816fb79d1921780",
+          "vectors_sha256": "403fd19c50177eb4dd59a5f6fc07f5fe6ab49da223f5e1f4d172ec6cebeff2da",
+          "serial_sha256": "52b9bab61da7230790b0dc8fc0028814aec768f77d8cda9cb8470e3277634868"
+        }
+      ],
+      "exact_view_bounds": {
+        "owned_bundle": {
+          "new_exact_views": 0,
+          "removed_exact_views": 0,
+          "grounded_p5_delta_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        "guarded_bundle": {
+          "new_exact_views": 0,
+          "removed_exact_views": 0,
+          "grounded_p5_delta_bounds": [
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    "source_fields_depth_256": {
+      "reports": [
+        {
+          "slurm_job": "46479",
+          "runner_sha256": "141cd84daa158fed8186edfe243e2436661b7f2bed6ca754d1262188b869689e",
+          "index_ms": 4360.225205076858,
+          "reverse": false,
+          "proposal_depth": 256,
+          "arms": {
+            "global_on_abstain": {
+              "allocated": 0,
+              "top_three_complete": 0,
+              "issued": 37,
+              "added_slots": 3,
+              "multi_source_additions": 0,
+              "changed_additions": 0,
+              "verifier_work": {
+                "logical_pairs": 184,
+                "logical_tokens": 33562,
+                "padded_batches": 32,
+                "executed_tokens": 35546,
+                "packed_batches": 14
+              },
+              "serial_p95_ms": 1056.2112141866232
+            },
+            "owned_bundle": {
+              "allocated": 1,
+              "top_three_complete": 0,
+              "issued": 37,
+              "added_slots": 3,
+              "multi_source_additions": 0,
+              "changed_additions": 0,
+              "verifier_work": {
+                "logical_pairs": 184,
+                "logical_tokens": 32452,
+                "padded_batches": 33,
+                "executed_tokens": 34616,
+                "packed_batches": 13
+              },
+              "serial_p95_ms": 1073.9335588412357
+            },
+            "guarded_bundle": {
+              "allocated": 1,
+              "top_three_complete": 0,
+              "issued": 37,
+              "added_slots": 3,
+              "multi_source_additions": 0,
+              "changed_additions": 0,
+              "verifier_work": {
+                "logical_pairs": 184,
+                "logical_tokens": 32452,
+                "padded_batches": 33,
+                "executed_tokens": 34616,
+                "packed_batches": 13
+              },
+              "serial_p95_ms": 1071.5618071262722
+            }
+          },
+          "gpu": "NVIDIA GeForce RTX 5090",
+          "requests": 80,
+          "sources": 52667,
+          "role_windows": 5734,
+          "models": {
+            "encoder": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+            "verifier": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+            "parser": "cdbee75f17c01a7cc42f958dc650907174af0554"
+          },
+          "queries_sha256": "30661871ac08a61e7e74d67d75491878c7e4194f217483b60d06426c4b36e4c5",
+          "source_sha256": "c9e8d6e13bb05900427ab1d785d6024256f61e8bb34f220c3816fb79d1921780",
+          "vectors_sha256": "403fd19c50177eb4dd59a5f6fc07f5fe6ab49da223f5e1f4d172ec6cebeff2da",
+          "serial_sha256": "52b9bab61da7230790b0dc8fc0028814aec768f77d8cda9cb8470e3277634868"
+        },
+        {
+          "slurm_job": "46478",
+          "runner_sha256": "141cd84daa158fed8186edfe243e2436661b7f2bed6ca754d1262188b869689e",
+          "index_ms": 4385.613685939461,
+          "reverse": true,
+          "proposal_depth": 256,
+          "arms": {
+            "global_on_abstain": {
+              "allocated": 0,
+              "top_three_complete": 0,
+              "issued": 37,
+              "added_slots": 3,
+              "multi_source_additions": 0,
+              "changed_additions": 0,
+              "verifier_work": {
+                "logical_pairs": 184,
+                "logical_tokens": 33562,
+                "padded_batches": 32,
+                "executed_tokens": 35546,
+                "packed_batches": 14
+              },
+              "serial_p95_ms": 1062.7938459627326
+            },
+            "owned_bundle": {
+              "allocated": 1,
+              "top_three_complete": 0,
+              "issued": 37,
+              "added_slots": 3,
+              "multi_source_additions": 0,
+              "changed_additions": 0,
+              "verifier_work": {
+                "logical_pairs": 184,
+                "logical_tokens": 32452,
+                "padded_batches": 33,
+                "executed_tokens": 34616,
+                "packed_batches": 13
+              },
+              "serial_p95_ms": 1078.1497086980378
+            },
+            "guarded_bundle": {
+              "allocated": 1,
+              "top_three_complete": 0,
+              "issued": 37,
+              "added_slots": 3,
+              "multi_source_additions": 0,
+              "changed_additions": 0,
+              "verifier_work": {
+                "logical_pairs": 184,
+                "logical_tokens": 32452,
+                "padded_batches": 33,
+                "executed_tokens": 34616,
+                "packed_batches": 13
+              },
+              "serial_p95_ms": 1079.574101604521
+            }
+          },
+          "gpu": "NVIDIA GeForce RTX 5090",
+          "requests": 80,
+          "sources": 52667,
+          "role_windows": 5734,
+          "models": {
+            "encoder": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+            "verifier": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+            "parser": "cdbee75f17c01a7cc42f958dc650907174af0554"
+          },
+          "queries_sha256": "30661871ac08a61e7e74d67d75491878c7e4194f217483b60d06426c4b36e4c5",
+          "source_sha256": "c9e8d6e13bb05900427ab1d785d6024256f61e8bb34f220c3816fb79d1921780",
+          "vectors_sha256": "403fd19c50177eb4dd59a5f6fc07f5fe6ab49da223f5e1f4d172ec6cebeff2da",
+          "serial_sha256": "52b9bab61da7230790b0dc8fc0028814aec768f77d8cda9cb8470e3277634868"
+        }
+      ],
+      "exact_view_bounds": {
+        "owned_bundle": {
+          "new_exact_views": 0,
+          "removed_exact_views": 0,
+          "grounded_p5_delta_bounds": [
+            0.0,
+            0.0
+          ]
+        },
+        "guarded_bundle": {
+          "new_exact_views": 0,
+          "removed_exact_views": 0,
+          "grounded_p5_delta_bounds": [
+            0.0,
+            0.0
+          ]
+        }
+      }
+    },
+    "disjoint_windows_depth_256": {
+      "reports": [
+        {
+          "slurm_job": "46484",
+          "runner_sha256": "65481b4d444960d27f32fccb42ee4b8976a02015e5611231e9c681fe74791f47",
+          "index_ms": 4403.724160976708,
+          "reverse": false,
+          "proposal_depth": 256,
+          "allow_disjoint_windows": true,
+          "arms": {
+            "global_on_abstain": {
+              "allocated": 0,
+              "top_three_complete": 0,
+              "issued": 37,
+              "added_slots": 3,
+              "multi_window_additions": 0,
+              "multi_source_additions": 0,
+              "changed_additions": 0,
+              "verifier_work": {
+                "logical_pairs": 184,
+                "logical_tokens": 33562,
+                "padded_batches": 32,
+                "executed_tokens": 35546,
+                "packed_batches": 14
+              },
+              "serial_p95_ms": 1060.5275958660054
+            },
+            "owned_bundle": {
+              "allocated": 23,
+              "top_three_complete": 0,
+              "issued": 39,
+              "added_slots": 5,
+              "multi_window_additions": 2,
+              "multi_source_additions": 0,
+              "changed_additions": 2,
+              "verifier_work": {
+                "logical_pairs": 184,
+                "logical_tokens": 28639,
+                "padded_batches": 40,
+                "executed_tokens": 31562,
+                "packed_batches": 6
+              },
+              "serial_p95_ms": 1080.5509391240773
+            },
+            "guarded_bundle": {
+              "allocated": 23,
+              "top_three_complete": 0,
+              "issued": 37,
+              "added_slots": 3,
+              "multi_window_additions": 0,
+              "multi_source_additions": 0,
+              "changed_additions": 0,
+              "verifier_work": {
+                "logical_pairs": 184,
+                "logical_tokens": 28639,
+                "padded_batches": 40,
+                "executed_tokens": 31562,
+                "packed_batches": 6
+              },
+              "serial_p95_ms": 1079.8458906356243
+            }
+          },
+          "gpu": "NVIDIA GeForce RTX 5090",
+          "requests": 80,
+          "sources": 52667,
+          "role_windows": 5734,
+          "models": {
+            "encoder": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+            "verifier": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+            "parser": "cdbee75f17c01a7cc42f958dc650907174af0554"
+          },
+          "queries_sha256": "30661871ac08a61e7e74d67d75491878c7e4194f217483b60d06426c4b36e4c5",
+          "source_sha256": "c9e8d6e13bb05900427ab1d785d6024256f61e8bb34f220c3816fb79d1921780",
+          "vectors_sha256": "403fd19c50177eb4dd59a5f6fc07f5fe6ab49da223f5e1f4d172ec6cebeff2da",
+          "serial_sha256": "52b9bab61da7230790b0dc8fc0028814aec768f77d8cda9cb8470e3277634868"
+        },
+        {
+          "slurm_job": "46483",
+          "runner_sha256": "65481b4d444960d27f32fccb42ee4b8976a02015e5611231e9c681fe74791f47",
+          "index_ms": 4443.859739927575,
+          "reverse": true,
+          "proposal_depth": 256,
+          "allow_disjoint_windows": true,
+          "arms": {
+            "global_on_abstain": {
+              "allocated": 0,
+              "top_three_complete": 0,
+              "issued": 37,
+              "added_slots": 3,
+              "multi_window_additions": 0,
+              "multi_source_additions": 0,
+              "changed_additions": 0,
+              "verifier_work": {
+                "logical_pairs": 184,
+                "logical_tokens": 33562,
+                "padded_batches": 32,
+                "executed_tokens": 35546,
+                "packed_batches": 14
+              },
+              "serial_p95_ms": 1080.4392697405997
+            },
+            "owned_bundle": {
+              "allocated": 23,
+              "top_three_complete": 0,
+              "issued": 39,
+              "added_slots": 5,
+              "multi_window_additions": 2,
+              "multi_source_additions": 0,
+              "changed_additions": 2,
+              "verifier_work": {
+                "logical_pairs": 184,
+                "logical_tokens": 28639,
+                "padded_batches": 40,
+                "executed_tokens": 31562,
+                "packed_batches": 6
+              },
+              "serial_p95_ms": 1095.281602651812
+            },
+            "guarded_bundle": {
+              "allocated": 23,
+              "top_three_complete": 0,
+              "issued": 37,
+              "added_slots": 3,
+              "multi_window_additions": 0,
+              "multi_source_additions": 0,
+              "changed_additions": 0,
+              "verifier_work": {
+                "logical_pairs": 184,
+                "logical_tokens": 28639,
+                "padded_batches": 40,
+                "executed_tokens": 31562,
+                "packed_batches": 6
+              },
+              "serial_p95_ms": 1098.8428591401314
+            }
+          },
+          "gpu": "NVIDIA GeForce RTX 5090",
+          "requests": 80,
+          "sources": 52667,
+          "role_windows": 5734,
+          "models": {
+            "encoder": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+            "verifier": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+            "parser": "cdbee75f17c01a7cc42f958dc650907174af0554"
+          },
+          "queries_sha256": "30661871ac08a61e7e74d67d75491878c7e4194f217483b60d06426c4b36e4c5",
+          "source_sha256": "c9e8d6e13bb05900427ab1d785d6024256f61e8bb34f220c3816fb79d1921780",
+          "vectors_sha256": "403fd19c50177eb4dd59a5f6fc07f5fe6ab49da223f5e1f4d172ec6cebeff2da",
+          "serial_sha256": "52b9bab61da7230790b0dc8fc0028814aec768f77d8cda9cb8470e3277634868"
+        }
+      ],
+      "exact_view_bounds": {
+        "owned_bundle": {
+          "new_exact_views": 2,
+          "removed_exact_views": 0,
+          "grounded_p5_delta_bounds": [
+            0.0,
+            0.005
+          ]
+        },
+        "guarded_bundle": {
+          "new_exact_views": 0,
+          "removed_exact_views": 0,
+          "grounded_p5_delta_bounds": [
+            0.0,
+            0.0
+          ]
+        }
+      }
+    }
+  }
+}

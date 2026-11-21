@@ -23,10 +23,11 @@ GUARD_DEPTH = 3
 
 
 class BundleIndex:
-    def __init__(self, windows, encoder, depth):
+    def __init__(self, windows, encoder, depth, allow_disjoint_windows):
         self.windows = windows
         self.encoder = encoder
         self.depth = depth
+        self.allow_disjoint_windows = allow_disjoint_windows
         self.vectors = torch.from_numpy(encoder.encode([item["view"]["text"] for item in windows])).to("cuda")
 
     def select(self, criteria):
@@ -41,8 +42,11 @@ class BundleIndex:
         proposals = []
         for candidates in owned.values():
             for a, b in combinations(candidates, 2):
-                if self.windows[a]["view"]["id"] == self.windows[b]["view"]["id"]:
-                    continue
+                first, second = (self.windows[i]["view"] for i in (a, b))
+                if first["id"] == second["id"]:
+                    disjoint = first["end"] <= second["start"] or second["end"] <= first["start"]
+                    if not self.allow_disjoint_windows or not disjoint:
+                        continue
                 covered = [min(r.get(a, self.depth + 1), r.get(b, self.depth + 1)) for r in ranks]
                 if max(covered) > self.depth:
                     continue
@@ -116,12 +120,13 @@ def act(text, arm, fixture, bundles):
                 clipped=initial["clipped_pairs"] + clipped, ms=(perf_counter()-started)*1000)
 
 
-def run(queries, corpus, roles, vectors, meta, models, serial, output, private, reverse, proposal_depth):
+def run(queries, corpus, roles, vectors, meta, models, serial, output, private, reverse,
+        proposal_depth, allow_disjoint_windows):
     require_cuda(output, private)
     texts, fixture, fingerprint = init_fixture(queries, corpus, roles, vectors, meta, models, serial)
     windows, _ = fixture[4]
     start = perf_counter()
-    bundles = BundleIndex(windows, fixture[1], proposal_depth)
+    bundles = BundleIndex(windows, fixture[1], proposal_depth, allow_disjoint_windows)
     index_ms = (perf_counter()-start)*1000
     arms = ARMS[::-1] if reverse else ARMS
     observations = []
@@ -151,6 +156,8 @@ def run(queries, corpus, roles, vectors, meta, models, serial, output, private, 
             top_three_complete=sum(x["top_three_complete"] for x in current),
             issued=sum(bool(x["primary"] or x["added"]) for x in current),
             added_slots=sum(len(x["added"]) for x in current),
+            multi_window_additions=sum(len(item["citations"]) > 1
+                                       for x in current for item in x["added"]),
             multi_source_additions=sum(len({c[0] for c in item["citations"]})>1
                                        for x in current for item in x["added"]),
             changed_additions=sum(x["added"]!=y["added"] for x,y in zip(current,reference,strict=True)),
@@ -159,7 +166,7 @@ def run(queries, corpus, roles, vectors, meta, models, serial, output, private, 
         )
     write(output, dict(slurm_job=os.environ["SLURM_JOB_ID"], runner_sha256=digest(Path(__file__)),
                        index_ms=index_ms, reverse=reverse, proposal_depth=proposal_depth,
-                       arms=totals, **fingerprint))
+                       allow_disjoint_windows=allow_disjoint_windows, arms=totals, **fingerprint))
 
 
 if __name__ == "__main__":
@@ -168,4 +175,6 @@ if __name__ == "__main__":
         cli.add_argument(name, type=Path)
     cli.add_argument("--reverse", action="store_true")
     cli.add_argument("--proposal-depth", type=int, default=DEPTH, choices=(DEPTH, 256))
+    cli.add_argument("--allow-disjoint-windows", action="store_true",
+                     help="Permit two non-overlapping excerpts from one profile field")
     run(**vars(cli.parse_args()))
