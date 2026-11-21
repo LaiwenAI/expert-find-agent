@@ -17,7 +17,7 @@ from experiments.followir.core17_reranking import digest, write_json
 POLICIES = {"exact_agreement": 0, "one_disagreement": 1, "any_feasible_pair": 2}
 
 
-def evaluate(service, request, cutoff):
+def query_state(service, request, withheld=None):
     requirements = json.loads(request.payload)["requirements"]
     clues = [item["topic"] for item in requirements]
     phrases = [item["role"] for item in requirements]
@@ -27,8 +27,14 @@ def evaluate(service, request, cutoff):
     )
     scores = {name: vectors[2:] @ service.banks[name].T for name in service.bands}
     index = service.index
-    ranking = index.full_rank(vectors[:2], clues, None)
-    state = plan(service, ranking, scores, clues, phrases, None, "screened", run_role=False)
+    ranking = index.full_rank(vectors[:2], clues, withheld)
+    state = plan(service, ranking, scores, clues, phrases, withheld, "screened", run_role=False)
+    return state, ranking, scores, clues, phrases
+
+
+def evaluate(service, request, cutoff):
+    state, _, scores, _, phrases = query_state(service, request)
+    index = service.index
     pair, base, response = state["pair"], state["roles"], state["response"]
     if not pair or response["calls"] or response["owners"]:
         return dict.fromkeys(POLICIES, response), pair, "initial"

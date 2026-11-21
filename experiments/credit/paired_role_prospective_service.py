@@ -166,6 +166,11 @@ def run(args):
 
         audit(service, labels, cutoff, args.stage_audit_reference, args.output, args.reverse)
         return
+    if args.source_postings_reference is not None:
+        from experiments.credit.paired_role_source_postings import run_postings
+
+        run_postings(service, labels, cutoff, args.source_postings_reference, args.output, args.reverse)
+        return
     by_arm, results = {}, {}
     lightweight = report = None
     requested = PRESCREEN_ARMS if args.prescreen else ARMS
@@ -242,7 +247,9 @@ if __name__ == "__main__":
     parser.add_argument("--plos", type=Path)
     parser.add_argument("--cascade", action="store_true")
     parser.add_argument("--reverse", action="store_true")
-    parser.add_argument("--stage-audit-reference", type=Path)
+    diagnostics = parser.add_mutually_exclusive_group()
+    diagnostics.add_argument("--stage-audit-reference", type=Path)
+    diagnostics.add_argument("--source-postings-reference", type=Path)
     args = parser.parse_args()
     if args.cascade and not args.plos:
         parser.error("--cascade requires --plos")
