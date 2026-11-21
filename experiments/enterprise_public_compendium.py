@@ -184,7 +184,7 @@ def run(args):
     if args.overlap_review and args.projection is None:
         raise ValueError("Reproduce the semantic projection before building an overlap packet")
     destinations = [path for path in (args.output, args.private, args.projection) if path is not None]
-    for option in (args.overlap_review, args.eligibility_pilot):
+    for option in (args.overlap_review, args.eligibility_pilot, args.cooperation_projection):
         if option:
             destinations.append(option[1])
     if len(set(destinations)) != len(destinations) or any(path.exists() for path in destinations):
@@ -207,6 +207,12 @@ def run(args):
     spec = json.loads(args.protocol.read_bytes())
     write(args.private, dict(combined=combined, disjoint=disjoint,
                              prior_index_sha256=digest_file(args.previous_index)))
+    if args.cooperation_projection:
+        from experiments.enterprise_cooperation_projection import build
+
+        pilot, output = args.cooperation_projection
+        build(args.private, combined, prior + new, history, summary, (args.earlier, args.municipal),
+              pilot, output, lambda value: CONTACT.sub("[contact]", value))
     if args.eligibility_pilot:
         from experiments.enterprise_eligibility_pilot import freeze
 
@@ -274,4 +280,6 @@ if __name__ == "__main__":
                         metavar=("SEMANTIC_SCREEN", "NEW_REVIEW_DIRECTORY"))
     parser.add_argument("--eligibility-pilot", nargs=2, type=Path,
                         metavar=("PILOT_PROTOCOL", "NEW_PILOT_DIRECTORY"))
+    parser.add_argument("--cooperation-projection", nargs=2, type=Path,
+                        metavar=("FROZEN_PILOT_DIRECTORY", "NEW_PRIVATE_PROJECTION_DIRECTORY"))
     run(parser.parse_args())

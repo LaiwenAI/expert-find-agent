@@ -29,7 +29,9 @@ field in `unindexed_original_cooperation`. Compare it to the current
 title and body during the preservation review. A nonempty
 cooperation field is a candidate for review. It may contain an
 administrative note, a preference, or a hard requirement. No
-eligibility label is inferred from field presence.
+eligibility label is inferred from field presence. The
+[restored private evaluation projection](../enterprise-cooperation-projection-v1)
+preserves the field for evaluation and repeats the overlap screen.
 
 ## Review rubric
 
