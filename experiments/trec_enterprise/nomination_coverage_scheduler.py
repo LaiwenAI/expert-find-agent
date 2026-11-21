@@ -86,7 +86,7 @@ def expected_doc(grouped, scores, people, lookahead):
     return docs[pool[pick]]
 
 
-def schedule(people, scores, source_labels, expert_labels, cap, lookahead, pair_cap=PAIR_CAP):
+def schedule(people, scores, source_labels, expert_labels, cap, lookahead, pair_cap=PAIR_CAP, *, trace=None):
     rank = {owner: i for i, owner in enumerate(people)}
     opened, checked, supported = set(), set(), set()
     unknown = 0
@@ -105,6 +105,8 @@ def schedule(people, scores, source_labels, expert_labels, cap, lookahead, pair_
         owner, doc = action
         opened.add(doc)
         checked.add(action)
+        if trace is not None:
+            trace.append(action)
         mark = source_labels.get(owner, {}).get(doc)
         unknown += mark is None
         if mark == 2:
