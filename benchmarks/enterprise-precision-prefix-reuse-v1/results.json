@@ -1,0 +1,310 @@
+{
+  "slurm_array": 47461,
+  "node": "ws6",
+  "output_sha256": [
+    "c10f940cf5e6a04668dd9ef8da59bc042c411e11782f91adf21162c2b729ca3a",
+    "add48a0f9159c0d5987efa1ee09df469283763197fef90c84b8003ef8a9a61a5"
+  ],
+  "runs": [
+    {
+      "panels": {
+        "development": {
+          "requests": 80,
+          "counts": {
+            "native": {
+              "fp16_prefixes": 14,
+              "rechecked": 9,
+              "fallback_slots": 95032,
+              "native_blocks": 24,
+              "changed_requests": 0,
+              "changed_clauses": 0,
+              "changed_roles": 0
+            },
+            "cast": {
+              "changed_requests": 2,
+              "changed_clauses": 2,
+              "changed_roles": 2,
+              "cast_prefixes": 14,
+              "cast_blocks": 24,
+              "rechecked": 7,
+              "fallback_slots": 68456
+            },
+            "guarded_cast": {
+              "changed_requests": 0,
+              "changed_clauses": 0,
+              "changed_roles": 0,
+              "cast_prefixes": 14,
+              "cast_blocks": 15,
+              "fp16_prefixes": 11,
+              "native_blocks": 20,
+              "rechecked": 9,
+              "fallback_slots": 95032
+            }
+          },
+          "p50_p95_ms": {
+            "native": [
+              152.2111832164228,
+              1317.6800203043967
+            ],
+            "cast": [
+              152.19188388437033,
+              1241.461156285368
+            ],
+            "guarded_cast": [
+              152.91824704036117,
+              1360.7543940888718
+            ]
+          },
+          "paired_p95_delta_ms_ci": {
+            "native": [
+              0.0,
+              0.0
+            ],
+            "cast": [
+              -1402.525329007768,
+              542.3457886325211
+            ],
+            "guarded_cast": [
+              -75.63776348251861,
+              62.90780287235975
+            ]
+          },
+          "decision_signature": "16e687ee00ea5df443076e12ede89e788b33c0ed9c397d78284ac33936155bb5"
+        },
+        "controls": {
+          "requests": 72,
+          "counts": {
+            "native": {
+              "fp16_prefixes": 3,
+              "rechecked": 0,
+              "fallback_slots": 0,
+              "native_blocks": 3,
+              "changed_requests": 0,
+              "changed_clauses": 0,
+              "changed_roles": 0,
+              "public_targets_correct": 61
+            },
+            "cast": {
+              "changed_requests": 0,
+              "changed_clauses": 0,
+              "changed_roles": 0,
+              "public_targets_correct": 61,
+              "cast_prefixes": 3,
+              "cast_blocks": 3
+            },
+            "guarded_cast": {
+              "changed_requests": 0,
+              "changed_clauses": 0,
+              "changed_roles": 0,
+              "public_targets_correct": 61,
+              "cast_prefixes": 3,
+              "cast_blocks": 3
+            }
+          },
+          "p50_p95_ms": {
+            "native": [
+              47.63190494850278,
+              72.14482729323208
+            ],
+            "cast": [
+              47.62877756729722,
+              71.78996610455215
+            ],
+            "guarded_cast": [
+              47.62826394289732,
+              71.91362932790071
+            ]
+          },
+          "paired_p95_delta_ms_ci": {
+            "native": [
+              0.0,
+              0.0
+            ],
+            "cast": [
+              -22.258541081100702,
+              0.7214741571806372
+            ],
+            "guarded_cast": [
+              -21.827099844813347,
+              1.1191131547093391
+            ]
+          },
+          "decision_signature": "51dbede48453b9d7f6a98ec090d0287ac425ea6e8a3af2cb8f791cdafbe890a0"
+        },
+        "forced_long_target_blocks": {
+          "blocks": 24,
+          "naturally_ambiguous": 1,
+          "native_fallbacks": 0,
+          "cast_fallbacks": 1,
+          "trust_cast": 23,
+          "virtual_gate_disagreements": 1,
+          "native_fallback_missed_by_guard": 0,
+          "cast_qualification_block_changes": 1,
+          "guarded_qualification_block_changes": 0,
+          "native_target_correct": 21,
+          "cast_target_correct": 22,
+          "guarded_target_correct": 21
+        }
+      },
+      "model": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "gpu": "NVIDIA GeForce RTX 4090",
+      "job": "47463",
+      "reverse": false,
+      "script_sha256": "8af2d3fcc7da228b9d0cc082346469ce3a883ec9bd8c66ca9ab9738d0ab7b17f",
+      "inputs": {
+        "development": "30661871ac08a61e7e74d67d75491878c7e4194f217483b60d06426c4b36e4c5",
+        "controls": "ca96d57855c1acb463a3bbce8bb21e3578d5c8465c340958fd74fe209cea5000"
+      }
+    },
+    {
+      "panels": {
+        "development": {
+          "requests": 80,
+          "counts": {
+            "native": {
+              "fp16_prefixes": 14,
+              "rechecked": 9,
+              "fallback_slots": 95032,
+              "native_blocks": 24,
+              "changed_requests": 0,
+              "changed_clauses": 0,
+              "changed_roles": 0
+            },
+            "cast": {
+              "changed_requests": 2,
+              "changed_clauses": 2,
+              "changed_roles": 2,
+              "cast_prefixes": 14,
+              "cast_blocks": 24,
+              "rechecked": 7,
+              "fallback_slots": 68456
+            },
+            "guarded_cast": {
+              "changed_requests": 0,
+              "changed_clauses": 0,
+              "changed_roles": 0,
+              "cast_prefixes": 14,
+              "cast_blocks": 15,
+              "fp16_prefixes": 11,
+              "native_blocks": 20,
+              "rechecked": 9,
+              "fallback_slots": 95032
+            }
+          },
+          "p50_p95_ms": {
+            "native": [
+              148.6941275652498,
+              1285.1122353458777
+            ],
+            "cast": [
+              149.7426733840257,
+              1211.3481594016775
+            ],
+            "guarded_cast": [
+              148.80553050898015,
+              1329.9635993316767
+            ]
+          },
+          "paired_p95_delta_ms_ci": {
+            "native": [
+              0.0,
+              0.0
+            ],
+            "cast": [
+              -1378.9010545704523,
+              613.2806236855686
+            ],
+            "guarded_cast": [
+              -104.99871438369212,
+              62.509527895599604
+            ]
+          },
+          "decision_signature": "16e687ee00ea5df443076e12ede89e788b33c0ed9c397d78284ac33936155bb5"
+        },
+        "controls": {
+          "requests": 72,
+          "counts": {
+            "native": {
+              "fp16_prefixes": 3,
+              "rechecked": 0,
+              "fallback_slots": 0,
+              "native_blocks": 3,
+              "changed_requests": 0,
+              "changed_clauses": 0,
+              "changed_roles": 0,
+              "public_targets_correct": 61
+            },
+            "cast": {
+              "changed_requests": 0,
+              "changed_clauses": 0,
+              "changed_roles": 0,
+              "public_targets_correct": 61,
+              "cast_prefixes": 3,
+              "cast_blocks": 3
+            },
+            "guarded_cast": {
+              "changed_requests": 0,
+              "changed_clauses": 0,
+              "changed_roles": 0,
+              "public_targets_correct": 61,
+              "cast_prefixes": 3,
+              "cast_blocks": 3
+            }
+          },
+          "p50_p95_ms": {
+            "native": [
+              47.41560691036284,
+              72.73284764960408
+            ],
+            "cast": [
+              47.45052848011255,
+              71.68385682161897
+            ],
+            "guarded_cast": [
+              47.47166181914508,
+              71.74244727939367
+            ]
+          },
+          "paired_p95_delta_ms_ci": {
+            "native": [
+              0.0,
+              0.0
+            ],
+            "cast": [
+              -23.117344826459885,
+              -0.5318027886096386
+            ],
+            "guarded_cast": [
+              -23.969617672264576,
+              -0.43327315885107914
+            ]
+          },
+          "decision_signature": "51dbede48453b9d7f6a98ec090d0287ac425ea6e8a3af2cb8f791cdafbe890a0"
+        },
+        "forced_long_target_blocks": {
+          "blocks": 24,
+          "naturally_ambiguous": 1,
+          "native_fallbacks": 0,
+          "cast_fallbacks": 1,
+          "trust_cast": 23,
+          "virtual_gate_disagreements": 1,
+          "native_fallback_missed_by_guard": 0,
+          "cast_qualification_block_changes": 1,
+          "guarded_qualification_block_changes": 0,
+          "native_target_correct": 21,
+          "cast_target_correct": 22,
+          "guarded_target_correct": 21
+        }
+      },
+      "model": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "gpu": "NVIDIA GeForce RTX 4090",
+      "job": "47461",
+      "reverse": true,
+      "script_sha256": "8af2d3fcc7da228b9d0cc082346469ce3a883ec9bd8c66ca9ab9738d0ab7b17f",
+      "inputs": {
+        "development": "30661871ac08a61e7e74d67d75491878c7e4194f217483b60d06426c4b36e4c5",
+        "controls": "ca96d57855c1acb463a3bbce8bb21e3578d5c8465c340958fd74fe209cea5000"
+      }
+    }
+  ]
+}
