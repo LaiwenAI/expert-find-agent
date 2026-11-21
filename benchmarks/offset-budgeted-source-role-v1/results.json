@@ -1,0 +1,1441 @@
+{
+  "slurm_job": 46094,
+  "runs": [
+    {
+      "script_sha256": "9b5c05a9ba9a59707b882a6089dd006dd7cd6afb45e3be2f2dbce7faf6931b31",
+      "inputs": {
+        "projection": "38bc5e6bd42e3b2f427a42a552cae11bc0813e50f2e601ee9e10a298fe47925f",
+        "manifest": "064b9d0a579e58911c1986a17e4eb169dcfd3ab57e4e4640d31a1a62143a753a",
+        "niso": "c107b4e780218e58aec4e2a13f2d7072533962a6a73b82d23e4273b43aafd528",
+        "training": "3365bdd2588d8dfff12de71cf7663808c25689f831a1ba42288a8bb8b53bfdc2",
+        "bands": "0e936678ef2e49944e0a6394257d1edb79dc216facaeb77aaa49db829ef5c3da",
+        "source_frozen": "e393fe72c74c5f12748da43e8c245e224411633ed2c24eef22d34b4665aeb741",
+        "role_frozen": "e332709fbb1b1371253fede037758a2d027b68f389ee42ae221352f7d7bffde0"
+      },
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "source_reader_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+      "role_reader_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "seed": 17,
+      "reverse": false,
+      "context": true,
+      "training_seconds": 5.50381413300056,
+      "parameters": 93621,
+      "fit_topics": 307,
+      "dev_topics": 61,
+      "fit_phrases": 64,
+      "dev_phrases": 20,
+      "training_requests": 2048,
+      "development_requests": 320,
+      "test_families": [
+        "00b84c94a418b735d937c4d5d06ca745d6239b5f7f5a60d1cc4d0a07f6a5c713",
+        "012f2ddbcf99a0c00924418010960950d3aa09e5e73e743f5e02749ed0cb5507",
+        "0391ec8d9fc09804c4507f3c68c23a36f210fc5c71bd01af01eef242f93f14d2",
+        "04cdb4fa95434dd40fc1450752b632e9ce6a3c7c04e55336635e752cee24b295",
+        "08b17ddde6d51856db5a8a63a23336511ec213b1ef4e194373d5580f7d3889d6",
+        "0b1e439df45895b22efe40fdd0bb5ca23dbcb1f74cd13b93d688892634df049a",
+        "0ba096b40605edd23de81870f5a9453a2fa7e38cfeb3a181819e313e15832d67",
+        "151a575e9cec018374f33f8a1a01a7414c0c43f5ceae4c3d4eb874de8cc6076e",
+        "161ba7c9775edc346074ee04e7d8c0412165cbfadace04b8ae9fe18a9cb87646",
+        "19d7abd444ff76508f5461935ce3c6c41c55d7eced74b17143adeb3a9c7706fc",
+        "32ffec86ae610b217413664ce43a544f13307205011627f1f2998d170a1d36b3",
+        "5b5d84551221d364be2dbc1c1f81d1a923e16e24556bff919d125fb6dedb9b2b",
+        "66f7703dc004551511550beef6e3ba96e92bcc19976c9e6cb65d598b478b0805"
+      ],
+      "loss": [
+        0.5453174903523177,
+        0.10292490909341723,
+        0.03075598353461828,
+        0.013282817970321048,
+        0.006939633043657523,
+        0.004396886899485253,
+        0.0028753523256455082,
+        0.0020632268006011145,
+        0.0015477831457246793,
+        0.0012418529568094527,
+        0.0009967470168703585,
+        0.0008353877046829439,
+        0.0007102068102540215,
+        0.0006048468731023604
+      ],
+      "threshold": 1.0,
+      "calibration": {
+        "0.0": {
+          "accepted": 79,
+          "exact": 14,
+          "outside": 0
+        },
+        "0.25": {
+          "accepted": 79,
+          "exact": 14,
+          "outside": 0
+        },
+        "0.5": {
+          "accepted": 78,
+          "exact": 13,
+          "outside": 0
+        },
+        "0.65": {
+          "accepted": 61,
+          "exact": 9,
+          "outside": 0
+        },
+        "0.8": {
+          "accepted": 43,
+          "exact": 5,
+          "outside": 0
+        },
+        "0.9": {
+          "accepted": 34,
+          "exact": 1,
+          "outside": 0
+        },
+        "0.95": {
+          "accepted": 21,
+          "exact": 0,
+          "outside": 0
+        },
+        "1.0": {
+          "accepted": 0,
+          "exact": 0,
+          "outside": 0
+        }
+      },
+      "results": {
+        "local_markers|calibrated_offsets": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 9.067850798601285,
+          "total_p95_ms": 9.06886809389107
+        },
+        "local_markers|hybrid": {
+          "totals": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 8,
+            "source_calls": 2,
+            "role_calls": 6,
+            "binding": 26,
+            "parsed": 26
+          },
+          "parser_p95_ms": 0.004336703568696976,
+          "total_p95_ms": 21.3617286644876
+        },
+        "local_markers|offsets": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 9.067850798601285,
+          "total_p95_ms": 9.069830790394917
+        },
+        "local_markers|rules": {
+          "totals": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 8,
+            "source_calls": 2,
+            "role_calls": 6,
+            "binding": 26,
+            "parsed": 26
+          },
+          "parser_p95_ms": 0.004336703568696976,
+          "total_p95_ms": 21.56296675093472
+        },
+        "local_markers|supplied": {
+          "totals": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 8,
+            "source_calls": 2,
+            "role_calls": 6,
+            "binding": 26,
+            "parsed": 26
+          },
+          "parser_p95_ms": 0.0,
+          "total_p95_ms": 21.674938936484978
+        },
+        "reversed_references|calibrated_offsets": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 9.027462685480714,
+          "total_p95_ms": 9.028537955600768
+        },
+        "reversed_references|hybrid": {
+          "totals": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 8,
+            "source_calls": 2,
+            "role_calls": 6,
+            "binding": 26,
+            "parsed": 26
+          },
+          "parser_p95_ms": 0.006857997504994273,
+          "total_p95_ms": 21.224180760327727
+        },
+        "reversed_references|offsets": {
+          "totals": {
+            "issued": 1,
+            "strict": 0,
+            "adverse": 1,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 1,
+            "source_calls": 0,
+            "role_calls": 1,
+            "binding": 0,
+            "parsed": 3
+          },
+          "parser_p95_ms": 9.027462685480714,
+          "total_p95_ms": 19.29392127203755
+        },
+        "reversed_references|rules": {
+          "totals": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 8,
+            "source_calls": 2,
+            "role_calls": 6,
+            "binding": 26,
+            "parsed": 26
+          },
+          "parser_p95_ms": 0.006857997504994273,
+          "total_p95_ms": 21.30148035939783
+        },
+        "reversed_references|supplied": {
+          "totals": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 8,
+            "source_calls": 2,
+            "role_calls": 6,
+            "binding": 26,
+            "parsed": 26
+          },
+          "parser_p95_ms": 0.0,
+          "total_p95_ms": 21.42981518409215
+        },
+        "shifted_markers|calibrated_offsets": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 8.94559666630812,
+          "total_p95_ms": 8.94633587449789
+        },
+        "shifted_markers|hybrid": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 8.9513806742616,
+          "total_p95_ms": 8.95203516120091
+        },
+        "shifted_markers|offsets": {
+          "totals": {
+            "issued": 2,
+            "strict": 2,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 1,
+            "source_calls": 0,
+            "role_calls": 1,
+            "binding": 2,
+            "parsed": 5
+          },
+          "parser_p95_ms": 8.94559666630812,
+          "total_p95_ms": 19.548115000361577
+        },
+        "shifted_markers|rules": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 0.006178219337016344,
+          "total_p95_ms": 0.008480768883600831
+        },
+        "shifted_markers|supplied": {
+          "totals": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 8,
+            "source_calls": 2,
+            "role_calls": 6,
+            "binding": 26,
+            "parsed": 26
+          },
+          "parser_p95_ms": 0.0,
+          "total_p95_ms": 21.423391241114587
+        }
+      },
+      "job_wall_seconds": 22
+    },
+    {
+      "script_sha256": "9b5c05a9ba9a59707b882a6089dd006dd7cd6afb45e3be2f2dbce7faf6931b31",
+      "inputs": {
+        "projection": "38bc5e6bd42e3b2f427a42a552cae11bc0813e50f2e601ee9e10a298fe47925f",
+        "manifest": "064b9d0a579e58911c1986a17e4eb169dcfd3ab57e4e4640d31a1a62143a753a",
+        "niso": "c107b4e780218e58aec4e2a13f2d7072533962a6a73b82d23e4273b43aafd528",
+        "training": "3365bdd2588d8dfff12de71cf7663808c25689f831a1ba42288a8bb8b53bfdc2",
+        "bands": "0e936678ef2e49944e0a6394257d1edb79dc216facaeb77aaa49db829ef5c3da",
+        "source_frozen": "e393fe72c74c5f12748da43e8c245e224411633ed2c24eef22d34b4665aeb741",
+        "role_frozen": "e332709fbb1b1371253fede037758a2d027b68f389ee42ae221352f7d7bffde0"
+      },
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "source_reader_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+      "role_reader_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "seed": 29,
+      "reverse": true,
+      "context": true,
+      "training_seconds": 5.449861000990495,
+      "parameters": 93621,
+      "fit_topics": 307,
+      "dev_topics": 61,
+      "fit_phrases": 64,
+      "dev_phrases": 20,
+      "training_requests": 2048,
+      "development_requests": 320,
+      "test_families": [
+        "00b84c94a418b735d937c4d5d06ca745d6239b5f7f5a60d1cc4d0a07f6a5c713",
+        "012f2ddbcf99a0c00924418010960950d3aa09e5e73e743f5e02749ed0cb5507",
+        "0391ec8d9fc09804c4507f3c68c23a36f210fc5c71bd01af01eef242f93f14d2",
+        "04cdb4fa95434dd40fc1450752b632e9ce6a3c7c04e55336635e752cee24b295",
+        "08b17ddde6d51856db5a8a63a23336511ec213b1ef4e194373d5580f7d3889d6",
+        "0b1e439df45895b22efe40fdd0bb5ca23dbcb1f74cd13b93d688892634df049a",
+        "0ba096b40605edd23de81870f5a9453a2fa7e38cfeb3a181819e313e15832d67",
+        "151a575e9cec018374f33f8a1a01a7414c0c43f5ceae4c3d4eb874de8cc6076e",
+        "161ba7c9775edc346074ee04e7d8c0412165cbfadace04b8ae9fe18a9cb87646",
+        "19d7abd444ff76508f5461935ce3c6c41c55d7eced74b17143adeb3a9c7706fc",
+        "32ffec86ae610b217413664ce43a544f13307205011627f1f2998d170a1d36b3",
+        "5b5d84551221d364be2dbc1c1f81d1a923e16e24556bff919d125fb6dedb9b2b",
+        "66f7703dc004551511550beef6e3ba96e92bcc19976c9e6cb65d598b478b0805"
+      ],
+      "loss": [
+        0.5434167399071157,
+        0.09448180923936889,
+        0.028805045803892426,
+        0.013416956964647397,
+        0.00931324299017433,
+        0.004126831589019275,
+        0.0027560061134863645,
+        0.001970543151401216,
+        0.0014838765928288922,
+        0.0011889027773577254,
+        0.0009892823591144406,
+        0.000823425149974355,
+        0.0006888974039611639,
+        0.0005949868464085739
+      ],
+      "threshold": 1.0,
+      "calibration": {
+        "0.0": {
+          "accepted": 57,
+          "exact": 10,
+          "outside": 0
+        },
+        "0.25": {
+          "accepted": 57,
+          "exact": 10,
+          "outside": 0
+        },
+        "0.5": {
+          "accepted": 56,
+          "exact": 10,
+          "outside": 0
+        },
+        "0.65": {
+          "accepted": 46,
+          "exact": 6,
+          "outside": 0
+        },
+        "0.8": {
+          "accepted": 35,
+          "exact": 4,
+          "outside": 0
+        },
+        "0.9": {
+          "accepted": 22,
+          "exact": 2,
+          "outside": 0
+        },
+        "0.95": {
+          "accepted": 14,
+          "exact": 0,
+          "outside": 0
+        },
+        "1.0": {
+          "accepted": 0,
+          "exact": 0,
+          "outside": 0
+        }
+      },
+      "results": {
+        "local_markers|calibrated_offsets": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 9.56680771196261,
+          "total_p95_ms": 9.567741130013019
+        },
+        "local_markers|hybrid": {
+          "totals": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 8,
+            "source_calls": 2,
+            "role_calls": 6,
+            "binding": 26,
+            "parsed": 26
+          },
+          "parser_p95_ms": 0.004818022716790438,
+          "total_p95_ms": 22.364213538821787
+        },
+        "local_markers|offsets": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 9.56680771196261,
+          "total_p95_ms": 9.568456502165645
+        },
+        "local_markers|rules": {
+          "totals": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 8,
+            "source_calls": 2,
+            "role_calls": 6,
+            "binding": 26,
+            "parsed": 26
+          },
+          "parser_p95_ms": 0.004818022716790438,
+          "total_p95_ms": 22.538820980116725
+        },
+        "local_markers|supplied": {
+          "totals": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 8,
+            "source_calls": 2,
+            "role_calls": 6,
+            "binding": 26,
+            "parsed": 26
+          },
+          "parser_p95_ms": 0.0,
+          "total_p95_ms": 23.16458782297559
+        },
+        "reversed_references|calibrated_offsets": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 9.389301965711638,
+          "total_p95_ms": 9.390394727233797
+        },
+        "reversed_references|hybrid": {
+          "totals": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 8,
+            "source_calls": 2,
+            "role_calls": 6,
+            "binding": 26,
+            "parsed": 26
+          },
+          "parser_p95_ms": 0.007318507414311171,
+          "total_p95_ms": 22.637511952780187
+        },
+        "reversed_references|offsets": {
+          "totals": {
+            "issued": 2,
+            "strict": 0,
+            "adverse": 2,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 2,
+            "source_calls": 0,
+            "role_calls": 2,
+            "binding": 0,
+            "parsed": 3
+          },
+          "parser_p95_ms": 9.389301965711638,
+          "total_p95_ms": 28.960655006812885
+        },
+        "reversed_references|rules": {
+          "totals": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 8,
+            "source_calls": 2,
+            "role_calls": 6,
+            "binding": 26,
+            "parsed": 26
+          },
+          "parser_p95_ms": 0.007318507414311171,
+          "total_p95_ms": 22.52479619346559
+        },
+        "reversed_references|supplied": {
+          "totals": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 8,
+            "source_calls": 2,
+            "role_calls": 6,
+            "binding": 26,
+            "parsed": 26
+          },
+          "parser_p95_ms": 0.0,
+          "total_p95_ms": 22.30300204246305
+        },
+        "shifted_markers|calibrated_offsets": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 9.401432238519192,
+          "total_p95_ms": 9.402403957210481
+        },
+        "shifted_markers|hybrid": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 9.407853794982657,
+          "total_p95_ms": 9.408566198544577
+        },
+        "shifted_markers|offsets": {
+          "totals": {
+            "issued": 2,
+            "strict": 2,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 2,
+            "source_calls": 0,
+            "role_calls": 2,
+            "binding": 4,
+            "parsed": 7
+          },
+          "parser_p95_ms": 9.401432238519192,
+          "total_p95_ms": 28.511255542980507
+        },
+        "shifted_markers|rules": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 0.006472546374425292,
+          "total_p95_ms": 0.008452101610600948
+        },
+        "shifted_markers|supplied": {
+          "totals": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 8,
+            "source_calls": 2,
+            "role_calls": 6,
+            "binding": 26,
+            "parsed": 26
+          },
+          "parser_p95_ms": 0.0,
+          "total_p95_ms": 22.70288998261094
+        }
+      },
+      "job_wall_seconds": 23
+    },
+    {
+      "script_sha256": "9b5c05a9ba9a59707b882a6089dd006dd7cd6afb45e3be2f2dbce7faf6931b31",
+      "inputs": {
+        "projection": "38bc5e6bd42e3b2f427a42a552cae11bc0813e50f2e601ee9e10a298fe47925f",
+        "manifest": "064b9d0a579e58911c1986a17e4eb169dcfd3ab57e4e4640d31a1a62143a753a",
+        "niso": "c107b4e780218e58aec4e2a13f2d7072533962a6a73b82d23e4273b43aafd528",
+        "training": "3365bdd2588d8dfff12de71cf7663808c25689f831a1ba42288a8bb8b53bfdc2",
+        "bands": "0e936678ef2e49944e0a6394257d1edb79dc216facaeb77aaa49db829ef5c3da",
+        "source_frozen": "e393fe72c74c5f12748da43e8c245e224411633ed2c24eef22d34b4665aeb741",
+        "role_frozen": "e332709fbb1b1371253fede037758a2d027b68f389ee42ae221352f7d7bffde0"
+      },
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "source_reader_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+      "role_reader_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "seed": 17,
+      "reverse": false,
+      "context": false,
+      "training_seconds": 2.1881402420112863,
+      "parameters": 145749,
+      "fit_topics": 307,
+      "dev_topics": 61,
+      "fit_phrases": 64,
+      "dev_phrases": 20,
+      "training_requests": 2048,
+      "development_requests": 320,
+      "test_families": [
+        "00b84c94a418b735d937c4d5d06ca745d6239b5f7f5a60d1cc4d0a07f6a5c713",
+        "012f2ddbcf99a0c00924418010960950d3aa09e5e73e743f5e02749ed0cb5507",
+        "0391ec8d9fc09804c4507f3c68c23a36f210fc5c71bd01af01eef242f93f14d2",
+        "04cdb4fa95434dd40fc1450752b632e9ce6a3c7c04e55336635e752cee24b295",
+        "08b17ddde6d51856db5a8a63a23336511ec213b1ef4e194373d5580f7d3889d6",
+        "0b1e439df45895b22efe40fdd0bb5ca23dbcb1f74cd13b93d688892634df049a",
+        "0ba096b40605edd23de81870f5a9453a2fa7e38cfeb3a181819e313e15832d67",
+        "151a575e9cec018374f33f8a1a01a7414c0c43f5ceae4c3d4eb874de8cc6076e",
+        "161ba7c9775edc346074ee04e7d8c0412165cbfadace04b8ae9fe18a9cb87646",
+        "19d7abd444ff76508f5461935ce3c6c41c55d7eced74b17143adeb3a9c7706fc",
+        "32ffec86ae610b217413664ce43a544f13307205011627f1f2998d170a1d36b3",
+        "5b5d84551221d364be2dbc1c1f81d1a923e16e24556bff919d125fb6dedb9b2b",
+        "66f7703dc004551511550beef6e3ba96e92bcc19976c9e6cb65d598b478b0805"
+      ],
+      "loss": [
+        1.2092735022306442,
+        0.5003605559468269,
+        0.20800278428941965,
+        0.09712122473865747,
+        0.0602428117999807,
+        0.03778391791274771,
+        0.029118032951373607,
+        0.02382013521855697,
+        0.019721103744814172,
+        0.01955052770790644,
+        0.016505870182299986,
+        0.013245858979644254,
+        0.011240749547141604,
+        0.01088748185429722
+      ],
+      "threshold": 0.95,
+      "calibration": {
+        "0.0": {
+          "accepted": 47,
+          "exact": 4,
+          "outside": 0
+        },
+        "0.25": {
+          "accepted": 47,
+          "exact": 4,
+          "outside": 0
+        },
+        "0.5": {
+          "accepted": 39,
+          "exact": 4,
+          "outside": 0
+        },
+        "0.65": {
+          "accepted": 15,
+          "exact": 4,
+          "outside": 0
+        },
+        "0.8": {
+          "accepted": 2,
+          "exact": 0,
+          "outside": 0
+        },
+        "0.9": {
+          "accepted": 1,
+          "exact": 0,
+          "outside": 0
+        },
+        "0.95": {
+          "accepted": 0,
+          "exact": 0,
+          "outside": 0
+        },
+        "1.0": {
+          "accepted": 0,
+          "exact": 0,
+          "outside": 0
+        }
+      },
+      "results": {
+        "local_markers|calibrated_offsets": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 1.240038254763931,
+          "total_p95_ms": 1.2409450428094715
+        },
+        "local_markers|hybrid": {
+          "totals": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 8,
+            "source_calls": 2,
+            "role_calls": 6,
+            "binding": 26,
+            "parsed": 26
+          },
+          "parser_p95_ms": 0.004365458153188229,
+          "total_p95_ms": 22.47667920892127
+        },
+        "local_markers|offsets": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 1.240038254763931,
+          "total_p95_ms": 1.2418510450515896
+        },
+        "local_markers|rules": {
+          "totals": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 8,
+            "source_calls": 2,
+            "role_calls": 6,
+            "binding": 26,
+            "parsed": 26
+          },
+          "parser_p95_ms": 0.004365458153188229,
+          "total_p95_ms": 23.424428451107815
+        },
+        "local_markers|supplied": {
+          "totals": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 8,
+            "source_calls": 2,
+            "role_calls": 6,
+            "binding": 26,
+            "parsed": 26
+          },
+          "parser_p95_ms": 0.0,
+          "total_p95_ms": 35.607968020485714
+        },
+        "reversed_references|calibrated_offsets": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 1.1622172314673662,
+          "total_p95_ms": 1.163186738267541
+        },
+        "reversed_references|hybrid": {
+          "totals": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 8,
+            "source_calls": 2,
+            "role_calls": 6,
+            "binding": 26,
+            "parsed": 26
+          },
+          "parser_p95_ms": 0.008115690434351563,
+          "total_p95_ms": 22.23353076260537
+        },
+        "reversed_references|offsets": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 1.1622172314673662,
+          "total_p95_ms": 1.1642114841379225
+        },
+        "reversed_references|rules": {
+          "totals": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 8,
+            "source_calls": 2,
+            "role_calls": 6,
+            "binding": 26,
+            "parsed": 26
+          },
+          "parser_p95_ms": 0.008115690434351563,
+          "total_p95_ms": 22.283043566858396
+        },
+        "reversed_references|supplied": {
+          "totals": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 8,
+            "source_calls": 2,
+            "role_calls": 6,
+            "binding": 26,
+            "parsed": 26
+          },
+          "parser_p95_ms": 0.0,
+          "total_p95_ms": 22.261923761107028
+        },
+        "shifted_markers|calibrated_offsets": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 1.128948526456952,
+          "total_p95_ms": 1.1296478332951665
+        },
+        "shifted_markers|hybrid": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 1.1344579979777336,
+          "total_p95_ms": 1.1351130669936538
+        },
+        "shifted_markers|offsets": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 1.128948526456952,
+          "total_p95_ms": 1.1299083125777543
+        },
+        "shifted_markers|rules": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 0.006142770871520042,
+          "total_p95_ms": 0.008002214599400759
+        },
+        "shifted_markers|supplied": {
+          "totals": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 8,
+            "source_calls": 2,
+            "role_calls": 6,
+            "binding": 26,
+            "parsed": 26
+          },
+          "parser_p95_ms": 0.0,
+          "total_p95_ms": 22.198850027052686
+        }
+      },
+      "job_wall_seconds": 16
+    },
+    {
+      "script_sha256": "9b5c05a9ba9a59707b882a6089dd006dd7cd6afb45e3be2f2dbce7faf6931b31",
+      "inputs": {
+        "projection": "38bc5e6bd42e3b2f427a42a552cae11bc0813e50f2e601ee9e10a298fe47925f",
+        "manifest": "064b9d0a579e58911c1986a17e4eb169dcfd3ab57e4e4640d31a1a62143a753a",
+        "niso": "c107b4e780218e58aec4e2a13f2d7072533962a6a73b82d23e4273b43aafd528",
+        "training": "3365bdd2588d8dfff12de71cf7663808c25689f831a1ba42288a8bb8b53bfdc2",
+        "bands": "0e936678ef2e49944e0a6394257d1edb79dc216facaeb77aaa49db829ef5c3da",
+        "source_frozen": "e393fe72c74c5f12748da43e8c245e224411633ed2c24eef22d34b4665aeb741",
+        "role_frozen": "e332709fbb1b1371253fede037758a2d027b68f389ee42ae221352f7d7bffde0"
+      },
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "source_reader_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+      "role_reader_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "seed": 29,
+      "reverse": true,
+      "context": false,
+      "training_seconds": 2.179354044026695,
+      "parameters": 145749,
+      "fit_topics": 307,
+      "dev_topics": 61,
+      "fit_phrases": 64,
+      "dev_phrases": 20,
+      "training_requests": 2048,
+      "development_requests": 320,
+      "test_families": [
+        "00b84c94a418b735d937c4d5d06ca745d6239b5f7f5a60d1cc4d0a07f6a5c713",
+        "012f2ddbcf99a0c00924418010960950d3aa09e5e73e743f5e02749ed0cb5507",
+        "0391ec8d9fc09804c4507f3c68c23a36f210fc5c71bd01af01eef242f93f14d2",
+        "04cdb4fa95434dd40fc1450752b632e9ce6a3c7c04e55336635e752cee24b295",
+        "08b17ddde6d51856db5a8a63a23336511ec213b1ef4e194373d5580f7d3889d6",
+        "0b1e439df45895b22efe40fdd0bb5ca23dbcb1f74cd13b93d688892634df049a",
+        "0ba096b40605edd23de81870f5a9453a2fa7e38cfeb3a181819e313e15832d67",
+        "151a575e9cec018374f33f8a1a01a7414c0c43f5ceae4c3d4eb874de8cc6076e",
+        "161ba7c9775edc346074ee04e7d8c0412165cbfadace04b8ae9fe18a9cb87646",
+        "19d7abd444ff76508f5461935ce3c6c41c55d7eced74b17143adeb3a9c7706fc",
+        "32ffec86ae610b217413664ce43a544f13307205011627f1f2998d170a1d36b3",
+        "5b5d84551221d364be2dbc1c1f81d1a923e16e24556bff919d125fb6dedb9b2b",
+        "66f7703dc004551511550beef6e3ba96e92bcc19976c9e6cb65d598b478b0805"
+      ],
+      "loss": [
+        1.16705390997231,
+        0.45311922393739223,
+        0.19078811793588102,
+        0.08818529464770108,
+        0.05423838063143194,
+        0.03910006285877898,
+        0.029808866267558187,
+        0.022217989433556795,
+        0.017334071948425844,
+        0.015485884447116405,
+        0.013169524841941893,
+        0.011864043190144002,
+        0.009817065394599922,
+        0.008764370897551998
+      ],
+      "threshold": 1.0,
+      "calibration": {
+        "0.0": {
+          "accepted": 65,
+          "exact": 9,
+          "outside": 0
+        },
+        "0.25": {
+          "accepted": 65,
+          "exact": 9,
+          "outside": 0
+        },
+        "0.5": {
+          "accepted": 59,
+          "exact": 8,
+          "outside": 0
+        },
+        "0.65": {
+          "accepted": 32,
+          "exact": 6,
+          "outside": 0
+        },
+        "0.8": {
+          "accepted": 12,
+          "exact": 1,
+          "outside": 0
+        },
+        "0.9": {
+          "accepted": 4,
+          "exact": 1,
+          "outside": 0
+        },
+        "0.95": {
+          "accepted": 2,
+          "exact": 0,
+          "outside": 0
+        },
+        "1.0": {
+          "accepted": 0,
+          "exact": 0,
+          "outside": 0
+        }
+      },
+      "results": {
+        "local_markers|calibrated_offsets": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 1.2599692272488028,
+          "total_p95_ms": 1.2608622782863677
+        },
+        "local_markers|hybrid": {
+          "totals": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 8,
+            "source_calls": 2,
+            "role_calls": 6,
+            "binding": 26,
+            "parsed": 26
+          },
+          "parser_p95_ms": 0.004358735168352723,
+          "total_p95_ms": 22.157529223477468
+        },
+        "local_markers|offsets": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 1.2599692272488028,
+          "total_p95_ms": 1.2615654850378633
+        },
+        "local_markers|rules": {
+          "totals": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 8,
+            "source_calls": 2,
+            "role_calls": 6,
+            "binding": 26,
+            "parsed": 26
+          },
+          "parser_p95_ms": 0.004358735168352723,
+          "total_p95_ms": 23.04878318682313
+        },
+        "local_markers|supplied": {
+          "totals": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 8,
+            "source_calls": 2,
+            "role_calls": 6,
+            "binding": 26,
+            "parsed": 26
+          },
+          "parser_p95_ms": 0.0,
+          "total_p95_ms": 24.229785514762625
+        },
+        "reversed_references|calibrated_offsets": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 1.167690264992416,
+          "total_p95_ms": 1.1687866935972124
+        },
+        "reversed_references|hybrid": {
+          "totals": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 8,
+            "source_calls": 2,
+            "role_calls": 6,
+            "binding": 26,
+            "parsed": 26
+          },
+          "parser_p95_ms": 0.007274240488186479,
+          "total_p95_ms": 22.19777466962114
+        },
+        "reversed_references|offsets": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 1.167690264992416,
+          "total_p95_ms": 1.169667870271951
+        },
+        "reversed_references|rules": {
+          "totals": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 8,
+            "source_calls": 2,
+            "role_calls": 6,
+            "binding": 26,
+            "parsed": 26
+          },
+          "parser_p95_ms": 0.007274240488186479,
+          "total_p95_ms": 21.965589199680835
+        },
+        "reversed_references|supplied": {
+          "totals": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 8,
+            "source_calls": 2,
+            "role_calls": 6,
+            "binding": 26,
+            "parsed": 26
+          },
+          "parser_p95_ms": 0.0,
+          "total_p95_ms": 21.705838764319196
+        },
+        "shifted_markers|calibrated_offsets": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 1.1206885101273656,
+          "total_p95_ms": 1.121399982366711
+        },
+        "shifted_markers|hybrid": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 1.1267584632150829,
+          "total_p95_ms": 1.1274205171503127
+        },
+        "shifted_markers|offsets": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 1.1206885101273656,
+          "total_p95_ms": 1.1217197752557695
+        },
+        "shifted_markers|rules": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 0.0061219907365739346,
+          "total_p95_ms": 0.007997674401849508
+        },
+        "shifted_markers|supplied": {
+          "totals": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 8,
+            "source_calls": 2,
+            "role_calls": 6,
+            "binding": 26,
+            "parsed": 26
+          },
+          "parser_p95_ms": 0.0,
+          "total_p95_ms": 21.841504727490246
+        }
+      },
+      "job_wall_seconds": 16
+    }
+  ]
+}
