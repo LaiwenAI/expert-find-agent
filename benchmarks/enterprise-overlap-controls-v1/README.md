@@ -3,9 +3,8 @@
 Reconstruct the frozen [regional overlap projection](../enterprise-regional-overlap-v1)
 and require the first and last windows of all 4,656 demand records to
 match. Use the same frozen Qwen3-Embedding-0.6B checkpoint, 384-token cap,
-and maximum cosine across query and corpus windows. Score three corpus
-representations use the same encoder. Compare first and last, first and
-center, and all three. Each window retains the original corpus title.
+and maximum cosine across query and corpus windows. Compare three corpus representations
+with the same encoder. Use first and last, first and center, or all three. Each window retains the original corpus title.
 Identical window strings are encoded once.
 
 - Remove the title from all 110 new regional demands. For bodies of
