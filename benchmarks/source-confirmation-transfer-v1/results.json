@@ -1,0 +1,2406 @@
+{
+  "slurm_array": 46039,
+  "node": "ws3",
+  "runs": [
+    {
+      "script_sha256": "623304907077a89f6f15b8e9ff0c2701113f80248db4661ea8791de6775caa68",
+      "elife_sha256": "38bc5e6bd42e3b2f427a42a552cae11bc0813e50f2e601ee9e10a298fe47925f",
+      "engineering_sha256": "53f4cda52f54d2982ff748c0e9fbbff627cbc1c9eeef024cd35e8539422137fb",
+      "frozen_sha256": "e393fe72c74c5f12748da43e8c245e224411633ed2c24eef22d34b4665aeb741",
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "verifier": {
+        "repository": "Qwen/Qwen3-Reranker-0.6B",
+        "revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+        "policy": "Official frozen BF16 checkpoint; no own training or quantization. Revision recorded before downloading weights.",
+        "files": {
+          "config.json": "d479c427a9ca5295218063d4f9aca4f297ab4ac27487cca7af42c84643d51ef0",
+          "expected-large-files.json": "cd9940a651fcf3d97ffc28f0242a9a620c0da5b9acad1861ef14faf5ee784f0e",
+          "generation_config.json": "81051cd3f6e77013827148d0b8a6ead93f8ac390d5ab805f849199f0af6a08db",
+          "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+          "model.safetensors": "27cd75a405b9c1b46b59abfd88aaa209e6fed2a1972cde9b70e7659537c5e65b",
+          "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+          "tokenizer_config.json": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0",
+          "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        }
+      },
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "reverse": false,
+      "cutoffs": {
+        "weakest": -5.125,
+        "absolute": -5.1875
+      },
+      "elife_panel": {
+        "admitted": 393,
+        "dropped": {
+          "incomplete_or_ambiguous": 28
+        },
+        "links": 16,
+        "paper_pairs": 13,
+        "linked_papers": 25,
+        "contributors": 14,
+        "variants": {
+          "present": 66,
+          "swap": 66
+        }
+      },
+      "results": {
+        "elife": {
+          "all_keywords|all|absolute": {
+            "totals": {
+              "pair_correct": 106,
+              "pair_wrong": 0,
+              "proof": 29,
+              "adverse": 1,
+              "role_substitution": 0,
+              "oracle_proof": 53,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 52,
+              "verifier_calls": 26
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 20.572416944196448
+          },
+          "all_keywords|all|anchor": {
+            "totals": {
+              "pair_correct": 96,
+              "pair_wrong": 0,
+              "proof": 26,
+              "adverse": 1,
+              "role_substitution": 0,
+              "oracle_proof": 48,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.926636977819726
+          },
+          "all_keywords|all|ungated": {
+            "totals": {
+              "pair_correct": 122,
+              "pair_wrong": 0,
+              "proof": 33,
+              "adverse": 2,
+              "role_substitution": 0,
+              "oracle_proof": 61,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.929589357692748
+          },
+          "all_keywords|all|weakest": {
+            "totals": {
+              "pair_correct": 106,
+              "pair_wrong": 0,
+              "proof": 29,
+              "adverse": 1,
+              "role_substitution": 0,
+              "oracle_proof": 53,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 26,
+              "verifier_calls": 26
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 19.413393910508603
+          },
+          "all_keywords|left_missing|absolute": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.864927299553528
+          },
+          "all_keywords|left_missing|anchor": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.856937745120376
+          },
+          "all_keywords|left_missing|ungated": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.864927299553528
+          },
+          "all_keywords|left_missing|weakest": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.864927299553528
+          },
+          "all_keywords|right_missing|absolute": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.842847969615832
+          },
+          "all_keywords|right_missing|anchor": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.836413258221
+          },
+          "all_keywords|right_missing|ungated": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.842847969615832
+          },
+          "all_keywords|right_missing|weakest": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.842847969615832
+          },
+          "leading_four|all|absolute": {
+            "totals": {
+              "pair_correct": 96,
+              "pair_wrong": 0,
+              "proof": 27,
+              "adverse": 1,
+              "role_substitution": 0,
+              "oracle_proof": 48,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 80,
+              "verifier_calls": 40
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 20.552625984419137
+          },
+          "leading_four|all|anchor": {
+            "totals": {
+              "pair_correct": 56,
+              "pair_wrong": 0,
+              "proof": 19,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 28,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.789059806847945
+          },
+          "leading_four|all|ungated": {
+            "totals": {
+              "pair_correct": 96,
+              "pair_wrong": 0,
+              "proof": 27,
+              "adverse": 1,
+              "role_substitution": 0,
+              "oracle_proof": 48,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.793054971145466
+          },
+          "leading_four|all|weakest": {
+            "totals": {
+              "pair_correct": 96,
+              "pair_wrong": 0,
+              "proof": 27,
+              "adverse": 1,
+              "role_substitution": 0,
+              "oracle_proof": 48,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 40,
+              "verifier_calls": 40
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 19.240240612998605
+          },
+          "leading_four|left_missing|absolute": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.745519958436489
+          },
+          "leading_four|left_missing|anchor": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.736824129708111
+          },
+          "leading_four|left_missing|ungated": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.745519958436489
+          },
+          "leading_four|left_missing|weakest": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.745519958436489
+          },
+          "leading_four|right_missing|absolute": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.727874777512625
+          },
+          "leading_four|right_missing|anchor": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.722321923822165
+          },
+          "leading_four|right_missing|ungated": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.727874777512625
+          },
+          "leading_four|right_missing|weakest": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.727874777512625
+          },
+          "trailing_four|all|absolute": {
+            "totals": {
+              "pair_correct": 70,
+              "pair_wrong": 0,
+              "proof": 20,
+              "adverse": 1,
+              "role_substitution": 0,
+              "oracle_proof": 35,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 40,
+              "verifier_calls": 20
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 20.286141464021057
+          },
+          "trailing_four|all|anchor": {
+            "totals": {
+              "pair_correct": 50,
+              "pair_wrong": 0,
+              "proof": 14,
+              "adverse": 1,
+              "role_substitution": 0,
+              "oracle_proof": 25,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.804179566912353
+          },
+          "trailing_four|all|ungated": {
+            "totals": {
+              "pair_correct": 70,
+              "pair_wrong": 0,
+              "proof": 20,
+              "adverse": 1,
+              "role_substitution": 0,
+              "oracle_proof": 35,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.804271104279906
+          },
+          "trailing_four|all|weakest": {
+            "totals": {
+              "pair_correct": 70,
+              "pair_wrong": 0,
+              "proof": 20,
+              "adverse": 1,
+              "role_substitution": 0,
+              "oracle_proof": 35,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 20,
+              "verifier_calls": 20
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 19.031843019183725
+          },
+          "trailing_four|left_missing|absolute": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.76963649247773
+          },
+          "trailing_four|left_missing|anchor": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.762451199116185
+          },
+          "trailing_four|left_missing|ungated": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.76963649247773
+          },
+          "trailing_four|left_missing|weakest": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.76963649247773
+          },
+          "trailing_four|right_missing|absolute": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.744798847008497
+          },
+          "trailing_four|right_missing|anchor": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.738339618546888
+          },
+          "trailing_four|right_missing|ungated": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.744798847008497
+          },
+          "trailing_four|right_missing|weakest": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.744798847008497
+          }
+        },
+        "engineering": {
+          "all_keywords|all|absolute": {
+            "totals": {
+              "pair_correct": 30,
+              "pair_wrong": 0,
+              "proof": 4,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 15,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 20,
+              "verifier_calls": 10
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 19.76430716458708
+          },
+          "all_keywords|all|anchor": {
+            "totals": {
+              "pair_correct": 20,
+              "pair_wrong": 0,
+              "proof": 4,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 10,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.00454822788015
+          },
+          "all_keywords|all|ungated": {
+            "totals": {
+              "pair_correct": 30,
+              "pair_wrong": 0,
+              "proof": 4,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 15,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.00773244886659
+          },
+          "all_keywords|all|weakest": {
+            "totals": {
+              "pair_correct": 30,
+              "pair_wrong": 0,
+              "proof": 4,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 15,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 10,
+              "verifier_calls": 10
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 18.54477726155892
+          },
+          "all_keywords|left_missing|absolute": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 40,
+              "verifier_calls": 20
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 19.814553821925074
+          },
+          "all_keywords|left_missing|anchor": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 9.99112980789505
+          },
+          "all_keywords|left_missing|ungated": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 20,
+              "proof": 0,
+              "adverse": 1,
+              "role_substitution": 1,
+              "oracle_proof": 0,
+              "oracle_substitution": 5,
+              "requests": 30,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 3,
+            "p95_ms": 9.998855314916
+          },
+          "all_keywords|left_missing|weakest": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 20,
+              "verifier_calls": 20
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 18.57503978535533
+          },
+          "all_keywords|right_missing|absolute": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 20,
+              "verifier_calls": 10
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 19.811221328563988
+          },
+          "all_keywords|right_missing|anchor": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.023242031456903
+          },
+          "all_keywords|right_missing|ungated": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 10,
+              "proof": 0,
+              "adverse": 2,
+              "role_substitution": 2,
+              "oracle_proof": 0,
+              "oracle_substitution": 5,
+              "requests": 30,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 2,
+            "p95_ms": 10.029273619875312
+          },
+          "all_keywords|right_missing|weakest": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 10,
+              "verifier_calls": 10
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 18.454114347696304
+          },
+          "leading_four|all|absolute": {
+            "totals": {
+              "pair_correct": 14,
+              "pair_wrong": 0,
+              "proof": 1,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 7,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 12,
+              "verifier_calls": 6
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 19.41341906785965
+          },
+          "leading_four|all|anchor": {
+            "totals": {
+              "pair_correct": 14,
+              "pair_wrong": 0,
+              "proof": 1,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 7,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.096758522558957
+          },
+          "leading_four|all|ungated": {
+            "totals": {
+              "pair_correct": 14,
+              "pair_wrong": 6,
+              "proof": 1,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 7,
+              "oracle_substitution": 1,
+              "requests": 30,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 1,
+            "p95_ms": 10.103242384502664
+          },
+          "leading_four|all|weakest": {
+            "totals": {
+              "pair_correct": 14,
+              "pair_wrong": 0,
+              "proof": 1,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 7,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 6,
+              "verifier_calls": 6
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 18.170405604178086
+          },
+          "leading_four|left_missing|absolute": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 32,
+              "verifier_calls": 16
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 19.410005444660783
+          },
+          "leading_four|left_missing|anchor": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.040988808032125
+          },
+          "leading_four|left_missing|ungated": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 16,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 3,
+              "requests": 30,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 2,
+            "p95_ms": 10.044996574288234
+          },
+          "leading_four|left_missing|weakest": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 16,
+              "verifier_calls": 16
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 18.28485820442438
+          },
+          "leading_four|right_missing|absolute": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 20,
+              "verifier_calls": 10
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 19.617858342826366
+          },
+          "leading_four|right_missing|anchor": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.03760161693208
+          },
+          "leading_four|right_missing|ungated": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 10,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 1,
+              "requests": 30,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 2,
+            "p95_ms": 10.041035054018721
+          },
+          "leading_four|right_missing|weakest": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 10,
+              "verifier_calls": 10
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 18.269679258810356
+          },
+          "trailing_four|all|absolute": {
+            "totals": {
+              "pair_correct": 20,
+              "pair_wrong": 0,
+              "proof": 3,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 10,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 24,
+              "verifier_calls": 12
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 19.941079197451472
+          },
+          "trailing_four|all|anchor": {
+            "totals": {
+              "pair_correct": 10,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 5,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.049252316821367
+          },
+          "trailing_four|all|ungated": {
+            "totals": {
+              "pair_correct": 22,
+              "pair_wrong": 0,
+              "proof": 4,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 11,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.053137427894399
+          },
+          "trailing_four|all|weakest": {
+            "totals": {
+              "pair_correct": 20,
+              "pair_wrong": 0,
+              "proof": 3,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 10,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 12,
+              "verifier_calls": 12
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 18.62574631231837
+          },
+          "trailing_four|left_missing|absolute": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 40,
+              "verifier_calls": 20
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 19.820520357461646
+          },
+          "trailing_four|left_missing|anchor": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.046726505970582
+          },
+          "trailing_four|left_missing|ungated": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 20,
+              "proof": 0,
+              "adverse": 1,
+              "role_substitution": 1,
+              "oracle_proof": 0,
+              "oracle_substitution": 5,
+              "requests": 30,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 3,
+            "p95_ms": 10.054399695945904
+          },
+          "trailing_four|left_missing|weakest": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 20,
+              "verifier_calls": 20
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 18.57467217487283
+          },
+          "trailing_four|right_missing|absolute": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 4,
+              "proof": 0,
+              "adverse": 1,
+              "role_substitution": 1,
+              "oracle_proof": 0,
+              "oracle_substitution": 3,
+              "requests": 30,
+              "source_reads": 56,
+              "verifier_calls": 28
+            },
+            "unique_wrong_source_pairs": 1,
+            "p95_ms": 19.81438112561591
+          },
+          "trailing_four|right_missing|anchor": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.029607726028189
+          },
+          "trailing_four|right_missing|ungated": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 28,
+              "proof": 0,
+              "adverse": 2,
+              "role_substitution": 2,
+              "oracle_proof": 0,
+              "oracle_substitution": 3,
+              "requests": 30,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 4,
+            "p95_ms": 10.036384523846209
+          },
+          "trailing_four|right_missing|weakest": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 4,
+              "proof": 0,
+              "adverse": 1,
+              "role_substitution": 1,
+              "oracle_proof": 0,
+              "oracle_substitution": 3,
+              "requests": 30,
+              "source_reads": 28,
+              "verifier_calls": 28
+            },
+            "unique_wrong_source_pairs": 1,
+            "p95_ms": 18.583649274660274
+          }
+        }
+      }
+    },
+    {
+      "script_sha256": "623304907077a89f6f15b8e9ff0c2701113f80248db4661ea8791de6775caa68",
+      "elife_sha256": "38bc5e6bd42e3b2f427a42a552cae11bc0813e50f2e601ee9e10a298fe47925f",
+      "engineering_sha256": "53f4cda52f54d2982ff748c0e9fbbff627cbc1c9eeef024cd35e8539422137fb",
+      "frozen_sha256": "e393fe72c74c5f12748da43e8c245e224411633ed2c24eef22d34b4665aeb741",
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "verifier": {
+        "repository": "Qwen/Qwen3-Reranker-0.6B",
+        "revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+        "policy": "Official frozen BF16 checkpoint; no own training or quantization. Revision recorded before downloading weights.",
+        "files": {
+          "config.json": "d479c427a9ca5295218063d4f9aca4f297ab4ac27487cca7af42c84643d51ef0",
+          "expected-large-files.json": "cd9940a651fcf3d97ffc28f0242a9a620c0da5b9acad1861ef14faf5ee784f0e",
+          "generation_config.json": "81051cd3f6e77013827148d0b8a6ead93f8ac390d5ab805f849199f0af6a08db",
+          "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+          "model.safetensors": "27cd75a405b9c1b46b59abfd88aaa209e6fed2a1972cde9b70e7659537c5e65b",
+          "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+          "tokenizer_config.json": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0",
+          "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        }
+      },
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "reverse": true,
+      "cutoffs": {
+        "weakest": -5.125,
+        "absolute": -5.1875
+      },
+      "elife_panel": {
+        "admitted": 393,
+        "dropped": {
+          "incomplete_or_ambiguous": 28
+        },
+        "links": 16,
+        "paper_pairs": 13,
+        "linked_papers": 25,
+        "contributors": 14,
+        "variants": {
+          "present": 66,
+          "swap": 66
+        }
+      },
+      "results": {
+        "elife": {
+          "all_keywords|all|absolute": {
+            "totals": {
+              "pair_correct": 106,
+              "pair_wrong": 0,
+              "proof": 29,
+              "adverse": 1,
+              "role_substitution": 0,
+              "oracle_proof": 53,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 52,
+              "verifier_calls": 26
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 20.450089155929163
+          },
+          "all_keywords|all|anchor": {
+            "totals": {
+              "pair_correct": 96,
+              "pair_wrong": 0,
+              "proof": 26,
+              "adverse": 1,
+              "role_substitution": 0,
+              "oracle_proof": 48,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.942688345676288
+          },
+          "all_keywords|all|ungated": {
+            "totals": {
+              "pair_correct": 122,
+              "pair_wrong": 0,
+              "proof": 33,
+              "adverse": 2,
+              "role_substitution": 0,
+              "oracle_proof": 61,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.94626939157024
+          },
+          "all_keywords|all|weakest": {
+            "totals": {
+              "pair_correct": 106,
+              "pair_wrong": 0,
+              "proof": 29,
+              "adverse": 1,
+              "role_substitution": 0,
+              "oracle_proof": 53,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 26,
+              "verifier_calls": 26
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 19.34894426376559
+          },
+          "all_keywords|left_missing|absolute": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.895768814953044
+          },
+          "all_keywords|left_missing|anchor": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.886972962180153
+          },
+          "all_keywords|left_missing|ungated": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.895768814953044
+          },
+          "all_keywords|left_missing|weakest": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.895768814953044
+          },
+          "all_keywords|right_missing|absolute": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.841161821736023
+          },
+          "all_keywords|right_missing|anchor": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.834939259802923
+          },
+          "all_keywords|right_missing|ungated": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.841161821736023
+          },
+          "all_keywords|right_missing|weakest": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.841161821736023
+          },
+          "leading_four|all|absolute": {
+            "totals": {
+              "pair_correct": 96,
+              "pair_wrong": 0,
+              "proof": 27,
+              "adverse": 1,
+              "role_substitution": 0,
+              "oracle_proof": 48,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 80,
+              "verifier_calls": 40
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 20.439315057592466
+          },
+          "leading_four|all|anchor": {
+            "totals": {
+              "pair_correct": 56,
+              "pair_wrong": 0,
+              "proof": 19,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 28,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.74331597192213
+          },
+          "leading_four|all|ungated": {
+            "totals": {
+              "pair_correct": 96,
+              "pair_wrong": 0,
+              "proof": 27,
+              "adverse": 1,
+              "role_substitution": 0,
+              "oracle_proof": 48,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.747862292919308
+          },
+          "leading_four|all|weakest": {
+            "totals": {
+              "pair_correct": 96,
+              "pair_wrong": 0,
+              "proof": 27,
+              "adverse": 1,
+              "role_substitution": 0,
+              "oracle_proof": 48,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 40,
+              "verifier_calls": 40
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 19.24178143381141
+          },
+          "leading_four|left_missing|absolute": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.766116029117256
+          },
+          "leading_four|left_missing|anchor": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.758259182330221
+          },
+          "leading_four|left_missing|ungated": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.766116029117256
+          },
+          "leading_four|left_missing|weakest": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.766116029117256
+          },
+          "leading_four|right_missing|absolute": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.692674928577617
+          },
+          "leading_four|right_missing|anchor": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.684921842766926
+          },
+          "leading_four|right_missing|ungated": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.692674928577617
+          },
+          "leading_four|right_missing|weakest": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.692674928577617
+          },
+          "trailing_four|all|absolute": {
+            "totals": {
+              "pair_correct": 70,
+              "pair_wrong": 0,
+              "proof": 20,
+              "adverse": 1,
+              "role_substitution": 0,
+              "oracle_proof": 35,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 40,
+              "verifier_calls": 20
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 20.362264045979828
+          },
+          "trailing_four|all|anchor": {
+            "totals": {
+              "pair_correct": 50,
+              "pair_wrong": 0,
+              "proof": 14,
+              "adverse": 1,
+              "role_substitution": 0,
+              "oracle_proof": 25,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.735351755283773
+          },
+          "trailing_four|all|ungated": {
+            "totals": {
+              "pair_correct": 70,
+              "pair_wrong": 0,
+              "proof": 20,
+              "adverse": 1,
+              "role_substitution": 0,
+              "oracle_proof": 35,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.742431547259912
+          },
+          "trailing_four|all|weakest": {
+            "totals": {
+              "pair_correct": 70,
+              "pair_wrong": 0,
+              "proof": 20,
+              "adverse": 1,
+              "role_substitution": 0,
+              "oracle_proof": 35,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 20,
+              "verifier_calls": 20
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 19.156051601748914
+          },
+          "trailing_four|left_missing|absolute": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.693746223114431
+          },
+          "trailing_four|left_missing|anchor": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.687133442843333
+          },
+          "trailing_four|left_missing|ungated": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.693746223114431
+          },
+          "trailing_four|left_missing|weakest": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.693746223114431
+          },
+          "trailing_four|right_missing|absolute": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.68056144285947
+          },
+          "trailing_four|right_missing|anchor": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.67485319217667
+          },
+          "trailing_four|right_missing|ungated": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.68056144285947
+          },
+          "trailing_four|right_missing|weakest": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 132,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.68056144285947
+          }
+        },
+        "engineering": {
+          "all_keywords|all|absolute": {
+            "totals": {
+              "pair_correct": 30,
+              "pair_wrong": 0,
+              "proof": 4,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 15,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 20,
+              "verifier_calls": 10
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 19.64413346722722
+          },
+          "all_keywords|all|anchor": {
+            "totals": {
+              "pair_correct": 20,
+              "pair_wrong": 0,
+              "proof": 4,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 10,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.14051862875931
+          },
+          "all_keywords|all|ungated": {
+            "totals": {
+              "pair_correct": 30,
+              "pair_wrong": 0,
+              "proof": 4,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 15,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.140602040337399
+          },
+          "all_keywords|all|weakest": {
+            "totals": {
+              "pair_correct": 30,
+              "pair_wrong": 0,
+              "proof": 4,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 15,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 10,
+              "verifier_calls": 10
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 18.426038924371824
+          },
+          "all_keywords|left_missing|absolute": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 40,
+              "verifier_calls": 20
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 19.85672988812439
+          },
+          "all_keywords|left_missing|anchor": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.086787643376738
+          },
+          "all_keywords|left_missing|ungated": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 20,
+              "proof": 0,
+              "adverse": 1,
+              "role_substitution": 1,
+              "oracle_proof": 0,
+              "oracle_substitution": 5,
+              "requests": 30,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 3,
+            "p95_ms": 10.093886003596708
+          },
+          "all_keywords|left_missing|weakest": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 20,
+              "verifier_calls": 20
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 18.530353117967024
+          },
+          "all_keywords|right_missing|absolute": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 20,
+              "verifier_calls": 10
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 19.88892478402704
+          },
+          "all_keywords|right_missing|anchor": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.13119964627549
+          },
+          "all_keywords|right_missing|ungated": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 10,
+              "proof": 0,
+              "adverse": 2,
+              "role_substitution": 2,
+              "oracle_proof": 0,
+              "oracle_substitution": 5,
+              "requests": 30,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 2,
+            "p95_ms": 10.137757967459038
+          },
+          "all_keywords|right_missing|weakest": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 10,
+              "verifier_calls": 10
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 18.620942923007533
+          },
+          "leading_four|all|absolute": {
+            "totals": {
+              "pair_correct": 14,
+              "pair_wrong": 0,
+              "proof": 1,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 7,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 12,
+              "verifier_calls": 6
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 19.45416937232949
+          },
+          "leading_four|all|anchor": {
+            "totals": {
+              "pair_correct": 14,
+              "pair_wrong": 0,
+              "proof": 1,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 7,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.130411520367488
+          },
+          "leading_four|all|ungated": {
+            "totals": {
+              "pair_correct": 14,
+              "pair_wrong": 6,
+              "proof": 1,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 7,
+              "oracle_substitution": 1,
+              "requests": 30,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 1,
+            "p95_ms": 10.13050950714387
+          },
+          "leading_four|all|weakest": {
+            "totals": {
+              "pair_correct": 14,
+              "pair_wrong": 0,
+              "proof": 1,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 7,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 6,
+              "verifier_calls": 6
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 18.173988029593602
+          },
+          "leading_four|left_missing|absolute": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 32,
+              "verifier_calls": 16
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 19.534291850868613
+          },
+          "leading_four|left_missing|anchor": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.083767410833389
+          },
+          "leading_four|left_missing|ungated": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 16,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 3,
+              "requests": 30,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 2,
+            "p95_ms": 10.09004035149701
+          },
+          "leading_four|left_missing|weakest": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 16,
+              "verifier_calls": 16
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 18.43811556464061
+          },
+          "leading_four|right_missing|absolute": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 20,
+              "verifier_calls": 10
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 19.876181503059343
+          },
+          "leading_four|right_missing|anchor": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.078203619923443
+          },
+          "leading_four|right_missing|ungated": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 10,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 1,
+              "requests": 30,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 2,
+            "p95_ms": 10.083385952748358
+          },
+          "leading_four|right_missing|weakest": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 10,
+              "verifier_calls": 10
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 18.511503603076562
+          },
+          "trailing_four|all|absolute": {
+            "totals": {
+              "pair_correct": 20,
+              "pair_wrong": 0,
+              "proof": 3,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 10,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 24,
+              "verifier_calls": 12
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 20.00816849176772
+          },
+          "trailing_four|all|anchor": {
+            "totals": {
+              "pair_correct": 10,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 5,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.137269634287804
+          },
+          "trailing_four|all|ungated": {
+            "totals": {
+              "pair_correct": 22,
+              "pair_wrong": 0,
+              "proof": 4,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 11,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.144499235320836
+          },
+          "trailing_four|all|weakest": {
+            "totals": {
+              "pair_correct": 20,
+              "pair_wrong": 0,
+              "proof": 3,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 10,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 12,
+              "verifier_calls": 12
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 18.646754283690825
+          },
+          "trailing_four|left_missing|absolute": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 40,
+              "verifier_calls": 20
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 19.847874663537368
+          },
+          "trailing_four|left_missing|anchor": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.145906131947413
+          },
+          "trailing_four|left_missing|ungated": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 20,
+              "proof": 0,
+              "adverse": 1,
+              "role_substitution": 1,
+              "oracle_proof": 0,
+              "oracle_substitution": 5,
+              "requests": 30,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 3,
+            "p95_ms": 10.153778229141608
+          },
+          "trailing_four|left_missing|weakest": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 20,
+              "verifier_calls": 20
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 18.53381603723392
+          },
+          "trailing_four|right_missing|absolute": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 4,
+              "proof": 0,
+              "adverse": 1,
+              "role_substitution": 1,
+              "oracle_proof": 0,
+              "oracle_substitution": 3,
+              "requests": 30,
+              "source_reads": 56,
+              "verifier_calls": 28
+            },
+            "unique_wrong_source_pairs": 1,
+            "p95_ms": 20.00493697123602
+          },
+          "trailing_four|right_missing|anchor": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 0,
+              "proof": 0,
+              "adverse": 0,
+              "role_substitution": 0,
+              "oracle_proof": 0,
+              "oracle_substitution": 0,
+              "requests": 30,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 0,
+            "p95_ms": 10.143454279750586
+          },
+          "trailing_four|right_missing|ungated": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 28,
+              "proof": 0,
+              "adverse": 2,
+              "role_substitution": 2,
+              "oracle_proof": 0,
+              "oracle_substitution": 3,
+              "requests": 30,
+              "source_reads": 0,
+              "verifier_calls": 0
+            },
+            "unique_wrong_source_pairs": 4,
+            "p95_ms": 10.151058138580993
+          },
+          "trailing_four|right_missing|weakest": {
+            "totals": {
+              "pair_correct": 0,
+              "pair_wrong": 4,
+              "proof": 0,
+              "adverse": 1,
+              "role_substitution": 1,
+              "oracle_proof": 0,
+              "oracle_substitution": 3,
+              "requests": 30,
+              "source_reads": 28,
+              "verifier_calls": 28
+            },
+            "unique_wrong_source_pairs": 1,
+            "p95_ms": 18.736135866492987
+          }
+        }
+      }
+    }
+  ]
+}
