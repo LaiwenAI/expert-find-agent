@@ -43,3 +43,28 @@ PYTHONPATH=src:. python -m experiments.retrieval.merge_enterprise_scope_review \
 The output includes a validation manifest, two blank forms and a separate
 private priority index. Keep the text, model linkage and submissions
 outside the public repository.
+
+## First review batch
+
+Use the eight anchors with repeated mandatory-qualification disagreement.
+For each, choose one distinct comparison anchor without a within-audit
+mandatory-qualification split. Prefer the same original request, then
+closest excerpt and request length. In this inventory all eight pairs
+come from the same request within each pair. The reviewers see a single
+deterministically shuffled form with no pair or stratum labels. The
+selected panel is an adjudication aid and does not support an accuracy
+or representativeness claim. [Batch inventory](first-batch.json)
+
+```sh
+PYTHONPATH=src:. python -m experiments.retrieval.enterprise_scope_review_batch prepare \
+  PRIVATE_PACKET PRIVATE_BATCH
+PYTHONPATH=src:. python -m experiments.retrieval.enterprise_scope_review_batch transfer \
+  PRIVATE_PACKET PRIVATE_BATCH RETURNED_A RETURNED_B NEW_PRIVATE_SUBMISSIONS
+```
+
+Use distinct reviewer IDs. A blank case can remain blank. The transfer
+validates the frozen source and copies only the judgment fields. Pass
+`--master-a` and `--master-b` to preserve previously completed judgments
+from the larger packet. Conflicting judgments for the same reviewer and
+anchor require reconciliation before transfer. The returned full-size
+copies can go through the existing two-reviewer validation.
