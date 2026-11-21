@@ -1,0 +1,184 @@
+{
+  "freeze_job": 47347,
+  "identical_decisions": true,
+  "node": "ws6",
+  "output_sha256": [
+    "8dba078effd9cde4187c394f2f03e4557b876aeea4a9718b1b92662d69796351",
+    "ea2ca6f45dfb89be5aba43fccd782900952de6621849b6422a8c57ea98a324ac"
+  ],
+  "runs": [
+    {
+      "frozen_reference": "7ee0997e56a8d58dc227ccd6a3b0e41ee0478856c0e94fc9d5df8d779c68d2c9",
+      "gpu": "NVIDIA GeForce RTX 4090",
+      "holdout": "51b1e398250a54b8c121e59abaea8a65f1e280176af688598e7062bdfa0d3415",
+      "outcomes": {
+        "present": {
+          "arms": {
+            "baseline": {
+              "calls": 0,
+              "correct": 9,
+              "n": 78,
+              "p50_ms": 16.653394559398293,
+              "p95_ms": 17.490529594942927,
+              "requests": 78,
+              "tokens": 0,
+              "wrong": 0
+            },
+            "frozen_source_score_4b": {
+              "calls": 47,
+              "correct": 10,
+              "n": 78,
+              "p50_ms": 50.64877565018833,
+              "p95_ms": 79.38000299036503,
+              "requests": 78,
+              "tokens": 24496,
+              "wrong": 0
+            }
+          },
+          "groups": 13,
+          "groups_with_added_wrong": 0,
+          "groups_with_new_correct": 1,
+          "paired_mean_count_per_group_95": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.23076923076923078,
+              0.0
+            ]
+          ]
+        },
+        "withdrawn": {
+          "arms": {
+            "baseline": {
+              "calls": 0,
+              "correct": 0,
+              "n": 156,
+              "p50_ms": 16.636576037853956,
+              "p95_ms": 17.172916210256517,
+              "requests": 156,
+              "tokens": 0,
+              "wrong": 1
+            },
+            "frozen_source_score_4b": {
+              "calls": 54,
+              "correct": 0,
+              "n": 156,
+              "p50_ms": 17.14241039007902,
+              "p95_ms": 76.35710330214351,
+              "requests": 156,
+              "tokens": 27522,
+              "wrong": 1
+            }
+          },
+          "groups": 13,
+          "groups_with_added_wrong": 0,
+          "groups_with_new_correct": 0,
+          "paired_mean_count_per_group_95": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0
+            ]
+          ]
+        }
+      },
+      "reader": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "reverse": false,
+      "script_sha256": "8de7f809b76b7ddc5ea53ab169c57b39c2120011002305b7031ce19bc88d5904",
+      "signature": "098d1d6d70827b73f7a6d759c7875a68e813207409285f05dbba51e511b4399e",
+      "statements": 440
+    },
+    {
+      "frozen_reference": "7ee0997e56a8d58dc227ccd6a3b0e41ee0478856c0e94fc9d5df8d779c68d2c9",
+      "gpu": "NVIDIA GeForce RTX 4090",
+      "holdout": "51b1e398250a54b8c121e59abaea8a65f1e280176af688598e7062bdfa0d3415",
+      "outcomes": {
+        "present": {
+          "arms": {
+            "baseline": {
+              "calls": 0,
+              "correct": 9,
+              "n": 78,
+              "p50_ms": 16.407798742875457,
+              "p95_ms": 16.974240844137967,
+              "requests": 78,
+              "tokens": 0,
+              "wrong": 0
+            },
+            "frozen_source_score_4b": {
+              "calls": 47,
+              "correct": 10,
+              "n": 78,
+              "p50_ms": 50.479249097406864,
+              "p95_ms": 80.09372241795063,
+              "requests": 78,
+              "tokens": 24496,
+              "wrong": 0
+            }
+          },
+          "groups": 13,
+          "groups_with_added_wrong": 0,
+          "groups_with_new_correct": 1,
+          "paired_mean_count_per_group_95": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.23076923076923078,
+              0.0
+            ]
+          ]
+        },
+        "withdrawn": {
+          "arms": {
+            "baseline": {
+              "calls": 0,
+              "correct": 0,
+              "n": 156,
+              "p50_ms": 16.373803606256843,
+              "p95_ms": 16.828636988066137,
+              "requests": 156,
+              "tokens": 0,
+              "wrong": 1
+            },
+            "frozen_source_score_4b": {
+              "calls": 54,
+              "correct": 0,
+              "n": 156,
+              "p50_ms": 16.808602027595043,
+              "p95_ms": 77.4146547773853,
+              "requests": 156,
+              "tokens": 27522,
+              "wrong": 1
+            }
+          },
+          "groups": 13,
+          "groups_with_added_wrong": 0,
+          "groups_with_new_correct": 0,
+          "paired_mean_count_per_group_95": [
+            [
+              0.0,
+              0.0
+            ],
+            [
+              0.0,
+              0.0
+            ]
+          ]
+        }
+      },
+      "reader": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "reverse": true,
+      "script_sha256": "8de7f809b76b7ddc5ea53ab169c57b39c2120011002305b7031ce19bc88d5904",
+      "signature": "098d1d6d70827b73f7a6d759c7875a68e813207409285f05dbba51e511b4399e",
+      "statements": 440
+    }
+  ],
+  "service_array": 47352
+}

@@ -51,12 +51,12 @@ def get(url):
         sleep(2 ** attempt)
 
 
-def metadata():
+def metadata(query=QUERY):
     cursor = "*"
     pages, owners, seen = [], defaultdict(set), set()
     total = None
     for _ in range(MAX_PAGES):
-        params = urlencode(dict(query=QUERY, format="json", resultType="core", pageSize=PAGE_SIZE, cursorMark=cursor))
+        params = urlencode(dict(query=query, format="json", resultType="core", pageSize=PAGE_SIZE, cursorMark=cursor))
         raw = get(METADATA + params)
         response = json.loads(raw)
         if total is None:
@@ -82,7 +82,7 @@ def metadata():
         cursor = following
     if sum(page["records"] for page in pages) != total:
         raise ValueError("Query exceeds the bounded metadata inventory")
-    return owners, seen, dict(query=QUERY, pages=pages, total=total, plos_dois=len(seen))
+    return owners, seen, dict(query=query, pages=pages, total=total, plos_dois=len(seen))
 
 
 def load_elife(paths):
