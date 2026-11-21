@@ -1,0 +1,628 @@
+{
+  "slurm_array": 46068,
+  "node": "ws3",
+  "runs": [
+    {
+      "script_sha256": "dc51a6a247f411c13130a15956d0eb6adbd17e6f78306c1acf4336dd8b545933",
+      "projection_sha256": "38bc5e6bd42e3b2f427a42a552cae11bc0813e50f2e601ee9e10a298fe47925f",
+      "manifest_sha256": "064b9d0a579e58911c1986a17e4eb169dcfd3ab57e4e4640d31a1a62143a753a",
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "source_reader_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+      "role_reader_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "reverse": false,
+      "panel": {
+        "admitted": 393,
+        "dropped": {
+          "incomplete_or_ambiguous": 28
+        },
+        "links": 16,
+        "paper_pairs": 13,
+        "linked_papers": 25,
+        "contributors": 14,
+        "variants": {
+          "present": 66,
+          "swap": 66
+        }
+      },
+      "results": {
+        "interleaved|adjacent": {
+          "totals": {
+            "issued": 37,
+            "strict": 36,
+            "adverse": 1,
+            "wrong_source": 0,
+            "requests": 132,
+            "positives": 66,
+            "search_calls": 28,
+            "source_calls": 9,
+            "role_calls": 19,
+            "correct_bindings": 132,
+            "correct_topic_spans": 132,
+            "parse_calls": 0,
+            "parse_tokens": 0
+          },
+          "parse_p95_ms": 0.00397911062464118,
+          "p95_ms": 21.969337854534388
+        },
+        "interleaved|factorized": {
+          "totals": {
+            "issued": 34,
+            "strict": 33,
+            "adverse": 1,
+            "wrong_source": 0,
+            "requests": 132,
+            "positives": 66,
+            "search_calls": 25,
+            "source_calls": 8,
+            "role_calls": 17,
+            "correct_bindings": 119,
+            "correct_topic_spans": 119,
+            "parse_calls": 132,
+            "parse_tokens": 47008
+          },
+          "parse_p95_ms": 27.31183264986612,
+          "p95_ms": 48.89157703728415
+        },
+        "interleaved|span_model": {
+          "totals": {
+            "issued": 37,
+            "strict": 36,
+            "adverse": 1,
+            "wrong_source": 0,
+            "requests": 132,
+            "positives": 66,
+            "search_calls": 28,
+            "source_calls": 9,
+            "role_calls": 19,
+            "correct_bindings": 132,
+            "correct_topic_spans": 132,
+            "parse_calls": 132,
+            "parse_tokens": 50036
+          },
+          "parse_p95_ms": 25.849489972461015,
+          "p95_ms": 45.45111290644854
+        },
+        "interleaved|structural": {
+          "totals": {
+            "issued": 37,
+            "strict": 36,
+            "adverse": 1,
+            "wrong_source": 0,
+            "requests": 132,
+            "positives": 66,
+            "search_calls": 28,
+            "source_calls": 9,
+            "role_calls": 19,
+            "correct_bindings": 132,
+            "correct_topic_spans": 132,
+            "parse_calls": 0,
+            "parse_tokens": 0
+          },
+          "parse_p95_ms": 0.01733772223815322,
+          "p95_ms": 21.808312367647886
+        },
+        "interleaved|supplied": {
+          "totals": {
+            "issued": 37,
+            "strict": 36,
+            "adverse": 1,
+            "wrong_source": 0,
+            "requests": 132,
+            "positives": 66,
+            "search_calls": 28,
+            "source_calls": 9,
+            "role_calls": 19,
+            "correct_bindings": 132,
+            "correct_topic_spans": 132,
+            "parse_calls": 0,
+            "parse_tokens": 0
+          },
+          "parse_p95_ms": 0.0032004958484321833,
+          "p95_ms": 22.15143748326227
+        },
+        "reversed_references|adjacent": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 132,
+            "positives": 66,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "correct_bindings": 0,
+            "correct_topic_spans": 0,
+            "parse_calls": 0,
+            "parse_tokens": 0
+          },
+          "parse_p95_ms": 0.0040296465158462524,
+          "p95_ms": 11.161993345012888
+        },
+        "reversed_references|factorized": {
+          "totals": {
+            "issued": 10,
+            "strict": 9,
+            "adverse": 1,
+            "wrong_source": 0,
+            "requests": 132,
+            "positives": 66,
+            "search_calls": 10,
+            "source_calls": 2,
+            "role_calls": 8,
+            "correct_bindings": 39,
+            "correct_topic_spans": 39,
+            "parse_calls": 132,
+            "parse_tokens": 46224
+          },
+          "parse_p95_ms": 27.26924837916158,
+          "p95_ms": 46.10500858398154
+        },
+        "reversed_references|span_model": {
+          "totals": {
+            "issued": 31,
+            "strict": 28,
+            "adverse": 3,
+            "wrong_source": 0,
+            "requests": 132,
+            "positives": 66,
+            "search_calls": 26,
+            "source_calls": 11,
+            "role_calls": 15,
+            "correct_bindings": 110,
+            "correct_topic_spans": 128,
+            "parse_calls": 132,
+            "parse_tokens": 49644
+          },
+          "parse_p95_ms": 25.815774407237768,
+          "p95_ms": 44.95989112765528
+        },
+        "reversed_references|structural": {
+          "totals": {
+            "issued": 37,
+            "strict": 36,
+            "adverse": 1,
+            "wrong_source": 0,
+            "requests": 132,
+            "positives": 66,
+            "search_calls": 28,
+            "source_calls": 9,
+            "role_calls": 19,
+            "correct_bindings": 132,
+            "correct_topic_spans": 132,
+            "parse_calls": 0,
+            "parse_tokens": 0
+          },
+          "parse_p95_ms": 0.01752694370225072,
+          "p95_ms": 21.77970681223087
+        },
+        "reversed_references|supplied": {
+          "totals": {
+            "issued": 37,
+            "strict": 36,
+            "adverse": 1,
+            "wrong_source": 0,
+            "requests": 132,
+            "positives": 66,
+            "search_calls": 28,
+            "source_calls": 9,
+            "role_calls": 19,
+            "correct_bindings": 132,
+            "correct_topic_spans": 132,
+            "parse_calls": 0,
+            "parse_tokens": 0
+          },
+          "parse_p95_ms": 0.004985491978004575,
+          "p95_ms": 21.92707911017351
+        },
+        "role_first|adjacent": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 132,
+            "positives": 66,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "correct_bindings": 0,
+            "correct_topic_spans": 0,
+            "parse_calls": 0,
+            "parse_tokens": 0
+          },
+          "parse_p95_ms": 0.003762572305276989,
+          "p95_ms": 11.313163250451908
+        },
+        "role_first|factorized": {
+          "totals": {
+            "issued": 34,
+            "strict": 33,
+            "adverse": 1,
+            "wrong_source": 0,
+            "requests": 132,
+            "positives": 66,
+            "search_calls": 25,
+            "source_calls": 7,
+            "role_calls": 18,
+            "correct_bindings": 117,
+            "correct_topic_spans": 117,
+            "parse_calls": 132,
+            "parse_tokens": 43848
+          },
+          "parse_p95_ms": 27.08873791852966,
+          "p95_ms": 46.46919487277046
+        },
+        "role_first|span_model": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 132,
+            "positives": 66,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "correct_bindings": 0,
+            "correct_topic_spans": 0,
+            "parse_calls": 132,
+            "parse_tokens": 48456
+          },
+          "parse_p95_ms": 23.27157473191619,
+          "p95_ms": 33.75116363167763
+        },
+        "role_first|structural": {
+          "totals": {
+            "issued": 37,
+            "strict": 36,
+            "adverse": 1,
+            "wrong_source": 0,
+            "requests": 132,
+            "positives": 66,
+            "search_calls": 28,
+            "source_calls": 9,
+            "role_calls": 19,
+            "correct_bindings": 132,
+            "correct_topic_spans": 132,
+            "parse_calls": 0,
+            "parse_tokens": 0
+          },
+          "parse_p95_ms": 0.01683583832345903,
+          "p95_ms": 21.85570548172109
+        },
+        "role_first|supplied": {
+          "totals": {
+            "issued": 37,
+            "strict": 36,
+            "adverse": 1,
+            "wrong_source": 0,
+            "requests": 132,
+            "positives": 66,
+            "search_calls": 28,
+            "source_calls": 9,
+            "role_calls": 19,
+            "correct_bindings": 132,
+            "correct_topic_spans": 132,
+            "parse_calls": 0,
+            "parse_tokens": 0
+          },
+          "parse_p95_ms": 0.006314070196822284,
+          "p95_ms": 21.838533895788714
+        }
+      }
+    },
+    {
+      "script_sha256": "dc51a6a247f411c13130a15956d0eb6adbd17e6f78306c1acf4336dd8b545933",
+      "projection_sha256": "38bc5e6bd42e3b2f427a42a552cae11bc0813e50f2e601ee9e10a298fe47925f",
+      "manifest_sha256": "064b9d0a579e58911c1986a17e4eb169dcfd3ab57e4e4640d31a1a62143a753a",
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "source_reader_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+      "role_reader_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "reverse": true,
+      "panel": {
+        "admitted": 393,
+        "dropped": {
+          "incomplete_or_ambiguous": 28
+        },
+        "links": 16,
+        "paper_pairs": 13,
+        "linked_papers": 25,
+        "contributors": 14,
+        "variants": {
+          "present": 66,
+          "swap": 66
+        }
+      },
+      "results": {
+        "interleaved|adjacent": {
+          "totals": {
+            "issued": 37,
+            "strict": 36,
+            "adverse": 1,
+            "wrong_source": 0,
+            "requests": 132,
+            "positives": 66,
+            "search_calls": 28,
+            "source_calls": 9,
+            "role_calls": 19,
+            "correct_bindings": 132,
+            "correct_topic_spans": 132,
+            "parse_calls": 0,
+            "parse_tokens": 0
+          },
+          "parse_p95_ms": 0.004097947385162114,
+          "p95_ms": 21.93467029137537
+        },
+        "interleaved|factorized": {
+          "totals": {
+            "issued": 34,
+            "strict": 33,
+            "adverse": 1,
+            "wrong_source": 0,
+            "requests": 132,
+            "positives": 66,
+            "search_calls": 25,
+            "source_calls": 8,
+            "role_calls": 17,
+            "correct_bindings": 119,
+            "correct_topic_spans": 119,
+            "parse_calls": 132,
+            "parse_tokens": 47008
+          },
+          "parse_p95_ms": 27.351795649155974,
+          "p95_ms": 48.923099861713126
+        },
+        "interleaved|span_model": {
+          "totals": {
+            "issued": 37,
+            "strict": 36,
+            "adverse": 1,
+            "wrong_source": 0,
+            "requests": 132,
+            "positives": 66,
+            "search_calls": 28,
+            "source_calls": 9,
+            "role_calls": 19,
+            "correct_bindings": 132,
+            "correct_topic_spans": 132,
+            "parse_calls": 132,
+            "parse_tokens": 50036
+          },
+          "parse_p95_ms": 25.88676509913057,
+          "p95_ms": 45.2949246391654
+        },
+        "interleaved|structural": {
+          "totals": {
+            "issued": 37,
+            "strict": 36,
+            "adverse": 1,
+            "wrong_source": 0,
+            "requests": 132,
+            "positives": 66,
+            "search_calls": 28,
+            "source_calls": 9,
+            "role_calls": 19,
+            "correct_bindings": 132,
+            "correct_topic_spans": 132,
+            "parse_calls": 0,
+            "parse_tokens": 0
+          },
+          "parse_p95_ms": 0.016215984942391515,
+          "p95_ms": 21.866771206259727
+        },
+        "interleaved|supplied": {
+          "totals": {
+            "issued": 37,
+            "strict": 36,
+            "adverse": 1,
+            "wrong_source": 0,
+            "requests": 132,
+            "positives": 66,
+            "search_calls": 28,
+            "source_calls": 9,
+            "role_calls": 19,
+            "correct_bindings": 132,
+            "correct_topic_spans": 132,
+            "parse_calls": 0,
+            "parse_tokens": 0
+          },
+          "parse_p95_ms": 0.003243220271542668,
+          "p95_ms": 22.030077321687713
+        },
+        "reversed_references|adjacent": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 132,
+            "positives": 66,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "correct_bindings": 0,
+            "correct_topic_spans": 0,
+            "parse_calls": 0,
+            "parse_tokens": 0
+          },
+          "parse_p95_ms": 0.0038366299122571945,
+          "p95_ms": 11.095559713430703
+        },
+        "reversed_references|factorized": {
+          "totals": {
+            "issued": 10,
+            "strict": 9,
+            "adverse": 1,
+            "wrong_source": 0,
+            "requests": 132,
+            "positives": 66,
+            "search_calls": 10,
+            "source_calls": 2,
+            "role_calls": 8,
+            "correct_bindings": 39,
+            "correct_topic_spans": 39,
+            "parse_calls": 132,
+            "parse_tokens": 46224
+          },
+          "parse_p95_ms": 27.35760376090184,
+          "p95_ms": 46.31336291786283
+        },
+        "reversed_references|span_model": {
+          "totals": {
+            "issued": 31,
+            "strict": 28,
+            "adverse": 3,
+            "wrong_source": 0,
+            "requests": 132,
+            "positives": 66,
+            "search_calls": 26,
+            "source_calls": 11,
+            "role_calls": 15,
+            "correct_bindings": 110,
+            "correct_topic_spans": 128,
+            "parse_calls": 132,
+            "parse_tokens": 49644
+          },
+          "parse_p95_ms": 25.855489808600396,
+          "p95_ms": 45.0224740547128
+        },
+        "reversed_references|structural": {
+          "totals": {
+            "issued": 37,
+            "strict": 36,
+            "adverse": 1,
+            "wrong_source": 0,
+            "requests": 132,
+            "positives": 66,
+            "search_calls": 28,
+            "source_calls": 9,
+            "role_calls": 19,
+            "correct_bindings": 132,
+            "correct_topic_spans": 132,
+            "parse_calls": 0,
+            "parse_tokens": 0
+          },
+          "parse_p95_ms": 0.015162804629653692,
+          "p95_ms": 21.823702100664377
+        },
+        "reversed_references|supplied": {
+          "totals": {
+            "issued": 37,
+            "strict": 36,
+            "adverse": 1,
+            "wrong_source": 0,
+            "requests": 132,
+            "positives": 66,
+            "search_calls": 28,
+            "source_calls": 9,
+            "role_calls": 19,
+            "correct_bindings": 132,
+            "correct_topic_spans": 132,
+            "parse_calls": 0,
+            "parse_tokens": 0
+          },
+          "parse_p95_ms": 0.0048779125791043034,
+          "p95_ms": 21.94463220075704
+        },
+        "role_first|adjacent": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 132,
+            "positives": 66,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "correct_bindings": 0,
+            "correct_topic_spans": 0,
+            "parse_calls": 0,
+            "parse_tokens": 0
+          },
+          "parse_p95_ms": 0.003579008625820279,
+          "p95_ms": 11.294657771941274
+        },
+        "role_first|factorized": {
+          "totals": {
+            "issued": 34,
+            "strict": 33,
+            "adverse": 1,
+            "wrong_source": 0,
+            "requests": 132,
+            "positives": 66,
+            "search_calls": 25,
+            "source_calls": 7,
+            "role_calls": 18,
+            "correct_bindings": 117,
+            "correct_topic_spans": 117,
+            "parse_calls": 132,
+            "parse_tokens": 43848
+          },
+          "parse_p95_ms": 27.09653881029226,
+          "p95_ms": 46.48918455350213
+        },
+        "role_first|span_model": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 132,
+            "positives": 66,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "correct_bindings": 0,
+            "correct_topic_spans": 0,
+            "parse_calls": 132,
+            "parse_tokens": 48456
+          },
+          "parse_p95_ms": 24.33003984624517,
+          "p95_ms": 33.79165554069914
+        },
+        "role_first|structural": {
+          "totals": {
+            "issued": 37,
+            "strict": 36,
+            "adverse": 1,
+            "wrong_source": 0,
+            "requests": 132,
+            "positives": 66,
+            "search_calls": 28,
+            "source_calls": 9,
+            "role_calls": 19,
+            "correct_bindings": 132,
+            "correct_topic_spans": 132,
+            "parse_calls": 0,
+            "parse_tokens": 0
+          },
+          "parse_p95_ms": 0.016448571113869548,
+          "p95_ms": 21.85822958126664
+        },
+        "role_first|supplied": {
+          "totals": {
+            "issued": 37,
+            "strict": 36,
+            "adverse": 1,
+            "wrong_source": 0,
+            "requests": 132,
+            "positives": 66,
+            "search_calls": 28,
+            "source_calls": 9,
+            "role_calls": 19,
+            "correct_bindings": 132,
+            "correct_topic_spans": 132,
+            "parse_calls": 0,
+            "parse_tokens": 0
+          },
+          "parse_p95_ms": 0.006879918510094284,
+          "p95_ms": 22.058776469202712
+        }
+      }
+    }
+  ]
+}
