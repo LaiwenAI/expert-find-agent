@@ -67,6 +67,31 @@ Slurm job 46710 reproduced the CPU results in both traversal orders.
 The layout intervention used the same pinned archive and split.
 [Aggregate results](results.json)
 
+## Semantic comparison with supplied candidates
+
+Run the same panel on ws1 RTX 4090 with the pinned Qwen 0.6B
+embedding checkpoint. Span cosine compares isolated anchor and
+candidate spans. Window cosine uses 55 characters of surrounding
+text on each side and marks the evaluated span. The learned variants
+add the span score, then both cosine scores, to the same four
+structural features and fit only on the original fit ads.
+
+| Route | Correct target / 150 |
+| --- | ---: |
+| Span cosine | 59 |
+| Window cosine | 120 |
+| Learned structure | 147 |
+| Learned structure plus span cosine | 147 |
+| Learned structure plus span and window cosine | 147 |
+
+Slurm tasks 46767_0 and 46767_1 reproduce all outcomes and the CPU
+structural reference. Both fitted semantic variants have paired
+intervals of [0, 0] against structure at the measured resolution.
+The result is specific to supplied spans and the low candidate
+ceiling for possible gains. The wider [raw-text evaluation](../goja-raw-experience-scope-v1)
+shows a distinct candidate and ranking bottleneck.
+[Semantic metrics](semantic-results.json)
+
 ## Reproduce
 
 Download `data/goja_redacted_v1.zip` from the pinned dataset revision.
@@ -81,3 +106,7 @@ PYTHONPATH=src:. OPENBLAS_NUM_THREADS=1 \
 PYTHONPATH=src:. OPENBLAS_NUM_THREADS=1 \
   python -m experiments.retrieval.goja_layout_ablation GOJA_ZIP NEW_LAYOUT_RESULTS
 ```
+
+For the semantic comparison, use the same command in a Slurm CUDA
+allocation and add `--embedding QWEN_EMBEDDING`. The pinned model
+revision is `97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3`.
