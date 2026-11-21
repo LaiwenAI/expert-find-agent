@@ -60,7 +60,7 @@ def anchor_candidates(text, vocabulary, *, include_cue_free=False):
 
 def feature_row(group, candidates, targets, anchor=None):
     spans, tokens, values = zip(*candidates, strict=True) if candidates else ((), (), ())
-    shape = 9 if anchor is None else 11
+    shape = len(values[0]) if values else (9 if anchor is None else 11)
     features = np.array(values, dtype=float).reshape(-1, shape)
     lexicon = [lexemes(words) for words in tokens]
     positive = np.array([offsets(span) in targets for span in spans], dtype=bool)
@@ -123,7 +123,7 @@ def measures(tp, predicted, gold):
                 recall=tp / max(1, gold), f1=2 * tp / max(1, predicted + gold))
 
 
-def evaluate(ads, proposer=anchor_candidates, *, trace=None, anchor_limits=None):
+def evaluate(ads, proposer=anchor_candidates, *, trace=None, anchor_limits=None, anchor_fit=fit_anchor):
     train_ads = [ad for ad in ads if group_bucket(ad[0]) < 4]
     anchor_forms = {group: Counter(terms(text, gold)) for group, text, gold in train_ads}
     scope_forms = {
@@ -146,7 +146,7 @@ def evaluate(ads, proposer=anchor_candidates, *, trace=None, anchor_limits=None)
             if row[4].any() and not row[4].all():
                 scope_training.append(row)
     anchor_bank = lexical_bank(anchor_training)
-    anchor_model = fit_anchor(anchor_training, anchor_bank)
+    anchor_model = anchor_fit(anchor_training, anchor_bank)
     scope_bank = lexical_bank(scope_training)
     scope_model = train(scope_training, [add_lexical(row, scope_bank, True) for row in scope_training])
     development, held = [], []
