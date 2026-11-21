@@ -1,0 +1,27 @@
+\begingroup
+\definecolor{reachpool}{HTML}{8AA0B6}
+\definecolor{reachreads}{HTML}{4B8496}
+\definecolor{reachreturned}{HTML}{1A6960}
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[x=1cm,y=1cm,font=\sffamily\scriptsize]
+  \foreach \tick in {0,25,50,75,100} {
+    \draw[gray!22] ({2.30+.054*\tick},.57) -- ({2.30+.054*\tick},3.54);
+    \node[anchor=north] at ({2.30+.054*\tick},.54) {\tick\%};
+  }
+  \node[anchor=west,font=\sffamily\small\bfseries] at (0,3.49) {PLOS (160)};
+  \node[anchor=west,font=\sffamily\small\bfseries] at (0,1.99) {eLife (51)};
+  \foreach \yt/\pct/\count/\shade/\stage in {
+    3.15/71.875/115/reachpool/Ranked pool,
+    2.76/55.625/89/reachreads/Three reads,
+    2.37/53.125/85/reachreturned/Returned,
+    1.66/96.078/49/reachpool/Ranked pool,
+    1.27/90.196/46/reachreads/Three reads,
+    .88/90.196/46/reachreturned/Returned}
+  {
+    \node[anchor=east] at (2.23,\yt) {\stage};
+    \fill[\shade,rounded corners=.9pt] (2.30,{\yt-.13}) rectangle ({2.30+.054*\pct},{\yt+.13});
+    \node[anchor=west,inner sep=2.2pt] at ({2.30+.054*\pct},\yt) {\count};
+  }
+\end{tikzpicture}%
+}
+\endgroup

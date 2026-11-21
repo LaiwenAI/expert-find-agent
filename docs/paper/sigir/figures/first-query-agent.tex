@@ -1,0 +1,79 @@
+\begingroup
+\definecolor{searchink}{HTML}{14263A}
+\definecolor{searchline}{HTML}{65788C}
+\definecolor{searchedge}{HTML}{1A6960}
+\definecolor{searchsoft}{HTML}{EAF4F1}
+\definecolor{searchlight}{HTML}{F2F5F8}
+\definecolor{searchgap}{HTML}{FFF3D9}
+\resizebox{\linewidth}{!}{%
+\begin{tikzpicture}[x=1cm,y=1cm,color=searchink,font=\sffamily\small,
+    pane/.style={draw=searchline!75,rounded corners=3pt,fill=white},
+    flow/.style={-{Stealth[length=2.5mm]},draw=searchline,line width=.7pt},
+    exact/.style={draw=searchedge,line width=.85pt},
+    micro/.style={font=\sffamily\scriptsize},
+    label/.style={font=\sffamily\small\bfseries,anchor=west}]
+  \path[use as bounding box] (0,.08) rectangle (17.65,4.49);
+  \draw[pane,fill=searchlight] (.06,1.06) rectangle (2.46,3.40);
+  \node[label] at (.19,3.14) {Request};
+  \node[anchor=west,micro] at (.19,2.70) {Two topic--role clauses};
+  \draw[pane] (.20,2.04) rectangle (2.31,2.49);
+  \draw[pane] (.20,1.46) rectangle (2.31,1.91);
+  \node[micro,anchor=west] at (.31,2.26) {Design the method};
+  \node[micro,anchor=west] at (.31,1.69) {Validate on the line};
+
+  \draw[pane,fill=searchlight] (2.86,.55) rectangle (6.00,3.99);
+  \node[label] at (3.00,3.73) {Owned-source index};
+  \node[micro,anchor=west] at (3.00,3.33) {Hybrid ranks by condition};
+  \foreach \x/\doc in {3.33/A,4.23/B,5.14/C} {
+    \draw[pane] (\x-.20,2.68) rectangle (\x+.20,3.08);
+    \node[micro] at (\x,2.88) {\doc};
+  }
+  \node[micro,anchor=west] at (3.00,2.36) {Contributor-role postings};
+  \draw[exact] (3.33,1.98) -- (3.94,1.26) -- (5.14,1.98);
+  \draw[searchline,dashed] (4.23,1.98) -- (5.31,1.26);
+  \foreach \x/\doc in {3.33/A,4.23/B,5.14/C} {
+    \node[micro,draw=searchline,fill=white,circle,inner sep=2.4pt] at (\x,1.98) {\doc};
+  }
+  \node[micro,fill=searchsoft,rounded corners=2pt] at (3.94,1.23) {Expert 1};
+  \node[micro,fill=white,rounded corners=2pt] at (5.31,1.23) {Expert 2};
+  \node[micro,anchor=west] at (3.00,.80) {Solid: known; dashed: opaque};
+
+  \draw[pane,fill=searchsoft] (6.45,.20) rectangle (14.30,4.36);
+  \node[label] at (6.63,4.08) {First-query agent};
+  \draw[pane] (6.66,1.97) rectangle (10.02,3.78);
+  \node[label] at (6.79,3.52) {Allocate reads};
+  \node[micro,anchor=west] at (6.79,3.15) {Join ranked lists on one expert};
+  \draw[exact] (7.12,2.68) -- (8.09,2.68);
+  \node[micro,draw=searchedge,fill=searchsoft,rounded corners=2pt] at (7.12,2.68) {A};
+  \node[micro,draw=searchedge,fill=searchsoft,rounded corners=2pt] at (8.09,2.68) {C};
+  \node[micro,anchor=west] at (8.53,2.68) {same person};
+  \node[micro,anchor=west] at (6.79,2.26) {Add one distinct source if needed};
+  \draw[pane] (10.49,1.97) rectangle (14.09,3.78);
+  \node[label] at (10.64,3.52) {Verify and update};
+  \node[micro,anchor=west] at (10.64,3.15) {Read original declarations};
+  \draw[rounded corners=2pt,fill=searchsoft,draw=searchedge!70] (10.67,2.44) rectangle (12.20,2.87);
+  \draw[rounded corners=2pt,fill=searchgap,draw=searchline] (12.34,2.44) rectangle (13.90,2.87);
+  \node[micro] at (11.44,2.65) {Design: verified};
+  \node[micro] at (13.12,2.65) {Validation: open};
+  \node[micro,anchor=west] at (10.64,2.19) {Retain source and span provenance};
+  \draw[pane] (6.66,.41) rectangle (14.09,1.52);
+  \node[label] at (6.79,1.27) {Evidence decision};
+  \node[micro,anchor=west] at (6.79,.79) {Missing witness: read};
+  \node[micro] at (10.34,.79) {Feasible ambiguity: recheck};
+  \node[micro,anchor=east] at (13.96,.79) {Stable output: stop};
+  \draw[flow] (10.02,2.88) -- (10.49,2.88);
+  \draw[flow] (12.42,1.97) -- (12.42,1.52);
+  \draw[flow,dashed] (8.13,1.52) -- (8.13,1.97);
+
+  \draw[pane,fill=searchlight] (14.76,1.06) rectangle (17.59,3.40);
+  \node[label] at (14.89,3.14) {Response};
+  \draw[pane] (14.90,2.20) rectangle (17.43,2.78);
+  \node[micro,anchor=west] at (15.00,2.48) {Expert with linked citations};
+  \draw[pane] (14.90,1.45) rectangle (17.43,2.04);
+  \node[micro,anchor=west] at (15.00,1.74) {Or unresolved conditions};
+  \draw[flow] (2.46,2.88) -- (2.86,2.88);
+  \draw[flow] (6.00,2.88) -- (6.66,2.88);
+  \draw[flow] (14.09,.96) -- (14.53,.96) -- (14.53,2.49) -- (14.76,2.49);
+\end{tikzpicture}%
+}
+\endgroup

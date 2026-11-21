@@ -1,4 +1,4 @@
-# SIGIR manuscript
+# Three Reads, One Expert
 
 `main.tex` is the canonical editable English manuscript; `supplement.tex` builds the separate supplementary PDF from `appendix.tex`, containing artifact pointers and earlier development comparisons. The main draft studies contributor-constrained first-round evidence allocation under a fixed reading budget. It reports coverage against fixed and sequential controls, exact execution checks, and a shared-corpus feasibility ablation for 4B role rechecks. The supplement identifies the reproducible runs and separates label-supported coverage from human evidence judgments. The current paper scope is the structured publication benchmark and fixed-inventory verification. The complete enterprise quality claim still requires independent adjudication and an end-to-end comparison at matched risk and cost. The main file uses ACM `acmart` with `sigconf,natbib=true,anonymous=true,pbalance=true`, following the official SIGIR2027 full-paper guidance:
 https://sigir2027.org/pages/submit-full.html
@@ -27,6 +27,12 @@ downstream outcome. SIGIR awarded it [Best Short Paper](https://sigir-2024.githu
 Crossref's DOI records reported 17 references to SIM-RAG and 182 to
 eRAG on 2026-11-21. Counts use the published DOIs and can differ from
 metrics that consolidate preprint versions.
+
+The observed-role continuation ablation reports proof availability,
+issued expert evidence, and latency as separate endpoints. Its paired
+controls and reproduction commands are in the
+[benchmark](../../../benchmarks/open-topic-observed-repair-v1).
+The figure and equation sources are editable LaTeX.
 
 ## Scope of the supplement
 
