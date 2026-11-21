@@ -1,0 +1,604 @@
+{
+  "panels": {
+    "role_edits": {
+      "array": 47062,
+      "inputs": {
+        "role-edits-plos-manifest.json": "93c9b3aedf74ed33e76ec69bebe58751d1101cab4023f748de3c5cf23b840060",
+        "role-edits-plos-notes.json": "876d2574000ef0249eca822a7f78e88c0063632a43604bc81ecabaf2dbee884e",
+        "results.json": "90673a9feb8b8ce15b228142791dc29c867dc67fce846e4687232365710605e9"
+      },
+      "reports": {
+        "index": {
+          "requests": 54,
+          "supported": 23,
+          "wrong": 1,
+          "wrong_negative": 1,
+          "issued": 24,
+          "adverse_groups": 1,
+          "reviewed": 0,
+          "reranker_checks": 0,
+          "changed": 0
+        },
+        "fusion": {
+          "requests": 54,
+          "supported": 19,
+          "wrong": 1,
+          "wrong_negative": 1,
+          "issued": 20,
+          "adverse_groups": 1,
+          "reviewed": 54,
+          "reranker_checks": 144,
+          "changed": 4
+        },
+        "matched": {
+          "hash": {
+            "requests": 54,
+            "supported": 23,
+            "wrong": 1,
+            "wrong_negative": 1,
+            "issued": 24,
+            "adverse_groups": 1,
+            "reviewed": 13,
+            "reranker_checks": 34,
+            "changed": 0
+          },
+          "margin": {
+            "requests": 54,
+            "supported": 19,
+            "wrong": 1,
+            "wrong_negative": 1,
+            "issued": 20,
+            "adverse_groups": 1,
+            "reviewed": 13,
+            "reranker_checks": 34,
+            "changed": 4
+          },
+          "disagreement": {
+            "requests": 54,
+            "supported": 21,
+            "wrong": 1,
+            "wrong_negative": 1,
+            "issued": 22,
+            "adverse_groups": 1,
+            "reviewed": 13,
+            "reranker_checks": 34,
+            "changed": 2
+          },
+          "learned_gain": {
+            "requests": 54,
+            "supported": 23,
+            "wrong": 1,
+            "wrong_negative": 1,
+            "issued": 24,
+            "adverse_groups": 1,
+            "reviewed": 13,
+            "reranker_checks": 34,
+            "changed": 0
+          }
+        },
+        "frozen": {
+          "hash": {
+            "requests": 54,
+            "supported": 23,
+            "wrong": 1,
+            "wrong_negative": 1,
+            "issued": 24,
+            "adverse_groups": 1,
+            "reviewed": 9,
+            "reranker_checks": 32,
+            "changed": 0
+          },
+          "margin": {
+            "requests": 54,
+            "supported": 19,
+            "wrong": 1,
+            "wrong_negative": 1,
+            "issued": 20,
+            "adverse_groups": 1,
+            "reviewed": 11,
+            "reranker_checks": 26,
+            "changed": 4
+          },
+          "disagreement": {
+            "requests": 54,
+            "supported": 21,
+            "wrong": 1,
+            "wrong_negative": 1,
+            "issued": 22,
+            "adverse_groups": 1,
+            "reviewed": 11,
+            "reranker_checks": 28,
+            "changed": 2
+          },
+          "learned_gain": {
+            "requests": 54,
+            "supported": 23,
+            "wrong": 1,
+            "wrong_negative": 1,
+            "issued": 24,
+            "adverse_groups": 1,
+            "reviewed": 15,
+            "reranker_checks": 44,
+            "changed": 0
+          }
+        }
+      },
+      "live": [
+        {
+          "job": "47064",
+          "reverse": false,
+          "metrics": {
+            "index": {
+              "requests": 54,
+              "supported": 23,
+              "wrong": 1,
+              "wrong_negative": 1,
+              "issued": 24,
+              "adverse_groups": 1,
+              "reviewed": 0,
+              "reranker_checks": 0,
+              "p95_ms": 10.810243058949709,
+              "p50_ms": 10.199898853898048,
+              "signature": "2bd0f258cddb2f4713ff1f70041757991a1911e721f6ae560a4be923521ff945"
+            },
+            "margin": {
+              "requests": 54,
+              "supported": 19,
+              "wrong": 1,
+              "wrong_negative": 1,
+              "issued": 20,
+              "adverse_groups": 1,
+              "reviewed": 11,
+              "reranker_checks": 26,
+              "p95_ms": 20.372935011982918,
+              "p50_ms": 10.302920825779438,
+              "signature": "7e4b78c712d29e641daf7c15bce46c7769a137d50bdf04ae270506316dbba511"
+            },
+            "disagreement": {
+              "requests": 54,
+              "supported": 21,
+              "wrong": 1,
+              "wrong_negative": 1,
+              "issued": 22,
+              "adverse_groups": 1,
+              "reviewed": 11,
+              "reranker_checks": 28,
+              "p95_ms": 20.42065169662237,
+              "p50_ms": 10.285913944244385,
+              "signature": "ad2728a12fac57cffe6e421e4666fbc917dbb868d13e9ab6148fb6ee5d2aa9a8"
+            },
+            "disagreement_veto": {
+              "requests": 54,
+              "supported": 21,
+              "wrong": 1,
+              "wrong_negative": 1,
+              "issued": 22,
+              "adverse_groups": 1,
+              "reviewed": 11,
+              "reranker_checks": 28,
+              "p95_ms": 20.310984272509813,
+              "p50_ms": 10.276229120790958,
+              "signature": "ad2728a12fac57cffe6e421e4666fbc917dbb868d13e9ab6148fb6ee5d2aa9a8"
+            },
+            "learned_gain": {
+              "requests": 54,
+              "supported": 23,
+              "wrong": 1,
+              "wrong_negative": 1,
+              "issued": 24,
+              "adverse_groups": 1,
+              "reviewed": 16,
+              "reranker_checks": 46,
+              "p95_ms": 20.377615932375193,
+              "p50_ms": 10.33803727477789,
+              "signature": "2bd0f258cddb2f4713ff1f70041757991a1911e721f6ae560a4be923521ff945"
+            },
+            "fusion": {
+              "requests": 54,
+              "supported": 19,
+              "wrong": 1,
+              "wrong_negative": 1,
+              "issued": 20,
+              "adverse_groups": 1,
+              "reviewed": 54,
+              "reranker_checks": 144,
+              "p95_ms": 21.26975180581212,
+              "p50_ms": 20.07354609668255,
+              "signature": "7e4b78c712d29e641daf7c15bce46c7769a137d50bdf04ae270506316dbba511"
+            }
+          }
+        },
+        {
+          "job": "47062",
+          "reverse": true,
+          "metrics": {
+            "margin": {
+              "requests": 54,
+              "supported": 19,
+              "wrong": 1,
+              "wrong_negative": 1,
+              "issued": 20,
+              "adverse_groups": 1,
+              "reviewed": 11,
+              "reranker_checks": 26,
+              "p95_ms": 21.363515499979258,
+              "p50_ms": 10.443057864904404,
+              "signature": "7e4b78c712d29e641daf7c15bce46c7769a137d50bdf04ae270506316dbba511"
+            },
+            "disagreement": {
+              "requests": 54,
+              "supported": 21,
+              "wrong": 1,
+              "wrong_negative": 1,
+              "issued": 22,
+              "adverse_groups": 1,
+              "reviewed": 11,
+              "reranker_checks": 28,
+              "p95_ms": 20.742085855454203,
+              "p50_ms": 10.422836989164352,
+              "signature": "ad2728a12fac57cffe6e421e4666fbc917dbb868d13e9ab6148fb6ee5d2aa9a8"
+            },
+            "disagreement_veto": {
+              "requests": 54,
+              "supported": 21,
+              "wrong": 1,
+              "wrong_negative": 1,
+              "issued": 22,
+              "adverse_groups": 1,
+              "reviewed": 11,
+              "reranker_checks": 28,
+              "p95_ms": 21.189980302006006,
+              "p50_ms": 10.466287843883038,
+              "signature": "ad2728a12fac57cffe6e421e4666fbc917dbb868d13e9ab6148fb6ee5d2aa9a8"
+            },
+            "learned_gain": {
+              "requests": 54,
+              "supported": 23,
+              "wrong": 1,
+              "wrong_negative": 1,
+              "issued": 24,
+              "adverse_groups": 1,
+              "reviewed": 16,
+              "reranker_checks": 46,
+              "p95_ms": 20.696360059082508,
+              "p50_ms": 10.472831316292286,
+              "signature": "2bd0f258cddb2f4713ff1f70041757991a1911e721f6ae560a4be923521ff945"
+            },
+            "fusion": {
+              "requests": 54,
+              "supported": 19,
+              "wrong": 1,
+              "wrong_negative": 1,
+              "issued": 20,
+              "adverse_groups": 1,
+              "reviewed": 54,
+              "reranker_checks": 144,
+              "p95_ms": 21.363818272948265,
+              "p50_ms": 20.401926711201668,
+              "signature": "7e4b78c712d29e641daf7c15bce46c7769a137d50bdf04ae270506316dbba511"
+            },
+            "index": {
+              "requests": 54,
+              "supported": 23,
+              "wrong": 1,
+              "wrong_negative": 1,
+              "issued": 24,
+              "adverse_groups": 1,
+              "reviewed": 0,
+              "reranker_checks": 0,
+              "p95_ms": 10.779665503650904,
+              "p50_ms": 10.326980613172054,
+              "signature": "2bd0f258cddb2f4713ff1f70041757991a1911e721f6ae560a4be923521ff945"
+            }
+          }
+        }
+      ]
+    },
+    "source_swaps": {
+      "array": 47072,
+      "inputs": {
+        "combined-swaps-manifest.json": "d808232f45e19a3f9e4529f6528a01a8ff84c47878616658e4613fc948e8c419",
+        "combined-swaps-notes.json": "cc4e61c0e24d222b68f4307633336d3840406d8961e2d1a3e248188fa35701b7",
+        "results.json": "90673a9feb8b8ce15b228142791dc29c867dc67fce846e4687232365710605e9"
+      },
+      "reports": {
+        "index": {
+          "requests": 28,
+          "supported": 13,
+          "wrong": 0,
+          "wrong_negative": 0,
+          "issued": 13,
+          "adverse_groups": 0,
+          "reviewed": 0,
+          "reranker_checks": 0,
+          "changed": 0
+        },
+        "fusion": {
+          "requests": 28,
+          "supported": 13,
+          "wrong": 0,
+          "wrong_negative": 0,
+          "issued": 13,
+          "adverse_groups": 0,
+          "reviewed": 28,
+          "reranker_checks": 80,
+          "changed": 0
+        },
+        "matched": {
+          "hash": {
+            "requests": 28,
+            "supported": 13,
+            "wrong": 0,
+            "wrong_negative": 0,
+            "issued": 13,
+            "adverse_groups": 0,
+            "reviewed": 7,
+            "reranker_checks": 20,
+            "changed": 0
+          },
+          "margin": {
+            "requests": 28,
+            "supported": 13,
+            "wrong": 0,
+            "wrong_negative": 0,
+            "issued": 13,
+            "adverse_groups": 0,
+            "reviewed": 7,
+            "reranker_checks": 20,
+            "changed": 0
+          },
+          "disagreement": {
+            "requests": 28,
+            "supported": 13,
+            "wrong": 0,
+            "wrong_negative": 0,
+            "issued": 13,
+            "adverse_groups": 0,
+            "reviewed": 7,
+            "reranker_checks": 20,
+            "changed": 0
+          },
+          "learned_gain": {
+            "requests": 28,
+            "supported": 13,
+            "wrong": 0,
+            "wrong_negative": 0,
+            "issued": 13,
+            "adverse_groups": 0,
+            "reviewed": 7,
+            "reranker_checks": 20,
+            "changed": 0
+          }
+        },
+        "frozen": {
+          "hash": {
+            "requests": 28,
+            "supported": 13,
+            "wrong": 0,
+            "wrong_negative": 0,
+            "issued": 13,
+            "adverse_groups": 0,
+            "reviewed": 2,
+            "reranker_checks": 6,
+            "changed": 0
+          },
+          "margin": {
+            "requests": 28,
+            "supported": 13,
+            "wrong": 0,
+            "wrong_negative": 0,
+            "issued": 13,
+            "adverse_groups": 0,
+            "reviewed": 4,
+            "reranker_checks": 10,
+            "changed": 0
+          },
+          "disagreement": {
+            "requests": 28,
+            "supported": 13,
+            "wrong": 0,
+            "wrong_negative": 0,
+            "issued": 13,
+            "adverse_groups": 0,
+            "reviewed": 5,
+            "reranker_checks": 14,
+            "changed": 0
+          },
+          "learned_gain": {
+            "requests": 28,
+            "supported": 13,
+            "wrong": 0,
+            "wrong_negative": 0,
+            "issued": 13,
+            "adverse_groups": 0,
+            "reviewed": 9,
+            "reranker_checks": 32,
+            "changed": 0
+          }
+        }
+      },
+      "live": [
+        {
+          "job": "47073",
+          "reverse": false,
+          "metrics": {
+            "index": {
+              "requests": 28,
+              "supported": 13,
+              "wrong": 0,
+              "wrong_negative": 0,
+              "issued": 13,
+              "adverse_groups": 0,
+              "reviewed": 0,
+              "reranker_checks": 0,
+              "p95_ms": 10.97263153642416,
+              "p50_ms": 10.4359807446599,
+              "signature": "80ef1896aaf21ed6741e524519e39740c30efc8cf9e0c7ba5cc851990c903598"
+            },
+            "margin": {
+              "requests": 28,
+              "supported": 13,
+              "wrong": 0,
+              "wrong_negative": 0,
+              "issued": 13,
+              "adverse_groups": 0,
+              "reviewed": 4,
+              "reranker_checks": 10,
+              "p95_ms": 20.362895261496305,
+              "p50_ms": 10.54135151207447,
+              "signature": "80ef1896aaf21ed6741e524519e39740c30efc8cf9e0c7ba5cc851990c903598"
+            },
+            "disagreement": {
+              "requests": 28,
+              "supported": 13,
+              "wrong": 0,
+              "wrong_negative": 0,
+              "issued": 13,
+              "adverse_groups": 0,
+              "reviewed": 5,
+              "reranker_checks": 14,
+              "p95_ms": 20.747019816190004,
+              "p50_ms": 10.570459067821503,
+              "signature": "80ef1896aaf21ed6741e524519e39740c30efc8cf9e0c7ba5cc851990c903598"
+            },
+            "disagreement_veto": {
+              "requests": 28,
+              "supported": 13,
+              "wrong": 0,
+              "wrong_negative": 0,
+              "issued": 13,
+              "adverse_groups": 0,
+              "reviewed": 5,
+              "reranker_checks": 14,
+              "p95_ms": 20.69865046069026,
+              "p50_ms": 10.563266463577747,
+              "signature": "80ef1896aaf21ed6741e524519e39740c30efc8cf9e0c7ba5cc851990c903598"
+            },
+            "learned_gain": {
+              "requests": 28,
+              "supported": 13,
+              "wrong": 0,
+              "wrong_negative": 0,
+              "issued": 13,
+              "adverse_groups": 0,
+              "reviewed": 9,
+              "reranker_checks": 32,
+              "p95_ms": 21.41486769542098,
+              "p50_ms": 10.662408545613289,
+              "signature": "80ef1896aaf21ed6741e524519e39740c30efc8cf9e0c7ba5cc851990c903598"
+            },
+            "fusion": {
+              "requests": 28,
+              "supported": 13,
+              "wrong": 0,
+              "wrong_negative": 0,
+              "issued": 13,
+              "adverse_groups": 0,
+              "reviewed": 28,
+              "reranker_checks": 80,
+              "p95_ms": 21.37285340577364,
+              "p50_ms": 20.46284545212984,
+              "signature": "80ef1896aaf21ed6741e524519e39740c30efc8cf9e0c7ba5cc851990c903598"
+            }
+          }
+        },
+        {
+          "job": "47072",
+          "reverse": true,
+          "metrics": {
+            "margin": {
+              "requests": 28,
+              "supported": 13,
+              "wrong": 0,
+              "wrong_negative": 0,
+              "issued": 13,
+              "adverse_groups": 0,
+              "reviewed": 4,
+              "reranker_checks": 10,
+              "p95_ms": 20.005707815289497,
+              "p50_ms": 10.388013906776905,
+              "signature": "80ef1896aaf21ed6741e524519e39740c30efc8cf9e0c7ba5cc851990c903598"
+            },
+            "disagreement": {
+              "requests": 28,
+              "supported": 13,
+              "wrong": 0,
+              "wrong_negative": 0,
+              "issued": 13,
+              "adverse_groups": 0,
+              "reviewed": 5,
+              "reranker_checks": 14,
+              "p95_ms": 20.486808009445667,
+              "p50_ms": 10.383108630776405,
+              "signature": "80ef1896aaf21ed6741e524519e39740c30efc8cf9e0c7ba5cc851990c903598"
+            },
+            "disagreement_veto": {
+              "requests": 28,
+              "supported": 13,
+              "wrong": 0,
+              "wrong_negative": 0,
+              "issued": 13,
+              "adverse_groups": 0,
+              "reviewed": 5,
+              "reranker_checks": 14,
+              "p95_ms": 20.438872557133436,
+              "p50_ms": 10.44099684804678,
+              "signature": "80ef1896aaf21ed6741e524519e39740c30efc8cf9e0c7ba5cc851990c903598"
+            },
+            "learned_gain": {
+              "requests": 28,
+              "supported": 13,
+              "wrong": 0,
+              "wrong_negative": 0,
+              "issued": 13,
+              "adverse_groups": 0,
+              "reviewed": 9,
+              "reranker_checks": 32,
+              "p95_ms": 20.615457091480494,
+              "p50_ms": 10.432329960167408,
+              "signature": "80ef1896aaf21ed6741e524519e39740c30efc8cf9e0c7ba5cc851990c903598"
+            },
+            "fusion": {
+              "requests": 28,
+              "supported": 13,
+              "wrong": 0,
+              "wrong_negative": 0,
+              "issued": 13,
+              "adverse_groups": 0,
+              "reviewed": 28,
+              "reranker_checks": 80,
+              "p95_ms": 21.060349326580763,
+              "p50_ms": 20.3373646363616,
+              "signature": "80ef1896aaf21ed6741e524519e39740c30efc8cf9e0c7ba5cc851990c903598"
+            },
+            "index": {
+              "requests": 28,
+              "supported": 13,
+              "wrong": 0,
+              "wrong_negative": 0,
+              "issued": 13,
+              "adverse_groups": 0,
+              "reviewed": 0,
+              "reranker_checks": 0,
+              "p95_ms": 10.930355452001095,
+              "p50_ms": 10.321330279111862,
+              "signature": "80ef1896aaf21ed6741e524519e39740c30efc8cf9e0c7ba5cc851990c903598"
+            }
+          }
+        }
+      ]
+    }
+  },
+  "script_sha256": "651d3d6721897ed165430c274c019fd19a509b1c7d0ea8b06ae8000b4f2c1fce",
+  "baseline_sha256": "e9673a6368600a6831e1df1af055d67925e5e2d29fdf89a9b0e4dc2a477a7ce4",
+  "controls_sha256": "90673a9feb8b8ce15b228142791dc29c867dc67fce846e4687232365710605e9",
+  "processor": "NVIDIA GeForce RTX 4090",
+  "pilot_jobs": [
+    47024,
+    47043
+  ],
+  "acquisition_jobs": [
+    47014,
+    47041
+  ]
+}

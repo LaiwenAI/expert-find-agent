@@ -49,9 +49,10 @@ def prepare_elife(manifest, notes, wording, sensors):
             common = sorted(set(notes[a]) & set(notes[b]))
             if not common:
                 raise ValueError("Frozen linked group lost its cross-paper identity")
-            for pos, binding in enumerate(item["bindings"]):
+            contrasts = item["contrasts"] if "contrasts" in item else [(roles, roles[::-1]) for roles in item["bindings"]]
+            for pos, (binding, negative) in enumerate(contrasts):
                 family = f"{name}-{set_id}-{pos}"
-                for variant, roles in (("present", binding), ("swap", binding[::-1])):
+                for variant, roles in (("present", binding), ("swap", negative)):
                     key = family, variant
                     truth[key] = set()
                     groups[key] = (a, b)

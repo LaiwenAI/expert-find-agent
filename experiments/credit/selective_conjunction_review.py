@@ -242,7 +242,12 @@ def main():
                  "frozen", "notes", "atomic_archive", "group_archive", "output"):
         parser.add_argument(name, type=Path)
     parser.add_argument("--reverse", action="store_true")
+    for option in ("external-manifest", "external-notes", "router-archive"):
+        parser.add_argument(f"--{option}", type=Path)
     args = parser.parse_args()
+    external_paths = (args.external_manifest, args.external_notes, args.router_archive)
+    if any(external_paths) and not all(external_paths):
+        parser.error("Provide the external manifest, notes, and frozen router archive together")
     if args.output.exists() or not os.environ.get("SLURM_JOB_ID") or not torch.cuda.is_available():
         raise ValueError("Require a Slurm GPU and fresh output")
     seed, links = raw.load(args.seed, raw.PANEL), raw.load(args.link_panel, raw.LINKS)
@@ -270,9 +275,32 @@ def main():
     panel["sensors"] = dict(units=sensors, truth=sensor_truth,
         groups={(row["family"], row["variant"]): tuple(row["papers"]) for row in links["queries"]})
     thresholds = archive["cutoffs"]["group_calibrated"]
-    reports, limits, router, definition = suite(panel,
-        dict(calibration=elife_values, held=elife_values, sensors=sensor_values), thresholds, fusion)
-    for key, result in reports.items():
+    measurements = dict(calibration=elife_values, held=elife_values, sensors=sensor_values)
+    live_panels = (("held", projected), ("sensors", original))
+    if args.external_manifest is not None:
+        external = json.loads(args.external_manifest.read_bytes())
+        external_notes = json.loads(args.external_notes.read_bytes())
+        indexed_ids = {item["engineering_key"] for source in notes.values() for item in source.values()}
+        indexed_ids.update(person for paper in links["articles"].values() for person in paper["roles"])
+        if indexed_ids & {item["engineering_key"] for source in external_notes.values() for item in source.values()}:
+            raise ValueError("An external author overlaps the prior proof corpus")
+        new_panels, new_views = base.prepare_elife(external, external_notes, wording, sensors)
+        if len(new_panels) != 1 or new_panels.keys() & panel.keys():
+            raise ValueError("External manifest must add one new panel")
+        name, extra = next(iter(new_panels.items()))
+        external_units = extra["units"]
+        measurements[name] = raw.margin_rows(external_units, new_views, reader, encoder, banks, args.reverse)
+        panel.update(new_panels)
+        live_panels = ((name, new_views),)
+    reports, limits, router, definition = suite(panel, measurements, thresholds, fusion)
+    if args.router_archive is not None:
+        previous = json.loads(args.router_archive.read_bytes())
+        if (json.loads(json.dumps(limits)) != previous["router_limits"]
+                or router[2].tolist() != previous["router_weights"] or definition != previous["definition_cutoff"]
+                or any(reports[key] != values for key, values in previous["reports"].items())):
+            raise ValueError("Previously frozen controls did not reproduce")
+    for key in archive["results"]:
+        result = reports[key]
         for arm, route in (("index", "role_index"), ("fusion", "fusion")):
             gold = archive["results"][key]["group_calibrated"][route]
             summary = result[arm]
@@ -282,8 +310,10 @@ def main():
                 raise ValueError("Changed archived full-route result")
     live = {key: timed(panel[key], views, encoder, reader, banks, fusion, thresholds,
                       limits, router, definition, args.reverse)
-            for key, views in (("held", projected), ("sensors", original))}
+            for key, views in live_panels}
+    external_inputs = {item.name: digest(item) for item in external_paths if item is not None}
     write_json(args.output, dict(reports=reports, live=live, router_limits=limits, definition_cutoff=definition,
+        external_inputs=external_inputs,
         router_weights=router[2].tolist(), archive_sha256=digest(args.group_archive),
         script_sha256=digest(Path(__file__)), job=os.environ["SLURM_JOB_ID"], gpu=torch.cuda.get_device_name(),
         reverse=args.reverse))
