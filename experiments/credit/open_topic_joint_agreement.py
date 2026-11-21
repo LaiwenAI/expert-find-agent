@@ -87,24 +87,24 @@ def signature(rows):
     return sha256(json.dumps(rows, sort_keys=True).encode()).hexdigest()
 
 
-def experiment(index, postings, queries, subjects, reverse, archived):
-    traces, timing, reachable = [], {arm: [] for arm in ARMS}, Counter()
-    order = ARMS[::-1] if reverse else ARMS
-    arm_results(index, postings, queries[0], subjects, order)
+def replay(index, postings, queries, subjects, reverse, *, arms, runner):
+    traces, timing, reachable = [], {arm: [] for arm in arms}, Counter()
+    order = arms[::-1] if reverse else arms
+    runner(index, postings, queries[0], subjects, order)
     indexed = list(enumerate(queries))
     for i, atoms in (reversed(indexed) if reverse else indexed):
         shift = i % len(order)
-        row, times, reach = arm_results(index, postings, atoms, subjects, order[shift:] + order[:shift])
+        row, times, reach = runner(index, postings, atoms, subjects, order[shift:] + order[:shift])
         traces.append((i, row))
         for arm, duration in times.items():
             timing[arm].append(duration)
         reachable.update(reach)
-    rows = [row for _, row in sorted(traces)]
-    baseline_signature = signature(paired_view(rows, SEQUENTIAL, JOINT))
-    if baseline_signature != archived:
-        raise ValueError("Same-role sequential and joint controls must reproduce archived decisions")
+    return [row for _, row in sorted(traces)], timing, reachable
+
+
+def compare(rows, comparisons):
     report = {}
-    for first, second in COMPARISONS:
+    for first, second in comparisons:
         pair = paired_view(rows, first, second)
         cases = {}
         for mode, selection in audit.select(pair).items():
@@ -114,9 +114,17 @@ def experiment(index, postings, queries, subjects, reverse, archived):
             item["possible_known_delta"] = previous.missing_bounds(pair, selection)
             cases[mode] = item
         report[f"{first}_to_{second}"] = cases
+    return report
+
+
+def experiment(index, postings, queries, subjects, reverse, archived):
+    rows, timing, reachable = replay(index, postings, queries, subjects, reverse, arms=ARMS, runner=arm_results)
+    baseline_signature = signature(paired_view(rows, SEQUENTIAL, JOINT))
+    if baseline_signature != archived:
+        raise ValueError("Same-role sequential and joint controls must reproduce archived decisions")
     return dict(requests=len(rows), reads_per_arm=3 * len(rows), reachable_after_reads=reachable,
                 p95_ms={arm: float(np.quantile(values, .95)) for arm, values in timing.items()},
-                comparisons=report, archived_control_signature=baseline_signature, decision_signature=signature(rows))
+                comparisons=compare(rows, COMPARISONS), archived_control_signature=baseline_signature, decision_signature=signature(rows))
 
 
 def run(args):

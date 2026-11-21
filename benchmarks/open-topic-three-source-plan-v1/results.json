@@ -1,0 +1,2883 @@
+{
+  "slurm_array": 47493,
+  "node": "ws6",
+  "decision_runs_identical": true,
+  "output_sha256": [
+    "ee86cf0a0340ec7808ef31f58f627f15a03abc6a6fbce6a66abbff045ae8be44",
+    "35f2ed0da0e7bde846b8dff81ae0a17dd864c1a2799ba7420e9c7a562ae3fa71"
+  ],
+  "archive_sha256": "affd946406775de8f3627f1d92c84d69fc8342bfe270c9496a9b2f78ef71adbb",
+  "script_sha256": "d0e22c9bee784d762902549f7488638b7c6fa04455958b2f06d9fb13c7f95630",
+  "embedding": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+  "gpu": "NVIDIA GeForce RTX 4090",
+  "panels": {
+    "plos_100": {
+      "requests": 160,
+      "reads_per_arm": 480,
+      "role_index_coverage": 100,
+      "index_counts": {
+        "indexed_sources": 452,
+        "person_role_postings": 7366
+      },
+      "reachable_after_reads": {
+        "owner_gap": 30,
+        "joint": 89,
+        "anchored": 89,
+        "free": 88,
+        "all_edges": 86
+      },
+      "tag_supported_in_pool": 115,
+      "tag_supported_in_frontier": {
+        "anchored": 89,
+        "free": 92,
+        "all_edges": 115
+      },
+      "changed_plans": {
+        "anchored": 0,
+        "free": 9,
+        "all_edges": 28
+      },
+      "candidate_sets_p50_p95": {
+        "anchored": [
+          1.0,
+          1.0
+        ],
+        "free": [
+          1.0,
+          2.0
+        ],
+        "all_edges": [
+          2.0,
+          5.0
+        ]
+      },
+      "comparisons": {
+        "joint_to_anchored": {
+          "natural": {
+            "arms": {
+              "joint": {
+                "issued": 140,
+                "known": 85,
+                "tag_unresolved": 55
+              },
+              "anchored": {
+                "issued": 140,
+                "known": 85,
+                "tag_unresolved": 55
+              }
+            },
+            "both_issue": 140,
+            "overlap_changes": {
+              "same_response": 140,
+              "same_person_changed_sources": 0,
+              "different_person": 0,
+              "known_gain": 0,
+              "known_loss": 0
+            },
+            "issued_only": {
+              "joint": 0,
+              "anchored": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 140,
+              "clusters": 90,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              0,
+              0
+            ]
+          },
+          "common": {
+            "arms": {
+              "joint": {
+                "issued": 140,
+                "known": 85,
+                "tag_unresolved": 55
+              },
+              "anchored": {
+                "issued": 140,
+                "known": 85,
+                "tag_unresolved": 55
+              }
+            },
+            "both_issue": 140,
+            "overlap_changes": {
+              "same_response": 140,
+              "same_person_changed_sources": 0,
+              "different_person": 0,
+              "known_gain": 0,
+              "known_loss": 0
+            },
+            "issued_only": {
+              "joint": 0,
+              "anchored": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 140,
+              "clusters": 90,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              0,
+              0
+            ]
+          },
+          "quota": {
+            "arms": {
+              "joint": {
+                "issued": 140,
+                "known": 85,
+                "tag_unresolved": 55
+              },
+              "anchored": {
+                "issued": 140,
+                "known": 85,
+                "tag_unresolved": 55
+              }
+            },
+            "both_issue": 140,
+            "overlap_changes": {
+              "same_response": 140,
+              "same_person_changed_sources": 0,
+              "different_person": 0,
+              "known_gain": 0,
+              "known_loss": 0
+            },
+            "issued_only": {
+              "joint": 0,
+              "anchored": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 140,
+              "clusters": 90,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              0,
+              0
+            ]
+          }
+        },
+        "joint_to_free": {
+          "natural": {
+            "arms": {
+              "joint": {
+                "issued": 140,
+                "known": 85,
+                "tag_unresolved": 55
+              },
+              "free": {
+                "issued": 136,
+                "known": 84,
+                "tag_unresolved": 52
+              }
+            },
+            "both_issue": 136,
+            "overlap_changes": {
+              "same_response": 131,
+              "same_person_changed_sources": 0,
+              "different_person": 5,
+              "known_gain": 3,
+              "known_loss": 1
+            },
+            "issued_only": {
+              "joint": 4,
+              "free": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": -0.00625,
+              "percentile_95": [
+                -0.05389221556886228,
+                0.034013605442176874
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.014705882352941176,
+              "percentile_95": [
+                -0.014184397163120567,
+                0.046511627906976744
+              ],
+              "queries": 136,
+              "clusters": 90,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -6,
+              1
+            ]
+          },
+          "common": {
+            "arms": {
+              "joint": {
+                "issued": 136,
+                "known": 82,
+                "tag_unresolved": 54
+              },
+              "free": {
+                "issued": 136,
+                "known": 84,
+                "tag_unresolved": 52
+              }
+            },
+            "both_issue": 136,
+            "overlap_changes": {
+              "same_response": 131,
+              "same_person_changed_sources": 0,
+              "different_person": 5,
+              "known_gain": 3,
+              "known_loss": 1
+            },
+            "issued_only": {
+              "joint": 0,
+              "free": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0125,
+              "percentile_95": [
+                -0.011834319526627219,
+                0.039683853673919876
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.014705882352941176,
+              "percentile_95": [
+                -0.014184397163120567,
+                0.046511627906976744
+              ],
+              "queries": 136,
+              "clusters": 90,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -2,
+              4
+            ]
+          },
+          "quota": {
+            "arms": {
+              "joint": {
+                "issued": 136,
+                "known": 82,
+                "tag_unresolved": 54
+              },
+              "free": {
+                "issued": 136,
+                "known": 84,
+                "tag_unresolved": 52
+              }
+            },
+            "both_issue": 135,
+            "overlap_changes": {
+              "same_response": 130,
+              "same_person_changed_sources": 0,
+              "different_person": 5,
+              "known_gain": 3,
+              "known_loss": 1
+            },
+            "issued_only": {
+              "joint": 1,
+              "free": 1
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0125,
+              "percentile_95": [
+                -0.011834319526627219,
+                0.039683853673919876
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.014814814814814815,
+              "percentile_95": [
+                -0.013986013986013986,
+                0.047619047619047616
+              ],
+              "queries": 135,
+              "clusters": 89,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -3,
+              5
+            ]
+          }
+        },
+        "joint_to_all_edges": {
+          "natural": {
+            "arms": {
+              "joint": {
+                "issued": 140,
+                "known": 85,
+                "tag_unresolved": 55
+              },
+              "all_edges": {
+                "issued": 136,
+                "known": 82,
+                "tag_unresolved": 54
+              }
+            },
+            "both_issue": 136,
+            "overlap_changes": {
+              "same_response": 115,
+              "same_person_changed_sources": 0,
+              "different_person": 21,
+              "known_gain": 7,
+              "known_loss": 7
+            },
+            "issued_only": {
+              "joint": 4,
+              "all_edges": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": -0.01875,
+              "percentile_95": [
+                -0.08,
+                0.04411764705882353
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.0,
+              "percentile_95": [
+                -0.058394160583941604,
+                0.06349206349206349
+              ],
+              "queries": 136,
+              "clusters": 90,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -17,
+              10
+            ]
+          },
+          "common": {
+            "arms": {
+              "joint": {
+                "issued": 136,
+                "known": 82,
+                "tag_unresolved": 54
+              },
+              "all_edges": {
+                "issued": 136,
+                "known": 82,
+                "tag_unresolved": 54
+              }
+            },
+            "both_issue": 136,
+            "overlap_changes": {
+              "same_response": 115,
+              "same_person_changed_sources": 0,
+              "different_person": 21,
+              "known_gain": 7,
+              "known_loss": 7
+            },
+            "issued_only": {
+              "joint": 0,
+              "all_edges": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0,
+              "percentile_95": [
+                -0.04878380169671262,
+                0.05333333333333334
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.0,
+              "percentile_95": [
+                -0.058394160583941604,
+                0.06349206349206349
+              ],
+              "queries": 136,
+              "clusters": 90,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -13,
+              13
+            ]
+          },
+          "quota": {
+            "arms": {
+              "joint": {
+                "issued": 136,
+                "known": 82,
+                "tag_unresolved": 54
+              },
+              "all_edges": {
+                "issued": 136,
+                "known": 82,
+                "tag_unresolved": 54
+              }
+            },
+            "both_issue": 135,
+            "overlap_changes": {
+              "same_response": 114,
+              "same_person_changed_sources": 0,
+              "different_person": 21,
+              "known_gain": 7,
+              "known_loss": 7
+            },
+            "issued_only": {
+              "joint": 1,
+              "all_edges": 1
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0,
+              "percentile_95": [
+                -0.04878380169671262,
+                0.05333333333333334
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.0,
+              "percentile_95": [
+                -0.059322033898305086,
+                0.06452193084242275
+              ],
+              "queries": 135,
+              "clusters": 89,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -14,
+              14
+            ]
+          }
+        },
+        "free_to_all_edges": {
+          "natural": {
+            "arms": {
+              "free": {
+                "issued": 136,
+                "known": 84,
+                "tag_unresolved": 52
+              },
+              "all_edges": {
+                "issued": 136,
+                "known": 82,
+                "tag_unresolved": 54
+              }
+            },
+            "both_issue": 136,
+            "overlap_changes": {
+              "same_response": 120,
+              "same_person_changed_sources": 0,
+              "different_person": 16,
+              "known_gain": 4,
+              "known_loss": 6
+            },
+            "issued_only": {
+              "free": 0,
+              "all_edges": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": -0.0125,
+              "percentile_95": [
+                -0.056179775280898875,
+                0.034252479924421264
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": -0.014705882352941176,
+              "percentile_95": [
+                -0.06569583173261621,
+                0.04
+              ],
+              "queries": 136,
+              "clusters": 90,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -11,
+              9
+            ]
+          },
+          "common": {
+            "arms": {
+              "free": {
+                "issued": 136,
+                "known": 84,
+                "tag_unresolved": 52
+              },
+              "all_edges": {
+                "issued": 136,
+                "known": 82,
+                "tag_unresolved": 54
+              }
+            },
+            "both_issue": 136,
+            "overlap_changes": {
+              "same_response": 120,
+              "same_person_changed_sources": 0,
+              "different_person": 16,
+              "known_gain": 4,
+              "known_loss": 6
+            },
+            "issued_only": {
+              "free": 0,
+              "all_edges": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": -0.0125,
+              "percentile_95": [
+                -0.056179775280898875,
+                0.034252479924421264
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": -0.014705882352941176,
+              "percentile_95": [
+                -0.06569583173261621,
+                0.04
+              ],
+              "queries": 136,
+              "clusters": 90,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -11,
+              9
+            ]
+          },
+          "quota": {
+            "arms": {
+              "free": {
+                "issued": 136,
+                "known": 84,
+                "tag_unresolved": 52
+              },
+              "all_edges": {
+                "issued": 136,
+                "known": 82,
+                "tag_unresolved": 54
+              }
+            },
+            "both_issue": 136,
+            "overlap_changes": {
+              "same_response": 120,
+              "same_person_changed_sources": 0,
+              "different_person": 16,
+              "known_gain": 4,
+              "known_loss": 6
+            },
+            "issued_only": {
+              "free": 0,
+              "all_edges": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": -0.0125,
+              "percentile_95": [
+                -0.056179775280898875,
+                0.034252479924421264
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": -0.014705882352941176,
+              "percentile_95": [
+                -0.06569583173261621,
+                0.04
+              ],
+              "queries": 136,
+              "clusters": 90,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -11,
+              9
+            ]
+          }
+        }
+      },
+      "decision_signature": "05015c97b9a308e718fed2d080f5863b4f948df9702d4f1a852fd03de1cb9348",
+      "baseline_signature": "6303f1d95d7abdf89d062f9bce64f15a98cf431bc6aad685e8b0dfcff844d452",
+      "p95_ms_by_run": [
+        {
+          "owner_gap": 17.864940012805164,
+          "joint": 17.891682218760252,
+          "anchored": 17.957304255105555,
+          "free": 18.088299175724387,
+          "all_edges": 18.09848470147699
+        },
+        {
+          "owner_gap": 30.42579113971442,
+          "joint": 30.736945034004748,
+          "anchored": 31.023758021183312,
+          "free": 31.011688709259033,
+          "all_edges": 31.149779609404504
+        }
+      ]
+    },
+    "elife_100": {
+      "requests": 51,
+      "reads_per_arm": 153,
+      "role_index_coverage": 100,
+      "index_counts": {
+        "indexed_sources": 452,
+        "person_role_postings": 7366
+      },
+      "reachable_after_reads": {
+        "owner_gap": 0,
+        "joint": 46,
+        "anchored": 46,
+        "free": 40,
+        "all_edges": 36
+      },
+      "tag_supported_in_pool": 49,
+      "tag_supported_in_frontier": {
+        "anchored": 46,
+        "free": 46,
+        "all_edges": 49
+      },
+      "changed_plans": {
+        "anchored": 0,
+        "free": 6,
+        "all_edges": 15
+      },
+      "candidate_sets_p50_p95": {
+        "anchored": [
+          1.0,
+          1.0
+        ],
+        "free": [
+          1.0,
+          2.0
+        ],
+        "all_edges": [
+          2.0,
+          4.0
+        ]
+      },
+      "comparisons": {
+        "joint_to_anchored": {
+          "natural": {
+            "arms": {
+              "joint": {
+                "issued": 49,
+                "known": 46,
+                "tag_unresolved": 3
+              },
+              "anchored": {
+                "issued": 49,
+                "known": 46,
+                "tag_unresolved": 3
+              }
+            },
+            "both_issue": 49,
+            "overlap_changes": {
+              "same_response": 49,
+              "same_person_changed_sources": 0,
+              "different_person": 0,
+              "known_gain": 0,
+              "known_loss": 0
+            },
+            "issued_only": {
+              "joint": 0,
+              "anchored": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 49,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              0,
+              0
+            ]
+          },
+          "common": {
+            "arms": {
+              "joint": {
+                "issued": 49,
+                "known": 46,
+                "tag_unresolved": 3
+              },
+              "anchored": {
+                "issued": 49,
+                "known": 46,
+                "tag_unresolved": 3
+              }
+            },
+            "both_issue": 49,
+            "overlap_changes": {
+              "same_response": 49,
+              "same_person_changed_sources": 0,
+              "different_person": 0,
+              "known_gain": 0,
+              "known_loss": 0
+            },
+            "issued_only": {
+              "joint": 0,
+              "anchored": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 49,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              0,
+              0
+            ]
+          },
+          "quota": {
+            "arms": {
+              "joint": {
+                "issued": 49,
+                "known": 46,
+                "tag_unresolved": 3
+              },
+              "anchored": {
+                "issued": 49,
+                "known": 46,
+                "tag_unresolved": 3
+              }
+            },
+            "both_issue": 49,
+            "overlap_changes": {
+              "same_response": 49,
+              "same_person_changed_sources": 0,
+              "different_person": 0,
+              "known_gain": 0,
+              "known_loss": 0
+            },
+            "issued_only": {
+              "joint": 0,
+              "anchored": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 49,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              0,
+              0
+            ]
+          }
+        },
+        "joint_to_free": {
+          "natural": {
+            "arms": {
+              "joint": {
+                "issued": 49,
+                "known": 46,
+                "tag_unresolved": 3
+              },
+              "free": {
+                "issued": 44,
+                "known": 40,
+                "tag_unresolved": 4
+              }
+            },
+            "both_issue": 44,
+            "overlap_changes": {
+              "same_response": 43,
+              "same_person_changed_sources": 0,
+              "different_person": 1,
+              "known_gain": 0,
+              "known_loss": 1
+            },
+            "issued_only": {
+              "joint": 5,
+              "free": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": -0.11764705882352941,
+              "percentile_95": [
+                -0.28125,
+                0.0
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": -0.022727272727272728,
+              "percentile_95": [
+                -0.06976744186046512,
+                0.0
+              ],
+              "queries": 44,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -6,
+              -5
+            ]
+          },
+          "common": {
+            "arms": {
+              "joint": {
+                "issued": 44,
+                "known": 41,
+                "tag_unresolved": 3
+              },
+              "free": {
+                "issued": 44,
+                "known": 40,
+                "tag_unresolved": 4
+              }
+            },
+            "both_issue": 44,
+            "overlap_changes": {
+              "same_response": 43,
+              "same_person_changed_sources": 0,
+              "different_person": 1,
+              "known_gain": 0,
+              "known_loss": 1
+            },
+            "issued_only": {
+              "joint": 0,
+              "free": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": -0.0196078431372549,
+              "percentile_95": [
+                -0.046875,
+                0.0
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": -0.022727272727272728,
+              "percentile_95": [
+                -0.06976744186046512,
+                0.0
+              ],
+              "queries": 44,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -1,
+              0
+            ]
+          },
+          "quota": {
+            "arms": {
+              "joint": {
+                "issued": 44,
+                "known": 41,
+                "tag_unresolved": 3
+              },
+              "free": {
+                "issued": 44,
+                "known": 40,
+                "tag_unresolved": 4
+              }
+            },
+            "both_issue": 41,
+            "overlap_changes": {
+              "same_response": 40,
+              "same_person_changed_sources": 0,
+              "different_person": 1,
+              "known_gain": 0,
+              "known_loss": 1
+            },
+            "issued_only": {
+              "joint": 3,
+              "free": 3
+            },
+            "paired_known_delta_per_query": {
+              "mean": -0.0196078431372549,
+              "percentile_95": [
+                -0.12371134020618557,
+                0.16216216216216217
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": -0.024390243902439025,
+              "percentile_95": [
+                -0.08108108108108109,
+                0.0
+              ],
+              "queries": 41,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -1,
+              0
+            ]
+          }
+        },
+        "joint_to_all_edges": {
+          "natural": {
+            "arms": {
+              "joint": {
+                "issued": 49,
+                "known": 46,
+                "tag_unresolved": 3
+              },
+              "all_edges": {
+                "issued": 40,
+                "known": 36,
+                "tag_unresolved": 4
+              }
+            },
+            "both_issue": 40,
+            "overlap_changes": {
+              "same_response": 34,
+              "same_person_changed_sources": 0,
+              "different_person": 6,
+              "known_gain": 2,
+              "known_loss": 3
+            },
+            "issued_only": {
+              "joint": 9,
+              "all_edges": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": -0.19607843137254902,
+              "percentile_95": [
+                -0.4606957649092481,
+                0.125
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": -0.025,
+              "percentile_95": [
+                -0.13333333333333333,
+                0.14285714285714285
+              ],
+              "queries": 40,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -13,
+              -6
+            ]
+          },
+          "common": {
+            "arms": {
+              "joint": {
+                "issued": 40,
+                "known": 37,
+                "tag_unresolved": 3
+              },
+              "all_edges": {
+                "issued": 40,
+                "known": 36,
+                "tag_unresolved": 4
+              }
+            },
+            "both_issue": 40,
+            "overlap_changes": {
+              "same_response": 34,
+              "same_person_changed_sources": 0,
+              "different_person": 6,
+              "known_gain": 2,
+              "known_loss": 3
+            },
+            "issued_only": {
+              "joint": 0,
+              "all_edges": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": -0.0196078431372549,
+              "percentile_95": [
+                -0.09836065573770492,
+                0.125
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": -0.025,
+              "percentile_95": [
+                -0.13333333333333333,
+                0.14285714285714285
+              ],
+              "queries": 40,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -4,
+              3
+            ]
+          },
+          "quota": {
+            "arms": {
+              "joint": {
+                "issued": 40,
+                "known": 37,
+                "tag_unresolved": 3
+              },
+              "all_edges": {
+                "issued": 40,
+                "known": 36,
+                "tag_unresolved": 4
+              }
+            },
+            "both_issue": 36,
+            "overlap_changes": {
+              "same_response": 30,
+              "same_person_changed_sources": 0,
+              "different_person": 6,
+              "known_gain": 2,
+              "known_loss": 3
+            },
+            "issued_only": {
+              "joint": 4,
+              "all_edges": 4
+            },
+            "paired_known_delta_per_query": {
+              "mean": -0.0196078431372549,
+              "percentile_95": [
+                -0.16470588235294117,
+                0.2777777777777778
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": -0.027777777777777776,
+              "percentile_95": [
+                -0.14893617021276595,
+                0.17647058823529413
+              ],
+              "queries": 36,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -4,
+              3
+            ]
+          }
+        },
+        "free_to_all_edges": {
+          "natural": {
+            "arms": {
+              "free": {
+                "issued": 44,
+                "known": 40,
+                "tag_unresolved": 4
+              },
+              "all_edges": {
+                "issued": 40,
+                "known": 36,
+                "tag_unresolved": 4
+              }
+            },
+            "both_issue": 40,
+            "overlap_changes": {
+              "same_response": 34,
+              "same_person_changed_sources": 0,
+              "different_person": 6,
+              "known_gain": 2,
+              "known_loss": 2
+            },
+            "issued_only": {
+              "free": 4,
+              "all_edges": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": -0.0784313725490196,
+              "percentile_95": [
+                -0.19047619047619047,
+                0.125
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.0,
+              "percentile_95": [
+                -0.10204081632653061,
+                0.16666666666666666
+              ],
+              "queries": 40,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -8,
+              0
+            ]
+          },
+          "common": {
+            "arms": {
+              "free": {
+                "issued": 40,
+                "known": 36,
+                "tag_unresolved": 4
+              },
+              "all_edges": {
+                "issued": 40,
+                "known": 36,
+                "tag_unresolved": 4
+              }
+            },
+            "both_issue": 40,
+            "overlap_changes": {
+              "same_response": 34,
+              "same_person_changed_sources": 0,
+              "different_person": 6,
+              "known_gain": 2,
+              "known_loss": 2
+            },
+            "issued_only": {
+              "free": 0,
+              "all_edges": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0,
+              "percentile_95": [
+                -0.08695652173913043,
+                0.12903225806451613
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.0,
+              "percentile_95": [
+                -0.10204081632653061,
+                0.16666666666666666
+              ],
+              "queries": 40,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -4,
+              4
+            ]
+          },
+          "quota": {
+            "arms": {
+              "free": {
+                "issued": 40,
+                "known": 37,
+                "tag_unresolved": 3
+              },
+              "all_edges": {
+                "issued": 40,
+                "known": 36,
+                "tag_unresolved": 4
+              }
+            },
+            "both_issue": 37,
+            "overlap_changes": {
+              "same_response": 32,
+              "same_person_changed_sources": 0,
+              "different_person": 5,
+              "known_gain": 2,
+              "known_loss": 2
+            },
+            "issued_only": {
+              "free": 3,
+              "all_edges": 3
+            },
+            "paired_known_delta_per_query": {
+              "mean": -0.0196078431372549,
+              "percentile_95": [
+                -0.14545454545454545,
+                0.2683161350844274
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.0,
+              "percentile_95": [
+                -0.10526315789473684,
+                0.21052631578947367
+              ],
+              "queries": 37,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -4,
+              3
+            ]
+          }
+        }
+      },
+      "decision_signature": "40d459af66fac8f8bf7e2f269d8cd80c7b5a49ed03f5bc5e930edee5b377c61d",
+      "baseline_signature": "eae0a28dd110416c565b32ff91ee1852c00cd347f1380ad2cb58271848792a3c",
+      "p95_ms_by_run": [
+        {
+          "owner_gap": 19.15183523669839,
+          "joint": 19.13026859983802,
+          "anchored": 19.262826070189476,
+          "free": 19.415360875427723,
+          "all_edges": 19.46004619821906
+        },
+        {
+          "owner_gap": 18.90032645314932,
+          "joint": 18.851035507395864,
+          "anchored": 18.882929580286145,
+          "free": 18.90409947372973,
+          "all_edges": 19.016943406313658
+        }
+      ]
+    },
+    "plos_50": {
+      "requests": 160,
+      "reads_per_arm": 480,
+      "role_index_coverage": 50,
+      "index_counts": {
+        "indexed_sources": 226,
+        "person_role_postings": 3698
+      },
+      "reachable_after_reads": {
+        "owner_gap": 6,
+        "joint": 59,
+        "anchored": 59,
+        "free": 61,
+        "all_edges": 63
+      },
+      "tag_supported_in_pool": 115,
+      "tag_supported_in_frontier": {
+        "anchored": 59,
+        "free": 63,
+        "all_edges": 115
+      },
+      "changed_plans": {
+        "anchored": 2,
+        "free": 13,
+        "all_edges": 31
+      },
+      "candidate_sets_p50_p95": {
+        "anchored": [
+          1.0,
+          1.0
+        ],
+        "free": [
+          1.0,
+          2.049999999999983
+        ],
+        "all_edges": [
+          4.0,
+          7.0
+        ]
+      },
+      "comparisons": {
+        "joint_to_anchored": {
+          "natural": {
+            "arms": {
+              "joint": {
+                "issued": 114,
+                "known": 56,
+                "tag_unresolved": 58
+              },
+              "anchored": {
+                "issued": 114,
+                "known": 56,
+                "tag_unresolved": 58
+              }
+            },
+            "both_issue": 114,
+            "overlap_changes": {
+              "same_response": 114,
+              "same_person_changed_sources": 0,
+              "different_person": 0,
+              "known_gain": 0,
+              "known_loss": 0
+            },
+            "issued_only": {
+              "joint": 0,
+              "anchored": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 114,
+              "clusters": 78,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              0,
+              0
+            ]
+          },
+          "common": {
+            "arms": {
+              "joint": {
+                "issued": 114,
+                "known": 56,
+                "tag_unresolved": 58
+              },
+              "anchored": {
+                "issued": 114,
+                "known": 56,
+                "tag_unresolved": 58
+              }
+            },
+            "both_issue": 114,
+            "overlap_changes": {
+              "same_response": 114,
+              "same_person_changed_sources": 0,
+              "different_person": 0,
+              "known_gain": 0,
+              "known_loss": 0
+            },
+            "issued_only": {
+              "joint": 0,
+              "anchored": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 114,
+              "clusters": 78,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              0,
+              0
+            ]
+          },
+          "quota": {
+            "arms": {
+              "joint": {
+                "issued": 114,
+                "known": 56,
+                "tag_unresolved": 58
+              },
+              "anchored": {
+                "issued": 114,
+                "known": 56,
+                "tag_unresolved": 58
+              }
+            },
+            "both_issue": 114,
+            "overlap_changes": {
+              "same_response": 114,
+              "same_person_changed_sources": 0,
+              "different_person": 0,
+              "known_gain": 0,
+              "known_loss": 0
+            },
+            "issued_only": {
+              "joint": 0,
+              "anchored": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 114,
+              "clusters": 78,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              0,
+              0
+            ]
+          }
+        },
+        "joint_to_free": {
+          "natural": {
+            "arms": {
+              "joint": {
+                "issued": 114,
+                "known": 56,
+                "tag_unresolved": 58
+              },
+              "free": {
+                "issued": 111,
+                "known": 58,
+                "tag_unresolved": 53
+              }
+            },
+            "both_issue": 111,
+            "overlap_changes": {
+              "same_response": 106,
+              "same_person_changed_sources": 0,
+              "different_person": 5,
+              "known_gain": 3,
+              "known_loss": 0
+            },
+            "issued_only": {
+              "joint": 3,
+              "free": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0125,
+              "percentile_95": [
+                -0.011976047904191617,
+                0.039735099337748346
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.02702702702702703,
+              "percentile_95": [
+                0.0,
+                0.06306306306306306
+              ],
+              "queries": 111,
+              "clusters": 77,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -5,
+              4
+            ]
+          },
+          "common": {
+            "arms": {
+              "joint": {
+                "issued": 111,
+                "known": 55,
+                "tag_unresolved": 56
+              },
+              "free": {
+                "issued": 111,
+                "known": 58,
+                "tag_unresolved": 53
+              }
+            },
+            "both_issue": 111,
+            "overlap_changes": {
+              "same_response": 106,
+              "same_person_changed_sources": 0,
+              "different_person": 5,
+              "known_gain": 3,
+              "known_loss": 0
+            },
+            "issued_only": {
+              "joint": 0,
+              "free": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.01875,
+              "percentile_95": [
+                0.0,
+                0.04430379746835443
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.02702702702702703,
+              "percentile_95": [
+                0.0,
+                0.06306306306306306
+              ],
+              "queries": 111,
+              "clusters": 77,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -2,
+              5
+            ]
+          },
+          "quota": {
+            "arms": {
+              "joint": {
+                "issued": 111,
+                "known": 55,
+                "tag_unresolved": 56
+              },
+              "free": {
+                "issued": 111,
+                "known": 58,
+                "tag_unresolved": 53
+              }
+            },
+            "both_issue": 108,
+            "overlap_changes": {
+              "same_response": 103,
+              "same_person_changed_sources": 0,
+              "different_person": 5,
+              "known_gain": 3,
+              "known_loss": 0
+            },
+            "issued_only": {
+              "joint": 3,
+              "free": 3
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.01875,
+              "percentile_95": [
+                -0.006535947712418301,
+                0.04964539007092199
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.027777777777777776,
+              "percentile_95": [
+                0.0,
+                0.06452193084242275
+              ],
+              "queries": 108,
+              "clusters": 75,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -4,
+              7
+            ]
+          }
+        },
+        "joint_to_all_edges": {
+          "natural": {
+            "arms": {
+              "joint": {
+                "issued": 114,
+                "known": 56,
+                "tag_unresolved": 58
+              },
+              "all_edges": {
+                "issued": 106,
+                "known": 59,
+                "tag_unresolved": 47
+              }
+            },
+            "both_issue": 104,
+            "overlap_changes": {
+              "same_response": 94,
+              "same_person_changed_sources": 0,
+              "different_person": 10,
+              "known_gain": 4,
+              "known_loss": 1
+            },
+            "issued_only": {
+              "joint": 10,
+              "all_edges": 2
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.01875,
+              "percentile_95": [
+                -0.01282051282051282,
+                0.05263157894736842
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.028846153846153848,
+              "percentile_95": [
+                -0.01,
+                0.07547169811320754
+              ],
+              "queries": 104,
+              "clusters": 74,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -15,
+              10
+            ]
+          },
+          "common": {
+            "arms": {
+              "joint": {
+                "issued": 104,
+                "known": 55,
+                "tag_unresolved": 49
+              },
+              "all_edges": {
+                "issued": 104,
+                "known": 58,
+                "tag_unresolved": 46
+              }
+            },
+            "both_issue": 104,
+            "overlap_changes": {
+              "same_response": 94,
+              "same_person_changed_sources": 0,
+              "different_person": 10,
+              "known_gain": 4,
+              "known_loss": 1
+            },
+            "issued_only": {
+              "joint": 0,
+              "all_edges": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.01875,
+              "percentile_95": [
+                -0.006493506493506494,
+                0.048954266592303355
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.028846153846153848,
+              "percentile_95": [
+                -0.01,
+                0.07547169811320754
+              ],
+              "queries": 104,
+              "clusters": 74,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -6,
+              9
+            ]
+          },
+          "quota": {
+            "arms": {
+              "joint": {
+                "issued": 106,
+                "known": 55,
+                "tag_unresolved": 51
+              },
+              "all_edges": {
+                "issued": 106,
+                "known": 59,
+                "tag_unresolved": 47
+              }
+            },
+            "both_issue": 100,
+            "overlap_changes": {
+              "same_response": 90,
+              "same_person_changed_sources": 0,
+              "different_person": 10,
+              "known_gain": 4,
+              "known_loss": 1
+            },
+            "issued_only": {
+              "joint": 6,
+              "all_edges": 6
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.025,
+              "percentile_95": [
+                -0.006756756756756757,
+                0.0625
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.03,
+              "percentile_95": [
+                -0.010416666666666666,
+                0.07777777777777778
+              ],
+              "queries": 100,
+              "clusters": 72,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -10,
+              14
+            ]
+          }
+        },
+        "free_to_all_edges": {
+          "natural": {
+            "arms": {
+              "free": {
+                "issued": 111,
+                "known": 58,
+                "tag_unresolved": 53
+              },
+              "all_edges": {
+                "issued": 106,
+                "known": 59,
+                "tag_unresolved": 47
+              }
+            },
+            "both_issue": 104,
+            "overlap_changes": {
+              "same_response": 99,
+              "same_person_changed_sources": 0,
+              "different_person": 5,
+              "known_gain": 1,
+              "known_loss": 1
+            },
+            "issued_only": {
+              "free": 7,
+              "all_edges": 2
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.00625,
+              "percentile_95": [
+                -0.013793103448275862,
+                0.028409090909090908
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.0,
+              "percentile_95": [
+                -0.028846153846153848,
+                0.02857142857142857
+              ],
+              "queries": 104,
+              "clusters": 74,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -10,
+              6
+            ]
+          },
+          "common": {
+            "arms": {
+              "free": {
+                "issued": 104,
+                "known": 58,
+                "tag_unresolved": 46
+              },
+              "all_edges": {
+                "issued": 104,
+                "known": 58,
+                "tag_unresolved": 46
+              }
+            },
+            "both_issue": 104,
+            "overlap_changes": {
+              "same_response": 99,
+              "same_person_changed_sources": 0,
+              "different_person": 5,
+              "known_gain": 1,
+              "known_loss": 1
+            },
+            "issued_only": {
+              "free": 0,
+              "all_edges": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0,
+              "percentile_95": [
+                -0.018867924528301886,
+                0.018292682926829267
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.0,
+              "percentile_95": [
+                -0.028846153846153848,
+                0.02857142857142857
+              ],
+              "queries": 104,
+              "clusters": 74,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -4,
+              4
+            ]
+          },
+          "quota": {
+            "arms": {
+              "free": {
+                "issued": 106,
+                "known": 57,
+                "tag_unresolved": 49
+              },
+              "all_edges": {
+                "issued": 106,
+                "known": 59,
+                "tag_unresolved": 47
+              }
+            },
+            "both_issue": 102,
+            "overlap_changes": {
+              "same_response": 97,
+              "same_person_changed_sources": 0,
+              "different_person": 5,
+              "known_gain": 1,
+              "known_loss": 1
+            },
+            "issued_only": {
+              "free": 4,
+              "all_edges": 4
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0125,
+              "percentile_95": [
+                -0.011834319526627219,
+                0.0392156862745098
+              ],
+              "queries": 160,
+              "clusters": 102,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.0,
+              "percentile_95": [
+                -0.02912621359223301,
+                0.02857142857142857
+              ],
+              "queries": 102,
+              "clusters": 72,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -6,
+              8
+            ]
+          }
+        }
+      },
+      "decision_signature": "db77dcadd144db952dd2629847839ed72c8bb51bd605cb8b8a889b5e259b87dd",
+      "baseline_signature": "da8a4708656e772607da9ee101f9682d15b5ec4d5335318b35cea7a4bc5f022f",
+      "p95_ms_by_run": [
+        {
+          "owner_gap": 17.85485662985593,
+          "joint": 18.046855623833835,
+          "anchored": 18.22924050502479,
+          "free": 18.250593915581703,
+          "all_edges": 18.303470965474844
+        },
+        {
+          "owner_gap": 17.41782813332975,
+          "joint": 17.688170121982694,
+          "anchored": 17.75668675545603,
+          "free": 17.855622968636453,
+          "all_edges": 17.897469294257462
+        }
+      ]
+    },
+    "elife_50": {
+      "requests": 51,
+      "reads_per_arm": 153,
+      "role_index_coverage": 50,
+      "index_counts": {
+        "indexed_sources": 226,
+        "person_role_postings": 3698
+      },
+      "reachable_after_reads": {
+        "owner_gap": 0,
+        "joint": 35,
+        "anchored": 35,
+        "free": 35,
+        "all_edges": 29
+      },
+      "tag_supported_in_pool": 49,
+      "tag_supported_in_frontier": {
+        "anchored": 35,
+        "free": 41,
+        "all_edges": 49
+      },
+      "changed_plans": {
+        "anchored": 0,
+        "free": 3,
+        "all_edges": 14
+      },
+      "candidate_sets_p50_p95": {
+        "anchored": [
+          1.0,
+          1.0
+        ],
+        "free": [
+          1.0,
+          3.0
+        ],
+        "all_edges": [
+          4.0,
+          5.0
+        ]
+      },
+      "comparisons": {
+        "joint_to_anchored": {
+          "natural": {
+            "arms": {
+              "joint": {
+                "issued": 45,
+                "known": 35,
+                "tag_unresolved": 10
+              },
+              "anchored": {
+                "issued": 45,
+                "known": 35,
+                "tag_unresolved": 10
+              }
+            },
+            "both_issue": 45,
+            "overlap_changes": {
+              "same_response": 45,
+              "same_person_changed_sources": 0,
+              "different_person": 0,
+              "known_gain": 0,
+              "known_loss": 0
+            },
+            "issued_only": {
+              "joint": 0,
+              "anchored": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 45,
+              "clusters": 7,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              0,
+              0
+            ]
+          },
+          "common": {
+            "arms": {
+              "joint": {
+                "issued": 45,
+                "known": 35,
+                "tag_unresolved": 10
+              },
+              "anchored": {
+                "issued": 45,
+                "known": 35,
+                "tag_unresolved": 10
+              }
+            },
+            "both_issue": 45,
+            "overlap_changes": {
+              "same_response": 45,
+              "same_person_changed_sources": 0,
+              "different_person": 0,
+              "known_gain": 0,
+              "known_loss": 0
+            },
+            "issued_only": {
+              "joint": 0,
+              "anchored": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 45,
+              "clusters": 7,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              0,
+              0
+            ]
+          },
+          "quota": {
+            "arms": {
+              "joint": {
+                "issued": 45,
+                "known": 35,
+                "tag_unresolved": 10
+              },
+              "anchored": {
+                "issued": 45,
+                "known": 35,
+                "tag_unresolved": 10
+              }
+            },
+            "both_issue": 45,
+            "overlap_changes": {
+              "same_response": 45,
+              "same_person_changed_sources": 0,
+              "different_person": 0,
+              "known_gain": 0,
+              "known_loss": 0
+            },
+            "issued_only": {
+              "joint": 0,
+              "anchored": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 45,
+              "clusters": 7,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              0,
+              0
+            ]
+          }
+        },
+        "joint_to_free": {
+          "natural": {
+            "arms": {
+              "joint": {
+                "issued": 45,
+                "known": 35,
+                "tag_unresolved": 10
+              },
+              "free": {
+                "issued": 42,
+                "known": 35,
+                "tag_unresolved": 7
+              }
+            },
+            "both_issue": 42,
+            "overlap_changes": {
+              "same_response": 42,
+              "same_person_changed_sources": 0,
+              "different_person": 0,
+              "known_gain": 0,
+              "known_loss": 0
+            },
+            "issued_only": {
+              "joint": 3,
+              "free": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 42,
+              "clusters": 7,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -3,
+              0
+            ]
+          },
+          "common": {
+            "arms": {
+              "joint": {
+                "issued": 42,
+                "known": 35,
+                "tag_unresolved": 7
+              },
+              "free": {
+                "issued": 42,
+                "known": 35,
+                "tag_unresolved": 7
+              }
+            },
+            "both_issue": 42,
+            "overlap_changes": {
+              "same_response": 42,
+              "same_person_changed_sources": 0,
+              "different_person": 0,
+              "known_gain": 0,
+              "known_loss": 0
+            },
+            "issued_only": {
+              "joint": 0,
+              "free": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 42,
+              "clusters": 7,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              0,
+              0
+            ]
+          },
+          "quota": {
+            "arms": {
+              "joint": {
+                "issued": 42,
+                "known": 35,
+                "tag_unresolved": 7
+              },
+              "free": {
+                "issued": 42,
+                "known": 35,
+                "tag_unresolved": 7
+              }
+            },
+            "both_issue": 41,
+            "overlap_changes": {
+              "same_response": 41,
+              "same_person_changed_sources": 0,
+              "different_person": 0,
+              "known_gain": 0,
+              "known_loss": 0
+            },
+            "issued_only": {
+              "joint": 1,
+              "free": 1
+            },
+            "paired_known_delta_per_query": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 41,
+              "clusters": 7,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -1,
+              1
+            ]
+          }
+        },
+        "joint_to_all_edges": {
+          "natural": {
+            "arms": {
+              "joint": {
+                "issued": 45,
+                "known": 35,
+                "tag_unresolved": 10
+              },
+              "all_edges": {
+                "issued": 36,
+                "known": 29,
+                "tag_unresolved": 7
+              }
+            },
+            "both_issue": 36,
+            "overlap_changes": {
+              "same_response": 34,
+              "same_person_changed_sources": 0,
+              "different_person": 2,
+              "known_gain": 0,
+              "known_loss": 1
+            },
+            "issued_only": {
+              "joint": 9,
+              "all_edges": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": -0.11764705882352941,
+              "percentile_95": [
+                -0.32727272727272727,
+                0.0
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": -0.027777777777777776,
+              "percentile_95": [
+                -0.09375,
+                0.0
+              ],
+              "queries": 36,
+              "clusters": 7,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -11,
+              -4
+            ]
+          },
+          "common": {
+            "arms": {
+              "joint": {
+                "issued": 36,
+                "known": 30,
+                "tag_unresolved": 6
+              },
+              "all_edges": {
+                "issued": 36,
+                "known": 29,
+                "tag_unresolved": 7
+              }
+            },
+            "both_issue": 36,
+            "overlap_changes": {
+              "same_response": 34,
+              "same_person_changed_sources": 0,
+              "different_person": 2,
+              "known_gain": 0,
+              "known_loss": 1
+            },
+            "issued_only": {
+              "joint": 0,
+              "all_edges": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": -0.0196078431372549,
+              "percentile_95": [
+                -0.05454545454545454,
+                0.0
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": -0.027777777777777776,
+              "percentile_95": [
+                -0.09375,
+                0.0
+              ],
+              "queries": 36,
+              "clusters": 7,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -2,
+              1
+            ]
+          },
+          "quota": {
+            "arms": {
+              "joint": {
+                "issued": 36,
+                "known": 31,
+                "tag_unresolved": 5
+              },
+              "all_edges": {
+                "issued": 36,
+                "known": 29,
+                "tag_unresolved": 7
+              }
+            },
+            "both_issue": 31,
+            "overlap_changes": {
+              "same_response": 29,
+              "same_person_changed_sources": 0,
+              "different_person": 2,
+              "known_gain": 0,
+              "known_loss": 1
+            },
+            "issued_only": {
+              "joint": 5,
+              "all_edges": 5
+            },
+            "paired_known_delta_per_query": {
+              "mean": -0.0392156862745098,
+              "percentile_95": [
+                -0.25,
+                0.2413793103448276
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": -0.03225806451612903,
+              "percentile_95": [
+                -0.11764705882352941,
+                0.0
+              ],
+              "queries": 31,
+              "clusters": 6,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -3,
+              1
+            ]
+          }
+        },
+        "free_to_all_edges": {
+          "natural": {
+            "arms": {
+              "free": {
+                "issued": 42,
+                "known": 35,
+                "tag_unresolved": 7
+              },
+              "all_edges": {
+                "issued": 36,
+                "known": 29,
+                "tag_unresolved": 7
+              }
+            },
+            "both_issue": 36,
+            "overlap_changes": {
+              "same_response": 34,
+              "same_person_changed_sources": 0,
+              "different_person": 2,
+              "known_gain": 0,
+              "known_loss": 1
+            },
+            "issued_only": {
+              "free": 6,
+              "all_edges": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": -0.11764705882352941,
+              "percentile_95": [
+                -0.32727272727272727,
+                0.0
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": -0.027777777777777776,
+              "percentile_95": [
+                -0.09375,
+                0.0
+              ],
+              "queries": 36,
+              "clusters": 7,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -8,
+              -4
+            ]
+          },
+          "common": {
+            "arms": {
+              "free": {
+                "issued": 36,
+                "known": 30,
+                "tag_unresolved": 6
+              },
+              "all_edges": {
+                "issued": 36,
+                "known": 29,
+                "tag_unresolved": 7
+              }
+            },
+            "both_issue": 36,
+            "overlap_changes": {
+              "same_response": 34,
+              "same_person_changed_sources": 0,
+              "different_person": 2,
+              "known_gain": 0,
+              "known_loss": 1
+            },
+            "issued_only": {
+              "free": 0,
+              "all_edges": 0
+            },
+            "paired_known_delta_per_query": {
+              "mean": -0.0196078431372549,
+              "percentile_95": [
+                -0.05454545454545454,
+                0.0
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": -0.027777777777777776,
+              "percentile_95": [
+                -0.09375,
+                0.0
+              ],
+              "queries": 36,
+              "clusters": 7,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -2,
+              1
+            ]
+          },
+          "quota": {
+            "arms": {
+              "free": {
+                "issued": 36,
+                "known": 31,
+                "tag_unresolved": 5
+              },
+              "all_edges": {
+                "issued": 36,
+                "known": 29,
+                "tag_unresolved": 7
+              }
+            },
+            "both_issue": 31,
+            "overlap_changes": {
+              "same_response": 29,
+              "same_person_changed_sources": 0,
+              "different_person": 2,
+              "known_gain": 0,
+              "known_loss": 1
+            },
+            "issued_only": {
+              "free": 5,
+              "all_edges": 5
+            },
+            "paired_known_delta_per_query": {
+              "mean": -0.0392156862745098,
+              "percentile_95": [
+                -0.25,
+                0.2413793103448276
+              ],
+              "queries": 51,
+              "clusters": 8,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "paired_known_delta_on_overlap": {
+              "mean": -0.03225806451612903,
+              "percentile_95": [
+                -0.11764705882352941,
+                0.0
+              ],
+              "queries": 31,
+              "clusters": 6,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "topic pair; query-weighted mean"
+            },
+            "possible_known_delta": [
+              -3,
+              1
+            ]
+          }
+        }
+      },
+      "decision_signature": "362fe49d692a4b49177aaf48342c44be1eda1eade4eab1b23df3c50f9771a66b",
+      "baseline_signature": "06090c5bd937070dd5e79bfa42059cf3f9b1207debd8975c845417d167aff6f0",
+      "p95_ms_by_run": [
+        {
+          "owner_gap": 18.673552433028817,
+          "joint": 18.53022677823901,
+          "anchored": 18.868843792006373,
+          "free": 18.742018612101674,
+          "all_edges": 18.895727349445224
+        },
+        {
+          "owner_gap": 18.289360916242003,
+          "joint": 18.258418422192335,
+          "anchored": 18.564040074124932,
+          "free": 18.540878780186176,
+          "all_edges": 18.714133882895112
+        }
+      ]
+    }
+  }
+}
