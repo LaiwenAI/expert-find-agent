@@ -1,0 +1,616 @@
+{
+  "node": "ws6",
+  "output_sha256": [
+    "e1f9c459775ee4419df56bb4dd5a7c19b2d1d7b788692145ec7fbafd3375a2da",
+    "99cc8f86c57f65b514c086d26e1fee79245f0ead1723fb74ebafa09ac594d458"
+  ],
+  "runs": [
+    {
+      "gpu": "NVIDIA GeForce RTX 4090",
+      "outcomes": {
+        "present": {
+          "matched": {
+            "byline_joint": {
+              "common_exact": {
+                "byline_joint": 39,
+                "role_joint": 39
+              },
+              "common_issuance": 43,
+              "exact": {
+                "byline_joint": 39,
+                "role_joint": 36
+              },
+              "paired_exact": {
+                "bootstrap_repeats": 10000,
+                "clusters": 13,
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 78,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "quota": 43
+            },
+            "byline_sequential": {
+              "common_exact": {
+                "byline_sequential": 36,
+                "role_joint": 36
+              },
+              "common_issuance": 40,
+              "exact": {
+                "byline_sequential": 36,
+                "role_joint": 36
+              },
+              "paired_exact": {
+                "bootstrap_repeats": 10000,
+                "clusters": 13,
+                "mean": 0.038461538461538464,
+                "percentile_95": [
+                  0.0,
+                  0.11538461538461539
+                ],
+                "queries": 78,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "quota": 40
+            },
+            "role_sequential": {
+              "common_exact": {
+                "role_joint": 39,
+                "role_sequential": 39
+              },
+              "common_issuance": 43,
+              "exact": {
+                "role_joint": 36,
+                "role_sequential": 39
+              },
+              "paired_exact": {
+                "bootstrap_repeats": 10000,
+                "clusters": 13,
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 78,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "quota": 43
+            },
+            "topical": {
+              "common_exact": {
+                "role_joint": 21,
+                "topical": 21
+              },
+              "common_issuance": 25,
+              "exact": {
+                "role_joint": 23,
+                "topical": 21
+              },
+              "paired_exact": {
+                "bootstrap_repeats": 10000,
+                "clusters": 13,
+                "mean": 0.23076923076923078,
+                "percentile_95": [
+                  0.11538461538461539,
+                  0.3471153846153706
+                ],
+                "queries": 78,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "quota": 25
+            }
+          },
+          "methods": {
+            "byline_joint": {
+              "exact": 39,
+              "issued": 43,
+              "p95_ms": 17.657288373447955,
+              "reachable": 39,
+              "reads": 234,
+              "requests": 78,
+              "wrong": 4
+            },
+            "byline_sequential": {
+              "exact": 36,
+              "issued": 40,
+              "p95_ms": 17.693397728726268,
+              "reachable": 36,
+              "reads": 234,
+              "requests": 78,
+              "wrong": 4
+            },
+            "role_joint": {
+              "exact": 39,
+              "issued": 54,
+              "p95_ms": 17.40444405004382,
+              "reachable": 39,
+              "reads": 234,
+              "requests": 78,
+              "wrong": 15
+            },
+            "role_sequential": {
+              "exact": 39,
+              "issued": 43,
+              "p95_ms": 17.677054437808692,
+              "reachable": 39,
+              "reads": 234,
+              "requests": 78,
+              "wrong": 4
+            },
+            "topical": {
+              "exact": 21,
+              "issued": 25,
+              "p95_ms": 17.454912164248526,
+              "reachable": 21,
+              "reads": 234,
+              "requests": 78,
+              "wrong": 4
+            }
+          }
+        },
+        "withdrawn": {
+          "matched": {
+            "byline_joint": {
+              "common_exact": {
+                "byline_joint": 0,
+                "role_joint": 0
+              },
+              "common_issuance": 24,
+              "exact": {
+                "byline_joint": 0,
+                "role_joint": 0
+              },
+              "paired_exact": {
+                "bootstrap_repeats": 10000,
+                "clusters": 13,
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 156,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "quota": 24
+            },
+            "byline_sequential": {
+              "common_exact": {
+                "byline_sequential": 0,
+                "role_joint": 0
+              },
+              "common_issuance": 5,
+              "exact": {
+                "byline_sequential": 0,
+                "role_joint": 0
+              },
+              "paired_exact": {
+                "bootstrap_repeats": 10000,
+                "clusters": 13,
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 156,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "quota": 5
+            },
+            "role_sequential": {
+              "common_exact": {
+                "role_joint": 0,
+                "role_sequential": 0
+              },
+              "common_issuance": 8,
+              "exact": {
+                "role_joint": 0,
+                "role_sequential": 0
+              },
+              "paired_exact": {
+                "bootstrap_repeats": 10000,
+                "clusters": 13,
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 156,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "quota": 8
+            },
+            "topical": {
+              "common_exact": {
+                "role_joint": 0,
+                "topical": 0
+              },
+              "common_issuance": 0,
+              "exact": {
+                "role_joint": 0,
+                "topical": 0
+              },
+              "paired_exact": {
+                "bootstrap_repeats": 10000,
+                "clusters": 13,
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 156,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "quota": 0
+            }
+          },
+          "methods": {
+            "byline_joint": {
+              "exact": 0,
+              "issued": 24,
+              "p95_ms": 17.28539913892746,
+              "reachable": 0,
+              "reads": 468,
+              "requests": 156,
+              "wrong": 24
+            },
+            "byline_sequential": {
+              "exact": 0,
+              "issued": 5,
+              "p95_ms": 17.243849695660174,
+              "reachable": 0,
+              "reads": 468,
+              "requests": 156,
+              "wrong": 5
+            },
+            "role_joint": {
+              "exact": 0,
+              "issued": 50,
+              "p95_ms": 17.372737638652325,
+              "reachable": 0,
+              "reads": 468,
+              "requests": 156,
+              "wrong": 50
+            },
+            "role_sequential": {
+              "exact": 0,
+              "issued": 8,
+              "p95_ms": 17.378193326294422,
+              "reachable": 0,
+              "reads": 468,
+              "requests": 156,
+              "wrong": 8
+            },
+            "topical": {
+              "exact": 0,
+              "issued": 0,
+              "p95_ms": 17.19893899280578,
+              "reachable": 0,
+              "reads": 468,
+              "requests": 156,
+              "wrong": 0
+            }
+          }
+        }
+      },
+      "panel_sha256": "51b1e398250a54b8c121e59abaea8a65f1e280176af688598e7062bdfa0d3415",
+      "reverse": false,
+      "script_sha256": "6bcef28200304b1fa3f77d45332ffd8ca99f742423b27e5f5be651be15568cab",
+      "signature": "90383b7e0697b55521ef588260f6b7e839024bea61c7b6237a65d206da299f68"
+    },
+    {
+      "gpu": "NVIDIA GeForce RTX 4090",
+      "outcomes": {
+        "present": {
+          "matched": {
+            "byline_joint": {
+              "common_exact": {
+                "byline_joint": 39,
+                "role_joint": 39
+              },
+              "common_issuance": 43,
+              "exact": {
+                "byline_joint": 39,
+                "role_joint": 36
+              },
+              "paired_exact": {
+                "bootstrap_repeats": 10000,
+                "clusters": 13,
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 78,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "quota": 43
+            },
+            "byline_sequential": {
+              "common_exact": {
+                "byline_sequential": 36,
+                "role_joint": 36
+              },
+              "common_issuance": 40,
+              "exact": {
+                "byline_sequential": 36,
+                "role_joint": 36
+              },
+              "paired_exact": {
+                "bootstrap_repeats": 10000,
+                "clusters": 13,
+                "mean": 0.038461538461538464,
+                "percentile_95": [
+                  0.0,
+                  0.11538461538461539
+                ],
+                "queries": 78,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "quota": 40
+            },
+            "role_sequential": {
+              "common_exact": {
+                "role_joint": 39,
+                "role_sequential": 39
+              },
+              "common_issuance": 43,
+              "exact": {
+                "role_joint": 36,
+                "role_sequential": 39
+              },
+              "paired_exact": {
+                "bootstrap_repeats": 10000,
+                "clusters": 13,
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 78,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "quota": 43
+            },
+            "topical": {
+              "common_exact": {
+                "role_joint": 21,
+                "topical": 21
+              },
+              "common_issuance": 25,
+              "exact": {
+                "role_joint": 23,
+                "topical": 21
+              },
+              "paired_exact": {
+                "bootstrap_repeats": 10000,
+                "clusters": 13,
+                "mean": 0.23076923076923078,
+                "percentile_95": [
+                  0.11538461538461539,
+                  0.3471153846153706
+                ],
+                "queries": 78,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "quota": 25
+            }
+          },
+          "methods": {
+            "byline_joint": {
+              "exact": 39,
+              "issued": 43,
+              "p95_ms": 17.684178799390793,
+              "reachable": 39,
+              "reads": 234,
+              "requests": 78,
+              "wrong": 4
+            },
+            "byline_sequential": {
+              "exact": 36,
+              "issued": 40,
+              "p95_ms": 17.606445052661,
+              "reachable": 36,
+              "reads": 234,
+              "requests": 78,
+              "wrong": 4
+            },
+            "role_joint": {
+              "exact": 39,
+              "issued": 54,
+              "p95_ms": 18.033309699967504,
+              "reachable": 39,
+              "reads": 234,
+              "requests": 78,
+              "wrong": 15
+            },
+            "role_sequential": {
+              "exact": 39,
+              "issued": 43,
+              "p95_ms": 18.074957327917218,
+              "reachable": 39,
+              "reads": 234,
+              "requests": 78,
+              "wrong": 4
+            },
+            "topical": {
+              "exact": 21,
+              "issued": 25,
+              "p95_ms": 17.57120699621737,
+              "reachable": 21,
+              "reads": 234,
+              "requests": 78,
+              "wrong": 4
+            }
+          }
+        },
+        "withdrawn": {
+          "matched": {
+            "byline_joint": {
+              "common_exact": {
+                "byline_joint": 0,
+                "role_joint": 0
+              },
+              "common_issuance": 24,
+              "exact": {
+                "byline_joint": 0,
+                "role_joint": 0
+              },
+              "paired_exact": {
+                "bootstrap_repeats": 10000,
+                "clusters": 13,
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 156,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "quota": 24
+            },
+            "byline_sequential": {
+              "common_exact": {
+                "byline_sequential": 0,
+                "role_joint": 0
+              },
+              "common_issuance": 5,
+              "exact": {
+                "byline_sequential": 0,
+                "role_joint": 0
+              },
+              "paired_exact": {
+                "bootstrap_repeats": 10000,
+                "clusters": 13,
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 156,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "quota": 5
+            },
+            "role_sequential": {
+              "common_exact": {
+                "role_joint": 0,
+                "role_sequential": 0
+              },
+              "common_issuance": 8,
+              "exact": {
+                "role_joint": 0,
+                "role_sequential": 0
+              },
+              "paired_exact": {
+                "bootstrap_repeats": 10000,
+                "clusters": 13,
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 156,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "quota": 8
+            },
+            "topical": {
+              "common_exact": {
+                "role_joint": 0,
+                "topical": 0
+              },
+              "common_issuance": 0,
+              "exact": {
+                "role_joint": 0,
+                "topical": 0
+              },
+              "paired_exact": {
+                "bootstrap_repeats": 10000,
+                "clusters": 13,
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 156,
+                "sampling_unit": "whole source paper; query-weighted mean",
+                "seed": 20261116
+              },
+              "quota": 0
+            }
+          },
+          "methods": {
+            "byline_joint": {
+              "exact": 0,
+              "issued": 24,
+              "p95_ms": 18.03436630871147,
+              "reachable": 0,
+              "reads": 468,
+              "requests": 156,
+              "wrong": 24
+            },
+            "byline_sequential": {
+              "exact": 0,
+              "issued": 5,
+              "p95_ms": 17.623859224841,
+              "reachable": 0,
+              "reads": 468,
+              "requests": 156,
+              "wrong": 5
+            },
+            "role_joint": {
+              "exact": 0,
+              "issued": 50,
+              "p95_ms": 17.684982041828334,
+              "reachable": 0,
+              "reads": 468,
+              "requests": 156,
+              "wrong": 50
+            },
+            "role_sequential": {
+              "exact": 0,
+              "issued": 8,
+              "p95_ms": 17.964280676096678,
+              "reachable": 0,
+              "reads": 468,
+              "requests": 156,
+              "wrong": 8
+            },
+            "topical": {
+              "exact": 0,
+              "issued": 0,
+              "p95_ms": 17.51695468556136,
+              "reachable": 0,
+              "reads": 468,
+              "requests": 156,
+              "wrong": 0
+            }
+          }
+        }
+      },
+      "panel_sha256": "51b1e398250a54b8c121e59abaea8a65f1e280176af688598e7062bdfa0d3415",
+      "reverse": true,
+      "script_sha256": "6bcef28200304b1fa3f77d45332ffd8ca99f742423b27e5f5be651be15568cab",
+      "signature": "90383b7e0697b55521ef588260f6b7e839024bea61c7b6237a65d206da299f68"
+    }
+  ],
+  "slurm_array": 47384
+}

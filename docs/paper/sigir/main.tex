@@ -190,6 +190,9 @@ eLife (51) & 64 & 17 & 0 / 0 & 14 / 15 & 17 / 18 \\
 \end{tabular}
 \end{table*}
 
+\paragraph{Control with the same indexed roles.}
+On the frozen 13-group PLOS keyword panel, we supply the requested roles and compare joint source planning with sequential repair using the same personal-role metadata. Each route opens three distinct declarations. With both papers present, both identify all 39 exact proofs, but joint planning emits 54 proofs and sequential repair emits 43. On the 43 requests that both answer, each has 39 exact proofs. At an equal panel-wide quota of 43 by citation rank, joint planning retains 36 exact proofs. When a designated paper is removed, joint and sequential planning issue 50 and 8 wrong-source substitutes across 156 requests. Both routes take about 18 ms at warm local P95. When a request identifies publications through source-specific clues, compatible roles alone cannot establish source identity. Sequential repair already reaches the exact-proof ceiling on these groups.
+
 \subsection{RQ2: Output-preserving work and measured latency}
 With complete publisher role fields, planning from depth 64 and certifying where possible returns the fixed depth-128 outcomes while reducing total reads from 633 to 516. The same response parity holds after masking or rotating indexed roles, although fewer requests qualify for early stopping. In the three 50\% exposure masks with role rotation, 15--50 PLOS and 1--4 eLife requests stop at depth 64. Warm request latency remains similar because both arms perform the deep retrieval.
 
@@ -238,7 +241,7 @@ The fixed-budget evidence covers labeled contribution tasks. Enterprise expert s
 Continual updates remain secondary. Compare them with a frozen initial agent on disjoint old and new tasks, including feedback and training costs.
 
 \section{Conclusion}
-Contributor-constrained source nomination increases label-supported evidence coverage under a fixed reading budget in the mixed publication catalogs. Exact checks can skip source reads or role-model calls while retaining fixed-policy outcomes. Work reduction affects client latency when it eliminates the calls that dominate the tail. The results support a lightweight first query and motivate separate measurement of when any more expensive verification improves expert selection.
+Contributor-constrained source nomination increases label-supported evidence coverage under a fixed reading budget in the mixed open-topic catalogs. When the task names source-specific cues and supplies exact roles, a strong sequential route already reaches every exact proof on the held panel and produces fewer source substitutes. Exact checks can skip source reads or role-model calls while retaining fixed-policy outcomes. Work reduction affects client latency when it eliminates the calls that dominate the tail. The results support a lightweight first query and motivate separate measurement of when any more expensive verification improves expert selection.
 
 \bibliographystyle{template/ACM-Reference-Format}
 \bibliography{../references}
