@@ -1,0 +1,874 @@
+{
+  "runs": [
+    {
+      "results": {
+        "KDD": {
+          "target": "KDD",
+          "training": "SciRepEval",
+          "queries": 122,
+          "acceptance_fit": {
+            "queries": 59,
+            "deeper_sources": 2576,
+            "accepted_sources": 170
+          },
+          "relevance_fit": {
+            "owner_slots": 295,
+            "judged_slots": 122,
+            "positive_slots": 52
+          },
+          "outcomes": {
+            "dense_state": {
+              "full": {
+                "cited": 291,
+                "known": 12,
+                "negative": 44,
+                "unknown": 235,
+                "reads": 610,
+                "tokens": 320095
+              },
+              "matched_issuance": {
+                "cited": 288,
+                "known": 12,
+                "negative": 44,
+                "unknown": 232
+              },
+              "matched_by_rank_only": {
+                "cited": 288,
+                "known": 12,
+                "negative": 44,
+                "unknown": 232
+              },
+              "paired_matched_p5_delta_pp": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 122,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000
+              },
+              "matched_p5_partial_label_interval_pp": [
+                0.0,
+                0.0
+              ]
+            },
+            "learned_acceptance": {
+              "full": {
+                "cited": 302,
+                "known": 12,
+                "negative": 44,
+                "unknown": 246,
+                "reads": 600,
+                "tokens": 296998
+              },
+              "matched_issuance": {
+                "cited": 288,
+                "known": 12,
+                "negative": 44,
+                "unknown": 232
+              },
+              "matched_by_rank_only": {
+                "cited": 288,
+                "known": 12,
+                "negative": 44,
+                "unknown": 232
+              },
+              "paired_matched_p5_delta_pp": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 122,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000
+              },
+              "matched_p5_partial_label_interval_pp": [
+                -0.6557377049180327,
+                0.6557377049180327
+              ]
+            },
+            "rank_prior": {
+              "full": {
+                "cited": 302,
+                "known": 12,
+                "negative": 44,
+                "unknown": 246,
+                "reads": 597,
+                "tokens": 297472
+              },
+              "matched_issuance": {
+                "cited": 288,
+                "known": 12,
+                "negative": 44,
+                "unknown": 232
+              },
+              "matched_by_rank_only": {
+                "cited": 288,
+                "known": 12,
+                "negative": 44,
+                "unknown": 232
+              },
+              "paired_matched_p5_delta_pp": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 122,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000
+              },
+              "matched_p5_partial_label_interval_pp": [
+                -0.6557377049180327,
+                0.6557377049180327
+              ]
+            },
+            "observed_relevance": {
+              "full": {
+                "cited": 301,
+                "known": 12,
+                "negative": 44,
+                "unknown": 245,
+                "reads": 599,
+                "tokens": 298172
+              },
+              "matched_issuance": {
+                "cited": 288,
+                "known": 12,
+                "negative": 44,
+                "unknown": 232
+              },
+              "matched_by_rank_only": {
+                "cited": 288,
+                "known": 12,
+                "negative": 44,
+                "unknown": 232
+              },
+              "paired_matched_p5_delta_pp": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 122,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000
+              },
+              "matched_p5_partial_label_interval_pp": [
+                -0.6557377049180327,
+                0.6557377049180327
+              ]
+            },
+            "judged_relevance": {
+              "full": {
+                "cited": 302,
+                "known": 12,
+                "negative": 44,
+                "unknown": 246,
+                "reads": 598,
+                "tokens": 296403
+              },
+              "matched_issuance": {
+                "cited": 288,
+                "known": 12,
+                "negative": 44,
+                "unknown": 232
+              },
+              "matched_by_rank_only": {
+                "cited": 288,
+                "known": 12,
+                "negative": 44,
+                "unknown": 232
+              },
+              "paired_matched_p5_delta_pp": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 122,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000
+              },
+              "matched_p5_partial_label_interval_pp": [
+                -0.6557377049180327,
+                0.6557377049180327
+              ]
+            }
+          },
+          "within_query_judged_concordance": {
+            "rank_prior": {
+              "correct": 4.0,
+              "pairs": 16
+            },
+            "observed_relevance": {
+              "correct": 3.0,
+              "pairs": 16
+            },
+            "judged_relevance": {
+              "correct": 2.0,
+              "pairs": 16
+            }
+          },
+          "signature": "3af867397c32e74cb1fb96f4c0b36e0a7983e86e4df905bc526e228f69a83571"
+        },
+        "SciRepEval": {
+          "target": "SciRepEval",
+          "training": "KDD",
+          "queries": 59,
+          "acceptance_fit": {
+            "queries": 122,
+            "deeper_sources": 4957,
+            "accepted_sources": 493
+          },
+          "relevance_fit": {
+            "owner_slots": 610,
+            "judged_slots": 102,
+            "positive_slots": 24
+          },
+          "outcomes": {
+            "dense_state": {
+              "full": {
+                "cited": 105,
+                "known": 26,
+                "negative": 23,
+                "unknown": 56,
+                "reads": 295,
+                "tokens": 127147
+              },
+              "matched_issuance": {
+                "cited": 99,
+                "known": 25,
+                "negative": 21,
+                "unknown": 53
+              },
+              "matched_by_rank_only": {
+                "cited": 99,
+                "known": 26,
+                "negative": 21,
+                "unknown": 52
+              },
+              "paired_matched_p5_delta_pp": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 59,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000
+              },
+              "matched_p5_partial_label_interval_pp": [
+                0.0,
+                0.0
+              ]
+            },
+            "learned_acceptance": {
+              "full": {
+                "cited": 111,
+                "known": 29,
+                "negative": 24,
+                "unknown": 58,
+                "reads": 290,
+                "tokens": 119939
+              },
+              "matched_issuance": {
+                "cited": 99,
+                "known": 25,
+                "negative": 22,
+                "unknown": 52
+              },
+              "matched_by_rank_only": {
+                "cited": 99,
+                "known": 26,
+                "negative": 22,
+                "unknown": 51
+              },
+              "paired_matched_p5_delta_pp": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 59,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000
+              },
+              "matched_p5_partial_label_interval_pp": [
+                -0.3389830508474576,
+                0.0
+              ]
+            },
+            "rank_prior": {
+              "full": {
+                "cited": 108,
+                "known": 29,
+                "negative": 22,
+                "unknown": 57,
+                "reads": 289,
+                "tokens": 120379
+              },
+              "matched_issuance": {
+                "cited": 99,
+                "known": 25,
+                "negative": 22,
+                "unknown": 52
+              },
+              "matched_by_rank_only": {
+                "cited": 99,
+                "known": 26,
+                "negative": 22,
+                "unknown": 51
+              },
+              "paired_matched_p5_delta_pp": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 59,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000
+              },
+              "matched_p5_partial_label_interval_pp": [
+                -0.3389830508474576,
+                0.0
+              ]
+            },
+            "observed_relevance": {
+              "full": {
+                "cited": 106,
+                "known": 28,
+                "negative": 23,
+                "unknown": 55,
+                "reads": 292,
+                "tokens": 120022
+              },
+              "matched_issuance": {
+                "cited": 99,
+                "known": 25,
+                "negative": 21,
+                "unknown": 53
+              },
+              "matched_by_rank_only": {
+                "cited": 99,
+                "known": 25,
+                "negative": 21,
+                "unknown": 53
+              },
+              "paired_matched_p5_delta_pp": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 59,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000
+              },
+              "matched_p5_partial_label_interval_pp": [
+                0.0,
+                0.0
+              ]
+            },
+            "judged_relevance": {
+              "full": {
+                "cited": 106,
+                "known": 28,
+                "negative": 23,
+                "unknown": 55,
+                "reads": 292,
+                "tokens": 120087
+              },
+              "matched_issuance": {
+                "cited": 99,
+                "known": 25,
+                "negative": 21,
+                "unknown": 53
+              },
+              "matched_by_rank_only": {
+                "cited": 99,
+                "known": 25,
+                "negative": 21,
+                "unknown": 53
+              },
+              "paired_matched_p5_delta_pp": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 59,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000
+              },
+              "matched_p5_partial_label_interval_pp": [
+                0.0,
+                0.0
+              ]
+            }
+          },
+          "within_query_judged_concordance": {
+            "rank_prior": {
+              "correct": 39.0,
+              "pairs": 56
+            },
+            "observed_relevance": {
+              "correct": 16.0,
+              "pairs": 56
+            },
+            "judged_relevance": {
+              "correct": 17.0,
+              "pairs": 56
+            }
+          },
+          "signature": "801593432285ec4710ee75ad549874203313067b5ddfa250bdbdbdf4fcacfdbb"
+        }
+      },
+      "inputs": {
+        "KDD": "a618b603caaaa456defb1551aaa30e4ba3f38f4c16fbe73eb432229e577ee1fe",
+        "SciRepEval": "822b33f66a45e8aaa4a4bc4193ad63f612af5fda595d61ec275cf33c14f6c836"
+      },
+      "reverse": false,
+      "runner": "6da05b53dba6df397e3789d06b042f5793d88736b9556a6517e0fc36ddd897a6",
+      "slurm": "46824"
+    },
+    {
+      "results": {
+        "SciRepEval": {
+          "target": "SciRepEval",
+          "training": "KDD",
+          "queries": 59,
+          "acceptance_fit": {
+            "queries": 122,
+            "deeper_sources": 4957,
+            "accepted_sources": 493
+          },
+          "relevance_fit": {
+            "owner_slots": 610,
+            "judged_slots": 102,
+            "positive_slots": 24
+          },
+          "outcomes": {
+            "dense_state": {
+              "full": {
+                "cited": 105,
+                "known": 26,
+                "negative": 23,
+                "unknown": 56,
+                "reads": 295,
+                "tokens": 127147
+              },
+              "matched_issuance": {
+                "cited": 99,
+                "known": 25,
+                "negative": 21,
+                "unknown": 53
+              },
+              "matched_by_rank_only": {
+                "cited": 99,
+                "known": 26,
+                "negative": 21,
+                "unknown": 52
+              },
+              "paired_matched_p5_delta_pp": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 59,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000
+              },
+              "matched_p5_partial_label_interval_pp": [
+                0.0,
+                0.0
+              ]
+            },
+            "learned_acceptance": {
+              "full": {
+                "cited": 111,
+                "known": 29,
+                "negative": 24,
+                "unknown": 58,
+                "reads": 290,
+                "tokens": 119939
+              },
+              "matched_issuance": {
+                "cited": 99,
+                "known": 25,
+                "negative": 22,
+                "unknown": 52
+              },
+              "matched_by_rank_only": {
+                "cited": 99,
+                "known": 26,
+                "negative": 22,
+                "unknown": 51
+              },
+              "paired_matched_p5_delta_pp": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 59,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000
+              },
+              "matched_p5_partial_label_interval_pp": [
+                -0.3389830508474576,
+                0.0
+              ]
+            },
+            "rank_prior": {
+              "full": {
+                "cited": 108,
+                "known": 29,
+                "negative": 22,
+                "unknown": 57,
+                "reads": 289,
+                "tokens": 120379
+              },
+              "matched_issuance": {
+                "cited": 99,
+                "known": 25,
+                "negative": 22,
+                "unknown": 52
+              },
+              "matched_by_rank_only": {
+                "cited": 99,
+                "known": 26,
+                "negative": 22,
+                "unknown": 51
+              },
+              "paired_matched_p5_delta_pp": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 59,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000
+              },
+              "matched_p5_partial_label_interval_pp": [
+                -0.3389830508474576,
+                0.0
+              ]
+            },
+            "observed_relevance": {
+              "full": {
+                "cited": 106,
+                "known": 28,
+                "negative": 23,
+                "unknown": 55,
+                "reads": 292,
+                "tokens": 120022
+              },
+              "matched_issuance": {
+                "cited": 99,
+                "known": 25,
+                "negative": 21,
+                "unknown": 53
+              },
+              "matched_by_rank_only": {
+                "cited": 99,
+                "known": 25,
+                "negative": 21,
+                "unknown": 53
+              },
+              "paired_matched_p5_delta_pp": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 59,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000
+              },
+              "matched_p5_partial_label_interval_pp": [
+                0.0,
+                0.0
+              ]
+            },
+            "judged_relevance": {
+              "full": {
+                "cited": 106,
+                "known": 28,
+                "negative": 23,
+                "unknown": 55,
+                "reads": 292,
+                "tokens": 120087
+              },
+              "matched_issuance": {
+                "cited": 99,
+                "known": 25,
+                "negative": 21,
+                "unknown": 53
+              },
+              "matched_by_rank_only": {
+                "cited": 99,
+                "known": 25,
+                "negative": 21,
+                "unknown": 53
+              },
+              "paired_matched_p5_delta_pp": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 59,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000
+              },
+              "matched_p5_partial_label_interval_pp": [
+                0.0,
+                0.0
+              ]
+            }
+          },
+          "within_query_judged_concordance": {
+            "rank_prior": {
+              "correct": 39.0,
+              "pairs": 56
+            },
+            "observed_relevance": {
+              "correct": 16.0,
+              "pairs": 56
+            },
+            "judged_relevance": {
+              "correct": 17.0,
+              "pairs": 56
+            }
+          },
+          "signature": "801593432285ec4710ee75ad549874203313067b5ddfa250bdbdbdf4fcacfdbb"
+        },
+        "KDD": {
+          "target": "KDD",
+          "training": "SciRepEval",
+          "queries": 122,
+          "acceptance_fit": {
+            "queries": 59,
+            "deeper_sources": 2576,
+            "accepted_sources": 170
+          },
+          "relevance_fit": {
+            "owner_slots": 295,
+            "judged_slots": 122,
+            "positive_slots": 52
+          },
+          "outcomes": {
+            "dense_state": {
+              "full": {
+                "cited": 291,
+                "known": 12,
+                "negative": 44,
+                "unknown": 235,
+                "reads": 610,
+                "tokens": 320095
+              },
+              "matched_issuance": {
+                "cited": 288,
+                "known": 12,
+                "negative": 44,
+                "unknown": 232
+              },
+              "matched_by_rank_only": {
+                "cited": 288,
+                "known": 12,
+                "negative": 44,
+                "unknown": 232
+              },
+              "paired_matched_p5_delta_pp": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 122,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000
+              },
+              "matched_p5_partial_label_interval_pp": [
+                0.0,
+                0.0
+              ]
+            },
+            "learned_acceptance": {
+              "full": {
+                "cited": 302,
+                "known": 12,
+                "negative": 44,
+                "unknown": 246,
+                "reads": 600,
+                "tokens": 296998
+              },
+              "matched_issuance": {
+                "cited": 288,
+                "known": 12,
+                "negative": 44,
+                "unknown": 232
+              },
+              "matched_by_rank_only": {
+                "cited": 288,
+                "known": 12,
+                "negative": 44,
+                "unknown": 232
+              },
+              "paired_matched_p5_delta_pp": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 122,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000
+              },
+              "matched_p5_partial_label_interval_pp": [
+                -0.6557377049180327,
+                0.6557377049180327
+              ]
+            },
+            "rank_prior": {
+              "full": {
+                "cited": 302,
+                "known": 12,
+                "negative": 44,
+                "unknown": 246,
+                "reads": 597,
+                "tokens": 297472
+              },
+              "matched_issuance": {
+                "cited": 288,
+                "known": 12,
+                "negative": 44,
+                "unknown": 232
+              },
+              "matched_by_rank_only": {
+                "cited": 288,
+                "known": 12,
+                "negative": 44,
+                "unknown": 232
+              },
+              "paired_matched_p5_delta_pp": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 122,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000
+              },
+              "matched_p5_partial_label_interval_pp": [
+                -0.6557377049180327,
+                0.6557377049180327
+              ]
+            },
+            "observed_relevance": {
+              "full": {
+                "cited": 301,
+                "known": 12,
+                "negative": 44,
+                "unknown": 245,
+                "reads": 599,
+                "tokens": 298172
+              },
+              "matched_issuance": {
+                "cited": 288,
+                "known": 12,
+                "negative": 44,
+                "unknown": 232
+              },
+              "matched_by_rank_only": {
+                "cited": 288,
+                "known": 12,
+                "negative": 44,
+                "unknown": 232
+              },
+              "paired_matched_p5_delta_pp": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 122,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000
+              },
+              "matched_p5_partial_label_interval_pp": [
+                -0.6557377049180327,
+                0.6557377049180327
+              ]
+            },
+            "judged_relevance": {
+              "full": {
+                "cited": 302,
+                "known": 12,
+                "negative": 44,
+                "unknown": 246,
+                "reads": 598,
+                "tokens": 296403
+              },
+              "matched_issuance": {
+                "cited": 288,
+                "known": 12,
+                "negative": 44,
+                "unknown": 232
+              },
+              "matched_by_rank_only": {
+                "cited": 288,
+                "known": 12,
+                "negative": 44,
+                "unknown": 232
+              },
+              "paired_matched_p5_delta_pp": {
+                "mean": 0.0,
+                "percentile_95": [
+                  0.0,
+                  0.0
+                ],
+                "queries": 122,
+                "seed": 20261116,
+                "bootstrap_repeats": 10000
+              },
+              "matched_p5_partial_label_interval_pp": [
+                -0.6557377049180327,
+                0.6557377049180327
+              ]
+            }
+          },
+          "within_query_judged_concordance": {
+            "rank_prior": {
+              "correct": 4.0,
+              "pairs": 16
+            },
+            "observed_relevance": {
+              "correct": 3.0,
+              "pairs": 16
+            },
+            "judged_relevance": {
+              "correct": 2.0,
+              "pairs": 16
+            }
+          },
+          "signature": "3af867397c32e74cb1fb96f4c0b36e0a7983e86e4df905bc526e228f69a83571"
+        }
+      },
+      "inputs": {
+        "KDD": "a618b603caaaa456defb1551aaa30e4ba3f38f4c16fbe73eb432229e577ee1fe",
+        "SciRepEval": "822b33f66a45e8aaa4a4bc4193ad63f612af5fda595d61ec275cf33c14f6c836"
+      },
+      "reverse": true,
+      "runner": "6da05b53dba6df397e3789d06b042f5793d88736b9556a6517e0fc36ddd897a6",
+      "slurm": "46824"
+    }
+  ]
+}
