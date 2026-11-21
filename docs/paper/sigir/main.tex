@@ -13,12 +13,12 @@
 \acmConference[Research draft]{Research draft}{November 2026}{}
 \acmYear{2026}
 \renewcommand\footnotetextcopyrightpermission[1]{}
-\title[Low-Cost Evidence-Based Expert Search]{Low-Cost First-Query Expert Search with Attributed Evidence}
+\title[Contributor-Constrained Expert Search]{Contributor-Constrained Evidence Allocation for First-Query Expert Search}
 \author{Anonymous Authors}
 \begin{document}
 
 \begin{abstract}
-Expert search must find people whose own contributions meet a request, often with support in different publications. We study a first-query agent that joins ranked source pools by contributor identity and uses indexed personal roles to select a small set of declarations for verification. In a 452-article mixed PLOS and eLife catalog, at most three reads per request recover 85 of 160 PLOS and 46 of 51 eLife label-supported matches at candidate depth 128, compared with 45 and 14 for byline-only joint nomination. Raising depth from 64 to 128 increases coverage, while the joint role route returns the same experts and citations on requests answered at both depths. A shallow-planning certificate preserves the fixed-depth responses and reduces reads from 633 to 516 with complete role fields. An independent byline precheck reduces reads from 1,266 to 910 in a paired live retrieval and source-service replay with identical responses. The source service uses loopback HTTP and an inserted read delay. These studies support fixed-budget coverage and equal-output execution savings. Independent evidence judgments and free-form enterprise requests remain necessary to establish expert-ranking quality.
+Expert search must find people whose own contributions satisfy a request. When the evidence spans publications, reading the highest-ranked sources independently can exhaust the budget before establishing a single person's eligibility. We study a first-query agent that joins ranked source pools by contributor identity, uses indexed roles to nominate complementary sources, and verifies the original declarations. On a mixed catalog of 452 PLOS and eLife articles, a three-read plan recovers 85 of 160 PLOS and 46 of 51 eLife label-supported matches at candidate depth 128, compared with 45 and 14 for joint byline nomination. A certificate retains the fixed-depth responses and reduces declarations read from 633 to 516 with complete role fields. On 13 later PLOS groups, a same-contributor feasibility test removes 84 of 101 calls to a frozen 4B role verifier while preserving every returned proof. Its intact-catalog P95 remains about 79 ms, compared with 17 ms for the lightweight baseline, for one additional correct proof. These results establish coverage at a fixed reading budget and show when structural pruning saves work. They leave the quality of enterprise expert rankings and the cost of obtaining it open.
 \end{abstract}
 \ccsdesc[500]{Information systems~Information retrieval}
 \ccsdesc[300]{Information systems~Retrieval models and ranking}
@@ -30,7 +30,7 @@ An enterprise looking for help with industrial inspection may need a person who 
 
 Reading the individually highest-ranked sources can spend most of the budget on papers about different people. A last read may then be unable to complete either person's evidence. We move the same-person constraint into the initial source plan. Ranked topic lists and contributor identifiers nominate complementary publications. The source declaration must still establish that the candidate performed each requested duty.
 
-Our first contribution is contributor-conditioned source allocation at a fixed verification budget. We measure reachability, loaded evidence and the final citation choice separately, and compare both natural and matched issuance. Our second contribution applies exact pruning to this allocation. A byline precheck removes a planned read that cannot contribute to any proof, and a prefix certificate can defer deeper role planning without changing the fixed-depth outcome. The evaluation separates CPU ranking, local declaration access and a controlled HTTP source service. We also examine attribution errors and controlled prose interpretation. Continual learning remains a follow-up to the frozen first-query agent.
+We make three contributions. First, we present a fixed-budget source allocation method that uses contributor identity and role information to select complementary evidence before reading. Second, we derive conditions that skip reads, deeper planning, or a role recheck while preserving a specified reference output. Third, we evaluate how source reachability, attributed support, and computation change under a common reading budget, matched issuance, and a source withdrawal intervention. We separate publisher-declared proof from reviewer relevance and enterprise eligibility. Continual learning remains a follow-up to the frozen first-query agent.
 
 \section{Related Work}
 Classical expert search aggregates document relevance into a ranking of people~\cite{balog2006formal}. We retain that aggregation for candidate generation and use contributor declarations to guide nomination and verification. CoF evaluates reviewer--paper relevance~\cite{zhang2025cof}. MERIT distinguishes core expertise from incidental overlap~\cite{yang2026merit}. Neither signal supplies ground truth for a person's contribution to a cited work in our enterprise setting.
@@ -56,10 +56,20 @@ A request $q$ identifies a target operation, context, and any hard requirements.
 \hfill\(\rightarrow\)\hfill
 \planstage{Joint plan}{Same contributor\\Distinct sources}
 \hfill\(\rightarrow\)\hfill
-\planstage{Source reads}{Precheck or certify\\Read original declarations}
+\planstage{Conditional checks}{Read original declarations\\Recheck feasible gaps}
 \hfill\(\rightarrow\)\hfill
 \planstage{Verified result}{Expert and citations\\Unresolved obligations}
-\caption{The frozen first-query path. Role postings guide nomination. Original declarations establish attributed support. Source prechecks and stopping certificates preserve the specified reference outcome.}
+
+\smallskip
+\fbox{\begin{minipage}{.75\textwidth}\centering
+\small\textbf{Evidence state guides the next action}\par\vspace{3pt}
+\footnotesize
+\fbox{Missing source: read}\hfill
+\fbox{Uncertain role: test feasibility}\hfill
+\fbox{Stable outcome: stop}\par\vspace{3pt}
+Update evidence state \(\longleftarrow\) read or recheck
+\end{minipage}}
+\caption{The first-query agent. Ranked pools and contributor links select sources. Original declarations update proof state and determine whether the agent returns a proof, reads another source, or rechecks a role.}
 \label{fig:plan}
 \end{figure*}
 
@@ -86,6 +96,13 @@ Let the shallow lists be prefixes of the fixed deep lists. The selected shallow 
 A structured request specifies topical content and two contribution duties independently. Interpret each duty against the available declaration fields before binding it to a source. We run two answer encodings and accept a field only on agreement. A single GPU batch executes the four prompts for a two-duty query. The resulting fields are reused across candidate sources. Every binding still uses the particular report and its author declaration. Field comparison can replace repeated interpretation when the relevant declarations are complete.
 
 For free text, a role proposal can influence nomination while the complete, unverified requirement spans remain available to the verifier. The system needs evidence before it can discharge a requirement, including one that appears in the same sentence as a role. Exact span offsets establish quotation identity. Conditions such as operating scale, test date and exclusive responsibility need separate support, even when the role is well understood. Our structured timing excludes free-text proof. A separate controlled prose replay encodes two topic spans and two role phrases in one forward through a frozen 0.6B encoder, with a ridge role head trained on 84 task descriptions absent from the held-out phrase inventory by exact match. The templates fix span boundaries. We compare separate forwards and open 4B interpretation while holding the downstream evidence route fixed.
+
+\paragraph{Feasibility before role recheck.}
+For a fixed pair $(a,b)$ with complete declarations, let $A_a(e)$ and $A_b(e)$ be the declared roles of contributor $e$ on each paper. For a confident role, let $U_i$ contain just the retained label. For an uncertain role, let $U_i$ be the full taxonomy. Issuance after rechecking requires some linked contributor to satisfy
+\[
+(A_a(e)\cap U_1\ne\varnothing)\;\land\;(A_b(e)\cap U_2\ne\varnothing).
+\]
+If none does, a recheck cannot emit a proof on that pair. The test is exact for the fixed source pair, contributor records, and retained confident labels. A cheaper approximate policy substitutes the two highest-scoring ridge labels for the full taxonomy in this test. Both policies still give the recheck model the full taxonomy whenever they call it. The exact test requires complete declarations and does not preclude looking for alternative sources when the application permits it.
 
 \subsection{Certificates for ranked citations}
 For the hard-constraint variant, an expert is confirmed when each required $r$ has at least one positive witness. A separate configuration confirms an expert after a fixed number of distinct positive sources. In both cases the prior orders confirmed experts, and required witness citations follow the published order in $W_{er}$. For the reviewer configuration, unconfirmed positions can be filled by the same fixed prior with empty citations. The hard-constraint configuration returns confirmed candidates only.
@@ -177,6 +194,26 @@ We also compare exact reciprocal-rank fusion implementations. On the 452-article
 \subsection{Interpretation of controlled prose}
 With controlled prose, fused and separate encoding each recover 41 PLOS matches versus 49 with supplied roles. The fused path recovers both roles for 110 of 160 requests and issues five returns whose declarations lack an intended role. Warm P95 falls from 19.06--19.67 to 9.91--10.09 ms. An open 4B interpreter recovers 31 matches at 57.55--57.83 ms. Live eLife gives 10 fused matches versus 14 with supplied roles, with one fused return lacking an intended role.
 
+\subsection{Frozen role recheck on new paper groups}
+\label{sec:role-recheck}
+We lock the source score and 4B role margin before constructing 13 PLOS paper groups disjoint from the development papers and recorded contributors. The 440-source catalog includes the original distractors and the 26 new papers. We score 78 intact keyword requests with paired role contrasts and 156 requests with one designated paper withheld. The baseline and each variant use the same exact ranker. Rechecks operate on independently nominated sources, hold confident roles fixed, and retain previous outputs. Both RTX 4090 runs use a resident serial loopback service and encode each request afresh. The P95 includes client transport and decoding.
+
+\begin{table*}[t]
+\caption{Keyword role rechecks. Correct and wrong counts use the requested sources and exact roles. The proof is emitted only if a single contributor is declared in both roles. Timing ranges span both request orders.}
+\label{tab:role-recheck}
+\small\centering
+\begin{tabular}{@{}lrr@{\qquad}rr@{\qquad}rr@{}}\toprule
+ & \multicolumn{2}{c}{Correct / wrong} & \multicolumn{2}{c}{4B calls} & \multicolumn{2}{c}{Client P95 (ms)} \\
+Policy & Intact & Withheld & Intact & Withheld & Intact & Withheld \\\midrule
+Lightweight baseline & 9 / 0 & 0 / 1 & 0 & 0 & 17.1--17.3 & 17.0--17.2 \\
+Frozen 4B recheck & 10 / 0 & 0 / 1 & 47 & 54 & 79.8--80.1 & 75.8--78.7 \\
+Exact feasibility & 10 / 0 & 0 / 1 & 17 & 0 & 78.8--78.9 & 17.2--17.5 \\
+Top-two feasibility & 10 / 0 & 0 / 1 & 13 & 0 & 56.3 & 17.3--17.5 \\\bottomrule
+\end{tabular}
+\end{table*}
+
+One group accounts for the added proof. Exact feasibility reproduces every proof and abstention, removes 84 of 101 forwards, and cuts withdrawal P95 by over 75\%. On intact requests it leaves enough slow calls to dominate the tail. Top-two feasibility reduces intact P95 and retains the additional proof in this replay. A matched-call offline control that ranks requests by ridge confidence also keeps that proof at both budgets. The approximate filter therefore needs new evidence before it can support a quality claim. Each route retains the baseline's one wrong-source output under withdrawal.
+
 \subsection{Transfer checks on reviewer search}
 On a separate reviewer benchmark, a fixed-inventory certificate with deferred numerical checks reproduces exhaustive reviewer order and citations. Requiring two sources, the deferred route lowers P95 by 13.4\% on 34 CoF NIPS requests and by 13.8\% on 59 SciRepEval requests relative to the fastest fixed control. The SciRepEval paired interval includes zero. These reviewer labels judge author relevance. The supplement reports the latency, queues and evidence limits of this transfer.
 
@@ -199,12 +236,15 @@ The at-least-one support rule credits all 50 slots in both conditions. The clean
 
 We also evaluate shared-paper downweighting on live KDD and SciRepEval reviewer retrieval. Adjusting both reviewer order and evidence selection reduces repeated citation slots from 124 to 77 and from 8 to 5, respectively. Newly retrieved known positives never reach the cited top five. Holding reviewer order fixed, reweighting only citation selection changes 35 of 610 KDD and 9 of 295 SciRepEval citation packages. Even if all potentially beneficial changes were correct, they could increase clean-citation P@5 by at most 4.26 and 2.37 percentage points on these panels. This is an upper bound from the changed outputs. A blinded packet contains 118 distinct citation cases with separate content and contribution judgments pending.
 
-\section{Limitations and publication criteria}
+\section{Limitations}
 The public first-query panels compose tasks from publisher metadata and use verified author identifiers. Publisher topic labels are incomplete and roles may omit real contributions. Structured and templated requests leave open segmentation, personal identity under missing identifiers, enterprise qualifications, and transfer of expertise. Independent judgments of the changed public recommendations are pending. The separate sealed enterprise protocol estimates full-index versus shortlist-restricted rescue after abstention. Joint first-round nomination requires its own independent enterprise comparison. The certificate applies only to fixed inventories with monotone decisions. Public records may occur in model pretraining, and loopback HTTP leaves production network and storage costs unmeasured.
 
-A subsequent enterprise comparison should hold interpretation, verification, and load fixed across joint nomination, sequential repair, and fixed hybrid retrieval. Match source reads and separately match recommendation counts. Blindly judge changed recommendations and their supporting spans. On independent enterprise requests, estimate supported P@5, coverage, and risk at a preregistered operating point. Evaluate client latency and cost per supported success at comparable quality, including fallback and failure.
+The fixed-budget evidence covers labeled contribution tasks. Enterprise expert search needs an independently judged comparison against sequential repair and hybrid ranking under a common interpretation, verification, and load protocol. The appropriate endpoints are supported P@5 under matched work and client latency and cost per supported success under comparable coverage and risk.
 
 Continual updates remain secondary. Compare them with a frozen initial agent on disjoint old and new tasks, including feedback and training costs.
+
+\section{Conclusion}
+Contributor-constrained source nomination increases label-supported evidence coverage under a fixed reading budget in the mixed publication catalogs. Exact checks can skip source reads or role-model calls while retaining fixed-policy outcomes. Work reduction affects client latency when it eliminates the calls that dominate the tail. The results support a lightweight first query and motivate separate measurement of when any more expensive verification improves expert selection.
 
 \bibliographystyle{template/ACM-Reference-Format}
 \bibliography{../references}
