@@ -100,7 +100,7 @@ def worker(pending, execute, warm, ready, execute_group, capacity):
                 execute(request)
         else:
             for width in range(1, capacity + 1):
-                execute_group(warm[:width])
+                list(execute_group(warm[:width]))
         ready.set_result(True)
     except Exception as exc:
         ready.set_exception(exc)
@@ -118,13 +118,14 @@ def worker(pending, execute, warm, ready, execute_group, capacity):
             batch.append(item)
         started = perf_counter()
         try:
-            if execute_group is None:
-                responses = [execute(first[0])]
-            else:
-                responses = execute_group([request for request, _, _ in batch])
-            compute_ms = (perf_counter() - started) * 1000
-            for (_, arrived, future), content in zip(batch, responses, strict=True):
+            responses = ((0, execute(first[0])),) if execute_group is None else execute_group(
+                [request for request, _, _ in batch])
+            for index, content in responses:
+                _, arrived, future = batch[index]
+                compute_ms = (perf_counter() - started) * 1000
                 future.set_result((content, len(batch), (started - arrived) * 1000, compute_ms))
+            if any(not future.done() for _, _, future in batch):
+                raise ValueError("Missing grouped response")
         except Exception as exc:
             for _, _, future in batch:
                 if not future.done():

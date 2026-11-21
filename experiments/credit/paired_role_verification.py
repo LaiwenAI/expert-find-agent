@@ -91,14 +91,15 @@ class PairedReader(RoleReader):
         return self.read_options(prompts, choices)
 
     def batched_requests(self, requests):
-        prompts, choices = [], []
+        prompts, choices, ends = [], [], [0]
         for phrases, pools in requests:
             rows, options = self.format_batched(phrases, pools)
             prompts.extend(rows)
             choices.extend(options)
+            ends.append(len(prompts))
         scores, counts = self.option_logits(prompts, per_row=True)
-        return [self.decode_options(scores[i:i + 2], choices[i:i + 2], sum(counts[i:i + 2]))
-                for i in range(0, len(prompts), 2)]
+        return [self.decode_options(scores[start:end], choices[start:end], sum(counts[start:end]))
+                for start, end in zip(ends[:-1], ends[1:], strict=True)]
 
     def packed(self, phrases, pools):
         glossary = sorted(set(pools[0]) | set(pools[1]))

@@ -13,11 +13,12 @@ import torch
 
 from expert_search.qwen_embedding_torch import QwenTorchEmbedding
 from expert_search.statistics import clustered_paired_interval
-from experiments.credit.budgeted_source_role_search import role_check
+from experiments.credit.distilled_role_recheck import route
 from experiments.credit.budgeted_source_role_service import Service
 from experiments.credit.elife_prompt_holdout import build, sample_families
 from experiments.credit.elife_role_prompt_service import arrivals_for, replay, summarize
 from experiments.credit.engineering_cross_source_search import TOPIC_TASK, candidates, phrase_bank
+from experiments.credit.engineering_one_role_recheck import replace
 from experiments.credit.engineering_role_banks import TASK, projections, queries
 from experiments.credit.joint_request_queue import Request
 from experiments.credit.keyword_author_rescue import PostingCatalog
@@ -68,14 +69,17 @@ def request_inputs(request):
 
 
 @dataclass
-class PairedRoleCheck:
+class RoleCheck:
     phrases: list
     pools: list
     finish: Callable
 
 
 def finish_role(service, result):
-    if isinstance(result, PairedRoleCheck):
+    if isinstance(result, RoleCheck):
+        if len(result.phrases) == 1:
+            role, gap, tokens = service.role.read(result.phrases[0], result.pools[0])
+            return result.finish(([role], gap, tokens))
         return result.finish(service.role.batched(result.phrases, result.pools))
     return result
 
@@ -92,21 +96,36 @@ def execute_group(service, requests, arm, cutoff, lightweight, resident, stage):
     inputs = [request_inputs(request) for request in requests]
     if stage == "embedding":
         flat = service.encoder.encode([prompt for _, _, prompts in inputs for prompt in prompts], group_size=4)
-        return [finish_role(service, resolve(service, arm, cutoff, lightweight, resident,
-                                             clues, roles, flat[4*i:4*i + 4]))
-                for i, (clues, roles, _) in enumerate(inputs)]
+        responses = [finish_role(service, resolve(service, arm, cutoff, lightweight, resident,
+                                                 clues, roles, flat[4*i:4*i + 4]))
+                     for i, (clues, roles, _) in enumerate(inputs)]
+        yield from enumerate(responses)
+        return
 
-    results = [resolve(service, arm, cutoff, lightweight, resident, clues, roles, service.encoder.encode(prompts))
-               for clues, roles, prompts in inputs]
-    deferred = [(i, result) for i, result in enumerate(results) if isinstance(result, PairedRoleCheck)]
-    if len(deferred) < 2:
-        return [finish_role(service, result) for result in results]
-    verified = service.role.batched_requests([(task.phrases, task.pools) for _, task in deferred])
-    for j, ((i, task), outcome) in enumerate(zip(deferred, verified, strict=True)):
-        result = json.loads(task.finish(outcome))
-        result["role_model_forwards"] = int(j == 0)
-        results[i] = json.dumps(result)
-    return results
+    deferred, completed = [], []
+    for i, (clues, roles, prompts) in enumerate(inputs):
+        result = resolve(service, arm, cutoff, lightweight, resident, clues, roles, service.encoder.encode(prompts))
+        if isinstance(result, RoleCheck) and (stage == "mixed_role" or len(result.phrases) == 2):
+            deferred.append((i, result))
+            continue
+        response = finish_role(service, result)
+        if stage == "mixed_role":
+            yield i, response
+        else:
+            completed.append((i, response))
+
+    if len(deferred) == 1:
+        i, task = deferred[0]
+        completed.append((i, finish_role(service, task)))
+    elif deferred:
+        verified = service.role.batched_requests([(task.phrases, task.pools) for _, task in deferred])
+        for j, ((i, task), outcome) in enumerate(zip(deferred, verified, strict=True)):
+            response = json.loads(task.finish(outcome))
+            response["role_model_forwards"] = int(j == 0)
+            if j == 0:
+                response["role_group"] = "+".join(map(str, sorted(len(task.phrases) for _, task in deferred)))
+            completed.append((i, json.dumps(response)))
+    yield from completed
 
 
 def resolve(service, arm, cutoff, lightweight, resident, clues, roles, vectors):
@@ -130,7 +149,7 @@ def resolve(service, arm, cutoff, lightweight, resident, clues, roles, vectors):
                 return json.dumps(payload(service.index, candidate if accepted else None,
                                           selected, role_calls=1, tokens=tokens))
 
-            return PairedRoleCheck(roles, pools, finish)
+            return RoleCheck(roles, pools, finish)
         arm = "student_then_teacher"
     if arm == "dense_joint":
         if not pair and not response["calls"]:
@@ -141,10 +160,18 @@ def resolve(service, arm, cutoff, lightweight, resident, clues, roles, vectors):
     if not pair or response["calls"] or response["owners"]:
         return json.dumps(response)
     if arm in ("reserve_agreement", "reserve_prescreen", *LIGHTWEIGHT_METHODS, *CASCADE_ARMS[2:]):
-        checked, forwards, tokens, _ = role_check(service.index, pair, scores, service.bands,
-                                                  service.role, roles, service.cutoffs["role"])
-        if forwards or candidates(service.index, pair, checked):
-            return json.dumps(payload(service.index, pair, checked, role_calls=forwards, tokens=tokens))
+        scope = {"papers": pair, "roles": (None, None)}
+        checked, _, slot, approved = route(service.index.articles, scope, scores, service.bands)
+        if approved:
+            def finish(outcome):
+                (role,), gap, tokens = outcome
+                accepted = role in approved and gap > service.cutoffs["role"]
+                selected = replace(checked, slot, role) if accepted else checked
+                return json.dumps(payload(service.index, pair, selected, role_calls=1, tokens=tokens))
+
+            return RoleCheck([roles[slot]], [checked[slot]], finish)
+        if candidates(service.index, pair, checked):
+            return json.dumps(payload(service.index, pair, checked))
     if arm in CASCADE_ARMS[2:]:
         heads, definitions, fit = lightweight
         student = decide("reserve_student", service, vectors[2:], roles, scores, pair, base, heads,
@@ -168,7 +195,7 @@ def resolve(service, arm, cutoff, lightweight, resident, clues, roles, vectors):
             observation = dict(choice=choice if choice == eligible else None, margin=margin, forwards=1, tokens=tokens)
             return json.dumps(apply(service.index, pair, base, observation, cutoff))
 
-        return PairedRoleCheck(roles, pools, finish)
+        return RoleCheck(roles, pools, finish)
     methods = ("two_batched", "top_one") if arm == "reserve_agreement" else ("two_batched",)
     observations = proposals(service.index, pair, base, roles, scores, service.role, methods)
     batch = observations["two_batched"]
@@ -326,7 +353,7 @@ def run(args):
             matched_serving = dict(calibration=matched_fit, observed_view_agreement=agreement,
                                    component_sha256=digest(args.matched_source_service_reference))
             requested = MATCHED_SERVICE_ARMS
-            if args.embedding_batch_capacity or args.role_batch_capacity:
+            if args.embedding_batch_capacity or args.role_batch_capacity or args.mixed_role_batch_capacity:
                 if args.embedding_batch_capacity and 4 * args.embedding_batch_capacity > service.encoder.batch_size:
                     raise ValueError("An embedding group must fit in a single encoder forward")
                 requested = ("student_then_teacher", "matched_resident",
@@ -336,8 +363,10 @@ def run(args):
         else:
             requested = CASCADE_ARMS if args.cascade else ("baseline", "reserve_prescreen", *LIGHTWEIGHT_METHODS)
         print("Frozen lightweight routes", fit, flush=True)
-    batch_capacity = args.embedding_batch_capacity or args.role_batch_capacity
+    batch_capacity = args.embedding_batch_capacity or args.role_batch_capacity or args.mixed_role_batch_capacity
     batch_stage = "embedding" if args.embedding_batch_capacity else "paired_role"
+    if args.mixed_role_batch_capacity:
+        batch_stage = "mixed_role"
     arms = requested[::-1] if args.reverse else requested
     for offset, rate in enumerate(RATES):
         trace, arrivals = arrivals_for(labels, rate, args.repeats)
@@ -356,16 +385,21 @@ def run(args):
             if detail["failures"] or len(responses) != len(labels):
                 raise ValueError(f"Incomplete replay for {arm} at {rate}: {detail['failures']}")
             calls = Counter(role_forwards=0, source_forwards=0)
+            role_groups = Counter()
             for record in records:
                 response = json.loads(record["response"])
                 if response["role_calls"] + response["source_calls"] != response["calls"] or response["calls"] > 1:
                     raise ValueError("Shared verifier budget exceeded")
                 calls.update(role_forwards=response["role_calls"], source_forwards=response["source_calls"])
-                if args.role_batch_capacity:
+                if args.role_batch_capacity or args.mixed_role_batch_capacity:
                     calls.update(role_model_forwards=response.get("role_model_forwards", response["role_calls"]))
+                    if "role_group" in response:
+                        role_groups[response["role_group"]] += 1
                 if args.joint_postings_service or matched_serving is not None:
                     calls.update(source_rows=response.get("source_rows", response["source_calls"]))
             detail["verification"] = dict(calls)
+            if args.mixed_role_batch_capacity:
+                detail["shared_role_groups"] = dict(sorted(role_groups.items()))
             if batch_capacity:
                 served = Counter(record["batch"] for record in records)
                 if any(count % width for width, count in served.items()):
@@ -444,6 +478,7 @@ if __name__ == "__main__":
     batching = parser.add_mutually_exclusive_group()
     batching.add_argument("--embedding-batch-capacity", type=int, choices=range(2, 9))
     batching.add_argument("--role-batch-capacity", type=int, choices=range(2, 9))
+    batching.add_argument("--mixed-role-batch-capacity", type=int, choices=range(2, 9))
     parser.add_argument("--matched-source-projection", type=Path)
     parser.add_argument("--matched-source-manifest", type=Path)
     parser.add_argument("--matched-source-supplement", type=Path)
@@ -461,7 +496,7 @@ if __name__ == "__main__":
     diagnostics.add_argument("--resident-source-reference", type=Path)
     diagnostics.add_argument("--matched-source-service-reference", type=Path)
     args = parser.parse_args()
-    if (args.embedding_batch_capacity or args.role_batch_capacity) and args.matched_source_service_reference is None:
+    if (args.embedding_batch_capacity or args.role_batch_capacity or args.mixed_role_batch_capacity) and args.matched_source_service_reference is None:
         parser.error("Batching requires --matched-source-service-reference")
     if args.repeats < 1:
         parser.error("--repeats must be positive")
