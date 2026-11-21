@@ -20,6 +20,8 @@ from experiments.retrieval.enterprise_role_first_query import require_cuda
 from experiments.retrieval.enterprise_routed_review import digest, write
 
 ARMS = ("whole_block", "selected_rows", "selected_rows_fixed_width")
+GUARDED_ARMS = ("whole_block", "selected_rows_fixed_width", "two_logit_guard", "four_logit_guard")
+GUARD_BANDS = {"two_logit_guard": 2., "four_logit_guard": 4.}
 FIELDS = ("qualifications", "ranked", "initial", "decisions", "extra", "invoked", "clipped")
 
 
@@ -31,13 +33,21 @@ class Parser:
         self.counts.update(fallback_blocks=1, available_rows=len(suffixes))
         if self.arm == "whole_block":
             self.counts.update(executed_rows=len(suffixes))
-            return reader.independent(front, suffixes)
+            scores, tokens = reader.independent(front, suffixes)
+            self.rechecks.append((None, (scores.argmax(dim=1) == QUALIFICATION).tolist()))
+            return scores, tokens
 
         other = [index for index in range(cached.shape[1]) if index != QUALIFICATION]
         alternate_best = alternate[:, other].float().amax(dim=1)
         alt_gap = (alternate[:, QUALIFICATION].float() - alternate_best).abs()
         disagree = (cached.argmax(dim=1) == QUALIFICATION) != (alternate.argmax(dim=1) == QUALIFICATION)
-        selected = torch.where(disagree | (alt_gap <= NARROW))[0]
+        needs_review = disagree | (alt_gap <= NARROW)
+        if self.arm in GUARD_BANDS:
+            cached_best = cached[:, other].float().amax(dim=1)
+            cached_gap = (cached[:, QUALIFICATION].float() - cached_best).abs()
+            band = GUARD_BANDS[self.arm]
+            needs_review |= (cached_gap <= band) | (alt_gap <= band)
+        selected = torch.where(needs_review)[0]
         if not selected.numel():
             raise ValueError("The selected rows must explain the block trigger")
         self.counts.update(executed_rows=selected.numel())
@@ -53,6 +63,7 @@ class Parser:
 
         result = cached.clone()
         result.index_copy_(0, selected, scores)
+        self.rechecks.append((needs_review.tolist(), (result.argmax(dim=1) == QUALIFICATION).tolist()))
         return result, tokens
 
     @torch.inference_mode()
@@ -60,6 +71,7 @@ class Parser:
         if method != "broadcast_prefix" or cutoff != 2.:
             raise ValueError("Unexpected qualification parser contract")
         self.counts = Counter()
+        self.rechecks = []
         for reader in self.readers.values():
             reader.broadcast = True
             reader.forks = reader.prefix_bytes = 0
@@ -72,23 +84,24 @@ class Parser:
         return dict(labels=self.labels, rechecked=result.get("rechecked", 0))
 
 
-def order(index, reverse):
-    arms = ARMS[::-1] if reverse else ARMS
+def order(arms, index, reverse):
+    arms = arms[::-1] if reverse else arms
     shift = index % len(arms)
     return arms[shift:] + arms[:shift]
 
 
-def summarize(observations):
+def summarize(observations, arms):
     baseline = [row["whole_block"] for row in observations]
     sample = np.random.default_rng(20261121).integers(len(baseline), size=(6000, len(baseline)))
     baseline_timing = np.asarray([row["elapsed_ms"] for row in baseline])
     report = {}
-    for arm in ARMS:
+    for arm in arms:
         current = [row[arm] for row in observations]
         ms = np.asarray([row["elapsed_ms"] for row in current])
         paired = np.quantile(ms[sample], .95, axis=1) - np.quantile(baseline_timing[sample], .95, axis=1)
         report[arm] = dict(
             parser_work=dict(sum((Counter(row["work"]) for row in current), Counter())),
+            fallback_drift=dict(sum((Counter(row["drift"]) for row in current), Counter())),
             parser_p50_p95_ms=np.quantile([row["parser_ms"] for row in current], [.50,.95]).tolist(),
             live_p50_p95_ms=np.quantile(ms, [.50,.95]).tolist(),
             paired_live_p95_delta_ci95_ms=np.quantile(paired, [.025,.975]).tolist(),
@@ -99,7 +112,18 @@ def summarize(observations):
     return report
 
 
-def run(queries, corpus, roles, vectors, meta, models, serial, controls, output, reverse):
+def attribute_drift(record, reference):
+    counts = Counter(omitted_rows_changed=0, rechecked_rows_changed=0)
+    for (selection, labels), (_, full) in zip(record, reference, strict=True):
+        if selection is None:
+            continue
+        for used, predicted, expected in zip(selection, labels, full, strict=True):
+            if predicted != expected:
+                counts["rechecked_rows_changed" if used else "omitted_rows_changed"] += 1
+    return dict(counts)
+
+
+def run(queries, corpus, roles, vectors, meta, models, serial, controls, output, reverse, guarded_rows):
     require_cuda(output)
     if digest(controls) != CONTROLS:
         raise ValueError("Use the pinned bilingual public controls")
@@ -107,21 +131,25 @@ def run(queries, corpus, roles, vectors, meta, models, serial, controls, output,
     parser = Parser(fixture[0])
     staged = (parser, *fixture[1:])
     observations = []
+    arms = GUARDED_ARMS if guarded_rows else ARMS
     for index, text in enumerate(texts):
         reference = packed.one(text, "guarded_rescue", *fixture)
         variants = {}
-        for arm in order(index, reverse):
+        for arm in order(arms, index, reverse):
             parser.arm = arm
             row = packed.one(text, "guarded_rescue", *staged)
             variants[arm] = dict(row, labels=tuple(map(int, parser.labels)),
-                                 parser_ms=parser.ms, work=dict(parser.counts))
+                                 parser_ms=parser.ms, work=dict(parser.counts), rechecks=parser.rechecks)
+        expected = variants["whole_block"]["rechecks"]
+        for row in variants.values():
+            row["drift"] = attribute_drift(row.pop("rechecks"), expected)
         if any(variants["whole_block"][key] != reference[key] for key in FIELDS):
             raise ValueError("Instrumented whole-block path changed the pipeline reference")
         observations.append(variants)
         if (index + 1) % 20 == 0:
             print(index + 1, "development requests measured", flush=True)
 
-    results = {arm: Counter(targets=0) for arm in ARMS}
+    results = {arm: Counter(targets=0) for arm in arms}
     public = json.loads(controls.read_bytes())
     for index, row in enumerate(public):
         text = row["text"]
@@ -129,7 +157,7 @@ def run(queries, corpus, roles, vectors, meta, models, serial, controls, output,
         position, gold = target(text, clauses, row)
         if position is None:
             raise ValueError("Missing control target")
-        for arm in order(index, reverse):
+        for arm in order(arms, index, reverse):
             parser.arm = arm
             predicted = int(parser.evaluate(text, clauses, "broadcast_prefix", 2.)["labels"][position])
             results[arm].update(targets=1, correct=predicted == gold,
@@ -137,7 +165,7 @@ def run(queries, corpus, roles, vectors, meta, models, serial, controls, output,
                                 missed_qualification=predicted != QUALIFICATION and gold == QUALIFICATION)
     write(output, dict(
         slurm_job=os.environ["SLURM_JOB_ID"], script_sha256=digest(Path(__file__)), reverse=reverse,
-        controls_sha256=CONTROLS, controls=results, development=summarize(observations), **fingerprint,
+        controls_sha256=CONTROLS, controls=results, development=summarize(observations, arms), **fingerprint,
     ))
 
 
@@ -146,4 +174,5 @@ if __name__ == "__main__":
     for name in ("queries", "corpus", "roles", "vectors", "meta", "models", "serial", "controls", "output"):
         cli.add_argument(name, type=Path)
     cli.add_argument("--reverse", action="store_true")
+    cli.add_argument("--guarded-rows", action="store_true")
     run(**vars(cli.parse_args()))

@@ -1,0 +1,657 @@
+{
+  "compute_node": "ws3",
+  "narrow": {
+    "slurm_array": 46412,
+    "runs": [
+      {
+        "slurm_job": "46413",
+        "script_sha256": "3d070e4ca708e115e790f5aebcbc505a4bd6167d0ea93d22f44595f8d9548f83",
+        "reverse": false,
+        "controls_sha256": "ca96d57855c1acb463a3bbce8bb21e3578d5c8465c340958fd74fe209cea5000",
+        "controls": {
+          "whole_block": {
+            "targets": 72,
+            "correct": 60,
+            "false_qualification": 2,
+            "missed_qualification": 10
+          },
+          "selected_rows": {
+            "targets": 72,
+            "correct": 60,
+            "false_qualification": 2,
+            "missed_qualification": 10
+          },
+          "selected_rows_fixed_width": {
+            "targets": 72,
+            "correct": 60,
+            "false_qualification": 2,
+            "missed_qualification": 10
+          }
+        },
+        "development": {
+          "whole_block": {
+            "parser_work": {
+              "fp16_checks": 25,
+              "fallback_blocks": 7,
+              "available_rows": 56,
+              "executed_rows": 56,
+              "fallback_slots": 74680
+            },
+            "parser_p50_p95_ms": [
+              114.4461779622361,
+              923.9420666126532
+            ],
+            "live_p50_p95_ms": [
+              176.92509456537664,
+              1053.880059253424
+            ],
+            "paired_live_p95_delta_ci95_ms": [
+              0.0,
+              0.0
+            ],
+            "issued": 37,
+            "changed": {
+              "qualifications": 0,
+              "ranked": 0,
+              "initial": 0,
+              "decisions": 0,
+              "extra": 0,
+              "invoked": 0,
+              "clipped": 0,
+              "labels": 0
+            }
+          },
+          "selected_rows": {
+            "parser_work": {
+              "fp16_checks": 25,
+              "fallback_blocks": 7,
+              "available_rows": 56,
+              "executed_rows": 7,
+              "fallback_slots": 9250
+            },
+            "parser_p50_p95_ms": [
+              114.21252699801698,
+              595.9148835914674
+            ],
+            "live_p50_p95_ms": [
+              176.30118451779708,
+              744.5993954548612
+            ],
+            "paired_live_p95_delta_ci95_ms": [
+              -850.1713691337504,
+              0.6302220281213522
+            ],
+            "issued": 36,
+            "changed": {
+              "qualifications": 4,
+              "ranked": 0,
+              "initial": 0,
+              "decisions": 4,
+              "extra": 1,
+              "invoked": 0,
+              "clipped": 0,
+              "labels": 4
+            }
+          },
+          "selected_rows_fixed_width": {
+            "parser_work": {
+              "fp16_checks": 25,
+              "fallback_blocks": 7,
+              "available_rows": 56,
+              "executed_rows": 7,
+              "fallback_slots": 9335
+            },
+            "parser_p50_p95_ms": [
+              114.21505600446835,
+              595.9358032559975
+            ],
+            "live_p50_p95_ms": [
+              176.56968848314136,
+              744.2418375401758
+            ],
+            "paired_live_p95_delta_ci95_ms": [
+              -850.3439310414255,
+              -0.2970360219478607
+            ],
+            "issued": 37,
+            "changed": {
+              "qualifications": 2,
+              "ranked": 0,
+              "initial": 0,
+              "decisions": 2,
+              "extra": 0,
+              "invoked": 0,
+              "clipped": 0,
+              "labels": 2
+            }
+          }
+        },
+        "gpu": "NVIDIA GeForce RTX 5090",
+        "requests": 80,
+        "sources": 52667,
+        "role_windows": 5734,
+        "models": {
+          "encoder": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+          "verifier": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+          "parser": "cdbee75f17c01a7cc42f958dc650907174af0554"
+        },
+        "queries_sha256": "30661871ac08a61e7e74d67d75491878c7e4194f217483b60d06426c4b36e4c5",
+        "source_sha256": "c9e8d6e13bb05900427ab1d785d6024256f61e8bb34f220c3816fb79d1921780",
+        "vectors_sha256": "403fd19c50177eb4dd59a5f6fc07f5fe6ab49da223f5e1f4d172ec6cebeff2da",
+        "serial_sha256": "52b9bab61da7230790b0dc8fc0028814aec768f77d8cda9cb8470e3277634868"
+      },
+      {
+        "slurm_job": "46412",
+        "script_sha256": "3d070e4ca708e115e790f5aebcbc505a4bd6167d0ea93d22f44595f8d9548f83",
+        "reverse": true,
+        "controls_sha256": "ca96d57855c1acb463a3bbce8bb21e3578d5c8465c340958fd74fe209cea5000",
+        "controls": {
+          "whole_block": {
+            "targets": 72,
+            "correct": 60,
+            "false_qualification": 2,
+            "missed_qualification": 10
+          },
+          "selected_rows": {
+            "targets": 72,
+            "correct": 60,
+            "false_qualification": 2,
+            "missed_qualification": 10
+          },
+          "selected_rows_fixed_width": {
+            "targets": 72,
+            "correct": 60,
+            "false_qualification": 2,
+            "missed_qualification": 10
+          }
+        },
+        "development": {
+          "whole_block": {
+            "parser_work": {
+              "fp16_checks": 25,
+              "fallback_blocks": 7,
+              "available_rows": 56,
+              "executed_rows": 56,
+              "fallback_slots": 74680
+            },
+            "parser_p50_p95_ms": [
+              114.66643051244318,
+              929.3219040206166
+            ],
+            "live_p50_p95_ms": [
+              176.3957339571789,
+              1059.9916761799245
+            ],
+            "paired_live_p95_delta_ci95_ms": [
+              0.0,
+              0.0
+            ],
+            "issued": 37,
+            "changed": {
+              "qualifications": 0,
+              "ranked": 0,
+              "initial": 0,
+              "decisions": 0,
+              "extra": 0,
+              "invoked": 0,
+              "clipped": 0,
+              "labels": 0
+            }
+          },
+          "selected_rows": {
+            "parser_work": {
+              "fp16_checks": 25,
+              "fallback_blocks": 7,
+              "available_rows": 56,
+              "executed_rows": 7,
+              "fallback_slots": 9250
+            },
+            "parser_p50_p95_ms": [
+              114.74063893547282,
+              597.9233548394403
+            ],
+            "live_p50_p95_ms": [
+              176.72978347400203,
+              748.7686553911772
+            ],
+            "paired_live_p95_delta_ci95_ms": [
+              -860.964217782021,
+              -1.8788690213114023
+            ],
+            "issued": 36,
+            "changed": {
+              "qualifications": 4,
+              "ranked": 0,
+              "initial": 0,
+              "decisions": 4,
+              "extra": 1,
+              "invoked": 0,
+              "clipped": 0,
+              "labels": 4
+            }
+          },
+          "selected_rows_fixed_width": {
+            "parser_work": {
+              "fp16_checks": 25,
+              "fallback_blocks": 7,
+              "available_rows": 56,
+              "executed_rows": 7,
+              "fallback_slots": 9335
+            },
+            "parser_p50_p95_ms": [
+              114.76962297456339,
+              598.800342355389
+            ],
+            "live_p50_p95_ms": [
+              176.69818055583164,
+              749.1430224035867
+            ],
+            "paired_live_p95_delta_ci95_ms": [
+              -859.9874033068777,
+              -0.04921993240714073
+            ],
+            "issued": 37,
+            "changed": {
+              "qualifications": 2,
+              "ranked": 0,
+              "initial": 0,
+              "decisions": 2,
+              "extra": 0,
+              "invoked": 0,
+              "clipped": 0,
+              "labels": 2
+            }
+          }
+        },
+        "gpu": "NVIDIA GeForce RTX 5090",
+        "requests": 80,
+        "sources": 52667,
+        "role_windows": 5734,
+        "models": {
+          "encoder": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+          "verifier": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+          "parser": "cdbee75f17c01a7cc42f958dc650907174af0554"
+        },
+        "queries_sha256": "30661871ac08a61e7e74d67d75491878c7e4194f217483b60d06426c4b36e4c5",
+        "source_sha256": "c9e8d6e13bb05900427ab1d785d6024256f61e8bb34f220c3816fb79d1921780",
+        "vectors_sha256": "403fd19c50177eb4dd59a5f6fc07f5fe6ab49da223f5e1f4d172ec6cebeff2da",
+        "serial_sha256": "52b9bab61da7230790b0dc8fc0028814aec768f77d8cda9cb8470e3277634868"
+      }
+    ]
+  },
+  "wide_guard": {
+    "slurm_array": 46418,
+    "runs": [
+      {
+        "slurm_job": "46419",
+        "script_sha256": "ee91c42fd9362ddd95f6d54f78ad79b4fd7c6d96e17d465e33031466a4dab8fd",
+        "reverse": false,
+        "controls_sha256": "ca96d57855c1acb463a3bbce8bb21e3578d5c8465c340958fd74fe209cea5000",
+        "controls": {
+          "whole_block": {
+            "targets": 72,
+            "correct": 60,
+            "false_qualification": 2,
+            "missed_qualification": 10
+          },
+          "selected_rows_fixed_width": {
+            "targets": 72,
+            "correct": 60,
+            "false_qualification": 2,
+            "missed_qualification": 10
+          },
+          "two_logit_guard": {
+            "targets": 72,
+            "correct": 60,
+            "false_qualification": 2,
+            "missed_qualification": 10
+          },
+          "four_logit_guard": {
+            "targets": 72,
+            "correct": 60,
+            "false_qualification": 2,
+            "missed_qualification": 10
+          }
+        },
+        "development": {
+          "whole_block": {
+            "parser_work": {
+              "fp16_checks": 25,
+              "fallback_blocks": 7,
+              "available_rows": 56,
+              "executed_rows": 56,
+              "fallback_slots": 74680
+            },
+            "fallback_drift": {},
+            "parser_p50_p95_ms": [
+              114.69410551944748,
+              930.6006007362155
+            ],
+            "live_p50_p95_ms": [
+              176.8873329856433,
+              1061.6319813008881
+            ],
+            "paired_live_p95_delta_ci95_ms": [
+              0.0,
+              0.0
+            ],
+            "issued": 37,
+            "changed": {
+              "qualifications": 0,
+              "ranked": 0,
+              "initial": 0,
+              "decisions": 0,
+              "extra": 0,
+              "invoked": 0,
+              "clipped": 0,
+              "labels": 0
+            }
+          },
+          "selected_rows_fixed_width": {
+            "parser_work": {
+              "fp16_checks": 25,
+              "fallback_blocks": 7,
+              "available_rows": 56,
+              "executed_rows": 7,
+              "fallback_slots": 9335
+            },
+            "fallback_drift": {
+              "rechecked_rows_changed": 3
+            },
+            "parser_p50_p95_ms": [
+              114.79291855357587,
+              598.3952484792097
+            ],
+            "live_p50_p95_ms": [
+              177.463322004769,
+              750.0364559644368
+            ],
+            "paired_live_p95_delta_ci95_ms": [
+              -863.9995602658023,
+              -0.9531053515093171
+            ],
+            "issued": 37,
+            "changed": {
+              "qualifications": 2,
+              "ranked": 0,
+              "initial": 0,
+              "decisions": 2,
+              "extra": 0,
+              "invoked": 0,
+              "clipped": 0,
+              "labels": 2
+            }
+          },
+          "two_logit_guard": {
+            "parser_work": {
+              "fp16_checks": 25,
+              "fallback_blocks": 7,
+              "available_rows": 56,
+              "executed_rows": 7,
+              "fallback_slots": 9335
+            },
+            "fallback_drift": {
+              "rechecked_rows_changed": 3
+            },
+            "parser_p50_p95_ms": [
+              115.01756950747222,
+              597.7799372049047
+            ],
+            "live_p50_p95_ms": [
+              177.07772500580177,
+              752.4359097296838
+            ],
+            "paired_live_p95_delta_ci95_ms": [
+              -864.9898752570157,
+              0.7278782373759896
+            ],
+            "issued": 37,
+            "changed": {
+              "qualifications": 2,
+              "ranked": 0,
+              "initial": 0,
+              "decisions": 2,
+              "extra": 0,
+              "invoked": 0,
+              "clipped": 0,
+              "labels": 2
+            }
+          },
+          "four_logit_guard": {
+            "parser_work": {
+              "fp16_checks": 25,
+              "fallback_blocks": 7,
+              "available_rows": 56,
+              "executed_rows": 9,
+              "fallback_slots": 11265
+            },
+            "fallback_drift": {
+              "rechecked_rows_changed": 4
+            },
+            "parser_p50_p95_ms": [
+              114.71545050153509,
+              607.7376723813358
+            ],
+            "live_p50_p95_ms": [
+              176.95724504301324,
+              756.7993662320076
+            ],
+            "paired_live_p95_delta_ci95_ms": [
+              -843.058944609948,
+              0.45772199518978596
+            ],
+            "issued": 38,
+            "changed": {
+              "qualifications": 3,
+              "ranked": 0,
+              "initial": 1,
+              "decisions": 3,
+              "extra": 0,
+              "invoked": 1,
+              "clipped": 0,
+              "labels": 3
+            }
+          }
+        },
+        "gpu": "NVIDIA GeForce RTX 5090",
+        "requests": 80,
+        "sources": 52667,
+        "role_windows": 5734,
+        "models": {
+          "encoder": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+          "verifier": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+          "parser": "cdbee75f17c01a7cc42f958dc650907174af0554"
+        },
+        "queries_sha256": "30661871ac08a61e7e74d67d75491878c7e4194f217483b60d06426c4b36e4c5",
+        "source_sha256": "c9e8d6e13bb05900427ab1d785d6024256f61e8bb34f220c3816fb79d1921780",
+        "vectors_sha256": "403fd19c50177eb4dd59a5f6fc07f5fe6ab49da223f5e1f4d172ec6cebeff2da",
+        "serial_sha256": "52b9bab61da7230790b0dc8fc0028814aec768f77d8cda9cb8470e3277634868"
+      },
+      {
+        "slurm_job": "46418",
+        "script_sha256": "ee91c42fd9362ddd95f6d54f78ad79b4fd7c6d96e17d465e33031466a4dab8fd",
+        "reverse": true,
+        "controls_sha256": "ca96d57855c1acb463a3bbce8bb21e3578d5c8465c340958fd74fe209cea5000",
+        "controls": {
+          "whole_block": {
+            "targets": 72,
+            "correct": 60,
+            "false_qualification": 2,
+            "missed_qualification": 10
+          },
+          "selected_rows_fixed_width": {
+            "targets": 72,
+            "correct": 60,
+            "false_qualification": 2,
+            "missed_qualification": 10
+          },
+          "two_logit_guard": {
+            "targets": 72,
+            "correct": 60,
+            "false_qualification": 2,
+            "missed_qualification": 10
+          },
+          "four_logit_guard": {
+            "targets": 72,
+            "correct": 60,
+            "false_qualification": 2,
+            "missed_qualification": 10
+          }
+        },
+        "development": {
+          "whole_block": {
+            "parser_work": {
+              "fp16_checks": 25,
+              "fallback_blocks": 7,
+              "available_rows": 56,
+              "executed_rows": 56,
+              "fallback_slots": 74680
+            },
+            "fallback_drift": {},
+            "parser_p50_p95_ms": [
+              116.1662390222773,
+              946.3213806913698
+            ],
+            "live_p50_p95_ms": [
+              179.32020354783162,
+              1078.315463563194
+            ],
+            "paired_live_p95_delta_ci95_ms": [
+              0.0,
+              0.0
+            ],
+            "issued": 37,
+            "changed": {
+              "qualifications": 0,
+              "ranked": 0,
+              "initial": 0,
+              "decisions": 0,
+              "extra": 0,
+              "invoked": 0,
+              "clipped": 0,
+              "labels": 0
+            }
+          },
+          "selected_rows_fixed_width": {
+            "parser_work": {
+              "fp16_checks": 25,
+              "fallback_blocks": 7,
+              "available_rows": 56,
+              "executed_rows": 7,
+              "fallback_slots": 9335
+            },
+            "fallback_drift": {
+              "rechecked_rows_changed": 3
+            },
+            "parser_p50_p95_ms": [
+              116.1412270157598,
+              608.2277887850067
+            ],
+            "live_p50_p95_ms": [
+              179.60138455964625,
+              762.3863645887468
+            ],
+            "paired_live_p95_delta_ci95_ms": [
+              -877.7832825959199,
+              0.34194517065770924
+            ],
+            "issued": 37,
+            "changed": {
+              "qualifications": 2,
+              "ranked": 0,
+              "initial": 0,
+              "decisions": 2,
+              "extra": 0,
+              "invoked": 0,
+              "clipped": 0,
+              "labels": 2
+            }
+          },
+          "two_logit_guard": {
+            "parser_work": {
+              "fp16_checks": 25,
+              "fallback_blocks": 7,
+              "available_rows": 56,
+              "executed_rows": 7,
+              "fallback_slots": 9335
+            },
+            "fallback_drift": {
+              "rechecked_rows_changed": 3
+            },
+            "parser_p50_p95_ms": [
+              116.41405551927164,
+              607.3269013955722
+            ],
+            "live_p50_p95_ms": [
+              179.17433753609657,
+              763.1620004831348
+            ],
+            "paired_live_p95_delta_ci95_ms": [
+              -879.2986439191741,
+              -0.5221440282183494
+            ],
+            "issued": 37,
+            "changed": {
+              "qualifications": 2,
+              "ranked": 0,
+              "initial": 0,
+              "decisions": 2,
+              "extra": 0,
+              "invoked": 0,
+              "clipped": 0,
+              "labels": 2
+            }
+          },
+          "four_logit_guard": {
+            "parser_work": {
+              "fp16_checks": 25,
+              "fallback_blocks": 7,
+              "available_rows": 56,
+              "executed_rows": 9,
+              "fallback_slots": 11265
+            },
+            "fallback_drift": {
+              "rechecked_rows_changed": 4
+            },
+            "parser_p50_p95_ms": [
+              116.2083309609443,
+              619.9449529580305
+            ],
+            "live_p50_p95_ms": [
+              179.51713647926226,
+              764.7373256797435
+            ],
+            "paired_live_p95_delta_ci95_ms": [
+              -855.146254342981,
+              -0.23143505677580833
+            ],
+            "issued": 38,
+            "changed": {
+              "qualifications": 3,
+              "ranked": 0,
+              "initial": 1,
+              "decisions": 3,
+              "extra": 0,
+              "invoked": 1,
+              "clipped": 0,
+              "labels": 3
+            }
+          }
+        },
+        "gpu": "NVIDIA GeForce RTX 5090",
+        "requests": 80,
+        "sources": 52667,
+        "role_windows": 5734,
+        "models": {
+          "encoder": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+          "verifier": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+          "parser": "cdbee75f17c01a7cc42f958dc650907174af0554"
+        },
+        "queries_sha256": "30661871ac08a61e7e74d67d75491878c7e4194f217483b60d06426c4b36e4c5",
+        "source_sha256": "c9e8d6e13bb05900427ab1d785d6024256f61e8bb34f220c3816fb79d1921780",
+        "vectors_sha256": "403fd19c50177eb4dd59a5f6fc07f5fe6ab49da223f5e1f4d172ec6cebeff2da",
+        "serial_sha256": "52b9bab61da7230790b0dc8fc0028814aec768f77d8cda9cb8470e3277634868"
+      }
+    ]
+  }
+}
