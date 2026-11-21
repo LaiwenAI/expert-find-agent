@@ -178,11 +178,17 @@ def run(args):
 
         run_postings(service, labels, cutoff, args.source_postings_reference, args.output, args.reverse)
         return
-    if args.joint_postings_reference is not None or args.joint_guard_reference is not None:
+    if any(input_path is not None for input_path in (
+            args.joint_postings_reference, args.joint_guard_reference, args.mixed_role_reference)):
         if digest(args.plos) != frozen["inputs"]["plos"]:
             raise ValueError("Changed PLOS calibration projection")
         heads, _, fit = fit_lightweight(args.plos, service, definitions, training)
-        if args.joint_guard_reference is not None:
+        if args.mixed_role_reference is not None:
+            from experiments.credit.paired_role_mixed_verifier import run_mixed
+
+            run_mixed(service, labels, cutoff, (heads, definitions, fit),
+                      args.mixed_role_reference, args.output, args.reverse)
+        elif args.joint_guard_reference is not None:
             from experiments.credit.paired_role_joint_guard import run_guard
 
             run_guard(service, labels, cutoff, (heads, definitions, fit),
@@ -287,6 +293,7 @@ if __name__ == "__main__":
     diagnostics.add_argument("--joint-postings-reference", type=Path)
     diagnostics.add_argument("--joint-postings-service", action="store_true")
     diagnostics.add_argument("--joint-guard-reference", type=Path)
+    diagnostics.add_argument("--mixed-role-reference", type=Path)
     args = parser.parse_args()
     if args.cascade and not args.plos:
         parser.error("--cascade requires --plos")
@@ -296,4 +303,6 @@ if __name__ == "__main__":
         parser.error("--joint-postings-service requires --plos")
     if args.joint_guard_reference is not None and args.plos is None:
         parser.error("--joint-guard-reference requires --plos")
+    if args.mixed_role_reference is not None and args.plos is None:
+        parser.error("--mixed-role-reference requires --plos")
     run(args)

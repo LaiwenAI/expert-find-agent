@@ -1,0 +1,408 @@
+{
+  "slurm_array": 46282,
+  "compute_node": "ws3",
+  "reference_proofs_match": true,
+  "repeat_identical": true,
+  "panels": {
+    "holdout": {
+      "counts": {
+        "keywords": {
+          "cascade": {
+            "issued": 10,
+            "strict": 10,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 24,
+            "positives": 12,
+            "search_calls": 7,
+            "source_calls": 1,
+            "role_calls": 6,
+            "fallback_rows": 0,
+            "fallback_tokens": 0
+          },
+          "dense_joint": {
+            "issued": 12,
+            "strict": 11,
+            "adverse": 1,
+            "wrong_source": 0,
+            "requests": 24,
+            "positives": 12,
+            "search_calls": 9,
+            "source_calls": 3,
+            "role_calls": 6,
+            "fallback_rows": 4,
+            "fallback_tokens": 861
+          },
+          "mixed_agreement": {
+            "issued": 11,
+            "strict": 10,
+            "adverse": 1,
+            "wrong_source": 0,
+            "requests": 24,
+            "positives": 12,
+            "search_calls": 9,
+            "source_calls": 3,
+            "role_calls": 6,
+            "fallback_rows": 16,
+            "fallback_tokens": 2031
+          },
+          "mixed_relabel": {
+            "issued": 11,
+            "strict": 10,
+            "adverse": 1,
+            "wrong_source": 0,
+            "requests": 24,
+            "positives": 12,
+            "search_calls": 9,
+            "source_calls": 3,
+            "role_calls": 6,
+            "fallback_rows": 16,
+            "fallback_tokens": 2031
+          }
+        },
+        "excerpt": {
+          "cascade": {
+            "issued": 12,
+            "strict": 12,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 24,
+            "positives": 12,
+            "search_calls": 10,
+            "source_calls": 0,
+            "role_calls": 10,
+            "fallback_rows": 0,
+            "fallback_tokens": 0
+          },
+          "dense_joint": {
+            "issued": 12,
+            "strict": 12,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 24,
+            "positives": 12,
+            "search_calls": 10,
+            "source_calls": 0,
+            "role_calls": 10,
+            "fallback_rows": 0,
+            "fallback_tokens": 0
+          },
+          "mixed_agreement": {
+            "issued": 12,
+            "strict": 12,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 24,
+            "positives": 12,
+            "search_calls": 10,
+            "source_calls": 0,
+            "role_calls": 10,
+            "fallback_rows": 0,
+            "fallback_tokens": 0
+          },
+          "mixed_relabel": {
+            "issued": 12,
+            "strict": 12,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 24,
+            "positives": 12,
+            "search_calls": 10,
+            "source_calls": 0,
+            "role_calls": 10,
+            "fallback_rows": 0,
+            "fallback_tokens": 0
+          }
+        }
+      },
+      "changes_from_dense": {
+        "keywords": {
+          "cascade": {
+            "strict_lost": 1,
+            "strict_added": 0,
+            "adverse_removed": 1,
+            "adverse_added": 0
+          },
+          "dense_joint": {
+            "strict_lost": 0,
+            "strict_added": 0,
+            "adverse_removed": 0,
+            "adverse_added": 0
+          },
+          "mixed_agreement": {
+            "strict_lost": 1,
+            "strict_added": 0,
+            "adverse_removed": 0,
+            "adverse_added": 0
+          },
+          "mixed_relabel": {
+            "strict_lost": 1,
+            "strict_added": 0,
+            "adverse_removed": 0,
+            "adverse_added": 0
+          }
+        },
+        "excerpt": {
+          "cascade": {
+            "strict_lost": 0,
+            "strict_added": 0,
+            "adverse_removed": 0,
+            "adverse_added": 0
+          },
+          "dense_joint": {
+            "strict_lost": 0,
+            "strict_added": 0,
+            "adverse_removed": 0,
+            "adverse_added": 0
+          },
+          "mixed_agreement": {
+            "strict_lost": 0,
+            "strict_added": 0,
+            "adverse_removed": 0,
+            "adverse_added": 0
+          },
+          "mixed_relabel": {
+            "strict_lost": 0,
+            "strict_added": 0,
+            "adverse_removed": 0,
+            "adverse_added": 0
+          }
+        }
+      },
+      "diagnostics": {
+        "keywords": {
+          "mixed_source_decision_changes": 0,
+          "mixed_role_label_changes": 0,
+          "mixed_role_threshold_changes": 0,
+          "separate_tokens": 2031,
+          "mixed_tokens": 2031,
+          "role_agrees": 1,
+          "proposed": 2
+        }
+      },
+      "over_budget_teacher_on_fallbacks": {
+        "keywords": {
+          "issued": 1,
+          "strict": 1,
+          "adverse": 0,
+          "wrong_source": 0,
+          "requests": 2,
+          "positives": 1,
+          "search_calls": 4,
+          "source_calls": 2,
+          "role_calls": 2,
+          "role_tokens": 305
+        }
+      },
+      "signatures": {
+        "cascade": "668b7662fe63b8b01a30222d0ee73ed4532881930ce116442e5ac8decc645161",
+        "dense_joint": "a604fcc492c773e1458649b4d123de05fdf8255f37cc9221877f8212b014aea6",
+        "mixed_agreement": "35426e352d52736ce8f1b7f35785f53e15dd898e8cdac66f02fd59bb3958b34f",
+        "mixed_relabel": "35426e352d52736ce8f1b7f35785f53e15dd898e8cdac66f02fd59bb3958b34f"
+      },
+      "requests": 48,
+      "reference_sha256": "c3fca40006675e01376ae9482c808f0466851462ad0f50c7ba73bc34473d7a83",
+      "script_sha256": "b50362fac13c209b33099518def2e37a0a9ae828b8b8d646ca10e67a7cd4380e"
+    },
+    "development": {
+      "counts": {
+        "keywords": {
+          "cascade": {
+            "issued": 12,
+            "strict": 12,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 54,
+            "positives": 27,
+            "search_calls": 9,
+            "source_calls": 4,
+            "role_calls": 5,
+            "fallback_rows": 0,
+            "fallback_tokens": 0
+          },
+          "dense_joint": {
+            "issued": 15,
+            "strict": 15,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 54,
+            "positives": 27,
+            "search_calls": 13,
+            "source_calls": 8,
+            "role_calls": 5,
+            "fallback_rows": 8,
+            "fallback_tokens": 1896
+          },
+          "mixed_agreement": {
+            "issued": 14,
+            "strict": 14,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 54,
+            "positives": 27,
+            "search_calls": 13,
+            "source_calls": 8,
+            "role_calls": 5,
+            "fallback_rows": 32,
+            "fallback_tokens": 4143
+          },
+          "mixed_relabel": {
+            "issued": 14,
+            "strict": 14,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 54,
+            "positives": 27,
+            "search_calls": 13,
+            "source_calls": 8,
+            "role_calls": 5,
+            "fallback_rows": 32,
+            "fallback_tokens": 4143
+          }
+        },
+        "excerpt": {
+          "cascade": {
+            "issued": 18,
+            "strict": 18,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 54,
+            "positives": 27,
+            "search_calls": 13,
+            "source_calls": 0,
+            "role_calls": 13,
+            "fallback_rows": 0,
+            "fallback_tokens": 0
+          },
+          "dense_joint": {
+            "issued": 18,
+            "strict": 18,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 54,
+            "positives": 27,
+            "search_calls": 13,
+            "source_calls": 0,
+            "role_calls": 13,
+            "fallback_rows": 0,
+            "fallback_tokens": 0
+          },
+          "mixed_agreement": {
+            "issued": 18,
+            "strict": 18,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 54,
+            "positives": 27,
+            "search_calls": 13,
+            "source_calls": 0,
+            "role_calls": 13,
+            "fallback_rows": 0,
+            "fallback_tokens": 0
+          },
+          "mixed_relabel": {
+            "issued": 18,
+            "strict": 18,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 54,
+            "positives": 27,
+            "search_calls": 13,
+            "source_calls": 0,
+            "role_calls": 13,
+            "fallback_rows": 0,
+            "fallback_tokens": 0
+          }
+        }
+      },
+      "changes_from_dense": {
+        "keywords": {
+          "cascade": {
+            "strict_lost": 3,
+            "strict_added": 0,
+            "adverse_removed": 0,
+            "adverse_added": 0
+          },
+          "dense_joint": {
+            "strict_lost": 0,
+            "strict_added": 0,
+            "adverse_removed": 0,
+            "adverse_added": 0
+          },
+          "mixed_agreement": {
+            "strict_lost": 1,
+            "strict_added": 0,
+            "adverse_removed": 0,
+            "adverse_added": 0
+          },
+          "mixed_relabel": {
+            "strict_lost": 1,
+            "strict_added": 0,
+            "adverse_removed": 0,
+            "adverse_added": 0
+          }
+        },
+        "excerpt": {
+          "cascade": {
+            "strict_lost": 0,
+            "strict_added": 0,
+            "adverse_removed": 0,
+            "adverse_added": 0
+          },
+          "dense_joint": {
+            "strict_lost": 0,
+            "strict_added": 0,
+            "adverse_removed": 0,
+            "adverse_added": 0
+          },
+          "mixed_agreement": {
+            "strict_lost": 0,
+            "strict_added": 0,
+            "adverse_removed": 0,
+            "adverse_added": 0
+          },
+          "mixed_relabel": {
+            "strict_lost": 0,
+            "strict_added": 0,
+            "adverse_removed": 0,
+            "adverse_added": 0
+          }
+        }
+      },
+      "diagnostics": {
+        "keywords": {
+          "mixed_source_decision_changes": 0,
+          "mixed_role_label_changes": 0,
+          "mixed_role_threshold_changes": 0,
+          "separate_tokens": 4143,
+          "mixed_tokens": 4143,
+          "role_agrees": 3,
+          "proposed": 4
+        }
+      },
+      "over_budget_teacher_on_fallbacks": {
+        "keywords": {
+          "issued": 2,
+          "strict": 2,
+          "adverse": 0,
+          "wrong_source": 0,
+          "requests": 4,
+          "positives": 3,
+          "search_calls": 8,
+          "source_calls": 4,
+          "role_calls": 4,
+          "role_tokens": 597
+        }
+      },
+      "signatures": {
+        "cascade": "48c465c15cda03ce97e6d582f80337ad1ebaf711b6b4ee7e408b07be8273e5a4",
+        "dense_joint": "5aa55880fe13a0c4fc9390a286866b90199719d2abc2d196909a373963bdbe09",
+        "mixed_agreement": "8c0c2fc0743f1c09432eb095412b5b24f0ce0e818c164b262561d560decc9d95",
+        "mixed_relabel": "8c0c2fc0743f1c09432eb095412b5b24f0ce0e818c164b262561d560decc9d95"
+      },
+      "requests": 108,
+      "reference_sha256": "9a6570b4367907497d540d32d944c23cba68f0d078d223b8497c8cdf038908bd",
+      "script_sha256": "b50362fac13c209b33099518def2e37a0a9ae828b8b8d646ca10e67a7cd4380e"
+    }
+  }
+}

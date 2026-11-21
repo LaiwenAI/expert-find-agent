@@ -40,11 +40,14 @@ class Reranker:
     def score(self, query, docs, pool, *, task=TASK):
         return self.score_pairs([(query, docs[doc]) for doc in pool], task=task)
 
-    @torch.inference_mode()
     def score_pairs(self, pairs, *, task=TASK, count_tokens=False):
+        return self.score_tasks(((task, query, document) for query, document in pairs), count_tokens=count_tokens)
+
+    @torch.inference_mode()
+    def score_tasks(self, rows, *, count_tokens=False):
         sequences = []
         truncated = 0
-        for query, document in pairs:
+        for task, query, document in rows:
             body = self.tokenizer.encode(f"<Instruct>: {task}\n<Query>: {query}\n<Document>: {document}",
                                          add_special_tokens=False)
             packed, raw = pack_tokens(self.prefix, body, self.suffix, 1024)
