@@ -135,12 +135,13 @@ def choose(reader, atoms, index, edges, candidates, original, rank_plan, mode):
     return min(candidates, key=priority), Counter(model_calls=calls, pairs=len(inputs), clipped_pairs=clipped)
 
 
-def query(index, postings, atoms, subjects, order, *, reader):
+def query(index, postings, atoms, subjects, order, *, reader, gate_features=None):
     start = perf_counter()
     full = index.rank([topic for topic, _ in atoms], depth=len(index.ids))
     ranks = tuple(dict(list(lane.items())[:DEPTH]) for lane in full)
     recall_ms = (perf_counter() - start) * 1000
     results, times, reach = {}, {}, Counter()
+    features = None
     for arm in order:
         start = perf_counter()
         facets = tuple(postings.facet(lane, role, 100, True) for lane, (_, role) in zip(ranks, atoms, strict=True))
@@ -154,6 +155,11 @@ def query(index, postings, atoms, subjects, order, *, reader):
                 candidate, work = choose(reader, atoms, index, orientations(facets, ranks), candidates,
                                          original, rank_plan, arm)
         opened = original if set(candidate) == set(original) else list(candidate)
+        if arm == JOINT and gate_features is not None:
+            gate_start = perf_counter()
+            features = gate_features(ranks, facets, original)
+            features["ms"] = (perf_counter() - gate_start) * 1000
+            start += features["ms"] / 1000
         loaded = index.open_sources(opened)
         if len(loaded) != 3 or set(opened) != loaded.keys():
             raise ValueError("Expected three distinct reads")
@@ -170,7 +176,10 @@ def query(index, postings, atoms, subjects, order, *, reader):
         results[arm] = dict(match=match, priority=(max(values), sum(values)) if values else None,
                             known=bool(match) and tagged(match), opened=opened, work=work)
         reach[arm] = int(any(tagged(proof) for proof in proofs))
-    return dict(atoms=atoms, arms=results, topic_pair=json.dumps([topic for topic, _ in atoms])), times, reach
+    row = dict(atoms=atoms, arms=results, topic_pair=json.dumps([topic for topic, _ in atoms]))
+    if features is not None:
+        row["gate_features"] = features
+    return row, times, reach
 
 
 def run(args):
