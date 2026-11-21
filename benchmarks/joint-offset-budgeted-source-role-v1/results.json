@@ -1,0 +1,986 @@
+{
+  "slurm_job": 46109,
+  "pre_agreement_job": 46105,
+  "runs": [
+    {
+      "script_sha256": "56ce66af4be65cdc2d749203a6357767b9b8254b38814afc755659011967bdd9",
+      "inputs": {
+        "projection": "38bc5e6bd42e3b2f427a42a552cae11bc0813e50f2e601ee9e10a298fe47925f",
+        "manifest": "064b9d0a579e58911c1986a17e4eb169dcfd3ab57e4e4640d31a1a62143a753a",
+        "niso": "c107b4e780218e58aec4e2a13f2d7072533962a6a73b82d23e4273b43aafd528",
+        "training": "3365bdd2588d8dfff12de71cf7663808c25689f831a1ba42288a8bb8b53bfdc2",
+        "bands": "0e936678ef2e49944e0a6394257d1edb79dc216facaeb77aaa49db829ef5c3da",
+        "source_frozen": "e393fe72c74c5f12748da43e8c245e224411633ed2c24eef22d34b4665aeb741",
+        "role_frozen": "e332709fbb1b1371253fede037758a2d027b68f389ee42ae221352f7d7bffde0"
+      },
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "source_reader_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+      "role_reader_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "seed": 17,
+      "reverse": false,
+      "context": true,
+      "training_seconds": 10.894839243032038,
+      "parameters": 93621,
+      "fit_topics": 307,
+      "dev_topics": 61,
+      "fit_phrases": 64,
+      "dev_phrases": 20,
+      "training_requests": 2048,
+      "development_requests": 320,
+      "test_families": [
+        "00b84c94a418b735d937c4d5d06ca745d6239b5f7f5a60d1cc4d0a07f6a5c713",
+        "012f2ddbcf99a0c00924418010960950d3aa09e5e73e743f5e02749ed0cb5507",
+        "0391ec8d9fc09804c4507f3c68c23a36f210fc5c71bd01af01eef242f93f14d2",
+        "04cdb4fa95434dd40fc1450752b632e9ce6a3c7c04e55336635e752cee24b295",
+        "08b17ddde6d51856db5a8a63a23336511ec213b1ef4e194373d5580f7d3889d6",
+        "0b1e439df45895b22efe40fdd0bb5ca23dbcb1f74cd13b93d688892634df049a",
+        "0ba096b40605edd23de81870f5a9453a2fa7e38cfeb3a181819e313e15832d67",
+        "151a575e9cec018374f33f8a1a01a7414c0c43f5ceae4c3d4eb874de8cc6076e",
+        "161ba7c9775edc346074ee04e7d8c0412165cbfadace04b8ae9fe18a9cb87646",
+        "19d7abd444ff76508f5461935ce3c6c41c55d7eced74b17143adeb3a9c7706fc",
+        "32ffec86ae610b217413664ce43a544f13307205011627f1f2998d170a1d36b3",
+        "5b5d84551221d364be2dbc1c1f81d1a923e16e24556bff919d125fb6dedb9b2b",
+        "66f7703dc004551511550beef6e3ba96e92bcc19976c9e6cb65d598b478b0805"
+      ],
+      "loss": [
+        0.5453174766153097,
+        0.10292490787105635,
+        0.030755983956623822,
+        0.013282817861181684,
+        0.006939633123693056,
+        0.004396886964968871,
+        0.002875352342016413,
+        0.0020632267733162735,
+        0.0015477831384487217,
+        0.0012418529331625905,
+        0.0009967470095944009,
+        0.000835387716506375,
+        0.0007102068075255374,
+        0.0006048468744666025
+      ],
+      "threshold": 1.0,
+      "calibration": {
+        "0.0": {
+          "accepted": 79,
+          "exact": 14,
+          "outside": 0
+        },
+        "0.25": {
+          "accepted": 79,
+          "exact": 14,
+          "outside": 0
+        },
+        "0.5": {
+          "accepted": 78,
+          "exact": 13,
+          "outside": 0
+        },
+        "0.65": {
+          "accepted": 61,
+          "exact": 9,
+          "outside": 0
+        },
+        "0.8": {
+          "accepted": 43,
+          "exact": 5,
+          "outside": 0
+        },
+        "0.9": {
+          "accepted": 34,
+          "exact": 1,
+          "outside": 0
+        },
+        "0.95": {
+          "accepted": 21,
+          "exact": 0,
+          "outside": 0
+        },
+        "1.0": {
+          "accepted": 0,
+          "exact": 0,
+          "outside": 0
+        }
+      },
+      "joint_calibration": {
+        "presence": {
+          "accepted_without_cut": 320,
+          "selected": null,
+          "best_n10": {
+            "threshold": 23.1844984292984,
+            "accepted": 191,
+            "exact": 48,
+            "outside": 0
+          }
+        },
+        "alternative": {
+          "accepted_without_cut": 320,
+          "selected": null,
+          "best_n10": {
+            "threshold": 5.249938488006592,
+            "accepted": 10,
+            "exact": 3,
+            "outside": 0
+          }
+        }
+      },
+      "agreement_seed": 29,
+      "agreement_development": {
+        "accepted": 166,
+        "exact": 34,
+        "outside": 29
+      },
+      "lattice_sha256": "3b8455fcd2b2b8f7acffdaa816768c9950b9bd87c8318f0fdb0ee67a028646cd",
+      "results": {
+        "local_markers|agreement": {
+          "totals": {
+            "issued": 3,
+            "strict": 3,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 1,
+            "source_calls": 0,
+            "role_calls": 1,
+            "binding": 6,
+            "parsed": 10
+          },
+          "parser_p95_ms": 12.037603242788464,
+          "total_p95_ms": 22.85613599815406
+        },
+        "local_markers|alternative": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 10.224301018752158,
+          "total_p95_ms": 10.225195263046771
+        },
+        "local_markers|greedy": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 9.359510004287586,
+          "total_p95_ms": 9.361563046695665
+        },
+        "local_markers|presence": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 10.224301018752158,
+          "total_p95_ms": 10.226093843812123
+        },
+        "local_markers|structured": {
+          "totals": {
+            "issued": 9,
+            "strict": 9,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 5,
+            "source_calls": 1,
+            "role_calls": 4,
+            "binding": 11,
+            "parsed": 26
+          },
+          "parser_p95_ms": 10.224301018752158,
+          "total_p95_ms": 32.11621113587171
+        },
+        "local_markers|structured_given_greedy_abstention": {
+          "totals": {
+            "issued": 9,
+            "strict": 9,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 5,
+            "source_calls": 1,
+            "role_calls": 4,
+            "binding": 11,
+            "parsed": 26
+          },
+          "parser_p95_ms": 10.224301018752158,
+          "total_p95_ms": 31.941901455866173
+        },
+        "local_markers|supplied": {
+          "totals": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 8,
+            "source_calls": 2,
+            "role_calls": 6,
+            "binding": 26,
+            "parsed": 26
+          },
+          "parser_p95_ms": 0.0,
+          "total_p95_ms": 22.506297565996647
+        },
+        "reversed_references|agreement": {
+          "totals": {
+            "issued": 8,
+            "strict": 0,
+            "adverse": 8,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 5,
+            "source_calls": 0,
+            "role_calls": 5,
+            "binding": 0,
+            "parsed": 13
+          },
+          "parser_p95_ms": 11.673120985506102,
+          "total_p95_ms": 33.098482817877084
+        },
+        "reversed_references|alternative": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 9.959100134437904,
+          "total_p95_ms": 9.959919174434617
+        },
+        "reversed_references|greedy": {
+          "totals": {
+            "issued": 1,
+            "strict": 0,
+            "adverse": 1,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 1,
+            "source_calls": 0,
+            "role_calls": 1,
+            "binding": 0,
+            "parsed": 3
+          },
+          "parser_p95_ms": 9.192735655233264,
+          "total_p95_ms": 20.026636368129402
+        },
+        "reversed_references|presence": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 9.959100134437904,
+          "total_p95_ms": 9.960661584045738
+        },
+        "reversed_references|structured": {
+          "totals": {
+            "issued": 11,
+            "strict": 2,
+            "adverse": 9,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 8,
+            "source_calls": 0,
+            "role_calls": 8,
+            "binding": 1,
+            "parsed": 26
+          },
+          "parser_p95_ms": 9.959100134437904,
+          "total_p95_ms": 33.9048272871878
+        },
+        "reversed_references|structured_given_greedy_abstention": {
+          "totals": {
+            "issued": 10,
+            "strict": 2,
+            "adverse": 8,
+            "wrong_source": 0,
+            "requests": 23,
+            "positives": 12,
+            "search_calls": 7,
+            "source_calls": 0,
+            "role_calls": 7,
+            "binding": 1,
+            "parsed": 23
+          },
+          "parser_p95_ms": 9.953411226160824,
+          "total_p95_ms": 34.31163287023082
+        },
+        "reversed_references|supplied": {
+          "totals": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 8,
+            "source_calls": 2,
+            "role_calls": 6,
+            "binding": 26,
+            "parsed": 26
+          },
+          "parser_p95_ms": 0.0,
+          "total_p95_ms": 22.0726074767299
+        },
+        "shifted_markers|agreement": {
+          "totals": {
+            "issued": 7,
+            "strict": 7,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 6,
+            "source_calls": 1,
+            "role_calls": 5,
+            "binding": 11,
+            "parsed": 16
+          },
+          "parser_p95_ms": 11.650485801510513,
+          "total_p95_ms": 33.29762601060793
+        },
+        "shifted_markers|alternative": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 9.969088452635333,
+          "total_p95_ms": 9.970041195629165
+        },
+        "shifted_markers|greedy": {
+          "totals": {
+            "issued": 2,
+            "strict": 2,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 1,
+            "source_calls": 0,
+            "role_calls": 1,
+            "binding": 2,
+            "parsed": 5
+          },
+          "parser_p95_ms": 9.223170200129971,
+          "total_p95_ms": 19.872188102453947
+        },
+        "shifted_markers|presence": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 9.969088452635333,
+          "total_p95_ms": 9.971047460567206
+        },
+        "shifted_markers|structured": {
+          "totals": {
+            "issued": 12,
+            "strict": 9,
+            "adverse": 3,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 9,
+            "source_calls": 2,
+            "role_calls": 7,
+            "binding": 13,
+            "parsed": 26
+          },
+          "parser_p95_ms": 9.969088452635333,
+          "total_p95_ms": 32.244316942524165
+        },
+        "shifted_markers|structured_given_greedy_abstention": {
+          "totals": {
+            "issued": 10,
+            "strict": 7,
+            "adverse": 3,
+            "wrong_source": 0,
+            "requests": 21,
+            "positives": 10,
+            "search_calls": 8,
+            "source_calls": 2,
+            "role_calls": 6,
+            "binding": 11,
+            "parsed": 21
+          },
+          "parser_p95_ms": 9.978447924368083,
+          "total_p95_ms": 32.22190402448177
+        },
+        "shifted_markers|supplied": {
+          "totals": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 8,
+            "source_calls": 2,
+            "role_calls": 6,
+            "binding": 26,
+            "parsed": 26
+          },
+          "parser_p95_ms": 0.0,
+          "total_p95_ms": 22.275239549344406
+        }
+      },
+      "job_wall_seconds": 33
+    },
+    {
+      "script_sha256": "56ce66af4be65cdc2d749203a6357767b9b8254b38814afc755659011967bdd9",
+      "inputs": {
+        "projection": "38bc5e6bd42e3b2f427a42a552cae11bc0813e50f2e601ee9e10a298fe47925f",
+        "manifest": "064b9d0a579e58911c1986a17e4eb169dcfd3ab57e4e4640d31a1a62143a753a",
+        "niso": "c107b4e780218e58aec4e2a13f2d7072533962a6a73b82d23e4273b43aafd528",
+        "training": "3365bdd2588d8dfff12de71cf7663808c25689f831a1ba42288a8bb8b53bfdc2",
+        "bands": "0e936678ef2e49944e0a6394257d1edb79dc216facaeb77aaa49db829ef5c3da",
+        "source_frozen": "e393fe72c74c5f12748da43e8c245e224411633ed2c24eef22d34b4665aeb741",
+        "role_frozen": "e332709fbb1b1371253fede037758a2d027b68f389ee42ae221352f7d7bffde0"
+      },
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "source_reader_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+      "role_reader_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "seed": 29,
+      "reverse": true,
+      "context": true,
+      "training_seconds": 10.603470153990202,
+      "parameters": 93621,
+      "fit_topics": 307,
+      "dev_topics": 61,
+      "fit_phrases": 64,
+      "dev_phrases": 20,
+      "training_requests": 2048,
+      "development_requests": 320,
+      "test_families": [
+        "00b84c94a418b735d937c4d5d06ca745d6239b5f7f5a60d1cc4d0a07f6a5c713",
+        "012f2ddbcf99a0c00924418010960950d3aa09e5e73e743f5e02749ed0cb5507",
+        "0391ec8d9fc09804c4507f3c68c23a36f210fc5c71bd01af01eef242f93f14d2",
+        "04cdb4fa95434dd40fc1450752b632e9ce6a3c7c04e55336635e752cee24b295",
+        "08b17ddde6d51856db5a8a63a23336511ec213b1ef4e194373d5580f7d3889d6",
+        "0b1e439df45895b22efe40fdd0bb5ca23dbcb1f74cd13b93d688892634df049a",
+        "0ba096b40605edd23de81870f5a9453a2fa7e38cfeb3a181819e313e15832d67",
+        "151a575e9cec018374f33f8a1a01a7414c0c43f5ceae4c3d4eb874de8cc6076e",
+        "161ba7c9775edc346074ee04e7d8c0412165cbfadace04b8ae9fe18a9cb87646",
+        "19d7abd444ff76508f5461935ce3c6c41c55d7eced74b17143adeb3a9c7706fc",
+        "32ffec86ae610b217413664ce43a544f13307205011627f1f2998d170a1d36b3",
+        "5b5d84551221d364be2dbc1c1f81d1a923e16e24556bff919d125fb6dedb9b2b",
+        "66f7703dc004551511550beef6e3ba96e92bcc19976c9e6cb65d598b478b0805"
+      ],
+      "loss": [
+        0.5434167480561882,
+        0.09448180714389309,
+        0.028805046196794137,
+        0.013416956404398661,
+        0.009313243070209865,
+        0.004126831616304116,
+        0.002756006169875036,
+        0.0019705431404872797,
+        0.0014838766091997968,
+        0.0011889027427969268,
+        0.000989282358204946,
+        0.0008234251472458709,
+        0.0006888973989589431,
+        0.0005949868505013001
+      ],
+      "threshold": 1.0,
+      "calibration": {
+        "0.0": {
+          "accepted": 57,
+          "exact": 10,
+          "outside": 0
+        },
+        "0.25": {
+          "accepted": 57,
+          "exact": 10,
+          "outside": 0
+        },
+        "0.5": {
+          "accepted": 56,
+          "exact": 10,
+          "outside": 0
+        },
+        "0.65": {
+          "accepted": 46,
+          "exact": 6,
+          "outside": 0
+        },
+        "0.8": {
+          "accepted": 35,
+          "exact": 4,
+          "outside": 0
+        },
+        "0.9": {
+          "accepted": 22,
+          "exact": 2,
+          "outside": 0
+        },
+        "0.95": {
+          "accepted": 14,
+          "exact": 0,
+          "outside": 0
+        },
+        "1.0": {
+          "accepted": 0,
+          "exact": 0,
+          "outside": 0
+        }
+      },
+      "joint_calibration": {
+        "presence": {
+          "accepted_without_cut": 320,
+          "selected": null,
+          "best_n10": {
+            "threshold": 7.150774240493774,
+            "accepted": 212,
+            "exact": 45,
+            "outside": 0
+          }
+        },
+        "alternative": {
+          "accepted_without_cut": 320,
+          "selected": null,
+          "best_n10": {
+            "threshold": 3.207808256149292,
+            "accepted": 44,
+            "exact": 10,
+            "outside": 0
+          }
+        }
+      },
+      "agreement_seed": 17,
+      "agreement_development": {
+        "accepted": 166,
+        "exact": 34,
+        "outside": 29
+      },
+      "lattice_sha256": "3b8455fcd2b2b8f7acffdaa816768c9950b9bd87c8318f0fdb0ee67a028646cd",
+      "results": {
+        "local_markers|agreement": {
+          "totals": {
+            "issued": 3,
+            "strict": 3,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 1,
+            "source_calls": 0,
+            "role_calls": 1,
+            "binding": 6,
+            "parsed": 10
+          },
+          "parser_p95_ms": 11.956426576944068,
+          "total_p95_ms": 22.697156760841608
+        },
+        "local_markers|alternative": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 10.158657445572317,
+          "total_p95_ms": 10.159339173696935
+        },
+        "local_markers|greedy": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 9.305634477641433,
+          "total_p95_ms": 9.307454252848402
+        },
+        "local_markers|presence": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 10.158657445572317,
+          "total_p95_ms": 10.159609460970387
+        },
+        "local_markers|structured": {
+          "totals": {
+            "issued": 8,
+            "strict": 7,
+            "adverse": 1,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 4,
+            "source_calls": 0,
+            "role_calls": 4,
+            "binding": 6,
+            "parsed": 26
+          },
+          "parser_p95_ms": 10.158657445572317,
+          "total_p95_ms": 30.955838039517403
+        },
+        "local_markers|structured_given_greedy_abstention": {
+          "totals": {
+            "issued": 8,
+            "strict": 7,
+            "adverse": 1,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 4,
+            "source_calls": 0,
+            "role_calls": 4,
+            "binding": 6,
+            "parsed": 26
+          },
+          "parser_p95_ms": 10.158657445572317,
+          "total_p95_ms": 30.982014373876154
+        },
+        "local_markers|supplied": {
+          "totals": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 8,
+            "source_calls": 2,
+            "role_calls": 6,
+            "binding": 26,
+            "parsed": 26
+          },
+          "parser_p95_ms": 0.0,
+          "total_p95_ms": 22.08131304359995
+        },
+        "reversed_references|agreement": {
+          "totals": {
+            "issued": 8,
+            "strict": 0,
+            "adverse": 8,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 5,
+            "source_calls": 0,
+            "role_calls": 5,
+            "binding": 0,
+            "parsed": 13
+          },
+          "parser_p95_ms": 11.665001511573792,
+          "total_p95_ms": 32.56621552282013
+        },
+        "reversed_references|alternative": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 9.908034553518519,
+          "total_p95_ms": 9.909005282679573
+        },
+        "reversed_references|greedy": {
+          "totals": {
+            "issued": 2,
+            "strict": 0,
+            "adverse": 2,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 2,
+            "source_calls": 0,
+            "role_calls": 2,
+            "binding": 0,
+            "parsed": 3
+          },
+          "parser_p95_ms": 9.117406560108066,
+          "total_p95_ms": 27.537461603060365
+        },
+        "reversed_references|presence": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 9.908034553518519,
+          "total_p95_ms": 9.909790329402313
+        },
+        "reversed_references|structured": {
+          "totals": {
+            "issued": 9,
+            "strict": 0,
+            "adverse": 9,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 6,
+            "source_calls": 1,
+            "role_calls": 5,
+            "binding": 0,
+            "parsed": 26
+          },
+          "parser_p95_ms": 9.908034553518519,
+          "total_p95_ms": 31.0805692570284
+        },
+        "reversed_references|structured_given_greedy_abstention": {
+          "totals": {
+            "issued": 7,
+            "strict": 0,
+            "adverse": 7,
+            "wrong_source": 0,
+            "requests": 23,
+            "positives": 12,
+            "search_calls": 4,
+            "source_calls": 1,
+            "role_calls": 3,
+            "binding": 0,
+            "parsed": 23
+          },
+          "parser_p95_ms": 9.914045652840286,
+          "total_p95_ms": 30.91779291862622
+        },
+        "reversed_references|supplied": {
+          "totals": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 8,
+            "source_calls": 2,
+            "role_calls": 6,
+            "binding": 26,
+            "parsed": 26
+          },
+          "parser_p95_ms": 0.0,
+          "total_p95_ms": 21.52851948630996
+        },
+        "shifted_markers|agreement": {
+          "totals": {
+            "issued": 7,
+            "strict": 7,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 6,
+            "source_calls": 1,
+            "role_calls": 5,
+            "binding": 11,
+            "parsed": 16
+          },
+          "parser_p95_ms": 11.517786013428122,
+          "total_p95_ms": 32.748039229772985
+        },
+        "shifted_markers|alternative": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 9.812307805987075,
+          "total_p95_ms": 9.812988835619763
+        },
+        "shifted_markers|greedy": {
+          "totals": {
+            "issued": 2,
+            "strict": 2,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 2,
+            "source_calls": 0,
+            "role_calls": 2,
+            "binding": 4,
+            "parsed": 7
+          },
+          "parser_p95_ms": 9.022673475556076,
+          "total_p95_ms": 27.284550858894363
+        },
+        "shifted_markers|presence": {
+          "totals": {
+            "issued": 0,
+            "strict": 0,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 0,
+            "source_calls": 0,
+            "role_calls": 0,
+            "binding": 0,
+            "parsed": 0
+          },
+          "parser_p95_ms": 9.812307805987075,
+          "total_p95_ms": 9.813507582293823
+        },
+        "shifted_markers|structured": {
+          "totals": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 8,
+            "source_calls": 2,
+            "role_calls": 6,
+            "binding": 15,
+            "parsed": 26
+          },
+          "parser_p95_ms": 9.812307805987075,
+          "total_p95_ms": 33.55737013043836
+        },
+        "shifted_markers|structured_given_greedy_abstention": {
+          "totals": {
+            "issued": 9,
+            "strict": 9,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 19,
+            "positives": 10,
+            "search_calls": 6,
+            "source_calls": 2,
+            "role_calls": 4,
+            "binding": 11,
+            "parsed": 19
+          },
+          "parser_p95_ms": 10.373133770190167,
+          "total_p95_ms": 34.275650209747255
+        },
+        "shifted_markers|supplied": {
+          "totals": {
+            "issued": 11,
+            "strict": 11,
+            "adverse": 0,
+            "wrong_source": 0,
+            "requests": 26,
+            "positives": 13,
+            "search_calls": 8,
+            "source_calls": 2,
+            "role_calls": 6,
+            "binding": 26,
+            "parsed": 26
+          },
+          "parser_p95_ms": 0.0,
+          "total_p95_ms": 23.928099748445675
+        }
+      },
+      "job_wall_seconds": 32
+    }
+  ]
+}

@@ -2,6 +2,7 @@
 
 import argparse
 from collections import Counter, defaultdict
+from itertools import groupby
 import json
 import os
 from hashlib import sha256
@@ -26,6 +27,7 @@ from experiments.credit.engineering_role_banks import projections, queries
 from experiments.credit.keyword_author_rescue import PostingCatalog
 from experiments.credit.plos_role_inventory import ROLES
 from experiments.credit.prose_budgeted_source_role import evidence
+from experiments.credit.source_role_offset_lattice import best_paths
 from experiments.credit.unquoted_budgeted_source_role import TEMPLATES, rule_parse, sample_families
 from experiments.followir.core17_reranking import digest, write_json
 from experiments.followir.core17_verifier import Reranker
@@ -152,21 +154,27 @@ def extract(model, vocab, text):
 
 def decode(logits, windows, text):
     scores, tags = logits.softmax(-1).max(-1)
-    tags = tags.tolist()
+    tag_ids = tags.tolist()
+    spans = decode_spans(tag_ids, windows, text)
+    confidence = min((score for score, label in zip(scores.tolist(), tag_ids, strict=True) if label), default=0.)
+    return spans, confidence if spans else 0.
+
+
+def decode_spans(tags, windows, text):
     spans = []
     for label in range(1, len(LABELS) + 1):
         indices = [i for i, category in enumerate(tags) if category == label]
         if not indices or len(indices) != indices[-1] - indices[0] + 1:
-            return (), 0.
+            return ()
         positions = [windows[i] for i in indices if windows[i][0] < windows[i][1]]
         if not positions:
-            return (), 0.
+            return ()
         spans.append((positions[0][0], positions[-1][1]))
-    if spans[0][0] >= spans[2][0]:
-        return (), 0.
+    ordered = sorted(spans)
+    if spans[0][0] >= spans[2][0] or any(left[1] > right[0] for left, right in zip(ordered, ordered[1:])):
+        return ()
     a, x, b, y = (text[start:end] for start, end in spans)
-    confidence = min(score for score, label in zip(scores.tolist(), tags, strict=True) if label)
-    return ((a, x), (b, y)), confidence
+    return ((a, x), (b, y))
 
 
 def trim_windows(text, offsets):
@@ -241,9 +249,42 @@ def fit_context(encoder, rows, seed):
 
 
 @torch.inference_mode()
-def extract_context(head, encoder, text):
+def context_logits(head, encoder, text):
     vectors, lengths, windows = contextual_tokens(encoder, [text])
-    return decode(head(vectors, lengths)[0], windows[0], text)
+    return head(vectors, lengths)[0], windows[0]
+
+
+def extract_context(head, encoder, text):
+    logits, windows = context_logits(head, encoder, text)
+    return decode(logits, windows, text)
+
+
+@torch.inference_mode()
+def joint_parse(head, encoder, text, partner=None):
+    start = perf_counter()
+    vectors, lengths, windows = contextual_tokens(encoder, [text])
+    windows = windows[0]
+    values = head(vectors, lengths)[0].float().cpu()
+    encoder_ms = (perf_counter() - start) * 1000
+    start = perf_counter()
+    greedy, _ = decode(values, windows, text)
+    greedy_ms = encoder_ms + (perf_counter() - start) * 1000
+    start = perf_counter()
+    path, margins = best_paths(values.numpy())
+    structured = decode_spans(path, windows, text) if path else ()
+    if not structured:
+        margins = {}
+    structure_ms = encoder_ms + (perf_counter() - start) * 1000
+    agreement, agreement_ms = (), structure_ms
+    if partner is not None and structured:
+        start = perf_counter()
+        other_values = partner(vectors, lengths)[0].float().cpu().numpy()
+        other_path, _ = best_paths(other_values)
+        other = decode_spans(other_path, windows, text) if other_path else ()
+        if other == structured:
+            agreement = structured
+        agreement_ms += (perf_counter() - start) * 1000
+    return greedy, greedy_ms, structured, margins, structure_ms, agreement, agreement_ms
 
 
 def expected_pairs(text, offsets):
@@ -311,6 +352,69 @@ def evaluate(service, test_rows, wording, parse, threshold, reverse):
             for key, values in sorted(times.items())}
 
 
+def calibrate_joint(parse, rows):
+    observations = []
+    agreement_counts = Counter(accepted=0, exact=0, outside=0)
+    for text, spans in rows:
+        _, _, prediction, margins, _, agreement, _ = parse(text)
+        gold = expected_pairs(text, spans)
+        if prediction:
+            observations.append((margins, prediction == gold, bool(gold)))
+        if agreement:
+            agreement_counts.update(accepted=1, exact=agreement == gold, outside=not gold)
+    curves = {}
+    for metric in ("presence", "alternative"):
+        ordered = sorted(observations, key=lambda row: row[0][metric], reverse=True)
+        points, accepted, exact, outside = [], 0, 0, 0
+        for threshold, members in groupby(ordered, key=lambda row: row[0][metric]):
+            for _, match, in_scope in members:
+                accepted += 1
+                exact += match
+                outside += not in_scope
+            points.append(dict(threshold=threshold, accepted=accepted, exact=exact, outside=outside))
+        feasible = [p for p in points if not p["outside"] and p["exact"] >= .90 * p["accepted"]]
+        selected = max(feasible, key=lambda point: point["accepted"]) if feasible else None
+        # Record the strongest achievable precision with useful calibration coverage.
+        comparable = [p for p in points if not p["outside"] and p["accepted"] >= 10]
+        best = max(comparable, key=lambda p: (p["exact"] / p["accepted"], p["accepted"])) if comparable else None
+        curves[metric] = dict(accepted_without_cut=len(ordered), selected=selected, best_n10=best)
+    return curves, dict(agreement_counts)
+
+
+def evaluate_joint(service, test_rows, wording, parse, calibration, reverse, ensemble):
+    bank = phrase_bank(wording)
+    rows = test_rows[::-1] if reverse else test_rows
+    counts, times = defaultdict(Counter), defaultdict(list)
+    for index, row in enumerate([rows[0], *rows]):
+        topics = [service.index.keywords(service.index.articles[p]["clue"]) for p in row["papers"]]
+        roles = [bank[r][int(row["family"][:16], 16) % len(bank[r])].strip().rstrip(".?!") for r in row["roles"]]
+        expected = tuple(zip(topics, roles, strict=True))
+        for style, template in TEMPLATES.items():
+            text = template.format(a=topics[0], b=topics[1], x=roles[0], y=roles[1])
+            greedy, greedy_ms, structured, margins, structure_ms, agreement, agreement_ms = parse(text)
+            routes = [("supplied", expected, 0.), ("greedy", greedy, greedy_ms),
+                      ("structured", structured, structure_ms)]
+            if ensemble:
+                routes.append(("agreement", agreement, agreement_ms))
+            for metric, diagnostics in calibration.items():
+                cut = diagnostics["selected"]
+                accepted = structured and cut is not None and margins[metric] >= cut["threshold"]
+                routes.append((metric, structured if accepted else (), structure_ms))
+            if not greedy:
+                routes.append(("structured_given_greedy_abstention", structured, structure_ms))
+            for arm, prediction, parse_ms in routes:
+                start = perf_counter()
+                result = score_search(service, prediction, row)
+                elapsed = parse_ms + (perf_counter() - start) * 1000
+                if index:
+                    key = f"{style}|{arm}"
+                    counts[key].update(result, binding=prediction == expected, parsed=bool(prediction))
+                    times[key].append((parse_ms, elapsed))
+    return {key: dict(totals=dict(counts[key]), parser_p95_ms=float(np.quantile([p for p, _ in values], .95)),
+                      total_p95_ms=float(np.quantile([t for _, t in values], .95)))
+            for key, values in sorted(times.items())}
+
+
 def pools(articles, index, test_rows):
     test_ids = {p for r in test_rows for p in r["papers"]}
     authors = {person for p in test_ids for person in articles[p]["roles"]}
@@ -352,8 +456,19 @@ def run(args):
 
         def parse(text):
             return extract(tagger, vocab, text)
+    partner = None
+    agreement_seed = None
+    if args.ensemble:
+        agreement_seed = 29 if args.seed == 17 else 17
+        partner, _ = fit_context(encoder, fit_rows, agreement_seed)
     train_seconds = perf_counter() - begin
     threshold, calibration = calibrate(parse, dev_rows)
+    joint_calibration = agreement_development = None
+    if args.structured:
+        def compare(text):
+            return joint_parse(tagger, encoder, text, partner)
+
+        joint_calibration, agreement_development = calibrate_joint(compare, dev_rows)
     print(f"Tagger fitted in {train_seconds:.1f}s, threshold={threshold}, loss={losses[-1]:.4f}", flush=True)
     banks = projections(encoder, definitions, training_phrases)
     source = Reranker(args.source_reader)
@@ -366,7 +481,10 @@ def run(args):
                    role=json.loads(args.role_frozen.read_bytes())["runs"][0]["fit"]["cutoff"])
     bands = json.loads(args.bands.read_bytes())["runs"][0]["bands"]
     service = Service(index, encoder, banks, bands, source, role, cutoffs)
-    results = evaluate(service, test_rows, wording, parse, threshold, args.reverse)
+    if args.structured:
+        results = evaluate_joint(service, test_rows, wording, compare, joint_calibration, args.reverse, args.ensemble)
+    else:
+        results = evaluate(service, test_rows, wording, parse, threshold, args.reverse)
     inputs = ("projection", "manifest", "niso", "training", "bands", "source_frozen", "role_frozen")
     write_json(args.output, dict(
         script_sha256=digest(Path(__file__)), inputs={key: digest(getattr(args, key)) for key in inputs},
@@ -377,7 +495,9 @@ def run(args):
         fit_topics=len(fit_topics), dev_topics=len(held_topics), fit_phrases=len(fit_phrases),
         dev_phrases=len(held_phrases), training_requests=len(fit_rows), development_requests=len(dev_rows),
         test_families=sorted({row["family"] for row in test_rows}),
-        loss=losses, threshold=threshold, calibration=calibration, results=results,
+        loss=losses, threshold=threshold, calibration=calibration, joint_calibration=joint_calibration,
+        agreement_seed=agreement_seed, agreement_development=agreement_development,
+        lattice_sha256=digest(Path(__file__).with_name("source_role_offset_lattice.py")), results=results,
     ))
 
 
@@ -388,5 +508,12 @@ if __name__ == "__main__":
         parser.add_argument(name, type=Path)
     parser.add_argument("--seed", type=int, default=17)
     parser.add_argument("--context", action="store_true")
+    parser.add_argument("--structured", action="store_true")
+    parser.add_argument("--ensemble", action="store_true")
     parser.add_argument("--reverse", action="store_true")
-    run(parser.parse_args())
+    options = parser.parse_args()
+    if options.structured and not options.context:
+        parser.error("--structured requires --context")
+    if options.ensemble and not options.structured:
+        parser.error("--ensemble requires --structured")
+    run(options)
