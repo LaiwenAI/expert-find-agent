@@ -1,0 +1,697 @@
+{
+  "slurm_job": 46154,
+  "runs": [
+    {
+      "script_sha256": "1a988d8292e9823dcf42271d017f50cb1d78f1ba02e257042e86a87e98537eef",
+      "projection_sha256": "e325293f021c6116a15808ba0666c50267fd14fcd64d26eb8a3c8f8126a5149e",
+      "manifest_sha256": "62917298cdb17c293598026a9ad7c938bc2e4a539e8741ccf6e61858ed541b08",
+      "paired_results_sha256": "f3f24de1b725c529b6dc142a0eedfc6413129bc67643e9b74d0909df0b94c956",
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "reverse": false,
+      "census": {
+        "admitted": 652,
+        "dropped": {
+          "incomplete_or_ambiguous": 24
+        },
+        "links": 33,
+        "paper_pairs": 27,
+        "linked_papers": 48,
+        "contributors": 27,
+        "variants": {
+          "present": 132,
+          "swap": 132
+        }
+      },
+      "distinct_requests": 108,
+      "author_connected_groups": 22,
+      "cutoffs": {
+        "source": -5.125,
+        "role": 0.0,
+        "two_batched": 0.0
+      },
+      "results": {
+        "28": {
+          "baseline": {
+            "counts": {
+              "exact": 44,
+              "adverse": 0,
+              "issued": 44,
+              "positives": 108,
+              "calls": 32,
+              "tokens": 2314
+            },
+            "requests": 216,
+            "expected_repeats": 2,
+            "offered_rps": 28.993565245892235,
+            "achieved_rps": 28.98885091476932,
+            "failures": {},
+            "makespan_seconds": 7.451140462071635,
+            "drain_seconds": 0.03570196126632652,
+            "p95_ms": {
+              "total_ms": 53.71677305083722,
+              "client_queue_ms": 2.2804428008385003,
+              "server_queue_ms": 34.394845000000004,
+              "compute_ms": 32.71113175
+            },
+            "verification": {
+              "role_forwards": 24,
+              "source_forwards": 8
+            }
+          },
+          "batch": {
+            "counts": {
+              "exact": 70,
+              "adverse": 6,
+              "issued": 76,
+              "positives": 108,
+              "calls": 126,
+              "tokens": 18006
+            },
+            "requests": 216,
+            "expected_repeats": 2,
+            "offered_rps": 28.993565245892235,
+            "achieved_rps": 28.88864408817542,
+            "failures": {},
+            "makespan_seconds": 7.476986435940489,
+            "drain_seconds": 0.061547935135180865,
+            "p95_ms": {
+              "total_ms": 84.85236202250235,
+              "client_queue_ms": 2.8612643654923886,
+              "server_queue_ms": 58.70897975,
+              "compute_ms": 40.2483305
+            },
+            "verification": {
+              "role_forwards": 118,
+              "source_forwards": 8
+            }
+          },
+          "reserve_agreement": {
+            "counts": {
+              "exact": 60,
+              "adverse": 0,
+              "issued": 60,
+              "positives": 108,
+              "calls": 126,
+              "tokens": 16502
+            },
+            "requests": 216,
+            "expected_repeats": 2,
+            "offered_rps": 28.993565245892235,
+            "achieved_rps": 28.89259557967187,
+            "failures": {},
+            "makespan_seconds": 7.47596384701319,
+            "drain_seconds": 0.06052534620788208,
+            "p95_ms": {
+              "total_ms": 82.60442916071042,
+              "client_queue_ms": 2.5822580500971526,
+              "server_queue_ms": 58.09951175,
+              "compute_ms": 42.83396375
+            },
+            "verification": {
+              "role_forwards": 118,
+              "source_forwards": 8
+            }
+          }
+        },
+        "60": {
+          "batch": {
+            "counts": {
+              "exact": 70,
+              "adverse": 6,
+              "issued": 76,
+              "positives": 108,
+              "calls": 126,
+              "tokens": 18006
+            },
+            "requests": 216,
+            "expected_repeats": 2,
+            "offered_rps": 62.129068384054776,
+            "achieved_rps": 44.627062617966686,
+            "failures": {},
+            "makespan_seconds": 4.840112418984063,
+            "drain_seconds": 1.379574451941585,
+            "p95_ms": {
+              "total_ms": 1304.310113628162,
+              "client_queue_ms": 2.0764073997270316,
+              "server_queue_ms": 1279.78784875,
+              "compute_ms": 32.88626575
+            },
+            "verification": {
+              "role_forwards": 118,
+              "source_forwards": 8
+            }
+          },
+          "reserve_agreement": {
+            "counts": {
+              "exact": 60,
+              "adverse": 0,
+              "issued": 60,
+              "positives": 108,
+              "calls": 126,
+              "tokens": 16502
+            },
+            "requests": 216,
+            "expected_repeats": 2,
+            "offered_rps": 62.129068384054776,
+            "achieved_rps": 45.6841403118056,
+            "failures": {},
+            "makespan_seconds": 4.728117865975946,
+            "drain_seconds": 1.2675798989334681,
+            "p95_ms": {
+              "total_ms": 1206.21044820291,
+              "client_queue_ms": 2.915441553341225,
+              "server_queue_ms": 1182.1085214999998,
+              "compute_ms": 31.08057875
+            },
+            "verification": {
+              "role_forwards": 118,
+              "source_forwards": 8
+            }
+          },
+          "baseline": {
+            "counts": {
+              "exact": 44,
+              "adverse": 0,
+              "issued": 44,
+              "positives": 108,
+              "calls": 32,
+              "tokens": 2314
+            },
+            "requests": 216,
+            "expected_repeats": 2,
+            "offered_rps": 62.129068384054776,
+            "achieved_rps": 61.24677730380285,
+            "failures": {},
+            "makespan_seconds": 3.526716171996668,
+            "drain_seconds": 0.06617820495418991,
+            "p95_ms": {
+              "total_ms": 104.90575598669238,
+              "client_queue_ms": 4.080286977114156,
+              "server_queue_ms": 86.12226725,
+              "compute_ms": 26.56576775
+            },
+            "verification": {
+              "role_forwards": 24,
+              "source_forwards": 8
+            }
+          }
+        }
+      },
+      "quality": {
+        "baseline": {
+          "keywords": {
+            "totals": {
+              "strict": 10,
+              "issued": 10,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 27,
+            "requests": 54,
+            "paired_strict_change": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 27,
+              "clusters": 22,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          },
+          "excerpt": {
+            "totals": {
+              "strict": 12,
+              "issued": 12,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 27,
+            "requests": 54,
+            "paired_strict_change": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 27,
+              "clusters": 22,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          }
+        },
+        "batch": {
+          "keywords": {
+            "totals": {
+              "strict": 15,
+              "issued": 16,
+              "adverse": 1,
+              "wrong_source": 0
+            },
+            "positives": 27,
+            "requests": 54,
+            "paired_strict_change": {
+              "mean": 0.18518518518518517,
+              "percentile_95": [
+                0.043478260869565216,
+                0.3333333333333333
+              ],
+              "queries": 27,
+              "clusters": 22,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          },
+          "excerpt": {
+            "totals": {
+              "strict": 20,
+              "issued": 22,
+              "adverse": 2,
+              "wrong_source": 0
+            },
+            "positives": 27,
+            "requests": 54,
+            "paired_strict_change": {
+              "mean": 0.2962962962962963,
+              "percentile_95": [
+                0.125,
+                0.48148148148148145
+              ],
+              "queries": 27,
+              "clusters": 22,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          }
+        },
+        "reserve_agreement": {
+          "keywords": {
+            "totals": {
+              "strict": 12,
+              "issued": 12,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 27,
+            "requests": 54,
+            "paired_strict_change": {
+              "mean": 0.07407407407407407,
+              "percentile_95": [
+                0.0,
+                0.18518518518518517
+              ],
+              "queries": 27,
+              "clusters": 22,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          },
+          "excerpt": {
+            "totals": {
+              "strict": 18,
+              "issued": 18,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 27,
+            "requests": 54,
+            "paired_strict_change": {
+              "mean": 0.2222222222222222,
+              "percentile_95": [
+                0.08333333333333333,
+                0.3448275862068966
+              ],
+              "queries": 27,
+              "clusters": 22,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          }
+        }
+      },
+      "response_signatures": {
+        "baseline": "f10aa4fa0937cd1022f354927eac35b3365bc7f83e6fe8795c4687fc0891ea3b",
+        "batch": "26889d484e3a6239842bb8289134f7918b0b4ba63e350700fe5035eb8f3741c7",
+        "reserve_agreement": "48c465c15cda03ce97e6d582f80337ad1ebaf711b6b4ee7e408b07be8273e5a4"
+      },
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "source_reader_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+      "role_reader_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "wall_seconds": 50
+    },
+    {
+      "script_sha256": "1a988d8292e9823dcf42271d017f50cb1d78f1ba02e257042e86a87e98537eef",
+      "projection_sha256": "e325293f021c6116a15808ba0666c50267fd14fcd64d26eb8a3c8f8126a5149e",
+      "manifest_sha256": "62917298cdb17c293598026a9ad7c938bc2e4a539e8741ccf6e61858ed541b08",
+      "paired_results_sha256": "f3f24de1b725c529b6dc142a0eedfc6413129bc67643e9b74d0909df0b94c956",
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "reverse": true,
+      "census": {
+        "admitted": 652,
+        "dropped": {
+          "incomplete_or_ambiguous": 24
+        },
+        "links": 33,
+        "paper_pairs": 27,
+        "linked_papers": 48,
+        "contributors": 27,
+        "variants": {
+          "present": 132,
+          "swap": 132
+        }
+      },
+      "distinct_requests": 108,
+      "author_connected_groups": 22,
+      "cutoffs": {
+        "source": -5.125,
+        "role": 0.0,
+        "two_batched": 0.0
+      },
+      "results": {
+        "28": {
+          "reserve_agreement": {
+            "counts": {
+              "exact": 60,
+              "adverse": 0,
+              "issued": 60,
+              "positives": 108,
+              "calls": 126,
+              "tokens": 16502
+            },
+            "requests": 216,
+            "expected_repeats": 2,
+            "offered_rps": 28.993565245892235,
+            "achieved_rps": 28.894873033091876,
+            "failures": {},
+            "makespan_seconds": 7.475374602014199,
+            "drain_seconds": 0.05993610120889059,
+            "p95_ms": {
+              "total_ms": 79.63597113848664,
+              "client_queue_ms": 2.919001301052049,
+              "server_queue_ms": 55.91946325,
+              "compute_ms": 42.72074825
+            },
+            "verification": {
+              "role_forwards": 118,
+              "source_forwards": 8
+            }
+          },
+          "batch": {
+            "counts": {
+              "exact": 70,
+              "adverse": 6,
+              "issued": 76,
+              "positives": 108,
+              "calls": 126,
+              "tokens": 18006
+            },
+            "requests": 216,
+            "expected_repeats": 2,
+            "offered_rps": 28.993565245892235,
+            "achieved_rps": 28.89203123206864,
+            "failures": {},
+            "makespan_seconds": 7.47610987490043,
+            "drain_seconds": 0.06067137409512213,
+            "p95_ms": {
+              "total_ms": 83.88797755469568,
+              "client_queue_ms": 2.530626457883045,
+              "server_queue_ms": 57.4271,
+              "compute_ms": 43.617404750000006
+            },
+            "verification": {
+              "role_forwards": 118,
+              "source_forwards": 8
+            }
+          },
+          "baseline": {
+            "counts": {
+              "exact": 44,
+              "adverse": 0,
+              "issued": 44,
+              "positives": 108,
+              "calls": 32,
+              "tokens": 2314
+            },
+            "requests": 216,
+            "expected_repeats": 2,
+            "offered_rps": 28.993565245892235,
+            "achieved_rps": 29.02246570535886,
+            "failures": {},
+            "makespan_seconds": 7.442510301945731,
+            "drain_seconds": 0.027071801140422735,
+            "p95_ms": {
+              "total_ms": 50.685237627476454,
+              "client_queue_ms": 2.1100719168316573,
+              "server_queue_ms": 34.0917735,
+              "compute_ms": 32.6037095
+            },
+            "verification": {
+              "role_forwards": 24,
+              "source_forwards": 8
+            }
+          }
+        },
+        "60": {
+          "batch": {
+            "counts": {
+              "exact": 70,
+              "adverse": 6,
+              "issued": 76,
+              "positives": 108,
+              "calls": 126,
+              "tokens": 18006
+            },
+            "requests": 216,
+            "expected_repeats": 2,
+            "offered_rps": 62.129068384054776,
+            "achieved_rps": 44.780025689587255,
+            "failures": {},
+            "makespan_seconds": 4.823579189018346,
+            "drain_seconds": 1.3630412219758683,
+            "p95_ms": {
+              "total_ms": 1296.9636309717316,
+              "client_queue_ms": 2.3975804506335407,
+              "server_queue_ms": 1272.76083775,
+              "compute_ms": 32.55519725
+            },
+            "verification": {
+              "role_forwards": 118,
+              "source_forwards": 8
+            }
+          },
+          "baseline": {
+            "counts": {
+              "exact": 44,
+              "adverse": 0,
+              "issued": 44,
+              "positives": 108,
+              "calls": 32,
+              "tokens": 2314
+            },
+            "requests": 216,
+            "expected_repeats": 2,
+            "offered_rps": 62.129068384054776,
+            "achieved_rps": 61.32694823019129,
+            "failures": {},
+            "makespan_seconds": 3.5221057990565896,
+            "drain_seconds": 0.061567832014111534,
+            "p95_ms": {
+              "total_ms": 96.8548646196723,
+              "client_queue_ms": 3.4756746608763933,
+              "server_queue_ms": 83.30615025,
+              "compute_ms": 25.6603475
+            },
+            "verification": {
+              "role_forwards": 24,
+              "source_forwards": 8
+            }
+          },
+          "reserve_agreement": {
+            "counts": {
+              "exact": 60,
+              "adverse": 0,
+              "issued": 60,
+              "positives": 108,
+              "calls": 126,
+              "tokens": 16502
+            },
+            "requests": 216,
+            "expected_repeats": 2,
+            "offered_rps": 62.129068384054776,
+            "achieved_rps": 45.78009427590701,
+            "failures": {},
+            "makespan_seconds": 4.71820784593001,
+            "drain_seconds": 1.257669878887532,
+            "p95_ms": {
+              "total_ms": 1193.0613340809941,
+              "client_queue_ms": 2.211388375144452,
+              "server_queue_ms": 1168.0249475,
+              "compute_ms": 31.225246
+            },
+            "verification": {
+              "role_forwards": 118,
+              "source_forwards": 8
+            }
+          }
+        }
+      },
+      "quality": {
+        "baseline": {
+          "keywords": {
+            "totals": {
+              "strict": 10,
+              "issued": 10,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 27,
+            "requests": 54,
+            "paired_strict_change": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 27,
+              "clusters": 22,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          },
+          "excerpt": {
+            "totals": {
+              "strict": 12,
+              "issued": 12,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 27,
+            "requests": 54,
+            "paired_strict_change": {
+              "mean": 0.0,
+              "percentile_95": [
+                0.0,
+                0.0
+              ],
+              "queries": 27,
+              "clusters": 22,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          }
+        },
+        "batch": {
+          "keywords": {
+            "totals": {
+              "strict": 15,
+              "issued": 16,
+              "adverse": 1,
+              "wrong_source": 0
+            },
+            "positives": 27,
+            "requests": 54,
+            "paired_strict_change": {
+              "mean": 0.18518518518518517,
+              "percentile_95": [
+                0.043478260869565216,
+                0.3333333333333333
+              ],
+              "queries": 27,
+              "clusters": 22,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          },
+          "excerpt": {
+            "totals": {
+              "strict": 20,
+              "issued": 22,
+              "adverse": 2,
+              "wrong_source": 0
+            },
+            "positives": 27,
+            "requests": 54,
+            "paired_strict_change": {
+              "mean": 0.2962962962962963,
+              "percentile_95": [
+                0.125,
+                0.48148148148148145
+              ],
+              "queries": 27,
+              "clusters": 22,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          }
+        },
+        "reserve_agreement": {
+          "keywords": {
+            "totals": {
+              "strict": 12,
+              "issued": 12,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 27,
+            "requests": 54,
+            "paired_strict_change": {
+              "mean": 0.07407407407407407,
+              "percentile_95": [
+                0.0,
+                0.18518518518518517
+              ],
+              "queries": 27,
+              "clusters": 22,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          },
+          "excerpt": {
+            "totals": {
+              "strict": 18,
+              "issued": 18,
+              "adverse": 0,
+              "wrong_source": 0
+            },
+            "positives": 27,
+            "requests": 54,
+            "paired_strict_change": {
+              "mean": 0.2222222222222222,
+              "percentile_95": [
+                0.08333333333333333,
+                0.3448275862068966
+              ],
+              "queries": 27,
+              "clusters": 22,
+              "seed": 20261116,
+              "bootstrap_repeats": 10000,
+              "sampling_unit": "connected paper/recorded-author groups"
+            }
+          }
+        }
+      },
+      "response_signatures": {
+        "reserve_agreement": "48c465c15cda03ce97e6d582f80337ad1ebaf711b6b4ee7e408b07be8273e5a4",
+        "batch": "26889d484e3a6239842bb8289134f7918b0b4ba63e350700fe5035eb8f3741c7",
+        "baseline": "f10aa4fa0937cd1022f354927eac35b3365bc7f83e6fe8795c4687fc0891ea3b"
+      },
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "source_reader_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+      "role_reader_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "wall_seconds": 49
+    }
+  ]
+}

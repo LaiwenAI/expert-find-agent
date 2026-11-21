@@ -70,6 +70,21 @@ def build(projection_path, manifest):
                                  variants=dict(Counter(row["variant"] for row in cases)))
 
 
+def sample_families(rows):
+    """Keep one complete query family for each unique target paper pair."""
+    first = {}
+    for row in rows:
+        pair = tuple(row["papers"])
+        first[pair] = min(first.get(pair, row["family"]), row["family"])
+    selected = [row for row in rows if first[tuple(row["papers"])] == row["family"]]
+    by_pair = defaultdict(list)
+    for row in selected:
+        by_pair[tuple(row["papers"])].append(bool(row["gold"]))
+    if any(sorted(labels) != [False, True] for labels in by_pair.values()):
+        raise ValueError("Expected a complete positive and control family for every pair")
+    return selected
+
+
 def freeze(sample, xml, reference_manifest, projection_path, output, prior_folders):
     if output.exists() or projection_path.exists():
         raise ValueError("Require fresh outputs")

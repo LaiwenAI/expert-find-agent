@@ -14,7 +14,7 @@ import torch
 
 from expert_search.qwen_embedding_torch import QwenTorchEmbedding
 from experiments.credit.budgeted_source_role_service import Service
-from experiments.credit.elife_prompt_holdout import build
+from experiments.credit.elife_prompt_holdout import build, sample_families
 from experiments.credit.engineering_cross_source_search import phrase_bank
 from experiments.credit.engineering_one_role_recheck import RoleReader
 from experiments.credit.engineering_role_banks import projections, queries
@@ -95,21 +95,6 @@ def model_parse(reader, request, *, allow_empty):
                                    pad_token_id=tokenizer.pad_token_id)[0, input_tokens:].tolist()
     decoded = tokenizer.decode(output, skip_special_tokens=True)
     return validate_copy(decoded, request), input_tokens, len(output)
-
-
-def sample_families(rows):
-    """Keep one complete query family for each unique target paper pair."""
-    first = {}
-    for row in rows:
-        pair = tuple(row["papers"])
-        first[pair] = min(first.get(pair, row["family"]), row["family"])
-    selected = [row for row in rows if first[tuple(row["papers"])] == row["family"]]
-    by_pair = defaultdict(list)
-    for row in selected:
-        by_pair[tuple(row["papers"])].append(bool(row["gold"]))
-    if any(sorted(labels) != [False, True] for labels in by_pair.values()):
-        raise ValueError("Expected a complete positive and control family for every pair")
-    return selected
 
 
 def run_panel(service, rows, wording, reader, reverse):
