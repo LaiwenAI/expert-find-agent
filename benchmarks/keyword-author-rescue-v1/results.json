@@ -1,0 +1,2944 @@
+{
+  "slurm_array": 46018,
+  "node": "ws3",
+  "runs": [
+    {
+      "script_sha256": "b9b8b57245401e1a06f8eb869b0077f0c3a873f4fbd66e3b3a1bcd9e7cba6ffd",
+      "dev_sha256": "4ce67b1ff52d869f133bd5318bad2573502d12aae065c75c9407c14754171c89",
+      "holdout_sha256": "38bc5e6bd42e3b2f427a42a552cae11bc0813e50f2e601ee9e10a298fe47925f",
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "reverse": false,
+      "dev": {
+        "admitted": 280,
+        "dropped": {
+          "incomplete_declaration": 42
+        },
+        "links": 12,
+        "paper_pairs": 10,
+        "independent_people": 10,
+        "variants": {
+          "present": 51,
+          "swap": 51
+        }
+      },
+      "held": {
+        "admitted": 393,
+        "dropped": {
+          "incomplete_or_ambiguous": 28
+        },
+        "links": 16,
+        "paper_pairs": 13,
+        "linked_papers": 25,
+        "contributors": 14,
+        "variants": {
+          "present": 66,
+          "swap": 66
+        }
+      },
+      "selected": {
+        "excerpt": {
+          "postings": [
+            false,
+            0.04,
+            0.75
+          ],
+          "symmetric_postings": [
+            true,
+            0.04,
+            0.75
+          ]
+        },
+        "keywords": {
+          "postings": [
+            false,
+            0.04,
+            0.75
+          ],
+          "symmetric_postings": [
+            true,
+            0.04,
+            0.75
+          ]
+        }
+      },
+      "calibration": {
+        "excerpt|all": {
+          "census": {
+            "positive": 51,
+            "both_top6": 51,
+            "both_top24": 51,
+            "both_cosine_gate": 51,
+            "one_leader": 51,
+            "examined": 0
+          },
+          "routes": {
+            "anchored6": {
+              "pair": {
+                "correct": 102,
+                "issued": 102
+              },
+              "static": {
+                "issued": 23,
+                "proof": 23,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 51,
+                "proof": 51,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 12.132975499844179
+            },
+            "anchored24": {
+              "pair": {
+                "correct": 102,
+                "issued": 102
+              },
+              "static": {
+                "issued": 23,
+                "proof": 23,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 51,
+                "proof": 51,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 12.427622108953074
+            },
+            "postings": {
+              "pair": {
+                "correct": 102,
+                "issued": 102
+              },
+              "static": {
+                "issued": 23,
+                "proof": 23,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 51,
+                "proof": 51,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 12.133286357857287
+            },
+            "symmetric_postings": {
+              "pair": {
+                "correct": 102,
+                "issued": 102
+              },
+              "static": {
+                "issued": 23,
+                "proof": 23,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 51,
+                "proof": 51,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 12.13327165460214
+            },
+            "ungated": {
+              "pair": {
+                "correct": 102,
+                "issued": 102
+              },
+              "static": {
+                "issued": 23,
+                "proof": 23,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 51,
+                "proof": 51,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 12.13328106678091
+            }
+          }
+        },
+        "excerpt|left_missing": {
+          "census": {
+            "positive": 51,
+            "both_top6": 0,
+            "both_top24": 0,
+            "both_cosine_gate": 0,
+            "one_leader": 0,
+            "examined": 12
+          },
+          "routes": {
+            "anchored6": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 12.081960053183138
+            },
+            "anchored24": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 12.526553025236353
+            },
+            "postings": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 12.089125299826264
+            },
+            "symmetric_postings": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 12.089101178571582
+            },
+            "ungated": {
+              "pair": {
+                "correct": 0,
+                "issued": 12
+              },
+              "static": {
+                "issued": 1,
+                "proof": 0,
+                "adverse": 1,
+                "swap_issued": 0,
+                "substitute": 1
+              },
+              "oracle": {
+                "issued": 4,
+                "proof": 0,
+                "adverse": 4,
+                "swap_issued": 0,
+                "substitute": 4
+              },
+              "p95_source_ms": 12.089132447727025
+            }
+          }
+        },
+        "excerpt|right_missing": {
+          "census": {
+            "positive": 51,
+            "both_top6": 0,
+            "both_top24": 0,
+            "both_cosine_gate": 0,
+            "one_leader": 0,
+            "examined": 20
+          },
+          "routes": {
+            "anchored6": {
+              "pair": {
+                "correct": 0,
+                "issued": 12
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 1,
+                "proof": 0,
+                "adverse": 1,
+                "swap_issued": 1,
+                "substitute": 1
+              },
+              "p95_source_ms": 12.052437267266214
+            },
+            "anchored24": {
+              "pair": {
+                "correct": 0,
+                "issued": 12
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 1,
+                "proof": 0,
+                "adverse": 1,
+                "swap_issued": 1,
+                "substitute": 1
+              },
+              "p95_source_ms": 12.490200338652357
+            },
+            "postings": {
+              "pair": {
+                "correct": 0,
+                "issued": 12
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 1,
+                "proof": 0,
+                "adverse": 1,
+                "swap_issued": 1,
+                "substitute": 1
+              },
+              "p95_source_ms": 12.057999626267701
+            },
+            "symmetric_postings": {
+              "pair": {
+                "correct": 0,
+                "issued": 12
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 1,
+                "proof": 0,
+                "adverse": 1,
+                "swap_issued": 1,
+                "substitute": 1
+              },
+              "p95_source_ms": 12.0579804177396
+            },
+            "ungated": {
+              "pair": {
+                "correct": 0,
+                "issued": 32
+              },
+              "static": {
+                "issued": 4,
+                "proof": 0,
+                "adverse": 4,
+                "swap_issued": 0,
+                "substitute": 4
+              },
+              "oracle": {
+                "issued": 7,
+                "proof": 0,
+                "adverse": 7,
+                "swap_issued": 2,
+                "substitute": 7
+              },
+              "p95_source_ms": 12.057990784524009
+            }
+          }
+        },
+        "keywords|all": {
+          "census": {
+            "positive": 51,
+            "both_top6": 36,
+            "both_top24": 41,
+            "both_cosine_gate": 36,
+            "one_leader": 41,
+            "examined": 0
+          },
+          "routes": {
+            "anchored6": {
+              "pair": {
+                "correct": 72,
+                "issued": 72
+              },
+              "static": {
+                "issued": 16,
+                "proof": 16,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 36,
+                "proof": 36,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 10.523600003216416
+            },
+            "anchored24": {
+              "pair": {
+                "correct": 72,
+                "issued": 72
+              },
+              "static": {
+                "issued": 16,
+                "proof": 16,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 36,
+                "proof": 36,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 10.882999771274626
+            },
+            "postings": {
+              "pair": {
+                "correct": 72,
+                "issued": 72
+              },
+              "static": {
+                "issued": 16,
+                "proof": 16,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 36,
+                "proof": 36,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 10.524130699923262
+            },
+            "symmetric_postings": {
+              "pair": {
+                "correct": 72,
+                "issued": 72
+              },
+              "static": {
+                "issued": 16,
+                "proof": 16,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 36,
+                "proof": 36,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 10.524123895447701
+            },
+            "ungated": {
+              "pair": {
+                "correct": 72,
+                "issued": 72
+              },
+              "static": {
+                "issued": 16,
+                "proof": 16,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 36,
+                "proof": 36,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 10.524124139919877
+            }
+          }
+        },
+        "keywords|left_missing": {
+          "census": {
+            "positive": 51,
+            "both_top6": 0,
+            "both_top24": 0,
+            "both_cosine_gate": 0,
+            "one_leader": 0,
+            "examined": 12
+          },
+          "routes": {
+            "anchored6": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 10.456407465972006
+            },
+            "anchored24": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 10.896919353399426
+            },
+            "postings": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 10.463731701020151
+            },
+            "symmetric_postings": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 10.463713033823296
+            },
+            "ungated": {
+              "pair": {
+                "correct": 0,
+                "issued": 12
+              },
+              "static": {
+                "issued": 1,
+                "proof": 0,
+                "adverse": 1,
+                "swap_issued": 0,
+                "substitute": 1
+              },
+              "oracle": {
+                "issued": 4,
+                "proof": 0,
+                "adverse": 4,
+                "swap_issued": 0,
+                "substitute": 4
+              },
+              "p95_source_ms": 10.463712038472295
+            }
+          }
+        },
+        "keywords|right_missing": {
+          "census": {
+            "positive": 51,
+            "both_top6": 0,
+            "both_top24": 0,
+            "both_cosine_gate": 0,
+            "one_leader": 0,
+            "examined": 22
+          },
+          "routes": {
+            "anchored6": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 10.43306925566867
+            },
+            "anchored24": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 10.881144943414256
+            },
+            "postings": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 10.441106650978327
+            },
+            "symmetric_postings": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 10.44106834451668
+            },
+            "ungated": {
+              "pair": {
+                "correct": 0,
+                "issued": 22
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 1,
+                "proof": 0,
+                "adverse": 1,
+                "swap_issued": 1,
+                "substitute": 1
+              },
+              "p95_source_ms": 10.441081726457924
+            }
+          }
+        }
+      },
+      "results": {
+        "excerpt|all": {
+          "census": {
+            "positive": 66,
+            "both_top6": 66,
+            "both_top24": 66,
+            "both_cosine_gate": 66,
+            "one_leader": 66,
+            "examined": 0
+          },
+          "routes": {
+            "anchored6": {
+              "pair": {
+                "correct": 132,
+                "issued": 132
+              },
+              "static": {
+                "issued": 40,
+                "proof": 35,
+                "adverse": 4,
+                "swap_issued": 1,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 66,
+                "proof": 66,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 14.429397089406848
+            },
+            "anchored24": {
+              "pair": {
+                "correct": 132,
+                "issued": 132
+              },
+              "static": {
+                "issued": 40,
+                "proof": 35,
+                "adverse": 4,
+                "swap_issued": 1,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 66,
+                "proof": 66,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 14.716076961485669
+            },
+            "postings": {
+              "pair": {
+                "correct": 132,
+                "issued": 132
+              },
+              "static": {
+                "issued": 40,
+                "proof": 35,
+                "adverse": 4,
+                "swap_issued": 1,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 66,
+                "proof": 66,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 14.429593278327957
+            },
+            "symmetric_postings": {
+              "pair": {
+                "correct": 132,
+                "issued": 132
+              },
+              "static": {
+                "issued": 40,
+                "proof": 35,
+                "adverse": 4,
+                "swap_issued": 1,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 66,
+                "proof": 66,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 14.429586700862274
+            },
+            "ungated": {
+              "pair": {
+                "correct": 132,
+                "issued": 132
+              },
+              "static": {
+                "issued": 40,
+                "proof": 35,
+                "adverse": 4,
+                "swap_issued": 1,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 66,
+                "proof": 66,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 14.429588167695329
+            }
+          }
+        },
+        "excerpt|left_missing": {
+          "census": {
+            "positive": 66,
+            "both_top6": 0,
+            "both_top24": 0,
+            "both_cosine_gate": 0,
+            "one_leader": 0,
+            "examined": 0
+          },
+          "routes": {
+            "anchored6": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 14.31335968663916
+            },
+            "anchored24": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 14.754825056297705
+            },
+            "postings": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 14.320894959382713
+            },
+            "symmetric_postings": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 14.320840657455847
+            },
+            "ungated": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 14.32085856795311
+            }
+          }
+        },
+        "excerpt|right_missing": {
+          "census": {
+            "positive": 66,
+            "both_top6": 0,
+            "both_top24": 0,
+            "both_cosine_gate": 0,
+            "one_leader": 0,
+            "examined": 0
+          },
+          "routes": {
+            "anchored6": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 14.303713431581855
+            },
+            "anchored24": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 14.745823631528765
+            },
+            "postings": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 14.310469920746982
+            },
+            "symmetric_postings": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 14.310437737731263
+            },
+            "ungated": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 14.310456975363195
+            }
+          }
+        },
+        "keywords|all": {
+          "census": {
+            "positive": 66,
+            "both_top6": 61,
+            "both_top24": 61,
+            "both_cosine_gate": 48,
+            "one_leader": 66,
+            "examined": 26
+          },
+          "routes": {
+            "anchored6": {
+              "pair": {
+                "correct": 96,
+                "issued": 96
+              },
+              "static": {
+                "issued": 27,
+                "proof": 26,
+                "adverse": 1,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 48,
+                "proof": 48,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 10.962506342912093
+            },
+            "anchored24": {
+              "pair": {
+                "correct": 96,
+                "issued": 96
+              },
+              "static": {
+                "issued": 27,
+                "proof": 26,
+                "adverse": 1,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 48,
+                "proof": 48,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 11.30961564485915
+            },
+            "postings": {
+              "pair": {
+                "correct": 96,
+                "issued": 96
+              },
+              "static": {
+                "issued": 27,
+                "proof": 26,
+                "adverse": 1,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 48,
+                "proof": 48,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 10.968068399233744
+            },
+            "symmetric_postings": {
+              "pair": {
+                "correct": 96,
+                "issued": 96
+              },
+              "static": {
+                "issued": 27,
+                "proof": 26,
+                "adverse": 1,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 48,
+                "proof": 48,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 10.968045349000022
+            },
+            "ungated": {
+              "pair": {
+                "correct": 122,
+                "issued": 122
+              },
+              "static": {
+                "issued": 36,
+                "proof": 33,
+                "adverse": 2,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 61,
+                "proof": 61,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 10.968104808125645
+            }
+          }
+        },
+        "keywords|left_missing": {
+          "census": {
+            "positive": 66,
+            "both_top6": 0,
+            "both_top24": 0,
+            "both_cosine_gate": 0,
+            "one_leader": 0,
+            "examined": 0
+          },
+          "routes": {
+            "anchored6": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 10.916971263941377
+            },
+            "anchored24": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 11.363222863292322
+            },
+            "postings": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 10.92525226995349
+            },
+            "symmetric_postings": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 10.925210861023515
+            },
+            "ungated": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 10.925249359570444
+            }
+          }
+        },
+        "keywords|right_missing": {
+          "census": {
+            "positive": 66,
+            "both_top6": 0,
+            "both_top24": 0,
+            "both_cosine_gate": 0,
+            "one_leader": 0,
+            "examined": 0
+          },
+          "routes": {
+            "anchored6": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 10.903531278017908
+            },
+            "anchored24": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 11.34175356128253
+            },
+            "postings": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 10.90935151441954
+            },
+            "symmetric_postings": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 10.909341071965173
+            },
+            "ungated": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 10.909362439997494
+            }
+          }
+        }
+      }
+    },
+    {
+      "script_sha256": "b9b8b57245401e1a06f8eb869b0077f0c3a873f4fbd66e3b3a1bcd9e7cba6ffd",
+      "dev_sha256": "4ce67b1ff52d869f133bd5318bad2573502d12aae065c75c9407c14754171c89",
+      "holdout_sha256": "38bc5e6bd42e3b2f427a42a552cae11bc0813e50f2e601ee9e10a298fe47925f",
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "reverse": true,
+      "dev": {
+        "admitted": 280,
+        "dropped": {
+          "incomplete_declaration": 42
+        },
+        "links": 12,
+        "paper_pairs": 10,
+        "independent_people": 10,
+        "variants": {
+          "present": 51,
+          "swap": 51
+        }
+      },
+      "held": {
+        "admitted": 393,
+        "dropped": {
+          "incomplete_or_ambiguous": 28
+        },
+        "links": 16,
+        "paper_pairs": 13,
+        "linked_papers": 25,
+        "contributors": 14,
+        "variants": {
+          "present": 66,
+          "swap": 66
+        }
+      },
+      "selected": {
+        "excerpt": {
+          "postings": [
+            false,
+            0.04,
+            0.75
+          ],
+          "symmetric_postings": [
+            true,
+            0.04,
+            0.75
+          ]
+        },
+        "keywords": {
+          "postings": [
+            false,
+            0.04,
+            0.75
+          ],
+          "symmetric_postings": [
+            true,
+            0.04,
+            0.75
+          ]
+        }
+      },
+      "calibration": {
+        "excerpt|all": {
+          "census": {
+            "positive": 51,
+            "both_top6": 51,
+            "both_top24": 51,
+            "both_cosine_gate": 51,
+            "one_leader": 51,
+            "examined": 0
+          },
+          "routes": {
+            "anchored6": {
+              "pair": {
+                "correct": 102,
+                "issued": 102
+              },
+              "static": {
+                "issued": 23,
+                "proof": 23,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 51,
+                "proof": 51,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 12.157165014650673
+            },
+            "anchored24": {
+              "pair": {
+                "correct": 102,
+                "issued": 102
+              },
+              "static": {
+                "issued": 23,
+                "proof": 23,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 51,
+                "proof": 51,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 12.442105932859704
+            },
+            "postings": {
+              "pair": {
+                "correct": 102,
+                "issued": 102
+              },
+              "static": {
+                "issued": 23,
+                "proof": 23,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 51,
+                "proof": 51,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 12.157375842798501
+            },
+            "symmetric_postings": {
+              "pair": {
+                "correct": 102,
+                "issued": 102
+              },
+              "static": {
+                "issued": 23,
+                "proof": 23,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 51,
+                "proof": 51,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 12.157354986993596
+            },
+            "ungated": {
+              "pair": {
+                "correct": 102,
+                "issued": 102
+              },
+              "static": {
+                "issued": 23,
+                "proof": 23,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 51,
+                "proof": 51,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 12.157372402725741
+            }
+          }
+        },
+        "excerpt|left_missing": {
+          "census": {
+            "positive": 51,
+            "both_top6": 0,
+            "both_top24": 0,
+            "both_cosine_gate": 0,
+            "one_leader": 0,
+            "examined": 12
+          },
+          "routes": {
+            "anchored6": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 12.101755855837837
+            },
+            "anchored24": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 12.545709242112935
+            },
+            "postings": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 12.11211463669315
+            },
+            "symmetric_postings": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 12.11213216301985
+            },
+            "ungated": {
+              "pair": {
+                "correct": 0,
+                "issued": 12
+              },
+              "static": {
+                "issued": 1,
+                "proof": 0,
+                "adverse": 1,
+                "swap_issued": 0,
+                "substitute": 1
+              },
+              "oracle": {
+                "issued": 4,
+                "proof": 0,
+                "adverse": 4,
+                "swap_issued": 0,
+                "substitute": 4
+              },
+              "p95_source_ms": 12.112103728577495
+            }
+          }
+        },
+        "excerpt|right_missing": {
+          "census": {
+            "positive": 51,
+            "both_top6": 0,
+            "both_top24": 0,
+            "both_cosine_gate": 0,
+            "one_leader": 0,
+            "examined": 20
+          },
+          "routes": {
+            "anchored6": {
+              "pair": {
+                "correct": 0,
+                "issued": 12
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 1,
+                "proof": 0,
+                "adverse": 1,
+                "swap_issued": 1,
+                "substitute": 1
+              },
+              "p95_source_ms": 12.08228908944875
+            },
+            "anchored24": {
+              "pair": {
+                "correct": 0,
+                "issued": 12
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 1,
+                "proof": 0,
+                "adverse": 1,
+                "swap_issued": 1,
+                "substitute": 1
+              },
+              "p95_source_ms": 12.524945981567726
+            },
+            "postings": {
+              "pair": {
+                "correct": 0,
+                "issued": 12
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 1,
+                "proof": 0,
+                "adverse": 1,
+                "swap_issued": 1,
+                "substitute": 1
+              },
+              "p95_source_ms": 12.090443586930633
+            },
+            "symmetric_postings": {
+              "pair": {
+                "correct": 0,
+                "issued": 12
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 1,
+                "proof": 0,
+                "adverse": 1,
+                "swap_issued": 1,
+                "substitute": 1
+              },
+              "p95_source_ms": 12.090470927068964
+            },
+            "ungated": {
+              "pair": {
+                "correct": 0,
+                "issued": 32
+              },
+              "static": {
+                "issued": 4,
+                "proof": 0,
+                "adverse": 4,
+                "swap_issued": 0,
+                "substitute": 4
+              },
+              "oracle": {
+                "issued": 7,
+                "proof": 0,
+                "adverse": 7,
+                "swap_issued": 2,
+                "substitute": 7
+              },
+              "p95_source_ms": 12.090474792057648
+            }
+          }
+        },
+        "keywords|all": {
+          "census": {
+            "positive": 51,
+            "both_top6": 36,
+            "both_top24": 41,
+            "both_cosine_gate": 36,
+            "one_leader": 41,
+            "examined": 0
+          },
+          "routes": {
+            "anchored6": {
+              "pair": {
+                "correct": 72,
+                "issued": 72
+              },
+              "static": {
+                "issued": 16,
+                "proof": 16,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 36,
+                "proof": 36,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 11.031873186584562
+            },
+            "anchored24": {
+              "pair": {
+                "correct": 72,
+                "issued": 72
+              },
+              "static": {
+                "issued": 16,
+                "proof": 16,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 36,
+                "proof": 36,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 11.326587613439187
+            },
+            "postings": {
+              "pair": {
+                "correct": 72,
+                "issued": 72
+              },
+              "static": {
+                "issued": 16,
+                "proof": 16,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 36,
+                "proof": 36,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 11.032107955543324
+            },
+            "symmetric_postings": {
+              "pair": {
+                "correct": 72,
+                "issued": 72
+              },
+              "static": {
+                "issued": 16,
+                "proof": 16,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 36,
+                "proof": 36,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 11.032086156774312
+            },
+            "ungated": {
+              "pair": {
+                "correct": 72,
+                "issued": 72
+              },
+              "static": {
+                "issued": 16,
+                "proof": 16,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 36,
+                "proof": 36,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 11.032107309438288
+            }
+          }
+        },
+        "keywords|left_missing": {
+          "census": {
+            "positive": 51,
+            "both_top6": 0,
+            "both_top24": 0,
+            "both_cosine_gate": 0,
+            "one_leader": 0,
+            "examined": 12
+          },
+          "routes": {
+            "anchored6": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 11.012155032949522
+            },
+            "anchored24": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 11.450856970623136
+            },
+            "postings": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 11.01832739659585
+            },
+            "symmetric_postings": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 11.018324707401916
+            },
+            "ungated": {
+              "pair": {
+                "correct": 0,
+                "issued": 12
+              },
+              "static": {
+                "issued": 1,
+                "proof": 0,
+                "adverse": 1,
+                "swap_issued": 0,
+                "substitute": 1
+              },
+              "oracle": {
+                "issued": 4,
+                "proof": 0,
+                "adverse": 4,
+                "swap_issued": 0,
+                "substitute": 4
+              },
+              "p95_source_ms": 11.018358904402703
+            }
+          }
+        },
+        "keywords|right_missing": {
+          "census": {
+            "positive": 51,
+            "both_top6": 0,
+            "both_top24": 0,
+            "both_cosine_gate": 0,
+            "one_leader": 0,
+            "examined": 22
+          },
+          "routes": {
+            "anchored6": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 11.00321356789209
+            },
+            "anchored24": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 11.43992708530277
+            },
+            "postings": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 11.01122100953944
+            },
+            "symmetric_postings": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 11.011221789522097
+            },
+            "ungated": {
+              "pair": {
+                "correct": 0,
+                "issued": 22
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 1,
+                "proof": 0,
+                "adverse": 1,
+                "swap_issued": 1,
+                "substitute": 1
+              },
+              "p95_source_ms": 11.011220514774323
+            }
+          }
+        }
+      },
+      "results": {
+        "excerpt|all": {
+          "census": {
+            "positive": 66,
+            "both_top6": 66,
+            "both_top24": 66,
+            "both_cosine_gate": 66,
+            "one_leader": 66,
+            "examined": 0
+          },
+          "routes": {
+            "anchored6": {
+              "pair": {
+                "correct": 132,
+                "issued": 132
+              },
+              "static": {
+                "issued": 40,
+                "proof": 35,
+                "adverse": 4,
+                "swap_issued": 1,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 66,
+                "proof": 66,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 14.482205017702654
+            },
+            "anchored24": {
+              "pair": {
+                "correct": 132,
+                "issued": 132
+              },
+              "static": {
+                "issued": 40,
+                "proof": 35,
+                "adverse": 4,
+                "swap_issued": 1,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 66,
+                "proof": 66,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 14.767620281782001
+            },
+            "postings": {
+              "pair": {
+                "correct": 132,
+                "issued": 132
+              },
+              "static": {
+                "issued": 40,
+                "proof": 35,
+                "adverse": 4,
+                "swap_issued": 1,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 66,
+                "proof": 66,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 14.482428500195965
+            },
+            "symmetric_postings": {
+              "pair": {
+                "correct": 132,
+                "issued": 132
+              },
+              "static": {
+                "issued": 40,
+                "proof": 35,
+                "adverse": 4,
+                "swap_issued": 1,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 66,
+                "proof": 66,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 14.482412824872881
+            },
+            "ungated": {
+              "pair": {
+                "correct": 132,
+                "issued": 132
+              },
+              "static": {
+                "issued": 40,
+                "proof": 35,
+                "adverse": 4,
+                "swap_issued": 1,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 66,
+                "proof": 66,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 14.48243519407697
+            }
+          }
+        },
+        "excerpt|left_missing": {
+          "census": {
+            "positive": 66,
+            "both_top6": 0,
+            "both_top24": 0,
+            "both_cosine_gate": 0,
+            "one_leader": 0,
+            "examined": 0
+          },
+          "routes": {
+            "anchored6": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 14.363314735237509
+            },
+            "anchored24": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 14.812753489241004
+            },
+            "postings": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 14.371144206961617
+            },
+            "symmetric_postings": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 14.371105842292309
+            },
+            "ungated": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 14.37110771657899
+            }
+          }
+        },
+        "excerpt|right_missing": {
+          "census": {
+            "positive": 66,
+            "both_top6": 0,
+            "both_top24": 0,
+            "both_cosine_gate": 0,
+            "one_leader": 0,
+            "examined": 0
+          },
+          "routes": {
+            "anchored6": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 14.322937879478559
+            },
+            "anchored24": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 14.757752569857985
+            },
+            "postings": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 14.329614053713158
+            },
+            "symmetric_postings": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 14.329584571532905
+            },
+            "ungated": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 14.329605299280956
+            }
+          }
+        },
+        "keywords|all": {
+          "census": {
+            "positive": 66,
+            "both_top6": 61,
+            "both_top24": 61,
+            "both_cosine_gate": 48,
+            "one_leader": 66,
+            "examined": 26
+          },
+          "routes": {
+            "anchored6": {
+              "pair": {
+                "correct": 96,
+                "issued": 96
+              },
+              "static": {
+                "issued": 27,
+                "proof": 26,
+                "adverse": 1,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 48,
+                "proof": 48,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 11.349582416005433
+            },
+            "anchored24": {
+              "pair": {
+                "correct": 96,
+                "issued": 96
+              },
+              "static": {
+                "issued": 27,
+                "proof": 26,
+                "adverse": 1,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 48,
+                "proof": 48,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 11.725816712714732
+            },
+            "postings": {
+              "pair": {
+                "correct": 96,
+                "issued": 96
+              },
+              "static": {
+                "issued": 27,
+                "proof": 26,
+                "adverse": 1,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 48,
+                "proof": 48,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 11.349804245401174
+            },
+            "symmetric_postings": {
+              "pair": {
+                "correct": 96,
+                "issued": 96
+              },
+              "static": {
+                "issued": 27,
+                "proof": 26,
+                "adverse": 1,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 48,
+                "proof": 48,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 11.34980043862015
+            },
+            "ungated": {
+              "pair": {
+                "correct": 122,
+                "issued": 122
+              },
+              "static": {
+                "issued": 36,
+                "proof": 33,
+                "adverse": 2,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 61,
+                "proof": 61,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 11.34978411719203
+            }
+          }
+        },
+        "keywords|left_missing": {
+          "census": {
+            "positive": 66,
+            "both_top6": 0,
+            "both_top24": 0,
+            "both_cosine_gate": 0,
+            "one_leader": 0,
+            "examined": 0
+          },
+          "routes": {
+            "anchored6": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 11.297860654303804
+            },
+            "anchored24": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 11.73146606888622
+            },
+            "postings": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 11.304538534022868
+            },
+            "symmetric_postings": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 11.30450779455714
+            },
+            "ungated": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 11.304513493087143
+            }
+          }
+        },
+        "keywords|right_missing": {
+          "census": {
+            "positive": 66,
+            "both_top6": 0,
+            "both_top24": 0,
+            "both_cosine_gate": 0,
+            "one_leader": 0,
+            "examined": 0
+          },
+          "routes": {
+            "anchored6": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 11.29623175947927
+            },
+            "anchored24": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 11.736348876729608
+            },
+            "postings": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 11.30257485783659
+            },
+            "symmetric_postings": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 11.303029180271551
+            },
+            "ungated": {
+              "pair": {
+                "correct": 0,
+                "issued": 0
+              },
+              "static": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "oracle": {
+                "issued": 0,
+                "proof": 0,
+                "adverse": 0,
+                "swap_issued": 0,
+                "substitute": 0
+              },
+              "p95_source_ms": 11.30253525916487
+            }
+          }
+        }
+      }
+    }
+  ]
+}
