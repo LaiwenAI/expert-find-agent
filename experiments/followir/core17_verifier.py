@@ -41,7 +41,7 @@ class Reranker:
         return self.score_pairs([(query, docs[doc]) for doc in pool], task=task)
 
     @torch.inference_mode()
-    def score_pairs(self, pairs, *, task=TASK):
+    def score_pairs(self, pairs, *, task=TASK, count_tokens=False):
         sequences = []
         truncated = 0
         for query, document in pairs:
@@ -52,7 +52,10 @@ class Reranker:
             truncated += raw > len(packed)
         inputs = self.tokenizer.pad(sequences, padding=True, return_tensors="pt").to("cuda")
         logits = self.model(**inputs, use_cache=False, logits_to_keep=1).logits[:, -1, self.labels].float()
-        return (logits[:, 0] - logits[:, 1]).cpu().tolist(), truncated
+        scores = (logits[:, 0] - logits[:, 1]).cpu().tolist()
+        if count_tokens:
+            return scores, truncated, sum(len(sequence["input_ids"]) for sequence in sequences)
+        return scores, truncated
 
     def rank(self, query, docs, pool):
         start = perf_counter()

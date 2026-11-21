@@ -19,6 +19,7 @@ from experiments.credit.engineering_cross_source_search import TOPIC_TASK, candi
 from experiments.credit.engineering_role_banks import TASK, projections, queries
 from experiments.credit.joint_request_queue import Request
 from experiments.credit.keyword_author_rescue import PostingCatalog
+from experiments.credit.lightweight_paired_role import METHODS as LIGHTWEIGHT_METHODS, decide, fit_lightweight
 from experiments.credit.paired_role_verification import PairedReader, alternative_roles, apply, proposals
 from experiments.credit.plos_role_inventory import ROLES
 from experiments.credit.prose_budgeted_source_role import evidence
@@ -30,6 +31,7 @@ from experiments.litsearch.dense_cache import verify_checkpoint
 
 ARMS = ("baseline", "batch", "reserve_agreement")
 PRESCREEN_ARMS = ("baseline", "reserve_agreement", "reserve_prescreen")
+CASCADE_ARMS = ("baseline", "reserve_prescreen", "student_then_reranker", "student_then_teacher")
 RATES = (28, 60)
 FROZEN_SHA = "f3f24de1b725c529b6dc142a0eedfc6413129bc67643e9b74d0909df0b94c956"
 
@@ -52,7 +54,7 @@ def workload(index, cases, wording):
     return labels
 
 
-def execute(service, request, arm, cutoff):
+def execute(service, request, arm, cutoff, lightweight=None):
     if arm == "baseline":
         return service.search(request, "screened_one_call")
     requirements = json.loads(request.payload)["requirements"]
@@ -66,11 +68,22 @@ def execute(service, request, arm, cutoff):
     pair, base, response = state["pair"], state["roles"], state["response"]
     if not pair or response["calls"] or response["owners"]:
         return json.dumps(response)
-    if arm in ("reserve_agreement", "reserve_prescreen"):
+    if arm in ("reserve_agreement", "reserve_prescreen", *LIGHTWEIGHT_METHODS, *CASCADE_ARMS[2:]):
         checked, forwards, tokens, _ = role_check(service.index, pair, scores, service.bands,
                                                   service.role, roles, service.cutoffs["role"])
         if forwards or candidates(service.index, pair, checked):
             return json.dumps(payload(service.index, pair, checked, role_calls=forwards, tokens=tokens))
+    if arm in CASCADE_ARMS[2:]:
+        heads, definitions, fit = lightweight
+        student = decide("reserve_student", service, vectors[2:], roles, scores, pair, base, heads,
+                         definitions, fit["reserve_student"]["cutoff"])
+        if student["owners"]:
+            return json.dumps(student)
+        arm = "reserve_reranker" if arm == "student_then_reranker" else "reserve_prescreen"
+    if arm in LIGHTWEIGHT_METHODS:
+        heads, definitions, fit = lightweight
+        return json.dumps(decide(arm, service, vectors[2:], roles, scores, pair, base, heads,
+                                 definitions, fit[arm]["cutoff"]))
     if arm == "reserve_prescreen":
         pools = alternative_roles(scores)
         eligible = [pool[0] for pool in pools]
@@ -149,13 +162,22 @@ def run(args):
     service = Service(index, encoder, banks, bands, source, reader, frozen["cutoffs"])
     labels = workload(index, selected, wording)
     by_arm, results = {}, {}
+    lightweight = report = None
     requested = PRESCREEN_ARMS if args.prescreen else ARMS
+    if args.plos:
+        if digest(args.plos) != frozen["inputs"]["plos"]:
+            raise ValueError("Changed PLOS calibration projection")
+        heads, training_report, fit = fit_lightweight(args.plos, service, definitions, training)
+        report = dict(training=training_report, calibration=fit, plos_sha256=digest(args.plos))
+        lightweight = (heads, definitions, fit)
+        requested = CASCADE_ARMS if args.cascade else ("baseline", "reserve_prescreen", *LIGHTWEIGHT_METHODS)
+        print("Frozen lightweight routes", fit, flush=True)
     arms = requested[::-1] if args.reverse else requested
     for offset, rate in enumerate(RATES):
         trace, arrivals = arrivals_for(labels, rate)
         results[rate] = {}
         for arm in arms[offset:] + arms[:offset]:
-            records, elapsed = replay(lambda request: execute(service, request, arm, cutoff),
+            records, elapsed = replay(lambda request: execute(service, request, arm, cutoff, lightweight),
                                       trace, arrivals, trace[:24])
             detail, responses = summarize(trace, arrivals, records, elapsed, labels, 2)
             if detail["failures"] or len(responses) != len(labels):
@@ -172,7 +194,7 @@ def run(args):
             by_arm[arm] = responses
             results[rate][arm] = detail
             print(rate, arm, detail["counts"], round(detail["p95_ms"]["total_ms"], 2), flush=True)
-    if args.prescreen and by_arm["reserve_agreement"] != by_arm["reserve_prescreen"]:
+    if args.prescreen and not args.plos and by_arm["reserve_agreement"] != by_arm["reserve_prescreen"]:
         changed = sum(by_arm["reserve_agreement"][req] != by_arm["reserve_prescreen"][req] for req in labels)
         raise ValueError(f"Agreement prescreen changed {changed} evidence payloads")
     groups = clusters(selected, articles)
@@ -202,7 +224,7 @@ def run(args):
         gpu=torch.cuda.get_device_name(), reverse=args.reverse, prescreen=args.prescreen, census=census,
         distinct_requests=len(labels), author_connected_groups=len(set(groups.values())),
         cutoffs=frozen["cutoffs"] | {"two_batched": cutoff}, results=results, quality=contrasts,
-        response_signatures=signatures, **revisions,
+        response_signatures=signatures, lightweight=report, cascade=args.cascade, **revisions,
     ))
 
 
@@ -212,5 +234,10 @@ if __name__ == "__main__":
                  "source_frozen", "role_frozen", "embedding", "source_reader", "role_reader", "output"):
         parser.add_argument(name, type=Path)
     parser.add_argument("--prescreen", action="store_true")
+    parser.add_argument("--plos", type=Path)
+    parser.add_argument("--cascade", action="store_true")
     parser.add_argument("--reverse", action="store_true")
-    run(parser.parse_args())
+    args = parser.parse_args()
+    if args.cascade and not args.plos:
+        parser.error("--cascade requires --plos")
+    run(args)
