@@ -11,7 +11,9 @@ from time import perf_counter
 import numpy as np
 import torch
 
-from experiments.retrieval.enterprise_cross_precision import CONTROLS, QUALIFICATION
+from experiments.retrieval.enterprise_cross_precision import (
+    CONTROLS, NARROW, QUALIFICATION, WIDE, disagreements, prefix_cache, qualification_gap,
+)
 from experiments.retrieval.enterprise_guarded_parsing import target
 from experiments.retrieval.enterprise_isolated_parsing import blocks, shared_prompt, spans
 from experiments.retrieval.enterprise_prefix_fork import ComparisonParser
@@ -50,19 +52,31 @@ def extended_text(row, repeats):
     return "\n".join((header, *(body * repeats), transition, row["text"]))
 
 
-def run(controls, models, output, reverse):
+def needs_recheck(parser, front, suffixes):
+    bf16, fp16 = (parser.readers[x] for x in ("bf16", "fp16"))
+    first, _ = bf16.cached(front, suffixes, prefix_cache(bf16, front))
+    if qualification_gap(first) > WIDE:
+        return False
+    second, _ = fp16.cached(front, suffixes, prefix_cache(fp16, front))
+    return disagreements(first, second) or qualification_gap(second) <= NARROW
+
+
+def run(controls, models, output, reverse, length_matched):
     require_cuda(output)
     if digest(controls) != CONTROLS:
         raise ValueError("Expected the pinned bilingual synthetic controls")
     torch.backends.cuda.matmul.allow_tf32 = False
     parser = LayoutParser(ComparisonParser(models / "qwen3-4b-instruct-2507"))
     reader = parser.readers["bf16"]
+    for active in parser.readers.values():
+        active.broadcast = True
     selected = sample_controls(json.loads(controls.read_bytes()))
     observations = defaultdict(list)
     reference_shapes = defaultdict(list)
     modes = ARMS[::-1] if reverse else ARMS
+    repeats_by_test = (8,) if length_matched else (1, 3)
     with torch.inference_mode():
-        for repeats in (1, 3):
+        for repeats in repeats_by_test:
             for case, row in enumerate(selected):
                 text = extended_text(row, repeats)
                 clauses = spans(text)
@@ -71,6 +85,7 @@ def run(controls, models, output, reverse):
                 selected_block = next(block for block in blocks(front, suffixes) if index in dict(block))
                 coordinates, decision_inputs = zip(*selected_block, strict=True)
                 target_row = coordinates.index(index)
+                trigger = needs_recheck(parser, front, decision_inputs) if length_matched else None
                 reference_shapes[repeats].append([len(front), len(decision_inputs)])
                 scores, work = {}, {}
                 order = modes[case%len(modes):]+modes[:case%len(modes)]
@@ -88,27 +103,33 @@ def run(controls, models, output, reverse):
                     logits = forward(mode)
                     scores[mode] = logits.argmax(dim=1).cpu().tolist()
                     work[mode] = dict(parser.run_counts, elapsed_ms=(perf_counter()-start)*1000)
-                observations[repeats].append(dict(scores=scores, work=work, gold=gold, target_row=target_row))
+                observations[repeats].append(dict(scores=scores, work=work, gold=gold, target_row=target_row, trigger=trigger))
     results = {}
     for repeats, rows in observations.items():
         results[repeats] = {
             "blocks": len(rows), "prefix_token_range": [min(x[0] for x in reference_shapes[repeats]),
                                                        max(x[0] for x in reference_shapes[repeats])],
+            "natural_target_block_triggers": sum(bool(row["trigger"]) for row in rows) if length_matched else None,
             "arms": {mode: dict(
                 changed_label_blocks=sum(row["scores"][mode]!=row["scores"][ARMS[0]] for row in rows),
                 changed_qualification_blocks=sum(
                     [v == QUALIFICATION for v in row["scores"][mode]] !=
                     [v == QUALIFICATION for v in row["scores"][ARMS[0]]] for row in rows),
                 target_correct=sum(row["gold"]==row["scores"][mode][row["target_row"]] for row in rows),
+                changed_qualification_on_triggered_blocks=sum(
+                    bool(row["trigger"]) and [v == QUALIFICATION for v in row["scores"][mode]] !=
+                    [v == QUALIFICATION for v in row["scores"][ARMS[0]]] for row in rows) if length_matched else None,
                 p50_p95_ms=np.quantile([row["work"][mode]["elapsed_ms"] for row in rows], [.5,.95]).tolist(),
                 canonical_after_agreement=sum(row["work"][mode].get("agreement_rejects",0) for row in rows),
             ) for mode in ARMS},
         }
     write(output, dict(results=results, template_controls_sha256=CONTROLS, job=os.environ["SLURM_JOB_ID"],
-        gpu=torch.cuda.get_device_name(), reverse=reverse, runner_sha256=digest(Path(__file__)),
+        gpu=torch.cuda.get_device_name(), reverse=reverse, length_matched=length_matched,
+        runner_sha256=digest(Path(__file__)),
         recheck_runner_sha256=digest(Path(__file__).with_name("enterprise_recheck_layouts.py")),
         score_signature=sha256(json.dumps(dict(observations=[
-            [row["scores"] for row in observations[repeats]] for repeats in (1,3)]),sort_keys=True).encode()).hexdigest()))
+            [{"scores": row["scores"], "trigger": row["trigger"]} for row in observations[repeats]]
+            for repeats in repeats_by_test]), sort_keys=True).encode()).hexdigest()))
 
 
 if __name__ == "__main__":
@@ -116,4 +137,5 @@ if __name__ == "__main__":
     for name in ("controls","models","output"):
         cli.add_argument(name, type=Path)
     cli.add_argument("--reverse", action="store_true")
+    cli.add_argument("--length-matched", action="store_true")
     run(**vars(cli.parse_args()))
