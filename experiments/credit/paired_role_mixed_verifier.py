@@ -33,7 +33,7 @@ def availability(service, request, cutoff, lightweight):
     selected = pairs_for(service.index, ranking, required)
     if not selected:
         return cascade, None
-    return cascade, (selected[0], pools, required, clues, phrases, state["role_vectors"])
+    return cascade, (selected[0], pools, required, clues, phrases, state["role_vectors"], ranking)
 
 
 def classify(values, pools):
@@ -51,7 +51,7 @@ def compare(service, request, cutoff, lightweight):
     if plan is None:
         return outcomes, None, None
     _, definitions, calibration = lightweight
-    pair, pools, required, clues, phrases, _ = plan
+    pair, pools, required, clues, phrases, _, _ = plan
     source_rows = [(VERIFY, clue, service.index.articles[paper]["indexed"])
                    for clue, paper in zip(clues, pair, strict=True)]
     role_rows = [(ROLE_TASK, phrase, definitions[SUPPORT[role]])

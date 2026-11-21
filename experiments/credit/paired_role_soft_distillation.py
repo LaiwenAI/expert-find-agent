@@ -130,7 +130,7 @@ def run_distillation(service, labels, cutoff, lightweight, training, plos, refer
         cascade, plan = availability(service, request, cutoff, lightweight)
         outcomes = dict.fromkeys(ARMS, cascade)
         if plan is not None:
-            pair, pools, dense_roles, clues, _, resident_vectors = plan
+            pair, pools, dense_roles, clues, _, resident_vectors, _ = plan
             required = {"dense_joint": dense_roles}
             for method in STUDENTS:
                 proposed, margin = predict(heads[method], resident_vectors, pools)
