@@ -17,7 +17,7 @@ FALLBACK = 8
 SALT = "external-enterprise-overlap-v1"
 
 
-def records(snapshot, workbook, frame):
+def records(snapshot, workbook, frame, first_batch=None):
     from experiments.external_enterprise_frame import BATCHES, COUNTS, historical, nantong, package
 
     index = json.loads(frame.read_bytes())
@@ -31,7 +31,13 @@ def records(snapshot, workbook, frame):
     path = snapshot / "nantong.html"
     by_id.update((row["id"], row) for row in nantong(path))
     attest["nantong"] = {"notice_sha256": digest(path)}
-    if attest != index["publication_sources"]:
+    if first_batch is not None:
+        first, attest["first"] = package(first_batch, "first", 30)
+        if any(row["id"] in by_id for row in first):
+            raise ValueError("First batch overlaps the notice ID inventory")
+        by_id.update((row["id"], row) for row in first)
+    expected = index["expanded_source_hashes"] if first_batch is not None else index["publication_sources"]
+    if attest != expected:
         raise ValueError("External input snapshots changed")
     rows = []
     for record in index["records"]:
@@ -45,12 +51,26 @@ def records(snapshot, workbook, frame):
 def prepare(args):
     from experiments.audit_enterprise_panel_neighbors import windows, write_private
 
-    external, history = records(args.snapshot, args.workbook, args.frame)
+    external, history = records(args.snapshot, args.workbook, args.frame, args.first_batch)
     payload = dict(frame_sha256=digest(args.frame), external=len(external),
                    views=[windows(row["zh"]) for row in external + history])
+    if args.first_batch is not None:
+        focus = [i for i, request in enumerate(external) if request["batch"] == "first"]
+        if not focus:
+            raise ValueError("No first-batch candidates to screen")
+        payload["focus"] = focus
     # Positions and technical text windows suffice for GPU screening.
     # Names, record identifiers and contact fields are kept local.
     write_private(args.output, [payload])
+
+
+def restrict_rows(values, focus):
+    keep = np.zeros(len(values), dtype=bool)
+    indices = np.asarray(focus)
+    if not len(indices) or indices.min() < 0 or indices.max() >= len(values):
+        raise ValueError("Invalid marked candidate rows")
+    keep[indices] = True
+    values[~keep] = -np.inf
 
 
 def pairs_for(values, n):
@@ -106,10 +126,13 @@ def gpu(args):
     n = data["external"]
     scores = np.maximum.reduce([vectors[i][:n] @ vectors[j].T for i in (0, 1) for j in (0, 1)])
     np.fill_diagonal(scores[:, :n], -np.inf)
+    if "focus" in data:
+        restrict_rows(scores, data["focus"])
     counts, pairs = signal(scores, n)
     write_json(args.output, dict(counts=counts, pairs=pairs, gpu=torch.cuda.get_device_name(),
                                  frame_sha256=data["frame_sha256"], projection_sha256=digest(args.inputs),
-                                 encoder_revision=checkpoint["revision"], order_offset=args.order_offset))
+                                 encoder_revision=checkpoint["revision"], order_offset=args.order_offset,
+                                 focal_groups=len(data["focus"]) if "focus" in data else n))
     args.output.chmod(0o600)
 
 
@@ -122,11 +145,16 @@ def packet(args):
     semantic = json.loads(args.semantic.read_bytes())
     if semantic["frame_sha256"] != frame_hash:
         raise ValueError("Semantic screen is for a different private frame")
-    external, historical_rows = records(args.snapshot, args.workbook, args.frame)
+    external, historical_rows = records(args.snapshot, args.workbook, args.frame, args.first_batch)
     rows = external + historical_rows
     n = len(external)
     names = [issuer_key(row["company"]) for row in rows]
-    org = np.asarray([[close(left, right) for right in names] for left in names[:n]], dtype=np.float64)
+    focus = [i for i, row in enumerate(external) if row["batch"] == "first"] if args.first_batch else list(range(n))
+    if semantic.get("focal_groups", n) != len(focus):
+        raise ValueError("Semantic screen used a different focal set")
+    org = np.full((n, len(names)), -np.inf, dtype=np.float64)
+    for i in focus:
+        org[i] = [close(names[i], right) for right in names]
     np.fill_diagonal(org[:, :n], -np.inf)
     org_counts, org_pairs = signal(org, n)
     mapping = {}
@@ -154,7 +182,7 @@ def packet(args):
     write_private(args.output / "private-mapping.jsonl", private)
     write_json(args.output / "summary.json", dict(
         blind_form_sha256=digest(form), blind_review_rows=len(visible),
-        selected_external_groups=n, historical_requests=len(historical_rows),
+        selected_external_groups=n, focal_groups=len(focus), historical_requests=len(historical_rows),
         semantic=semantic["counts"], organization=org_counts, human_reviews=0,
         gpu=semantic["gpu"], encoder_revision=semantic["encoder_revision"],
         script_sha256=digest(Path(__file__)),
@@ -172,6 +200,8 @@ if __name__ == "__main__":
             group.add_argument(name, type=Path)
         if command is gpu:
             group.add_argument("--order-offset", type=int, default=0, choices=(0, 1))
+        else:
+            group.add_argument("--first-batch", type=Path)
         group.set_defaults(command=command)
     args = cli.parse_args()
     args.command(args)

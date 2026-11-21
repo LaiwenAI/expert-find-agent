@@ -41,15 +41,20 @@ def listed_names(path):
     return dict(pairs)
 
 
+def is_detail(filename):
+    name = PurePosixPath(filename).name
+    return name.lower().endswith(".docx") and not name.startswith("~$")
+
+
 def attachments(path):
     if path.suffix == ".zip":
         with ZipFile(path) as archive:
             for member in archive.namelist():
-                if member.lower().endswith(".docx"):
+                if is_detail(member):
                     yield member, archive.read(member)
     else:
         for member in check_output(["bsdtar", "-tf", str(path)], text=True).splitlines():
-            if member.lower().endswith(".docx"):
+            if is_detail(member):
                 yield member, check_output(["bsdtar", "-xOf", str(path), "--", member])
 
 
