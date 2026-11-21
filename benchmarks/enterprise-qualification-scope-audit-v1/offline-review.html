@@ -1,0 +1,202 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'unsafe-inline'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'">
+<title>Qualification scope review</title>
+<style>
+:root{color-scheme:light dark;font:16px/1.55 system-ui,sans-serif}
+body{margin:0;color:light-dark(#172531,#e8edf3);background:light-dark(#f4f7fa,#17202a)}
+main{max-width:76rem;margin:auto;padding:clamp(1rem,4vw,2.3rem)}
+h1{font-size:clamp(1.6rem,4vw,2.25rem);margin:0}
+h2{font-size:1.15rem;margin:0 0 .65rem}
+p{margin:.45rem 0 1rem}
+.panel{padding:1rem 1.15rem;border:1px solid light-dark(#cdd8e3,#475664);border-radius:.6rem;background:light-dark(#fff,#202b35)}
+.toolbar,nav{display:flex;flex-wrap:wrap;gap:.6rem 1rem;align-items:end}
+nav{margin:.8rem 0;align-items:center}
+#progress{margin-left:auto}
+label{font-weight:600}
+.toolbar label,.assessment label{display:grid;gap:.25rem}
+input,select,button,textarea{font:inherit;box-sizing:border-box;max-width:100%}
+button,select,input[type=text],textarea{border:1px solid light-dark(#8296a9,#8ba2b7);border-radius:.3rem;padding:.4rem .65rem;background:light-dark(#fff,#17202a)}
+button{cursor:pointer}
+button:disabled{cursor:default;opacity:.55}
+#export{background:#1f517d;color:white;border-color:#1f517d}
+.grid{display:grid;grid-template-columns:minmax(0,1.55fr) minmax(0,1fr);gap:1rem;align-items:start}
+#request{white-space:pre-wrap;overflow-wrap:anywhere}
+mark{background:light-dark(#ffe798,#6b510e);color:inherit;border-radius:.12rem;box-shadow:inset 0 -1px #be8f32}
+.assessment label{margin:.75rem 0}
+textarea{width:100%;resize:vertical}
+#status{min-height:1.55em;margin:.45rem 0}
+#error{color:light-dark(#9f2528,#ffb0ad)}
+:focus-visible{outline:3px solid light-dark(#1262a0,#8dc4f2);outline-offset:2px}
+@media(max-width:760px){.grid{grid-template-columns:1fr}#progress{margin-left:0;flex-basis:100%}}
+</style>
+</head>
+<body>
+<main>
+  <h1>Qualification scope review</h1>
+  <p>Open your assigned JSONL form. Read the request before judging the marked clause.
+    Export before closing. Open an export to resume.</p>
+  <div class="panel toolbar">
+    <label>Review form <input type="file" id="file" accept=".jsonl,.ndjson"></label>
+    <label>Reviewer ID <input id="reviewer" type="text" autocomplete="off" disabled></label>
+    <button id="export" type="button" disabled>Export review</button>
+  </div>
+  <p id="status" role="status"></p>
+  <p id="error" role="alert" hidden></p>
+  <section id="review" hidden>
+    <nav aria-label="Cases">
+      <button id="prev" type="button">Previous</button>
+      <label for="case">Case</label>
+      <select id="case"></select>
+      <button id="next" type="button">Next</button>
+      <button id="unfinished" type="button">Next unfinished</button>
+      <span id="progress" aria-live="polite"></span>
+    </nav>
+    <div class="grid">
+      <section class="panel">
+        <h2>Original request</h2>
+        <div id="request"></div>
+      </section>
+      <section class="panel assessment">
+        <h2>Clause judgment</h2>
+        <p>A prior qualification is experience, a credential, or a past result that the applicant must already have.
+          Use the surrounding wording to identify who did the work and when.</p>
+        <label>Role <select id="role"></select></label>
+        <label>Reason citing the request <textarea id="reason" rows="5"></textarea></label>
+      </section>
+    </div>
+  </section>
+</main>
+<script>
+const elements = Object.fromEntries([...document.querySelectorAll("[id]")].map(el => [el.id, el]));
+const roles = {
+  prior_qualification: "Prior applicant qualification",
+  future_work: "Future work or deliverable",
+  operating_condition: "Current operating condition",
+  other: "Other or background",
+  mixed: "Multiple inseparable roles",
+  uncertain: "Uncertain"
+};
+const fields = ["case_id", "full_request", "start", "end", "target", "reviewer_id", "role", "rationale"];
+elements.role.add(new Option("Choose a role", ""));
+for (const [label, text] of Object.entries(roles)) elements.role.add(new Option(text, label));
+
+let forms = [];
+let current = 0;
+let dirty = false;
+const complete = row => Object.hasOwn(roles, row.role) && Boolean(row.rationale?.trim());
+
+function sourceParts(row) {
+  const text = Array.from(row.full_request);
+  return [text.slice(0, row.start).join(""), text.slice(row.start, row.end).join(""), text.slice(row.end).join("")];
+}
+
+function refresh() {
+  const count = forms.filter(complete).length;
+  elements.progress.textContent = count + " of " + forms.length + " cases complete";
+  elements.export.disabled = !count || !elements.reviewer.value.trim();
+  elements.prev.disabled = current === 0;
+  elements.next.disabled = current === forms.length - 1;
+  elements.unfinished.disabled = count === forms.length;
+}
+
+function show(index) {
+  current = index;
+  const row = forms[index];
+  const [before, target, after] = sourceParts(row);
+  const marked = document.createElement("mark");
+  marked.textContent = target;
+  elements.request.replaceChildren(before, marked, after);
+  elements.case.value = String(index);
+  elements.role.value = row.role || "";
+  elements.reason.value = row.rationale || "";
+  refresh();
+}
+
+function read(text) {
+  const rows = text.split(/\r?\n/).filter(line => line.trim()).map(line => JSON.parse(line));
+  if (!rows.length || rows.some(row =>
+    !row || Object.keys(row).length !== fields.length || fields.some(field => !Object.hasOwn(row, field)) ||
+    typeof row.case_id !== "string" || !row.case_id || typeof row.full_request !== "string" ||
+    typeof row.target !== "string" || !Number.isInteger(row.start) || !Number.isInteger(row.end) ||
+    row.start < 0 || row.end <= row.start || row.end > Array.from(row.full_request).length ||
+    !row.target || sourceParts(row)[1] !== row.target || (row.role !== null && !Object.hasOwn(roles, row.role)) ||
+    ["reviewer_id", "rationale"].some(field => row[field] !== null && typeof row[field] !== "string")) ||
+    new Set(rows.map(row => row.case_id)).size !== rows.length) {
+    throw new Error("Expected a qualification review form with unique cases and valid original excerpts.");
+  }
+  const reviewers = new Set(rows.map(row => row.reviewer_id?.trim()).filter(Boolean));
+  if (reviewers.size > 1) throw new Error("Use a form containing only one reviewer's work.");
+  return [rows, [...reviewers][0] || ""];
+}
+
+elements.file.addEventListener("change", async () => {
+  const [file] = elements.file.files;
+  if (!file) return;
+  if (dirty && !confirm("Replace the current form before exporting your changes?")) {
+    elements.file.value = "";
+    return;
+  }
+  try {
+    const [rows, reviewer] = read(await file.text());
+    forms = rows;
+    elements.reviewer.value = reviewer;
+    elements.reviewer.disabled = false;
+    elements.reviewer.readOnly = Boolean(reviewer);
+    elements.case.replaceChildren(...rows.map((_, i) => new Option(String(i + 1), String(i))));
+    elements.error.hidden = true;
+    elements.review.hidden = false;
+    elements.status.textContent = "Loaded " + forms.length + " cases.";
+    dirty = false;
+    show(Math.max(0, forms.findIndex(row => !complete(row))));
+  } catch (error) {
+    elements.error.textContent = error instanceof SyntaxError ? "The file contains invalid JSON lines." : error.message;
+    elements.error.hidden = false;
+  } finally {
+    elements.file.value = "";
+  }
+});
+
+function change() {
+  forms[current].role = elements.role.value || null;
+  forms[current].rationale = elements.reason.value || null;
+  dirty = true;
+  refresh();
+}
+elements.role.addEventListener("change", change);
+elements.reason.addEventListener("input", change);
+elements.reviewer.addEventListener("input", refresh);
+elements.case.addEventListener("change", () => show(Number(elements.case.value)));
+elements.prev.addEventListener("click", () => show(current - 1));
+elements.next.addEventListener("click", () => show(current + 1));
+elements.unfinished.addEventListener("click", () => {
+  const following = forms.findIndex((row, i) => i > current && !complete(row));
+  show(following >= 0 ? following : forms.findIndex(row => !complete(row)));
+});
+elements.export.addEventListener("click", () => {
+  const reviewer = elements.reviewer.value.trim();
+  const records = forms.map(row => complete(row)
+    ? {...row, reviewer_id: reviewer, rationale: row.rationale.trim()}
+    : {...row, role: null, reviewer_id: null});
+  const contents = records.map(row => JSON.stringify(row)).join("\n") + "\n";
+  const url = URL.createObjectURL(new Blob([contents], {type: "text/plain;charset=utf-8"}));
+  const link = document.createElement("a");
+  link.href = url;
+  link.download = "qualification-review.jsonl";
+  link.click();
+  setTimeout(() => URL.revokeObjectURL(url), 1000);
+  elements.reviewer.readOnly = true;
+  elements.status.textContent = "Review exported. Only complete judgments are counted.";
+  dirty = forms.some(row => row.role && !complete(row));
+});
+window.addEventListener("beforeunload", event => {
+  if (!dirty) return;
+  event.preventDefault();
+  event.returnValue = "";
+});
+</script>
+</body>
+</html>

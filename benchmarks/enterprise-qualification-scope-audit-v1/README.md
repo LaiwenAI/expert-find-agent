@@ -113,3 +113,13 @@ PYTHONPATH=src:. python -m experiments.retrieval.enterprise_qualification_scope_
 
 Use two separate reviewer copies and independently adjudicate
 unresolved or conflicting assessments before using the results.
+
+## Offline review
+
+Open [offline-review.html](offline-review.html) locally and load
+one of the independent reviewer JSONL forms. The page highlights
+the frozen clause within the complete request and exports the same
+JSONL schema. An exported copy can be loaded to resume. The page
+keeps input and annotations in memory and makes no network calls.
+Use `validate` above to confirm that both outputs preserve the
+frozen source fields and to count overlap and disagreements.
