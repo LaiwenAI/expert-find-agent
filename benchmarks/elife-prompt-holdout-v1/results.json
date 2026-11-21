@@ -1,0 +1,786 @@
+{
+  "slurm_array": 45957,
+  "node": "ws3",
+  "runs": [
+    {
+      "manifest_sha256": "064b9d0a579e58911c1986a17e4eb169dcfd3ab57e4e4640d31a1a62143a753a",
+      "projection_sha256": "38bc5e6bd42e3b2f427a42a552cae11bc0813e50f2e601ee9e10a298fe47925f",
+      "script_sha256": "e9a7af4ac13f30f1736091ea07f2cd4a54626424a02ae7684e58baebe600d5cf",
+      "panel": {
+        "admitted": 393,
+        "dropped": {
+          "incomplete_or_ambiguous": 28
+        },
+        "links": 16,
+        "paper_pairs": 13,
+        "linked_papers": 25,
+        "contributors": 14,
+        "variants": {
+          "present": 66,
+          "swap": 66
+        }
+      },
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "reader_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "bands": {
+        "prototype": 0.02919971942901611,
+        "ridge": 0.34417891502380366
+      },
+      "cutoff": 0.0,
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "reverse": false,
+      "results": {
+        "excerpt|all|compact": {
+          "totals": {
+            "issued": 46,
+            "exact": 44,
+            "exact_proof": 40,
+            "adverse": 6,
+            "cases": 132,
+            "calls": 32,
+            "tokens": 4848,
+            "substitutions": 0,
+            "swap_issued": 1
+          },
+          "mean_ms": 16.69139743634415,
+          "p95_ms": 29.1075223183725
+        },
+        "excerpt|all|full": {
+          "totals": {
+            "issued": 47,
+            "exact": 45,
+            "exact_proof": 41,
+            "adverse": 6,
+            "cases": 132,
+            "calls": 32,
+            "tokens": 7733,
+            "substitutions": 0,
+            "swap_issued": 1
+          },
+          "mean_ms": 17.805012369838852,
+          "p95_ms": 38.38821765384636
+        },
+        "excerpt|all|name_only": {
+          "totals": {
+            "issued": 48,
+            "exact": 46,
+            "exact_proof": 42,
+            "adverse": 6,
+            "cases": 132,
+            "calls": 32,
+            "tokens": 3074,
+            "substitutions": 0,
+            "swap_issued": 1
+          },
+          "mean_ms": 16.356557936612234,
+          "p95_ms": 26.48151784669608
+        },
+        "excerpt|all|prototype_band": {
+          "totals": {
+            "issued": 40,
+            "exact": 37,
+            "exact_proof": 35,
+            "adverse": 4,
+            "cases": 132,
+            "calls": 0,
+            "tokens": 0,
+            "substitutions": 0,
+            "swap_issued": 1
+          },
+          "mean_ms": 13.531754167298928,
+          "p95_ms": 15.585229569114745
+        },
+        "excerpt|left_missing|compact": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "cases": 132,
+            "calls": 0,
+            "tokens": 0,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 13.478544473676294,
+          "p95_ms": 15.516384999500588
+        },
+        "excerpt|left_missing|full": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "cases": 132,
+            "calls": 0,
+            "tokens": 0,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 13.479668841958329,
+          "p95_ms": 15.517562173772603
+        },
+        "excerpt|left_missing|name_only": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "cases": 132,
+            "calls": 0,
+            "tokens": 0,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 13.4781848314698,
+          "p95_ms": 15.516041277442127
+        },
+        "excerpt|left_missing|prototype_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "cases": 132,
+            "calls": 0,
+            "tokens": 0,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 13.482471847744433,
+          "p95_ms": 15.520219836616889
+        },
+        "excerpt|right_missing|compact": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "cases": 132,
+            "calls": 0,
+            "tokens": 0,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 13.434165033906924,
+          "p95_ms": 15.494844468776137
+        },
+        "excerpt|right_missing|full": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "cases": 132,
+            "calls": 0,
+            "tokens": 0,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 13.435181748002034,
+          "p95_ms": 15.495953120989725
+        },
+        "excerpt|right_missing|name_only": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "cases": 132,
+            "calls": 0,
+            "tokens": 0,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 13.433866051138576,
+          "p95_ms": 15.494515624595806
+        },
+        "excerpt|right_missing|prototype_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "cases": 132,
+            "calls": 0,
+            "tokens": 0,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 13.437934992411597,
+          "p95_ms": 15.49858917715028
+        },
+        "keywords|all|compact": {
+          "totals": {
+            "issued": 33,
+            "exact": 33,
+            "exact_proof": 32,
+            "adverse": 1,
+            "cases": 132,
+            "calls": 19,
+            "tokens": 2882,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 12.314695731743775,
+          "p95_ms": 24.916607863269743
+        },
+        "keywords|all|full": {
+          "totals": {
+            "issued": 33,
+            "exact": 33,
+            "exact_proof": 32,
+            "adverse": 1,
+            "cases": 132,
+            "calls": 19,
+            "tokens": 4567,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 12.983381054999137,
+          "p95_ms": 33.031314075924456
+        },
+        "keywords|all|name_only": {
+          "totals": {
+            "issued": 34,
+            "exact": 34,
+            "exact_proof": 33,
+            "adverse": 1,
+            "cases": 132,
+            "calls": 19,
+            "tokens": 1834,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 12.048543706910234,
+          "p95_ms": 21.534374624025077
+        },
+        "keywords|all|prototype_band": {
+          "totals": {
+            "issued": 27,
+            "exact": 27,
+            "exact_proof": 26,
+            "adverse": 1,
+            "cases": 132,
+            "calls": 0,
+            "tokens": 0,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 10.461542108907562,
+          "p95_ms": 10.769808903569356
+        },
+        "keywords|left_missing|compact": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "cases": 132,
+            "calls": 0,
+            "tokens": 0,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 10.402043418831784,
+          "p95_ms": 10.718181147240102
+        },
+        "keywords|left_missing|full": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "cases": 132,
+            "calls": 0,
+            "tokens": 0,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 10.40300412569195,
+          "p95_ms": 10.719098296249285
+        },
+        "keywords|left_missing|name_only": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "cases": 132,
+            "calls": 0,
+            "tokens": 0,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 10.40174729000269,
+          "p95_ms": 10.71786069078371
+        },
+        "keywords|left_missing|prototype_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "cases": 132,
+            "calls": 0,
+            "tokens": 0,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 10.40543100327451,
+          "p95_ms": 10.721345647471026
+        },
+        "keywords|right_missing|compact": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "cases": 132,
+            "calls": 0,
+            "tokens": 0,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 10.382015919524498,
+          "p95_ms": 10.68790141143836
+        },
+        "keywords|right_missing|full": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "cases": 132,
+            "calls": 0,
+            "tokens": 0,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 10.382829607944146,
+          "p95_ms": 10.688627301715314
+        },
+        "keywords|right_missing|name_only": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "cases": 132,
+            "calls": 0,
+            "tokens": 0,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 10.381776870362405,
+          "p95_ms": 10.68769995472394
+        },
+        "keywords|right_missing|prototype_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "cases": 132,
+            "calls": 0,
+            "tokens": 0,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 10.385091876025509,
+          "p95_ms": 10.691075515933335
+        }
+      }
+    },
+    {
+      "manifest_sha256": "064b9d0a579e58911c1986a17e4eb169dcfd3ab57e4e4640d31a1a62143a753a",
+      "projection_sha256": "38bc5e6bd42e3b2f427a42a552cae11bc0813e50f2e601ee9e10a298fe47925f",
+      "script_sha256": "e9a7af4ac13f30f1736091ea07f2cd4a54626424a02ae7684e58baebe600d5cf",
+      "panel": {
+        "admitted": 393,
+        "dropped": {
+          "incomplete_or_ambiguous": 28
+        },
+        "links": 16,
+        "paper_pairs": 13,
+        "linked_papers": 25,
+        "contributors": 14,
+        "variants": {
+          "present": 66,
+          "swap": 66
+        }
+      },
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "reader_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "bands": {
+        "prototype": 0.02919971942901611,
+        "ridge": 0.34417891502380366
+      },
+      "cutoff": 0.0,
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "reverse": true,
+      "results": {
+        "excerpt|all|compact": {
+          "totals": {
+            "issued": 46,
+            "exact": 44,
+            "exact_proof": 40,
+            "adverse": 6,
+            "cases": 132,
+            "calls": 32,
+            "tokens": 4848,
+            "substitutions": 0,
+            "swap_issued": 1
+          },
+          "mean_ms": 16.949357208266687,
+          "p95_ms": 29.469702107599
+        },
+        "excerpt|all|full": {
+          "totals": {
+            "issued": 47,
+            "exact": 45,
+            "exact_proof": 41,
+            "adverse": 6,
+            "cases": 132,
+            "calls": 32,
+            "tokens": 7733,
+            "substitutions": 0,
+            "swap_issued": 1
+          },
+          "mean_ms": 17.927859374498382,
+          "p95_ms": 38.65443919203244
+        },
+        "excerpt|all|name_only": {
+          "totals": {
+            "issued": 48,
+            "exact": 46,
+            "exact_proof": 42,
+            "adverse": 6,
+            "cases": 132,
+            "calls": 32,
+            "tokens": 3074,
+            "substitutions": 0,
+            "swap_issued": 1
+          },
+          "mean_ms": 16.55165779767699,
+          "p95_ms": 26.475350046530366
+        },
+        "excerpt|all|prototype_band": {
+          "totals": {
+            "issued": 40,
+            "exact": 37,
+            "exact_proof": 35,
+            "adverse": 4,
+            "cases": 132,
+            "calls": 0,
+            "tokens": 0,
+            "substitutions": 0,
+            "swap_issued": 1
+          },
+          "mean_ms": 13.69042526295578,
+          "p95_ms": 15.47678752685897
+        },
+        "excerpt|left_missing|compact": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "cases": 132,
+            "calls": 0,
+            "tokens": 0,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 13.621675377979761,
+          "p95_ms": 15.482496039476246
+        },
+        "excerpt|left_missing|full": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "cases": 132,
+            "calls": 0,
+            "tokens": 0,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 13.622799845920367,
+          "p95_ms": 15.48348541255109
+        },
+        "excerpt|left_missing|name_only": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "cases": 132,
+            "calls": 0,
+            "tokens": 0,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 13.621292473875325,
+          "p95_ms": 15.482062316732481
+        },
+        "excerpt|left_missing|prototype_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "cases": 132,
+            "calls": 0,
+            "tokens": 0,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 13.625539699922118,
+          "p95_ms": 15.486821421654895
+        },
+        "excerpt|right_missing|compact": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "cases": 132,
+            "calls": 0,
+            "tokens": 0,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 13.579119058593994,
+          "p95_ms": 15.444048447534442
+        },
+        "excerpt|right_missing|full": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "cases": 132,
+            "calls": 0,
+            "tokens": 0,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 13.58010169827718,
+          "p95_ms": 15.44496837304905
+        },
+        "excerpt|right_missing|name_only": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "cases": 132,
+            "calls": 0,
+            "tokens": 0,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 13.57880228544783,
+          "p95_ms": 15.443607809720561
+        },
+        "excerpt|right_missing|prototype_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "cases": 132,
+            "calls": 0,
+            "tokens": 0,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 13.582742235016529,
+          "p95_ms": 15.448104846291244
+        },
+        "keywords|all|compact": {
+          "totals": {
+            "issued": 33,
+            "exact": 33,
+            "exact_proof": 32,
+            "adverse": 1,
+            "cases": 132,
+            "calls": 19,
+            "tokens": 2882,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 12.701141867596148,
+          "p95_ms": 25.224122108193114
+        },
+        "keywords|all|full": {
+          "totals": {
+            "issued": 33,
+            "exact": 33,
+            "exact_proof": 32,
+            "adverse": 1,
+            "cases": 132,
+            "calls": 19,
+            "tokens": 4567,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 13.35332764111544,
+          "p95_ms": 33.48487330949865
+        },
+        "keywords|all|name_only": {
+          "totals": {
+            "issued": 34,
+            "exact": 34,
+            "exact_proof": 33,
+            "adverse": 1,
+            "cases": 132,
+            "calls": 19,
+            "tokens": 1834,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 12.42541080732322,
+          "p95_ms": 22.040393482893705
+        },
+        "keywords|all|prototype_band": {
+          "totals": {
+            "issued": 27,
+            "exact": 27,
+            "exact_proof": 26,
+            "adverse": 1,
+            "cases": 132,
+            "calls": 0,
+            "tokens": 0,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 10.815412297343949,
+          "p95_ms": 11.1497632577084
+        },
+        "keywords|left_missing|compact": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "cases": 132,
+            "calls": 0,
+            "tokens": 0,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 10.757532020127684,
+          "p95_ms": 11.071656609419733
+        },
+        "keywords|left_missing|full": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "cases": 132,
+            "calls": 0,
+            "tokens": 0,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 10.758487019109342,
+          "p95_ms": 11.072603502543643
+        },
+        "keywords|left_missing|name_only": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "cases": 132,
+            "calls": 0,
+            "tokens": 0,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 10.757210989002928,
+          "p95_ms": 11.071400169748813
+        },
+        "keywords|left_missing|prototype_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "cases": 132,
+            "calls": 0,
+            "tokens": 0,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 10.760807029190332,
+          "p95_ms": 11.074883840046823
+        },
+        "keywords|right_missing|compact": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "cases": 132,
+            "calls": 0,
+            "tokens": 0,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 10.736268103673039,
+          "p95_ms": 11.05636860593222
+        },
+        "keywords|right_missing|full": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "cases": 132,
+            "calls": 0,
+            "tokens": 0,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 10.737077127542403,
+          "p95_ms": 11.056954675586894
+        },
+        "keywords|right_missing|name_only": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "cases": 132,
+            "calls": 0,
+            "tokens": 0,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 10.736034056842044,
+          "p95_ms": 11.05608853395097
+        },
+        "keywords|right_missing|prototype_band": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "cases": 132,
+            "calls": 0,
+            "tokens": 0,
+            "substitutions": 0,
+            "swap_issued": 0
+          },
+          "mean_ms": 10.739346319689613,
+          "p95_ms": 11.059232905972749
+        }
+      }
+    }
+  ]
+}
