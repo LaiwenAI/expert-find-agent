@@ -362,10 +362,13 @@ def run(args):
                                    component_sha256=digest(matched_reference))
             if args.fresh_source_reference is not None:
                 from experiments.credit.elife_fresh_source_evaluation import evaluate
-                from experiments.credit.elife_extended_role_holdout import SALT
+                from experiments.credit.elife_extended_role_holdout import CONFIRMATION_SALT, SALT
 
-                if manifest.get("sampling_salt") != SALT:
-                    raise ValueError("Expected the fixed extended eLife holdout")
+                salt = manifest.get("sampling_salt")
+                if salt not in (SALT, CONFIRMATION_SALT):
+                    raise ValueError("Expected a fixed extended eLife holdout")
+                if salt == CONFIRMATION_SALT and not args.guarded_source_replay:
+                    raise ValueError("The confirmation holdout is for the frozen source guard comparison")
                 if args.source_audit is not None:
                     from experiments.credit.elife_source_identity_audit import evaluate
                 evaluate(service, labels, cutoff, lightweight, resident, clusters(selected, articles),
