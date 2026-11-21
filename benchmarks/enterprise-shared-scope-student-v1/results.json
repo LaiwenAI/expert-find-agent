@@ -1,0 +1,700 @@
+{
+  "node": "ws6",
+  "output_sha256": [
+    "0341cbd573bbae18ceae4df3e1dea53ff4eac523c771196f324a0daa1c362faa",
+    "b630372e6eca22a4b31184263953b58f5b9834623d0626c03833ab0a7d698dac"
+  ],
+  "runs": [
+    {
+      "development": {
+        "per_clause": {
+          "changed_requests": 25,
+          "changed_skipped_requests": 1,
+          "clauses": 1452,
+          "model_additions": 0,
+          "model_misses": 51,
+          "p50_p95_ms": [
+            85.44809999875724,
+            461.5735257975756
+          ],
+          "requests": 80,
+          "simulated_guard_p50_p95_ms": [
+            221.96835651993752,
+            1740.655406587757
+          ],
+          "skip_requests": 7,
+          "tokens": 1428015
+        },
+        "shared_forward": {
+          "changed_requests": 25,
+          "changed_skipped_requests": 0,
+          "clauses": 1452,
+          "model_additions": 0,
+          "model_misses": 51,
+          "p50_p95_ms": [
+            13.481861213222146,
+            22.607607557438307
+          ],
+          "requests": 80,
+          "simulated_guard_p50_p95_ms": [
+            155.48101835884154,
+            1308.6212671827525
+          ],
+          "skip_requests": 5,
+          "tokens": 48453
+        },
+        "shared_symmetric": {
+          "changed_requests": 25,
+          "changed_skipped_requests": 2,
+          "clauses": 1452,
+          "model_additions": 6,
+          "model_misses": 49,
+          "p50_p95_ms": [
+            16.053610015660524,
+            51.442408538423464
+          ],
+          "requests": 80,
+          "simulated_guard_p50_p95_ms": [
+            145.50533494912088,
+            1318.0130915017799
+          ],
+          "skip_requests": 16,
+          "tokens": 96838
+        }
+      },
+      "embedding": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "gpu": "NVIDIA GeForce RTX 4090",
+      "inputs": {
+        "controls": "ca96d57855c1acb463a3bbce8bb21e3578d5c8465c340958fd74fe209cea5000",
+        "development": "30661871ac08a61e7e74d67d75491878c7e4194f217483b60d06426c4b36e4c5",
+        "scope_dataset": "e9384206c99723ec766dcc627c0980f0a17ceaa8ba67186f6110a2e69d87e08a"
+      },
+      "public": {
+        "per_clause": {
+          "calibration": {
+            "accepted": 6,
+            "accepted_errors": 0,
+            "accepted_qualified": 0,
+            "all_correct_groups": 0,
+            "by_role": {
+              "future_work": {
+                "cases": 6,
+                "flagged": 0
+              },
+              "operating_condition": {
+                "cases": 6,
+                "flagged": 0
+              },
+              "other": {
+                "cases": 6,
+                "flagged": 0
+              },
+              "prior_qualification": {
+                "cases": 6,
+                "flagged": 0
+              }
+            },
+            "calibration_cutoff": 1.865678071975708,
+            "cases": 24,
+            "correct": 18,
+            "false_negative": 6,
+            "false_positive": 0,
+            "groups": 6,
+            "true_positive": 0,
+            "within_encoding_limit": 24
+          },
+          "heading": {
+            "accepted": 0,
+            "accepted_errors": 0,
+            "accepted_qualified": 0,
+            "all_correct_groups": 5,
+            "by_role": {
+              "future_work": {
+                "cases": 36,
+                "flagged": 0
+              },
+              "prior_qualification": {
+                "cases": 36,
+                "flagged": 5
+              }
+            },
+            "calibration_cutoff": 1.865678071975708,
+            "cases": 72,
+            "correct": 41,
+            "false_negative": 31,
+            "false_positive": 0,
+            "groups": 36,
+            "true_positive": 5,
+            "within_encoding_limit": 72
+          },
+          "held": {
+            "accepted": 0,
+            "accepted_errors": 0,
+            "accepted_qualified": 0,
+            "all_correct_groups": 7,
+            "by_role": {
+              "future_work": {
+                "cases": 12,
+                "flagged": 0
+              },
+              "operating_condition": {
+                "cases": 12,
+                "flagged": 0
+              },
+              "other": {
+                "cases": 12,
+                "flagged": 0
+              },
+              "prior_qualification": {
+                "cases": 12,
+                "flagged": 7
+              }
+            },
+            "calibration_cutoff": 1.865678071975708,
+            "cases": 48,
+            "correct": 43,
+            "false_negative": 5,
+            "false_positive": 0,
+            "groups": 12,
+            "true_positive": 7,
+            "within_encoding_limit": 48
+          }
+        },
+        "shared_forward": {
+          "calibration": {
+            "accepted": 8,
+            "accepted_errors": 0,
+            "accepted_qualified": 0,
+            "all_correct_groups": 1,
+            "by_role": {
+              "future_work": {
+                "cases": 6,
+                "flagged": 0
+              },
+              "operating_condition": {
+                "cases": 6,
+                "flagged": 0
+              },
+              "other": {
+                "cases": 6,
+                "flagged": 0
+              },
+              "prior_qualification": {
+                "cases": 6,
+                "flagged": 1
+              }
+            },
+            "calibration_cutoff": 1.186697006225586,
+            "cases": 24,
+            "correct": 19,
+            "false_negative": 5,
+            "false_positive": 0,
+            "groups": 6,
+            "true_positive": 1,
+            "within_encoding_limit": 24
+          },
+          "heading": {
+            "accepted": 4,
+            "accepted_errors": 0,
+            "accepted_qualified": 4,
+            "all_correct_groups": 23,
+            "by_role": {
+              "future_work": {
+                "cases": 36,
+                "flagged": 10
+              },
+              "prior_qualification": {
+                "cases": 36,
+                "flagged": 32
+              }
+            },
+            "calibration_cutoff": 1.186697006225586,
+            "cases": 72,
+            "correct": 58,
+            "false_negative": 4,
+            "false_positive": 10,
+            "groups": 36,
+            "true_positive": 32,
+            "within_encoding_limit": 72
+          },
+          "held": {
+            "accepted": 0,
+            "accepted_errors": 0,
+            "accepted_qualified": 0,
+            "all_correct_groups": 10,
+            "by_role": {
+              "future_work": {
+                "cases": 12,
+                "flagged": 1
+              },
+              "operating_condition": {
+                "cases": 12,
+                "flagged": 1
+              },
+              "other": {
+                "cases": 12,
+                "flagged": 2
+              },
+              "prior_qualification": {
+                "cases": 12,
+                "flagged": 12
+              }
+            },
+            "calibration_cutoff": 1.186697006225586,
+            "cases": 48,
+            "correct": 44,
+            "false_negative": 0,
+            "false_positive": 4,
+            "groups": 12,
+            "true_positive": 12,
+            "within_encoding_limit": 48
+          }
+        },
+        "shared_symmetric": {
+          "calibration": {
+            "accepted": 14,
+            "accepted_errors": 0,
+            "accepted_qualified": 0,
+            "all_correct_groups": 2,
+            "by_role": {
+              "future_work": {
+                "cases": 6,
+                "flagged": 0
+              },
+              "operating_condition": {
+                "cases": 6,
+                "flagged": 0
+              },
+              "other": {
+                "cases": 6,
+                "flagged": 0
+              },
+              "prior_qualification": {
+                "cases": 6,
+                "flagged": 2
+              }
+            },
+            "calibration_cutoff": 1.0026060342788696,
+            "cases": 24,
+            "correct": 20,
+            "false_negative": 4,
+            "false_positive": 0,
+            "groups": 6,
+            "true_positive": 2,
+            "within_encoding_limit": 24
+          },
+          "heading": {
+            "accepted": 3,
+            "accepted_errors": 0,
+            "accepted_qualified": 3,
+            "all_correct_groups": 21,
+            "by_role": {
+              "future_work": {
+                "cases": 36,
+                "flagged": 11
+              },
+              "prior_qualification": {
+                "cases": 36,
+                "flagged": 31
+              }
+            },
+            "calibration_cutoff": 1.0026060342788696,
+            "cases": 72,
+            "correct": 56,
+            "false_negative": 5,
+            "false_positive": 11,
+            "groups": 36,
+            "true_positive": 31,
+            "within_encoding_limit": 72
+          },
+          "held": {
+            "accepted": 4,
+            "accepted_errors": 0,
+            "accepted_qualified": 4,
+            "all_correct_groups": 8,
+            "by_role": {
+              "future_work": {
+                "cases": 12,
+                "flagged": 1
+              },
+              "operating_condition": {
+                "cases": 12,
+                "flagged": 4
+              },
+              "other": {
+                "cases": 12,
+                "flagged": 4
+              },
+              "prior_qualification": {
+                "cases": 12,
+                "flagged": 12
+              }
+            },
+            "calibration_cutoff": 1.0026060342788696,
+            "cases": 48,
+            "correct": 39,
+            "false_negative": 0,
+            "false_positive": 9,
+            "groups": 12,
+            "true_positive": 12,
+            "within_encoding_limit": 48
+          }
+        }
+      },
+      "reader": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "reference_p50_p95_ms": [
+        146.36007975786924,
+        1293.5243714600801
+      ],
+      "reverse": false,
+      "script_sha256": "4ad2a72a19951599013c0c7e3300072ece18597558a113f80804a31a31206149",
+      "torch": "2.15.0+cu132"
+    },
+    {
+      "development": {
+        "per_clause": {
+          "changed_requests": 25,
+          "changed_skipped_requests": 1,
+          "clauses": 1452,
+          "model_additions": 0,
+          "model_misses": 51,
+          "p50_p95_ms": [
+            84.96489864774048,
+            466.45179651677597
+          ],
+          "requests": 80,
+          "simulated_guard_p50_p95_ms": [
+            227.14804811403155,
+            1737.0745653519405
+          ],
+          "skip_requests": 7,
+          "tokens": 1428015
+        },
+        "shared_forward": {
+          "changed_requests": 25,
+          "changed_skipped_requests": 0,
+          "clauses": 1452,
+          "model_additions": 0,
+          "model_misses": 51,
+          "p50_p95_ms": [
+            13.6349240783602,
+            22.381096379831426
+          ],
+          "requests": 80,
+          "simulated_guard_p50_p95_ms": [
+            158.14589825458825,
+            1304.933609534055
+          ],
+          "skip_requests": 5,
+          "tokens": 48453
+        },
+        "shared_symmetric": {
+          "changed_requests": 25,
+          "changed_skipped_requests": 2,
+          "clauses": 1452,
+          "model_additions": 6,
+          "model_misses": 49,
+          "p50_p95_ms": [
+            16.724813729524612,
+            50.360273523256154
+          ],
+          "requests": 80,
+          "simulated_guard_p50_p95_ms": [
+            146.89761027693748,
+            1314.498407812789
+          ],
+          "skip_requests": 16,
+          "tokens": 96838
+        }
+      },
+      "embedding": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "gpu": "NVIDIA GeForce RTX 4090",
+      "inputs": {
+        "controls": "ca96d57855c1acb463a3bbce8bb21e3578d5c8465c340958fd74fe209cea5000",
+        "development": "30661871ac08a61e7e74d67d75491878c7e4194f217483b60d06426c4b36e4c5",
+        "scope_dataset": "e9384206c99723ec766dcc627c0980f0a17ceaa8ba67186f6110a2e69d87e08a"
+      },
+      "public": {
+        "per_clause": {
+          "calibration": {
+            "accepted": 6,
+            "accepted_errors": 0,
+            "accepted_qualified": 0,
+            "all_correct_groups": 0,
+            "by_role": {
+              "future_work": {
+                "cases": 6,
+                "flagged": 0
+              },
+              "operating_condition": {
+                "cases": 6,
+                "flagged": 0
+              },
+              "other": {
+                "cases": 6,
+                "flagged": 0
+              },
+              "prior_qualification": {
+                "cases": 6,
+                "flagged": 0
+              }
+            },
+            "calibration_cutoff": 1.865678071975708,
+            "cases": 24,
+            "correct": 18,
+            "false_negative": 6,
+            "false_positive": 0,
+            "groups": 6,
+            "true_positive": 0,
+            "within_encoding_limit": 24
+          },
+          "heading": {
+            "accepted": 0,
+            "accepted_errors": 0,
+            "accepted_qualified": 0,
+            "all_correct_groups": 5,
+            "by_role": {
+              "future_work": {
+                "cases": 36,
+                "flagged": 0
+              },
+              "prior_qualification": {
+                "cases": 36,
+                "flagged": 5
+              }
+            },
+            "calibration_cutoff": 1.865678071975708,
+            "cases": 72,
+            "correct": 41,
+            "false_negative": 31,
+            "false_positive": 0,
+            "groups": 36,
+            "true_positive": 5,
+            "within_encoding_limit": 72
+          },
+          "held": {
+            "accepted": 0,
+            "accepted_errors": 0,
+            "accepted_qualified": 0,
+            "all_correct_groups": 7,
+            "by_role": {
+              "future_work": {
+                "cases": 12,
+                "flagged": 0
+              },
+              "operating_condition": {
+                "cases": 12,
+                "flagged": 0
+              },
+              "other": {
+                "cases": 12,
+                "flagged": 0
+              },
+              "prior_qualification": {
+                "cases": 12,
+                "flagged": 7
+              }
+            },
+            "calibration_cutoff": 1.865678071975708,
+            "cases": 48,
+            "correct": 43,
+            "false_negative": 5,
+            "false_positive": 0,
+            "groups": 12,
+            "true_positive": 7,
+            "within_encoding_limit": 48
+          }
+        },
+        "shared_forward": {
+          "calibration": {
+            "accepted": 8,
+            "accepted_errors": 0,
+            "accepted_qualified": 0,
+            "all_correct_groups": 1,
+            "by_role": {
+              "future_work": {
+                "cases": 6,
+                "flagged": 0
+              },
+              "operating_condition": {
+                "cases": 6,
+                "flagged": 0
+              },
+              "other": {
+                "cases": 6,
+                "flagged": 0
+              },
+              "prior_qualification": {
+                "cases": 6,
+                "flagged": 1
+              }
+            },
+            "calibration_cutoff": 1.186697006225586,
+            "cases": 24,
+            "correct": 19,
+            "false_negative": 5,
+            "false_positive": 0,
+            "groups": 6,
+            "true_positive": 1,
+            "within_encoding_limit": 24
+          },
+          "heading": {
+            "accepted": 4,
+            "accepted_errors": 0,
+            "accepted_qualified": 4,
+            "all_correct_groups": 23,
+            "by_role": {
+              "future_work": {
+                "cases": 36,
+                "flagged": 10
+              },
+              "prior_qualification": {
+                "cases": 36,
+                "flagged": 32
+              }
+            },
+            "calibration_cutoff": 1.186697006225586,
+            "cases": 72,
+            "correct": 58,
+            "false_negative": 4,
+            "false_positive": 10,
+            "groups": 36,
+            "true_positive": 32,
+            "within_encoding_limit": 72
+          },
+          "held": {
+            "accepted": 0,
+            "accepted_errors": 0,
+            "accepted_qualified": 0,
+            "all_correct_groups": 10,
+            "by_role": {
+              "future_work": {
+                "cases": 12,
+                "flagged": 1
+              },
+              "operating_condition": {
+                "cases": 12,
+                "flagged": 1
+              },
+              "other": {
+                "cases": 12,
+                "flagged": 2
+              },
+              "prior_qualification": {
+                "cases": 12,
+                "flagged": 12
+              }
+            },
+            "calibration_cutoff": 1.186697006225586,
+            "cases": 48,
+            "correct": 44,
+            "false_negative": 0,
+            "false_positive": 4,
+            "groups": 12,
+            "true_positive": 12,
+            "within_encoding_limit": 48
+          }
+        },
+        "shared_symmetric": {
+          "calibration": {
+            "accepted": 14,
+            "accepted_errors": 0,
+            "accepted_qualified": 0,
+            "all_correct_groups": 2,
+            "by_role": {
+              "future_work": {
+                "cases": 6,
+                "flagged": 0
+              },
+              "operating_condition": {
+                "cases": 6,
+                "flagged": 0
+              },
+              "other": {
+                "cases": 6,
+                "flagged": 0
+              },
+              "prior_qualification": {
+                "cases": 6,
+                "flagged": 2
+              }
+            },
+            "calibration_cutoff": 1.0026060342788696,
+            "cases": 24,
+            "correct": 20,
+            "false_negative": 4,
+            "false_positive": 0,
+            "groups": 6,
+            "true_positive": 2,
+            "within_encoding_limit": 24
+          },
+          "heading": {
+            "accepted": 3,
+            "accepted_errors": 0,
+            "accepted_qualified": 3,
+            "all_correct_groups": 21,
+            "by_role": {
+              "future_work": {
+                "cases": 36,
+                "flagged": 11
+              },
+              "prior_qualification": {
+                "cases": 36,
+                "flagged": 31
+              }
+            },
+            "calibration_cutoff": 1.0026060342788696,
+            "cases": 72,
+            "correct": 56,
+            "false_negative": 5,
+            "false_positive": 11,
+            "groups": 36,
+            "true_positive": 31,
+            "within_encoding_limit": 72
+          },
+          "held": {
+            "accepted": 4,
+            "accepted_errors": 0,
+            "accepted_qualified": 4,
+            "all_correct_groups": 8,
+            "by_role": {
+              "future_work": {
+                "cases": 12,
+                "flagged": 1
+              },
+              "operating_condition": {
+                "cases": 12,
+                "flagged": 4
+              },
+              "other": {
+                "cases": 12,
+                "flagged": 4
+              },
+              "prior_qualification": {
+                "cases": 12,
+                "flagged": 12
+              }
+            },
+            "calibration_cutoff": 1.0026060342788696,
+            "cases": 48,
+            "correct": 39,
+            "false_negative": 0,
+            "false_positive": 9,
+            "groups": 12,
+            "true_positive": 12,
+            "within_encoding_limit": 48
+          }
+        }
+      },
+      "reader": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "reference_p50_p95_ms": [
+        146.99373045004904,
+        1290.6696802936494
+      ],
+      "reverse": true,
+      "script_sha256": "4ad2a72a19951599013c0c7e3300072ece18597558a113f80804a31a31206149",
+      "torch": "2.15.0+cu132"
+    }
+  ],
+  "slurm_array": 47290
+}
