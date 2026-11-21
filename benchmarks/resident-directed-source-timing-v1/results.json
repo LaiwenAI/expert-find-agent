@@ -1,0 +1,654 @@
+{
+  "node": "ws6",
+  "output_sha256": [
+    "8b6576fb75bd83ed96ed52aef04de3647cc421d48e0c71cbe5e5bf290490d862",
+    "155c621c8bca103a4ce36046f2ee8523440b866c0fd3fb87f191e6dbc387544f"
+  ],
+  "runs": [
+    {
+      "catalog_articles": {
+        "elife": 2011,
+        "plos": 414
+      },
+      "elife_panel_sha256": "3488c50589b3b5d78d7cd834539682ed948bfc3cec0e475553ea5759f55d6bd0",
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "gpu": "NVIDIA GeForce RTX 4090",
+      "job": "47214",
+      "lexical_payload_bytes": {
+        "elife": 1763064,
+        "plos": 410760
+      },
+      "outcomes_sha256": "37baf9f2ffded0e974c9711e7b5440a388d8275fa06f65ca5ae3bf45c100ae05",
+      "plos_panel_sha256": "3185a5f782ccc78a058233c0c7bf48b52ec4ab2e029bae0e2e174019d12d8d52",
+      "results": {
+        "elife": {
+          "legacy_author": {
+            "stages": {
+              "client_during_fallback_ms": {
+                "n": 268,
+                "p50_ms": 26.13814570941031,
+                "p95_ms": 50.84212853107601
+              },
+              "client_ms": {
+                "n": 840,
+                "p50_ms": 16.646123258396983,
+                "p95_ms": 48.2613684842363
+              },
+              "encode_ms": {
+                "n": 840,
+                "p50_ms": 15.997325535863638,
+                "p95_ms": 17.180637177079902
+              },
+              "fallback_ms": {
+                "n": 268,
+                "p50_ms": 0.0894409604370594,
+                "p95_ms": 0.1872393069788806
+              },
+              "rank_ms": {
+                "n": 840,
+                "p50_ms": 0.0,
+                "p95_ms": 31.599081330932677
+              }
+            },
+            "work": {
+              "correct": 48,
+              "fallbacks": 268,
+              "posting_reads": 2624,
+              "requests": 840,
+              "source_scans": 134,
+              "wrong": 4
+            }
+          },
+          "legacy_author_role": {
+            "stages": {
+              "client_during_fallback_ms": {
+                "n": 268,
+                "p50_ms": 26.97214367799461,
+                "p95_ms": 50.17831055447459
+              },
+              "client_ms": {
+                "n": 840,
+                "p50_ms": 16.613893676549196,
+                "p95_ms": 48.343955958262086
+              },
+              "encode_ms": {
+                "n": 840,
+                "p50_ms": 15.997471520677209,
+                "p95_ms": 17.380067845806476
+              },
+              "fallback_ms": {
+                "n": 268,
+                "p50_ms": 0.08894503116607666,
+                "p95_ms": 0.175017467699944
+              },
+              "rank_ms": {
+                "n": 840,
+                "p50_ms": 0.0,
+                "p95_ms": 31.558585818856955
+              }
+            },
+            "work": {
+              "correct": 48,
+              "fallbacks": 268,
+              "posting_reads": 628,
+              "requests": 840,
+              "source_scans": 16,
+              "wrong": 4
+            }
+          },
+          "vectorized_author": {
+            "stages": {
+              "client_during_fallback_ms": {
+                "n": 268,
+                "p50_ms": 19.139837473630905,
+                "p95_ms": 21.839496633037925
+              },
+              "client_ms": {
+                "n": 840,
+                "p50_ms": 16.715384321287274,
+                "p95_ms": 20.4802107764408
+              },
+              "encode_ms": {
+                "n": 840,
+                "p50_ms": 15.989077743142843,
+                "p95_ms": 17.467700387351215
+              },
+              "fallback_ms": {
+                "n": 268,
+                "p50_ms": 0.017832498997449875,
+                "p95_ms": 0.13409955427050346
+              },
+              "rank_ms": {
+                "n": 840,
+                "p50_ms": 0.0,
+                "p95_ms": 3.5744210705161086
+              }
+            },
+            "work": {
+              "correct": 48,
+              "fallbacks": 268,
+              "posting_reads": 2624,
+              "requests": 840,
+              "source_scans": 134,
+              "wrong": 4
+            }
+          },
+          "vectorized_author_role": {
+            "stages": {
+              "client_during_fallback_ms": {
+                "n": 268,
+                "p50_ms": 19.08233598805964,
+                "p95_ms": 21.875228849239647
+              },
+              "client_ms": {
+                "n": 840,
+                "p50_ms": 16.70811977237463,
+                "p95_ms": 20.47785692848265
+              },
+              "encode_ms": {
+                "n": 840,
+                "p50_ms": 15.993839129805565,
+                "p95_ms": 17.486738436855376
+              },
+              "fallback_ms": {
+                "n": 268,
+                "p50_ms": 0.01904647797346115,
+                "p95_ms": 0.12368701864033604
+              },
+              "rank_ms": {
+                "n": 840,
+                "p50_ms": 0.0,
+                "p95_ms": 3.5245293285697694
+              }
+            },
+            "work": {
+              "correct": 48,
+              "fallbacks": 268,
+              "posting_reads": 628,
+              "requests": 840,
+              "source_scans": 16,
+              "wrong": 4
+            }
+          }
+        },
+        "plos": {
+          "legacy_author": {
+            "stages": {
+              "client_during_fallback_ms": {
+                "n": 40,
+                "p50_ms": 19.789747428148985,
+                "p95_ms": 22.032517078332603
+              },
+              "client_ms": {
+                "n": 288,
+                "p50_ms": 16.547999111935496,
+                "p95_ms": 21.644026413559914
+              },
+              "encode_ms": {
+                "n": 288,
+                "p50_ms": 15.996200032532215,
+                "p95_ms": 17.840098682790995
+              },
+              "fallback_ms": {
+                "n": 40,
+                "p50_ms": 0.09062630124390125,
+                "p95_ms": 0.1886010868474841
+              },
+              "rank_ms": {
+                "n": 288,
+                "p50_ms": 0.0,
+                "p95_ms": 5.32740147318691
+              }
+            },
+            "work": {
+              "correct": 8,
+              "fallbacks": 40,
+              "posting_reads": 224,
+              "requests": 288,
+              "source_scans": 28,
+              "wrong": 4
+            }
+          },
+          "legacy_author_role": {
+            "stages": {
+              "client_during_fallback_ms": {
+                "n": 40,
+                "p50_ms": 19.8106924071908,
+                "p95_ms": 21.73703119624406
+              },
+              "client_ms": {
+                "n": 288,
+                "p50_ms": 16.529460437595844,
+                "p95_ms": 21.624749968759716
+              },
+              "encode_ms": {
+                "n": 288,
+                "p50_ms": 15.980054391548038,
+                "p95_ms": 17.385362624190748
+              },
+              "fallback_ms": {
+                "n": 40,
+                "p50_ms": 0.0890740193426609,
+                "p95_ms": 0.1821364043280482
+              },
+              "rank_ms": {
+                "n": 288,
+                "p50_ms": 0.0,
+                "p95_ms": 5.326910479925573
+              }
+            },
+            "work": {
+              "correct": 8,
+              "fallbacks": 40,
+              "posting_reads": 86,
+              "requests": 288,
+              "source_scans": 4,
+              "wrong": 4
+            }
+          },
+          "vectorized_author": {
+            "stages": {
+              "client_during_fallback_ms": {
+                "n": 40,
+                "p50_ms": 16.80493215098977,
+                "p95_ms": 17.11384120862931
+              },
+              "client_ms": {
+                "n": 288,
+                "p50_ms": 16.56234310939908,
+                "p95_ms": 17.929694475606084
+              },
+              "encode_ms": {
+                "n": 288,
+                "p50_ms": 15.972695080563426,
+                "p95_ms": 17.403216403909028
+              },
+              "fallback_ms": {
+                "n": 40,
+                "p50_ms": 0.02055009827017784,
+                "p95_ms": 0.18631317652761936
+              },
+              "rank_ms": {
+                "n": 288,
+                "p50_ms": 0.0,
+                "p95_ms": 0.6798563990741967
+              }
+            },
+            "work": {
+              "correct": 8,
+              "fallbacks": 40,
+              "posting_reads": 224,
+              "requests": 288,
+              "source_scans": 28,
+              "wrong": 4
+            }
+          },
+          "vectorized_author_role": {
+            "stages": {
+              "client_during_fallback_ms": {
+                "n": 40,
+                "p50_ms": 16.784578561782837,
+                "p95_ms": 17.09324400871992
+              },
+              "client_ms": {
+                "n": 288,
+                "p50_ms": 16.571318497881293,
+                "p95_ms": 17.923856154084206
+              },
+              "encode_ms": {
+                "n": 288,
+                "p50_ms": 15.996657079085708,
+                "p95_ms": 17.42657208815217
+              },
+              "fallback_ms": {
+                "n": 40,
+                "p50_ms": 0.01682084985077381,
+                "p95_ms": 0.17961889971047637
+              },
+              "rank_ms": {
+                "n": 288,
+                "p50_ms": 0.0,
+                "p95_ms": 0.6959318881854408
+              }
+            },
+            "work": {
+              "correct": 8,
+              "fallbacks": 40,
+              "posting_reads": 86,
+              "requests": 288,
+              "source_scans": 4,
+              "wrong": 4
+            }
+          }
+        }
+      },
+      "reverse": false,
+      "rounds": 2,
+      "script_sha256": "460460d7ff9d971e82d6f386769073f165ae8773117ec05672f5f2a0fd939492",
+      "unique_trials": 564
+    },
+    {
+      "catalog_articles": {
+        "elife": 2011,
+        "plos": 414
+      },
+      "elife_panel_sha256": "3488c50589b3b5d78d7cd834539682ed948bfc3cec0e475553ea5759f55d6bd0",
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "gpu": "NVIDIA GeForce RTX 4090",
+      "job": "47213",
+      "lexical_payload_bytes": {
+        "elife": 1763064,
+        "plos": 410760
+      },
+      "outcomes_sha256": "37baf9f2ffded0e974c9711e7b5440a388d8275fa06f65ca5ae3bf45c100ae05",
+      "plos_panel_sha256": "3185a5f782ccc78a058233c0c7bf48b52ec4ab2e029bae0e2e174019d12d8d52",
+      "results": {
+        "elife": {
+          "legacy_author": {
+            "stages": {
+              "client_during_fallback_ms": {
+                "n": 268,
+                "p50_ms": 26.40666253864765,
+                "p95_ms": 50.09232833981514
+              },
+              "client_ms": {
+                "n": 840,
+                "p50_ms": 16.690308693796396,
+                "p95_ms": 48.32504675723612
+              },
+              "encode_ms": {
+                "n": 840,
+                "p50_ms": 16.072270926088095,
+                "p95_ms": 17.62527716346085
+              },
+              "fallback_ms": {
+                "n": 268,
+                "p50_ms": 0.0859659630805254,
+                "p95_ms": 0.1892369706183667
+              },
+              "rank_ms": {
+                "n": 840,
+                "p50_ms": 0.0,
+                "p95_ms": 31.1674386030063
+              }
+            },
+            "work": {
+              "correct": 48,
+              "fallbacks": 268,
+              "posting_reads": 2624,
+              "requests": 840,
+              "source_scans": 134,
+              "wrong": 4
+            }
+          },
+          "legacy_author_role": {
+            "stages": {
+              "client_during_fallback_ms": {
+                "n": 268,
+                "p50_ms": 26.02161793038249,
+                "p95_ms": 50.11072896886617
+              },
+              "client_ms": {
+                "n": 840,
+                "p50_ms": 16.725430265069008,
+                "p95_ms": 49.03274201788008
+              },
+              "encode_ms": {
+                "n": 840,
+                "p50_ms": 16.08683937229216,
+                "p95_ms": 17.631020885892212
+              },
+              "fallback_ms": {
+                "n": 268,
+                "p50_ms": 0.08617248386144638,
+                "p95_ms": 0.1799555728211988
+              },
+              "rank_ms": {
+                "n": 840,
+                "p50_ms": 0.0,
+                "p95_ms": 31.661599059589207
+              }
+            },
+            "work": {
+              "correct": 48,
+              "fallbacks": 268,
+              "posting_reads": 628,
+              "requests": 840,
+              "source_scans": 16,
+              "wrong": 4
+            }
+          },
+          "vectorized_author": {
+            "stages": {
+              "client_during_fallback_ms": {
+                "n": 268,
+                "p50_ms": 19.09366180188954,
+                "p95_ms": 21.875595091842115
+              },
+              "client_ms": {
+                "n": 840,
+                "p50_ms": 16.804031562060118,
+                "p95_ms": 20.623630075715482
+              },
+              "encode_ms": {
+                "n": 840,
+                "p50_ms": 16.073897946625948,
+                "p95_ms": 17.643267940729856
+              },
+              "fallback_ms": {
+                "n": 268,
+                "p50_ms": 0.017999904230237007,
+                "p95_ms": 0.13588117435574273
+              },
+              "rank_ms": {
+                "n": 840,
+                "p50_ms": 0.0,
+                "p95_ms": 3.6113897105678916
+              }
+            },
+            "work": {
+              "correct": 48,
+              "fallbacks": 268,
+              "posting_reads": 2624,
+              "requests": 840,
+              "source_scans": 134,
+              "wrong": 4
+            }
+          },
+          "vectorized_author_role": {
+            "stages": {
+              "client_during_fallback_ms": {
+                "n": 268,
+                "p50_ms": 19.102808786556125,
+                "p95_ms": 21.874717832542956
+              },
+              "client_ms": {
+                "n": 840,
+                "p50_ms": 16.791410744190216,
+                "p95_ms": 20.608900301158428
+              },
+              "encode_ms": {
+                "n": 840,
+                "p50_ms": 16.07880601659417,
+                "p95_ms": 17.507757130078968
+              },
+              "fallback_ms": {
+                "n": 268,
+                "p50_ms": 0.018999911844730377,
+                "p95_ms": 0.12973926495760324
+              },
+              "rank_ms": {
+                "n": 840,
+                "p50_ms": 0.0,
+                "p95_ms": 3.6079999990761276
+              }
+            },
+            "work": {
+              "correct": 48,
+              "fallbacks": 268,
+              "posting_reads": 628,
+              "requests": 840,
+              "source_scans": 16,
+              "wrong": 4
+            }
+          }
+        },
+        "plos": {
+          "legacy_author": {
+            "stages": {
+              "client_during_fallback_ms": {
+                "n": 40,
+                "p50_ms": 20.670924801379442,
+                "p95_ms": 21.98016664478928
+              },
+              "client_ms": {
+                "n": 288,
+                "p50_ms": 16.590793384239078,
+                "p95_ms": 21.66954828426242
+              },
+              "encode_ms": {
+                "n": 288,
+                "p50_ms": 16.041736118495464,
+                "p95_ms": 17.59481863118708
+              },
+              "fallback_ms": {
+                "n": 40,
+                "p50_ms": 0.08722557686269283,
+                "p95_ms": 0.18412731587886808
+              },
+              "rank_ms": {
+                "n": 288,
+                "p50_ms": 0.0,
+                "p95_ms": 5.313929030671716
+              }
+            },
+            "work": {
+              "correct": 8,
+              "fallbacks": 40,
+              "posting_reads": 224,
+              "requests": 288,
+              "source_scans": 28,
+              "wrong": 4
+            }
+          },
+          "legacy_author_role": {
+            "stages": {
+              "client_during_fallback_ms": {
+                "n": 40,
+                "p50_ms": 20.11001156643033,
+                "p95_ms": 21.833580662496388
+              },
+              "client_ms": {
+                "n": 288,
+                "p50_ms": 16.567603684961796,
+                "p95_ms": 21.71551038045436
+              },
+              "encode_ms": {
+                "n": 288,
+                "p50_ms": 16.03556447662413,
+                "p95_ms": 17.905980045907196
+              },
+              "fallback_ms": {
+                "n": 40,
+                "p50_ms": 0.08734804578125477,
+                "p95_ms": 0.1956992084160447
+              },
+              "rank_ms": {
+                "n": 288,
+                "p50_ms": 0.0,
+                "p95_ms": 5.328693543560803
+              }
+            },
+            "work": {
+              "correct": 8,
+              "fallbacks": 40,
+              "posting_reads": 86,
+              "requests": 288,
+              "source_scans": 4,
+              "wrong": 4
+            }
+          },
+          "vectorized_author": {
+            "stages": {
+              "client_during_fallback_ms": {
+                "n": 40,
+                "p50_ms": 16.881437273696065,
+                "p95_ms": 17.274781479500234
+              },
+              "client_ms": {
+                "n": 288,
+                "p50_ms": 16.624438809230924,
+                "p95_ms": 18.115699384361506
+              },
+              "encode_ms": {
+                "n": 288,
+                "p50_ms": 16.047273529693484,
+                "p95_ms": 17.592314421199262
+              },
+              "fallback_ms": {
+                "n": 40,
+                "p50_ms": 0.020716339349746704,
+                "p95_ms": 0.178718171082437
+              },
+              "rank_ms": {
+                "n": 288,
+                "p50_ms": 0.0,
+                "p95_ms": 0.6568532902747392
+              }
+            },
+            "work": {
+              "correct": 8,
+              "fallbacks": 40,
+              "posting_reads": 224,
+              "requests": 288,
+              "source_scans": 28,
+              "wrong": 4
+            }
+          },
+          "vectorized_author_role": {
+            "stages": {
+              "client_during_fallback_ms": {
+                "n": 40,
+                "p50_ms": 16.81842771358788,
+                "p95_ms": 17.223124904558063
+              },
+              "client_ms": {
+                "n": 288,
+                "p50_ms": 16.64212462492287,
+                "p95_ms": 18.137409235350788
+              },
+              "encode_ms": {
+                "n": 288,
+                "p50_ms": 16.054249834269285,
+                "p95_ms": 17.59198415093124
+              },
+              "fallback_ms": {
+                "n": 40,
+                "p50_ms": 0.01678941771388054,
+                "p95_ms": 0.17977908719331026
+              },
+              "rank_ms": {
+                "n": 288,
+                "p50_ms": 0.0,
+                "p95_ms": 0.6601405097171662
+              }
+            },
+            "work": {
+              "correct": 8,
+              "fallbacks": 40,
+              "posting_reads": 86,
+              "requests": 288,
+              "source_scans": 4,
+              "wrong": 4
+            }
+          }
+        }
+      },
+      "reverse": true,
+      "rounds": 2,
+      "script_sha256": "460460d7ff9d971e82d6f386769073f165ae8773117ec05672f5f2a0fd939492",
+      "unique_trials": 564
+    }
+  ],
+  "slurm_array": "47213"
+}
