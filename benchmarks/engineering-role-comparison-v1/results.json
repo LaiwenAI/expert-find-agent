@@ -1,0 +1,280 @@
+{
+  "slurm_array": 45913,
+  "node": "ws3",
+  "runs": [
+    {
+      "panel_sha256": "53f4cda52f54d2982ff748c0e9fbbff627cbc1c9eeef024cd35e8539422137fb",
+      "calibration_sha256": "1b9d9b1fae5397b790be93df66b42d8295105f4a57ade1ca3618e6ee40d2c322",
+      "script_sha256": "a3706042240dd6d3f08cfe7c2f39f0a2910eaf98a6f66ffd577b7eab0bf58406",
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "reranker": {
+        "repository": "Qwen/Qwen3-Reranker-0.6B",
+        "revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+        "policy": "Official frozen BF16 checkpoint; no own training or quantization. Revision recorded before downloading weights.",
+        "files": {
+          "config.json": "d479c427a9ca5295218063d4f9aca4f297ab4ac27487cca7af42c84643d51ef0",
+          "expected-large-files.json": "cd9940a651fcf3d97ffc28f0242a9a620c0da5b9acad1861ef14faf5ee784f0e",
+          "generation_config.json": "81051cd3f6e77013827148d0b8a6ead93f8ac390d5ab805f849199f0af6a08db",
+          "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+          "model.safetensors": "27cd75a405b9c1b46b59abfd88aaa209e6fed2a1972cde9b70e7659537c5e65b",
+          "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+          "tokenizer_config.json": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0",
+          "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        }
+      },
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "calibration_cases": 48,
+      "target_cases": 30,
+      "reverse": false,
+      "fit": {
+        "ridge": {
+          "cutoff": 0.0,
+          "counts": {
+            "issued": 24,
+            "exact": 24,
+            "exact_proof": 24,
+            "adverse": 0
+          }
+        },
+        "prototype": {
+          "cutoff": 0.029386937618255615,
+          "counts": {
+            "issued": 24,
+            "exact": 24,
+            "exact_proof": 24,
+            "adverse": 0
+          }
+        },
+        "shortlist": {
+          "cutoff": 0.75,
+          "counts": {
+            "issued": 24,
+            "exact": 24,
+            "exact_proof": 24,
+            "adverse": 0
+          }
+        },
+        "full": {
+          "cutoff": 1.875,
+          "counts": {
+            "issued": 17,
+            "exact": 17,
+            "exact_proof": 17,
+            "adverse": 0
+          }
+        }
+      },
+      "results": {
+        "ridge": {
+          "totals": {
+            "issued": 9,
+            "exact": 7,
+            "exact_proof": 2,
+            "adverse": 7,
+            "swap_issued": 2,
+            "correct_role_slots": 28
+          },
+          "p95_ms": 10.443554242374375,
+          "mean_comparisons": 0.0
+        },
+        "prototype": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "correct_role_slots": 32
+          },
+          "p95_ms": 10.419639298925176,
+          "mean_comparisons": 0.0
+        },
+        "shortlist": {
+          "totals": {
+            "issued": 12,
+            "exact": 10,
+            "exact_proof": 4,
+            "adverse": 8,
+            "swap_issued": 2,
+            "correct_role_slots": 36
+          },
+          "p95_ms": 20.934229431441054,
+          "mean_comparisons": 4.4
+        },
+        "full": {
+          "totals": {
+            "issued": 3,
+            "exact": 2,
+            "exact_proof": 1,
+            "adverse": 2,
+            "swap_issued": 1,
+            "correct_role_slots": 28
+          },
+          "p95_ms": 37.459581362782046,
+          "mean_comparisons": 28.0
+        },
+        "ridge_band": {
+          "totals": {
+            "issued": 1,
+            "exact": 1,
+            "exact_proof": 1,
+            "adverse": 0,
+            "swap_issued": 0,
+            "correct_role_slots": 58
+          },
+          "p95_ms": 10.421607462922111,
+          "mean_comparisons": 0.0
+        },
+        "prototype_band": {
+          "totals": {
+            "issued": 4,
+            "exact": 4,
+            "exact_proof": 4,
+            "adverse": 0,
+            "swap_issued": 0,
+            "correct_role_slots": 44
+          },
+          "p95_ms": 10.414204944390804,
+          "mean_comparisons": 0.0
+        }
+      }
+    },
+    {
+      "panel_sha256": "53f4cda52f54d2982ff748c0e9fbbff627cbc1c9eeef024cd35e8539422137fb",
+      "calibration_sha256": "1b9d9b1fae5397b790be93df66b42d8295105f4a57ade1ca3618e6ee40d2c322",
+      "script_sha256": "a3706042240dd6d3f08cfe7c2f39f0a2910eaf98a6f66ffd577b7eab0bf58406",
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "reranker": {
+        "repository": "Qwen/Qwen3-Reranker-0.6B",
+        "revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+        "policy": "Official frozen BF16 checkpoint; no own training or quantization. Revision recorded before downloading weights.",
+        "files": {
+          "config.json": "d479c427a9ca5295218063d4f9aca4f297ab4ac27487cca7af42c84643d51ef0",
+          "expected-large-files.json": "cd9940a651fcf3d97ffc28f0242a9a620c0da5b9acad1861ef14faf5ee784f0e",
+          "generation_config.json": "81051cd3f6e77013827148d0b8a6ead93f8ac390d5ab805f849199f0af6a08db",
+          "merges.txt": "8831e4f1a044471340f7c0a83d7bd71306a5b867e95fd870f74d0c5308a904d5",
+          "model.safetensors": "27cd75a405b9c1b46b59abfd88aaa209e6fed2a1972cde9b70e7659537c5e65b",
+          "tokenizer.json": "aeb13307a71acd8fe81861d94ad54ab689df773318809eed3cbe794b4492dae4",
+          "tokenizer_config.json": "253153d0738ceb4c668d2eff957714dd2bea0b56de772a9fdccd96cbf517e6a0",
+          "vocab.json": "ca10d7e9fb3ed18575dd1e277a2579c16d108e32f27439684afa0e10b1440910"
+        }
+      },
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "calibration_cases": 48,
+      "target_cases": 30,
+      "reverse": true,
+      "fit": {
+        "ridge": {
+          "cutoff": 0.0,
+          "counts": {
+            "issued": 24,
+            "exact": 24,
+            "exact_proof": 24,
+            "adverse": 0
+          }
+        },
+        "prototype": {
+          "cutoff": 0.029386937618255615,
+          "counts": {
+            "issued": 24,
+            "exact": 24,
+            "exact_proof": 24,
+            "adverse": 0
+          }
+        },
+        "shortlist": {
+          "cutoff": 0.75,
+          "counts": {
+            "issued": 24,
+            "exact": 24,
+            "exact_proof": 24,
+            "adverse": 0
+          }
+        },
+        "full": {
+          "cutoff": 1.875,
+          "counts": {
+            "issued": 17,
+            "exact": 17,
+            "exact_proof": 17,
+            "adverse": 0
+          }
+        }
+      },
+      "results": {
+        "ridge": {
+          "totals": {
+            "issued": 9,
+            "exact": 7,
+            "exact_proof": 2,
+            "adverse": 7,
+            "swap_issued": 2,
+            "correct_role_slots": 28
+          },
+          "p95_ms": 9.808931918814778,
+          "mean_comparisons": 0.0
+        },
+        "prototype": {
+          "totals": {
+            "issued": 0,
+            "exact": 0,
+            "exact_proof": 0,
+            "adverse": 0,
+            "swap_issued": 0,
+            "correct_role_slots": 32
+          },
+          "p95_ms": 9.782251418801025,
+          "mean_comparisons": 0.0
+        },
+        "shortlist": {
+          "totals": {
+            "issued": 12,
+            "exact": 10,
+            "exact_proof": 4,
+            "adverse": 8,
+            "swap_issued": 2,
+            "correct_role_slots": 36
+          },
+          "p95_ms": 20.436609839089215,
+          "mean_comparisons": 4.4
+        },
+        "full": {
+          "totals": {
+            "issued": 3,
+            "exact": 2,
+            "exact_proof": 1,
+            "adverse": 2,
+            "swap_issued": 1,
+            "correct_role_slots": 28
+          },
+          "p95_ms": 37.42885055835359,
+          "mean_comparisons": 28.0
+        },
+        "ridge_band": {
+          "totals": {
+            "issued": 1,
+            "exact": 1,
+            "exact_proof": 1,
+            "adverse": 0,
+            "swap_issued": 0,
+            "correct_role_slots": 58
+          },
+          "p95_ms": 9.783663781126961,
+          "mean_comparisons": 0.0
+        },
+        "prototype_band": {
+          "totals": {
+            "issued": 4,
+            "exact": 4,
+            "exact_proof": 4,
+            "adverse": 0,
+            "swap_issued": 0,
+            "correct_role_slots": 44
+          },
+          "p95_ms": 9.777650178875774,
+          "mean_comparisons": 0.0
+        }
+      }
+    }
+  ]
+}
