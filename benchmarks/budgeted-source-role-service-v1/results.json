@@ -1,0 +1,664 @@
+{
+  "slurm_array": 46052,
+  "node": "ws3",
+  "runs": [
+    {
+      "script_sha256": "f08297d20e88844e3d08ba0d580bd318da04d49a3677c3f3a83cefd4220d4ccb",
+      "projection_sha256": "38bc5e6bd42e3b2f427a42a552cae11bc0813e50f2e601ee9e10a298fe47925f",
+      "manifest_sha256": "064b9d0a579e58911c1986a17e4eb169dcfd3ab57e4e4640d31a1a62143a753a",
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "source_reader_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+      "role_reader_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "cutoffs": {
+        "source": -5.125,
+        "role": 0.0
+      },
+      "reverse": false,
+      "panel": {
+        "admitted": 393,
+        "dropped": {
+          "incomplete_or_ambiguous": 28
+        },
+        "links": 16,
+        "paper_pairs": 13,
+        "linked_papers": 25,
+        "contributors": 14,
+        "variants": {
+          "present": 66,
+          "swap": 66
+        }
+      },
+      "distinct_requests": 396,
+      "trace_requests": 396,
+      "results": {
+        "45": {
+          "static": {
+            "counts": {
+              "exact": 59,
+              "adverse": 2,
+              "issued": 61,
+              "positives": 198,
+              "calls": 0,
+              "tokens": 0
+            },
+            "requests": 396,
+            "expected_repeats": 1,
+            "offered_rps": 45.884488800184684,
+            "achieved_rps": 45.86449461610241,
+            "failures": {},
+            "makespan_seconds": 8.634129805956036,
+            "drain_seconds": 0.025556182740468003,
+            "p95_ms": {
+              "total_ms": 29.96384783182293,
+              "client_queue_ms": 1.8113687401637435,
+              "server_queue_ms": 18.46489075,
+              "compute_ms": 11.23082225
+            },
+            "verification": {
+              "source_calls": 0,
+              "role_calls": 0,
+              "issued_with_source_call": 0
+            }
+          },
+          "role_only": {
+            "counts": {
+              "exact": 72,
+              "adverse": 2,
+              "issued": 74,
+              "positives": 198,
+              "calls": 38,
+              "tokens": 3549
+            },
+            "requests": 396,
+            "expected_repeats": 1,
+            "offered_rps": 45.884488800184684,
+            "achieved_rps": 45.86383456658627,
+            "failures": {},
+            "makespan_seconds": 8.634254064061679,
+            "drain_seconds": 0.025680440846111097,
+            "p95_ms": {
+              "total_ms": 40.43568257475272,
+              "client_queue_ms": 1.6873426793608814,
+              "server_queue_ms": 26.359267000000003,
+              "compute_ms": 21.91128875
+            },
+            "verification": {
+              "source_calls": 0,
+              "role_calls": 38,
+              "issued_with_source_call": 0
+            }
+          },
+          "both": {
+            "counts": {
+              "exact": 93,
+              "adverse": 4,
+              "issued": 97,
+              "positives": 198,
+              "calls": 139,
+              "tokens": 5008
+            },
+            "requests": 396,
+            "expected_repeats": 1,
+            "offered_rps": 45.884488800184684,
+            "achieved_rps": 45.86812796583406,
+            "failures": {},
+            "makespan_seconds": 8.633445871062577,
+            "drain_seconds": 0.02487224784700892,
+            "p95_ms": {
+              "total_ms": 54.34234350104816,
+              "client_queue_ms": 1.7528452444821596,
+              "server_queue_ms": 38.09300275,
+              "compute_ms": 22.63529475
+            },
+            "verification": {
+              "source_calls": 86,
+              "role_calls": 53,
+              "issued_with_source_call": 23
+            }
+          },
+          "one_call": {
+            "counts": {
+              "exact": 89,
+              "adverse": 3,
+              "issued": 92,
+              "positives": 198,
+              "calls": 124,
+              "tokens": 3549
+            },
+            "requests": 396,
+            "expected_repeats": 1,
+            "offered_rps": 45.884488800184684,
+            "achieved_rps": 45.86659720683288,
+            "failures": {},
+            "makespan_seconds": 8.633734005037695,
+            "drain_seconds": 0.02516038182212732,
+            "p95_ms": {
+              "total_ms": 50.54847136489116,
+              "client_queue_ms": 1.5813347417861223,
+              "server_queue_ms": 36.845091000000004,
+              "compute_ms": 22.16136675
+            },
+            "verification": {
+              "source_calls": 86,
+              "role_calls": 38,
+              "issued_with_source_call": 18
+            }
+          },
+          "screened_one_call": {
+            "counts": {
+              "exact": 89,
+              "adverse": 3,
+              "issued": 92,
+              "positives": 198,
+              "calls": 62,
+              "tokens": 3549
+            },
+            "requests": 396,
+            "expected_repeats": 1,
+            "offered_rps": 45.884488800184684,
+            "achieved_rps": 45.803979576951996,
+            "failures": {},
+            "makespan_seconds": 8.645536996074952,
+            "drain_seconds": 0.036963372859384336,
+            "p95_ms": {
+              "total_ms": 40.07605413789861,
+              "client_queue_ms": 1.5430560160893947,
+              "server_queue_ms": 26.355224500000002,
+              "compute_ms": 22.04914675
+            },
+            "verification": {
+              "source_calls": 24,
+              "role_calls": 38,
+              "issued_with_source_call": 18
+            }
+          },
+          "screen_comparison": {
+            "paired": 396,
+            "changed_evidence": 0
+          }
+        },
+        "75": {
+          "role_only": {
+            "counts": {
+              "exact": 72,
+              "adverse": 2,
+              "issued": 74,
+              "positives": 198,
+              "calls": 38,
+              "tokens": 3549
+            },
+            "requests": 396,
+            "expected_repeats": 1,
+            "offered_rps": 76.47414800030778,
+            "achieved_rps": 75.58071262393123,
+            "failures": {},
+            "makespan_seconds": 5.239431943045929,
+            "drain_seconds": 0.07428776911658641,
+            "p95_ms": {
+              "total_ms": 102.14153231936507,
+              "client_queue_ms": 1.897601061500609,
+              "server_queue_ms": 90.15296,
+              "compute_ms": 22.0031905
+            },
+            "verification": {
+              "source_calls": 0,
+              "role_calls": 38,
+              "issued_with_source_call": 0
+            },
+            "changed_from_first_rate": 0
+          },
+          "both": {
+            "counts": {
+              "exact": 93,
+              "adverse": 4,
+              "issued": 97,
+              "positives": 198,
+              "calls": 139,
+              "tokens": 5008
+            },
+            "requests": 396,
+            "expected_repeats": 1,
+            "offered_rps": 76.47414800030778,
+            "achieved_rps": 69.67685791882481,
+            "failures": {},
+            "makespan_seconds": 5.683379127993248,
+            "drain_seconds": 0.5182349540639057,
+            "p95_ms": {
+              "total_ms": 549.9308447469957,
+              "client_queue_ms": 1.6496324678882957,
+              "server_queue_ms": 534.4180695,
+              "compute_ms": 22.35691875
+            },
+            "verification": {
+              "source_calls": 86,
+              "role_calls": 53,
+              "issued_with_source_call": 23
+            },
+            "changed_from_first_rate": 0
+          },
+          "one_call": {
+            "counts": {
+              "exact": 89,
+              "adverse": 3,
+              "issued": 92,
+              "positives": 198,
+              "calls": 124,
+              "tokens": 3549
+            },
+            "requests": 396,
+            "expected_repeats": 1,
+            "offered_rps": 76.47414800030778,
+            "achieved_rps": 72.00603004683627,
+            "failures": {},
+            "makespan_seconds": 5.499539409996942,
+            "drain_seconds": 0.334395236067599,
+            "p95_ms": {
+              "total_ms": 405.2914598141797,
+              "client_queue_ms": 1.6560455842409283,
+              "server_queue_ms": 390.54206875,
+              "compute_ms": 21.992065750000002
+            },
+            "verification": {
+              "source_calls": 86,
+              "role_calls": 38,
+              "issued_with_source_call": 18
+            },
+            "changed_from_first_rate": 0
+          },
+          "screened_one_call": {
+            "counts": {
+              "exact": 89,
+              "adverse": 3,
+              "issued": 92,
+              "positives": 198,
+              "calls": 62,
+              "tokens": 3549
+            },
+            "requests": 396,
+            "expected_repeats": 1,
+            "offered_rps": 76.47414800030778,
+            "achieved_rps": 74.78459752570141,
+            "failures": {},
+            "makespan_seconds": 5.295208012103103,
+            "drain_seconds": 0.13006383817376044,
+            "p95_ms": {
+              "total_ms": 157.7920546696987,
+              "client_queue_ms": 1.7489453020971268,
+              "server_queue_ms": 143.88045025000002,
+              "compute_ms": 22.197076
+            },
+            "verification": {
+              "source_calls": 24,
+              "role_calls": 38,
+              "issued_with_source_call": 18
+            },
+            "changed_from_first_rate": 0
+          },
+          "static": {
+            "counts": {
+              "exact": 59,
+              "adverse": 2,
+              "issued": 61,
+              "positives": 198,
+              "calls": 0,
+              "tokens": 0
+            },
+            "requests": 396,
+            "expected_repeats": 1,
+            "offered_rps": 76.47414800030778,
+            "achieved_rps": 76.26611348075282,
+            "failures": {},
+            "makespan_seconds": 5.192345354007557,
+            "drain_seconds": 0.02720118007821437,
+            "p95_ms": {
+              "total_ms": 55.4554860573262,
+              "client_queue_ms": 1.540472701890394,
+              "server_queue_ms": 43.87681425,
+              "compute_ms": 11.3065615
+            },
+            "verification": {
+              "source_calls": 0,
+              "role_calls": 0,
+              "issued_with_source_call": 0
+            },
+            "changed_from_first_rate": 0
+          },
+          "screen_comparison": {
+            "paired": 396,
+            "changed_evidence": 0
+          }
+        }
+      }
+    },
+    {
+      "script_sha256": "f08297d20e88844e3d08ba0d580bd318da04d49a3677c3f3a83cefd4220d4ccb",
+      "projection_sha256": "38bc5e6bd42e3b2f427a42a552cae11bc0813e50f2e601ee9e10a298fe47925f",
+      "manifest_sha256": "064b9d0a579e58911c1986a17e4eb169dcfd3ab57e4e4640d31a1a62143a753a",
+      "embedding_revision": "97b0c614be4d77ee51c0cef4e5f07c00f9eb65b3",
+      "source_reader_revision": "e61197ed45024b0ed8a2d74b80b4d909f1255473",
+      "role_reader_revision": "cdbee75f17c01a7cc42f958dc650907174af0554",
+      "gpu": "NVIDIA GeForce RTX 5090",
+      "cutoffs": {
+        "source": -5.125,
+        "role": 0.0
+      },
+      "reverse": true,
+      "panel": {
+        "admitted": 393,
+        "dropped": {
+          "incomplete_or_ambiguous": 28
+        },
+        "links": 16,
+        "paper_pairs": 13,
+        "linked_papers": 25,
+        "contributors": 14,
+        "variants": {
+          "present": 66,
+          "swap": 66
+        }
+      },
+      "distinct_requests": 396,
+      "trace_requests": 396,
+      "results": {
+        "45": {
+          "screened_one_call": {
+            "counts": {
+              "exact": 89,
+              "adverse": 3,
+              "issued": 92,
+              "positives": 198,
+              "calls": 62,
+              "tokens": 3549
+            },
+            "requests": 396,
+            "expected_repeats": 1,
+            "offered_rps": 45.884488800184684,
+            "achieved_rps": 45.86239317347225,
+            "failures": {},
+            "makespan_seconds": 8.634525427012704,
+            "drain_seconds": 0.025951803797136463,
+            "p95_ms": {
+              "total_ms": 41.38664840138517,
+              "client_queue_ms": 1.6653378552291542,
+              "server_queue_ms": 26.84471475,
+              "compute_ms": 22.11562375
+            },
+            "verification": {
+              "source_calls": 24,
+              "role_calls": 38,
+              "issued_with_source_call": 18
+            }
+          },
+          "one_call": {
+            "counts": {
+              "exact": 89,
+              "adverse": 3,
+              "issued": 92,
+              "positives": 198,
+              "calls": 124,
+              "tokens": 3549
+            },
+            "requests": 396,
+            "expected_repeats": 1,
+            "offered_rps": 45.884488800184684,
+            "achieved_rps": 45.864549839742125,
+            "failures": {},
+            "makespan_seconds": 8.634119409951381,
+            "drain_seconds": 0.025545786735813536,
+            "p95_ms": {
+              "total_ms": 49.87127025378868,
+              "client_queue_ms": 1.766258239513263,
+              "server_queue_ms": 37.1540035,
+              "compute_ms": 22.049431499999997
+            },
+            "verification": {
+              "source_calls": 86,
+              "role_calls": 38,
+              "issued_with_source_call": 18
+            }
+          },
+          "both": {
+            "counts": {
+              "exact": 93,
+              "adverse": 4,
+              "issued": 97,
+              "positives": 198,
+              "calls": 139,
+              "tokens": 5008
+            },
+            "requests": 396,
+            "expected_repeats": 1,
+            "offered_rps": 45.884488800184684,
+            "achieved_rps": 45.86579770707642,
+            "failures": {},
+            "makespan_seconds": 8.63388450210914,
+            "drain_seconds": 0.02531087889357231,
+            "p95_ms": {
+              "total_ms": 54.86054721404798,
+              "client_queue_ms": 1.818916673073545,
+              "server_queue_ms": 37.914068,
+              "compute_ms": 22.77401975
+            },
+            "verification": {
+              "source_calls": 86,
+              "role_calls": 53,
+              "issued_with_source_call": 23
+            }
+          },
+          "role_only": {
+            "counts": {
+              "exact": 72,
+              "adverse": 2,
+              "issued": 74,
+              "positives": 198,
+              "calls": 38,
+              "tokens": 3549
+            },
+            "requests": 396,
+            "expected_repeats": 1,
+            "offered_rps": 45.884488800184684,
+            "achieved_rps": 45.86521404705933,
+            "failures": {},
+            "makespan_seconds": 8.633994373027235,
+            "drain_seconds": 0.02542074981166742,
+            "p95_ms": {
+              "total_ms": 38.946130545809865,
+              "client_queue_ms": 1.8793359922710806,
+              "server_queue_ms": 25.940231500000003,
+              "compute_ms": 22.0172045
+            },
+            "verification": {
+              "source_calls": 0,
+              "role_calls": 38,
+              "issued_with_source_call": 0
+            }
+          },
+          "static": {
+            "counts": {
+              "exact": 59,
+              "adverse": 2,
+              "issued": 61,
+              "positives": 198,
+              "calls": 0,
+              "tokens": 0
+            },
+            "requests": 396,
+            "expected_repeats": 1,
+            "offered_rps": 45.884488800184684,
+            "achieved_rps": 45.864112117774106,
+            "failures": {},
+            "makespan_seconds": 8.634201813023537,
+            "drain_seconds": 0.025628189807969548,
+            "p95_ms": {
+              "total_ms": 30.466838943539187,
+              "client_queue_ms": 1.9286631722934544,
+              "server_queue_ms": 18.985010499999998,
+              "compute_ms": 11.23647875
+            },
+            "verification": {
+              "source_calls": 0,
+              "role_calls": 0,
+              "issued_with_source_call": 0
+            }
+          },
+          "screen_comparison": {
+            "paired": 396,
+            "changed_evidence": 0
+          }
+        },
+        "75": {
+          "one_call": {
+            "counts": {
+              "exact": 89,
+              "adverse": 3,
+              "issued": 92,
+              "positives": 198,
+              "calls": 124,
+              "tokens": 3549
+            },
+            "requests": 396,
+            "expected_repeats": 1,
+            "offered_rps": 76.47414800030778,
+            "achieved_rps": 72.14910228632343,
+            "failures": {},
+            "makespan_seconds": 5.488633779925294,
+            "drain_seconds": 0.32348960599595156,
+            "p95_ms": {
+              "total_ms": 391.663194517605,
+              "client_queue_ms": 1.3458238099701703,
+              "server_queue_ms": 376.14825824999997,
+              "compute_ms": 21.948245749999998
+            },
+            "verification": {
+              "source_calls": 86,
+              "role_calls": 38,
+              "issued_with_source_call": 18
+            },
+            "changed_from_first_rate": 0
+          },
+          "both": {
+            "counts": {
+              "exact": 93,
+              "adverse": 4,
+              "issued": 97,
+              "positives": 198,
+              "calls": 139,
+              "tokens": 5008
+            },
+            "requests": 396,
+            "expected_repeats": 1,
+            "offered_rps": 76.47414800030778,
+            "achieved_rps": 69.5902399869534,
+            "failures": {},
+            "makespan_seconds": 5.690453145070933,
+            "drain_seconds": 0.5253089711415901,
+            "p95_ms": {
+              "total_ms": 558.5904887411743,
+              "client_queue_ms": 1.9066535751335323,
+              "server_queue_ms": 543.479299,
+              "compute_ms": 22.364059750000003
+            },
+            "verification": {
+              "source_calls": 86,
+              "role_calls": 53,
+              "issued_with_source_call": 23
+            },
+            "changed_from_first_rate": 0
+          },
+          "role_only": {
+            "counts": {
+              "exact": 72,
+              "adverse": 2,
+              "issued": 74,
+              "positives": 198,
+              "calls": 38,
+              "tokens": 3549
+            },
+            "requests": 396,
+            "expected_repeats": 1,
+            "offered_rps": 76.47414800030778,
+            "achieved_rps": 75.58991552738041,
+            "failures": {},
+            "makespan_seconds": 5.238794053904712,
+            "drain_seconds": 0.07364987997536954,
+            "p95_ms": {
+              "total_ms": 95.09100730065256,
+              "client_queue_ms": 1.5781408874318004,
+              "server_queue_ms": 83.43565124999999,
+              "compute_ms": 21.896107999999998
+            },
+            "verification": {
+              "source_calls": 0,
+              "role_calls": 38,
+              "issued_with_source_call": 0
+            },
+            "changed_from_first_rate": 0
+          },
+          "static": {
+            "counts": {
+              "exact": 59,
+              "adverse": 2,
+              "issued": 61,
+              "positives": 198,
+              "calls": 0,
+              "tokens": 0
+            },
+            "requests": 396,
+            "expected_repeats": 1,
+            "offered_rps": 76.47414800030778,
+            "achieved_rps": 76.26462390824119,
+            "failures": {},
+            "makespan_seconds": 5.192446768982336,
+            "drain_seconds": 0.02730259505299326,
+            "p95_ms": {
+              "total_ms": 54.35152872814797,
+              "client_queue_ms": 1.7456074128858745,
+              "server_queue_ms": 42.31782475,
+              "compute_ms": 11.23684675
+            },
+            "verification": {
+              "source_calls": 0,
+              "role_calls": 0,
+              "issued_with_source_call": 0
+            },
+            "changed_from_first_rate": 0
+          },
+          "screened_one_call": {
+            "counts": {
+              "exact": 89,
+              "adverse": 3,
+              "issued": 92,
+              "positives": 198,
+              "calls": 62,
+              "tokens": 3549
+            },
+            "requests": 396,
+            "expected_repeats": 1,
+            "offered_rps": 76.47414800030778,
+            "achieved_rps": 75.0268812222844,
+            "failures": {},
+            "makespan_seconds": 5.278108239988796,
+            "drain_seconds": 0.11296406605945375,
+            "p95_ms": {
+              "total_ms": 156.20884325471707,
+              "client_queue_ms": 1.6635650827083737,
+              "server_queue_ms": 141.52494074999998,
+              "compute_ms": 21.9427715
+            },
+            "verification": {
+              "source_calls": 24,
+              "role_calls": 38,
+              "issued_with_source_call": 18
+            },
+            "changed_from_first_rate": 0
+          },
+          "screen_comparison": {
+            "paired": 396,
+            "changed_evidence": 0
+          }
+        }
+      }
+    }
+  ]
+}
