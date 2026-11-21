@@ -46,7 +46,7 @@ class LocalIndex:
             path.write_text(json.dumps(catalogue.ownership[doi]["authors"], separators=(",", ":")))
             self.paths[doi] = path
 
-    def rank(self, topics, *, depth=DEPTH):
+    def rank(self, topics, *, depth=DEPTH, views=None):
         dense = self.encoder.encode(topics, query=True) @ self.embeddings.T
         valid = set(self.valid)
         ranks = []
@@ -59,6 +59,9 @@ class LocalIndex:
             for order in (sparse, semantic):
                 for rank, key in enumerate(order, 1):
                     fusion[key] += 1 / (60 + rank)
+            if views is not None:
+                views.append(tuple({self.ids[key]: rank for rank, key in enumerate(order, 1)}
+                                   for order in (sparse, semantic)))
             sequence = sorted(fusion, key=lambda key: (-fusion[key], key))[:depth]
             ranks.append({self.ids[key]: j for j, key in enumerate(sequence, 1)})
         return tuple(ranks)

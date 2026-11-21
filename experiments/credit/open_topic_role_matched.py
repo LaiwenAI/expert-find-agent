@@ -152,9 +152,7 @@ def freeze_blind_review(archive, directory, panels, traces, catalogue, args, che
     print(f"Frozen {len(blinded)} distinct evidence cards")
 
 
-def run(args):
-    if args.output.exists() or not os.environ.get("SLURM_JOB_ID") or not torch.cuda.is_available():
-        raise ValueError("Require a fresh output on a Slurm GPU")
+def pinned_inputs(args):
     expected = json.loads(args.reference.read_bytes())
     provenance = json.loads(args.live_reference.read_bytes())["runs"][0]
     base = live.BASE
@@ -176,6 +174,13 @@ def run(args):
     catalogue = mixed.merge(plos, elife)
     if len(catalogue.ids) != 452 or {key: len(panel[0]) for key, panel in cases.items()} != {"plos": 160, "elife": 51}:
         raise ValueError("Unexpected mixed catalog or query counts")
+    return catalogue, cases, checkpoint, expected
+
+
+def run(args):
+    if args.output.exists() or not os.environ.get("SLURM_JOB_ID") or not torch.cuda.is_available():
+        raise ValueError("Require a fresh output on a Slurm GPU")
+    catalogue, cases, checkpoint, expected = pinned_inputs(args)
     traces = {name: [] for name in cases} if args.blind_review else {}
     with TemporaryDirectory(dir=args.output.parent) as scratch:
         index = live.LocalIndex(catalogue, mixed.QwenTorchEmbedding(args.embedding), Path(scratch) / "reads")
