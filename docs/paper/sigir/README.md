@@ -27,3 +27,12 @@ downstream outcome. SIGIR awarded it [Best Short Paper](https://sigir-2024.githu
 Crossref's DOI records reported 17 references to SIM-RAG and 182 to
 eRAG on 2026-11-21. Counts use the published DOIs and can differ from
 metrics that consolidate preprint versions.
+
+## Scope of the supplement
+
+The supplement contains the protocols and ablations that support this
+draft. Earlier development notes remain in the
+[archived extended appendix](https://github.com/LaiwenAI/expert-find-agent/blob/af8508704af8983d2b54da28f90ef0d2df37c058/docs/paper/sigir/appendix.tex).
+The individual benchmark folders retain executable commands and
+aggregate receipts. The public draft records the evaluation status.
+The frozen review packets and their labels stay outside the source tree.
