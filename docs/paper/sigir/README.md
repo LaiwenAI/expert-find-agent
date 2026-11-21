@@ -5,19 +5,17 @@ contributor-constrained first-query search with a fixed read budget.
 The standalone appendix source preserves protocols and development
 comparisons for reference.
 
-## Build the signed draft
+## Build the anonymous draft
 
-Keep the ACM author and affiliation statements in the local
-`artifacts/sigir-author-copy/authors.tex` file. Build with Tectonic
-from the checkout that contains the source:
+Build with Tectonic from the checkout that contains the source:
 
 ```bash
 python3 experiments/paper/build_sigir.py --frozen-results
 ```
 
-The command replaces `output/pdf/expert-search-sigir-author-draft.pdf`
-after compilation succeeds. Set `--authors` or `--output` when the
-metadata or shared manuscript lives outside the source checkout.
+The command replaces `output/pdf/expert-search-sigir-anonymous-draft.pdf`
+after compilation succeeds. Set `--output` when the shared manuscript
+lives outside the source checkout.
 Omit `--frozen-results` to refresh the tables from local experiment
 artifacts. The build stages temporary inputs and removes them on exit.
 The original ACM template and its license are kept under `template/`.

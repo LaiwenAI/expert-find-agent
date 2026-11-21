@@ -239,7 +239,7 @@ The enterprise/researcher raw files are not distributed with the software. Suppl
 Check the repository-root `.env`, provider URL, API key, and model availability. The lexical path does not call the model service.
 
 **Can the paper compile without private data?**  
-Yes. Use `python experiments/paper/build_sigir.py --frozen-results` with local author metadata. Refreshing the tables also requires the local experiment artifacts. See the [manuscript build instructions](docs/paper/sigir/README.md).
+Yes. Use `python experiments/paper/build_sigir.py --frozen-results` to compile the anonymous manuscript. Refreshing the tables also requires the local experiment artifacts. See the [manuscript build instructions](docs/paper/sigir/README.md).
 
 **Are the synthetic queries and model judgments human gold labels?**  
 No. Construction records retain their screening and unresolved states. See the data cards for the distinction between original needs, derived bilingual intents, source-scoped judgments, and human-rated auxiliary tasks.

@@ -1,4 +1,4 @@
-"""Build the single signed SIGIR manuscript from the canonical LaTeX source."""
+"""Build the single anonymous SIGIR manuscript from the canonical LaTeX source."""
 
 import argparse
 from hashlib import sha256
@@ -12,13 +12,10 @@ from tempfile import TemporaryDirectory
 
 ROOT = Path(__file__).resolve().parents[2]
 PAPER = ROOT / "docs/paper/sigir"
-DEFAULT_AUTHORS = ROOT / "artifacts/sigir-author-copy/authors.tex"
-DEFAULT_OUTPUT = ROOT / "output/pdf/expert-search-sigir-author-draft.pdf"
+DEFAULT_OUTPUT = ROOT / "output/pdf/expert-search-sigir-anonymous-draft.pdf"
 
 
-def build(authors, output, frozen_results):
-    if not authors.is_file():
-        raise FileNotFoundError(f"Local author metadata is missing: {authors}. Pass --authors to select it.")
+def build(output, frozen_results):
     if output.suffix.lower() != ".pdf":
         raise ValueError("Manuscript output must be a PDF")
     if not frozen_results:
@@ -32,7 +29,6 @@ def build(authors, output, frozen_results):
         paper = build_dir / "sigir"
         shutil.copytree(PAPER, paper)
         shutil.copy2(PAPER.parent / "references.bib", build_dir)
-        shutil.copyfile(authors, paper / "authors.tex")
         result = subprocess.run(
             ["tectonic", "-Z", f"search-path={paper / 'template'}", "--outdir", str(build_dir), "main.tex"],
             cwd=paper, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True,
@@ -53,11 +49,9 @@ def build(authors, output, frozen_results):
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("--authors", type=Path, default=DEFAULT_AUTHORS,
-                        help="Local acmart author and affiliation statements.")
     parser.add_argument("--output", type=Path, default=DEFAULT_OUTPUT,
-                        help="Stable signed manuscript path.")
+                        help="Stable anonymous manuscript path.")
     parser.add_argument("--frozen-results", action="store_true",
                         help="Use the committed result snapshot without refreshing local data.")
     args = parser.parse_args()
-    build(args.authors.resolve(), args.output.resolve(), args.frozen_results)
+    build(args.output.resolve(), args.frozen_results)
